@@ -19,6 +19,6 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('blog_api.urls', namespace='blog_api')),
-    path('', include('blog.urls'))
 ]
+
+urlpatterns += path('api/news/', include('news.urls')),
