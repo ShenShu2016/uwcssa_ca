@@ -21,4 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += path('api/news/', include('news.urls')),
+urlpatterns += path('api/', include('news.urls')),

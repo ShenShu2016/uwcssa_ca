@@ -4,8 +4,8 @@ from news import views
 
 
 router = routers.DefaultRouter()
-router.register(r'topic', views.TopicViewSet)
-router.register(r'news', viewset=views.NewsViewSet)
+router.register(r'news/topic', views.TopicViewSet)
+router.register(r'news/news', viewset=views.NewsViewSet)
 
 
 urlpatterns = [
