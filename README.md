@@ -49,9 +49,9 @@
   <br/>
   <a>To optimize the management of the student council (UWINCSSA) as well as its efficient operation. </a>
   <br/>
-  <a>To build relationships among the student council, students and the local community and have them engaged.</a>
+  <a>* To build relationships among the student council, students and the local community and have them engaged.</a>
   <br/>
-  <a>To improve accessibility.</a>
+  <a>* To improve accessibility.</a>
   <br/>
     <a href="https://uwcssa.ca">View Demo</a>
     ·
@@ -103,11 +103,17 @@ Here's a blank template to get started:
 
 ### Built With
 
-* []()
-* []()
-* []()
-
-
+* [Shen Shu](https://shushengacademy.com/zh-hans/)
+* [Kerun Pan](https://github.com/KerunPan)
+* [Shikai(Zoe) Jin](https://github.com/shikaijin)
+* [Jinhua Long](https://github.com/lzg187ljh)
+* [ChangkuanGao](https://github.com/gao14o)
+* [Fanyu Zeng](https://github.com/CokeUltraman)
+* [Heng Wei](https://github.com/theOGcat)
+* [Changye Ma](https://github.com/ChangyeMa)
+* [Yanhao Wang](https://github.com/DG-xixuan)
+* [Chengyue Wei](https://github.com/KevinVVei)
+* [Mike Yu](https://github.com/mikezerone)
 
 <!-- GETTING STARTED -->
 ## Getting Started
