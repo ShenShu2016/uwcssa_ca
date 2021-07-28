@@ -49,9 +49,9 @@
   <br/>
   <a>To optimize the management of the student council (UWINCSSA) as well as its efficient operation. </a>
   <br/>
-  <a>* To build relationships among the student council, students and the local community and have them engaged.</a>
+  <a>To build relationships among the student council, students and the local community and have them engaged.</a>
   <br/>
-  <a>* To improve accessibility.</a>
+  <a>To improve accessibility.</a>
   <br/>
     <a href="https://uwcssa.ca">View Demo</a>
     ·
@@ -123,23 +123,25 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/ShenShu2016/uwcssa_ca.git
    ```
-2. Install NPM packages
+2. Prepare & start Frontend Docker Contanier
    ```sh
-   npm install
+   cd ../uwcssa_ca/frontend
+   docker-compose build
+   docker-compose up
    ```
-
-
+3. Prepare & start Backend & PostgreSQL Docker Contaniers
+   ```sh
+   cd ../uwcssa_ca/backend
+   docker-compose build
+   docker-compose up
+   ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
