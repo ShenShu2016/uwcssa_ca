@@ -180,5 +180,8 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/django
 {"mode":"full","isActive":false}
 
-#docker database persist database
+# docker database persist database
 backend/data*
+
+# django secret infomation
+# backend/SECRET.py
