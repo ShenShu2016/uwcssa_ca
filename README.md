@@ -38,15 +38,22 @@
   </a>
   
   
-  <h3 align="center">project_title</h3>
+  <h3 align="center">Web Development of CSSA - University of Windsor Chinese Student & Scholar Association</h3>
 
   <p align="center">
     project_description
     <br />
     <a href="https://github.com/ShenShu2016/uwcssa_ca"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/ShenShu2016/uwcssa_ca">View Demo</a>
+  <a>The main objectives to be achieved through the implementation of the business requirements are described as follows:</a>
+  <br/>
+  <a>To optimize the management of the student council (UWINCSSA) as well as its efficient operation. </a>
+  <br/>
+  <a>To build relationships among the student council, students and the local community and have them engaged.</a>
+  <br/>
+  <a>To improve accessibility.</a>
+  <br/>
+    <a href="https://uwcssa.ca">View Demo</a>
     ·
     <a href="https://github.com/ShenShu2016/uwcssa_ca/issues">Report Bug</a>
     ·
@@ -167,9 +174,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Home Page - [@UWCSSA.ca](https://uwcssa.ca)
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/github_username/repo_name)
 
 
 
