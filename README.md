@@ -103,17 +103,7 @@ Here's a blank template to get started:
 
 ### Built With
 
-* [Shen Shu](https://shushengacademy.com/zh-hans/)
-* [Kerun Pan](https://github.com/KerunPan)
-* [Shikai(Zoe) Jin](https://github.com/shikaijin)
-* [Jinhua Long](https://github.com/lzg187ljh)
-* [ChangkuanGao](https://github.com/gao14o)
-* [Fanyu Zeng](https://github.com/CokeUltraman)
-* [Heng Wei](https://github.com/theOGcat)
-* [Changye Ma](https://github.com/ChangyeMa)
-* [Yanhao Wang](https://github.com/DG-xixuan)
-* [Chengyue Wei](https://github.com/KevinVVei)
-* [Mike Yu](https://github.com/mikezerone)
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -191,9 +181,17 @@ Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/gith
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* [Shen Shu](https://shushengacademy.com/zh-hans/)
+* [Kerun Pan](https://github.com/KerunPan)
+* [Shikai(Zoe) Jin](https://github.com/shikaijin)
+* [Jinhua Long](https://github.com/lzg187ljh)
+* [ChangkuanGao](https://github.com/gao14o)
+* [Fanyu Zeng](https://github.com/CokeUltraman)
+* [Heng Wei](https://github.com/theOGcat)
+* [Changye Ma](https://github.com/ChangyeMa)
+* [Yanhao Wang](https://github.com/DG-xixuan)
+* [Chengyue Wei](https://github.com/KevinVVei)
+* [Mike Yu](https://github.com/mikezerone)
 
 
 
