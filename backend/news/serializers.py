@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from news.models import Topic, News
+from .models import Topic, News
 
 # reference: https://www.jianshu.com/p/de30adb8245e
 

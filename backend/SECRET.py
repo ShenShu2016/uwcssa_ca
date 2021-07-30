@@ -15,3 +15,6 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+# superuser id: root
+# superuser pw: root

@@ -38,11 +38,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+]
+INSTALLED_APPS += [
+
+    # extention lib
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 INSTALLED_APPS += [
-    'news'
+
+    # our apps
+    'news',
+    'cssamembers',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +138,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticated',
     ),
 }

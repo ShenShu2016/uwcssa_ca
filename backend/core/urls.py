@@ -28,4 +28,5 @@ urlpatterns = [
     ),
 ]
 
-urlpatterns += path('api/', include('news.urls')),
+urlpatterns += path('', include('news.urls')),
+urlpatterns += path('news/', include('news.urls')),
