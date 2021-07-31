@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from news.models import News, Topic
-from .serializers import TopicSerializer, NewsSerializer
+from news.models import Article, Topic
+from .serializers import TopicSerializer, ArticleSerializer
 
 from django.shortcuts import HttpResponse
 # Create your views here.
@@ -17,11 +17,11 @@ class TopicViewSet(viewsets.ModelViewSet):
     serializer_class = TopicSerializer  # 指定序列化器
 
 
-class NewsViewSet(viewsets.ModelViewSet):
-    queryset = News.objects.all()
-    serializer_class = NewsSerializer
+class ArticleViewSet(viewsets.ModelViewSet):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
 
 
 # @login_required
-def News(request):
-    return HttpResponse("<h1>Newssssss</h1>")
+# def News(request):
+#     return HttpResponse("<h1>Newssssss</h1>")
