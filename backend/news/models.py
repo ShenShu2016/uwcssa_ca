@@ -22,7 +22,7 @@ class Topic(models.Model):
         ordering = ['id']
 
 
-class News(models.Model):
+class Article(models.Model):
 
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     subject = models.CharField(max_length=255)
@@ -37,5 +37,5 @@ class News(models.Model):
         return self.subject
 
     class Meta:
-        db_table = 'news'
+        db_table = 'article'
         ordering = ['id']
