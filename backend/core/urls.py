@@ -21,16 +21,10 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('rest-auth/', include('rest_auth.urls')),
-
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),
-
     path(
         "favicon.ico",
         RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
     ),  # 静态favicon地址
 ]
 
-urlpatterns += path('', include('news.urls')),
-urlpatterns += path('news/', include('news.urls')),
+urlpatterns += path('api/', include('api.urls')),
