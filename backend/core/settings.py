@@ -38,21 +38,53 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-]
-INSTALLED_APPS += [
-
-    # extention lib
-    'rest_framework',
-    'rest_framework.authtoken',
 ]
 
 INSTALLED_APPS += [
+    # Local & custom user
+    'users',
+]
 
-    # our apps
+# let django know you are using custom User model
+AUTH_USER_MODEL = 'users.CustomUser'
+
+INSTALLED_APPS += [
+    # Local
     'news',
     'cssamembers',
 ]
+
+INSTALLED_APPS += [
+    # 3rd party
+    'rest_framework',  # rest_framework
+    'rest_framework.authtoken',  # rest_framework
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',  # always has session
+        'rest_framework.authentication.TokenAuthentication',
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+    ),
+}
+
+
+INSTALLED_APPS += [
+    # 3rd party
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+]
+
+# reference: https://github.com/Tivix/django-rest-auth/issues/457
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'user_name'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -135,11 +167,6 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.permissions.AllowAny',
-        # 'rest_framework.permissions.IsAuthenticated',
-    ),
-}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # rest-auth
+SITE_ID = 1  # rest-auth
