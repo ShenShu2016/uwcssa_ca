@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import CustomUser
 from django.contrib.auth.admin import UserAdmin
-from django.forms import TextInput, Textarea
+# from django.forms import TextInput, Textarea
 
 
 # class UserAdminConfig(UserAdmin):  # 用来把我们自定义的 NewUser 弄到 admin 里面去
@@ -29,10 +29,10 @@ from django.forms import TextInput, Textarea
 
 class UserAdminConfig(admin.ModelAdmin):  # 这个是有内置的admin 功能较多
 
-    search_fields = ('email', 'user_name', 'first_name',)
-    list_filter = ('email', 'user_name', 'first_name', 'is_active', 'is_staff')
+    search_fields = ('email', 'username', 'first_name',)
+    list_filter = ('email', 'username', 'first_name', 'is_active', 'is_staff')
     ordering = ('-start_date',)  # 从最新的order 正负可以 desc asc
-    list_display = ('email', 'user_name', 'first_name',
+    list_display = ('email', 'username', 'first_name',
                     'is_active', 'is_staff')  # 能看到的columns 的内容
 
 
