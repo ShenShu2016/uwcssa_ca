@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -50,6 +51,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 INSTALLED_APPS += [
     # Local
+    'api',
     'news',
     'cssamembers',
 ]
@@ -70,6 +72,13 @@ REST_FRAMEWORK = {
 }
 
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+# REST_USE_JWT = True
+
 INSTALLED_APPS += [
     # 3rd party
     'rest_auth',
@@ -80,7 +89,7 @@ INSTALLED_APPS += [
 ]
 
 # reference: https://github.com/Tivix/django-rest-auth/issues/457
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'user_name'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
