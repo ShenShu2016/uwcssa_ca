@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -38,12 +39,61 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
 ]
 
 INSTALLED_APPS += [
-    'news'
+    # Local & custom user
+    'users',
 ]
+
+# let django know you are using custom User model
+AUTH_USER_MODEL = 'users.CustomUser'
+
+INSTALLED_APPS += [
+    # Local
+    'api',
+    'news',
+    'cssamembers',
+]
+
+INSTALLED_APPS += [
+    # 3rd party
+    'rest_framework',  # rest_framework
+    'rest_framework.authtoken',  # rest_framework
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',  # always has session
+        'rest_framework.authentication.TokenAuthentication',
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+    ),
+}
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+# REST_USE_JWT = True
+
+INSTALLED_APPS += [
+    # 3rd party
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+]
+
+# reference: https://github.com/Tivix/django-rest-auth/issues/457
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,9 +176,6 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
-}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # rest-auth
+SITE_ID = 1  # rest-auth

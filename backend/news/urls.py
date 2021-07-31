@@ -1,13 +1,7 @@
-from django.urls import include, path
 from rest_framework import routers
 from news import views
 
 
 router = routers.DefaultRouter()
 router.register(r'news/topic', views.TopicViewSet)
-router.register(r'news/news', viewset=views.NewsViewSet)
-
-
-urlpatterns = [
-    path('', include(router.urls)),
-]
+router.register(r'news/article', views.ArticleViewSet)

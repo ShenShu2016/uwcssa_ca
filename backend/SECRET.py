@@ -15,3 +15,6 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+# superuser email: admin@gmail.com
+# superuser pw: admin

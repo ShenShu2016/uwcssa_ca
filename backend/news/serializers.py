@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from news.models import Topic, News
+from news.models import Topic, Article
 
 # reference: https://www.jianshu.com/p/de30adb8245e
 
@@ -10,9 +10,9 @@ class TopicSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class NewsSerializer(serializers.ModelSerializer):
+class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = News
+        model = Article
         fields = '__all__'
 
 # class StudentSerializer(serializers.ModelSerializer):
