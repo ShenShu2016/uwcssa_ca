@@ -16,5 +16,5 @@ DATABASES = {
     }
 }
 
-# superuser id: root
-# superuser pw: root
+# superuser email: admin@gmail.com
+# superuser pw: admin
