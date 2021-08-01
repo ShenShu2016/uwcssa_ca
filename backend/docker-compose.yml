@@ -4,13 +4,17 @@ services:
     api:
         build: .
         container_name: django
-        command: python manage.py runserver 0.0.0.0:8000
+
         volumes: 
             - .:/usr/src/app
         ports: 
             - "8000:8000"
         depends_on: 
-            - db
+            db:
+                condition: service_healthy
+        command: 
+            python manage.py runserver 0.0.0.0:8000
+
     db:
         image: postgres
         volumes:
@@ -23,4 +27,9 @@ services:
             postgres_db
         ports:
             - "5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 3s
+            timeout: 3s
+            retries: 5
         
