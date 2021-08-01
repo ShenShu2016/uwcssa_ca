@@ -1,0 +1,18 @@
+#stage 1: build stage
+FROM node:14.16.0 as react-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+
+############################################################
+# stage 2: web server stage
+FROM nginx:1.12-alpine as nginx-stage
+COPY --from=react-stage /app/build /usr/share/nginx/html
+EXPOSE 80
+# RUN addgroup app && adduser --system --group app
+# #RUN mkdir /app && chown app:app /app
+# USER app
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

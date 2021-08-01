@@ -4,3 +4,5 @@ djangorestframework==3.12.4
 djangorestframework-simplejwt==4.7.2
 django-rest-auth==0.9.5
 django-allauth==0.45.0
+celery>=5.0
+redis>=3.5

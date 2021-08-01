@@ -1,0 +1,60 @@
+version: '3'
+
+services: 
+    django:
+        image: django_dev_app:0.0.1
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: django_dev_server
+        volumes: 
+            - .:/usr/src/app
+        ports: 
+            - "8000:8000"
+        environment: 
+            - CELERY_BROKER=redis://redis:6379/0
+            - CELERY_BACKEND=redis://redis:6379/0
+        depends_on: 
+            - pgdb
+            - redis
+                # condition: service_healthy
+        command: 
+            python manage.py runserver 0.0.0.0:8000
+
+    celery:
+        container_name: 
+            celery
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev    
+        volumes: 
+            - .:/usr/src/app
+        command: celery -A core worker -l INFO
+        depends_on: 
+            - django
+            - redis
+    
+    redis:
+        image: redis:alpine
+
+                
+    pgdb:
+        image: postgres
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        container_name: 
+            postgres_db
+        ports:
+            - "5432:5432"
+        # healthcheck:
+        #     test: ["CMD-SHELL", "pg_isready -U postgres"]
+        #     interval: 0.1s
+        #     timeout: 3s
+        #     retries: 600
+
+    
+        

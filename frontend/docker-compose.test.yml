@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  react_test:
+    container_name: react_test
+    image: react_test_app:0.0.1
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    # env_file: 
+    #   - ./.env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm test
