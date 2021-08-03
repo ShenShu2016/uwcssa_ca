@@ -194,7 +194,7 @@ Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/gith
 * [Shikai(Zoe) Jin](https://github.com/shikaijin) [![wakatime](https://wakatime.com/badge/github/shikaijin/uwcssa_ca.svg)](https://wakatime.com/badge/github/shikaijin/uwcssa_ca)
 * [Jinhua Long](https://github.com/lzg187ljh)
 * [ChangkuanGao](https://github.com/gao14o)
-* [Fanyu Zeng](https://github.com/CokeUltraman)
+* [Fanyu Zeng](https://github.com/CokeUltraman) [![wakatime](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca.svg)](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca)
 * [Heng Wei](https://github.com/theOGcat)
 * [Changye Ma](https://github.com/ChangyeMa)
 * [Yanhao Wang](https://github.com/DG-xixuan)
