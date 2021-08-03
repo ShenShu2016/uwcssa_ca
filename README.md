@@ -191,7 +191,7 @@ Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/gith
 
 * [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
 * [Kerun Pan](https://github.com/KerunPan)
-* [Shikai(Zoe) Jin](https://github.com/shikaijin)
+* [Shikai(Zoe) Jin](https://github.com/shikaijin) [![wakatime](https://wakatime.com/badge/github/shikaijin/uwcssa_ca.svg)](https://wakatime.com/badge/github/shikaijin/uwcssa_ca)
 * [Jinhua Long](https://github.com/lzg187ljh)
 * [ChangkuanGao](https://github.com/gao14o)
 * [Fanyu Zeng](https://github.com/CokeUltraman)
