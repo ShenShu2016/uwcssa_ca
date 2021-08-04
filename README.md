@@ -45,13 +45,7 @@
     <br />
     <a href="https://github.com/ShenShu2016/uwcssa_ca"><strong>Explore the docs »</strong></a>
     <br />
-  <a>The main objectives to be achieved through the implementation of the business requirements are described as follows:</a>
-  <br/>
-  <a>To optimize the management of the student council (UWINCSSA) as well as its efficient operation. </a>
-  <br/>
-  <a>To build relationships among the student council, students and the local community and have them engaged.</a>
-  <br/>
-  <a>To improve accessibility.</a>
+  <a> The UWCSSA project is a web development project designed to provide an efficient working platform for the University of Windsor Chinese Students and Scholars Association and a student forum for University of Windsor students.</a>
   <br/>
     <a href="https://uwcssa.ca">View Demo</a>
     ·
@@ -70,6 +64,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#motiation">Motiation</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -82,9 +77,11 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributors">Contributors</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#support">Support</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -99,6 +96,11 @@
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
 `github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+
+### Motiation
+* To optimize the management of the student council (UWINCSSA) as well as its efficient operation. 
+* To build relationships among the student council, students and the local community and have them engaged.
+* To improve accessibility.
 
 
 ### Built With
@@ -155,6 +157,22 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
 
+<!-- CONTRIUTORS -->
+## Contributors
+The following people have contributed to the project:
+
+* [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
+* [Kerun Pan](https://github.com/KerunPan)
+* [Shikai(Zoe) Jin](https://github.com/shikaijin) [![wakatime](https://wakatime.com/badge/github/shikaijin/uwcssa_ca.svg)](https://wakatime.com/badge/github/shikaijin/uwcssa_ca)
+* [Jinhua Long](https://github.com/lzg187ljh)
+* [ChangkuanGao](https://github.com/gao14o)
+* [Fanyu Zeng](https://github.com/CokeUltraman) [![wakatime](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca.svg)](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca)
+* [Heng Wei](https://github.com/theOGcat)
+* [Changye Ma](https://github.com/ChangyeMa)
+* [Yanhao Wang](https://github.com/DG-xixuan)
+* [Chengyue Wei](https://github.com/KevinVVei)
+* [Mike Yu](https://github.com/mikezerone)
+
 
 
 <!-- CONTRIBUTING -->
@@ -184,22 +202,19 @@ Home Page - [@UWCSSA.ca](https://uwcssa.ca)
 
 Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/github_username/repo_name)
 
+<!-- Support -->
+## Support
+Contributions, issues, and feature requests are welcome!
+
+Give a ⭐️ if you like this project!
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
-* [Kerun Pan](https://github.com/KerunPan)
-* [Shikai(Zoe) Jin](https://github.com/shikaijin)
-* [Jinhua Long](https://github.com/lzg187ljh)
-* [ChangkuanGao](https://github.com/gao14o)
-* [Fanyu Zeng](https://github.com/CokeUltraman)
-* [Heng Wei](https://github.com/theOGcat)
-* [Changye Ma](https://github.com/ChangyeMa)
-* [Yanhao Wang](https://github.com/DG-xixuan)
-* [Chengyue Wei](https://github.com/KevinVVei)
-* [Mike Yu](https://github.com/mikezerone)
+* 
+
+
 
 
 
