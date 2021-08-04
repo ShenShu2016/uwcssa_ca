@@ -114,6 +114,7 @@ Here's a blank template to get started:
 * [<img align="left" alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />][webdevplaylist]<br />
 * [<img align="left" alt="Terminal" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />][webdevplaylist]<br />
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -142,6 +143,7 @@ This is an example of how to list things you need to use the software and how to
    docker-compose build
    docker-compose up
    ```
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -150,12 +152,14 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- CONTRIUTORS -->
 ## Contributors
@@ -173,7 +177,7 @@ The following people have contributed to the project:
 * [Chengyue Wei](https://github.com/KevinVVei)
 * [Mike Yu](https://github.com/mikezerone)
 
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -186,14 +190,14 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- CONTACT -->
 ## Contact
@@ -202,12 +206,15 @@ Home Page - [@UWCSSA.ca](https://uwcssa.ca)
 
 Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/github_username/repo_name)
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
 <!-- Support -->
 ## Support
 Contributions, issues, and feature requests are welcome!
 
 Give a ⭐️ if you like this project!
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
