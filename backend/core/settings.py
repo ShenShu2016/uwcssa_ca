@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     'allauth',  # 自己定义的
     'allauth.account',  # 自定义的
     'allauth.socialaccount',  # 自定义
+
+    # api doc
+    'drf_yasg',
 ]
 
 # let django know you are using custom User model
@@ -69,6 +72,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES':
     ('rest_framework.permissions.IsAuthenticatedOrReadOnly', ),
+    'DEFAULT_SCHEMA_CLASS': ('rest_framework.schemas.coreapi.AutoSchema'),
 }
 
 SIMPLE_JWT = {

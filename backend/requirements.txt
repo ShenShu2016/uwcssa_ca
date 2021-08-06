@@ -13,4 +13,4 @@ six==1.16.0
 sqlparse==0.4.1
 urllib3==1.26.6
 djangorestframework-simplejwt==4.7.2
-
+drf-yasg==1.20.0
