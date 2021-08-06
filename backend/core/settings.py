@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 3rd party
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 
     # 3rd party but use local
     'rest_auth',  # 自己定义的
