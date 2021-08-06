@@ -27,4 +27,6 @@ urlpatterns = [
     ),  # 静态favicon地址
 ]
 
+
+
 urlpatterns += path('api/', include('api.urls')),
