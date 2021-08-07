@@ -181,14 +181,24 @@ The following people have contributed to the project:
 
 <!-- CONTRIBUTING -->
 ## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+First off, thanks for taking the time to contribute! Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+Please try to create bug reports that are:
+
+- _Reproducible._ Include steps to reproduce the problem.
+- _Specific._ Include as much detail as possible: which version, what environment, etc.
+- _Unique._ Do not duplicate existing opened issues.
+- _Scoped to a Single Bug._ One bug per report.
+
+Please adhere to this project's [code of conduct](https://github.com/shikaijin/uwcssa_ca/blob/c956d22ecc81f84c803558d6f16b4d8aa8155794/contributor%20covenant.md).
+
+
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -218,8 +228,7 @@ Give a ⭐️ if you like this project!
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-
-* 
+* [amazing-github-template](https://github.com/dec0dOS/amazing-github-template/blob/main/README.md)
 
 
 
