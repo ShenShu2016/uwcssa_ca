@@ -15,6 +15,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = '__all__'
 
+
 # class StudentSerializer(serializers.ModelSerializer):
 #     # 自定义序列化和反序列化字段校验条件，默认使用建表约束校验；也可以使用extra_kwargs
 #     # SlugRelatedField指定关联对象的指定字段，关联字段默认为关联对象id
