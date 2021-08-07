@@ -173,7 +173,7 @@ The following people have contributed to the project:
 * [Fanyu Zeng](https://github.com/CokeUltraman) [![wakatime](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca.svg)](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca)
 * [Heng Wei](https://github.com/theOGcat)
 * [Changye Ma](https://github.com/ChangyeMa)
-* [Yanhao Wang](https://github.com/DG-xixuan)
+* [Yanhao Wang](https://github.com/DG-xixuan) [![wakatime](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca.svg)](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca)
 * [Chengyue Wei](https://github.com/KevinVVei)
 * [Mike Yu](https://github.com/mikezerone)
 
