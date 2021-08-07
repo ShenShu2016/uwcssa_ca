@@ -8,7 +8,7 @@ from users.models import CustomUser
 
 
 def upload_to(instance, filename):
-    return 'post/{filename}'.format(filename=filename)
+    return 'media/news/article/{filename}'.format(filename=filename)
 
 
 class Topic(models.Model):

@@ -8,7 +8,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 class TopicListCreateView(ListCreateAPIView):
     serializer_class = TopicSerializer
     queryset = Topic.objects.all()
-    permission_classes = (IsAuthenticated, )
+
+    #permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
@@ -20,8 +21,7 @@ class TopicDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Topic.objects.all()
 
     def perform_update(self, serializer):
-        serializer.save(created_by=self.request.user,
-                        updated_by=self.request.user)
+        serializer.save(created_by=self.request.user)
 
 
 class ArticleListCreateView(ListCreateAPIView):
@@ -30,7 +30,8 @@ class ArticleListCreateView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        serializer.save(created_by=self.request.user,
+                        updated_by=self.request.user)
 
 
 class ArticleDetailView(RetrieveUpdateDestroyAPIView):
