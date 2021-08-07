@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from datetime import timedelta
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from SECRET import ALLOWED_HOSTS, DATABASES, SECRET_KEY
@@ -166,3 +166,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # rest-auth
 SITE_ID = 1  # rest-auth
+
+MDEIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
