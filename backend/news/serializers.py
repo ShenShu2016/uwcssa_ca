@@ -8,12 +8,18 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = '__all__'
+        read_only_fields = (
+            'topic',
+            'created_at',
+            'created_by',
+        )
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
+
 
 # class StudentSerializer(serializers.ModelSerializer):
 #     # 自定义序列化和反序列化字段校验条件，默认使用建表约束校验；也可以使用extra_kwargs

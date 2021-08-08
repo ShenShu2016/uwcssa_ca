@@ -45,13 +45,7 @@
     <br />
     <a href="https://github.com/ShenShu2016/uwcssa_ca"><strong>Explore the docs »</strong></a>
     <br />
-  <a>The main objectives to be achieved through the implementation of the business requirements are described as follows:</a>
-  <br/>
-  <a>To optimize the management of the student council (UWINCSSA) as well as its efficient operation. </a>
-  <br/>
-  <a>To build relationships among the student council, students and the local community and have them engaged.</a>
-  <br/>
-  <a>To improve accessibility.</a>
+  <a> The UWCSSA project is a web development project designed to provide an efficient working platform for the University of Windsor Chinese Students and Scholars Association and a student forum for University of Windsor students.</a>
   <br/>
     <a href="https://uwcssa.ca">View Demo</a>
     ·
@@ -70,6 +64,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#motiation">Motiation</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -82,9 +77,11 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributors">Contributors</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#support">Support</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
     <li><a href="#kerun-pan-notes">KerunPanNotes</a></li>
   </ol>
@@ -101,6 +98,11 @@ Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
 `github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
 
+### Motiation
+* To optimize the management of the student council (UWINCSSA) as well as its efficient operation. 
+* To build relationships among the student council, students and the local community and have them engaged.
+* To improve accessibility.
+
 
 ### Built With
 * [<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />][webdevplaylist]<br />
@@ -113,6 +115,7 @@ Here's a blank template to get started:
 * [<img align="left" alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />][webdevplaylist]<br />
 * [<img align="left" alt="Terminal" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />][webdevplaylist]<br />
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -141,6 +144,7 @@ This is an example of how to list things you need to use the software and how to
    docker-compose -f docker-compose.dev.yml build
    docker-compose -f docker-compose.dev.yml up
    ```
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -149,19 +153,36 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
+<!-- CONTRIUTORS -->
+## Contributors
+The following people have contributed to the project:
+
+* [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
+* [Kerun Pan](https://github.com/KerunPan)
+* [Shikai(Zoe) Jin](https://github.com/shikaijin) [![wakatime](https://wakatime.com/badge/github/shikaijin/uwcssa_ca.svg)](https://wakatime.com/badge/github/shikaijin/uwcssa_ca)
+* [Jinhua Long](https://github.com/lzg187ljh)
+* [ChangkuanGao](https://github.com/gao14o)
+* [Fanyu Zeng](https://github.com/CokeUltraman) [![wakatime](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca.svg)](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca)
+* [Heng Wei](https://github.com/theOGcat)
+* [Changye Ma](https://github.com/ChangyeMa)
+* [Yanhao Wang](https://github.com/DG-xixuan) [![wakatime](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca.svg)](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca)
+* [Chengyue Wei](https://github.com/KevinVVei)
+* [Mike Yu](https://github.com/mikezerone)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- CONTRIBUTING -->
 ## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+First off, thanks for taking the time to contribute! Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -169,14 +190,25 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+Please try to create bug reports that are:
 
+- _Reproducible._ Include steps to reproduce the problem.
+- _Specific._ Include as much detail as possible: which version, what environment, etc.
+- _Unique._ Do not duplicate existing opened issues.
+- _Scoped to a Single Bug._ One bug per report.
+
+Please adhere to this project's [code of conduct](https://github.com/shikaijin/uwcssa_ca/blob/c956d22ecc81f84c803558d6f16b4d8aa8155794/contributor%20covenant.md).
+
+
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- CONTACT -->
 ## Contact
@@ -185,22 +217,20 @@ Home Page - [@UWCSSA.ca](https://uwcssa.ca)
 
 Project Link: [https://github.com/ShenShu2016/uwcssa_ca](https://github.com/github_username/repo_name)
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
+<!-- Support -->
+## Support
+Contributions, issues, and feature requests are welcome!
+
+Give a ⭐️ if you like this project!
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
+* [amazing-github-template](https://github.com/dec0dOS/amazing-github-template/blob/main/README.md)
 
-* [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
-* [Kerun Pan](https://github.com/KerunPan)
-* [Shikai(Zoe) Jin](https://github.com/shikaijin)
-* [Jinhua Long](https://github.com/lzg187ljh)
-* [ChangkuanGao](https://github.com/gao14o)
-* [Fanyu Zeng](https://github.com/CokeUltraman)
-* [Heng Wei](https://github.com/theOGcat)
-* [Changye Ma](https://github.com/ChangyeMa)
-* [Yanhao Wang](https://github.com/DG-xixuan)
-* [Chengyue Wei](https://github.com/KevinVVei)
-* [Mike Yu](https://github.com/mikezerone)
 
 <!-- CONTACT -->
 ## KerunPanNotes

@@ -1,7 +1,9 @@
-from rest_framework import routers
-from news import views
+from django.urls import path
+from news.views import ArticleListCreateView, ArticleDetailView, TopicListCreateView, TopicDetailView
 
-
-router = routers.DefaultRouter()
-router.register(r'news/topic', views.TopicViewSet)
-router.register(r'news/article', views.ArticleViewSet)
+urlpatterns = [
+    path('topic/', TopicListCreateView.as_view()),
+    path('topic/<int:pk>/', TopicDetailView.as_view()),
+    path('article/', ArticleListCreateView.as_view()),
+    path('article/<int:pk>/', ArticleDetailView.as_view())
+]
