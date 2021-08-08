@@ -1,12 +1,15 @@
 version: '3'
 
 services: 
-    api:
-        build: .
-        container_name: django
+    django:
+        image: django_dev_app:0.0.1
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: django_dev_server
 
-        volumes: 
-            - .:/usr/src/app
+        # volumes: 
+        #     - .:/app
         ports: 
             - "8000:8000"
         depends_on: 

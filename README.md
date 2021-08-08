@@ -83,6 +83,7 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#support">Support</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#kerun-pan-notes">KerunPanNotes</a></li>
   </ol>
 </details>
 
@@ -134,14 +135,14 @@ This is an example of how to list things you need to use the software and how to
 2. Prepare & start Frontend Docker Contanier
    ```sh
    cd ../uwcssa_ca/frontend
-   docker-compose build
-   docker-compose up
+   docker-compose -f docker-compose.dev.yml build
+   docker-compose -f docker-compose.dev.yml up
    ```
 3. Prepare & start Backend & PostgreSQL Docker Contaniers
    ```sh
    cd ../uwcssa_ca/backend
-   docker-compose build
-   docker-compose up
+   docker-compose -f docker-compose.dev.yml build
+   docker-compose -f docker-compose.dev.yml up
    ```
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -231,6 +232,50 @@ Give a ⭐️ if you like this project!
 * [amazing-github-template](https://github.com/dec0dOS/amazing-github-template/blob/main/README.md)
 
 
+<!-- CONTACT -->
+## KerunPanNotes
+
+* Note this section just contains some hints, you guys can edit it if you want, or use this as a template to update our README file
+
+### hadolint
+
+1. Check Docker images security level hadolint
+  https://github.com/hadolint/hadolint
+
+2. Open git bash to run 
+
+  ```sh
+  docker run --rm -i hadolint/hadolint < Dockerfile.dev
+  ```
+
+### iteract with docker container
+
+1. Check current running container
+
+  ```sh
+  docker ps -a
+  ```
+
+2. iteract with the container by ID
+
+  ```sh
+  docker exec -it [containerID] bash
+  ```
+
+### open django shell terminal
+
+1. Using it for testing django features
+
+  ```sh
+  python manage.py shell
+  ```
+### open redis cli terminal
+
+1. Using it for testing redis features
+
+  ```sh
+  docker exec -it [containerID] redis-cli
+  ```
 
 
 
