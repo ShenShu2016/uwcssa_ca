@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'allauth',  # 自己定义的
     'allauth.account',  # 自定义的
     'allauth.socialaccount',  # 自定义
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
 
     # api doc
     'drf_yasg',
@@ -177,3 +179,34 @@ REST_AUTH_SERIALIZERS = {
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # only verified email can login
+
+# allauth
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# Provider specific settings
+# Homepage URL:http://127.0.0.1:8000
+# Authorization callback URL http://localhost/accounts/github/login/callback/
+# and site 1 change to: 127.0.0.1
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+    }
+}
