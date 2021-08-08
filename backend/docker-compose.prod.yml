@@ -8,8 +8,8 @@ services:
             dockerfile: Dockerfile.dev
         container_name: django_dev_server
 
-        volumes: 
-            - .:/usr/src/app
+        # volumes: 
+        #     - .:/app
         ports: 
             - "8000:8000"
         depends_on: 
