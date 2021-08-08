@@ -8,6 +8,11 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = '__all__'
+        read_only_fields = (
+            'topic',
+            'created_at',
+            'created_by',
+        )
 
 
 class ArticleSerializer(serializers.ModelSerializer):
