@@ -53,6 +53,7 @@ urlpatterns = [
         "favicon.ico",
         RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
     ),  # 静态favicon地址
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += path('api/', include('api.urls')),

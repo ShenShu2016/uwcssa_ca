@@ -6,6 +6,5 @@ urlpatterns = [
     path('auth/registration/', include('rest_auth.registration.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('accounts/', include('allauth.urls')),
     path('news/', include('news.urls'))
 ]
