@@ -36,7 +36,7 @@ class CustomAccountManager(BaseUserManager):  # 继承 BaseUserManager
 
         email = self.normalize_email(email)
         user = self.model(email=email,
-                          sername=username,
+                          username=username,
                           first_name=first_name,
                           **other_fields)
         user.set_password(password)
