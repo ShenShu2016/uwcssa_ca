@@ -54,7 +54,8 @@ class LoginSerializer(serializers.Serializer):
         elif username and password:
             user = self.authenticate(username=username, password=password)
         else:
-            msg = _('Must include either "username" or "email" and "password".')
+            msg = _(
+                'Must include either "username" or "email" and "password".')
             raise exceptions.ValidationError(msg)
 
         return user
@@ -119,10 +120,9 @@ class TokenSerializer(serializers.ModelSerializer):
     """
     Serializer for Token model.
     """
-
     class Meta:
         model = TokenModel
-        fields = ('key',)
+        fields = ('key', )
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
@@ -149,11 +149,10 @@ class JWTSerializer(serializers.Serializer):
         """
         rest_auth_serializers = getattr(settings, 'REST_AUTH_SERIALIZERS', {})
         JWTUserDetailsSerializer = import_callable(
-            rest_auth_serializers.get(
-                'USER_DETAILS_SERIALIZER', UserDetailsSerializer)
-        )
-        user_data = JWTUserDetailsSerializer(
-            obj['user'], context=self.context).data
+            rest_auth_serializers.get('USER_DETAILS_SERIALIZER',
+                                      UserDetailsSerializer))
+        user_data = JWTUserDetailsSerializer(obj['user'],
+                                             context=self.context).data
         return user_data
 
 
@@ -217,9 +216,8 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
         self.custom_validation(attrs)
         # Construct SetPasswordForm instance
-        self.set_password_form = self.set_password_form_class(
-            user=self.user, data=attrs
-        )
+        self.set_password_form = self.set_password_form_class(user=self.user,
+                                                              data=attrs)
         if not self.set_password_form.is_valid():
             raise serializers.ValidationError(self.set_password_form.errors)
         if not default_token_generator.check_token(self.user, attrs['token']):
@@ -240,11 +238,10 @@ class PasswordChangeSerializer(serializers.Serializer):
 
     def __init__(self, *args, **kwargs):
         self.old_password_field_enabled = getattr(
-            settings, 'OLD_PASSWORD_FIELD_ENABLED', False
-        )
-        self.logout_on_password_change = getattr(
-            settings, 'LOGOUT_ON_PASSWORD_CHANGE', False
-        )
+            settings, 'OLD_PASSWORD_FIELD_ENABLED', False)
+        self.logout_on_password_change = getattr(settings,
+                                                 'LOGOUT_ON_PASSWORD_CHANGE',
+                                                 False)
         super(PasswordChangeSerializer, self).__init__(*args, **kwargs)
 
         if not self.old_password_field_enabled:
@@ -254,22 +251,20 @@ class PasswordChangeSerializer(serializers.Serializer):
         self.user = getattr(self.request, 'user', None)
 
     def validate_old_password(self, value):
-        invalid_password_conditions = (
-            self.old_password_field_enabled,
-            self.user,
-            not self.user.check_password(value)
-        )
+        invalid_password_conditions = (self.old_password_field_enabled,
+                                       self.user,
+                                       not self.user.check_password(value))
 
         if all(invalid_password_conditions):
             err_msg = _(
-                "Your old password was entered incorrectly. Please enter it again.")
+                "Your old password was entered incorrectly. Please enter it again."
+            )
             raise serializers.ValidationError(err_msg)
         return value
 
     def validate(self, attrs):
-        self.set_password_form = self.set_password_form_class(
-            user=self.user, data=attrs
-        )
+        self.set_password_form = self.set_password_form_class(user=self.user,
+                                                              data=attrs)
 
         if not self.set_password_form.is_valid():
             raise serializers.ValidationError(self.set_password_form.errors)
