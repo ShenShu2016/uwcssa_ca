@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-
 from SECRET import ALLOWED_HOSTS, DATABASES, SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -169,3 +168,12 @@ SITE_ID = 1  # rest-auth
 
 MDEIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+REST_AUTH_SERIALIZERS = {
+    # Changed
+    'USER_DETAILS_SERIALIZER': 'users.users_serializers.CustomUserSerializer',
+    'LOGIN_SERIALIZER': 'users.login_serializers.CustomLoginSerializer',
+}
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+LOGIN_REDIRECT_URL = '/'
