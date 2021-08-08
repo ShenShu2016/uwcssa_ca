@@ -1,23 +1,22 @@
 from news.models import Article, Topic
 from .serializers import TopicSerializer, ArticleSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
 # Create your views here.
 
 
 class TopicListCreateView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated, )
     serializer_class = TopicSerializer
     queryset = Topic.objects.all()
-
-    #permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
 
-class TopicDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = TopicSerializer
+class TopicDetailView(RetrieveAPIView):  # Topic 不能改
     permission_classes = (IsAuthenticated, )
+    serializer_class = TopicSerializer
     queryset = Topic.objects.all()
 
     def perform_update(self, serializer):
@@ -25,9 +24,9 @@ class TopicDetailView(RetrieveUpdateDestroyAPIView):
 
 
 class ArticleListCreateView(ListCreateAPIView):
+    permission_classes = (IsAuthenticated, )
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
-    permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user,
@@ -35,8 +34,8 @@ class ArticleListCreateView(ListCreateAPIView):
 
 
 class ArticleDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = ArticleSerializer
     permission_classes = (IsAuthenticated, )
+    serializer_class = ArticleSerializer
     queryset = Article.objects.all()
 
     def perform_update(self, serializer):
