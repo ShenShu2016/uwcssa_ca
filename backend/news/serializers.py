@@ -9,7 +9,6 @@ class TopicSerializer(serializers.ModelSerializer):
         model = Topic
         fields = '__all__'
         read_only_fields = (
-            'topic',
             'created_at',
             'created_by',
         )
