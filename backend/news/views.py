@@ -1,11 +1,16 @@
 from news.models import Article, Topic
 from .serializers import TopicSerializer, ArticleSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView, ListAPIView, CreateAPIView
 # Create your views here.
 
 
-class TopicListCreateView(ListCreateAPIView):
+class TopicListView(ListAPIView):
+    serializer_class = TopicSerializer
+    queryset = Topic.objects.all()
+
+
+class TopicCreateView(CreateAPIView):
     permission_classes = (IsAuthenticated, )
     serializer_class = TopicSerializer
     queryset = Topic.objects.all()
@@ -23,7 +28,12 @@ class TopicDetailView(RetrieveAPIView):  # Topic 不能改
         serializer.save(created_by=self.request.user)
 
 
-class ArticleListCreateView(ListCreateAPIView):
+class ArticleListView(ListAPIView):
+    serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
+
+
+class ArticleCreateView(CreateAPIView):
     permission_classes = (IsAuthenticated, )
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
