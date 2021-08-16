@@ -9,8 +9,8 @@ jobs:
 
     steps:
       # Pull source code from Github to Circle ci
-      - checkout 
-        path: ~/repo
+      - checkout: 
+          path: ~/repo
 
       #Download and cache dependencies
       - restore_cache:
