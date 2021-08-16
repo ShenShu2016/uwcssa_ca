@@ -18,3 +18,6 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: npm start
+    #docker will run the container in "interactive mode" 
+    #which is required to run the react app in development mode
+    stdin_open: true
