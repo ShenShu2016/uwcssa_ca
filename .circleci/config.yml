@@ -5,8 +5,6 @@ jobs:
     docker:
       - image: node:14.16.0
       
-    working_directory: ~/frontend
-  
     steps:
       # Pull source code from Github to Circle ci
       - checkout 
@@ -14,19 +12,25 @@ jobs:
       #Download and cache dependencies
       - restore_cache:
           keys:
-            - vi-dependencies-{{ checksum "package.json" }}
+            - vi-dependencies-{{ checksum "frontend/package.json" }}
             # fallback to using the latest vache if no exact match is found
             - vi-dependencies-
       
-      - run: npm install
+      - run: 
+          name: install dependencies
+          command: | 
+            npm install
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "frontend/package.json" }}
       
       # run tests!
-      - run: npm test
+      - run: 
+          name: run tests
+          command: | 
+            npm test
 
 workflows:
   backend_and_frontend:
