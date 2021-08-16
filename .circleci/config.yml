@@ -13,16 +13,16 @@ jobs:
 
       #Download and cache dependencies
       - restore_cache:
-        keys:
-          - vi-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest vache if no exact match is found
-          - vi-dependencies-
+          keys:
+            - vi-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest vache if no exact match is found
+            - vi-dependencies-
       
       - run: npm install
 
-      -save_cache:
-        paths:
-          - node_modules
+      - save_cache:
+          paths:
+            - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       
       # run tests!
@@ -33,4 +33,3 @@ workflows:
     jobs:
       # - backend
       - frontend
-
