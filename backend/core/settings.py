@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'users',
 
     # app
+    'authorization',
     'news',
     'cssamembers',
     'experimentapp',  # 小潘测试用app
