@@ -25,6 +25,7 @@ from drf_yasg import openapi
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -38,23 +39,34 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=[permissions.AllowAny],
 )
+
 urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$',
         schema_view.without_ui(cache_timeout=0),
         name='schema-json'),
-    url(r'^swagger/$',
-        schema_view.with_ui('swagger', cache_timeout=0),
-        name='schema-swagger-ui'),
-    url(r'^redoc/$',
-        schema_view.with_ui('redoc', cache_timeout=0),
-        name='schema-redoc'),
+    path('swagger/',
+         schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),
+    path('redoc/',
+         schema_view.with_ui('redoc', cache_timeout=0),
+         name='schema-redoc'),
     path('admin/', admin.site.urls),
-    path(
-        "favicon.ico",
-        RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
-    ),  # 静态favicon地址
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('jwt/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('jwt/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('accounts/', include('allauth.urls')),
+    # url(r'^', include('django.contrib.auth.urls')),
 ]
 
-urlpatterns += path('api/', include('api.urls')),
+# loacl app
+urlpatterns += [
+    path('news/', include('news.urls')),
+]
+
+urlpatterns += path(
+    "favicon.ico",
+    RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
+),  # 静态favicon地址
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
