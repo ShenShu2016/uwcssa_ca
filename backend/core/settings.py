@@ -54,6 +54,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',  # always has session
         'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':
     ('rest_framework.permissions.IsAuthenticatedOrReadOnly', ),
@@ -63,7 +64,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'AUTH_HEADER_TYPES': ('Bearer', ),
+    'AUTH_HEADER_TYPES': ('JWT', ),
 }
 
 # reference: https://github.com/Tivix/django-rest-auth/issues/457

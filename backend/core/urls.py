@@ -1,3 +1,4 @@
+from authorization.views import FacebookLogin, GoogleLogin
 from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
@@ -10,8 +11,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView)
-from authorization.views import GoogleLogin, FacebookLogin
+                                            TokenRefreshView, TokenVerifyView)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -45,8 +45,11 @@ urlpatterns = [
     path('auth/jwttoken/refresh/',
          TokenRefreshView.as_view(),
          name='token_refresh'),
+    path('auth/jwttoken/verify/',
+         TokenVerifyView.as_view(),
+         name='token_verify'),
     path('accounts/', include('allauth.urls')),
-    # url(r'^', include('django.contrib.auth.urls')),
+    url(r'^', include('django.contrib.auth.urls')),
 ]
 
 # social login
