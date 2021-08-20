@@ -9,7 +9,9 @@ import ResetPassword from './containers/ResetPassword';
 import ResetPasswordConfirm from './containers/ResetPasswordConfirm';
 import Facebook from './containers/Facebook';
 import Google from './containers/Google';
-
+import Services from "./containers/Services";
+import News from "./containers/News";
+import Forum from "./containers/Forum";
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -21,6 +23,9 @@ const App = () => (
             <Layout>
                 <Switch>
                     <Route exact path='/' component={Home} />
+                    <Route path="/news" exact component={News} />
+                    <Route path="/forum" exact component={Forum} />
+                    <Route path="/services" exact component={Services} />
                     <Route  path='/login' component={Login} />
                     <Route  path='/signup' component={Signup} />
                     <Route  path='/facebook' component={Facebook} />

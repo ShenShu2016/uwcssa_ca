@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../actions/auth';
-import axios from 'axios';
+
 
 const Signup = ({ signup, isAuthenticated }) => {
     const [accountCreated, setAccountCreated] = useState(false);
@@ -27,25 +27,25 @@ const Signup = ({ signup, isAuthenticated }) => {
         }
     };
 
-    const continueWithGoogle = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google`)
+    // const continueWithGoogle = async () => {
+    //     try {
+    //         const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google`)
 
-            window.location.replace(res.data.authorization_url);
-        } catch (err) {
+    //         window.location.replace(res.data.authorization_url);
+    //     } catch (err) {
 
-        }
-    };
+    //     }
+    // };
 
-    const continueWithFacebook = async () => {
-        try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/facebook/?redirect_uri=${process.env.REACT_APP_API_URL}/facebook`)
+    // const continueWithFacebook = async () => {
+    //     try {
+    //         const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/facebook/?redirect_uri=${process.env.REACT_APP_API_URL}/facebook`)
 
-            window.location.replace(res.data.authorization_url);
-        } catch (err) {
+    //         window.location.replace(res.data.authorization_url);
+    //     } catch (err) {
 
-        }
-    };
+    //     }
+    // };
 
     if (isAuthenticated) {
         return <Redirect to='/' />
@@ -55,7 +55,7 @@ const Signup = ({ signup, isAuthenticated }) => {
     }
 
     return (
-        <div className='container mt-5'>
+        <div className='login_form_main'>
             <h1>Sign Up</h1>
             <p>Create your Account</p>
             <form onSubmit={e => onSubmit(e)}>
@@ -108,13 +108,13 @@ const Signup = ({ signup, isAuthenticated }) => {
                 </div>
                 <button className='btn btn-primary' type='submit'>Register</button>
             </form>
-            <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
+            {/* <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
                 Continue With Google
             </button>
             <br />
             <button className='btn btn-primary mt-3' onClick={continueWithFacebook}>
                 Continue With Facebook
-            </button>
+            </button> */}
             <p className='mt-3'>
                 Already have an account? <Link to='/login'>Sign In</Link>
             </p>

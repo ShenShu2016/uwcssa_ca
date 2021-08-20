@@ -7,8 +7,8 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
     useEffect(() => {
         checkAuthenticated();
         load_user();
-    
     }, []);
+// 上面空list，第一次加载页面的时候就一次
 
     return (
         <div>

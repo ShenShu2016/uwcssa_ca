@@ -1,16 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
+import Card from '../components/card/Card'
 
 const Home = () => (
-    <div className='container'>
-        <div class='jumbotron mt-5'>
-            <h1 class='display-4'>Welcome to Auth System!</h1>
-            <p class='lead'>This is an incredible authentication system with production level features!</p>
-            <hr class='my-4' />
-            <p>Click the Log In button</p>
-            <Link class='btn btn-primary btn-lg' to='/login' role='button'>Login</Link>
-        </div>
-    </div>
+    <>
+      <h1 className="home">Home</h1>
+      <Card 
+      apiAddress='http://127.0.0.1:8000/news/article_list/'
+      index='0'
+      />
+      <Card 
+      apiAddress='http://127.0.0.1:8000/news/article_list/'
+      index='1'
+      />
+    </>
 );
 
 export default Home;

@@ -6,12 +6,15 @@ import "./Navbar.css";
 import { Button } from "../button/Button";
 import Dropdown from "./Dropdown";
 import LogoSvg from "../uwcssa_logo.svg";
+import store from "../../store";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const {user} = store.getState()
+  console.log(user);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -57,7 +60,6 @@ const Navbar = ({ logout, isAuthenticated }) => {
       </a>
     </li>
   );
-
   return (
     <Fragment>
       <nav className="navbar">
@@ -117,7 +119,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           {/* 这东西是根据你有没有登录变的 */}
         </ul>
         {/* 这东西是根据你有没有登录变的 */}
-        {isAuthenticated ? "" : <Button />}
+        {isAuthenticated ? "" : <div className='none-at-media'><Button /></div>}
         {/* 这东西是根据你有没有登录变的 */}
       </nav>
       {redirect ? <Redirect to="/" /> : <Fragment></Fragment>}
