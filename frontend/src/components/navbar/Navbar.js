@@ -3,18 +3,16 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import "./Navbar.css";
-import { Button } from "../button/Button";
+import { LoginButton } from "../button/LoginButton";
 import Dropdown from "./Dropdown";
 import LogoSvg from "../uwcssa_logo.svg";
 import store from "../../store";
 
-const Navbar = ({ logout, isAuthenticated }) => {
+const Navbar = ({ logout, isAuthenticated, user }) => {
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  const {user} = store.getState()
-  console.log(user);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -56,22 +54,36 @@ const Navbar = ({ logout, isAuthenticated }) => {
   const authLinks = () => (
     <li className="nav-item">
       <a className="nav-link" href="#!" onClick={logout_user}>
+        {user ? user.username : ""}
         Logout
       </a>
     </li>
   );
+
+  const userInfo = () => (
+    <Fragment>
+      <li className="nav-item">
+        <a className="nav-link nav-link-user" href="#!" onClick={logout_user}>
+          {user ? user.username : ""}
+        </a>
+      </li>
+    </Fragment>
+  );
+
   return (
     <Fragment>
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
-          UWCSSA{" "}
           <img
             src={LogoSvg}
-            style={{ height: 40, width: 40 }}
+            style={{ height: 62, width: 62 }}
             alt="website logo"
-            fill="red"
           />
         </Link>
+        <Link to="/" className="navbar-logo-text">
+          UWCSSA
+        </Link>
+
         <div className="menu-icon" onClick={handleClick}>
           <i className={click ? "fas fa-times" : "fas fa-bars"} />
         </div>
@@ -95,7 +107,17 @@ const Navbar = ({ logout, isAuthenticated }) => {
             </Link>
           </li>
 
-          <li
+          <li className="nav-item">
+            <Link to="/members" className="nav-links" onClick={closeMobileMenu}>
+              Members
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/forum" className="nav-links" onClick={closeMobileMenu}>
+              EN/中文
+            </Link>
+          </li>
+          {/* <li
             className="nav-item"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -108,20 +130,32 @@ const Navbar = ({ logout, isAuthenticated }) => {
               Services <i className="fas fa-caret-down" />
             </Link>
             {dropdown && <Dropdown />}
-          </li>
+          </li> */}
+          {/* 这东西是根据你有没有登录变的 */}
           <li className="nav-item">
-            <Link to="/members" className="nav-links" onClick={closeMobileMenu}>
-              Members
+            <Link to="/search" className="nav-links" onClick={closeMobileMenu}>
+              <i class="fas fa-search"></i>
             </Link>
           </li>
-          {/* 这东西是根据你有没有登录变的 */}
-          {isAuthenticated ? authLinks() : guestLinks()}
+          {isAuthenticated ? userInfo() : guestLinks()}
+
           {/* 这东西是根据你有没有登录变的 */}
         </ul>
+        {/* <form>
+          <input className="nav-search" placeholder="Search" />
+        </form> */}
+
         {/* 这东西是根据你有没有登录变的 */}
-        {isAuthenticated ? "" : <div className='none-at-media'><Button /></div>}
+        {isAuthenticated ? (
+          ""
+        ) : (
+          <div className="none-at-media">
+            <LoginButton />
+          </div>
+        )}
         {/* 这东西是根据你有没有登录变的 */}
       </nav>
+
       {redirect ? <Redirect to="/" /> : <Fragment></Fragment>}
     </Fragment>
   );
@@ -129,6 +163,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

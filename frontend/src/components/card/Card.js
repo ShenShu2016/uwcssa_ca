@@ -23,7 +23,7 @@ function Card({ apiAddress, index }) {
           <h3>{newsData.topic_name}</h3>
         </div>
         <div className="card-body">
-          <p>{newsData.content}</p>
+          <pre>{newsData.content}</pre>
         </div>
       </div>
       <div className="card-btn">
