@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  // border-style: solid;
-  // border-color: red;
-  padding: 30px 60px;
- background: #E0E0E0;
-radial-gradient(circle, rgba(92,39,251,1) 0%, rgba(112,71,247,1) 100%)
+  padding-top:190px;
+  padding-left: 50px;
+  padding-bottom: 80px;
+  background: #2C3E50;
+  radial-gradient(circle, rgba(92,39,251,1) 0%, rgba(112,71,247,1) 100%)
   @media (max-width: 1000px) {
     padding: 70px 30px;
+    height:900;
   }
 `;
 
@@ -15,22 +16,20 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 1000px;
     margin: 0 auto;
-    /* background: red; */
 `
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-left: 60px;
+  margin-left: 30px;
 `;
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 30px;
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -38,11 +37,13 @@ export const Row = styled.div`
 `;
 
 export const Link = styled.a`
-  color: black;
+  color: #fff;
   margin-bottom: 20px;
   font-size: 18px;
   text-decoration: none;
-
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
   &:hover {
       color: #ff9c00;
       transition: 200ms ease-in;
@@ -51,7 +52,21 @@ export const Link = styled.a`
 
 export const Title = styled.p`
   font-size: 30px;
-  color: black;
-  margin-bottom: 20px;
+  color: #fff;
+  margin-bottom: 80px;
   font-weight: bold;
+`;
+export const CopyContainer = styled.div`
+  margin-top:150px;
+  width: 70%;
+`;
+
+
+export const Copy = styled.p`
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  float:right;
+
 `;

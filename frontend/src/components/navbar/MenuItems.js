@@ -1,27 +1,13 @@
 export const MenuItems= [
     {
-        title: 'Marketing',
-        path: '/marketing',
-        cName: 'dropdown-link',
-    },
-        {
-        title: 'Consulting',
-        path: '/consulting',
-        cName: 'dropdown-link',
-    },
-        {
-        title: 'Design',
+        title: '中文',
         path: '/',
         cName: 'dropdown-link',
     },
         {
-        title: 'Development',
+        title: 'English',
         path: '/',
         cName: 'dropdown-link',
     },
-            {
-        title: 'Dashboard',
-        path: '/dashboard',
-        cName: 'dropdown-link',
-    },
+
 ]

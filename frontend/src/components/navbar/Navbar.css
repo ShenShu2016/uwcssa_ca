@@ -11,14 +11,20 @@
   justify-self: start;
   margin-left: 20px;
   cursor: pointer;
-  /* text-decoration: none; */
+
   margin-right: 0.5rem;
 }
+.navbar-logo img {
+  height: 62px;
+  width: 62px;
+}
+
 .navbar-logo-text {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
   color: rgb(17, 6, 6);
+  text-decoration: none;
 }
 
 .fa-firstdraft {
@@ -32,7 +38,7 @@
   grid-gap: 10px;
   list-style: none;
   text-align: center;
-  width: 80vw;
+  width: 75vw;
   justify-content: end;
   margin-right: 0.5rem;
 }
@@ -67,6 +73,10 @@
   font-weight: normal;
   font-size: 20px;
   line-height: 26px;
+}
+
+.nav-link-user {
+  text-decoration: none;
 }
 .nav-links {
   color: rgb(19, 17, 17);

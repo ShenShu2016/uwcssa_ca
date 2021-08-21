@@ -48,7 +48,7 @@ p {
   background: rgba(27, 156, 253, 0.1);
 }
 
-a {
+.card-btn a {
   text-transform: uppercase;
   color: #1b9cfc;
   text-decoration: none;
@@ -101,7 +101,7 @@ a {
     margin: 0.5rem;
   }
 
-  a {
+  .card-btn a {
     text-transform: uppercase;
     color: #1b9cfc;
     text-decoration: none;

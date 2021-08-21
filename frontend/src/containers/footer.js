@@ -1,41 +1,39 @@
-import React from 'react'
-import Footer from '../components/footer'
-import Icon from '../components/icons'
+import React from "react";
+import Footer from "../components/footer";
+import Icon from "../components/icons";
 
 export function FooterContainer() {
-    return (
-        <Footer>
-            <Footer.Wrapper>
-            <Footer.Row>
-                <Footer.Column>
-                <Footer.Title>About Us</Footer.Title>
-                    <Footer.Link href="#">Story</Footer.Link>
-                    <Footer.Link href="#">Clients</Footer.Link>
-                    <Footer.Link href="#">Testimonials</Footer.Link>
-                </Footer.Column>
-                <Footer.Column>
-                <Footer.Title>Services</Footer.Title>
-                    <Footer.Link href="/marketing">Marketing</Footer.Link>
-                    <Footer.Link href="#">Consulting</Footer.Link>
-                    <Footer.Link href="#">Development</Footer.Link>
-                    <Footer.Link href="#">Design</Footer.Link>
-                </Footer.Column>
-                <Footer.Column>
-                <Footer.Title>Contact Us</Footer.Title>
-                    <Footer.Link href="#">United States</Footer.Link>
-                    <Footer.Link href="#">United Kingdom</Footer.Link>
-                    <Footer.Link href="#">Australia</Footer.Link>
-                    <Footer.Link href="#">Support</Footer.Link>
-                </Footer.Column>
-                <Footer.Column>
-                <Footer.Title>Social</Footer.Title>
-                    <Footer.Link href="#"><Icon className="fab fa-facebook-f" />Facebook</Footer.Link>
-                    <Footer.Link href="#"><Icon className="fab fa-instagram" />Instagram</Footer.Link>
-                    <Footer.Link href="#"><Icon className="fab fa-youtube" />Youtube</Footer.Link>
-                    <Footer.Link href="#"><Icon className="fab fa-twitter" />Twitter</Footer.Link>
-                </Footer.Column>
-            </Footer.Row>
-            </Footer.Wrapper>
-        </Footer>
-    )
+  return (
+    <Footer>
+      <Footer.Wrapper>
+        <Footer.Row>
+          <Footer.Column>
+            <Footer.Title>About Us</Footer.Title>
+            <Footer.Link href="/members">Our Team</Footer.Link>
+            <Footer.Link href="#">Contact Us</Footer.Link>
+          </Footer.Column>
+          <Footer.Column>
+            <Footer.Title>News</Footer.Title>
+            <Footer.Link href="/marketing">CSSA News</Footer.Link>
+          </Footer.Column>
+          <Footer.Column>
+            <Footer.Title>Get In Touch</Footer.Title>
+            <Footer.Link href="#">Email: uwincssa.it@gmail.com</Footer.Link>
+            <Footer.Link href="#">Follow UWCSSA</Footer.Link>
+          </Footer.Column>
+          <Footer.Column>
+            <Footer.Title>Jobs</Footer.Title>
+            <Footer.Link href="#">
+              Come work with us! We are always looking for great talent to join
+              our team.
+            </Footer.Link>
+            {/* <Footer.Link href="#"><Icon className="fab fa-instagram" />Instagram</Footer.Link> */}
+          </Footer.Column>
+        </Footer.Row>
+      </Footer.Wrapper>
+      <Footer.CopyContainer>
+        <Footer.Copy> © UWCSSA 2021</Footer.Copy>
+      </Footer.CopyContainer>
+    </Footer>
+  );
 }
