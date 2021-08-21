@@ -1,0 +1,87 @@
+.home-ticker-container-row {
+  width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#nt-example1 {
+  max-width: 525px;
+  margin: 12px;
+  height: 510;
+}
+.ticker-title h3 {
+  display: block;
+  font-size: calc(1.3rem + 0.6vw);
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  text-align: left;
+  margin-left: 12px;
+}
+#nt-example1-container {
+  text-align: center;
+}
+#nt-example1-container img {
+  height: 100px;
+  width: 100px;
+}
+
+.inner-item-row {
+  width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.inner-item-row-other {
+  width: 400px;
+  margin-left: 5px;
+}
+.inner-item-row-other a {
+  font-size: 25px;
+}
+.inner-item-row-other p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+#nt-example1-container i {
+  font-size: 36px;
+  margin: 8px;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+#nt-example1-container i:hover {
+  color: #333;
+}
+
+#nt-example1 li {
+  background: #fafafa;
+  overflow: hidden;
+  height: 170px;
+  padding: 10px;
+  line-height: 30px;
+  list-style: none;
+  font-size: 24px;
+  text-align: left;
+  border-bottom: 1px dotted #ccc;
+}
+
+#nt-example1 li:hover {
+  background: #fff;
+}
+@media screen and (max-width: 1100px) {
+  .home-ticker-container-row {
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
