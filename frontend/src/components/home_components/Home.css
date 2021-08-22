@@ -1,0 +1,27 @@
+.home-container {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #333333;
+  justify-content: center;
+}
+.home-left-container {
+  margin-right: 50px;
+  width: 1155px;
+  height: 650px;
+}
+@media screen and (max-width: 900px) {
+  .home-left-container {
+    justify-content: center;
+    width: 100%;
+    height: 56.2%;
+    margin: auto;
+  }
+
+  .home-right-constainer {
+    justify-content: center;
+  }
+}

@@ -19,12 +19,12 @@ function HomeTickers() {
     <div className="home-ticker-container-row">
       <div id="nt-example1-container">
         <div className="ticker-title">
-          <h3>我是news ticker的 title</h3>
+          <h3>Last News</h3>
         </div>
         <NewsTicker
           id="nt-example1"
           ref={ref1}
-          rowHeight={171}
+          rowHeight={94}
           maxRows={3}
           duration={4000}
         >
@@ -81,7 +81,7 @@ function HomeTickers() {
             </div>
           </div>
         </NewsTicker>
-        <i
+        {/* <i
           className="fa fa-arrow-up"
           id="nt-example1-prev"
           onClick={() => {
@@ -96,16 +96,16 @@ function HomeTickers() {
             ref1.current.moveNext();
             ref1.current.resetInterval();
           }}
-        />
+        /> */}
       </div>
       <div id="nt-example1-container">
         <div className="ticker-title">
-          <h3>我是 论坛 ticker的 title</h3>
+          <h3>Hot Forum Topics</h3>
         </div>
         <NewsTicker
           id="nt-example1"
           ref={ref2}
-          rowHeight={171}
+          rowHeight={93}
           maxRows={3}
           duration={3500}
           direction={Directions.DOWN}
@@ -163,7 +163,7 @@ function HomeTickers() {
             </div>
           </div>
         </NewsTicker>
-        <i
+        {/* <i
           className="fa fa-arrow-up"
           id="nt-example1-prev"
           onClick={() => {
@@ -178,7 +178,7 @@ function HomeTickers() {
             ref2.current.moveNext();
             ref2.current.resetInterval();
           }}
-        />
+        /> */}
       </div>
     </div>
   );
