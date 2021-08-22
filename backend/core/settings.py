@@ -62,6 +62,9 @@ INSTALLED_APPS = [
 
     # api doc
     'drf_yasg',
+
+    # experiment app for Pan to config backend
+    'experimentapp',
 ]
 
 # let django know you are using custom User model
