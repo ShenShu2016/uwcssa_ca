@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # 解决跨域问题
-    "corsheaders",
+    'corsheaders',
 ]
 
 # let django know you are using custom User model
