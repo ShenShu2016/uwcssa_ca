@@ -23,12 +23,13 @@ export const Column = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-left: 30px;
+  margin-left: 20px;
+  margin-right: 10px;
 `;
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 0.8fr 0.8fr 1.2fr 1.2fr;
   grid-gap: 30px;
 
   @media (max-width: 1000px) {

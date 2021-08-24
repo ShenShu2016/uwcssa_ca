@@ -2,12 +2,15 @@ from news.models import Article, Topic
 from .serializers import TopicSerializer, ArticleSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView, ListAPIView, CreateAPIView
+
+from rest_framework.pagination import PageNumberPagination
 # Create your views here.
 
 
 class TopicListView(ListAPIView):
     serializer_class = TopicSerializer
     queryset = Topic.objects.all()
+    pagination_class = PageNumberPagination
 
 
 class TopicCreateView(CreateAPIView):
@@ -31,6 +34,7 @@ class TopicDetailView(RetrieveAPIView):  # Topic 不能改
 class ArticleListView(ListAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+    pagination_class = PageNumberPagination
 
 
 class ArticleCreateView(CreateAPIView):

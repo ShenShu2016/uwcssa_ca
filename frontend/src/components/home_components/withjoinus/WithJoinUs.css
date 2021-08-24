@@ -1,0 +1,69 @@
+:root {
+  --primary: #1682fd;
+}
+
+.with-join-button {
+  padding: 8px 20px;
+  border-radius: 4px;
+  outline: none;
+  border: 2px solid var(--primary);
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  background-color: var(--primary);
+  margin-bottom: 30px;
+}
+.with-join-button :hover {
+  padding: 6px 18px;
+  transition: all 0.3s ease-out;
+  background-color: transparent;
+  color: var(--primary);
+  border-radius: 4px;
+}
+
+.with-join-us {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.with-us {
+  flex-basis: 50%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+.with-us-inner {
+  max-width: 300px;
+  margin: auto;
+}
+.with-us h3 {
+  font-size: 20px;
+}
+.p-width {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  width: 300px;
+  height: auto;
+}
+.with-us p {
+  font-size: 16px;
+  text-align: start;
+}
+
+.join-us {
+  flex-basis: 50%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+.join-us-inner {
+  max-width: 300px;
+  margin: auto;
+}
+.join-us h3 {
+  font-size: 20px;
+}
+.join-us p {
+  font-size: 16px;
+  text-align: start;
+}
