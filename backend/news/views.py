@@ -1,6 +1,6 @@
 from news.models import Article, Topic
 from .serializers import TopicSerializer, ArticleSerializer
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView, ListAPIView, CreateAPIView
 
 from rest_framework.pagination import PageNumberPagination
@@ -48,7 +48,7 @@ class ArticleCreateView(CreateAPIView):
 
 
 class ArticleDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
 

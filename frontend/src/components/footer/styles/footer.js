@@ -5,10 +5,12 @@ export const Container = styled.div`
   padding-left: 50px;
   padding-bottom: 80px;
   background: #2C3E50;
+  margin-top:30px;
   radial-gradient(circle, rgba(92,39,251,1) 0%, rgba(112,71,247,1) 100%)
   @media (max-width: 1000px) {
     padding: 70px 30px;
     height:900;
+    
   }
 `;
 

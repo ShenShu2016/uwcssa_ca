@@ -12,6 +12,7 @@ import Google from './containers/Google';
 import Services from "./containers/Services";
 import Members from "./containers/Members"
 import News from "./containers/News";
+import NewsSinglePage from './containers/NewsSinglePage';
 import Forum from "./containers/Forum";
 import { Provider } from 'react-redux';
 import store from './store';
@@ -25,16 +26,17 @@ const App = () => (
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path="/news" exact component={News} />
+                    <Route path="/news/:article_id" exact component={NewsSinglePage} />
                     <Route path="/forum" exact component={Forum} />
                     <Route path="/services" exact component={Services} />
                     <Route path="/members" exact component={Members} />
-                    <Route  path='/login' component={Login} />
-                    <Route  path='/signup' component={Signup} />
-                    <Route  path='/facebook' component={Facebook} />
-                    <Route  path='/google' component={Google} />
-                    <Route  path='/reset-password' component={ResetPassword} />
-                    <Route  path='/reset/:uid/:token/' component={ResetPasswordConfirm} />
-                    <Route  path='/accounts/confirm-email/:key' component={Activate} />
+                    <Route path='/login' component={Login} />
+                    <Route path='/signup' component={Signup} />
+                    <Route path='/facebook' component={Facebook} />
+                    <Route path='/google' component={Google} />
+                    <Route path='/reset-password' component={ResetPassword} />
+                    <Route path='/reset/:uid/:token/' component={ResetPasswordConfirm} />
+                    <Route path='/accounts/confirm-email/:key' component={Activate} />
                 </Switch>
             </Layout>
         </Router>

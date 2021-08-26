@@ -16,8 +16,8 @@ const WithJoinUs = () => {
                 the local community.
               </p>
             </div>
-
-            <button className="with-join-button"> Contact Us</button>
+<Link to='/'>
+            <button className="with-join-button"> Contact Us</button></Link>
           </div>
         </div>
         <div className="join-us">
@@ -31,7 +31,8 @@ const WithJoinUs = () => {
                 team.
               </p>
             </div>
-            <button className="with-join-button">Join Us</button>
+            <Link to='/'>
+            <button className="with-join-button">Join Us</button></Link>
           </div>
         </div>
       </div>

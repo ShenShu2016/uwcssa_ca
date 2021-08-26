@@ -5,7 +5,7 @@
 
 # dependencies
 /node_modules
-
+node_modules
 # testing
 /coverage
 
@@ -186,3 +186,6 @@ backend/data*
 # django secret infomation
 # backend/SECRET.py
 DRF-REACT/
+
+# vscode
+.vscode

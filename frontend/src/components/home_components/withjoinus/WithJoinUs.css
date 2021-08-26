@@ -13,11 +13,11 @@
   background-color: var(--primary);
   margin-bottom: 30px;
 }
-.with-join-button :hover {
+.with-join-button:hover {
   padding: 6px 18px;
   transition: all 0.3s ease-out;
   background-color: transparent;
-  color: var(--primary);
+  color: black;
   border-radius: 4px;
 }
 

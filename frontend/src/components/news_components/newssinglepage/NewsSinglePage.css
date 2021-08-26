@@ -1,0 +1,72 @@
+.newssingle-main-container {
+  max-width: 900px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+.newssingle-title {
+  font-size: 30px;
+  margin: 1rem 0;
+}
+
+.newssingle-info-share i {
+  font-size: 1.5rem;
+  margin: 1rem 1rem;
+}
+.fa-weixin {
+  color: green;
+}
+.fa-weibo {
+  color: red;
+}
+.fa-facebook {
+  color: rgb(58, 58, 240);
+}
+.newssingle-post-info ul {
+  list-style: none;
+}
+.newssingle-post-info li {
+  margin: 3px 0;
+  font-size: 16px;
+}
+.newssingle-main-pic img {
+  margin: 2rem 0;
+  width: 100%;
+}
+pre {
+  font-size: 16px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.newssingle-login {
+  width: 100%;
+  margin: 3rem;
+  justify-content: center;
+}
+.newssingle-login-inner {
+  max-width: 825px;
+  justify-content: center;
+  text-align: center;
+  border: solid;
+  border-width: 2px;
+  padding: 1rem 0;
+  font-size: 20px;
+  margin: auto;
+}
+.newssingle-login button {
+  padding: 8px 20px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #1888ff;
+  font-size: 18px;
+  color: #1888ff;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.newssingle-login button:hover {
+  padding: 6px 18px;
+  transition: all 0.3s ease-out;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #1888ff;
+}

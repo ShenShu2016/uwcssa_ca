@@ -16,9 +16,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 65px;
+  margin-bottom: 5px;
 }
-
+.slider h1 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+}
 .image {
   max-width: 1172px;
   max-height: 457px;
@@ -58,7 +62,25 @@
   transition-duration: 1s;
   transform: scale(1.08);
 }
+.slideshowDots {
+  text-align: center;
+}
 
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 40px;
+
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: #808080;
+}
 @media screen and (max-width: 1172px) {
   .image {
     max-width: 90vw;
