@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block head %}<title>温莎大学中国学生联谊会</title>{% endblock %}
+{% block body %}
+
+<div class="container">
+<h1 class="display-2 m-1" style="text-align:center"><strong>温莎大学CSSA 主页</strong></h1>
+    <h2>这是你的第{{ num_visits }}次访问这网站，自从上次更新{{ update_date }}</h2>
+
+
+
+<div class="container border rounded-pill"  style=" width: 100%; background-color: #1b1b1b ;color: white" >
+    <div class="container" style="width: 70%">
+        <h1 class="m-1 " style="text-align:center; color: red;">强者招募 Software Developer</h1>
+    <h3><strong>职责:</strong></h3>
+    <ul >
+    <li class="m-1">负责网页搭建与维护</li>
+    <li class="m-1">有自己的想法与建议</li>
+    <li class="m-1">热爱电脑</li>
+        </ul>
+<h3><strong>要求:</strong></h3>
+    <ul >
+    <li class="m-1">Python (能读对就行)</li>
+    <li class="m-1">JavaScript (写个loop就行)</li>
+    <li class="m-1">SQL (能run出 select* from 就行)</li>
+    </ul>
+    <h3><strong>Nice to have:</strong></h3>
+        <ul >
+    <li class="m-1">React.js (React Cli 脚手架)</li>
+    <li class="m-1">Django (DjangoRestFramework, Django ORM)</li>
+    <li class="m-1">GitHub (可以使用日常生产力工具)</li>
+            <li class="m-1">MySQL (可以创建database 并且熟练运用view 视图)</li>
+            <li class="m-1">Echarts (可视化工具，别的也行)</li>
+            <li class="m-1">AWS 运维 (Docker,EC2,会deploy上云)</li>
+            <li class="m-1">Data Science 相关工具, pandas, scikit-learn,等机器学习工具</li>
+    </ul>
+    <h4>当然，如果你有信心，没有学过完全不是问题</h4>
+            <h1 style="color: red"><strong>
+        熟练运用之后，毕业无缝衔接6万薪水不是梦</strong></h1>
+
+    <h4>发送简历至: <a href="mailto:uwincssa.it@gmail.com">uwincssa.it@gmail.com</a><br> </h4>
+
+    <h1 class="m-5">提供reference check！</h1>
+        </div>
+</div>
+
+
+</div>
+{% endblock %}

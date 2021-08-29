@@ -189,3 +189,4 @@ DRF-REACT/
 
 # vscode
 .vscode
+backend/SECRET.py

@@ -1,7 +1,13 @@
 import os
 from datetime import timedelta
 from pathlib import Path
-from SECRET import ALLOWED_HOSTS, DATABASES, SECRET_KEY
+from dotenv import load_dotenv
+load_dotenv()
+# from SECRET import ALLOWED_HOSTS, DATABASES, SECRET_KEY
+
+
+ALLOWED_HOSTS=os.environ.get('ALLOWED_HOSTS')
+SECRET_KEY=os.environ.get('SECRET_KEY')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,6 +85,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",  # corsheaders
     'django.middleware.common.CommonMiddleware',
@@ -90,10 +97,21 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('db_NAME'),
+        'USER': os.environ.get('db_USER'),
+        'PASSWORD': os.environ.get('db_PASSWORD'),
+        'HOST': os.environ.get('db_HOST'),
+        'PORT': os.environ.get('db_PORT'),
+    }
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,8 +161,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -169,7 +193,7 @@ REST_AUTH_SERIALIZERS = {
 
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 LOGIN_REDIRECT_URL = '/'
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # only verified email can login
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"  # only verified email can login
 
 # allauth
 AUTHENTICATION_BACKENDS = [

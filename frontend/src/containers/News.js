@@ -6,7 +6,7 @@ export default function News() {
   const [newsData, setNewsData] = useState(null);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/news/article_list/").then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/news/article_list/`).then((response) => {
       setNewsData(
         response.data.results.map((newsitem, index) => (
           <Fragment>

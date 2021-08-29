@@ -1,0 +1,55 @@
+{#{% load static %}#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P741DM1139"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P741DM1139');
+</script>
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+          <h3>正在制作中</h3>
+
+      </a>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'main'  %}" class="nav-link px-2 link-secondary">主页</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">未来的功能</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">招人</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+          <li><a href="" class="nav-link px-2 link-dark">CSSA 成员</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">关于我们</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+      </div>
+    </header>
+
+{% block body %}{% endblock %}
+</body>
+<footer class="footer mt-auto py-3">
+    <div class="container bg-light">
+        <span class="text-muted">本网站归 温莎大学CSSA 所有</span>
+        <span class="text-muted">Email: uwincssa.it@gmail.com</span>
+    </div>
+</footer>
+</html>

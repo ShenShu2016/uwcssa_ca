@@ -11,7 +11,7 @@ const NewsSinglePage = ({ isAuthenticated, user }) => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/news/article/${article_id}`)
+      .get(`${process.env.REACT_APP_API_URL}/news/article/${article_id}`)
       .then((response) => {
         setsingleNewsData(
           <Fragment>
