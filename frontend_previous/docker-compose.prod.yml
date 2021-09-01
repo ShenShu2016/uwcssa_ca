@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+
+  react_prod:
+    container_name: react_prod_server
+    image: react_prod_app:0.0.1
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 8080:80
+    restart: unless-stopped

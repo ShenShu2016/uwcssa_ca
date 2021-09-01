@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+
+  react_dev:
+    container_name: react_dev_server
+    image: react_dev_app:0.0.1
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    # env_file: 
+    #   - ./.env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+    #docker will run the container in "interactive mode" 
+    #which is required to run the react app in development mode
+    stdin_open: true

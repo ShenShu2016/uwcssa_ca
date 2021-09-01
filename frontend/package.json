@@ -1,31 +1,27 @@
 {
-  "name": "react-frontend",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "^3.0.1"
-  },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.6.1",
-    "axios": "^0.21.1",
-    "query-string": "^7.0.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.1.0",
-    "redux-devtools-extension": "^2.13.9",
-    "styled-components": "^5.3.0"
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "prettier": {
-    "trailingComma": "all"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
