@@ -45,11 +45,15 @@ const ProductComponent = () => {
             <Button size="small" color="primary">
               Share
             </Button>
-            <Link to={`product/${id}`}>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </Link>
+
+            <Button
+              size="small"
+              color="primary"
+              component={Link}
+              to={`products/${id}`}
+            >
+              Learn More
+            </Button>
           </CardActions>
         </Card>
       </Box>

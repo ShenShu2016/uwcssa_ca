@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductComponent from "./ProductComponent";
 import axios from "axios";
 import { setProducts } from "../redux/actions/productActions";
+
 const ProductListing = () => {
   const products = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ const ProductListing = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   console.log("Products:", products);
   return (
     <div>

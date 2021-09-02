@@ -13,7 +13,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
   const [dropdown, setDropdown] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  const {user} = store.getState()
+  const { user } = store.getState();
   console.log(user);
 
   const onMouseEnter = () => {
@@ -119,7 +119,13 @@ const Navbar = ({ logout, isAuthenticated }) => {
           {/* 这东西是根据你有没有登录变的 */}
         </ul>
         {/* 这东西是根据你有没有登录变的 */}
-        {isAuthenticated ? "" : <div className='none-at-media'><Button /></div>}
+        {isAuthenticated ? (
+          ""
+        ) : (
+          <div className="none-at-media">
+            <Button />
+          </div>
+        )}
         {/* 这东西是根据你有没有登录变的 */}
       </nav>
       {redirect ? <Redirect to="/" /> : <Fragment></Fragment>}

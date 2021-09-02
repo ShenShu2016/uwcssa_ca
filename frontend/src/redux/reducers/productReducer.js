@@ -1,5 +1,4 @@
-import { Switch } from "@material-ui/core";
-import { ActionTypes } from "../contants/action-types";
+import { ActionTypes } from "../contants/product-action-types";
 
 const initialState = {
   products: [],

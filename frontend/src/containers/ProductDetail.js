@@ -15,7 +15,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 const ProductDetail = () => {
   const classes = useStyles();
   const product = useSelector((state) => state.product);
-  const { title, image, price, category, description } = product;
+  const { title, image, category, description } = product;
   const { productId } = useParams();
   const dispatch = useDispatch();
   console.log(product);
@@ -42,10 +42,19 @@ const ProductDetail = () => {
   useEffect(() => {
     if (productId && productId !== "") fetchProductDetail();
     return () => dispatch(removeSelectedProduct());
-  }, [productId]);
+  }, [productId]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div>
       <h1>ProductDetail</h1>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/products"
+      >
+        Back to Products
+      </Button>
       {Object.keys(product).length === 0 ? (
         <div>...Loading</div>
       ) : (
