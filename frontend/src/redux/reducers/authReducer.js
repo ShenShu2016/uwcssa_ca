@@ -1,24 +1,4 @@
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  USER_LOADED_SUCCESS,
-  USER_LOADED_FAIL,
-  AUTHENTICATED_SUCCESS,
-  AUTHENTICATED_FAIL,
-  PASSWORD_RESET_SUCCESS,
-  PASSWORD_RESET_FAIL,
-  PASSWORD_RESET_CONFIRM_SUCCESS,
-  PASSWORD_RESET_CONFIRM_FAIL,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAIL,
-  ACTIVATION_SUCCESS,
-  ACTIVATION_FAIL,
-  GOOGLE_AUTH_SUCCESS,
-  GOOGLE_AUTH_FAIL,
-  FACEBOOK_AUTH_SUCCESS,
-  FACEBOOK_AUTH_FAIL,
-  LOGOUT,
-} from "../contants/auth-action-types";
+import { ActionTypes } from "../contants/auth-action-types";
 
 const initialState = {
   access: localStorage.getItem("access"),
@@ -29,14 +9,14 @@ const initialState = {
 
 export const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case AUTHENTICATED_SUCCESS:
+    case ActionTypes.AUTHENTICATED_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
       };
-    case LOGIN_SUCCESS:
-    case GOOGLE_AUTH_SUCCESS:
-    case FACEBOOK_AUTH_SUCCESS:
+    case ActionTypes.LOGIN_SUCCESS:
+    case ActionTypes.GOOGLE_AUTH_SUCCESS:
+    case ActionTypes.FACEBOOK_AUTH_SUCCESS:
       localStorage.setItem("access", payload.access);
       localStorage.setItem("refresh", payload.refresh);
       return {
@@ -45,31 +25,31 @@ export const authReducer = (state = initialState, { type, payload }) => {
         access: payload.access,
         refresh: payload.refresh,
       };
-    case SIGNUP_SUCCESS:
+    case ActionTypes.SIGNUP_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
       };
-    case USER_LOADED_SUCCESS:
+    case ActionTypes.USER_LOADED_SUCCESS:
       return {
         ...state,
         user: payload,
       };
-    case AUTHENTICATED_FAIL:
+    case ActionTypes.AUTHENTICATED_FAIL:
       return {
         ...state,
         isAuthenticated: false,
       };
-    case USER_LOADED_FAIL:
+    case ActionTypes.USER_LOADED_FAIL:
       return {
         ...state,
         user: null,
       };
-    case GOOGLE_AUTH_FAIL:
-    case FACEBOOK_AUTH_FAIL:
-    case LOGIN_FAIL:
-    case SIGNUP_FAIL:
-    case LOGOUT:
+    case ActionTypes.GOOGLE_AUTH_FAIL:
+    case ActionTypes.FACEBOOK_AUTH_FAIL:
+    case ActionTypes.LOGIN_FAIL:
+    case ActionTypes.SIGNUP_FAIL:
+    case ActionTypes.LOGOUT:
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
       return {
@@ -79,12 +59,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
         isAuthenticated: false,
         user: null,
       };
-    case PASSWORD_RESET_SUCCESS:
-    case PASSWORD_RESET_FAIL:
-    case PASSWORD_RESET_CONFIRM_SUCCESS:
-    case PASSWORD_RESET_CONFIRM_FAIL:
-    case ACTIVATION_SUCCESS:
-    case ACTIVATION_FAIL:
+    case ActionTypes.PASSWORD_RESET_SUCCESS:
+    case ActionTypes.PASSWORD_RESET_FAIL:
+    case ActionTypes.PASSWORD_RESET_CONFIRM_SUCCESS:
+    case ActionTypes.PASSWORD_RESET_CONFIRM_FAIL:
+    case ActionTypes.ACTIVATION_SUCCESS:
+    case ActionTypes.ACTIVATION_FAIL:
       return {
         ...state,
       };
