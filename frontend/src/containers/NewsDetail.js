@@ -21,11 +21,11 @@ const useStyles = makeStyles({
 
 const NewsDetail = () => {
   const classes = useStyles();
-  const news = useSelector((state) => state.new);
-  const { title, image, category, description } = news;
+  const new12 = useSelector((state) => state.new12);
+  const { topic, subject, content, image } = new12;
   const { newId } = useParams();
   const dispatch = useDispatch();
-  console.log(news);
+  console.log(newId);
 
   const fetchNewDetail = async () => {
     const response = await axios
@@ -47,7 +47,7 @@ const NewsDetail = () => {
       <Button variant="contained" color="primary" component={Link} to="/news">
         Back to News
       </Button>
-      {Object.keys(news).length === 0 ? (
+      {Object.keys(new12).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Card className={classes.root}>
@@ -57,14 +57,14 @@ const NewsDetail = () => {
               alt="Contemplative Reptile"
               height="140"
               image={image}
-              title={title}
+              title={subject}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                {category}
+                {topic}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {description}
+                {content}
               </Typography>
             </CardContent>
           </CardActionArea>

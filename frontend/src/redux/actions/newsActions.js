@@ -7,14 +7,14 @@ export const setNews = (news) => {
   };
 };
 
-export const selectedNew = (news) => {
+export const selectedNew = (new12) => {
   return {
     type: ActionTypes.SELECTED_NEW,
-    payload: news,
+    payload: new12,
   };
 };
 
-export const removeSelectedNew = () => {
+export const removeSelectedNew = (new12) => {
   return {
     type: ActionTypes.REMOVE_SELECTED_NEW,
   };

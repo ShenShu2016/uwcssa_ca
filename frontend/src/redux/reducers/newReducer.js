@@ -4,7 +4,7 @@ const initialState = {
   news: [],
 };
 
-export const newsReducer = (state = initialState, { type, payload }) => {
+export const newReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_NEWS:
       return { ...state, news: payload };
@@ -14,11 +14,11 @@ export const newsReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const selectedNewsReducer = (state = {}, { type, payload }) => {
+export const selectedNewReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case ActionTypes.SELECTED_NEWS:
+    case ActionTypes.SELECTED_NEW:
       return { ...state, ...payload };
-    case ActionTypes.REMOVE_SELECTED_NEWS:
+    case ActionTypes.REMOVE_SELECTED_NEW:
       return {};
     default:
       return { state };

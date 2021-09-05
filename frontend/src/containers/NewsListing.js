@@ -10,12 +10,12 @@ const NewsListing = () => {
 
   const fetchNews = async () => {
     const response = await axios
-      .get("https://uwcssa.ca/news/article_list")
+      .get("https://uwcssa.ca/news/article_list/?page=1")
       .catch((err) => {
         console.log("Err", err);
       });
 
-    dispatch(setNews(response.data));
+    dispatch(setNews(response.data.results));
   };
   console.log(news);
 

@@ -34,7 +34,7 @@ function App() {
                 exact
                 component={ProductDetail}
               />
-              <Route path="/news/:newsId" exact component={NewsDetail} />
+              <Route path="/news/:newId" exact component={NewsDetail} />
               <Route>404 Not Found!</Route>
             </Switch>
           </Layout>
