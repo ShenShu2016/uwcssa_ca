@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = ({ logout, isAuthenticated }) => {
+const Header = ({ logout, isAuthenticated }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -191,7 +191,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
             variant="h6"
             noWrap
           >
-            University of Windsor Chinese Students & Scholars Association
+            温莎大学中国学生学者联谊会
           </Typography>
 
           <div className={classes.search}>
@@ -215,7 +215,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
               component={Link}
               to="/products"
             >
-              Products
+              样例_Products
             </Button>
 
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -275,4 +275,4 @@ const mapStateToProps = (state) => ({
 
 // 这里有奇怪的问题，具体我也不知道
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout })(Header);

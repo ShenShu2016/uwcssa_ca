@@ -1,5 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "path-intellisense.extensionOnImport": true,
-  "editor.formatOnSave": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 设置编辑器的默认格式化工具为 prettier
+
+  "editor.formatOnSave": true // 保存的时候自动格式化
 }
