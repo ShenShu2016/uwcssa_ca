@@ -13,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   inner: {
-    marginLeft: 3,
-    marginRight: 3,
     width: "100%",
+    margin:'auto',
   },
   title: {
     paddingTop: "5rem",
@@ -24,10 +23,12 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     maxWidth: 1000,
-    margin: "auto",
     textAlign: "start",
     marginBottom: "1.5rem",
-    marginInline: "auto",
+    margin:'auto',
+    paddingLeft: '0.5rem',
+    paddingRight:'0.5rem'
+
   },
   bbsTag: { marginBottom: "5rem", marginInline: "0.2rem" },
   bbsTagButton: {
@@ -53,10 +54,10 @@ const FeatureIntro = () => {
             UWCSSA 论坛即将到来!
           </Typography>
           <div className={classes.text}>
-            <Typography variant="h5">
+            <Typography variant="h5" >
               我们相信，对学生最好的支持往往来自于其他学生。他们是真正理解学生所面临的挑战的人，因为他们自己也面临这些挑战。
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" >
               uwcssa论坛是一个在线社区，成千上万的学生将在这里相互帮助。它为所有年轻人而存在，uwcssa论坛几乎涵盖了您能想到的所有领域:
             </Typography>
           </div>
