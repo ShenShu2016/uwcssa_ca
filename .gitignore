@@ -186,5 +186,3 @@ backend/data*
 # django secret infomation
 # backend/SECRET.py
 DRF-REACT/
-
-.vscode
