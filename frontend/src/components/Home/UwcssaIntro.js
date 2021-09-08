@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
+    marginBottom: "2rem",
   },
   webIntro: {
     width: 700,
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "5rem",
     marginBottom: "3rem",
     fontWeight: 700,
+    paddingInline: "1rem",
   },
   slogan: {
     marginTop: "3rem",
@@ -130,14 +132,14 @@ const UwcssaIntro = () => {
               size="large"
               content="textOnly"
             >
-              <Button disabled="true">UWCSSA新闻</Button>
-              <Button disabled="true">UWCSSA活动</Button>
+              <Button disabled={true}>UWCSSA新闻</Button>
+              <Button disabled={true}>UWCSSA活动</Button>
               <Button
                 variant="outlined"
                 size="large"
                 content="textOnly"
                 color="primary"
-                disabled="true"
+                disabled={true}
               >
                 UWCSSA论坛（建设中）
               </Button>

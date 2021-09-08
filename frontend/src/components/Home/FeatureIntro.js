@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inner: {
     width: "100%",
-    margin:'auto',
+    margin: "auto",
   },
   title: {
     paddingTop: "5rem",
@@ -25,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1000,
     textAlign: "start",
     marginBottom: "1.5rem",
-    margin:'auto',
-    paddingLeft: '0.5rem',
-    paddingRight:'0.5rem'
-
+    margin: "auto",
+    paddingLeft: "0.5rem",
+    paddingRight: "0.5rem",
   },
   bbsTag: { marginBottom: "5rem", marginInline: "0.2rem" },
   bbsTagButton: {
@@ -47,17 +45,17 @@ const FeatureIntro = () => {
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <div>
       <Box className={classes.root} width="100%">
         <Box className={classes.inner} width="100%">
           <Typography variant="h4" className={classes.title}>
             UWCSSA 论坛即将到来!
           </Typography>
           <div className={classes.text}>
-            <Typography variant="h5" >
+            <Typography variant="h5">
               我们相信，对学生最好的支持往往来自于其他学生。他们是真正理解学生所面临的挑战的人，因为他们自己也面临这些挑战。
             </Typography>
-            <Typography variant="h5" >
+            <Typography variant="h5">
               uwcssa论坛是一个在线社区，成千上万的学生将在这里相互帮助。它为所有年轻人而存在，uwcssa论坛几乎涵盖了您能想到的所有领域:
             </Typography>
           </div>
@@ -116,7 +114,7 @@ const FeatureIntro = () => {
           <img src={uwcssabbs} alt="uwcssabbs.gif" className={classes.gif} />
         </Box>
       </Box>
-    </Fragment>
+    </div>
   );
 };
 

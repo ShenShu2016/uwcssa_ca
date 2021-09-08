@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     minWidth: "45%",
     maxWidth: "95%",
+    paddingLeft: "3rem",
   },
 
   title: {
