@@ -10,6 +10,9 @@ import Layout from "./hocs/Layout";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import ForgotPassword from "./containers/ForgotPassword";
+import ResetPassword from "./containers/ResetPassword";
+import EmailConfirm from "./containers/EmailConfirm";
 
 const theme = createTheme({
   typography: {
@@ -28,6 +31,9 @@ function App() {
               <Route path="/login" exact component={Login} />
               <Route path="/Register" exact component={Register} />
               <Route path="/products" exact component={ProductListing} />
+              <Route path="/forgotpassword" exact component={ForgotPassword} />
+              <Route path="/resetpassword" exact component={ResetPassword} />
+              <Route path="/emailconfirm" exact component={EmailConfirm} />
               <Route path="/news" exact component={NewsListing} />
               <Route path="/news/:newsId" exact component={NewsDetail} />
               <Route
