@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
+import {Button} from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -14,6 +14,8 @@ import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { login } from "../redux/actions/authActions";
 import { Redirect } from "react-router-dom";
+import { Box} from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -26,11 +28,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "75%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    margin: "auto",
+    marginBottom: theme.spacing(5),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(5, 4, 0),
+  },
+
+  button: {
+    marginLeft: "1rem",
+    marginRight: "4rem",   
+  },  
+
+  third_party_button: {
+    width: 400, 
+    marginBottom: "5rem",
   },
 }));
 
@@ -63,29 +77,33 @@ const Login = ({ login, isAuthenticated }) => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          登陆
+        <Typography component="h1" variant="h5" align="left">
+          登入
+        </Typography>
+        <Typography>
+          还没有账户？
+          <Link href="/register">注册</Link>
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => onSubmit(e)}>
           <TextField
-            variant="outlined"
+            variant="standard"
             margin="normal"
             required
-            fullWidth
             id="email"
             label="Email Address"
             name="email"
+            fullWidth
             autoComplete="email"
             autoFocus
             value={email}
             onChange={(e) => onChange(e)}
           />
           <TextField
-            variant="outlined"
+            variant="standard"
             margin="normal"
             required
-            fullWidth
             name="password"
+            fullWidth
             label="Password"
             type="password"
             id="password"
@@ -95,30 +113,45 @@ const Login = ({ login, isAuthenticated }) => {
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label="我不是机器人"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            登陆
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                忘记密码?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          <Grid container>           
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              className={classes.submit}             
+              >
+              登陆
+            </Button>
+            <Button // 这个忘记密码的按钮不知道为什么不能redirect
+              // type="button"
+              variant="outlined"
+              component={Link}
+              to="/forgotpassword"
+              color="primary"
+              className={classes.submit}
+            >
+              忘记密码
+            </Button>
+          </Grid>     
         </form>
+        <Box marginTop="3rem">  
+          <Button
+          type="submit"             
+          variant="outlined"         
+          className={classes.third_party_button}               
+          >
+          google 登入
+          </Button>         
+          <Button
+          type="submit"             
+          variant="outlined"              
+          className={classes.third_party_button}
+          >
+          微信登入
+          </Button>
+        </Box>
       </div>
     </Container>
   );
