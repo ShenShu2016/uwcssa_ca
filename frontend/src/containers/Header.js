@@ -219,6 +219,14 @@ const Header = ({ logout }) => {
             >
               样例_Products
             </Button>
+            <Button
+              variant="text"
+              style={{ color: "#FFF" }}
+              component={Link}
+              to="/news"
+            >
+              News
+            </Button>
 
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">

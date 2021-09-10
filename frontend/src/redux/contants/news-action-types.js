@@ -1,0 +1,5 @@
+export const ActionTypes = {
+  SET_NEWS: "SET_NEWS",
+  SELECTED_NEW: "SELECTED_NEW",
+  REMOVE_SELECTED_NEW: "REMOVE_SELECTED_NEW",
+};
