@@ -35,12 +35,13 @@ function App() {
               <Route path="/resetpassword" exact component={ResetPassword} />
               <Route path="/emailconfirm" exact component={EmailConfirm} />
               <Route path="/news" exact component={NewsListing} />
+              <Route path="/news/:newsId" exact component={NewsDetail} />
               <Route
                 path="/products/:productId"
                 exact
                 component={ProductDetail}
               />
-              <Route path="/news/:newId" exact component={NewsDetail} />
+
               <Route>404 Not Found!</Route>
             </Switch>
           </Layout>

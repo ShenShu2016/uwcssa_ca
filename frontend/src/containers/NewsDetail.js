@@ -2,15 +2,15 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectedNew, removeSelectedNew } from "../redux/actions/newsActions";
-
+import {
+  selectedSingleNews,
+  removeSelectedSingleNews,
+} from "../redux/actions/newsActions";
 import { makeStyles } from "@material-ui/core/styles";
-
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-
+import { Box } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import { Link as newslink } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
@@ -48,26 +48,25 @@ const useStyles = makeStyles({
 });
 
 const NewsDetail = () => {
+  const { newsId } = useParams();
   const classes = useStyles();
-  const new12 = useSelector((state) => state.new12);
-  const { subject, content, image, created_by, id, updated_at } = new12;
-  const { newId } = useParams();
+  const singleNews = useSelector((state) => state.singleNews);
+  const { subject, content, image, created_by, updated_at } = singleNews;
   const dispatch = useDispatch();
-  console.log(newId);
 
-  const fetchNewDetail = async () => {
+  const fetchNewsDetail = async () => {
     const response = await axios
-      .get(`https://api.uwcssa.ca/news/article/${newId}`)
+      .get(`https://api.uwcssa.ca/news/article/${newsId}`)
       .catch((err) => {
         console.log("Err", err);
       });
-    dispatch(selectedNew(response.data));
+    dispatch(selectedSingleNews(response.data));
   };
 
   useEffect(() => {
-    if (newId && newId !== "") fetchNewDetail();
-    return () => dispatch(removeSelectedNew());
-  }, [newId]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (newsId && newsId !== "") fetchNewsDetail();
+    return () => dispatch(removeSelectedSingleNews());
+  }, [newsId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
@@ -75,88 +74,45 @@ const NewsDetail = () => {
         <Link color="inherit" href="/">
           首页
         </Link>
-        <Link color="inherit" component={newslink} to="/news">
+        <Link color="inherit" href="/news">
           新闻
         </Link>
-        <Typography color="textPrimary">文章{id}</Typography>
+        <Typography color="textPrimary">文章: {newsId}</Typography>
       </Breadcrumbs>
-      {/* <h1>NewsDetail</h1>
-      <Button variant="contained" color="primary" component={Link} to="/news">
-        Back to News
-      </Button> */}
-      {Object.keys(new12).length === 0 ? (
+      {Object.keys(singleNews).length === 0 ? (
         <div>...Loading</div>
       ) : (
-        // <Card className={classes.root}>
-        //   <CardActionArea>
-        //     <CardMedia
-        //       component="img"
-        //       alt="Contemplative Reptile"
-        //       height="140"
-        //       image={image}
-        //       title={subject}
-        //     />
-        //     <CardContent>
-        //       <Typography gutterBottom variant="h5" component="h2">
-        //         {topic}
-        //       </Typography>
-        //       <Typography variant="body2" color="textSecondary" component="p">
-        //         {content}
-        //       </Typography>
-        //     </CardContent>
-        //   </CardActionArea>
-        //   <CardActions>
-        //     <Button size="small" color="primary">
-        //       Share
-        //     </Button>
-        //     <Button size="small" color="primary">
-        //       Learn More
-        //     </Button>
-        //   </CardActions>
-        // </Card>
-        <box>
+        <Box>
           <Container className={classes.main}>
-            <Typography component="h1" variant="h4" align="center">
+            <Typography variant="h4" align="center">
               {subject}
             </Typography>
 
-            <box>
-              <Typography
-                component="h1"
-                variant="subtitle1"
-                className={classes.createby}
-              >
+            <Box>
+              <Typography variant="subtitle1" className={classes.createby}>
                 by {created_by}
               </Typography>
-              <Typography
-                component="h1"
-                variant="subtitle1"
-                className={classes.createat}
-              >
+              <Typography variant="subtitle1" className={classes.createat}>
                 {updated_at}
               </Typography>
               <CardMedia className={classes.media} image={image} />
               <CardContent>
-                <Typography
-                  variant="substitle1"
-                  component="p"
-                  className={classes.contentcss}
-                >
+                <Typography variant="subtitle1" className={classes.contentcss}>
                   {content}
                 </Typography>
               </CardContent>
 
               <Typography
-                variant="substitle1"
+                variant="subtitle1"
                 align="center"
                 className={classes.buttoncss}
               >
                 *任何人都可以阅读
                 评论区内容，但如果要添加或者回复评论，你必须是uwcssa的注册用户。如果你还没有账户，你可以现在就创建一个（免费）。
               </Typography>
-            </box>
+            </Box>
           </Container>
-        </box>
+        </Box>
       )}
     </div>
   );
