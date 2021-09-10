@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import GitHubButton from "react-github-btn";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +11,10 @@ import { ButtonGroup } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import store from "../../redux/store";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setUsers } from "../../redux/actions/userActions";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -71,6 +75,25 @@ const useStyles = makeStyles((theme) => ({
 const UwcssaIntro = () => {
   const classes = useStyles();
   const { userAuth } = store.getState();
+  const userCounts = useSelector((state) => state.allUsers.users.count);
+  const dispatch = useDispatch();
+
+  const fetchUsers = async () => {
+    const response = await axios
+      .get(`${process.env.REACT_APP_API_URL}/users/total_counts/`)
+      .catch((err) => {
+        console.log("Err", err);
+      });
+
+    dispatch(setUsers(response.data));
+  };
+  console.log(userCounts);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  console.log("Users:", userCounts);
 
   const guestButton = () => (
     <div>
@@ -110,7 +133,7 @@ const UwcssaIntro = () => {
             <Grid container spacing={0}>
               <Grid item xs={6}>
                 <Paper className={classes.paper}>
-                  <Typography variant="h5">2000+</Typography>
+                  <Typography variant="h5">{ userCounts }</Typography>
                   <Typography variant="h5">用户</Typography>
                 </Paper>
               </Grid>
