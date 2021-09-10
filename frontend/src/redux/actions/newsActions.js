@@ -7,15 +7,15 @@ export const setNews = (news) => {
   };
 };
 
-export const selectedNew = (new12) => {
+export const selectedSingleNews = (singleNews) => {
   return {
-    type: ActionTypes.SELECTED_NEW,
-    payload: new12,
+    type: ActionTypes.SELECTED_SINGLENEWS,
+    payload: singleNews,
   };
 };
 
-export const removeSelectedNew = (new12) => {
+export const removeSelectedSingleNews = (singleNews) => {
   return {
-    type: ActionTypes.REMOVE_SELECTED_NEW,
+    type: ActionTypes.REMOVE_SELECTED_SINGLENEWS,
   };
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
@@ -32,7 +31,7 @@ const ContactUs = () => {
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <div>
       <Box className={classes.root}>
         <Box className={classes.cards}>
           <Typography variant="h5" className={classes.title}>
@@ -63,7 +62,7 @@ const ContactUs = () => {
           <img src={wechatQrCode} alt="QrCode" className={classes.qrCode} />
         </Box>
       </Box>
-    </Fragment>
+    </div>
   );
 };
 export default ContactUs;

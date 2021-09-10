@@ -28,8 +28,8 @@ const ProductComponent = () => {
   const renderList = products.map((product) => {
     const { id, title, image, price, category } = product;
     return (
-      <Box p={1} m={1}>
-        <Card className={classes.root} key={id}>
+      <Box p={1} m={1} key={id}>
+        <Card className={classes.root}>
           <CardActionArea>
             <CardMedia className={classes.media} image={image} title={title} />
             <CardContent>

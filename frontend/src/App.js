@@ -29,12 +29,13 @@ function App() {
               <Route path="/Register" exact component={Register} />
               <Route path="/products" exact component={ProductListing} />
               <Route path="/news" exact component={NewsListing} />
+              <Route path="/news/:newsId" exact component={NewsDetail} />
               <Route
                 path="/products/:productId"
                 exact
                 component={ProductDetail}
               />
-              <Route path="/news/:newId" exact component={NewsDetail} />
+
               <Route>404 Not Found!</Route>
             </Switch>
           </Layout>
