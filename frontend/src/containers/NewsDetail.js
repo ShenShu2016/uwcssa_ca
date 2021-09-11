@@ -7,13 +7,15 @@ import {
   removeSelectedSingleNews,
 } from "../redux/actions/newsActions";
 import { makeStyles } from "@material-ui/core/styles";
-import CardContent from "@material-ui/core/CardContent";
+
 import CardMedia from "@material-ui/core/CardMedia";
-import { Box } from "@material-ui/core";
+
 import Typography from "@material-ui/core/Typography";
 import { Container } from "@material-ui/core";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
+import LoginRequest from "../components/News/LoginRequest";
+import NewsComments from "../components/News/NewsComments";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -51,7 +53,12 @@ const NewsDetail = () => {
   const { newsId } = useParams();
   const classes = useStyles();
   const singleNews = useSelector((state) => state.singleNews);
+
+  console.log("aaa", singleNews);
   const { subject, content, image, created_by, updated_at } = singleNews;
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
   const dispatch = useDispatch();
 
   const fetchNewsDetail = async () => {
@@ -82,37 +89,25 @@ const NewsDetail = () => {
       {Object.keys(singleNews).length === 0 ? (
         <div>...Loading</div>
       ) : (
-        <Box>
-          <Container className={classes.main}>
-            <Typography variant="h4" align="center">
-              {subject}
-            </Typography>
-
-            <Box>
-              <Typography variant="subtitle1" className={classes.createby}>
-                by {created_by}
-              </Typography>
-              <Typography variant="subtitle1" className={classes.createat}>
-                {updated_at}
-              </Typography>
-              <CardMedia className={classes.media} image={image} />
-              <CardContent>
-                <Typography variant="subtitle1" className={classes.contentcss}>
-                  {content}
-                </Typography>
-              </CardContent>
-
-              <Typography
-                variant="subtitle1"
-                align="center"
-                className={classes.buttoncss}
-              >
-                *任何人都可以阅读
-                评论区内容，但如果要添加或者回复评论，你必须是uwcssa的注册用户。如果你还没有账户，你可以现在就创建一个（免费）。
-              </Typography>
-            </Box>
-          </Container>
-        </Box>
+        <Container className={classes.main}>
+          <Typography variant="h4" align="center">
+            {subject}
+          </Typography>
+          <Typography variant="subtitle1" className={classes.createby}>
+            by {created_by}
+          </Typography>
+          <Typography variant="subtitle1" className={classes.createat}>
+            {updated_at}
+          </Typography>
+          <CardMedia className={classes.media} image={image} />
+          <Typography variant="subtitle1" className={classes.contentcss}>
+            {content}
+          </Typography>
+          <div>{isAuthenticated ? null : <LoginRequest />}</div>
+          <div>
+            <NewsComments />
+          </div>
+        </Container>
       )}
     </div>
   );
