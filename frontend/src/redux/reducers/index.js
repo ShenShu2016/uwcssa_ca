@@ -5,7 +5,7 @@ import { authReducer } from "./authReducer";
 import { userReducer } from "./userReducer";
 import { newsCommentsReducer, selectedNewsCommReducer } from "./newComReducer";
 
-export default combineReducers({
+const reducers = combineReducers({
   userAuth: authReducer,
   allUsers: userReducer,
   allProducts: productReducer,
@@ -15,3 +15,4 @@ export default combineReducers({
   allNewsComments: newsCommentsReducer,
   newsComment: selectedNewsCommReducer,
 });
+export default reducers;

@@ -6,7 +6,7 @@ import { Link as NewsLink } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { useLocation, useHistory } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -37,6 +37,7 @@ const useStyles = makeStyles({
 
 const LoginRequest = () => {
   const classes = useStyles();
+  const location = useLocation();
 
   return (
     <Container className={classes.contentcss}>
@@ -50,7 +51,10 @@ const LoginRequest = () => {
             variant="contained"
             color="primary"
             component={NewsLink}
-            to="/login"
+            to={{
+              pathname: "/login",
+              state: { from: location.pathname },
+            }}
           >
             登入
           </Button>

@@ -54,8 +54,12 @@ const NewsDetail = () => {
   const classes = useStyles();
   const singleNews = useSelector((state) => state.singleNews);
 
-  console.log("aaa", singleNews);
   const { subject, content, image, created_by, updated_at } = singleNews;
+
+  //Time formatting
+  const timeString = Object.values({ updated_at });
+  const timeString1 = timeString.toString();
+  const finaltimeArt = timeString1.split(".")[0];
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
@@ -63,7 +67,7 @@ const NewsDetail = () => {
 
   const fetchNewsDetail = async () => {
     const response = await axios
-      .get(`https://api.uwcssa.ca/news/article/${newsId}`)
+      .get(`${process.env.REACT_APP_API_URL}/news/article/${newsId}`)
       .catch((err) => {
         console.log("Err", err);
       });
@@ -97,7 +101,7 @@ const NewsDetail = () => {
             by {created_by}
           </Typography>
           <Typography variant="subtitle1" className={classes.createat}>
-            {updated_at}
+            {finaltimeArt}
           </Typography>
           <CardMedia className={classes.media} image={image} />
           <Typography variant="subtitle1" className={classes.contentcss}>

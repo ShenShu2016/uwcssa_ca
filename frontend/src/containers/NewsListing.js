@@ -10,7 +10,7 @@ const NewsListing = () => {
 
   const fetchNews = async () => {
     const response = await axios
-      .get("https://api.uwcssa.ca/news/article_list/")
+      .get(`${process.env.REACT_APP_API_URL}/news/article_list/`)
       .catch((err) => {
         console.log("Err", err);
       });
