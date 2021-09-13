@@ -21,6 +21,6 @@ export const selectedSingleNewsReducer = (state = {}, { type, payload }) => {
     case ActionTypes.REMOVE_SELECTED_SINGLENEWS:
       return {};
     default:
-      return { state };
+      return state;
   }
 };

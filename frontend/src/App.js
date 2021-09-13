@@ -13,6 +13,7 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import ForgotPassword from "./containers/ForgotPassword";
 import ResetPassword from "./containers/ResetPassword";
 import EmailConfirm from "./containers/EmailConfirm";
+import NewsComments from "./components/News/NewsComments";
 
 const theme = createTheme({
   typography: {
@@ -36,6 +37,11 @@ function App() {
               <Route path="/emailconfirm" exact component={EmailConfirm} />
               <Route path="/news" exact component={NewsListing} />
               <Route path="/news/:newsId" exact component={NewsDetail} />
+              <Route
+                path="articlecommentsingle_list/:articletId"
+                exact
+                component={NewsComments}
+              />
               <Route
                 path="/products/:productId"
                 exact
