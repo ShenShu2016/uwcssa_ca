@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   form : {
-    width: 300,
+    width: "auto",
     margin: "auto",
+    width: 300,
   },
 
   button : {
