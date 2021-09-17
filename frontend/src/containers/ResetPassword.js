@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   form : {
+    width: "auto",
     margin: "auto",
     width: 300,
   },
