@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import {Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -18,6 +18,7 @@ import { Box} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import googleLogo from "../static/google.png"
 import wechatLogo from "../static/wechat.png"
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
 
   button: {
     marginLeft: "1rem",
-    marginRight: "4rem",   
-  },  
+    marginRight: "4rem",
+  },
 
   third_party_button: {
     width: 426, 
@@ -64,12 +65,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated }, props) => {
   const classes = useStyles();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const location = useLocation();
+
+  const referer = location.state;
 
   const { email, password } = formData;
 
@@ -81,10 +85,20 @@ const Login = ({ login, isAuthenticated }) => {
 
     login(email, password);
   };
-
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
+  let from;
+  if (referer != null) {
+    from = referer.from;
   }
+  const urlTo = from || "/";
+  if (isAuthenticated) {
+    return <Redirect to={urlTo} />;
+  }
+
+  // let from;
+  // if (this.props.location.state != null) {
+  //   from = this.props.location.state.from;
+  // }
+  // const urlTo = from || "App";
 
   return (
     <Container component="main" maxWidth="xs">
@@ -131,15 +145,16 @@ const Login = ({ login, isAuthenticated }) => {
             control={<Checkbox value="remember" color="primary" />}
             label="我不是机器人"
           />
-          <Grid container>           
+          <Grid container>
             <Button
               type="submit"
               variant="outlined"
               color="primary"
-              className={classes.submit}             
-              >
+              className={classes.submit}
+            >
               登陆
             </Button>
+
             <Button // 这个忘记密码的按钮不知道为什么不能redirect
               // type="button"
               variant="outlined"
@@ -150,13 +165,13 @@ const Login = ({ login, isAuthenticated }) => {
             >
               忘记密码
             </Button>
-          </Grid>     
+          </Grid>
         </form>
-        <Box marginTop="3rem">  
+        <Box marginTop="3rem">
           <Button
-          type="submit"             
-          variant="outlined"         
-          className={classes.third_party_button}               
+            type="submit"
+            variant="outlined"
+            className={classes.third_party_button}
           >
           <Grid
             container
@@ -177,9 +192,9 @@ const Login = ({ login, isAuthenticated }) => {
             </Grid>
           </Button>         
           <Button
-          type="submit"             
-          variant="outlined"              
-          className={classes.third_party_button}
+            type="submit"
+            variant="outlined"
+            className={classes.third_party_button}
           >
           <Grid
             container

@@ -85,7 +85,7 @@ const NewsComponent = () => {
   const renderList = news.map((news) => {
     const { id, topic, image, subject } = news;
     return (
-      <Box p={1} m={1} key={id}>
+      <Box p={1} m={(1, 2)} key={id}>
         <Card className={classes.root}>
           <CardActionArea>
             <CardMedia className={classes.media} image={image} title={topic} />
