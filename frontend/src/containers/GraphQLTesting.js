@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { API, graphqlOperation, Storage } from "aws-amplify";
 import { listArticles } from "../graphql/queries";
 import { Link } from "react-router-dom";
+import { AmplifyS3Image } from '@aws-amplify/ui-react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,9 +19,6 @@ export default function GraphQLTesting() {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     fetchArticles();
-    setTimeout(()=>{
-      setRefresh(refresh=>!refresh);
-    },1000)
   }, []);
 
   const fetchArticles = async () => {
@@ -32,23 +30,12 @@ export default function GraphQLTesting() {
       const articleList = articleData.data.listArticles.items;
       console.log("Article list", articleList);
 
-      modifyArticles(articleList)
+      setArticles(articleList)
       
     } catch (error) {
       console.log("error on fetching Article", error);
     }
   };
-
-  const [refresh, setRefresh] = useState(false);
-
-  const modifyArticles = async articles => {
-    console.log(articles.length)
-    let newArticles = []
-    articles.map(async article => {
-      newArticles.push({ ...article, imagePath:await Storage.get(article.imagePath)})
-    })
-    setArticles(newArticles)
-  }
 
   return (
     <div className={classes.root}>
@@ -56,7 +43,7 @@ export default function GraphQLTesting() {
         Go Add Article
       </Button>
       <Typography variant="h1">GraphQLTesting</Typography>
-      {articles.length==0 ? <h1>Loading...</h1> : articles.map(article => {
+      {articles.map(article => {
         return (
           <div key={article.id}>
             <Typography variant="h3">title:{article.title}</Typography>
@@ -66,7 +53,7 @@ export default function GraphQLTesting() {
             <Typography variant="h5">topic: {article.topic}</Typography>
             <Typography variant="h5">type: {article.type}</Typography>
             <Typography variant="h3">owner:{article.owner}</Typography>
-            <Typography variant="h3"><img src={article.imagePath} style={{width: 188,height: 188}} /></Typography>
+            <AmplifyS3Image imgKey={article.imagePath} alt=""/>
           </div>
         );
       })}
