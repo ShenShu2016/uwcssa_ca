@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { API, graphqlOperation, Storage } from "aws-amplify";
 import { listArticles } from "../graphql/queries";
 import { Link } from "react-router-dom";
-
+import {AmplifyS3Image} from "@aws-amplify/ui-react";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -27,7 +27,8 @@ export default function GraphQLTesting() {
         authMode: "AWS_IAM",
       });
       const articleList = articleData.data.listArticles.items;
-      console.log("Article list", articleList);
+            console.log("articleData", articleData);
+      // console.log("Article list", articleList);
       setArticles(articleList);
     } catch (error) {
       console.log("error on fetching Article", error);
@@ -51,8 +52,9 @@ export default function GraphQLTesting() {
       </Button>
       <Typography variant="h1">GraphQLTesting</Typography>
       {articles.map((article) => {
-        console.log( getImgURL(article.imagePath))
-    
+        // console.log( getImgURL(article.imagePath))
+        // console.log(article)
+    // <AmplifyS3Image imgKey={article.imagePath} />
         return (
           <div key={article.id}>
             <Typography variant="h3">title:{article.title}</Typography>
@@ -62,7 +64,8 @@ export default function GraphQLTesting() {
             <Typography variant="h5">topic: {article.topic}</Typography>
             <Typography variant="h5">type: {article.type}</Typography>
             <Typography variant="h3">owner:{article.owner}</Typography>
-            {/* <h1>{ getImgURL(article.imagePath)}</h1> */}
+            <AmplifyS3Image  path={article.imagePath} />
+            {/* https://docs.amplify.aws/ui/storage/s3-image/q/framework/react/ */}
           </div>
         );
       })}

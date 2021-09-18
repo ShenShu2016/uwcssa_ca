@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = ({ onSignIn, loggedIn }) => {
+  
   const classes = useStyles();
   const history = useHistory();
   const [formData, setFormData] = useState({
@@ -72,7 +73,7 @@ const Login = ({ onSignIn, loggedIn }) => {
     try {
       const response = await Auth.signIn(email, password);
       console.log("auth response", response);
-      history.goBack();
+      history.push('/');
       onSignIn();
     } catch (error) {
       console.log("there was an error logging in ", error);
