@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import GitHubButton from "react-github-btn";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
@@ -9,12 +9,7 @@ import { Grid } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import { ButtonGroup } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import store from "../../redux/store";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setUsers } from "../../redux/actions/userActions";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -72,28 +67,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UwcssaIntro = () => {
+const UwcssaIntro = ({ loggedIn }) => {
   const classes = useStyles();
-  const { userAuth } = store.getState();
-  const userCounts = useSelector((state) => state.allUsers.users.count);
-  const dispatch = useDispatch();
+  // const userCounts = useSelector((state) => state.allUsers.users.count);
+  // const dispatch = useDispatch();
 
-  const fetchUsers = async () => {
-    const response = await axios
-      .get(`${process.env.REACT_APP_API_URL}/users/total_counts/`)
-      .catch((err) => {
-        console.log("Err", err);
-      });
+  // const fetchUsers = async () => {
+  //   const response = await axios
+  //     .get(`${process.env.REACT_APP_API_URL}/users/total_counts/`)
+  //     .catch((err) => {
+  //       console.log("Err", err);
+  //     });
 
-    dispatch(setUsers(response.data));
-  };
-  console.log(userCounts);
+  //   dispatch(setUsers(response.data));
+  // };
+  // console.log(userCounts);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log("Users:", userCounts);
+  // console.log("Users:", userCounts);
 
   const guestButton = () => (
     <div>
@@ -114,7 +108,7 @@ const UwcssaIntro = () => {
     <div>
       <Typography variant="h4">Welcome: </Typography>
       <Typography variant="h5">
-        {userAuth.user ? userAuth.user.username : ""}
+        {/* {userAuth.user ? userAuth.user.username : ""} */}
       </Typography>
     </div>
   );
@@ -133,7 +127,7 @@ const UwcssaIntro = () => {
             <Grid container spacing={0}>
               <Grid item xs={6}>
                 <Paper className={classes.paper}>
-                  <Typography variant="h5">{ userCounts }</Typography>
+                  <Typography variant="h5">666</Typography>
                   <Typography variant="h5">用户</Typography>
                 </Paper>
               </Grid>
@@ -145,7 +139,7 @@ const UwcssaIntro = () => {
               </Grid>
             </Grid>
           </Box>
-          {userAuth.isAuthenticated ? authButton() : guestButton()}
+          {loggedIn ? authButton() : guestButton()}
           <Box className={classes.relateWeb}>
             <Typography variant="h5">相关页面</Typography>
             <ButtonGroup
@@ -239,11 +233,7 @@ const UwcssaIntro = () => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-  user: state.userAuth.user,
-});
 
 // 这里有奇怪的问题，具体我也不知道
 
-export default connect(mapStateToProps, {})(UwcssaIntro);
+export default UwcssaIntro;

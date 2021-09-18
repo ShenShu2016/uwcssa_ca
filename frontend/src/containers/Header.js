@@ -14,11 +14,9 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { logout } from "../redux/actions/authActions";
-import store from "../redux/store";
 import { Redirect } from "react-router";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -62,8 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ logout }) => {
-  const { userAuth } = store.getState();
+const Header = ({ loggedIn, signOut }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -92,7 +89,7 @@ const Header = ({ logout }) => {
   const logout_user = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    logout();
+    signOut();
     setRedirect(true);
   };
 
@@ -137,6 +134,13 @@ const Header = ({ logout }) => {
         </IconButton>
         <p>样例_PRODUCTS</p>
       </MenuItem>
+      <MenuItem component={Link} to="/graphqltesting" onClick={handleMenuClose}>
+        <IconButton>
+          <StorefrontIcon />
+        </IconButton>
+        <p>GraphQLTesting</p>
+      </MenuItem>
+
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
@@ -153,7 +157,7 @@ const Header = ({ logout }) => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      {userAuth.isAuthenticated ? (
+      {loggedIn ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             aria-label="account of current user"
@@ -223,23 +227,30 @@ const Header = ({ logout }) => {
               variant="text"
               style={{ color: "#FFF" }}
               component={Link}
+              to="/graphqltesting"
+            >
+              GraphQLTesting
+            </Button>
+
+            <Button
+              variant="text"
+              style={{ color: "#FFF" }}
+              component={Link}
               to="/news"
             >
               News
             </Button>
-
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            {userAuth.isAuthenticated ? (
+            {loggedIn ? (
               ""
             ) : (
               <Button
@@ -251,7 +262,7 @@ const Header = ({ logout }) => {
                 登陆
               </Button>
             )}
-            {userAuth.isAuthenticated ? (
+            {loggedIn ? (
               <IconButton
                 edge="end"
                 aria-label="account of current user"
@@ -286,11 +297,4 @@ const Header = ({ logout }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-  user: state.userAuth.user,
-});
-
-// 这里有奇怪的问题，具体我也不知道
-
-export default connect(mapStateToProps, { logout })(Header);
+export default Header;
