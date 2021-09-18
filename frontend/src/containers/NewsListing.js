@@ -26,4 +26,5 @@ const NewsListing = () => {
     </div>
   );
 };
+
 export default NewsListing;

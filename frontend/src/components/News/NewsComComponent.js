@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { connect, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -14,40 +14,40 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import { red } from "@material-ui/core/colors";
 import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { postNewsComments } from "../../redux/actions/newsComActions";
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
   },
   media: {
-    height: 300,
-    width: 220,
-  },
-  BigNews: {
-    justifyContent: "center",
-    marginTop: 62,
+    height: "30rem",
+    width: "22rem",
   },
   main: {
-    marginTop: 62,
-    marginBottom: 202,
+    marginTop: "6rem",
+    marginBottom: "20rem",
   },
   comment: {
-    marginTop: "6.6rem",
+    marginTop: "6.5rem",
   },
   avatar: {
     backgroundColor: red[500],
   },
   addIcon: {
-    marginTop: "2.3rem",
-    // marginLeft: "68rem",
-    // marginRight: "30rem",
+    marginTop: "2rem",
   },
 });
 
-const NewsComComponent = () => {
+const NewsComComponent = ({ postNewsComments }) => {
   const newsComments = useSelector(
     (state) => state.allNewsComments.newsComments
   );
@@ -57,16 +57,14 @@ const NewsComComponent = () => {
     //Time formatting
     let timeString = Object.values({ created_at });
     const timeString1 = timeString.toString();
-    const finaltimeCom = timeString1.split(".")[0];
+    const finalTimeCom = timeString1.split(".")[0];
 
     return (
       <Box p={1} m={1} key={id} className={classes.root}>
         <Card>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                Z
-              </Avatar>
+              <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
             }
             action={
               <IconButton aria-label="settings">
@@ -74,7 +72,7 @@ const NewsComComponent = () => {
               </IconButton>
             }
             title={created_by}
-            subheader={finaltimeCom}
+            subheader={finalTimeCom}
           />
           <CardActionArea>
             {/* <CardMedia className={classes.media} image={image} title={topic} /> */}
@@ -107,6 +105,44 @@ const NewsComComponent = () => {
     );
   });
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const { isAuthenticated, newsId, username } = useSelector((state) => ({
+    isAuthenticated: state.userAuth.isAuthenticated,
+    newsId: state.singleNews.id,
+    username: state.userAuth.user.username,
+  }));
+
+  const [formData, setFormData] = useState(
+    isAuthenticated
+      ? {
+          comment: "",
+          article_id: newsId,
+          created_by_id: username,
+          updated_by_id: username,
+        }
+      : { comment: "", article_id: newsId, created_by_id: "" }
+  );
+
+  const { comment, article_id, created_by_id, updated_by_id } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    postNewsComments(comment, article_id, created_by_id, updated_by_id);
+  };
+
   return (
     <Container className={classes.comment}>
       <Typography component="h1" variant="body1" align="left">
@@ -117,11 +153,48 @@ const NewsComComponent = () => {
         {renderList}
       </Box>
       <Box className={classes.addIcon} display="flex" justifyContent="flex-end">
-        <Fab color="primary" aria-label="add">
+        <Fab
+          color="primary"
+          aria-label="add"
+          component={Button}
+          onClick={handleClickOpen}
+        >
           <AddIcon />
         </Fab>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          fullWidth="true"
+          maxWidth="md"
+        >
+          <DialogTitle id="form-dialog-title">评论区</DialogTitle>
+          <form noValidate onSubmit={(e) => onSubmit(e)}>
+            <DialogContent>
+              <TextField
+                //id="outlined-multiline-static"
+                fullWidth="true"
+                multiline
+                id="comment"
+                name="comment"
+                rows={4}
+                defaultValue="Default Value"
+                variant="outlined"
+                value={comment}
+                onChange={(e) => onChange(e)}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button type="submit" onClick={handleClose} color="primary">
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
       </Box>
     </Container>
   );
 };
-export default NewsComComponent;
+export default connect(null, { postNewsComments })(NewsComComponent);
