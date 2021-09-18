@@ -18,6 +18,9 @@ export default function GraphQLTesting() {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     fetchArticles();
+    setTimeout(()=>{
+      setRefresh(refresh=>!refresh);
+    },1000)
   }, []);
 
   const fetchArticles = async () => {
@@ -28,20 +31,23 @@ export default function GraphQLTesting() {
       });
       const articleList = articleData.data.listArticles.items;
       console.log("Article list", articleList);
-      setArticles(articleList);
+
+      modifyArticles(articleList)
+      
     } catch (error) {
       console.log("error on fetching Article", error);
     }
   };
 
-  const [imgURL, setImgURL] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
-  async function getImgURL(path) {
-   const result=await Storage.get(path, {
-     expires: 60,
-   })
-    console.log(result)
-    return result
+  const modifyArticles = async articles => {
+    console.log(articles.length)
+    let newArticles = []
+    articles.map(async article => {
+      newArticles.push({ ...article, imagePath:await Storage.get(article.imagePath)})
+    })
+    setArticles(newArticles)
   }
 
   return (
@@ -50,9 +56,7 @@ export default function GraphQLTesting() {
         Go Add Article
       </Button>
       <Typography variant="h1">GraphQLTesting</Typography>
-      {articles.map((article) => {
-        console.log( getImgURL(article.imagePath))
-    
+      {articles.length==0 ? <h1>Loading...</h1> : articles.map(article => {
         return (
           <div key={article.id}>
             <Typography variant="h3">title:{article.title}</Typography>
@@ -62,7 +66,7 @@ export default function GraphQLTesting() {
             <Typography variant="h5">topic: {article.topic}</Typography>
             <Typography variant="h5">type: {article.type}</Typography>
             <Typography variant="h3">owner:{article.owner}</Typography>
-            {/* <h1>{ getImgURL(article.imagePath)}</h1> */}
+            <Typography variant="h3"><img src={article.imagePath} style={{width: 188,height: 188}} /></Typography>
           </div>
         );
       })}
