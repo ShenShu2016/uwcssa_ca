@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
 import { setNewsComments } from "../../redux/actions/newsComActions";
 import { useDispatch } from "react-redux";
 import NewsComComponent from "./NewsComComponent";
+
 const NewsComments = () => {
   const dispatch = useDispatch();
   const { newsId } = useParams();

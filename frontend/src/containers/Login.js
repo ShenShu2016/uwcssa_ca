@@ -16,6 +16,7 @@ import { login } from "../redux/actions/authActions";
 import { Redirect } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -76,12 +77,6 @@ const Login = ({ login, isAuthenticated }, props) => {
   if (isAuthenticated) {
     return <Redirect to={urlTo} />;
   }
-
-  // let from;
-  // if (this.props.location.state != null) {
-  //   from = this.props.location.state.from;
-  // }
-  // const urlTo = from || "App";
 
   return (
     <Container component="main" maxWidth="xs">
