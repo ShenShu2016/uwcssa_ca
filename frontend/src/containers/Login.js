@@ -16,6 +16,8 @@ import { login } from "../redux/actions/authActions";
 import { Redirect } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
+import Auth from "@aws-amplify/auth";
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -48,8 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ login, isAuthenticated }, props) => {
+const Login = ({ onSignIn, loggedIn }) => {
   const classes = useStyles();
+  const history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -60,28 +63,30 @@ const Login = ({ login, isAuthenticated }, props) => {
 
   const { email, password } = formData;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (event) =>
+    setFormData({ ...formData, [event.target.name]: event.target.value });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async function (event) {
+    event.preventDefault();
 
-    login(email, password);
+    try {
+      const response = await Auth.signIn(email, password);
+      console.log("auth response", response);
+      history.goBack();
+      onSignIn();
+    } catch (error) {
+      console.log("there was an error logging in ", error);
+    }
   };
+
   let from;
   if (referer != null) {
     from = referer.from;
   }
   const urlTo = from || "/";
-  if (isAuthenticated) {
+  if (loggedIn) {
     return <Redirect to={urlTo} />;
   }
-
-  // let from;
-  // if (this.props.location.state != null) {
-  //   from = this.props.location.state.from;
-  // }
-  // const urlTo = from || "App";
 
   return (
     <Container component="main" maxWidth="xs">
@@ -97,7 +102,11 @@ const Login = ({ login, isAuthenticated }, props) => {
           还没有账户？
           <Link href="/register">注册</Link>
         </Typography>
-        <form className={classes.form} noValidate onSubmit={(e) => onSubmit(e)}>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={(event) => handleSubmit(event)}
+        >
           <TextField
             variant="standard"
             margin="normal"
@@ -109,7 +118,7 @@ const Login = ({ login, isAuthenticated }, props) => {
             autoComplete="email"
             autoFocus
             value={email}
-            onChange={(e) => onChange(e)}
+            onChange={(event) => onChange(event)}
           />
           <TextField
             variant="standard"
@@ -122,7 +131,7 @@ const Login = ({ login, isAuthenticated }, props) => {
             id="password"
             autoComplete="current-password"
             value={password}
-            onChange={(e) => onChange(e)}
+            onChange={(event) => onChange(event)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -155,6 +164,7 @@ const Login = ({ login, isAuthenticated }, props) => {
             type="submit"
             variant="outlined"
             className={classes.third_party_button}
+            onClick={() => Auth.federatedSignIn({ provider: "Google" })}
           >
             google 登入
           </Button>

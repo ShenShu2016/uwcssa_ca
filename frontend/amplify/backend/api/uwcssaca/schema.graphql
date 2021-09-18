@@ -1,0 +1,83 @@
+type Topic
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  like: Int!
+  unlike: Int!
+  articles: [Article] @connection(name: "TopicArticles")
+}
+
+type Type
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  like: Int!
+  unlike: Int!
+  articles: [Article] @connection(name: "TypeArticles")
+}
+
+type Article
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  content: String!
+  imagePath: String
+  like: Int!
+  unlike: Int!
+  topic: Topic @connection(name: "TopicArticles")
+  type: Type @connection(name: "TypeArticles")
+  ArticleComments: [ArticleComment] @connection(name: "ArticleArticleComments")
+}
+
+type ArticleComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  content: String!
+  like: Int!
+  unlike: Int!
+  article: Article @connection(name: "ArticleArticleComments")
+}
