@@ -28,3 +28,11 @@ export const selectedNewsCommReducer = (state = {}, { type, payload }) => {
       return { state };
   }
 };
+export const newsCommPostReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.NEWSCOMMPOST_SUCCESS:
+      return { ...state, ...payload };
+    default:
+      return { state };
+  }
+};

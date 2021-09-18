@@ -14,23 +14,23 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: "34.5rem",
   },
   media: {
-    height: 300,
-    width: 220,
+    height: "30rem",
+    width: "22rem",
   },
   BigNews: {
     justifyContent: "center",
-    marginTop: 62,
+    marginTop: "6rem",
   },
   main: {
-    marginTop: 62,
-    marginBottom: 202,
+    marginTop: "6rem",
+    marginBottom: "20rem",
   },
   lastNews: {
-    marginTop: 157,
-    marginBottom: 44,
+    marginTop: "15.5rem",
+    marginBottom: "4.5rem",
   },
 });
 
@@ -57,7 +57,6 @@ const NewsComponent = () => {
                 ></Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                   subject: {subject}
-                  <br />
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -65,7 +64,6 @@ const NewsComponent = () => {
               <Button size="small" color="primary">
                 Share
               </Button>
-
               <Button
                 size="small"
                 color="primary"
@@ -93,7 +91,6 @@ const NewsComponent = () => {
               <Typography gutterBottom variant="h5" component="h2"></Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 subject: {subject}
-                <br />
               </Typography>
             </CardContent>
           </CardActionArea>

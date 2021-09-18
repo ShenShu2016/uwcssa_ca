@@ -18,33 +18,29 @@ import LoginRequest from "../components/News/LoginRequest";
 import NewsComments from "../components/News/NewsComments";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: "34.5rem",
   },
   media: {
     width: "100%",
-    minHeight: 320,
-    left: 395,
-    top: 442,
-    marginTop: 36,
+    minHeight: "32rem",
+    left: "39.5rem",
+    top: "44rem",
+    marginTop: "3.5rem",
   },
-  createby: {
-    marginTop: 28,
+  createBy: {
+    marginTop: "3rem",
   },
-  createat: {
-    marginTop: 29,
+
+  contentCss: {
+    marginTop: "4.5rem",
   },
-  contentcss: {
-    marginTop: 44,
-  },
-  buttoncss: {
-    marginTop: 64,
-  },
+
   main: {
-    marginTop: 157,
-    marginBottom: 1413,
+    marginTop: "15.5rem",
+    marginBottom: "141.5rem",
   },
-  breadcss: {
-    marginTop: 42,
+  bread: {
+    marginTop: "4rem",
     marginLeft: "1rem",
   },
 });
@@ -59,7 +55,7 @@ const NewsDetail = () => {
   //Time formatting
   const timeString = Object.values({ updated_at });
   const timeString1 = timeString.toString();
-  const finaltimeArt = timeString1.split(".")[0];
+  const finalTimeArt = timeString1.split(".")[0];
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
@@ -81,7 +77,7 @@ const NewsDetail = () => {
 
   return (
     <div>
-      <Breadcrumbs aria-label="breadcrumb" className={classes.breadcss}>
+      <Breadcrumbs aria-label="breadcrumb" className={classes.bread}>
         <Link color="inherit" href="/">
           首页
         </Link>
@@ -97,20 +93,18 @@ const NewsDetail = () => {
           <Typography variant="h4" align="center">
             {subject}
           </Typography>
-          <Typography variant="subtitle1" className={classes.createby}>
+          <Typography variant="subtitle1" className={classes.createBy}>
             by {created_by}
           </Typography>
-          <Typography variant="subtitle1" className={classes.createat}>
-            {finaltimeArt}
+          <Typography variant="subtitle1" className={classes.creatBy}>
+            {finalTimeArt}
           </Typography>
           <CardMedia className={classes.media} image={image} />
-          <Typography variant="subtitle1" className={classes.contentcss}>
+          <Typography variant="subtitle1" className={classes.contentCss}>
             {content}
           </Typography>
-          <div>{isAuthenticated ? null : <LoginRequest />}</div>
-          <div>
-            <NewsComments />
-          </div>
+
+          <div>{isAuthenticated ? <NewsComments /> : <LoginRequest />}</div>
         </Container>
       )}
     </div>

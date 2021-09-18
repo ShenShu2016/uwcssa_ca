@@ -3,7 +3,11 @@ import { productReducer, selectedProductReducer } from "./productReducer";
 import { newsReducer, selectedSingleNewsReducer } from "./newReducer";
 import { authReducer } from "./authReducer";
 import { userReducer } from "./userReducer";
-import { newsCommentsReducer, selectedNewsCommReducer } from "./newComReducer";
+import {
+  newsCommentsReducer,
+  selectedNewsCommReducer,
+  newsCommPostReducer,
+} from "./newComReducer";
 
 const reducers = combineReducers({
   userAuth: authReducer,
@@ -14,5 +18,6 @@ const reducers = combineReducers({
   singleNews: selectedSingleNewsReducer,
   allNewsComments: newsCommentsReducer,
   newsComment: selectedNewsCommReducer,
+  newsCommentPost: newsCommPostReducer,
 });
 export default reducers;

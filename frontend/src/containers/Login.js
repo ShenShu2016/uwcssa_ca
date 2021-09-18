@@ -94,12 +94,6 @@ const Login = ({ login, isAuthenticated }, props) => {
     return <Redirect to={urlTo} />;
   }
 
-  // let from;
-  // if (this.props.location.state != null) {
-  //   from = this.props.location.state.from;
-  // }
-  // const urlTo = from || "App";
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
