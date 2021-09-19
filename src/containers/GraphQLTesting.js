@@ -1,10 +1,10 @@
 import { Button, IconButton, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { API, graphqlOperation, Storage } from "aws-amplify";
+import { API } from "aws-amplify";
 import { listArticles } from "../graphql/queries";
 import { Link } from "react-router-dom";
-import {AmplifyS3Image} from "@aws-amplify/ui-react";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -27,23 +27,13 @@ export default function GraphQLTesting() {
         authMode: "AWS_IAM",
       });
       const articleList = articleData.data.listArticles.items;
-            console.log("articleData", articleData);
+      console.log("articleData", articleData);
       // console.log("Article list", articleList);
       setArticles(articleList);
     } catch (error) {
       console.log("error on fetching Article", error);
     }
   };
-
-  const [imgURL, setImgURL] = useState("");
-
-  async function getImgURL(path) {
-   const result=await Storage.get(path, {
-     expires: 60,
-   })
-    console.log(result)
-    return result
-  }
 
   return (
     <div className={classes.root}>
@@ -54,7 +44,7 @@ export default function GraphQLTesting() {
       {articles.map((article) => {
         // console.log( getImgURL(article.imagePath))
         // console.log(article)
-    // <AmplifyS3Image imgKey={article.imagePath} />
+        // <AmplifyS3Image imgKey={article.imagePath} />
         return (
           <div key={article.id}>
             <Typography variant="h3">title:{article.title}</Typography>
@@ -64,7 +54,7 @@ export default function GraphQLTesting() {
             <Typography variant="h5">topic: {article.topic}</Typography>
             <Typography variant="h5">type: {article.type}</Typography>
             <Typography variant="h3">owner:{article.owner}</Typography>
-            <AmplifyS3Image  path={article.imagePath} />
+            <AmplifyS3Image path={article.imagePath} />
             {/* https://docs.amplify.aws/ui/storage/s3-image/q/framework/react/ */}
           </div>
         );

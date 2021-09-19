@@ -9,19 +9,17 @@
       "UnauthRoleName": "amplify-uwcssaca-dev-174619-unauthRole",
       "StackName": "amplify-uwcssaca-dev-174619",
       "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-dev-174619/b2ed1030-1800-11ec-9ff0-0283dea58ef6",
-      "AmplifyAppId": "dih6klj3rpoqn"
+      "AmplifyAppId": "dih6klj3rpoqn",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-dev-174619-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
+      "auth": {
+        "uwcssa": {}
+      },
       "function": {
         "uwcssaPostConfirmation": {
-          "GROUP": "anyone",
           "deploymentBucketName": "amplify-uwcssaca-dev-174619-deployment",
           "s3Key": "amplify-builds/uwcssaPostConfirmation-46304749385931424151-build.zip"
-        }
-      },
-      "auth": {
-        "uwcssa": {
-          "googleClientId": "430702876047-h39k41308l9st61sjufobd2abk6nqse6.apps.googleusercontent.com"
         }
       }
     }
