@@ -183,7 +183,6 @@ cython_debug/
 # docker database persist database
 backend/data*
 
-
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*

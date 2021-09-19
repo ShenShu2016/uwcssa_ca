@@ -1,25 +1,29 @@
 {
-  "dev": {
+  "pro": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-uwcssaca-dev-174619-authRole",
-      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-dev-174619-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-dev-174619-authRole",
+      "AuthRoleName": "amplify-uwcssaca-pro-152639-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-pro-152639-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-pro-152639-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-uwcssaca-dev-174619-deployment",
-      "UnauthRoleName": "amplify-uwcssaca-dev-174619-unauthRole",
-      "StackName": "amplify-uwcssaca-dev-174619",
-      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-dev-174619/b2ed1030-1800-11ec-9ff0-0283dea58ef6",
+      "DeploymentBucketName": "amplify-uwcssaca-pro-152639-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-pro-152639-unauthRole",
+      "StackName": "amplify-uwcssaca-pro-152639",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-pro-152639/5d84c6e0-18b6-11ec-a47b-02129115f1e4",
       "AmplifyAppId": "dih6klj3rpoqn",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-dev-174619-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-pro-152639-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "uwcssa": {}
+        "uwcssa": {
+          "googleClientId": "430702876047-0t9c7a1kl7rr1f6iijaovdankk6squk3.apps.googleusercontent.com"
+        },
+        "userPoolGroups": {}
       },
       "function": {
         "uwcssaPostConfirmation": {
-          "deploymentBucketName": "amplify-uwcssaca-dev-174619-deployment",
-          "s3Key": "amplify-builds/uwcssaPostConfirmation-46304749385931424151-build.zip"
+          "deploymentBucketName": "amplify-uwcssaca-pro-152639-deployment",
+          "s3Key": "amplify-builds/uwcssaPostConfirmation-46304749385931424151-build.zip",
+          "GROUP": "anyone"
         }
       }
     }

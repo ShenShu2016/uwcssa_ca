@@ -186,10 +186,6 @@ Parameters:
   dependsOn:
     Type: CommaDelimitedList
       
-  googleClientId:
-    Type: String
-  
-            
   hostedUIDomainName:
     Type: String
   
@@ -203,6 +199,10 @@ Parameters:
   
             
   hostedUIProviderCreds:
+    Type: String
+  
+            
+  googleClientId:
     Type: String
   
             
