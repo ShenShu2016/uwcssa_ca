@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "uwcssaPostConfirmation",
+            "uwinPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "uwcssaPostConfirmation",
+                  "uwinPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "uwcssaPostConfirmation",
+            "uwinPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "uwcssaPostConfirmation",
+                  "uwinPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
