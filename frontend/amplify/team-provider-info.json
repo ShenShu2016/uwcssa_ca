@@ -25,5 +25,32 @@
         }
       }
     }
+  },
+  "testing": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssaca-testing-232959-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-testing-232959-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-testing-232959-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssaca-testing-232959-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-testing-232959-unauthRole",
+      "StackName": "amplify-uwcssaca-testing-232959",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-testing-232959/0adc9c70-19c3-11ec-94de-02bd3c7f8164",
+      "AmplifyAppId": "dmsl2mfclfxp3"
+    },
+    "categories": {
+      "auth": {
+        "uwin": {
+          "googleClientId": "1067602080073-3hea9nvda1a6uemhpngqj50eh2mrtlv3.apps.googleusercontent.com"
+        }
+      },
+      "function": {
+        "uwinPostConfirmation": {
+          "GROUP": "anyone",
+          "deploymentBucketName": "amplify-uwcssaca-testing-232959-deployment",
+          "s3Key": "amplify-builds/uwinPostConfirmation-664c4157455833374269-build.zip"
+        }
+      }
+    }
   }
 }
