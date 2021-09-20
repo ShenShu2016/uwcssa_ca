@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./containers/ProductDetail";
 import ProductListing from "./containers/ProductListing";

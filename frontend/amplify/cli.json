@@ -15,7 +15,8 @@
     "auth": {
       "enablecaseinsensitivity": true,
       "useinclusiveterminology": true,
-      "breakcirculardependency": true
+      "breakcirculardependency": true,
+      "forcealiasattributes": false
     },
     "codegen": {
       "useappsyncmodelgenplugin": true,

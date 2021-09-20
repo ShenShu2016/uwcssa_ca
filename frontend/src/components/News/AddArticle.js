@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { createArticle } from "../../graphql/mutations";
 import { v4 as uuid } from "uuid";
 
-import Amplify, { API, graphqlOperation, Storage } from "aws-amplify";
+import { API, graphqlOperation, Storage } from "aws-amplify";
 
 import { IconButton, TextField } from "@material-ui/core";
 
@@ -11,7 +11,7 @@ import PublishIcon from "@material-ui/icons/Publish";
 
 export default function AddArticle() {
   const [articleData, setArticleData] = useState({});
-  const [imgData, setImgData] = useState();
+  const [imgData, setImgData] = useState("");
 
   const uploadArticle = async () => {
     //Upload the article

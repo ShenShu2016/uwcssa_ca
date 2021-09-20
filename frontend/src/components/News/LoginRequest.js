@@ -8,11 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-
-const useStyles = makeStyles({
   content: {
     marginTop: "4.5rem",
     textAlign: "center",

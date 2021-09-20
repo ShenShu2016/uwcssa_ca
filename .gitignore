@@ -182,7 +182,3 @@ cython_debug/
 
 # docker database persist database
 backend/data*
-
-# django secret infomation
-# backend/SECRET.py
-DRF-REACT/
