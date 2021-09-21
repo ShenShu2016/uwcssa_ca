@@ -1,4 +1,4 @@
-import { ActionTypes } from "../contants/auth-action-types";
+import { ActionTypes } from "../constants/auth-action-types";
 
 const initialState = {
   isAuthenticated: null,
@@ -47,7 +47,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.FACEBOOK_AUTH_FAIL:
     case ActionTypes.LOGIN_FAIL:
     case ActionTypes.SIGNUP_FAIL:
-    case ActionTypes.LOGOUT:
+    case ActionTypes.SIGNOUT:
       return {
         ...state,
         isAuthenticated: false,

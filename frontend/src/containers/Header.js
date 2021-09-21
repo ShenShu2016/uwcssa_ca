@@ -16,8 +16,8 @@ import StorefrontIcon from "@material-ui/icons/Storefront";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
-import { logout } from "../redux/actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
+import { signOut } from "../redux/actions/authActions";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ logout, isAuthenticated }) => {
+const Header = ({ signOut, isAuthenticated }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -89,10 +89,10 @@ const Header = ({ logout, isAuthenticated }) => {
   };
 
   const [redirect, setRedirect] = useState(false);
-  const logout_user = () => {
+  const signOut_user = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    logout();
+    signOut();
     setRedirect(true);
   };
 
@@ -110,7 +110,7 @@ const Header = ({ logout, isAuthenticated }) => {
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleMenuClose}>Setting</MenuItem>
-      <MenuItem onClick={logout_user}>Log Out</MenuItem>
+      <MenuItem onClick={signOut_user}>注销</MenuItem>
     </Menu>
   );
 
@@ -308,4 +308,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { logout })(Header);
+export default connect(mapStateToProps, { signOut })(Header);

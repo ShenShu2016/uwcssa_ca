@@ -1,37 +1,6 @@
-import { ActionTypes } from "../contants/auth-action-types";
+import { ActionTypes } from "../constants/auth-action-types";
 import Auth from "@aws-amplify/auth";
 import axios from "axios";
-// export const load_user = () => async (dispatch) => {
-//   if (localStorage.getItem("access")) {
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `JWT ${localStorage.getItem("access")}`,
-//         Accept: "application/json",
-//       },
-//     };
-
-//     try {
-//       const res = await axios.get(
-//         `${process.env.REACT_APP_API_URL}/auth/user/`,
-//         config
-//       );
-
-//       dispatch({
-//         type: ActionTypes.USER_LOADED_SUCCESS,
-//         payload: res.data,
-//       });
-//     } catch (err) {
-//       dispatch({
-//         type: ActionTypes.USER_LOADED_FAIL,
-//       });
-//     }
-//   } else {
-//     dispatch({
-//       type: ActionTypes.USER_LOADED_FAIL,
-//     });
-//   }
-// };
 
 export const load_user = () => async (dispatch) => {
   Auth.currentAuthenticatedUser()
@@ -80,7 +49,7 @@ export const login = (username, password) => async (dispatch) => {
   }
 };
 
-export const signup = (username, password) => async (dispatch) => {
+export const signUp = (username, password) => async (dispatch) => {
   try {
     console.log("start signed up!");
     const response = await Auth.signUp({
@@ -98,28 +67,6 @@ export const signup = (username, password) => async (dispatch) => {
     });
   }
 };
-
-// export const verify = (key) => async (dispatch) => {
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   };
-//   try {
-//     await axios.get(
-//       `${process.env.REACT_APP_API_URL}/accounts/confirm-email/${key}/`,
-//       config
-//     );
-
-//     dispatch({
-//       type: ActionTypes.ACTIVATION_SUCCESS,
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: ActionTypes.ACTIVATION_FAIL,
-//     });
-//   }
-// };
 
 export const emailConfirm =
   (username, authenticationCode) => async (dispatch) => {
@@ -189,11 +136,11 @@ export const reset_password_confirm =
     }
   };
 
-export const logout = () => async (dispatch) => {
+export const signOut = () => async (dispatch) => {
   try {
     await Auth.signOut();
     dispatch({
-      type: ActionTypes.LOGOUT,
+      type: ActionTypes.SIGNOUT,
     });
   } catch (error) {
     console.log("error signing out", error);

@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { signup } from "../redux/actions/authActions";
+import { signUp } from "../redux/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = ({ signup, isAuthenticated }) => {
+const Register = ({ signUp, isAuthenticated }) => {
   const classes = useStyles();
   const [accountCreated, setAccountCreated] = useState(false);
 
@@ -53,7 +53,7 @@ const Register = ({ signup, isAuthenticated }) => {
 
   const onSignUp = async () => {
     const { username, password } = formData;
-    signup(username, password);
+    signUp(username, password);
     setAccountCreated(true);
   };
 
@@ -124,4 +124,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { signup })(Register);
+export default connect(mapStateToProps, { signUp })(Register);
