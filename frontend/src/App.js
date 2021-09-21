@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ProductDetail from "./containers/ProductDetail";
-import ProductListing from "./containers/ProductListing";
-import NewsDetail from "./containers/NewsDetail";
-import NewsListing from "./containers/NewsListing";
-import Home from "./containers/Home";
-import Login from "./containers/Login";
-import Register from "./containers/Register";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import ForgotPassword from "./containers/ForgotPassword";
-import ResetPassword from "./containers/ResetPassword";
-import EmailConfirm from "./containers/EmailConfirm";
-import NewsComments from "./components/News/NewsComments";
-import Header from "./containers/Header";
-import Footer from "./containers/Footer";
-import awsconfig from "./aws-exports";
+
 import Amplify from "aws-amplify";
 import Auth from "@aws-amplify/auth";
+import EmailConfirm from "./containers/EmailConfirm";
+import Footer from "./containers/Footer";
+import ForgotPassword from "./containers/ForgotPassword";
 import GraphQLTesting from "./containers/GraphQLTesting";
+import Header from "./containers/Header";
+import Home from "./containers/Home";
+import Login from "./containers/Login";
+import MuiAlert from "@material-ui/lab/Alert";
+import NewsComments from "./components/News/NewsComments";
+import NewsDetail from "./containers/NewsDetail";
+import NewsListing from "./containers/NewsListing";
+import ProductDetail from "./containers/ProductDetail";
+import ProductListing from "./containers/ProductListing";
+import Register from "./containers/Register";
+import ResetPassword from "./containers/ResetPassword";
+import Snackbar from "@material-ui/core/Snackbar";
+import awsconfig from "./aws-exports";
 import uploadArticle from "./components/News/AddArticle";
+
 Amplify.configure(awsconfig);
 
 const theme = createTheme({
@@ -30,6 +33,7 @@ const theme = createTheme({
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [signInOpen, setSignInOpen] = useState(false);
 
   useEffect(() => {
     AssessLoggedInState();
@@ -37,11 +41,13 @@ function App() {
 
   const AssessLoggedInState = () => {
     Auth.currentAuthenticatedUser()
-      .then(() => {
+      .then((result) => {
         setLoggedIn(true);
+        console.log(result);
       })
-      .catch(() => {
+      .catch((result) => {
         setLoggedIn(false);
+        console.log(result);
       });
   };
 
@@ -49,7 +55,6 @@ function App() {
     try {
       await Auth.signOut();
       setLoggedIn(false);
-      console.log("redirect");
     } catch (error) {
       console.log("error signing out", error);
     }
@@ -57,6 +62,18 @@ function App() {
 
   const onSignIn = () => {
     setLoggedIn(true);
+    setSignInOpen(true);
+  };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleSignInClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSignInOpen(false);
   };
 
   return (
@@ -77,7 +94,7 @@ function App() {
                 <Login onSignIn={onSignIn} loggedIn={loggedIn} />
               )}
             />
-            <Route path="/Register" exact component={Register} />
+            <Route path="/register" exact component={Register} />
             <Route path="/products" exact component={ProductListing} />
             <Route path="/forgotpassword" exact component={ForgotPassword} />
             <Route path="/resetpassword" exact component={ResetPassword} />
@@ -100,6 +117,15 @@ function App() {
           </Switch>
           <Footer />
         </Router>
+        <Snackbar
+          open={signInOpen}
+          autoHideDuration={6000}
+          onClose={handleSignInClose}
+        >
+          <Alert onClose={handleSignInClose} severity="success">
+            登陆成功! 欢迎来到 UWCSSA.CA
+          </Alert>
+        </Snackbar>
       </div>
     </ThemeProvider>
   );
