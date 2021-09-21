@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import Auth from "@aws-amplify/auth";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
@@ -8,10 +7,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Redirect } from "react-router";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router";
+import { signUp } from "../redux/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,15 +37,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+const Register = ({ signUp, isAuthenticated }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const [accountCreated, setAccountCreated] = useState(false);
 
   const [formData, setFormData] = useState({
-    password: "",
     username: "",
-    authenticationCode: "",
-    step: 0,
+    password: "",
   });
 
   const onChange = (event) => {
@@ -52,134 +51,77 @@ export default function Register() {
     console.log(formData);
   };
 
-  const signUp = async () => {
-    const { password, username } = formData;
-    try {
-      console.log("start signed up!");
-      await Auth.signUp({
-        username,
-        password,
-      });
-      console.log("successfully signed up!");
-      setFormData({ step: 1 });
-    } catch (error) {
-      console.log("error signing up:", error);
-      alert(error.message);
-    }
+  const onSignUp = async () => {
+    const { username, password } = formData;
+    signUp(username, password);
+    setAccountCreated(true);
   };
 
-  const confirmSignUp = async () => {
-    const { username, authenticationCode } = formData;
-    try {
-      await Auth.confirmSignUp(username, authenticationCode);
-      console.log("user successfully signed up!");
-      history.push("/login");
-    } catch (error) {
-      console.log("error confirming signing up:", error);
-      alert(error.message);
-    }
-  };
-
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
+  if (accountCreated) {
+    return <Redirect to="/EmailConfirm" />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      {formData.step === 0 && (
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography variant="h5">注册</Typography>
-          <Typography>
-            已经有账户了？
-            <Link href="/login">登入</Link>
-          </Typography>
-          <form className={classes.form}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  required
-                  fullWidth
-                  name="username"
-                  label="Email"
-                  type="email"
-                  id="username"
-                  autoComplete="email"
-                  onChange={(event) => onChange(event)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  required
-                  fullWidth
-                  name="password"
-                  label="输入密码"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange={(event) => onChange(event)}
-                />
-              </Grid>
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography variant="h5">注册</Typography>
+        <Typography>
+          已经有账户了？
+          <Link href="/login">登入</Link>
+        </Typography>
+        <form className={classes.form}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant="standard"
+                required
+                fullWidth
+                name="username"
+                label="Email"
+                type="email"
+                id="username"
+                autoComplete="email"
+                onChange={(event) => onChange(event)}
+              />
             </Grid>
-            <Grid className={classes.register_button}>
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.submit}
-                onClick={signUp}
-              >
-                注册
-              </Button>
+            <Grid item xs={12}>
+              <TextField
+                variant="standard"
+                required
+                fullWidth
+                name="password"
+                label="输入密码"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={(event) => onChange(event)}
+              />
             </Grid>
-          </form>
-        </div>
-      )}
-      {formData.step === 1 && (
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography variant="h5">验证</Typography>
-          <form className={classes.form}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  required
-                  fullWidth
-                  id="username "
-                  label="email"
-                  name="username"
-                  autoComplete="email"
-                  onChange={(event) => onChange(event)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  required
-                  fullWidth
-                  name="authenticationCode"
-                  label="验证码"
-                  id="authenticationCode"
-                  onChange={(event) => onChange(event)}
-                />
-              </Grid>
-            </Grid>
-            <Grid className={classes.register_button}>
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.submit}
-                onClick={confirmSignUp}
-              >
-                Confirm Sign Up
-              </Button>
-            </Grid>
-          </form>
-        </div>
-      )}
+          </Grid>
+          <Grid className={classes.register_button}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.submit}
+              onClick={onSignUp}
+            >
+              注册
+            </Button>
+          </Grid>
+        </form>
+      </div>
     </Container>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userAuth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { signUp })(Register);

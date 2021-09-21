@@ -1,4 +1,4 @@
-import { ActionTypes } from "../contants/news-action-types";
+import { ActionTypes } from "../constants/news-action-types";
 
 export const setNews = (news) => {
   return {

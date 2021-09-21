@@ -1,4 +1,3 @@
-import { Link, useHistory, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 
 import Auth from "@aws-amplify/auth";
@@ -10,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
@@ -65,16 +65,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ onSignIn, loggedIn }) => {
+const Login = ({ login, isAuthenticated }) => {
   const classes = useStyles();
-  const history = useHistory();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const location = useLocation();
-
-  const referer = location.state;
 
   const { username, password } = formData;
 
@@ -83,38 +80,21 @@ const Login = ({ onSignIn, loggedIn }) => {
 
   const handleSubmit = async function (event) {
     event.preventDefault();
-
-    try {
-      const response = await Auth.signIn(username, password);
-      console.log("auth response", response);
-      history.push("/");
-      onSignIn();
-    } catch (error) {
-      console.log("there was an error logging in ", error);
-      alert(error.message);
-    }
+    login(username, password);
   };
 
-  const handleGoogleLoginSignIn = async function (event) {
+  const handleGoogleSignIn = async function (event) {
     event.preventDefault();
-
     try {
       const response = await Auth.federatedSignIn({ provider: "Google" });
       console.log("google auth response", response);
-      onSignIn();
     } catch (error) {
       console.log("there was an error google logging in ", error);
-      alert(error.message);
     }
   };
 
-  let from;
-  if (referer != null) {
-    from = referer.from;
-  }
-  const urlTo = from || "/";
-  if (loggedIn) {
-    return <Redirect to={urlTo} />;
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
   }
 
   return (
@@ -193,7 +173,7 @@ const Login = ({ onSignIn, loggedIn }) => {
             type="submit"
             variant="outlined"
             className={classes.third_party_button}
-            onClick={(event) => handleGoogleLoginSignIn(event)}
+            onClick={(event) => handleGoogleSignIn(event)}
           >
             <Grid
               container
