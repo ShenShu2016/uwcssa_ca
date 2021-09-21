@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+
+import Auth from "@aws-amplify/auth";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Auth from "@aws-amplify/auth";
-import { Redirect } from "react-router";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,12 +38,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [formData, setFormData] = useState({
-    email: "",
     password: "",
     username: "",
-    phone_number: "",
     authenticationCode: "",
     step: 0,
   });
@@ -53,29 +53,30 @@ export default function Register() {
   };
 
   const signUp = async () => {
-    const { email, password, username, phone_number } = formData;
+    const { password, username } = formData;
     try {
       console.log("start signed up!");
       await Auth.signUp({
         username,
         password,
-        attributes: { email, phone_number },
       });
       console.log("successfully signed up!");
       setFormData({ step: 1 });
-    } catch (err) {
-      console.log("error signing up:", err);
+    } catch (error) {
+      console.log("error signing up:", error);
+      alert(error.message);
     }
   };
 
   const confirmSignUp = async () => {
-    const { email, authenticationCode } = formData;
+    const { username, authenticationCode } = formData;
     try {
-      await Auth.confirmSignUp(email, authenticationCode);
+      await Auth.confirmSignUp(username, authenticationCode);
       console.log("user successfully signed up!");
-      return <Redirect to='/'/>
-    } catch (err) {
-      console.log("error confirming signing up:", err);
+      history.push("/login");
+    } catch (error) {
+      console.log("error confirming signing up:", error);
+      alert(error.message);
     }
   };
 
@@ -99,9 +100,10 @@ export default function Register() {
                   variant="standard"
                   required
                   fullWidth
-                  id="email"
-                  label="输入邮箱"
-                  name="email"
+                  name="username"
+                  label="Email"
+                  type="email"
+                  id="username"
                   autoComplete="email"
                   onChange={(event) => onChange(event)}
                 />
@@ -116,30 +118,6 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  onChange={(event) => onChange(event)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  required
-                  fullWidth
-                  name="username"
-                  label="昵称"
-                  type="username"
-                  id="username"
-                  onChange={(event) => onChange(event)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  required
-                  fullWidth
-                  name="phone_number"
-                  label="电话"
-                  type="phone"
-                  id="phone_number"
                   onChange={(event) => onChange(event)}
                 />
               </Grid>
@@ -170,9 +148,9 @@ export default function Register() {
                   variant="standard"
                   required
                   fullWidth
-                  id="email"
+                  id="username "
                   label="email"
-                  name="email"
+                  name="username"
                   autoComplete="email"
                   onChange={(event) => onChange(event)}
                 />
