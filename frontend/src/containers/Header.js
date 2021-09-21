@@ -1,20 +1,23 @@
+import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import AppBar from "@material-ui/core/AppBar";
+import Badge from "@material-ui/core/Badge";
 import Button from "@material-ui/core/Button";
-import StorefrontIcon from "@material-ui/icons/Storefront";
-import { Link } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import MailIcon from "@material-ui/icons/Mail";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Redirect } from "react-router";
+import StorefrontIcon from "@material-ui/icons/Storefront";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import { logout } from "../redux/actions/authActions";
+import { makeStyles } from "@material-ui/core/styles";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,11 +63,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ loggedIn, signOut }) => {
+const Header = ({ logout, isAuthenticated }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
+  const history = useHistory();
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -85,11 +89,10 @@ const Header = ({ loggedIn, signOut }) => {
   };
 
   const [redirect, setRedirect] = useState(false);
-
   const logout_user = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    signOut();
+    logout();
     setRedirect(true);
   };
 
@@ -157,7 +160,7 @@ const Header = ({ loggedIn, signOut }) => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      {loggedIn ? (
+      {isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             aria-label="account of current user"
@@ -195,7 +198,9 @@ const Header = ({ loggedIn, signOut }) => {
             className={classes.uwcssaLogo}
           />
           <Typography
-            onClick={(event) => (window.location.href = "/")}
+            onClick={() => {
+              history.push("/");
+            }}
             style={{ cursor: "pointer" }}
             className={classes.title2}
             variant="h5"
@@ -204,7 +209,9 @@ const Header = ({ loggedIn, signOut }) => {
             UWCSSA
           </Typography>
           <Typography
-            onClick={(event) => (window.location.href = "/")}
+            onClick={() => {
+              history.push("/");
+            }}
             style={{ cursor: "pointer" }}
             className={classes.title}
             variant="h6"
@@ -250,7 +257,7 @@ const Header = ({ loggedIn, signOut }) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            {loggedIn ? (
+            {isAuthenticated ? (
               ""
             ) : (
               <Button
@@ -262,7 +269,7 @@ const Header = ({ loggedIn, signOut }) => {
                 登陆
               </Button>
             )}
-            {loggedIn ? (
+            {isAuthenticated ? (
               <IconButton
                 edge="end"
                 aria-label="account of current user"
@@ -297,4 +304,8 @@ const Header = ({ loggedIn, signOut }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userAuth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { logout })(Header);

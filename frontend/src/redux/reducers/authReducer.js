@@ -1,8 +1,6 @@
 import { ActionTypes } from "../contants/auth-action-types";
 
 const initialState = {
-  access: localStorage.getItem("access"),
-  refresh: localStorage.getItem("refresh"),
   isAuthenticated: null,
   user: null,
 };
@@ -50,12 +48,8 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.LOGIN_FAIL:
     case ActionTypes.SIGNUP_FAIL:
     case ActionTypes.LOGOUT:
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
       return {
         ...state,
-        access: null,
-        refresh: null,
         isAuthenticated: false,
         user: null,
       };
