@@ -451,3 +451,207 @@ export const onDeleteArticleComment = /* GraphQL */ `
     }
   }
 `;
+export const onCreateDepartment = /* GraphQL */ `
+  subscription OnCreateDepartment {
+    onCreateDepartment {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateDepartment = /* GraphQL */ `
+  subscription OnUpdateDepartment {
+    onUpdateDepartment {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteDepartment = /* GraphQL */ `
+  subscription OnDeleteDepartment {
+    onDeleteDepartment {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateUwcssaJob = /* GraphQL */ `
+  subscription OnCreateUwcssaJob {
+    onCreateUwcssaJob {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUwcssaJob = /* GraphQL */ `
+  subscription OnUpdateUwcssaJob {
+    onUpdateUwcssaJob {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUwcssaJob = /* GraphQL */ `
+  subscription OnDeleteUwcssaJob {
+    onDeleteUwcssaJob {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
