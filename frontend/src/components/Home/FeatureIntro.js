@@ -25,8 +25,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "start",
     marginBottom: "1.5rem",
     margin: "auto",
-    paddingLeft: "0.5rem",
-    paddingRight: "0.5rem",
+    padding: "0 0.25rem",
   },
   bbsTag: { marginBottom: "5rem", marginInline: "0.2rem" },
   bbsTagButton: {
