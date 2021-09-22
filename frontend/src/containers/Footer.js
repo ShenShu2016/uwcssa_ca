@@ -1,15 +1,16 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+import { makeStyles, Grid, Box, Link, Container } from "@material-ui/core";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import { SocialIcon } from "react-social-icons";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        uwcssa.ca
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -34,6 +35,20 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.grey[200]
         : theme.palette.grey[800],
   },
+  text: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  copyright: {
+    marginTop: "1rem",
+  },
+  icons: {
+    marginTop: "0.25rem",
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    justifyContent: "left",
+  },
 }));
 
 export default function StickyFooter() {
@@ -42,11 +57,70 @@ export default function StickyFooter() {
   return (
     <div className={classes.root}>
       <footer className={classes.footer}>
-        <Container maxWidth="sm">
-          <Typography variant="body1">
-            My sticky footer can be found here.
-          </Typography>
-          <Copyright />
+        <Container maxWidth="md">
+          <Grid container spacing={3}>
+            <Grid item xs={6} sm={3}>
+              <Box className={classes.text}>
+                <Typography variant="h6" gutterBottom>
+                  关于我们
+                </Typography>
+                <Link href="" color="inherit">
+                  团队
+                </Link>
+                <Link href="" color="inherit">
+                  联系我们
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Box className={classes.text}>
+                <Typography variant="h6" gutterBottom>
+                  资讯
+                </Typography>
+                <Link href="" color="inherit">
+                  uwcssa新闻
+                </Link>
+                <Link href="" color="inherit">
+                  uwcssa活动
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Box className={classes.text}>
+                <Typography variant="h6" gutterBottom>
+                  联系我们
+                </Typography>
+                <Link color="inherit" href="mailto:uwincssa.it@gmail.com">
+                  邮箱：uwincssa.it@gmail.com
+                </Link>
+                <Box className={classes.icons}>
+                  <FacebookIcon />
+                  <LinkedInIcon />
+                  <SocialIcon
+                    style={{ height: 20, width: 20 }}
+                    url="https://wechat.com"
+                    bgColor="black"
+                  />
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Box className={classes.text}>
+                <Typography variant="h6" gutterBottom>
+                  职位
+                </Typography>
+                <Typography variant="caption" gutterBottom>
+                  来和我们一起工作吧! 我们一直在寻找优秀的人才加入我们的团队。
+                </Typography>
+                <Link href="" color="inherit">
+                  查看职位
+                </Link>
+              </Box>
+            </Grid>
+          </Grid>
+          <Box className={classes.copyright}>
+            <Copyright />
+          </Box>
         </Container>
       </footer>
     </div>
