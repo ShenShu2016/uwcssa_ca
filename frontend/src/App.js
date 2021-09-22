@@ -25,6 +25,7 @@ import awsconfig from "./aws-exports";
 import { connect } from "react-redux";
 import store from "./redux/store";
 import uploadArticle from "./components/News/AddArticle";
+import JoinUs from "./containers/JoinUs";
 
 Amplify.configure(awsconfig);
 
@@ -83,6 +84,7 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
               />
               <Route path="/graphqltesting" exact component={GraphQLTesting} />
               <Route path="/uploadarticle" exact component={uploadArticle} />
+              <Route path="/joinus" component={JoinUs} />
               <Route>404 Not Found!</Route>
             </Switch>
             <Footer />
