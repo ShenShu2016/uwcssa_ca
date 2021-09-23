@@ -15,10 +15,12 @@ import { Redirect } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
-import googleLogo from "../static/google.png";
+import googleLogo from "../static/svg icons/google.svg";
+import facebookLogo from "../static/svg icons/facebook.svg";
+import githubLogo from "../static/svg icons/github.svg";
+import linkedinLogo from "../static/svg icons/linkedin.svg";
 import { login } from "../redux/actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
-import wechatLogo from "../static/wechat.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,20 +51,32 @@ const useStyles = makeStyles((theme) => ({
   third_party_button: {
     width: 426,
     height: 64,
-    marginBottom: "5rem",
+    marginBottom: "2rem",
+    maxWidth: "100%",
+    minWidth: "40%",
+    boxShadow: "0 3px 5px 2px rgba(191, 191, 191, 1)",
   },
-
-  wechatLogo: {
+  facebookLogo: {
     width: 24,
     height: 24,
-    marginRight: "9rem",
+    marginRight: "6rem",
   },
-
   googleLogo: {
     width: 24,
     height: 24,
-    marginRight: "8rem",
+    marginRight: "6rem",
   },
+  github: {
+    width: 24,
+    height: 24,
+    marginRight: "1rem",
+  },
+  more_third_party: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: "3rem",
+  }
 }));
 
 const Login = ({ login, isAuthenticated }) => {
@@ -156,7 +170,7 @@ const Login = ({ login, isAuthenticated }) => {
               登陆
             </Button>
 
-            <Button // 这个忘记密码的按钮不知道为什么不能redirect
+            <Button
               // type="button"
               variant="outlined"
               component={Link}
@@ -167,8 +181,9 @@ const Login = ({ login, isAuthenticated }) => {
               忘记密码
             </Button>
           </Grid>
-        </form>
+        </form>      
         <Box marginTop="3rem">
+          {/* Google的登入按钮 */}
           <Button
             type="submit"
             variant="outlined"
@@ -181,37 +196,61 @@ const Login = ({ login, isAuthenticated }) => {
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Grid>
+              <Grid item xs={1}>
+              </Grid>
+              <Grid item xs={3}>
                 <img
                   src={googleLogo}
                   alt="googleLogo"
                   className={classes.googleLogo}
                 />
               </Grid>
-              <Grid>Google登入</Grid>
+              <Grid>Google Sign in</Grid>
             </Grid>
           </Button>
+          
+          {/* Facebook的登入按钮*/}
           <Button
             type="submit"
             variant="outlined"
             className={classes.third_party_button}
           >
             <Grid
-              container
+              container          
               direction="row"
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Grid>
+              <Grid item xs={1}>
+              </Grid>
+              <Grid item xs={3}>
                 <img
-                  src={wechatLogo}
-                  alt="wechatLogo"
-                  className={classes.wechatLogo}
+                  src={facebookLogo}
+                  alt="facebookLogo"
+                  className={classes.facebookLogo}
                 />
               </Grid>
-              <Grid>微信登入</Grid>
+              <Grid>Facebook Sign in</Grid>
+           
             </Grid>
           </Button>
+          
+        </Box>
+        {/* 之后增加点按转入网站的功能 */}
+        <Box className={classes.more_third_party}>
+          
+            <img
+                src={githubLogo}
+                alt="githubLogo"
+                className={classes.github}   
+                onClick={(event) => handleGoogleSignIn(event)}        
+            />
+          
+            <img
+                src={linkedinLogo}
+                alt="linkedinLogo"
+                className={classes.github}
+            />
         </Box>
       </div>
     </Container>
