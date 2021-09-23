@@ -487,3 +487,225 @@ export const deleteArticleComment = /* GraphQL */ `
     }
   }
 `;
+export const createDepartment = /* GraphQL */ `
+  mutation CreateDepartment(
+    $input: CreateDepartmentInput!
+    $condition: ModelDepartmentConditionInput
+  ) {
+    createDepartment(input: $input, condition: $condition) {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateDepartment = /* GraphQL */ `
+  mutation UpdateDepartment(
+    $input: UpdateDepartmentInput!
+    $condition: ModelDepartmentConditionInput
+  ) {
+    updateDepartment(input: $input, condition: $condition) {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteDepartment = /* GraphQL */ `
+  mutation DeleteDepartment(
+    $input: DeleteDepartmentInput!
+    $condition: ModelDepartmentConditionInput
+  ) {
+    deleteDepartment(input: $input, condition: $condition) {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createUwcssaJob = /* GraphQL */ `
+  mutation CreateUwcssaJob(
+    $input: CreateUwcssaJobInput!
+    $condition: ModelUwcssaJobConditionInput
+  ) {
+    createUwcssaJob(input: $input, condition: $condition) {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateUwcssaJob = /* GraphQL */ `
+  mutation UpdateUwcssaJob(
+    $input: UpdateUwcssaJobInput!
+    $condition: ModelUwcssaJobConditionInput
+  ) {
+    updateUwcssaJob(input: $input, condition: $condition) {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteUwcssaJob = /* GraphQL */ `
+  mutation DeleteUwcssaJob(
+    $input: DeleteUwcssaJobInput!
+    $condition: ModelUwcssaJobConditionInput
+  ) {
+    deleteUwcssaJob(input: $input, condition: $condition) {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;

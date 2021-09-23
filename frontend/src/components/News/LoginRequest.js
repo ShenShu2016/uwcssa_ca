@@ -1,9 +1,9 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { Link as NewsLink } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 
@@ -46,7 +46,7 @@ const LoginRequest = () => {
             variant="contained"
             color="primary"
             component={NewsLink}
-            to="/Register"
+            to="/register"
           >
             注册
           </Button>

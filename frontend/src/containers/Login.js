@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import { Button } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { connect } from "react-redux";
-import { login } from "../redux/actions/authActions";
-import { Redirect } from "react-router-dom";
-import { Box} from "@material-ui/core";
-import { Link } from "react-router-dom";
-import googleLogo from "../static/google.png"
-import wechatLogo from "../static/wechat.png"
-import { useLocation } from "react-router-dom";
+
 import Auth from "@aws-amplify/auth";
-import { useHistory } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import { Box } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Redirect } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import googleLogo from "../static/google.png";
+import { login } from "../redux/actions/authActions";
+import { makeStyles } from "@material-ui/core/styles";
+import wechatLogo from "../static/wechat.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   third_party_button: {
-    width: 426, 
+    width: 426,
     height: 64,
-    marginBottom: "5rem",  
+    marginBottom: "5rem",
   },
 
   wechatLogo: {
@@ -63,47 +61,40 @@ const useStyles = makeStyles((theme) => ({
   googleLogo: {
     width: 24,
     height: 24,
-    marginRight: "8rem",  
+    marginRight: "8rem",
   },
 }));
 
-const Login = ({ onSignIn, loggedIn }) => {
-  
+const Login = ({ login, isAuthenticated }) => {
   const classes = useStyles();
-  const history = useHistory();
+
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
-  const location = useLocation();
 
-  const referer = location.state;
-
-  const { email, password } = formData;
+  const { username, password } = formData;
 
   const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
 
   const handleSubmit = async function (event) {
     event.preventDefault();
+    login(username, password);
+  };
 
+  const handleGoogleSignIn = async function (event) {
+    event.preventDefault();
     try {
-      const response = await Auth.signIn(email, password);
-      console.log("auth response", response);
-      history.push('/');
-      onSignIn();
+      const response = await Auth.federatedSignIn({ provider: "Google" });
+      console.log("google auth response", response);
     } catch (error) {
-      console.log("there was an error logging in ", error);
+      console.log("there was an error google logging in ", error);
     }
   };
 
-  let from;
-  if (referer != null) {
-    from = referer.from;
-  }
-  const urlTo = from || "/";
-  if (loggedIn) {
-    return <Redirect to={urlTo} />;
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
   }
 
   return (
@@ -129,13 +120,13 @@ const Login = ({ onSignIn, loggedIn }) => {
             variant="standard"
             margin="normal"
             required
-            id="email"
+            id="username"
             label="Email Address"
-            name="email"
+            name="username"
             fullWidth
             autoComplete="email"
             autoFocus
-            value={email}
+            value={username}
             onChange={(event) => onChange(event)}
           />
           <TextField
@@ -182,48 +173,44 @@ const Login = ({ onSignIn, loggedIn }) => {
             type="submit"
             variant="outlined"
             className={classes.third_party_button}
-            onClick={() => Auth.federatedSignIn({ provider: "Google" })}
+            onClick={(event) => handleGoogleSignIn(event)}
           >
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
             >
-            <Grid>
-              <img
-                src={googleLogo}
-                alt="googleLogo"
-                className={classes.googleLogo}              
-              /> 
-              </Grid>                                          
               <Grid>
-                Google登入      
-              </Grid>  
+                <img
+                  src={googleLogo}
+                  alt="googleLogo"
+                  className={classes.googleLogo}
+                />
+              </Grid>
+              <Grid>Google登入</Grid>
             </Grid>
-          </Button>         
+          </Button>
           <Button
             type="submit"
             variant="outlined"
             className={classes.third_party_button}
           >
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"             
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
             >
-            <Grid>
-              <img
-                src={wechatLogo}
-                alt="wechatLogo"
-                className={classes.wechatLogo}              
-              /> 
-              </Grid>                                          
               <Grid>
-                微信登入      
-              </Grid>  
-            </Grid> 
+                <img
+                  src={wechatLogo}
+                  alt="wechatLogo"
+                  className={classes.wechatLogo}
+                />
+              </Grid>
+              <Grid>微信登入</Grid>
+            </Grid>
           </Button>
         </Box>
       </div>

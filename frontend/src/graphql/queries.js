@@ -271,3 +271,135 @@ export const listArticleComments = /* GraphQL */ `
     }
   }
 `;
+export const getDepartment = /* GraphQL */ `
+  query GetDepartment($id: ID!) {
+    getDepartment(id: $id) {
+      id
+      name
+      introduction
+      email
+      leader
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listDepartments = /* GraphQL */ `
+  query ListDepartments(
+    $filter: ModelDepartmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDepartments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaJob = /* GraphQL */ `
+  query GetUwcssaJob($id: ID!) {
+    getUwcssaJob(id: $id) {
+      id
+      introduction
+      title
+      requirements
+      Bonus
+      imagePath
+      Benefits
+      Schedule
+      like
+      unlike
+      createdAt
+      updatedAt
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listUwcssaJobs = /* GraphQL */ `
+  query ListUwcssaJobs(
+    $filter: ModelUwcssaJobFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
