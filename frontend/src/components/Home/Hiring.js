@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { List } from "@material-ui/core";
+import { List, Link } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
@@ -21,6 +21,7 @@ import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
 import iconHtml from "../../static/svg icons/html.svg";
 import iconRestAPI from "../../static/svg icons/rest-api.svg";
 import { Button } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -86,16 +87,22 @@ const Hiring = () => {
               <ListItemText primary="-热爱电脑" />
             </ListItem>
           </List>
-          <Button
-            variant="text"
-            target="_top"
-            href={`mailto:uwincssa.it@gmail.com`}
+          <Link
+            variant="h6"
+            color="inherit"
+            href="mailto:uwincssa.it@gmail.com"
+            xs={12}
+            className={classes.contractInfo}
+            style={{
+              display: "flex",
+              alignItems: "left",
+              flexWrap: "wrap",
+              justifyContent: "left",
+            }}
           >
-            <Typography variant="h5" className={classes.contractInfo}>
-              请将简历发至: <EmailOutlinedIcon />
-              uwincssa.it@gmail.com
-            </Typography>
-          </Button>
+            请将简历发至: <EmailOutlinedIcon />
+            uwincssa.it@gmail.com
+          </Link>
         </Box>
 
         <Box className={classes.niceToHave}>
