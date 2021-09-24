@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { List, Link } from "@material-ui/core";
-import { ListItem } from "@material-ui/core";
+import { ListItem, Container } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -20,7 +20,6 @@ import iconCss from "../../static/svg icons/css.svg";
 import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
 import iconHtml from "../../static/svg icons/html.svg";
 import iconRestAPI from "../../static/svg icons/rest-api.svg";
-import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,8 +103,7 @@ const Hiring = () => {
             uwincssa.it@gmail.com
           </Link>
         </Box>
-
-        <Box className={classes.niceToHave}>
+        <Container className={classes.niceToHave}>
           <Typography variant="h4" className={classes.title}>
             我们使用的技术栈
           </Typography>
@@ -239,7 +237,7 @@ const Hiring = () => {
               </div>
             </Grid>
           </Grid>
-        </Box>
+        </Container>
       </Box>
     </div>
   );

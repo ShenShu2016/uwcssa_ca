@@ -2,7 +2,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, Grid, Box, Link, Container } from "@material-ui/core";
+import { makeStyles, Grid, Box, Button } from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import { SocialIcon } from "react-social-icons";
@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     justifyContent: "left",
   },
+  link: {
+    overflowWrap: "break-word",
+  },
 }));
 
 export default function StickyFooter() {
@@ -92,9 +95,14 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   联系我们
                 </Typography>
-                <Link color="inherit" href="mailto:uwincssa.it@gmail.com">
-                  邮箱：uwincssa.it@gmail.com
+                <Link
+                  color="inherit"
+                  href="mailto:uwincssa.it@gmail.com"
+                  className={classes.link}
+                >
+                  邮箱: uwincssa.it@gmail.com
                 </Link>
+
                 <Box className={classes.icons}>
                   <FacebookIcon />
                   <LinkedInIcon />
@@ -114,9 +122,9 @@ export default function StickyFooter() {
                 <Typography variant="caption" gutterBottom>
                   来和我们一起工作吧! 我们一直在寻找优秀的人才加入我们的团队。
                 </Typography>
-                <Link href="" color="inherit">
+                <Button variant="outlined" color="primary" href="">
                   查看职位
-                </Link>
+                </Button>
               </Box>
             </Grid>
           </Grid>

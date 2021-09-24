@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
     paddingBottom: "2rem",
+    backgroundImage: `url(${cssalogo})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   webIntro: {
     minWidth: "40%",
@@ -23,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     paddingBottom: "auto",
     marginBottom: "auto",
-    backgroundImage: `url(${cssalogo})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
   },
   titleBox: {
     height: "100%",
@@ -34,8 +34,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     paddingTop: "5rem",
     marginBottom: "2rem",
-
     lineHeight: "130%",
+    [theme.breakpoints.only("sm")]: {
+      width: "calc(100% - 190px)",
+      marginLeft: "190px",
+    },
+    [theme.breakpoints.only("md")]: {
+      width: "calc(100% - 260px)",
+      marginLeft: "260px",
+    },
   },
   title: {
     marginBottom: "2rem",
