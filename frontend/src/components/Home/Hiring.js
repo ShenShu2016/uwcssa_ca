@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { List, Link } from "@material-ui/core";
-import { ListItem, Container } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -103,7 +103,7 @@ const Hiring = () => {
             uwincssa.it@gmail.com
           </Link>
         </Box>
-        <Container className={classes.niceToHave}>
+        <Box className={classes.niceToHave}>
           <Typography variant="h4" className={classes.title}>
             我们使用的技术栈
           </Typography>
@@ -237,7 +237,7 @@ const Hiring = () => {
               </div>
             </Grid>
           </Grid>
-        </Container>
+        </Box>
       </Box>
     </div>
   );
