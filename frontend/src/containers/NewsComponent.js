@@ -1,16 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -35,9 +35,9 @@ const useStyles = makeStyles({
 });
 
 const NewsComponent = () => {
-  const news = useSelector((state) => state.allNews.news);
+  const articles = useSelector((state) => state.allArticles.articles);
   const classes = useStyles();
-  const renderBigNews = news.map((news, index) => {
+  const renderBigNews = articles.map((news, index) => {
     const { id, topic, image, subject } = news;
     if (index === 0) {
       return (
@@ -80,7 +80,7 @@ const NewsComponent = () => {
       return <div key={id}></div>;
     }
   });
-  const renderList = news.map((news) => {
+  const renderList = articles.map((news) => {
     const { id, topic, image, subject } = news;
     return (
       <Box p={1} m={1} key={id}>
