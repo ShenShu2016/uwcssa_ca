@@ -1,32 +1,35 @@
-import React, { useState } from "react";
-import { createType } from "../../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
 import { IconButton, TextField } from "@material-ui/core";
+import React, { useState } from "react";
+
 import PublishIcon from "@material-ui/icons/Publish";
+import { createTopic } from "../../graphql/mutations";
 
-export default function AddType() {
-  const [topicData, setTypeData] = useState({});
+export default function AddTopic() {
+  const [topicData, setTopicData] = useState({ name: "" });
 
-  const uploadType = async () => {
+  const uploadTopic = async () => {
     //Upload the topic
     console.log("topicData", topicData);
     const { name } = topicData;
-    const createTypeInput = {
+    const createTopicInput = {
       name,
-      like: 0,
-      unlike: 0,
+      like: [],
+      unlike: [],
     };
-    await API.graphql(graphqlOperation(createType, { input: createTypeInput }));
+    await API.graphql(
+      graphqlOperation(createTopic, { input: createTopicInput })
+    );
   };
 
   return (
-    <div className="newType">
+    <div className="newTopic">
       <TextField
-        label="Name"
+        label="Topic"
         value={topicData.name}
-        onChange={(e) => setTypeData({ ...topicData, name: e.target.value })}
+        onChange={(e) => setTopicData({ ...topicData, name: e.target.value })}
       />
-      <IconButton onClick={uploadType}>
+      <IconButton onClick={uploadTopic}>
         <PublishIcon />
       </IconButton>
     </div>

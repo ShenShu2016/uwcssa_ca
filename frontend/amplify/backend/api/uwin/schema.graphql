@@ -13,8 +13,8 @@ type Topic
   ) {
   id: ID!
   name: String!
-  like: Int!
-  unlike: Int!
+  like: [String]!
+  unlike: [String]!
   articles: [Article] @connection(name: "TopicArticles")
 }
 
@@ -33,13 +33,18 @@ type Type
   ) {
   id: ID!
   name: String!
-  like: Int!
-  unlike: Int!
+  like: [String]!
+  unlike: [String]!
   articles: [Article] @connection(name: "TypeArticles")
 }
 
 type Article
   @model
+  @key(
+    name: "articlesByDate"
+    fields: ["byDate", "createdAt"]
+    queryField: "articlesByDate"
+  )
   @auth(
     rules: [
       { allow: owner }
@@ -55,11 +60,13 @@ type Article
   title: String!
   content: String!
   imagePath: String
-  like: Int!
-  unlike: Int!
-  topic: Topic @connection(name: "TopicArticles")
-  type: Type @connection(name: "TypeArticles")
+  like: [String]!
+  unlike: [String]!
+  topic: Topic! @connection(name: "TopicArticles")
+  type: Type! @connection(name: "TypeArticles")
   ArticleComments: [ArticleComment] @connection(name: "ArticleArticleComments")
+  byDate: String!
+  createdAt: String!
 }
 
 type ArticleComment
@@ -77,9 +84,9 @@ type ArticleComment
   ) {
   id: ID!
   content: String!
-  like: Int!
-  unlike: Int!
-  article: Article @connection(name: "ArticleArticleComments")
+  like: [String]!
+  unlike: [String]!
+  article: Article! @connection(name: "ArticleArticleComments")
 }
 
 type Department
@@ -97,11 +104,11 @@ type Department
   ) {
   id: ID!
   name: String!
-  introduction:String
-  email:String
-  leader:String
-  like: Int!
-  unlike: Int!
+  introduction: String
+  email: String
+  leader: String
+  like: [String]!
+  unlike: [String]!
   uwcssaJobs: [UwcssaJob] @connection(name: "DepartmentUwcssaJobs")
 }
 
@@ -119,14 +126,14 @@ type UwcssaJob
     ]
   ) {
   id: ID!
-  introduction:String!
+  introduction: String!
   title: String!
-  requirements:[String]!
-  Bonus:[String]!
+  requirements: [String]!
+  Bonus: [String]!
   imagePath: String
   department: Department @connection(name: "DepartmentUwcssaJobs")
-  Benefits:[String]!
-  Schedule:[String]!
-  like: Int!
-  unlike: Int!
+  Benefits: [String]!
+  Schedule: [String]!
+  like: [String]!
+  unlike: [String]!
 }

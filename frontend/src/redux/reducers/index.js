@@ -1,23 +1,24 @@
-import { combineReducers } from "redux";
+import { articleReducer, selectedArticleReducer } from "./articleReducer";
+// import {
+//   newsCommPostReducer,
+//   newsCommentsReducer,
+//   selectedNewsCommReducer,
+// } from "./newComReducer";
 import { productReducer, selectedProductReducer } from "./productReducer";
-import { newsReducer, selectedSingleNewsReducer } from "./newReducer";
+
 import { authReducer } from "./authReducer";
+import { combineReducers } from "redux";
 import { userReducer } from "./userReducer";
-import {
-  newsCommentsReducer,
-  selectedNewsCommReducer,
-  newsCommPostReducer,
-} from "./newComReducer";
 
 const reducers = combineReducers({
   userAuth: authReducer,
   allUsers: userReducer,
   allProducts: productReducer,
   product: selectedProductReducer,
-  allNews: newsReducer,
-  singleNews: selectedSingleNewsReducer,
-  allNewsComments: newsCommentsReducer,
-  newsComment: selectedNewsCommReducer,
-  newsCommentPost: newsCommPostReducer,
+  allArticles: articleReducer,
+  article: selectedArticleReducer,
+  // allNewsComments: newsCommentsReducer,
+  // newsComment: selectedNewsCommReducer,
+  // newsCommentPost: newsCommPostReducer,
 });
 export default reducers;

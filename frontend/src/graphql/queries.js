@@ -19,6 +19,7 @@ export const getTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -69,6 +70,7 @@ export const getType = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -110,6 +112,7 @@ export const getArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      byDate
       createdAt
       updatedAt
       topic {
@@ -166,6 +169,61 @@ export const listArticles = /* GraphQL */ `
         imagePath
         like
         unlike
+        byDate
+        createdAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        type {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        ArticleComments {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const articlesByDate = /* GraphQL */ `
+  query ArticlesByDate(
+    $byDate: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelArticleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    articlesByDate(
+      byDate: $byDate
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imagePath
+        like
+        unlike
+        byDate
         createdAt
         updatedAt
         topic {
@@ -211,6 +269,7 @@ export const getArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        byDate
         createdAt
         updatedAt
         topic {
@@ -261,6 +320,7 @@ export const listArticleComments = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner

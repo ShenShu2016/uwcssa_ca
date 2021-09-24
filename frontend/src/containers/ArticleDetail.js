@@ -1,21 +1,21 @@
-import axios from "axios";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  selectedSingleNews,
-  removeSelectedSingleNews,
-} from "../redux/actions/newsActions";
-import { makeStyles } from "@material-ui/core/styles";
+  removeSelectedArticle,
+  selectedArticle,
+} from "../redux/actions/articleActions";
+import { useDispatch, useSelector } from "react-redux";
 
-import CardMedia from "@material-ui/core/CardMedia";
-
-import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import CardMedia from "@material-ui/core/CardMedia";
+import { Container } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
 import LoginRequest from "../components/News/LoginRequest";
 import NewsComments from "../components/News/NewsComments";
+import Typography from "@material-ui/core/Typography";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router-dom";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: "34.5rem",
@@ -45,12 +45,12 @@ const useStyles = makeStyles({
   },
 });
 
-const NewsDetail = () => {
+const ArticleDetail = () => {
   const { newsId } = useParams();
   const classes = useStyles();
-  const singleNews = useSelector((state) => state.singleNews);
+  const article = useSelector((state) => state.article);
 
-  const { subject, content, image, created_by, updated_at } = singleNews;
+  const { subject, content, image, created_by, updated_at } = article;
 
   //Time formatting
   const timeString = Object.values({ updated_at });
@@ -67,12 +67,12 @@ const NewsDetail = () => {
       .catch((err) => {
         console.log("Err", err);
       });
-    dispatch(selectedSingleNews(response.data));
+    dispatch(selectedArticle(response.data));
   };
 
   useEffect(() => {
     if (newsId && newsId !== "") fetchNewsDetail();
-    return () => dispatch(removeSelectedSingleNews());
+    return () => dispatch(removeSelectedArticle());
   }, [newsId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -86,7 +86,7 @@ const NewsDetail = () => {
         </Link>
         <Typography color="textPrimary">文章: {newsId}</Typography>
       </Breadcrumbs>
-      {Object.keys(singleNews).length === 0 ? (
+      {Object.keys(article).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Container className={classes.main}>
@@ -110,4 +110,4 @@ const NewsDetail = () => {
     </div>
   );
 };
-export default NewsDetail;
+export default ArticleDetail;

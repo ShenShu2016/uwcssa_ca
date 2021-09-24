@@ -4,17 +4,19 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { checkAuthenticated, load_user } from "./redux/actions/authActions";
 
 import Amplify from "aws-amplify";
+import ArticleDetail from "./containers/ArticleDetail";
+import ArticleListing from "./containers/ArticleListing";
+import ContactUs from "./containers/ContactUs"
 import EmailConfirm from "./containers/EmailConfirm";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/ForgotPassword";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
+import JoinUs from "./containers/JoinUs"
 import Login from "./containers/Login";
 import MuiAlert from "@material-ui/lab/Alert";
 import NewsComments from "./components/News/NewsComments";
-import NewsDetail from "./containers/NewsDetail";
-import NewsListing from "./containers/NewsListing";
 import ProductDetail from "./containers/ProductDetail";
 import ProductListing from "./containers/ProductListing";
 import { Provider } from "react-redux";
@@ -25,8 +27,6 @@ import awsconfig from "./aws-exports";
 import { connect } from "react-redux";
 import store from "./redux/store";
 import uploadArticle from "./components/News/AddArticle";
-import ContactUs from "./containers/ContactUs"
-import JoinUs from "./containers/JoinUs"
 
 Amplify.configure(awsconfig);
 
@@ -71,8 +71,8 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
               <Route path="/forgotpassword" exact component={ForgotPassword} />
               <Route path="/resetpassword" exact component={ResetPassword} />
               <Route path="/emailconfirm" exact component={EmailConfirm} />
-              <Route path="/news" exact component={NewsListing} />
-              <Route path="/news/:newsId" exact component={NewsDetail} />
+              <Route path="/news" exact component={ArticleListing} />
+              <Route path="/news/:newsId" exact component={ArticleDetail} />
               <Route
                 path="articlecommentsingle_list/:articletId"
                 exact

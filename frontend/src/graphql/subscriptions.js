@@ -19,6 +19,7 @@ export const onCreateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -46,6 +47,7 @@ export const onUpdateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -73,6 +75,7 @@ export const onDeleteTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -100,6 +103,7 @@ export const onCreateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -127,6 +131,7 @@ export const onUpdateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -154,6 +159,7 @@ export const onDeleteType = /* GraphQL */ `
           imagePath
           like
           unlike
+          byDate
           createdAt
           updatedAt
           owner
@@ -172,6 +178,7 @@ export const onCreateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      byDate
       createdAt
       updatedAt
       topic {
@@ -223,6 +230,7 @@ export const onUpdateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      byDate
       createdAt
       updatedAt
       topic {
@@ -274,6 +282,7 @@ export const onDeleteArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      byDate
       createdAt
       updatedAt
       topic {
@@ -332,6 +341,7 @@ export const onCreateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        byDate
         createdAt
         updatedAt
         topic {
@@ -377,6 +387,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        byDate
         createdAt
         updatedAt
         topic {
@@ -422,6 +433,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        byDate
         createdAt
         updatedAt
         topic {
