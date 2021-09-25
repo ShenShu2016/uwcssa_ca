@@ -20,7 +20,6 @@ import iconCss from "../../static/svg icons/css.svg";
 import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
 import iconHtml from "../../static/svg icons/html.svg";
 import iconRestAPI from "../../static/svg icons/rest-api.svg";
-import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,7 +103,6 @@ const Hiring = () => {
             uwincssa.it@gmail.com
           </Link>
         </Box>
-
         <Box className={classes.niceToHave}>
           <Typography variant="h4" className={classes.title}>
             我们使用的技术栈
