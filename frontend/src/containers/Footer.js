@@ -1,10 +1,8 @@
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, Grid, Box, Button } from "@material-ui/core";
+import { Box, Button, Grid, makeStyles } from "@material-ui/core";
 
+import Container from "@material-ui/core/Container";
 import FacebookIcon from "@material-ui/icons/Facebook";
+import Link from "@material-ui/core/Link";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
