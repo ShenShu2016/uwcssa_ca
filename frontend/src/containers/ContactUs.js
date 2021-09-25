@@ -1,15 +1,16 @@
-
-import React from 'react';
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
 import { Button, Grid, Paper } from "@material-ui/core";
-import cssalog from "../static/cssalogo.png";
+
+import ApartmentIcon from '@material-ui/icons/Apartment';
 import Box from "@material-ui/core/Box";
-import Hidden from '@material-ui/core/Hidden';
-import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
-import ApartmentIcon from '@material-ui/icons/Apartment';
+import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
+import Hidden from '@material-ui/core/Hidden';
+import React from 'react';
+import Typography from "@material-ui/core/Typography";
+import cssaLogo from "../static/cssalogo.png";
+import { makeStyles } from "@material-ui/styles";
+
 const useStyles = makeStyles((theme) => ({
     
     root: {
@@ -57,7 +58,7 @@ export default function ContactUs() {
             <Box className={classes.root} width="100%">
                 <Hidden xsDown>
                 <Box className={classes.logoBox}>
-                    <img src={cssalog}/>
+                    <img src={cssaLogo} alt=' UWCSSA LOGO'/>
                 </Box>
                 </Hidden>
                 <Box className={classes.mainContent}>

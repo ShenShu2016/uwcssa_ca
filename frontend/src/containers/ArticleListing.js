@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
 import NewsComponent from "./NewsComponent";
 import axios from "axios";
-import { setNews } from "../redux/actions/newsActions";
+import { setArticles } from "../redux/actions/articleActions";
+import { useDispatch } from "react-redux";
 
-const NewsListing = () => {
+const ArticleListing = () => {
   // const news = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ const NewsListing = () => {
         console.log("Err", err);
       });
 
-    dispatch(setNews(response.data.results));
+    dispatch(setArticles(response.data.results));
   };
   useEffect(() => {
     fetchNews();
@@ -27,4 +28,4 @@ const NewsListing = () => {
   );
 };
 
-export default NewsListing;
+export default ArticleListing;

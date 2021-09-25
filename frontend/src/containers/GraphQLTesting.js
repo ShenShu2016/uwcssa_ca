@@ -1,10 +1,12 @@
 import { Button, IconButton, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core";
+
 import { API } from "aws-amplify";
-import { listArticles } from "../graphql/queries";
-import { Link } from "react-router-dom";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
+import { Link } from "react-router-dom";
+import { listArticles } from "../graphql/queries";
+import { makeStyles } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -28,13 +30,12 @@ export default function GraphQLTesting() {
       });
       const articleList = articleData.data.listArticles.items;
       console.log("articleData", articleData);
-      // console.log("Article list", articleList);
+
       setArticles(articleList);
     } catch (error) {
       console.log("error on fetching Article", error);
     }
   };
-
   return (
     <div className={classes.root}>
       <Button variant="contained" component={Link} to="/uploadarticle">
@@ -42,20 +43,20 @@ export default function GraphQLTesting() {
       </Button>
       <Typography variant="h1">GraphQLTesting</Typography>
       {articles.map((article) => {
-        // console.log( getImgURL(article.imagePath))
-        // console.log(article)
-        // <AmplifyS3Image imgKey={article.imagePath} />
         return (
           <div key={article.id}>
             <Typography variant="h3">title:{article.title}</Typography>
             <Typography variant="h3">article:{article.content}</Typography>
-            <IconButton>like: {article.like}</IconButton>
-            <IconButton>unlike: {article.unlike}</IconButton>
-            <Typography variant="h5">topic: {article.topic}</Typography>
-            <Typography variant="h5">type: {article.type}</Typography>
+            <IconButton>like: {article.like.length}</IconButton>
+            <IconButton>unlike: {article.unlike.length}</IconButton>
+            <Typography variant="h5">
+              topic: {article.topic ? article.topic.name : ""}
+            </Typography>
+            <Typography variant="h5">
+              type: {article.type ? article.type.name : ""}
+            </Typography>
             <Typography variant="h3">owner:{article.owner}</Typography>
             <AmplifyS3Image path={article.imagePath} />
-            {/* https://docs.amplify.aws/ui/storage/s3-image/q/framework/react/ */}
           </div>
         );
       })}
