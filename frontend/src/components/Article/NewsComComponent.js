@@ -116,9 +116,9 @@ const NewsComComponent = ({ postNewsComments }) => {
     setOpen(false);
   };
 
-  const { isAuthenticated, newsId, username } = useSelector((state) => ({
+  const { isAuthenticated, articleId, username } = useSelector((state) => ({
     isAuthenticated: state.userAuth.isAuthenticated,
-    newsId: state.article.id,
+    articleId: state.article.id,
     username: state.userAuth.user.username,
   }));
 
@@ -126,11 +126,11 @@ const NewsComComponent = ({ postNewsComments }) => {
     isAuthenticated
       ? {
           comment: "",
-          article_id: newsId,
+          article_id: articleId,
           created_by_id: username,
           updated_by_id: username,
         }
-      : { comment: "", article_id: newsId, created_by_id: "" }
+      : { comment: "", article_id: articleId, created_by_id: "" }
   );
 
   const { comment, article_id, created_by_id, updated_by_id } = formData;
