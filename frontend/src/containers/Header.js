@@ -131,6 +131,12 @@ const Header = ({ signOut, isAuthenticated }) => {
         </IconButton>
         <p>主页</p>
       </MenuItem>
+      <MenuItem component={Link} to="/article" onClick={handleMenuClose}>
+        <IconButton>
+          <StorefrontIcon />
+        </IconButton>
+        <p>Article</p>
+      </MenuItem>
       <MenuItem component={Link} to="/products" onClick={handleMenuClose}>
         <IconButton>
           <StorefrontIcon />
@@ -243,9 +249,9 @@ const Header = ({ signOut, isAuthenticated }) => {
               variant="text"
               style={{ color: "#FFF" }}
               component={Link}
-              to="/news"
+              to="/article"
             >
-              News
+              Article
             </Button>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">

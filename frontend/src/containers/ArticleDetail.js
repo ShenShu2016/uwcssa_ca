@@ -3,18 +3,18 @@ import {
   removeSelectedArticle,
   selectedArticle,
 } from "../redux/actions/articleActions";
-import { useDispatch, useSelector } from "react-redux";
 
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import CardMedia from "@material-ui/core/CardMedia";
 import { Container } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
-import LoginRequest from "../components/News/LoginRequest";
-import NewsComments from "../components/News/NewsComments";
+import LoginRequest from "../components/Article/LoginRequest";
+// import NewsComments from "../components/Article/NewsComments";
 import Typography from "@material-ui/core/Typography";
-import axios from "axios";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -45,35 +45,20 @@ const useStyles = makeStyles({
   },
 });
 
-const ArticleDetail = () => {
-  const { newsId } = useParams();
+const ArticleDetail = ({ selectedArticle, removeSelectedArticle }) => {
   const classes = useStyles();
+  const { articleId } = useParams();
+
+  useEffect(() => {
+    if (articleId && articleId !== "") selectedArticle(articleId);
+    return () => removeSelectedArticle();
+  }, [articleId]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const article = useSelector((state) => state.article);
-
-  const { subject, content, image, created_by, updated_at } = article;
-
-  //Time formatting
-  const timeString = Object.values({ updated_at });
-  const timeString1 = timeString.toString();
-  const finalTimeArt = timeString1.split(".")[0];
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
-  const dispatch = useDispatch();
-
-  const fetchNewsDetail = async () => {
-    const response = await axios
-      .get(`${process.env.REACT_APP_API_URL}/news/article/${newsId}`)
-      .catch((err) => {
-        console.log("Err", err);
-      });
-    dispatch(selectedArticle(response.data));
-  };
-
-  useEffect(() => {
-    if (newsId && newsId !== "") fetchNewsDetail();
-    return () => dispatch(removeSelectedArticle());
-  }, [newsId]); // eslint-disable-line react-hooks/exhaustive-deps
+  const { title, content, imagePath, owner, updatedAt } = article;
 
   return (
     <div>
@@ -81,33 +66,36 @@ const ArticleDetail = () => {
         <Link color="inherit" href="/">
           首页
         </Link>
-        <Link color="inherit" href="/news">
+        <Link color="inherit" href="/article">
           新闻
         </Link>
-        <Typography color="textPrimary">文章: {newsId}</Typography>
+        <Typography color="textPrimary">文章: {articleId}</Typography>
       </Breadcrumbs>
       {Object.keys(article).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Container className={classes.main}>
           <Typography variant="h4" align="center">
-            {subject}
+            {title}
           </Typography>
           <Typography variant="subtitle1" className={classes.createBy}>
-            by {created_by}
+            by {owner}
           </Typography>
           <Typography variant="subtitle1" className={classes.creatBy}>
-            {finalTimeArt}
+            {Object.values({ updatedAt }).toString().split("T")[0]}
           </Typography>
-          <CardMedia className={classes.media} image={image} />
+          {/* <CardMedia className={classes.media} image={image} /> */}
+          <AmplifyS3Image path={imagePath} className={classes.s3image} />
           <Typography variant="subtitle1" className={classes.contentCss}>
             {content}
           </Typography>
 
-          <div>{isAuthenticated ? <NewsComments /> : <LoginRequest />}</div>
+          <div>{isAuthenticated ? "<NewsComments /> " : <LoginRequest />}</div>
         </Container>
       )}
     </div>
   );
 };
-export default ArticleDetail;
+export default connect(null, { selectedArticle, removeSelectedArticle })(
+  ArticleDetail
+);

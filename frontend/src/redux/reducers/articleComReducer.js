@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/news-action-types";
+import { ActionTypes } from "../constants/article-action-types";
 
 const initialState = {
   articleComments: [],

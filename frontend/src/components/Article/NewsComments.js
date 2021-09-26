@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
+
+import NewsComComponent from "./NewsComComponent";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { setNewsComments } from "../../redux/actions/newsComActions";
 import { useDispatch } from "react-redux";
-import NewsComComponent from "./NewsComComponent";
+import { useParams } from "react-router-dom";
 
 const NewsComments = () => {
   const dispatch = useDispatch();
-  const { newsId } = useParams();
+  const { articleId } = useParams();
 
   const fetchComments = async () => {
     const response = await axios
       .get(
-        `${process.env.REACT_APP_API_URL}/news/articlecommentsingle_list/${newsId}?page=1`
+        `${process.env.REACT_APP_API_URL}/news/articlecommentsingle_list/${articleId}?page=1`
       )
       .catch((err) => {
         console.log("Err", err);
