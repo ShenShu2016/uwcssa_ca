@@ -1,12 +1,9 @@
+import { Avatar, Grid, TextField, Typography } from "@material-ui/core";
 import { Button, Container } from "@material-ui/core";
 import React, { useState } from "react";
 
-import { Avatar } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
-import { TextField } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { emailConfirm } from "../redux/actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,7 +35,7 @@ const EmailConfirm = ({ emailConfirm }) => {
   };
 
   if (emailConfirmed) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/signIn" />;
   }
   // 这里还需要fetch邮箱地址
   return (

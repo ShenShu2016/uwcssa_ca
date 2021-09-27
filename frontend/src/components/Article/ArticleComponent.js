@@ -1,40 +1,35 @@
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
+import { Avatar } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { CardHeader } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import React from "react";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: "100%",
     justifyContent: "center",
+    margin: "auto",
+    maxWidth: "960px",
+    paddingInline: "1rem",
   },
   title: {
     textAlign: "center",
   },
   paper: {
-    maxWidth: "80%",
-
+    maxWidth: "100%",
     margin: "2rem auto",
-    padding: "2rem",
-  },
-  media: {
-    height: "300px",
-    maxWidth: "600px",
-  },
-  news: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "4rem",
-    width: "80%",
-    margin: "auto",
   },
   s3image: {},
 });
@@ -42,7 +37,6 @@ const useStyles = makeStyles({
 const ArticleComponent = () => {
   const articles = useSelector((state) => state.allArticles.articles);
   const classes = useStyles();
-  // console.log("articles", articles);
 
   const renderList = articles.map((article) => {
     const {
@@ -53,12 +47,28 @@ const ArticleComponent = () => {
       imagePath,
       like,
       unlike,
-      // createdAt,
+      createdAt,
       // updateAt,
+      owner,
     } = article;
 
     return (
-      <Card className={classes.paper} key={id}>
+      <Card className={classes.paper} key={id} elevation={5}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={owner}
+          subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
+            11,
+            19
+          )}`}
+        />
         <CardActions>
           <Button size="small" color="primary">
             Type: {type.name}
@@ -68,21 +78,24 @@ const ArticleComponent = () => {
           </Button>
         </CardActions>
         <CardActionArea>
-          {/* <CardMedia className={classes.media} image={image} title={topic} /> */}
-          <AmplifyS3Image path={imagePath} className={classes.s3image} />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2"></Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {content}
-            </Typography>
+            <AmplifyS3Image path={imagePath} className={classes.s3image} />
           </CardContent>
         </CardActionArea>
+        <CardContent>
+          <Typography variant="body" noWrap color="textSecondary" component="p">
+            {content}
+          </Typography>
+        </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
-            like: {like.length}
+          <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
+            {like.length}
+          </Button>
+          <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
+            {unlike.length}
           </Button>
           <Button size="small" color="primary">
-            unlike: {unlike.length}
+            回复: {}
           </Button>
         </CardActions>
         <CardActions>
@@ -108,7 +121,6 @@ const ArticleComponent = () => {
         <Typography variant="h1" className={classes.title}>
           Articles
         </Typography>
-        <Box></Box>
         {renderList}
       </Box>
     </Box>

@@ -10,7 +10,6 @@ export default function AddType() {
   const [typeData, setTypeData] = useState({ name: "" });
 
   const uploadType = async () => {
-    //Upload the type
     console.log("typeData", typeData);
     const { name } = typeData;
     const createTypeInput = {

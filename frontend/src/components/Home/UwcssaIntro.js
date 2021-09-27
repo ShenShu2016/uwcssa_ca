@@ -1,16 +1,17 @@
-import React from "react";
-import GitHubButton from "react-github-btn";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import { Button } from "@material-ui/core";
-import cssalogo from "../../static/cssa-logo.png";
+import { Container, Paper } from "@material-ui/core";
+
 import Box from "@material-ui/core/Box";
-import { Grid } from "@material-ui/core";
-import { Paper, Container } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { ButtonGroup } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import GitHubButton from "react-github-btn";
+import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import React from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
+import Typography from "@material-ui/core/Typography";
+import cssalogo from "../../static/cssa-logo.png";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,7 +107,7 @@ const UwcssaIntro = ({ loggedIn }) => {
         content="textOnly"
         color="primary"
         component={Link}
-        to="/login"
+        to="/signIn"
       >
         成为会员
       </Button>

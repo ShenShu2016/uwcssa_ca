@@ -1,3 +1,4 @@
+import { Provider, connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -14,17 +15,14 @@ import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import JoinUs from "./containers/JoinUs";
-import Login from "./containers/Login";
 import MuiAlert from "@material-ui/lab/Alert";
-import NewsComments from "./components/Article/NewsComments";
 import ProductDetail from "./containers/ProductDetail";
 import ProductListing from "./containers/ProductListing";
-import { Provider } from "react-redux";
-import Register from "./containers/Register";
 import ResetPassword from "./containers/ResetPassword";
+import SignIn from "./containers/SignIn";
+import SignUp from "./containers/SignUp";
 import Snackbar from "@material-ui/core/Snackbar";
 import awsconfig from "./aws-exports";
-import { connect } from "react-redux";
 import store from "./redux/store";
 import uploadArticle from "./components/Article/AddArticle";
 
@@ -65,12 +63,12 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
             <Header />
             <Switch>
               <Route path="/" exact component={() => <Home />} />
-              <Route path="/login" exact component={() => <Login />} />
-              <Route path="/register" exact component={Register} />
+              <Route path="/signIn" exact component={() => <SignIn />} />
+              <Route path="/signUp" exact component={SignUp} />
               <Route path="/products" exact component={ProductListing} />
-              <Route path="/forgotpassword" exact component={ForgotPassword} />
-              <Route path="/resetpassword" exact component={ResetPassword} />
-              <Route path="/emailconfirm" exact component={EmailConfirm} />
+              <Route path="/forgotPassword" exact component={ForgotPassword} />
+              <Route path="/resetPassword" exact component={ResetPassword} />
+              <Route path="/emailConfirm" exact component={EmailConfirm} />
               <Route path="/article" exact component={ArticleListing} />
               <Route
                 path="/article/:articleId"
@@ -78,19 +76,14 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
                 component={ArticleDetail}
               />
               <Route
-                path="articlecommentsingle_list/:articletId"
-                exact
-                component={NewsComments}
-              />
-              <Route
                 path="/products/:productId"
                 exact
                 component={ProductDetail}
               />
-              <Route path="/graphqltesting" exact component={GraphQLTesting} />
-              <Route path="/uploadarticle" exact component={uploadArticle} />
-              <Route path="/contactus" exact component={ContactUs} />
-              <Route path="/joinus" component={JoinUs} />
+              <Route path="/graphqlTesting" exact component={GraphQLTesting} />
+              <Route path="/uploadArticle" exact component={uploadArticle} />
+              <Route path="/contactUs" exact component={ContactUs} />
+              <Route path="/joinUs" component={JoinUs} />
               <Route>404 Not Found!</Route>
             </Switch>
             <Footer />

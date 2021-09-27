@@ -1,6 +1,8 @@
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/article-action-types";
+import { createArticleComment } from "../../graphql/mutations";
 import { getArticle } from "../../graphql/queries";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listArticles } from "../../graphql/queries";
 
 export const setArticles = () => async (dispatch) => {
@@ -25,7 +27,6 @@ export const selectedArticle = (articleId) => async (dispatch) => {
       variables: { id: articleId },
       authMode: "AWS_IAM",
     });
-    console.log("response", response);
     dispatch({
       type: ActionTypes.SELECTED_ARTICLE,
       payload: response.data.getArticle,
@@ -39,4 +40,23 @@ export const removeSelectedArticle = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.REMOVE_SELECTED_ARTICLE,
   });
+};
+
+export const postArticleComment = (createArticleInput) => async (dispatch) => {
+  try {
+    const response = await API.graphql(
+      graphqlOperation(createArticleComment, { input: createArticleInput })
+    );
+
+    dispatch({
+      type: ActionTypes.ARTICLECOMMPOST_SUCCESS,
+      payload: response,
+    });
+    dispatch(selectedArticle(createArticleInput.articleCommentArticleId));
+  } catch (error) {
+    console.log("error on posting ArticleComment", error);
+    dispatch({
+      type: ActionTypes.ARTICLECOMMPOST_FAIL,
+    });
+  }
 };

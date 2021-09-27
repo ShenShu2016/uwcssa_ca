@@ -1,15 +1,17 @@
+import {
+  Avatar,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useState } from "react";
 
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { signUp } from "../redux/actions/authActions";
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = ({ signUp, isAuthenticated }) => {
+const SignUp = ({ signUp, isAuthenticated }) => {
   const classes = useStyles();
   const [accountCreated, setAccountCreated] = useState(false);
 
@@ -73,7 +75,7 @@ const Register = ({ signUp, isAuthenticated }) => {
         <Typography variant="h5">注册</Typography>
         <Typography>
           已经有账户了？
-          <Link href="/login">登入</Link>
+          <Link to="/signIn">登入</Link>
         </Typography>
         <form className={classes.form}>
           <Grid container spacing={2}>
@@ -124,4 +126,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { signUp })(Register);
+export default connect(mapStateToProps, { signUp })(SignUp);

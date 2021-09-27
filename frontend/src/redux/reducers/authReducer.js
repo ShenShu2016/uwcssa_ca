@@ -12,7 +12,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         isAuthenticated: true,
       };
-    case ActionTypes.LOGIN_SUCCESS:
+    case ActionTypes.SIGNIN_SUCCESS:
     case ActionTypes.GOOGLE_AUTH_SUCCESS:
     case ActionTypes.FACEBOOK_AUTH_SUCCESS:
       localStorage.setItem("access", payload.access);
@@ -45,7 +45,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       };
     case ActionTypes.GOOGLE_AUTH_FAIL:
     case ActionTypes.FACEBOOK_AUTH_FAIL:
-    case ActionTypes.LOGIN_FAIL:
+    case ActionTypes.SIGNIN_FAIL:
     case ActionTypes.SIGNUP_FAIL:
     case ActionTypes.SIGNOUT:
       return {

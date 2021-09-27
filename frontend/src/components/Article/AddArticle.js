@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddArticle() {
+  const classes = useStyles();
   const [articleData, setArticleData] = useState({
     title: "",
     content: "",
@@ -31,8 +32,6 @@ export default function AddArticle() {
   const [imgData, setImgData] = useState("");
   const [types, setTypes] = useState([]);
   const [topics, setTopics] = useState([]);
-
-  const classes = useStyles();
 
   useEffect(() => {
     fetchTypes();

@@ -5,14 +5,12 @@ import axios from "axios";
 export const load_user = () => async (dispatch) => {
   Auth.currentAuthenticatedUser()
     .then((response) => {
-      console.log(response);
       dispatch({
         type: ActionTypes.USER_LOADED_SUCCESS,
         payload: response,
       });
     })
     .catch((response) => {
-      console.log(response);
       dispatch({
         type: ActionTypes.USER_LOADED_FAIL,
       });
@@ -33,19 +31,18 @@ export const checkAuthenticated = () => async (dispatch) => {
     });
 };
 
-export const login = (username, password) => async (dispatch) => {
+export const signIn = (username, password) => async (dispatch) => {
   try {
     const response = await Auth.signIn(username, password);
     dispatch({
-      type: ActionTypes.LOGIN_SUCCESS,
+      type: ActionTypes.SIGNIN_SUCCESS,
       payload: response,
     });
     dispatch(load_user());
   } catch (error) {
     dispatch({
-      type: ActionTypes.LOGIN_FAIL,
+      type: ActionTypes.SIGNIN_FAIL,
     });
-    console.log("我她吗出错拉", error);
   }
 };
 

@@ -1,26 +1,27 @@
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import { Link, Redirect } from "react-router-dom";
 import React, { useState } from "react";
 
 import Auth from "@aws-amplify/auth";
 import Avatar from "@material-ui/core/Avatar";
-import { Box } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import Checkbox from "@material-ui/core/Checkbox";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid from "@material-ui/core/Grid";
-import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Redirect } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
-import googleLogo from "../static/svg icons/google.svg";
 import facebookLogo from "../static/svg icons/facebook.svg";
 import githubLogo from "../static/svg icons/github.svg";
+import googleLogo from "../static/svg icons/google.svg";
 import linkedinLogo from "../static/svg icons/linkedin.svg";
-import { login } from "../redux/actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
+import { signIn } from "../redux/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -76,10 +77,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: "3rem",
-  }
+  },
 }));
 
-const Login = ({ login, isAuthenticated }) => {
+const SignIn = ({ signIn, isAuthenticated }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -94,7 +95,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   const handleSubmit = async function (event) {
     event.preventDefault();
-    login(username, password);
+    signIn(username, password);
   };
 
   const handleGoogleSignIn = async function (event) {
@@ -123,7 +124,7 @@ const Login = ({ login, isAuthenticated }) => {
         </Typography>
         <Typography>
           还没有账户？
-          <Link to="/register">注册</Link>
+          <Link to="/signUp">注册</Link>
         </Typography>
         <form
           className={classes.form}
@@ -174,14 +175,14 @@ const Login = ({ login, isAuthenticated }) => {
               // type="button"
               variant="outlined"
               component={Link}
-              to="/forgotpassword"
+              to="/forgotPassword"
               color="primary"
               className={classes.submit}
             >
               忘记密码
             </Button>
           </Grid>
-        </form>      
+        </form>
         <Box marginTop="3rem">
           {/* Google的登入按钮 */}
           <Button
@@ -196,8 +197,7 @@ const Login = ({ login, isAuthenticated }) => {
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Grid item xs={1}>
-              </Grid>
+              <Grid item xs={1}></Grid>
               <Grid item xs={3}>
                 <img
                   src={googleLogo}
@@ -208,7 +208,7 @@ const Login = ({ login, isAuthenticated }) => {
               <Grid>Google Sign in</Grid>
             </Grid>
           </Button>
-          
+
           {/* Facebook的登入按钮*/}
           <Button
             type="submit"
@@ -216,13 +216,12 @@ const Login = ({ login, isAuthenticated }) => {
             className={classes.third_party_button}
           >
             <Grid
-              container          
+              container
               direction="row"
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Grid item xs={1}>
-              </Grid>
+              <Grid item xs={1}></Grid>
               <Grid item xs={3}>
                 <img
                   src={facebookLogo}
@@ -231,26 +230,23 @@ const Login = ({ login, isAuthenticated }) => {
                 />
               </Grid>
               <Grid>Facebook Sign in</Grid>
-           
             </Grid>
           </Button>
-          
         </Box>
         {/* 之后增加点按转入网站的功能 */}
         <Box className={classes.more_third_party}>
-          
-            <img
-                src={githubLogo}
-                alt="githubLogo"
-                className={classes.github}   
-                onClick={(event) => handleGoogleSignIn(event)}        
-            />
-          
-            <img
-                src={linkedinLogo}
-                alt="linkedinLogo"
-                className={classes.github}
-            />
+          <img
+            src={githubLogo}
+            alt="githubLogo"
+            className={classes.github}
+            onClick={(event) => handleGoogleSignIn(event)}
+          />
+
+          <img
+            src={linkedinLogo}
+            alt="linkedinLogo"
+            className={classes.github}
+          />
         </Box>
       </div>
     </Container>
@@ -260,4 +256,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { signIn })(SignIn);

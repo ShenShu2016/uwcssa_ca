@@ -1,20 +1,19 @@
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import AppBar from "@material-ui/core/AppBar";
-import Badge from "@material-ui/core/Badge";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MailIcon from "@material-ui/icons/Mail";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Redirect } from "react-router";
 import StorefrontIcon from "@material-ui/icons/Storefront";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { signOut } from "../redux/actions/authActions";
@@ -149,23 +148,6 @@ const Header = ({ signOut, isAuthenticated }) => {
         </IconButton>
         <p>GraphQLTesting</p>
       </MenuItem>
-
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       {isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
@@ -179,7 +161,7 @@ const Header = ({ signOut, isAuthenticated }) => {
           <p>Profile</p>
         </MenuItem>
       ) : (
-        <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
+        <MenuItem component={Link} to="/signIn" onClick={handleMenuClose}>
           <IconButton
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
@@ -232,6 +214,14 @@ const Header = ({ signOut, isAuthenticated }) => {
               variant="text"
               style={{ color: "#FFF" }}
               component={Link}
+              to="/article"
+            >
+              Article
+            </Button>
+            <Button
+              variant="text"
+              style={{ color: "#FFF" }}
+              component={Link}
               to="/products"
             >
               样例_Products
@@ -240,35 +230,16 @@ const Header = ({ signOut, isAuthenticated }) => {
               variant="text"
               style={{ color: "#FFF" }}
               component={Link}
-              to="/graphqltesting"
+              to="/graphqlTesting"
             >
               GraphQLTesting
             </Button>
-
-            <Button
-              variant="text"
-              style={{ color: "#FFF" }}
-              component={Link}
-              to="/article"
-            >
-              Article
-            </Button>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             {isAuthenticated ? (
               ""
             ) : (
               <Button
                 component={Link}
-                to="/login"
+                to="/signIn"
                 variant="text"
                 style={{ color: "#FFF" }}
               >
