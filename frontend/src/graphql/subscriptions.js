@@ -667,3 +667,558 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
     }
   }
 `;
+export const onCreateForumTopic = /* GraphQL */ `
+  subscription OnCreateForumTopic {
+    onCreateForumTopic {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateForumTopic = /* GraphQL */ `
+  subscription OnUpdateForumTopic {
+    onUpdateForumTopic {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteForumTopic = /* GraphQL */ `
+  subscription OnDeleteForumTopic {
+    onDeleteForumTopic {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateForumSubTopic = /* GraphQL */ `
+  subscription OnCreateForumSubTopic {
+    onCreateForumSubTopic {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateForumSubTopic = /* GraphQL */ `
+  subscription OnUpdateForumSubTopic {
+    onUpdateForumSubTopic {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteForumSubTopic = /* GraphQL */ `
+  subscription OnDeleteForumSubTopic {
+    onDeleteForumSubTopic {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateForumPost = /* GraphQL */ `
+  subscription OnCreateForumPost {
+    onCreateForumPost {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateForumPost = /* GraphQL */ `
+  subscription OnUpdateForumPost {
+    onUpdateForumPost {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteForumPost = /* GraphQL */ `
+  subscription OnDeleteForumPost {
+    onDeleteForumPost {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateForumPostComment = /* GraphQL */ `
+  subscription OnCreateForumPostComment {
+    onCreateForumPostComment {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateForumPostComment = /* GraphQL */ `
+  subscription OnUpdateForumPostComment {
+    onUpdateForumPostComment {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteForumPostComment = /* GraphQL */ `
+  subscription OnDeleteForumPostComment {
+    onDeleteForumPostComment {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateForumPostSubComment = /* GraphQL */ `
+  subscription OnCreateForumPostSubComment {
+    onCreateForumPostSubComment {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateForumPostSubComment = /* GraphQL */ `
+  subscription OnUpdateForumPostSubComment {
+    onUpdateForumPostSubComment {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteForumPostSubComment = /* GraphQL */ `
+  subscription OnDeleteForumPostSubComment {
+    onDeleteForumPostSubComment {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;

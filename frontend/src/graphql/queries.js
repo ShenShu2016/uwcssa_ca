@@ -463,3 +463,358 @@ export const listUwcssaJobs = /* GraphQL */ `
     }
   }
 `;
+export const getForumTopic = /* GraphQL */ `
+  query GetForumTopic($name: String!) {
+    getForumTopic(name: $name) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listForumTopics = /* GraphQL */ `
+  query ListForumTopics(
+    $name: String
+    $filter: ModelForumTopicFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listForumTopics(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getForumSubTopic = /* GraphQL */ `
+  query GetForumSubTopic($name: String!) {
+    getForumSubTopic(name: $name) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listForumSubTopics = /* GraphQL */ `
+  query ListForumSubTopics(
+    $name: String
+    $filter: ModelForumSubTopicFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listForumSubTopics(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getForumPost = /* GraphQL */ `
+  query GetForumPost($id: ID!) {
+    getForumPost(id: $id) {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listForumPosts = /* GraphQL */ `
+  query ListForumPosts(
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForumPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getForumPostComment = /* GraphQL */ `
+  query GetForumPostComment($id: ID!) {
+    getForumPostComment(id: $id) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listForumPostComments = /* GraphQL */ `
+  query ListForumPostComments(
+    $filter: ModelForumPostCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForumPostComments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getForumPostSubComment = /* GraphQL */ `
+  query GetForumPostSubComment($id: ID!) {
+    getForumPostSubComment(id: $id) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listForumPostSubComments = /* GraphQL */ `
+  query ListForumPostSubComments(
+    $filter: ModelForumPostSubCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForumPostSubComments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPostComment {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;

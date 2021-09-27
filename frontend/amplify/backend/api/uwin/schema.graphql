@@ -137,3 +137,110 @@ type UwcssaJob
   like: [String]!
   unlike: [String]!
 }
+
+type ForumTopic
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  like: [String]!
+  unlike: [String]!
+  subTopics: [ForumSubTopic]! @connection(name: "ForumTopicForumSubTopic")
+}
+
+type ForumSubTopic
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  like: [String]!
+  unlike: [String]!
+  forumTopic: ForumTopic! @connection(name: "ForumTopicForumSubTopic")
+  forumPosts: [ForumPost]! @connection(name: "ForumSubTopicForumPost")
+}
+
+type ForumPost
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  content: String!
+  imagePath: String
+  like: [String]!
+  unlike: [String]!
+  forumSubTopic: ForumSubTopic! @connection(name: "ForumSubTopicForumPost")
+  forumPostComments: [ForumPostComment]!
+    @connection(name: "ForumPostForumPostComment")
+}
+
+type ForumPostComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  content: String!
+  like: [String]!
+  unlike: [String]!
+  forumPost: ForumPost! @connection(name: "ForumPostForumPostComment")
+  forumPostSubComments: [ForumPostSubComment]!
+    @connection(name: "ForumPostCommentForumPostSubComment")
+}
+
+type ForumPostSubComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  content: String!
+  like: [String]!
+  unlike: [String]!
+  forumPostComment: ForumPostComment!
+    @connection(name: "ForumPostCommentForumPostSubComment")
+}

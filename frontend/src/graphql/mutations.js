@@ -721,3 +721,603 @@ export const deleteUwcssaJob = /* GraphQL */ `
     }
   }
 `;
+export const createForumTopic = /* GraphQL */ `
+  mutation CreateForumTopic(
+    $input: CreateForumTopicInput!
+    $condition: ModelForumTopicConditionInput
+  ) {
+    createForumTopic(input: $input, condition: $condition) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateForumTopic = /* GraphQL */ `
+  mutation UpdateForumTopic(
+    $input: UpdateForumTopicInput!
+    $condition: ModelForumTopicConditionInput
+  ) {
+    updateForumTopic(input: $input, condition: $condition) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteForumTopic = /* GraphQL */ `
+  mutation DeleteForumTopic(
+    $input: DeleteForumTopicInput!
+    $condition: ModelForumTopicConditionInput
+  ) {
+    deleteForumTopic(input: $input, condition: $condition) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      owner
+      subTopics {
+        items {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createForumSubTopic = /* GraphQL */ `
+  mutation CreateForumSubTopic(
+    $input: CreateForumSubTopicInput!
+    $condition: ModelForumSubTopicConditionInput
+  ) {
+    createForumSubTopic(input: $input, condition: $condition) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateForumSubTopic = /* GraphQL */ `
+  mutation UpdateForumSubTopic(
+    $input: UpdateForumSubTopicInput!
+    $condition: ModelForumSubTopicConditionInput
+  ) {
+    updateForumSubTopic(input: $input, condition: $condition) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteForumSubTopic = /* GraphQL */ `
+  mutation DeleteForumSubTopic(
+    $input: DeleteForumSubTopicInput!
+    $condition: ModelForumSubTopicConditionInput
+  ) {
+    deleteForumSubTopic(input: $input, condition: $condition) {
+      name
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        subTopics {
+          nextToken
+        }
+      }
+      owner
+      forumPosts {
+        items {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createForumPost = /* GraphQL */ `
+  mutation CreateForumPost(
+    $input: CreateForumPostInput!
+    $condition: ModelForumPostConditionInput
+  ) {
+    createForumPost(input: $input, condition: $condition) {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateForumPost = /* GraphQL */ `
+  mutation UpdateForumPost(
+    $input: UpdateForumPostInput!
+    $condition: ModelForumPostConditionInput
+  ) {
+    updateForumPost(input: $input, condition: $condition) {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteForumPost = /* GraphQL */ `
+  mutation DeleteForumPost(
+    $input: DeleteForumPostInput!
+    $condition: ModelForumPostConditionInput
+  ) {
+    deleteForumPost(input: $input, condition: $condition) {
+      id
+      content
+      imagePath
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumSubTopic {
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPosts {
+          nextToken
+        }
+      }
+      owner
+      forumPostComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createForumPostComment = /* GraphQL */ `
+  mutation CreateForumPostComment(
+    $input: CreateForumPostCommentInput!
+    $condition: ModelForumPostCommentConditionInput
+  ) {
+    createForumPostComment(input: $input, condition: $condition) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateForumPostComment = /* GraphQL */ `
+  mutation UpdateForumPostComment(
+    $input: UpdateForumPostCommentInput!
+    $condition: ModelForumPostCommentConditionInput
+  ) {
+    updateForumPostComment(input: $input, condition: $condition) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteForumPostComment = /* GraphQL */ `
+  mutation DeleteForumPostComment(
+    $input: DeleteForumPostCommentInput!
+    $condition: ModelForumPostCommentConditionInput
+  ) {
+    deleteForumPostComment(input: $input, condition: $condition) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPost {
+        id
+        content
+        imagePath
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      owner
+      forumPostSubComments {
+        items {
+          id
+          content
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createForumPostSubComment = /* GraphQL */ `
+  mutation CreateForumPostSubComment(
+    $input: CreateForumPostSubCommentInput!
+    $condition: ModelForumPostSubCommentConditionInput
+  ) {
+    createForumPostSubComment(input: $input, condition: $condition) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateForumPostSubComment = /* GraphQL */ `
+  mutation UpdateForumPostSubComment(
+    $input: UpdateForumPostSubCommentInput!
+    $condition: ModelForumPostSubCommentConditionInput
+  ) {
+    updateForumPostSubComment(input: $input, condition: $condition) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteForumPostSubComment = /* GraphQL */ `
+  mutation DeleteForumPostSubComment(
+    $input: DeleteForumPostSubCommentInput!
+    $condition: ModelForumPostSubCommentConditionInput
+  ) {
+    deleteForumPostSubComment(input: $input, condition: $condition) {
+      id
+      content
+      like
+      unlike
+      createdAt
+      updatedAt
+      forumPostComment {
+        id
+        content
+        like
+        unlike
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
