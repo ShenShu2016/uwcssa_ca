@@ -11,10 +11,10 @@
     "userpoolArn": {
       "Type": "String"
     },
-    "functionuwinPostConfirmationName": {
+    "functionuwinAuthPostConfirmationName": {
       "Type": "String"
     },
-    "functionuwinPostConfirmationArn": {
+    "functionuwinAuthPostConfirmationArn": {
       "Type": "String"
     }
   },
@@ -34,7 +34,7 @@
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Ref": "functionuwinPostConfirmationName"
+          "Ref": "functionuwinAuthPostConfirmationName"
         },
         "Principal": "cognito-idp.amazonaws.com",
         "SourceArn": {
@@ -134,9 +134,9 @@
         "lambdaConfig": [
           {
             "triggerType": "PostConfirmation",
-            "lambdaFunctionName": "uwinPostConfirmation",
+            "lambdaFunctionName": "uwinAuthPostConfirmation",
             "lambdaFunctionArn": {
-              "Ref": "functionuwinPostConfirmationArn"
+              "Ref": "functionuwinAuthPostConfirmationArn"
             }
           }
         ]
