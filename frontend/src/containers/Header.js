@@ -106,9 +106,27 @@ const Header = ({ signOut, isAuthenticated }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose} component={Link} to='/account/dashboard'>Dashboard</MenuItem>
-      <MenuItem onClick={handleMenuClose} component={Link} to='/account/profile'>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose} component={Link} to='/account/myAccount'>My account</MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        component={Link}
+        to="/account/dashboard"
+      >
+        Dashboard
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        component={Link}
+        to="/account/profile"
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        component={Link}
+        to="/account/myAccount"
+      >
+        My account
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>Setting</MenuItem>
       <MenuItem onClick={signOut_user}>注销</MenuItem>
     </Menu>
@@ -136,12 +154,6 @@ const Header = ({ signOut, isAuthenticated }) => {
           <StorefrontIcon />
         </IconButton>
         <p>Article</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/products" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>样例_PRODUCTS</p>
       </MenuItem>
       <MenuItem component={Link} to="/graphqltesting" onClick={handleMenuClose}>
         <IconButton>
@@ -218,14 +230,6 @@ const Header = ({ signOut, isAuthenticated }) => {
               to="/article"
             >
               Article
-            </Button>
-            <Button
-              variant="text"
-              style={{ color: "#FFF" }}
-              component={Link}
-              to="/products"
-            >
-              样例_Products
             </Button>
             <Button
               variant="text"
