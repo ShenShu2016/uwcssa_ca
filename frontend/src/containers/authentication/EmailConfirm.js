@@ -5,8 +5,9 @@ import React, { useState } from "react";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
-import { emailConfirm } from "../redux/actions/authActions";
+import { emailConfirm } from "../../redux/actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 const EmailConfirm = ({ emailConfirm }) => {
   const [emailConfirmed, setEmailConfirmed] = useState(false);
+  const { username } = useParams();
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    username: "",
+    username: username,
     authenticationCode: "",
   });
   const onChange = (event) => {
@@ -30,8 +32,14 @@ const EmailConfirm = ({ emailConfirm }) => {
   };
   const confirmSignUp = async () => {
     const { username, authenticationCode } = formData;
-    emailConfirm(username, authenticationCode);
-    setEmailConfirmed(true);
+    const response = await emailConfirm(username, authenticationCode);
+
+    if (response.result) {
+      setEmailConfirmed(true);
+    } else {
+      console.log(response);
+      alert(response.error.message);
+    }
   };
 
   if (emailConfirmed) {
@@ -53,9 +61,10 @@ const EmailConfirm = ({ emailConfirm }) => {
                 required
                 fullWidth
                 id="username "
-                label="username"
+                label="用户名"
                 name="username"
                 autoComplete="username"
+                value={username}
                 onChange={(event) => onChange(event)}
               />
             </Grid>

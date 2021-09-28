@@ -39,10 +39,17 @@ export const signIn = (username, password) => async (dispatch) => {
       payload: response,
     });
     dispatch(load_user());
+    return {
+      result: true,
+    };
   } catch (error) {
     dispatch({
       type: ActionTypes.SIGNIN_FAIL,
     });
+    return {
+      result: false,
+      error: error,
+    };
   }
 };
 
@@ -58,11 +65,18 @@ export const signUp = (username, password, email) => async (dispatch) => {
       type: ActionTypes.SIGNUP_SUCCESS,
       payload: response.data,
     });
+    return {
+      result: true,
+    };
   } catch (error) {
     console.log("error signing up:", error);
     dispatch({
       type: ActionTypes.SIGNUP_FAIL,
     });
+    return {
+      result: false,
+      error: error,
+    };
   }
 };
 
@@ -73,11 +87,18 @@ export const emailConfirm =
       dispatch({
         type: ActionTypes.EMAILCONFIRM_SUCCESS,
       });
+      return {
+        result: true,
+      };
     } catch (error) {
       console.log("error confirming signing up:", error);
       dispatch({
         type: ActionTypes.EMAILCONFIRM_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 

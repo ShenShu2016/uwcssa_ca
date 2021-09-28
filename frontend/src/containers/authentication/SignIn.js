@@ -16,12 +16,12 @@ import Auth from "@aws-amplify/auth";
 import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
-import facebookLogo from "../static/svg icons/facebook.svg";
-import githubLogo from "../static/svg icons/github.svg";
-import googleLogo from "../static/svg icons/google.svg";
-import linkedinLogo from "../static/svg icons/linkedin.svg";
+import facebookLogo from "../../static/svg icons/facebook.svg";
+import githubLogo from "../../static/svg icons/github.svg";
+import googleLogo from "../../static/svg icons/google.svg";
+import linkedinLogo from "../../static/svg icons/linkedin.svg";
 import { makeStyles } from "@material-ui/core/styles";
-import { signIn } from "../redux/actions/authActions";
+import { signIn } from "../../redux/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = ({ signIn, isAuthenticated }) => {
   const classes = useStyles();
-
+  const [loggedIn, setLogged] = useState(isAuthenticated);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -95,7 +95,13 @@ const SignIn = ({ signIn, isAuthenticated }) => {
 
   const handleSubmit = async function (event) {
     event.preventDefault();
-    signIn(username, password);
+    const response = await signIn(username, password);
+    if (response.result) {
+      setLogged(true);
+    } else {
+      console.log(response);
+      alert(response.error.message);
+    }
   };
 
   const handleGoogleSignIn = async function (event) {
@@ -108,7 +114,7 @@ const SignIn = ({ signIn, isAuthenticated }) => {
     }
   };
 
-  if (isAuthenticated) {
+  if (loggedIn) {
     return <Redirect to="/" />;
   }
 
@@ -136,10 +142,10 @@ const SignIn = ({ signIn, isAuthenticated }) => {
             margin="normal"
             required
             id="username"
-            label="Email Address"
+            label="用户名"
             name="username"
             fullWidth
-            autoComplete="email"
+            autoComplete="username"
             autoFocus
             value={username}
             onChange={(event) => onChange(event)}
@@ -150,7 +156,7 @@ const SignIn = ({ signIn, isAuthenticated }) => {
             required
             name="password"
             fullWidth
-            label="Password"
+            label="密码"
             type="password"
             id="password"
             autoComplete="current-password"

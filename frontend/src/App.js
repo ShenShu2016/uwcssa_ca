@@ -9,7 +9,7 @@ import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
-import EmailConfirm from "./containers/EmailConfirm";
+import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/ForgotPassword";
 import GraphQLTesting from "./containers/GraphQLTesting";
@@ -18,12 +18,10 @@ import Home from "./containers/Home";
 import JoinUs from "./containers/JoinUs";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
-import ProductDetail from "./containers/ProductDetail";
-import ProductListing from "./containers/ProductListing";
 import Profile from "./containers/account/Profile";
-import ResetPassword from "./containers/ResetPassword";
-import SignIn from "./containers/SignIn";
-import SignUp from "./containers/SignUp";
+import ResetPassword from "./containers/authentication/ResetPassword";
+import SignIn from "./containers/authentication/SignIn";
+import SignUp from "./containers/authentication/SignUp";
 import Snackbar from "@material-ui/core/Snackbar";
 import awsconfig from "./aws-exports";
 import store from "./redux/store";
@@ -65,26 +63,24 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
           <Router>
             <Header />
             <Switch>
-              <Route path="/" exact component={() => <Home />} />
+              <Route path="/" exact component={Home} />
               <Route path="/account/dashboard" exact component={Dashboard} />
               <Route path="/account/profile" exact component={Profile} />
               <Route path="/account/myAccount" exact component={MyAccount} />
-              <Route path="/signIn" exact component={() => <SignIn />} />
+              <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
-              <Route path="/products" exact component={ProductListing} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />
               <Route path="/resetPassword" exact component={ResetPassword} />
-              <Route path="/emailConfirm" exact component={EmailConfirm} />
+              <Route
+                path="/emailConfirm/:username"
+                exact
+                component={EmailConfirm}
+              />
               <Route path="/article" exact component={ArticleListing} />
               <Route
                 path="/article/:articleId"
                 exact
                 component={ArticleDetail}
-              />
-              <Route
-                path="/products/:productId"
-                exact
-                component={ProductDetail}
               />
               <Route path="/graphqlTesting" exact component={GraphQLTesting} />
               <Route path="/uploadArticle" exact component={uploadArticle} />

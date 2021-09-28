@@ -14,7 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { signUp } from "../redux/actions/authActions";
+import { signUp } from "../../redux/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,15 +56,20 @@ const SignUp = ({ signUp, isAuthenticated }) => {
 
   const onSignUp = async () => {
     const { username, password, email } = formData;
-    signUp(username, password, email);
-    setAccountCreated(true);
+    const response = await signUp(username, password, email);
+    if (response.result) {
+      setAccountCreated(true);
+    } else {
+      console.log(response);
+      alert(response.error.message);
+    }
   };
 
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }
   if (accountCreated) {
-    return <Redirect to="/EmailConfirm" />;
+    return <Redirect to={`/emailConfirm/${formData.username}`} />;
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -85,11 +90,11 @@ const SignUp = ({ signUp, isAuthenticated }) => {
                 variant="standard"
                 required
                 fullWidth
-                name="email"
-                label="Email"
-                type="email"
-                id="email"
-                autoComplete="email"
+                name="username"
+                label="用户名"
+                type="username"
+                id="username"
+                autoComplete="username"
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -98,11 +103,11 @@ const SignUp = ({ signUp, isAuthenticated }) => {
                 variant="standard"
                 required
                 fullWidth
-                name="username"
-                label="username"
-                type="username"
-                id="username"
-                autoComplete="username"
+                name="email"
+                label="Email"
+                type="email"
+                id="email"
+                autoComplete="email"
                 onChange={(event) => onChange(event)}
               />
             </Grid>
