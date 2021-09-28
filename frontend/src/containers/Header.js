@@ -106,8 +106,9 @@ const Header = ({ signOut, isAuthenticated }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={Link} to='/account/dashboard'>Dashboard</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={Link} to='/account/profile'>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={Link} to='/account/myAccount'>My account</MenuItem>
       <MenuItem onClick={handleMenuClose}>Setting</MenuItem>
       <MenuItem onClick={signOut_user}>注销</MenuItem>
     </Menu>

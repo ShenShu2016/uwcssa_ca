@@ -46,12 +46,13 @@ export const signIn = (username, password) => async (dispatch) => {
   }
 };
 
-export const signUp = (username, password) => async (dispatch) => {
+export const signUp = (username, password, email) => async (dispatch) => {
   try {
     console.log("start signed up!");
     const response = await Auth.signUp({
       username,
       password,
+      attributes: { email },
     });
     dispatch({
       type: ActionTypes.SIGNUP_SUCCESS,

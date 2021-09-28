@@ -83,7 +83,12 @@ const ArticleComponent = () => {
           </CardContent>
         </CardActionArea>
         <CardContent>
-          <Typography variant="body" noWrap color="textSecondary" component="p">
+          <Typography
+            variant="body1"
+            noWrap
+            color="textSecondary"
+            component="p"
+          >
             {content}
           </Typography>
         </CardContent>

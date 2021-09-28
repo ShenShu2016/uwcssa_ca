@@ -53,9 +53,9 @@ const EmailConfirm = ({ emailConfirm }) => {
                 required
                 fullWidth
                 id="username "
-                label="email"
+                label="username"
                 name="username"
-                autoComplete="email"
+                autoComplete="username"
                 onChange={(event) => onChange(event)}
               />
             </Grid>

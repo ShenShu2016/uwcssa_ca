@@ -8,6 +8,7 @@ import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
 import ContactUs from "./containers/ContactUs";
+import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/EmailConfirm";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/ForgotPassword";
@@ -16,8 +17,10 @@ import Header from "./containers/Header";
 import Home from "./containers/Home";
 import JoinUs from "./containers/JoinUs";
 import MuiAlert from "@material-ui/lab/Alert";
+import MyAccount from "./containers/account/MyAccount";
 import ProductDetail from "./containers/ProductDetail";
 import ProductListing from "./containers/ProductListing";
+import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/ResetPassword";
 import SignIn from "./containers/SignIn";
 import SignUp from "./containers/SignUp";
@@ -63,6 +66,9 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
             <Header />
             <Switch>
               <Route path="/" exact component={() => <Home />} />
+              <Route path="/account/dashboard" exact component={Dashboard} />
+              <Route path="/account/profile" exact component={Profile} />
+              <Route path="/account/myAccount" exact component={MyAccount} />
               <Route path="/signIn" exact component={() => <SignIn />} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/products" exact component={ProductListing} />

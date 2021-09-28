@@ -46,6 +46,7 @@ const SignUp = ({ signUp, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    email: "",
   });
 
   const onChange = (event) => {
@@ -54,8 +55,8 @@ const SignUp = ({ signUp, isAuthenticated }) => {
   };
 
   const onSignUp = async () => {
-    const { username, password } = formData;
-    signUp(username, password);
+    const { username, password, email } = formData;
+    signUp(username, password, email);
     setAccountCreated(true);
   };
 
@@ -84,11 +85,24 @@ const SignUp = ({ signUp, isAuthenticated }) => {
                 variant="standard"
                 required
                 fullWidth
-                name="username"
+                name="email"
                 label="Email"
                 type="email"
-                id="username"
+                id="email"
                 autoComplete="email"
+                onChange={(event) => onChange(event)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="standard"
+                required
+                fullWidth
+                name="username"
+                label="username"
+                type="username"
+                id="username"
+                autoComplete="username"
                 onChange={(event) => onChange(event)}
               />
             </Grid>
