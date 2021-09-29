@@ -18,14 +18,14 @@
           "name" : "getTopic",
           "description" : null,
           "args" : [ {
-            "name" : "id",
+            "name" : "name",
             "description" : null,
             "type" : {
               "kind" : "NON_NULL",
               "name" : null,
               "ofType" : {
                 "kind" : "SCALAR",
-                "name" : "ID",
+                "name" : "String",
                 "ofType" : null
               }
             },
@@ -42,6 +42,15 @@
           "name" : "listTopics",
           "description" : null,
           "args" : [ {
+            "name" : "name",
+            "description" : null,
+            "type" : {
+              "kind" : "SCALAR",
+              "name" : "String",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
             "name" : "filter",
             "description" : null,
             "type" : {
@@ -68,6 +77,15 @@
               "ofType" : null
             },
             "defaultValue" : null
+          }, {
+            "name" : "sortDirection",
+            "description" : null,
+            "type" : {
+              "kind" : "ENUM",
+              "name" : "ModelSortDirection",
+              "ofType" : null
+            },
+            "defaultValue" : null
           } ],
           "type" : {
             "kind" : "OBJECT",
@@ -80,14 +98,14 @@
           "name" : "getType",
           "description" : null,
           "args" : [ {
-            "name" : "id",
+            "name" : "name",
             "description" : null,
             "type" : {
               "kind" : "NON_NULL",
               "name" : null,
               "ofType" : {
                 "kind" : "SCALAR",
-                "name" : "ID",
+                "name" : "String",
                 "ofType" : null
               }
             },
@@ -104,6 +122,15 @@
           "name" : "listTypes",
           "description" : null,
           "args" : [ {
+            "name" : "name",
+            "description" : null,
+            "type" : {
+              "kind" : "SCALAR",
+              "name" : "String",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
             "name" : "filter",
             "description" : null,
             "type" : {
@@ -127,6 +154,15 @@
             "type" : {
               "kind" : "SCALAR",
               "name" : "String",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
+            "name" : "sortDirection",
+            "description" : null,
+            "type" : {
+              "kind" : "ENUM",
+              "name" : "ModelSortDirection",
               "ofType" : null
             },
             "defaultValue" : null
@@ -331,14 +367,14 @@
           "name" : "getDepartment",
           "description" : null,
           "args" : [ {
-            "name" : "id",
+            "name" : "name",
             "description" : null,
             "type" : {
               "kind" : "NON_NULL",
               "name" : null,
               "ofType" : {
                 "kind" : "SCALAR",
-                "name" : "ID",
+                "name" : "String",
                 "ofType" : null
               }
             },
@@ -355,6 +391,15 @@
           "name" : "listDepartments",
           "description" : null,
           "args" : [ {
+            "name" : "name",
+            "description" : null,
+            "type" : {
+              "kind" : "SCALAR",
+              "name" : "String",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
             "name" : "filter",
             "description" : null,
             "type" : {
@@ -378,6 +423,15 @@
             "type" : {
               "kind" : "SCALAR",
               "name" : "String",
+              "ofType" : null
+            },
+            "defaultValue" : null
+          }, {
+            "name" : "sortDirection",
+            "description" : null,
+            "type" : {
+              "kind" : "ENUM",
+              "name" : "ModelSortDirection",
               "ofType" : null
             },
             "defaultValue" : null
@@ -807,21 +861,6 @@
         "name" : "Topic",
         "description" : null,
         "fields" : [ {
-          "name" : "id",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "ID",
-              "ofType" : null
-            }
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
           "name" : "name",
           "description" : null,
           "args" : [ ],
@@ -965,15 +1004,6 @@
         } ],
         "inputFields" : null,
         "interfaces" : [ ],
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "SCALAR",
-        "name" : "ID",
-        "description" : "Built-in ID",
-        "fields" : null,
-        "inputFields" : null,
-        "interfaces" : null,
         "enumValues" : null,
         "possibleTypes" : null
       }, {
@@ -1266,25 +1296,19 @@
         "enumValues" : null,
         "possibleTypes" : null
       }, {
+        "kind" : "SCALAR",
+        "name" : "ID",
+        "description" : "Built-in ID",
+        "fields" : null,
+        "inputFields" : null,
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
         "kind" : "OBJECT",
         "name" : "Type",
         "description" : null,
         "fields" : [ {
-          "name" : "id",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "ID",
-              "ofType" : null
-            }
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
           "name" : "name",
           "description" : null,
           "args" : [ ],
@@ -2267,15 +2291,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIDInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -2382,15 +2397,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIDInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -2537,21 +2543,6 @@
         "name" : "Department",
         "description" : null,
         "fields" : [ {
-          "name" : "id",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "ID",
-              "ofType" : null
-            }
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
           "name" : "name",
           "description" : null,
           "args" : [ ],
@@ -3171,15 +3162,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIDInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -5761,15 +5743,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -5826,15 +5799,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "name",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelStringInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "like",
           "description" : null,
           "type" : {
@@ -5897,25 +5861,16 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "name",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "ID",
+              "name" : "String",
               "ofType" : null
             }
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "name",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
           },
           "defaultValue" : null
         }, {
@@ -5954,14 +5909,14 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "name",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "ID",
+              "name" : "String",
               "ofType" : null
             }
           },
@@ -5976,15 +5931,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -6041,15 +5987,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "name",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelStringInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "like",
           "description" : null,
           "type" : {
@@ -6112,25 +6049,16 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "name",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "ID",
+              "name" : "String",
               "ofType" : null
             }
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "name",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
           },
           "defaultValue" : null
         }, {
@@ -6169,14 +6097,14 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "name",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "ID",
+              "name" : "String",
               "ofType" : null
             }
           },
@@ -6803,15 +6731,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -6895,15 +6814,6 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "name",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelStringInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "introduction",
           "description" : null,
           "type" : {
@@ -6993,25 +6903,16 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "name",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "ID",
+              "name" : "String",
               "ofType" : null
             }
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "name",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
           },
           "defaultValue" : null
         }, {
@@ -7077,14 +6978,14 @@
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "name",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
             "name" : null,
             "ofType" : {
               "kind" : "SCALAR",
-              "name" : "ID",
+              "name" : "String",
               "ofType" : null
             }
           },
@@ -9050,109 +8951,6 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelFloatInput",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : [ {
-          "name" : "ne",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "eq",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "le",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "lt",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "ge",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "gt",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "between",
-          "description" : null,
-          "type" : {
-            "kind" : "LIST",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "Float",
-              "ofType" : null
-            }
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "attributeExists",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Boolean",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "attributeType",
-          "description" : null,
-          "type" : {
-            "kind" : "ENUM",
-            "name" : "ModelAttributeTypes",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        } ],
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "SCALAR",
-        "name" : "Float",
-        "description" : "Built-in Float",
-        "fields" : null,
-        "inputFields" : null,
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "INPUT_OBJECT",
         "name" : "ModelBooleanInput",
         "description" : null,
         "fields" : null,
@@ -9287,6 +9085,109 @@
           },
           "defaultValue" : null
         } ],
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "INPUT_OBJECT",
+        "name" : "ModelFloatInput",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : [ {
+          "name" : "ne",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "eq",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "le",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "lt",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "ge",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "gt",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "between",
+          "description" : null,
+          "type" : {
+            "kind" : "LIST",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "Float",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "attributeExists",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Boolean",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "attributeType",
+          "description" : null,
+          "type" : {
+            "kind" : "ENUM",
+            "name" : "ModelAttributeTypes",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        } ],
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "SCALAR",
+        "name" : "Float",
+        "description" : "Built-in Float",
+        "fields" : null,
+        "inputFields" : null,
         "interfaces" : null,
         "enumValues" : null,
         "possibleTypes" : null

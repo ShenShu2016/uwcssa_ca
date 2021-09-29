@@ -2,11 +2,11 @@ import { Provider, connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { checkAuthenticated, load_user } from "./redux/actions/authActions";
 
 import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
+import ArticlesPreview from "./containers/account/staff/Article/ArticlesPreview";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
@@ -18,14 +18,16 @@ import Home from "./containers/Home";
 import JoinUs from "./containers/JoinUs";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
+import PostArticle from "./containers/account/staff/Article/PostArticle";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
 import Snackbar from "@material-ui/core/Snackbar";
+import Staff from "./containers/account/staff/Staff";
 import awsconfig from "./aws-exports";
+import { load_user } from "./redux/actions/authActions";
 import store from "./redux/store";
-import uploadArticle from "./components/Article/AddArticle";
 
 Amplify.configure(awsconfig);
 
@@ -35,15 +37,15 @@ const theme = createTheme({
   },
 });
 
-function App({ load_user, checkAuthenticated, isAuthenticated }) {
+function App({ load_user, isAuthenticated }) {
   const [signInOpen, setSignInOpen] = useState(false);
   useEffect(() => {
     load_user();
-    checkAuthenticated();
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
-  }, [load_user, checkAuthenticated, isAuthenticated]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -67,6 +69,18 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
               <Route path="/account/dashboard" exact component={Dashboard} />
               <Route path="/account/profile" exact component={Profile} />
               <Route path="/account/myAccount" exact component={MyAccount} />
+              <Route path="/account/staff" exact component={Staff} />
+              <Route
+                path="/account/staff/article"
+                exact
+                component={ArticlesPreview}
+              />
+              <Route
+                path="/account/staff/article/postArticle"
+                exact
+                component={PostArticle}
+              />
+
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />
@@ -83,7 +97,6 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
                 component={ArticleDetail}
               />
               <Route path="/graphqlTesting" exact component={GraphQLTesting} />
-              <Route path="/uploadArticle" exact component={uploadArticle} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/joinUs" component={JoinUs} />
               <Route>404 Not Found!</Route>
@@ -108,4 +121,4 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
-export default connect(mapStateToProps, { checkAuthenticated, load_user })(App);
+export default connect(mapStateToProps, { load_user })(App);

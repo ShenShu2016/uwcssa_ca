@@ -82,7 +82,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = ({ signIn, isAuthenticated }) => {
   const classes = useStyles();
-  const [loggedIn, setLogged] = useState(isAuthenticated);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -97,7 +96,7 @@ const SignIn = ({ signIn, isAuthenticated }) => {
     event.preventDefault();
     const response = await signIn(username, password);
     if (response.result) {
-      setLogged(true);
+      // setLogged(true);
     } else {
       console.log(response);
       alert(response.error.message);
@@ -114,7 +113,7 @@ const SignIn = ({ signIn, isAuthenticated }) => {
     }
   };
 
-  if (loggedIn) {
+  if (isAuthenticated === true) {
     return <Redirect to="/" />;
   }
 

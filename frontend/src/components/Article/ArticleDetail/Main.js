@@ -4,6 +4,7 @@ import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Avatar } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import { CardActions } from "@material-ui/core";
 import { CardHeader } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -29,6 +30,8 @@ function Main({ article }) {
     content,
     imagePath,
     owner,
+    topic,
+    type,
     // updatedAt,
     createdAt,
     like,
@@ -55,13 +58,25 @@ function Main({ article }) {
               19
             )}`}
           />
+          <CardActions>
+            <Button size="small" color="primary">
+              Type: {type.name}
+            </Button>
+            <Button size="small" color="primary">
+              Topic: {topic.name}
+            </Button>
+          </CardActions>
           <Typography variant="h3" align="center" className={classes.title}>
             {title}
           </Typography>
 
           {/* <CardMedia className={classes.media} image={image} /> */}
           <AmplifyS3Image path={imagePath} />
-          <Typography variant="subtitle1" className={classes.content}>
+          <Typography
+            variant="body1"
+            className={classes.content}
+            component="pre"
+          >
             {content}
           </Typography>
           <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>

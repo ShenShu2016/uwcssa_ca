@@ -4,9 +4,8 @@ import { Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
   root: {
-    width: "100%",
+    maxWidth: "960px",
     margin: "auto",
-    textAlign: "center",
   },
 });
 function Profile() {

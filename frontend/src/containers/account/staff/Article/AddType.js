@@ -1,10 +1,10 @@
 import { API, graphqlOperation } from "aws-amplify";
 import React, { useState } from "react";
 
-import { IconButton } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import PublishIcon from "@material-ui/icons/Publish";
 import { TextField } from "@material-ui/core";
-import { createType } from "../../graphql/mutations";
+import { createType } from "../../../../graphql/mutations";
 
 export default function AddType() {
   const [typeData, setTypeData] = useState({ name: "" });
@@ -27,9 +27,14 @@ export default function AddType() {
         value={typeData.name}
         onChange={(e) => setTypeData({ ...typeData, name: e.target.value })}
       />
-      <IconButton onClick={uploadType}>
-        <PublishIcon />
-      </IconButton>
+      <Button
+        variant="contained"
+        endIcon={<PublishIcon />}
+        onClick={uploadType}
+        color="primary"
+      >
+        上传新的Type
+      </Button>
     </div>
   );
 }

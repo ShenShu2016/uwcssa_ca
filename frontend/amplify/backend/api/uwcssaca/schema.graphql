@@ -10,8 +10,8 @@ type Topic
       # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
-  id: ID!
+  )
+  @key(fields: ["name"]) {
   name: String!
   like: [String]!
   unlike: [String]!
@@ -30,8 +30,8 @@ type Type
       # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
-  id: ID!
+  )
+  @key(fields: ["name"]) {
   name: String!
   like: [String]!
   unlike: [String]!
@@ -101,8 +101,8 @@ type Department
       # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
-  id: ID!
+  )
+  @key(fields: ["name"]) {
   name: String!
   introduction: String
   email: String

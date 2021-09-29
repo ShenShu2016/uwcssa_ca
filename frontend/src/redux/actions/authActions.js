@@ -9,22 +9,14 @@ export const load_user = () => async (dispatch) => {
         type: ActionTypes.USER_LOADED_SUCCESS,
         payload: response,
       });
-    })
-    .catch((response) => {
-      dispatch({
-        type: ActionTypes.USER_LOADED_FAIL,
-      });
-    });
-};
-
-export const checkAuthenticated = () => async (dispatch) => {
-  Auth.currentAuthenticatedUser()
-    .then((response) => {
       dispatch({
         type: ActionTypes.AUTHENTICATED_SUCCESS,
       });
     })
     .catch((response) => {
+      dispatch({
+        type: ActionTypes.USER_LOADED_FAIL,
+      });
       dispatch({
         type: ActionTypes.AUTHENTICATED_FAIL,
       });

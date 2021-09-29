@@ -42,6 +42,7 @@ const ArticleComponent = () => {
     const {
       id,
       content,
+      title,
       topic,
       type,
       imagePath,
@@ -68,7 +69,8 @@ const ArticleComponent = () => {
             11,
             19
           )}`}
-        />
+        />{" "}
+        <CardHeader title={title} />
         <CardActions>
           <Button size="small" color="primary">
             Type: {type.name}

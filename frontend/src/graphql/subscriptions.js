@@ -4,7 +4,6 @@
 export const onCreateTopic = /* GraphQL */ `
   subscription OnCreateTopic {
     onCreateTopic {
-      id
       name
       like
       unlike
@@ -32,7 +31,6 @@ export const onCreateTopic = /* GraphQL */ `
 export const onUpdateTopic = /* GraphQL */ `
   subscription OnUpdateTopic {
     onUpdateTopic {
-      id
       name
       like
       unlike
@@ -60,7 +58,6 @@ export const onUpdateTopic = /* GraphQL */ `
 export const onDeleteTopic = /* GraphQL */ `
   subscription OnDeleteTopic {
     onDeleteTopic {
-      id
       name
       like
       unlike
@@ -88,7 +85,6 @@ export const onDeleteTopic = /* GraphQL */ `
 export const onCreateType = /* GraphQL */ `
   subscription OnCreateType {
     onCreateType {
-      id
       name
       like
       unlike
@@ -116,7 +112,6 @@ export const onCreateType = /* GraphQL */ `
 export const onUpdateType = /* GraphQL */ `
   subscription OnUpdateType {
     onUpdateType {
-      id
       name
       like
       unlike
@@ -144,7 +139,6 @@ export const onUpdateType = /* GraphQL */ `
 export const onDeleteType = /* GraphQL */ `
   subscription OnDeleteType {
     onDeleteType {
-      id
       name
       like
       unlike
@@ -182,7 +176,6 @@ export const onCreateArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -194,7 +187,6 @@ export const onCreateArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -234,7 +226,6 @@ export const onUpdateArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -246,7 +237,6 @@ export const onUpdateArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -286,7 +276,6 @@ export const onDeleteArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -298,7 +287,6 @@ export const onDeleteArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -345,7 +333,6 @@ export const onCreateArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -354,7 +341,6 @@ export const onCreateArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -391,7 +377,6 @@ export const onUpdateArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -400,7 +385,6 @@ export const onUpdateArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -437,7 +421,6 @@ export const onDeleteArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -446,7 +429,6 @@ export const onDeleteArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -466,7 +448,6 @@ export const onDeleteArticleComment = /* GraphQL */ `
 export const onCreateDepartment = /* GraphQL */ `
   subscription OnCreateDepartment {
     onCreateDepartment {
-      id
       name
       introduction
       email
@@ -500,7 +481,6 @@ export const onCreateDepartment = /* GraphQL */ `
 export const onUpdateDepartment = /* GraphQL */ `
   subscription OnUpdateDepartment {
     onUpdateDepartment {
-      id
       name
       introduction
       email
@@ -534,7 +514,6 @@ export const onUpdateDepartment = /* GraphQL */ `
 export const onDeleteDepartment = /* GraphQL */ `
   subscription OnDeleteDepartment {
     onDeleteDepartment {
-      id
       name
       introduction
       email
@@ -581,7 +560,6 @@ export const onCreateUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email
@@ -615,7 +593,6 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email
@@ -649,7 +626,6 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email

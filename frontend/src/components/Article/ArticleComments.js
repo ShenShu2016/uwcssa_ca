@@ -66,7 +66,7 @@ const ArticleComments = ({ article }) => {
                     <Typography
                       variant="body1"
                       color="textSecondary"
-                      component="p"
+                      component="pre"
                       style={{ wordWrap: "break-word" }}
                     >
                       {content}

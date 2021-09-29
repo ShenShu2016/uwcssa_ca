@@ -1,9 +1,9 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { IconButton, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 
 import PublishIcon from "@material-ui/icons/Publish";
-import { createTopic } from "../../graphql/mutations";
+import { createTopic } from "../../../../graphql/mutations";
 
 export default function AddTopic() {
   const [topicData, setTopicData] = useState({ name: "" });
@@ -29,9 +29,14 @@ export default function AddTopic() {
         value={topicData.name}
         onChange={(e) => setTopicData({ ...topicData, name: e.target.value })}
       />
-      <IconButton onClick={uploadTopic}>
-        <PublishIcon />
-      </IconButton>
+      <Button
+        variant="contained"
+        endIcon={<PublishIcon />}
+        onClick={uploadTopic}
+        color="primary"
+      >
+        上传新的topic
+      </Button>
     </div>
   );
 }
