@@ -19,12 +19,14 @@ import JoinUs from "./containers/JoinUs";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/account/staff/Article/PostArticle";
+import PostUwcssaJob from "./containers/account/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
 import Snackbar from "@material-ui/core/Snackbar";
 import Staff from "./containers/account/staff/Staff";
+import UwcssaJobsPreview from "./containers/account/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import store from "./redux/store";
@@ -74,13 +76,22 @@ function App({ load_user, isAuthenticated }) {
                 path="/account/staff/article"
                 exact
                 component={ArticlesPreview}
+              />{" "}
+              <Route
+                path="/account/staff/uwcssaJob"
+                exact
+                component={UwcssaJobsPreview}
               />
               <Route
                 path="/account/staff/article/postArticle"
                 exact
                 component={PostArticle}
               />
-
+              <Route
+                path="/account/staff/uwcssaJob/postUwcssaJob"
+                exact
+                component={PostUwcssaJob}
+              />
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />

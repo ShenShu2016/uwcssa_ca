@@ -155,6 +155,12 @@ const Header = ({ signOut, isAuthenticated }) => {
         </IconButton>
         <p>Article</p>
       </MenuItem>
+      <MenuItem component={Link} to="/joinUs" onClick={handleMenuClose}>
+        <IconButton>
+          <StorefrontIcon />
+        </IconButton>
+        <p>加入我们</p>
+      </MenuItem>
       <MenuItem component={Link} to="/graphqltesting" onClick={handleMenuClose}>
         <IconButton>
           <StorefrontIcon />
@@ -230,6 +236,15 @@ const Header = ({ signOut, isAuthenticated }) => {
               to="/article"
             >
               Article
+            </Button>
+
+            <Button
+              variant="text"
+              style={{ color: "#FFF" }}
+              component={Link}
+              to="/joinUs"
+            >
+              加入我们
             </Button>
             <Button
               variant="text"
