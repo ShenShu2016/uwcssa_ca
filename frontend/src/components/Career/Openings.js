@@ -41,7 +41,7 @@ export default function Openings() {
               return (
                 <div key={job.id}>
                   <br />
-                  <div style={{display: "inline-block",width: "70%"}}><Link  className={classes.jobLink} to={`/career/jobdetail/${job.id}`}>{job.title}</Link></div>
+                  <div style={{display: "inline-block",width: "70%"}}><Link  className={classes.jobLink} to={`/career/jobDetail/${job.id}`}>{job.title}</Link></div>
                   <div style={{display: "inline-block",width: "30%",textAlign: "right"}}>5</div>
                   <br />
                 </div>
