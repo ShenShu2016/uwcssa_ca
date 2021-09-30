@@ -4,8 +4,10 @@ import {Button,Typography,Snackbar} from "@material-ui/core"
 import { Checkbox,TextField,Grid, } from '@material-ui/core';
 import {useSelector} from "react-redux"
 import API from "@aws-amplify/api";
+import Storage from "@aws-amplify/storage";
 import {getUwcssaJob} from "../../graphql/queries"
 import Alert from '@material-ui/lab/Alert';
+import { v4 as uuid } from "uuid"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +34,7 @@ export default function ApplyJob(props) {
   const classes = useStyles();
   const {id} = props.match.params
   const [open, setOpen] = useState(false);
+  const [info, setInfo] = useState(false);
   const [resume, setResume] = useState("");
   const userAuth = useSelector((state) => state.userAuth);
   
@@ -79,13 +82,30 @@ export default function ApplyJob(props) {
 
   const addFile = (event) => {
     setResume(()=>event.target.files[0])
-    console.log(resume)
   }
+
+  const postResume = async (resume) => {
+    try {
+      const response = await Storage.put(
+        `career/${uuid()}${resume.name}`,
+        resume,
+      );
+      setApplyData({ ...applyData, resumePath: response.key})
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (event) => {
     if(!userAuth.user){
       setOpen(true)
       setTimeout(() => {props.history.push("/signIn")},1200)
+    }else{
+      if(!resume && !applyData.applyname || !resume && !applyData.applyemail || !resume && !applyData.applyphone){
+        setInfo(true)
+      }else{
+        postResume(resume)
+      }
     }
     console.log(applyData)
   }
@@ -93,6 +113,10 @@ export default function ApplyJob(props) {
   const handleClose = (event, reason) => {
     setOpen(false);
   };
+
+  const handleCloseInfo = (event, reason) => {
+    setInfo(false);
+  }
   
   return (
     <div className={classes.root}>
@@ -170,6 +194,11 @@ export default function ApplyJob(props) {
       <Snackbar open={open} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity="error" onClose={handleClose}>
           请先登录!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={info} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={3000} onClose={handleCloseInfo}>
+        <Alert severity="error" onClose={handleCloseInfo}>
+          请上传RESUME或者补充完整个人信息!
         </Alert>
       </Snackbar>
     </div>
