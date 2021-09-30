@@ -30,6 +30,7 @@ import UwcssaJobsPreview from "./containers/account/staff/UwcssaJob/UwcssaJobsPr
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import store from "./redux/store";
+import FourmHome from "./containers/FourmHome";
 
 Amplify.configure(awsconfig);
 
@@ -101,6 +102,7 @@ function App({ load_user, isAuthenticated }) {
                   exact
                   component={PostUwcssaJob}
                 />
+                <Route path="/fourmHome" exact component={FourmHome} />
                 <Route path="/signIn" exact component={SignIn} />
                 <Route path="/signUp" exact component={SignUp} />
                 <Route
@@ -130,7 +132,6 @@ function App({ load_user, isAuthenticated }) {
                 <Route>404 Not Found!</Route>
               </Switch>
             </div>
-
             <Footer />
           </Router>
           <Snackbar
