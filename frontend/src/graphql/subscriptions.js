@@ -574,6 +574,19 @@ export const onCreateUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -607,6 +620,19 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -636,6 +662,148 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
         updatedAt
         owner
         uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateUwcssaJobResume = /* GraphQL */ `
+  subscription OnCreateUwcssaJobResume {
+    onCreateUwcssaJobResume {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUwcssaJobResume = /* GraphQL */ `
+  subscription OnUpdateUwcssaJobResume {
+    onUpdateUwcssaJobResume {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUwcssaJobResume = /* GraphQL */ `
+  subscription OnDeleteUwcssaJobResume {
+    onDeleteUwcssaJobResume {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
           nextToken
         }
       }

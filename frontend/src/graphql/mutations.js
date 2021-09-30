@@ -622,6 +622,19 @@ export const createUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -658,6 +671,19 @@ export const updateUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -690,6 +716,157 @@ export const deleteUwcssaJob = /* GraphQL */ `
         updatedAt
         owner
         uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createUwcssaJobResume = /* GraphQL */ `
+  mutation CreateUwcssaJobResume(
+    $input: CreateUwcssaJobResumeInput!
+    $condition: ModelUwcssaJobResumeConditionInput
+  ) {
+    createUwcssaJobResume(input: $input, condition: $condition) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateUwcssaJobResume = /* GraphQL */ `
+  mutation UpdateUwcssaJobResume(
+    $input: UpdateUwcssaJobResumeInput!
+    $condition: ModelUwcssaJobResumeConditionInput
+  ) {
+    updateUwcssaJobResume(input: $input, condition: $condition) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteUwcssaJobResume = /* GraphQL */ `
+  mutation DeleteUwcssaJobResume(
+    $input: DeleteUwcssaJobResumeInput!
+    $condition: ModelUwcssaJobResumeConditionInput
+  ) {
+    deleteUwcssaJobResume(input: $input, condition: $condition) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
           nextToken
         }
       }

@@ -1,5 +1,5 @@
-import { IconButton, TextField, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { TextField, Typography } from "@material-ui/core";
 import { connect, useSelector } from "react-redux";
 import { createTopic, createType } from "../../../../graphql/mutations";
 import {
@@ -17,7 +17,6 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import PublishIcon from "@material-ui/icons/Publish";
-import { Redirect } from "react-router";
 import Select from "@material-ui/core/Select";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@material-ui/core/styles";

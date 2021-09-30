@@ -5,18 +5,22 @@ import Card from "@mui/material/Card";
 import { CardActionArea } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import CurrentJob from "../../components/Account/Dashboard/CurrentJob";
+import Education from "../../components/Account/Dashboard/Education";
+import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
 import LinearProgress from "@mui/material/LinearProgress";
+import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
 import React from "react";
 import { Redirect } from "react-router";
 import TempLinkBar from "../../components/Account/TempLinkBar";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/styles";
 import { useSelector } from "react-redux";
-
 const useStyles = makeStyles({
   root: {
     maxWidth: "960px",
     margin: "auto",
+    paddingInline: "1rem",
   },
   banner: {
     minHeight: "200px",
@@ -30,6 +34,13 @@ const useStyles = makeStyles({
   },
   outer: {
     height: "75px",
+  },
+  infoCards: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%",
+    margin: "auto",
+    justifyContent: "space-between",
   },
 });
 
@@ -77,6 +88,14 @@ function Dashboard() {
               </Typography>
             </CardContent>
           </Card>
+          <Box className={classes.infoCards}>
+            <Education />
+            <CurrentJob />
+            <FavoriteTopic />
+          </Box>
+          <Box className={classes.myForumPosts}>
+            <MyForumPosts />
+          </Box>
         </div>
       ) : (
         <LinearProgress />

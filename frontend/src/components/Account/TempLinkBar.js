@@ -15,23 +15,18 @@ const TempLinkBar = () => {
 
   return (
     <div className={classes.root}>
-      <ButtonGroup
-        variant="contained"
-        aria-label="outlined primary button group"
-      >
-        <Button component={Link} to="/account/dashboard">
-          Dashboard
-        </Button>
-        <Button component={Link} to="/account/profile">
-          Profile
-        </Button>
-        <Button component={Link} to="/account/myAccount">
-          My Account
-        </Button>
-        <Button component={Link} to="/account/staff">
-          Staff Only
-        </Button>
-      </ButtonGroup>
+      <Button component={Link} to="/account/dashboard" variant="contained">
+        Dashboard
+      </Button>
+      <Button component={Link} to="/account/profile" variant="contained">
+        Profile
+      </Button>
+      <Button component={Link} to="/account/myAccount" variant="contained">
+        My Account
+      </Button>
+      <Button component={Link} to="/account/staff" variant="contained">
+        Staff Only
+      </Button>
     </div>
   );
 };

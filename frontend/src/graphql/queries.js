@@ -431,6 +431,19 @@ export const getUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -459,6 +472,92 @@ export const listUwcssaJobs = /* GraphQL */ `
           introduction
           email
           leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaJobResume = /* GraphQL */ `
+  query GetUwcssaJobResume($id: ID!) {
+    getUwcssaJobResume(id: $id) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listUwcssaJobResumes = /* GraphQL */ `
+  query ListUwcssaJobResumes(
+    $filter: ModelUwcssaJobResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaJobResumes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        resumeFilePath
+        phone
+        createdAt
+        updatedAt
+        uwcssaJob {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
           like
           unlike
           createdAt

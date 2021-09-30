@@ -136,6 +136,29 @@ type UwcssaJob
   Schedule: [String]!
   like: [String]!
   unlike: [String]!
+  uwcssaJobResumes: [UwcssaJobResume]
+    @connection(name: "UwcssaJobUwcssaJobResumes")
+}
+
+type UwcssaJobResume
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      # allow admins to create, update and delete
+      { allow: groups, groups: ["admin"] }
+      # allow all authenticated users to view
+      { allow: private, operations: [read] }
+      # allow all guest users (not authenticated) to view
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  email: String!
+  resumeFilePath: String
+  phone: Int!
+  uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
 }
 
 type ForumTopic
