@@ -1,6 +1,7 @@
 import { Provider, connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Snackbar, makeStyles } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
 import Amplify from "aws-amplify";
@@ -24,7 +25,6 @@ import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
-import Snackbar from "@material-ui/core/Snackbar";
 import Staff from "./containers/account/staff/Staff";
 import UwcssaJobsPreview from "./containers/account/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
@@ -38,9 +38,17 @@ const theme = createTheme({
     fontFamily: "Noto Sans SC",
   },
 });
-
+const useStyles = makeStyles({
+  headerBody: {
+    minHeight: `calc(100vh - 220px)`,
+    [theme.breakpoints.down("sm")]: {
+      minHeight: `calc(100vh - 350px)`,
+    },
+  },
+});
 function App({ load_user, isAuthenticated }) {
   const [signInOpen, setSignInOpen] = useState(false);
+  const classes = useStyles();
   useEffect(() => {
     load_user();
     if (isAuthenticated) {
@@ -65,53 +73,63 @@ function App({ load_user, isAuthenticated }) {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Router>
-            <Header />
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/account/dashboard" exact component={Dashboard} />
-              <Route path="/account/profile" exact component={Profile} />
-              <Route path="/account/myAccount" exact component={MyAccount} />
-              <Route path="/account/staff" exact component={Staff} />
-              <Route
-                path="/account/staff/article"
-                exact
-                component={ArticlesPreview}
-              />{" "}
-              <Route
-                path="/account/staff/uwcssaJob"
-                exact
-                component={UwcssaJobsPreview}
-              />
-              <Route
-                path="/account/staff/article/postArticle"
-                exact
-                component={PostArticle}
-              />
-              <Route
-                path="/account/staff/uwcssaJob/postUwcssaJob"
-                exact
-                component={PostUwcssaJob}
-              />
-              <Route path="/signIn" exact component={SignIn} />
-              <Route path="/signUp" exact component={SignUp} />
-              <Route path="/forgotPassword" exact component={ForgotPassword} />
-              <Route path="/resetPassword" exact component={ResetPassword} />
-              <Route
-                path="/emailConfirm/:username"
-                exact
-                component={EmailConfirm}
-              />
-              <Route path="/article" exact component={ArticleListing} />
-              <Route
-                path="/article/:articleId"
-                exact
-                component={ArticleDetail}
-              />
-              <Route path="/graphqlTesting" exact component={GraphQLTesting} />
-              <Route path="/contactUs" exact component={ContactUs} />
-              <Route path="/joinUs" component={JoinUs} />
-              <Route>404 Not Found!</Route>
-            </Switch>
+            <div className={classes.headerBody}>
+              <Header />
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/account/dashboard" exact component={Dashboard} />
+                <Route path="/account/profile" exact component={Profile} />
+                <Route path="/account/myAccount" exact component={MyAccount} />
+                <Route path="/account/staff" exact component={Staff} />
+                <Route
+                  path="/account/staff/article"
+                  exact
+                  component={ArticlesPreview}
+                />{" "}
+                <Route
+                  path="/account/staff/uwcssaJob"
+                  exact
+                  component={UwcssaJobsPreview}
+                />
+                <Route
+                  path="/account/staff/article/postArticle"
+                  exact
+                  component={PostArticle}
+                />
+                <Route
+                  path="/account/staff/uwcssaJob/postUwcssaJob"
+                  exact
+                  component={PostUwcssaJob}
+                />
+                <Route path="/signIn" exact component={SignIn} />
+                <Route path="/signUp" exact component={SignUp} />
+                <Route
+                  path="/forgotPassword"
+                  exact
+                  component={ForgotPassword}
+                />
+                <Route path="/resetPassword" exact component={ResetPassword} />
+                <Route
+                  path="/emailConfirm/:username"
+                  exact
+                  component={EmailConfirm}
+                />
+                <Route path="/article" exact component={ArticleListing} />
+                <Route
+                  path="/article/:articleId"
+                  exact
+                  component={ArticleDetail}
+                />
+                <Route
+                  path="/graphqlTesting"
+                  exact
+                  component={GraphQLTesting}
+                />
+                <Route path="/contactUs" exact component={ContactUs} />
+                <Route path="/joinUs" component={JoinUs} />
+                <Route>404 Not Found!</Route>
+              </Switch>
+            </div>
             <Footer />
           </Router>
           <Snackbar
