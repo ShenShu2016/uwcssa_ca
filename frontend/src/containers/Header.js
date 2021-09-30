@@ -155,7 +155,7 @@ const Header = ({ signOut, isAuthenticated }) => {
         </IconButton>
         <p>Article</p>
       </MenuItem>
-      <MenuItem component={Link} to="/joinUs" onClick={handleMenuClose}>
+      <MenuItem component={Link} to="/career" onClick={handleMenuClose}>
         <IconButton>
           <StorefrontIcon />
         </IconButton>
@@ -242,7 +242,7 @@ const Header = ({ signOut, isAuthenticated }) => {
               variant="text"
               style={{ color: "#FFF" }}
               component={Link}
-              to="/joinUs"
+              to="/career"
             >
               加入我们
             </Button>

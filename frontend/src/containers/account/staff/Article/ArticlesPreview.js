@@ -66,7 +66,7 @@ const ArticlesPreview = ({ setArticles }) => {
   const classes = useStyles();
   useEffect(() => {
     setArticles();
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
   const articles = useSelector((state) => state.allArticles.articles);
 
   const rows = articles.map((article) => {

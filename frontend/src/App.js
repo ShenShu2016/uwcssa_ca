@@ -8,6 +8,7 @@ import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
 import ArticlesPreview from "./containers/account/staff/Article/ArticlesPreview";
+import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
@@ -16,7 +17,6 @@ import ForgotPassword from "./containers/ForgotPassword";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Career from "./containers/Career";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/account/staff/Article/PostArticle";
@@ -126,7 +126,6 @@ function App({ load_user, isAuthenticated }) {
                   component={GraphQLTesting}
                 />
                 <Route path="/contactUs" exact component={ContactUs} />
-                <Route path="/joinUs" component={JoinUs} />
                 <Route path="/career" component={Career} />
                 <Route>404 Not Found!</Route>
               </Switch>

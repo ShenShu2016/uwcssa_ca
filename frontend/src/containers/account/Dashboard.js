@@ -1,4 +1,3 @@
-import Auth from "@aws-amplify/auth";
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
 import Card from "@mui/material/Card";

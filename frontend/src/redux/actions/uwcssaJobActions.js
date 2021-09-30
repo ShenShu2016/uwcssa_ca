@@ -1,16 +1,6 @@
-import {
-  createArticleComment,
-  createDepartment,
-} from "../../graphql/mutations";
-import { listDepartments, listUwcssaJobs } from "../../graphql/queries";
-
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/uwcssaJob-action-types";
-import Storage from "@aws-amplify/storage";
-import { getArticle } from "../../graphql/queries";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { v4 as uuid } from "uuid";
-
+import { listUwcssaJobs } from "../../graphql/queries";
 
 const departments = `query ListDepartments {
   listDepartments {
