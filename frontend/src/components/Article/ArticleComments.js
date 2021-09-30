@@ -64,9 +64,9 @@ const ArticleComments = ({ article }) => {
 
                   <CardContent className={classes.cardContent}>
                     <Typography
-                      variant="body"
+                      variant="body1"
                       color="textSecondary"
-                      component="p"
+                      component="pre"
                       style={{ wordWrap: "break-word" }}
                     >
                       {content}

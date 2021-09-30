@@ -2,9 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const getTopic = /* GraphQL */ `
-  query GetTopic($id: ID!) {
-    getTopic(id: $id) {
-      id
+  query GetTopic($name: String!) {
+    getTopic(name: $name) {
       name
       like
       unlike
@@ -31,13 +30,20 @@ export const getTopic = /* GraphQL */ `
 `;
 export const listTopics = /* GraphQL */ `
   query ListTopics(
+    $name: String
     $filter: ModelTopicFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listTopics(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTopics(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
         name
         like
         unlike
@@ -53,9 +59,8 @@ export const listTopics = /* GraphQL */ `
   }
 `;
 export const getType = /* GraphQL */ `
-  query GetType($id: ID!) {
-    getType(id: $id) {
-      id
+  query GetType($name: String!) {
+    getType(name: $name) {
       name
       like
       unlike
@@ -82,13 +87,20 @@ export const getType = /* GraphQL */ `
 `;
 export const listTypes = /* GraphQL */ `
   query ListTypes(
+    $name: String
     $filter: ModelTypeFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTypes(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
         name
         like
         unlike
@@ -116,7 +128,6 @@ export const getArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -128,7 +139,6 @@ export const getArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -173,7 +183,6 @@ export const listArticles = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -182,7 +191,6 @@ export const listArticles = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -227,7 +235,6 @@ export const articlesByDate = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -236,7 +243,6 @@ export const articlesByDate = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -273,7 +279,6 @@ export const getArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -282,7 +287,6 @@ export const getArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -332,9 +336,8 @@ export const listArticleComments = /* GraphQL */ `
   }
 `;
 export const getDepartment = /* GraphQL */ `
-  query GetDepartment($id: ID!) {
-    getDepartment(id: $id) {
-      id
+  query GetDepartment($name: String!) {
+    getDepartment(name: $name) {
       name
       introduction
       email
@@ -367,13 +370,20 @@ export const getDepartment = /* GraphQL */ `
 `;
 export const listDepartments = /* GraphQL */ `
   query ListDepartments(
+    $name: String
     $filter: ModelDepartmentFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listDepartments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listDepartments(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
         name
         introduction
         email
@@ -407,7 +417,6 @@ export const getUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email
@@ -422,6 +431,19 @@ export const getUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -446,11 +468,96 @@ export const listUwcssaJobs = /* GraphQL */ `
         createdAt
         updatedAt
         department {
-          id
           name
           introduction
           email
           leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaJobResume = /* GraphQL */ `
+  query GetUwcssaJobResume($id: ID!) {
+    getUwcssaJobResume(id: $id) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listUwcssaJobResumes = /* GraphQL */ `
+  query ListUwcssaJobResumes(
+    $filter: ModelUwcssaJobResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaJobResumes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        resumeFilePath
+        phone
+        createdAt
+        updatedAt
+        uwcssaJob {
+          id
+          introduction
+          title
+          requirements
+          Bonus
+          imagePath
+          Benefits
+          Schedule
           like
           unlike
           createdAt

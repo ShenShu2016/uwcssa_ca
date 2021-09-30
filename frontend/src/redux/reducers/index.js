@@ -1,24 +1,18 @@
-import { articleReducer, selectedArticleReducer } from "./articleReducer";
-// import {
-//   newsCommPostReducer,
-//   newsCommentsReducer,
-//   selectedNewsCommReducer,
-// } from "./newComReducer";
-import { productReducer, selectedProductReducer } from "./productReducer";
+import {
+  articleReducer,
+  postArticleReducer,
+  selectedArticleReducer,
+} from "./articleReducer";
 
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
-import { userReducer } from "./userReducer";
+import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
 const reducers = combineReducers({
   userAuth: authReducer,
-  allUsers: userReducer,
-  allProducts: productReducer,
-  product: selectedProductReducer,
   allArticles: articleReducer,
   article: selectedArticleReducer,
-  // allNewsComments: newsCommentsReducer,
-  // newsComment: selectedNewsCommReducer,
-  // newsCommentPost: newsCommPostReducer,
+  postArticle: postArticleReducer,
+  allUwcssaJobs: uwcssaJobReducer,
 });
 export default reducers;

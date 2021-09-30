@@ -1,53 +1,41 @@
 {
-  "staging": {
+  "production": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-uwcssaca-staging-20258-authRole",
-      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-staging-20258-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-staging-20258-authRole",
+      "AuthRoleName": "amplify-uwcssaca-production-01110-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-production-01110-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-production-01110-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-uwcssaca-staging-20258-deployment",
-      "UnauthRoleName": "amplify-uwcssaca-staging-20258-unauthRole",
-      "StackName": "amplify-uwcssaca-staging-20258",
-      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-staging-20258/e1410600-19b6-11ec-bab6-028611031520",
-      "AmplifyAppId": "dmsl2mfclfxp3"
-    },
-    "categories": {
-      "function": {
-        "uwinPostConfirmation": {
-          "GROUP": "anyone",
-          "deploymentBucketName": "amplify-uwcssaca-staging-20258-deployment",
-          "s3Key": "amplify-builds/uwinPostConfirmation-664c4157455833374269-build.zip"
-        }
-      },
-      "auth": {
-        "uwin": {
-          "googleClientId": "1067602080073-771t9nunsgkvkftb9kd0coqitjgkvpgj.apps.googleusercontent.com"
-        }
-      }
+      "DeploymentBucketName": "amplify-uwcssaca-production-01110-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-production-01110-unauthRole",
+      "StackName": "amplify-uwcssaca-production-01110",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-production-01110/ca1fad70-19c8-11ec-8709-0aa0c2860894",
+      "AmplifyAppId": "dmsl2mfclfxp3",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-production-01110-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     }
   },
   "develop": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-uwcssaca-develop-12320-authRole",
-      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-develop-12320-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-develop-12320-authRole",
+      "AuthRoleName": "amplify-uwcssaca-develop-233420-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-develop-233420-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-develop-233420-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-uwcssaca-develop-12320-deployment",
-      "UnauthRoleName": "amplify-uwcssaca-develop-12320-unauthRole",
-      "StackName": "amplify-uwcssaca-develop-12320",
-      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-develop-12320/dfb35060-19d2-11ec-8233-02261dac6e7c",
+      "DeploymentBucketName": "amplify-uwcssaca-develop-233420-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-develop-233420-unauthRole",
+      "StackName": "amplify-uwcssaca-develop-233420",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-develop-233420/f7f46c50-200c-11ec-9415-061c6c4c0322",
       "AmplifyAppId": "dmsl2mfclfxp3"
     },
     "categories": {
-      "auth": {
-        "uwin": {
-          "googleClientId": "1067602080073-mlhi1gk3uflq8v3b6hrm152vr0otofrs.apps.googleusercontent.com"
+      "function": {
+        "uwinAuthPostConfirmation": {
+          "GROUP": "anyone",
+          "deploymentBucketName": "amplify-uwcssaca-develop-233420-deployment",
+          "s3Key": "amplify-builds/uwinAuthPostConfirmation-57445738653766397330-build.zip"
         }
       },
-      "function": {
-        "uwinPostConfirmation": {
-          "deploymentBucketName": "amplify-uwcssaca-develop-12320-deployment",
-          "s3Key": "amplify-builds/uwinPostConfirmation-664c4157455833374269-build.zip"
+      "auth": {
+        "uwinAuth": {
+          "googleClientId": "1067602080073-mlhi1gk3uflq8v3b6hrm152vr0otofrs.apps.googleusercontent.com"
         }
       }
     }

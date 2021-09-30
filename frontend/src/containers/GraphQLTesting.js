@@ -38,8 +38,12 @@ export default function GraphQLTesting() {
   };
   return (
     <div className={classes.root}>
-      <Button variant="contained" component={Link} to="/uploadarticle">
-        Go Add Article
+      <Button
+        variant="contained"
+        component={Link}
+        to="/account/staff/article/postArticle"
+      >
+        Go Create Article
       </Button>
       <Typography variant="h1">GraphQLTesting</Typography>
       {articles.map((article) => {

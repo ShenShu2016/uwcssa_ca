@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "uwcssaca",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authuwinAuth",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

@@ -7,7 +7,6 @@ export const createTopic = /* GraphQL */ `
     $condition: ModelTopicConditionInput
   ) {
     createTopic(input: $input, condition: $condition) {
-      id
       name
       like
       unlike
@@ -38,7 +37,6 @@ export const updateTopic = /* GraphQL */ `
     $condition: ModelTopicConditionInput
   ) {
     updateTopic(input: $input, condition: $condition) {
-      id
       name
       like
       unlike
@@ -69,7 +67,6 @@ export const deleteTopic = /* GraphQL */ `
     $condition: ModelTopicConditionInput
   ) {
     deleteTopic(input: $input, condition: $condition) {
-      id
       name
       like
       unlike
@@ -100,7 +97,6 @@ export const createType = /* GraphQL */ `
     $condition: ModelTypeConditionInput
   ) {
     createType(input: $input, condition: $condition) {
-      id
       name
       like
       unlike
@@ -131,7 +127,6 @@ export const updateType = /* GraphQL */ `
     $condition: ModelTypeConditionInput
   ) {
     updateType(input: $input, condition: $condition) {
-      id
       name
       like
       unlike
@@ -162,7 +157,6 @@ export const deleteType = /* GraphQL */ `
     $condition: ModelTypeConditionInput
   ) {
     deleteType(input: $input, condition: $condition) {
-      id
       name
       like
       unlike
@@ -203,7 +197,6 @@ export const createArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -215,7 +208,6 @@ export const createArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -258,7 +250,6 @@ export const updateArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -270,7 +261,6 @@ export const updateArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -313,7 +303,6 @@ export const deleteArticle = /* GraphQL */ `
       createdAt
       updatedAt
       topic {
-        id
         name
         like
         unlike
@@ -325,7 +314,6 @@ export const deleteArticle = /* GraphQL */ `
         }
       }
       type {
-        id
         name
         like
         unlike
@@ -375,7 +363,6 @@ export const createArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -384,7 +371,6 @@ export const createArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -424,7 +410,6 @@ export const updateArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -433,7 +418,6 @@ export const updateArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -473,7 +457,6 @@ export const deleteArticleComment = /* GraphQL */ `
         createdAt
         updatedAt
         topic {
-          id
           name
           like
           unlike
@@ -482,7 +465,6 @@ export const deleteArticleComment = /* GraphQL */ `
           owner
         }
         type {
-          id
           name
           like
           unlike
@@ -505,7 +487,6 @@ export const createDepartment = /* GraphQL */ `
     $condition: ModelDepartmentConditionInput
   ) {
     createDepartment(input: $input, condition: $condition) {
-      id
       name
       introduction
       email
@@ -542,7 +523,6 @@ export const updateDepartment = /* GraphQL */ `
     $condition: ModelDepartmentConditionInput
   ) {
     updateDepartment(input: $input, condition: $condition) {
-      id
       name
       introduction
       email
@@ -579,7 +559,6 @@ export const deleteDepartment = /* GraphQL */ `
     $condition: ModelDepartmentConditionInput
   ) {
     deleteDepartment(input: $input, condition: $condition) {
-      id
       name
       introduction
       email
@@ -629,7 +608,6 @@ export const createUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email
@@ -644,6 +622,19 @@ export const createUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -666,7 +657,6 @@ export const updateUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email
@@ -681,6 +671,19 @@ export const updateUwcssaJob = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -703,7 +706,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
-        id
         name
         introduction
         email
@@ -714,6 +716,157 @@ export const deleteUwcssaJob = /* GraphQL */ `
         updatedAt
         owner
         uwcssaJobs {
+          nextToken
+        }
+      }
+      owner
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createUwcssaJobResume = /* GraphQL */ `
+  mutation CreateUwcssaJobResume(
+    $input: CreateUwcssaJobResumeInput!
+    $condition: ModelUwcssaJobResumeConditionInput
+  ) {
+    createUwcssaJobResume(input: $input, condition: $condition) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateUwcssaJobResume = /* GraphQL */ `
+  mutation UpdateUwcssaJobResume(
+    $input: UpdateUwcssaJobResumeInput!
+    $condition: ModelUwcssaJobResumeConditionInput
+  ) {
+    updateUwcssaJobResume(input: $input, condition: $condition) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteUwcssaJobResume = /* GraphQL */ `
+  mutation DeleteUwcssaJobResume(
+    $input: DeleteUwcssaJobResumeInput!
+    $condition: ModelUwcssaJobResumeConditionInput
+  ) {
+    deleteUwcssaJobResume(input: $input, condition: $condition) {
+      id
+      name
+      email
+      resumeFilePath
+      phone
+      createdAt
+      updatedAt
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        Bonus
+        imagePath
+        Benefits
+        Schedule
+        like
+        unlike
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
           nextToken
         }
       }

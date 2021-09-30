@@ -9,22 +9,14 @@ export const load_user = () => async (dispatch) => {
         type: ActionTypes.USER_LOADED_SUCCESS,
         payload: response,
       });
-    })
-    .catch((response) => {
-      dispatch({
-        type: ActionTypes.USER_LOADED_FAIL,
-      });
-    });
-};
-
-export const checkAuthenticated = () => async (dispatch) => {
-  Auth.currentAuthenticatedUser()
-    .then((response) => {
       dispatch({
         type: ActionTypes.AUTHENTICATED_SUCCESS,
       });
     })
     .catch((response) => {
+      dispatch({
+        type: ActionTypes.USER_LOADED_FAIL,
+      });
       dispatch({
         type: ActionTypes.AUTHENTICATED_FAIL,
       });
@@ -39,29 +31,44 @@ export const signIn = (username, password) => async (dispatch) => {
       payload: response,
     });
     dispatch(load_user());
+    return {
+      result: true,
+    };
   } catch (error) {
     dispatch({
       type: ActionTypes.SIGNIN_FAIL,
     });
+    return {
+      result: false,
+      error: error,
+    };
   }
 };
 
-export const signUp = (username, password) => async (dispatch) => {
+export const signUp = (username, password, email) => async (dispatch) => {
   try {
     console.log("start signed up!");
     const response = await Auth.signUp({
       username,
       password,
+      attributes: { email },
     });
     dispatch({
       type: ActionTypes.SIGNUP_SUCCESS,
       payload: response.data,
     });
+    return {
+      result: true,
+    };
   } catch (error) {
     console.log("error signing up:", error);
     dispatch({
       type: ActionTypes.SIGNUP_FAIL,
     });
+    return {
+      result: false,
+      error: error,
+    };
   }
 };
 
@@ -72,11 +79,18 @@ export const emailConfirm =
       dispatch({
         type: ActionTypes.EMAILCONFIRM_SUCCESS,
       });
+      return {
+        result: true,
+      };
     } catch (error) {
       console.log("error confirming signing up:", error);
       dispatch({
         type: ActionTypes.EMAILCONFIRM_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 
