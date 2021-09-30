@@ -15,7 +15,7 @@ import ForgotPassword from "./containers/ForgotPassword";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import JoinUs from "./containers/JoinUs";
+import Career from "./containers/Career";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/account/staff/Article/PostArticle";
@@ -109,7 +109,7 @@ function App({ load_user, isAuthenticated }) {
               />
               <Route path="/graphqlTesting" exact component={GraphQLTesting} />
               <Route path="/contactUs" exact component={ContactUs} />
-              <Route path="/joinUs" component={JoinUs} />
+              <Route path="/career" component={Career} />
               <Route>404 Not Found!</Route>
             </Switch>
             <Footer />
