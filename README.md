@@ -177,6 +177,7 @@ The following people have contributed to the project:
 * [Yanhao Wang](https://github.com/DG-xixuan) [![wakatime](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca.svg)](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca)
 * [Chengyue Wei](https://github.com/KevinVVei)
 * [Mike Yu](https://github.com/mikezerone)
+* [Xinyu Ji](https://github.com/Quennel-coder) [![wakatime](https://wakatime.com/badge/github/Quennel-coder/uwcssa_ca.svg)](https://wakatime.com/badge/github/Quennel-coder/uwcssa_ca)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
