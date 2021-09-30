@@ -11,6 +11,40 @@ import { getArticle } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
+
+const departments = `query ListDepartments {
+  listDepartments {
+    items {
+      createdAt
+      email
+      introduction
+      leader
+      like
+      name
+      owner
+      unlike
+      updatedAt
+      uwcssaJobs {
+        items {
+          Benefits
+          Bonus
+          Schedule
+          createdAt
+          id
+          imagePath
+          introduction
+          like
+          owner
+          requirements
+          title
+          unlike
+          updatedAt
+        }
+      }
+    }
+  }
+}`
+
 export const setUwcssaJobs = () => async (dispatch) => {
   try {
     const uwcssaJobData = await API.graphql({
@@ -30,7 +64,7 @@ export const setUwcssaJobs = () => async (dispatch) => {
 export const setDepartments = () => async (dispatch) => {
   try {
     const departmentData = await API.graphql({
-      query: listDepartments,
+      query: departments,
       authMode: "AWS_IAM",
     });
     dispatch({
