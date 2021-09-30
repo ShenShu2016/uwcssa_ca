@@ -12,7 +12,6 @@ import cssaLogo from "../static/cssalogo.png";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
-    
     root: {
         background:"#fff",
         display:"flex",

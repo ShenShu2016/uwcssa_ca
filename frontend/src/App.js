@@ -25,6 +25,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import awsconfig from "./aws-exports";
 import store from "./redux/store";
 import uploadArticle from "./components/Article/AddArticle";
+import FourmHome from "./containers/FourmHome";
 
 Amplify.configure(awsconfig);
 
@@ -80,6 +81,7 @@ function App({ load_user, checkAuthenticated, isAuthenticated }) {
                 exact
                 component={ProductDetail}
               />
+              <Route path="/fourmHome" exact component={FourmHome} />
               <Route path="/graphqlTesting" exact component={GraphQLTesting} />
               <Route path="/uploadArticle" exact component={uploadArticle} />
               <Route path="/contactUs" exact component={ContactUs} />
