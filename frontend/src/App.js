@@ -13,7 +13,8 @@ import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Footer from "./containers/Footer";
-import ForgotPassword from "./containers/ForgotPassword";
+import ForgotPassword from "./containers/authentication/ForgotPassword";
+import FourmHome from "./containers/FourmHome";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
@@ -23,6 +24,7 @@ import PostArticle from "./containers/account/staff/Article/PostArticle";
 import PostUwcssaJob from "./containers/account/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
+import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
 import Staff from "./containers/account/staff/Staff";
@@ -30,7 +32,6 @@ import UwcssaJobsPreview from "./containers/account/staff/UwcssaJob/UwcssaJobsPr
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import store from "./redux/store";
-import FourmHome from "./containers/FourmHome";
 
 Amplify.configure(awsconfig);
 
@@ -74,6 +75,7 @@ function App({ load_user, isAuthenticated }) {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Router>
+            <ScrollToTop />
             <div className={classes.headerBody}>
               <Header />
               <Switch>

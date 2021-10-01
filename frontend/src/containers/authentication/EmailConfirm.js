@@ -96,8 +96,5 @@ const EmailConfirm = ({ emailConfirm }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
 
-export default connect(mapStateToProps, { emailConfirm })(EmailConfirm);
+export default connect( { emailConfirm })(EmailConfirm);

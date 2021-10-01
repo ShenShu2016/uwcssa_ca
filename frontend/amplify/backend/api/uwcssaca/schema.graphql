@@ -157,7 +157,7 @@ type UwcssaJobResume
   name: String!
   email: String!
   resumeFilePath: String
-  phone: Int!
+  phone: String!
   uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
 }
 

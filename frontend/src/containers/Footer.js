@@ -2,8 +2,9 @@ import { Box, Button, Grid, makeStyles } from "@material-ui/core";
 
 import Container from "@material-ui/core/Container";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import { Link as MUILink } from "@material-ui/core";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import Typography from "@material-ui/core/Typography";
@@ -12,9 +13,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <MUILink color="inherit" href="https://material-ui.com/">
         uwcssa.ca
-      </Link>{" "}
+      </MUILink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -73,12 +74,12 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   关于我们
                 </Typography>
-                <Link href="" color="inherit">
+                <MUILink href="" color="inherit">
                   团队
-                </Link>
-                <Link href="" color="inherit">
+                </MUILink>
+                <MUILink href="" color="inherit">
                   联系我们
-                </Link>
+                </MUILink>
               </Box>
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -86,12 +87,12 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   资讯
                 </Typography>
-                <Link href="" color="inherit">
+                <MUILink href="" color="inherit">
                   uwcssa新闻
-                </Link>
-                <Link href="" color="inherit">
+                </MUILink>
+                <MUILink href="" color="inherit">
                   uwcssa活动
-                </Link>
+                </MUILink>
               </Box>
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -99,13 +100,13 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   联系我们
                 </Typography>
-                <Link
+                <MUILink
                   color="inherit"
                   href="mailto:uwincssa.it@gmail.com"
                   className={classes.link}
                 >
                   邮箱: uwincssa.it@gmail.com
-                </Link>
+                </MUILink>
 
                 <Box className={classes.icons}>
                   <FacebookIcon />
@@ -126,7 +127,12 @@ export default function StickyFooter() {
                 <Typography variant="caption" gutterBottom>
                   来和我们一起工作吧! 我们一直在寻找优秀的人才加入我们的团队。
                 </Typography>
-                <Button variant="outlined" color="primary" href="">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  component={Link}
+                  to="/career"
+                >
                   查看职位
                 </Button>
               </Box>

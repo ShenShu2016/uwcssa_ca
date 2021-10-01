@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import React from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@material-ui/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "space-between",
     width: "80%",
     margin: "auto",
-    marginTop: "7rem",
+    marginTop: "3rem",
   },
   relateWeb: {
     display: "flex",
@@ -77,28 +79,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UwcssaIntro = ({ loggedIn }) => {
+const UwcssaIntro = ({ isAuthenticated }) => {
   const classes = useStyles();
-  // const userCounts = useSelector((state) => state.allUsers.users.count);
-  // const dispatch = useDispatch();
-
-  // const fetchUsers = async () => {
-  //   const response = await axios
-  //     .get(`${process.env.REACT_APP_API_URL}/users/total_counts/`)
-  //     .catch((err) => {
-  //       console.log("Err", err);
-  //     });
-
-  //   dispatch(setUsers(response.data));
-  // };
-  // console.log(userCounts);
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // console.log("Users:", userCounts);
-
+  console.log("isAuthenticated", isAuthenticated);
+  const userAuth = useSelector((state) => state.userAuth);
+  console.log("userAuth", userAuth);
   const guestButton = () => (
     <div>
       <Button
@@ -115,11 +100,31 @@ const UwcssaIntro = ({ loggedIn }) => {
   );
 
   const authButton = () => (
-    <div>
-      <Typography variant="h4">Welcome: </Typography>
-      <Typography variant="h5">
-        {/* {userAuth.user ? userAuth.user.username : ""} */}
-      </Typography>
+    <div>{userAuth.user===null ? '':(<div>
+      <Typography variant="h4">欢迎 : </Typography>
+      <Box mt={1} mb={1}>
+        <Typography variant="h5" noWrap>
+          {userAuth.user.username}
+        </Typography>
+      </Box>
+      <Box mt={1} mb={1}>
+        <Typography variant="subtitle" color={"secondary"}>
+          {userAuth.user.username.slice(0, 7) === "google_"
+            ? "我们建议您在我们网站注册账户，体验完整的系统"
+            : ""}
+        </Typography>
+      </Box>
+      <Box mt={2} mb={1}>
+        <Button
+          variant="contained"
+          color={"primary"}
+          size="large"
+          component={Link}
+          to="/account/dashboard"
+        >
+          个人中心
+        </Button>
+      </Box></div>) }
     </div>
   );
 
@@ -156,7 +161,7 @@ const UwcssaIntro = ({ loggedIn }) => {
                         </Grid>
                       </Grid>
                     </Box>
-                    {loggedIn ? authButton() : guestButton()}
+                    {isAuthenticated ? authButton() : guestButton()}
                     <Grid container spacing={1} className={classes.repoInfo}>
                       <Grid item xs={12} align="center">
                         <Typography variant="h6" gutterBottom>
@@ -256,4 +261,7 @@ const UwcssaIntro = ({ loggedIn }) => {
 
 // 这里有奇怪的问题，具体我也不知道
 
-export default UwcssaIntro;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userAuth.isAuthenticated,
+});
+export default connect(mapStateToProps, {})(UwcssaIntro);
