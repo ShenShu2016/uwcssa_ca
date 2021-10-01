@@ -8,6 +8,8 @@ import Storage from "@aws-amplify/storage";
 import {getUwcssaJob} from "../../graphql/queries"
 import Alert from '@material-ui/lab/Alert';
 import { v4 as uuid } from "uuid"
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import {createUwcssaJobResume} from "../../graphql/mutations"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +37,8 @@ export default function ApplyJob(props) {
   const {id} = props.match.params
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitFailure, setSubmitFailure] = useState(false);
   const [resume, setResume] = useState("");
   const userAuth = useSelector((state) => state.userAuth);
   
@@ -96,15 +100,35 @@ export default function ApplyJob(props) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     if(!userAuth.user){
       setOpen(true)
       setTimeout(() => {props.history.push("/signIn")},1200)
     }else{
-      if(!resume && !applyData.applyname || !resume && !applyData.applyemail || !resume && !applyData.applyphone){
+      if(!resume || !applyData.applyname || !applyData.applyemail || !applyData.applyphone){
         setInfo(true)
       }else{
-        postResume(resume)
+        if(resume){
+          postResume(resume)
+        }
+        try {
+          const createUwcssaJobResumeInput = {
+            name: applyData.applyname,
+            email: applyData.applyemail,
+            phone: applyData.applyphone,
+            resumeFilePath: applyData.resumePath,
+            uwcssaJobResumeUwcssaJobId: applyData.job.id
+          }
+          const newUwcssaJobResume = await API.graphql(graphqlOperation(createUwcssaJobResume,{input: createUwcssaJobResumeInput}))
+          console.log("newUwcssaJobResume",newUwcssaJobResume.data.createUwcssaJobResume)
+          if(newUwcssaJobResume) {
+            setSubmitSuccess(true)
+            setTimeout(() => {props.history.push("/career")},1200)
+          }
+        } catch (error) {
+          console.log("submit resume failure: ",error)
+          setSubmitFailure(true)
+        }
       }
     }
     console.log(applyData)
@@ -116,6 +140,14 @@ export default function ApplyJob(props) {
 
   const handleCloseInfo = (event, reason) => {
     setInfo(false);
+  }
+
+  const handleCloseSuccess = (event, reason) => {
+    setSubmitSuccess(false);
+  }
+
+  const handleCloseFailure = (event, reason) => {
+    setSubmitFailure(false);
   }
   
   return (
@@ -196,9 +228,19 @@ export default function ApplyJob(props) {
           请先登录!
         </Alert>
       </Snackbar>
-      <Snackbar open={info} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={3000} onClose={handleCloseInfo}>
-        <Alert severity="error" onClose={handleCloseInfo}>
-          请上传RESUME或者补充完整个人信息!
+      <Snackbar open={info} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={5000} onClose={handleCloseInfo}>
+        <Alert severity="warning" onClose={handleCloseInfo}>
+          请上传RESUME并补充完整个人信息!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={submitSuccess} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={3000} onClose={handleCloseSuccess}>
+        <Alert severity="success" onClose={handleCloseSuccess}>
+          申请提交成功,请耐心等待!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={submitFailure} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={4000} onClose={handleCloseFailure}>
+        <Alert severity="error" onClose={handleCloseFailure}>
+          申请提交失败,请重试!
         </Alert>
       </Snackbar>
     </div>

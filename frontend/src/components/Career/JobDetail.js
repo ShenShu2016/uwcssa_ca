@@ -85,7 +85,7 @@ export default function JobDetail(props) {
         )
       }):""}
       <br />
-      <Button variant="outlined" color="primary" to={`/career/applyjob/${job.id}`} component={Link}>
+      <Button variant="outlined" color="primary" to={`/career/applyJob/${job.id}`} component={Link}>
         申请
       </Button>
     </div>
