@@ -1,13 +1,12 @@
-import {React, useEffect, useState} from 'react'
-import { makeStyles, useTheme, Typography } from "@material-ui/core";
-import PropTypes from "prop-types";
+import {React, useEffect} from 'react'
+import { makeStyles, Typography } from "@material-ui/core";
 import {Link} from "react-router-dom"
 import {setDepartments,setUwcssaJobs} from "../../redux/actions/uwcssaJobActions"
 import store from "../../redux/store"
 import {useSelector} from 'react-redux'
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: "#fff",
     textAlign: "left",
@@ -33,11 +32,11 @@ export default function Openings() {
 
   return (
     <div className={classes.root}>
-      {departments.length==0?"":departments.map(department=>{
+      {departments.length===0?"":departments.map(department=>{
         return (
           <div key={department.name}>
             <Typography variant="h5">{department.name}</Typography>
-            {department.uwcssaJobs.items.length==0?"":department.uwcssaJobs.items.map(job => {
+            {department.uwcssaJobs.items.length===0?"":department.uwcssaJobs.items.map(job => {
               return (
                 <div key={job.id}>
                   <br />

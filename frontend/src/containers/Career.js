@@ -1,5 +1,5 @@
-import {React, useEffect, useState} from 'react'
-import { makeStyles, useTheme, Typography } from "@material-ui/core";
+import React from 'react'
+import { makeStyles, Typography } from "@material-ui/core";
 import Openings from "../components/Career/Openings"
 import JobDetail from "../components/Career/JobDetail"
 import ApplyJob from "../components/Career/ApplyJob"

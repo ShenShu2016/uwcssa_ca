@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import API from "@aws-amplify/api";
 import {getUwcssaJob} from "../../graphql/queries"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: "#fff",
     textAlign: "left",
@@ -28,7 +28,7 @@ export default function JobDetail(props) {
 
   useEffect(() => {
     fetchJob();
-  }, []);
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchJob = async () => {
     try {
