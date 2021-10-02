@@ -20,6 +20,39 @@ export const onCreateUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -42,6 +75,39 @@ export const onUpdateUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -64,6 +130,288 @@ export const onDeleteUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateUserEducation = /* GraphQL */ `
+  subscription OnCreateUserEducation {
+    onCreateUserEducation {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUserEducation = /* GraphQL */ `
+  subscription OnUpdateUserEducation {
+    onUpdateUserEducation {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUserEducation = /* GraphQL */ `
+  subscription OnDeleteUserEducation {
+    onDeleteUserEducation {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateUserExperience = /* GraphQL */ `
+  subscription OnCreateUserExperience {
+    onCreateUserExperience {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUserExperience = /* GraphQL */ `
+  subscription OnUpdateUserExperience {
+    onUpdateUserExperience {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUserExperience = /* GraphQL */ `
+  subscription OnDeleteUserExperience {
+    onDeleteUserExperience {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
     }
   }
 `;
@@ -1426,6 +1774,504 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         owner
         forumPostSubComments {
           nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateMarketType = /* GraphQL */ `
+  subscription OnCreateMarketType {
+    onCreateMarketType {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateMarketType = /* GraphQL */ `
+  subscription OnUpdateMarketType {
+    onUpdateMarketType {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteMarketType = /* GraphQL */ `
+  subscription OnDeleteMarketType {
+    onDeleteMarketType {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateMarketItem = /* GraphQL */ `
+  subscription OnCreateMarketItem {
+    onCreateMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemCondition {
+        name
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const onUpdateMarketItem = /* GraphQL */ `
+  subscription OnUpdateMarketItem {
+    onUpdateMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemCondition {
+        name
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const onDeleteMarketItem = /* GraphQL */ `
+  subscription OnDeleteMarketItem {
+    onDeleteMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemCondition {
+        name
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const onCreateMarketItemCategory = /* GraphQL */ `
+  subscription OnCreateMarketItemCategory {
+    onCreateMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCondition {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateMarketItemCategory = /* GraphQL */ `
+  subscription OnUpdateMarketItemCategory {
+    onUpdateMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCondition {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteMarketItemCategory = /* GraphQL */ `
+  subscription OnDeleteMarketItemCategory {
+    onDeleteMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCondition {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateMarketItemCondition = /* GraphQL */ `
+  subscription OnCreateMarketItemCondition {
+    onCreateMarketItemCondition {
+      name
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCondition {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateMarketItemCondition = /* GraphQL */ `
+  subscription OnUpdateMarketItemCondition {
+    onUpdateMarketItemCondition {
+      name
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCondition {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteMarketItemCondition = /* GraphQL */ `
+  subscription OnDeleteMarketItemCondition {
+    onDeleteMarketItemCondition {
+      name
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCondition {
+          name
+          createdAt
+          updatedAt
+          owner
         }
       }
       owner

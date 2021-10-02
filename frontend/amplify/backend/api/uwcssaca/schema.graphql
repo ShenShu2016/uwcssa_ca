@@ -38,6 +38,50 @@ type User
         { allow: public, operations: [read], provider: iam }
       ]
     )
+  UserEducations: [UserEducation] @connection(name: "UserUserEducations")
+  UserExperiences: [UserExperience] @connection(name: "UserUserExperiences")
+}
+
+type UserEducation
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  school: String!
+  degree: String
+  fieldOfStudy: String
+  startDate: AWSDate
+  endDate: AWSDate
+  grade: Int
+  description: String
+  user: User! @connection(name: "UserUserEducations")
+}
+type UserExperience
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  employmentType: String
+  companyName: String
+  location: String
+  startDate: AWSDate
+  endDate: AWSDate
+  industry: String
+  description: String
+  user: User! @connection(name: "UserUserExperiences")
 }
 
 type Topic
@@ -273,4 +317,76 @@ type ForumPostSubComment
   unlike: [String]!
   forumPostComment: ForumPostComment!
     @connection(name: "ForumPostCommentForumPostSubComment")
+}
+
+type MarketType
+  # 卖东西，卖车，房屋租售，职位空缺
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  marketItems: [MarketItem] @connection(name: "MarketTypeMarketItems")
+}
+
+type MarketItem
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  imagePath: [String]!
+  title: String!
+  price: Int
+  description: String
+  location: String
+  marketType: MarketType! @connection(name: "MarketTypeMarketItems")
+  marketItemCategory: MarketItemCategory!
+    @connection(name: "MarketItemMarketItemCategory")
+  marketItemCondition: MarketItemCondition!
+    @connection(name: "MarketItemMarketItemCondition")
+}
+
+type MarketItemCategory
+  # 工具，电子产品，保健
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCategory")
+}
+
+type MarketItemCondition
+  # 全新，二手，很旧
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCondition")
 }
