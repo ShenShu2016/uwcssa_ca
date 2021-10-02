@@ -1,6 +1,81 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      tags
+      createdAt
+      updatedAt
+      uWindsorEmail
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      tags
+      createdAt
+      updatedAt
+      uWindsorEmail
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      tags
+      createdAt
+      updatedAt
+      uWindsorEmail
+    }
+  }
+`;
 export const createTopic = /* GraphQL */ `
   mutation CreateTopic(
     $input: CreateTopicInput!
@@ -885,7 +960,6 @@ export const createForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
-      owner
       subTopics {
         items {
           name
@@ -893,7 +967,6 @@ export const createForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -911,7 +984,6 @@ export const updateForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
-      owner
       subTopics {
         items {
           name
@@ -919,7 +991,6 @@ export const updateForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -937,7 +1008,6 @@ export const deleteForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
-      owner
       subTopics {
         items {
           name
@@ -945,7 +1015,6 @@ export const deleteForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -969,12 +1038,10 @@ export const createForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
-        owner
         subTopics {
           nextToken
         }
       }
-      owner
       forumPosts {
         items {
           id
@@ -1008,12 +1075,10 @@ export const updateForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
-        owner
         subTopics {
           nextToken
         }
       }
-      owner
       forumPosts {
         items {
           id
@@ -1047,12 +1112,10 @@ export const deleteForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
-        owner
         subTopics {
           nextToken
         }
       }
-      owner
       forumPosts {
         items {
           id
@@ -1094,9 +1157,7 @@ export const createForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
-        owner
         forumPosts {
           nextToken
         }
@@ -1142,9 +1203,7 @@ export const updateForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
-        owner
         forumPosts {
           nextToken
         }
@@ -1190,9 +1249,7 @@ export const deleteForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
-        owner
         forumPosts {
           nextToken
         }
@@ -1239,7 +1296,6 @@ export const createForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
         owner
         forumPostComments {
@@ -1288,7 +1344,6 @@ export const updateForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
         owner
         forumPostComments {
@@ -1337,7 +1392,6 @@ export const deleteForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
-          owner
         }
         owner
         forumPostComments {

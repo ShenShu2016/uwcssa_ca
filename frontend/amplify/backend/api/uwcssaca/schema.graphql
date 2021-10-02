@@ -1,3 +1,37 @@
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "owner" }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  username: String!
+  email: String!
+  owner: String!
+  uWindsorEmail: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read] }
+        { allow: groups, groups: ["admin"], operations: [read] }
+        { allow: private, operations: [read] }
+        { allow: public, operations: [read], provider: iam }
+      ]
+    )
+  firstName: String
+  lastName: String
+  intro: String
+  major: String
+  avatarImgPath: String
+  backGroundImgPath: String
+  linkedin: String
+  github: String
+  tags: [String]
+}
+
 type Topic
   @model
   @auth(
@@ -165,9 +199,7 @@ type ForumTopic
   @model
   @auth(
     rules: [
-      { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["admin", "staff"] }
       # allow all authenticated users to view
       { allow: private, operations: [read] }
       # allow all guest users (not authenticated) to view
@@ -185,9 +217,7 @@ type ForumSubTopic
   @model
   @auth(
     rules: [
-      { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["admin", "staff"] }
       # allow all authenticated users to view
       { allow: private, operations: [read] }
       # allow all guest users (not authenticated) to view

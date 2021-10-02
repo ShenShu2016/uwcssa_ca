@@ -138,10 +138,6 @@ Parameters:
   authProviders:
     Type: CommaDelimitedList
       
-  googleClientId:
-    Type: String
-  
-            
   
   userPoolGroups:
     Type: String
@@ -170,19 +166,10 @@ Parameters:
     Type: String
   
             
-  hostedUIProviderCreds:
-    Type: String
-  
-            
-  oAuthMetadata:
-    Type: String
-  
-            
         
   userPoolGroupList:
     Type: CommaDelimitedList
       
-            
   serviceName:
     Type: String
   
@@ -211,6 +198,19 @@ Parameters:
   dependsOn:
     Type: CommaDelimitedList
       
+  hostedUIProviderCreds:
+    Type: String
+  
+            
+  googleClientId:
+    Type: String
+  
+            
+  oAuthMetadata:
+    Type: String
+  
+            
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
   

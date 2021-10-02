@@ -1,18 +1,4 @@
 {
-  "production": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-uwcssaca-production-01110-authRole",
-      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-production-01110-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-production-01110-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-uwcssaca-production-01110-deployment",
-      "UnauthRoleName": "amplify-uwcssaca-production-01110-unauthRole",
-      "StackName": "amplify-uwcssaca-production-01110",
-      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-production-01110/ca1fad70-19c8-11ec-8709-0aa0c2860894",
-      "AmplifyAppId": "dmsl2mfclfxp3",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-production-01110-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
-    }
-  },
   "develop": {
     "awscloudformation": {
       "AuthRoleName": "amplify-uwcssaca-develop-233420-authRole",
@@ -23,19 +9,20 @@
       "UnauthRoleName": "amplify-uwcssaca-develop-233420-unauthRole",
       "StackName": "amplify-uwcssaca-develop-233420",
       "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-develop-233420/f7f46c50-200c-11ec-9415-061c6c4c0322",
-      "AmplifyAppId": "dmsl2mfclfxp3"
+      "AmplifyAppId": "dmsl2mfclfxp3",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-develop-233420-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
-      "function": {
-        "uwinAuthPostConfirmation": {
-          "GROUP": "anyone",
-          "deploymentBucketName": "amplify-uwcssaca-develop-233420-deployment",
-          "s3Key": "amplify-builds/uwinAuthPostConfirmation-57445738653766397330-build.zip"
-        }
-      },
       "auth": {
         "uwinAuth": {
           "googleClientId": "1067602080073-mlhi1gk3uflq8v3b6hrm152vr0otofrs.apps.googleusercontent.com"
+        }
+      },
+      "function": {
+        "uwinAuthPostConfirmation": {
+          "deploymentBucketName": "amplify-uwcssaca-develop-233420-deployment",
+          "s3Key": "amplify-builds/uwinAuthPostConfirmation-3555343738614570696c-build.zip",
+          "GROUP": "anyone"
         }
       }
     }
