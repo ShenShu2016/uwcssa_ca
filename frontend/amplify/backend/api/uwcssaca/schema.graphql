@@ -16,7 +16,7 @@ type User
     @auth(
       rules: [
         { allow: owner, operations: [read] }
-        { allow: groups, groups: ["admin"], operations: [read] }
+        { allow: groups, groups: ["admin"] }
         { allow: private, operations: [read] }
         { allow: public, operations: [read], provider: iam }
       ]
@@ -30,6 +30,14 @@ type User
   linkedin: String
   github: String
   tags: [String]
+    @auth(
+      rules: [
+        { allow: owner, operations: [read] }
+        { allow: groups, groups: ["admin"] }
+        { allow: private, operations: [read] }
+        { allow: public, operations: [read], provider: iam }
+      ]
+    )
 }
 
 type Topic
@@ -37,11 +45,8 @@ type Topic
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -57,11 +62,8 @@ type Type
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -70,6 +72,7 @@ type Type
   like: [String]!
   unlike: [String]!
   articles: [Article] @connection(name: "TypeArticles")
+  owner: String
 }
 
 type Article
@@ -82,11 +85,8 @@ type Article
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -108,11 +108,8 @@ type ArticleComment
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -128,11 +125,8 @@ type Department
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -151,11 +145,8 @@ type UwcssaJob
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -179,11 +170,8 @@ type UwcssaJobResume
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -199,10 +187,9 @@ type ForumTopic
   @model
   @auth(
     rules: [
+      { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
-      # allow all authenticated users to view
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -217,10 +204,9 @@ type ForumSubTopic
   @model
   @auth(
     rules: [
+      { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
-      # allow all authenticated users to view
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -237,11 +223,8 @@ type ForumPost
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -260,11 +243,8 @@ type ForumPostComment
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -282,11 +262,8 @@ type ForumPostSubComment
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {

@@ -33,7 +33,7 @@ const departments = `query ListDepartments {
       }
     }
   }
-}`
+}`;
 
 export const setUwcssaJobs = () => async (dispatch) => {
   try {

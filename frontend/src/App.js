@@ -31,6 +31,7 @@ import Staff from "./containers/account/staff/Staff";
 import UwcssaJobsPreview from "./containers/account/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
+import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
 
 Amplify.configure(awsconfig);
@@ -48,11 +49,12 @@ const useStyles = makeStyles({
     },
   },
 });
-function App({ load_user, isAuthenticated }) {
+function App({ load_user, isAuthenticated, setUserCounts }) {
   const [signInOpen, setSignInOpen] = useState(false);
   const classes = useStyles();
   useEffect(() => {
     load_user();
+    setUserCounts();
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
@@ -154,4 +156,4 @@ function App({ load_user, isAuthenticated }) {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
-export default connect(mapStateToProps, { load_user })(App);
+export default connect(mapStateToProps, { load_user, setUserCounts })(App);

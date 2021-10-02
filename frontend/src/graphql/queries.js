@@ -16,10 +16,10 @@ export const getUser = /* GraphQL */ `
       backGroundImgPath
       linkedin
       github
-      tags
       createdAt
       updatedAt
       uWindsorEmail
+      tags
     }
   }
 `;
@@ -43,10 +43,10 @@ export const listUsers = /* GraphQL */ `
         backGroundImgPath
         linkedin
         github
-        tags
         createdAt
         updatedAt
         uWindsorEmail
+        tags
       }
       nextToken
     }
@@ -115,9 +115,9 @@ export const getType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -155,9 +155,9 @@ export const listTypes = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -193,9 +193,9 @@ export const getArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -245,9 +245,9 @@ export const listArticles = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -297,9 +297,9 @@ export const articlesByDate = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -341,9 +341,9 @@ export const getArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -629,6 +629,7 @@ export const getForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
+      owner
       subTopics {
         items {
           name
@@ -636,6 +637,7 @@ export const getForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -663,6 +665,7 @@ export const listForumTopics = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
+        owner
         subTopics {
           nextToken
         }
@@ -685,10 +688,12 @@ export const getForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
+        owner
         subTopics {
           nextToken
         }
       }
+      owner
       forumPosts {
         items {
           id
@@ -732,7 +737,9 @@ export const listForumSubTopics = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
+        owner
         forumPosts {
           nextToken
         }
@@ -763,7 +770,9 @@ export const getForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
+        owner
         forumPosts {
           nextToken
         }
@@ -805,6 +814,7 @@ export const listForumPosts = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         owner
         forumPostComments {
@@ -838,6 +848,7 @@ export const getForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         owner
         forumPostComments {

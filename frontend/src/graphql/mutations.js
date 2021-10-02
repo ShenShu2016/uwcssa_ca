@@ -19,10 +19,10 @@ export const createUser = /* GraphQL */ `
       backGroundImgPath
       linkedin
       github
-      tags
       createdAt
       updatedAt
       uWindsorEmail
+      tags
     }
   }
 `;
@@ -44,10 +44,10 @@ export const updateUser = /* GraphQL */ `
       backGroundImgPath
       linkedin
       github
-      tags
       createdAt
       updatedAt
       uWindsorEmail
+      tags
     }
   }
 `;
@@ -69,10 +69,10 @@ export const deleteUser = /* GraphQL */ `
       backGroundImgPath
       linkedin
       github
-      tags
       createdAt
       updatedAt
       uWindsorEmail
+      tags
     }
   }
 `;
@@ -175,9 +175,9 @@ export const createType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -205,9 +205,9 @@ export const updateType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -235,9 +235,9 @@ export const deleteType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -286,9 +286,9 @@ export const createArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -339,9 +339,9 @@ export const updateArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -392,9 +392,9 @@ export const deleteArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -449,9 +449,9 @@ export const createArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -496,9 +496,9 @@ export const updateArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -543,9 +543,9 @@ export const deleteArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -960,6 +960,7 @@ export const createForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
+      owner
       subTopics {
         items {
           name
@@ -967,6 +968,7 @@ export const createForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -984,6 +986,7 @@ export const updateForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
+      owner
       subTopics {
         items {
           name
@@ -991,6 +994,7 @@ export const updateForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -1008,6 +1012,7 @@ export const deleteForumTopic = /* GraphQL */ `
       unlike
       createdAt
       updatedAt
+      owner
       subTopics {
         items {
           name
@@ -1015,6 +1020,7 @@ export const deleteForumTopic = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -1038,10 +1044,12 @@ export const createForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
+        owner
         subTopics {
           nextToken
         }
       }
+      owner
       forumPosts {
         items {
           id
@@ -1075,10 +1083,12 @@ export const updateForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
+        owner
         subTopics {
           nextToken
         }
       }
+      owner
       forumPosts {
         items {
           id
@@ -1112,10 +1122,12 @@ export const deleteForumSubTopic = /* GraphQL */ `
         unlike
         createdAt
         updatedAt
+        owner
         subTopics {
           nextToken
         }
       }
+      owner
       forumPosts {
         items {
           id
@@ -1157,7 +1169,9 @@ export const createForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
+        owner
         forumPosts {
           nextToken
         }
@@ -1203,7 +1217,9 @@ export const updateForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
+        owner
         forumPosts {
           nextToken
         }
@@ -1249,7 +1265,9 @@ export const deleteForumPost = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
+        owner
         forumPosts {
           nextToken
         }
@@ -1296,6 +1314,7 @@ export const createForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         owner
         forumPostComments {
@@ -1344,6 +1363,7 @@ export const updateForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         owner
         forumPostComments {
@@ -1392,6 +1412,7 @@ export const deleteForumPostComment = /* GraphQL */ `
           unlike
           createdAt
           updatedAt
+          owner
         }
         owner
         forumPostComments {

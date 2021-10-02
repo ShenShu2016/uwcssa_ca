@@ -6,6 +6,7 @@ import {
 
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
+import { userReducer } from "./userReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
 const reducers = combineReducers({
@@ -14,5 +15,6 @@ const reducers = combineReducers({
   article: selectedArticleReducer,
   postArticle: postArticleReducer,
   allUwcssaJobs: uwcssaJobReducer,
+  allUsers: userReducer,
 });
 export default reducers;

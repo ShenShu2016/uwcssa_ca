@@ -21,7 +21,7 @@
       "function": {
         "uwinAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssaca-develop-233420-deployment",
-          "s3Key": "amplify-builds/uwinAuthPostConfirmation-3555343738614570696c-build.zip",
+          "s3Key": "amplify-builds/uwinAuthPostConfirmation-6c517a6e4a7065617534-build.zip",
           "GROUP": "anyone"
         }
       }

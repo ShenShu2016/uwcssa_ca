@@ -1,19 +1,21 @@
-import { Container, Paper } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import { connect, useSelector } from "react-redux";
 
-import Box from "@material-ui/core/Box";
-import { Button } from "@material-ui/core";
-import { ButtonGroup } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import GitHubButton from "react-github-btn";
-import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import React from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
-import Typography from "@material-ui/core/Typography";
-import { connect } from "react-redux";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@material-ui/styles";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +85,8 @@ const UwcssaIntro = ({ isAuthenticated }) => {
   const classes = useStyles();
   console.log("isAuthenticated", isAuthenticated);
   const userAuth = useSelector((state) => state.userAuth);
-  console.log("userAuth", userAuth);
+  const userCounts = useSelector((state) => state.allUsers.userCounts);
+
   const guestButton = () => (
     <div>
       <Button
@@ -100,31 +103,37 @@ const UwcssaIntro = ({ isAuthenticated }) => {
   );
 
   const authButton = () => (
-    <div>{userAuth.user===null ? '':(<div>
-      <Typography variant="h4">欢迎 : </Typography>
-      <Box mt={1} mb={1}>
-        <Typography variant="h5" noWrap>
-          {userAuth.user.username}
-        </Typography>
-      </Box>
-      <Box mt={1} mb={1}>
-        <Typography variant="subtitle" color={"secondary"}>
-          {userAuth.user.username.slice(0, 7) === "google_"
-            ? "我们建议您在我们网站注册账户，体验完整的系统"
-            : ""}
-        </Typography>
-      </Box>
-      <Box mt={2} mb={1}>
-        <Button
-          variant="contained"
-          color={"primary"}
-          size="large"
-          component={Link}
-          to="/account/dashboard"
-        >
-          个人中心
-        </Button>
-      </Box></div>) }
+    <div>
+      {userAuth.user === null ? (
+        ""
+      ) : (
+        <div>
+          <Typography variant="h4">欢迎 : </Typography>
+          <Box mt={1} mb={1}>
+            <Typography variant="h5" noWrap>
+              {userAuth.user.username}
+            </Typography>
+          </Box>
+          <Box mt={1} mb={1}>
+            <Typography variant="subtitle1" color={"secondary"}>
+              {userAuth.user.username.slice(0, 7) === "google_"
+                ? "我们建议您在我们网站注册账户，体验完整的系统"
+                : ""}
+            </Typography>
+          </Box>
+          <Box mt={2} mb={1}>
+            <Button
+              variant="contained"
+              color={"primary"}
+              size="large"
+              component={Link}
+              to="/account/dashboard"
+            >
+              个人中心
+            </Button>
+          </Box>
+        </div>
+      )}
     </div>
   );
 
@@ -149,7 +158,7 @@ const UwcssaIntro = ({ isAuthenticated }) => {
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Paper className={classes.paper}>
-                            <Typography variant="h5">666</Typography>
+                            <Typography variant="h5">{userCounts}</Typography>
                             <Typography variant="h5">用户</Typography>
                           </Paper>
                         </Grid>
