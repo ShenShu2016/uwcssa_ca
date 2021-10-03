@@ -353,10 +353,51 @@ type MarketItem
   description: String
   location: String
   marketType: MarketType! @connection(name: "MarketTypeMarketItems")
+  condition:String
   marketItemCategory: MarketItemCategory!
     @connection(name: "MarketItemMarketItemCategory")
-  marketItemCondition: MarketItemCondition!
-    @connection(name: "MarketItemMarketItemCondition")
+  marketItemCar: MarketItemCar @connection(name: "MarketItemMarketItemCar")
+  marketItemHome: MarketItemHome @connection(name: "MarketItemMarketItemHome")
+}
+
+
+type MarketItemCar
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  year:String!
+  make:String!
+  model:String!
+  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCar")
+}
+
+type MarketItemHome
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  saleOrRent:String!
+  property:String!
+  bedroomCounts:Int!
+  bathroomsCounts:Int!
+  propertySize:Int
+  laundryType:String
+  airCondition:String
+  heating:String
+  marketItem: MarketItem! @connection(name: "MarketItemMarketItemHome")
 }
 
 type MarketItemCategory
@@ -373,20 +414,4 @@ type MarketItemCategory
   @key(fields: ["name"]) {
   name: String!
   marketItem: MarketItem! @connection(name: "MarketItemMarketItemCategory")
-}
-
-type MarketItemCondition
-  # 全新，二手，很旧
-  @model
-  @auth(
-    rules: [
-      { allow: owner }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(fields: ["name"]) {
-  name: String!
-  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCondition")
 }

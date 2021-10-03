@@ -1199,6 +1199,7 @@ export const getMarketType = /* GraphQL */ `
           price
           description
           location
+          condition
           createdAt
           updatedAt
           owner
@@ -1246,6 +1247,7 @@ export const getMarketItem = /* GraphQL */ `
       price
       description
       location
+      condition
       createdAt
       updatedAt
       marketType {
@@ -1258,6 +1260,55 @@ export const getMarketItem = /* GraphQL */ `
         }
       }
       owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
       marketItemCategory {
         name
         createdAt
@@ -1270,24 +1321,7 @@ export const getMarketItem = /* GraphQL */ `
           price
           description
           location
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      marketItemCondition {
-        name
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
+          condition
           createdAt
           updatedAt
           owner
@@ -1312,6 +1346,7 @@ export const listMarketItems = /* GraphQL */ `
         price
         description
         location
+        condition
         createdAt
         updatedAt
         marketType {
@@ -1321,18 +1356,233 @@ export const listMarketItems = /* GraphQL */ `
           owner
         }
         owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
         marketItemCategory {
           name
           createdAt
           updatedAt
           owner
         }
-        marketItemCondition {
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketItemCar = /* GraphQL */ `
+  query GetMarketItemCar($id: ID!) {
+    getMarketItemCar(id: $id) {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
           name
           createdAt
           updatedAt
           owner
         }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listMarketItemCars = /* GraphQL */ `
+  query ListMarketItemCars(
+    $filter: ModelMarketItemCarFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMarketItemCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketItemHome = /* GraphQL */ `
+  query GetMarketItemHome($id: ID!) {
+    getMarketItemHome(id: $id) {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listMarketItemHomes = /* GraphQL */ `
+  query ListMarketItemHomes(
+    $filter: ModelMarketItemHomeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMarketItemHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
       }
       nextToken
     }
@@ -1352,6 +1602,7 @@ export const getMarketItemCategory = /* GraphQL */ `
         price
         description
         location
+        condition
         createdAt
         updatedAt
         marketType {
@@ -1361,13 +1612,30 @@ export const getMarketItemCategory = /* GraphQL */ `
           owner
         }
         owner
-        marketItemCategory {
-          name
+        marketItemCar {
+          id
+          year
+          make
+          model
           createdAt
           updatedAt
           owner
         }
-        marketItemCondition {
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
           name
           createdAt
           updatedAt
@@ -1405,83 +1673,7 @@ export const listMarketItemCategories = /* GraphQL */ `
           price
           description
           location
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getMarketItemCondition = /* GraphQL */ `
-  query GetMarketItemCondition($name: String!) {
-    getMarketItemCondition(name: $name) {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        createdAt
-        updatedAt
-        marketType {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCondition {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const listMarketItemConditions = /* GraphQL */ `
-  query ListMarketItemConditions(
-    $name: String
-    $filter: ModelMarketItemConditionFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listMarketItemConditions(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        name
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
+          condition
           createdAt
           updatedAt
           owner
