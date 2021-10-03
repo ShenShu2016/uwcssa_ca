@@ -2,9 +2,9 @@ import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import React from "react";
-import TempLinkBar from "../../../components/Account/TempLinkBar";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: "960px",
@@ -16,7 +16,6 @@ const Staff = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <TempLinkBar />
       <Typography variant="h4">Staff</Typography>
       <Box>
         <Button

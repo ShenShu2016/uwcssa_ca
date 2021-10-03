@@ -11,6 +11,10 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import { DrawerListItems } from "../components/Drawer/DrawerListItems";
+import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Redirect } from "react-router";
 import StorefrontIcon from "@material-ui/icons/Storefront";
@@ -69,7 +73,28 @@ const Header = ({ signOut, isAuthenticated }) => {
   const isMenuOpen = Boolean(anchorEl);
   const history = useHistory();
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [drawer, setDrawer] = useState(false);
 
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setDrawer(open);
+  };
+
+  const drawerList = () => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      {DrawerListItems}
+    </Box>
+  );
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -161,7 +186,7 @@ const Header = ({ signOut, isAuthenticated }) => {
         </IconButton>
         <p>加入我们</p>
       </MenuItem>
-      <MenuItem component={Link} to="/graphqltesting" onClick={handleMenuClose}>
+      <MenuItem component={Link} to="/graphqlTesting" onClick={handleMenuClose}>
         <IconButton>
           <StorefrontIcon />
         </IconButton>
@@ -198,7 +223,20 @@ const Header = ({ signOut, isAuthenticated }) => {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
+        {" "}
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleDrawer(true)}
+            edge="start"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer open={drawer} onClose={toggleDrawer(false)}>
+            {drawerList()}
+          </Drawer>
+
           <img
             src={uwcssaLogo}
             alt="uwcssaLogo"

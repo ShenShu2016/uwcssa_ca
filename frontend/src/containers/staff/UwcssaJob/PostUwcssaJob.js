@@ -1,5 +1,4 @@
 import React from "react";
-import TempLinkBar from "../../../../components/Account/TempLinkBar";
 import { Typography } from "@mui/material";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
@@ -13,7 +12,6 @@ function PostUwcssaJob() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <TempLinkBar />
       <Typography variant="h1">Post UwcssaJob</Typography>
     </div>
   );

@@ -11,12 +11,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
 import React from "react";
 import { Redirect } from "react-router";
-import TempLinkBar from "../../components/Account/TempLinkBar";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/styles";
 import { useSelector } from "react-redux";
 const useStyles = makeStyles({
   root: {
+    marginTop: "1rem",
     maxWidth: "960px",
     margin: "auto",
     paddingInline: "1rem",
@@ -57,8 +57,6 @@ function Dashboard() {
     <div>
       {userAuth.isAuthenticated === true ? (
         <div className={classes.root}>
-          <TempLinkBar />
-          <Typography variant="h3">Dashboard</Typography>
           <Card elevation={0} className={classes.header}>
             <CardActionArea>
               <CardMedia
