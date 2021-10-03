@@ -83,7 +83,11 @@ function App({ load_user, isAuthenticated, setUserCounts }) {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/account/dashboard" exact component={Dashboard} />
-                <Route path="/account/profile" exact component={Profile} />
+                <Route
+                  path="/account/profile/:username"
+                  exact
+                  component={Profile}
+                />
                 <Route path="/account/myAccount" exact component={MyAccount} />
                 <Route path="/staff" exact component={Staff} />
                 <Route

@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { Card, TableHead, Typography } from "@mui/material";
+import { Card, CardContent, TableHead, Typography } from "@mui/material";
 
 import Box from "@mui/material/Box";
-import { CardContent } from "@material-ui/core";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -121,7 +120,7 @@ const rows = [
   createData("Oreo", 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-const MyForumPosts = () => {
+const MyMarketPosts = () => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -144,7 +143,7 @@ const MyForumPosts = () => {
       <CardContent>
         <Box className={classes.title}>
           <Typography gutterBottom variant="h5" component="div">
-            我的帖子
+            我的商品
           </Typography>
         </Box>
       </CardContent>
@@ -206,4 +205,4 @@ const MyForumPosts = () => {
     </Card>
   );
 };
-export default MyForumPosts;
+export default MyMarketPosts;

@@ -7,8 +7,8 @@ type User
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
-  id: ID!
+  )
+  @key(fields: ["username"]) {
   username: String!
   email: String!
   owner: String!
@@ -353,13 +353,12 @@ type MarketItem
   description: String
   location: String
   marketType: MarketType! @connection(name: "MarketTypeMarketItems")
-  condition:String
+  condition: String
   marketItemCategory: MarketItemCategory!
     @connection(name: "MarketItemMarketItemCategory")
   marketItemCar: MarketItemCar @connection(name: "MarketItemMarketItemCar")
   marketItemHome: MarketItemHome @connection(name: "MarketItemMarketItemHome")
 }
-
 
 type MarketItemCar
   @model
@@ -372,9 +371,9 @@ type MarketItemCar
     ]
   ) {
   id: ID!
-  year:String!
-  make:String!
-  model:String!
+  year: String!
+  make: String!
+  model: String!
   marketItem: MarketItem! @connection(name: "MarketItemMarketItemCar")
 }
 
@@ -389,14 +388,14 @@ type MarketItemHome
     ]
   ) {
   id: ID!
-  saleOrRent:String!
-  property:String!
-  bedroomCounts:Int!
-  bathroomsCounts:Int!
-  propertySize:Int
-  laundryType:String
-  airCondition:String
-  heating:String
+  saleOrRent: String!
+  property: String!
+  bedroomCounts: Int!
+  bathroomsCounts: Int!
+  propertySize: Int
+  laundryType: String
+  airCondition: String
+  heating: String
   marketItem: MarketItem! @connection(name: "MarketItemMarketItemHome")
 }
 

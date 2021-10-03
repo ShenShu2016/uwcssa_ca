@@ -6,9 +6,9 @@ exports.handler = async (event) => {
   if (event.request.userAttributes.sub) {
     let params = {
       Item: {
-        id: { S: event.request.userAttributes.sub },
-        __typename: { S: "User" },
+        // id: { S: event.request.userAttributes.sub },
         username: { S: event.userName },
+        __typename: { S: "User" },
         email: { S: event.request.userAttributes.email },
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },

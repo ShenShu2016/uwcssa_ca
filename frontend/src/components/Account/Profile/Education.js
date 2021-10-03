@@ -3,6 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/styles";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "960px",
@@ -10,17 +11,18 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "1rem",
   },
 }));
-function CurrentJob() {
+
+function Education() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Card sx={{ minWidth: 315 }}>
+      <Card>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Word of the Day
+            教育经历
           </Typography>
           <Typography variant="h5" component="div">
-            benevolent
+            教育经历
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             adjective
@@ -36,4 +38,4 @@ function CurrentJob() {
   );
 }
 
-export default CurrentJob;
+export default Education;

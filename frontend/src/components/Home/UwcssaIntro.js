@@ -8,14 +8,15 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 
 import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
-import React from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@material-ui/styles";
+import { setUserCounts } from "../../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,9 +82,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UwcssaIntro = ({ isAuthenticated }) => {
+const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
   const classes = useStyles();
-  console.log("isAuthenticated", isAuthenticated);
+  useEffect(() => {
+    setUserCounts();
+  }, []);
   const userAuth = useSelector((state) => state.userAuth);
   const userCounts = useSelector((state) => state.allUsers.userCounts);
 
@@ -273,4 +276,4 @@ const UwcssaIntro = ({ isAuthenticated }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
-export default connect(mapStateToProps, {})(UwcssaIntro);
+export default connect(mapStateToProps, { setUserCounts })(UwcssaIntro);

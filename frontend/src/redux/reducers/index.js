@@ -3,10 +3,10 @@ import {
   postArticleReducer,
   selectedArticleReducer,
 } from "./articleReducer";
+import { selectedUserReducer, userReducer } from "./userReducer";
 
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
-import { userReducer } from "./userReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
 const reducers = combineReducers({
@@ -16,5 +16,6 @@ const reducers = combineReducers({
   postArticle: postArticleReducer,
   allUwcssaJobs: uwcssaJobReducer,
   allUsers: userReducer,
+  user: selectedUserReducer,
 });
 export default reducers;

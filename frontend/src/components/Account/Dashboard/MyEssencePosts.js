@@ -11,17 +11,17 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "1rem",
   },
 }));
-function FavoriteTopic() {
+function MyEssencePosts() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Card sx={{ minWidth: "350px" }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Word of the Day
+            我的精华贴
           </Typography>
           <Typography variant="h5" component="div">
-            喜欢的论坛类别
+            我的精华贴
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             adjective
@@ -37,4 +37,4 @@ function FavoriteTopic() {
   );
 }
 
-export default FavoriteTopic;
+export default MyEssencePosts;

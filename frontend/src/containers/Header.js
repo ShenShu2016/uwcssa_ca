@@ -11,9 +11,8 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import { DrawerListItems } from "../components/Drawer/DrawerListItems";
+import DrawerList from "../components/Drawer/DrawerList";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Redirect } from "react-router";
@@ -24,6 +23,9 @@ import { signOut } from "../redux/actions/authActions";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
 const useStyles = makeStyles((theme) => ({
+  toolbar: {
+    // maxWidth: "1300px",
+  },
   grow: {
     flexGrow: 1,
   },
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
   sectionDesktop: {
     display: "none",
+    marginInline: "1rem",
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },
@@ -85,16 +88,6 @@ const Header = ({ signOut, isAuthenticated }) => {
     setDrawer(open);
   };
 
-  const drawerList = () => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      {DrawerListItems}
-    </Box>
-  );
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -178,7 +171,7 @@ const Header = ({ signOut, isAuthenticated }) => {
         <IconButton>
           <StorefrontIcon />
         </IconButton>
-        <p>Article</p>
+        <p>文章</p>
       </MenuItem>
       <MenuItem component={Link} to="/career" onClick={handleMenuClose}>
         <IconButton>
@@ -223,8 +216,7 @@ const Header = ({ signOut, isAuthenticated }) => {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        {" "}
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -234,9 +226,8 @@ const Header = ({ signOut, isAuthenticated }) => {
             <MenuIcon />
           </IconButton>
           <Drawer open={drawer} onClose={toggleDrawer(false)}>
-            {drawerList()}
+            <DrawerList toggleDrawer={toggleDrawer} />
           </Drawer>
-
           <img
             src={uwcssaLogo}
             alt="uwcssaLogo"
@@ -257,9 +248,9 @@ const Header = ({ signOut, isAuthenticated }) => {
             onClick={() => {
               history.push("/");
             }}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", fontSize: "25px" }}
             className={classes.title}
-            variant="h6"
+            // variant="h6"
             noWrap
           >
             温莎大学中国学生学者联谊会
@@ -269,16 +260,15 @@ const Header = ({ signOut, isAuthenticated }) => {
           <div className={classes.sectionDesktop}>
             <Button
               variant="text"
-              style={{ color: "#FFF" }}
+              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
               component={Link}
               to="/article"
             >
-              Article
+              文章
             </Button>
-
             <Button
               variant="text"
-              style={{ color: "#FFF" }}
+              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
               component={Link}
               to="/career"
             >
@@ -286,7 +276,7 @@ const Header = ({ signOut, isAuthenticated }) => {
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF" }}
+              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
               component={Link}
               to="/graphqlTesting"
             >
@@ -299,7 +289,11 @@ const Header = ({ signOut, isAuthenticated }) => {
                 component={Link}
                 to="/signIn"
                 variant="text"
-                style={{ color: "#FFF" }}
+                style={{
+                  color: "#FFF",
+                  fontSize: "23px",
+                  marginInline: "1rem",
+                }}
               >
                 登陆
               </Button>
@@ -313,7 +307,7 @@ const Header = ({ signOut, isAuthenticated }) => {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountCircle fontSize={"large"} />
               </IconButton>
             ) : (
               ""

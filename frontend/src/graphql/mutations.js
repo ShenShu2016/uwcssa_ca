@@ -7,7 +7,6 @@ export const createUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     createUser(input: $input, condition: $condition) {
-      id
       username
       email
       owner
@@ -65,7 +64,6 @@ export const updateUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
-      id
       username
       email
       owner
@@ -123,7 +121,6 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
-      id
       username
       email
       owner
@@ -192,7 +189,6 @@ export const createUserEducation = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -236,7 +232,6 @@ export const updateUserEducation = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -280,7 +275,6 @@ export const deleteUserEducation = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -325,7 +319,6 @@ export const createUserExperience = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -370,7 +363,6 @@ export const updateUserExperience = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -415,7 +407,6 @@ export const deleteUserExperience = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner

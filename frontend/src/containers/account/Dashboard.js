@@ -1,14 +1,17 @@
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
+import { Button } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import { CardActionArea } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CurrentJob from "../../components/Account/Dashboard/CurrentJob";
-import Education from "../../components/Account/Dashboard/Education";
+import EditIcon from "@mui/icons-material/Edit";
 import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
 import LinearProgress from "@mui/material/LinearProgress";
+import { Link } from "react-router-dom";
+import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
 import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
+import MyMarketPosts from "../../components/Account/Dashboard/MyMarketPosts";
 import React from "react";
 import { Redirect } from "react-router";
 import Typography from "@mui/material/Typography";
@@ -27,6 +30,10 @@ const useStyles = makeStyles({
   avatar: {
     top: "-75px",
     marginLeft: "1rem",
+  },
+  edit: {
+    top: "-160px",
+    float: "right",
   },
   info: {
     minHeight: "150px",
@@ -65,7 +72,7 @@ function Dashboard() {
                 image="https://cdn1.dotesports.com/wp-content/uploads/2021/05/27113316/diablo-II-resurrected-pc-specs.jpg"
                 alt="green iguana"
                 className={classes.banner}
-              />{" "}
+              />
             </CardActionArea>
 
             <CardContent className={classes.info}>
@@ -76,6 +83,17 @@ function Dashboard() {
                   sx={{ width: 150, height: 150 }}
                   className={classes.avatar}
                 />
+
+                <Button
+                  variant="contained"
+                  endIcon={<EditIcon />}
+                  color="primary"
+                  className={classes.edit}
+                  component={Link}
+                  to={`/account/profile/${userAuth.user.username}`}
+                >
+                  点击编辑
+                </Button>
               </div>
               <Typography gutterBottom variant="h4" component="div">
                 {userAuth.user.username}
@@ -86,12 +104,12 @@ function Dashboard() {
             </CardContent>
           </Card>
           <Box className={classes.infoCards}>
-            <Education />
-            <CurrentJob />
             <FavoriteTopic />
+            <MyEssencePosts />
           </Box>
           <Box className={classes.myForumPosts}>
             <MyForumPosts />
+            <MyMarketPosts />
           </Box>
         </div>
       ) : (

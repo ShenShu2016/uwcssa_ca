@@ -4,7 +4,6 @@
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
-      id
       username
       email
       owner
@@ -59,7 +58,6 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
-      id
       username
       email
       owner
@@ -114,7 +112,6 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
-      id
       username
       email
       owner
@@ -180,7 +177,6 @@ export const onCreateUserEducation = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -221,7 +217,6 @@ export const onUpdateUserEducation = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -262,7 +257,6 @@ export const onDeleteUserEducation = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -304,7 +298,6 @@ export const onCreateUserExperience = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -346,7 +339,6 @@ export const onUpdateUserExperience = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
@@ -388,7 +380,6 @@ export const onDeleteUserExperience = /* GraphQL */ `
       createdAt
       updatedAt
       user {
-        id
         username
         email
         owner
