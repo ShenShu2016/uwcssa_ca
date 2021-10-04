@@ -56,8 +56,8 @@ type UserEducation
   school: String!
   degree: String
   fieldOfStudy: String
-  startDate: AWSDate
-  endDate: AWSDate
+  startDate: AWSDateTime
+  endDate: AWSDateTime
   grade: Int
   description: String
   user: User! @connection(name: "UserUserEducations")
@@ -75,10 +75,10 @@ type UserExperience
   id: ID!
   title: String!
   employmentType: String
-  companyName: String
+  companyName: String!
   location: String
-  startDate: AWSDate
-  endDate: AWSDate
+  startDate: AWSDateTime
+  endDate: AWSDateTime
   industry: String
   description: String
   user: User! @connection(name: "UserUserExperiences")

@@ -23,3 +23,47 @@ export const selectedUserReducer = (state = {}, { type, payload }) => {
       return state;
   }
 };
+
+export const postUserEducationReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.POST_USER_EDUCATION_SUCCESS:
+      return { ...state, ...payload };
+    case ActionTypes.POST_USER_EDUCATION_FAIL:
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};
+
+export const putUserEducationReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.UPDATE_USER_EDUCATION_SUCCESS:
+      return { ...state, ...payload };
+    case ActionTypes.UPDATE_USER_EDUCATION__FAIL:
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};
+
+export const postUserExperienceReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.POST_USER_EXPERIENCE_SUCCESS:
+      return { ...state, ...payload };
+    case ActionTypes.POST_USER_EXPERIENCE_FAIL:
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};
+
+export const putUserExperienceReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.UPDATE_USER_EXPERIENCE_SUCCESS:
+      return { ...state, ...payload };
+    case ActionTypes.UPDATE_USER_EXPERIENCE__FAIL:
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};

@@ -11,6 +11,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -48,6 +49,8 @@ const ArticleComments = ({ article }) => {
                       <Avatar
                         aria-label="recipe"
                         className={classes.avatar}
+                        component={Link}
+                        to={`/account/profile/${owner}`}
                       ></Avatar>
                     }
                     action={

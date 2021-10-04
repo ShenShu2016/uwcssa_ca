@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
   const classes = useStyles();
   useEffect(() => {
-    setUserCounts();
+    setUserCounts();// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const userAuth = useSelector((state) => state.userAuth);
   const userCounts = useSelector((state) => state.allUsers.userCounts);
