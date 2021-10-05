@@ -10,7 +10,6 @@ import Edit from "./Education/Edit";
 import EditIcon from "@mui/icons-material/Edit";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/styles";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {

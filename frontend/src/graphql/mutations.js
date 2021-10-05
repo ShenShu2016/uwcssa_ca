@@ -1993,6 +1993,93 @@ export const deleteMarketType = /* GraphQL */ `
     }
   }
 `;
+export const createMarketItemCategory = /* GraphQL */ `
+  mutation CreateMarketItemCategory(
+    $input: CreateMarketItemCategoryInput!
+    $condition: ModelMarketItemCategoryConditionInput
+  ) {
+    createMarketItemCategory(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateMarketItemCategory = /* GraphQL */ `
+  mutation UpdateMarketItemCategory(
+    $input: UpdateMarketItemCategoryInput!
+    $condition: ModelMarketItemCategoryConditionInput
+  ) {
+    updateMarketItemCategory(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteMarketItemCategory = /* GraphQL */ `
+  mutation DeleteMarketItemCategory(
+    $input: DeleteMarketItemCategoryInput!
+    $condition: ModelMarketItemCategoryConditionInput
+  ) {
+    deleteMarketItemCategory(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createMarketItem = /* GraphQL */ `
   mutation CreateMarketItem(
     $input: CreateMarketItemInput!
@@ -2010,6 +2097,15 @@ export const createMarketItem = /* GraphQL */ `
       createdAt
       updatedAt
       marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
         name
         createdAt
         updatedAt
@@ -2051,25 +2147,6 @@ export const createMarketItem = /* GraphQL */ `
         laundryType
         airCondition
         heating
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      marketItemCategory {
-        name
         createdAt
         updatedAt
         marketItem {
@@ -2115,95 +2192,7 @@ export const updateMarketItem = /* GraphQL */ `
           nextToken
         }
       }
-      owner
-      marketItemCar {
-        id
-        year
-        make
-        model
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      marketItemHome {
-        id
-        saleOrRent
-        property
-        bedroomCounts
-        bathroomsCounts
-        propertySize
-        laundryType
-        airCondition
-        heating
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
       marketItemCategory {
-        name
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-    }
-  }
-`;
-export const deleteMarketItem = /* GraphQL */ `
-  mutation DeleteMarketItem(
-    $input: DeleteMarketItemInput!
-    $condition: ModelMarketItemConditionInput
-  ) {
-    deleteMarketItem(input: $input, condition: $condition) {
-      id
-      name
-      imagePath
-      title
-      price
-      description
-      location
-      condition
-      createdAt
-      updatedAt
-      marketType {
         name
         createdAt
         updatedAt
@@ -2262,8 +2251,76 @@ export const deleteMarketItem = /* GraphQL */ `
         }
         owner
       }
+    }
+  }
+`;
+export const deleteMarketItem = /* GraphQL */ `
+  mutation DeleteMarketItem(
+    $input: DeleteMarketItemInput!
+    $condition: ModelMarketItemConditionInput
+  ) {
+    deleteMarketItem(input: $input, condition: $condition) {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
       marketItemCategory {
         name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
         createdAt
         updatedAt
         marketItem {
@@ -2313,6 +2370,12 @@ export const createMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2333,12 +2396,6 @@ export const createMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2377,6 +2434,12 @@ export const updateMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2397,12 +2460,6 @@ export const updateMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2441,6 +2498,12 @@ export const deleteMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2461,12 +2524,6 @@ export const deleteMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2510,6 +2567,12 @@ export const createMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2530,12 +2593,6 @@ export const createMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2579,6 +2636,12 @@ export const updateMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2599,12 +2662,6 @@ export const updateMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2648,62 +2705,7 @@ export const deleteMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
         marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const createMarketItemCategory = /* GraphQL */ `
-  mutation CreateMarketItemCategory(
-    $input: CreateMarketItemCategoryInput!
-    $condition: ModelMarketItemCategoryConditionInput
-  ) {
-    createMarketItemCategory(input: $input, condition: $condition) {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
           name
           createdAt
           updatedAt
@@ -2729,134 +2731,6 @@ export const createMarketItemCategory = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const updateMarketItemCategory = /* GraphQL */ `
-  mutation UpdateMarketItemCategory(
-    $input: UpdateMarketItemCategoryInput!
-    $condition: ModelMarketItemCategoryConditionInput
-  ) {
-    updateMarketItemCategory(input: $input, condition: $condition) {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const deleteMarketItemCategory = /* GraphQL */ `
-  mutation DeleteMarketItemCategory(
-    $input: DeleteMarketItemCategoryInput!
-    $condition: ModelMarketItemCategoryConditionInput
-  ) {
-    deleteMarketItemCategory(input: $input, condition: $condition) {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner

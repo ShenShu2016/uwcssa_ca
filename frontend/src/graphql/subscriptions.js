@@ -1849,6 +1849,84 @@ export const onDeleteMarketType = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMarketItemCategory = /* GraphQL */ `
+  subscription OnCreateMarketItemCategory {
+    onCreateMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateMarketItemCategory = /* GraphQL */ `
+  subscription OnUpdateMarketItemCategory {
+    onUpdateMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteMarketItemCategory = /* GraphQL */ `
+  subscription OnDeleteMarketItemCategory {
+    onDeleteMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const onCreateMarketItem = /* GraphQL */ `
   subscription OnCreateMarketItem {
     onCreateMarketItem {
@@ -1863,6 +1941,15 @@ export const onCreateMarketItem = /* GraphQL */ `
       createdAt
       updatedAt
       marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
         name
         createdAt
         updatedAt
@@ -1904,25 +1991,6 @@ export const onCreateMarketItem = /* GraphQL */ `
         laundryType
         airCondition
         heating
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      marketItemCategory {
-        name
         createdAt
         updatedAt
         marketItem {
@@ -1965,92 +2033,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
           nextToken
         }
       }
-      owner
-      marketItemCar {
-        id
-        year
-        make
-        model
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      marketItemHome {
-        id
-        saleOrRent
-        property
-        bedroomCounts
-        bathroomsCounts
-        propertySize
-        laundryType
-        airCondition
-        heating
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
       marketItemCategory {
-        name
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-    }
-  }
-`;
-export const onDeleteMarketItem = /* GraphQL */ `
-  subscription OnDeleteMarketItem {
-    onDeleteMarketItem {
-      id
-      name
-      imagePath
-      title
-      price
-      description
-      location
-      condition
-      createdAt
-      updatedAt
-      marketType {
         name
         createdAt
         updatedAt
@@ -2109,8 +2092,73 @@ export const onDeleteMarketItem = /* GraphQL */ `
         }
         owner
       }
+    }
+  }
+`;
+export const onDeleteMarketItem = /* GraphQL */ `
+  subscription OnDeleteMarketItem {
+    onDeleteMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
       marketItemCategory {
         name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
         createdAt
         updatedAt
         marketItem {
@@ -2157,6 +2205,12 @@ export const onCreateMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2177,12 +2231,6 @@ export const onCreateMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2218,6 +2266,12 @@ export const onUpdateMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2238,12 +2292,6 @@ export const onUpdateMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2279,6 +2327,12 @@ export const onDeleteMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2299,12 +2353,6 @@ export const onDeleteMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2345,6 +2393,12 @@ export const onCreateMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2365,12 +2419,6 @@ export const onCreateMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2411,6 +2459,12 @@ export const onUpdateMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -2431,12 +2485,6 @@ export const onUpdateMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -2477,59 +2525,7 @@ export const onDeleteMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
         marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onCreateMarketItemCategory = /* GraphQL */ `
-  subscription OnCreateMarketItemCategory {
-    onCreateMarketItemCategory {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
           name
           createdAt
           updatedAt
@@ -2555,128 +2551,6 @@ export const onCreateMarketItemCategory = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateMarketItemCategory = /* GraphQL */ `
-  subscription OnUpdateMarketItemCategory {
-    onUpdateMarketItemCategory {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteMarketItemCategory = /* GraphQL */ `
-  subscription OnDeleteMarketItemCategory {
-    onDeleteMarketItemCategory {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner

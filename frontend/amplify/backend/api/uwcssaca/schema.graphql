@@ -334,6 +334,21 @@ type MarketType
   name: String!
   marketItems: [MarketItem] @connection(name: "MarketTypeMarketItems")
 }
+type MarketItemCategory
+  # 工具，电子产品，保健
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  marketItems: [MarketItem] @connection(name: "MarketItemCategoryMarketItems")
+}
 
 type MarketItem
   @model
@@ -355,7 +370,7 @@ type MarketItem
   marketType: MarketType! @connection(name: "MarketTypeMarketItems")
   condition: String
   marketItemCategory: MarketItemCategory!
-    @connection(name: "MarketItemMarketItemCategory")
+    @connection(name: "MarketItemCategoryMarketItems")
   marketItemCar: MarketItemCar @connection(name: "MarketItemMarketItemCar")
   marketItemHome: MarketItemHome @connection(name: "MarketItemMarketItemHome")
 }
@@ -399,18 +414,4 @@ type MarketItemHome
   marketItem: MarketItem! @connection(name: "MarketItemMarketItemHome")
 }
 
-type MarketItemCategory
-  # 工具，电子产品，保健
-  @model
-  @auth(
-    rules: [
-      { allow: owner }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(fields: ["name"]) {
-  name: String!
-  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCategory")
-}
+

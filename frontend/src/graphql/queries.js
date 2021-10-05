@@ -1239,6 +1239,60 @@ export const listMarketTypes = /* GraphQL */ `
     }
   }
 `;
+export const getMarketItemCategory = /* GraphQL */ `
+  query GetMarketItemCategory($name: String!) {
+    getMarketItemCategory(name: $name) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listMarketItemCategories = /* GraphQL */ `
+  query ListMarketItemCategories(
+    $name: String
+    $filter: ModelMarketItemCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listMarketItemCategories(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getMarketItem = /* GraphQL */ `
   query GetMarketItem($id: ID!) {
     getMarketItem(id: $id) {
@@ -1253,6 +1307,15 @@ export const getMarketItem = /* GraphQL */ `
       createdAt
       updatedAt
       marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
         name
         createdAt
         updatedAt
@@ -1311,25 +1374,6 @@ export const getMarketItem = /* GraphQL */ `
         }
         owner
       }
-      marketItemCategory {
-        name
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
     }
   }
 `;
@@ -1357,6 +1401,12 @@ export const listMarketItems = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -1377,12 +1427,6 @@ export const listMarketItems = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -1418,6 +1462,12 @@ export const getMarketItemCar = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -1438,12 +1488,6 @@ export const getMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -1517,6 +1561,12 @@ export const getMarketItemHome = /* GraphQL */ `
           updatedAt
           owner
         }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
         owner
         marketItemCar {
           id
@@ -1537,12 +1587,6 @@ export const getMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
           createdAt
           updatedAt
           owner
@@ -1569,102 +1613,6 @@ export const listMarketItemHomes = /* GraphQL */ `
         laundryType
         airCondition
         heating
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          condition
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getMarketItemCategory = /* GraphQL */ `
-  query GetMarketItemCategory($name: String!) {
-    getMarketItemCategory(name: $name) {
-      name
-      createdAt
-      updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        condition
-        createdAt
-        updatedAt
-        marketType {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-      }
-      owner
-    }
-  }
-`;
-export const listMarketItemCategories = /* GraphQL */ `
-  query ListMarketItemCategories(
-    $name: String
-    $filter: ModelMarketItemCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listMarketItemCategories(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        name
         createdAt
         updatedAt
         marketItem {

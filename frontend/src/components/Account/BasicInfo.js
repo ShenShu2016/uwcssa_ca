@@ -12,7 +12,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   root: {},
@@ -36,8 +35,7 @@ const useStyles = makeStyles({
 });
 function BasicInfo({ user, userAuth }) {
   const classes = useStyles();
-  console.log(user, "usernameusernameusername");
-  const history = useHistory();
+
   return (
     <div>
       {userAuth.user === null ? (
