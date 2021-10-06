@@ -18,8 +18,8 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Alert from '@material-ui/lab/Alert';
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import {createUwcssaJob} from "../../../../graphql/mutations"
-import {listDepartments} from "../../../../graphql/queries"
+import {createUwcssaJob} from "../../../graphql/mutations"
+import {listDepartments} from "../../../graphql/queries"
 
 
 const useStyles = makeStyles({
@@ -98,7 +98,7 @@ function PostUwcssaJob(props) {
       console.log("newUwcssaJob:",newUwcssaJob.data.createUwcssaJob)
       if(newUwcssaJob) {
         setSubmitSuccess(true)
-        setTimeout(() => {props.history.push("/account/staff/uwcssaJob")},1200)
+        setTimeout(() => {props.history.push("/staff/uwcssaJob")},1200)
       }
     } catch (error) {
       console.log("submit resume failure: ",error)
