@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 import { CardActions } from "@material-ui/core";
 import { CardHeader } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -45,7 +46,12 @@ function Main({ article }) {
         <Box className={classes.main}>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+              <Avatar
+                aria-label="recipe"
+                className={classes.avatar}
+                component={Link}
+                to={`/account/profile/${owner}`}
+              ></Avatar>
             }
             action={
               <IconButton aria-label="settings">

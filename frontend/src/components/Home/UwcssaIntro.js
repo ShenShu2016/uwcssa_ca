@@ -1,17 +1,22 @@
-import { Container, Paper } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import React, { useEffect } from "react";
+import { connect, useSelector } from "react-redux";
 
-import Box from "@material-ui/core/Box";
-import { Button } from "@material-ui/core";
-import { ButtonGroup } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import GitHubButton from "react-github-btn";
-import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import React from "react";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
-import Typography from "@material-ui/core/Typography";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@material-ui/styles";
+import { setUserCounts } from "../../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "space-between",
     width: "80%",
     margin: "auto",
-    marginTop: "7rem",
+    marginTop: "3rem",
   },
   relateWeb: {
     display: "flex",
@@ -77,27 +82,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UwcssaIntro = ({ loggedIn }) => {
+const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
   const classes = useStyles();
-  // const userCounts = useSelector((state) => state.allUsers.users.count);
-  // const dispatch = useDispatch();
-
-  // const fetchUsers = async () => {
-  //   const response = await axios
-  //     .get(`${process.env.REACT_APP_API_URL}/users/total_counts/`)
-  //     .catch((err) => {
-  //       console.log("Err", err);
-  //     });
-
-  //   dispatch(setUsers(response.data));
-  // };
-  // console.log(userCounts);
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // console.log("Users:", userCounts);
+  useEffect(() => {
+    setUserCounts();// eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const userAuth = useSelector((state) => state.userAuth);
+  const userCounts = useSelector((state) => state.allUsers.userCounts);
 
   const guestButton = () => (
     <div>
@@ -116,10 +107,36 @@ const UwcssaIntro = ({ loggedIn }) => {
 
   const authButton = () => (
     <div>
-      <Typography variant="h4">Welcome: </Typography>
-      <Typography variant="h5">
-        {/* {userAuth.user ? userAuth.user.username : ""} */}
-      </Typography>
+      {userAuth.user === null ? (
+        ""
+      ) : (
+        <div>
+          <Typography variant="h4">欢迎 : </Typography>
+          <Box mt={1} mb={1}>
+            <Typography variant="h5" noWrap>
+              {userAuth.user.username}
+            </Typography>
+          </Box>
+          <Box mt={1} mb={1}>
+            <Typography variant="subtitle1" color={"secondary"}>
+              {userAuth.user.username.slice(0, 7) === "google_"
+                ? "我们建议您在我们网站注册账户，体验完整的系统"
+                : ""}
+            </Typography>
+          </Box>
+          <Box mt={2} mb={1}>
+            <Button
+              variant="contained"
+              color={"primary"}
+              size="large"
+              component={Link}
+              to="/account/dashboard"
+            >
+              个人中心
+            </Button>
+          </Box>
+        </div>
+      )}
     </div>
   );
 
@@ -144,7 +161,7 @@ const UwcssaIntro = ({ loggedIn }) => {
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Paper className={classes.paper}>
-                            <Typography variant="h5">666</Typography>
+                            <Typography variant="h5">{userCounts}</Typography>
                             <Typography variant="h5">用户</Typography>
                           </Paper>
                         </Grid>
@@ -156,7 +173,7 @@ const UwcssaIntro = ({ loggedIn }) => {
                         </Grid>
                       </Grid>
                     </Box>
-                    {loggedIn ? authButton() : guestButton()}
+                    {isAuthenticated ? authButton() : guestButton()}
                     <Grid container spacing={1} className={classes.repoInfo}>
                       <Grid item xs={12} align="center">
                         <Typography variant="h6" gutterBottom>
@@ -256,4 +273,7 @@ const UwcssaIntro = ({ loggedIn }) => {
 
 // 这里有奇怪的问题，具体我也不知道
 
-export default UwcssaIntro;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userAuth.isAuthenticated,
+});
+export default connect(mapStateToProps, { setUserCounts })(UwcssaIntro);

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Typography } from "@material-ui/core";
 import { connect, useSelector } from "react-redux";
-import { createTopic, createType } from "../../../../graphql/mutations";
+import { createTopic, createType } from "../../../graphql/mutations";
 import {
   postArticle,
   postArticleImg,
   setTopics,
   setTypes,
-} from "../../../../redux/actions/articleActions";
+} from "../../../redux/actions/articleActions";
 
 import API from "@aws-amplify/api";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";

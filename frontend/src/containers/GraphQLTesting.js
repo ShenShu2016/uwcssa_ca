@@ -41,7 +41,7 @@ export default function GraphQLTesting() {
       <Button
         variant="contained"
         component={Link}
-        to="/account/staff/article/postArticle"
+        to="/staff/article/postArticle"
       >
         Go Create Article
       </Button>

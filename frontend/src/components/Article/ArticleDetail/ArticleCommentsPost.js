@@ -7,6 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
+import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SignInRequest from "../SignInRequest";
 import TextField from "@material-ui/core/TextField";
@@ -55,7 +56,12 @@ function ArticleCommentsPost({ article, postArticleComment }) {
           <Card elevation={3} className={classes.card}>
             <CardHeader
               avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+                <Avatar
+                  aria-label="recipe"
+                  className={classes.avatar}
+                  component={Link}
+                  to={`/account/profile/${userInfo.user.username}`}
+                ></Avatar>
               }
               action={
                 <IconButton aria-label="settings">

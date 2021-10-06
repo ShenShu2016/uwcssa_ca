@@ -1,6 +1,438 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createUserEducation = /* GraphQL */ `
+  mutation CreateUserEducation(
+    $input: CreateUserEducationInput!
+    $condition: ModelUserEducationConditionInput
+  ) {
+    createUserEducation(input: $input, condition: $condition) {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateUserEducation = /* GraphQL */ `
+  mutation UpdateUserEducation(
+    $input: UpdateUserEducationInput!
+    $condition: ModelUserEducationConditionInput
+  ) {
+    updateUserEducation(input: $input, condition: $condition) {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteUserEducation = /* GraphQL */ `
+  mutation DeleteUserEducation(
+    $input: DeleteUserEducationInput!
+    $condition: ModelUserEducationConditionInput
+  ) {
+    deleteUserEducation(input: $input, condition: $condition) {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const createUserExperience = /* GraphQL */ `
+  mutation CreateUserExperience(
+    $input: CreateUserExperienceInput!
+    $condition: ModelUserExperienceConditionInput
+  ) {
+    createUserExperience(input: $input, condition: $condition) {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateUserExperience = /* GraphQL */ `
+  mutation UpdateUserExperience(
+    $input: UpdateUserExperienceInput!
+    $condition: ModelUserExperienceConditionInput
+  ) {
+    updateUserExperience(input: $input, condition: $condition) {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteUserExperience = /* GraphQL */ `
+  mutation DeleteUserExperience(
+    $input: DeleteUserExperienceInput!
+    $condition: ModelUserExperienceConditionInput
+  ) {
+    deleteUserExperience(input: $input, condition: $condition) {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
 export const createTopic = /* GraphQL */ `
   mutation CreateTopic(
     $input: CreateTopicInput!
@@ -100,9 +532,9 @@ export const createType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -130,9 +562,9 @@ export const updateType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -160,9 +592,9 @@ export const deleteType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -211,9 +643,9 @@ export const createArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -264,9 +696,9 @@ export const updateArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -317,9 +749,9 @@ export const deleteArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -374,9 +806,9 @@ export const createArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -421,9 +853,9 @@ export const updateArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -468,9 +900,9 @@ export const deleteArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -1468,6 +1900,840 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         owner
         forumPostSubComments {
           nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const createMarketType = /* GraphQL */ `
+  mutation CreateMarketType(
+    $input: CreateMarketTypeInput!
+    $condition: ModelMarketTypeConditionInput
+  ) {
+    createMarketType(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateMarketType = /* GraphQL */ `
+  mutation UpdateMarketType(
+    $input: UpdateMarketTypeInput!
+    $condition: ModelMarketTypeConditionInput
+  ) {
+    updateMarketType(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteMarketType = /* GraphQL */ `
+  mutation DeleteMarketType(
+    $input: DeleteMarketTypeInput!
+    $condition: ModelMarketTypeConditionInput
+  ) {
+    deleteMarketType(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createMarketItemCategory = /* GraphQL */ `
+  mutation CreateMarketItemCategory(
+    $input: CreateMarketItemCategoryInput!
+    $condition: ModelMarketItemCategoryConditionInput
+  ) {
+    createMarketItemCategory(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateMarketItemCategory = /* GraphQL */ `
+  mutation UpdateMarketItemCategory(
+    $input: UpdateMarketItemCategoryInput!
+    $condition: ModelMarketItemCategoryConditionInput
+  ) {
+    updateMarketItemCategory(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteMarketItemCategory = /* GraphQL */ `
+  mutation DeleteMarketItemCategory(
+    $input: DeleteMarketItemCategoryInput!
+    $condition: ModelMarketItemCategoryConditionInput
+  ) {
+    deleteMarketItemCategory(input: $input, condition: $condition) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createMarketItem = /* GraphQL */ `
+  mutation CreateMarketItem(
+    $input: CreateMarketItemInput!
+    $condition: ModelMarketItemConditionInput
+  ) {
+    createMarketItem(input: $input, condition: $condition) {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const updateMarketItem = /* GraphQL */ `
+  mutation UpdateMarketItem(
+    $input: UpdateMarketItemInput!
+    $condition: ModelMarketItemConditionInput
+  ) {
+    updateMarketItem(input: $input, condition: $condition) {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const deleteMarketItem = /* GraphQL */ `
+  mutation DeleteMarketItem(
+    $input: DeleteMarketItemInput!
+    $condition: ModelMarketItemConditionInput
+  ) {
+    deleteMarketItem(input: $input, condition: $condition) {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const createMarketItemCar = /* GraphQL */ `
+  mutation CreateMarketItemCar(
+    $input: CreateMarketItemCarInput!
+    $condition: ModelMarketItemCarConditionInput
+  ) {
+    createMarketItemCar(input: $input, condition: $condition) {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateMarketItemCar = /* GraphQL */ `
+  mutation UpdateMarketItemCar(
+    $input: UpdateMarketItemCarInput!
+    $condition: ModelMarketItemCarConditionInput
+  ) {
+    updateMarketItemCar(input: $input, condition: $condition) {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteMarketItemCar = /* GraphQL */ `
+  mutation DeleteMarketItemCar(
+    $input: DeleteMarketItemCarInput!
+    $condition: ModelMarketItemCarConditionInput
+  ) {
+    deleteMarketItemCar(input: $input, condition: $condition) {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const createMarketItemHome = /* GraphQL */ `
+  mutation CreateMarketItemHome(
+    $input: CreateMarketItemHomeInput!
+    $condition: ModelMarketItemHomeConditionInput
+  ) {
+    createMarketItemHome(input: $input, condition: $condition) {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateMarketItemHome = /* GraphQL */ `
+  mutation UpdateMarketItemHome(
+    $input: UpdateMarketItemHomeInput!
+    $condition: ModelMarketItemHomeConditionInput
+  ) {
+    updateMarketItemHome(input: $input, condition: $condition) {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteMarketItemHome = /* GraphQL */ `
+  mutation DeleteMarketItemHome(
+    $input: DeleteMarketItemHomeInput!
+    $condition: ModelMarketItemHomeConditionInput
+  ) {
+    deleteMarketItemHome(input: $input, condition: $condition) {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
         }
       }
       owner

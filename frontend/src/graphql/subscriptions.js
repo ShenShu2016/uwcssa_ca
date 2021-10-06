@@ -1,6 +1,411 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateUserEducation = /* GraphQL */ `
+  subscription OnCreateUserEducation {
+    onCreateUserEducation {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUserEducation = /* GraphQL */ `
+  subscription OnUpdateUserEducation {
+    onUpdateUserEducation {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUserEducation = /* GraphQL */ `
+  subscription OnDeleteUserEducation {
+    onDeleteUserEducation {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateUserExperience = /* GraphQL */ `
+  subscription OnCreateUserExperience {
+    onCreateUserExperience {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUserExperience = /* GraphQL */ `
+  subscription OnUpdateUserExperience {
+    onUpdateUserExperience {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUserExperience = /* GraphQL */ `
+  subscription OnDeleteUserExperience {
+    onDeleteUserExperience {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
 export const onCreateTopic = /* GraphQL */ `
   subscription OnCreateTopic {
     onCreateTopic {
@@ -88,9 +493,9 @@ export const onCreateType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -115,9 +520,9 @@ export const onUpdateType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -142,9 +547,9 @@ export const onDeleteType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -190,9 +595,9 @@ export const onCreateArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -240,9 +645,9 @@ export const onUpdateArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -290,9 +695,9 @@ export const onDeleteArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -344,9 +749,9 @@ export const onCreateArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -388,9 +793,9 @@ export const onUpdateArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -432,9 +837,9 @@ export const onDeleteArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -1360,6 +1765,795 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         owner
         forumPostSubComments {
           nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateMarketType = /* GraphQL */ `
+  subscription OnCreateMarketType {
+    onCreateMarketType {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateMarketType = /* GraphQL */ `
+  subscription OnUpdateMarketType {
+    onUpdateMarketType {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteMarketType = /* GraphQL */ `
+  subscription OnDeleteMarketType {
+    onDeleteMarketType {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateMarketItemCategory = /* GraphQL */ `
+  subscription OnCreateMarketItemCategory {
+    onCreateMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateMarketItemCategory = /* GraphQL */ `
+  subscription OnUpdateMarketItemCategory {
+    onUpdateMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteMarketItemCategory = /* GraphQL */ `
+  subscription OnDeleteMarketItemCategory {
+    onDeleteMarketItemCategory {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateMarketItem = /* GraphQL */ `
+  subscription OnCreateMarketItem {
+    onCreateMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const onUpdateMarketItem = /* GraphQL */ `
+  subscription OnUpdateMarketItem {
+    onUpdateMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const onDeleteMarketItem = /* GraphQL */ `
+  subscription OnDeleteMarketItem {
+    onDeleteMarketItem {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const onCreateMarketItemCar = /* GraphQL */ `
+  subscription OnCreateMarketItemCar {
+    onCreateMarketItemCar {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateMarketItemCar = /* GraphQL */ `
+  subscription OnUpdateMarketItemCar {
+    onUpdateMarketItemCar {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteMarketItemCar = /* GraphQL */ `
+  subscription OnDeleteMarketItemCar {
+    onDeleteMarketItemCar {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateMarketItemHome = /* GraphQL */ `
+  subscription OnCreateMarketItemHome {
+    onCreateMarketItemHome {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateMarketItemHome = /* GraphQL */ `
+  subscription OnUpdateMarketItemHome {
+    onUpdateMarketItemHome {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteMarketItemHome = /* GraphQL */ `
+  subscription OnDeleteMarketItemHome {
+    onDeleteMarketItemHome {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
         }
       }
       owner

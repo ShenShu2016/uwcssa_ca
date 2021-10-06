@@ -57,7 +57,12 @@ const ArticleComponent = () => {
       <Card className={classes.paper} key={id} elevation={5}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+            <Avatar
+              aria-label="recipe"
+              className={classes.avatar}
+              component={Link}
+              to={`/account/profile/${owner}`}
+            ></Avatar>
           }
           action={
             <IconButton aria-label="settings">

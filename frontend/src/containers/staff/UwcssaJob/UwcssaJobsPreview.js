@@ -3,9 +3,8 @@ import { connect, useSelector } from "react-redux";
 import {
   setDepartments,
   setUwcssaJobs,
-} from "../../../../redux/actions/uwcssaJobActions";
+} from "../../../redux/actions/uwcssaJobActions";
 
-import TempLinkBar from "../../../../components/Account/TempLinkBar";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 
@@ -29,7 +28,6 @@ function UwcssaJobsPreview({ setDepartments, setUwcssaJobs }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <TempLinkBar />
       <Typography variant="h1">Uwcssa Jobs Preview</Typography>
     </div>
   );

@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core";
-import { setArticles } from "../../../../redux/actions/articleActions";
+import { setArticles } from "../../../redux/actions/articleActions";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
@@ -66,7 +66,7 @@ const ArticlesPreview = ({ setArticles }) => {
   const classes = useStyles();
   useEffect(() => {
     setArticles();
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const articles = useSelector((state) => state.allArticles.articles);
 
   const rows = articles.map((article) => {
