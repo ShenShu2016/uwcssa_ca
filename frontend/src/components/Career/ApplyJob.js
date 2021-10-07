@@ -41,15 +41,12 @@ export default function ApplyJob(props) {
   const [submitFailure, setSubmitFailure] = useState(false);
   const [fileSize, setFileSize] = useState(false);
   const [resume, setResume] = useState("");
-  const { user } = useSelector(
-    (state) => state.userAuth,
-    (prev, next) => prev.username === next.username
-  );
+  const userAuth = useSelector((state) => state.userAuth);
 
   const [applyData, setApplyData] = useState({
     job: "",
-    applyName: user ? user.username : "",
-    applyEmail: user ? user.attributes.email : "",
+    applyName: userAuth.user.username,
+    applyEmail: userAuth.user.attributes.email,
     applyPhone: "",
   });
 
@@ -96,7 +93,7 @@ export default function ApplyJob(props) {
   };
 
   const handleSubmit = async (event) => {
-    if (!user) {
+    if (userAuth.isAuthenticated === false) {
       setOpen(true);
       setTimeout(() => {
         props.history.push("/signIn");
