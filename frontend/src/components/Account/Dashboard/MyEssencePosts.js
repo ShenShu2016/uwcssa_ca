@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "1rem",
   },
 }));
-function MyEssencePosts() {
+
+export default function MyEssencePosts() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -36,5 +37,3 @@ function MyEssencePosts() {
     </div>
   );
 }
-
-export default MyEssencePosts;

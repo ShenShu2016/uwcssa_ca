@@ -1,6 +1,6 @@
+import { Button, FormControl, InputLabel, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { TextField, Typography } from "@material-ui/core";
-import { connect, useSelector } from "react-redux";
 import { createTopic, createType } from "../../../graphql/mutations";
 import {
   postArticle,
@@ -8,14 +8,11 @@ import {
   setTopics,
   setTypes,
 } from "../../../redux/actions/articleActions";
+import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Box } from "@mui/system";
-import { Button } from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 import PublishIcon from "@material-ui/icons/Publish";
 import Select from "@material-ui/core/Select";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
@@ -56,8 +53,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PostArticle = ({ setTopics, setTypes, postArticle, postArticleImg }) => {
+export default function PostArticle() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [imgData, setImgData] = useState("");
   const [imgKey, setImgKey] = useState("");
   const history = useHistory();
@@ -68,15 +67,15 @@ const PostArticle = ({ setTopics, setTypes, postArticle, postArticleImg }) => {
     typeId: "",
   });
   useEffect(() => {
-    setTopics();
-    setTypes();
+    dispatch(setTopics());
+    dispatch(setTypes());
     console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { topics, types } = useSelector((state) => state.allArticles);
 
   const uploadArticleImg = async () => {
-    const response = await postArticleImg(imgData);
+    const response = await dispatch(postArticleImg(imgData));
     console.log("response.key", response.key);
     setImgKey(response.key);
   };
@@ -95,12 +94,8 @@ const PostArticle = ({ setTopics, setTypes, postArticle, postArticleImg }) => {
       articleTypeId: typeId,
       byDate: "Article",
     };
-    const response = await postArticle(createArticleInput);
-    console.log(
-      "response.response.data.createArticle.id",
-      response.response.data.createArticle.id
-    );
-    console.log("response.result", response.result);
+    const response = await dispatch(postArticle(createArticleInput));
+
     if (response.result) {
       history.push(`/article/${response.response.data.createArticle.id}`);
     }
@@ -275,10 +270,4 @@ const PostArticle = ({ setTopics, setTypes, postArticle, postArticleImg }) => {
       </Button>
     </div>
   );
-};
-export default connect(null, {
-  setTopics,
-  setTypes,
-  postArticle,
-  postArticleImg,
-})(PostArticle);
+}

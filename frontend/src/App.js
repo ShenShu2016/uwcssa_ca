@@ -1,4 +1,4 @@
-import { Provider, connect } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Snackbar, makeStyles } from "@material-ui/core";
@@ -49,18 +49,22 @@ const useStyles = makeStyles({
     },
   },
 });
-function App({ load_user, isAuthenticated, setUserCounts }) {
-  const [signInOpen, setSignInOpen] = useState(false);
+export default function App() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [signInOpen, setSignInOpen] = useState(false);
   useEffect(() => {
-    load_user();
-    setUserCounts();
+    dispatch(load_user());
+    dispatch(setUserCounts());
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -157,7 +161,3 @@ function App({ load_user, isAuthenticated, setUserCounts }) {
     </Provider>
   );
 }
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-export default connect(mapStateToProps, { load_user, setUserCounts })(App);

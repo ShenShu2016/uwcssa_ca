@@ -1,23 +1,23 @@
 import {
   AppBar,
   Button,
+  Drawer,
   IconButton,
   Menu,
   MenuItem,
   Toolbar,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import Drawer from "@mui/material/Drawer";
 import DrawerList from "../components/Drawer/DrawerList";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Redirect } from "react-router";
 import StorefrontIcon from "@material-ui/icons/Storefront";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { signOut } from "../redux/actions/authActions";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
@@ -68,9 +68,13 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
 }));
-
-const Header = ({ signOut, isAuthenticated }) => {
+export default function Header() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
+  const userAuth = useSelector((state) => state.userAuth);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -109,7 +113,7 @@ const Header = ({ signOut, isAuthenticated }) => {
   const signOut_user = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    signOut();
+    dispatch(signOut());
     setRedirect(true);
   };
 
@@ -134,7 +138,11 @@ const Header = ({ signOut, isAuthenticated }) => {
       <MenuItem
         onClick={handleMenuClose}
         component={Link}
-        to="/account/profile"
+        to={
+          userAuth.user === null
+            ? ""
+            : `/account/profile/${userAuth.user.username}`
+        }
       >
         Profile
       </MenuItem>
@@ -331,10 +339,4 @@ const Header = ({ signOut, isAuthenticated }) => {
       {redirect ? <Redirect to="/" /> : <div></div>}
     </div>
   );
-};
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { signOut })(Header);
+}

@@ -1,23 +1,27 @@
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import Button from "@mui/material/Button";
 import DatePicker from "@mui/lab/DatePicker";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import TextField from "@mui/material/TextField";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { putUserExperience } from "../../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {},
 });
-function Edit({ experience, editOpen, handleEditClose, putUserExperience }) {
+export default function Edit({ experience, editOpen, handleEditClose }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     companyName: experience.companyName,
     description: experience.description,
@@ -56,7 +60,7 @@ function Edit({ experience, editOpen, handleEditClose, putUserExperience }) {
   };
 
   const update = () => {
-    putUserExperience(updateUserExperienceInput);
+    dispatch(putUserExperience(updateUserExperienceInput));
     handleEditClose();
   };
 
@@ -171,5 +175,3 @@ function Edit({ experience, editOpen, handleEditClose, putUserExperience }) {
     </div>
   );
 }
-
-export default connect(null, { putUserExperience })(Edit);

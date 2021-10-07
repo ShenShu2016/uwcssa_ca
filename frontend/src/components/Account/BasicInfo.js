@@ -33,14 +33,12 @@ const useStyles = makeStyles({
     height: "75px",
   },
 });
-function BasicInfo({ user, userAuth }) {
-  const classes = useStyles();
 
+export default function BasicInfo({ user, userAuth }) {
+  const classes = useStyles();
   return (
     <div>
-      {userAuth.user === null ? (
-        ""
-      ) : (
+      {
         <div>
           <Card elevation={0} className={classes.header}>
             <CardActionArea>
@@ -60,7 +58,7 @@ function BasicInfo({ user, userAuth }) {
                   sx={{ width: 150, height: 150 }}
                   className={classes.avatar}
                 />
-                {userAuth.user.username === user.username ? (
+                {userAuth.user.username === user.username && (
                   <Button
                     variant="contained"
                     endIcon={<EditIcon />}
@@ -71,8 +69,6 @@ function BasicInfo({ user, userAuth }) {
                   >
                     点击编辑
                   </Button>
-                ) : (
-                  ""
                 )}
               </div>
               <Typography gutterBottom variant="h4" component="div" noWrap>
@@ -84,9 +80,7 @@ function BasicInfo({ user, userAuth }) {
             </CardContent>
           </Card>
         </div>
-      )}
+      }
     </div>
   );
 }
-
-export default BasicInfo;

@@ -21,7 +21,6 @@ const DrawerList = ({ toggleDrawer }) => {
       <Box
         sx={{ width: 250 }}
         role="presentation"
-        // onClick={toggleDrawer(false)}
         onKeyDown={toggleDrawer(false)}
       >
         <List>
@@ -86,7 +85,12 @@ const DrawerList = ({ toggleDrawer }) => {
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    onClick={toggleDrawer(false)}
+                    component={Link}
+                    to="/staff/uwcssaJob/postUwcssaJob"
+                  >
                     <ListItemText primary="职位招聘" />
                   </ListItemButton>
                 </ListItem>

@@ -3,15 +3,14 @@ import {
   removeSelectedUser,
   selectedUser,
 } from "../../redux/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 import BasicInfo from "../../components/Account/BasicInfo";
 import Education from "../../components/Account/Profile/Education";
 import Experience from "../../components/Account/Profile/Experience";
 import { Redirect } from "react-router";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -21,16 +20,18 @@ const useStyles = makeStyles({
     paddingInline: "1rem",
   },
 });
-function Profile({ selectedUser, removeSelectedUser }) {
+export default function Profile() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { username } = useParams();
 
   useEffect(() => {
     if (username && username !== "") {
-      selectedUser(username);
+      dispatch(selectedUser(username));
     }
-    return () => removeSelectedUser();
+    return () => dispatch(removeSelectedUser());
   }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const userAuth = useSelector((state) => state.userAuth);
   const user = useSelector((state) => state.user);
 
@@ -48,5 +49,3 @@ function Profile({ selectedUser, removeSelectedUser }) {
     </div>
   );
 }
-
-export default connect(null, { selectedUser, removeSelectedUser })(Profile);

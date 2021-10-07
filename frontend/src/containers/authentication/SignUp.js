@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { signUp } from "../../redux/actions/authActions";
 
@@ -39,8 +39,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = ({ signUp, isAuthenticated }) => {
+export default function SignUp() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
   const [accountCreated, setAccountCreated] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -56,7 +60,7 @@ const SignUp = ({ signUp, isAuthenticated }) => {
 
   const onSignUp = async () => {
     const { username, password, email } = formData;
-    const response = await signUp(username, password, email);
+    const response = await dispatch(signUp(username, password, email));
     if (response.result) {
       setAccountCreated(true);
     } else {
@@ -139,10 +143,4 @@ const SignUp = ({ signUp, isAuthenticated }) => {
       </div>
     </Container>
   );
-};
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { signUp })(SignUp);
+}

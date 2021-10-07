@@ -25,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Education({ user, userAuth }) {
+export default function Education({ user, userAuth }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
+  console.log(user, "user");
   const handleEditClickOpen = () => {
     setEditOpen(true);
   };
@@ -45,78 +46,63 @@ function Education({ user, userAuth }) {
 
   return (
     <div className={classes.root}>
-      {" "}
-      {userAuth.user === null ? (
-        ""
-      ) : (
-        <Card>
-          <Typography variant="h4" sx={{ m: 2 }}>
-            教育经历
-            {userAuth.user.username === user.username ? (
-              <Button endIcon={<AddIcon />} onClick={handleCreateClickOpen} />
-            ) : (
-              ""
-            )}
-          </Typography>
-
-          {userAuth.user.username === user.username ? (
-            <Create
-              createOpen={createOpen}
-              handleCreateClose={handleCreateClose}
-              username={user.username}
-            />
-          ) : (
-            ""
+      <Card>
+        <Typography variant="h4" sx={{ m: 2 }}>
+          教育经历
+          {userAuth.user.username === user.username && (
+            <Button endIcon={<AddIcon />} onClick={handleCreateClickOpen} />
           )}
-          {Object.keys(user).length === 0
-            ? ""
-            : user.UserEducations.items.map((education) => {
-                const {
-                  degree,
-                  description,
-                  endDate,
-                  fieldOfStudy,
-                  grade,
-                  id,
-                  school,
-                  startDate,
-                } = education;
-                return (
-                  <div key={id}>
-                    <CardContent className={classes.cardContent} key={id}>
-                      <div className={classes.school}>
-                        <Typography variant="h5">{school}</Typography>
-                        {userAuth.user.username === user.username ? (
-                          <Button
-                            endIcon={<EditIcon />}
-                            onClick={handleEditClickOpen}
-                          />
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      <Typography sx={{ mb: 1.5 }}>
-                        {degree}, {fieldOfStudy}, {grade}
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {startDate === null ? "" : startDate.slice(0, 4)} -{" "}
-                        {endDate === null ? "" : endDate.slice(0, 4)}
-                      </Typography>
-                      <Typography variant="body2">{description}</Typography>
-                      <Divider />
-                    </CardContent>
-                    <Edit
-                      editOpen={editOpen}
-                      education={education}
-                      handleEditClose={handleEditClose}
+        </Typography>
+        {userAuth.user.username === user.username && (
+          <Create
+            createOpen={createOpen}
+            handleCreateClose={handleCreateClose}
+            username={user.username}
+          />
+        )}
+
+        {user.UserEducations.items.map((education) => {
+          const {
+            degree,
+            description,
+            endDate,
+            fieldOfStudy,
+            grade,
+            id,
+            school,
+            startDate,
+          } = education;
+          return (
+            <div key={id}>
+              <CardContent className={classes.cardContent} key={id}>
+                <div className={classes.school}>
+                  <Typography variant="h5">{school}</Typography>
+                  {userAuth.user.username === user.username && (
+                    <Button
+                      endIcon={<EditIcon />}
+                      onClick={handleEditClickOpen}
                     />
-                  </div>
-                );
-              })}
-        </Card>
-      )}
+                  )}
+                </div>
+                <Typography sx={{ mb: 1.5 }}>
+                  {degree}, {fieldOfStudy}, {grade}
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  {startDate && startDate.slice(0, 4)} -{" "}
+                  {endDate && endDate.slice(0, 4)}
+                </Typography>
+                <Typography variant="body2">{description}</Typography>
+                <Divider />
+              </CardContent>
+              <Edit
+                editOpen={editOpen}
+                education={education}
+                handleEditClose={handleEditClose}
+              />
+            </div>
+          );
+        })}
+      </Card>
     </div>
   );
 }
-
-export default Education;

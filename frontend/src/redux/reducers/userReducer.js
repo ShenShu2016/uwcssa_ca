@@ -3,7 +3,23 @@ import { ActionTypes } from "../constants/user-action-types";
 const initialState = {
   userCounts: [],
 };
-
+const initialStateUser = {
+  username: "",
+  email: "",
+  owner: "",
+  uWindsorEmail: "",
+  firstName: "",
+  lastName: "",
+  intro: "",
+  major: "",
+  avatarImgPath: "",
+  backGroundImgPath: "",
+  linkedin: "",
+  github: "",
+  tags: [],
+  UserEducations: { items: [] },
+  UserExperiences: { items: [] },
+};
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_USER_COUNTS:
@@ -13,12 +29,15 @@ export const userReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const selectedUserReducer = (state = {}, { type, payload }) => {
+export const selectedUserReducer = (
+  state = initialStateUser,
+  { type, payload }
+) => {
   switch (type) {
     case ActionTypes.SELECTED_USER:
       return { ...state, ...payload };
     case ActionTypes.REMOVE_SELECTED_USER:
-      return {};
+      return { ...initialStateUser, ...payload };
     default:
       return state;
   }

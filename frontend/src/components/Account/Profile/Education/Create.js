@@ -1,28 +1,27 @@
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import Button from "@mui/material/Button";
 import DatePicker from "@mui/lab/DatePicker";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import TextField from "@mui/material/TextField";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { postUserEducation } from "../../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {},
 });
-function Create({
-  createOpen,
-  handleCreateClose,
-  username,
-  postUserEducation,
-}) {
+
+export default function Create({ createOpen, handleCreateClose, username }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     degree: "",
     description: "",
@@ -51,7 +50,7 @@ function Create({
   };
 
   const create = () => {
-    postUserEducation(createUserEducationInput);
+    dispatch(postUserEducation(createUserEducationInput));
     handleCreateClose();
     setFormData({
       degree: "",
@@ -165,5 +164,3 @@ function Create({
     </div>
   );
 }
-
-export default connect(null, { postUserEducation })(Create);

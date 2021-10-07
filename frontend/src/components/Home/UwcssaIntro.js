@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
@@ -81,15 +81,17 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "1rem",
   },
 }));
-
-const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
+export default function UwcssaIntro() {
   const classes = useStyles();
-  useEffect(() => {
-    setUserCounts();// eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const dispatch = useDispatch();
   const userAuth = useSelector((state) => state.userAuth);
   const userCounts = useSelector((state) => state.allUsers.userCounts);
-
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
+  useEffect(() => {
+    dispatch(setUserCounts()); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const guestButton = () => (
     <div>
       <Button
@@ -107,9 +109,7 @@ const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
 
   const authButton = () => (
     <div>
-      {userAuth.user === null ? (
-        ""
-      ) : (
+      {
         <div>
           <Typography variant="h4">欢迎 : </Typography>
           <Box mt={1} mb={1}>
@@ -136,7 +136,7 @@ const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
             </Button>
           </Box>
         </div>
-      )}
+      }
     </div>
   );
 
@@ -269,11 +269,4 @@ const UwcssaIntro = ({ isAuthenticated, setUserCounts }) => {
       </div>
     </React.Fragment>
   );
-};
-
-// 这里有奇怪的问题，具体我也不知道
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-export default connect(mapStateToProps, { setUserCounts })(UwcssaIntro);
+}

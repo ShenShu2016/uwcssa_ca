@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "1rem",
   },
 }));
-function FavoriteTopic() {
+
+export default function FavoriteTopic() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -36,5 +37,3 @@ function FavoriteTopic() {
     </div>
   );
 }
-
-export default FavoriteTopic;

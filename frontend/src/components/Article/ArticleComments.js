@@ -28,7 +28,8 @@ const useStyles = makeStyles({
   cardContent: {},
   main: {},
 });
-const ArticleComments = ({ article }) => {
+
+export default function ArticleComments({ article }) {
   const classes = useStyles();
 
   return (
@@ -103,5 +104,4 @@ const ArticleComments = ({ article }) => {
       )}
     </div>
   );
-};
-export default ArticleComments;
+}
