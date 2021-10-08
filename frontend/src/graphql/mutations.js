@@ -940,6 +940,7 @@ export const createDepartment = /* GraphQL */ `
           schedule
           like
           unlike
+          active
           createdAt
           updatedAt
           owner
@@ -976,6 +977,7 @@ export const updateDepartment = /* GraphQL */ `
           schedule
           like
           unlike
+          active
           createdAt
           updatedAt
           owner
@@ -1012,6 +1014,7 @@ export const deleteDepartment = /* GraphQL */ `
           schedule
           like
           unlike
+          active
           createdAt
           updatedAt
           owner
@@ -1037,6 +1040,7 @@ export const createUwcssaJob = /* GraphQL */ `
       schedule
       like
       unlike
+      active
       createdAt
       updatedAt
       department {
@@ -1062,7 +1066,6 @@ export const createUwcssaJob = /* GraphQL */ `
           resumeFilePath
           phone
           message
-          active
           createdAt
           updatedAt
           owner
@@ -1088,6 +1091,7 @@ export const updateUwcssaJob = /* GraphQL */ `
       schedule
       like
       unlike
+      active
       createdAt
       updatedAt
       department {
@@ -1113,7 +1117,6 @@ export const updateUwcssaJob = /* GraphQL */ `
           resumeFilePath
           phone
           message
-          active
           createdAt
           updatedAt
           owner
@@ -1139,6 +1142,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
       schedule
       like
       unlike
+      active
       createdAt
       updatedAt
       department {
@@ -1164,7 +1168,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
           resumeFilePath
           phone
           message
-          active
           createdAt
           updatedAt
           owner
@@ -1186,7 +1189,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
       resumeFilePath
       phone
       message
-      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -1200,6 +1202,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
         schedule
         like
         unlike
+        active
         createdAt
         updatedAt
         department {
@@ -1243,7 +1246,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
       resumeFilePath
       phone
       message
-      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -1257,6 +1259,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         schedule
         like
         unlike
+        active
         createdAt
         updatedAt
         department {
@@ -1300,7 +1303,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
       resumeFilePath
       phone
       message
-      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -1314,6 +1316,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         schedule
         like
         unlike
+        active
         createdAt
         updatedAt
         department {
@@ -1362,7 +1365,6 @@ export const createUwcssaJobResumeStatus = /* GraphQL */ `
           resumeFilePath
           phone
           message
-          active
           createdAt
           updatedAt
           owner
@@ -1390,7 +1392,6 @@ export const updateUwcssaJobResumeStatus = /* GraphQL */ `
           resumeFilePath
           phone
           message
-          active
           createdAt
           updatedAt
           owner
@@ -1418,7 +1419,6 @@ export const deleteUwcssaJobResumeStatus = /* GraphQL */ `
           resumeFilePath
           phone
           message
-          active
           createdAt
           updatedAt
           owner

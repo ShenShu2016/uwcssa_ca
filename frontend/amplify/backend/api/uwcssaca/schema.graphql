@@ -205,6 +205,7 @@ type UwcssaJob
   schedule: [String]!
   like: [String]!
   unlike: [String]!
+  active:Boolean!
   uwcssaJobResumes: [UwcssaJobResume]
     @connection(name: "UwcssaJobUwcssaJobResumes")
 }
@@ -225,10 +226,8 @@ type UwcssaJobResume
   resumeFilePath: String
   phone: String!
   message:String
-  active:Boolean!
   uwcssaJobResumeStatus: UwcssaJobResumeStatus! @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
   uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
-
 }
 
 type UwcssaJobResumeStatus
