@@ -28,9 +28,20 @@ const useStyles = makeStyles((theme) => ({
 export default function Education({ user, userAuth }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
-  console.log(user, "user");
-  const handleEditClickOpen = () => {
+  const [education, setEducation] = useState({
+    degree: "",
+    description: "",
+    endDate: "",
+    fieldOfStudy: "",
+    grade: "",
+    id: "",
+    school: "",
+    startDate: "",
+  });
+  const handleEditClickOpen = (education) => {
+    console.log(education);
     setEditOpen(true);
+    setEducation(education);
   };
   const handleEditClose = () => {
     setEditOpen(false);
@@ -60,7 +71,6 @@ export default function Education({ user, userAuth }) {
             username={user.username}
           />
         )}
-
         {user.UserEducations.items.map((education) => {
           const {
             degree,
@@ -79,8 +89,10 @@ export default function Education({ user, userAuth }) {
                   <Typography variant="h5">{school}</Typography>
                   {userAuth.user.username === user.username && (
                     <Button
+                      id={id}
+                      name={id}
                       endIcon={<EditIcon />}
-                      onClick={handleEditClickOpen}
+                      onClick={() => handleEditClickOpen(education)}
                     />
                   )}
                 </div>
@@ -94,15 +106,15 @@ export default function Education({ user, userAuth }) {
                 <Typography variant="body2">{description}</Typography>
                 <Divider />
               </CardContent>
-              <Edit
-                editOpen={editOpen}
-                education={education}
-                handleEditClose={handleEditClose}
-              />
             </div>
           );
         })}
       </Card>
+      <Edit
+        editOpen={editOpen}
+        education={education}
+        handleEditClose={handleEditClose}
+      />
     </div>
   );
 }

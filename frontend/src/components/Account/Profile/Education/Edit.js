@@ -6,7 +6,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
@@ -22,6 +22,15 @@ const useStyles = makeStyles({
 export default function Edit({ education, editOpen, handleEditClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFormData(education);
+    setStartDate(education.startDate);
+    setEndDate(education.endDate);
+  }, [education]);
+
+  const [startDate, setStartDate] = useState(education.startDate);
+  const [endDate, setEndDate] = useState(education.endDate);
   const [formData, setFormData] = useState({
     degree: education.degree,
     description: education.description,
@@ -30,13 +39,13 @@ export default function Edit({ education, editOpen, handleEditClose }) {
     id: education.id,
     school: education.school,
   });
+
   const { degree, description, fieldOfStudy, grade, id, school } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const [startDate, setStartDate] = useState(education.startDate);
-  const [endDate, setEndDate] = useState(education.endDate);
+
   const updateUserEducationInput = {
     degree: degree,
     description: description,

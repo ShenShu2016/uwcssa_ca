@@ -6,7 +6,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
@@ -21,6 +21,12 @@ const useStyles = makeStyles({
 export default function Edit({ experience, editOpen, handleEditClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFormData(experience);
+    setStartDate(experience.startDate);
+    setEndDate(experience.endDate);
+  }, [experience]);
 
   const [formData, setFormData] = useState({
     companyName: experience.companyName,

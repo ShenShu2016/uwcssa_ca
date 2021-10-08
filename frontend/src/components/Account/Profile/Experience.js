@@ -24,12 +24,22 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
 }));
-function Experience({ user, userAuth }) {
-  const classes = useStyles();
 
+export default function Experience({ user, userAuth }) {
+  const classes = useStyles();
+  const [experience, setExperience] = useState({
+    companyName: "",
+    description: "",
+    employmentType: "",
+    id: "",
+    industry: "",
+    location: "",
+    title: "",
+  });
   const [editOpen, setEditOpen] = useState(false);
-  const handleEditClickOpen = () => {
+  const handleEditClickOpen = (experience) => {
     setEditOpen(true);
+    setExperience(experience);
   };
   const handleEditClose = () => {
     setEditOpen(false);
@@ -81,7 +91,7 @@ function Experience({ user, userAuth }) {
                   {userAuth.user.username === user.username && (
                     <Button
                       endIcon={<EditIcon />}
-                      onClick={handleEditClickOpen}
+                      onClick={() => handleEditClickOpen(experience)}
                     />
                   )}
                 </div>
@@ -98,17 +108,15 @@ function Experience({ user, userAuth }) {
                 <Typography variant="body2">{description}</Typography>
                 <Divider />
               </CardContent>
-              <Edit
-                editOpen={editOpen}
-                experience={experience}
-                handleEditClose={handleEditClose}
-              />
             </div>
           );
         })}
       </Card>
+      <Edit
+        editOpen={editOpen}
+        experience={experience}
+        handleEditClose={handleEditClose}
+      />
     </div>
   );
 }
-
-export default Experience;
