@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@material-ui/core";
+import { Box } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Create from "./Experience/Create";
 import { Divider } from "@material-ui/core";
 import Edit from "./Experience/Edit";
 import EditIcon from "@mui/icons-material/Edit";
+import { IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "960px",
-    margin: "auto",
     marginBlock: "1rem",
+  },
+  card: {
+    paddingInline: "1rem",
+    paddingTop: "1rem",
+  },
+  title: {
+    display: "flex",
+    justifyContent: "space-between",
   },
   cardContent: {
     marginLeft: "1rem",
   },
-  title: {
+  company: {
     display: "flex",
+    justifyContent: "space-between",
   },
 }));
 
@@ -55,14 +64,22 @@ export default function Experience({ user, userAuth }) {
 
   return (
     <div className={classes.root}>
-      <Card>
-        <Typography variant="h4" sx={{ m: 2 }}>
-          工作经验
+      <Card className={classes.card}>
+        <Box className={classes.title}>
+          <Typography variant="h6" sx={{ m: 1, fontWeight: "600" }}>
+            工作经验
+          </Typography>
           {userAuth.user.username === user.username && (
-            <Button endIcon={<AddIcon />} onClick={handleCreateClickOpen} />
+            <IconButton
+              aria-label="create"
+              onClick={handleCreateClickOpen}
+              size="large"
+              color="info"
+            >
+              <AddIcon />
+            </IconButton>
           )}
-        </Typography>
-
+        </Box>
         {userAuth.user.username === user.username && (
           <Create
             createOpen={createOpen}
@@ -84,28 +101,39 @@ export default function Experience({ user, userAuth }) {
           } = experience;
           return (
             <div key={id}>
-              <CardContent className={classes.cardContent}>
-                <div className={classes.title}>
-                  <Typography variant="h5">{title}</Typography>
+              <CardContent>
+                <div className={classes.company}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
+                    {title}
+                  </Typography>
 
                   {userAuth.user.username === user.username && (
-                    <Button
-                      endIcon={<EditIcon />}
-                      onClick={() => handleEditClickOpen(experience)}
-                    />
+                    <IconButton
+                      aria-label="edit"
+                      color="info"
+                      size="small"
+                      onClick={(e) => handleEditClickOpen(experience)}
+                    >
+                      <EditIcon />
+                    </IconButton>
                   )}
                 </div>
-                <Typography sx={{ mb: 1.5 }}>
-                  {companyName} - {industry} - {employmentType}
+                <Typography variant="subtitle2" sx={{}}>
+                  {companyName} {" - "} {industry} {" - "} {employmentType}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <Typography
+                  sx={{ mb: 1.5 }}
+                  variant="subtitle2"
+                  color="text.secondary"
+                >
                   {startDate && startDate.slice(0, 4)} -{" "}
                   {endDate && endDate.slice(0, 4)}
                   <br />
                   {location}
                 </Typography>
-
-                <Typography variant="body2">{description}</Typography>
+                <Typography variant="body2" sx={{ mb: 2 }}>
+                  {description}
+                </Typography>
                 <Divider />
               </CardContent>
             </div>

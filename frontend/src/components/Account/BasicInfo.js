@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     minHeight: "150px",
   },
   outer: {
-    height: "75px",
+    height: "90px",
   },
 });
 
@@ -71,7 +71,12 @@ export default function BasicInfo({ user, userAuth }) {
                   </Button>
                 )}
               </div>
-              <Typography gutterBottom variant="h4" component="div" noWrap>
+              <Typography
+                gutterBottom
+                variant="h5"
+                noWrap
+                sx={{ fontWeight: "700" }}
+              >
                 {user.username}
               </Typography>
               <Typography variant="body2" color="text.secondary">
