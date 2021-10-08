@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import { Button, Grid, Paper } from "@material-ui/core";
 import React from 'react'
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, styled, useTheme } from "@material-ui/styles";
+import { makeStyles,useTheme } from "@material-ui/styles";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -277,7 +277,7 @@ const ForumLeftSide= () =>  {
 
                     </Box>
 
-
+                    
                 </Box>
         </div>
     )

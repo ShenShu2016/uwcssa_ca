@@ -14,7 +14,6 @@ import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
-import FourmHome from "./containers/FourmHome";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
@@ -33,6 +32,13 @@ import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
+
+import Forum from "./containers/Forum";
+import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
+import ForumPost from "./components/Forum/CurdTesting/ForumPost";
+import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
+import ForumPostDetail from "./components/Forum/CurdTesting/ForumPostDetail";
+import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostCommentDetail";
 
 Amplify.configure(awsconfig);
 
@@ -114,7 +120,23 @@ export default function App() {
                   exact
                   component={PostUwcssaJob}
                 />
-                <Route path="/fourmHome" exact component={FourmHome} />
+                <Route path="/forum" exact component={Forum} />
+                <Route path="/forumTopic" exact component={ForumTopic} />
+                <Route path="/forumPost" exact component={ForumPost} />
+                <Route path="/forumPostList" exact component={ForumPostList}/>
+                <Route
+                  path="/forumPost/:forumPostId"
+                  exact
+                  component={ForumPostDetail}
+                />
+                <Route
+                  path="/forumPost/forumPostComment/:forumPostCommentId"
+                  exact
+                  component={ForumPostCommentDetail}
+                />
+                
+                
+                
                 <Route path="/signIn" exact component={SignIn} />
                 <Route path="/signUp" exact component={SignUp} />
                 <Route
