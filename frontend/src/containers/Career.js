@@ -8,7 +8,7 @@ import { Route } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      backgroundColor: "#fff",
+      backgroundColor: "#F3F2EF",
       textAlign: "center",
       margin: "4rem auto",
       maxWidth: "960px",

@@ -48,6 +48,7 @@ export default function ApplyJob(props) {
     applyName: userAuth.user.username,
     applyEmail: userAuth.user.attributes.email,
     applyPhone: "",
+    message: "",
   });
 
   useEffect(() => {
@@ -119,7 +120,9 @@ export default function ApplyJob(props) {
             email: applyData.applyEmail,
             phone: applyData.applyPhone,
             resumeFilePath: key,
+            message: applyData.message,
             uwcssaJobResumeUwcssaJobId: applyData.job.id,
+            uwcssaJobResumeUwcssaJobResumeStatusId: "等待查阅",
           };
           const newUwcssaJobResume = await API.graphql(
             graphqlOperation(createUwcssaJobResume, {
@@ -240,6 +243,20 @@ export default function ApplyJob(props) {
               id="applyPhone"
               autoComplete="applyPhone"
               value={applyData.applyPhone}
+              onChange={(event) => onChange(event)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="standard"
+              required
+              fullWidth
+              name="message"
+              placeholder="备注信息"
+              type="text"
+              id="message"
+              autoComplete="message"
+              value={applyData.message}
               onChange={(event) => onChange(event)}
             />
           </Grid>

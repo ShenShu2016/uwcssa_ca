@@ -98,11 +98,12 @@ export default function PostUwcssaJob(props) {
         title: uwcssaJobData.title,
         introduction: uwcssaJobData.introduction,
         requirements: uwcssaJobData.requirements.filter((e) => e !== ""),
-        Schedule: uwcssaJobData.schedule.filter((e) => e !== ""),
-        Benefits: uwcssaJobData.benefits.filter((e) => e !== ""),
-        Bonus: uwcssaJobData.bonus.filter((e) => e !== ""),
+        schedule: uwcssaJobData.schedule.filter((e) => e !== ""),
+        benefits: uwcssaJobData.benefits.filter((e) => e !== ""),
+        bonus: uwcssaJobData.bonus.filter((e) => e !== ""),
         like: [""],
         unlike: [""],
+        active: true,
         uwcssaJobDepartmentId: uwcssaJobData.departmentName,
       };
       const newUwcssaJob = await API.graphql(
@@ -185,7 +186,7 @@ export default function PostUwcssaJob(props) {
       </Box>
       <Box>
         <Typography variant="h5">REQUIREMENTS</Typography>
-        <TableContainer component={Paper} className={classes.table}>
+        <TableContainer className={classes.table}>
           <Table aria-label="simple table">
             <TableBody>
               {uwcssaJobData.requirements.map((row, index) => (
@@ -255,7 +256,7 @@ export default function PostUwcssaJob(props) {
       </Box>
       <Box>
         <Typography variant="h5">SCHEDULE</Typography>
-        <TableContainer component={Paper} className={classes.table}>
+        <TableContainer className={classes.table}>
           <Table aria-label="simple table">
             <TableBody>
               {uwcssaJobData.schedule.map((row, index) => (
@@ -325,7 +326,7 @@ export default function PostUwcssaJob(props) {
       </Box>
       <Box>
         <Typography variant="h5">BENEFITS</Typography>
-        <TableContainer component={Paper} className={classes.table}>
+        <TableContainer className={classes.table}>
           <Table aria-label="simple table">
             <TableBody>
               {uwcssaJobData.benefits.map((row, index) => (
@@ -395,7 +396,7 @@ export default function PostUwcssaJob(props) {
       </Box>
       <Box>
         <Typography variant="h5">BONUS</Typography>
-        <TableContainer component={Paper} className={classes.table}>
+        <TableContainer className={classes.table}>
           <Table aria-label="simple table">
             <TableBody>
               {uwcssaJobData.bonus.map((row, index) => (

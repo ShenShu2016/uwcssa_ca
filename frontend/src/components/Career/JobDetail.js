@@ -7,7 +7,7 @@ import {getUwcssaJob} from "../../graphql/queries"
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F3F2EF",
     textAlign: "left",
     margin: "4rem",
     color: "#687988",
@@ -59,7 +59,7 @@ export default function JobDetail(props) {
       }):""}
       <br />
       <Typography variant="h6">SCHEDULE:</Typography><br />
-      {job.Schedule?job.Schedule.map((schedule,index) => {
+      {job.schedule?job.schedule.map((schedule,index) => {
         return (
           <div key={index}>
             <li className={classes.body}>{schedule}</li>
@@ -68,7 +68,7 @@ export default function JobDetail(props) {
       }):""}
       <br />
       <Typography variant="h6">BENEFITS:</Typography><br />
-      {job.Benefits?job.Benefits.map((benefit,index) => {
+      {job.benefits?job.benefits.map((benefit,index) => {
         return (
           <div key={index}>
             <li className={classes.body}>{benefit}</li>
@@ -77,7 +77,7 @@ export default function JobDetail(props) {
       }):""}
       <br />
       <Typography variant="h6">BONUS:</Typography><br />
-      {job.Bonus?job.Bonus.map((bonus,index) => {
+      {job.bonus?job.bonus.map((bonus,index) => {
         return (
           <div key={index}>
             <li className={classes.body}>{bonus}</li>

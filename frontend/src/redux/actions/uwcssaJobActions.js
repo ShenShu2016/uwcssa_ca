@@ -16,11 +16,12 @@ const departments = `query ListDepartments {
       updatedAt
       uwcssaJobs {
         items {
-          Benefits
-          Bonus
-          Schedule
+          benefits
+          bonus
+          schedule
           createdAt
           id
+          active
           imagePath
           introduction
           like
