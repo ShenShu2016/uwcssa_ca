@@ -8,7 +8,7 @@ import {useSelector} from 'react-redux'
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F3F2EF",
     textAlign: "left",
     margin: "4rem",
     maxWidth: "960px",
@@ -28,7 +28,7 @@ export default function Openings() {
   },[])
 
   const departments = useSelector(state=>state.allUwcssaJobs.departments)
-  console.log(departments)
+  console.log("Departments:",departments)
 
   return (
     <div className={classes.root}>
@@ -37,14 +37,13 @@ export default function Openings() {
           <div key={department.name}>
             <Typography variant="h5">{department.name}</Typography>
             {department.uwcssaJobs.items.length===0?"":department.uwcssaJobs.items.map(job => {
-              return (
+              return job.active?(
                 <div key={job.id}>
                   <br />
                   <div style={{display: "inline-block",width: "70%"}}><Link  className={classes.jobLink} to={`/career/jobDetail/${job.id}`}>{job.title}</Link></div>
-                  <div style={{display: "inline-block",width: "30%",textAlign: "right"}}>5</div>
                   <br />
                 </div>
-              )
+              ):""
             })}
             <br /><br />
           </div>
