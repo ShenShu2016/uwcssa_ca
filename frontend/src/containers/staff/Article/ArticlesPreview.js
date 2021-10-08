@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core";
-import { setArticles } from "../../../../redux/actions/articleActions";
-import { useSelector } from "react-redux";
+import { setArticles } from "../../../redux/actions/articleActions";
 
 const useStyles = makeStyles({
   root: {
@@ -61,12 +60,12 @@ const columns = [
     editable: false,
   },
 ];
-
-const ArticlesPreview = ({ setArticles }) => {
+export default function ArticlesPreview() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   useEffect(() => {
-    setArticles();
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+    dispatch(setArticles());
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const articles = useSelector((state) => state.allArticles.articles);
 
   const rows = articles.map((article) => {
@@ -113,6 +112,4 @@ const ArticlesPreview = ({ setArticles }) => {
       </div>
     </div>
   );
-};
-
-export default connect(null, { setArticles })(ArticlesPreview);
+}

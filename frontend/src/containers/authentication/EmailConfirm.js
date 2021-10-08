@@ -4,9 +4,9 @@ import React, { useState } from "react";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Redirect } from "react-router";
-import { connect } from "react-redux";
 import { emailConfirm } from "../../redux/actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,11 +17,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
 }));
+export default function EmailConfirm() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
-const EmailConfirm = ({ emailConfirm }) => {
   const [emailConfirmed, setEmailConfirmed] = useState(false);
   const { username } = useParams();
-  const classes = useStyles();
+
   const [formData, setFormData] = useState({
     username: username,
     authenticationCode: "",
@@ -32,7 +34,7 @@ const EmailConfirm = ({ emailConfirm }) => {
   };
   const confirmSignUp = async () => {
     const { username, authenticationCode } = formData;
-    const response = await emailConfirm(username, authenticationCode);
+    const response = await dispatch(emailConfirm(username, authenticationCode));
 
     if (response.result) {
       setEmailConfirmed(true);
@@ -94,10 +96,4 @@ const EmailConfirm = ({ emailConfirm }) => {
       </div>
     </Container>
   );
-};
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { emailConfirm })(EmailConfirm);
+}

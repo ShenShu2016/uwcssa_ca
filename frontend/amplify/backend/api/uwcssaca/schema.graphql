@@ -1,13 +1,96 @@
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "owner" }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["username"]) {
+  username: String!
+  email: String!
+  owner: String!
+  uWindsorEmail: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read] }
+        { allow: groups, groups: ["admin"] }
+        { allow: private, operations: [read] }
+        { allow: public, operations: [read], provider: iam }
+      ]
+    )
+  firstName: String
+  lastName: String
+  intro: String
+  major: String
+  avatarImgPath: String
+  backGroundImgPath: String
+  linkedin: String
+  github: String
+  tags: [String]
+    @auth(
+      rules: [
+        { allow: owner, operations: [read] }
+        { allow: groups, groups: ["admin"] }
+        { allow: private, operations: [read] }
+        { allow: public, operations: [read], provider: iam }
+      ]
+    )
+  UserEducations: [UserEducation] @connection(name: "UserUserEducations")
+  UserExperiences: [UserExperience] @connection(name: "UserUserExperiences")
+}
+
+type UserEducation
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  school: String!
+  degree: String
+  fieldOfStudy: String
+  startDate: AWSDateTime
+  endDate: AWSDateTime
+  grade: Int
+  description: String
+  user: User! @connection(name: "UserUserEducations")
+}
+type UserExperience
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  employmentType: String
+  companyName: String!
+  location: String
+  startDate: AWSDateTime
+  endDate: AWSDateTime
+  industry: String
+  description: String
+  user: User! @connection(name: "UserUserExperiences")
+}
+
 type Topic
   @model
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -23,11 +106,8 @@ type Type
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -36,6 +116,7 @@ type Type
   like: [String]!
   unlike: [String]!
   articles: [Article] @connection(name: "TypeArticles")
+  owner: String
 }
 
 type Article
@@ -48,11 +129,8 @@ type Article
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -74,11 +152,8 @@ type ArticleComment
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -94,11 +169,8 @@ type Department
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -117,11 +189,8 @@ type UwcssaJob
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -145,11 +214,8 @@ type UwcssaJobResume
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -157,7 +223,7 @@ type UwcssaJobResume
   name: String!
   email: String!
   resumeFilePath: String
-  phone: Int!
+  phone: String!
   uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
 }
 
@@ -166,11 +232,8 @@ type ForumTopic
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -186,11 +249,8 @@ type ForumSubTopic
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   )
@@ -207,11 +267,8 @@ type ForumPost
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -230,11 +287,8 @@ type ForumPostComment
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -252,11 +306,8 @@ type ForumPostSubComment
   @auth(
     rules: [
       { allow: owner }
-      # allow admins to create, update and delete
-      { allow: groups, groups: ["admin"] }
-      # allow all authenticated users to view
+      { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view
       { allow: public, operations: [read], provider: iam }
     ]
   ) {
@@ -267,3 +318,100 @@ type ForumPostSubComment
   forumPostComment: ForumPostComment!
     @connection(name: "ForumPostCommentForumPostSubComment")
 }
+
+type MarketType
+  # 卖东西，卖车，房屋租售，职位空缺
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  marketItems: [MarketItem] @connection(name: "MarketTypeMarketItems")
+}
+type MarketItemCategory
+  # 工具，电子产品，保健
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(fields: ["name"]) {
+  name: String!
+  marketItems: [MarketItem] @connection(name: "MarketItemCategoryMarketItems")
+}
+
+type MarketItem
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  imagePath: [String]!
+  title: String!
+  price: Int
+  description: String
+  location: String
+  marketType: MarketType! @connection(name: "MarketTypeMarketItems")
+  condition: String
+  marketItemCategory: MarketItemCategory!
+    @connection(name: "MarketItemCategoryMarketItems")
+  marketItemCar: MarketItemCar @connection(name: "MarketItemMarketItemCar")
+  marketItemHome: MarketItemHome @connection(name: "MarketItemMarketItemHome")
+}
+
+type MarketItemCar
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  year: String!
+  make: String!
+  model: String!
+  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCar")
+}
+
+type MarketItemHome
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  saleOrRent: String!
+  property: String!
+  bedroomCounts: Int!
+  bathroomsCounts: Int!
+  propertySize: Int
+  laundryType: String
+  airCondition: String
+  heating: String
+  marketItem: MarketItem! @connection(name: "MarketItemMarketItemHome")
+}
+
+

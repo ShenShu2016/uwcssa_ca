@@ -1,11 +1,11 @@
 import { ActionTypes } from "../constants/auth-action-types";
 
-const initialState = {
+const initialStateAuth = {
   isAuthenticated: null,
-  user: null,
+  user: { username: "", attributes: { email: "" } },
 };
 
-export const authReducer = (state = initialState, { type, payload }) => {
+export const authReducer = (state = initialStateAuth, { type, payload }) => {
   switch (type) {
     case ActionTypes.AUTHENTICATED_SUCCESS:
       return {
@@ -41,7 +41,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.USER_LOADED_FAIL:
       return {
         ...state,
-        user: null,
+        user: { username: "", attributes: { email: "" } },
       };
     case ActionTypes.GOOGLE_AUTH_FAIL:
     case ActionTypes.FACEBOOK_AUTH_FAIL:
@@ -51,7 +51,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isAuthenticated: false,
-        user: null,
+        user: { username: "", attributes: { email: "" } },
       };
     case ActionTypes.PASSWORD_RESET_SUCCESS:
     case ActionTypes.PASSWORD_RESET_FAIL:

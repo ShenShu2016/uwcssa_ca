@@ -1,7 +1,4 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import React from "react";
 import Typography from "@mui/material/Typography";
@@ -15,17 +12,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Education() {
+export default function MyEssencePosts() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Card sx={{ minWidth: 315 }}>
+      <Card sx={{ minWidth: "350px" }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Word of the Day
+            我的精华贴
           </Typography>
           <Typography variant="h5" component="div">
-            benevolent
+            我的精华贴
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             adjective
@@ -40,5 +37,3 @@ function Education() {
     </div>
   );
 }
-
-export default Education;

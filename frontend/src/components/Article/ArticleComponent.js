@@ -1,31 +1,35 @@
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@mui/material";
+
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { Avatar } from "@material-ui/core";
-import { Box } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import { CardHeader } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
-    justifyContent: "center",
     margin: "auto",
+    marginTop: "4rem",
     maxWidth: "960px",
     paddingInline: "1rem",
   },
   title: {
     textAlign: "center",
+    color: "#0D1F48",
   },
   paper: {
     maxWidth: "100%",
@@ -34,7 +38,7 @@ const useStyles = makeStyles({
   s3image: {},
 });
 
-const ArticleComponent = () => {
+export default function ArticleComponent() {
   const articles = useSelector((state) => state.allArticles.articles);
   const classes = useStyles();
 
@@ -57,7 +61,12 @@ const ArticleComponent = () => {
       <Card className={classes.paper} key={id} elevation={5}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+            <Avatar
+              aria-label="recipe"
+              className={classes.avatar}
+              component={Link}
+              to={`/account/profile/${owner}`}
+            ></Avatar>
           }
           action={
             <IconButton aria-label="settings">
@@ -69,7 +78,7 @@ const ArticleComponent = () => {
             11,
             19
           )}`}
-        />{" "}
+        />
         <CardHeader title={title} />
         <CardActions>
           <Button size="small" color="primary">
@@ -125,12 +134,11 @@ const ArticleComponent = () => {
   return (
     <Box className={classes.root}>
       <Box>
-        <Typography variant="h1" className={classes.title}>
-          Articles
+        <Typography variant="h3" className={classes.title}>
+          文章
         </Typography>
         {renderList}
       </Box>
     </Box>
   );
-};
-export default ArticleComponent;
+}

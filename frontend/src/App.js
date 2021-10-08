@@ -1,4 +1,4 @@
-import { Provider, connect } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Snackbar, makeStyles } from "@material-ui/core";
@@ -7,29 +7,32 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
-import ArticlesPreview from "./containers/account/staff/Article/ArticlesPreview";
+import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Footer from "./containers/Footer";
-import ForgotPassword from "./containers/ForgotPassword";
+import ForgotPassword from "./containers/authentication/ForgotPassword";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
-import PostArticle from "./containers/account/staff/Article/PostArticle";
-import PostUwcssaJob from "./containers/account/staff/UwcssaJob/PostUwcssaJob";
+import PostArticle from "./containers/staff/Article/PostArticle";
+import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
+import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
-import Staff from "./containers/account/staff/Staff";
-import UwcssaJobsPreview from "./containers/account/staff/UwcssaJob/UwcssaJobsPreview";
+import Staff from "./containers/staff/Staff";
+import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
+import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
+
 import Forum from "./containers/Forum";
 import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
 import ForumPost from "./components/Forum/CurdTesting/ForumPost";
@@ -52,17 +55,22 @@ const useStyles = makeStyles({
     },
   },
 });
-function App({ load_user, isAuthenticated }) {
-  const [signInOpen, setSignInOpen] = useState(false);
+export default function App() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [signInOpen, setSignInOpen] = useState(false);
   useEffect(() => {
-    load_user();
+    dispatch(load_user());
+    dispatch(setUserCounts());
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -79,31 +87,36 @@ function App({ load_user, isAuthenticated }) {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Router>
+            <ScrollToTop />
             <div className={classes.headerBody}>
               <Header />
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/account/dashboard" exact component={Dashboard} />
-                <Route path="/account/profile" exact component={Profile} />
-                <Route path="/account/myAccount" exact component={MyAccount} />
-                <Route path="/account/staff" exact component={Staff} />
                 <Route
-                  path="/account/staff/article"
+                  path="/account/profile/:username"
+                  exact
+                  component={Profile}
+                />
+                <Route path="/account/myAccount" exact component={MyAccount} />
+                <Route path="/staff" exact component={Staff} />
+                <Route
+                  path="/staff/article"
                   exact
                   component={ArticlesPreview}
                 />{" "}
                 <Route
-                  path="/account/staff/uwcssaJob"
+                  path="/staff/uwcssaJob"
                   exact
                   component={UwcssaJobsPreview}
                 />
                 <Route
-                  path="/account/staff/article/postArticle"
+                  path="/staff/article/postArticle"
                   exact
                   component={PostArticle}
                 />
                 <Route
-                  path="/account/staff/uwcssaJob/postUwcssaJob"
+                  path="/staff/uwcssaJob/postUwcssaJob"
                   exact
                   component={PostUwcssaJob}
                 />
@@ -170,7 +183,3 @@ function App({ load_user, isAuthenticated }) {
     </Provider>
   );
 }
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-export default connect(mapStateToProps, { load_user })(App);

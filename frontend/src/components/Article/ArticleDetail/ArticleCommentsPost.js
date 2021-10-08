@@ -1,20 +1,22 @@
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import IconButton from "@material-ui/core/IconButton";
+import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SignInRequest from "../SignInRequest";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { postArticleComment } from "../../../redux/actions/articleActions";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {},
@@ -23,8 +25,10 @@ const useStyles = makeStyles({
   },
   card: {},
 });
-function ArticleCommentsPost({ article, postArticleComment }) {
+export default function ArticleCommentsPost({ article }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const userInfo = useSelector((state) => state.userAuth);
 
   const [formData, setFormData] = useState({
@@ -44,7 +48,7 @@ function ArticleCommentsPost({ article, postArticleComment }) {
   };
 
   const postComment = (e) => {
-    postArticleComment(createArticleInput);
+    dispatch(postArticleComment(createArticleInput));
     setFormData({ comment: "" });
   };
   return (
@@ -55,7 +59,12 @@ function ArticleCommentsPost({ article, postArticleComment }) {
           <Card elevation={3} className={classes.card}>
             <CardHeader
               avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+                <Avatar
+                  aria-label="recipe"
+                  className={classes.avatar}
+                  component={Link}
+                  to={`/account/profile/${userInfo.user.username}`}
+                ></Avatar>
               }
               action={
                 <IconButton aria-label="settings">
@@ -90,5 +99,3 @@ function ArticleCommentsPost({ article, postArticleComment }) {
     </div>
   );
 }
-
-export default connect(null, { postArticleComment })(ArticleCommentsPost);

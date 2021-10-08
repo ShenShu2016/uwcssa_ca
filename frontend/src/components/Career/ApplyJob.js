@@ -1,25 +1,27 @@
-import React,{ useState,useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import {Button,Typography,Snackbar} from "@material-ui/core"
-import { Checkbox,TextField,Grid, } from '@material-ui/core';
-import {useSelector} from "react-redux"
-import API from "@aws-amplify/api";
-import Storage from "@aws-amplify/storage";
-import {getUwcssaJob} from "../../graphql/queries"
-import Alert from '@material-ui/lab/Alert';
-import { v4 as uuid } from "uuid"
+import { Button, Snackbar, Typography } from "@material-ui/core";
+import { Checkbox, Grid, TextField } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 
+import API from "@aws-amplify/api";
+import Alert from "@material-ui/lab/Alert";
+import Storage from "@aws-amplify/storage";
+import { createUwcssaJobResume } from "../../graphql/mutations";
+import { getUwcssaJob } from "../../graphql/queries";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
-    textAlign: 'left',
+    textAlign: "left",
     margin: "4rem",
   },
   input: {
-    display: 'none',
+    display: "none",
   },
   form: {
     width: "16rem",
@@ -27,48 +29,41 @@ const useStyles = makeStyles((theme) => ({
   },
   fileName: {
     paddingLeft: "1rem",
-  }
+  },
 }));
 
 export default function ApplyJob(props) {
   const classes = useStyles();
-  const {id} = props.match.params
+  const { id } = props.match.params;
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitFailure, setSubmitFailure] = useState(false);
+  const [fileSize, setFileSize] = useState(false);
   const [resume, setResume] = useState("");
   const userAuth = useSelector((state) => state.userAuth);
-  
+
   const [applyData, setApplyData] = useState({
     job: "",
-    applyname: "",
-    applyemail: "",
-    applyphone: "",
-    resumePath: "",
+    applyName: userAuth.user.username,
+    applyEmail: userAuth.user.attributes.email,
+    applyPhone: "",
   });
 
   useEffect(() => {
-    initUser();
     fetchJob();
-  },[])
-
-  const initUser = () => {
-    console.log(userAuth)
-    if(userAuth.user){
-      const applyname = userAuth.user.username
-      const applyemail = userAuth.user.attributes.email
-      setApplyData({ ...applyData, applyname: applyname, applyemail: applyemail })
-    }
-  }
+    console.log("applyData", applyData);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchJob = async () => {
     try {
       const jobData = await API.graphql({
         query: getUwcssaJob,
-        variables: {id: id},
+        variables: { id: id },
         authMode: "AWS_IAM",
       });
       const job = jobData.data.getUwcssaJob;
-      console.log("jobData", jobData);
+      console.log("jobTitle: ", job.title);
       setApplyData({ ...applyData, job: job });
     } catch (error) {
       console.log("error on fetching Job", error);
@@ -81,34 +76,73 @@ export default function ApplyJob(props) {
   };
 
   const addFile = (event) => {
-    setResume(()=>event.target.files[0])
-  }
+    setResume(event.target.files[0]);
+  };
 
   const postResume = async (resume) => {
     try {
       const response = await Storage.put(
         `career/${uuid()}${resume.name}`,
-        resume,
+        resume
       );
-      setApplyData({ ...applyData, resumePath: response.key})
+      console.log("key: ", response.key);
+      return response.key;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleSubmit = (event) => {
-    if(!userAuth.user){
-      setOpen(true)
-      setTimeout(() => {props.history.push("/signIn")},1200)
-    }else{
-      if(!resume && !applyData.applyname || !resume && !applyData.applyemail || !resume && !applyData.applyphone){
-        setInfo(true)
-      }else{
-        postResume(resume)
+  const handleSubmit = async (event) => {
+    if (userAuth.isAuthenticated === false) {
+      setOpen(true);
+      setTimeout(() => {
+        props.history.push("/signIn");
+      }, 1200);
+    } else {
+      if (
+        !resume ||
+        !applyData.applyName ||
+        !applyData.applyEmail ||
+        !applyData.applyPhone
+      ) {
+        setInfo(true);
+      } else {
+        if (resume.size > 1024 * 1024 * 20) {
+          setFileSize(true);
+          console.log("upload file size > 20M");
+          return;
+        }
+        const key = await postResume(resume);
+        try {
+          const createUwcssaJobResumeInput = {
+            name: applyData.applyName,
+            email: applyData.applyEmail,
+            phone: applyData.applyPhone,
+            resumeFilePath: key,
+            uwcssaJobResumeUwcssaJobId: applyData.job.id,
+          };
+          const newUwcssaJobResume = await API.graphql(
+            graphqlOperation(createUwcssaJobResume, {
+              input: createUwcssaJobResumeInput,
+            })
+          );
+          console.log(
+            "newUwcssaJobResume",
+            newUwcssaJobResume.data.createUwcssaJobResume
+          );
+          if (newUwcssaJobResume) {
+            setSubmitSuccess(true);
+            setTimeout(() => {
+              props.history.push("/career");
+            }, 1200);
+          }
+        } catch (error) {
+          console.log("submit resume failure: ", error);
+          setSubmitFailure(true);
+        }
       }
     }
-    console.log(applyData)
-  }
+  };
 
   const handleClose = (event, reason) => {
     setOpen(false);
@@ -116,12 +150,28 @@ export default function ApplyJob(props) {
 
   const handleCloseInfo = (event, reason) => {
     setInfo(false);
-  }
-  
+  };
+
+  const handleCloseSuccess = (event, reason) => {
+    setSubmitSuccess(false);
+  };
+
+  const handleCloseFailure = (event, reason) => {
+    setSubmitFailure(false);
+  };
+
+  const handleCloseFileSize = (event, reason) => {
+    setFileSize(false);
+  };
+
   return (
     <div className={classes.root}>
-      <Typography variant="h6">{applyData.job.title}</Typography><br />
-      <Typography variant="body1">谢谢你的兴趣.请填写下面的表格并点击"提交"</Typography><br />
+      <Typography variant="h6">{applyData.job.title}</Typography>
+      <br />
+      <Typography variant="body1">
+        谢谢你的兴趣.请填写下面的表格并点击"提交"
+      </Typography>
+      <br />
       <div>* 使用简历申请</div>
       <input
         accept="*"
@@ -130,14 +180,24 @@ export default function ApplyJob(props) {
         name="files"
         // multiple
         type="file"
-        onChange={event => addFile(event)}
+        onChange={(event) => addFile(event)}
       />
       <label htmlFor="contained-button-file">
         <Button variant="outlined" color="primary" component="span">
           上传文件
         </Button>
-        { resume?<Typography variant="overline" className={classes.fileName}>{resume.name}</Typography>:<Typography variant="overline" className={classes.fileName}>未上传文件</Typography> }
-      </label><br /><br />
+        {resume ? (
+          <Typography variant="overline" className={classes.fileName}>
+            {resume.name}
+          </Typography>
+        ) : (
+          <Typography variant="overline" className={classes.fileName}>
+            未上传文件
+          </Typography>
+        )}
+      </label>
+      <br />
+      <br />
       <Typography variant="body1">个人信息</Typography>
       <form className={classes.form}>
         <Grid container spacing={2}>
@@ -146,12 +206,12 @@ export default function ApplyJob(props) {
               variant="standard"
               required
               fullWidth
-              name="applyname"
+              name="applyName"
               placeholder="姓名"
               type="text"
-              id="applyname"
-              autoComplete="applyname"
-              value={applyData.applyname}
+              id="applyName"
+              autoComplete="applyName"
+              value={applyData.applyName}
               onChange={(event) => onChange(event)}
             />
           </Grid>
@@ -160,12 +220,12 @@ export default function ApplyJob(props) {
               variant="standard"
               required
               fullWidth
-              name="applyemail"
+              name="applyEmail"
               placeholder="邮箱"
               type="email"
-              id="applyemail"
-              autoComplete="applyemail"
-              value={applyData.applyemail}
+              id="applyEmail"
+              autoComplete="applyEmail"
+              value={applyData.applyEmail}
               onChange={(event) => onChange(event)}
             />
           </Grid>
@@ -174,33 +234,77 @@ export default function ApplyJob(props) {
               variant="standard"
               required
               fullWidth
-              name="applyphone"
+              name="applyPhone"
               placeholder="手机号码"
               type="tel"
-              id="applyphone"
-              autoComplete="applyphone"
-              value={applyData.applyphone}
+              id="applyPhone"
+              autoComplete="applyPhone"
+              value={applyData.applyPhone}
               onChange={(event) => onChange(event)}
             />
           </Grid>
         </Grid>
       </form>
       <br />
-      <p>我保证我对所有问题的回答都是真实和正确的,没有任何形式的间接遗漏.我明白,如果我被录用,在本申请书中或在雇用前的过程中所作的任何虚假,误导性或其它不正确的陈述,都可能成为我被立即解雇的理由.</p>
-      <Checkbox className={classes.checkbox} name="agree" checked={true}/>我同意<br />
+      <p>
+        我保证我对所有问题的回答都是真实和正确的,没有任何形式的间接遗漏.我明白,如果我被录用,在本申请书中或在雇用前的过程中所作的任何虚假,误导性或其它不正确的陈述,都可能成为我被立即解雇的理由.
+      </p>
+      <Checkbox className={classes.checkbox} name="agree" checked={true} />
+      我同意
+      <br />
       <Button variant="outlined" color="primary" onClick={handleSubmit}>
         提交
       </Button>
-      <Snackbar open={open} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={3000} onClose={handleClose}>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
         <Alert severity="error" onClose={handleClose}>
           请先登录!
         </Alert>
       </Snackbar>
-      <Snackbar open={info} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} autoHideDuration={3000} onClose={handleCloseInfo}>
-        <Alert severity="error" onClose={handleCloseInfo}>
-          请上传RESUME或者补充完整个人信息!
+      <Snackbar
+        open={info}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={handleCloseInfo}
+      >
+        <Alert severity="warning" onClose={handleCloseInfo}>
+          请上传RESUME并补充完整个人信息!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={submitSuccess}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={3000}
+        onClose={handleCloseSuccess}
+      >
+        <Alert severity="success" onClose={handleCloseSuccess}>
+          申请提交成功,请耐心等待!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={submitFailure}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={handleCloseFailure}
+      >
+        <Alert severity="error" onClose={handleCloseFailure}>
+          申请提交失败,请重试!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={fileSize}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={handleCloseFileSize}
+      >
+        <Alert severity="info" onClose={handleCloseFileSize}>
+          您提交的文件超过了20M限制!
         </Alert>
       </Snackbar>
     </div>
-  )
+  );
 }

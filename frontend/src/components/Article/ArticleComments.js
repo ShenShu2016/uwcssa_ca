@@ -11,6 +11,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -27,7 +28,8 @@ const useStyles = makeStyles({
   cardContent: {},
   main: {},
 });
-const ArticleComments = ({ article }) => {
+
+export default function ArticleComments({ article }) {
   const classes = useStyles();
 
   return (
@@ -48,6 +50,8 @@ const ArticleComments = ({ article }) => {
                       <Avatar
                         aria-label="recipe"
                         className={classes.avatar}
+                        component={Link}
+                        to={`/account/profile/${owner}`}
                       ></Avatar>
                     }
                     action={
@@ -100,5 +104,4 @@ const ArticleComments = ({ article }) => {
       )}
     </div>
   );
-};
-export default ArticleComments;
+}

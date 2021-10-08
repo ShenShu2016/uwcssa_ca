@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Checkbox,
@@ -11,11 +12,10 @@ import {
 } from "@material-ui/core";
 import { Link, Redirect } from "react-router-dom";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Auth from "@aws-amplify/auth";
-import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { connect } from "react-redux";
 import facebookLogo from "../../static/svg icons/facebook.svg";
 import githubLogo from "../../static/svg icons/github.svg";
 import googleLogo from "../../static/svg icons/google.svg";
@@ -80,8 +80,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = ({ signIn, isAuthenticated }) => {
+export default function SignIn() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -94,7 +98,7 @@ const SignIn = ({ signIn, isAuthenticated }) => {
 
   const handleSubmit = async function (event) {
     event.preventDefault();
-    const response = await signIn(username, password);
+    const response = await dispatch(signIn(username, password));
     if (response.result) {
       // setLogged(true);
     } else {
@@ -256,9 +260,4 @@ const SignIn = ({ signIn, isAuthenticated }) => {
       </div>
     </Container>
   );
-};
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userAuth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { signIn })(SignIn);
+}

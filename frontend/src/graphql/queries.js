@@ -1,6 +1,266 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUser = /* GraphQL */ `
+  query GetUser($username: String!) {
+    getUser(username: $username) {
+      username
+      email
+      owner
+      firstName
+      lastName
+      intro
+      major
+      avatarImgPath
+      backGroundImgPath
+      linkedin
+      github
+      createdAt
+      updatedAt
+      uWindsorEmail
+      tags
+      UserEducations {
+        items {
+          id
+          school
+          degree
+          fieldOfStudy
+          startDate
+          endDate
+          grade
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      UserExperiences {
+        items {
+          id
+          title
+          employmentType
+          companyName
+          location
+          startDate
+          endDate
+          industry
+          description
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $username: String
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listUsers(
+      username: $username
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserEducation = /* GraphQL */ `
+  query GetUserEducation($id: ID!) {
+    getUserEducation(id: $id) {
+      id
+      school
+      degree
+      fieldOfStudy
+      startDate
+      endDate
+      grade
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listUserEducations = /* GraphQL */ `
+  query ListUserEducations(
+    $filter: ModelUserEducationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserEducations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        school
+        degree
+        fieldOfStudy
+        startDate
+        endDate
+        grade
+        description
+        createdAt
+        updatedAt
+        user {
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgPath
+          backGroundImgPath
+          linkedin
+          github
+          createdAt
+          updatedAt
+          uWindsorEmail
+          tags
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserExperience = /* GraphQL */ `
+  query GetUserExperience($id: ID!) {
+    getUserExperience(id: $id) {
+      id
+      title
+      employmentType
+      companyName
+      location
+      startDate
+      endDate
+      industry
+      description
+      createdAt
+      updatedAt
+      user {
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
+        createdAt
+        updatedAt
+        uWindsorEmail
+        tags
+        UserEducations {
+          nextToken
+        }
+        UserExperiences {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listUserExperiences = /* GraphQL */ `
+  query ListUserExperiences(
+    $filter: ModelUserExperienceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserExperiences(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        employmentType
+        companyName
+        location
+        startDate
+        endDate
+        industry
+        description
+        createdAt
+        updatedAt
+        user {
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgPath
+          backGroundImgPath
+          linkedin
+          github
+          createdAt
+          updatedAt
+          uWindsorEmail
+          tags
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getTopic = /* GraphQL */ `
   query GetTopic($name: String!) {
     getTopic(name: $name) {
@@ -64,9 +324,9 @@ export const getType = /* GraphQL */ `
       name
       like
       unlike
+      owner
       createdAt
       updatedAt
-      owner
       articles {
         items {
           id
@@ -104,9 +364,9 @@ export const listTypes = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -142,9 +402,9 @@ export const getArticle = /* GraphQL */ `
         name
         like
         unlike
+        owner
         createdAt
         updatedAt
-        owner
         articles {
           nextToken
         }
@@ -194,9 +454,9 @@ export const listArticles = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -246,9 +506,9 @@ export const articlesByDate = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -290,9 +550,9 @@ export const getArticleComment = /* GraphQL */ `
           name
           like
           unlike
+          owner
           createdAt
           updatedAt
-          owner
         }
         owner
         ArticleComments {
@@ -915,6 +1175,455 @@ export const listForumPostSubComments = /* GraphQL */ `
           content
           like
           unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketType = /* GraphQL */ `
+  query GetMarketType($name: String!) {
+    getMarketType(name: $name) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listMarketTypes = /* GraphQL */ `
+  query ListMarketTypes(
+    $name: String
+    $filter: ModelMarketTypeFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listMarketTypes(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketItemCategory = /* GraphQL */ `
+  query GetMarketItemCategory($name: String!) {
+    getMarketItemCategory(name: $name) {
+      name
+      createdAt
+      updatedAt
+      owner
+      marketItems {
+        items {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listMarketItemCategories = /* GraphQL */ `
+  query ListMarketItemCategories(
+    $name: String
+    $filter: ModelMarketItemCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listMarketItemCategories(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketItem = /* GraphQL */ `
+  query GetMarketItem($id: ID!) {
+    getMarketItem(id: $id) {
+      id
+      name
+      imagePath
+      title
+      price
+      description
+      location
+      condition
+      createdAt
+      updatedAt
+      marketType {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      marketItemCategory {
+        name
+        createdAt
+        updatedAt
+        owner
+        marketItems {
+          nextToken
+        }
+      }
+      owner
+      marketItemCar {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      marketItemHome {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const listMarketItems = /* GraphQL */ `
+  query ListMarketItems(
+    $filter: ModelMarketItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMarketItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketItemCar = /* GraphQL */ `
+  query GetMarketItemCar($id: ID!) {
+    getMarketItemCar(id: $id) {
+      id
+      year
+      make
+      model
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listMarketItemCars = /* GraphQL */ `
+  query ListMarketItemCars(
+    $filter: ModelMarketItemCarFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMarketItemCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        year
+        make
+        model
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketItemHome = /* GraphQL */ `
+  query GetMarketItemHome($id: ID!) {
+    getMarketItemHome(id: $id) {
+      id
+      saleOrRent
+      property
+      bedroomCounts
+      bathroomsCounts
+      propertySize
+      laundryType
+      airCondition
+      heating
+      createdAt
+      updatedAt
+      marketItem {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        condition
+        createdAt
+        updatedAt
+        marketType {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemCategory {
+          name
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        marketItemCar {
+          id
+          year
+          make
+          model
+          createdAt
+          updatedAt
+          owner
+        }
+        marketItemHome {
+          id
+          saleOrRent
+          property
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          laundryType
+          airCondition
+          heating
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listMarketItemHomes = /* GraphQL */ `
+  query ListMarketItemHomes(
+    $filter: ModelMarketItemHomeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMarketItemHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        saleOrRent
+        property
+        bedroomCounts
+        bathroomsCounts
+        propertySize
+        laundryType
+        airCondition
+        heating
+        createdAt
+        updatedAt
+        marketItem {
+          id
+          name
+          imagePath
+          title
+          price
+          description
+          location
+          condition
           createdAt
           updatedAt
           owner

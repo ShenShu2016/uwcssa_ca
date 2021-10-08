@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
 import {
   setDepartments,
   setUwcssaJobs,
-} from "../../../../redux/actions/uwcssaJobActions";
+} from "../../../redux/actions/uwcssaJobActions";
+import { useDispatch, useSelector } from "react-redux";
 
-import TempLinkBar from "../../../../components/Account/TempLinkBar";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 
@@ -15,10 +14,13 @@ const useStyles = makeStyles({
     margin: "auto",
   },
 });
-function UwcssaJobsPreview({ setDepartments, setUwcssaJobs }) {
+export default function UwcssaJobsPreview() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setDepartments();
-    setUwcssaJobs();
+    dispatch(setDepartments());
+    dispatch(setUwcssaJobs());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -26,15 +28,10 @@ function UwcssaJobsPreview({ setDepartments, setUwcssaJobs }) {
     (state) => state.allUwcssaJobs
   );
   console.log("departments, uwcssaJobs", departments, uwcssaJobs);
-  const classes = useStyles();
+
   return (
     <div className={classes.root}>
-      <TempLinkBar />
       <Typography variant="h1">Uwcssa Jobs Preview</Typography>
     </div>
   );
 }
-
-export default connect(null, { setDepartments, setUwcssaJobs })(
-  UwcssaJobsPreview
-);
