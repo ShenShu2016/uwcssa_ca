@@ -198,11 +198,11 @@ type UwcssaJob
   introduction: String!
   title: String!
   requirements: [String]!
-  Bonus: [String]!
+  bonus: [String]!
   imagePath: String
   department: Department @connection(name: "DepartmentUwcssaJobs")
-  Benefits: [String]!
-  Schedule: [String]!
+  benefits: [String]!
+  schedule: [String]!
   like: [String]!
   unlike: [String]!
   uwcssaJobResumes: [UwcssaJobResume]
@@ -215,8 +215,8 @@ type UwcssaJobResume
     rules: [
       { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
+      # { allow: private, operations: [read] }
+      # { allow: public, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -224,8 +224,27 @@ type UwcssaJobResume
   email: String!
   resumeFilePath: String
   phone: String!
+  message:String
+  active:Boolean!
+  uwcssaJobResumeStatus: UwcssaJobResumeStatus! @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
   uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
+
 }
+
+type UwcssaJobResumeStatus
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      # { allow: private, operations: [read] }
+      # { allow: public, operations: [read], provider: iam }
+    ]
+  )@key(fields: ["status"]) {
+  status: String!
+  uwcssaJobResumes: [UwcssaJobResume] @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
+}
+
 
 type ForumTopic
   @model

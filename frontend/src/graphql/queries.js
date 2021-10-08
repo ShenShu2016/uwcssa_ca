@@ -613,10 +613,10 @@ export const getDepartment = /* GraphQL */ `
           introduction
           title
           requirements
-          Bonus
+          bonus
           imagePath
-          Benefits
-          Schedule
+          benefits
+          schedule
           like
           unlike
           createdAt
@@ -668,10 +668,10 @@ export const getUwcssaJob = /* GraphQL */ `
       introduction
       title
       requirements
-      Bonus
+      bonus
       imagePath
-      Benefits
-      Schedule
+      benefits
+      schedule
       like
       unlike
       createdAt
@@ -698,6 +698,8 @@ export const getUwcssaJob = /* GraphQL */ `
           email
           resumeFilePath
           phone
+          message
+          active
           createdAt
           updatedAt
           owner
@@ -719,10 +721,10 @@ export const listUwcssaJobs = /* GraphQL */ `
         introduction
         title
         requirements
-        Bonus
+        bonus
         imagePath
-        Benefits
-        Schedule
+        benefits
+        schedule
         like
         unlike
         createdAt
@@ -755,6 +757,8 @@ export const getUwcssaJobResume = /* GraphQL */ `
       email
       resumeFilePath
       phone
+      message
+      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -762,10 +766,10 @@ export const getUwcssaJobResume = /* GraphQL */ `
         introduction
         title
         requirements
-        Bonus
+        bonus
         imagePath
-        Benefits
-        Schedule
+        benefits
+        schedule
         like
         unlike
         createdAt
@@ -787,6 +791,15 @@ export const getUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumeStatus {
+        status
+        createdAt
+        updatedAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        owner
+      }
     }
   }
 `;
@@ -807,6 +820,8 @@ export const listUwcssaJobResumes = /* GraphQL */ `
         email
         resumeFilePath
         phone
+        message
+        active
         createdAt
         updatedAt
         uwcssaJob {
@@ -814,15 +829,74 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           introduction
           title
           requirements
-          Bonus
+          bonus
           imagePath
-          Benefits
-          Schedule
+          benefits
+          schedule
           like
           unlike
           createdAt
           updatedAt
           owner
+        }
+        owner
+        uwcssaJobResumeStatus {
+          status
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaJobResumeStatus = /* GraphQL */ `
+  query GetUwcssaJobResumeStatus($status: String!) {
+    getUwcssaJobResumeStatus(status: $status) {
+      status
+      createdAt
+      updatedAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          message
+          active
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      owner
+    }
+  }
+`;
+export const listUwcssaJobResumeStatuses = /* GraphQL */ `
+  query ListUwcssaJobResumeStatuses(
+    $status: String
+    $filter: ModelUwcssaJobResumeStatusFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listUwcssaJobResumeStatuses(
+      status: $status
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        status
+        createdAt
+        updatedAt
+        uwcssaJobResumes {
+          nextToken
         }
         owner
       }

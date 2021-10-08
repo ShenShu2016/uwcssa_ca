@@ -934,10 +934,10 @@ export const createDepartment = /* GraphQL */ `
           introduction
           title
           requirements
-          Bonus
+          bonus
           imagePath
-          Benefits
-          Schedule
+          benefits
+          schedule
           like
           unlike
           createdAt
@@ -970,10 +970,10 @@ export const updateDepartment = /* GraphQL */ `
           introduction
           title
           requirements
-          Bonus
+          bonus
           imagePath
-          Benefits
-          Schedule
+          benefits
+          schedule
           like
           unlike
           createdAt
@@ -1006,10 +1006,10 @@ export const deleteDepartment = /* GraphQL */ `
           introduction
           title
           requirements
-          Bonus
+          bonus
           imagePath
-          Benefits
-          Schedule
+          benefits
+          schedule
           like
           unlike
           createdAt
@@ -1031,10 +1031,10 @@ export const createUwcssaJob = /* GraphQL */ `
       introduction
       title
       requirements
-      Bonus
+      bonus
       imagePath
-      Benefits
-      Schedule
+      benefits
+      schedule
       like
       unlike
       createdAt
@@ -1061,6 +1061,8 @@ export const createUwcssaJob = /* GraphQL */ `
           email
           resumeFilePath
           phone
+          message
+          active
           createdAt
           updatedAt
           owner
@@ -1080,10 +1082,10 @@ export const updateUwcssaJob = /* GraphQL */ `
       introduction
       title
       requirements
-      Bonus
+      bonus
       imagePath
-      Benefits
-      Schedule
+      benefits
+      schedule
       like
       unlike
       createdAt
@@ -1110,6 +1112,8 @@ export const updateUwcssaJob = /* GraphQL */ `
           email
           resumeFilePath
           phone
+          message
+          active
           createdAt
           updatedAt
           owner
@@ -1129,10 +1133,10 @@ export const deleteUwcssaJob = /* GraphQL */ `
       introduction
       title
       requirements
-      Bonus
+      bonus
       imagePath
-      Benefits
-      Schedule
+      benefits
+      schedule
       like
       unlike
       createdAt
@@ -1159,6 +1163,8 @@ export const deleteUwcssaJob = /* GraphQL */ `
           email
           resumeFilePath
           phone
+          message
+          active
           createdAt
           updatedAt
           owner
@@ -1179,6 +1185,8 @@ export const createUwcssaJobResume = /* GraphQL */ `
       email
       resumeFilePath
       phone
+      message
+      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -1186,10 +1194,10 @@ export const createUwcssaJobResume = /* GraphQL */ `
         introduction
         title
         requirements
-        Bonus
+        bonus
         imagePath
-        Benefits
-        Schedule
+        benefits
+        schedule
         like
         unlike
         createdAt
@@ -1211,6 +1219,15 @@ export const createUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumeStatus {
+        status
+        createdAt
+        updatedAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        owner
+      }
     }
   }
 `;
@@ -1225,6 +1242,8 @@ export const updateUwcssaJobResume = /* GraphQL */ `
       email
       resumeFilePath
       phone
+      message
+      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -1232,10 +1251,10 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         introduction
         title
         requirements
-        Bonus
+        bonus
         imagePath
-        Benefits
-        Schedule
+        benefits
+        schedule
         like
         unlike
         createdAt
@@ -1257,6 +1276,15 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
+      uwcssaJobResumeStatus {
+        status
+        createdAt
+        updatedAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        owner
+      }
     }
   }
 `;
@@ -1271,6 +1299,8 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
       email
       resumeFilePath
       phone
+      message
+      active
       createdAt
       updatedAt
       uwcssaJob {
@@ -1278,10 +1308,10 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         introduction
         title
         requirements
-        Bonus
+        bonus
         imagePath
-        Benefits
-        Schedule
+        benefits
+        schedule
         like
         unlike
         createdAt
@@ -1301,6 +1331,99 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         uwcssaJobResumes {
           nextToken
         }
+      }
+      owner
+      uwcssaJobResumeStatus {
+        status
+        createdAt
+        updatedAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        owner
+      }
+    }
+  }
+`;
+export const createUwcssaJobResumeStatus = /* GraphQL */ `
+  mutation CreateUwcssaJobResumeStatus(
+    $input: CreateUwcssaJobResumeStatusInput!
+    $condition: ModelUwcssaJobResumeStatusConditionInput
+  ) {
+    createUwcssaJobResumeStatus(input: $input, condition: $condition) {
+      status
+      createdAt
+      updatedAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          message
+          active
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      owner
+    }
+  }
+`;
+export const updateUwcssaJobResumeStatus = /* GraphQL */ `
+  mutation UpdateUwcssaJobResumeStatus(
+    $input: UpdateUwcssaJobResumeStatusInput!
+    $condition: ModelUwcssaJobResumeStatusConditionInput
+  ) {
+    updateUwcssaJobResumeStatus(input: $input, condition: $condition) {
+      status
+      createdAt
+      updatedAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          message
+          active
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      owner
+    }
+  }
+`;
+export const deleteUwcssaJobResumeStatus = /* GraphQL */ `
+  mutation DeleteUwcssaJobResumeStatus(
+    $input: DeleteUwcssaJobResumeStatusInput!
+    $condition: ModelUwcssaJobResumeStatusConditionInput
+  ) {
+    deleteUwcssaJobResumeStatus(input: $input, condition: $condition) {
+      status
+      createdAt
+      updatedAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFilePath
+          phone
+          message
+          active
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       owner
     }
