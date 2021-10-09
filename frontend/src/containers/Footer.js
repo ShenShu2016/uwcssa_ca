@@ -1,13 +1,18 @@
-import { Box, Button, Grid, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Link as MUILink,
+  Typography,
+} from "@mui/material";
 
-import Container from "@material-ui/core/Container";
-import FacebookIcon from "@material-ui/icons/Facebook";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import { Link as MUILink } from "@material-ui/core";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
 
 function Copyright() {
   return (
@@ -15,18 +20,13 @@ function Copyright() {
       {"Copyright © "}
       <MUILink color="inherit" href="https://material-ui.com/">
         uwcssa.ca
-      </MUILink>{" "}
+      </MUILink>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  // },//？？ what is this for?
   main: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
@@ -34,10 +34,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     height: "220px",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[800],
+    backgroundColor: "#F3F2EF",
     [theme.breakpoints.down("sm")]: {
       height: "350px",
     },

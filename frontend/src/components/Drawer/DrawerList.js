@@ -1,4 +1,4 @@
-import { Box, Divider, List, ListItem, ListItemText } from "@material-ui/core";
+import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import React, { useState } from "react";
 
 import Collapse from "@mui/material/Collapse";

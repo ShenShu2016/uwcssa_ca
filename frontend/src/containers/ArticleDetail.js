@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ArticleComments from "../components/Article/ArticleComments";
 import ArticleCommentsPost from "../components/Article/ArticleDetail/ArticleCommentsPost";
 import Main from "../components/Article/ArticleDetail/Main";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({

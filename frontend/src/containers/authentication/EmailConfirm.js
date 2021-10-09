@@ -1,11 +1,17 @@
-import { Avatar, Grid, TextField, Typography } from "@material-ui/core";
-import { Button, Container } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Redirect } from "react-router";
 import { emailConfirm } from "../../redux/actions/authActions";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 

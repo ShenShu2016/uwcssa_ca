@@ -13,9 +13,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SignInRequest from "../SignInRequest";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { postArticleComment } from "../../../redux/actions/articleActions";
 
 const useStyles = makeStyles({

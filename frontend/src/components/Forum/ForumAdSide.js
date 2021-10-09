@@ -1,10 +1,10 @@
+import Box from "@material-ui/core/Box";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from '@material-ui/core/ImageListItemBar';
-import Box from "@material-ui/core/Box";
 import React from 'react';
-import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
 
     root: {

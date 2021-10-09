@@ -1,8 +1,7 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import { Card, CardContent, Typography } from "@mui/material";
+
 import React from "react";
-import Typography from "@mui/material/Typography";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {

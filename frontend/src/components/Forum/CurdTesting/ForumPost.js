@@ -1,23 +1,24 @@
+import { Box, Button, InputLabel, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { Typography, makeStyles } from "@material-ui/core";
 import { connect, useSelector } from "react-redux";
-import { API } from "aws-amplify";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { makeStyles, Typography } from "@material-ui/core";
 import { getForumTopic, listForumTopics } from "../../../graphql/queries";
 import {
-  setForumTopics,
-  setForumSubTopics,
   postForumPost,
   postForumPostImg,
+  setForumSubTopics,
+  setForumTopics,
 } from "../../../redux/actions/forumAction";
-import { createForumPost } from "../../../graphql/mutations";
-import { InputLabel, Button, Box, TextField } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
+
+import { API } from "aws-amplify";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import PublishIcon from "@material-ui/icons/Publish";
 import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import PublishIcon from "@mui/icons-material/Publish";
+import Select from "@mui/material/Select";
+import { createForumPost } from "../../../graphql/mutations";
+import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -26,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
   imgPreview: {
     minHeight: "300px",
-    maxHeight:"300px",
-    maxWidth:"300px",
+    maxHeight: "300px",
+    maxWidth: "300px",
     backgroundColor: "#f4f4f4",
   },
 }));
@@ -81,7 +82,7 @@ const ForumPost = ({
       history.push(`/forumPost/${response.response.data.createForumPost.id}`);
     }
   };
-  
+
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
@@ -175,5 +176,5 @@ export default connect(null, {
   setForumTopics,
   setForumSubTopics,
   postForumPost,
-  postForumPostImg
+  postForumPostImg,
 })(ForumPost);

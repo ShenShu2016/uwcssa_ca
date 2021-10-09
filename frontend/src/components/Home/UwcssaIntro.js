@@ -7,15 +7,15 @@ import {
   Grid,
   Paper,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
-import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 import { setUserCounts } from "../../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({

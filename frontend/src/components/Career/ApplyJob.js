@@ -1,5 +1,11 @@
-import { Button, Snackbar, Typography } from "@material-ui/core";
-import { Checkbox, Grid, TextField } from "@material-ui/core";
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import API from "@aws-amplify/api";
@@ -8,7 +14,7 @@ import Storage from "@aws-amplify/storage";
 import { createUwcssaJobResume } from "../../graphql/mutations";
 import { getUwcssaJob } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 

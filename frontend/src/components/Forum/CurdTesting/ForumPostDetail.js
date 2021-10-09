@@ -4,10 +4,10 @@ import {
   removeSelectedForumPost,
   selectedForumPost,
 } from "../../../redux/actions/forumAction";
-import ForumPostMain from "../ForumPostDetail/ForumPostMain";
+
 import ForumPostComments from "../ForumPostDetail/ForumPostComments";
 import ForumPostCommentsPost from "../ForumPostDetail/ForumPostCommentsPost";
-
+import ForumPostMain from "../ForumPostDetail/ForumPostMain";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 

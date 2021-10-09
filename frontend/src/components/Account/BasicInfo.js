@@ -11,10 +11,14 @@ import Avatar from "@mui/material/Avatar";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  root: {},
+  root: {
+    marginTop: "1rem",
+    maxWidth: "960px",
+    margin: "auto",
+  },
   banner: {
     minHeight: "200px",
   },
@@ -37,55 +41,53 @@ const useStyles = makeStyles({
 export default function BasicInfo({ user, userAuth }) {
   const classes = useStyles();
   return (
-    <div>
-      {
-        <div>
-          <Card elevation={0} className={classes.header}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="140"
-                image="https://cdn1.dotesports.com/wp-content/uploads/2021/05/27113316/diablo-II-resurrected-pc-specs.jpg"
-                alt="green iguana"
-                className={classes.banner}
+    <div className={classes.root}>
+      <div>
+        <Card elevation={0} className={classes.header}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="140"
+              image="https://cdn1.dotesports.com/wp-content/uploads/2021/05/27113316/diablo-II-resurrected-pc-specs.jpg"
+              alt="green iguana"
+              className={classes.banner}
+            />
+          </CardActionArea>
+          <CardContent className={classes.info}>
+            <div className={classes.outer}>
+              <Avatar
+                alt="avatar"
+                src=""
+                sx={{ width: 150, height: 150 }}
+                className={classes.avatar}
               />
-            </CardActionArea>
-            <CardContent className={classes.info}>
-              <div className={classes.outer}>
-                <Avatar
-                  alt="avatar"
-                  src=""
-                  sx={{ width: 150, height: 150 }}
-                  className={classes.avatar}
-                />
-                {userAuth.user.username === user.username && (
-                  <Button
-                    variant="contained"
-                    endIcon={<EditIcon />}
-                    color="primary"
-                    className={classes.edit}
-                    component={Link}
-                    to={`/account/profile/${user.username}`}
-                  >
-                    点击编辑
-                  </Button>
-                )}
-              </div>
-              <Typography
-                gutterBottom
-                variant="h5"
-                noWrap
-                sx={{ fontWeight: "700" }}
-              >
-                {user.username}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                待定
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-      }
+              {userAuth.user.username === user.username && (
+                <Button
+                  variant="contained"
+                  endIcon={<EditIcon />}
+                  color="primary"
+                  className={classes.edit}
+                  component={Link}
+                  to={`/account/profile/${user.username}`}
+                >
+                  点击编辑
+                </Button>
+              )}
+            </div>
+            <Typography
+              gutterBottom
+              variant="h5"
+              noWrap
+              sx={{ fontWeight: "700" }}
+            >
+              {user.username}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              待定
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

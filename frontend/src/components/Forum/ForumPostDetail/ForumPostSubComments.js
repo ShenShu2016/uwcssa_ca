@@ -11,10 +11,10 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { deleteForumPostSubComment } from "../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
@@ -100,7 +100,7 @@ const ForumPostSubComments = ({ forumPostComment }) => {
                     <Button
                       size="small"
                       color="primary"
-                      onClick={delForumPostSubComment({id})}
+                      onClick={delForumPostSubComment({ id })}
                     >
                       删除
                     </Button>

@@ -1,19 +1,22 @@
 import "./Main.css";
 
+import {
+  Avatar,
+  Box,
+  Button,
+  CardActions,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@mui/material";
+
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { Avatar } from "@material-ui/core";
-import { Box } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { CardActions } from "@material-ui/core";
-import { CardHeader } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   title: {

@@ -9,18 +9,18 @@ import {
   Grid,
   TextField,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Link, Redirect } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Auth from "@aws-amplify/auth";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import facebookLogo from "../../static/svg icons/facebook.svg";
 import githubLogo from "../../static/svg icons/github.svg";
 import googleLogo from "../../static/svg icons/google.svg";
 import linkedinLogo from "../../static/svg icons/linkedin.svg";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { signIn } from "../../redux/actions/authActions";
 
 const useStyles = makeStyles((theme) => ({

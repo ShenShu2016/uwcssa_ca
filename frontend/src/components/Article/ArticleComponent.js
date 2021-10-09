@@ -13,14 +13,14 @@ import {
 
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import { makeStyles } from "@material-ui/core/styles";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
     marginTop: "4rem",
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     margin: "2rem auto",
   },
   s3image: {},
-});
+}));
 
 export default function ArticleComponent() {
   const articles = useSelector((state) => state.allArticles.articles);

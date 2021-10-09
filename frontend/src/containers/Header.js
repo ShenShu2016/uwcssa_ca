@@ -12,13 +12,13 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 import DrawerList from "../components/Drawer/DrawerList";
 import MenuIcon from "@mui/icons-material/Menu";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import MoreIcon from "@mui/icons-material/MoreVert";
 import { Redirect } from "react-router";
-import StorefrontIcon from "@material-ui/icons/Storefront";
-import { makeStyles } from "@material-ui/core/styles";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import { makeStyles } from "@mui/styles";
 import { signOut } from "../redux/actions/authActions";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 

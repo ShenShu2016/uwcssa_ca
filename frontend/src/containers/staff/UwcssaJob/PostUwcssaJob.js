@@ -1,29 +1,28 @@
 import {
+  Alert,
+  Box,
   Button,
-  Paper,
+  IconButton,
   Snackbar,
   Table,
+  TableBody,
   TableCell,
   TableContainer,
   TableRow,
   TextField,
   Tooltip,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { useState } from "react";
 
 import API from "@aws-amplify/api";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import Alert from "@material-ui/lab/Alert";
-import { Box } from "@mui/system";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import IconButton from "@material-ui/core/Icon";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import TableBody from "@material-ui/core/TableBody";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { createUwcssaJob } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listDepartments } from "../../../graphql/queries";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({

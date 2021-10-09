@@ -1,11 +1,11 @@
-import { Button, IconButton, Typography } from "@material-ui/core";
+import { Button, IconButton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { API } from "aws-amplify";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
 import { listArticles } from "../graphql/queries";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {

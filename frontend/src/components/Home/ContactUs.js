@@ -1,9 +1,9 @@
+import { Box, Button, Divider, Typography } from "@mui/material";
+
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import { Button, Divider } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
+import { makeStyles } from "@mui/styles";
 import wechatQrCode from "../../static/wechatQrCode.png";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "1rem",
   },
   title: {
-    marginTop: "5rem",
+    paddingTop: "5rem",
     marginBottom: "2rem",
   },
   content: {
@@ -27,17 +27,7 @@ const useStyles = makeStyles((theme) => ({
     height: 188,
     width: 188,
   },
-  ColorButton: {
-    variant: "contained",
-    color: "primary",
-    component: "span",
-
-    borderRadius: 3,
-    height: 48,
-    padding: "0 30px",
-    marginTop: "1rem",
-    marginBottom: "2rem",
-  },
+  ColorButton: {},
 }));
 const ContactUs = () => {
   const classes = useStyles();
@@ -55,7 +45,16 @@ const ContactUs = () => {
           <Button
             variant="outlined"
             color="primary"
-            className={classes.ColorButton}
+            sx={{
+              variant: "contained",
+              color: "primary",
+              component: "span",
+              borderRadius: 3,
+              height: 48,
+              padding: "0 30px",
+              marginTop: "1rem",
+              marginBottom: "2rem",
+            }}
           >
             加入我们
           </Button>
@@ -71,7 +70,16 @@ const ContactUs = () => {
           <Button
             variant="outlined"
             color="primary"
-            className={classes.ColorButton}
+            sx={{
+              variant: "contained",
+              color: "primary",
+              component: "span",
+              borderRadius: 3,
+              height: 48,
+              padding: "0 30px",
+              marginTop: "1rem",
+              marginBottom: "2rem",
+            }}
           >
             联系我们
           </Button>

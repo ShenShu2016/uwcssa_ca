@@ -10,11 +10,12 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 const useStyles = makeStyles({
   root: {
@@ -89,7 +90,12 @@ const ForumPostComments = ({ forumPost }) => {
                     >
                       {unlike.length}
                     </Button>
-                    <Button size="small" color="primary" component={Link} to={`forumPostComment/${id}`}>
+                    <Button
+                      size="small"
+                      color="primary"
+                      component={Link}
+                      to={`forumPostComment/${id}`}
+                    >
                       回复
                     </Button>
                   </CardActions>

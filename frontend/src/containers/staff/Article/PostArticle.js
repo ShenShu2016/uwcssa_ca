@@ -1,6 +1,13 @@
-import { Button, FormControl, InputLabel, MenuItem } from "@material-ui/core";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { TextField, Typography } from "@material-ui/core";
 import { createTopic, createType } from "../../../graphql/mutations";
 import {
   postArticle,
@@ -13,10 +20,9 @@ import { useDispatch, useSelector } from "react-redux";
 import API from "@aws-amplify/api";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Box } from "@mui/system";
-import PublishIcon from "@material-ui/icons/Publish";
-import Select from "@material-ui/core/Select";
+import PublishIcon from "@mui/icons-material/Publish";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -148,7 +154,11 @@ export default function PostArticle() {
       </Box>
       <Box className={classes.topic}>
         <div className="newTopic">
-          <FormControl variant="outlined" className={classes.formControl}>
+          <FormControl
+            variant="outlined"
+            // className={classes.formControl}
+            fullWidth
+          >
             <InputLabel id="demo-simple-select-outlined-label2">
               Topic
             </InputLabel>
@@ -191,7 +201,11 @@ export default function PostArticle() {
       </Box>
       <Box className={classes.type}>
         <div className="newType">
-          <FormControl variant="outlined" className={classes.formControl}>
+          <FormControl
+            variant="outlined"
+            className={classes.formControl}
+            fullWidth
+          >
             <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"

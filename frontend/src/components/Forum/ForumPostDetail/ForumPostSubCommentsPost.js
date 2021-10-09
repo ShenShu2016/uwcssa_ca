@@ -7,7 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SignInRequest from "../ForumPostDetail/SignInRequest";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -33,7 +33,7 @@ function ForumPostSubCommentsPost({
   const [formData, setFormData] = useState({
     comment: "",
   });
-  
+
   const { comment } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -45,9 +45,8 @@ function ForumPostSubCommentsPost({
     forumPostSubCommentForumPostCommentId: forumPostComment.id,
   };
   const postComment = (e) => {
-     
     postForumPostSubComment(createForumPostSubCommentInput);
-    console.log(forumPostComment); 
+    console.log(forumPostComment);
     setFormData({ comment: "" });
   };
 

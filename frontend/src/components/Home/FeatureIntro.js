@@ -1,9 +1,8 @@
+import { Box, Button, Container, Typography } from "@mui/material";
+
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import { Button, Container } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
 import uwcssabbs from "../../static/uwcssabbs.gif";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,49 +63,84 @@ const FeatureIntro = () => {
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 学习帮助
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 大学和大学课程
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 职业和工作
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 娱乐
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 生活
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 住房
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.bbsTagButton}
+                sx={{
+                  borderRadius: 16,
+                  marginLeft: "1rem",
+                  marginRight: "1rem",
+                  marginBlock: "0.3rem",
+                }}
               >
                 商城
               </Button>

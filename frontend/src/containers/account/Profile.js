@@ -9,7 +9,7 @@ import BasicInfo from "../../components/Account/BasicInfo";
 import Education from "../../components/Account/Profile/Education";
 import Experience from "../../components/Account/Profile/Experience";
 import { Redirect } from "react-router";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({

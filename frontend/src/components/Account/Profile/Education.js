@@ -1,16 +1,13 @@
+import { Box, CardContent, Divider, IconButton } from "@mui/material";
 import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
-import { Box } from "@mui/system";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Create from "./Education/Create";
-import { Divider } from "@material-ui/core";
 import Edit from "./Education/Edit";
 import EditIcon from "@mui/icons-material/Edit";
-import { IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,8 +123,8 @@ export default function Education({ user, userAuth }) {
                   variant="subtitle2"
                   color="text.secondary"
                 >
-                  {startDate && startDate.slice(0, 4)} -{" "}
-                  {endDate && endDate.slice(0, 4)}
+                  {startDate && startDate.slice(0, 7)} -{" "}
+                  {endDate && endDate.slice(0, 7)}
                 </Typography>
                 <Typography variant="body2" sx={{ mb: 2 }}>
                   {description}

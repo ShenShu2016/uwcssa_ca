@@ -1,7 +1,8 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { Box, Typography,TextField, Button } from "@material-ui/core";
+
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   mainBackground: {
@@ -27,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10rem",
   },
 
-  form : {
+  form: {
     margin: "auto",
     width: 300,
   },
 
-  button : {
-    marginTop : "5rem",
-  }
+  button: {
+    marginTop: "5rem",
+  },
 }));
 
 export default function ForgotPassword() {
@@ -52,18 +53,19 @@ export default function ForgotPassword() {
     e.preventDefault();
   };
 
-
   return (
     <div>
       <Box className={classes.mainBackground}>
         <Box className={classes.webTitle}>
-          <Typography variant="h3">
-            忘记密码
-          </Typography>
+          <Typography variant="h3">忘记密码</Typography>
           <Typography variant="body1" className={classes.instruction}>
             请输入你的注册邮箱，稍后我们将发送链接。
           </Typography>
-          <form className={classes.form} noValidate onSubmit={(e) => onSubmit(e)}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={(e) => onSubmit(e)}
+          >
             <TextField
               variant="standard"
               margin="normal"
@@ -77,14 +79,15 @@ export default function ForgotPassword() {
               value={email}
               onChange={(e) => onChange(e)}
             />
-            <Button className={classes.button}
+            <Button
+              className={classes.button}
               type="submit"
               variant="outlined"
               color="primary"
               component={Link}
               to="/resetpassword"
             >
-            提交
+              提交
             </Button>
           </form>
         </Box>

@@ -1,8 +1,8 @@
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({

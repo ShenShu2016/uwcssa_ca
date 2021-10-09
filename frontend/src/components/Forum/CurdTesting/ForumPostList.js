@@ -1,3 +1,7 @@
+import React, { useEffect } from "react";
+import { connect, useSelector } from "react-redux";
+
+import { API } from "aws-amplify";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Avatar } from "@material-ui/core";
 import { Box } from "@material-ui/core";
@@ -9,19 +13,14 @@ import CardContent from "@material-ui/core/CardContent";
 import { CardHeader } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import React, { useEffect } from "react";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { useSelector, connect } from "react-redux";
-import { setForumPosts } from "../../../redux/actions/forumAction";
+import { deleteForumPost } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { API } from "aws-amplify";
-import {
-  deleteForumPost,
-} from "../../../graphql/mutations";
+import { makeStyles } from "@material-ui/core/styles";
+import { setForumPosts } from "../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
   root: {
@@ -40,7 +39,6 @@ const useStyles = makeStyles({
   s3image: {},
 });
 
-
 const ForumPostList = ({ setForumPosts }) => {
   const classes = useStyles();
   useEffect(() => {
@@ -51,7 +49,7 @@ const ForumPostList = ({ setForumPosts }) => {
   console.log(forumPosts);
   //Delete the forum topic
   const delForumPost = async (forumPostId) => {
-    const {id} = {id:forumPostId};
+    const { id } = { id: forumPostId };
     console.log("DelForumTopicId", id);
     const delForumPostInput = {
       id,

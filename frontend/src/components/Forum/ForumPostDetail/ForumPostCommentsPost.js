@@ -7,13 +7,13 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SignInRequest from "../ForumPostDetail/SignInRequest";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { postForumPostComment }  from "../../../redux/actions/forumAction";
+import { postForumPostComment } from "../../../redux/actions/forumAction";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({

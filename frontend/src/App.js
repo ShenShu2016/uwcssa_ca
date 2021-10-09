@@ -1,8 +1,7 @@
 import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { Snackbar, makeStyles } from "@material-ui/core";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
@@ -32,22 +31,24 @@ import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
+import { Snackbar } from "@mui/material";
 import Staff from "./containers/staff/Staff";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
+import { makeStyles } from "@mui/styles";
 import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
-
-Amplify.configure(awsconfig);
 
 const theme = createTheme({
   typography: {
     fontFamily: "Noto Sans SC",
   },
 });
+
+Amplify.configure(awsconfig);
+
 const useStyles = makeStyles({
-  root: { backgroundColor: "#F3F2EF" },
   headerBody: {
     minHeight: `calc(100vh - 220px)`,
     [theme.breakpoints.down("sm")]: {
@@ -85,97 +86,87 @@ export default function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <Router>
-            <ScrollToTop />
-            <div className={classes.headerBody}>
-              <Header />
-              <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/account/dashboard" exact component={Dashboard} />
-                <Route
-                  path="/account/profile/:username"
-                  exact
-                  component={Profile}
-                />
-                <Route path="/account/myAccount" exact component={MyAccount} />
-                <Route path="/staff" exact component={Staff} />
-                <Route
-                  path="/staff/article"
-                  exact
-                  component={ArticlesPreview}
-                />{" "}
-                <Route
-                  path="/staff/uwcssaJob"
-                  exact
-                  component={UwcssaJobsPreview}
-                />
-                <Route
-                  path="/staff/article/postArticle"
-                  exact
-                  component={PostArticle}
-                />
-                <Route
-                  path="/staff/uwcssaJob/postUwcssaJob"
-                  exact
-                  component={PostUwcssaJob}
-                />
-                <Route path="/forum" exact component={Forum} />
-                <Route path="/forumTopic" exact component={ForumTopic} />
-                <Route path="/forumPost" exact component={ForumPost} />
-                <Route path="/forumPostList" exact component={ForumPostList} />
-                <Route
-                  path="/forumPost/:forumPostId"
-                  exact
-                  component={ForumPostDetail}
-                />
-                <Route
-                  path="/forumPost/forumPostComment/:forumPostCommentId"
-                  exact
-                  component={ForumPostCommentDetail}
-                />
-                <Route path="/signIn" exact component={SignIn} />
-                <Route path="/signUp" exact component={SignUp} />
-                <Route
-                  path="/forgotPassword"
-                  exact
-                  component={ForgotPassword}
-                />
-                <Route path="/resetPassword" exact component={ResetPassword} />
-                <Route
-                  path="/emailConfirm/:username"
-                  exact
-                  component={EmailConfirm}
-                />
-                <Route path="/article" exact component={ArticleListing} />
-                <Route
-                  path="/article/:articleId"
-                  exact
-                  component={ArticleDetail}
-                />
-                <Route
-                  path="/graphqlTesting"
-                  exact
-                  component={GraphQLTesting}
-                />
-                <Route path="/contactUs" exact component={ContactUs} />
-                <Route path="/career" component={Career} />
-                <Route>404 Not Found!</Route>
-              </Switch>
-            </div>
-            <Footer />
-          </Router>
-          <Snackbar
-            open={signInOpen}
-            autoHideDuration={2000}
-            onClose={handleSignInClose}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          >
-            <Alert onClose={handleSignInClose} severity="success">
-              登陆成功! 欢迎来到 UWCSSA.CA
-            </Alert>
-          </Snackbar>
-        </div>
+        <Router>
+          <ScrollToTop />
+          <div className={classes.headerBody}>
+            <Header />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/account/dashboard" exact component={Dashboard} />
+              <Route
+                path="/account/profile/:username"
+                exact
+                component={Profile}
+              />
+              <Route path="/account/myAccount" exact component={MyAccount} />
+              <Route path="/staff" exact component={Staff} />
+              <Route
+                path="/staff/article"
+                exact
+                component={ArticlesPreview}
+              />{" "}
+              <Route
+                path="/staff/uwcssaJob"
+                exact
+                component={UwcssaJobsPreview}
+              />
+              <Route
+                path="/staff/article/postArticle"
+                exact
+                component={PostArticle}
+              />
+              <Route
+                path="/staff/uwcssaJob/postUwcssaJob"
+                exact
+                component={PostUwcssaJob}
+              />
+              <Route path="/forum" exact component={Forum} />
+              <Route path="/forumTopic" exact component={ForumTopic} />
+              <Route path="/forumPost" exact component={ForumPost} />
+              <Route path="/forumPostList" exact component={ForumPostList} />
+              <Route
+                path="/forumPost/:forumPostId"
+                exact
+                component={ForumPostDetail}
+              />
+              <Route
+                path="/forumPost/forumPostComment/:forumPostCommentId"
+                exact
+                component={ForumPostCommentDetail}
+              />
+              <Route path="/signIn" exact component={SignIn} />
+              <Route path="/signUp" exact component={SignUp} />
+              <Route path="/forgotPassword" exact component={ForgotPassword} />
+              <Route path="/resetPassword" exact component={ResetPassword} />
+              <Route
+                path="/emailConfirm/:username"
+                exact
+                component={EmailConfirm}
+              />
+              <Route path="/article" exact component={ArticleListing} />
+              <Route
+                path="/article/:articleId"
+                exact
+                component={ArticleDetail}
+              />
+              <Route path="/graphqlTesting" exact component={GraphQLTesting} />
+              <Route path="/contactUs" exact component={ContactUs} />
+              <Route path="/career" component={Career} />
+              <Route>404 Not Found!</Route>
+            </Switch>
+          </div>
+          <Footer />
+        </Router>
+        <Snackbar
+          open={signInOpen}
+          autoHideDuration={2000}
+          onClose={handleSignInClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert onClose={handleSignInClose} severity="success">
+            登陆成功! 欢迎来到 UWCSSA.CA
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </Provider>
   );

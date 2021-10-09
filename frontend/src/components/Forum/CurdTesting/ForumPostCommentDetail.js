@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
-import {
-  selectedForumPostComment,
-} from "../../../redux/actions/forumAction";
+
 import ForumPostCommentsMain from "../ForumPostDetail/ForumPostCommentsMain";
 import ForumPostSubComments from "../ForumPostDetail/ForumPostSubComments";
 import ForumPostSubCommentsPost from "../ForumPostDetail/ForumPostSubCommentsPost";
-
-
-
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  selectedForumPostComment,
+} from "../../../redux/actions/forumAction";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({

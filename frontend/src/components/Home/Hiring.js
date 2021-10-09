@@ -1,25 +1,29 @@
+import {
+  Box,
+  Grid,
+  Link,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import { List, Link } from "@material-ui/core";
-import { ListItem } from "@material-ui/core";
-import { ListItemText } from "@material-ui/core";
-import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Grid from "@material-ui/core/Grid";
-import iconJS from "../../static/svg icons/javascript-programming-language.svg";
-import iconDjango from "../../static/svg icons/django.svg";
 import iconAws from "../../static/svg icons/aws.svg";
+import iconCss from "../../static/svg icons/css.svg";
+import iconDjango from "../../static/svg icons/django.svg";
 import iconDocker from "../../static/svg icons/docker.svg";
 import iconGithub from "../../static/svg icons/github.svg";
+import iconHtml from "../../static/svg icons/html.svg";
+import iconJS from "../../static/svg icons/javascript-programming-language.svg";
+import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
 import iconPython from "../../static/svg icons/python-programming-language.svg";
 import iconReact from "../../static/svg icons/react-js.svg";
 import iconRedis from "../../static/svg icons/redis.svg";
-import iconCss from "../../static/svg icons/css.svg";
-import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
-import iconHtml from "../../static/svg icons/html.svg";
 import iconRestAPI from "../../static/svg icons/rest-api.svg";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {

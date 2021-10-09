@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { Typography } from "@mui/material";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   root: {

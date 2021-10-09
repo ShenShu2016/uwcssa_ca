@@ -1,4 +1,3 @@
-import React from "react";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Avatar } from "@material-ui/core";
 import { Box } from "@material-ui/core";
@@ -6,11 +5,12 @@ import { Button } from "@material-ui/core";
 import { CardActions } from "@material-ui/core";
 import { CardHeader } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import React from "react";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 const useStyles = makeStyles({
   title: {
     marginBlock: "2rem",
@@ -49,9 +49,9 @@ function ForumPostMain({ forumPost }) {
             }
             title={owner}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
-                11,
-                19
-              )}`}
+              11,
+              19
+            )}`}
           />
           <CardActions>
             <Button size="small" color="primary">
