@@ -179,7 +179,7 @@ export default function Header() {
         <IconButton>
           <StorefrontIcon />
         </IconButton>
-        <p>文章</p>
+        <p>近期新闻</p>
       </MenuItem>
       <MenuItem component={Link} to="/career" onClick={handleMenuClose}>
         <IconButton>
@@ -272,7 +272,7 @@ export default function Header() {
               component={Link}
               to="/article"
             >
-              文章
+              近期新闻
             </Button>
             <Button
               variant="text"

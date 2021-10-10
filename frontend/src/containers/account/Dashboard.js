@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexWrap: "wrap",
     width: "100%",
+    marginBlock: "1rem",
     justifyContent: "space-between",
   },
 });
@@ -32,9 +33,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className={classes.root}>
-      <div>
-        <BasicInfo userAuth={userAuth} user={userAuth.user} />
+    <div>
+      <BasicInfo userAuth={userAuth} user={userAuth.user} />
+      <div className={classes.root}>
         <div className={classes.infoCards}>
           <FavoriteTopic />
           <MyEssencePosts />

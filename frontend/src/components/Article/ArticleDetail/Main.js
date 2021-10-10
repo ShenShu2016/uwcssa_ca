@@ -6,6 +6,7 @@ import {
   Button,
   CardActions,
   CardHeader,
+  Divider,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -23,6 +24,9 @@ const useStyles = makeStyles({
     marginBlock: "2rem",
   },
   content: {
+    marginBlock: "2rem",
+  },
+  buttonGroup: {
     marginBlock: "2rem",
   },
 });
@@ -47,7 +51,23 @@ function Main({ article }) {
         <div>...Loading</div>
       ) : (
         <Box className={classes.main}>
+          <Typography
+            variant="h4"
+            className={classes.title}
+            sx={{ fontWeight: 700, my: 2 }}
+          >
+            {title}
+          </Typography>
+          <CardActions sx={{ px: 0 }}>
+            <Button size="small" color="primary">
+              Type: {type.name}
+            </Button>
+            <Button size="small" color="primary">
+              Topic: {topic.name}
+            </Button>
+          </CardActions>
           <CardHeader
+            sx={{ px: 0, my: 2 }}
             avatar={
               <Avatar
                 aria-label="recipe"
@@ -56,47 +76,36 @@ function Main({ article }) {
                 to={`/account/profile/${owner}`}
               ></Avatar>
             }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
+            // action={
+            //   <IconButton aria-label="settings">
+            //     <MoreVertIcon />
+            //   </IconButton>
+            // }
             title={owner}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
               11,
               19
             )}`}
           />
-          <CardActions>
-            <Button size="small" color="primary">
-              Type: {type.name}
-            </Button>
-            <Button size="small" color="primary">
-              Topic: {topic.name}
-            </Button>
-          </CardActions>
-          <Typography variant="h3" align="center" className={classes.title}>
-            {title}
-          </Typography>
-
           {/* <CardMedia className={classes.media} image={image} /> */}
-          <AmplifyS3Image path={imagePath} />
-          <Typography
-            variant="body1"
-            className={classes.content}
-            component="pre"
-          >
-            {content}
-          </Typography>
-          <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-            {like.length}
-          </Button>
-          <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-            {unlike.length}
-          </Button>
-          <Button size="small" color="primary">
-            回复
-          </Button>
+          <Box sx={{ my: 2 }}>
+            <AmplifyS3Image path={imagePath} />
+          </Box>
+          <Divider />
+          <Box sx={{ my: 2 }}>
+            <Typography variant="body1" className={classes.content}>
+              {content}
+            </Typography>
+          </Box>
+          <Divider />
+          <Box className={classes.buttonGroup}>
+            <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
+              {like.length}
+            </Button>
+            <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
+              {unlike.length}
+            </Button>
+          </Box>
         </Box>
       )}
     </div>

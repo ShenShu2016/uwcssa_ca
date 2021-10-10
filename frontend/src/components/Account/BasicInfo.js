@@ -14,11 +14,11 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  // root: {
-  //   marginTop: "1rem",
-  //   maxWidth: "960px",
-  //   margin: "auto",
-  // },
+  root: {
+    marginTop: "1rem",
+    maxWidth: "960px",
+    margin: "auto",
+  },
   banner: {
     minHeight: "200px",
   },
@@ -42,7 +42,7 @@ export default function BasicInfo({ user, userAuth }) {
   const classes = useStyles();
   return (
     <div>
-      <div>
+      <div className={classes.root}>
         <Card elevation={0} className={classes.header}>
           <CardActionArea>
             <CardMedia

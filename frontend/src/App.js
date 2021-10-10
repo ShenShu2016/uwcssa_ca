@@ -45,6 +45,11 @@ const theme = createTheme({
   typography: {
     fontFamily: "Noto Sans SC",
   },
+  breakpoints: {
+    value: {
+      md: 960,
+    },
+  },
 });
 
 Amplify.configure(awsconfig);
