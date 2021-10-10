@@ -4,11 +4,11 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "960px",
-    margin: "auto",
-    marginBlock: "1rem",
-  },
+  // root: {
+  //   maxWidth: "960px",
+  //   margin: "auto",
+  //   marginBlock: "1rem",
+  // },
 }));
 
 export default function FavoriteTopic() {
