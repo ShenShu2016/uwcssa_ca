@@ -17,11 +17,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Auth from "@aws-amplify/auth";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import facebookLogo from "../../static/svg icons/facebook.svg";
-import githubLogo from "../../static/svg icons/github.svg";
+import appleLogo from "../../static/svg icons/apple.svg";
 import googleLogo from "../../static/svg icons/google.svg";
-import linkedinLogo from "../../static/svg icons/linkedin.svg";
+import amazonLogo from "../../static/svg icons/amazon.svg";
 import { makeStyles } from "@mui/styles";
 import { signIn } from "../../redux/actions/authActions";
+import { CircularProgress } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginBottom: theme.spacing(5),
   },
+
   submit: {
     margin: theme.spacing(5, 4, 0),
   },
@@ -52,14 +54,15 @@ const useStyles = makeStyles((theme) => ({
   third_party_button: {
     width: 426,
     height: 64,
-    marginBottom: "2rem",
     maxWidth: "100%",
     minWidth: "40%",
     boxShadow: "0 3px 5px 2px rgba(191, 191, 191, 1)",
+    justifyContent:"center",
+    alignItems:"center"
   },
   facebookLogo: {
     width: 24,
-    height: 24,
+    height: 24, 
     marginRight: "6rem",
   },
   googleLogo: {
@@ -67,9 +70,9 @@ const useStyles = makeStyles((theme) => ({
     height: 24,
     marginRight: "6rem",
   },
-  github: {
-    width: 24,
-    height: 24,
+  other_third_party: {
+    width: 35,
+    height: 35,
     marginRight: "1rem",
   },
   more_third_party: {
@@ -77,12 +80,20 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: "3rem",
+    marginTop: "2rem",
   },
 }));
 
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [loading, setLoading] = React.useState(false);
+  const [ loggedInState, setLoggedInState] = useState();
+
+  const handleClickLoading = () => {
+    setLoading((prevLoading) => !prevLoading);
+  };
+
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
@@ -93,17 +104,20 @@ export default function SignIn() {
 
   const { username, password } = formData;
 
-  const onChange = (event) =>
+  const onChange = (event) => 
     setFormData({ ...formData, [event.target.name]: event.target.value });
+
 
   const handleSubmit = async function (event) {
     event.preventDefault();
+    setLoggedInState("logging in");
     const response = await dispatch(signIn(username, password));
     if (response.result) {
       // setLogged(true);
     } else {
       console.log(response);
-      alert(response.error.message);
+      //alert(response.error.message);
+      setLoggedInState("logging failed");
     }
   };
 
@@ -125,6 +139,8 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        {loggedInState === "logging in" ? <CircularProgress /> : " "}
+        {loggedInState === "logging failed"}
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -140,7 +156,7 @@ export default function SignIn() {
           noValidate
           onSubmit={(event) => handleSubmit(event)}
         >
-          <TextField
+          <TextField          
             variant="standard"
             margin="normal"
             required
@@ -151,6 +167,7 @@ export default function SignIn() {
             autoComplete="username"
             autoFocus
             value={username}
+            error={loggedInState === "logging failed"}
             onChange={(event) => onChange(event)}
           />
           <TextField
@@ -164,40 +181,46 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
             value={password}
+            error={loggedInState === "logging failed"}
             onChange={(event) => onChange(event)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="我不是机器人"
           />
-          <Grid container>
+          <Grid container marginTop="1rem">
+            <Grid marginLeft="2rem" marginRight="3rem">
             <Button
               type="submit"
               variant="outlined"
               color="primary"
               className={classes.submit}
+              
+              onClick={handleClickLoading}
             >
               登陆
             </Button>
-
+            </Grid>
+            <Grid>
             <Button
               // type="button"
               variant="outlined"
               component={Link}
               to="/forgotPassword"
-              color="primary"
+              color="primary"            
               className={classes.submit}
             >
               忘记密码
             </Button>
+            </Grid>
           </Grid>
         </form>
-        <Box marginTop="3rem">
+        <Box width="22.5rem">
           {/* Google的登入按钮 */}
           <Button
             type="submit"
             variant="outlined"
-            className={classes.third_party_button}
+            className={classes.third_party_button}                     
             onClick={(event) => handleGoogleSignIn(event)}
           >
             <Grid
@@ -207,7 +230,7 @@ export default function SignIn() {
               alignItems="center"
             >
               <Grid item xs={1}></Grid>
-              <Grid item xs={3}>
+              <Grid item xs={3.5}>
                 <img
                   src={googleLogo}
                   alt="googleLogo"
@@ -217,11 +240,13 @@ export default function SignIn() {
               <Grid>Google Sign in</Grid>
             </Grid>
           </Button>
-
+        </Box>
+        <Box marginTop="2rem" width="22.5rem">
           {/* Facebook的登入按钮*/}
           <Button
             type="submit"
             variant="outlined"
+            disabled
             className={classes.third_party_button}
           >
             <Grid
@@ -245,16 +270,15 @@ export default function SignIn() {
         {/* 之后增加点按转入网站的功能 */}
         <Box className={classes.more_third_party}>
           <img
-            src={githubLogo}
-            alt="githubLogo"
-            className={classes.github}
-            onClick={(event) => handleGoogleSignIn(event)}
+            src={appleLogo}
+            alt="appleLogo"          
+            className={classes.other_third_party}
           />
-
+  
           <img
-            src={linkedinLogo}
-            alt="linkedinLogo"
-            className={classes.github}
+            src={amazonLogo}
+            alt="amazonLogo"
+            className={classes.other_third_party}
           />
         </Box>
       </div>
