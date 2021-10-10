@@ -71,7 +71,7 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   关于我们
                 </Typography>
-                <MUILink href="" color="inherit">
+                <MUILink href="/foundingTeam" color="inherit">
                   团队
                 </MUILink>
                 <MUILink href="" color="inherit">

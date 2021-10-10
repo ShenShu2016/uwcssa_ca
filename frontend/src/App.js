@@ -19,6 +19,7 @@ import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostComm
 import ForumPostDetail from "./components/Forum/CurdTesting/ForumPostDetail";
 import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
 import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
+import FoundingTeam from "./containers/FoundingTeam";
 import GraphQLTesting from "./containers/GraphQLTesting";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
@@ -149,6 +150,7 @@ export default function App() {
                 exact
                 component={ArticleDetail}
               />
+              <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/graphqlTesting" exact component={GraphQLTesting} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
