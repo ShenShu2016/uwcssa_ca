@@ -1,5 +1,9 @@
+import {
+  articleByCreatedAt,
+  listTopics,
+  listTypes,
+} from "../../graphql/queries";
 import { createArticle, createArticleComment } from "../../graphql/mutations";
-import { listArticles, listTopics, listTypes } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/article-action-types";
@@ -11,18 +15,19 @@ import { v4 as uuid } from "uuid";
 export const setArticles = () => async (dispatch) => {
   try {
     const articleData = await API.graphql({
-      query: listArticles,
+      query: articleByCreatedAt,
+      variables: { ByCreatedAt: "Article", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
+    console.log("articleData", articleData);
     dispatch({
       type: ActionTypes.SET_ARTICLES,
-      payload: articleData.data.listArticles.items,
+      payload: articleData.data.articleByCreatedAt.items,
     });
   } catch (error) {
     console.log("error on fetching Article", error);
   }
 };
-
 export const selectedArticle = (articleId) => async (dispatch) => {
   try {
     const response = await API.graphql({

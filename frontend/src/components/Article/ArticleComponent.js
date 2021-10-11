@@ -4,7 +4,6 @@ import {
   Avatar,
   Box,
   Button,
-  Card,
   CardActionArea,
   CardActions,
   CardContent,

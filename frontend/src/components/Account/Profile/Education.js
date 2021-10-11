@@ -126,7 +126,12 @@ export default function Education({ user, userAuth }) {
                   {startDate && startDate.slice(0, 7)} -{" "}
                   {endDate && endDate.slice(0, 7)}
                 </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mb: 2 }}
+                  component="span"
+                  style={{ whiteSpace: "pre" }}
+                >
                   {description}
                 </Typography>
                 <Divider />

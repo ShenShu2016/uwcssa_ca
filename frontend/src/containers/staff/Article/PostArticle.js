@@ -98,7 +98,7 @@ export default function PostArticle() {
       unlike: [],
       articleTopicId: topicId,
       articleTypeId: typeId,
-      byDate: "Article",
+      ByCreatedAt: "Article",
     };
     const response = await dispatch(postArticle(createArticleInput));
 

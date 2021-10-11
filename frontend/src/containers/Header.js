@@ -187,11 +187,11 @@ export default function Header() {
         </IconButton>
         <p>加入我们</p>
       </MenuItem>
-      <MenuItem component={Link} to="/graphqlTesting" onClick={handleMenuClose}>
+      <MenuItem component={Link} to="/forum" onClick={handleMenuClose}>
         <IconButton>
           <StorefrontIcon />
         </IconButton>
-        <p>GraphQLTesting</p>
+        <p>论坛</p>
       </MenuItem>
       {isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
@@ -286,9 +286,9 @@ export default function Header() {
               variant="text"
               style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
               component={Link}
-              to="/graphqlTesting"
+              to="/forum"
             >
-              GraphQLTesting
+              论坛
             </Button>
             {isAuthenticated ? (
               ""

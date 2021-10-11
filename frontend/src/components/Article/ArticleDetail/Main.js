@@ -7,13 +7,11 @@ import {
   CardActions,
   CardHeader,
   Divider,
-  IconButton,
   Typography,
 } from "@mui/material";
 
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -31,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Main({ article }) {
+export default function Main({ article }) {
   const classes = useStyles();
   const {
     title,
@@ -87,13 +85,19 @@ function Main({ article }) {
               19
             )}`}
           />
+
           {/* <CardMedia className={classes.media} image={image} /> */}
           <Box sx={{ my: 2 }}>
             <AmplifyS3Image path={imagePath} />
           </Box>
           <Divider />
           <Box sx={{ my: 2 }}>
-            <Typography variant="body1" className={classes.content}>
+            <Typography
+              variant="body1"
+              className={classes.content}
+              component="span"
+              style={{ whiteSpace: "pre" }}
+            >
               {content}
             </Typography>
           </Box>
@@ -111,5 +115,3 @@ function Main({ article }) {
     </div>
   );
 }
-
-export default Main;

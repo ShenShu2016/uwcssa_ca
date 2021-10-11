@@ -121,11 +121,6 @@ type Type
 
 type Article
   @model
-  @key(
-    name: "articlesByDate"
-    fields: ["byDate", "createdAt"]
-    queryField: "articlesByDate"
-  )
   @auth(
     rules: [
       { allow: owner }
@@ -133,6 +128,11 @@ type Article
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "articleByCreatedAt"
+    fields: ["ByCreatedAt", "createdAt"]
+    queryField: "articleByCreatedAt"
   ) {
   id: ID!
   title: String!
@@ -142,9 +142,9 @@ type Article
   unlike: [String]!
   topic: Topic! @connection(name: "TopicArticles")
   type: Type! @connection(name: "TypeArticles")
-  ArticleComments: [ArticleComment] @connection(name: "ArticleArticleComments")
-  byDate: String!
-  createdAt: String!
+  articleComments: [ArticleComment] @connection(name: "ArticleArticleComments")
+  createdAt: AWSDateTime!
+  ByCreatedAt: String! #用来当第二索引的
 }
 
 type ArticleComment
@@ -156,12 +156,19 @@ type ArticleComment
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "ByArticleId"
+    fields: ["ArticleId", "createdAt"]
+    queryField: "ArticleCommentByCreatedAt"
   ) {
   id: ID!
   content: String!
   like: [String]!
   unlike: [String]!
   article: Article! @connection(name: "ArticleArticleComments")
+  createdAt: AWSDateTime!
+  ArticleId: String! #用来排日期的
 }
 
 type Department
@@ -205,7 +212,7 @@ type UwcssaJob
   schedule: [String]!
   like: [String]!
   unlike: [String]!
-  active:Boolean!
+  active: Boolean!
   uwcssaJobResumes: [UwcssaJobResume]
     @connection(name: "UwcssaJobUwcssaJobResumes")
 }
@@ -225,8 +232,9 @@ type UwcssaJobResume
   email: String!
   resumeFilePath: String
   phone: String!
-  message:String
-  uwcssaJobResumeStatus: UwcssaJobResumeStatus! @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
+  message: String
+  uwcssaJobResumeStatus: UwcssaJobResumeStatus!
+    @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
   uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
 }
 
@@ -239,11 +247,13 @@ type UwcssaJobResumeStatus
       # { allow: private, operations: [read] }
       # { allow: public, operations: [read], provider: iam }
     ]
-  )@key(fields: ["status"]) {
+  )
+  @key(fields: ["status"]) {
   status: String!
-  uwcssaJobResumes: [UwcssaJobResume] @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
+  message: String
+  uwcssaJobResumes: [UwcssaJobResume]
+    @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
 }
-
 
 type ForumTopic
   @model
@@ -289,12 +299,19 @@ type ForumPost
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "forumPostByCreatedAt"
+    fields: ["ByCreatedAt", "createdAt"]
+    queryField: "forumPostByCreatedAt"
   ) {
   id: ID!
   content: String!
   imagePath: String
   like: [String]!
   unlike: [String]!
+  ByCreatedAt: String!
+  createdAt: AWSDateTime!
   forumSubTopic: ForumSubTopic! @connection(name: "ForumSubTopicForumPost")
   forumPostComments: [ForumPostComment]!
     @connection(name: "ForumPostForumPostComment")
@@ -309,11 +326,18 @@ type ForumPostComment
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "byForumPostId"
+    fields: ["ForumPostId", "createdAt"]
+    queryField: "byForumPostId"
   ) {
   id: ID!
   content: String!
   like: [String]!
   unlike: [String]!
+  ForumPostId: String!
+  createdAt: AWSDateTime!
   forumPost: ForumPost! @connection(name: "ForumPostForumPostComment")
   forumPostSubComments: [ForumPostSubComment]!
     @connection(name: "ForumPostCommentForumPostSubComment")
@@ -328,11 +352,18 @@ type ForumPostSubComment
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "byForumPostCommentId"
+    fields: ["ForumPostCommentId", "createdAt"]
+    queryField: "byForumPostCommentId"
   ) {
   id: ID!
   content: String!
   like: [String]!
   unlike: [String]!
+  ForumPostCommentId: String!
+  createdAt: AWSDateTime!
   forumPostComment: ForumPostComment!
     @connection(name: "ForumPostCommentForumPostSubComment")
 }
@@ -431,5 +462,3 @@ type MarketItemHome
   heating: String
   marketItem: MarketItem! @connection(name: "MarketItemMarketItemHome")
 }
-
-

@@ -39,7 +39,7 @@ export default function ArticleComments({ article }) {
         ""
       ) : (
         <div>
-          {article.ArticleComments.items.map((comment) => {
+          {article.articleComments.items.map((comment) => {
             const { id, content, createdAt, like, unlike, owner } = comment;
 
             return (
@@ -70,8 +70,8 @@ export default function ArticleComments({ article }) {
                     <Typography
                       variant="body1"
                       color="textSecondary"
-                      component="pre"
-                      style={{ wordWrap: "break-word" }}
+                      component="span"
+                      style={{ whiteSpace: "pre" }}
                     >
                       {content}
                     </Typography>

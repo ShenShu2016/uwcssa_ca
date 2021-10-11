@@ -1,8 +1,4 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "files.exclude": {
     "amplify/.config": true,
     "amplify/**/*-parameters.json": true,
@@ -12,5 +8,11 @@
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
   },
-  "cSpell.words": ["awsconfig"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "awsconfig"
+  ]
 }

@@ -453,8 +453,8 @@ export const createTopic = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -483,8 +483,8 @@ export const updateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -513,8 +513,8 @@ export const deleteTopic = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -543,8 +543,8 @@ export const createType = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -573,8 +573,8 @@ export const updateType = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -603,8 +603,8 @@ export const deleteType = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -625,8 +625,8 @@ export const createArticle = /* GraphQL */ `
       imagePath
       like
       unlike
-      byDate
       createdAt
+      ByCreatedAt
       updatedAt
       topic {
         name
@@ -651,13 +651,14 @@ export const createArticle = /* GraphQL */ `
         }
       }
       owner
-      ArticleComments {
+      articleComments {
         items {
           id
           content
           like
           unlike
           createdAt
+          ArticleId
           updatedAt
           owner
         }
@@ -678,8 +679,8 @@ export const updateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
-      byDate
       createdAt
+      ByCreatedAt
       updatedAt
       topic {
         name
@@ -704,13 +705,14 @@ export const updateArticle = /* GraphQL */ `
         }
       }
       owner
-      ArticleComments {
+      articleComments {
         items {
           id
           content
           like
           unlike
           createdAt
+          ArticleId
           updatedAt
           owner
         }
@@ -731,8 +733,8 @@ export const deleteArticle = /* GraphQL */ `
       imagePath
       like
       unlike
-      byDate
       createdAt
+      ByCreatedAt
       updatedAt
       topic {
         name
@@ -757,13 +759,14 @@ export const deleteArticle = /* GraphQL */ `
         }
       }
       owner
-      ArticleComments {
+      articleComments {
         items {
           id
           content
           like
           unlike
           createdAt
+          ArticleId
           updatedAt
           owner
         }
@@ -783,6 +786,7 @@ export const createArticleComment = /* GraphQL */ `
       like
       unlike
       createdAt
+      ArticleId
       updatedAt
       article {
         id
@@ -791,8 +795,8 @@ export const createArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
-        byDate
         createdAt
+        ByCreatedAt
         updatedAt
         topic {
           name
@@ -811,7 +815,7 @@ export const createArticleComment = /* GraphQL */ `
           updatedAt
         }
         owner
-        ArticleComments {
+        articleComments {
           nextToken
         }
       }
@@ -830,6 +834,7 @@ export const updateArticleComment = /* GraphQL */ `
       like
       unlike
       createdAt
+      ArticleId
       updatedAt
       article {
         id
@@ -838,8 +843,8 @@ export const updateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
-        byDate
         createdAt
+        ByCreatedAt
         updatedAt
         topic {
           name
@@ -858,7 +863,7 @@ export const updateArticleComment = /* GraphQL */ `
           updatedAt
         }
         owner
-        ArticleComments {
+        articleComments {
           nextToken
         }
       }
@@ -877,6 +882,7 @@ export const deleteArticleComment = /* GraphQL */ `
       like
       unlike
       createdAt
+      ArticleId
       updatedAt
       article {
         id
@@ -885,8 +891,8 @@ export const deleteArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
-        byDate
         createdAt
+        ByCreatedAt
         updatedAt
         topic {
           name
@@ -905,7 +911,7 @@ export const deleteArticleComment = /* GraphQL */ `
           updatedAt
         }
         owner
-        ArticleComments {
+        articleComments {
           nextToken
         }
       }
@@ -1224,6 +1230,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
       owner
       uwcssaJobResumeStatus {
         status
+        message
         createdAt
         updatedAt
         uwcssaJobResumes {
@@ -1281,6 +1288,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
       owner
       uwcssaJobResumeStatus {
         status
+        message
         createdAt
         updatedAt
         uwcssaJobResumes {
@@ -1338,6 +1346,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
       owner
       uwcssaJobResumeStatus {
         status
+        message
         createdAt
         updatedAt
         uwcssaJobResumes {
@@ -1355,6 +1364,7 @@ export const createUwcssaJobResumeStatus = /* GraphQL */ `
   ) {
     createUwcssaJobResumeStatus(input: $input, condition: $condition) {
       status
+      message
       createdAt
       updatedAt
       uwcssaJobResumes {
@@ -1382,6 +1392,7 @@ export const updateUwcssaJobResumeStatus = /* GraphQL */ `
   ) {
     updateUwcssaJobResumeStatus(input: $input, condition: $condition) {
       status
+      message
       createdAt
       updatedAt
       uwcssaJobResumes {
@@ -1409,6 +1420,7 @@ export const deleteUwcssaJobResumeStatus = /* GraphQL */ `
   ) {
     deleteUwcssaJobResumeStatus(input: $input, condition: $condition) {
       status
+      message
       createdAt
       updatedAt
       uwcssaJobResumes {
@@ -1537,6 +1549,7 @@ export const createForumSubTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1576,6 +1589,7 @@ export const updateForumSubTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1615,6 +1629,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1635,6 +1650,7 @@ export const createForumPost = /* GraphQL */ `
       imagePath
       like
       unlike
+      ByCreatedAt
       createdAt
       updatedAt
       forumSubTopic {
@@ -1663,6 +1679,7 @@ export const createForumPost = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostId
           createdAt
           updatedAt
           owner
@@ -1683,6 +1700,7 @@ export const updateForumPost = /* GraphQL */ `
       imagePath
       like
       unlike
+      ByCreatedAt
       createdAt
       updatedAt
       forumSubTopic {
@@ -1711,6 +1729,7 @@ export const updateForumPost = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostId
           createdAt
           updatedAt
           owner
@@ -1731,6 +1750,7 @@ export const deleteForumPost = /* GraphQL */ `
       imagePath
       like
       unlike
+      ByCreatedAt
       createdAt
       updatedAt
       forumSubTopic {
@@ -1759,6 +1779,7 @@ export const deleteForumPost = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostId
           createdAt
           updatedAt
           owner
@@ -1778,6 +1799,7 @@ export const createForumPostComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostId
       createdAt
       updatedAt
       forumPost {
@@ -1786,6 +1808,7 @@ export const createForumPostComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        ByCreatedAt
         createdAt
         updatedAt
         forumSubTopic {
@@ -1808,6 +1831,7 @@ export const createForumPostComment = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostCommentId
           createdAt
           updatedAt
           owner
@@ -1827,6 +1851,7 @@ export const updateForumPostComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostId
       createdAt
       updatedAt
       forumPost {
@@ -1835,6 +1860,7 @@ export const updateForumPostComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        ByCreatedAt
         createdAt
         updatedAt
         forumSubTopic {
@@ -1857,6 +1883,7 @@ export const updateForumPostComment = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostCommentId
           createdAt
           updatedAt
           owner
@@ -1876,6 +1903,7 @@ export const deleteForumPostComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostId
       createdAt
       updatedAt
       forumPost {
@@ -1884,6 +1912,7 @@ export const deleteForumPostComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        ByCreatedAt
         createdAt
         updatedAt
         forumSubTopic {
@@ -1906,6 +1935,7 @@ export const deleteForumPostComment = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostCommentId
           createdAt
           updatedAt
           owner
@@ -1925,6 +1955,7 @@ export const createForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostCommentId
       createdAt
       updatedAt
       forumPostComment {
@@ -1932,6 +1963,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         content
         like
         unlike
+        ForumPostId
         createdAt
         updatedAt
         forumPost {
@@ -1940,6 +1972,7 @@ export const createForumPostSubComment = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1963,6 +1996,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostCommentId
       createdAt
       updatedAt
       forumPostComment {
@@ -1970,6 +2004,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         content
         like
         unlike
+        ForumPostId
         createdAt
         updatedAt
         forumPost {
@@ -1978,6 +2013,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -2001,6 +2037,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostCommentId
       createdAt
       updatedAt
       forumPostComment {
@@ -2008,6 +2045,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         content
         like
         unlike
+        ForumPostId
         createdAt
         updatedAt
         forumPost {
@@ -2016,6 +2054,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
