@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
   Link as MUILink,
   Typography,
@@ -18,8 +19,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
-      <MUILink color="inherit" href="https://material-ui.com/">
-        uwcssa.ca
+      <MUILink color="inherit" href="https://material-ui.com/" underline="none">
+        uwcssa.ca{" "}
       </MUILink>
       {new Date().getFullYear()}
     </Typography>
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     height: "220px",
-    backgroundColor: "#F3F2EF",
+    backgroundColor: "#FDFEFE ",
     [theme.breakpoints.down("sm")]: {
       height: "350px",
     },
@@ -56,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
   link: {
     overflowWrap: "break-word",
   },
+  muiLink: {
+    "&:hover": {
+      color: "#2196f3",
+    },
+  },
 }));
 
 export default function StickyFooter() {
@@ -63,6 +69,7 @@ export default function StickyFooter() {
 
   return (
     <div className={classes.root}>
+      <Divider />
       <footer className={classes.footer}>
         <Container maxWidth="md">
           <Grid container spacing={3}>
@@ -71,10 +78,20 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   关于我们
                 </Typography>
-                <MUILink href="/foundingTeam" color="inherit">
+                <MUILink
+                  href="/foundingTeam"
+                  underline="hover"
+                  color="inherit"
+                  className={classes.muiLink}
+                >
                   团队
                 </MUILink>
-                <MUILink href="" color="inherit">
+                <MUILink
+                  href=""
+                  underline="hover"
+                  color="inherit"
+                  className={classes.muiLink}
+                >
                   联系我们
                 </MUILink>
               </Box>
@@ -84,10 +101,20 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   资讯
                 </Typography>
-                <MUILink href="" color="inherit">
+                <MUILink
+                  href=""
+                  underline="hover"
+                  color="inherit"
+                  className={classes.muiLink}
+                >
                   uwcssa新闻
                 </MUILink>
-                <MUILink href="" color="inherit">
+                <MUILink
+                  href=""
+                  underline="hover"
+                  color="inherit"
+                  className={classes.muiLink}
+                >
                   uwcssa活动
                 </MUILink>
               </Box>
@@ -100,7 +127,8 @@ export default function StickyFooter() {
                 <MUILink
                   color="inherit"
                   href="mailto:uwincssa.it@gmail.com"
-                  className={classes.link}
+                  underline="hover"
+                  className={classes.muiLink}
                 >
                   邮箱: uwincssa.it@gmail.com
                 </MUILink>
