@@ -172,7 +172,6 @@ export default function Create({ createOpen, handleCreateClose, username }) {
                     label="结束日期"
                     value={endDate}
                     onChange={(e) => {
-                      console.log(e);
                       setEndDate(e);
                     }}
                     renderInput={(params) => <TextField {...params} />}

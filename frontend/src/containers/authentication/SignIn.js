@@ -114,7 +114,6 @@ export default function SignIn() {
     if (response.result) {
       // setLogged(true);
     } else {
-      console.log(response);
       //alert(response.error.message);
       setLoggedInState("logging failed");
     }

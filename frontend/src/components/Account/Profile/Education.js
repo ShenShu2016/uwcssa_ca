@@ -45,7 +45,6 @@ export default function Education({ user, userAuth }) {
     startDate: "",
   });
   const handleEditClickOpen = (education) => {
-    console.log(education);
     setEditOpen(true);
     setEducation(education);
   };

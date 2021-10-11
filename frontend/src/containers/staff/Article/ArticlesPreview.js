@@ -95,8 +95,6 @@ export default function ArticlesPreview() {
     };
   });
 
-  console.log("rows", rows);
-
   return (
     <div className={classes.root}>
       <Typography variant="h4">ArticlesPreview</Typography>

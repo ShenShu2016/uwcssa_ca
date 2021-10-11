@@ -1,20 +1,20 @@
 import {
-  createForumTopic,
-  createForumSubTopic,
   createForumPost,
   createForumPostComment,
   createForumPostSubComment,
+  createForumSubTopic,
+  createForumTopic,
   deleteForumPost,
 } from "../../graphql/mutations";
 import {
-  listForumTopics,
-  getForumTopic,
-  listForumSubTopics,
-  listForumPosts,
-  listForumPostComments,
-  listForumPostSubComments,
   getForumPost,
   getForumPostComment,
+  getForumTopic,
+  listForumPostComments,
+  listForumPostSubComments,
+  listForumPosts,
+  listForumSubTopics,
+  listForumTopics,
 } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
@@ -191,7 +191,6 @@ export const postForumPostComment =
 export const selectedForumPostComment =
   (forumPostCommentId) => async (dispatch) => {
     try {
-      console.log(forumPostCommentId);
       const response = await API.graphql({
         query: getForumPostComment,
         variables: { id: forumPostCommentId },
@@ -219,7 +218,7 @@ export const postForumPostSubComment =
         type: ActionTypes.POST_FORUMPOST_SUBCOMMENT_SUCCESS,
         payload: response,
       });
-      console.log(response);
+
       dispatch(
         selectedForumPostComment(
           createForumPostSubCommentInput.forumPostSubCommentForumPostCommentId
@@ -239,8 +238,8 @@ export const deleteForumPostSubComment =
       console.log(deleteForumPostSubCommentInput);
       const response = await API.graphql(
         graphqlOperation(deleteForumPostSubComment, {
-        input: deleteForumPostSubCommentInput,
-      })
+          input: deleteForumPostSubCommentInput,
+        })
       );
       dispatch({
         type: ActionTypes.REMOVE_FORUMPOST_SUBCOMMENT_SUCCESS,
@@ -251,7 +250,7 @@ export const deleteForumPostSubComment =
           deleteForumPostSubCommentInput.forumPostSubCommentForumPostCommentId
         )
       );
-    } catch (error){
+    } catch (error) {
       console.log("error on delete ForumPostSubComment", error);
       dispatch({
         type: ActionTypes.REMOVE_FORUMPOST_SUBCOMMENT_FAIL,

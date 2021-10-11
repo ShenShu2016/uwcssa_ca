@@ -4,11 +4,14 @@ import {
   listTypes,
 } from "../../graphql/queries";
 import { createArticle, createArticleComment } from "../../graphql/mutations";
+import {
+  customArticleCommentByCreatedAt,
+  customGetArticle,
+} from "./CustomQuery/article";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/article-action-types";
 import Storage from "@aws-amplify/storage";
-import { getArticle } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
@@ -19,7 +22,6 @@ export const setArticles = () => async (dispatch) => {
       variables: { ByCreatedAt: "Article", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
-    console.log("articleData", articleData);
     dispatch({
       type: ActionTypes.SET_ARTICLES,
       payload: articleData.data.articleByCreatedAt.items,
@@ -28,16 +30,29 @@ export const setArticles = () => async (dispatch) => {
     console.log("error on fetching Article", error);
   }
 };
+
 export const selectedArticle = (articleId) => async (dispatch) => {
   try {
     const response = await API.graphql({
-      query: getArticle,
+      query: customGetArticle,
       variables: { id: articleId },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SELECTED_ARTICLE,
       payload: response.data.getArticle,
+    });
+    const articleCommentData = await API.graphql({
+      query: customArticleCommentByCreatedAt,
+      variables: {
+        ArticleId: articleId,
+        sortDirection: "DESC",
+      },
+      authMode: "AWS_IAM",
+    });
+    dispatch({
+      type: ActionTypes.SELECTED_ARTICLECOMMENTS,
+      payload: articleCommentData.data.ArticleCommentByCreatedAt.items,
     });
   } catch (error) {
     console.log("error on selecting Article", error);
@@ -75,7 +90,6 @@ export const setTopics = () => async (dispatch) => {
       query: listTopics,
       authMode: "AWS_IAM",
     });
-    console.log("topicData", topicData);
     dispatch({
       type: ActionTypes.SET_TOPICS,
       payload: topicData.data.listTopics.items,
@@ -91,7 +105,6 @@ export const setTypes = () => async (dispatch) => {
       query: listTypes,
       authMode: "AWS_IAM",
     });
-    console.log("typeData", typeData);
     dispatch({
       type: ActionTypes.SET_TYPES,
       payload: typeData.data.listTypes.items,
@@ -144,6 +157,5 @@ export const postArticleImg = (imgData) => async (dispatch) => {
       type: ActionTypes.POST_ARTICLE_IMG_FAIL,
       payload: error,
     });
-    console.log(error);
   }
 };

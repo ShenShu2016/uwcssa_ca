@@ -31,15 +31,14 @@ const useStyles = makeStyles({
 
 export default function ArticleComments({ article }) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Typography className={classes.subTitle}>评论：</Typography>
-      {Object.keys(article).length === 0 ? (
+      {Object.keys(article.comments).length === 0 ? (
         ""
       ) : (
         <div>
-          {article.articleComments.items.map((comment) => {
+          {article.comments.map((comment) => {
             const { id, content, createdAt, like, unlike, owner } = comment;
 
             return (

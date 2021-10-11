@@ -74,15 +74,13 @@ export default function PostArticle() {
   });
   useEffect(() => {
     dispatch(setTopics());
-    dispatch(setTypes());
-    console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(setTypes()); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { topics, types } = useSelector((state) => state.allArticles);
 
   const uploadArticleImg = async () => {
     const response = await dispatch(postArticleImg(imgData));
-    console.log("response.key", response.key);
     setImgKey(response.key);
   };
 
@@ -110,7 +108,6 @@ export default function PostArticle() {
 
   const uploadTopic = async () => {
     //Upload the topic
-    console.log("topicData", topicData);
     const { name } = topicData;
     const createTopicInput = {
       name,
@@ -126,7 +123,6 @@ export default function PostArticle() {
   const [typeData, setTypeData] = useState({ name: "" });
 
   const uploadType = async () => {
-    console.log("typeData", typeData);
     const { name } = typeData;
     const createTypeInput = {
       name,
@@ -250,10 +246,9 @@ export default function PostArticle() {
         )}
         <input
           type="file"
-          accept="image/png"
+          accept="image/*"
           onChange={(e) => {
             setImgData(e.target.files[0]);
-            console.log("imgData", imgData);
           }}
         />
         <Button variant="contained" color="primary" onClick={uploadArticleImg}>

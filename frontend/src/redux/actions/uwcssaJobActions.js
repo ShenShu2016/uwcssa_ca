@@ -42,7 +42,6 @@ export const setUwcssaJobs = () => async (dispatch) => {
       query: listUwcssaJobs,
       authMode: "AWS_IAM",
     });
-    console.log("uwcssaJobData", uwcssaJobData);
     dispatch({
       type: ActionTypes.SET_UWCSSAJOBS,
       payload: uwcssaJobData.data.listUwcssaJobs.items,

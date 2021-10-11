@@ -42,10 +42,11 @@ export default function Main({ article }) {
     createdAt,
     like,
     unlike,
-  } = article;
+  } = article.article;
+  console.log("article.article", article.article);
   return (
     <div>
-      {Object.keys(article).length === 0 ? (
+      {Object.keys(article.article).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Box className={classes.main}>
