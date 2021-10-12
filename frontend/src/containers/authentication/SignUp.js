@@ -58,7 +58,6 @@ export default function SignUp() {
 
   const onChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(formData);
   };
 
   const onSignUp = async () => {
@@ -67,7 +66,6 @@ export default function SignUp() {
     if (response.result) {
       setAccountCreated(true);
     } else {
-      console.log(response);
       alert(response.error.message);
     }
   };

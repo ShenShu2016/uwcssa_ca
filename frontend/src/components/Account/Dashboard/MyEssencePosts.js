@@ -4,18 +4,20 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "960px",
-    margin: "auto",
+  card: {
+    width: "350px",
     marginBlock: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      width: "92vw",
+    },
   },
 }));
 
 export default function MyEssencePosts() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Card sx={{ minWidth: "350px" }}>
+    <div>
+      <Card className={classes.card}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             我的精华贴

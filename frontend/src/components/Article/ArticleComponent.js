@@ -1,13 +1,16 @@
+import "./ArticleComponent.css";
+
 import {
   Avatar,
   Box,
   Button,
-  Card,
   CardActionArea,
   CardActions,
   CardContent,
   CardHeader,
+  Grid,
   IconButton,
+  Paper,
   Typography,
 } from "@mui/material";
 
@@ -30,12 +33,17 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
     color: "#0D1F48",
+    paddingBottom: "3rem",
   },
   paper: {
     maxWidth: "100%",
-    margin: "2rem auto",
+    margin: "1rem auto",
+    paddingInline: "3px",
   },
-  s3image: {},
+  s3image: {
+    width: "100%",
+    // paddingInline: "1rem",
+  },
 }));
 
 export default function ArticleComponent() {
@@ -47,8 +55,6 @@ export default function ArticleComponent() {
       id,
       content,
       title,
-      topic,
-      type,
       imagePath,
       like,
       unlike,
@@ -58,7 +64,7 @@ export default function ArticleComponent() {
     } = article;
 
     return (
-      <Card className={classes.paper} key={id} elevation={5}>
+      <Paper className={classes.paper} key={id} elevation={5}>
         <CardHeader
           avatar={
             <Avatar
@@ -79,55 +85,42 @@ export default function ArticleComponent() {
             19
           )}`}
         />
-        <CardHeader title={title} />
-        <CardActions>
-          <Button size="small" color="primary">
-            Type: {type.name}
-          </Button>
-          <Button size="small" color="primary">
-            Topic: {topic.name}
-          </Button>
-        </CardActions>
-        <CardActionArea>
-          <CardContent>
-            <AmplifyS3Image path={imagePath} className={classes.s3image} />
-          </CardContent>
-        </CardActionArea>
-        <CardContent>
-          <Typography
-            variant="body1"
-            noWrap
-            color="textSecondary"
-            component="p"
-          >
-            {content}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-            {like.length}
-          </Button>
-          <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-            {unlike.length}
-          </Button>
-          <Button size="small" color="primary">
-            回复: {}
-          </Button>
-        </CardActions>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button
-            size="small"
-            color="primary"
-            component={Link}
-            to={`article/${id}`}
-          >
-            查看更多
-          </Button>
-        </CardActions>
-      </Card>
+        <div>
+          <Grid container columns={12} spacing={1}>
+            <Grid item xs={7}>
+              <CardContent sx={{ p: 1 }}>
+                <Typography variant="h6">{title}</Typography>
+                <Typography variant="body2" color="textSecondary" paragraph>
+                  {content.slice(0, 50)}
+                </Typography>
+              </CardContent>
+            </Grid>
+            <Grid item xs={5}>
+              <div className={classes.s3image}>
+                <CardActionArea>
+                  <AmplifyS3Image path={imagePath} />
+                </CardActionArea>
+              </div>
+            </Grid>
+          </Grid>
+          <CardActions>
+            <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
+              {like.length}
+            </Button>
+            <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
+              {unlike.length}
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              component={Link}
+              to={`article/${id}`}
+            >
+              查看更多
+            </Button>
+          </CardActions>
+        </div>
+      </Paper>
     );
   });
 
@@ -135,7 +128,7 @@ export default function ArticleComponent() {
     <Box className={classes.root}>
       <Box>
         <Typography variant="h3" className={classes.title}>
-          文章
+          近期新闻
         </Typography>
         {renderList}
       </Box>

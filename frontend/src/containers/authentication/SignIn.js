@@ -15,14 +15,14 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Auth from "@aws-amplify/auth";
+import { CircularProgress } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import facebookLogo from "../../static/svg icons/facebook.svg";
-import appleLogo from "../../static/svg icons/apple.svg";
-import googleLogo from "../../static/svg icons/google.svg";
 import amazonLogo from "../../static/svg icons/amazon.svg";
+import appleLogo from "../../static/svg icons/apple.svg";
+import facebookLogo from "../../static/svg icons/facebook.svg";
+import googleLogo from "../../static/svg icons/google.svg";
 import { makeStyles } from "@mui/styles";
 import { signIn } from "../../redux/actions/authActions";
-import { CircularProgress } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,12 +57,12 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     minWidth: "40%",
     boxShadow: "0 3px 5px 2px rgba(191, 191, 191, 1)",
-    justifyContent:"center",
-    alignItems:"center"
+    justifyContent: "center",
+    alignItems: "center",
   },
   facebookLogo: {
     width: 24,
-    height: 24, 
+    height: 24,
     marginRight: "6rem",
   },
   googleLogo: {
@@ -99,9 +99,8 @@ export default function SignIn() {
 
   const { username, password } = formData;
 
-  const onChange = (event) => 
+  const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
-
 
   const handleSubmit = async function (event) {
     event.preventDefault();
@@ -110,7 +109,6 @@ export default function SignIn() {
     if (response.result) {
       // setLogged(true);
     } else {
-      console.log(response);
       //alert(response.error.message);
       setLoggedInState("logging failed");
     }
@@ -151,7 +149,7 @@ export default function SignIn() {
           noValidate
           onSubmit={(event) => handleSubmit(event)}
         >
-          <TextField          
+          <TextField
             variant="standard"
             margin="normal"
             required
@@ -185,6 +183,7 @@ export default function SignIn() {
           />
           <Grid container marginTop="1rem">
             <Grid marginLeft="2rem" marginRight="3rem">
+
             <Button
               type="submit"
               variant="outlined"
@@ -193,18 +192,19 @@ export default function SignIn() {
             >
               登陆
             </Button>
+
             </Grid>
             <Grid>
-            <Button
-              // type="button"
-              variant="outlined"
-              component={Link}
-              to="/forgotPassword"
-              color="primary"            
-              className={classes.submit}
-            >
-              忘记密码
-            </Button>
+              <Button
+                // type="button"
+                variant="outlined"
+                component={Link}
+                to="/forgotPassword"
+                color="primary"
+                className={classes.submit}
+              >
+                忘记密码
+              </Button>
             </Grid>
           </Grid>
         </form>
@@ -213,7 +213,7 @@ export default function SignIn() {
           <Button
             type="submit"
             variant="outlined"
-            className={classes.third_party_button}                     
+            className={classes.third_party_button}
             onClick={(event) => handleGoogleSignIn(event)}
           >
             <Grid
@@ -264,10 +264,10 @@ export default function SignIn() {
         <Box className={classes.more_third_party}>
           <img
             src={appleLogo}
-            alt="appleLogo"          
+            alt="appleLogo"
             className={classes.other_third_party}
           />
-  
+
           <img
             src={amazonLogo}
             alt="amazonLogo"

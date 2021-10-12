@@ -166,7 +166,6 @@ export default function Edit({ experience, editOpen, handleEditClose }) {
                     label="结束日期"
                     value={endDate}
                     onChange={(e) => {
-                      console.log(e);
                       setEndDate(e);
                     }}
                     renderInput={(params) => <TextField {...params} />}

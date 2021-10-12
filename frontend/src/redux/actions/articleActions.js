@@ -1,32 +1,40 @@
+import {
+  articleByCreatedAt,
+  listTopics,
+  listTypes,
+} from "../../graphql/queries";
 import { createArticle, createArticleComment } from "../../graphql/mutations";
-import { listArticles, listTopics, listTypes } from "../../graphql/queries";
+import {
+  customArticleCommentByCreatedAt,
+  customGetArticle,
+} from "./CustomQuery/article";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/article-action-types";
 import Storage from "@aws-amplify/storage";
-import { getArticle } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
 export const setArticles = () => async (dispatch) => {
   try {
     const articleData = await API.graphql({
-      query: listArticles,
+      query: articleByCreatedAt,
+      variables: { ByCreatedAt: "Article", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SET_ARTICLES,
-      payload: articleData.data.listArticles.items,
+      payload: articleData.data.articleByCreatedAt.items,
     });
   } catch (error) {
     console.log("error on fetching Article", error);
   }
 };
 
-export const selectedArticle = (articleId) => async (dispatch) => {
+export const selectedArticle = (articleId, nextToken) => async (dispatch) => {
   try {
     const response = await API.graphql({
-      query: getArticle,
+      query: customGetArticle,
       variables: { id: articleId },
       authMode: "AWS_IAM",
     });
@@ -34,10 +42,51 @@ export const selectedArticle = (articleId) => async (dispatch) => {
       type: ActionTypes.SELECTED_ARTICLE,
       payload: response.data.getArticle,
     });
+    const articleCommentData = await API.graphql({
+      query: customArticleCommentByCreatedAt,
+      variables: {
+        ArticleId: articleId,
+        sortDirection: "DESC",
+        limit: 5,
+        nextToken: nextToken,
+      },
+      authMode: "AWS_IAM",
+    });
+
+    dispatch({
+      type: ActionTypes.SELECTED_ARTICLECOMMENTS,
+      payload: articleCommentData.data.ArticleCommentByCreatedAt,
+    });
+    console.log("articleCommentData", articleCommentData);
   } catch (error) {
     console.log("error on selecting Article", error);
   }
 };
+
+export const loadMoreArticleComments =
+  (articleId, nextToken) => async (dispatch) => {
+    console.log("load more date start");
+    try {
+      const articleCommentData = await API.graphql({
+        query: customArticleCommentByCreatedAt,
+        variables: {
+          ArticleId: articleId,
+          sortDirection: "DESC",
+          limit: 5,
+          nextToken: nextToken,
+        },
+        authMode: "AWS_IAM",
+      });
+      console.log("More Articlecomments", articleCommentData);
+      dispatch({
+        type: ActionTypes.LOADMORE_ARTICLECOMMENTS,
+        payload: articleCommentData.data.ArticleCommentByCreatedAt,
+      });
+      console.log("payload", articleCommentData.data.ArticleCommentByCreatedAt);
+    } catch (error) {
+      console.log("error on Load more data", error);
+    }
+  };
 
 export const removeSelectedArticle = () => async (dispatch) => {
   dispatch({
@@ -70,7 +119,6 @@ export const setTopics = () => async (dispatch) => {
       query: listTopics,
       authMode: "AWS_IAM",
     });
-    console.log("topicData", topicData);
     dispatch({
       type: ActionTypes.SET_TOPICS,
       payload: topicData.data.listTopics.items,
@@ -86,7 +134,6 @@ export const setTypes = () => async (dispatch) => {
       query: listTypes,
       authMode: "AWS_IAM",
     });
-    console.log("typeData", typeData);
     dispatch({
       type: ActionTypes.SET_TYPES,
       payload: typeData.data.listTypes.items,
@@ -139,6 +186,5 @@ export const postArticleImg = (imgData) => async (dispatch) => {
       type: ActionTypes.POST_ARTICLE_IMG_FAIL,
       payload: error,
     });
-    console.log(error);
   }
 };

@@ -6,13 +6,12 @@ import {
   Button,
   CardActions,
   CardHeader,
-  IconButton,
+  Divider,
   Typography,
 } from "@mui/material";
 
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -25,9 +24,12 @@ const useStyles = makeStyles({
   content: {
     marginBlock: "2rem",
   },
+  buttonGroup: {
+    marginBlock: "2rem",
+  },
 });
 
-function Main({ article }) {
+export default function Main({ article }) {
   const classes = useStyles();
   const {
     title,
@@ -40,14 +42,30 @@ function Main({ article }) {
     createdAt,
     like,
     unlike,
-  } = article;
+  } = article.article;
   return (
     <div>
-      {Object.keys(article).length === 0 ? (
+      {Object.keys(article.article).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Box className={classes.main}>
+          <Typography
+            variant="h4"
+            className={classes.title}
+            sx={{ fontWeight: 700, my: 2 }}
+          >
+            {title}
+          </Typography>
+          <CardActions sx={{ px: 0 }}>
+            <Button size="small" color="primary">
+              Type: {type.name}
+            </Button>
+            <Button size="small" color="primary">
+              Topic: {topic.name}
+            </Button>
+          </CardActions>
           <CardHeader
+            sx={{ px: 0, my: 2 }}
             avatar={
               <Avatar
                 aria-label="recipe"
@@ -56,51 +74,44 @@ function Main({ article }) {
                 to={`/account/profile/${owner}`}
               ></Avatar>
             }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
+            // action={
+            //   <IconButton aria-label="settings">
+            //     <MoreVertIcon />
+            //   </IconButton>
+            // }
             title={owner}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
               11,
               19
             )}`}
           />
-          <CardActions>
-            <Button size="small" color="primary">
-              Type: {type.name}
-            </Button>
-            <Button size="small" color="primary">
-              Topic: {topic.name}
-            </Button>
-          </CardActions>
-          <Typography variant="h3" align="center" className={classes.title}>
-            {title}
-          </Typography>
 
           {/* <CardMedia className={classes.media} image={image} /> */}
-          <AmplifyS3Image path={imagePath} />
-          <Typography
-            variant="body1"
-            className={classes.content}
-            component="pre"
-          >
-            {content}
-          </Typography>
-          <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-            {like.length}
-          </Button>
-          <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-            {unlike.length}
-          </Button>
-          <Button size="small" color="primary">
-            回复
-          </Button>
+          <Box sx={{ my: 2 }}>
+            <AmplifyS3Image path={imagePath} />
+          </Box>
+          <Divider />
+          <Box sx={{ my: 2 }}>
+            <Typography
+              variant="body1"
+              className={classes.content}
+              component="span"
+              style={{ whiteSpace: "pre" }}
+            >
+              {content}
+            </Typography>
+          </Box>
+          <Divider />
+          <Box className={classes.buttonGroup}>
+            <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
+              {like.length}
+            </Button>
+            <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
+              {unlike.length}
+            </Button>
+          </Box>
         </Box>
       )}
     </div>
   );
 }
-
-export default Main;

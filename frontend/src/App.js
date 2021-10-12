@@ -19,7 +19,7 @@ import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostComm
 import ForumPostDetail from "./components/Forum/CurdTesting/ForumPostDetail";
 import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
 import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
-import GraphQLTesting from "./containers/GraphQLTesting";
+import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -43,6 +43,11 @@ import store from "./redux/store";
 const theme = createTheme({
   typography: {
     fontFamily: "Noto Sans SC",
+  },
+  breakpoints: {
+    value: {
+      md: 960,
+    },
   },
 });
 
@@ -149,7 +154,7 @@ export default function App() {
                 exact
                 component={ArticleDetail}
               />
-              <Route path="/graphqlTesting" exact component={GraphQLTesting} />
+              <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
               <Route>404 Not Found!</Route>

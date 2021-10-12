@@ -24,94 +24,102 @@ const DrawerList = ({ toggleDrawer }) => {
         onKeyDown={toggleDrawer(false)}
       >
         <List>
-          {
-            <div>
-              <ListItemButton
-                component={Link}
-                to="/account/dashboard"
-                onClick={toggleDrawer(false)}
-              >
-                <ListItemText primary="个人中心" />
-              </ListItemButton>
-              <ListItemButton
-                component={Link}
-                to={
-                  userAuth.isAuthenticated
-                    ? `/account/profile/${userAuth.user.username}`
-                    : `/signIn`
-                }
-                onClick={toggleDrawer(false)}
-              >
-                <ListItemText primary="我的资料" />
-              </ListItemButton>
-              <ListItemButton
-                component={Link}
-                to={userAuth.isAuthenticated ? "/account/myAccount" : `/signIn`}
-                onClick={toggleDrawer(false)}
-              >
-                <ListItemText primary="我的账号" />
-              </ListItemButton>
-            </div>
-          }
+          <div>
+            <ListItemButton
+              component={Link}
+              to="/account/dashboard"
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemText primary="个人中心" />
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to={
+                userAuth.isAuthenticated
+                  ? `/account/profile/${userAuth.user.username}`
+                  : `/signIn`
+              }
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemText primary="我的资料" />
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to={userAuth.isAuthenticated ? "/account/myAccount" : `/signIn`}
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemText primary="我的账号" />
+            </ListItemButton>
+          </div>
         </List>
         <Divider />
         <List>
-          {
-            <div>
+          <div>
+            <ListItem>
+              <ListItemButton>
+                <ListItemText primary="学生会" component={Link} to="/staff" />
+                {open ? (
+                  <ExpandLess onClick={handleClick} />
+                ) : (
+                  <ExpandMore onClick={handleClick} />
+                )}
+              </ListItemButton>
+            </ListItem>
+            <Collapse in={open} timeout="auto">
               <ListItem>
-                <ListItemButton>
-                  <ListItemText primary="学生会" component={Link} to="/staff" />
-                  {open ? (
-                    <ExpandLess onClick={handleClick} />
-                  ) : (
-                    <ExpandMore onClick={handleClick} />
-                  )}
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="成员" />
                 </ListItemButton>
               </ListItem>
-              <Collapse in={open} timeout="auto">
-                <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
-                    <ListItemText primary="成员" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
-                    <ListItemText primary="财务" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
-                    <ListItemText primary="活动策划" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={toggleDrawer(false)}
-                    component={Link}
-                    to="/staff/uwcssaJob/postUwcssaJob"
-                  >
-                    <ListItemText primary="职位招聘" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton
-                    sx={{ pl: 4 }}
-                    onClick={toggleDrawer(false)}
-                    component={Link}
-                    to="/staff/article/postArticle"
-                  >
-                    <ListItemText primary="新闻发布" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
-                    <ListItemText primary="举报审核" />
-                  </ListItemButton>
-                </ListItem>
-              </Collapse>
-            </div>
-          }
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="财务" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="活动策划" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
+                  to="/staff/uwcssaJob/postUwcssaJob"
+                >
+                  <ListItemText primary="职位招聘" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
+                  to="/staff/article/postArticle"
+                >
+                  <ListItemText primary="新闻发布" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="举报审核" />
+                </ListItemButton>
+              </ListItem>
+            </Collapse>
+          </div>
+        </List>
+        <Divider />
+        <List>
+          <div>
+            <ListItemButton
+              component={Link}
+              to="/foundingTeam"
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemText primary="创始团队以及贡献者" />
+            </ListItemButton>
+          </div>
         </List>
       </Box>
     </div>

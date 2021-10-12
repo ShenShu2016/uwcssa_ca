@@ -1,6 +1,19 @@
-import * as React from "react";
-
-import { Card, CardContent, TableHead, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import { makeStyles, useTheme } from "@mui/styles";
 
 import Box from "@mui/material/Box";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
@@ -8,24 +21,9 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableFooter from "@mui/material/TableFooter";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "960px",
-    margin: "auto",
-    marginBlock: "1rem",
-  },
   title: {
     marginBlock: "1rem",
   },
@@ -122,8 +120,8 @@ const rows = [
 
 const MyMarketPosts = () => {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -139,7 +137,7 @@ const MyMarketPosts = () => {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardContent>
         <Box className={classes.title}>
           <Typography gutterBottom variant="h5" component="div">

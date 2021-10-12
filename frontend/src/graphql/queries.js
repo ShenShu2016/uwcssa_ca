@@ -278,8 +278,8 @@ export const getTopic = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -335,8 +335,8 @@ export const getType = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -384,8 +384,8 @@ export const getArticle = /* GraphQL */ `
       imagePath
       like
       unlike
-      byDate
       createdAt
+      ByCreatedAt
       updatedAt
       topic {
         name
@@ -410,13 +410,14 @@ export const getArticle = /* GraphQL */ `
         }
       }
       owner
-      ArticleComments {
+      articleComments {
         items {
           id
           content
           like
           unlike
           createdAt
+          ArticleId
           updatedAt
           owner
         }
@@ -439,8 +440,8 @@ export const listArticles = /* GraphQL */ `
         imagePath
         like
         unlike
-        byDate
         createdAt
+        ByCreatedAt
         updatedAt
         topic {
           name
@@ -459,7 +460,7 @@ export const listArticles = /* GraphQL */ `
           updatedAt
         }
         owner
-        ArticleComments {
+        articleComments {
           nextToken
         }
       }
@@ -467,17 +468,17 @@ export const listArticles = /* GraphQL */ `
     }
   }
 `;
-export const articlesByDate = /* GraphQL */ `
-  query ArticlesByDate(
-    $byDate: String
+export const articleByCreatedAt = /* GraphQL */ `
+  query ArticleByCreatedAt(
+    $ByCreatedAt: String
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelArticleFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    articlesByDate(
-      byDate: $byDate
+    articleByCreatedAt(
+      ByCreatedAt: $ByCreatedAt
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -491,8 +492,8 @@ export const articlesByDate = /* GraphQL */ `
         imagePath
         like
         unlike
-        byDate
         createdAt
+        ByCreatedAt
         updatedAt
         topic {
           name
@@ -511,7 +512,7 @@ export const articlesByDate = /* GraphQL */ `
           updatedAt
         }
         owner
-        ArticleComments {
+        articleComments {
           nextToken
         }
       }
@@ -527,6 +528,7 @@ export const getArticleComment = /* GraphQL */ `
       like
       unlike
       createdAt
+      ArticleId
       updatedAt
       article {
         id
@@ -535,8 +537,8 @@ export const getArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
-        byDate
         createdAt
+        ByCreatedAt
         updatedAt
         topic {
           name
@@ -555,7 +557,7 @@ export const getArticleComment = /* GraphQL */ `
           updatedAt
         }
         owner
-        ArticleComments {
+        articleComments {
           nextToken
         }
       }
@@ -576,6 +578,7 @@ export const listArticleComments = /* GraphQL */ `
         like
         unlike
         createdAt
+        ArticleId
         updatedAt
         article {
           id
@@ -584,8 +587,51 @@ export const listArticleComments = /* GraphQL */ `
           imagePath
           like
           unlike
-          byDate
           createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const articleCommentByCreatedAt = /* GraphQL */ `
+  query ArticleCommentByCreatedAt(
+    $ArticleId: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelArticleCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ArticleCommentByCreatedAt(
+      ArticleId: $ArticleId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        like
+        unlike
+        createdAt
+        ArticleId
+        updatedAt
+        article {
+          id
+          title
+          content
+          imagePath
+          like
+          unlike
+          createdAt
+          ByCreatedAt
           updatedAt
           owner
         }
@@ -795,6 +841,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
       owner
       uwcssaJobResumeStatus {
         status
+        message
         createdAt
         updatedAt
         uwcssaJobResumes {
@@ -844,6 +891,7 @@ export const listUwcssaJobResumes = /* GraphQL */ `
         owner
         uwcssaJobResumeStatus {
           status
+          message
           createdAt
           updatedAt
           owner
@@ -857,6 +905,7 @@ export const getUwcssaJobResumeStatus = /* GraphQL */ `
   query GetUwcssaJobResumeStatus($status: String!) {
     getUwcssaJobResumeStatus(status: $status) {
       status
+      message
       createdAt
       updatedAt
       uwcssaJobResumes {
@@ -894,6 +943,7 @@ export const listUwcssaJobResumeStatuses = /* GraphQL */ `
     ) {
       items {
         status
+        message
         createdAt
         updatedAt
         uwcssaJobResumes {
@@ -985,6 +1035,7 @@ export const getForumSubTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1040,6 +1091,7 @@ export const getForumPost = /* GraphQL */ `
       imagePath
       like
       unlike
+      ByCreatedAt
       createdAt
       updatedAt
       forumSubTopic {
@@ -1068,6 +1120,7 @@ export const getForumPost = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostId
           createdAt
           updatedAt
           owner
@@ -1090,6 +1143,50 @@ export const listForumPosts = /* GraphQL */ `
         imagePath
         like
         unlike
+        ByCreatedAt
+        createdAt
+        updatedAt
+        forumSubTopic {
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const forumPostByCreatedAt = /* GraphQL */ `
+  query ForumPostByCreatedAt(
+    $ByCreatedAt: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    forumPostByCreatedAt(
+      ByCreatedAt: $ByCreatedAt
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        imagePath
+        like
+        unlike
+        ByCreatedAt
         createdAt
         updatedAt
         forumSubTopic {
@@ -1116,6 +1213,7 @@ export const getForumPostComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostId
       createdAt
       updatedAt
       forumPost {
@@ -1124,6 +1222,7 @@ export const getForumPostComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        ByCreatedAt
         createdAt
         updatedAt
         forumSubTopic {
@@ -1146,6 +1245,7 @@ export const getForumPostComment = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostCommentId
           createdAt
           updatedAt
           owner
@@ -1171,6 +1271,7 @@ export const listForumPostComments = /* GraphQL */ `
         content
         like
         unlike
+        ForumPostId
         createdAt
         updatedAt
         forumPost {
@@ -1179,6 +1280,52 @@ export const listForumPostComments = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const byForumPostId = /* GraphQL */ `
+  query ByForumPostId(
+    $ForumPostId: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byForumPostId(
+      ForumPostId: $ForumPostId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        like
+        unlike
+        ForumPostId
+        createdAt
+        updatedAt
+        forumPost {
+          id
+          content
+          imagePath
+          like
+          unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1199,6 +1346,7 @@ export const getForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
+      ForumPostCommentId
       createdAt
       updatedAt
       forumPostComment {
@@ -1206,6 +1354,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         content
         like
         unlike
+        ForumPostId
         createdAt
         updatedAt
         forumPost {
@@ -1214,6 +1363,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           imagePath
           like
           unlike
+          ByCreatedAt
           createdAt
           updatedAt
           owner
@@ -1243,6 +1393,7 @@ export const listForumPostSubComments = /* GraphQL */ `
         content
         like
         unlike
+        ForumPostCommentId
         createdAt
         updatedAt
         forumPostComment {
@@ -1250,6 +1401,48 @@ export const listForumPostSubComments = /* GraphQL */ `
           content
           like
           unlike
+          ForumPostId
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const byForumPostCommentId = /* GraphQL */ `
+  query ByForumPostCommentId(
+    $ForumPostCommentId: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostSubCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byForumPostCommentId(
+      ForumPostCommentId: $ForumPostCommentId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        like
+        unlike
+        ForumPostCommentId
+        createdAt
+        updatedAt
+        forumPostComment {
+          id
+          content
+          like
+          unlike
+          ForumPostId
           createdAt
           updatedAt
           owner

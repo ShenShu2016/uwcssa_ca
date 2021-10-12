@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Box,
   Card,
@@ -16,6 +14,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -127,8 +126,8 @@ const rows = [
 
 const MyForumPosts = () => {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =

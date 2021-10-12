@@ -41,8 +41,8 @@ const useStyles = makeStyles({
 export default function BasicInfo({ user, userAuth }) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div>
+    <div>
+      <div className={classes.root}>
         <Card elevation={0} className={classes.header}>
           <CardActionArea>
             <CardMedia

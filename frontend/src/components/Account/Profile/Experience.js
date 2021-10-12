@@ -133,7 +133,12 @@ export default function Experience({ user, userAuth }) {
                   <br />
                   {location}
                 </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ mb: 2 }}
+                  component="span"
+                  style={{ whiteSpace: "pre" }}
+                >
                   {description}
                 </Typography>
                 <Divider />

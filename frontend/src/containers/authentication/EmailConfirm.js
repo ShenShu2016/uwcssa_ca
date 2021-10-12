@@ -36,7 +36,6 @@ export default function EmailConfirm() {
   });
   const onChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(formData);
   };
   const confirmSignUp = async () => {
     const { username, authenticationCode } = formData;
@@ -45,7 +44,6 @@ export default function EmailConfirm() {
     if (response.result) {
       setEmailConfirmed(true);
     } else {
-      console.log(response);
       alert(response.error.message);
     }
   };
