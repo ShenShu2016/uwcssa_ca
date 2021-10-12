@@ -87,12 +87,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [loading, setLoading] = React.useState(false);
-  const [loggedInState, setLoggedInState] = useState();
-
-  const handleClickLoading = () => {
-    setLoading((prevLoading) => !prevLoading);
-  };
+  const [ loggedInState, setLoggedInState] = useState(); //logging state
 
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
@@ -188,15 +183,16 @@ export default function SignIn() {
           />
           <Grid container marginTop="1rem">
             <Grid marginLeft="2rem" marginRight="3rem">
-              <Button
-                type="submit"
-                variant="outlined"
-                color="primary"
-                className={classes.submit}
-                onClick={handleClickLoading}
-              >
-                登陆
-              </Button>
+
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              className={classes.submit}
+            >
+              登陆
+            </Button>
+
             </Grid>
             <Grid>
               <Button

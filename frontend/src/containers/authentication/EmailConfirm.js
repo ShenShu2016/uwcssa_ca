@@ -51,7 +51,7 @@ export default function EmailConfirm() {
   if (emailConfirmed) {
     return <Redirect to="/signIn" />;
   }
-  // 这里还需要fetch邮箱地址
+
   return (
     <Container>
       <div className={classes.paper}>
@@ -86,7 +86,7 @@ export default function EmailConfirm() {
               />
             </Grid>
           </Grid>
-          <Grid className={classes.register_button}>
+          <Grid marginTop="2rem">
             <Button
               variant="outlined"
               color="primary"
