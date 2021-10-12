@@ -7,15 +7,18 @@ const initialStateArticle = {
 };
 
 const initialStateSelectedArticle = {
-  article: [],
+  article: {},
   comments: [],
+  commentsNextToken: "",
 };
+
 const initialStatePUDArticle = {
   postArticle: {},
   postImage: {},
   updateArticle: [],
   deleteArticle: [],
 };
+
 export const articleReducer = (
   state = initialStateArticle,
   { type, payload }
@@ -40,7 +43,17 @@ export const selectedArticleReducer = (
     case ActionTypes.SELECTED_ARTICLE:
       return { ...state, article: payload };
     case ActionTypes.SELECTED_ARTICLECOMMENTS:
-      return { ...state, comments: payload };
+      return {
+        ...state,
+        comments: payload.items,
+        commentsNextToken: payload.nextToken,
+      };
+    case ActionTypes.LOADMORE_ARTICLECOMMENTS:
+      return {
+        ...state,
+        comments: [...state.comments, ...payload.items],
+        commentsNextToken: payload.nextToken,
+      };
     case ActionTypes.REMOVE_SELECTED_ARTICLE:
       return initialStateSelectedArticle;
     default:

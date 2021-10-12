@@ -43,7 +43,6 @@ export default function Main({ article }) {
     like,
     unlike,
   } = article.article;
-  console.log("article.article", article.article);
   return (
     <div>
       {Object.keys(article.article).length === 0 ? (

@@ -31,7 +31,7 @@ export const setArticles = () => async (dispatch) => {
   }
 };
 
-export const selectedArticle = (articleId) => async (dispatch) => {
+export const selectedArticle = (articleId, nextToken) => async (dispatch) => {
   try {
     const response = await API.graphql({
       query: customGetArticle,
@@ -47,17 +47,46 @@ export const selectedArticle = (articleId) => async (dispatch) => {
       variables: {
         ArticleId: articleId,
         sortDirection: "DESC",
+        limit: 5,
+        nextToken: nextToken,
       },
       authMode: "AWS_IAM",
     });
+
     dispatch({
       type: ActionTypes.SELECTED_ARTICLECOMMENTS,
-      payload: articleCommentData.data.ArticleCommentByCreatedAt.items,
+      payload: articleCommentData.data.ArticleCommentByCreatedAt,
     });
+    console.log("articleCommentData", articleCommentData);
   } catch (error) {
     console.log("error on selecting Article", error);
   }
 };
+
+export const loadMoreArticleComments =
+  (articleId, nextToken) => async (dispatch) => {
+    console.log("load more date start");
+    try {
+      const articleCommentData = await API.graphql({
+        query: customArticleCommentByCreatedAt,
+        variables: {
+          ArticleId: articleId,
+          sortDirection: "DESC",
+          limit: 5,
+          nextToken: nextToken,
+        },
+        authMode: "AWS_IAM",
+      });
+      console.log("More Articlecomments", articleCommentData);
+      dispatch({
+        type: ActionTypes.LOADMORE_ARTICLECOMMENTS,
+        payload: articleCommentData.data.ArticleCommentByCreatedAt,
+      });
+      console.log("payload", articleCommentData.data.ArticleCommentByCreatedAt);
+    } catch (error) {
+      console.log("error on Load more data", error);
+    }
+  };
 
 export const removeSelectedArticle = () => async (dispatch) => {
   dispatch({

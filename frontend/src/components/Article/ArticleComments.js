@@ -7,6 +7,7 @@ import {
   CardContent,
   CardHeader,
   IconButton,
+  Pagination,
   Typography,
 } from "@mui/material";
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
 
 export default function ArticleComments({ article }) {
   const classes = useStyles();
+  // console.log(article, "article");
   return (
     <div className={classes.root}>
       <Typography className={classes.subTitle}>评论：</Typography>
@@ -100,6 +102,15 @@ export default function ArticleComments({ article }) {
             );
           })}
         </div>
+      )}
+      {article.commentsNextToken ? (
+        <Button variant="contained" size="large">
+          加载更多
+        </Button>
+      ) : (
+        <Typography variant="h5" align="center">
+          已经到达底部
+        </Typography>
       )}
     </div>
   );
