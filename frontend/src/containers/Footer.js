@@ -2,26 +2,28 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
+  IconButton,
   Link as MUILink,
   Typography,
 } from "@mui/material";
-
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { makeStyles } from "@mui/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
-      <MUILink color="inherit" href="https://material-ui.com/">
-        uwcssa.ca
-      </MUILink>
-      {new Date().getFullYear()}
+      <Button color="inherit" href="https://uwcssa/">
+        uwcssa.ca {""} {new Date().getFullYear()}
+      </Button>
     </Typography>
   );
 }
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     height: "220px",
-    backgroundColor: "#F3F2EF",
+    backgroundColor: "#FDFEFE ",
     [theme.breakpoints.down("sm")]: {
       height: "350px",
     },
@@ -58,11 +60,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#000000",
+    },
+  },
+});
+
 export default function StickyFooter() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      <Divider />
       <footer className={classes.footer}>
         <Container maxWidth="md">
           <Grid container spacing={3}>
@@ -71,12 +82,41 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   关于我们
                 </Typography>
-                <MUILink href="/foundingTeam" color="inherit">
-                  团队
-                </MUILink>
-                <MUILink href="" color="inherit">
-                  联系我们
-                </MUILink>
+                <span style={{ cursor: "not-allowed" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      color="primary"
+                      variant="text"
+                      component={Link}
+                      to="/foundingTeam"
+                    >
+                      团队
+                    </Button>
+                  </ThemeProvider>
+                </span>
+                <span style={{ cursor: "not-allowed" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      color="primary"
+                      variant="text"
+                      component={Link}
+                      to="/contactUs"
+                    >
+                      联系我们
+                    </Button>
+                  </ThemeProvider>
+                </span>
+                <span style={{ cursor: "not-allowed" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      color="primary"
+                      variant="text"
+                      href="mailto:uwincssa.it@gmail.com"
+                    >
+                      邮箱: uwincssa.it@gmail.com
+                    </Button>
+                  </ThemeProvider>
+                </span>
               </Box>
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -84,35 +124,51 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   资讯
                 </Typography>
-                <MUILink href="" color="inherit">
-                  uwcssa新闻
-                </MUILink>
-                <MUILink href="" color="inherit">
-                  uwcssa活动
-                </MUILink>
+                <span style={{ cursor: "not-allowed" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      color="primary"
+                      variant="text"
+                      component={Link}
+                      to="/article"
+                    >
+                      uwcssa新闻
+                    </Button>
+                  </ThemeProvider>
+                </span>
+                <span style={{ cursor: "not-allowed" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      color="primary"
+                      variant="text"
+                      component={Link}
+                      to="/event"
+                    >
+                      uwcssa活动
+                    </Button>
+                  </ThemeProvider>
+                </span>
               </Box>
             </Grid>
             <Grid item xs={6} sm={3}>
               <Box className={classes.text}>
                 <Typography variant="h6" gutterBottom>
-                  联系我们
+                  关注我们
                 </Typography>
-                <MUILink
-                  color="inherit"
-                  href="mailto:uwincssa.it@gmail.com"
-                  className={classes.link}
-                >
-                  邮箱: uwincssa.it@gmail.com
-                </MUILink>
-
                 <Box className={classes.icons}>
-                  <FacebookIcon />
-                  <LinkedInIcon />
-                  <SocialIcon
-                    style={{ height: 20, width: 20 }}
-                    url="https://wechat.com"
-                    bgColor="black"
-                  />
+                  <IconButton href="https://www.facebook.com/uwincssa">
+                    <FacebookIcon />
+                  </IconButton>
+                  <IconButton href="https://www.youtube.com/user/uwincssa">
+                    <YouTubeIcon />
+                  </IconButton>
+                  <IconButton>
+                    <SocialIcon
+                      style={{ height: 20, width: 20 }}
+                      url="https://wechat.com"
+                      bgColor="grey"
+                    />
+                  </IconButton>
                 </Box>
               </Box>
             </Grid>
@@ -121,17 +177,20 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   职位
                 </Typography>
+
                 <Typography variant="caption" gutterBottom>
                   来和我们一起工作吧! 我们一直在寻找优秀的人才加入我们的团队。
                 </Typography>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  component={Link}
-                  to="/career"
-                >
-                  查看职位
-                </Button>
+                <ThemeProvider theme={theme}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    component={Link}
+                    to="/career"
+                  >
+                    查看职位
+                  </Button>
+                </ThemeProvider>
               </Box>
             </Grid>
           </Grid>
