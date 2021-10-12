@@ -36,12 +36,15 @@ const useStyles = makeStyles((theme) => ({
   },
   register_button: {
     marginLeft: theme.spacing(3),
+    marginTop: "2rem",
+    marginBottom: "2rem",
   },
 }));
 
 export default function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
@@ -68,6 +71,7 @@ export default function SignUp() {
       alert(response.error.message);
     }
   };
+
 
   if (isAuthenticated) {
     return <Redirect to="/" />;
@@ -99,6 +103,8 @@ export default function SignUp() {
                 type="username"
                 id="username"
                 autoComplete="username"
+                error={formData.username=== ""} // if input is empty
+                helperText={formData.username === "" ? 'Empty field!' : ' '}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -111,7 +117,10 @@ export default function SignUp() {
                 label="Email"
                 type="email"
                 id="email"
-                autoComplete="email"
+                autoComplete="email"              
+                error={formData.email=== ""}
+                helperText={formData.email === "" ? 'Empty field!' : ' '}
+                // error={formData.email.indexOf("@")}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -125,6 +134,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                error={formData.password === "" || formData.password.length < 6} // if input is empty
+                helperText={formData.password === "" ? 'Empty field!' : ' ' || formData.password > 6 ? 'Length less than 6!' : '' }             
                 onChange={(event) => onChange(event)}
               />
             </Grid>
