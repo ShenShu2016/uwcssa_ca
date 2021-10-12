@@ -132,7 +132,7 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {loggedInState === "logging in" ? <CircularProgress /> : " "}
+        {/* {loggedInState === "logging in" ? <CircularProgress /> : " "} */}
         {loggedInState === "logging failed"}
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -189,8 +189,9 @@ export default function SignIn() {
               variant="outlined"
               color="primary"
               className={classes.submit}
-            >
+            >              
               登陆
+              {loggedInState === "logging in" ? <CircularProgress size="1.5rem"/> : " "}
             </Button>
 
             </Grid>

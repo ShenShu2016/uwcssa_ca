@@ -132,8 +132,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                error={formData.password === "" || formData.password.length < 6} // if input is empty
-                helperText={formData.password === "" ? 'Empty field!' : ' ' || formData.password > 6 ? 'Length less than 6!' : '' }             
+                error={formData.password === "" } // if input is empty. || formData.password.length < 6
+                helperText={formData.password === "" ? 'Empty field!' : ' ' } // || formData.password < 6 ? 'Length less than 6!' : '' 
                 onChange={(event) => onChange(event)}
               />
             </Grid>
