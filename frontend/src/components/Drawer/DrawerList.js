@@ -50,6 +50,9 @@ const DrawerList = ({ toggleDrawer }) => {
             >
               <ListItemText primary="我的账号" />
             </ListItemButton>
+            <ListItemButton component={Link} to="/event">
+              <ListItemText primary="活动" />
+            </ListItemButton>
           </div>
         </List>
         <Divider />

@@ -319,8 +319,10 @@ export default function Event() {
                           </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button size="small">分享</Button>
-                          <Button size="small" component={Link} to="">
+                          <Button size="small" disabled>
+                            分享
+                          </Button>
+                          <Button size="small" component={Link} to="" disabled>
                             了解更多
                           </Button>
                         </CardActions>
@@ -338,7 +340,7 @@ export default function Event() {
               })}
             </Grid>
             <Box className={classes.seeMore}>
-              <Button variant="outlined" component={Link} to="">
+              <Button variant="outlined" component={Link} to="" disabled>
                 查看更多
               </Button>
             </Box>

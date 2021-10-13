@@ -290,6 +290,14 @@ export default function Header() {
             >
               GraphQLTesting
             </Button>
+            <Button
+              variant="text"
+              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
+              component={Link}
+              to="/event"
+            >
+              活动
+            </Button>
             {isAuthenticated ? (
               ""
             ) : (
