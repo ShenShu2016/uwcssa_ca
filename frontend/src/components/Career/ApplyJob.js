@@ -24,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     textAlign: "left",
-    margin: "4rem",
+    margin: "4rem 1rem",
+  },
+  title: {
+    color: "#1472CE",
   },
   input: {
     display: "none",
@@ -36,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   fileName: {
     paddingLeft: "1rem",
   },
+  Checkbox: {
+    paddingLeft: "1rem",
+  }
 }));
 
 export default function ApplyJob(props) {
@@ -128,7 +134,7 @@ export default function ApplyJob(props) {
             resumeFilePath: key,
             message: applyData.message,
             uwcssaJobResumeUwcssaJobId: applyData.job.id,
-            uwcssaJobResumeUwcssaJobResumeStatusId: "等待查阅",
+            uwcssaJobResumeUwcssaJobResumeStatusId: "已提交",
           };
           const newUwcssaJobResume = await API.graphql(
             graphqlOperation(createUwcssaJobResume, {
@@ -175,7 +181,7 @@ export default function ApplyJob(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h6">{applyData.job.title}</Typography>
+      <Typography variant="h6" className={classes.title}>{applyData.job.title}</Typography>
       <br />
       <Typography variant="body1">
         谢谢你的兴趣.请填写下面的表格并点击"提交"
