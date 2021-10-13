@@ -5,13 +5,11 @@ import {
   Divider,
   Grid,
   IconButton,
-  Link as MUILink,
   Typography,
 } from "@mui/material";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { makeStyles } from "@mui/styles";
@@ -21,7 +19,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
-      <Button color="inherit" href="https://uwcssa/">
+      <Button color="inherit" href="https://uwcssa.ca/">
         uwcssa.ca {""} {new Date().getFullYear()}
       </Button>
     </Typography>

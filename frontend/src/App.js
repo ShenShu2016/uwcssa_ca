@@ -40,6 +40,7 @@ import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
+import Event from "./containers/EventListing";
 
 const theme = createTheme({
   typography: {
@@ -163,6 +164,7 @@ export default function App() {
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
+              <Route path="/event" exact component={Event} />
               <Route>404 Not Found!</Route>
             </Switch>
           </div>
