@@ -26,6 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
+import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -124,6 +125,11 @@ export default function App() {
                 path="/staff/uwcssaJob/postUwcssaJob"
                 exact
                 component={PostUwcssaJob}
+              />
+              <Route
+                path="/staff/uwcssaJob/postDepartment"
+                exact
+                component={PostDepartment}
               />
               <Route path="/forum" exact component={Forum} />
               <Route path="/forumTopic" exact component={ForumTopic} />

@@ -10,14 +10,14 @@ const useStyles = makeStyles(() => ({
   root: {
     // backgroundColor: "#F3F2EF",
     textAlign: "left",
-    margin: "4rem",
-    color: "#687988",
+    margin: "4rem 1rem",
+    color: "#1472CE",
   },
   intro: {
-    color: "#82919C",
+    color: "#0D1F48",
   },
   body: {
-    color: "#82919C",
+    color: "#0D1F48",
     paddingLeft: "1.5rem",
   },
 }));
