@@ -99,6 +99,16 @@ const DrawerList = ({ toggleDrawer }) => {
                   sx={{ pl: 4 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
+                  to="/staff/uwcssaJob/postDepartment"
+                >
+                  <ListItemText primary="部门管理" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
                   to="/staff/article/postArticle"
                 >
                   <ListItemText primary="新闻发布" />
