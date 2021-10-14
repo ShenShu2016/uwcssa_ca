@@ -134,7 +134,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.title}
-          style={{marginBlock:"2rem"}}
+          sx={{marginBlock:"2rem"}}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, title: e.target.value })
           }
@@ -147,7 +147,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.departmentName}
-          style={{marginBlock: "2rem"}}
+          sx={{marginBlock: "2rem"}}
           onChange={(e) =>
             setUwcssaJobData({
               ...uwcssaJobData,
@@ -165,7 +165,7 @@ export default function PostUwcssaJob(props) {
           multiline
           minRows={5}
           value={uwcssaJobData.introduction}
-          style={{marginBlock: "2rem"}}
+          sx={{marginBlock: "2rem"}}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, introduction: e.target.value })
           }
@@ -451,7 +451,7 @@ export default function PostUwcssaJob(props) {
       <Button
         variant="contained"
         color="primary"
-        style={{marginBlock: "2rem"}}
+        sx={{marginBlock: "2rem"}}
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >
