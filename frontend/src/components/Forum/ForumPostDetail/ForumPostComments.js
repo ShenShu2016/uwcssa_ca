@@ -8,12 +8,11 @@ import {
   CardHeader,
   IconButton,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
-
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import React from "react";
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import React from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 

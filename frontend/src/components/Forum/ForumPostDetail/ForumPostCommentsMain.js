@@ -1,16 +1,18 @@
-import { CardContent, CardHeader } from "@material-ui/core";
-
-import { Avatar } from "@material-ui/core";
-import { Box } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { CardActions } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import {
+  Box,
+  Avatar,
+  Button,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   title: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
 
 function ForumPostCommentsMain({ forumPostComment }) {
   const classes = useStyles();
-  const { id, content, createdAt, like, unlike, owner } = forumPostComment;
+  const { content, createdAt, like, unlike, owner } = forumPostComment;
   return (
     <div>
       {Object.keys(forumPostComment).length === 0 ? (

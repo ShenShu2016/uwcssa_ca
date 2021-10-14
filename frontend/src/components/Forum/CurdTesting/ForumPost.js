@@ -1,23 +1,25 @@
-import { Box, Button, InputLabel, TextField } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Button,
+  MenuItem,
+  Select,
+  InputLabel,
+  TextField,
+  Typography,
+  FormControl,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
-import { Typography, makeStyles } from "@material-ui/core";
 import { connect, useSelector } from "react-redux";
-import { getForumTopic, listForumTopics } from "../../../graphql/queries";
 import {
   postForumPost,
   postForumPostImg,
   setForumSubTopics,
   setForumTopics,
 } from "../../../redux/actions/forumAction";
-
-import { API } from "aws-amplify";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
-import MenuItem from "@mui/material/MenuItem";
 import PublishIcon from "@mui/icons-material/Publish";
-import Select from "@mui/material/Select";
-import { createForumPost } from "../../../graphql/mutations";
 import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +53,7 @@ const ForumPost = ({
     setForumTopics();
     setForumSubTopics();
     console.log("using effect");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { forumTopics, forumSubTopics } = useSelector((state) => state.forum);
   console.log("forumTopics", forumTopics);

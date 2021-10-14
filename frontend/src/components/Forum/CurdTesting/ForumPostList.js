@@ -1,25 +1,26 @@
-import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
-
-import { API } from "aws-amplify";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { Avatar } from "@material-ui/core";
-import { Box } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import { CardHeader } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import {
+  Box,
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import Typography from "@material-ui/core/Typography";
-import { deleteForumPost } from "../../../graphql/mutations";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { connect, useSelector } from "react-redux";
+// import { API } from "aws-amplify";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
+// import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { Link } from "react-router-dom";
+// import { deleteForumPost } from "../../../graphql/mutations";
 import { setForumPosts } from "../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
@@ -48,16 +49,16 @@ const ForumPostList = ({ setForumPosts }) => {
   const forumPosts = useSelector((state) => state.forum.forumPosts);
   console.log(forumPosts);
   //Delete the forum topic
-  const delForumPost = async (forumPostId) => {
-    const { id } = { id: forumPostId };
-    console.log("DelForumTopicId", id);
-    const delForumPostInput = {
-      id,
-    };
-    await API.graphql(
-      graphqlOperation(deleteForumPost, { input: delForumPostInput })
-    );
-  };
+  // const delForumPost = async (forumPostId) => {
+  //   const { id } = { id: forumPostId };
+  //   console.log("DelForumTopicId", id);
+  //   const delForumPostInput = {
+  //     id,
+  //   };
+  //   await API.graphql(
+  //     graphqlOperation(deleteForumPost, { input: delForumPostInput })
+  //   );
+  // };
   const renderList = forumPosts.map((forumPost) => {
     const {
       id,
