@@ -32,23 +32,11 @@ const useStyles = makeStyles({
     paddingTop: "3rem",
     paddingInline: "1rem",
   },
-  title: {
-    marginBlock: "2rem",
-  },
-  intro: {
-    marginBlock: "2rem",
-  },
-  department: {
-    marginBlock: "2rem",
-  },
   table: {
     marginBlock: "2rem",
   },
   button: {
     cursor: "pointer",
-  },
-  submit: {
-    marginBlock: "2rem",
   },
 });
 export default function PostUwcssaJob(props) {
@@ -146,7 +134,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.title}
-          className={classes.title}
+          sx={{marginBlock:"2rem"}}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, title: e.target.value })
           }
@@ -159,7 +147,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.departmentName}
-          className={classes.department}
+          sx={{marginBlock: "2rem"}}
           onChange={(e) =>
             setUwcssaJobData({
               ...uwcssaJobData,
@@ -177,7 +165,7 @@ export default function PostUwcssaJob(props) {
           multiline
           minRows={5}
           value={uwcssaJobData.introduction}
-          className={classes.intro}
+          sx={{marginBlock: "2rem"}}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, introduction: e.target.value })
           }
@@ -463,7 +451,7 @@ export default function PostUwcssaJob(props) {
       <Button
         variant="contained"
         color="primary"
-        className={classes.submit}
+        sx={{marginBlock: "2rem"}}
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >

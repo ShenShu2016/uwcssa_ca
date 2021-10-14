@@ -21,7 +21,7 @@ export default function Career() {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h3" className={classes.title}>
+      <Typography variant="h4" className={classes.title}>
         开放职位
       </Typography>
       <Route exact path="/career" component={Openings} />

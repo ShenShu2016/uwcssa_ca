@@ -8,6 +8,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CardMedia,
   Grid,
   IconButton,
   Paper,
@@ -18,6 +19,7 @@ import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
+import Storage from "@aws-amplify/storage";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
@@ -49,6 +51,20 @@ const useStyles = makeStyles((theme) => ({
 export default function ArticleComponent() {
   const articles = useSelector((state) => state.allArticles.articles);
   const classes = useStyles();
+
+  // const handleImage = async (imagePath) => {
+  //   try {
+  //     const imageAccessURL = await Storage.get(imagePath, {
+  //       level: "public",
+  //       expires: 120,
+  //       download: false,
+  //     });
+  //     console.log("imageAccessURL", imageAccessURL);
+  //     return imageAccessURL;
+  //   } catch (error) {
+  //     console.error("error accessing the Image from s3", error);
+  //   }
+  // };
 
   const renderList = articles.map((article) => {
     const {
@@ -99,6 +115,7 @@ export default function ArticleComponent() {
               <div className={classes.s3image}>
                 <CardActionArea>
                   <AmplifyS3Image path={imagePath} />
+                  {/* <img src={handleImage(imagePath)} alt="" /> */}
                 </CardActionArea>
               </div>
             </Grid>

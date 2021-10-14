@@ -40,9 +40,9 @@ export default function Profile() {
   }
 
   return (
-    <div className={classes.root}>
-      <div>
-        <BasicInfo userAuth={userAuth} user={user} />
+    <div>
+      <BasicInfo userAuth={userAuth} user={user} />
+      <div className={classes.root}>
         <Education userAuth={userAuth} user={user} />
         <Experience userAuth={userAuth} user={user} />
       </div>

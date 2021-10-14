@@ -26,6 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
+import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -39,6 +40,7 @@ import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
+import Event from "./containers/EventListing";
 
 const theme = createTheme({
   typography: {
@@ -125,6 +127,11 @@ export default function App() {
                 exact
                 component={PostUwcssaJob}
               />
+              <Route
+                path="/staff/uwcssaJob/postDepartment"
+                exact
+                component={PostDepartment}
+              />
               <Route path="/forum" exact component={Forum} />
               <Route path="/forumTopic" exact component={ForumTopic} />
               <Route path="/forumPost" exact component={ForumPost} />
@@ -157,6 +164,7 @@ export default function App() {
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
+              <Route path="/event" exact component={Event} />
               <Route>404 Not Found!</Route>
             </Switch>
           </div>

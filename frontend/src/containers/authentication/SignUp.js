@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Redirect } from "react-router";
 import { makeStyles } from "@mui/styles";
 import { signUp } from "../../redux/actions/authActions";
+import { CircularProgress } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "75%", // Fix IE 11 issue.
     marginTop: theme.spacing(8),
   },
   submit: {
@@ -44,11 +45,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  
+
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
   const [accountCreated, setAccountCreated] = useState(false);
+  const [loadingState, setLoadingState] = useState();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -62,14 +64,15 @@ export default function SignUp() {
 
   const onSignUp = async () => {
     const { username, password, email } = formData;
-    const response = await dispatch(signUp(username, password, email));
-    if (response.result) {
-      setAccountCreated(true);
+    setLoadingState("loading");
+    const response = await dispatch(signUp(username, password, email)); 
+    if (response.result) {      
+      setAccountCreated(true);    
     } else {
-      alert(response.error.message);
+      alert(response.error.message);     
+      setLoadingState("stop_loading")
     }
   };
-
 
   if (isAuthenticated) {
     return <Redirect to="/" />;
@@ -79,8 +82,9 @@ export default function SignUp() {
   }
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <CssBaseline />     
       <div className={classes.paper}>
+        {loadingState === "stop_loading"}
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -132,21 +136,25 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                error={formData.password === "" || formData.password.length < 6} // if input is empty
-                helperText={formData.password === "" ? 'Empty field!' : ' ' || formData.password > 6 ? 'Length less than 6!' : '' }             
+                error={formData.password === "" } // if input is empty. || formData.password.length < 6
+                helperText={formData.password === "" ? 'Empty field!' : ' ' } // || formData.password < 6 ? 'Length less than 6!' : '' 
                 onChange={(event) => onChange(event)}
               />
             </Grid>
           </Grid>
           <Grid className={classes.register_button}>
             <Button
+              type="submit"
               variant="outlined"
               color="primary"
               className={classes.submit}
-              onClick={onSignUp}
+              onClick={onSignUp}    
+              disabled={loadingState ===  "loading"}        
             >
-              注册
-            </Button>
+              注册   
+              {/* 但是如果都是空的话，loading动画不会出现，不知道为啥 */}
+              {loadingState === "loading" ? <CircularProgress size="1.5rem"/> : " "}
+            </Button>            
           </Grid>
         </form>
       </div>

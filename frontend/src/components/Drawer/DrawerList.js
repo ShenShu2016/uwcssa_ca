@@ -50,6 +50,9 @@ const DrawerList = ({ toggleDrawer }) => {
             >
               <ListItemText primary="我的账号" />
             </ListItemButton>
+            <ListItemButton component={Link} to="/event">
+              <ListItemText primary="活动" />
+            </ListItemButton>
           </div>
         </List>
         <Divider />
@@ -89,6 +92,16 @@ const DrawerList = ({ toggleDrawer }) => {
                   to="/staff/uwcssaJob/postUwcssaJob"
                 >
                   <ListItemText primary="职位招聘" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
+                  to="/staff/uwcssaJob/postDepartment"
+                >
+                  <ListItemText primary="部门管理" />
                 </ListItemButton>
               </ListItem>
               <ListItem>
