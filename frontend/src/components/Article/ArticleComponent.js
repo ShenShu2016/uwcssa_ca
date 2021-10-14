@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginTop: "4rem",
     maxWidth: "960px",
-    paddingInline: "1rem",
+    paddingInline: "0.5rem",
   },
   title: {
     textAlign: "center",
@@ -82,6 +82,7 @@ export default function ArticleComponent() {
     return (
       <Paper className={classes.paper} key={id} elevation={5}>
         <CardHeader
+          sx={{ p: 1 }}
           avatar={
             <Avatar
               aria-label="recipe"
@@ -105,9 +106,23 @@ export default function ArticleComponent() {
           <Grid container columns={12} spacing={1}>
             <Grid item xs={7}>
               <CardContent sx={{ p: 1 }}>
-                <Typography variant="h6">{title}</Typography>
-                <Typography variant="body2" color="textSecondary" paragraph>
-                  {content.slice(0, 50)}
+                <Typography
+                  variant="subtitle2"
+                  style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  sx={{ maxHeight: "300px" }}
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
+                    overflow: "hidden",
+                  }}
+                >
+                  {content}
                 </Typography>
               </CardContent>
             </Grid>

@@ -43,9 +43,10 @@ export default function ArticleDetail() {
       const scrollY = window.scrollY; //当前上方高度
       const scrollTop = e.target.scrollingElement.clientHeight; //窗口高度
       const scrollHeight = e.target.scrollingElement.scrollHeight; //总高度
-      // console.log(scrollY, scrollTop, scrollHeight);
+      // console.log(scrollY, scrollTop, scrollY + scrollTop, scrollHeight);
       // console.log("nextToken", nextToken);
-      if (scrollY + scrollTop === scrollHeight) {
+      if (scrollY + scrollTop > scrollHeight) {
+        // 这个问题需要解决，为啥前面加起来有小数点。并且如果我在前面一点就想load的话这个东西会重复读
         if (nextToken) {
           console.log("到底了");
           dispatch(loadMoreArticleComments(articleId, nextToken));

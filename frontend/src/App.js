@@ -11,6 +11,7 @@ import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
+import Event from "./containers/EventListing";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/Forum";
@@ -25,8 +26,8 @@ import Home from "./containers/Home";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
-import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
+import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -40,7 +41,6 @@ import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
-import Event from "./containers/EventListing";
 
 const theme = createTheme({
   typography: {

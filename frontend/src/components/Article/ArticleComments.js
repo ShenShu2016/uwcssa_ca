@@ -6,7 +6,9 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CircularProgress,
   IconButton,
+  LinearProgress,
   Pagination,
   Typography,
 } from "@mui/material";
@@ -17,6 +19,7 @@ import React from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
+import { margin } from "@mui/system";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +31,10 @@ const useStyles = makeStyles({
   },
   cardContent: {},
   main: {},
+  moreCommentsStatus: {
+    width: "100%",
+    margin: "auto",
+  },
 });
 
 export default function ArticleComments({ article }) {
@@ -72,7 +79,10 @@ export default function ArticleComments({ article }) {
                       variant="body1"
                       color="textSecondary"
                       component="span"
-                      style={{ whiteSpace: "pre" }}
+                      style={{
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                      }}
                     >
                       {content}
                     </Typography>
@@ -103,15 +113,25 @@ export default function ArticleComments({ article }) {
           })}
         </div>
       )}
-      {article.commentsNextToken ? (
-        <Button variant="contained" size="large">
-          加载更多
-        </Button>
-      ) : (
-        <Typography variant="h5" align="center">
-          已经到达底部
-        </Typography>
-      )}
+      <Box className="moreCommentsStatus">
+        {article.commentsNextToken ? (
+          <Box>
+            <Typography
+              variant="h5"
+              color="primary"
+              align="center"
+              sx={{ my: 3 }}
+            >
+              再往下翻一翻 加载更多
+            </Typography>
+            <LinearProgress />
+          </Box>
+        ) : (
+          <Typography variant="h5" align="center" sx={{ my: 3 }}>
+            已经到达底部
+          </Typography>
+        )}
+      </Box>
     </div>
   );
 }

@@ -55,7 +55,7 @@ export default function Main({ article }) {
           expires: 120,
           download: false,
         });
-        console.log("imageAccessURL", imageAccessURL);
+        // console.log("imageAccessURL", imageAccessURL);
         setImageURL(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
@@ -115,7 +115,7 @@ export default function Main({ article }) {
               variant="body1"
               className={classes.content}
               component="span"
-              style={{ whiteSpace: "pre" }}
+              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
             >
               {content}
             </Typography>

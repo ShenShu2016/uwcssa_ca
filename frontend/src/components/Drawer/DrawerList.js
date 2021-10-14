@@ -51,7 +51,7 @@ const DrawerList = ({ toggleDrawer }) => {
               <ListItemText primary="我的账号" />
             </ListItemButton>
             <ListItemButton component={Link} to="/event">
-              <ListItemText primary="活动" />
+              <ListItemText primary="活动" onClick={toggleDrawer(false)} />
             </ListItemButton>
           </div>
         </List>
@@ -59,8 +59,8 @@ const DrawerList = ({ toggleDrawer }) => {
         <List>
           <div>
             <ListItem>
-              <ListItemButton>
-                <ListItemText primary="学生会" component={Link} to="/staff" />
+              <ListItemButton component={Link} to="/staff">
+                <ListItemText primary="学生会" onClick={toggleDrawer(false)} />
                 {open ? (
                   <ExpandLess onClick={handleClick} />
                 ) : (

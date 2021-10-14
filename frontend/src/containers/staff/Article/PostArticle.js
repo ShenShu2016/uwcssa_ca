@@ -69,8 +69,8 @@ export default function PostArticle() {
   const [articleData, setArticleData] = useState({
     title: "",
     content: "",
-    topicId: "",
-    typeId: "",
+    topicID: "",
+    typeID: "",
   });
   useEffect(() => {
     dispatch(setTopics());
@@ -86,7 +86,7 @@ export default function PostArticle() {
 
   const uploadArticle = async () => {
     //Upload the article
-    const { title, content, topicId, typeId } = articleData;
+    const { title, content, topicID, typeID } = articleData;
 
     const createArticleInput = {
       title,
@@ -94,8 +94,8 @@ export default function PostArticle() {
       imagePath: imgKey,
       like: [],
       unlike: [],
-      articleTopicId: topicId,
-      articleTypeId: typeId,
+      topicID: topicID,
+      typeID: typeID,
       ByCreatedAt: "Article",
     };
     const response = await dispatch(postArticle(createArticleInput));
@@ -161,9 +161,9 @@ export default function PostArticle() {
             <Select
               labelId="demo-simple-select-outlined-label2"
               id="demo-simple-select-outlined2"
-              value={articleData.topicId}
+              value={articleData.topicID}
               onChange={(e) =>
-                setArticleData({ ...articleData, topicId: e.target.value })
+                setArticleData({ ...articleData, topicID: e.target.value })
               }
               label="Topic"
             >
@@ -206,9 +206,9 @@ export default function PostArticle() {
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={articleData.typeId}
+              value={articleData.typeID}
               onChange={(e) =>
-                setArticleData({ ...articleData, typeId: e.target.value })
+                setArticleData({ ...articleData, typeID: e.target.value })
               }
               label="Type"
             >

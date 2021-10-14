@@ -278,6 +278,8 @@ export const getTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -324,9 +326,9 @@ export const getType = /* GraphQL */ `
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -335,6 +337,8 @@ export const getType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -364,9 +368,9 @@ export const listTypes = /* GraphQL */ `
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -384,6 +388,8 @@ export const getArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
       createdAt
       ByCreatedAt
       updatedAt
@@ -402,9 +408,9 @@ export const getArticle = /* GraphQL */ `
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -440,6 +446,8 @@ export const listArticles = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
         createdAt
         ByCreatedAt
         updatedAt
@@ -455,9 +463,9 @@ export const listArticles = /* GraphQL */ `
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -492,6 +500,8 @@ export const articleByCreatedAt = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
         createdAt
         ByCreatedAt
         updatedAt
@@ -507,9 +517,9 @@ export const articleByCreatedAt = /* GraphQL */ `
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -537,6 +547,8 @@ export const getArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
         createdAt
         ByCreatedAt
         updatedAt
@@ -552,9 +564,9 @@ export const getArticleComment = /* GraphQL */ `
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -587,6 +599,8 @@ export const listArticleComments = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -630,6 +644,8 @@ export const articleCommentByCreatedAt = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt

@@ -98,7 +98,7 @@ type Topic
   name: String!
   like: [String]!
   unlike: [String]!
-  articles: [Article] @connection(name: "TopicArticles")
+  articles: [Article] @connection(keyName: "byTopic", fields: ["name"])
 }
 
 type Type
@@ -115,8 +115,7 @@ type Type
   name: String!
   like: [String]!
   unlike: [String]!
-  articles: [Article] @connection(name: "TypeArticles")
-  owner: String
+  articles: [Article] @connection(keyName: "byType", fields: ["name"])
 }
 
 type Article
@@ -133,15 +132,19 @@ type Article
     name: "articleByCreatedAt"
     fields: ["ByCreatedAt", "createdAt"]
     queryField: "articleByCreatedAt"
-  ) {
+  )
+  @key(name: "byTopic", fields: ["topicID"])
+  @key(name: "byType", fields: ["typeID"]) {
   id: ID!
   title: String!
   content: String!
   imagePath: String
   like: [String]!
   unlike: [String]!
-  topic: Topic! @connection(name: "TopicArticles")
-  type: Type! @connection(name: "TypeArticles")
+  topicID: String!
+  topic: Topic! @connection(fields: ["topicID"])
+  typeID: String!
+  type: Type! @connection(fields: ["typeID"])
   articleComments: [ArticleComment] @connection(name: "ArticleArticleComments")
   createdAt: AWSDateTime!
   ByCreatedAt: String! #用来当第二索引的

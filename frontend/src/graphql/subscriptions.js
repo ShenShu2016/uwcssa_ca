@@ -423,6 +423,8 @@ export const onCreateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -450,6 +452,8 @@ export const onUpdateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -477,6 +481,8 @@ export const onDeleteTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -493,9 +499,9 @@ export const onCreateType = /* GraphQL */ `
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -504,6 +510,8 @@ export const onCreateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -520,9 +528,9 @@ export const onUpdateType = /* GraphQL */ `
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -531,6 +539,8 @@ export const onUpdateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -547,9 +557,9 @@ export const onDeleteType = /* GraphQL */ `
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -558,6 +568,8 @@ export const onDeleteType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
           createdAt
           ByCreatedAt
           updatedAt
@@ -577,6 +589,8 @@ export const onCreateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
       createdAt
       ByCreatedAt
       updatedAt
@@ -595,9 +609,9 @@ export const onCreateArticle = /* GraphQL */ `
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -628,6 +642,8 @@ export const onUpdateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
       createdAt
       ByCreatedAt
       updatedAt
@@ -646,9 +662,9 @@ export const onUpdateArticle = /* GraphQL */ `
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -679,6 +695,8 @@ export const onDeleteArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
       createdAt
       ByCreatedAt
       updatedAt
@@ -697,9 +715,9 @@ export const onDeleteArticle = /* GraphQL */ `
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -738,6 +756,8 @@ export const onCreateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
         createdAt
         ByCreatedAt
         updatedAt
@@ -753,9 +773,9 @@ export const onCreateArticleComment = /* GraphQL */ `
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -783,6 +803,8 @@ export const onUpdateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
         createdAt
         ByCreatedAt
         updatedAt
@@ -798,9 +820,9 @@ export const onUpdateArticleComment = /* GraphQL */ `
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -828,6 +850,8 @@ export const onDeleteArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
         createdAt
         ByCreatedAt
         updatedAt
@@ -843,9 +867,9 @@ export const onDeleteArticleComment = /* GraphQL */ `
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
