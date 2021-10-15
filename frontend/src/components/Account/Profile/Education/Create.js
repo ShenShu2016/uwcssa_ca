@@ -59,7 +59,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
     fieldOfStudy: fieldOfStudy,
     grade: grade,
     school: school,
-    userEducationUserId: username,
+    userID: username,
   };
 
   const create = () => {

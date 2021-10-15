@@ -45,7 +45,7 @@ export default function Main({ article }) {
     like,
     unlike,
   } = article.article;
-  console.log("imageURL", imageURL);
+  // console.log("imageURL", imageURL);
 
   useEffect(() => {
     const getImage = async () => {

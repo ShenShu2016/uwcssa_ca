@@ -36,7 +36,7 @@ export const selectedUser = (username) => async (dispatch) => {
   try {
     const response = await API.graphql({
       query: getUser,
-      variables: { username: username },
+      variables: { id: username },
       authMode: "AWS_IAM",
     });
     dispatch({

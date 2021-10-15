@@ -71,7 +71,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
     location: location,
     startDate: startDate,
     title: title,
-    userExperienceUserId: username,
+    userID: username,
   };
 
   const create = () => {

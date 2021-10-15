@@ -85,7 +85,7 @@ export default function Education({ user, userAuth }) {
             username={user.username}
           />
         )}
-        {user.UserEducations.items.map((education) => {
+        {user.userEducations.items.map((education) => {
           const {
             degree,
             description,

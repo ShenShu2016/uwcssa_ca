@@ -72,6 +72,7 @@ export default function PostArticle() {
     topicID: "",
     typeID: "",
   });
+  console.log("articleData", articleData);
   useEffect(() => {
     dispatch(setTopics());
     dispatch(setTypes()); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,6 +97,7 @@ export default function PostArticle() {
       unlike: [],
       topicID: topicID,
       typeID: typeID,
+      active: 1,
       ByCreatedAt: "Article",
     };
     const response = await dispatch(postArticle(createArticleInput));
@@ -169,7 +171,7 @@ export default function PostArticle() {
             >
               {topics.map((topic) => {
                 return (
-                  <MenuItem value={topic.name} key={topic.name}>
+                  <MenuItem value={topic.id} key={topic.id}>
                     {topic.name}
                   </MenuItem>
                 );
@@ -214,7 +216,7 @@ export default function PostArticle() {
             >
               {types.map((type) => {
                 return (
-                  <MenuItem value={type.name} key={type.name}>
+                  <MenuItem value={type.id} key={type.id}>
                     {type.name}
                   </MenuItem>
                 );
@@ -275,7 +277,7 @@ export default function PostArticle() {
         onClick={uploadArticle}
         color="primary"
       >
-        上传新的Type
+        上传 Article
       </Button>
     </div>
   );

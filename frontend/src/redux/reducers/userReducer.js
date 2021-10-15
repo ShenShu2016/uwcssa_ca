@@ -17,8 +17,8 @@ const initialStateUser = {
   linkedin: "",
   github: "",
   tags: [],
-  UserEducations: { items: [] },
-  UserExperiences: { items: [] },
+  userEducations: { items: [] },
+  userExperiences: { items: [] },
 };
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {

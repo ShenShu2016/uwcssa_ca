@@ -1,13 +1,11 @@
 import {
   articleByCreatedAt,
+  byArticleID,
+  getArticle,
   listTopics,
   listTypes,
 } from "../../graphql/queries";
 import { createArticle, createArticleComment } from "../../graphql/mutations";
-import {
-  customArticleCommentByCreatedAt,
-  customGetArticle,
-} from "./CustomQuery/article";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/article-action-types";
@@ -27,14 +25,14 @@ export const setArticles = () => async (dispatch) => {
       payload: articleData.data.articleByCreatedAt.items,
     });
   } catch (error) {
-    console.log("error on fetching Article", error);
+    console.log("error on fetching Article setArticles", error);
   }
 };
 
 export const selectedArticle = (articleId, nextToken) => async (dispatch) => {
   try {
     const response = await API.graphql({
-      query: customGetArticle,
+      query: getArticle,
       variables: { id: articleId },
       authMode: "AWS_IAM",
     });
@@ -43,21 +41,21 @@ export const selectedArticle = (articleId, nextToken) => async (dispatch) => {
       payload: response.data.getArticle,
     });
     const articleCommentData = await API.graphql({
-      query: customArticleCommentByCreatedAt,
+      query: byArticleID,
       variables: {
-        ArticleId: articleId,
+        articleID: articleId,
         sortDirection: "DESC",
+        filter: { active: { eq: 1 } },
         limit: 5,
         nextToken: nextToken,
       },
       authMode: "AWS_IAM",
     });
-
+    console.log("articleCommentData", articleCommentData);
     dispatch({
       type: ActionTypes.SELECTED_ARTICLECOMMENTS,
-      payload: articleCommentData.data.ArticleCommentByCreatedAt,
+      payload: articleCommentData.data.byArticleID,
     });
-    console.log("articleCommentData", articleCommentData);
   } catch (error) {
     console.log("error on selecting Article", error);
   }
@@ -68,10 +66,11 @@ export const loadMoreArticleComments =
     console.log("load more date start");
     try {
       const articleCommentData = await API.graphql({
-        query: customArticleCommentByCreatedAt,
+        query: byArticleID,
         variables: {
-          ArticleId: articleId,
+          articleID: articleId,
           sortDirection: "DESC",
+          activeCreatedAt: { beginsWith: { active: 1 } },
           limit: 5,
           nextToken: nextToken,
         },
@@ -80,7 +79,7 @@ export const loadMoreArticleComments =
       console.log("More Articlecomments", articleCommentData);
       dispatch({
         type: ActionTypes.LOADMORE_ARTICLECOMMENTS,
-        payload: articleCommentData.data.ArticleCommentByCreatedAt,
+        payload: articleCommentData.data.byArticleID,
       });
       console.log("payload", articleCommentData.data.ArticleCommentByCreatedAt);
     } catch (error) {
@@ -144,6 +143,7 @@ export const setTypes = () => async (dispatch) => {
 };
 
 export const postArticle = (createArticleInput) => async (dispatch) => {
+  console.log("createArticleInput", createArticleInput);
   try {
     const response = await API.graphql(
       graphqlOperation(createArticle, { input: createArticleInput })
