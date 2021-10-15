@@ -1,5 +1,10 @@
-import { Box, Button, Grid, Hidden, Paper, Typography } from "@mui/material";
-
+import { 
+  Box, 
+  Button, 
+  Grid, 
+  Paper, 
+  Typography 
+} from "@mui/material";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BugReportOutlinedIcon from "@mui/icons-material/BugReportOutlined";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
@@ -9,53 +14,46 @@ import cssaLogo from "../static/cssalogo.png";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: "Zrem",
-    flexwrap: "wrap",
-  },
-  logoBox: {
-    width: 600,
-    minWidth: "40%",
-    maxWidth: "100%",
-    backgroundSize: "cover",
-    minHeight: 800,
-  },
-  mainContent: {
-    width: 800,
-    minWidth: "40%",
-    maxWidth: "100%",
+  root:{
     textAlign: "center",
+    flexDirection:"row",
+    alignItems:"center",
+    display: "flex",
+    marginTop: "2rem",
+    color: "#0D1F48",
   },
   title: {
-    fontWeight: 400,
-    marginTop: "3rem",
-    marginBottom: "1rem",
+    marginTop: "5rem",
   },
-  contactBox: {
-    marginTop: "8rem",
-    marginBottom: "10rem",
+  paper:{
+    height:"100%",
+    textAlign:"center",
+    width:"300px",
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-  },
+  img:{
+    width:"50%",
+    height:"820px",
+    display: "flex",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+    marginRight:"200px",
+  }
 }));
 
 export default function ContactUs() {
   const classes = useStyles();
   return (
-    <div>
-      <Box className={classes.root} width="100%">
-        <Hidden xsDown>
-          <Box className={classes.logoBox}>
-            <img src={cssaLogo} alt=" UWCSSA LOGO" />
-          </Box>
-        </Hidden>
-        <Box className={classes.mainContent}>
+    <div className={classes.root}>
+      <img src={cssaLogo} alt=" UWCSSA LOGO"  className={classes.img}/>
+      
+      <Box
+          sx={{
+            maxWidth: "100%",
+            textAlign: "center",
+          }}
+          
+        >
           <Typography variant="h3" className={classes.title}>
             联系我们
           </Typography>
@@ -63,15 +61,15 @@ export default function ContactUs() {
             为确保您的询问能到达正确的人手中，请选择以下最合适的方式进行联系。
           </Typography>
 
-          <Box className={classes.contactBox}>
+          <Box sx={{ marginTop: "8rem", marginBottom: "10rem" }}>
             <Grid
               container
-              direction="row"
+              direction="column"
               justifyContent="center"
               alignItems="center"
-              spacing={3}
+              spacing={5}
             >
-              <Grid item xs={12} sm={6} md={6} lg={3} spacing={3} zeroMinWidth>
+              <Grid item xs={12} sm={6} md={6} lg={3} spacing={2} zeroMinWidth>
                 <Paper className={classes.paper}>
                   <Typography variant="h6">登录/访问网站有问题</Typography>
                   <Typography variant="body2">
@@ -89,7 +87,7 @@ export default function ContactUs() {
                   </Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={3} sapcing={3} zeroMinWidth>
+              <Grid item xs={12} sm={6} md={6} lg={3} sapcing={2} zeroMinWidth>
                 <Paper className={classes.paper}>
                   <Typography variant="h6">网站反馈/错误报告</Typography>
                   <Typography variant="body2">
@@ -108,7 +106,7 @@ export default function ContactUs() {
                   </Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={3} spacing={3} zeroMinWidth>
+              <Grid item xs={12} sm={6} md={6} lg={3} spacing={2} zeroMinWidth>
                 <Paper className={classes.paper}>
                   <Typography variant="h6">广告或其他市场查询</Typography>
                   <Typography variant="body2">
@@ -126,7 +124,7 @@ export default function ContactUs() {
                   </Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={3} spacing={3} zeroMinWidth>
+              <Grid item xs={12} sm={6} md={6} lg={3} spacing={2} zeroMinWidth>
                 <Paper className={classes.paper}>
                   <Typography variant="h6">所有其他类型查询</Typography>
                   <Typography variant="body2">
@@ -146,7 +144,6 @@ export default function ContactUs() {
               </Grid>
             </Grid>
           </Box>
-        </Box>
       </Box>
     </div>
   );

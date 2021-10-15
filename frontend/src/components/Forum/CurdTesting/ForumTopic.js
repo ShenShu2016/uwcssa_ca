@@ -1,10 +1,16 @@
 import {
   Button,
   Link,
+  Grid,
   TextField,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import PublishIcon from "@mui/icons-material/Publish";
 import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import {
@@ -17,16 +23,10 @@ import {
   setForumSubTopics,
   setForumTopics,
 } from "../../../redux/actions/forumAction";
-
 import API from "@aws-amplify/api";
-import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import PublishIcon from "@mui/icons-material/Publish";
-import Select from "@mui/material/Select";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listForumTopics } from "../../../graphql/queries";
+
+// import { listForumTopics } from "../../../graphql/queries";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",

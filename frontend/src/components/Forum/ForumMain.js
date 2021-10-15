@@ -1,34 +1,26 @@
-import { Button, Grid, Paper } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/styles";
-
+import {
+  Button,
+  Grid,
+  Paper,
+  Box,
+  Typography,
+  MobileStepper,
+} from "@mui/material";
+import { makeStyles, useTheme } from "@mui/styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Box from "@material-ui/core/Box";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import MobileStepper from "@material-ui/core/MobileStepper";
-import React from "react";
+import React, { useEffect } from "react";
+import { connect, useSelector } from "react-redux";
 import SwipeableViews from "react-swipeable-views";
-import Typography from "@material-ui/core/Typography";
 import { autoPlay } from "react-swipeable-views-utils";
+import { setForumTopics } from "../../redux/actions/forumAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-  },
-  mainContent: {
-    padding: "2rem",
-    maxwidth: "100%",
-  },
-  quickLink: {
-    marginTop: "4rem",
-    color: "primary",
-  },
-  title: {
-    fontWeight: 400,
-    marginTop: "0.8rem",
-    marginBottom: "1rem",
   },
   sportlight: {
     textAlign: "center",
@@ -59,11 +51,16 @@ const images = [
   },
 ];
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-const ForumLeftSide = () => {
+const ForumLeftSide = ({ setForumTopics }) => {
+  useEffect(() => {
+    setForumTopics();
+    console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const { forumTopics } = useSelector((state) => state.forum);
+  // console.log("forumTopics", forumTopics);
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -79,75 +76,40 @@ const ForumLeftSide = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Box className={classes.mainContent}>
-        <Box className={classes.title}>
+      <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
+        <Box
+          sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}
+        >
           <Typography variant="h5">UWCSSA 论坛</Typography>
         </Box>
         {/* forum type link */}
-        <Box className={classes.quickLink}>
+        <Box sx={{ marginTop: "4rem" }}>
           {/* 后期动态改变 type: FourmTopic */}
-          <Grid container spacing={8}>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  学习帮助
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  娱乐
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  大学和大学课程
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  生活
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  职业和工作
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  住房
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid item xs={1.5} sm={1.5} md={1.8} lg={1.8}>
-              <Typography variant="subtitle2">
-                <Button variant="text" target="_top" color="primary" href={`#`}>
-                  商城
-                  <ArrowForwardIcon />
-                </Button>
-              </Typography>
-            </Grid>
+          <Grid container spacing={0}>
+            {forumTopics.map((forumTopic) => {
+              return (
+                <div key={forumTopic.name}>
+                  <Grid item xs={12}>
+                    <Typography variant="subtitle2">
+                      <Button
+                        variant="text"
+                        target="_top"
+                        color="primary"
+                        href={`#`}
+                      >
+                        {forumTopic.name}
+                        <ArrowForwardIcon />
+                      </Button>
+                    </Typography>
+                  </Grid>
+                </div>
+              );
+            })}
           </Grid>
         </Box>
         {/* forum sportlight slide */}
         <Box className={classes.sportlight}>
-          <Box className={classes.title}>
+          <Box sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}>
             <Typography variant="h6">SPORTLIGHT</Typography>
           </Box>
 
@@ -235,4 +197,4 @@ const ForumLeftSide = () => {
   );
 };
 
-export default ForumLeftSide;
+export default connect(null, { setForumTopics })(ForumLeftSide);

@@ -128,6 +128,16 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItemButton>
               </ListItem>
               <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
+                  to="/forumTopic"
+                >
+                  <ListItemText primary="论坛管理" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
                   <ListItemText primary="举报审核" />
                 </ListItemButton>
