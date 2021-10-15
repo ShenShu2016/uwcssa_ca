@@ -70,15 +70,17 @@ export default function PostUwcssaJob(props) {
       setInfo(true);
       return;
     }
-    let allDepartments = await API.graphql(graphqlOperation(listDepartments));
-    allDepartments.data.listDepartments.items.map((data) =>
-      departmentList.push(data.name)
-    );
-    console.log("list:", departmentList);
-    if (departmentList.indexOf(uwcssaJobData.departmentName) < 0) {
+    let targetDepartment = await API.graphql({
+      query: listDepartments,
+      variables: {filter:{name:{eq:uwcssaJobData.departmentName}}},
+      authMode: 'AWS_IAM'
+    })
+    if (targetDepartment.data.listDepartments.items.length===0) {
       setDepart(true);
       return;
     }
+    const departmentID = targetDepartment.data.listDepartments.items[0].id
+    console.log("departmentID: ",departmentID)
     console.log(uwcssaJobData);
     try {
       const createUwcssaJobInput = {
@@ -90,8 +92,8 @@ export default function PostUwcssaJob(props) {
         bonus: uwcssaJobData.bonus.filter((e) => e !== ""),
         like: [""],
         unlike: [""],
-        active: true,
-        uwcssaJobDepartmentId: uwcssaJobData.departmentName,
+        active: 1,
+        departmentID: departmentID,
       };
       const newUwcssaJob = await API.graphql(
         graphqlOperation(createUwcssaJob, { input: createUwcssaJobInput })
