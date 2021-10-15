@@ -11,9 +11,14 @@ import { useSelector } from "react-redux";
 const DrawerList = ({ toggleDrawer }) => {
   const userAuth = useSelector((state) => state.userAuth);
   const [open, setOpen] = useState(true);
+  const [openMarket, setOpenMarket] = useState(true);
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const handleClickMarket = () => {
+    setOpenMarket(!openMarket);
   };
 
   return (
@@ -53,6 +58,13 @@ const DrawerList = ({ toggleDrawer }) => {
             <ListItemButton component={Link} to="/event">
               <ListItemText primary="活动" onClick={toggleDrawer(false)} />
             </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to={userAuth.isAuthenticated ? "/marketPostTest" : `/signIn`}
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemText primary="Market" />
+            </ListItemButton>
           </div>
         </List>
         <Divider />
@@ -68,6 +80,7 @@ const DrawerList = ({ toggleDrawer }) => {
                 )}
               </ListItemButton>
             </ListItem>
+
             <Collapse in={open} timeout="auto">
               <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
@@ -114,6 +127,64 @@ const DrawerList = ({ toggleDrawer }) => {
                   <ListItemText primary="新闻发布" />
                 </ListItemButton>
               </ListItem>
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="举报审核" />
+                </ListItemButton>
+              </ListItem>
+            </Collapse>
+          </div>
+        </List>
+        <List>
+          <div>
+            <ListItem>
+              <ListItemButton>
+                <ListItemText primary="商城" component={Link} to="/market" />
+                {openMarket ? (
+                  <ExpandLess onClick={handleClickMarket} />
+                ) : (
+                  <ExpandMore onClick={handleClickMarket} />
+                )}
+              </ListItemButton>
+            </ListItem>
+
+            <Collapse in={openMarket} timeout="auto">
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="成员" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="财务" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemText primary="活动策划" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
+                  to="/market/PostMarketItem"
+                >
+                  <ListItemText primary="发布商品" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={toggleDrawer(false)}
+                  component={Link}
+                  to="/market"
+                >
+                  <ListItemText primary="查看全部商品" />
+                </ListItemButton>
+              </ListItem>
+
               <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
                   <ListItemText primary="举报审核" />
