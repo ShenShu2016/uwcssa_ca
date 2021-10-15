@@ -1101,6 +1101,7 @@ export const getForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
@@ -1154,6 +1155,7 @@ export const getForumPost = /* GraphQL */ `
   query GetForumPost($id: ID!) {
     getForumPost(id: $id) {
       id
+      title
       content
       imagePath
       like
@@ -1212,6 +1214,7 @@ export const listForumPosts = /* GraphQL */ `
     listForumPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        title
         content
         imagePath
         like
@@ -1259,6 +1262,7 @@ export const byForumSubTopicID = /* GraphQL */ `
     ) {
       items {
         id
+        title
         content
         imagePath
         like
@@ -1300,6 +1304,7 @@ export const getForumPostComment = /* GraphQL */ `
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
@@ -1363,6 +1368,7 @@ export const listForumPostComments = /* GraphQL */ `
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
@@ -1410,6 +1416,7 @@ export const byForumPostID = /* GraphQL */ `
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
@@ -1450,6 +1457,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
