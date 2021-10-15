@@ -16,7 +16,10 @@ import {
   selectedUserReducer,
   userReducer,
 } from "./userReducer";
-
+import {
+  marketItemReducer,
+  selectedMarketItemReducer,
+} from "./marketItemReducer";
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
@@ -38,5 +41,7 @@ const reducers = combineReducers({
   updateUserEducation: putUserEducationReducer,
   createUserExperience: postUserExperienceReducer,
   updateUserExperience: putUserExperienceReducer,
+  allMarketItems: marketItemReducer,
+  marketItem: selectedMarketItemReducer,
 });
 export default reducers;

@@ -2,10 +2,12 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
+import PostMarketItem from "./containers/market/PostMarketItem";
 import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
+import MarketListing from "./containers/MarketListing";
+import MarketItemDetail from "./containers/MarketItemDetail";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
@@ -22,8 +24,9 @@ import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
 import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
 import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
+import MarketPostTest from "./containers/MarketPostTest";
 import Home from "./containers/Home";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@mui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
@@ -127,11 +130,6 @@ export default function App() {
                 exact
                 component={PostUwcssaJob}
               />
-              <Route
-                path="/staff/uwcssaJob/postDepartment"
-                exact
-                component={PostDepartment}
-              />
               <Route path="/forum" exact component={Forum} />
               <Route path="/forumTopic" exact component={ForumTopic} />
               <Route path="/forumPost" exact component={ForumPost} />
@@ -160,6 +158,20 @@ export default function App() {
                 path="/article/:articleId"
                 exact
                 component={ArticleDetail}
+              />
+              <Route path="/MarketPostTest" exact component={MarketPostTest} /> 
+                         
+              <Route
+                path="/market/postMarketItem"
+                exact
+                component={PostMarketItem}
+              />
+              <Route path="/market" exact component={MarketListing} />         
+                   
+              <Route
+                path="/market/:marketId"
+                exact
+                component={MarketItemDetail}
               />
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />

@@ -181,6 +181,12 @@ export default function Header() {
         </IconButton>
         <p>近期新闻</p>
       </MenuItem>
+      <MenuItem component={Link} to="/market" onClick={handleMenuClose}>
+        <IconButton>
+          <StorefrontIcon />
+        </IconButton>
+        <p>商城</p>
+      </MenuItem>
       <MenuItem component={Link} to="/career" onClick={handleMenuClose}>
         <IconButton>
           <StorefrontIcon />
@@ -273,6 +279,14 @@ export default function Header() {
               to="/article"
             >
               近期新闻
+            </Button>
+            <Button
+              variant="text"
+              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
+              component={Link}
+              to="/market"
+            >
+              商城
             </Button>
             <Button
               variant="text"
