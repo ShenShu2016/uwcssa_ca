@@ -43,7 +43,6 @@ import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
-import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
 
 const theme = createTheme({
@@ -74,7 +73,6 @@ export default function App() {
   const [signInOpen, setSignInOpen] = useState(false);
   useEffect(() => {
     dispatch(load_user());
-    dispatch(setUserCounts());
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
