@@ -130,6 +130,11 @@ export default function App() {
                 exact
                 component={PostUwcssaJob}
               />
+              <Route
+                path="/staff/uwcssaJob/postDepartment"
+                exact
+                component={PostDepartment}
+              />
               <Route path="/forum" exact component={Forum} />
               <Route path="/forumTopic" exact component={ForumTopic} />
               <Route path="/forumPost" exact component={ForumPost} />

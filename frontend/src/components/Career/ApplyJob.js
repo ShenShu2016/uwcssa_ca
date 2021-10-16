@@ -133,8 +133,8 @@ export default function ApplyJob(props) {
             phone: applyData.applyPhone,
             resumeFilePath: key,
             message: applyData.message,
-            uwcssaJobResumeUwcssaJobId: applyData.job.id,
-            uwcssaJobResumeUwcssaJobResumeStatusId: "已提交",
+            uwcssaJobID: applyData.job.id,
+            uwcssaJobResumeStatus: "pending",
           };
           const newUwcssaJobResume = await API.graphql(
             graphqlOperation(createUwcssaJobResume, {
