@@ -29,56 +29,63 @@ export const setArticles = () => async (dispatch) => {
   }
 };
 
-export const selectedArticle = (articleId, nextToken) => async (dispatch) => {
+export const selectedArticle = (articleID) => async (dispatch) => {
   try {
     const response = await API.graphql({
       query: getArticle,
-      variables: { id: articleId },
+      variables: { id: articleID },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SELECTED_ARTICLE,
       payload: response.data.getArticle,
     });
-    const articleCommentData = await API.graphql({
-      query: byArticleID,
-      variables: {
-        articleID: articleId,
-        sortDirection: "DESC",
-        filter: { active: { eq: 1 } },
-        limit: 5,
-        nextToken: nextToken,
-      },
-      authMode: "AWS_IAM",
-    });
-    console.log("articleCommentData", articleCommentData);
-    dispatch({
-      type: ActionTypes.SELECTED_ARTICLECOMMENTS,
-      payload: articleCommentData.data.byArticleID,
-    });
   } catch (error) {
     console.log("error on selecting Article", error);
   }
 };
 
+export const selectedArticleComments = (articleID) => async (dispatch) => {
+  console.log("selectedArticleComments,articleID", articleID);
+  try {
+    const articleCommentData = await API.graphql({
+      query: byArticleID,
+      variables: {
+        articleID: articleID,
+        sortDirection: "DESC",
+        filter: { active: { eq: 1 } },
+        limit: 10,
+      },
+      authMode: "AWS_IAM",
+    });
+    console.log("articleCommentData", articleCommentData);
+    dispatch({
+      type: ActionTypes.SELECTED_ARTICLE_COMMENTS,
+      payload: articleCommentData.data.byArticleID,
+    });
+  } catch (error) {
+    console.log("error on selectedArticleComments", error);
+  }
+};
+
 export const loadMoreArticleComments =
-  (articleId, nextToken) => async (dispatch) => {
+  (articleID, nextToken) => async (dispatch) => {
     console.log("load more date start");
     try {
       const articleCommentData = await API.graphql({
         query: byArticleID,
         variables: {
-          articleID: articleId,
+          articleID: articleID,
           sortDirection: "DESC",
-          activeCreatedAt: { beginsWith: { active: 1 } },
-          limit: 5,
+          filter: { active: { eq: 1 } },
+          limit: 10,
           nextToken: nextToken,
         },
         authMode: "AWS_IAM",
       });
       console.log("More Articlecomments", articleCommentData);
       dispatch({
-        type: ActionTypes.LOADMORE_ARTICLECOMMENTS,
+        type: ActionTypes.LOAD_MORE_ARTICLE_COMMENTS,
         payload: articleCommentData.data.byArticleID,
       });
       console.log("payload", articleCommentData.data.ArticleCommentByCreatedAt);
@@ -100,14 +107,15 @@ export const postArticleComment = (createArticleInput) => async (dispatch) => {
     );
 
     dispatch({
-      type: ActionTypes.ARTICLECOMMPOST_SUCCESS,
+      type: ActionTypes.ARTICLE_COMMENT_POST_SUCCESS,
       payload: response,
     });
-    dispatch(selectedArticle(createArticleInput.articleCommentArticleId));
+    console.log();
+    dispatch(selectedArticleComments(createArticleInput.articleID));
   } catch (error) {
     console.log("error on posting ArticleComment", error);
     dispatch({
-      type: ActionTypes.ARTICLECOMMPOST_FAIL,
+      type: ActionTypes.ARTICLE_COMMENT_POST_FAIL,
     });
   }
 };
