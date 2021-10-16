@@ -1,26 +1,41 @@
-import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import React, { useState } from "react";
 
+import ArticleIcon from "@mui/icons-material/Article";
 import Collapse from "@mui/material/Collapse";
+import EventIcon from "@mui/icons-material/Event";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import ForumIcon from "@mui/icons-material/Forum";
+import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
-import { useSelector } from "react-redux";
+import ShopIcon from "@mui/icons-material/Shop";
+import WorkIcon from "@mui/icons-material/Work";
+import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
 const DrawerList = ({ toggleDrawer }) => {
-  const userAuth = useSelector((state) => state.userAuth);
-  const [open, setOpen] = useState(true);
-  const [openMarket, setOpenMarket] = useState(true);
+  const [openStaff, setOpenStaff] = useState(false);
 
+  const [openMarket, setOpenMarket] = useState(false);
+  const [openForum, setOpenForum] = useState(false);
   const handleClick = () => {
-    setOpen(!open);
+    setOpenStaff(!openStaff);
   };
 
   const handleClickMarket = () => {
     setOpenMarket(!openMarket);
   };
-
+  const handleClickForum = () => {
+    setOpenForum(!openForum);
+  };
   return (
     <div>
       <Box
@@ -32,56 +47,170 @@ const DrawerList = ({ toggleDrawer }) => {
           <div>
             <ListItemButton
               component={Link}
-              to="/account/dashboard"
+              to="/article"
               onClick={toggleDrawer(false)}
             >
-              <ListItemText primary="个人中心" />
+              <ListItemIcon>
+                <ArticleIcon />
+              </ListItemIcon>
+              <ListItemText primary="近期新闻" />
             </ListItemButton>
             <ListItemButton
               component={Link}
-              to={
-                userAuth.isAuthenticated
-                  ? `/account/profile/${userAuth.user.username}`
-                  : `/signIn`
-              }
+              to="/event"
               onClick={toggleDrawer(false)}
             >
-              <ListItemText primary="我的资料" />
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary="活动" />
             </ListItemButton>
             <ListItemButton
               component={Link}
-              to={userAuth.isAuthenticated ? "/account/myAccount" : `/signIn`}
+              to="/career"
               onClick={toggleDrawer(false)}
             >
-              <ListItemText primary="我的账号" />
+              <ListItemIcon>
+                <WorkIcon />
+              </ListItemIcon>
+              <ListItemText primary="开放职位" />
             </ListItemButton>
-            <ListItemButton component={Link} to="/event">
-              <ListItemText primary="活动" onClick={toggleDrawer(false)} />
-            </ListItemButton>
-            <ListItemButton
-              component={Link}
-              to={userAuth.isAuthenticated ? "/marketPostTest" : `/signIn`}
-              onClick={toggleDrawer(false)}
-            >
-              <ListItemText primary="Market" />
-            </ListItemButton>
+            <div>
+              <ListItemButton onClick={handleClickForum}>
+                <ListItemIcon>
+                  <ForumIcon />
+                </ListItemIcon>
+                <ListItemText primary="论坛" />
+                {openForum ? <ExpandMore /> : <ExpandLess />}
+              </ListItemButton>
+
+              <Collapse in={openForum} timeout="auto">
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/forum"
+                    onClick={toggleDrawer(false)}
+                    sx={{ pl: 4 }}
+                  >
+                    <ListItemText primary="论坛首页" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    component={Link}
+                    to="/forumPost"
+                    onClick={toggleDrawer(false)}
+                  >
+                    <ListItemText primary="发布帖子" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    component={Link}
+                    to="/forumTopic"
+                    onClick={toggleDrawer(false)}
+                  >
+                    <ListItemText primary="论坛主题" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    component={Link}
+                    to="/forumPostList"
+                    onClick={toggleDrawer(false)}
+                  >
+                    <ListItemText primary="forumPostList" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton sx={{ pl: 4 }} disabled>
+                    <ListItemText primary="举报审核" />
+                  </ListItemButton>
+                </ListItem>
+              </Collapse>
+            </div>
+
+            <div>
+              <ListItemButton onClick={handleClickMarket}>
+                <ListItemIcon>
+                  <ShopIcon />
+                </ListItemIcon>
+                <ListItemText primary="商城" />
+                {openMarket ? <ExpandMore /> : <ExpandLess />}
+              </ListItemButton>
+
+              <Collapse in={openMarket} timeout="auto">
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/market"
+                    onClick={toggleDrawer(false)}
+                    sx={{ pl: 4 }}
+                  >
+                    <ListItemText primary="商城首页" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    onClick={toggleDrawer(false)}
+                    component={Link}
+                    to="/market/PostMarketItem"
+                  >
+                    <ListItemText primary="发布商品" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    onClick={toggleDrawer(false)}
+                    component={Link}
+                    to="/market"
+                  >
+                    <ListItemText primary="查看全部商品" />
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem>
+                  <ListItemButton sx={{ pl: 4 }} disabled>
+                    <ListItemText primary="举报审核" />
+                  </ListItemButton>
+                </ListItem>
+              </Collapse>
+            </div>
           </div>
         </List>
+
         <Divider />
         <List>
           <div>
             <ListItem>
-              <ListItemButton component={Link} to="/staff">
-                <ListItemText primary="学生会" onClick={toggleDrawer(false)} />
-                {open ? (
-                  <ExpandLess onClick={handleClick} />
-                ) : (
-                  <ExpandMore onClick={handleClick} />
-                )}
+              <ListItemButton onClick={handleClick}>
+                <ListItemIcon>
+                  <img
+                    src={uwcssa_logo}
+                    alt="uwcssaLogo"
+                    style={{ height: "24px" }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary="学生会" />
+                {openStaff ? <ExpandMore /> : <ExpandLess />}
               </ListItemButton>
             </ListItem>
-
-            <Collapse in={open} timeout="auto">
+            <Collapse in={openStaff} timeout="auto">
+              <ListItem>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  component={Link}
+                  to="/staff"
+                  onClick={toggleDrawer(false)}
+                >
+                  <ListItemText primary="学生会管理系统首页" />
+                </ListItemButton>
+              </ListItem>
               <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
                   <ListItemText primary="成员" />
@@ -145,64 +274,6 @@ const DrawerList = ({ toggleDrawer }) => {
             </Collapse>
           </div>
         </List>
-        <List>
-          <div>
-            <ListItem>
-              <ListItemButton>
-                <ListItemText primary="商城" component={Link} to="/market" />
-                {openMarket ? (
-                  <ExpandLess onClick={handleClickMarket} />
-                ) : (
-                  <ExpandMore onClick={handleClickMarket} />
-                )}
-              </ListItemButton>
-            </ListItem>
-
-            <Collapse in={openMarket} timeout="auto">
-              <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="成员" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="财务" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="活动策划" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 4 }}
-                  onClick={toggleDrawer(false)}
-                  component={Link}
-                  to="/market/PostMarketItem"
-                >
-                  <ListItemText primary="发布商品" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 4 }}
-                  onClick={toggleDrawer(false)}
-                  component={Link}
-                  to="/market"
-                >
-                  <ListItemText primary="查看全部商品" />
-                </ListItemButton>
-              </ListItem>
-
-              <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="举报审核" />
-                </ListItemButton>
-              </ListItem>
-            </Collapse>
-          </div>
-        </List>
         <Divider />
         <List>
           <div>
@@ -211,6 +282,9 @@ const DrawerList = ({ toggleDrawer }) => {
               to="/foundingTeam"
               onClick={toggleDrawer(false)}
             >
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
               <ListItemText primary="创始团队以及贡献者" />
             </ListItemButton>
           </div>

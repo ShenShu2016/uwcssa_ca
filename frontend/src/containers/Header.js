@@ -10,17 +10,72 @@ import {
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
+import { alpha, styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArticleIcon from "@mui/icons-material/Article";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import DrawerList from "../components/Drawer/DrawerList";
+import EventIcon from "@mui/icons-material/Event";
+import ForumIcon from "@mui/icons-material/Forum";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import PublicIcon from "@mui/icons-material/Public";
 import { Redirect } from "react-router";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ShopIcon from "@mui/icons-material/Shop";
+import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 import { signOut } from "../redux/actions/authActions";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
+
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color:
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
+    "& .MuiMenuItem-root": {
+      "& .MuiSvgIcon-root": {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      "&:active": {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        ),
+      },
+    },
+  },
+}));
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -119,7 +174,7 @@ export default function Header() {
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
-    <Menu
+    <StyledMenu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
@@ -133,7 +188,8 @@ export default function Header() {
         component={Link}
         to="/account/dashboard"
       >
-        Dashboard
+        <DashboardIcon />
+        个人中心
       </MenuItem>
       <MenuItem
         onClick={handleMenuClose}
@@ -144,18 +200,26 @@ export default function Header() {
             : `/account/profile/${userAuth.user.username}`
         }
       >
-        Profile
+        <PublicIcon />
+        个人资料
       </MenuItem>
       <MenuItem
         onClick={handleMenuClose}
         component={Link}
         to="/account/myAccount"
       >
-        My account
+        <ManageAccountsIcon />
+        我的账户
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Setting</MenuItem>
-      <MenuItem onClick={signOut_user}>注销</MenuItem>
-    </Menu>
+      <MenuItem onClick={handleMenuClose}>
+        <SettingsIcon />
+        设置
+      </MenuItem>
+      <MenuItem onClick={signOut_user}>
+        <LogoutIcon />
+        注销
+      </MenuItem>
+    </StyledMenu>
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -168,36 +232,13 @@ export default function Header() {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      sx={{ maxWidth: "300px" }}
     >
-      <MenuItem component={Link} to="/" onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose}>
         <IconButton>
-          <StorefrontIcon />
+          <ArrowBackIcon />
         </IconButton>
-        <p>主页</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/article" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>近期新闻</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/market" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>商城</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/career" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>加入我们</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/forum" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>论坛</p>
+        <p>左上角有功能键哦</p>
       </MenuItem>
       {isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
@@ -209,7 +250,7 @@ export default function Header() {
           >
             <AccountCircle />
           </IconButton>
-          <p>Profile</p>
+          <p>{userAuth.user.username}</p>
         </MenuItem>
       ) : (
         <MenuItem component={Link} to="/signIn" onClick={handleMenuClose}>
@@ -274,43 +315,48 @@ export default function Header() {
           <div className={classes.sectionDesktop}>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/article"
+              startIcon={<ArticleIcon />}
             >
               近期新闻
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
-              to="/market"
+              to="/event"
+              startIcon={<EventIcon />}
             >
-              商城
+              活动
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
-              component={Link}
-              to="/career"
-            >
-              加入我们
-            </Button>
-            <Button
-              variant="text"
-              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/forum"
+              startIcon={<ForumIcon />}
             >
               论坛
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "23px", marginInline: "1rem" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
-              to="/event"
+              to="/market"
+              startIcon={<ShopIcon />}
             >
-              活动
+              商城
+            </Button>
+            <Button
+              variant="text"
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              component={Link}
+              to="/career"
+              startIcon={<WorkIcon />}
+            >
+              加入我们
             </Button>
             {isAuthenticated ? (
               ""
@@ -321,9 +367,10 @@ export default function Header() {
                 variant="text"
                 style={{
                   color: "#FFF",
-                  fontSize: "23px",
+                  fontSize: "20px",
                   marginInline: "1rem",
                 }}
+                startIcon={<LoginIcon />}
               >
                 登陆
               </Button>

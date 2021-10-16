@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [ signInState, setsignInState] = useState(); //logging state
+  const [signInState, setSignInState] = useState(); //logging state
 
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
@@ -104,13 +104,13 @@ export default function SignIn() {
 
   const handleSubmit = async function (event) {
     event.preventDefault();
-    setsignInState("logging in");
+    setSignInState("logging in");
     const response = await dispatch(signIn(username, password));
     if (response.result) {
       // setLogged(true);
     } else {
       //alert(response.error.message);
-      setsignInState("logging failed");
+      setSignInState("logging failed");
     }
   };
 
@@ -182,20 +182,21 @@ export default function SignIn() {
             label="我不是机器人"
           />
           <Grid container marginTop="1rem">
-            <Grid item xs={5} sm={8} md={6}
-              marginLeft="2rem"               
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              disabled={signInState === "logging in"}
-            >              
-              登陆
-              {signInState === "logging in" ? <CircularProgress size="1.5rem"/> : " "}
-            </Button>
-
+            <Grid item xs={5} sm={8} md={6} marginLeft="2rem">
+              <Button
+                type="submit"
+                variant="outlined"
+                color="primary"
+                className={classes.submit}
+                disabled={signInState === "logging in"}
+              >
+                登陆
+                {signInState === "logging in" ? (
+                  <CircularProgress size="1.5rem" />
+                ) : (
+                  " "
+                )}
+              </Button>
             </Grid>
             <Grid>
               <Button
@@ -211,19 +212,23 @@ export default function SignIn() {
               </Button>
             </Grid>
           </Grid>
-        </form>        
-          {/* Google的登入按钮 */}
-          <Grid item xs={10}  lg={10}
-              container     
-              justifyContent= "center"
-              alignItems= "center"                      
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              className={classes.third_party_button}
-              onClick={(event) => handleGoogleSignIn(event)}              
-            >
+        </form>
+        {/* Google的登入按钮 */}
+        <Grid
+          item
+          xs={10}
+          lg={10}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            className={classes.third_party_button}
+            onClick={(event) => handleGoogleSignIn(event)}
+            disabled
+          >
             <Grid xs={8} lg={6}>
               <img
                 src={googleLogo}
@@ -231,22 +236,27 @@ export default function SignIn() {
                 className={classes.googleLogo}
               />
             </Grid>
-            <Grid item xs={12} lg={12} marginRight= "1rem">Google Sign in</Grid>
-            </Button>
-          </Grid>                
-          {/* Facebook的登入按钮*/}
-          <Grid item xs={10}  lg={10}
-              container     
-              justifyContent= "center"
-              alignItems= "center"  
-              marginTop="2rem"                   
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              disabled
-              className={classes.third_party_button}
-            >
+            <Grid item xs={12} lg={12} marginRight="1rem">
+              Google Sign in
+            </Grid>
+          </Button>
+        </Grid>
+        {/* Facebook的登入按钮*/}
+        <Grid
+          item
+          xs={10}
+          lg={10}
+          container
+          justifyContent="center"
+          alignItems="center"
+          marginTop="2rem"
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled
+            className={classes.third_party_button}
+          >
             <Grid xs={8} lg={6}>
               <img
                 src={facebookLogo}
@@ -254,9 +264,11 @@ export default function SignIn() {
                 className={classes.facebookLogo}
               />
             </Grid>
-            <Grid item xs={12} lg={12}>Facebook Sign in</Grid>
-            </Button>
-          </Grid>
+            <Grid item xs={12} lg={12}>
+              Facebook Sign in
+            </Grid>
+          </Button>
+        </Grid>
         {/* 之后增加点按转入网站的功能 */}
         <Box className={classes.more_third_party}>
           <img

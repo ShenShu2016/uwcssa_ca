@@ -83,7 +83,7 @@ export const loadMoreArticleComments =
         },
         authMode: "AWS_IAM",
       });
-      console.log("More Articlecomments", articleCommentData);
+      console.log("More Article comments", articleCommentData);
       dispatch({
         type: ActionTypes.LOAD_MORE_ARTICLE_COMMENTS,
         payload: articleCommentData.data.byArticleID,
