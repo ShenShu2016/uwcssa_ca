@@ -8,7 +8,6 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
   Grid,
   IconButton,
   Paper,
@@ -19,7 +18,7 @@ import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import Storage from "@aws-amplify/storage";
+// import Storage from "@aws-amplify/storage";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";

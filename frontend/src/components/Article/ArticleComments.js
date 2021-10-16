@@ -6,10 +6,8 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CircularProgress,
   IconButton,
   LinearProgress,
-  Pagination,
   Typography,
 } from "@mui/material";
 
@@ -19,7 +17,6 @@ import React from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
-import { margin } from "@mui/system";
 
 const useStyles = makeStyles({
   root: {

@@ -87,7 +87,7 @@ export const setUwcssaJobs = () => async (dispatch) => {
       authMode: "AWS_IAM",
     });
     dispatch({
-      type: ActionTypes.SET_UWCSSAJOBS,
+      type: ActionTypes.SET_UWCSSA_JOBS,
       payload: uwcssaJobData.data.listUwcssaJobs.items,
     });
   } catch (error) {
