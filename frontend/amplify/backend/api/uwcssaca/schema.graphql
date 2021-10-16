@@ -329,6 +329,7 @@ type ForumPost
   )
   @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"]) {
   id: ID!
+  title: String!
   content: String!
   imagePath: String
   like: [String]!

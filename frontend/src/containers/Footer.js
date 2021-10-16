@@ -13,14 +13,13 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { makeStyles } from "@mui/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
       <Button color="inherit" href="https://uwcssa.ca/">
-        uwcssa.ca {""} {new Date().getFullYear()}
+        uwcssa.ca, {new Date().getFullYear()}
       </Button>
     </Typography>
   );
@@ -58,14 +57,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#000000",
-    },
-  },
-});
-
 export default function StickyFooter() {
   const classes = useStyles();
 
@@ -81,39 +72,36 @@ export default function StickyFooter() {
                   关于我们
                 </Typography>
                 <span style={{ cursor: "not-allowed" }}>
-                  <ThemeProvider theme={theme}>
-                    <Button
-                      color="primary"
-                      variant="text"
-                      component={Link}
-                      to="/foundingTeam"
-                    >
-                      团队
-                    </Button>
-                  </ThemeProvider>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    component={Link}
+                    to="/foundingTeam"
+                    style={{ color: "#000000" }}
+                  >
+                    我们的团队
+                  </Button>
                 </span>
                 <span style={{ cursor: "not-allowed" }}>
-                  <ThemeProvider theme={theme}>
-                    <Button
-                      color="primary"
-                      variant="text"
-                      component={Link}
-                      to="/contactUs"
-                    >
-                      联系我们
-                    </Button>
-                  </ThemeProvider>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    component={Link}
+                    to="/contactUs"
+                    style={{ color: "#000000" }}
+                  >
+                    联系我们
+                  </Button>
                 </span>
                 <span style={{ cursor: "not-allowed" }}>
-                  <ThemeProvider theme={theme}>
-                    <Button
-                      color="primary"
-                      variant="text"
-                      href="mailto:uwincssa.it@gmail.com"
-                    >
-                      邮箱: uwincssa.it@gmail.com
-                    </Button>
-                  </ThemeProvider>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    href="mailto:uwincssa.it@gmail.com"
+                    style={{ color: "#000000", textTransform: "none" }}
+                  >
+                    邮箱: uwincssa.it@gmail.com
+                  </Button>
                 </span>
               </Box>
             </Grid>
@@ -123,28 +111,26 @@ export default function StickyFooter() {
                   资讯
                 </Typography>
                 <span style={{ cursor: "not-allowed" }}>
-                  <ThemeProvider theme={theme}>
-                    <Button
-                      color="primary"
-                      variant="text"
-                      component={Link}
-                      to="/article"
-                    >
-                      uwcssa新闻
-                    </Button>
-                  </ThemeProvider>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    component={Link}
+                    to="/article"
+                    style={{ color: "#000000" }}
+                  >
+                    uwcssa新闻
+                  </Button>
                 </span>
                 <span style={{ cursor: "not-allowed" }}>
-                  <ThemeProvider theme={theme}>
-                    <Button
-                      color="primary"
-                      variant="text"
-                      component={Link}
-                      to="/event"
-                    >
-                      uwcssa活动
-                    </Button>
-                  </ThemeProvider>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    component={Link}
+                    to="/event"
+                    style={{ color: "#000000" }}
+                  >
+                    uwcssa活动
+                  </Button>
                 </span>
               </Box>
             </Grid>
@@ -179,16 +165,16 @@ export default function StickyFooter() {
                 <Typography variant="caption" gutterBottom>
                   来和我们一起工作吧! 我们一直在寻找优秀的人才加入我们的团队。
                 </Typography>
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    component={Link}
-                    to="/career"
-                  >
-                    查看职位
-                  </Button>
-                </ThemeProvider>
+
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  component={Link}
+                  to="/career"
+                  style={{ borderColor: "#000000", color: "#000000" }}
+                >
+                  查看职位
+                </Button>
               </Box>
             </Grid>
           </Grid>

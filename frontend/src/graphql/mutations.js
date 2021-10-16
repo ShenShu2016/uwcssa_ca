@@ -1558,6 +1558,7 @@ export const createForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
@@ -1603,6 +1604,7 @@ export const updateForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
@@ -1648,6 +1650,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
@@ -1670,6 +1673,7 @@ export const createForumPost = /* GraphQL */ `
   ) {
     createForumPost(input: $input, condition: $condition) {
       id
+      title
       content
       imagePath
       like
@@ -1726,6 +1730,7 @@ export const updateForumPost = /* GraphQL */ `
   ) {
     updateForumPost(input: $input, condition: $condition) {
       id
+      title
       content
       imagePath
       like
@@ -1782,6 +1787,7 @@ export const deleteForumPost = /* GraphQL */ `
   ) {
     deleteForumPost(input: $input, condition: $condition) {
       id
+      title
       content
       imagePath
       like
@@ -1847,6 +1853,7 @@ export const createForumPostComment = /* GraphQL */ `
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
@@ -1904,6 +1911,7 @@ export const updateForumPostComment = /* GraphQL */ `
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
@@ -1961,6 +1969,7 @@ export const deleteForumPostComment = /* GraphQL */ `
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
@@ -2026,6 +2035,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
@@ -2069,6 +2079,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
@@ -2112,6 +2123,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
