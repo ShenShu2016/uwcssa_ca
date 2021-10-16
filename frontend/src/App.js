@@ -2,12 +2,10 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import PostMarketItem from "./containers/market/PostMarketItem";
+
 import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
-import MarketListing from "./containers/MarketListing";
-import MarketItemDetail from "./containers/MarketItemDetail";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
@@ -24,12 +22,15 @@ import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
 import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
 import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
-import MarketPostTest from "./containers/MarketPostTest";
 import Home from "./containers/Home";
+import MarketItemDetail from "./containers/MarketItemDetail";
+import MarketListing from "./containers/MarketListing";
+import MarketPostTest from "./containers/MarketPostTest";
 import MuiAlert from "@mui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
+import PostMarketItem from "./containers/market/PostMarketItem";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
@@ -42,7 +43,6 @@ import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
-import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
 
 const theme = createTheme({
@@ -73,7 +73,6 @@ export default function App() {
   const [signInOpen, setSignInOpen] = useState(false);
   useEffect(() => {
     dispatch(load_user());
-    dispatch(setUserCounts());
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
@@ -160,7 +159,7 @@ export default function App() {
               />
               <Route path="/article" exact component={ArticleListing} />
               <Route
-                path="/article/:articleId"
+                path="/article/:articleID"
                 exact
                 component={ArticleDetail}
               />

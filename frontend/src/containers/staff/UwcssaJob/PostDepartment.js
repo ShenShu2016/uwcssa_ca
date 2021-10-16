@@ -13,7 +13,6 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createDepartment } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +28,7 @@ const useStyles = makeStyles({
 export default function PostDepartment(props) {
   const classes = useStyles();
 
-  const { user } = useSelector((state) => state.userAuth);
+  // const { user } = useSelector((state) => state.userAuth);
   const [info, setInfo] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailure, setSubmitFailure] = useState(false);
@@ -92,7 +91,7 @@ export default function PostDepartment(props) {
           variant="outlined"
           fullWidth
           value={departmentData.name}
-          style={{marginBlock: "2rem"}}
+          style={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setDepartmentData({
               ...departmentData,
@@ -110,9 +109,12 @@ export default function PostDepartment(props) {
           multiline
           minRows={5}
           value={departmentData.introduction}
-          style={{marginBlock: "2rem"}}
+          style={{ marginBlock: "2rem" }}
           onChange={(e) =>
-            setDepartmentData({ ...departmentData, introduction: e.target.value })
+            setDepartmentData({
+              ...departmentData,
+              introduction: e.target.value,
+            })
           }
         />
       </Box>
@@ -123,7 +125,7 @@ export default function PostDepartment(props) {
           variant="outlined"
           fullWidth
           value={departmentData.email}
-          style={{marginBlock:"2rem"}}
+          style={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setDepartmentData({ ...departmentData, email: e.target.value })
           }
@@ -136,7 +138,7 @@ export default function PostDepartment(props) {
           variant="outlined"
           fullWidth
           value={departmentData.leader}
-          style={{marginBlock:"2rem"}}
+          style={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setDepartmentData({ ...departmentData, leader: e.target.value })
           }
@@ -145,7 +147,7 @@ export default function PostDepartment(props) {
       <Button
         variant="contained"
         color="primary"
-        style={{marginBlock: "2rem"}}
+        style={{ marginBlock: "2rem" }}
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >

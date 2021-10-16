@@ -1,13 +1,13 @@
-import { createMarketItem } from "../../graphql/mutations";
 import {
+  listMarketItemCategories,
   listMarketItems,
   listMarketTypes,
-  listMarketItemCategories,
 } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/marketItem-action-types";
 import Storage from "@aws-amplify/storage";
+import { createMarketItem } from "../../graphql/mutations";
 import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
@@ -61,14 +61,14 @@ export const removeSelectedMarketItem = () => async (dispatch) => {
 //     );
 
 //     dispatch({
-//       type: ActionTypes.ARTICLECOMMPOST_SUCCESS,
+//       type: ActionTypes.ARTICLE_COMMENT_POST_SUCCESS,
 //       payload: response,
 //     });
 //     dispatch(selectedMarketItem(createMarketItemInput.articleCommentMarketItemId));
 //   } catch (error) {
 //     console.log("error on posting MarketItemComment", error);
 //     dispatch({
-//       type: ActionTypes.ARTICLECOMMPOST_FAIL,
+//       type: ActionTypes.ARTICLE_COMMENT_POST_FAIL,
 //     });
 //   }
 // };

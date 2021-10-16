@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
   removeSelectedArticle,
   selectedArticle,
+  selectedArticleComments,
 } from "../redux/actions/articleActions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,16 +28,17 @@ const useStyles = makeStyles({
 export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { articleId } = useParams();
+  const { articleID } = useParams();
   const article = useSelector((state) => state.article);
   const nextToken = article.commentsNextToken;
 
   useEffect(() => {
-    if (articleId && articleId !== "") {
-      dispatch(selectedArticle(articleId));
+    if (articleID && articleID !== "") {
+      dispatch(selectedArticle(articleID));
+      dispatch(selectedArticleComments(articleID));
     }
     return () => dispatch(removeSelectedArticle());
-  }, [articleId, dispatch]);
+  }, [articleID, dispatch]);
 
   useEffect(() => {
     window.onscroll = (e) => {
@@ -49,11 +51,11 @@ export default function ArticleDetail() {
         // 这个问题需要解决，为啥前面加起来有小数点。并且如果我在前面一点就想load的话这个东西会重复读
         if (nextToken) {
           console.log("到底了");
-          dispatch(loadMoreArticleComments(articleId, nextToken));
+          dispatch(loadMoreArticleComments(articleID, nextToken));
         }
       }
     };
-  }, [nextToken, articleId, dispatch]);
+  }, [nextToken, articleID, dispatch]);
   // console.log("state.article", article);
 
   return (

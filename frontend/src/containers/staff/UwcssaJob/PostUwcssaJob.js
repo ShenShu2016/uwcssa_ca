@@ -59,7 +59,7 @@ export default function PostUwcssaJob(props) {
     departmentName: "",
   });
 
-  let departmentList = [];
+  // let departmentList = [];
 
   const handleSubmit = async () => {
     if (
@@ -72,15 +72,15 @@ export default function PostUwcssaJob(props) {
     }
     let targetDepartment = await API.graphql({
       query: listDepartments,
-      variables: {filter:{name:{eq:uwcssaJobData.departmentName}}},
-      authMode: 'AWS_IAM'
-    })
-    if (targetDepartment.data.listDepartments.items.length===0) {
+      variables: { filter: { name: { eq: uwcssaJobData.departmentName } } },
+      authMode: "AWS_IAM",
+    });
+    if (targetDepartment.data.listDepartments.items.length === 0) {
       setDepart(true);
       return;
     }
-    const departmentID = targetDepartment.data.listDepartments.items[0].id
-    console.log("departmentID: ",departmentID)
+    const departmentID = targetDepartment.data.listDepartments.items[0].id;
+    console.log("departmentID: ", departmentID);
     console.log(uwcssaJobData);
     try {
       const createUwcssaJobInput = {
@@ -136,7 +136,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.title}
-          sx={{marginBlock:"2rem"}}
+          sx={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, title: e.target.value })
           }
@@ -149,7 +149,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.departmentName}
-          sx={{marginBlock: "2rem"}}
+          sx={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setUwcssaJobData({
               ...uwcssaJobData,
@@ -167,7 +167,7 @@ export default function PostUwcssaJob(props) {
           multiline
           minRows={5}
           value={uwcssaJobData.introduction}
-          sx={{marginBlock: "2rem"}}
+          sx={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, introduction: e.target.value })
           }
@@ -453,7 +453,7 @@ export default function PostUwcssaJob(props) {
       <Button
         variant="contained"
         color="primary"
-        sx={{marginBlock: "2rem"}}
+        sx={{ marginBlock: "2rem" }}
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >

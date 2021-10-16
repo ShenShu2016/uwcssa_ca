@@ -13,7 +13,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 const userCountsQuery = `query ListUsers {
     listUsers {
         items {
-            username
+            id
         }
     }
 }`;
