@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 
 export default function Main({ article }) {
   const classes = useStyles();
-  const [imageURL, setImageURL] = useState("");
+  const [imageURL, setImageURL] = useState(null);
   const {
     title,
     content,
@@ -59,10 +59,12 @@ export default function Main({ article }) {
         setImageURL(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
-        setImageURL("");
+        setImageURL(null);
       }
     };
-    getImage();
+    if (imagePath) {
+      getImage();
+    }
   }, [imagePath]);
 
   return (

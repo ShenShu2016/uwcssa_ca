@@ -241,7 +241,7 @@ type UwcssaJobResume
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner } # 需要改只能上传和查看
       { allow: groups, groups: ["admin", "staff"] }
       # { allow: private, operations: [read] }
       # { allow: public, operations: [read], provider: iam }
