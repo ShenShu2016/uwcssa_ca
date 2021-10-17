@@ -17,7 +17,6 @@ import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import amazonLogo from "../../static/svg icons/amazon.svg";
 import appleLogo from "../../static/svg icons/apple.svg";
 import facebookLogo from "../../static/svg icons/facebook.svg";
@@ -33,10 +32,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  // avatar: {
-  //   margin: theme.spacing(1),
-  //   backgroundColor: theme.palette.secondary.main,
-  // },
   form: {
     width: "75%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -90,8 +85,8 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [signInState, setSignInState] = useState(); //logging state
-  const [success, setSuccess] = useState(true);
+  const [loading, setLoading] = useState(); //logging state
+  const [errorMessage, setErrorMessage] = useState(null);
   const timer = useRef();
 
   useEffect(() => {
@@ -100,14 +95,21 @@ export default function SignIn() {
     };
   }, []);
 
-  const handleButtonClick = () => {
-    if (!signInState) {
-      setSuccess(false);
-      setSignInState(true);
-      timer.current = window.setTimeout(() => {
-        setSuccess(true);
-        setSignInState(false);
-      }, 1000);
+  const handleSubmit = async function (event) {
+    event.preventDefault();
+    if (!loading) {
+      // console.log("setLoading(loading)", loading);
+      setLoading(true); //开始转圈
+      const response = await dispatch(signIn(username, password));
+      if (response.result) {
+        timer.current = window.setTimeout(() => {}, 1000);
+      } else {
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+          console.log(response.error.message);
+          setErrorMessage(response.error.message);
+        }, 1000);
+      }
     }
   };
 
@@ -123,18 +125,6 @@ export default function SignIn() {
 
   const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
-
-  const handleSubmit = async function (event) {
-    event.preventDefault();
-    setSignInState("logging in");
-    const response = await dispatch(signIn(username, password));
-    if (response.result) {
-      // setLogged(true);
-    } else {
-      //alert(response.error.message);
-      setSignInState("logging failed");
-    }
-  };
 
   const handleGoogleSignIn = async function (event) {
     event.preventDefault();
@@ -154,11 +144,6 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* {signInState === "logging in" ? <CircularProgress /> : " "} */}
-        {signInState === "logging failed"}
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
         <Typography component="h1" variant="h5" align="left">
           登入
         </Typography>
@@ -182,7 +167,8 @@ export default function SignIn() {
             autoComplete="username"
             autoFocus
             value={username}
-            error={signInState}
+            error={errorMessage ? true : false}
+            helperText={errorMessage}
             onChange={(event) => onChange(event)}
           />
           <TextField
@@ -196,7 +182,8 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
             value={password}
-            error={signInState}
+            error={errorMessage ? true : false}
+            helperText={errorMessage}
             onChange={(event) => onChange(event)}
           />
           <FormControlLabel
@@ -210,13 +197,11 @@ export default function SignIn() {
                 variant="outlined"
                 color="primary"
                 className={classes.submit}
-                disabled={signInState}
-                onClick={handleButtonClick}
+                disabled={loading}
               >
-                {/* 这里的动画可以让用户自己脑补 */}
-                {success ? <LockIcon /> : <LockOpenIcon />}
+                {loading ? <LockOpenIcon /> : <LockIcon />}
                 登陆
-                {signInState && (
+                {loading && (
                   <CircularProgress
                     size={24}
                     sx={{
@@ -233,20 +218,18 @@ export default function SignIn() {
             </Grid>
             <Grid>
               <Button
-                // type="button"
                 variant="outlined"
                 component={Link}
                 to="/forgotPassword"
                 color="primary"
                 className={classes.submit}
-                disabled={signInState}
+                disabled={loading}
               >
                 忘记密码
               </Button>
             </Grid>
           </Grid>
         </form>
-        {/* Google的登入按钮 */}
         <Grid
           item
           xs={10}
@@ -275,7 +258,6 @@ export default function SignIn() {
             </Grid>
           </Button>
         </Grid>
-        {/* Facebook的登入按钮*/}
         <Grid
           item
           xs={10}
