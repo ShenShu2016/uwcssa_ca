@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   removeSelectedArticle,
   selectedArticle,
@@ -29,6 +29,7 @@ export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { articleID } = useParams();
+  const [canFetch, setCanFetch] = useState(true);
   const article = useSelector((state) => state.article);
   const nextToken = article.commentsNextToken;
 
@@ -41,22 +42,31 @@ export default function ArticleDetail() {
   }, [articleID, dispatch]);
 
   useEffect(() => {
-    window.onscroll = (e) => {
+    window.onscroll = async (e) => {
       const scrollY = window.scrollY; //当前上方高度
       const scrollTop = e.target.scrollingElement.clientHeight; //窗口高度
       const scrollHeight = e.target.scrollingElement.scrollHeight; //总高度
-      console.log(scrollY, scrollTop, scrollY + scrollTop, scrollHeight);
+      // console.log(canFetch, scrollHeight - scrollY - scrollTop);
       // console.log("nextToken", nextToken);
-      if (scrollY + scrollTop >= scrollHeight) {
+      if (scrollY + scrollTop >= scrollHeight - 1000 && nextToken) {
         // 这个问题需要解决，为啥前面加起来有小数点。并且如果我在前面一点就想load的话这个东西会重复读
-        if (nextToken) {
-          console.log("到底了");
-          dispatch(loadMoreArticleComments(articleID, nextToken));
+        if (canFetch) {
+          setCanFetch(false);
+          setCanFetch(false); //！ 问题，为什么一次 就不行，两次就可以了
+          console.log("canFetch，it should be false", canFetch);
+          const response = await dispatch(
+            loadMoreArticleComments(articleID, nextToken)
+          );
+          console.log("loadMoreArticleComments response", response);
+          setCanFetch(response);
+          console.log(
+            "loadMoreArticleComments finished,it should be true",
+            canFetch
+          );
         }
       }
     };
-  }, [nextToken, articleID, dispatch]);
-  // console.log("state.article", article);
+  }, [nextToken, articleID, dispatch, canFetch]);
 
   return (
     <div className={classes.root}>

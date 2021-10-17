@@ -4,8 +4,8 @@ export const ActionTypes = {
   SET_TOPICS: "articles/setTopics",
   POST_ARTICLE_SUCCESS: "articles/postSuccess",
   POST_ARTICLE_FAIL: "articles/postFail",
-  POST_ARTICLE_IMG_SUCCESS: "articles/PostImgSuccess",
-  POST_ARTICLE_IMG_FAIL: "articles/PostImgFail",
+  POST_ARTICLE_IMG_SUCCESS: "articles/postImgSuccess",
+  POST_ARTICLE_IMG_FAIL: "articles/postImgFail",
 
   SELECTED_ARTICLE: "article/selectedArticle",
   SELECTED_ARTICLE_COMMENTS: "article/selectedComments",

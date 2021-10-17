@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Checkbox,
@@ -11,16 +10,18 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, Redirect } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import amazonLogo from "../../static/svg icons/amazon.svg";
 import appleLogo from "../../static/svg icons/apple.svg";
 import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signIn } from "../../redux/actions/authActions";
 
@@ -30,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "75%", // Fix IE 11 issue.
@@ -63,12 +60,12 @@ const useStyles = makeStyles((theme) => ({
   facebookLogo: {
     width: 24,
     height: 24,
-    marginRight: "1rem",
+    marginLeft: "1rem",
   },
   googleLogo: {
     width: 24,
     height: 24,
-    marginRight: "1rem",
+    marginLeft: "1rem",
   },
   other_third_party: {
     width: 35,
@@ -87,7 +84,34 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [ signInState, setsignInState] = useState(); //logging state
+
+  const [loading, setLoading] = useState(); //logging state
+  const [errorMessage, setErrorMessage] = useState(null);
+  const timer = useRef();
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  const handleSubmit = async function (event) {
+    event.preventDefault();
+    if (!loading) {
+      // console.log("setLoading(loading)", loading);
+      setLoading(true); //开始转圈
+      const response = await dispatch(signIn(username, password));
+      if (response.result) {
+        timer.current = window.setTimeout(() => {}, 1000);
+      } else {
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+          console.log(response.error.message);
+          setErrorMessage(response.error.message);
+        }, 1000);
+      }
+    }
+  };
 
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
@@ -101,18 +125,6 @@ export default function SignIn() {
 
   const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
-
-  const handleSubmit = async function (event) {
-    event.preventDefault();
-    setsignInState("logging in");
-    const response = await dispatch(signIn(username, password));
-    if (response.result) {
-      // setLogged(true);
-    } else {
-      //alert(response.error.message);
-      setsignInState("logging failed");
-    }
-  };
 
   const handleGoogleSignIn = async function (event) {
     event.preventDefault();
@@ -132,11 +144,6 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* {signInState === "logging in" ? <CircularProgress /> : " "} */}
-        {signInState === "logging failed"}
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5" align="left">
           登入
         </Typography>
@@ -160,7 +167,8 @@ export default function SignIn() {
             autoComplete="username"
             autoFocus
             value={username}
-            error={signInState === "logging failed"}
+            error={errorMessage ? true : false}
+            helperText={errorMessage}
             onChange={(event) => onChange(event)}
           />
           <TextField
@@ -174,7 +182,8 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
             value={password}
-            error={signInState === "logging failed"}
+            error={errorMessage ? true : false}
+            helperText={errorMessage}
             onChange={(event) => onChange(event)}
           />
           <FormControlLabel
@@ -182,81 +191,102 @@ export default function SignIn() {
             label="我不是机器人"
           />
           <Grid container marginTop="1rem">
-            <Grid item xs={5} sm={8} md={6}
-              marginLeft="2rem"               
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              disabled={signInState === "logging in"}
-            >              
-              登陆
-              {signInState === "logging in" ? <CircularProgress size="1.5rem"/> : " "}
-            </Button>
-
+            <Grid item xs={5} sm={8} md={6} marginLeft="2rem">
+              <Button
+                type="submit"
+                variant="outlined"
+                color="primary"
+                className={classes.submit}
+                disabled={loading}
+              >
+                {loading ? <LockOpenIcon /> : <LockIcon />}
+                登陆
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: green[500],
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-0.75rem",
+                      marginLeft: "-0.75rem",
+                    }}
+                  />
+                )}
+              </Button>
             </Grid>
             <Grid>
               <Button
-                // type="button"
                 variant="outlined"
                 component={Link}
                 to="/forgotPassword"
                 color="primary"
                 className={classes.submit}
-                disabled={signInState === "logging in"}
+                disabled={loading}
               >
                 忘记密码
               </Button>
             </Grid>
           </Grid>
-        </form>        
-          {/* Google的登入按钮 */}
-          <Grid item xs={10}  lg={10}
-              container     
-              justifyContent= "center"
-              alignItems= "center"                      
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              className={classes.third_party_button}
-              onClick={(event) => handleGoogleSignIn(event)}              
-            >
-            <Grid xs={8} lg={6}>
+        </form>
+        <Grid
+          item
+          xs={10}
+          lg={10}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            className={classes.third_party_button}
+            onClick={(event) => handleGoogleSignIn(event)}
+            disabled
+          >
+            <Grid item xs={8} lg={6}>
               <img
                 src={googleLogo}
                 alt="googleLogo"
                 className={classes.googleLogo}
               />
             </Grid>
-            <Grid item xs={12} lg={12} marginRight= "1rem">Google Sign in</Grid>
-            </Button>
-          </Grid>                
-          {/* Facebook的登入按钮*/}
-          <Grid item xs={10}  lg={10}
-              container     
-              justifyContent= "center"
-              alignItems= "center"  
-              marginTop="2rem"                   
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              disabled
-              className={classes.third_party_button}
-            >
-            <Grid xs={8} lg={6}>
+
+            <Grid item xs={12} marginRight="3rem">
+              Google Sign in
+            </Grid>
+          </Button>
+        </Grid>
+        <Grid
+          item
+          xs={10}
+          lg={10}
+          container
+          justifyContent="center"
+          alignItems="center"
+          marginTop="2rem"
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled
+            className={classes.third_party_button}
+          >
+            <Grid item xs={8} lg={6}>
               <img
                 src={facebookLogo}
                 alt="facebookLogo"
                 className={classes.facebookLogo}
               />
             </Grid>
-            <Grid item xs={12} lg={12}>Facebook Sign in</Grid>
-            </Button>
-          </Grid>
+
+            <Grid item xs={12} marginRight="3rem">
+              Facebook Sign in
+            </Grid>
+          </Button>
+        </Grid>
+
         {/* 之后增加点按转入网站的功能 */}
         <Box className={classes.more_third_party}>
           <img
