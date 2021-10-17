@@ -1,5 +1,4 @@
 import {
-  // Avatar,
   Box,
   Button,
   Checkbox,
@@ -11,23 +10,21 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, Redirect } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 // import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import amazonLogo from "../../static/svg icons/amazon.svg";
 import appleLogo from "../../static/svg icons/apple.svg";
 import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signIn } from "../../redux/actions/authActions";
-import { useRef } from "react";
-import { green } from '@mui/material/colors';
-import { useEffect } from "react";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import LockIcon from '@mui/icons-material/Lock';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -93,8 +90,8 @@ export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [ signInState, setsignInState] = useState(); //logging state
-  const [ success, setSuccess] = useState(true);
+  const [signInState, setSignInState] = useState(); //logging state
+  const [success, setSuccess] = useState(true);
   const timer = useRef();
 
   useEffect(() => {
@@ -106,14 +103,13 @@ export default function SignIn() {
   const handleButtonClick = () => {
     if (!signInState) {
       setSuccess(false);
-      setsignInState(true);
+      setSignInState(true);
       timer.current = window.setTimeout(() => {
         setSuccess(true);
-        setsignInState(false);
+        setSignInState(false);
       }, 1000);
     }
   };
-
 
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
@@ -208,35 +204,32 @@ export default function SignIn() {
             label="我不是机器人"
           />
           <Grid container marginTop="1rem">
-
-            <Grid item xs={5} sm={8} md={6}
-              marginLeft="2rem"               
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              disabled={signInState}
-              onClick={handleButtonClick}
-            >   
-              {/* 这里的动画可以让用户自己脑补 */}
-              {success ? <LockIcon /> : <LockOpenIcon />}           
-              登陆
-              {signInState && 
-              (<CircularProgress
-              size={24}
-              sx={{
-              color: green[500], 
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              marginTop: '-0.75rem',
-              marginLeft: '-0.75rem',          
-              }}/>
-            )}
-            </Button>           
-
+            <Grid item xs={5} sm={8} md={6} marginLeft="2rem">
+              <Button
+                type="submit"
+                variant="outlined"
+                color="primary"
+                className={classes.submit}
+                disabled={signInState}
+                onClick={handleButtonClick}
+              >
+                {/* 这里的动画可以让用户自己脑补 */}
+                {success ? <LockIcon /> : <LockOpenIcon />}
+                登陆
+                {signInState && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: green[500],
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-0.75rem",
+                      marginLeft: "-0.75rem",
+                    }}
+                  />
+                )}
+              </Button>
             </Grid>
             <Grid>
               <Button
@@ -252,47 +245,53 @@ export default function SignIn() {
               </Button>
             </Grid>
           </Grid>
-
-        </form>        
-          {/* Google的登入按钮 */}
-          <Grid item xs={10}  lg={10}
-              container     
-              justifyContent= "center"
-              alignItems= "center"                      
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              className={classes.third_party_button}
-              onClick={(event) => handleGoogleSignIn(event)}              
-            disabled>
+        </form>
+        {/* Google的登入按钮 */}
+        <Grid
+          item
+          xs={10}
+          lg={10}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            className={classes.third_party_button}
+            onClick={(event) => handleGoogleSignIn(event)}
+            disabled
+          >
             <Grid item xs={8} lg={6}>
-
               <img
                 src={googleLogo}
                 alt="googleLogo"
-                className={classes.googleLogo}  
+                className={classes.googleLogo}
               />
             </Grid>
 
-            <Grid item xs={12} marginRight= "3rem">Google Sign in</Grid>
-            </Button>
-          </Grid>                
-          {/* Facebook的登入按钮*/}
-          <Grid item xs={10}  lg={10}
-              container     
-              justifyContent= "center"
-              alignItems= "center"  
-              marginTop="2rem"                   
-            >
-            <Button
-              type="submit"
-              variant="outlined"
-              disabled
-              className={classes.third_party_button}
-            >
+            <Grid item xs={12} marginRight="3rem">
+              Google Sign in
+            </Grid>
+          </Button>
+        </Grid>
+        {/* Facebook的登入按钮*/}
+        <Grid
+          item
+          xs={10}
+          lg={10}
+          container
+          justifyContent="center"
+          alignItems="center"
+          marginTop="2rem"
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled
+            className={classes.third_party_button}
+          >
             <Grid item xs={8} lg={6}>
-
               <img
                 src={facebookLogo}
                 alt="facebookLogo"
@@ -300,9 +299,11 @@ export default function SignIn() {
               />
             </Grid>
 
-            <Grid item xs={12} marginRight= "3rem">Facebook Sign in</Grid>
-            </Button>
-          </Grid>
+            <Grid item xs={12} marginRight="3rem">
+              Facebook Sign in
+            </Grid>
+          </Button>
+        </Grid>
 
         {/* 之后增加点按转入网站的功能 */}
         <Box className={classes.more_third_party}>
