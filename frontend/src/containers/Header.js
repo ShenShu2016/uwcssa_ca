@@ -1,6 +1,7 @@
 import {
   AppBar,
   Button,
+  CssBaseline,
   Drawer,
   IconButton,
   Menu,
@@ -102,19 +103,19 @@ const useStyles = makeStyles((theme) => ({
   uwcssaLogo: {
     width: 36,
     height: 36,
-    marginRight: "1rem",
+    marginInline: "1rem",
   },
 
   sectionDesktop: {
     display: "none",
     marginInline: "1rem",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("1260")]: {
       display: "flex",
     },
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("1260")]: {
       display: "none",
     },
   },
@@ -270,6 +271,7 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
+      <CssBaseline />
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <IconButton

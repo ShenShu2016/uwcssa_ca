@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  CardActionArea,
   CardActions,
   CardHeader,
   CardMedia,
@@ -96,21 +97,23 @@ export default function Main({ article }) {
                 className={classes.avatar}
                 component={Link}
                 to={`/account/profile/${owner}`}
-              ></Avatar>
+              >
+                {owner.toUpperCase().slice(0, 1)}
+              </Avatar>
             }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
             title={owner}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
               11,
               19
             )}`}
           />
-          <CardMedia component="img" image={imageURL} />
-
+          <CardActionArea
+            onClick={() => {
+              window.open(imageURL);
+            }}
+          >
+            <CardMedia component="img" image={imageURL} />
+          </CardActionArea>
           <Divider />
           <Box sx={{ my: 2 }}>
             <Typography
