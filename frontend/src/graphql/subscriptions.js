@@ -4,6 +4,7 @@
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
+      id
       username
       email
       owner
@@ -19,7 +20,7 @@ export const onCreateUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -29,13 +30,14 @@ export const onCreateUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -46,6 +48,7 @@ export const onCreateUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -58,6 +61,7 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
+      id
       username
       email
       owner
@@ -73,7 +77,7 @@ export const onUpdateUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -83,13 +87,14 @@ export const onUpdateUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -100,6 +105,7 @@ export const onUpdateUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -112,6 +118,7 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
+      id
       username
       email
       owner
@@ -127,7 +134,7 @@ export const onDeleteUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -137,13 +144,14 @@ export const onDeleteUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -154,6 +162,7 @@ export const onDeleteUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -174,9 +183,11 @@ export const onCreateUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -192,10 +203,10 @@ export const onCreateUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -214,9 +225,11 @@ export const onUpdateUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -232,10 +245,10 @@ export const onUpdateUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -254,9 +267,11 @@ export const onDeleteUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -272,10 +287,10 @@ export const onDeleteUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -295,9 +310,11 @@ export const onCreateUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -313,10 +330,10 @@ export const onCreateUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -336,9 +353,11 @@ export const onUpdateUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -354,10 +373,10 @@ export const onUpdateUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -377,9 +396,11 @@ export const onDeleteUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -395,10 +416,10 @@ export const onDeleteUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -409,6 +430,7 @@ export const onDeleteUserExperience = /* GraphQL */ `
 export const onCreateTopic = /* GraphQL */ `
   subscription OnCreateTopic {
     onCreateTopic {
+      id
       name
       like
       unlike
@@ -423,6 +445,9 @@ export const onCreateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -436,6 +461,7 @@ export const onCreateTopic = /* GraphQL */ `
 export const onUpdateTopic = /* GraphQL */ `
   subscription OnUpdateTopic {
     onUpdateTopic {
+      id
       name
       like
       unlike
@@ -450,6 +476,9 @@ export const onUpdateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -463,6 +492,7 @@ export const onUpdateTopic = /* GraphQL */ `
 export const onDeleteTopic = /* GraphQL */ `
   subscription OnDeleteTopic {
     onDeleteTopic {
+      id
       name
       like
       unlike
@@ -477,6 +507,9 @@ export const onDeleteTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -490,12 +523,13 @@ export const onDeleteTopic = /* GraphQL */ `
 export const onCreateType = /* GraphQL */ `
   subscription OnCreateType {
     onCreateType {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -504,6 +538,9 @@ export const onCreateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -517,12 +554,13 @@ export const onCreateType = /* GraphQL */ `
 export const onUpdateType = /* GraphQL */ `
   subscription OnUpdateType {
     onUpdateType {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -531,6 +569,9 @@ export const onUpdateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -544,12 +585,13 @@ export const onUpdateType = /* GraphQL */ `
 export const onDeleteType = /* GraphQL */ `
   subscription OnDeleteType {
     onDeleteType {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -558,6 +600,9 @@ export const onDeleteType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -577,10 +622,14 @@ export const onCreateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -592,12 +641,13 @@ export const onCreateArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -609,8 +659,9 @@ export const onCreateArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -628,10 +679,14 @@ export const onUpdateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -643,12 +698,13 @@ export const onUpdateArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -660,8 +716,9 @@ export const onUpdateArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -679,10 +736,14 @@ export const onDeleteArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -694,12 +755,13 @@ export const onDeleteArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -711,8 +773,9 @@ export const onDeleteArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -728,8 +791,9 @@ export const onCreateArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -738,10 +802,14 @@ export const onCreateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -750,12 +818,13 @@ export const onCreateArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -773,8 +842,9 @@ export const onUpdateArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -783,10 +853,14 @@ export const onUpdateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -795,12 +869,13 @@ export const onUpdateArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -818,8 +893,9 @@ export const onDeleteArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -828,10 +904,14 @@ export const onDeleteArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -840,12 +920,13 @@ export const onDeleteArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -859,6 +940,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
 export const onCreateDepartment = /* GraphQL */ `
   subscription OnCreateDepartment {
     onCreateDepartment {
+      id
       name
       introduction
       email
@@ -876,6 +958,7 @@ export const onCreateDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -893,6 +976,7 @@ export const onCreateDepartment = /* GraphQL */ `
 export const onUpdateDepartment = /* GraphQL */ `
   subscription OnUpdateDepartment {
     onUpdateDepartment {
+      id
       name
       introduction
       email
@@ -910,6 +994,7 @@ export const onUpdateDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -927,6 +1012,7 @@ export const onUpdateDepartment = /* GraphQL */ `
 export const onDeleteDepartment = /* GraphQL */ `
   subscription OnDeleteDepartment {
     onDeleteDepartment {
+      id
       name
       introduction
       email
@@ -944,6 +1030,7 @@ export const onDeleteDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -967,6 +1054,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -975,6 +1063,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -998,6 +1087,8 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -1015,6 +1106,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -1023,6 +1115,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -1046,6 +1139,8 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -1063,6 +1158,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -1071,6 +1167,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -1094,6 +1191,8 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -1112,6 +1211,8 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -1120,6 +1221,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -1128,6 +1230,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -1144,16 +1247,6 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
     }
   }
 `;
@@ -1167,6 +1260,8 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -1175,6 +1270,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -1183,6 +1279,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -1199,16 +1296,6 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
     }
   }
 `;
@@ -1222,6 +1309,8 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -1230,6 +1319,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -1238,6 +1328,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -1254,108 +1345,27 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
-    }
-  }
-`;
-export const onCreateUwcssaJobResumeStatus = /* GraphQL */ `
-  subscription OnCreateUwcssaJobResumeStatus($owner: String) {
-    onCreateUwcssaJobResumeStatus(owner: $owner) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateUwcssaJobResumeStatus = /* GraphQL */ `
-  subscription OnUpdateUwcssaJobResumeStatus($owner: String) {
-    onUpdateUwcssaJobResumeStatus(owner: $owner) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteUwcssaJobResumeStatus = /* GraphQL */ `
-  subscription OnDeleteUwcssaJobResumeStatus($owner: String) {
-    onDeleteUwcssaJobResumeStatus(owner: $owner) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
     }
   }
 `;
 export const onCreateForumTopic = /* GraphQL */ `
   subscription OnCreateForumTopic {
     onCreateForumTopic {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1368,17 +1378,21 @@ export const onCreateForumTopic = /* GraphQL */ `
 export const onUpdateForumTopic = /* GraphQL */ `
   subscription OnUpdateForumTopic {
     onUpdateForumTopic {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1391,17 +1405,21 @@ export const onUpdateForumTopic = /* GraphQL */ `
 export const onDeleteForumTopic = /* GraphQL */ `
   subscription OnDeleteForumTopic {
     onDeleteForumTopic {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1414,19 +1432,23 @@ export const onDeleteForumTopic = /* GraphQL */ `
 export const onCreateForumSubTopic = /* GraphQL */ `
   subscription OnCreateForumSubTopic {
     onCreateForumSubTopic {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1434,12 +1456,14 @@ export const onCreateForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1451,19 +1475,23 @@ export const onCreateForumSubTopic = /* GraphQL */ `
 export const onUpdateForumSubTopic = /* GraphQL */ `
   subscription OnUpdateForumSubTopic {
     onUpdateForumSubTopic {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1471,12 +1499,14 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1488,19 +1518,23 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
 export const onDeleteForumSubTopic = /* GraphQL */ `
   subscription OnDeleteForumSubTopic {
     onDeleteForumSubTopic {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1508,12 +1542,14 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1526,20 +1562,26 @@ export const onCreateForumPost = /* GraphQL */ `
   subscription OnCreateForumPost {
     onCreateForumPost {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1559,8 +1601,9 @@ export const onCreateForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1573,20 +1616,26 @@ export const onUpdateForumPost = /* GraphQL */ `
   subscription OnUpdateForumPost {
     onUpdateForumPost {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1606,8 +1655,9 @@ export const onUpdateForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1620,20 +1670,26 @@ export const onDeleteForumPost = /* GraphQL */ `
   subscription OnDeleteForumPost {
     onDeleteForumPost {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1653,8 +1709,9 @@ export const onDeleteForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1670,22 +1727,28 @@ export const onCreateForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1702,8 +1765,8 @@ export const onCreateForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1719,22 +1782,28 @@ export const onUpdateForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1751,8 +1820,8 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1768,22 +1837,28 @@ export const onDeleteForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1800,8 +1875,8 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1817,25 +1892,28 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1855,25 +1933,28 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1893,25 +1974,28 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1927,6 +2011,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
 export const onCreateMarketType = /* GraphQL */ `
   subscription OnCreateMarketType {
     onCreateMarketType {
+      id
       name
       createdAt
       updatedAt
@@ -1940,7 +2025,9 @@ export const onCreateMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1953,6 +2040,7 @@ export const onCreateMarketType = /* GraphQL */ `
 export const onUpdateMarketType = /* GraphQL */ `
   subscription OnUpdateMarketType {
     onUpdateMarketType {
+      id
       name
       createdAt
       updatedAt
@@ -1966,7 +2054,9 @@ export const onUpdateMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1979,6 +2069,7 @@ export const onUpdateMarketType = /* GraphQL */ `
 export const onDeleteMarketType = /* GraphQL */ `
   subscription OnDeleteMarketType {
     onDeleteMarketType {
+      id
       name
       createdAt
       updatedAt
@@ -1992,7 +2083,9 @@ export const onDeleteMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2005,6 +2098,7 @@ export const onDeleteMarketType = /* GraphQL */ `
 export const onCreateMarketItemCategory = /* GraphQL */ `
   subscription OnCreateMarketItemCategory {
     onCreateMarketItemCategory {
+      id
       name
       createdAt
       updatedAt
@@ -2018,7 +2112,9 @@ export const onCreateMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2031,6 +2127,7 @@ export const onCreateMarketItemCategory = /* GraphQL */ `
 export const onUpdateMarketItemCategory = /* GraphQL */ `
   subscription OnUpdateMarketItemCategory {
     onUpdateMarketItemCategory {
+      id
       name
       createdAt
       updatedAt
@@ -2044,7 +2141,9 @@ export const onUpdateMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2057,6 +2156,7 @@ export const onUpdateMarketItemCategory = /* GraphQL */ `
 export const onDeleteMarketItemCategory = /* GraphQL */ `
   subscription OnDeleteMarketItemCategory {
     onDeleteMarketItemCategory {
+      id
       name
       createdAt
       updatedAt
@@ -2070,7 +2170,9 @@ export const onDeleteMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2090,10 +2192,13 @@ export const onCreateMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -2103,6 +2208,7 @@ export const onCreateMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -2127,7 +2233,9 @@ export const onCreateMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2154,7 +2262,9 @@ export const onCreateMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2174,10 +2284,13 @@ export const onUpdateMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -2187,6 +2300,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -2211,7 +2325,9 @@ export const onUpdateMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2238,7 +2354,9 @@ export const onUpdateMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2258,10 +2376,13 @@ export const onDeleteMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -2271,6 +2392,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -2295,7 +2417,9 @@ export const onDeleteMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2322,7 +2446,9 @@ export const onDeleteMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2349,16 +2475,20 @@ export const onCreateMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2410,16 +2540,20 @@ export const onUpdateMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2471,16 +2605,20 @@ export const onDeleteMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2537,16 +2675,20 @@ export const onCreateMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2603,16 +2745,20 @@ export const onUpdateMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2669,16 +2815,20 @@ export const onDeleteMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt

@@ -13,7 +13,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 const userCountsQuery = `query ListUsers {
     listUsers {
         items {
-            username
+            id
         }
     }
 }`;
@@ -36,7 +36,7 @@ export const selectedUser = (username) => async (dispatch) => {
   try {
     const response = await API.graphql({
       query: getUser,
-      variables: { username: username },
+      variables: { id: username },
       authMode: "AWS_IAM",
     });
     dispatch({

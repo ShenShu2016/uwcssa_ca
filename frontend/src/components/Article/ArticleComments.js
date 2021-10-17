@@ -7,7 +7,7 @@ import {
   CardContent,
   CardHeader,
   IconButton,
-  Pagination,
+  LinearProgress,
   Typography,
 } from "@mui/material";
 
@@ -28,6 +28,10 @@ const useStyles = makeStyles({
   },
   cardContent: {},
   main: {},
+  moreCommentsStatus: {
+    width: "100%",
+    margin: "auto",
+  },
 });
 
 export default function ArticleComments({ article }) {
@@ -72,7 +76,10 @@ export default function ArticleComments({ article }) {
                       variant="body1"
                       color="textSecondary"
                       component="span"
-                      style={{ whiteSpace: "pre" }}
+                      style={{
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                      }}
                     >
                       {content}
                     </Typography>
@@ -103,15 +110,25 @@ export default function ArticleComments({ article }) {
           })}
         </div>
       )}
-      {article.commentsNextToken ? (
-        <Button variant="contained" size="large">
-          加载更多
-        </Button>
-      ) : (
-        <Typography variant="h5" align="center">
-          已经到达底部
-        </Typography>
-      )}
+      <Box className="moreCommentsStatus">
+        {article.commentsNextToken ? (
+          <Box>
+            <Typography
+              variant="h5"
+              color="primary"
+              align="center"
+              sx={{ my: 3 }}
+            >
+              再往下翻一翻 加载更多
+            </Typography>
+            <LinearProgress />
+          </Box>
+        ) : (
+          <Typography variant="h5" align="center" sx={{ my: 3 }}>
+            已经到达底部
+          </Typography>
+        )}
+      </Box>
     </div>
   );
 }

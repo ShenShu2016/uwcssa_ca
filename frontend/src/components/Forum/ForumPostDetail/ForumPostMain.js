@@ -1,16 +1,18 @@
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { Avatar } from "@material-ui/core";
-import { Box } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { CardActions } from "@material-ui/core";
-import { CardHeader } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import {
+  Box,
+  Avatar,
+  Button,
+  CardActions,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { AmplifyS3Image } from "@aws-amplify/ui-react";
 const useStyles = makeStyles({
   title: {
     marginBlock: "2rem",
@@ -23,7 +25,6 @@ const useStyles = makeStyles({
 function ForumPostMain({ forumPost }) {
   const classes = useStyles();
   const {
-    id,
     content,
     imagePath,
     like,

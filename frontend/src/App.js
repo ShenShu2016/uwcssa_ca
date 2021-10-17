@@ -11,6 +11,7 @@ import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
+import Event from "./containers/EventListing";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/Forum";
@@ -22,9 +23,14 @@ import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
 import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import MuiAlert from "@material-ui/lab/Alert";
+import MarketItemDetail from "./containers/MarketItemDetail";
+import MarketListing from "./containers/MarketListing";
+import MarketPostTest from "./containers/MarketPostTest";
+import MuiAlert from "@mui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
+import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
+import PostMarketItem from "./containers/market/PostMarketItem";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
@@ -37,7 +43,6 @@ import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
-import { setUserCounts } from "./redux/actions/userActions";
 import store from "./redux/store";
 
 const theme = createTheme({
@@ -68,7 +73,6 @@ export default function App() {
   const [signInOpen, setSignInOpen] = useState(false);
   useEffect(() => {
     dispatch(load_user());
-    dispatch(setUserCounts());
     if (isAuthenticated) {
       return setSignInOpen(true);
     }
@@ -125,6 +129,11 @@ export default function App() {
                 exact
                 component={PostUwcssaJob}
               />
+              <Route
+                path="/staff/uwcssaJob/postDepartment"
+                exact
+                component={PostDepartment}
+              />
               <Route path="/forum" exact component={Forum} />
               <Route path="/forumTopic" exact component={ForumTopic} />
               <Route path="/forumPost" exact component={ForumPost} />
@@ -150,13 +159,28 @@ export default function App() {
               />
               <Route path="/article" exact component={ArticleListing} />
               <Route
-                path="/article/:articleId"
+                path="/article/:articleID"
                 exact
                 component={ArticleDetail}
+              />
+              <Route path="/MarketPostTest" exact component={MarketPostTest} /> 
+                         
+              <Route
+                path="/market/postMarketItem"
+                exact
+                component={PostMarketItem}
+              />
+              <Route path="/market" exact component={MarketListing} />         
+                   
+              <Route
+                path="/market/:marketId"
+                exact
+                component={MarketItemDetail}
               />
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
+              <Route path="/event" exact component={Event} />
               <Route>404 Not Found!</Route>
             </Switch>
           </div>

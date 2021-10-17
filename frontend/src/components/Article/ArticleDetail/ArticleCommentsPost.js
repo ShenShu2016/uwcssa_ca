@@ -44,8 +44,8 @@ export default function ArticleCommentsPost({ article }) {
     content: comment,
     like: [],
     unlike: [],
-    articleCommentArticleId: article.article.id,
-    ArticleId: article.article.id,
+    active: 1,
+    articleID: article.article.id,
   };
 
   const postComment = (e) => {

@@ -69,9 +69,10 @@ export default function PostArticle() {
   const [articleData, setArticleData] = useState({
     title: "",
     content: "",
-    topicId: "",
-    typeId: "",
+    topicID: "",
+    typeID: "",
   });
+  console.log("articleData", articleData);
   useEffect(() => {
     dispatch(setTopics());
     dispatch(setTypes()); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,7 +87,7 @@ export default function PostArticle() {
 
   const uploadArticle = async () => {
     //Upload the article
-    const { title, content, topicId, typeId } = articleData;
+    const { title, content, topicID, typeID } = articleData;
 
     const createArticleInput = {
       title,
@@ -94,8 +95,9 @@ export default function PostArticle() {
       imagePath: imgKey,
       like: [],
       unlike: [],
-      articleTopicId: topicId,
-      articleTypeId: typeId,
+      topicID: topicID,
+      typeID: typeID,
+      active: 1,
       ByCreatedAt: "Article",
     };
     const response = await dispatch(postArticle(createArticleInput));
@@ -161,15 +163,15 @@ export default function PostArticle() {
             <Select
               labelId="demo-simple-select-outlined-label2"
               id="demo-simple-select-outlined2"
-              value={articleData.topicId}
+              value={articleData.topicID}
               onChange={(e) =>
-                setArticleData({ ...articleData, topicId: e.target.value })
+                setArticleData({ ...articleData, topicID: e.target.value })
               }
               label="Topic"
             >
               {topics.map((topic) => {
                 return (
-                  <MenuItem value={topic.name} key={topic.name}>
+                  <MenuItem value={topic.id} key={topic.id}>
                     {topic.name}
                   </MenuItem>
                 );
@@ -206,15 +208,15 @@ export default function PostArticle() {
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={articleData.typeId}
+              value={articleData.typeID}
               onChange={(e) =>
-                setArticleData({ ...articleData, typeId: e.target.value })
+                setArticleData({ ...articleData, typeID: e.target.value })
               }
               label="Type"
             >
               {types.map((type) => {
                 return (
-                  <MenuItem value={type.name} key={type.name}>
+                  <MenuItem value={type.id} key={type.id}>
                     {type.name}
                   </MenuItem>
                 );
@@ -275,7 +277,7 @@ export default function PostArticle() {
         onClick={uploadArticle}
         color="primary"
       >
-        上传新的Type
+        上传 Article
       </Button>
     </div>
   );

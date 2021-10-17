@@ -2,8 +2,9 @@
 // this is an auto generated file. This will be overwritten
 
 export const getUser = /* GraphQL */ `
-  query GetUser($username: String!) {
-    getUser(username: $username) {
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
       username
       email
       owner
@@ -19,7 +20,7 @@ export const getUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -29,13 +30,14 @@ export const getUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -46,6 +48,7 @@ export const getUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -57,20 +60,13 @@ export const getUser = /* GraphQL */ `
 `;
 export const listUsers = /* GraphQL */ `
   query ListUsers(
-    $username: String
     $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listUsers(
-      username: $username
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         username
         email
         owner
@@ -86,10 +82,10 @@ export const listUsers = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -108,9 +104,11 @@ export const getUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -126,10 +124,10 @@ export const getUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -153,9 +151,11 @@ export const listUserEducations = /* GraphQL */ `
         endDate
         grade
         description
+        userID
         createdAt
         updatedAt
         user {
+          id
           username
           email
           owner
@@ -190,9 +190,11 @@ export const getUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -208,10 +210,10 @@ export const getUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -236,9 +238,11 @@ export const listUserExperiences = /* GraphQL */ `
         endDate
         industry
         description
+        userID
         createdAt
         updatedAt
         user {
+          id
           username
           email
           owner
@@ -262,8 +266,9 @@ export const listUserExperiences = /* GraphQL */ `
   }
 `;
 export const getTopic = /* GraphQL */ `
-  query GetTopic($name: String!) {
-    getTopic(name: $name) {
+  query GetTopic($id: ID!) {
+    getTopic(id: $id) {
+      id
       name
       like
       unlike
@@ -278,6 +283,9 @@ export const getTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -290,20 +298,13 @@ export const getTopic = /* GraphQL */ `
 `;
 export const listTopics = /* GraphQL */ `
   query ListTopics(
-    $name: String
     $filter: ModelTopicFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listTopics(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listTopics(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         like
         unlike
@@ -319,14 +320,15 @@ export const listTopics = /* GraphQL */ `
   }
 `;
 export const getType = /* GraphQL */ `
-  query GetType($name: String!) {
-    getType(name: $name) {
+  query GetType($id: ID!) {
+    getType(id: $id) {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -335,6 +337,9 @@ export const getType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -347,26 +352,19 @@ export const getType = /* GraphQL */ `
 `;
 export const listTypes = /* GraphQL */ `
   query ListTypes(
-    $name: String
     $filter: ModelTypeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listTypes(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -384,10 +382,14 @@ export const getArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -399,12 +401,13 @@ export const getArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -416,8 +419,9 @@ export const getArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -440,10 +444,14 @@ export const listArticles = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -452,12 +460,13 @@ export const listArticles = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -471,7 +480,7 @@ export const listArticles = /* GraphQL */ `
 export const articleByCreatedAt = /* GraphQL */ `
   query ArticleByCreatedAt(
     $ByCreatedAt: String
-    $createdAt: ModelStringKeyConditionInput
+    $activeCreatedAt: ModelArticleArticleByCreatedAtCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelArticleFilterInput
     $limit: Int
@@ -479,7 +488,7 @@ export const articleByCreatedAt = /* GraphQL */ `
   ) {
     articleByCreatedAt(
       ByCreatedAt: $ByCreatedAt
-      createdAt: $createdAt
+      activeCreatedAt: $activeCreatedAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -492,10 +501,14 @@ export const articleByCreatedAt = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -504,12 +517,13 @@ export const articleByCreatedAt = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -527,8 +541,9 @@ export const getArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -537,10 +552,14 @@ export const getArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -549,12 +568,13 @@ export const getArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -577,8 +597,9 @@ export const listArticleComments = /* GraphQL */ `
         content
         like
         unlike
+        active
+        articleID
         createdAt
-        ArticleId
         updatedAt
         article {
           id
@@ -587,6 +608,9 @@ export const listArticleComments = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -598,18 +622,18 @@ export const listArticleComments = /* GraphQL */ `
     }
   }
 `;
-export const articleCommentByCreatedAt = /* GraphQL */ `
-  query ArticleCommentByCreatedAt(
-    $ArticleId: String
-    $createdAt: ModelStringKeyConditionInput
+export const byArticleID = /* GraphQL */ `
+  query ByArticleID(
+    $articleID: ID
+    $activeCreatedAt: ModelArticleCommentByArticleIDCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelArticleCommentFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    ArticleCommentByCreatedAt(
-      ArticleId: $ArticleId
-      createdAt: $createdAt
+    byArticleID(
+      articleID: $articleID
+      activeCreatedAt: $activeCreatedAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -620,8 +644,9 @@ export const articleCommentByCreatedAt = /* GraphQL */ `
         content
         like
         unlike
+        active
+        articleID
         createdAt
-        ArticleId
         updatedAt
         article {
           id
@@ -630,6 +655,9 @@ export const articleCommentByCreatedAt = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -642,8 +670,9 @@ export const articleCommentByCreatedAt = /* GraphQL */ `
   }
 `;
 export const getDepartment = /* GraphQL */ `
-  query GetDepartment($name: String!) {
-    getDepartment(name: $name) {
+  query GetDepartment($id: ID!) {
+    getDepartment(id: $id) {
+      id
       name
       introduction
       email
@@ -661,6 +690,7 @@ export const getDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -677,20 +707,13 @@ export const getDepartment = /* GraphQL */ `
 `;
 export const listDepartments = /* GraphQL */ `
   query ListDepartments(
-    $name: String
     $filter: ModelDepartmentFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listDepartments(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listDepartments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         introduction
         email
@@ -717,6 +740,7 @@ export const getUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -725,6 +749,7 @@ export const getUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -748,6 +773,8 @@ export const getUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -770,6 +797,7 @@ export const listUwcssaJobs = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -778,6 +806,60 @@ export const listUwcssaJobs = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const byDepartmentID = /* GraphQL */ `
+  query ByDepartmentID(
+    $departmentID: ID
+    $activeCreatedAt: ModelUwcssaJobByDepartmentIDCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUwcssaJobFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byDepartmentID(
+      departmentID: $departmentID
+      activeCreatedAt: $activeCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imagePath
+        departmentID
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        updatedAt
+        department {
+          id
           name
           introduction
           email
@@ -807,6 +889,8 @@ export const getUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -815,6 +899,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -823,6 +908,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -839,16 +925,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
     }
   }
 `;
@@ -871,6 +947,8 @@ export const listUwcssaJobResumes = /* GraphQL */ `
         phone
         message
         createdAt
+        uwcssaJobID
+        uwcssaJobResumeStatus
         updatedAt
         uwcssaJob {
           id
@@ -879,6 +957,7 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -889,65 +968,55 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           owner
         }
         owner
-        uwcssaJobResumeStatus {
-          status
-          message
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
   }
 `;
-export const getUwcssaJobResumeStatus = /* GraphQL */ `
-  query GetUwcssaJobResumeStatus($status: String!) {
-    getUwcssaJobResumeStatus(status: $status) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-    }
-  }
-`;
-export const listUwcssaJobResumeStatuses = /* GraphQL */ `
-  query ListUwcssaJobResumeStatuses(
-    $status: String
-    $filter: ModelUwcssaJobResumeStatusFilterInput
+export const byUwcssaJobID = /* GraphQL */ `
+  query ByUwcssaJobID(
+    $uwcssaJobID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUwcssaJobResumeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listUwcssaJobResumeStatuses(
-      status: $status
+    byUwcssaJobID(
+      uwcssaJobID: $uwcssaJobID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
     ) {
       items {
-        status
+        id
+        name
+        email
+        resumeFilePath
+        phone
         message
         createdAt
+        uwcssaJobID
+        uwcssaJobResumeStatus
         updatedAt
-        uwcssaJobResumes {
-          nextToken
+        uwcssaJob {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imagePath
+          departmentID
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          updatedAt
+          owner
         }
         owner
       }
@@ -956,19 +1025,23 @@ export const listUwcssaJobResumeStatuses = /* GraphQL */ `
   }
 `;
 export const getForumTopic = /* GraphQL */ `
-  query GetForumTopic($name: String!) {
-    getForumTopic(name: $name) {
+  query GetForumTopic($id: ID!) {
+    getForumTopic(id: $id) {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -980,27 +1053,20 @@ export const getForumTopic = /* GraphQL */ `
 `;
 export const listForumTopics = /* GraphQL */ `
   query ListForumTopics(
-    $name: String
     $filter: ModelForumTopicFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listForumTopics(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listForumTopics(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1009,21 +1075,25 @@ export const listForumTopics = /* GraphQL */ `
   }
 `;
 export const getForumSubTopic = /* GraphQL */ `
-  query GetForumSubTopic($name: String!) {
-    getForumSubTopic(name: $name) {
+  query GetForumSubTopic($id: ID!) {
+    getForumSubTopic(id: $id) {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1031,12 +1101,14 @@ export const getForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1047,26 +1119,22 @@ export const getForumSubTopic = /* GraphQL */ `
 `;
 export const listForumSubTopics = /* GraphQL */ `
   query ListForumSubTopics(
-    $name: String
     $filter: ModelForumSubTopicFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listForumSubTopics(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listForumSubTopics(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1087,20 +1155,26 @@ export const getForumPost = /* GraphQL */ `
   query GetForumPost($id: ID!) {
     getForumPost(id: $id) {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1120,8 +1194,9 @@ export const getForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1139,17 +1214,22 @@ export const listForumPosts = /* GraphQL */ `
     listForumPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1163,18 +1243,18 @@ export const listForumPosts = /* GraphQL */ `
     }
   }
 `;
-export const forumPostByCreatedAt = /* GraphQL */ `
-  query ForumPostByCreatedAt(
-    $ByCreatedAt: String
-    $createdAt: ModelStringKeyConditionInput
+export const byForumSubTopicID = /* GraphQL */ `
+  query ByForumSubTopicID(
+    $forumSubTopicID: ID
+    $activeCreatedAt: ModelForumPostByForumSubTopicIDCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelForumPostFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    forumPostByCreatedAt(
-      ByCreatedAt: $ByCreatedAt
-      createdAt: $createdAt
+    byForumSubTopicID(
+      forumSubTopicID: $forumSubTopicID
+      activeCreatedAt: $activeCreatedAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -1182,17 +1262,22 @@ export const forumPostByCreatedAt = /* GraphQL */ `
     ) {
       items {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1213,22 +1298,28 @@ export const getForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1245,8 +1336,8 @@ export const getForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1271,17 +1362,20 @@ export const listForumPostComments = /* GraphQL */ `
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1294,18 +1388,18 @@ export const listForumPostComments = /* GraphQL */ `
     }
   }
 `;
-export const byForumPostId = /* GraphQL */ `
-  query ByForumPostId(
-    $ForumPostId: String
-    $createdAt: ModelStringKeyConditionInput
+export const byForumPostID = /* GraphQL */ `
+  query ByForumPostID(
+    $forumPostID: ID
+    $activeCreatedAt: ModelForumPostCommentByForumPostIDCompositeKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelForumPostCommentFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byForumPostId(
-      ForumPostId: $ForumPostId
-      createdAt: $createdAt
+    byForumPostID(
+      forumPostID: $forumPostID
+      activeCreatedAt: $activeCreatedAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -1316,17 +1410,20 @@ export const byForumPostId = /* GraphQL */ `
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1346,25 +1443,28 @@ export const getForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1393,16 +1493,17 @@ export const listForumPostSubComments = /* GraphQL */ `
         content
         like
         unlike
-        ForumPostCommentId
         createdAt
+        forumPostCommentID
         updatedAt
         forumPostComment {
           id
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1412,17 +1513,17 @@ export const listForumPostSubComments = /* GraphQL */ `
     }
   }
 `;
-export const byForumPostCommentId = /* GraphQL */ `
-  query ByForumPostCommentId(
-    $ForumPostCommentId: String
+export const byForumPostCommentID = /* GraphQL */ `
+  query ByForumPostCommentID(
+    $forumPostCommentID: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelForumPostSubCommentFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byForumPostCommentId(
-      ForumPostCommentId: $ForumPostCommentId
+    byForumPostCommentID(
+      forumPostCommentID: $forumPostCommentID
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -1434,16 +1535,17 @@ export const byForumPostCommentId = /* GraphQL */ `
         content
         like
         unlike
-        ForumPostCommentId
         createdAt
+        forumPostCommentID
         updatedAt
         forumPostComment {
           id
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1454,8 +1556,9 @@ export const byForumPostCommentId = /* GraphQL */ `
   }
 `;
 export const getMarketType = /* GraphQL */ `
-  query GetMarketType($name: String!) {
-    getMarketType(name: $name) {
+  query GetMarketType($id: ID!) {
+    getMarketType(id: $id) {
+      id
       name
       createdAt
       updatedAt
@@ -1469,7 +1572,9 @@ export const getMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1481,20 +1586,13 @@ export const getMarketType = /* GraphQL */ `
 `;
 export const listMarketTypes = /* GraphQL */ `
   query ListMarketTypes(
-    $name: String
     $filter: ModelMarketTypeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listMarketTypes(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listMarketTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         createdAt
         updatedAt
@@ -1508,8 +1606,9 @@ export const listMarketTypes = /* GraphQL */ `
   }
 `;
 export const getMarketItemCategory = /* GraphQL */ `
-  query GetMarketItemCategory($name: String!) {
-    getMarketItemCategory(name: $name) {
+  query GetMarketItemCategory($id: ID!) {
+    getMarketItemCategory(id: $id) {
+      id
       name
       createdAt
       updatedAt
@@ -1523,7 +1622,9 @@ export const getMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1535,20 +1636,17 @@ export const getMarketItemCategory = /* GraphQL */ `
 `;
 export const listMarketItemCategories = /* GraphQL */ `
   query ListMarketItemCategories(
-    $name: String
     $filter: ModelMarketItemCategoryFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
     listMarketItemCategories(
-      name: $name
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
     ) {
       items {
+        id
         name
         createdAt
         updatedAt
@@ -1571,10 +1669,13 @@ export const getMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -1584,6 +1685,7 @@ export const getMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -1608,7 +1710,9 @@ export const getMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1635,7 +1739,9 @@ export const getMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1660,16 +1766,20 @@ export const listMarketItems = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -1721,16 +1831,20 @@ export const getMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -1787,7 +1901,9 @@ export const listMarketItemCars = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -1820,16 +1936,20 @@ export const getMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -1891,7 +2011,9 @@ export const listMarketItemHomes = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner

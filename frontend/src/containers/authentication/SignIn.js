@@ -92,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const [ signInState, setsignInState] = useState(); //logging state
   const [ success, setSuccess] = useState(true);
   const timer = useRef();
@@ -113,6 +114,7 @@ export default function SignIn() {
     }
   };
 
+
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
@@ -128,13 +130,13 @@ export default function SignIn() {
 
   const handleSubmit = async function (event) {
     event.preventDefault();
-    setsignInState("logging in");
+    setSignInState("logging in");
     const response = await dispatch(signIn(username, password));
     if (response.result) {
       // setLogged(true);
     } else {
       //alert(response.error.message);
-      setsignInState("logging failed");
+      setSignInState("logging failed");
     }
   };
 
@@ -206,6 +208,7 @@ export default function SignIn() {
             label="我不是机器人"
           />
           <Grid container marginTop="1rem">
+
             <Grid item xs={5} sm={8} md={6}
               marginLeft="2rem"               
             >
@@ -233,6 +236,7 @@ export default function SignIn() {
               }}/>
             )}
             </Button>           
+
             </Grid>
             <Grid>
               <Button
@@ -248,6 +252,7 @@ export default function SignIn() {
               </Button>
             </Grid>
           </Grid>
+
         </form>        
           {/* Google的登入按钮 */}
           <Grid item xs={10}  lg={10}
@@ -260,14 +265,16 @@ export default function SignIn() {
               variant="outlined"
               className={classes.third_party_button}
               onClick={(event) => handleGoogleSignIn(event)}              
-            >
+            disabled>
             <Grid item xs={8} lg={6}>
+
               <img
                 src={googleLogo}
                 alt="googleLogo"
                 className={classes.googleLogo}  
               />
             </Grid>
+
             <Grid item xs={12} marginRight= "3rem">Google Sign in</Grid>
             </Button>
           </Grid>                
@@ -285,15 +292,18 @@ export default function SignIn() {
               className={classes.third_party_button}
             >
             <Grid item xs={8} lg={6}>
+
               <img
                 src={facebookLogo}
                 alt="facebookLogo"
                 className={classes.facebookLogo}
               />
             </Grid>
+
             <Grid item xs={12} marginRight= "3rem">Facebook Sign in</Grid>
             </Button>
           </Grid>
+
         {/* 之后增加点按转入网站的功能 */}
         <Box className={classes.more_third_party}>
           <img

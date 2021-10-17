@@ -6,13 +6,14 @@ import {
   Button,
   CardActions,
   CardHeader,
+  CardMedia,
   Divider,
   Typography,
 } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
-import React from "react";
+import Storage from "@aws-amplify/storage";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
 
 export default function Main({ article }) {
   const classes = useStyles();
+  const [imageURL, setImageURL] = useState(null);
   const {
     title,
     content,
@@ -43,6 +45,28 @@ export default function Main({ article }) {
     like,
     unlike,
   } = article.article;
+  // console.log("imageURL", imageURL);
+
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const imageAccessURL = await Storage.get(imagePath, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        // console.log("imageAccessURL", imageAccessURL);
+        setImageURL(imageAccessURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setImageURL(null);
+      }
+    };
+    if (imagePath) {
+      getImage();
+    }
+  }, [imagePath]);
+
   return (
     <div>
       {Object.keys(article.article).length === 0 ? (
@@ -85,18 +109,15 @@ export default function Main({ article }) {
               19
             )}`}
           />
+          <CardMedia component="img" image={imageURL} />
 
-          {/* <CardMedia className={classes.media} image={image} /> */}
-          <Box sx={{ my: 2 }}>
-            <AmplifyS3Image path={imagePath} />
-          </Box>
           <Divider />
           <Box sx={{ my: 2 }}>
             <Typography
               variant="body1"
               className={classes.content}
               component="span"
-              style={{ whiteSpace: "pre" }}
+              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
             >
               {content}
             </Typography>

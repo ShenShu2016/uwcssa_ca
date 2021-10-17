@@ -1,4 +1,4 @@
 export const ActionTypes = {
-  SET_UWCSSAJOBS: "SET_UWCSSAJOBS",
-  SET_DEPARTMENTS: "SET_DEPARTMENTS",
+  SET_UWCSSA_JOBS: "career/setJobs",
+  SET_DEPARTMENTS: "career/setDepartments",
 };

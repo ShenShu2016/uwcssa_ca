@@ -12,5 +12,5 @@
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
   },
-  "cSpell.words": ["awsconfig"]
+  "cSpell.words": ["awsconfig", "UWCSSA"]
 }

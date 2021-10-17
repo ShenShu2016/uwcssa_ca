@@ -18,6 +18,7 @@ import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
+// import Storage from "@aws-amplify/storage";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginTop: "4rem",
     maxWidth: "960px",
-    paddingInline: "1rem",
+    paddingInline: "0.5rem",
   },
   title: {
     textAlign: "center",
@@ -50,6 +51,20 @@ export default function ArticleComponent() {
   const articles = useSelector((state) => state.allArticles.articles);
   const classes = useStyles();
 
+  // const handleImage = async (imagePath) => {
+  //   try {
+  //     const imageAccessURL = await Storage.get(imagePath, {
+  //       level: "public",
+  //       expires: 120,
+  //       download: false,
+  //     });
+  //     console.log("imageAccessURL", imageAccessURL);
+  //     return imageAccessURL;
+  //   } catch (error) {
+  //     console.error("error accessing the Image from s3", error);
+  //   }
+  // };
+
   const renderList = articles.map((article) => {
     const {
       id,
@@ -66,6 +81,7 @@ export default function ArticleComponent() {
     return (
       <Paper className={classes.paper} key={id} elevation={5}>
         <CardHeader
+          sx={{ p: 1 }}
           avatar={
             <Avatar
               aria-label="recipe"
@@ -89,9 +105,23 @@ export default function ArticleComponent() {
           <Grid container columns={12} spacing={1}>
             <Grid item xs={7}>
               <CardContent sx={{ p: 1 }}>
-                <Typography variant="h6">{title}</Typography>
-                <Typography variant="body2" color="textSecondary" paragraph>
-                  {content.slice(0, 50)}
+                <Typography
+                  variant="subtitle2"
+                  style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  sx={{ maxHeight: "300px" }}
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
+                    overflow: "hidden",
+                  }}
+                >
+                  {content}
                 </Typography>
               </CardContent>
             </Grid>
@@ -99,6 +129,7 @@ export default function ArticleComponent() {
               <div className={classes.s3image}>
                 <CardActionArea>
                   <AmplifyS3Image path={imagePath} />
+                  {/* <img src={handleImage(imagePath)} alt="" /> */}
                 </CardActionArea>
               </div>
             </Grid>

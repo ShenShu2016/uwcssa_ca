@@ -28,12 +28,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 0.25rem",
   },
   bbsTag: { marginBottom: "5rem", marginInline: "0.2rem" },
-  bbsTagButton: {
-    borderRadius: 16,
-    marginLeft: "1rem",
-    marginRight: "1rem",
-    marginBlock: "0.3rem",
-  },
   gif: {
     maxWidth: 750,
     width: "95%",

@@ -20,11 +20,15 @@ import { setUserCounts } from "../../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: "block",
     backgroundColor: "#fff",
     paddingBottom: "2rem",
     backgroundImage: `url(${cssalogo})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
+    [theme.breakpoints.only("lg")]: {
+      height: "835px",
+    },
   },
   webIntro: {
     minWidth: "40%",
@@ -61,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "3rem",
     marginBottom: "3rem",
     fontWeight: 700,
+  },
+  buttonBox: {
+    marginBottom: "1rem",
   },
   repoInfo: {
     display: "flex",
@@ -173,7 +180,10 @@ export default function UwcssaIntro() {
                         </Grid>
                       </Grid>
                     </Box>
-                    {isAuthenticated ? authButton() : guestButton()}
+                    <Box className={classes.buttonBox}>
+                      {isAuthenticated ? authButton() : guestButton()}
+                    </Box>
+
                     <Grid container spacing={1} className={classes.repoInfo}>
                       <Grid item xs={12} align="center">
                         <Typography variant="h6" gutterBottom>

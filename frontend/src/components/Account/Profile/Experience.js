@@ -89,7 +89,7 @@ export default function Experience({ user, userAuth }) {
             username={user.username}
           />
         )}
-        {user.UserExperiences.items.map((experience) => {
+        {user.userExperiences.items.map((experience) => {
           const {
             companyName,
             description,

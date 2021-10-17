@@ -7,8 +7,8 @@ type User
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["username"]) {
+  ) {
+  id: ID!
   username: String!
   email: String!
   owner: String!
@@ -38,8 +38,9 @@ type User
         { allow: public, operations: [read], provider: iam }
       ]
     )
-  UserEducations: [UserEducation] @connection(name: "UserUserEducations")
-  UserExperiences: [UserExperience] @connection(name: "UserUserExperiences")
+  userEducations: [UserEducation] @connection(keyName: "byUser", fields: ["id"])
+  userExperiences: [UserExperience]
+    @connection(keyName: "byUser", fields: ["id"])
 }
 
 type UserEducation
@@ -51,16 +52,18 @@ type UserEducation
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   school: String!
   degree: String
   fieldOfStudy: String
-  startDate: AWSDateTime
+  startDate: AWSDateTime!
   endDate: AWSDateTime
   grade: Int
   description: String
-  user: User! @connection(name: "UserUserEducations")
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 type UserExperience
   @model
@@ -71,17 +74,19 @@ type UserExperience
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   title: String!
   employmentType: String
   companyName: String!
   location: String
-  startDate: AWSDateTime
+  startDate: AWSDateTime!
   endDate: AWSDateTime
   industry: String
   description: String
-  user: User! @connection(name: "UserUserExperiences")
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type Topic
@@ -93,12 +98,12 @@ type Topic
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["name"]) {
+  ) {
+  id: ID!
   name: String!
   like: [String]!
   unlike: [String]!
-  articles: [Article] @connection(name: "TopicArticles")
+  articles: [Article] @connection(keyName: "byTopic", fields: ["id"])
 }
 
 type Type
@@ -110,13 +115,12 @@ type Type
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["name"]) {
+  ) {
+  id: ID!
   name: String!
   like: [String]!
   unlike: [String]!
-  articles: [Article] @connection(name: "TypeArticles")
-  owner: String
+  articles: [Article] @connection(keyName: "byType", fields: ["id"])
 }
 
 type Article
@@ -131,18 +135,24 @@ type Article
   )
   @key(
     name: "articleByCreatedAt"
-    fields: ["ByCreatedAt", "createdAt"]
+    fields: ["ByCreatedAt", "active", "createdAt"]
     queryField: "articleByCreatedAt"
-  ) {
+  )
+  @key(name: "byTopic", fields: ["topicID"])
+  @key(name: "byType", fields: ["typeID"]) {
   id: ID!
   title: String!
   content: String!
   imagePath: String
   like: [String]!
   unlike: [String]!
-  topic: Topic! @connection(name: "TopicArticles")
-  type: Type! @connection(name: "TypeArticles")
-  articleComments: [ArticleComment] @connection(name: "ArticleArticleComments")
+  topicID: ID!
+  topic: Topic! @connection(fields: ["topicID"])
+  typeID: ID!
+  active: Int!
+  type: Type! @connection(fields: ["typeID"])
+  articleComments: [ArticleComment]
+    @connection(keyName: "byArticle", fields: ["id"])
   createdAt: AWSDateTime!
   ByCreatedAt: String! #用来当第二索引的
 }
@@ -158,17 +168,19 @@ type ArticleComment
     ]
   )
   @key(
-    name: "ByArticleId"
-    fields: ["ArticleId", "createdAt"]
-    queryField: "ArticleCommentByCreatedAt"
-  ) {
+    name: "byArticleID"
+    fields: ["articleID", "active", "createdAt"]
+    queryField: "byArticleID"
+  )
+  @key(name: "byArticle", fields: ["articleID", "createdAt"]) {
   id: ID!
   content: String!
   like: [String]!
   unlike: [String]!
-  article: Article! @connection(name: "ArticleArticleComments")
+  active: Int!
+  articleID: ID!
+  article: Article! @connection(fields: ["articleID"])
   createdAt: AWSDateTime!
-  ArticleId: String! #用来排日期的
 }
 
 type Department
@@ -180,15 +192,15 @@ type Department
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["name"]) {
+  ) {
+  id: ID!
   name: String!
   introduction: String
   email: String
   leader: String
   like: [String]!
   unlike: [String]!
-  uwcssaJobs: [UwcssaJob] @connection(name: "DepartmentUwcssaJobs")
+  uwcssaJobs: [UwcssaJob] @connection(keyName: "byDepartment", fields: ["id"])
 }
 
 type UwcssaJob
@@ -200,59 +212,63 @@ type UwcssaJob
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(
+    name: "byDepartmentID"
+    fields: ["departmentID", "active", "createdAt"]
+    queryField: "byDepartmentID"
+  )
+  @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
   id: ID!
   introduction: String!
   title: String!
   requirements: [String]!
   bonus: [String]!
   imagePath: String
-  department: Department @connection(name: "DepartmentUwcssaJobs")
+  departmentID: ID!
+  department: Department @connection(fields: ["departmentID"])
   benefits: [String]!
   schedule: [String]!
   like: [String]!
   unlike: [String]!
-  active: Boolean!
+  active: Int!
+  createdAt: AWSDateTime!
   uwcssaJobResumes: [UwcssaJobResume]
-    @connection(name: "UwcssaJobUwcssaJobResumes")
+    @connection(keyName: "byUwcssaJob", fields: ["id"])
 }
 
 type UwcssaJobResume
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner } # 需要改只能上传和查看
       { allow: groups, groups: ["admin", "staff"] }
       # { allow: private, operations: [read] }
       # { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(
+    name: "byUwcssaJobID"
+    fields: ["uwcssaJobID", "createdAt"]
+    queryField: "byUwcssaJobID"
+  )
+  @key(name: "byUwcssaJob", fields: ["uwcssaJobID", "createdAt"]) {
   id: ID!
   name: String!
   email: String!
   resumeFilePath: String
   phone: String!
   message: String
+  createdAt: AWSDateTime!
+  uwcssaJobID: ID!
+  uwcssaJob: UwcssaJob! @connection(fields: ["uwcssaJobID"])
   uwcssaJobResumeStatus: UwcssaJobResumeStatus!
-    @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
-  uwcssaJob: UwcssaJob! @connection(name: "UwcssaJobUwcssaJobResumes")
 }
 
-type UwcssaJobResumeStatus
-  @model
-  @auth(
-    rules: [
-      { allow: owner }
-      { allow: groups, groups: ["admin", "staff"] }
-      # { allow: private, operations: [read] }
-      # { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(fields: ["status"]) {
-  status: String!
-  message: String
-  uwcssaJobResumes: [UwcssaJobResume]
-    @connection(name: "UwcssaJobResumeStatusUwcssaJobResumes")
+enum UwcssaJobResumeStatus {
+  pending
+  inProgress
+  finish
 }
 
 type ForumTopic
@@ -264,12 +280,13 @@ type ForumTopic
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["name"]) {
+  ) {
+  id: ID!
   name: String!
   like: [String]!
   unlike: [String]!
-  subTopics: [ForumSubTopic]! @connection(name: "ForumTopicForumSubTopic")
+  forumSubTopics: [ForumSubTopic]!
+    @connection(keyName: "byForumTopic", fields: ["id"])
 }
 
 type ForumSubTopic
@@ -282,12 +299,17 @@ type ForumSubTopic
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(fields: ["name"]) {
+  @key(name: "byForumTopic", fields: ["forumTopicID", "createdAt"]) {
+  id: ID!
   name: String!
   like: [String]!
   unlike: [String]!
-  forumTopic: ForumTopic! @connection(name: "ForumTopicForumSubTopic")
-  forumPosts: [ForumPost]! @connection(name: "ForumSubTopicForumPost")
+  active: Int!
+  forumTopicID: ID!
+  forumTopic: ForumTopic! @connection(fields: ["forumTopicID"])
+  forumPosts: [ForumPost]!
+    @connection(keyName: "byForumSubTopic", fields: ["id"])
+  createdAt: AWSDateTime!
 }
 
 type ForumPost
@@ -301,20 +323,23 @@ type ForumPost
     ]
   )
   @key(
-    name: "forumPostByCreatedAt"
-    fields: ["ByCreatedAt", "createdAt"]
-    queryField: "forumPostByCreatedAt"
-  ) {
+    name: "byForumSubTopicID"
+    fields: ["forumSubTopicID", "active", "createdAt"]
+    queryField: "byForumSubTopicID"
+  )
+  @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"]) {
   id: ID!
+  title: String!
   content: String!
   imagePath: String
   like: [String]!
   unlike: [String]!
-  ByCreatedAt: String!
   createdAt: AWSDateTime!
-  forumSubTopic: ForumSubTopic! @connection(name: "ForumSubTopicForumPost")
+  active: Int!
+  forumSubTopicID: ID!
+  forumSubTopic: ForumSubTopic! @connection(fields: ["forumSubTopicID"])
   forumPostComments: [ForumPostComment]!
-    @connection(name: "ForumPostForumPostComment")
+    @connection(keyName: "byForumPost", fields: ["id"])
 }
 
 type ForumPostComment
@@ -328,19 +353,21 @@ type ForumPostComment
     ]
   )
   @key(
-    name: "byForumPostId"
-    fields: ["ForumPostId", "createdAt"]
-    queryField: "byForumPostId"
-  ) {
+    name: "byForumPostID"
+    fields: ["forumPostID", "active", "createdAt"]
+    queryField: "byForumPostID"
+  )
+  @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
   content: String!
   like: [String]!
   unlike: [String]!
-  ForumPostId: String!
   createdAt: AWSDateTime!
-  forumPost: ForumPost! @connection(name: "ForumPostForumPostComment")
+  active: Int!
+  forumPostID: ID!
+  forumPost: ForumPost! @connection(fields: ["forumPostID"])
   forumPostSubComments: [ForumPostSubComment]!
-    @connection(name: "ForumPostCommentForumPostSubComment")
+    @connection(keyName: "byForumPostComment", fields: ["id"])
 }
 
 type ForumPostSubComment
@@ -354,18 +381,22 @@ type ForumPostSubComment
     ]
   )
   @key(
-    name: "byForumPostCommentId"
-    fields: ["ForumPostCommentId", "createdAt"]
-    queryField: "byForumPostCommentId"
+    name: "byForumPostCommentID"
+    fields: ["forumPostCommentID", "createdAt"]
+    queryField: "byForumPostCommentID"
+  )
+  @key(
+    name: "byForumPostComment"
+    fields: ["forumPostCommentID", "createdAt"]
   ) {
   id: ID!
   content: String!
   like: [String]!
   unlike: [String]!
-  ForumPostCommentId: String!
   createdAt: AWSDateTime!
+  forumPostCommentID: ID!
   forumPostComment: ForumPostComment!
-    @connection(name: "ForumPostCommentForumPostSubComment")
+    @connection(fields: ["forumPostCommentID"])
 }
 
 type MarketType
@@ -378,10 +409,10 @@ type MarketType
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["name"]) {
+  ) {
+  id: ID!
   name: String!
-  marketItems: [MarketItem] @connection(name: "MarketTypeMarketItems")
+  marketItems: [MarketItem] @connection(keyName: "byMarketType", fields: ["id"])
 }
 type MarketItemCategory
   # 工具，电子产品，保健
@@ -393,10 +424,11 @@ type MarketItemCategory
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(fields: ["name"]) {
+  ) {
+  id: ID!
   name: String!
-  marketItems: [MarketItem] @connection(name: "MarketItemCategoryMarketItems")
+  marketItems: [MarketItem]
+    @connection(keyName: "byMarketItemCategory", fields: ["id"])
 }
 
 type MarketItem
@@ -408,6 +440,11 @@ type MarketItem
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(name: "byMarketType", fields: ["marketTypeID", "createdAt"])
+  @key(
+    name: "byMarketItemCategory"
+    fields: ["marketItemCategoryID", "createdAt"]
   ) {
   id: ID!
   name: String!
@@ -416,12 +453,15 @@ type MarketItem
   price: Int
   description: String
   location: String
-  marketType: MarketType! @connection(name: "MarketTypeMarketItems")
+  marketTypeID: ID!
+  marketType: MarketType! @connection(fields: ["marketTypeID"])
   condition: String
+  marketItemCategoryID: ID!
   marketItemCategory: MarketItemCategory!
-    @connection(name: "MarketItemCategoryMarketItems")
+    @connection(fields: ["marketItemCategoryID"])
   marketItemCar: MarketItemCar @connection(name: "MarketItemMarketItemCar")
   marketItemHome: MarketItemHome @connection(name: "MarketItemMarketItemHome")
+  createdAt: AWSDateTime!
 }
 
 type MarketItemCar

@@ -42,13 +42,13 @@ export const selectedArticleReducer = (
   switch (type) {
     case ActionTypes.SELECTED_ARTICLE:
       return { ...state, article: payload };
-    case ActionTypes.SELECTED_ARTICLECOMMENTS:
+    case ActionTypes.SELECTED_ARTICLE_COMMENTS:
       return {
         ...state,
         comments: payload.items,
         commentsNextToken: payload.nextToken,
       };
-    case ActionTypes.LOADMORE_ARTICLECOMMENTS:
+    case ActionTypes.LOAD_MORE_ARTICLE_COMMENTS:
       return {
         ...state,
         comments: [...state.comments, ...payload.items],

@@ -1,6 +1,5 @@
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/uwcssaJob-action-types";
-import { listUwcssaJobs } from "../../graphql/queries";
 
 const departments = `query ListDepartments {
   listDepartments {
@@ -36,6 +35,51 @@ const departments = `query ListDepartments {
   }
 }`;
 
+export const listUwcssaJobs = `query ListUwcssaJobs {
+    listUwcssaJobs {
+      items {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imagePath
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        updatedAt
+        department {
+          name
+          introduction
+          email
+          leader
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        uwcssaJobResumes {
+          items {
+            id
+            name
+            email
+            resumeFilePath
+            phone
+            message
+            createdAt
+            updatedAt
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const setUwcssaJobs = () => async (dispatch) => {
   try {
     const uwcssaJobData = await API.graphql({
@@ -43,7 +87,7 @@ export const setUwcssaJobs = () => async (dispatch) => {
       authMode: "AWS_IAM",
     });
     dispatch({
-      type: ActionTypes.SET_UWCSSAJOBS,
+      type: ActionTypes.SET_UWCSSA_JOBS,
       payload: uwcssaJobData.data.listUwcssaJobs.items,
     });
   } catch (error) {

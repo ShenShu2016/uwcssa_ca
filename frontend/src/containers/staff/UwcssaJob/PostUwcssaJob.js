@@ -32,23 +32,11 @@ const useStyles = makeStyles({
     paddingTop: "3rem",
     paddingInline: "1rem",
   },
-  title: {
-    marginBlock: "2rem",
-  },
-  intro: {
-    marginBlock: "2rem",
-  },
-  department: {
-    marginBlock: "2rem",
-  },
   table: {
     marginBlock: "2rem",
   },
   button: {
     cursor: "pointer",
-  },
-  submit: {
-    marginBlock: "2rem",
   },
 });
 export default function PostUwcssaJob(props) {
@@ -71,7 +59,7 @@ export default function PostUwcssaJob(props) {
     departmentName: "",
   });
 
-  let departmentList = [];
+  // let departmentList = [];
 
   const handleSubmit = async () => {
     if (
@@ -82,15 +70,17 @@ export default function PostUwcssaJob(props) {
       setInfo(true);
       return;
     }
-    let allDepartments = await API.graphql(graphqlOperation(listDepartments));
-    allDepartments.data.listDepartments.items.map((data) =>
-      departmentList.push(data.name)
-    );
-    console.log("list:", departmentList);
-    if (departmentList.indexOf(uwcssaJobData.departmentName) < 0) {
+    let targetDepartment = await API.graphql({
+      query: listDepartments,
+      variables: { filter: { name: { eq: uwcssaJobData.departmentName } } },
+      authMode: "AWS_IAM",
+    });
+    if (targetDepartment.data.listDepartments.items.length === 0) {
       setDepart(true);
       return;
     }
+    const departmentID = targetDepartment.data.listDepartments.items[0].id;
+    console.log("departmentID: ", departmentID);
     console.log(uwcssaJobData);
     try {
       const createUwcssaJobInput = {
@@ -102,8 +92,8 @@ export default function PostUwcssaJob(props) {
         bonus: uwcssaJobData.bonus.filter((e) => e !== ""),
         like: [""],
         unlike: [""],
-        active: true,
-        uwcssaJobDepartmentId: uwcssaJobData.departmentName,
+        active: 1,
+        departmentID: departmentID,
       };
       const newUwcssaJob = await API.graphql(
         graphqlOperation(createUwcssaJob, { input: createUwcssaJobInput })
@@ -146,7 +136,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.title}
-          className={classes.title}
+          sx={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, title: e.target.value })
           }
@@ -159,7 +149,7 @@ export default function PostUwcssaJob(props) {
           variant="outlined"
           fullWidth
           value={uwcssaJobData.departmentName}
-          className={classes.department}
+          sx={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setUwcssaJobData({
               ...uwcssaJobData,
@@ -177,7 +167,7 @@ export default function PostUwcssaJob(props) {
           multiline
           minRows={5}
           value={uwcssaJobData.introduction}
-          className={classes.intro}
+          sx={{ marginBlock: "2rem" }}
           onChange={(e) =>
             setUwcssaJobData({ ...uwcssaJobData, introduction: e.target.value })
           }
@@ -463,7 +453,7 @@ export default function PostUwcssaJob(props) {
       <Button
         variant="contained"
         color="primary"
-        className={classes.submit}
+        sx={{ marginBlock: "2rem" }}
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >

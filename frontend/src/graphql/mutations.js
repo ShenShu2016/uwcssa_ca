@@ -7,6 +7,7 @@ export const createUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     createUser(input: $input, condition: $condition) {
+      id
       username
       email
       owner
@@ -22,7 +23,7 @@ export const createUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -32,13 +33,14 @@ export const createUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -49,6 +51,7 @@ export const createUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -64,6 +67,7 @@ export const updateUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
+      id
       username
       email
       owner
@@ -79,7 +83,7 @@ export const updateUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -89,13 +93,14 @@ export const updateUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -106,6 +111,7 @@ export const updateUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -121,6 +127,7 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
+      id
       username
       email
       owner
@@ -136,7 +143,7 @@ export const deleteUser = /* GraphQL */ `
       updatedAt
       uWindsorEmail
       tags
-      UserEducations {
+      userEducations {
         items {
           id
           school
@@ -146,13 +153,14 @@ export const deleteUser = /* GraphQL */ `
           endDate
           grade
           description
+          userID
           createdAt
           updatedAt
           owner
         }
         nextToken
       }
-      UserExperiences {
+      userExperiences {
         items {
           id
           title
@@ -163,6 +171,7 @@ export const deleteUser = /* GraphQL */ `
           endDate
           industry
           description
+          userID
           createdAt
           updatedAt
           owner
@@ -186,9 +195,11 @@ export const createUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -204,10 +215,10 @@ export const createUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -229,9 +240,11 @@ export const updateUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -247,10 +260,10 @@ export const updateUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -272,9 +285,11 @@ export const deleteUserEducation = /* GraphQL */ `
       endDate
       grade
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -290,10 +305,10 @@ export const deleteUserEducation = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -316,9 +331,11 @@ export const createUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -334,10 +351,10 @@ export const createUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -360,9 +377,11 @@ export const updateUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -378,10 +397,10 @@ export const updateUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -404,9 +423,11 @@ export const deleteUserExperience = /* GraphQL */ `
       endDate
       industry
       description
+      userID
       createdAt
       updatedAt
       user {
+        id
         username
         email
         owner
@@ -422,10 +443,10 @@ export const deleteUserExperience = /* GraphQL */ `
         updatedAt
         uWindsorEmail
         tags
-        UserEducations {
+        userEducations {
           nextToken
         }
-        UserExperiences {
+        userExperiences {
           nextToken
         }
       }
@@ -439,6 +460,7 @@ export const createTopic = /* GraphQL */ `
     $condition: ModelTopicConditionInput
   ) {
     createTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
@@ -453,6 +475,9 @@ export const createTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -469,6 +494,7 @@ export const updateTopic = /* GraphQL */ `
     $condition: ModelTopicConditionInput
   ) {
     updateTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
@@ -483,6 +509,9 @@ export const updateTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -499,6 +528,7 @@ export const deleteTopic = /* GraphQL */ `
     $condition: ModelTopicConditionInput
   ) {
     deleteTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
@@ -513,6 +543,9 @@ export const deleteTopic = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -529,12 +562,13 @@ export const createType = /* GraphQL */ `
     $condition: ModelTypeConditionInput
   ) {
     createType(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -543,6 +577,9 @@ export const createType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -559,12 +596,13 @@ export const updateType = /* GraphQL */ `
     $condition: ModelTypeConditionInput
   ) {
     updateType(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -573,6 +611,9 @@ export const updateType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -589,12 +630,13 @@ export const deleteType = /* GraphQL */ `
     $condition: ModelTypeConditionInput
   ) {
     deleteType(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
-      owner
       createdAt
       updatedAt
+      owner
       articles {
         items {
           id
@@ -603,6 +645,9 @@ export const deleteType = /* GraphQL */ `
           imagePath
           like
           unlike
+          topicID
+          typeID
+          active
           createdAt
           ByCreatedAt
           updatedAt
@@ -625,10 +670,14 @@ export const createArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -640,12 +689,13 @@ export const createArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -657,8 +707,9 @@ export const createArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -679,10 +730,14 @@ export const updateArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -694,12 +749,13 @@ export const updateArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -711,8 +767,9 @@ export const updateArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -733,10 +790,14 @@ export const deleteArticle = /* GraphQL */ `
       imagePath
       like
       unlike
+      topicID
+      typeID
+      active
       createdAt
       ByCreatedAt
       updatedAt
       topic {
+        id
         name
         like
         unlike
@@ -748,12 +809,13 @@ export const deleteArticle = /* GraphQL */ `
         }
       }
       type {
+        id
         name
         like
         unlike
-        owner
         createdAt
         updatedAt
+        owner
         articles {
           nextToken
         }
@@ -765,8 +827,9 @@ export const deleteArticle = /* GraphQL */ `
           content
           like
           unlike
+          active
+          articleID
           createdAt
-          ArticleId
           updatedAt
           owner
         }
@@ -785,8 +848,9 @@ export const createArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -795,10 +859,14 @@ export const createArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -807,12 +875,13 @@ export const createArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -833,8 +902,9 @@ export const updateArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -843,10 +913,14 @@ export const updateArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -855,12 +929,13 @@ export const updateArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -881,8 +956,9 @@ export const deleteArticleComment = /* GraphQL */ `
       content
       like
       unlike
+      active
+      articleID
       createdAt
-      ArticleId
       updatedAt
       article {
         id
@@ -891,10 +967,14 @@ export const deleteArticleComment = /* GraphQL */ `
         imagePath
         like
         unlike
+        topicID
+        typeID
+        active
         createdAt
         ByCreatedAt
         updatedAt
         topic {
+          id
           name
           like
           unlike
@@ -903,12 +983,13 @@ export const deleteArticleComment = /* GraphQL */ `
           owner
         }
         type {
+          id
           name
           like
           unlike
-          owner
           createdAt
           updatedAt
+          owner
         }
         owner
         articleComments {
@@ -925,6 +1006,7 @@ export const createDepartment = /* GraphQL */ `
     $condition: ModelDepartmentConditionInput
   ) {
     createDepartment(input: $input, condition: $condition) {
+      id
       name
       introduction
       email
@@ -942,6 +1024,7 @@ export const createDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -962,6 +1045,7 @@ export const updateDepartment = /* GraphQL */ `
     $condition: ModelDepartmentConditionInput
   ) {
     updateDepartment(input: $input, condition: $condition) {
+      id
       name
       introduction
       email
@@ -979,6 +1063,7 @@ export const updateDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -999,6 +1084,7 @@ export const deleteDepartment = /* GraphQL */ `
     $condition: ModelDepartmentConditionInput
   ) {
     deleteDepartment(input: $input, condition: $condition) {
+      id
       name
       introduction
       email
@@ -1016,6 +1102,7 @@ export const deleteDepartment = /* GraphQL */ `
           requirements
           bonus
           imagePath
+          departmentID
           benefits
           schedule
           like
@@ -1042,6 +1129,7 @@ export const createUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -1050,6 +1138,7 @@ export const createUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -1073,6 +1162,8 @@ export const createUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -1093,6 +1184,7 @@ export const updateUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -1101,6 +1193,7 @@ export const updateUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -1124,6 +1217,8 @@ export const updateUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -1144,6 +1239,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imagePath
+      departmentID
       benefits
       schedule
       like
@@ -1152,6 +1248,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
       createdAt
       updatedAt
       department {
+        id
         name
         introduction
         email
@@ -1175,6 +1272,8 @@ export const deleteUwcssaJob = /* GraphQL */ `
           phone
           message
           createdAt
+          uwcssaJobID
+          uwcssaJobResumeStatus
           updatedAt
           owner
         }
@@ -1196,6 +1295,8 @@ export const createUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -1204,6 +1305,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -1212,6 +1314,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -1228,16 +1331,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
     }
   }
 `;
@@ -1254,6 +1347,8 @@ export const updateUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -1262,6 +1357,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -1270,6 +1366,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -1286,16 +1383,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
     }
   }
 `;
@@ -1312,6 +1399,8 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
       phone
       message
       createdAt
+      uwcssaJobID
+      uwcssaJobResumeStatus
       updatedAt
       uwcssaJob {
         id
@@ -1320,6 +1409,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imagePath
+        departmentID
         benefits
         schedule
         like
@@ -1328,6 +1418,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         createdAt
         updatedAt
         department {
+          id
           name
           introduction
           email
@@ -1344,100 +1435,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         }
       }
       owner
-      uwcssaJobResumeStatus {
-        status
-        message
-        createdAt
-        updatedAt
-        uwcssaJobResumes {
-          nextToken
-        }
-        owner
-      }
-    }
-  }
-`;
-export const createUwcssaJobResumeStatus = /* GraphQL */ `
-  mutation CreateUwcssaJobResumeStatus(
-    $input: CreateUwcssaJobResumeStatusInput!
-    $condition: ModelUwcssaJobResumeStatusConditionInput
-  ) {
-    createUwcssaJobResumeStatus(input: $input, condition: $condition) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-    }
-  }
-`;
-export const updateUwcssaJobResumeStatus = /* GraphQL */ `
-  mutation UpdateUwcssaJobResumeStatus(
-    $input: UpdateUwcssaJobResumeStatusInput!
-    $condition: ModelUwcssaJobResumeStatusConditionInput
-  ) {
-    updateUwcssaJobResumeStatus(input: $input, condition: $condition) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
-    }
-  }
-`;
-export const deleteUwcssaJobResumeStatus = /* GraphQL */ `
-  mutation DeleteUwcssaJobResumeStatus(
-    $input: DeleteUwcssaJobResumeStatusInput!
-    $condition: ModelUwcssaJobResumeStatusConditionInput
-  ) {
-    deleteUwcssaJobResumeStatus(input: $input, condition: $condition) {
-      status
-      message
-      createdAt
-      updatedAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      owner
     }
   }
 `;
@@ -1447,17 +1444,21 @@ export const createForumTopic = /* GraphQL */ `
     $condition: ModelForumTopicConditionInput
   ) {
     createForumTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1473,17 +1474,21 @@ export const updateForumTopic = /* GraphQL */ `
     $condition: ModelForumTopicConditionInput
   ) {
     updateForumTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1499,17 +1504,21 @@ export const deleteForumTopic = /* GraphQL */ `
     $condition: ModelForumTopicConditionInput
   ) {
     deleteForumTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
       createdAt
       updatedAt
       owner
-      subTopics {
+      forumSubTopics {
         items {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1525,19 +1534,23 @@ export const createForumSubTopic = /* GraphQL */ `
     $condition: ModelForumSubTopicConditionInput
   ) {
     createForumSubTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1545,12 +1558,14 @@ export const createForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1565,19 +1580,23 @@ export const updateForumSubTopic = /* GraphQL */ `
     $condition: ModelForumSubTopicConditionInput
   ) {
     updateForumSubTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1585,12 +1604,14 @@ export const updateForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1605,19 +1626,23 @@ export const deleteForumSubTopic = /* GraphQL */ `
     $condition: ModelForumSubTopicConditionInput
   ) {
     deleteForumSubTopic(input: $input, condition: $condition) {
+      id
       name
       like
       unlike
+      active
+      forumTopicID
       createdAt
       updatedAt
       forumTopic {
+        id
         name
         like
         unlike
         createdAt
         updatedAt
         owner
-        subTopics {
+        forumSubTopics {
           nextToken
         }
       }
@@ -1625,12 +1650,14 @@ export const deleteForumSubTopic = /* GraphQL */ `
       forumPosts {
         items {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1646,20 +1673,26 @@ export const createForumPost = /* GraphQL */ `
   ) {
     createForumPost(input: $input, condition: $condition) {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1679,8 +1712,9 @@ export const createForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1696,20 +1730,26 @@ export const updateForumPost = /* GraphQL */ `
   ) {
     updateForumPost(input: $input, condition: $condition) {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1729,8 +1769,9 @@ export const updateForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1746,20 +1787,26 @@ export const deleteForumPost = /* GraphQL */ `
   ) {
     deleteForumPost(input: $input, condition: $condition) {
       id
+      title
       content
       imagePath
       like
       unlike
-      ByCreatedAt
       createdAt
+      active
+      forumSubTopicID
       updatedAt
       forumSubTopic {
+        id
         name
         like
         unlike
+        active
+        forumTopicID
         createdAt
         updatedAt
         forumTopic {
+          id
           name
           like
           unlike
@@ -1779,8 +1826,9 @@ export const deleteForumPost = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostId
           createdAt
+          active
+          forumPostID
           updatedAt
           owner
         }
@@ -1799,22 +1847,28 @@ export const createForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1831,8 +1885,8 @@ export const createForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1851,22 +1905,28 @@ export const updateForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1883,8 +1943,8 @@ export const updateForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1903,22 +1963,28 @@ export const deleteForumPostComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostId
       createdAt
+      active
+      forumPostID
       updatedAt
       forumPost {
         id
+        title
         content
         imagePath
         like
         unlike
-        ByCreatedAt
         createdAt
+        active
+        forumSubTopicID
         updatedAt
         forumSubTopic {
+          id
           name
           like
           unlike
+          active
+          forumTopicID
           createdAt
           updatedAt
           owner
@@ -1935,8 +2001,8 @@ export const deleteForumPostComment = /* GraphQL */ `
           content
           like
           unlike
-          ForumPostCommentId
           createdAt
+          forumPostCommentID
           updatedAt
           owner
         }
@@ -1955,25 +2021,28 @@ export const createForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -1996,25 +2065,28 @@ export const updateForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -2037,25 +2109,28 @@ export const deleteForumPostSubComment = /* GraphQL */ `
       content
       like
       unlike
-      ForumPostCommentId
       createdAt
+      forumPostCommentID
       updatedAt
       forumPostComment {
         id
         content
         like
         unlike
-        ForumPostId
         createdAt
+        active
+        forumPostID
         updatedAt
         forumPost {
           id
+          title
           content
           imagePath
           like
           unlike
-          ByCreatedAt
           createdAt
+          active
+          forumSubTopicID
           updatedAt
           owner
         }
@@ -2074,6 +2149,7 @@ export const createMarketType = /* GraphQL */ `
     $condition: ModelMarketTypeConditionInput
   ) {
     createMarketType(input: $input, condition: $condition) {
+      id
       name
       createdAt
       updatedAt
@@ -2087,7 +2163,9 @@ export const createMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2103,6 +2181,7 @@ export const updateMarketType = /* GraphQL */ `
     $condition: ModelMarketTypeConditionInput
   ) {
     updateMarketType(input: $input, condition: $condition) {
+      id
       name
       createdAt
       updatedAt
@@ -2116,7 +2195,9 @@ export const updateMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2132,6 +2213,7 @@ export const deleteMarketType = /* GraphQL */ `
     $condition: ModelMarketTypeConditionInput
   ) {
     deleteMarketType(input: $input, condition: $condition) {
+      id
       name
       createdAt
       updatedAt
@@ -2145,7 +2227,9 @@ export const deleteMarketType = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2161,6 +2245,7 @@ export const createMarketItemCategory = /* GraphQL */ `
     $condition: ModelMarketItemCategoryConditionInput
   ) {
     createMarketItemCategory(input: $input, condition: $condition) {
+      id
       name
       createdAt
       updatedAt
@@ -2174,7 +2259,9 @@ export const createMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2190,6 +2277,7 @@ export const updateMarketItemCategory = /* GraphQL */ `
     $condition: ModelMarketItemCategoryConditionInput
   ) {
     updateMarketItemCategory(input: $input, condition: $condition) {
+      id
       name
       createdAt
       updatedAt
@@ -2203,7 +2291,9 @@ export const updateMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2219,6 +2309,7 @@ export const deleteMarketItemCategory = /* GraphQL */ `
     $condition: ModelMarketItemCategoryConditionInput
   ) {
     deleteMarketItemCategory(input: $input, condition: $condition) {
+      id
       name
       createdAt
       updatedAt
@@ -2232,7 +2323,9 @@ export const deleteMarketItemCategory = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2255,10 +2348,13 @@ export const createMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -2268,6 +2364,7 @@ export const createMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -2292,7 +2389,9 @@ export const createMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2319,7 +2418,9 @@ export const createMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2342,10 +2443,13 @@ export const updateMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -2355,6 +2459,7 @@ export const updateMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -2379,7 +2484,9 @@ export const updateMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2406,7 +2513,9 @@ export const updateMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2429,10 +2538,13 @@ export const deleteMarketItem = /* GraphQL */ `
       price
       description
       location
+      marketTypeID
       condition
+      marketItemCategoryID
       createdAt
       updatedAt
       marketType {
+        id
         name
         createdAt
         updatedAt
@@ -2442,6 +2554,7 @@ export const deleteMarketItem = /* GraphQL */ `
         }
       }
       marketItemCategory {
+        id
         name
         createdAt
         updatedAt
@@ -2466,7 +2579,9 @@ export const deleteMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2493,7 +2608,9 @@ export const deleteMarketItem = /* GraphQL */ `
           price
           description
           location
+          marketTypeID
           condition
+          marketItemCategoryID
           createdAt
           updatedAt
           owner
@@ -2523,16 +2640,20 @@ export const createMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2587,16 +2708,20 @@ export const updateMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2651,16 +2776,20 @@ export const deleteMarketItemCar = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2720,16 +2849,20 @@ export const createMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2789,16 +2922,20 @@ export const updateMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt
@@ -2858,16 +2995,20 @@ export const deleteMarketItemHome = /* GraphQL */ `
         price
         description
         location
+        marketTypeID
         condition
+        marketItemCategoryID
         createdAt
         updatedAt
         marketType {
+          id
           name
           createdAt
           updatedAt
           owner
         }
         marketItemCategory {
+          id
           name
           createdAt
           updatedAt

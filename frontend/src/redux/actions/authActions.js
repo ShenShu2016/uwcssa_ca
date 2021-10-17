@@ -27,7 +27,7 @@ export const signIn = (username, password) => async (dispatch) => {
   try {
     const response = await Auth.signIn(username, password);
     dispatch({
-      type: ActionTypes.SIGNIN_SUCCESS,
+      type: ActionTypes.SIGN_IN_SUCCESS,
       payload: response,
     });
     dispatch(load_user());
@@ -36,7 +36,7 @@ export const signIn = (username, password) => async (dispatch) => {
     };
   } catch (error) {
     dispatch({
-      type: ActionTypes.SIGNIN_FAIL,
+      type: ActionTypes.SIGN_IN_FAIL,
     });
     return {
       result: false,
@@ -54,7 +54,7 @@ export const signUp = (username, password, email) => async (dispatch) => {
       attributes: { email },
     });
     dispatch({
-      type: ActionTypes.SIGNUP_SUCCESS,
+      type: ActionTypes.SIGN_UP_SUCCESS,
       payload: response.data,
     });
     return {
@@ -63,7 +63,7 @@ export const signUp = (username, password, email) => async (dispatch) => {
   } catch (error) {
     console.log("error signing up:", error);
     dispatch({
-      type: ActionTypes.SIGNUP_FAIL,
+      type: ActionTypes.SIGN_UP_FAIL,
     });
     return {
       result: false,
@@ -77,7 +77,7 @@ export const emailConfirm =
     try {
       await Auth.confirmSignUp(username, authenticationCode);
       dispatch({
-        type: ActionTypes.EMAILCONFIRM_SUCCESS,
+        type: ActionTypes.EMAIL_CONFIRM_SUCCESS,
       });
       return {
         result: true,
@@ -85,7 +85,7 @@ export const emailConfirm =
     } catch (error) {
       console.log("error confirming signing up:", error);
       dispatch({
-        type: ActionTypes.EMAILCONFIRM_FAIL,
+        type: ActionTypes.EMAIL_CONFIRM_FAIL,
       });
       return {
         result: false,
@@ -151,7 +151,7 @@ export const signOut = () => async (dispatch) => {
   try {
     await Auth.signOut();
     dispatch({
-      type: ActionTypes.SIGNOUT,
+      type: ActionTypes.SIGN_OUT,
     });
   } catch (error) {
     console.log("error signing out", error);
