@@ -8,6 +8,7 @@ import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
+import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
@@ -93,6 +94,7 @@ export default function App() {
           <ScrollToTop />
           <div className={classes.headerBody}>
             <Header />
+            <Box pb={"64px"} />
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/account/dashboard" exact component={Dashboard} />

@@ -272,8 +272,8 @@ export default function Header() {
   return (
     <div className={classes.grow}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar className={classes.toolbar}>
+      <AppBar>
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -282,7 +282,7 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Drawer open={drawer} onClose={toggleDrawer(false)}>
+          <Drawer open={drawer} onClose={toggleDrawer(false)} elevation={30}>
             <DrawerList toggleDrawer={toggleDrawer} />
           </Drawer>
           <img
