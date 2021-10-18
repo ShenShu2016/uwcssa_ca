@@ -84,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
   grow: {
     flexGrow: 1,
+    paddingBottom: "4rem",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -272,7 +273,14 @@ export default function Header() {
   return (
     <div className={classes.grow}>
       <CssBaseline />
-      <AppBar position="static">
+      <AppBar
+        style={{
+          position: "fixed",
+          top: "0",
+          left: "0",
+          width: "100%",
+        }}
+      >
         <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
