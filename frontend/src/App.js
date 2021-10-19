@@ -1,3 +1,4 @@
+import { Alert, Snackbar } from "@mui/material";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
@@ -7,6 +8,7 @@ import Amplify from "aws-amplify";
 import ArticleDetail from "./containers/ArticleDetail";
 import ArticleListing from "./containers/ArticleListing";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
+import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
@@ -26,7 +28,6 @@ import Home from "./containers/Home";
 import MarketItemDetail from "./containers/MarketItemDetail";
 import MarketListing from "./containers/MarketListing";
 import MarketPostTest from "./containers/MarketPostTest";
-import MuiAlert from "@mui/lab/Alert";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
@@ -37,7 +38,6 @@ import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
-import { Snackbar } from "@mui/material";
 import Staff from "./containers/staff/Staff";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
@@ -69,28 +69,23 @@ const useStyles = makeStyles({
 export default function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  const [signInOpen, setSignInOpen] = useState(false);
-  useEffect(() => {
-    dispatch(load_user());
-    if (isAuthenticated) {
-      return setSignInOpen(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
-  );
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
-
-  const handleSignInClose = (event, reason) => {
+  const [open, setOpen] = useState(true);
+  const handleClose = (reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setSignInOpen(false);
+    setOpen(false);
   };
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
+  useEffect(() => {
+    dispatch(load_user());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setOpen(isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <Provider store={store}>
@@ -99,6 +94,7 @@ export default function App() {
           <ScrollToTop />
           <div className={classes.headerBody}>
             <Header />
+            <Box pb={"64px"} />
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/account/dashboard" exact component={Dashboard} />
@@ -109,11 +105,7 @@ export default function App() {
               />
               <Route path="/account/myAccount" exact component={MyAccount} />
               <Route path="/staff" exact component={Staff} />
-              <Route
-                path="/staff/article"
-                exact
-                component={ArticlesPreview}
-              />{" "}
+              <Route path="/staff/article" exact component={ArticlesPreview} />
               <Route
                 path="/staff/uwcssaJob"
                 exact
@@ -183,19 +175,23 @@ export default function App() {
               <Route path="/event" exact component={Event} />
               <Route>404 Not Found!</Route>
             </Switch>
+            <Snackbar
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              open={open}
+              autoHideDuration={3000}
+              onClose={handleClose}
+            >
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                登陆成功
+              </Alert>
+            </Snackbar>
           </div>
           <Footer />
         </Router>
-        <Snackbar
-          open={signInOpen}
-          autoHideDuration={2000}
-          onClose={handleSignInClose}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <Alert onClose={handleSignInClose} severity="success">
-            登陆成功! 欢迎来到 UWCSSA.CA
-          </Alert>
-        </Snackbar>
       </ThemeProvider>
     </Provider>
   );

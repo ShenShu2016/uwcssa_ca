@@ -2,10 +2,9 @@ import {
   Avatar,
   Box,
   Button,
-  Card,
   CardActions,
-  CardContent,
   CardHeader,
+  Grid,
   IconButton,
   LinearProgress,
   Typography,
@@ -14,8 +13,8 @@ import {
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -32,7 +31,39 @@ const useStyles = makeStyles({
     width: "100%",
     margin: "auto",
   },
+  moreVertIcon: {
+    // display: "none",
+    // "&:hover": {
+    //   color: "red",
+    // },
+  },
 });
+
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  /* eslint-enable no-bitwise */
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.slice(0, 1)}`,
+  };
+}
 
 export default function ArticleComments({ article }) {
   const classes = useStyles();
@@ -48,63 +79,73 @@ export default function ArticleComments({ article }) {
             const { id, content, createdAt, like, unlike, owner } = comment;
 
             return (
-              <Box key={id} pb={1}>
-                <Card className={classes.main}>
-                  <CardHeader
-                    avatar={
-                      <Avatar
-                        aria-label="recipe"
-                        className={classes.avatar}
-                        component={Link}
-                        to={`/account/profile/${owner}`}
-                      ></Avatar>
-                    }
-                    action={
-                      <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                    title={owner}
-                    subheader={`发布日期： ${createdAt.slice(
-                      0,
-                      10
-                    )} ${createdAt.slice(11, 19)}`}
-                  />
-
-                  <CardContent className={classes.cardContent}>
-                    <Typography
-                      variant="body1"
-                      color="textSecondary"
-                      component="span"
-                      style={{
-                        whiteSpace: "pre-wrap",
-                        wordBreak: "break-word",
-                      }}
+              <Box key={id} mb={2} className={classes.main}>
+                <Grid container spacing={0} justifyContent="space-between">
+                  <Grid item xs={"auto"}>
+                    <CardHeader
+                      component={Link}
+                      to={`/account/profile/${owner}`}
+                      sx={{ p: 0, textDecoration: "none" }}
+                      avatar={<Avatar {...stringAvatar(owner.toUpperCase())} />}
+                    />
+                  </Grid>
+                  <Grid item xs>
+                    <Box sx={{ display: "flex", mb: 1 }}>
+                      <Typography
+                        mr={1}
+                        variant="subtitle2"
+                        sx={{ fontSize: "13px", color: "#030303" }}
+                      >
+                        {owner}
+                      </Typography>
+                      <Typography variant="caption" sx={{ color: "#606060" }}>
+                        {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ my: 1 }}>
+                      <Typography
+                        variant="body2"
+                        component="span"
+                        style={{
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          color: "#030303",
+                        }}
+                      >
+                        {content}
+                      </Typography>
+                    </Box>
+                    <CardActions sx={{ p: 0 }}>
+                      <Button
+                        size="small"
+                        color="primary"
+                        startIcon={<ThumbUpAltOutlinedIcon />}
+                        sx={{ p: 0 }}
+                        style={{ width: "22px" }}
+                      >
+                        {like.length}
+                      </Button>
+                      <Button
+                        size="small"
+                        color="primary"
+                        startIcon={<ThumbDownAltOutlinedIcon />}
+                      >
+                        {unlike.length}
+                      </Button>
+                      <Button size="small" color="primary">
+                        回复
+                      </Button>
+                    </CardActions>
+                  </Grid>
+                  <Grid item xs={"auto"}>
+                    <IconButton
+                      aria-label="settings"
+                      className={classes.moreVertIcon}
                     >
-                      {content}
-                    </Typography>
-                  </CardContent>
-
-                  <CardActions>
-                    <Button
-                      size="small"
-                      color="primary"
-                      startIcon={<ThumbUpIcon />}
-                    >
-                      {like.length}
-                    </Button>
-                    <Button
-                      size="small"
-                      color="primary"
-                      startIcon={<ThumbDownIcon />}
-                    >
-                      {unlike.length}
-                    </Button>
-                    <Button size="small" color="primary">
-                      回复
-                    </Button>
-                  </CardActions>
-                </Card>
+                      <MoreVertIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
               </Box>
             );
           })}

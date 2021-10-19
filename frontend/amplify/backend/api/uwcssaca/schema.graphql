@@ -459,8 +459,10 @@ type MarketItem
   marketItemCategoryID: ID!
   marketItemCategory: MarketItemCategory!
     @connection(fields: ["marketItemCategoryID"])
-  marketItemCar: MarketItemCar @connection(name: "MarketItemMarketItemCar")
-  marketItemHome: MarketItemHome @connection(name: "MarketItemMarketItemHome")
+  marketItemCarID: ID
+  marketItemCar: MarketItemCar @connection(fields: ["marketItemCarID"])
+  marketItemHomeID: ID
+  marketItemHome: MarketItemHome @connection(fields: ["marketItemHomeID"])
   createdAt: AWSDateTime!
 }
 
@@ -478,7 +480,8 @@ type MarketItemCar
   year: String!
   make: String!
   model: String!
-  marketItem: MarketItem! @connection(name: "MarketItemMarketItemCar")
+  marketItemID: ID!
+  marketItem: MarketItem! @connection(fields: ["marketItemID"])
 }
 
 type MarketItemHome
@@ -500,5 +503,6 @@ type MarketItemHome
   laundryType: String
   airCondition: String
   heating: String
-  marketItem: MarketItem! @connection(name: "MarketItemMarketItemHome")
+  marketItemID: ID!
+  marketItem: MarketItem! @connection(fields: ["marketItemID"])
 }

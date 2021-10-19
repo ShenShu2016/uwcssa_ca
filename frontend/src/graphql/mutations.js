@@ -2166,6 +2166,8 @@ export const createMarketType = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2198,6 +2200,8 @@ export const updateMarketType = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2230,6 +2234,8 @@ export const deleteMarketType = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2262,6 +2268,8 @@ export const createMarketItemCategory = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2294,6 +2302,8 @@ export const updateMarketItemCategory = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2326,6 +2336,8 @@ export const deleteMarketItemCategory = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2351,6 +2363,8 @@ export const createMarketItem = /* GraphQL */ `
       marketTypeID
       condition
       marketItemCategoryID
+      marketItemCarID
+      marketItemHomeID
       createdAt
       updatedAt
       marketType {
@@ -2379,6 +2393,7 @@ export const createMarketItem = /* GraphQL */ `
         year
         make
         model
+        marketItemID
         createdAt
         updatedAt
         marketItem {
@@ -2392,6 +2407,8 @@ export const createMarketItem = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2408,6 +2425,7 @@ export const createMarketItem = /* GraphQL */ `
         laundryType
         airCondition
         heating
+        marketItemID
         createdAt
         updatedAt
         marketItem {
@@ -2421,6 +2439,8 @@ export const createMarketItem = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2446,6 +2466,8 @@ export const updateMarketItem = /* GraphQL */ `
       marketTypeID
       condition
       marketItemCategoryID
+      marketItemCarID
+      marketItemHomeID
       createdAt
       updatedAt
       marketType {
@@ -2474,6 +2496,7 @@ export const updateMarketItem = /* GraphQL */ `
         year
         make
         model
+        marketItemID
         createdAt
         updatedAt
         marketItem {
@@ -2487,6 +2510,8 @@ export const updateMarketItem = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2503,6 +2528,7 @@ export const updateMarketItem = /* GraphQL */ `
         laundryType
         airCondition
         heating
+        marketItemID
         createdAt
         updatedAt
         marketItem {
@@ -2516,6 +2542,8 @@ export const updateMarketItem = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2541,6 +2569,8 @@ export const deleteMarketItem = /* GraphQL */ `
       marketTypeID
       condition
       marketItemCategoryID
+      marketItemCarID
+      marketItemHomeID
       createdAt
       updatedAt
       marketType {
@@ -2569,6 +2599,7 @@ export const deleteMarketItem = /* GraphQL */ `
         year
         make
         model
+        marketItemID
         createdAt
         updatedAt
         marketItem {
@@ -2582,6 +2613,8 @@ export const deleteMarketItem = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2598,6 +2631,7 @@ export const deleteMarketItem = /* GraphQL */ `
         laundryType
         airCondition
         heating
+        marketItemID
         createdAt
         updatedAt
         marketItem {
@@ -2611,6 +2645,8 @@ export const deleteMarketItem = /* GraphQL */ `
           marketTypeID
           condition
           marketItemCategoryID
+          marketItemCarID
+          marketItemHomeID
           createdAt
           updatedAt
           owner
@@ -2630,6 +2666,7 @@ export const createMarketItemCar = /* GraphQL */ `
       year
       make
       model
+      marketItemID
       createdAt
       updatedAt
       marketItem {
@@ -2643,6 +2680,8 @@ export const createMarketItemCar = /* GraphQL */ `
         marketTypeID
         condition
         marketItemCategoryID
+        marketItemCarID
+        marketItemHomeID
         createdAt
         updatedAt
         marketType {
@@ -2665,6 +2704,7 @@ export const createMarketItemCar = /* GraphQL */ `
           year
           make
           model
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2679,6 +2719,7 @@ export const createMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2698,6 +2739,7 @@ export const updateMarketItemCar = /* GraphQL */ `
       year
       make
       model
+      marketItemID
       createdAt
       updatedAt
       marketItem {
@@ -2711,6 +2753,8 @@ export const updateMarketItemCar = /* GraphQL */ `
         marketTypeID
         condition
         marketItemCategoryID
+        marketItemCarID
+        marketItemHomeID
         createdAt
         updatedAt
         marketType {
@@ -2733,6 +2777,7 @@ export const updateMarketItemCar = /* GraphQL */ `
           year
           make
           model
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2747,6 +2792,7 @@ export const updateMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2766,6 +2812,7 @@ export const deleteMarketItemCar = /* GraphQL */ `
       year
       make
       model
+      marketItemID
       createdAt
       updatedAt
       marketItem {
@@ -2779,6 +2826,8 @@ export const deleteMarketItemCar = /* GraphQL */ `
         marketTypeID
         condition
         marketItemCategoryID
+        marketItemCarID
+        marketItemHomeID
         createdAt
         updatedAt
         marketType {
@@ -2801,6 +2850,7 @@ export const deleteMarketItemCar = /* GraphQL */ `
           year
           make
           model
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2815,6 +2865,7 @@ export const deleteMarketItemCar = /* GraphQL */ `
           laundryType
           airCondition
           heating
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2839,6 +2890,7 @@ export const createMarketItemHome = /* GraphQL */ `
       laundryType
       airCondition
       heating
+      marketItemID
       createdAt
       updatedAt
       marketItem {
@@ -2852,6 +2904,8 @@ export const createMarketItemHome = /* GraphQL */ `
         marketTypeID
         condition
         marketItemCategoryID
+        marketItemCarID
+        marketItemHomeID
         createdAt
         updatedAt
         marketType {
@@ -2874,6 +2928,7 @@ export const createMarketItemHome = /* GraphQL */ `
           year
           make
           model
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2888,6 +2943,7 @@ export const createMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2912,6 +2968,7 @@ export const updateMarketItemHome = /* GraphQL */ `
       laundryType
       airCondition
       heating
+      marketItemID
       createdAt
       updatedAt
       marketItem {
@@ -2925,6 +2982,8 @@ export const updateMarketItemHome = /* GraphQL */ `
         marketTypeID
         condition
         marketItemCategoryID
+        marketItemCarID
+        marketItemHomeID
         createdAt
         updatedAt
         marketType {
@@ -2947,6 +3006,7 @@ export const updateMarketItemHome = /* GraphQL */ `
           year
           make
           model
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2961,6 +3021,7 @@ export const updateMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -2985,6 +3046,7 @@ export const deleteMarketItemHome = /* GraphQL */ `
       laundryType
       airCondition
       heating
+      marketItemID
       createdAt
       updatedAt
       marketItem {
@@ -2998,6 +3060,8 @@ export const deleteMarketItemHome = /* GraphQL */ `
         marketTypeID
         condition
         marketItemCategoryID
+        marketItemCarID
+        marketItemHomeID
         createdAt
         updatedAt
         marketType {
@@ -3020,6 +3084,7 @@ export const deleteMarketItemHome = /* GraphQL */ `
           year
           make
           model
+          marketItemID
           createdAt
           updatedAt
           owner
@@ -3034,6 +3099,7 @@ export const deleteMarketItemHome = /* GraphQL */ `
           laundryType
           airCondition
           heating
+          marketItemID
           createdAt
           updatedAt
           owner
