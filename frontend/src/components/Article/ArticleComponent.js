@@ -1,34 +1,18 @@
-import "./ArticleComponent.css";
-
 import {
   Avatar,
-  Box,
   CardActionArea,
   CardHeader,
   Grid,
   Paper,
   Typography,
 } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import React from "react";
+import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
-
-// import Storage from "@aws-amplify/storage";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    marginTop: "4rem",
-    maxWidth: "960px",
-    paddingInline: "0.5rem",
-  },
-  title: {
-    textAlign: "center",
-    color: "#0D1F48",
-    paddingBottom: "3rem",
-  },
   paper: {},
   content: {
     maxHeight: "200px",
@@ -46,40 +30,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ArticleComponent() {
-  const articles = useSelector((state) => state.allArticles.articles);
+function ArticleComponent({ article }) {
   const classes = useStyles();
+  const [imageURL, setImageURL] = useState(null);
+  const { id, content, title, imagePath, createdAt, owner } = article;
 
-  // const handleImage = async (imagePath) => {
-  //   try {
-  //     const imageAccessURL = await Storage.get(imagePath, {
-  //       level: "public",
-  //       expires: 120,
-  //       download: false,
-  //     });
-  //     console.log("imageAccessURL", imageAccessURL);
-  //     return imageAccessURL;
-  //   } catch (error) {
-  //     console.error("error accessing the Image from s3", error);
-  //   }
-  // };
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const imageAccessURL = await Storage.get(imagePath, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        // console.log("imageAccessURL", imageAccessURL);
+        setImageURL(imageAccessURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setImageURL(null);
+      }
+    };
+    if (imagePath) {
+      getImage();
+    }
+  }, [imagePath]);
 
-  const renderList = articles.map((article) => {
-    const {
-      id,
-      content,
-      title,
-      imagePath,
-      like,
-      unlike,
-      createdAt,
-      // updateAt,
-      owner,
-    } = article;
-
-    return (
+  return (
+    <div>
       <Paper
-        key={id}
         elevation={0}
         variant="outlined"
         sx={{
@@ -118,68 +96,57 @@ export default function ArticleComponent() {
                   title={owner}
                 />
               </Grid>
-              <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
-                <div style={{ maxHeight: "48px", overflow: "hidden" }}>
-                  <Typography
-                    variant="subtitle1"
-                    style={{
-                      fontSize: "18px",
-                      whiteSpace: "pre-wrap",
-                      wordBreak: "break-word",
-                      lineHeight: "1.3em",
-                      color: "#202124",
-                    }}
-                  >
-                    {title}
+              <CardActionArea component={Link} to={`/article/${id}`}>
+                <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
+                  <div style={{ maxHeight: "48px", overflow: "hidden" }}>
+                    <Typography
+                      variant="subtitle1"
+                      style={{
+                        fontSize: "18px",
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                        lineHeight: "1.3em",
+                        color: "#202124",
+                      }}
+                    >
+                      {title}
+                    </Typography>
+                  </div>
+                </Grid>
+                <Grid item xs>
+                  <div style={{ maxHeight: "80px", overflow: "hidden" }}>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{
+                        wordBreak: "break-word",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {content}
+                    </Typography>
+                  </div>
+                </Grid>
+
+                <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
+                  <Typography variant="overline" color="textSecondary">
+                    {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
                   </Typography>
-                </div>
-              </Grid>
-              <Grid item xs>
-                <div style={{ maxHeight: "80px", overflow: "hidden" }}>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    style={{
-                      wordBreak: "break-word",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {content}
-                  </Typography>
-                </div>
-              </Grid>
-              <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
-                <Typography variant="overline" color="textSecondary">
-                  {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
-                </Typography>
-              </Grid>
+                </Grid>
+              </CardActionArea>
             </Grid>
           </Grid>
           <Grid item xs={"auto"}>
             <div>
               <CardActionArea>
-                {/* <AmplifyS3Image path={imagePath} /> */}
-                <img
-                  src="https://img.yxwoo.com:4433/uploads/images/20200709/20200709172333_87131.png"
-                  alt=""
-                  className={classes.s3image}
-                />
+                <img src={imageURL} alt="" className={classes.s3image} />
               </CardActionArea>
             </div>
           </Grid>
         </Grid>
       </Paper>
-    );
-  });
-
-  return (
-    <Box className={classes.root}>
-      <Box>
-        <Typography variant="h3" className={classes.title}>
-          近期新闻
-        </Typography>
-        {renderList}
-      </Box>
-    </Box>
+    </div>
   );
 }
+
+export default ArticleComponent;
