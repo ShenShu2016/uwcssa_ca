@@ -3,26 +3,19 @@ import "./ArticleComponent.css";
 import {
   Avatar,
   Box,
-  Button,
   CardActionArea,
-  CardActions,
-  CardContent,
   CardHeader,
   Grid,
-  IconButton,
   Paper,
   Typography,
 } from "@mui/material";
 
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-// import Storage from "@aws-amplify/storage";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
+
+// import Storage from "@aws-amplify/storage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,14 +29,20 @@ const useStyles = makeStyles((theme) => ({
     color: "#0D1F48",
     paddingBottom: "3rem",
   },
-  paper: {
-    maxWidth: "100%",
-    margin: "1rem auto",
-    paddingInline: "3px",
+  paper: {},
+  content: {
+    maxHeight: "200px",
   },
   s3image: {
-    width: "100%",
-    // paddingInline: "1rem",
+    width: "162px",
+    height: "162px",
+    borderRadius: "8px",
+    objectFit: "cover",
+    [theme.breakpoints.down("sm")]: {
+      width: "112px",
+      height: "112px",
+      marginTop: "2.5rem",
+    },
   },
 }));
 
@@ -79,78 +78,96 @@ export default function ArticleComponent() {
     } = article;
 
     return (
-      <Paper className={classes.paper} key={id} elevation={5}>
-        <CardHeader
-          sx={{ p: 1 }}
-          avatar={
-            <Avatar
-              aria-label="recipe"
-              className={classes.avatar}
-              component={Link}
-              to={`/account/profile/${owner}`}
-            ></Avatar>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={owner}
-          subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
-            11,
-            19
-          )}`}
-        />
-        <div>
-          <Grid container columns={12} spacing={1}>
-            <Grid item xs={7}>
-              <CardContent sx={{ p: 1 }}>
-                <Typography
-                  variant="subtitle2"
-                  style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-                >
-                  {title}
+      <Paper
+        key={id}
+        elevation={0}
+        variant="outlined"
+        sx={{
+          maxWidth: "100%",
+          margin: "1rem auto",
+          padding: "1rem",
+          maxHeight: "255px",
+          borderRadius: "8px",
+          border: "1px solid #dfe1e5",
+        }}
+      >
+        <Grid container spacing={1} sx={{ height: "100%" }}>
+          <Grid item xs sx={{ p: 0 }}>
+            <Grid
+              container
+              direction="column"
+              justifyContent="space-between"
+              alignItems="flex-start"
+              sx={{ height: "100%" }}
+            >
+              <Grid item xs={"auto"} sx={{ paddingBottom: "0.5rem" }}>
+                <CardHeader
+                  sx={{ p: 0 }}
+                  avatar={
+                    <Avatar
+                      aria-label="recipe"
+                      className={classes.avatar}
+                      component={Link}
+                      to={`/account/profile/${owner}`}
+                      sx={{ width: 16, height: 16 }}
+                      variant="square"
+                    >
+                      {owner.toUpperCase().slice(0, 1)}
+                    </Avatar>
+                  }
+                  title={owner}
+                />
+              </Grid>
+              <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
+                <div style={{ maxHeight: "48px", overflow: "hidden" }}>
+                  <Typography
+                    variant="subtitle1"
+                    style={{
+                      fontSize: "18px",
+                      whiteSpace: "pre-wrap",
+                      wordBreak: "break-word",
+                      lineHeight: "1.3em",
+                      color: "#202124",
+                    }}
+                  >
+                    {title}
+                  </Typography>
+                </div>
+              </Grid>
+              <Grid item xs>
+                <div style={{ maxHeight: "80px", overflow: "hidden" }}>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    style={{
+                      wordBreak: "break-word",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {content}
+                  </Typography>
+                </div>
+              </Grid>
+              <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
+                <Typography variant="overline" color="textSecondary">
+                  {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ maxHeight: "300px" }}
-                  style={{
-                    whiteSpace: "pre-wrap",
-                    wordBreak: "break-word",
-                    overflow: "hidden",
-                  }}
-                >
-                  {content}
-                </Typography>
-              </CardContent>
-            </Grid>
-            <Grid item xs={5}>
-              <div className={classes.s3image}>
-                <CardActionArea>
-                  <AmplifyS3Image path={imagePath} />
-                  {/* <img src={handleImage(imagePath)} alt="" /> */}
-                </CardActionArea>
-              </div>
+              </Grid>
             </Grid>
           </Grid>
-          <CardActions>
-            <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-              {like.length}
-            </Button>
-            <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-              {unlike.length}
-            </Button>
-            <Button
-              size="small"
-              color="primary"
-              component={Link}
-              to={`article/${id}`}
-            >
-              查看更多
-            </Button>
-          </CardActions>
-        </div>
+          <Grid item xs={"auto"}>
+            <div>
+              <CardActionArea>
+                {/* <AmplifyS3Image path={imagePath} /> */}
+                <img
+                  src="https://img.yxwoo.com:4433/uploads/images/20200709/20200709172333_87131.png"
+                  alt=""
+                  className={classes.s3image}
+                />
+              </CardActionArea>
+            </div>
+          </Grid>
+        </Grid>
       </Paper>
     );
   });

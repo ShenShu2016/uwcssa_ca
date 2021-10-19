@@ -282,7 +282,7 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Drawer open={drawer} onClose={toggleDrawer(false)} elevation={30}>
+          <Drawer open={drawer} onClose={toggleDrawer(false)}>
             <DrawerList toggleDrawer={toggleDrawer} />
           </Drawer>
           <img
