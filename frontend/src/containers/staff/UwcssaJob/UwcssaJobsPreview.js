@@ -4,6 +4,7 @@ import {
   setUwcssaJobs,
 } from "../../../redux/actions/uwcssaJobActions";
 import { useDispatch, useSelector } from "react-redux";
+
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -64,8 +65,7 @@ export default function UwcssaJobsPreview() {
   useEffect(() => {
     dispatch(setDepartments());
     dispatch(setUwcssaJobs());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const { departments, uwcssaJobs } = useSelector(
     (state) => state.allUwcssaJobs
@@ -73,21 +73,14 @@ export default function UwcssaJobsPreview() {
   console.log("departments, uwcssaJobs", departments, uwcssaJobs);
 
   const rows = uwcssaJobs.map((uwcssaJob) => {
-    const {
-      id,
-      title,
-      department,
-      like,
-      unlike,
-      active,
-      uwcssaJobResumes,
-    } = uwcssaJob;
+    const { id, title, department, like, unlike, active, uwcssaJobResumes } =
+      uwcssaJob;
     return {
       id: id,
       title: title,
       department: department.name,
-      like: like.filter(e=>e!=="").length,
-      unlike: unlike.filter(e=>e!=="").length,
+      like: like.filter((e) => e !== "").length,
+      unlike: unlike.filter((e) => e !== "").length,
       active: active,
       applied: uwcssaJobResumes.items.length,
     };

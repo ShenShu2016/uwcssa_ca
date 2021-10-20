@@ -97,8 +97,8 @@ export default function UwcssaIntro() {
     (state) => state.userAuth.isAuthenticated
   );
   useEffect(() => {
-    dispatch(setUserCounts()); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(setUserCounts());
+  }, [dispatch]);
   const guestButton = () => (
     <div>
       <Button
