@@ -41,6 +41,8 @@ type User
   userEducations: [UserEducation] @connection(keyName: "byUser", fields: ["id"])
   userExperiences: [UserExperience]
     @connection(keyName: "byUser", fields: ["id"])
+  marketUserInfo: [MarketUserInfo]
+    @connection(keyName: "byUser", fields: ["id"])
 }
 
 type UserEducation
@@ -399,8 +401,7 @@ type ForumPostSubComment
     @connection(fields: ["forumPostCommentID"])
 }
 
-type MarketType
-  # 卖东西，卖车，房屋租售，职位空缺
+type MarketUserInfo
   @model
   @auth(
     rules: [
@@ -409,26 +410,14 @@ type MarketType
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  name: String!
-  marketItems: [MarketItem] @connection(keyName: "byMarketType", fields: ["id"])
-}
-type MarketItemCategory
-  # 工具，电子产品，保健
-  @model
-  @auth(
-    rules: [
-      { allow: owner }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  ) {
-  id: ID!
-  name: String!
-  marketItems: [MarketItem]
-    @connection(keyName: "byMarketItemCategory", fields: ["id"])
+  phone: String
+  weChat: String
+  email: String
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type MarketItem
@@ -441,10 +430,10 @@ type MarketItem
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(name: "byMarketType", fields: ["marketTypeID", "createdAt"])
   @key(
-    name: "byMarketItemCategory"
-    fields: ["marketItemCategoryID", "createdAt"]
+    name: "marketItemByCreatedAt"
+    fields: ["ByCreatedAt", "active", "createdAt"]
+    queryField: "marketItemByCreatedAt"
   ) {
   id: ID!
   name: String!
@@ -453,20 +442,60 @@ type MarketItem
   price: Int
   description: String
   location: String
-  marketTypeID: ID!
-  marketType: MarketType! @connection(fields: ["marketTypeID"])
-  condition: String
-  marketItemCategoryID: ID!
+  marketItemCondition: MarketItemCondition!
   marketItemCategory: MarketItemCategory!
-    @connection(fields: ["marketItemCategoryID"])
-  marketItemCarID: ID
-  marketItemCar: MarketItemCar @connection(fields: ["marketItemCarID"])
-  marketItemHomeID: ID
-  marketItemHome: MarketItemHome @connection(fields: ["marketItemHomeID"])
+  tags: [String]
+  active: Int!
   createdAt: AWSDateTime!
+  ByCreatedAt: String!
 }
 
-type MarketItemCar
+enum MarketItemCondition {
+  New
+  UsedLikeNew
+  UsedGood
+  UsedFair
+
+  Other
+}
+
+enum MarketItemCategory {
+  Tools
+  Furniture
+  HouseHold
+  Garden
+  Appliances
+
+  VideoGames
+  BooksMoviesMusic
+
+  BagsLuggage
+  WomensClothingShoes
+  MensClothingShoes
+  JewelryAccessories
+
+  HealthBeauty
+  PetSupplies
+  BabyKids
+  ToysGames
+
+  ElectronicsComputers
+  MobilePhones
+
+  Bicycles
+  ArtsCrafts
+  SportsOutdoors
+  AutoParts
+  MusicalInstruments
+  AntiquesCollectibles
+
+  GarageSale
+  Miscellaneous
+
+  Other
+}
+
+type MarketVehicle
   @model
   @auth(
     rules: [
@@ -475,16 +504,39 @@ type MarketItemCar
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "marketVehicleByCreatedAt"
+    fields: ["ByCreatedAt", "active", "createdAt"]
+    queryField: "marketVehicleByCreatedAt"
   ) {
   id: ID!
-  year: String!
+  vehicleType: VehicleType!
+  imagePath: [String]!
+  location: String
+  year: Int!
   make: String!
   model: String!
-  marketItemID: ID!
-  marketItem: MarketItem! @connection(fields: ["marketItemID"])
+  exteriorColor: String
+  interiorColor: String
+  fuelType: String
+  price: Int
+  description: String
+  active: Int!
+  createdAt: AWSDateTime!
+  ByCreatedAt: String!
 }
 
-type MarketItemHome
+enum VehicleType {
+  CarTruck
+  Motorcycle
+  PowerSport
+  RVCamper
+  Trailer
+  Other
+}
+
+type MarketHome
   @model
   @auth(
     rules: [
@@ -493,16 +545,64 @@ type MarketItemHome
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "marketHomeByCreatedAt"
+    fields: ["ByCreatedAt", "active", "createdAt"]
+    queryField: "marketHomeByCreatedAt"
   ) {
   id: ID!
-  saleOrRent: String!
-  property: String!
-  bedroomCounts: Int!
-  bathroomsCounts: Int!
+  imagePath: [String]!
+  marketHomeSaleRent: MarketHomeSaleRent!
+  propertyType: PropertyType!
+  bedroomCounts: Int
+  bathroomsCounts: Int
+  price: Int
+  address: String
+  description: String
   propertySize: Int
-  laundryType: String
-  airCondition: String
-  heating: String
-  marketItemID: ID!
-  marketItem: MarketItem! @connection(fields: ["marketItemID"])
+  dateAvailable: AWSDateTime
+  laundryType: LaundryType
+  airConditionType: AirConditionType
+  heatingType: HeatingType
+  catFriendly: Boolean
+  dogFriendly: Boolean
+  active: Int!
+  createdAt: AWSDateTime!
+  ByCreatedAt: String!
+}
+
+enum MarketHomeSaleRent {
+  Rent
+  ForSale
+  Other
+}
+
+enum PropertyType {
+  Apartment
+  House
+  RoomOnly
+  Townhouse
+  Other
+}
+enum LaundryType {
+  InUnitLaundry
+  LaundryInBuilding
+  LaundryAvailable
+  None
+  Other
+}
+
+enum AirConditionType {
+  CentralAC
+  ACAvailable
+  None
+  Other
+}
+
+enum HeatingType {
+  CentralHeating
+  ElectricHeating
+  GasHeating
+  RadiatorHeating
 }

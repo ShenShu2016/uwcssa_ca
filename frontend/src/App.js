@@ -25,13 +25,13 @@ import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
 import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import MarketItemDetail from "./containers/MarketItemDetail";
-import MarketListing from "./containers/MarketListing";
-import MarketPostTest from "./containers/MarketPostTest";
+// import MarketItemDetail from "./containers/MarketItemDetail";
+// import MarketListing from "./containers/MarketListing";
+// import MarketPostTest from "./containers/MarketPostTest";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
-import PostMarketItem from "./containers/market/PostMarketItem";
+// import PostMarketItem from "./containers/market/PostMarketItem";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
@@ -155,7 +155,7 @@ export default function App() {
                 exact
                 component={ArticleDetail}
               />
-              <Route path="/MarketPostTest" exact component={MarketPostTest} /> 
+              {/* <Route path="/MarketPostTest" exact component={MarketPostTest} /> 
                          
               <Route
                 path="/market/postMarketItem"
@@ -168,7 +168,7 @@ export default function App() {
                 path="/market/:marketId"
                 exact
                 component={MarketItemDetail}
-              />
+              /> */}
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />

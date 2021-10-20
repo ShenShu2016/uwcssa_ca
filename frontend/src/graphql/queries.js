@@ -55,6 +55,19 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      marketUserInfo {
+        items {
+          id
+          phone
+          weChat
+          email
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -86,6 +99,9 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         userExperiences {
+          nextToken
+        }
+        marketUserInfo {
           nextToken
         }
       }
@@ -128,6 +144,9 @@ export const getUserEducation = /* GraphQL */ `
           nextToken
         }
         userExperiences {
+          nextToken
+        }
+        marketUserInfo {
           nextToken
         }
       }
@@ -214,6 +233,9 @@ export const getUserExperience = /* GraphQL */ `
           nextToken
         }
         userExperiences {
+          nextToken
+        }
+        marketUserInfo {
           nextToken
         }
       }
@@ -1555,109 +1577,81 @@ export const byForumPostCommentID = /* GraphQL */ `
     }
   }
 `;
-export const getMarketType = /* GraphQL */ `
-  query GetMarketType($id: ID!) {
-    getMarketType(id: $id) {
+export const getMarketUserInfo = /* GraphQL */ `
+  query GetMarketUserInfo($id: ID!) {
+    getMarketUserInfo(id: $id) {
       id
-      name
+      phone
+      weChat
+      email
+      userID
       createdAt
       updatedAt
-      owner
-      marketItems {
-        items {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          marketTypeID
-          condition
-          marketItemCategoryID
-          marketItemCarID
-          marketItemHomeID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const listMarketTypes = /* GraphQL */ `
-  query ListMarketTypes(
-    $filter: ModelMarketTypeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listMarketTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
+      user {
         id
-        name
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgPath
+        backGroundImgPath
+        linkedin
+        github
         createdAt
         updatedAt
-        owner
-        marketItems {
+        uWindsorEmail
+        tags
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
           nextToken
         }
       }
-      nextToken
-    }
-  }
-`;
-export const getMarketItemCategory = /* GraphQL */ `
-  query GetMarketItemCategory($id: ID!) {
-    getMarketItemCategory(id: $id) {
-      id
-      name
-      createdAt
-      updatedAt
       owner
-      marketItems {
-        items {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          marketTypeID
-          condition
-          marketItemCategoryID
-          marketItemCarID
-          marketItemHomeID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
-export const listMarketItemCategories = /* GraphQL */ `
-  query ListMarketItemCategories(
-    $filter: ModelMarketItemCategoryFilterInput
+export const listMarketUserInfos = /* GraphQL */ `
+  query ListMarketUserInfos(
+    $filter: ModelMarketUserInfoFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMarketItemCategories(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listMarketUserInfos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
+        phone
+        weChat
+        email
+        userID
         createdAt
         updatedAt
-        owner
-        marketItems {
-          nextToken
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgPath
+          backGroundImgPath
+          linkedin
+          github
+          createdAt
+          updatedAt
+          uWindsorEmail
+          tags
         }
+        owner
       }
       nextToken
     }
@@ -1673,93 +1667,14 @@ export const getMarketItem = /* GraphQL */ `
       price
       description
       location
-      marketTypeID
-      condition
-      marketItemCategoryID
-      marketItemCarID
-      marketItemHomeID
+      marketItemCondition
+      marketItemCategory
+      tags
+      active
       createdAt
+      ByCreatedAt
       updatedAt
-      marketType {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        marketItems {
-          nextToken
-        }
-      }
-      marketItemCategory {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        marketItems {
-          nextToken
-        }
-      }
       owner
-      marketItemCar {
-        id
-        year
-        make
-        model
-        marketItemID
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          marketTypeID
-          condition
-          marketItemCategoryID
-          marketItemCarID
-          marketItemHomeID
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
-      marketItemHome {
-        id
-        saleOrRent
-        property
-        bedroomCounts
-        bathroomsCounts
-        propertySize
-        laundryType
-        airCondition
-        heating
-        marketItemID
-        createdAt
-        updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          marketTypeID
-          condition
-          marketItemCategoryID
-          marketItemCarID
-          marketItemHomeID
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
     }
   }
 `;
@@ -1778,278 +1693,249 @@ export const listMarketItems = /* GraphQL */ `
         price
         description
         location
-        marketTypeID
-        condition
-        marketItemCategoryID
-        marketItemCarID
-        marketItemHomeID
+        marketItemCondition
+        marketItemCategory
+        tags
+        active
         createdAt
+        ByCreatedAt
         updatedAt
-        marketType {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          marketItemID
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          marketItemID
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
   }
 `;
-export const getMarketItemCar = /* GraphQL */ `
-  query GetMarketItemCar($id: ID!) {
-    getMarketItemCar(id: $id) {
+export const marketItemByCreatedAt = /* GraphQL */ `
+  query MarketItemByCreatedAt(
+    $ByCreatedAt: String
+    $activeCreatedAt: ModelMarketItemMarketItemByCreatedAtCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMarketItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    marketItemByCreatedAt(
+      ByCreatedAt: $ByCreatedAt
+      activeCreatedAt: $activeCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        imagePath
+        title
+        price
+        description
+        location
+        marketItemCondition
+        marketItemCategory
+        tags
+        active
+        createdAt
+        ByCreatedAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getMarketVehicle = /* GraphQL */ `
+  query GetMarketVehicle($id: ID!) {
+    getMarketVehicle(id: $id) {
       id
+      vehicleType
+      imagePath
+      location
       year
       make
       model
-      marketItemID
+      exteriorColor
+      interiorColor
+      fuelType
+      price
+      description
+      active
       createdAt
+      ByCreatedAt
       updatedAt
-      marketItem {
-        id
-        name
-        imagePath
-        title
-        price
-        description
-        location
-        marketTypeID
-        condition
-        marketItemCategoryID
-        marketItemCarID
-        marketItemHomeID
-        createdAt
-        updatedAt
-        marketType {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          marketItemID
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          marketItemID
-          createdAt
-          updatedAt
-          owner
-        }
-      }
       owner
     }
   }
 `;
-export const listMarketItemCars = /* GraphQL */ `
-  query ListMarketItemCars(
-    $filter: ModelMarketItemCarFilterInput
+export const listMarketVehicles = /* GraphQL */ `
+  query ListMarketVehicles(
+    $filter: ModelMarketVehicleFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMarketItemCars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listMarketVehicles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        vehicleType
+        imagePath
+        location
         year
         make
         model
-        marketItemID
+        exteriorColor
+        interiorColor
+        fuelType
+        price
+        description
+        active
         createdAt
+        ByCreatedAt
         updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          marketTypeID
-          condition
-          marketItemCategoryID
-          marketItemCarID
-          marketItemHomeID
-          createdAt
-          updatedAt
-          owner
-        }
         owner
       }
       nextToken
     }
   }
 `;
-export const getMarketItemHome = /* GraphQL */ `
-  query GetMarketItemHome($id: ID!) {
-    getMarketItemHome(id: $id) {
-      id
-      saleOrRent
-      property
-      bedroomCounts
-      bathroomsCounts
-      propertySize
-      laundryType
-      airCondition
-      heating
-      marketItemID
-      createdAt
-      updatedAt
-      marketItem {
+export const marketVehicleByCreatedAt = /* GraphQL */ `
+  query MarketVehicleByCreatedAt(
+    $ByCreatedAt: String
+    $activeCreatedAt: ModelMarketVehicleMarketVehicleByCreatedAtCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMarketVehicleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    marketVehicleByCreatedAt(
+      ByCreatedAt: $ByCreatedAt
+      activeCreatedAt: $activeCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
         id
-        name
+        vehicleType
         imagePath
-        title
+        location
+        year
+        make
+        model
+        exteriorColor
+        interiorColor
+        fuelType
         price
         description
-        location
-        marketTypeID
-        condition
-        marketItemCategoryID
-        marketItemCarID
-        marketItemHomeID
+        active
         createdAt
+        ByCreatedAt
         updatedAt
-        marketType {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemCategory {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
-        marketItemCar {
-          id
-          year
-          make
-          model
-          marketItemID
-          createdAt
-          updatedAt
-          owner
-        }
-        marketItemHome {
-          id
-          saleOrRent
-          property
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          laundryType
-          airCondition
-          heating
-          marketItemID
-          createdAt
-          updatedAt
-          owner
-        }
       }
+      nextToken
+    }
+  }
+`;
+export const getMarketHome = /* GraphQL */ `
+  query GetMarketHome($id: ID!) {
+    getMarketHome(id: $id) {
+      id
+      imagePath
+      marketHomeSaleRent
+      propertyType
+      bedroomCounts
+      bathroomsCounts
+      price
+      address
+      description
+      propertySize
+      dateAvailable
+      laundryType
+      airConditionType
+      heatingType
+      catFriendly
+      dogFriendly
+      active
+      createdAt
+      ByCreatedAt
+      updatedAt
       owner
     }
   }
 `;
-export const listMarketItemHomes = /* GraphQL */ `
-  query ListMarketItemHomes(
-    $filter: ModelMarketItemHomeFilterInput
+export const listMarketHomes = /* GraphQL */ `
+  query ListMarketHomes(
+    $filter: ModelMarketHomeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMarketItemHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listMarketHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        saleOrRent
-        property
+        imagePath
+        marketHomeSaleRent
+        propertyType
         bedroomCounts
         bathroomsCounts
+        price
+        address
+        description
         propertySize
+        dateAvailable
         laundryType
-        airCondition
-        heating
-        marketItemID
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        active
         createdAt
+        ByCreatedAt
         updatedAt
-        marketItem {
-          id
-          name
-          imagePath
-          title
-          price
-          description
-          location
-          marketTypeID
-          condition
-          marketItemCategoryID
-          marketItemCarID
-          marketItemHomeID
-          createdAt
-          updatedAt
-          owner
-        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const marketHomeByCreatedAt = /* GraphQL */ `
+  query MarketHomeByCreatedAt(
+    $ByCreatedAt: String
+    $activeCreatedAt: ModelMarketHomeMarketHomeByCreatedAtCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMarketHomeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    marketHomeByCreatedAt(
+      ByCreatedAt: $ByCreatedAt
+      activeCreatedAt: $activeCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        imagePath
+        marketHomeSaleRent
+        propertyType
+        bedroomCounts
+        bathroomsCounts
+        price
+        address
+        description
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        active
+        createdAt
+        ByCreatedAt
+        updatedAt
         owner
       }
       nextToken
