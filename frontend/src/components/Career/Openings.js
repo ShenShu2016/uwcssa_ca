@@ -5,7 +5,7 @@ import {
 } from "../../redux/actions/uwcssaJobActions";
 
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import store from "../../redux/store";
 import { useSelector } from "react-redux";
@@ -45,11 +45,11 @@ export default function Openings() {
                 {department.uwcssaJobs.items.length === 0
                   ? ""
                   : department.uwcssaJobs.items.map((job) => {
-                      return job.active ? (
+                      return job.active===1 ? (
                         <div key={job.id}>
                           <br />
                           <div
-                            style={{ display: "inline-block", width: "70%" }}
+                            style={{ display: "inline-block", width: "80%" }}
                           >
                             <Link
                               className={classes.jobLink}
@@ -58,6 +58,7 @@ export default function Openings() {
                               {job.title}
                             </Link>
                           </div>
+                          <div style={{ display: "inline-block", width: "20%", textAlign: "right" }}>{job.createdAt.slice(0,10)}</div>
                           <br />
                         </div>
                       ) : (
@@ -65,6 +66,7 @@ export default function Openings() {
                       );
                     })}
                 <br />
+                <Divider />
                 <br />
               </div>
             );
