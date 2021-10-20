@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   InputLabel,
@@ -18,11 +19,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { Box } from "@mui/system";
 import PublishIcon from "@mui/icons-material/Publish";
+import S3Image from "../../../components/S3/S3Image";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "960px",
     margin: "auto",
     paddingTop: "5rem",
+    paddingInline: "1rem",
   },
   formControl: {
     margin: theme.spacing(2, 0),
@@ -59,6 +61,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Input = styled("input")({
+  display: "none",
+});
+
 export default function PostArticle() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -72,17 +78,19 @@ export default function PostArticle() {
     topicID: "",
     typeID: "",
   });
-  console.log("articleData", articleData);
+
   useEffect(() => {
     dispatch(setTopics());
-    dispatch(setTypes()); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(setTypes());
+  }, [dispatch]);
 
   const { topics, types } = useSelector((state) => state.allArticles);
 
   const uploadArticleImg = async () => {
     const response = await dispatch(postArticleImg(imgData));
-    setImgKey(response.key);
+    if (response) {
+      setImgKey(response.key);
+    }
   };
 
   const uploadArticle = async () => {
@@ -119,7 +127,7 @@ export default function PostArticle() {
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
-    setTopics();
+    dispatch(setTopics());
   };
 
   const [typeData, setTypeData] = useState({ name: "" });
@@ -132,15 +140,17 @@ export default function PostArticle() {
       unlike: [],
     };
     await API.graphql(graphqlOperation(createType, { input: createTypeInput }));
-    setTypes();
+    dispatch(setTypes());
   };
 
   return (
     <div className={classes.root}>
+      <Typography variant="h4" sx={{ textAlign: "center", mb: 2 }}>
+        发布文章
+      </Typography>
       <Box className={classes.title}>
-        <Typography variant="h3">输入标题</Typography>
         <TextField
-          label="标题"
+          label="文章标题"
           variant="outlined"
           fullWidth
           value={articleData.title}
@@ -151,12 +161,8 @@ export default function PostArticle() {
         />
       </Box>
       <Box className={classes.topic}>
-        <div className="newTopic">
-          <FormControl
-            variant="outlined"
-            // className={classes.formControl}
-            fullWidth
-          >
+        <Box className="newTopic">
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="demo-simple-select-outlined-label2">
               Topic
             </InputLabel>
@@ -178,24 +184,7 @@ export default function PostArticle() {
               })}
             </Select>
           </FormControl>
-        </div>
-        <div className="newTopic">
-          <TextField
-            label="Topic"
-            value={topicData.name}
-            onChange={(e) =>
-              setTopicData({ ...topicData, name: e.target.value })
-            }
-          />
-          <Button
-            variant="contained"
-            endIcon={<PublishIcon />}
-            onClick={uploadTopic}
-            color="primary"
-          >
-            上传新的topic
-          </Button>
-        </div>
+        </Box>
       </Box>
       <Box className={classes.type}>
         <div className="newType">
@@ -224,39 +213,54 @@ export default function PostArticle() {
             </Select>
           </FormControl>
         </div>
-        <div className="newType">
-          <TextField
-            label="Type"
-            value={typeData.name}
-            onChange={(e) => setTypeData({ ...typeData, name: e.target.value })}
-          />
-          <Button
-            variant="contained"
-            endIcon={<PublishIcon />}
-            onClick={uploadType}
-            color="primary"
-          >
-            上传新的Type
-          </Button>
-        </div>
       </Box>
-      <Box className={classes.imgPreview}>
-        {imgKey === "" ? (
-          <Typography variant="h4">添加照片</Typography>
-        ) : (
-          <AmplifyS3Image path={imgKey} />
-        )}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => {
-            setImgData(e.target.files[0]);
-          }}
+      <div className="newTopic">
+        <TextField
+          label="Topic"
+          value={topicData.name}
+          onChange={(e) => setTopicData({ ...topicData, name: e.target.value })}
         />
-        <Button variant="contained" color="primary" onClick={uploadArticleImg}>
-          上传图片
+        <Button
+          variant="contained"
+          endIcon={<PublishIcon />}
+          onClick={uploadTopic}
+          color="primary"
+        >
+          上传新的topic
         </Button>
+      </div>
+      <div className="newType">
+        <TextField
+          label="Type"
+          value={typeData.name}
+          onChange={(e) => setTypeData({ ...typeData, name: e.target.value })}
+        />
+        <Button
+          variant="contained"
+          endIcon={<PublishIcon />}
+          onClick={uploadType}
+          color="primary"
+        >
+          上传新的Type
+        </Button>
+      </div>
+      <Box>
+        <label htmlFor="contained-button-file">
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            type="file"
+            onChange={(e) => {
+              setImgData(e.target.files[0]);
+              uploadArticleImg();
+            }}
+          />
+          <Button variant="contained" component="span">
+            上传图片
+          </Button>
+        </label>
       </Box>
+      <S3Image S3Key={imgKey} style={{ width: "100%" }} />
       <Box className={classes.content}>
         <TextField
           label="Content"
@@ -270,7 +274,6 @@ export default function PostArticle() {
           }
         />
       </Box>
-
       <Button
         variant="contained"
         endIcon={<PublishIcon />}

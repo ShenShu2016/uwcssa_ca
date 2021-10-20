@@ -5,13 +5,11 @@ import {
   CardActions,
   CardHeader,
   Grid,
-  IconButton,
   LinearProgress,
   Typography,
 } from "@mui/material";
 
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -136,14 +134,6 @@ export default function ArticleComments({ article }) {
                         回复
                       </Button>
                     </CardActions>
-                  </Grid>
-                  <Grid item xs={"auto"}>
-                    <IconButton
-                      aria-label="settings"
-                      className={classes.moreVertIcon}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
                   </Grid>
                 </Grid>
               </Box>
