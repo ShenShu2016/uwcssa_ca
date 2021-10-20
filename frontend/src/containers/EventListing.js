@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import {
   Box,
@@ -15,12 +15,20 @@ import {
   MobileStepper,
   useTheme,
   CardActions,
-  Link,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+  Breadcrumbs,
 } from "@mui/material";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,6 +127,8 @@ export default function Event() {
   const handleClick = () => {
     console.info("You clicked the Chip.");
   };
+  const userInfo = useSelector((state) => state.userAuth);
+
   const eventPosts = [
     {
       title: "Featured post",
@@ -165,6 +175,16 @@ export default function Event() {
     <div>
       <Box className={classes.root}>
         <Container size="lg">
+          <Box>
+            <Breadcrumbs aria-label="breadcrumb">
+              <span style={{ cursor: "not-allowed" }}>
+                <Button color="inherit" component={Link} to="/">
+                  主页
+                </Button>
+              </span>
+              <Typography>{""}</Typography>
+            </Breadcrumbs>
+          </Box>
           <Box className={classes.title}>
             <Typography variant="h4" className={classes.title}>
               UWCSSA活动集锦
@@ -319,9 +339,17 @@ export default function Event() {
                           </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button size="small" disabled>
-                            分享
-                          </Button>
+                          {userInfo.isAuthenticated ? (
+                            <Button
+                              size="small"
+                              component={Link}
+                              to="/event/eventSignUp"
+                            >
+                              报名
+                            </Button>
+                          ) : (
+                            <SignUpRequest />
+                          )}
                           <Button size="small" component={Link} to="" disabled>
                             了解更多
                           </Button>
@@ -350,3 +378,49 @@ export default function Event() {
     </div>
   );
 }
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const SignUpRequest = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Button size="small" onClick={handleClickOpen}>
+        报名
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Oops！"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            需要登录才能报名哦~ 如果你还没有账户，你可以现在就注册一个（免费）。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button component={Link} to="/SignUp">
+            注册
+          </Button>
+          <Button component={Link} to="/signIn">
+            登入
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};

@@ -14,6 +14,9 @@ import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/EventListing";
+import EventSignUp from "./components/Event/SignUpEvent";
+import Individual from "./components/Event/individual";
+import Group from "./components/Event/group";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/Forum";
@@ -173,6 +176,15 @@ export default function App() {
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
               <Route path="/event" exact component={Event} />
+              <Route path="/event/eventSignUp" exact component={EventSignUp} />
+              {/*event/:eventId/eventSignUp*/}
+              <Route
+                path="/event/eventSignUp/individual"
+                exact
+                component={Individual}
+              />
+              {/*event/:eventId/eventSignUp/individual*/}
+              <Route path="/event/eventSignUp/group" exact component={Group} />
               <Route>404 Not Found!</Route>
             </Switch>
             <Snackbar
