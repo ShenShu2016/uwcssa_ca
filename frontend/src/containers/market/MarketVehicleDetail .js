@@ -1,5 +1,3 @@
-import "./../components/Article/ArticleDetail/Main.css";
-
 import {
   Avatar,
   Box,
@@ -15,11 +13,11 @@ import React, { useEffect, useState } from "react";
 import {
   removeSelectedMarketItem,
   selectedMarketItem,
-} from "../redux/actions/marketItemActions";
+} from "../../redux/actions/marketItemActions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
@@ -36,19 +34,20 @@ const useStyles = makeStyles({
     paddingInline: "1rem",
   },
 });
-export default function MarketItemDetail() {
+export default function MarketVehicleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [imageURL, setImageURL] = useState(null);
-  const { marketItemID } = useParams();
-  console.log("marketItemID", marketItemID);
+  const { id } = useParams();
+  console.log("id", id);
   useEffect(() => {
-    if (marketItemID && marketItemID !== "") {
-      dispatch(selectedMarketItem(marketItemID));
+    if (id && id !== "") {
+      const type = "vehicle";
+      dispatch(selectedMarketItem(id, type));
     }
     return () => dispatch(removeSelectedMarketItem());
-  }, [marketItemID, dispatch]);
+  }, [id, dispatch]);
   const marketItem = useSelector((state) => state.marketItem);
   console.log("marketItem", marketItem);
   const {

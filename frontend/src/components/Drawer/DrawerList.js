@@ -158,7 +158,7 @@ const DrawerList = ({ toggleDrawer }) => {
                     sx={{ pl: 4 }}
                     onClick={toggleDrawer(false)}
                     component={Link}
-                    to="/market/PostMarketItem"
+                    to="/market/create"
                   >
                     <ListItemText primary="发布商品" />
                   </ListItemButton>

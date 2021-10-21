@@ -2,17 +2,15 @@ import { ActionTypes } from "../constants/marketItem-action-types";
 
 const initialState = {
   marketItems: [],
+  marketVehicles: [],
 };
 
 export const marketItemReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case ActionTypes.SET_MARKETITEMS:
+    case ActionTypes.SET_MARKET_ITEMS:
       return { ...state, marketItems: payload };
-    case ActionTypes.SET_MARKETTYPES:
-      return { ...state, marketTypes: payload };
-    case ActionTypes.SET_MARKETCATEGORIES:
-      return { ...state, marketCategories: payload };
-
+    case ActionTypes.SET_MARKET_VEHICLE:
+      return { ...state, marketVehicles: payload };
     default:
       return state;
   }
@@ -20,7 +18,7 @@ export const marketItemReducer = (state = initialState, { type, payload }) => {
 
 export const selectedMarketItemReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case ActionTypes.SELECTED_MARKETITEM:
+    case ActionTypes.SELECTED_MARKET_ITEM:
       return { ...state, ...payload };
     case ActionTypes.REMOVE_SELECTED_MARKETITEM:
       return {};

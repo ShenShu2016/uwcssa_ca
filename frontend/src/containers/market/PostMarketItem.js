@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import PublishIcon from "@material-ui/icons/Publish";
+import PublishIcon from "@mui/icons-material/Publish";
 import S3Image from "../../components/S3/S3Image";
 import Select from "@mui/material/Select";
 import { makeStyles } from "@mui/styles";
@@ -105,7 +105,7 @@ export default function PostMarketItem() {
     console.log("response", response);
     if (response.result) {
       history.push(
-        `/market/marketItem/${response.response.data.createMarketItem.id}`
+        `/market/item/${response.response.data.createMarketItem.id}`
       );
     }
   };

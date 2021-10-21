@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Checkbox,
   Grid,
@@ -9,7 +10,6 @@ import {
 import React, { useEffect, useState } from "react";
 
 import API from "@aws-amplify/api";
-import Alert from "@material-ui/lab/Alert";
 import Storage from "@aws-amplify/storage";
 import { createUwcssaJobResume } from "../../graphql/mutations";
 import { getUwcssaJob } from "../../graphql/queries";
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Checkbox: {
     paddingLeft: "1rem",
-  }
+  },
 }));
 
 export default function ApplyJob(props) {
@@ -181,7 +181,9 @@ export default function ApplyJob(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h6" className={classes.title}>{applyData.job.title}</Typography>
+      <Typography variant="h6" className={classes.title}>
+        {applyData.job.title}
+      </Typography>
       <br />
       <Typography variant="body1">
         谢谢你的兴趣.请填写下面的表格并点击"提交"

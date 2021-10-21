@@ -525,6 +525,7 @@ type MarketVehicle
   active: Int!
   createdAt: AWSDateTime!
   ByCreatedAt: String!
+  #tag
 }
 
 enum VehicleType {

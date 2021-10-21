@@ -8,7 +8,10 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "283px",
-    margin: "4px",
+    margin: "2px",
+    [theme.breakpoints.down("sm")]: {
+      width: "173px",
+    },
   },
   paper: {},
   content: {
@@ -20,17 +23,18 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     objectFit: "cover",
     [theme.breakpoints.down("sm")]: {
-      width: "112px",
-      height: "112px",
+      width: "173px",
+      height: "173px",
       marginTop: "2.5rem",
     },
   },
 }));
 
-export default function MarketComponent({ marketItem }) {
+export default function MarketComponent({ item, type }) {
   const classes = useStyles();
-  console.log("marketItem", marketItem);
+
   const [imageURL, setImageURL] = useState(null);
+
   const {
     id,
     title,
@@ -40,10 +44,11 @@ export default function MarketComponent({ marketItem }) {
     // marketItemCategory,
     // marketItemCondition,
     location,
+    model,
     // tags,
     // active,
     // ByCreatedAt,
-  } = marketItem;
+  } = item;
 
   useEffect(() => {
     const getImage = async () => {
@@ -67,7 +72,7 @@ export default function MarketComponent({ marketItem }) {
 
   return (
     <Paper elevation={0} className={classes.root}>
-      <CardActionArea component={Link} to={`/market/marketItem/${id}`}>
+      <CardActionArea component={Link} to={`/market/${type}/${id}`}>
         <img src={imageURL} alt="" className={classes.s3image} />
         <Box my={"8px"}>
           <Box my={"4px"}>
@@ -80,6 +85,18 @@ export default function MarketComponent({ marketItem }) {
               }}
             >
               ${price}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "600",
+                lineHeight: "1.3333",
+              }}
+            >
+              {model}
             </Typography>
           </Box>
           <Box my={"4px"}>
