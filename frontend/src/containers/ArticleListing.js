@@ -26,7 +26,7 @@ export default function ArticleListing() {
   const classes = useStyles();
   useEffect(() => {
     dispatch(setArticles());
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;

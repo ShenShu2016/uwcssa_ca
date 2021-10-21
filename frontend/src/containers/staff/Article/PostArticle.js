@@ -68,8 +68,6 @@ const Input = styled("input")({
 export default function PostArticle() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  const [imgData, setImgData] = useState("");
   const [imgKey, setImgKey] = useState("");
   const history = useHistory();
   const [articleData, setArticleData] = useState({
@@ -86,8 +84,8 @@ export default function PostArticle() {
 
   const { topics, types } = useSelector((state) => state.allArticles);
 
-  const uploadArticleImg = async () => {
-    const response = await dispatch(postArticleImg(imgData));
+  const uploadArticleImg = async (e) => {
+    const response = await dispatch(postArticleImg(e.target.files[0]));
     if (response) {
       setImgKey(response.key);
     }
@@ -251,8 +249,8 @@ export default function PostArticle() {
             id="contained-button-file"
             type="file"
             onChange={(e) => {
-              setImgData(e.target.files[0]);
-              uploadArticleImg();
+              // setImgData();
+              uploadArticleImg(e);
             }}
           />
           <Button variant="contained" component="span">

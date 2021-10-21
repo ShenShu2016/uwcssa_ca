@@ -65,7 +65,7 @@ export default function ArticlesPreview() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setArticles());
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch]);
   const articles = useSelector((state) => state.allArticles.articles);
 
   const rows = articles.map((article) => {

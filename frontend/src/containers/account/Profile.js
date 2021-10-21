@@ -30,7 +30,7 @@ export default function Profile() {
       dispatch(selectedUser(username));
     }
     return () => dispatch(removeSelectedUser());
-  }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [username, dispatch]);
 
   const userAuth = useSelector((state) => state.userAuth);
   const user = useSelector((state) => state.user);

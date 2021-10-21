@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useForm = ({ initState, callback, validator }) => {
   const [state, setState] = useState(initState);
@@ -10,7 +10,7 @@ const useForm = ({ initState, callback, validator }) => {
       Object.values(errors).filter((error) => typeof error !== "undefined")
         .length > 0;
     if (isSubmitted && !isValidErrors()) callback();
-  }, [errors]);
+  }, [errors, callback, isSubmitted]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,20 +22,20 @@ const useForm = ({ initState, callback, validator }) => {
 
   const handleBlur = (e) => {
     const { name: fieldName } = e.target;
-    const faildFiels = validator(state, fieldName);
+    const failFields = validator(state, fieldName);
     setErrors(() => ({
       ...errors,
-      [fieldName]: Object.values(faildFiels)[0],
+      [fieldName]: Object.values(failFields)[0],
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name: fieldName } = e.target;
-    const faildFiels = validator(state, fieldName);
+    const failFields = validator(state, fieldName);
     setErrors(() => ({
       ...errors,
-      [fieldName]: Object.values(faildFiels)[0],
+      [fieldName]: Object.values(failFields)[0],
     }));
     setIsSubmitted(true);
   };
