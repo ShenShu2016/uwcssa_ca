@@ -1,154 +1,113 @@
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
-import { Link } from "react-router-dom";
-import React from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
-import Grid from "@mui/material/Grid";
-import {
-  Typography,
-  CardActionArea,
-  Avatar,
-  CardActions,
-  Box,
-  CardContent,
-  Button,
-  Card,
-  CardHeader,
-  IconButton,
-} from "@mui/material";
-const useStyles = makeStyles({
-  root: {
-    justifyContent: "center",
-    margin: "auto",
-    maxWidth: "960px",
-    paddingInline: "1rem",
-  },
-  title: {
-    textAlign: "center",
+import { Box, CardActionArea, Paper, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-    color: "#0D1F48",
-    paddingBottom: "3rem",
+import { Link } from "react-router-dom";
+import Storage from "@aws-amplify/storage";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "283px",
+    margin: "4px",
   },
-  paper: {
-    maxWidth: "100%",
-    margin: "1rem auto",
+  paper: {},
+  content: {
+    maxHeight: "200px",
   },
   s3image: {
-    width: "100%",
+    width: "283px",
+    height: "283px",
+    borderRadius: "8px",
+    objectFit: "cover",
+    [theme.breakpoints.down("sm")]: {
+      width: "112px",
+      height: "112px",
+      marginTop: "2.5rem",
+    },
   },
-});
+}));
 
-const MarketComponent = () => {
-  const markets = useSelector((state) => state.allMarketItems.marketItems);
+export default function MarketComponent({ marketItem }) {
   const classes = useStyles();
+  console.log("marketItem", marketItem);
+  const [imageURL, setImageURL] = useState(null);
+  const {
+    id,
+    title,
+    // description,
+    price,
+    imagePath,
+    // marketItemCategory,
+    // marketItemCondition,
+    location,
+    // tags,
+    // active,
+    // ByCreatedAt,
+  } = marketItem;
 
-  const renderList = markets.map((market) => {
-    const {
-      id,
-      description,
-      title,
-      marketItemCategory,
-      marketType,
-      imagePath,
-      price,
-      //like,
-      //unlike,
-      createdAt,
-      // updateAt,
-      owner,
-    } = market;
-
-    return (
-      <Grid item xs md={4}>
-        <Card className={classes.paper} key={id} elevation={5}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={owner}
-            subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
-              11,
-              19
-            )}`}
-          />{" "}
-          <CardHeader title={title} />
-          <CardActions>
-            <Button size="small" color="primary">
-              marketType: {marketType.name}
-            </Button>
-            <Button size="small" color="primary">
-              marketItemCategory: {marketItemCategory.name}
-            </Button>
-          </CardActions>
-          <div className={classes.s3image}>
-            <CardActionArea>
-              <CardContent>
-                <AmplifyS3Image path={imagePath} />
-              </CardContent>
-            </CardActionArea>
-          </div>
-          <CardContent>
-            <Typography variant="body1" noWrap color="red" component="p">
-              价格：CAD {price}
-            </Typography>
-            <Typography
-              variant="body1"
-              noWrap
-              color="textSecondary"
-              component="p"
-            >
-              {description}
-            </Typography>
-          </CardContent>
-          {/* <CardActions>
-          <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-            {like.length}
-          </Button>
-          <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-            {unlike.length}
-          </Button>
-          <Button size="small" color="primary">
-            回复: {}
-          </Button>
-        </CardActions> */}
-          <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button
-              size="small"
-              color="primary"
-              component={Link}
-              to={`market/${id}`}
-            >
-              查看更多
-            </Button>
-          </CardActions>
-        </Card>
-      </Grid>
-    );
-  });
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const imageAccessURL = await Storage.get(imagePath, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        // console.log("imageAccessURL", imageAccessURL);
+        setImageURL(imageAccessURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setImageURL(null);
+      }
+    };
+    if (imagePath) {
+      getImage();
+    }
+  }, [imagePath]);
 
   return (
-    <Box className={classes.root}>
-      <Box>
-        <Typography variant="h3" className={classes.title}>
-          Markets
-        </Typography>
-
-        <Grid container spacing={1}>
-          <Grid container item spacing={3}>
-            {renderList}
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
+    <Paper elevation={0} className={classes.root}>
+      <CardActionArea component={Link} to={`/market/marketItem/${id}`}>
+        <img src={imageURL} alt="" className={classes.s3image} />
+        <Box my={"8px"}>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "600",
+                lineHeight: "1.3333",
+              }}
+            >
+              ${price}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "400",
+                lineHeight: "1.33333",
+              }}
+            >
+              {title}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "13px",
+                color: "#65676B",
+                fontWeight: "400",
+                lineHeight: "1.2308",
+              }}
+            >
+              {location}
+            </Typography>
+          </Box>
+        </Box>
+      </CardActionArea>
+    </Paper>
   );
-};
-export default MarketComponent;
+}

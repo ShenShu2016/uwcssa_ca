@@ -22,15 +22,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ArticleListing() {
   const dispatch = useDispatch();
-  const articles = useSelector((state) => state.allArticles.articles);
   const classes = useStyles();
+
   useEffect(() => {
     dispatch(setArticles());
   }, [dispatch]);
 
+  const articles = useSelector((state) => state.allArticles.articles);
+
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;
   });
+  console.log("articles", articles);
   return (
     <Box className={classes.root}>
       <Box>

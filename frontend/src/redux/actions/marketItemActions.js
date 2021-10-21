@@ -1,15 +1,10 @@
-import {
-  listMarketItemCategories,
-  listMarketItems,
-  listMarketTypes,
-} from "../../graphql/queries";
-
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/marketItem-action-types";
 import Storage from "@aws-amplify/storage";
 import { createMarketItem } from "../../graphql/mutations";
 import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { listMarketItems } from "../../graphql/queries";
 import { v4 as uuid } from "uuid";
 
 export const setMarketItems = () => async (dispatch) => {
@@ -33,6 +28,7 @@ export const setMarketItems = () => async (dispatch) => {
 };
 
 export const selectedMarketItem = (marketItemId) => async (dispatch) => {
+  console.log("selectedMarketItem dispatch进了", marketItemId);
   try {
     const response = await API.graphql({
       query: getMarketItem,
@@ -54,58 +50,8 @@ export const removeSelectedMarketItem = () => async (dispatch) => {
   });
 };
 
-// export const postMarketItemComment = (createMarketItemInput) => async (dispatch) => {
-//   try {
-//     const response = await API.graphql(
-//       graphqlOperation(createMarketItemComment, { input: createMarketItemInput })
-//     );
-
-//     dispatch({
-//       type: ActionTypes.ARTICLE_COMMENT_POST_SUCCESS,
-//       payload: response,
-//     });
-//     dispatch(selectedMarketItem(createMarketItemInput.articleCommentMarketItemId));
-//   } catch (error) {
-//     console.log("error on posting MarketItemComment", error);
-//     dispatch({
-//       type: ActionTypes.ARTICLE_COMMENT_POST_FAIL,
-//     });
-//   }
-// };
-
-export const setMarketCategories = () => async (dispatch) => {
-  try {
-    const marketCategoryData = await API.graphql({
-      query: listMarketItemCategories,
-      authMode: "AWS_IAM",
-    });
-    console.log("marketCategoryData", marketCategoryData);
-    dispatch({
-      type: ActionTypes.SET_MARKETCATEGORIES,
-      payload: marketCategoryData.data.listMarketItemCategories.items,
-    });
-  } catch (error) {
-    console.log("error on fetching Topics", error);
-  }
-};
-
-export const setMarketTypes = () => async (dispatch) => {
-  try {
-    const MarketTypesData = await API.graphql({
-      query: listMarketTypes,
-      authMode: "AWS_IAM",
-    });
-    console.log("MarketTypesData", MarketTypesData);
-    dispatch({
-      type: ActionTypes.SET_MARKETTYPES,
-      payload: MarketTypesData.data.listMarketTypes.items,
-    });
-  } catch (error) {
-    console.log("error on fetching listMarketType", error);
-  }
-};
-
 export const postMarketItem = (createMarketItemInput) => async (dispatch) => {
+  console.log("我要上传拉createMarketItemInput", createMarketItemInput);
   try {
     const response = await API.graphql(
       graphqlOperation(createMarketItem, { input: createMarketItemInput })
@@ -129,6 +75,7 @@ export const postMarketItem = (createMarketItemInput) => async (dispatch) => {
     };
   }
 };
+
 export const postMarketItemImg = (imgData) => async (dispatch) => {
   try {
     const response = await Storage.put(

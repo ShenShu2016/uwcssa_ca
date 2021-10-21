@@ -2,8 +2,6 @@ import { ActionTypes } from "../constants/marketItem-action-types";
 
 const initialState = {
   marketItems: [],
-  marketTypes: [],
-  marketCategories: [],
 };
 
 export const marketItemReducer = (state = initialState, { type, payload }) => {

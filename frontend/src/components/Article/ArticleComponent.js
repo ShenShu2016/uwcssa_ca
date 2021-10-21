@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 function ArticleComponent({ article }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
+  console.log("article", article);
   const { id, content, title, imagePath, createdAt, owner } = article;
 
   useEffect(() => {

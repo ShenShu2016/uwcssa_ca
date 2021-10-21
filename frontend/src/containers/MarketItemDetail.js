@@ -1,28 +1,27 @@
-import React, { useEffect } from "react";
+import "./../components/Article/ArticleDetail/Main.css";
+
+import {
+  Avatar,
+  Box,
+  Button,
+  CardActionArea,
+  CardHeader,
+  CardMedia,
+  Divider,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   removeSelectedMarketItem,
   selectedMarketItem,
 } from "../redux/actions/marketItemActions";
 import { useDispatch, useSelector } from "react-redux";
-import "./../components/Article/ArticleDetail/Main.css";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-
+import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import {
-  Typography,
-  Avatar,
-  CardActions,
-  Box,
-  Button,
-  CardHeader,
-  IconButton,
-} from "@mui/material";
-
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -41,36 +40,55 @@ export default function MarketItemDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { marketId } = useParams();
-
+  const [imageURL, setImageURL] = useState(null);
+  const { marketItemID } = useParams();
+  console.log("marketItemID", marketItemID);
   useEffect(() => {
-    if (marketId && marketId !== "") {
-      dispatch(selectedMarketItem(marketId));
+    if (marketItemID && marketItemID !== "") {
+      dispatch(selectedMarketItem(marketItemID));
     }
     return () => dispatch(removeSelectedMarketItem());
-  }, [marketId]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [marketItemID, dispatch]);
   const marketItem = useSelector((state) => state.marketItem);
-  console.log("111111111", marketItem);
+  console.log("marketItem", marketItem);
   const {
-    title,
-    createdAt,
+    // id,
+    // name,
     imagePath,
-    owner,
+    title,
     price,
-
-    // updatedAt,
-    marketItemCategory,
-    marketType,
     description,
+    location,
+    marketItemCondition,
+    marketItemCategory,
+    // tags,
+    // active,
+    createdAt,
+    // ByCreatedAt,
+    owner,
   } = marketItem;
 
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const imageAccessURL = await Storage.get(imagePath, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        // console.log("imageAccessURL", imageAccessURL);
+        setImageURL(imageAccessURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setImageURL(null);
+      }
+    };
+    if (imagePath) {
+      getImage();
+    }
+  }, [imagePath]);
+
   return (
-    // <div className={classes.root}>
-    //   {/* <Main article={marketItem} /> */}
-    //   {/* <ArticleComments article={article} />
-    //   <ArticleCommentsPost article={article} /> */}
-    // </div
     <div className={classes.root}>
       {Object.keys(marketItem).length === 0 ? (
         <div>...Loading</div>
@@ -96,21 +114,29 @@ export default function MarketItemDetail() {
               19
             )}`}
           />
-          <CardActions>
-            <Button size="small" color="primary">
-              marketType: {marketType.name}
-            </Button>
-            <Button size="small" color="primary">
-              marketItemCategory: {marketItemCategory.name}
-            </Button>
-          </CardActions>
           <Typography variant="h3" align="center" className={classes.title}>
             {title}
           </Typography>
 
-          <AmplifyS3Image path={imagePath} />
+          <CardActionArea
+            onClick={() => {
+              window.open(imageURL);
+            }}
+          >
+            <CardMedia component="img" image={imageURL} />
+          </CardActionArea>
+          <Divider />
           <Typography variant="h3" color="red" className={classes.title}>
             价格：{price}
+          </Typography>
+          <Typography variant="h3" color="red" className={classes.title}>
+            位置：{location}
+          </Typography>
+          <Typography variant="h3" color="red" className={classes.title}>
+            条件：{marketItemCondition}
+          </Typography>
+          <Typography variant="h3" color="red" className={classes.title}>
+            分类：{marketItemCategory}
           </Typography>
           <Typography
             variant="body1"
@@ -119,12 +145,6 @@ export default function MarketItemDetail() {
           >
             {description}
           </Typography>
-          {/* <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-            {like.length}
-          </Button>
-          <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-            {unlike.length}
-          </Button> */}
           <Button size="small" color="primary">
             回复(测试)
           </Button>

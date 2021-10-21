@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TextField, Typography } from "@mui/material";
-import { connect, useSelector } from "react-redux";
-import {
-  createMarketType,
-  createMarketItemCategory,
-} from "../../graphql/mutations";
 import {
   postMarketItem,
   postMarketItemImg,
-  setMarketTypes,
-  setMarketCategories,
 } from "../../redux/actions/marketItemActions";
 
-import API from "@aws-amplify/api";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Box } from "@mui/system";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import PublishIcon from "@material-ui/icons/Publish";
+import S3Image from "../../components/S3/S3Image";
 import Select from "@mui/material/Select";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,97 +49,126 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PostMarketItem = ({
-  postMarketItem,
-  postMarketItemImg,
-  setMarketTypes,
-  setMarketCategories,
-}) => {
+const Input = styled("input")({
+  display: "none",
+});
+export default function PostMarketItem() {
   const classes = useStyles();
-  const [imgData, setImgData] = useState("");
+  const dispatch = useDispatch();
   const [imgKey, setImgKey] = useState("");
+
   const history = useHistory();
+
   const [marketItemData, setMarketItemData] = useState({
     title: "",
     name: "",
     price: "",
     description: "",
-    marketCategoryId: "",
-    marketTypeId: "",
+    marketItemCategory: "",
+    marketItemCondition: "",
+    location: "",
   });
-  useEffect(() => {
-    setMarketTypes();
-    setMarketCategories();
-
-    console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { marketTypes, marketCategories } = useSelector(
-    (state) => state.allMarketItems
-  );
-
-  const uploadMarketItemImg = async () => {
-    const response = await postMarketItemImg(imgData);
-    console.log("response.key", response.key);
-    setImgKey(response.key);
+  console.log("marketItemData", marketItemData);
+  const uploadMarketItemImg = async (e) => {
+    const response = await dispatch(postMarketItemImg(e.target.files[0]));
+    if (response) {
+      setImgKey(response.key);
+    }
   };
 
   const uploadMarketItem = async () => {
     //Upload the marketItem
-    const { title, description, marketTypeId, marketCategoryId, name, price } =
-      marketItemData;
+    const {
+      title,
+      description,
+      marketItemCategory,
+      marketItemCondition,
+      price,
+      location,
+    } = marketItemData;
 
     const createMarketItemInput = {
       title: title,
-      name: name,
+      name: title,
       description: description,
       price: price,
       imagePath: [imgKey],
-      marketItemMarketItemCategoryId: marketCategoryId,
-      marketItemMarketTypeId: marketTypeId,
+      marketItemCategory: marketItemCategory,
+      marketItemCondition: marketItemCondition,
+      location: location,
+      tags: [],
+      active: 1,
+      ByCreatedAt: "MarketItem",
     };
-    const response = await postMarketItem(createMarketItemInput);
 
-    console.log("response.result", response);
-    console.log("2222", marketItemData);
-
+    const response = await dispatch(postMarketItem(createMarketItemInput));
+    console.log("response", response);
     if (response.result) {
-      history.push(`/marketItem/${response.response.data.createMarketItem.id}`);
+      history.push(
+        `/market/marketItem/${response.response.data.createMarketItem.id}`
+      );
     }
   };
-  const [marketCategoryData, setMarketCategoryData] = useState({ name: "" });
+  const marketItemConditionList = [
+    { value: "New", label: "全新" },
+    { value: "UsedLikeNew", label: "基本全新" },
+    { value: "UsedGood", label: "7成新" },
+    { value: "UsedFair", label: "可以使用" },
+    { value: "Other", label: "其他" },
+  ];
+  const marketItemCategoryList = [
+    { value: "Tools", label: "工具" },
+    { value: "Furniture", label: "家具" },
+    { value: "HouseHold", label: "家庭" },
+    { value: "Garden", label: "园艺" },
+    { value: "Appliances", label: "家电" },
 
-  const uploadMarketCategory = async () => {
-    //Upload the topic
-    console.log("marketCategoryData", marketCategoryData);
-    const { name } = marketCategoryData;
-    const createMarketCategoryInput = {
-      name,
-    };
-    await API.graphql(
-      graphqlOperation(createMarketItemCategory, {
-        input: createMarketCategoryInput,
-      })
-    );
-    setMarketCategories();
-  };
+    { value: "VideoGames", label: "电视游戏" },
+    { value: "BooksMoviesMusic", label: "书籍，电影，音乐" },
 
-  const [marketTypeData, setMarketTypeData] = useState({ name: "" });
+    { value: "BagsLuggage", label: "箱包行李" },
+    { value: "WomensClothingShoes", label: "女装，女鞋" },
+    { value: "MensClothingShoes", label: "男装，男鞋" },
+    { value: "JewelryAccessories", label: "珠宝首饰" },
 
-  const uploadMarketType = async () => {
-    console.log("typeData", marketTypeData);
-    const { name } = marketTypeData;
-    const createMarketTypeInput = {
-      name,
-    };
-    await API.graphql(
-      graphqlOperation(createMarketType, { input: createMarketTypeInput })
-    );
-    setMarketTypes();
-  };
+    { value: "HealthBeauty", label: "健康美容" },
+    { value: "PetSupplies", label: "宠物用品" },
+    { value: "BabyKids", label: "婴儿玩具" },
+    { value: "ToysGames", label: "玩具游戏" },
+
+    { value: "ElectronicsComputers", label: "电子产品，电脑" },
+    { value: "MobilePhones", label: "手机" },
+
+    { value: "Bicycles", label: "自行车" },
+    { value: "ArtsCrafts", label: "工艺品" },
+    { value: "SportsOutdoors", label: "运动户外" },
+    { value: "AutoParts", label: "汽车零件" },
+    { value: "MusicalInstruments", label: "乐器" },
+    { value: "AntiquesCollectibles", label: "古董收藏品" },
+
+    { value: "GarageSale", label: "车库特卖" },
+    { value: "Miscellaneous", label: "各种各样的" },
+    { value: "Other", label: "其他" },
+  ];
 
   return (
     <div className={classes.root}>
+      <Box>
+        <label htmlFor="contained-button-file">
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            type="file"
+            onChange={(e) => {
+              uploadMarketItemImg(e);
+            }}
+          />
+          <Button variant="contained" component="span">
+            上传图片
+          </Button>
+        </label>
+      </Box>
+      <S3Image S3Key={imgKey} style={{ width: "100%" }} />
       <Box>
         <Typography variant="h4">输入商品信息</Typography>
         <TextField
@@ -155,9 +177,9 @@ const PostMarketItem = ({
           fullWidth
           value={marketItemData.title}
           style={{ marginBlock: "2rem" }}
-          onChange={(e) =>
-            setMarketItemData({ ...marketItemData, title: e.target.value })
-          }
+          onChange={(e) => {
+            setMarketItemData({ ...marketItemData, title: e.target.value });
+          }}
         />
       </Box>
       <Box className={classes.topic}>
@@ -165,6 +187,7 @@ const PostMarketItem = ({
           label="价格"
           variant="outlined"
           fullWidth
+          type="number"
           value={marketItemData.price}
           className={classes.titleInput}
           onChange={(e) =>
@@ -181,117 +204,61 @@ const PostMarketItem = ({
             <Select
               labelId="demo-simple-select-outlined-label2"
               id="demo-simple-select-outlined2"
-              value={marketItemData.marketCategoryId}
+              value={marketItemData.marketItemCategory}
               onChange={(e) =>
                 setMarketItemData({
                   ...marketItemData,
-                  marketCategoryId: e.target.value,
+                  marketItemCategory: e.target.value,
                 })
               }
               label="Category"
             >
-              {marketCategories.map((topic) => {
+              {marketItemCategoryList.map((category) => {
                 return (
-                  <MenuItem value={topic.name} key={topic.name}>
-                    {topic.name}
+                  <MenuItem value={category.value} key={category.value}>
+                    {category.label}
                   </MenuItem>
                 );
               })}
             </Select>
           </FormControl>
-        </div>
-        <div className="newTopic">
-          <TextField
-            label="Topic"
-            value={marketCategoryData.name}
-            onChange={(e) =>
-              setMarketCategoryData({
-                ...marketCategoryData,
-                name: e.target.value,
-              })
-            }
-          />
-          <Button
-            variant="contained"
-            endIcon={<PublishIcon />}
-            onClick={uploadMarketCategory}
-            color="primary"
-          >
-            上传新的category
-          </Button>
         </div>
       </Box>
       <Box className={classes.type}>
         <div className="newType">
           <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
+            <InputLabel id="demo-simple-select-outlined-label">
+              Condition
+            </InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={marketItemData.marketTypeId}
+              value={marketItemData.marketItemCondition}
               onChange={(e) =>
                 setMarketItemData({
                   ...marketItemData,
-                  marketTypeId: e.target.value,
+                  marketItemCondition: e.target.value,
                 })
               }
-              label="Type"
+              label="Condition"
             >
-              {marketTypes.map((type) => {
+              {marketItemConditionList.map((condition) => {
                 return (
-                  <MenuItem value={type.name} key={type.name}>
-                    {type.name}
+                  <MenuItem value={condition.value} key={condition.value}>
+                    {condition.label}
                   </MenuItem>
                 );
               })}
             </Select>
           </FormControl>
         </div>
-        <div className="newType">
-          <TextField
-            label="Type"
-            value={marketTypeData.name}
-            onChange={(e) =>
-              setMarketTypeData({ ...marketTypeData, name: e.target.value })
-            }
-          />
-          <Button
-            variant="contained"
-            endIcon={<PublishIcon />}
-            onClick={uploadMarketType}
-            color="primary"
-          >
-            上传新的marketType
-          </Button>
-        </div>
       </Box>
-      <Box className={classes.imgPreview}>
-        {imgKey === "" ? (
-          <Typography variant="h4">添加照片</Typography>
-        ) : (
-          <AmplifyS3Image path={imgKey} />
-        )}
-        <input
-          type="file"
-          accept="image/png"
-          onChange={(e) => {
-            setImgData(e.target.files[0]);
-            console.log("imgData", imgData);
-          }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={uploadMarketItemImg}
-        >
-          上传图片
-        </Button>
-      </Box>
+
       <Box className={classes.content}>
         <TextField
           label="description"
           value={marketItemData.description}
-          minRows={20}
+          minRows={5}
           variant="outlined"
           multiline
           fullWidth
@@ -304,6 +271,20 @@ const PostMarketItem = ({
         />
       </Box>
 
+      <Box>
+        <TextField
+          label="location"
+          value={marketItemData.location}
+          variant="outlined"
+          fullWidth
+          onChange={(e) =>
+            setMarketItemData({
+              ...marketItemData,
+              location: e.target.value,
+            })
+          }
+        />
+      </Box>
       <Button
         variant="contained"
         endIcon={<PublishIcon />}
@@ -314,11 +295,4 @@ const PostMarketItem = ({
       </Button>
     </div>
   );
-};
-
-export default connect(null, {
-  setMarketTypes,
-  setMarketCategories,
-  postMarketItem,
-  postMarketItemImg,
-})(PostMarketItem);
+}

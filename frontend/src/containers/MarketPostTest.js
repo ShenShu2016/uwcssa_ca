@@ -1,13 +1,12 @@
-import { Button, IconButton, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { Button, Typography } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { API } from "aws-amplify";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import { Link } from "react-router-dom";
-import { listMarketItems } from "../graphql/queries";
 import { makeStyles } from "@material-ui/core";
 import { setMarketItems } from "../redux/actions/marketItemActions";
-import { useDispatch, useSelector } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -22,7 +21,7 @@ export default function MarketPostTest() {
   // const [marketItem, setMarketItems] = useState([]);
   useEffect(() => {
     dispatch(setMarketItems());
-  }, []);
+  }, [dispatch]);
   const marketItem = useSelector((state) => state.allMarketItems.marketItems);
   console.log(marketItem, "marketItem");
 
