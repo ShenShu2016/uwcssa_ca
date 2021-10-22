@@ -25,6 +25,7 @@ export default function ArticleListing() {
   const classes = useStyles();
 
   useEffect(() => {
+    document.title = "近期新闻";
     dispatch(setArticles());
   }, [dispatch]);
 

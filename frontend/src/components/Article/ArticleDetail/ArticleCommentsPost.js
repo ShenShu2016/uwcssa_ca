@@ -65,7 +65,7 @@ export default function ArticleCommentsPost({ article }) {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const createArticleInput = {
+  const createArticleCommentInput = {
     content: comment,
     like: [],
     unlike: [],
@@ -74,7 +74,7 @@ export default function ArticleCommentsPost({ article }) {
   };
 
   const postComment = (e) => {
-    dispatch(postArticleComment(createArticleInput));
+    dispatch(postArticleComment(createArticleCommentInput));
     setFormData({ comment: "" });
   };
   return (

@@ -101,25 +101,28 @@ export const removeSelectedArticle = () => async (dispatch) => {
   });
 };
 
-export const postArticleComment = (createArticleInput) => async (dispatch) => {
-  try {
-    const response = await API.graphql(
-      graphqlOperation(createArticleComment, { input: createArticleInput })
-    );
+export const postArticleComment =
+  (createArticleCommentInput) => async (dispatch) => {
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createArticleComment, {
+          input: createArticleCommentInput,
+        })
+      );
 
-    dispatch({
-      type: ActionTypes.ARTICLE_COMMENT_POST_SUCCESS,
-      payload: response,
-    });
-    console.log();
-    dispatch(selectedArticleComments(createArticleInput.articleID));
-  } catch (error) {
-    console.log("error on posting ArticleComment", error);
-    dispatch({
-      type: ActionTypes.ARTICLE_COMMENT_POST_FAIL,
-    });
-  }
-};
+      dispatch({
+        type: ActionTypes.ARTICLE_COMMENT_POST_SUCCESS,
+        payload: response,
+      });
+      console.log();
+      dispatch(selectedArticleComments(createArticleCommentInput.articleID));
+    } catch (error) {
+      console.log("error on posting ArticleComment", error);
+      dispatch({
+        type: ActionTypes.ARTICLE_COMMENT_POST_FAIL,
+      });
+    }
+  };
 
 export const setTopics = () => async (dispatch) => {
   try {
