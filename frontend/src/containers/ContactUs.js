@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   img:{
     width:"50%",
-    height:"820px",
+    height:"700px",
     display: "flex",
     [theme.breakpoints.down("md")]: {
       display: "none",

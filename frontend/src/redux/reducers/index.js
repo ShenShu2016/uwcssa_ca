@@ -7,6 +7,8 @@ import {
   forumReducer,
   selectedForumPostCommentReducer,
   selectedForumPostReducer,
+  selectedForumSubTopicReducer,
+  selectedForumTopicReducer,
 } from "./forumReducer";
 import {
   postUserEducationReducer,
@@ -32,6 +34,8 @@ const reducers = combineReducers({
   allUwcssaJobs: uwcssaJobReducer,
 
   forum: forumReducer,
+  forumTopic: selectedForumTopicReducer,
+  forumSubTopic: selectedForumSubTopicReducer,
   forumPost: selectedForumPostReducer,
   forumPostComment: selectedForumPostCommentReducer,
 

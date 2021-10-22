@@ -5,7 +5,9 @@ import {
   Box,
   Typography,
   MobileStepper,
+  // Skeleton,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@mui/styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -25,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
   sportlight: {
     textAlign: "center",
     marginTop: "4rem",
+  },
+  forumTopic: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 }));
 //测试初始图片，后期可更换
@@ -51,7 +58,7 @@ const images = [
   },
 ];
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-const ForumLeftSide = ({ setForumTopics }) => {
+const ForumMain = ({ setForumTopics }) => {
   useEffect(() => {
     setForumTopics();
     console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,17 +92,17 @@ const ForumLeftSide = ({ setForumTopics }) => {
         {/* forum type link */}
         <Box sx={{ marginTop: "4rem" }}>
           {/* 后期动态改变 type: FourmTopic */}
-          <Grid container spacing={0}>
+          <Grid container spacing={0} className={classes.forumTopic}>
             {forumTopics.map((forumTopic) => {
               return (
-                <div key={forumTopic.name}>
+                <div key={forumTopic.id}>
                   <Grid item xs={12}>
                     <Typography variant="subtitle2">
                       <Button
                         variant="text"
-                        target="_top"
                         color="primary"
-                        href={`#`}
+                        component={Link}
+                        to={`/forumTopic/${forumTopic.id}`}
                       >
                         {forumTopic.name}
                         <ArrowForwardIcon />
@@ -109,7 +116,9 @@ const ForumLeftSide = ({ setForumTopics }) => {
         </Box>
         {/* forum sportlight slide */}
         <Box className={classes.sportlight}>
-          <Box sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}>
+          <Box
+            sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}
+          >
             <Typography variant="h6">SPORTLIGHT</Typography>
           </Box>
 
@@ -197,4 +206,4 @@ const ForumLeftSide = ({ setForumTopics }) => {
   );
 };
 
-export default connect(null, { setForumTopics })(ForumLeftSide);
+export default connect(null, { setForumTopics })(ForumMain);

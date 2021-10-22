@@ -12,7 +12,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import PublishIcon from "@mui/icons-material/Publish";
 import React, { useEffect, useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createForumSubTopic,
   createForumTopic,
@@ -39,17 +39,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
+function ForumTopicCURD()  {
   const classes = useStyles();
+  const dispatch = useDispatch();
   useEffect(() => {
-    setForumTopics();
-    setForumSubTopics();
-    console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(setForumTopics());
+    dispatch(setForumSubTopics());
+    console.log("using effect");
+  }, [dispatch]);
   const { forumTopics, forumSubTopics } = useSelector((state) => state.forum);
-  console.log("forumTopics", forumTopics);
-  console.log("forumSubTopics", forumSubTopics);
+  // console.log("forumTopics", forumTopics);
+  // console.log("forumSubTopics", forumSubTopics);
   const [forumTopicData, setForumTopicData] = useState({ name: "" });
+  
   //upload the forum topic
   const uploadForumTopic = async () => {
     console.log("AddForumTopicData", forumTopicData);
@@ -64,42 +66,46 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
     );
   };
   //Delete the forum topic
+  const [forumTopicId, setForumTopicId] = useState({ id: "" });
   const delForumTopic = async () => {
-    console.log("DelForumTopicData", forumTopicData);
-    const { name } = forumTopicData;
-    const delForumTopicInput = {
-      name,
+    console.log("DelForumTopicId", forumTopicId);
+    const { id } = forumTopicId;
+    const DelForumTopicInput = {
+      id,
     };
     await API.graphql(
-      graphqlOperation(deleteForumTopic, { input: delForumTopicInput })
+      graphqlOperation(deleteForumTopic, { input: DelForumTopicInput })
     );
   };
 
   //upload the forum Sub topic
-  const [selectForumTopicData, selectForumTopic] = useState({ name: "" });
+  const [selectForumTopicData, selectForumTopic] = useState({ id: "" });
   console.log("selectForumTopicData", selectForumTopicData);
   const [forumSubTopicData, setForumSubTopicData] = useState({});
+  
   const uploadForumSubTopic = async () => {
     console.log("ForumSubTopicData", forumSubTopicData);
     const { name } = forumSubTopicData;
-    const topicName = selectForumTopicData.name;
+    const topicId = selectForumTopicData.id;
     console.log("selectForumTopicData", selectForumTopicData);
     const createForumSubTopicInput = {
       name,
       like: [],
       unlike: [],
-      forumSubTopicForumTopicId: topicName,
+      active:1,
+      forumTopicID: topicId,
     };
     await API.graphql(
       graphqlOperation(createForumSubTopic, { input: createForumSubTopicInput })
     );
   };
   //Delete the forum Sub topic
+  const [forumSubTopicId, setForumSubTopicId] = useState({ id: "" });
   const delForumSubTopic = async () => {
-    console.log("DelForumSubTopicData", forumSubTopicData);
-    const { name } = forumSubTopicData;
+    console.log("DelForumSubTopicId", forumSubTopicId);
+    const { id } = forumSubTopicId;
     const delForumSubTopicInput = {
-      name,
+      id,
     };
     await API.graphql(
       graphqlOperation(deleteForumSubTopic, { input: delForumSubTopicInput })
@@ -127,12 +133,21 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
     <div className={classes.root}>
       <Grid container spacing={4}>
         {/* ForumTopicInput */}
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <TextField
             label="Topic"
             value={forumTopicData.name}
             onChange={(e) =>
               setForumTopicData({ ...forumTopicData, name: e.target.value })
+            }
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="TopicId"
+            value={forumTopicId.id}
+            onChange={(e) =>
+              setForumTopicId({ ...forumTopicId, id: e.target.value })
             }
           />
         </Grid>
@@ -167,13 +182,20 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
           {forumTopics.map((forumTopic) => {
             return (
               <div key={forumTopic.name}>
-                <Typography variant="h4">Topic:{forumTopic.name}</Typography>
+                <Grid container spacing={4}>
+                  <Grid item xs={6}>
+                    <Typography variant="h4">Topic:{forumTopic.name}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                  <Typography variant="h4">Id:{forumTopic.id}</Typography>
+                  </Grid>
+                </Grid>
               </div>
             );
           })}
         </Grid>
         {/* select forum topic  */}
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <FormControl sx={{ minWidth: 80 }}>
             <InputLabel id="demo-simple-select-autowidth-label">
               Topic
@@ -181,11 +203,11 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              value={selectForumTopicData.name}
+              value={selectForumTopicData.id}
               onChange={(e) =>
                 selectForumTopic({
                   ...selectForumTopicData,
-                  name: e.target.value,
+                  id: e.target.value,
                 })
               }
               autoWidth
@@ -196,7 +218,7 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
               </MenuItem>
               {forumTopics.map((forumTopic) => {
                 return (
-                  <MenuItem value={forumTopic.name} key={forumTopic.name}>
+                  <MenuItem value={forumTopic.id} key={forumTopic.id}>
                     {forumTopic.name}
                   </MenuItem>
                 );
@@ -205,7 +227,7 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
           </FormControl>
         </Grid>
         {/* input forum sub topic */}
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <TextField
             label="SubTopic"
             value={forumSubTopicData.name}
@@ -214,6 +236,15 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
                 ...forumSubTopicData,
                 name: e.target.value,
               })
+            }
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="SubTopicId"
+            value={forumSubTopicId.id}
+            onChange={(e) =>
+              setForumSubTopicId({ ...forumSubTopicId, id: e.target.value })
             }
           />
         </Grid>
@@ -241,6 +272,7 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
             删除Forum Sub topic
           </Button>
         </Grid>
+        
         {/* list forum sub topic */}
         <Grid item xs={12}>
           <Typography variant="h3">ForumSubTopic</Typography>
@@ -248,14 +280,24 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
             return (
               <div key={forumSubTopic.name}>
                 <Grid container spacing={4}>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography variant="h4">
                       SubTopic:{forumSubTopic.name}
                     </Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography variant="h4">
                       Topic:{forumSubTopic.forumTopic.name}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography variant="h4">
+                      Id:{forumSubTopic.id}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography variant="h4">
+                      Active:{forumSubTopic.active}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -267,7 +309,4 @@ const ForumTopic = ({ setForumTopics, setForumSubTopics }) => {
     </div>
   );
 };
-export default connect(null, {
-  setForumTopics,
-  setForumSubTopics,
-})(ForumTopic);
+export default ForumTopicCURD;

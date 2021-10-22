@@ -5,6 +5,23 @@ const initialState = {
   forumSubTopics: [],
   forumPosts: [],
 };
+const initialStateSelectedForumTopic = {
+  forumTopic: {},
+}
+const initialStateSelectedForumSubTopic = {
+  forumSubTopic: {},
+}
+const initialStateSelectedForumPost = {
+  forumPost: {},
+  // forumPostComments: {},
+  // forumPostCommentsNextToken: {},
+
+}
+const initialStatePUDForumPost = {
+  postForumPost: {},
+  postImage: {},
+
+}
 
 export const forumReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -19,7 +36,26 @@ export const forumReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const postForumPostReducer = (state = {}, { type, payload }) => {
+export const selectedForumTopicReducer = (state = initialStateSelectedForumTopic, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SELECTED_FORUMTOPIC:
+      return { ...state, forumTopic:payload };
+    default:
+      return state;
+  }
+};
+
+export const selectedForumSubTopicReducer = (state = initialStateSelectedForumSubTopic, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SELECTED_FORUMSUBTOPIC:
+      return { ...state, forumSubTopic:payload };
+    default:
+      return state;
+  }
+};
+
+
+export const pudForumPostReducer = (state = initialStatePUDForumPost, { type, payload }) => {
   switch (type) {
     case ActionTypes.POST_FORUMPOST_SUCCESS:
       return { ...state, ...payload };
@@ -34,10 +70,17 @@ export const postForumPostReducer = (state = {}, { type, payload }) => {
   }
 };
 
-export const selectedForumPostReducer = (state = {}, { type, payload }) => {
+
+export const selectedForumPostReducer = (state = initialStateSelectedForumPost, { type, payload }) => {
   switch (type) {
     case ActionTypes.SELECTED_FORUMPOST:
-      return { ...state, ...payload };
+      return { ...state, forumPost:payload };
+    case ActionTypes.SELECTED_FORUMPOSTCOMMENTS:
+      return {
+        ...state,
+        forumPostComments: payload.items,
+        forumPostCommentsNextToken: payload.nextToken,
+      }
     case ActionTypes.REMOVE_SELECTED_FORUMPOST:
       return { ...state, ...payload };
     case ActionTypes.REMOVE_SELECTED_FORUMPOST_FAIL:
