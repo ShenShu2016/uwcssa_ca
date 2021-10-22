@@ -17,11 +17,10 @@ import Event from "./containers/EventListing";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/Forum";
-import ForumPost from "./components/Forum/CurdTesting/ForumPost";
+import ForumPostUpload from "./components/Forum/CurdTesting/ForumPostUpload";
 import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostCommentDetail";
-import ForumPostDetail from "./components/Forum/CurdTesting/ForumPostDetail";
+import ForumPost from "./components/Forum/CurdTesting/ForumPost";
 import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
-import ForumTopic from "./components/Forum/CurdTesting/ForumTopic";
 import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
@@ -44,6 +43,9 @@ import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
+import ForumTopic from "./components/Forum/ForumTopic";
+import ForumSubTopic from "./components/Forum/ForumSubTopic";
+import ForumTopicCURD from "./components/Forum/CurdTesting/ForumTopicCURD";
 
 const theme = createTheme({
   typography: {
@@ -127,13 +129,23 @@ export default function App() {
                 component={PostDepartment}
               />
               <Route path="/forum" exact component={Forum} />
-              <Route path="/forumTopic" exact component={ForumTopic} />
-              <Route path="/forumPost" exact component={ForumPost} />
+              <Route path="/forumTopicCURD" exact component={ForumTopicCURD} />
+              <Route
+                path="/forumTopic/:forumTopicID"
+                exact
+                component={ForumTopic}
+              />
+              <Route
+                path="/forumSubTopic/:forumSubTopicID"
+                exact
+                component={ForumSubTopic}
+              />
+              <Route path="/forumPostUpload" exact component={ForumPostUpload} />
               <Route path="/forumPostList" exact component={ForumPostList} />
               <Route
-                path="/forumPost/:forumPostId"
+                path="/forumPost/:forumPostID"
                 exact
-                component={ForumPostDetail}
+                component={ForumPost}
               />
               <Route
                 path="/forumPost/forumPostComment/:forumPostCommentId"

@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
@@ -26,6 +27,7 @@ function ForumPostMain({ forumPost }) {
   const classes = useStyles();
   const {
     content,
+    title,
     imagePath,
     like,
     unlike,
@@ -55,15 +57,25 @@ function ForumPostMain({ forumPost }) {
             )}`}
           />
           <CardActions>
-            <Button size="small" color="primary">
+            <Button
+              size="small"
+              color="primary"
+              component={Link}
+              to={`/forumSubTopic/${forumPost.forumSubTopic.id}`}
+            >
               SubTopic: {forumPost.forumSubTopic.name}
             </Button>
-            <Button size="small" color="primary">
+            <Button
+              size="small"
+              color="primary"
+              component={Link}
+              to={`/forumTopic/${forumPost.forumSubTopic.forumTopic.id}`}
+            >
               Topic: {forumPost.forumSubTopic.forumTopic.name}
             </Button>
           </CardActions>
           <Typography variant="h3" align="center" className={classes.title}>
-            Title
+            {title}
           </Typography>
 
           {/* <CardMedia className={classes.media} image={image} /> */}

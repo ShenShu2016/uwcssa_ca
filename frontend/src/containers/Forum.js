@@ -1,6 +1,5 @@
 import { 
-    Grid, 
-    Hidden 
+    Grid,
 } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
@@ -14,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
   },
-  speedDial: {},
 }));
 
 const Forum = () => {
@@ -25,14 +23,12 @@ const Forum = () => {
         <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
           <ForumMain />
         </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <OpenIconSpeedDial />
-        </Grid>
-        <Hidden xsDown>
           <Grid item sm={1} md={2}>
             <ForumAdSide />
           </Grid>
-        </Hidden>
+        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
+          <OpenIconSpeedDial />
+        </Grid>
       </Grid>
     </div>
   );

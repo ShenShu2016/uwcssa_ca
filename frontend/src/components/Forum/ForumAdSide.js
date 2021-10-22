@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     borderLeft: "1px solid rgba(0, 0, 0, 0.05)",
+    borderRight: "1px solid rgba(0, 0, 0, 0.05)",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
   title: {
     fontWeight: 400,

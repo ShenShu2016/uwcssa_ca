@@ -1,18 +1,20 @@
 import {
   Avatar,
   Button,
+  Box,
+  Grid,
   Card,
   CardActions,
   CardContent,
   CardHeader,
-  IconButton,
   Typography,
   TextField,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SignInRequest from "../ForumPostDetail/SignInRequest";
 import { postForumPostComment } from "../../../redux/actions/forumAction";
 
@@ -23,14 +25,38 @@ const useStyles = makeStyles({
   },
   card: {},
 });
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = "#";
 
-function ForumPostCommentsPost({ forumPost, postForumPostComment }) {
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  /* eslint-enable no-bitwise */
+  return color;
+}
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.slice(0, 1)}`,
+  };
+}
+
+function ForumPostCommentsPost({ forumPost}) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userAuth);
   const [formData, setFormData] = useState({
     comment: "",
   });
-
   const { comment } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,49 +65,72 @@ function ForumPostCommentsPost({ forumPost, postForumPostComment }) {
     content: comment,
     like: [],
     unlike: [],
-    forumPostCommentForumPostId: forumPost.id,
+    active:1,
+    forumPostID: forumPost.id,
   };
   const postComment = (e) => {
-    postForumPostComment(createForumPostCommentInput);
+    dispatch(postForumPostComment(createForumPostCommentInput));
     setFormData({ comment: "" });
   };
+
 
   return (
     <div>
       {userInfo.isAuthenticated ? (
         <div>
           <Typography className={classes.subTitle}>发布新评论：</Typography>
-          <Card elevation={3} className={classes.card}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              title={userInfo.user.username}
-            />
-            <CardContent>
-              <TextField
-                //id="outlined-multiline-static"
-                multiline
-                fullWidth
-                id="comment"
-                name="comment"
-                minRows={4}
-                variant="outlined"
-                value={comment}
-                onChange={(e) => onChange(e)}
-              />
-            </CardContent>
-            <CardActions>
-              <Button color="primary" onClick={postComment}>
-                提交
-              </Button>
-            </CardActions>
-          </Card>
+          <Box className={classes.main}>
+            <Grid container spacing={0}>
+              <Grid item xs={"auto"}>
+                <CardHeader
+                  sx={{ px: 0, textDecoration: "none" }}
+                  component={Link}
+                  to={`/account/profile/${userInfo.user.username}`}
+                  avatar={
+                    <Avatar
+                      {...stringAvatar(userInfo.user.username.toUpperCase())}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item xs>
+                <Box sx={{ my: 1 }}>
+                  <TextField
+                    label="发表公开评论..."
+                    variant="standard"
+                    fullWidth
+                    multiline
+                    id="comment"
+                    name="comment"
+                    value={comment}
+                    onChange={(e) => onChange(e)}
+                  />
+                </Box>
+                <CardActions sx={{ p: 0, justifyContent: "flex-end" }}>
+                  <Button
+                    color="primary"
+                    size="large"
+                    variant="text"
+                    onClick={() => {
+                      setFormData({
+                        comment: "",
+                      });
+                    }}
+                  >
+                    取消
+                  </Button>
+                  <Button
+                    color="primary"
+                    size="large"
+                    variant="contained"
+                    onClick={postComment}
+                  >
+                    评论
+                  </Button>
+                </CardActions>
+              </Grid>
+            </Grid>
+          </Box>
         </div>
       ) : (
         <SignInRequest />
@@ -90,4 +139,4 @@ function ForumPostCommentsPost({ forumPost, postForumPostComment }) {
   );
 }
 
-export default connect(null, { postForumPostComment })(ForumPostCommentsPost);
+export default ForumPostCommentsPost;

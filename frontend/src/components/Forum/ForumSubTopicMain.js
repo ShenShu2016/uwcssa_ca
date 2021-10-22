@@ -11,62 +11,37 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
-// import { API } from "aws-amplify";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
-// import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { Link } from "react-router-dom";
-// import { deleteForumPost } from "../../../graphql/mutations";
-import { setForumPosts } from "../../../redux/actions/forumAction";
-
-const useStyles = makeStyles({
+import { makeStyles } from "@mui/styles";
+import React from "react";
+const useStyles = makeStyles((theme) => ({
   root: {
-    margin: "auto",
-    marginTop: "4rem",
-    maxWidth: "960px",
-    paddingInline: "0.5rem",
+    background: "#fff",
+    display: "flex",
+    flexDirection: "row",
+    //   justifyContent: "center",
   },
-  title: {
-    textAlign: "center",
-    color: "#0D1F48",
-    paddingBottom: "3rem",
+  forumSubTopic: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  paper: {
-    maxWidth: "100%",
-    margin: "1rem auto",
-    paddingInline: "3px",
-  },
-  s3image: {
-    width: "100%",
-    // paddingInline: "1rem",
-  },
-});
-
-const ForumPostList = ({ setForumPosts }) => {
+}));
+export default function ForumSubTopicMain({ forumSubTopic }) {
   const classes = useStyles();
-  useEffect(() => {
-    setForumPosts();
-    console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const forumPosts = useSelector((state) => state.forum.forumPosts);
-  console.log(forumPosts);
-  //  Delete the forum topic
-  // const delForumPost = async (forumPostId) => {
-  //   const { id } = { id: forumPostId };
-  //   console.log("DelForumTopicId", id);
-  //   const delForumPostInput = {
-  //     id,
-  //   };
-  //   await API.graphql(
-  //     graphqlOperation(deleteForumPost, { input: delForumPostInput })
-  //   );
-  // };
-  const renderList = forumPosts.map((forumPost) => {
+  // console.log(forumSubTopic);
+  const { name, forumTopic, forumPosts } = forumSubTopic;
+  const forumPostsData = forumPosts.items;
+  const sortForumPostsData = forumPostsData.sort((a, b) => (a.createdAt > b.createdAt) ? 1:-1 ).reverse();
+
+  // const sortForumPostsData = ;
+  // console.log(sortForumPostsData);
+  
+  const renderList = sortForumPostsData.map((forumPost) => {
     const {
       id,
       title,
@@ -75,12 +50,10 @@ const ForumPostList = ({ setForumPosts }) => {
       like,
       unlike,
       createdAt,
-      forumSubTopic,
       // updateAt,
       owner,
     } = forumPost;
     return (
-
       <Paper className={classes.paper} key={id} elevation={5}>
         <CardHeader
           sx={{ p: 1 }}
@@ -147,34 +120,29 @@ const ForumPostList = ({ setForumPosts }) => {
               size="small"
               color="primary"
               component={Link}
-              to={`forumPost/${id}`}
+              to={`/forumPost/${id}`}
             >
               查看更多
             </Button>
-            <Button
-              size="small"
-              color="primary"
-              component={Link}
-              to={`forumPost/${id}`}
-            >
-              SubTopic:{forumSubTopic.name}
-            </Button>
           </CardActions>
-          <Grid item xs={12}>
-        </Grid>
+          <Grid item xs={12}></Grid>
         </div>
       </Paper>
     );
   });
   return (
-    <Box className={classes.root}>
-      <Box>
-        <Typography variant="h1" className={classes.title}>
-          Forum Post
-        </Typography>
+    <div className={classes.root}>
+      <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
+        <Box
+          sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}
+        >
+          <Typography variant="h5">
+            UWCSSA/论坛/{forumTopic.name}/{name}
+          </Typography>
+          {/* <Typography variant="h3">{name}</Typography> */}
+        </Box>
         {renderList}
       </Box>
-    </Box>
+    </div>
   );
-};
-export default connect(null, { setForumPosts })(ForumPostList);
+}

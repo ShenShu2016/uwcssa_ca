@@ -99,7 +99,7 @@ const DrawerList = ({ toggleDrawer }) => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     component={Link}
-                    to="/forumPost"
+                    to="/forumPostUpload"
                     onClick={toggleDrawer(false)}
                   >
                     <ListItemText primary="发布帖子" />
@@ -109,7 +109,7 @@ const DrawerList = ({ toggleDrawer }) => {
                   <ListItemButton
                     sx={{ pl: 4 }}
                     component={Link}
-                    to="/forumTopic"
+                    to="/forumTopicCURD"
                     onClick={toggleDrawer(false)}
                   >
                     <ListItemText primary="论坛主题" />
