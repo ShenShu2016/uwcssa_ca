@@ -18,6 +18,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { makeStyles } from "@mui/styles";
 import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
+import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function FoundingTeam() {
+  useTitle("创始团队以及贡献者");
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 

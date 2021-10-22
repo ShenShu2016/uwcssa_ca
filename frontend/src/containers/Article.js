@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ArticleComponent from "../components/Article/ArticleComponent";
 import { makeStyles } from "@mui/styles";
 import { setArticles } from "../redux/actions/articleActions";
+import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,12 +21,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ArticleListing() {
+export default function Article() {
+  useTitle("近期新闻");
+
   const dispatch = useDispatch();
   const classes = useStyles();
-
   useEffect(() => {
-    document.title = "近期新闻";
     dispatch(setArticles());
   }, [dispatch]);
 

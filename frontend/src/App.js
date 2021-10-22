@@ -5,8 +5,8 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Amplify from "aws-amplify";
+import Article from "./containers/Article";
 import ArticleDetail from "./containers/ArticleDetail";
-import ArticleListing from "./containers/ArticleListing";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";
@@ -18,18 +18,21 @@ import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/Forum";
-import ForumPostUpload from "./components/Forum/CurdTesting/ForumPostUpload";
-import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostCommentDetail";
 import ForumPost from "./components/Forum/CurdTesting/ForumPost";
+import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostCommentDetail";
 import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
+import ForumPostUpload from "./components/Forum/CurdTesting/ForumPostUpload";
+import ForumSubTopic from "./components/Forum/ForumSubTopic";
+import ForumTopic from "./components/Forum/ForumTopic";
+import ForumTopicCURD from "./components/Forum/CurdTesting/ForumTopicCURD";
 import FoundingTeam from "./containers/FoundingTeam";
 import Group from "./components/Event/group";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Individual from "./components/Event/individual";
+import Market from "./containers/market/Market";
 import MarketCreate from "./containers/market/MarketCreate";
 import MarketItemDetail from "./containers/market/MarketItemDetail";
-import MarketListing from "./containers/market/MarketListing";
 import MarketVehicleDetail from "./containers/market/MarketVehicleDetail ";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
@@ -48,9 +51,6 @@ import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
-import ForumTopic from "./components/Forum/ForumTopic";
-import ForumSubTopic from "./components/Forum/ForumSubTopic";
-import ForumTopicCURD from "./components/Forum/CurdTesting/ForumTopicCURD";
 
 const theme = createTheme({
   typography: {
@@ -145,7 +145,11 @@ export default function App() {
                 exact
                 component={ForumSubTopic}
               />
-              <Route path="/forumPostUpload" exact component={ForumPostUpload} />
+              <Route
+                path="/forumPostUpload"
+                exact
+                component={ForumPostUpload}
+              />
               <Route path="/forumPostList" exact component={ForumPostList} />
               <Route
                 path="/forumPost/:forumPostID"
@@ -166,7 +170,7 @@ export default function App() {
                 exact
                 component={EmailConfirm}
               />
-              <Route path="/article" exact component={ArticleListing} />
+              <Route path="/article" exact component={Article} />
               <Route
                 path="/article/:articleID"
                 exact
@@ -184,7 +188,7 @@ export default function App() {
                 component={PostMarketVehicle}
               />
               <Route path="/market/create/rental" exact />
-              <Route path="/market" exact component={MarketListing} />          
+              <Route path="/market" exact component={Market} />          
               <Route
                 path="/market/item/:id"
                 exact

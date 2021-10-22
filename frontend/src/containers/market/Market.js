@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import MarketComponent from "../../components/Market/MarketComponent";
 import { makeStyles } from "@mui/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MarketListing() {
+export default function Market() {
+  useTitle("市场");
   const dispatch = useDispatch();
   const classes = useStyles();
 
