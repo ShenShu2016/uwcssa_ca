@@ -512,6 +512,30 @@ export const onCreateTopic = /* GraphQL */ `
         }
         nextToken
       }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -543,6 +567,30 @@ export const onUpdateTopic = /* GraphQL */ `
         }
         nextToken
       }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -567,6 +615,30 @@ export const onDeleteTopic = /* GraphQL */ `
           topicID
           typeID
           active
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
           createdAt
           ByCreatedAt
           updatedAt
@@ -696,6 +768,9 @@ export const onCreateArticle = /* GraphQL */ `
         articles {
           nextToken
         }
+        events {
+          nextToken
+        }
       }
       type {
         id
@@ -753,6 +828,9 @@ export const onUpdateArticle = /* GraphQL */ `
         articles {
           nextToken
         }
+        events {
+          nextToken
+        }
       }
       type {
         id
@@ -808,6 +886,9 @@ export const onDeleteArticle = /* GraphQL */ `
         updatedAt
         owner
         articles {
+          nextToken
+        }
+        events {
           nextToken
         }
       }
@@ -987,6 +1068,342 @@ export const onDeleteArticleComment = /* GraphQL */ `
         }
         owner
         articleComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateEvent = /* GraphQL */ `
+  subscription OnCreateEvent {
+    onCreateEvent {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateEvent = /* GraphQL */ `
+  subscription OnUpdateEvent {
+    onUpdateEvent {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteEvent = /* GraphQL */ `
+  subscription OnDeleteEvent {
+    onDeleteEvent {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateEventParticipant = /* GraphQL */ `
+  subscription OnCreateEventParticipant {
+    onCreateEventParticipant {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateEventParticipant = /* GraphQL */ `
+  subscription OnUpdateEventParticipant {
+    onUpdateEventParticipant {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteEventParticipant = /* GraphQL */ `
+  subscription OnDeleteEventParticipant {
+    onDeleteEventParticipant {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
           nextToken
         }
       }

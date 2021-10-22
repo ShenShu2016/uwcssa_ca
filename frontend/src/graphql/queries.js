@@ -315,6 +315,30 @@ export const getTopic = /* GraphQL */ `
         }
         nextToken
       }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -334,6 +358,9 @@ export const listTopics = /* GraphQL */ `
         updatedAt
         owner
         articles {
+          nextToken
+        }
+        events {
           nextToken
         }
       }
@@ -419,6 +446,9 @@ export const getArticle = /* GraphQL */ `
         updatedAt
         owner
         articles {
+          nextToken
+        }
+        events {
           nextToken
         }
       }
@@ -680,6 +710,326 @@ export const byArticleID = /* GraphQL */ `
           topicID
           typeID
           active
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getEvent = /* GraphQL */ `
+  query GetEvent($id: ID!) {
+    getEvent(id: $id) {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listEvents = /* GraphQL */ `
+  query ListEvents(
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const eventByCreatedAt = /* GraphQL */ `
+  query EventByCreatedAt(
+    $ByCreatedAt: String
+    $activeCreatedAt: ModelEventEventByCreatedAtCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventByCreatedAt(
+      ByCreatedAt: $ByCreatedAt
+      activeCreatedAt: $activeCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getEventParticipant = /* GraphQL */ `
+  query GetEventParticipant($id: ID!) {
+    getEventParticipant(id: $id) {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listEventParticipants = /* GraphQL */ `
+  query ListEventParticipants(
+    $filter: ModelEventParticipantFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventParticipants(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        address
+        phone
+        weChat
+        message
+        numberOfPeople
+        eventParticipantStatus
+        active
+        eventID
+        createdAt
+        updatedAt
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const byEventID = /* GraphQL */ `
+  query ByEventID(
+    $eventID: ID
+    $activeCreatedAt: ModelEventParticipantByEventIDCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventParticipantFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byEventID(
+      eventID: $eventID
+      activeCreatedAt: $activeCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        address
+        phone
+        weChat
+        message
+        numberOfPeople
+        eventParticipantStatus
+        active
+        eventID
+        createdAt
+        updatedAt
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
           createdAt
           ByCreatedAt
           updatedAt

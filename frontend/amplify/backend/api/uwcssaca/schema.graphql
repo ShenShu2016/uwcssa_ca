@@ -106,6 +106,7 @@ type Topic
   like: [String]!
   unlike: [String]!
   articles: [Article] @connection(keyName: "byTopic", fields: ["id"])
+  events: [Event] @connection(keyName: "byTopic", fields: ["id"])
 }
 
 type Type
@@ -183,6 +184,87 @@ type ArticleComment
   articleID: ID!
   article: Article! @connection(fields: ["articleID"])
   createdAt: AWSDateTime!
+}
+
+type Event
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "eventByCreatedAt"
+    fields: ["ByCreatedAt", "active", "createdAt"]
+    queryField: "eventByCreatedAt"
+  )
+  @key(name: "byTopic", fields: ["topicID"]) {
+  id: ID!
+  title: String!
+  startDate: AWSDateTime!
+  endDate: AWSDateTime!
+  online: Boolean! #代表线上线下
+  group: Boolean!
+  backGroundImgPath: String
+  qrCode: String
+  poster: String
+  content: String
+  location: String
+  sponsor: [String]
+  eventStatus: EventStatus!
+  active: Int!
+  topicID: ID!
+  topic: Topic! @connection(fields: ["topicID"])
+  eventParticipants: [EventParticipant]
+    @connection(keyName: "byEvent", fields: ["id"])
+  createdAt: AWSDateTime!
+  ByCreatedAt: String!
+}
+enum EventStatus {
+  ComingSoon
+  InProgress
+  SignUpClosed
+  Finished
+  Canceled
+}
+
+type EventParticipant
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "byEventID"
+    fields: ["eventID", "active", "createdAt"]
+    queryField: "byEventID"
+  )
+  @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
+  id: ID!
+  name: String!
+  email: String!
+  address: String
+  phone: String
+  weChat: String
+  message: String
+  numberOfPeople: Int!
+  eventParticipantStatus: EventParticipantStatus!
+  active: Int!
+  eventID: ID!
+  event: Event! @connection(fields: ["eventID"])
+  createdAt: AWSDateTime!
+}
+enum EventParticipantStatus {
+  ArriveOnTime
+  CanNotArrive
+  Undecided
 }
 
 type Department

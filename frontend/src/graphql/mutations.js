@@ -542,6 +542,30 @@ export const createTopic = /* GraphQL */ `
         }
         nextToken
       }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -576,6 +600,30 @@ export const updateTopic = /* GraphQL */ `
         }
         nextToken
       }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -603,6 +651,30 @@ export const deleteTopic = /* GraphQL */ `
           topicID
           typeID
           active
+          createdAt
+          ByCreatedAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgPath
+          qrCode
+          poster
+          content
+          location
+          sponsor
+          eventStatus
+          active
+          topicID
           createdAt
           ByCreatedAt
           updatedAt
@@ -744,6 +816,9 @@ export const createArticle = /* GraphQL */ `
         articles {
           nextToken
         }
+        events {
+          nextToken
+        }
       }
       type {
         id
@@ -804,6 +879,9 @@ export const updateArticle = /* GraphQL */ `
         articles {
           nextToken
         }
+        events {
+          nextToken
+        }
       }
       type {
         id
@@ -862,6 +940,9 @@ export const deleteArticle = /* GraphQL */ `
         updatedAt
         owner
         articles {
+          nextToken
+        }
+        events {
           nextToken
         }
       }
@@ -1050,6 +1131,360 @@ export const deleteArticleComment = /* GraphQL */ `
         }
         owner
         articleComments {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const createEvent = /* GraphQL */ `
+  mutation CreateEvent(
+    $input: CreateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    createEvent(input: $input, condition: $condition) {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateEvent = /* GraphQL */ `
+  mutation UpdateEvent(
+    $input: UpdateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    updateEvent(input: $input, condition: $condition) {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteEvent = /* GraphQL */ `
+  mutation DeleteEvent(
+    $input: DeleteEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    deleteEvent(input: $input, condition: $condition) {
+      id
+      title
+      startDate
+      endDate
+      online
+      group
+      backGroundImgPath
+      qrCode
+      poster
+      content
+      location
+      sponsor
+      eventStatus
+      active
+      topicID
+      createdAt
+      ByCreatedAt
+      updatedAt
+      topic {
+        id
+        name
+        like
+        unlike
+        createdAt
+        updatedAt
+        owner
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+      }
+      owner
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          eventParticipantStatus
+          active
+          eventID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createEventParticipant = /* GraphQL */ `
+  mutation CreateEventParticipant(
+    $input: CreateEventParticipantInput!
+    $condition: ModelEventParticipantConditionInput
+  ) {
+    createEventParticipant(input: $input, condition: $condition) {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateEventParticipant = /* GraphQL */ `
+  mutation UpdateEventParticipant(
+    $input: UpdateEventParticipantInput!
+    $condition: ModelEventParticipantConditionInput
+  ) {
+    updateEventParticipant(input: $input, condition: $condition) {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteEventParticipant = /* GraphQL */ `
+  mutation DeleteEventParticipant(
+    $input: DeleteEventParticipantInput!
+    $condition: ModelEventParticipantConditionInput
+  ) {
+    deleteEventParticipant(input: $input, condition: $condition) {
+      id
+      name
+      email
+      address
+      phone
+      weChat
+      message
+      numberOfPeople
+      eventParticipantStatus
+      active
+      eventID
+      createdAt
+      updatedAt
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgPath
+        qrCode
+        poster
+        content
+        location
+        sponsor
+        eventStatus
+        active
+        topicID
+        createdAt
+        ByCreatedAt
+        updatedAt
+        topic {
+          id
+          name
+          like
+          unlike
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+        eventParticipants {
           nextToken
         }
       }

@@ -1,10 +1,8 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
   Grid,
   TextField,
   Typography,
@@ -186,10 +184,10 @@ export default function SignIn() {
             helperText={errorMessage}
             onChange={(event) => onChange(event)}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="我不是机器人"
-          />
+          /> */}
           <Grid container marginTop="1rem">
             <Grid item xs={5} sm={8} md={6} marginLeft="2rem">
               <Button
@@ -243,7 +241,7 @@ export default function SignIn() {
             variant="outlined"
             className={classes.third_party_button}
             onClick={(event) => handleGoogleSignIn(event)}
-            disabled
+            // disabled
           >
             <Grid item xs={8} lg={6}>
               <img
