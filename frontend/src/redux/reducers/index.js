@@ -25,6 +25,11 @@ import {
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
+import {
+  eventReducer,
+  pudEventReducer,
+  selectedEventReducer,
+} from "./eventReducer";
 
 const reducers = combineReducers({
   userAuth: authReducer,
@@ -47,5 +52,9 @@ const reducers = combineReducers({
   updateUserExperience: putUserExperienceReducer,
   allMarketItems: marketItemReducer,
   marketItem: selectedMarketItemReducer,
+
+  allEvents: eventReducer,
+  event: selectedEventReducer,
+  pudEvent: pudEventReducer,
 });
 export default reducers;
