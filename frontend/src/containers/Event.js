@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import {
   Box,
@@ -28,7 +28,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setEvents } from "../redux/actions/eventActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,49 +129,14 @@ export default function Event() {
     console.info("You clicked the Chip.");
   };
   const userInfo = useSelector((state) => state.userAuth);
+  const dispatch = useDispatch();
 
-  const eventPosts = [
-    {
-      title: "Featured post",
-      date: "10/30/2021",
-      category: "Movie",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content.",
-      image:
-        "https://upload.wikimedia.org/wikipedia/en/6/66/Aria_Of_A_Starless_Night_poster.jpg",
-      imageText: "Image Text",
-    },
-    {
-      title: "Post title",
-      date: "10/30/2021",
-      category: "Movie",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content.",
-      image:
-        "https://upload.wikimedia.org/wikipedia/en/6/66/Aria_Of_A_Starless_Night_poster.jpg",
-      imageText: "Image Text",
-    },
-    {
-      title: "Post title",
-      date: "10/30/2021",
-      category: "Movie",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content.",
-      image:
-        "https://upload.wikimedia.org/wikipedia/en/6/66/Aria_Of_A_Starless_Night_poster.jpg",
-      imageText: "Image Text",
-    },
-    {
-      title: "Post title",
-      date: "10/30/2021",
-      category: "Movie",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content.",
-      image:
-        "https://upload.wikimedia.org/wikipedia/en/6/66/Aria_Of_A_Starless_Night_poster.jpg",
-      imageText: "Image Text",
-    },
-  ];
+  useEffect(() => {
+    dispatch(setEvents());
+  }, [dispatch]);
+
+  const { events } = useSelector((state) => state.allEvents);
+
   return (
     <div>
       <Box className={classes.root}>
@@ -322,20 +288,21 @@ export default function Event() {
               />
             </Box>
             <Grid container spacing={4} padding="1rem">
-              {eventPosts.map((post) => {
+              {events.map((event) => {
                 return (
-                  <Grid item xs={12} md={6} key={post.title} post={post}>
+                  <Grid item xs={12} md={6} key={event.title}>
                     <Card className={classes.card}>
                       <div className={classes.cardDetails}>
                         <CardContent>
                           <Typography component="h2" variant="h5">
-                            {post.title}
+                            {event.title}
                           </Typography>
                           <Typography variant="subtitle1" color="textSecondary">
-                            {post.date} | {post.category}
+                            {event.startDate} | {event.topic.name} |{" "}
+                            {event.location} | {event.status}
                           </Typography>
                           <Typography variant="subtitle1" paragraph>
-                            {post.description}
+                            {event.content}
                           </Typography>
                         </CardContent>
                         <CardActions>
@@ -343,7 +310,7 @@ export default function Event() {
                             <Button
                               size="small"
                               component={Link}
-                              to="/event/eventSignUp"
+                              to={`/event/${event.id}/eventSignUp`}
                             >
                               报名
                             </Button>
@@ -358,8 +325,7 @@ export default function Event() {
                       <Hidden xsDown>
                         <CardMedia
                           className={classes.cardMedia}
-                          image={post.image}
-                          title={post.imageTitle}
+                          image={event.poster}
                         />
                       </Hidden>
                     </Card>

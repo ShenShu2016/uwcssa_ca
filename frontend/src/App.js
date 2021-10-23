@@ -13,7 +13,7 @@ import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
-import Event from "./containers/EventListing";
+import Event from "./containers/Event";
 import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
@@ -35,6 +35,7 @@ import MarketCreate from "./containers/market/MarketCreate";
 import MarketItemDetail from "./containers/market/MarketItemDetail";
 import MarketVehicleDetail from "./containers/market/MarketVehicleDetail ";
 import MyAccount from "./containers/account/MyAccount";
+import PostEvent from "./components/Event/PostEvent";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import PostMarketItem from "./containers/market/PostMarketItem";
@@ -187,6 +188,11 @@ export default function App() {
                 exact
                 component={PostMarketVehicle}
               />
+              <Route
+                path="/staff/event/postEvent"
+                exact
+                component={PostEvent}
+              />
               <Route path="/market/create/rental" exact />
               <Route path="/market" exact component={Market} />          
               <Route
@@ -203,15 +209,21 @@ export default function App() {
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
               <Route path="/event" exact component={Event} />
-              <Route path="/event/eventSignUp" exact component={EventSignUp} />
-              {/*event/:eventId/eventSignUp*/}
               <Route
-                path="/event/eventSignUp/individual"
+                path="/event/:eventID/eventSignUp"
+                exact
+                component={EventSignUp}
+              />
+              <Route
+                path="/event/:eventID/eventSignUp/individual"
                 exact
                 component={Individual}
               />
-              {/*event/:eventId/eventSignUp/individual*/}
-              <Route path="/event/eventSignUp/group" exact component={Group} />
+              <Route
+                path="/event/:eventID/eventSignUp/group"
+                exact
+                component={Group}
+              />
               <Route>404 Not Found!</Route>
             </Switch>
             <Snackbar

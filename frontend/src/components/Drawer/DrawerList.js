@@ -222,7 +222,11 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItemButton>
               </ListItem>
               <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  component={Link}
+                  to="/staff/event/postEvent"
+                >
                   <ListItemText primary="活动策划" />
                 </ListItemButton>
               </ListItem>
