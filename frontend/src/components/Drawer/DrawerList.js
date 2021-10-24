@@ -226,6 +226,7 @@ const DrawerList = ({ toggleDrawer }) => {
                   sx={{ pl: 4 }}
                   component={Link}
                   to="/staff/event/postEvent"
+                  onClick={toggleDrawer(false)}
                 >
                   <ListItemText primary="活动策划" />
                 </ListItemButton>

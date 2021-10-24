@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   paper: {},
@@ -115,7 +116,7 @@ function ArticleComponent({ article }) {
                   </div>
                 </Grid>
                 <Grid item xs>
-                  <div style={{ maxHeight: "80px", overflow: "hidden" }}>
+                  <Box style={{ maxHeight: "80px", overflow: "hidden" }}>
                     <Typography
                       variant="body2"
                       color="textSecondary"
@@ -126,7 +127,7 @@ function ArticleComponent({ article }) {
                     >
                       {content}
                     </Typography>
-                  </div>
+                  </Box>
                 </Grid>
 
                 <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>

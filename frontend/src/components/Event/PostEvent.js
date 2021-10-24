@@ -33,11 +33,11 @@ import { styled } from "@mui/material/styles";
 import S3Image from "../../components/S3/S3Image";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import TimePicker from "@mui/lab/TimePicker";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import Stack from "@mui/material/Stack";
 import DatePicker from "@mui/lab/DatePicker";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -66,6 +66,7 @@ export default function PostEvent() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const [posterKey, setPosterKey] = useState("");
   const [imgKey, setImgKey] = useState("");
 
   const history = useHistory();
@@ -79,8 +80,6 @@ export default function PostEvent() {
     location: "",
     topicID: "",
     eventStatus: "ComingSoon",
-    poster: imgKey,
-    backGroundImgPath: imgKey,
   });
   console.log("eventData", eventData);
   useEffect(() => {
@@ -99,9 +98,10 @@ export default function PostEvent() {
   const uploadEventPoster = async (e) => {
     const response = await dispatch(postEventPoster(e.target.files[0]));
     if (response) {
-      setImgKey(response.key);
+      setPosterKey(response.key);
     }
   };
+
   const uploadEvent = async () => {
     const {
       title,
@@ -124,6 +124,8 @@ export default function PostEvent() {
       group,
       location,
       eventStatus,
+      poster: posterKey,
+      backGroundImgPath: imgKey,
       topicID: topicID,
       active: 1,
       ByCreatedAt: "Event",
@@ -131,7 +133,7 @@ export default function PostEvent() {
     const response = await dispatch(postEvent(createEventInput));
 
     if (response.result) {
-      history.push(`/event/${response.response.data.createEvent.id}`);
+      history.push(`/event`);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
@@ -215,7 +217,7 @@ export default function PostEvent() {
             <Box>
               <div>
                 <DateTimePicker
-                  label="入学日期"
+                  label="开始时间"
                   value={eventData.startDate}
                   id="startDate"
                   onChange={(e) => {
@@ -230,7 +232,7 @@ export default function PostEvent() {
               </div>
               <div>
                 <DateTimePicker
-                  label="结业日期"
+                  label="结束时间"
                   value={eventData.endDate}
                   id="endDate"
                   onChange={(e) => {
@@ -333,13 +335,13 @@ export default function PostEvent() {
                   id="contained-button-file"
                   type="file"
                   onChange={(e) => {
-                    // setImgData();
                     uploadEventPoster(e);
                   }}
                 />
                 <Button variant="contained" component="span">
                   上传活动海报
                 </Button>
+                <S3Image S3Key={posterKey} style={{ width: "100%" }} />
               </label>
               <label htmlFor="contained-button-file" sx={{ margin: "normal" }}>
                 <Input
