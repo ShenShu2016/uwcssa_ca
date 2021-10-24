@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArticleIcon from "@mui/icons-material/Article";
+import CustomAvatar from "../components/CustomMUI/CustomAvatar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DrawerList from "../components/Drawer/DrawerList";
 import EventIcon from "@mui/icons-material/Event";
@@ -386,7 +387,11 @@ export default function Header() {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle fontSize={"large"} />
+                {/* <AccountCircle fontSize={"large"} /> */}
+                <CustomAvatar
+                  username={userAuth.user.username}
+                  sx={{ width: 35, height: 35 }}
+                />
               </IconButton>
             ) : (
               ""
