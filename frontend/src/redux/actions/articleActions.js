@@ -109,18 +109,23 @@ export const postArticleComment =
           input: createArticleCommentInput,
         })
       );
-
       dispatch({
         type: ActionTypes.ARTICLE_COMMENT_POST_SUCCESS,
-        payload: response,
+        payload: [response.data.createArticleComment],
       });
-      console.log();
-      dispatch(selectedArticleComments(createArticleCommentInput.articleID));
+      return {
+        result: true,
+        response: response,
+      };
     } catch (error) {
       console.log("error on posting ArticleComment", error);
       dispatch({
         type: ActionTypes.ARTICLE_COMMENT_POST_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 

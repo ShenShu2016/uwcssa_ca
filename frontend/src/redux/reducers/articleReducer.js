@@ -48,6 +48,8 @@ export const selectedArticleReducer = (
         comments: payload.items,
         commentsNextToken: payload.nextToken,
       };
+    case ActionTypes.ARTICLE_COMMENT_POST_SUCCESS:
+      return { ...state, comments: [...payload, ...state.comments] };
     case ActionTypes.LOAD_MORE_ARTICLE_COMMENTS:
       return {
         ...state,
