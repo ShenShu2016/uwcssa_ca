@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  CircularProgress,
   Container,
   CssBaseline,
   Grid,
@@ -116,37 +117,34 @@ export default function UwcssaIntro() {
 
   const authButton = () => (
     <div>
-      {
-        <div>
-          <Typography variant="h4">欢迎 : </Typography>
-          <Box mt={1} mb={1}>
-            <Typography variant="h5" noWrap>
-              {userAuth.user.username}
-            </Typography>
-          </Box>
-          <Box mt={1} mb={1}>
-            <Typography variant="subtitle1" color={"secondary"}>
-              {userAuth.user.username.slice(0, 7) === "google_"
-                ? "我们建议您在我们网站注册账户，体验完整的系统"
-                : ""}
-            </Typography>
-          </Box>
-          <Box mt={2} mb={1}>
-            <Button
-              variant="contained"
-              color={"primary"}
-              size="large"
-              component={Link}
-              to="/account/dashboard"
-            >
-              个人中心
-            </Button>
-          </Box>
-        </div>
-      }
+      <div>
+        <Typography variant="h4">欢迎 : </Typography>
+        <Box mt={1} mb={1}>
+          <Typography variant="h5" noWrap>
+            {userAuth.user.username}
+          </Typography>
+        </Box>
+        <Box mt={1} mb={1}>
+          <Typography variant="subtitle1" color={"secondary"}>
+            {userAuth.user.username.slice(0, 7) === "google_"
+              ? "我们建议您在我们网站注册账户，体验完整的系统"
+              : ""}
+          </Typography>
+        </Box>
+        <Box mt={2} mb={1}>
+          <Button
+            variant="contained"
+            color={"primary"}
+            size="large"
+            component={Link}
+            to="/account/dashboard"
+          >
+            个人中心
+          </Button>
+        </Box>
+      </div>
     </div>
   );
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -168,7 +166,9 @@ export default function UwcssaIntro() {
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Paper className={classes.paper}>
-                            <Typography variant="h5">{userCounts}</Typography>
+                            <Typography variant="h5">
+                              {userCounts ? userCounts : <CircularProgress />}
+                            </Typography>
                             <Typography variant="h5">用户</Typography>
                           </Paper>
                         </Grid>

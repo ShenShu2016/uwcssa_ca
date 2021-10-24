@@ -8,29 +8,47 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComments from "../components/Article/ArticleComments";
 import ArticleCommentsPost from "../components/Article/ArticleDetail/ArticleCommentsPost";
+import ArticleSideBar from "../components/Article/ArticleSideBar";
+import { Box } from "@mui/system";
 import Main from "../components/Article/ArticleDetail/Main";
+import { Typography } from "@mui/material";
 import { loadMoreArticleComments } from "../redux/actions/articleActions";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
+import { useTitle } from "../Hooks/useTitle";
 
-const useStyles = makeStyles({
-  bread: {
-    marginTop: "4rem",
-    marginLeft: "1rem",
-  },
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "960px",
     margin: "auto",
     paddingBlock: "3rem",
-    paddingInline: "1rem",
+    maxWidth: "1536px",
+    paddingInline: "0.5rem",
   },
-});
+  title: {
+    textAlign: "center",
+    color: "#0D1F48",
+    paddingBottom: "3rem",
+  },
+  main: {
+    display: "flex",
+    [theme.breakpoints.down("lg")]: {
+      display: "block",
+    },
+  },
+  body: {
+    maxWidth: "1100px",
+    [theme.breakpoints.down("lg")]: {
+      maxWidth: "100%",
+    },
+  },
+}));
 export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { articleID } = useParams();
   const [canFetch, setCanFetch] = useState(true);
   const article = useSelector((state) => state.article);
+  useTitle(article.article.title);
   const nextToken = article.commentsNextToken;
 
   useEffect(() => {
@@ -53,16 +71,16 @@ export default function ArticleDetail() {
         if (canFetch) {
           setCanFetch(false);
           setCanFetch(false); //！ 问题，为什么一次 就不行，两次就可以了
-          console.log("canFetch，it should be false", canFetch);
+          // console.log("canFetch，it should be false", canFetch);
           const response = await dispatch(
             loadMoreArticleComments(articleID, nextToken)
           );
-          console.log("loadMoreArticleComments response", response);
+          // console.log("loadMoreArticleComments response", response);
           setCanFetch(response);
-          console.log(
-            "loadMoreArticleComments finished,it should be true",
-            canFetch
-          );
+          // console.log(
+          //   "loadMoreArticleComments finished,it should be true",
+          //   canFetch
+          // );
         }
       }
     };
@@ -70,9 +88,23 @@ export default function ArticleDetail() {
 
   return (
     <div className={classes.root}>
-      <Main article={article} />
-      <ArticleCommentsPost article={article} />
-      <ArticleComments article={article} />
+      <Typography
+        variant="h4"
+        className={classes.title}
+        sx={{ fontWeight: 700 }}
+      >
+        {article.article.title}
+      </Typography>
+      <Box className={classes.main}>
+        <Box className={classes.body}>
+          <Main article={article} />
+          <ArticleCommentsPost article={article} />
+          <ArticleComments article={article} />
+        </Box>
+        <Box>
+          <ArticleSideBar />
+        </Box>
+      </Box>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/Event";
+import EventDetail from "./components/Event/EventDetail";
 import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
@@ -43,6 +44,7 @@ import PostMarketHome from "./containers/market/PostHomeItem";
 import PostMarketItem from "./containers/market/PostMarketItem";
 import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
+import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -58,11 +60,6 @@ import store from "./redux/store";
 const theme = createTheme({
   typography: {
     fontFamily: "Noto Sans SC",
-  },
-  breakpoints: {
-    value: {
-      md: 960,
-    },
   },
 });
 
@@ -86,9 +83,10 @@ export default function App() {
     }
     setOpen(false);
   };
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
+  const { isAuthenticated, cognitoGroup } = useSelector(
+    (state) => state.userAuth
   );
+
   useEffect(() => {
     dispatch(load_user());
   }, [dispatch]);
@@ -107,31 +105,63 @@ export default function App() {
             <Box pb={"64px"} />
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/account/dashboard" exact component={Dashboard} />
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="anyone"
+                path="/account/dashboard"
+                exact
+                component={Dashboard}
+              />
               <Route
                 path="/account/profile/:username"
                 exact
                 component={Profile}
               />
-              <Route path="/account/myAccount" exact component={MyAccount} />
-              <Route path="/staff" exact component={Staff} />
-              <Route path="/staff/article" exact component={ArticlesPreview} />
-              <Route
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="anyone"
+                path="/account/myAccount"
+                exact
+                component={MyAccount}
+              />
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
+                path="/staff"
+                exact
+                component={Staff}
+              />
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
+                path="/staff/article"
+                exact
+                component={ArticlesPreview}
+              />
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/uwcssaJob"
                 exact
                 component={UwcssaJobsPreview}
               />
-              <Route
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/article/postArticle"
                 exact
                 component={PostArticle}
               />
-              <Route
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/uwcssaJob/postUwcssaJob"
                 exact
                 component={PostUwcssaJob}
               />
-              <Route
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/uwcssaJob/postDepartment"
                 exact
                 component={PostDepartment}
@@ -236,6 +266,7 @@ export default function App() {
                 exact
                 component={Group}
               />
+              <Route path="/event/:eventID" exact component={EventDetail} />
               <Route>404 Not Found!</Route>
             </Switch>
             <Snackbar

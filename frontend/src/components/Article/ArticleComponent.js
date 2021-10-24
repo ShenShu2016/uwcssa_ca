@@ -1,5 +1,5 @@
 import {
-  Avatar,
+  Box,
   CardActionArea,
   CardHeader,
   Grid,
@@ -8,9 +8,11 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   paper: {},
@@ -33,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 function ArticleComponent({ article }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
-  console.log("article", article);
   const { id, content, title, imagePath, createdAt, owner } = article;
 
   useEffect(() => {
@@ -80,23 +81,25 @@ function ArticleComponent({ article }) {
               sx={{ height: "100%" }}
             >
               <Grid item xs={"auto"} sx={{ paddingBottom: "0.5rem" }}>
-                <CardHeader
-                  sx={{ p: 0 }}
-                  avatar={
-                    <Avatar
-                      aria-label="recipe"
-                      className={classes.avatar}
-                      component={Link}
-                      to={`/account/profile/${owner}`}
-                      sx={{ width: 16, height: 16 }}
-                      variant="square"
-                    >
-                      {owner.toUpperCase().slice(0, 1)}
-                    </Avatar>
-                  }
-                  title={owner}
-                />
+                <CardActionArea
+                  component={Link}
+                  to={`/account/profile/${owner}`}
+                >
+                  <CardHeader
+                    sx={{ p: 0 }}
+                    avatar={
+                      <CustomAvatar
+                        link={false}
+                        variant={"square"}
+                        sx={{ width: 16, height: 16 }}
+                        username={owner}
+                      />
+                    }
+                    title={owner}
+                  />
+                </CardActionArea>
               </Grid>
+
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
                   <div style={{ maxHeight: "48px", overflow: "hidden" }}>
@@ -115,7 +118,7 @@ function ArticleComponent({ article }) {
                   </div>
                 </Grid>
                 <Grid item xs>
-                  <div style={{ maxHeight: "80px", overflow: "hidden" }}>
+                  <Box style={{ maxHeight: "80px", overflow: "hidden" }}>
                     <Typography
                       variant="body2"
                       color="textSecondary"
@@ -126,12 +129,12 @@ function ArticleComponent({ article }) {
                     >
                       {content}
                     </Typography>
-                  </div>
+                  </Box>
                 </Grid>
 
                 <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
                   <Typography variant="overline" color="textSecondary">
-                    {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
+                    {moment(createdAt).fromNow()}
                   </Typography>
                 </Grid>
               </CardActionArea>

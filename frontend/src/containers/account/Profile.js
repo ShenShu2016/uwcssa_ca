@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import BasicInfo from "../../components/Account/BasicInfo";
 import Education from "../../components/Account/Profile/Education";
 import Experience from "../../components/Account/Profile/Experience";
-import { Redirect } from "react-router";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 
@@ -20,6 +19,7 @@ const useStyles = makeStyles({
     paddingInline: "1rem",
   },
 });
+
 export default function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -34,10 +34,6 @@ export default function Profile() {
 
   const userAuth = useSelector((state) => state.userAuth);
   const user = useSelector((state) => state.user);
-
-  if (userAuth.isAuthenticated === false) {
-    return <Redirect to="/signIn" />;
-  }
 
   return (
     <div>

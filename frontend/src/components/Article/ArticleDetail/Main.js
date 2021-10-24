@@ -1,7 +1,4 @@
-import "./Main.css";
-
 import {
-  Avatar,
   Box,
   Button,
   CardActionArea,
@@ -13,13 +10,17 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import Storage from "@aws-amplify/storage";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
+  root: {
+    paddingTop: "1rem",
+    width: "100%",
+  },
   title: {
     marginBlock: "2rem",
   },
@@ -35,7 +36,7 @@ export default function Main({ article }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
   const {
-    title,
+    // title,
     content,
     imagePath,
     owner,
@@ -69,18 +70,26 @@ export default function Main({ article }) {
   }, [imagePath]);
 
   return (
-    <div>
+    <div className={classes.root}>
       {Object.keys(article.article).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Box className={classes.main}>
-          <Typography
+          {/* <Typography
             variant="h4"
             className={classes.title}
             sx={{ fontWeight: 700, my: 2 }}
           >
             {title}
-          </Typography>
+          </Typography> */}
+
+          <CardActionArea
+            onClick={() => {
+              window.open(imageURL);
+            }}
+          >
+            <CardMedia component="img" image={imageURL} />
+          </CardActionArea>
           <CardActions sx={{ px: 0 }}>
             <Button size="small" color="primary">
               Type: {type.name}
@@ -91,29 +100,13 @@ export default function Main({ article }) {
           </CardActions>
           <CardHeader
             sx={{ px: 0, my: 2 }}
-            avatar={
-              <Avatar
-                aria-label="recipe"
-                className={classes.avatar}
-                component={Link}
-                to={`/account/profile/${owner}`}
-              >
-                {owner.toUpperCase().slice(0, 1)}
-              </Avatar>
-            }
+            avatar={<CustomAvatar username={owner} link={true} />}
             title={owner}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
               11,
               19
             )}`}
           />
-          <CardActionArea
-            onClick={() => {
-              window.open(imageURL);
-            }}
-          >
-            <CardMedia component="img" image={imageURL} />
-          </CardActionArea>
           <Divider />
           <Box sx={{ my: 2 }}>
             <Typography

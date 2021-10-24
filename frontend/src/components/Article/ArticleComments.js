@@ -14,6 +14,7 @@ import React from "react";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import { makeStyles } from "@mui/styles";
+import moment from "moment";
 
 const useStyles = makeStyles({
   root: {
@@ -97,7 +98,8 @@ export default function ArticleComments({ article }) {
                         {owner}
                       </Typography>
                       <Typography variant="caption" sx={{ color: "#606060" }}>
-                        {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
+                        {/* {createdAt.slice(0, 10)} {createdAt.slice(11, 19)} */}
+                        {moment(createdAt).fromNow()}
                       </Typography>
                     </Box>
                     <Box sx={{ my: 1 }}>

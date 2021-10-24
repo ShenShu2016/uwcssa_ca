@@ -4,7 +4,6 @@ import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
 import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
 import MyMarketPosts from "../../components/Account/Dashboard/MyMarketPosts";
 import React from "react";
-import { Redirect } from "react-router";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 
@@ -27,10 +26,6 @@ const useStyles = makeStyles({
 export default function Dashboard() {
   const classes = useStyles();
   const userAuth = useSelector((state) => state.userAuth);
-
-  if (userAuth.isAuthenticated === false) {
-    return <Redirect to="/signIn" />;
-  }
 
   return (
     <div>

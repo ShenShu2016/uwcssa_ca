@@ -1,7 +1,7 @@
 import { ActionTypes } from "../constants/user-action-types";
 
 const initialState = {
-  userCounts: [],
+  userCounts: "",
 };
 const initialStateUser = {
   username: "",
