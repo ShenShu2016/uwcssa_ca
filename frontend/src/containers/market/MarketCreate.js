@@ -12,6 +12,7 @@ import {
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
+import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@mui/styles";
@@ -104,6 +105,29 @@ function MarketCreate() {
                 </Avatar>
                 <Typography gutterBottom variant="h5">
                   汽车
+                </Typography>
+              </IconButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper>
+              <IconButton
+                style={{
+                  margin: "0 auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "200px",
+                  borderRadius: "0",
+                }}
+                size="large"
+                component={Link}
+                to="/market/create/rental"
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <HouseIcon />
+                </Avatar>
+                <Typography gutterBottom variant="h5">
+                  房屋
                 </Typography>
               </IconButton>
             </Paper>
