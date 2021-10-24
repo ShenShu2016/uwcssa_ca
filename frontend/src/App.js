@@ -42,6 +42,7 @@ import PostEvent from "./components/Event/PostEvent";
 import PostMarketItem from "./containers/market/PostMarketItem";
 import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
+import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -101,31 +102,56 @@ export default function App() {
             <Box pb={"64px"} />
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/account/dashboard" exact component={Dashboard} />
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/account/dashboard"
+                exact
+                component={Dashboard}
+              />
               <Route
                 path="/account/profile/:username"
                 exact
                 component={Profile}
               />
-              <Route path="/account/myAccount" exact component={MyAccount} />
-              <Route path="/staff" exact component={Staff} />
-              <Route path="/staff/article" exact component={ArticlesPreview} />
-              <Route
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/account/myAccount"
+                exact
+                component={MyAccount}
+              />
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/staff"
+                exact
+                component={Staff}
+              />
+              {/* <Route path="/staff" exact component={Staff} /> */}
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                path="/staff/article"
+                exact
+                component={ArticlesPreview}
+              />
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
                 path="/staff/uwcssaJob"
                 exact
                 component={UwcssaJobsPreview}
               />
-              <Route
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
                 path="/staff/article/postArticle"
                 exact
                 component={PostArticle}
               />
-              <Route
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
                 path="/staff/uwcssaJob/postUwcssaJob"
                 exact
                 component={PostUwcssaJob}
               />
-              <Route
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
                 path="/staff/uwcssaJob/postDepartment"
                 exact
                 component={PostDepartment}

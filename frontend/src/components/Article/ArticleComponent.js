@@ -1,9 +1,10 @@
 import {
+  Box,
   CardActionArea,
   CardHeader,
   Grid,
   Paper,
-  Typography,Box
+  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -12,7 +13,6 @@ import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {},
@@ -89,7 +89,7 @@ function ArticleComponent({ article }) {
                     sx={{ p: 0 }}
                     avatar={
                       <CustomAvatar
-                        link={true}
+                        link={false}
                         variant={"square"}
                         sx={{ width: 16, height: 16 }}
                         username={owner}
