@@ -46,7 +46,7 @@ export const selectedArticle = (articleID) => async (dispatch) => {
 };
 
 export const selectedArticleComments = (articleID) => async (dispatch) => {
-  console.log("selectedArticleComments,articleID", articleID);
+  // console.log("selectedArticleComments,articleID", articleID);
   try {
     const articleCommentData = await API.graphql({
       query: byArticleID,
@@ -58,7 +58,7 @@ export const selectedArticleComments = (articleID) => async (dispatch) => {
       },
       authMode: "AWS_IAM",
     });
-    console.log("articleCommentData", articleCommentData);
+    // console.log("articleCommentData", articleCommentData);
     dispatch({
       type: ActionTypes.SELECTED_ARTICLE_COMMENTS,
       payload: articleCommentData.data.byArticleID,
@@ -70,7 +70,7 @@ export const selectedArticleComments = (articleID) => async (dispatch) => {
 
 export const loadMoreArticleComments =
   (articleID, nextToken) => async (dispatch) => {
-    console.log("load more date start");
+    // console.log("load more date start");
     try {
       const articleCommentData = await API.graphql({
         query: byArticleID,

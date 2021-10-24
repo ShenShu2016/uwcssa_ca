@@ -81,9 +81,10 @@ export default function App() {
     }
     setOpen(false);
   };
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
+  const { isAuthenticated, cognitoGroup } = useSelector(
+    (state) => state.userAuth
   );
+
   useEffect(() => {
     dispatch(load_user());
   }, [dispatch]);
@@ -103,7 +104,8 @@ export default function App() {
             <Switch>
               <Route path="/" exact component={Home} />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="anyone"
                 path="/account/dashboard"
                 exact
                 component={Dashboard}
@@ -114,44 +116,50 @@ export default function App() {
                 component={Profile}
               />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="anyone"
                 path="/account/myAccount"
                 exact
                 component={MyAccount}
               />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff"
                 exact
                 component={Staff}
               />
-              {/* <Route path="/staff" exact component={Staff} /> */}
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/article"
                 exact
                 component={ArticlesPreview}
               />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/uwcssaJob"
                 exact
                 component={UwcssaJobsPreview}
               />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/article/postArticle"
                 exact
                 component={PostArticle}
               />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/uwcssaJob/postUwcssaJob"
                 exact
                 component={PostUwcssaJob}
               />
               <PrivateRoute
-                isAuthenticated={isAuthenticated}
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
                 path="/staff/uwcssaJob/postDepartment"
                 exact
                 component={PostDepartment}

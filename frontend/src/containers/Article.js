@@ -13,7 +13,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginTop: "4rem",
     maxWidth: "1536px",
-    paddingInline: "0.5rem",
+    paddingInline: "2rem",
+    [theme.breakpoints.down("lg")]: {
+      paddingInline: "0.5rem",
+    },
   },
   main: {
     display: "flex",

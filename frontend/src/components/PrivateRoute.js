@@ -1,23 +1,31 @@
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import { Redirect } from "react-router";
 import { Route } from "react-router";
 
 export default function PrivateRoute({
   component: Component,
-  isAuthenticated,
+  cognitoGroup,
+  allowRoles,
   ...rest
 }) {
   return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated === true ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/signIn" />
-        )
-      }
-    />
+    <div>
+      {cognitoGroup.includes(null) ? (
+        <CircularProgress />
+      ) : (
+        <Route
+          {...rest}
+          render={(props) =>
+            cognitoGroup.includes(allowRoles) ? (
+              <Component {...props} />
+            ) : (
+              <Redirect to="/signIn" />
+            )
+          }
+        />
+      )}
+    </div>
   );
 }
 //https://stackoverflow.com/questions/43164554/how-to-implement-authenticated-routes-in-react-router-4

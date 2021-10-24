@@ -66,16 +66,6 @@ export default function ArticleCommentsPost({ article }) {
       }
     }
   };
-  console.log("loading", loading);
-  console.log("userInfo.isAuthenticated", userInfo.isAuthenticated);
-  console.log(
-    "loading &&  !userInfo.isAuthenticated",
-    loading && !userInfo.isAuthenticated
-  );
-  console.log(
-    "loading ||  userInfo.isAuthenticated",
-    loading || !userInfo.isAuthenticated
-  );
 
   return (
     <div>

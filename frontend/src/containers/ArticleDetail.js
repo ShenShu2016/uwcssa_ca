@@ -71,16 +71,16 @@ export default function ArticleDetail() {
         if (canFetch) {
           setCanFetch(false);
           setCanFetch(false); //！ 问题，为什么一次 就不行，两次就可以了
-          console.log("canFetch，it should be false", canFetch);
+          // console.log("canFetch，it should be false", canFetch);
           const response = await dispatch(
             loadMoreArticleComments(articleID, nextToken)
           );
-          console.log("loadMoreArticleComments response", response);
+          // console.log("loadMoreArticleComments response", response);
           setCanFetch(response);
-          console.log(
-            "loadMoreArticleComments finished,it should be true",
-            canFetch
-          );
+          // console.log(
+          //   "loadMoreArticleComments finished,it should be true",
+          //   canFetch
+          // );
         }
       }
     };
