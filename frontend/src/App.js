@@ -14,6 +14,7 @@ import ContactUs from "./containers/ContactUs";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/Event";
+import EventDetail from "./components/Event/EventDetail";
 import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
@@ -219,6 +220,7 @@ export default function App() {
                 exact
                 component={Group}
               />
+              <Route path="/event/:eventID" exact component={EventDetail} />
               <Route>404 Not Found!</Route>
             </Switch>
             <Snackbar

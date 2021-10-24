@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import {
   Box,
   Typography,
   Container,
   Chip,
-  Grid,
-  Card,
-  CardContent,
-  Hidden,
-  CardMedia,
   Button,
   Paper,
   MobileStepper,
   useTheme,
-  CardActions,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Slide,
   Breadcrumbs,
+  Grid,
 } from "@mui/material";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -30,6 +19,8 @@ import { autoPlay } from "react-swipeable-views-utils";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setEvents } from "../redux/actions/eventActions";
+import EventMain from "../components/Event/EventMain";
+import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1rem",
     paddingBottom: "1rem",
   },
+
   stepper: {
     maxWidth: "400",
     margin: "0 auto",
@@ -65,15 +57,7 @@ const useStyles = makeStyles((theme) => ({
       width: "420px",
     },
   },
-  card: {
-    display: "flex",
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
+
   seeMore: {
     marginTop: "1rem",
     margin: "0 auto",
@@ -109,6 +93,7 @@ const images = [
 ];
 
 export default function Event() {
+  useTitle("UWCSSA活动");
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -128,14 +113,17 @@ export default function Event() {
   const handleClick = () => {
     console.info("You clicked the Chip.");
   };
-  const userInfo = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setEvents());
   }, [dispatch]);
 
-  const { events } = useSelector((state) => state.allEvents);
+  const events = useSelector((state) => state.allEvents.events);
+
+  const renderList = events.map((event) => {
+    return <EventMain event={event} key={event.id} />;
+  });
 
   return (
     <div>
@@ -287,51 +275,8 @@ export default function Event() {
                 onClick={handleClick}
               />
             </Box>
-            <Grid container spacing={4} padding="1rem">
-              {events.map((event) => {
-                return (
-                  <Grid item xs={12} md={6} key={event.title}>
-                    <Card className={classes.card}>
-                      <div className={classes.cardDetails}>
-                        <CardContent>
-                          <Typography component="h2" variant="h5">
-                            {event.title}
-                          </Typography>
-                          <Typography variant="subtitle1" color="textSecondary">
-                            {event.startDate} | {event.topic.name} |{" "}
-                            {event.location} | {event.status}
-                          </Typography>
-                          <Typography variant="subtitle1" paragraph>
-                            {event.content}
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
-                          {userInfo.isAuthenticated ? (
-                            <Button
-                              size="small"
-                              component={Link}
-                              to={`/event/${event.id}/eventSignUp`}
-                            >
-                              报名
-                            </Button>
-                          ) : (
-                            <SignUpRequest />
-                          )}
-                          <Button size="small" component={Link} to="" disabled>
-                            了解更多
-                          </Button>
-                        </CardActions>
-                      </div>
-                      <Hidden xsDown>
-                        <CardMedia
-                          className={classes.cardMedia}
-                          image={event.poster}
-                        />
-                      </Hidden>
-                    </Card>
-                  </Grid>
-                );
-              })}
+            <Grid container spacing={4} padding="0 1rem">
+              {renderList}
             </Grid>
             <Box className={classes.seeMore}>
               <Button variant="outlined" component={Link} to="" disabled>
@@ -344,49 +289,3 @@ export default function Event() {
     </div>
   );
 }
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const SignUpRequest = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <div>
-      <Button size="small" onClick={handleClickOpen}>
-        报名
-      </Button>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Oops！"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            需要登录才能报名哦~ 如果你还没有账户，你可以现在就注册一个（免费）。
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button component={Link} to="/SignUp">
-            注册
-          </Button>
-          <Button component={Link} to="/signIn">
-            登入
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-};
