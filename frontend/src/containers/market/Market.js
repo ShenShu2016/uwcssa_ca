@@ -1,6 +1,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
+  setMarketHome,
   setMarketItems,
   setMarketVehicles,
 } from "../../redux/actions/marketItemActions";
@@ -37,9 +38,10 @@ export default function Market() {
   useEffect(() => {
     dispatch(setMarketItems());
     dispatch(setMarketVehicles());
+    dispatch(setMarketHome());
   }, [dispatch]);
 
-  const { marketItems, marketVehicles } = useSelector(
+  const { marketItems, marketVehicles, marketHomes } = useSelector(
     (state) => state.allMarketItems
   );
 
@@ -60,6 +62,12 @@ export default function Market() {
     );
   });
 
+  const marketHomeRenderList = marketHomes.map((marketHome) => {
+    return (
+      <MarketComponent item={marketHome} type={"rental"} key={marketHome.id} />
+    );
+  });
+
   return (
     <Box className={classes.root}>
       <Box>
@@ -75,6 +83,11 @@ export default function Market() {
           汽车
         </Typography>
         <Box className={classes.items}>{marketVehicleRenderList}</Box>
+        <Divider />
+        <Typography variant="h5" className={classes.title}>
+          房屋
+        </Typography>
+        <Box className={classes.items}>{marketHomeRenderList}</Box>
         <Divider />
       </Box>
     </Box>

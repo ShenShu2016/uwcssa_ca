@@ -1,8 +1,13 @@
-import { createMarketItem, createMarketVehicle } from "../../graphql/mutations";
+import {
+  createMarketHome,
+  createMarketItem,
+  createMarketVehicle,
+} from "../../graphql/mutations";
 import {
   getMarketHome,
   getMarketItem,
   getMarketVehicle,
+  marketHomeByCreatedAt,
   marketItemByCreatedAt,
   marketVehicleByCreatedAt,
 } from "../../graphql/queries";
@@ -26,6 +31,22 @@ export const setMarketItems = () => async (dispatch) => {
     });
   } catch (error) {
     console.log("error on fetching MarketItem", error);
+  }
+};
+
+export const setMarketHome = () => async (dispatch) => {
+  try {
+    const MarketHomeData = await API.graphql({
+      query: marketHomeByCreatedAt,
+      variables: { ByCreatedAt: "MarketHome", sortDirection: "DESC" },
+      authMode: "AWS_IAM",
+    });
+    dispatch({
+      type: ActionTypes.SET_MARKET_HOME,
+      payload: MarketHomeData.data.marketHomeByCreatedAt.items,
+    });
+  } catch (error) {
+    console.log("error on fetching MarketHome", error);
   }
 };
 
@@ -86,6 +107,7 @@ export const selectedMarketItem = (marketItemId, type) => async (dispatch) => {
       type: ActionTypes.SELECTED_MARKET_ITEM,
       payload: getPayload(response, type),
     });
+    console.log("response", response);
   } catch (error) {
     console.log("error on selecting MarketItem", error);
   }
@@ -151,6 +173,32 @@ export const postMarketVehicle =
       };
     }
   };
+
+export const postMarketHome = (createMarketHomeInput) => async (dispatch) => {
+  console.log("createMarketHomeInput", createMarketHomeInput);
+  try {
+    const response = await API.graphql(
+      graphqlOperation(createMarketHome, { input: createMarketHomeInput })
+    );
+    dispatch({
+      type: ActionTypes.POST_MARKET_HOME_SUCCESS,
+      payload: response,
+    });
+    return {
+      result: true,
+      response: response,
+    };
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.POST_MARKET_HOME_FAIL,
+      payload: error,
+    });
+    return {
+      result: false,
+      response: error,
+    };
+  }
+};
 
 export const postMarketItemImg = (imgData) => async (dispatch) => {
   try {
