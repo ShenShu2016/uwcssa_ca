@@ -36,9 +36,9 @@ import MarketCreate from "./containers/market/MarketCreate";
 import MarketItemDetail from "./containers/market/MarketItemDetail";
 import MarketVehicleDetail from "./containers/market/MarketVehicleDetail ";
 import MyAccount from "./containers/account/MyAccount";
-import PostEvent from "./components/Event/PostEvent";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
+import PostEvent from "./components/Event/PostEvent";
 import PostMarketItem from "./containers/market/PostMarketItem";
 import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
@@ -57,11 +57,6 @@ import store from "./redux/store";
 const theme = createTheme({
   typography: {
     fontFamily: "Noto Sans SC",
-  },
-  breakpoints: {
-    value: {
-      md: 960,
-    },
   },
 });
 

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComponent from "../components/Article/ArticleComponent";
+import ArticleSideBar from "../components/Article/ArticleSideBar";
 import { makeStyles } from "@mui/styles";
 import { setArticles } from "../redux/actions/articleActions";
 import { useTitle } from "../Hooks/useTitle";
@@ -11,8 +12,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
     marginTop: "4rem",
-    maxWidth: "960px",
+    maxWidth: "1536px",
     paddingInline: "0.5rem",
+  },
+  main: {
+    display: "flex",
+    [theme.breakpoints.down("lg")]: {
+      display: "block",
+    },
+  },
+  body: {
+    maxWidth: "1100px",
+    [theme.breakpoints.down("lg")]: {
+      maxWidth: "100%",
+    },
   },
   title: {
     textAlign: "center",
@@ -35,14 +48,17 @@ export default function Article() {
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;
   });
-  console.log("articles", articles);
+  // console.log("renderList", renderList);
   return (
     <Box className={classes.root}>
-      <Box>
-        <Typography variant="h3" className={classes.title}>
-          近期新闻
-        </Typography>
-        {renderList}
+      <Typography variant="h3" className={classes.title}>
+        近期新闻
+      </Typography>
+      <Box className={classes.main}>
+        <Box className={classes.body}>{renderList}</Box>
+        <Box>
+          <ArticleSideBar />
+        </Box>
       </Box>
     </Box>
   );
