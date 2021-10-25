@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
     margin: "0 auto",
     [theme.breakpoints.up("sm")]: {
-      width: "420px",
+      width: "425px",
     },
   },
 
@@ -282,7 +282,12 @@ export default function Event() {
         <div>
           <Box sx={{ bgcolor: "#EBF5FB", paddingBottom: "3rem" }}>
             <Container>
-              <Grid container spacing={4} padding="0 1rem">
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 2, sm: 8, md: 12 }}
+                padding="0 1rem"
+              >
                 {renderList}
               </Grid>
 
