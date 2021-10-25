@@ -4,6 +4,11 @@ import {
   selectedArticleReducer,
 } from "./articleReducer";
 import {
+  eventReducer,
+  pudEventReducer,
+  selectedEventReducer,
+} from "./eventReducer";
+import {
   forumReducer,
   selectedForumPostCommentReducer,
   selectedForumPostReducer,
@@ -11,28 +16,27 @@ import {
   selectedForumTopicReducer,
 } from "./forumReducer";
 import {
+  marketItemReducer,
+  selectedMarketItemReducer,
+} from "./marketItemReducer";
+import {
   postUserEducationReducer,
   postUserExperienceReducer,
   putUserEducationReducer,
   putUserExperienceReducer,
   selectedUserReducer,
+  urlReducer,
   userReducer,
 } from "./userReducer";
-import {
-  marketItemReducer,
-  selectedMarketItemReducer,
-} from "./marketItemReducer";
+
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
-import {
-  eventReducer,
-  pudEventReducer,
-  selectedEventReducer,
-} from "./eventReducer";
 
 const reducers = combineReducers({
   userAuth: authReducer,
+  user: selectedUserReducer,
+  url: urlReducer,
   allArticles: articleReducer,
   article: selectedArticleReducer,
   pudArticle: pudArticleReducer,
@@ -45,7 +49,6 @@ const reducers = combineReducers({
   forumPostComment: selectedForumPostCommentReducer,
 
   allUsers: userReducer,
-  user: selectedUserReducer,
   createUserEducation: postUserEducationReducer,
   updateUserEducation: putUserEducationReducer,
   createUserExperience: postUserExperienceReducer,

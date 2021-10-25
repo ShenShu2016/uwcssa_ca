@@ -1,26 +1,20 @@
+import {
+  Box,
+  Button,
+  CardActions,
+  CardMedia,
+  Container,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Storage from "@aws-amplify/storage";
-import {
-  Button,
-  Container,
-  CardContent,
-  CardActions,
-  Typography,
-  Box,
-  IconButton,
-  CardMedia,
-} from "@mui/material";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import SignUpRequest from "../Event/SignUpRequireDialog";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { useTheme } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import SignUpRequest from "../Event/SignUpRequireDialog";
+import Storage from "@aws-amplify/storage";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

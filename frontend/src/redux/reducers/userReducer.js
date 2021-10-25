@@ -20,6 +20,22 @@ const initialStateUser = {
   userEducations: { items: [] },
   userExperiences: { items: [] },
 };
+
+const initialStateURL = {
+  urlFrom: null,
+};
+
+export const urlReducer = (state = initialStateURL, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SET_URL_FROM:
+      return { ...state, urlFrom: payload };
+    case ActionTypes.REMOVE_URL_FROM:
+      return initialStateURL;
+    default:
+      return state;
+  }
+};
+
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_USER_COUNTS:

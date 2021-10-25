@@ -1,21 +1,20 @@
 import {
   Avatar,
-  Button,
   Box,
-  Grid,
-  Card,
+  Button,
   CardActions,
-  CardContent,
   CardHeader,
-  Typography,
+  Grid,
   TextField,
+  Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
-import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Link } from "react-router-dom";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SignInRequest from "../ForumPostDetail/SignInRequest";
+import { makeStyles } from "@mui/styles";
 import { postForumPostComment } from "../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
@@ -50,7 +49,7 @@ function stringAvatar(name) {
   };
 }
 
-function ForumPostCommentsPost({ forumPost}) {
+function ForumPostCommentsPost({ forumPost }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userAuth);
@@ -65,14 +64,13 @@ function ForumPostCommentsPost({ forumPost}) {
     content: comment,
     like: [],
     unlike: [],
-    active:1,
+    active: 1,
     forumPostID: forumPost.id,
   };
   const postComment = (e) => {
     dispatch(postForumPostComment(createForumPostCommentInput));
     setFormData({ comment: "" });
   };
-
 
   return (
     <div>

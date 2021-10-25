@@ -61,7 +61,7 @@ export default function CustomAvatar({ username, variant, sx, link }) {
       getUserData();
     }
   }, [username]);
-  console.log(userData);
+  // console.log(userData);
 
   useEffect(() => {
     const getAvatarImage = async () => {
