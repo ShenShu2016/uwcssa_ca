@@ -72,6 +72,12 @@ const useStyles = makeStyles({
       minHeight: `calc(100vh - 350px)`,
     },
   },
+  headerBox: {
+    paddingBottom: "64px",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "56px",
+    },
+  },
 });
 export default function App() {
   const classes = useStyles();
@@ -102,7 +108,7 @@ export default function App() {
           <ScrollToTop />
           <div className={classes.headerBody}>
             <Header />
-            <Box pb={"64px"} />
+            <Box className={classes.headerBox} />
             <Switch>
               <Route path="/" exact component={Home} />
               <PrivateRoute
@@ -166,6 +172,13 @@ export default function App() {
                 exact
                 component={PostDepartment}
               />
+              <PrivateRoute
+                cognitoGroup={cognitoGroup}
+                allowRoles="staff"
+                path="/staff/event/postEvent"
+                exact
+                component={PostEvent}
+              />
               <Route path="/forum" exact component={Forum} />
               <Route path="/forumTopicCURD" exact component={ForumTopicCURD} />
               <Route
@@ -224,11 +237,6 @@ export default function App() {
                 path="/market/create/rental"
                 exact
                 component={PostMarketHome}
-              />
-              <Route
-                path="/staff/event/postEvent"
-                exact
-                component={PostEvent}
               />
               <Route path="/market/create/rental" exact />
               <Route path="/market" exact component={Market} />          

@@ -1,14 +1,17 @@
 import {
   createUserEducation,
   createUserExperience,
+  updateUser,
   updateUserEducation,
   updateUserExperience,
 } from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/user-action-types";
+import Storage from "@aws-amplify/storage";
 import { getUser } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { v4 as uuid } from "uuid";
 
 const userCountsQuery = `query ListUsers {
     listUsers {
@@ -45,6 +48,72 @@ export const selectedUser = (username) => async (dispatch) => {
     });
   } catch (error) {
     console.log("error on selecting User", error);
+  }
+};
+
+export const putUserInfo = (updateUserInput) => async (dispatch) => {
+  try {
+    console.log("updateUserInput", updateUserInput);
+    const response = await API.graphql(
+      graphqlOperation(updateUser, {
+        input: updateUserInput,
+      })
+    );
+    dispatch({
+      type: ActionTypes.UPDATE_USER_INFO_SUCCESS,
+      payload: response.data.updateUser,
+    });
+    console.log(response.data.updateUser);
+    // dispatch(selectedUser(response.data.updateUserInput.user.username));
+    //用来刷新页面的
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.UPDATE_USER_INFO_FAIL,
+      payload: error,
+    });
+    console.log("error on update User Info", error);
+  }
+};
+
+export const postAvatarImg = (imgData) => async (dispatch) => {
+  try {
+    const response = await Storage.put(
+      `user/Avatar/${uuid()}.${imgData.name.split(".").pop()}`,
+      imgData,
+      { contentType: "image/*" }
+    );
+    dispatch({
+      type: ActionTypes.POST_AVATAR_IMG_SUCCESS,
+      payload: response,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ActionTypes.POST_AVATAR_IMG_FAIL,
+      payload: error,
+    });
+  }
+};
+
+export const postBackGroundImg = (imgData) => async (dispatch) => {
+  try {
+    const response = await Storage.put(
+      `user/Background/${uuid()}.${imgData.name.split(".").pop()}`,
+      imgData,
+      { contentType: "image/*" }
+    );
+    dispatch({
+      type: ActionTypes.POST_BACKGROUND_IMG_SUCCESS,
+      payload: response,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ActionTypes.POST_BACKGROUND_IMG_FAIL,
+      payload: error,
+    });
   }
 };
 

@@ -1,12 +1,17 @@
-import { Box, CardContent, Divider, IconButton } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
-import Card from "@mui/material/Card";
 import Create from "./Education/Create";
 import Edit from "./Education/Edit";
 import EditIcon from "@mui/icons-material/Edit";
-import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({

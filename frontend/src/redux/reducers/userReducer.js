@@ -36,6 +36,9 @@ export const selectedUserReducer = (
   switch (type) {
     case ActionTypes.SELECTED_USER:
       return { ...state, ...payload };
+
+    case ActionTypes.UPDATE_USER_INFO_SUCCESS:
+      return { ...state, ...payload };
     case ActionTypes.REMOVE_SELECTED_USER:
       return { ...initialStateUser, ...payload };
     default:

@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Card,
   CardActionArea,
@@ -8,9 +7,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Edit from "./Profile/Info/Edit";
+import Avatar from "@mui/material/Avatar";
 import EditIcon from "@mui/icons-material/Edit";
-import S3Image from "../S3/S3Image";
+import { Link } from "react-router-dom";
+import S3Image from "../../S3/S3Image";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 
@@ -39,18 +39,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicInfo({ user, userAuth }) {
+export default function DashboardBasicInfo({ user, userAuth }) {
   const classes = useStyles();
-  const [editOpen, setEditOpen] = useState(false);
 
-  const handleEditClickOpen = () => {
-    setEditOpen(true);
-  };
-  const handleEditClose = () => {
-    setEditOpen(false);
-  };
   const [avatarURL, setAvatarURL] = useState(null);
-
   useEffect(() => {
     const getImage = async () => {
       try {
@@ -69,6 +61,7 @@ export default function BasicInfo({ user, userAuth }) {
       getImage();
     }
   }, [user]);
+
   return (
     <div>
       <div className={classes.root}>
@@ -92,17 +85,16 @@ export default function BasicInfo({ user, userAuth }) {
                 sx={{ width: 150, height: 150 }}
                 className={classes.avatar}
               />
-              {userAuth.user.username === user.username && (
-                <Button
-                  variant="contained"
-                  endIcon={<EditIcon />}
-                  color="primary"
-                  className={classes.edit}
-                  onClick={() => handleEditClickOpen()}
-                >
-                  点击编辑
-                </Button>
-              )}
+              <Button
+                variant="contained"
+                endIcon={<EditIcon />}
+                color="primary"
+                className={classes.edit}
+                component={Link}
+                to={`/account/profile/${userAuth.user.username}`}
+              >
+                查看我的信息
+              </Button>
             </div>
             <Typography
               gutterBottom
@@ -112,21 +104,12 @@ export default function BasicInfo({ user, userAuth }) {
             >
               {user.username}
             </Typography>
-            <Typography
-              gutterBottom
-              variant="h5"
-              noWrap
-              sx={{ fontWeight: "700" }}
-            >
-              {user.lastName} {user.firstName}
-            </Typography>
             <Typography variant="body2" color="text.secondary">
-              {user.intro}
+              待定
             </Typography>
           </CardContent>
         </Card>
       </div>
-      <Edit editOpen={editOpen} user={user} handleEditClose={handleEditClose} />
     </div>
   );
 }

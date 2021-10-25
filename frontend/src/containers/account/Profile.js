@@ -5,6 +5,7 @@ import {
 } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
+import AboutMe from "../../components/Account/Profile/AboutMe";
 import BasicInfo from "../../components/Account/BasicInfo";
 import Education from "../../components/Account/Profile/Education";
 import Experience from "../../components/Account/Profile/Experience";
@@ -38,7 +39,9 @@ export default function Profile() {
   return (
     <div>
       <BasicInfo userAuth={userAuth} user={user} />
+
       <div className={classes.root}>
+        <AboutMe user={user} />
         <Education userAuth={userAuth} user={user} />
         <Experience userAuth={userAuth} user={user} />
       </div>
