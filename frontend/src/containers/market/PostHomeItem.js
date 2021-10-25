@@ -7,14 +7,14 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   postMarketHome,
   postMarketItemImg,
 } from "../../redux/actions/marketItemActions";
 
 import PublishIcon from "@mui/icons-material/Publish";
-import S3Image from "../../components/S3/S3Image";
+import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
@@ -57,7 +57,8 @@ const Input = styled("input")({
 export default function PostMarketHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgKey, setImgKey] = useState("");
+  const [imgKeyToServer, setImgKeyToServer] = useState([]);
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
 
   const history = useHistory();
 
@@ -80,11 +81,38 @@ export default function PostMarketHome() {
   console.log("marketHomeData", marketHomeData);
 
   const uploadMarketItemImg = async (e) => {
-    const response = await dispatch(postMarketItemImg(e.target.files[0]));
+    const response = await Promise.all(
+      Array.from(e.target.files).map((file) =>
+        dispatch(postMarketItemImg(file))
+      )
+    );
     if (response) {
-      setImgKey(response.key);
+      setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
     }
   };
+
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const imageAccessURL = await Promise.all(
+          Array.from(imgKeyToServer).map((key) =>
+            Storage.get(key, {
+              level: "public",
+              expires: 120,
+              download: false,
+            })
+          )
+        );
+        setImgKeyFromServer((url) => url.concat(imageAccessURL));
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setImgKeyFromServer([]);
+      }
+    };
+    if (imgKeyToServer) {
+      getImage();
+    }
+  }, [imgKeyToServer]);
 
   const uploadMarketHome = async () => {
     //Upload the marketHome
@@ -111,7 +139,7 @@ export default function PostMarketHome() {
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
       price: price,
-      imagePath: [imgKey],
+      imagePath: [imgKeyToServer],
       address: address,
       description: description,
       propertySize: propertySize,
@@ -166,6 +194,7 @@ export default function PostMarketHome() {
             accept="image/*"
             id="contained-button-file"
             type="file"
+            multiple
             onChange={(e) => {
               uploadMarketItemImg(e);
             }}
@@ -175,7 +204,11 @@ export default function PostMarketHome() {
           </Button>
         </label>
       </Box>
-      <S3Image S3Key={imgKey} style={{ width: "100%" }} />
+
+      {imgKeyToServer &&
+        imgKeyFromServer.map((imgKey) => (
+          <img src={imgKey} key={imgKey} alt="images" />
+        ))}
 
       <Box className={classes.topic}>
         <div className="newTopic">
