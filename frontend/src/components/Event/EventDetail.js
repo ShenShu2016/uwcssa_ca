@@ -9,8 +9,9 @@ import EventBody from "../Event/EventBody";
 
 import { makeStyles } from "@mui/styles";
 import { Link, useParams } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles({
   root: {
@@ -35,10 +36,12 @@ export default function EventDetail() {
 
   return (
     <div className={classes.root}>
-      <IconButton component={Link} to="/event">
-        <ArrowBackIcon />
-      </IconButton>
-      <EventBody event={event} />
+      <Box>
+        <IconButton component={Link} to="/event">
+          <ArrowBackIcon />
+        </IconButton>
+        <EventBody event={event} />
+      </Box>
     </div>
   );
 }

@@ -25,14 +25,12 @@ import { useTitle } from "../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    marginBottom: "2rem",
     marginTop: "3rem",
   },
   title: {
     textAlign: "center",
     minWidth: "40%",
     maxWidth: "100%",
-    paddingTop: "1rem",
     paddingBottom: "1rem",
   },
 
@@ -45,8 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     marginTop: "5rem",
-    border: "solid",
-    borderRadius: 40,
+
     height: "100%",
     paddingBottom: "2rem",
   },
@@ -144,147 +141,159 @@ export default function Event() {
               UWCSSA活动集锦
             </Typography>
           </Box>
-          <Box className={classes.stepper}>
-            <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-              <Paper
-                square
-                elevation={0}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  height: 50,
-                  pl: 2,
-                  bgcolor: "background.default",
-                }}
-              >
-                <Typography>{images[activeStep].label}</Typography>
-              </Paper>
-              <AutoPlaySwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-              >
-                {images.map((step, index) => (
-                  <div key={step.label}>
-                    {Math.abs(activeStep - index) <= 2 ? (
-                      <Box
-                        component="img"
-                        sx={{
-                          height: 255,
-                          display: "block",
-                          maxWidth: 400,
-                          overflow: "hidden",
-                          width: "100%",
-                        }}
-                        src={step.imgPath}
-                        alt={step.label}
-                      />
-                    ) : null}
-                  </div>
-                ))}
-              </AutoPlaySwipeableViews>
-              <MobileStepper
-                steps={maxSteps}
-                position="static"
-                activeStep={activeStep}
-                nextButton={
-                  <Button
-                    size="small"
-                    onClick={handleNext}
-                    disabled={activeStep === maxSteps - 1}
-                  >
-                    下一页
-                    {theme.direction === "rtl" ? (
-                      <KeyboardArrowLeft />
-                    ) : (
-                      <KeyboardArrowRight />
-                    )}
-                  </Button>
-                }
-                backButton={
-                  <Button
-                    size="small"
-                    onClick={handleBack}
-                    disabled={activeStep === 0}
-                  >
-                    {theme.direction === "rtl" ? (
-                      <KeyboardArrowRight />
-                    ) : (
-                      <KeyboardArrowLeft />
-                    )}
-                    上一页
-                  </Button>
-                }
-              />
-            </Box>
-          </Box>
-          <Box className={classes.list}>
-            <Typography variant="h4" className={classes.title}>
-              近期活动
-            </Typography>
-            <Box className={classes.timeTag}>
-              <Chip
-                label="今天"
-                variant="outlined"
-                sx={{
-                  marginLeft: "1rem",
-                  marginRight: "1rem",
-                  marginBlock: "0.3rem",
-                }}
-                onClick={handleClick}
-              />
-              <Chip
-                label="明天"
-                variant="outlined"
-                sx={{
-                  marginLeft: "1rem",
-                  marginRight: "1rem",
-                  marginBlock: "0.3rem",
-                }}
-                onClick={handleClick}
-              />
-              <Chip
-                label="这周"
-                variant="outlined"
-                sx={{
-                  marginLeft: "1rem",
-                  marginRight: "1rem",
-                  marginBlock: "0.3rem",
-                }}
-                onClick={handleClick}
-              />
-              <Chip
-                label="下周"
-                variant="outlined"
-                sx={{
-                  marginLeft: "1rem",
-                  marginRight: "1rem",
-                  marginBlock: "0.3rem",
-                }}
-                onClick={handleClick}
-              />
-              <Chip
-                label="下月"
-                variant="outlined"
-                sx={{
-                  marginLeft: "1rem",
-                  marginRight: "1rem",
-                  marginBlock: "0.3rem",
-                }}
-                onClick={handleClick}
-              />
-            </Box>
-            <Grid container spacing={4} padding="0 1rem">
-              {renderList}
-            </Grid>
-            <Box className={classes.seeMore}>
-              <Button variant="outlined" component={Link} to="" disabled>
-                查看更多
-              </Button>
-            </Box>
-          </Box>
         </Container>
+        <div>
+          <Box sx={{ backgroundColor: "#17202A", padding: "3rem" }}>
+            <Box className={classes.stepper}>
+              <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+                <Paper
+                  square
+                  elevation={0}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: 50,
+                    pl: 2,
+                    bgcolor: "background.default",
+                  }}
+                >
+                  <Typography>{images[activeStep].label}</Typography>
+                </Paper>
+                <AutoPlaySwipeableViews
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents
+                >
+                  {images.map((step, index) => (
+                    <div key={step.label}>
+                      {Math.abs(activeStep - index) <= 2 ? (
+                        <Box
+                          component="img"
+                          sx={{
+                            height: 255,
+                            display: "block",
+                            maxWidth: 400,
+                            overflow: "hidden",
+                            width: "100%",
+                          }}
+                          src={step.imgPath}
+                          alt={step.label}
+                        />
+                      ) : null}
+                    </div>
+                  ))}
+                </AutoPlaySwipeableViews>
+                <MobileStepper
+                  steps={maxSteps}
+                  position="static"
+                  activeStep={activeStep}
+                  nextButton={
+                    <Button
+                      size="small"
+                      onClick={handleNext}
+                      disabled={activeStep === maxSteps - 1}
+                    >
+                      下一页
+                      {theme.direction === "rtl" ? (
+                        <KeyboardArrowLeft />
+                      ) : (
+                        <KeyboardArrowRight />
+                      )}
+                    </Button>
+                  }
+                  backButton={
+                    <Button
+                      size="small"
+                      onClick={handleBack}
+                      disabled={activeStep === 0}
+                    >
+                      {theme.direction === "rtl" ? (
+                        <KeyboardArrowRight />
+                      ) : (
+                        <KeyboardArrowLeft />
+                      )}
+                      上一页
+                    </Button>
+                  }
+                />
+              </Box>
+            </Box>
+          </Box>
+        </div>
+        <Box className={classes.list}>
+          <Typography variant="h4" className={classes.title}>
+            近期活动
+          </Typography>
+          <Box className={classes.timeTag}>
+            <Chip
+              label="今天"
+              variant="outlined"
+              sx={{
+                marginLeft: "1rem",
+                marginRight: "1rem",
+                marginBlock: "0.3rem",
+              }}
+              onClick={handleClick}
+            />
+            <Chip
+              label="明天"
+              variant="outlined"
+              sx={{
+                marginLeft: "1rem",
+                marginRight: "1rem",
+                marginBlock: "0.3rem",
+              }}
+              onClick={handleClick}
+            />
+            <Chip
+              label="这周"
+              variant="outlined"
+              sx={{
+                marginLeft: "1rem",
+                marginRight: "1rem",
+                marginBlock: "0.3rem",
+              }}
+              onClick={handleClick}
+            />
+            <Chip
+              label="下周"
+              variant="outlined"
+              sx={{
+                marginLeft: "1rem",
+                marginRight: "1rem",
+                marginBlock: "0.3rem",
+              }}
+              onClick={handleClick}
+            />
+            <Chip
+              label="下月"
+              variant="outlined"
+              sx={{
+                marginLeft: "1rem",
+                marginRight: "1rem",
+                marginBlock: "0.3rem",
+              }}
+              onClick={handleClick}
+            />
+          </Box>
+        </Box>
+
+        <div>
+          <Box sx={{ bgcolor: "#EBF5FB", paddingBottom: "3rem" }}>
+            <Container>
+              <Grid container spacing={4} padding="0 1rem">
+                {renderList}
+              </Grid>
+
+              <Box className={classes.seeMore}>
+                <Button variant="outlined" component={Link} to="" disabled>
+                  查看更多
+                </Button>
+              </Box>
+            </Container>
+          </Box>
+        </div>
       </Box>
     </div>
   );

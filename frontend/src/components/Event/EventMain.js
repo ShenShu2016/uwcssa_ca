@@ -1,8 +1,10 @@
 import {
   Button,
   Card,
+  CardActionArea,
   CardActions,
   CardContent,
+  CardMedia,
   Grid,
   Typography,
 } from "@mui/material";
@@ -12,27 +14,18 @@ import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import SignUpRequest from "./SignUpRequireDialog";
+import { Box } from "@mui/system";
 // import LinesEllipsis from "react-lines-ellipsis";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    textAlign: "center",
-    minWidth: "40%",
-    maxWidth: "100%",
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
-  },
-  card: {
-    display: "flex",
-  },
   cardDetails: {
-    flex: 1,
+    maxWidth: 345,
   },
   cardMedia: {
-    width: "160",
-  },
-  content: {
-    maxHeight: "200px",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: " auto",
+    width: "50%",
   },
 
   s3image: {
@@ -85,40 +78,57 @@ export default function EventMain({ event }) {
   const userInfo = useSelector((state) => state.userAuth);
 
   return (
-    <Grid item xs={12} key={event.title}>
-      <Card className={classes.card}>
-        <div className={classes.cardDetails}>
+    <Grid item xs={3} key={event.title}>
+      <Card className={classes.cardDetails}>
+        <CardActionArea component={Link} to={`/event/${id}`}>
+          <CardMedia component="img" height="194" image={posterURL} />
           <CardContent>
-            <Typography component="subtitle1" variant="subtitle1">
-              {title}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
+            <Typography variant="subtitle2" color="textSecondary">
               时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
               {startDate.slice(11, 16)} | {location}
             </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
+            <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
+              <Typography
+                variant="subtitle1"
+                style={{
+                  wordBreak: "break-word",
+                  overflow: "hidden",
+                }}
+              >
+                <b>{title}</b>
+              </Typography>
+            </Box>
+
+            <Typography variant="subtitle2" color="textSecondary">
               {topic.name} | {eventStatus}
             </Typography>
-            <Typography variant="subtitle1">{content}</Typography>
-          </CardContent>
-          <CardActions>
-            {userInfo.isAuthenticated ? (
-              <Button
-                size="small"
-                component={Link}
-                to={`/event/${event.id}/eventSignUp`}
+            <Box style={{ maxHeight: "40px", overflow: "hidden" }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                style={{
+                  wordBreak: "break-word",
+                  overflow: "hidden",
+                }}
               >
-                报名
-              </Button>
-            ) : (
-              <SignUpRequest />
-            )}
-            <Button size="small" component={Link} to={`/event/${id}`}>
-              了解更多
+                {content}
+              </Typography>
+            </Box>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          {userInfo.isAuthenticated ? (
+            <Button
+              size="small"
+              component={Link}
+              to={`/event/${event.id}/eventSignUp`}
+            >
+              报名
             </Button>
-          </CardActions>
-          <img src={posterURL} alt="" sx={{ width: "100%" }} />
-        </div>
+          ) : (
+            <SignUpRequest />
+          )}
+        </CardActions>
       </Card>
     </Grid>
   );
