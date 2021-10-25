@@ -78,14 +78,21 @@ export default function EventMain({ event }) {
   const userInfo = useSelector((state) => state.userAuth);
 
   return (
-    <Grid item xs={3} key={event.title}>
+    <Grid item xs={2} sm={4} md={4} key={event.title}>
       <Card className={classes.cardDetails}>
         <CardActionArea component={Link} to={`/event/${id}`}>
           <CardMedia component="img" height="194" image={posterURL} />
           <CardContent>
-            <Typography variant="subtitle2" color="textSecondary">
+            <Typography variant="subtitle2">
               时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-              {startDate.slice(11, 16)} | {location}
+              {startDate.slice(11, 16)}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              color="textSecondary"
+              color="primary"
+            >
+              {eventStatus}
             </Typography>
             <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
               <Typography
@@ -100,8 +107,12 @@ export default function EventMain({ event }) {
             </Box>
 
             <Typography variant="subtitle2" color="textSecondary">
-              {topic.name} | {eventStatus}
+              地址： {location}
             </Typography>
+            <Typography variant="subtitle2" color="textSecondary">
+              类别： {topic.name}
+            </Typography>
+
             <Box style={{ maxHeight: "40px", overflow: "hidden" }}>
               <Typography
                 variant="body2"
