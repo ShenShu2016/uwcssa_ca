@@ -54,7 +54,7 @@ export const selectedArticleComments = (articleID) => async (dispatch) => {
         articleID: articleID,
         sortDirection: "DESC",
         filter: { active: { eq: 1 } },
-        limit: 10,
+        // limit: 10,
       },
       authMode: "AWS_IAM",
     });
