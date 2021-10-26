@@ -139,7 +139,7 @@ export default function PostMarketHome() {
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
       price: price,
-      imagePath: [imgKeyToServer],
+      imagePath: imgKeyToServer,
       address: address,
       description: description,
       propertySize: propertySize,

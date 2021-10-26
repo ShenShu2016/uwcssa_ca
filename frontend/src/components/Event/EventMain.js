@@ -9,12 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
+import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
+import SignUpRequest from "./SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
-import SignUpRequest from "./SignUpRequireDialog";
-import { Box } from "@mui/system";
 // import LinesEllipsis from "react-lines-ellipsis";
 
 const useStyles = makeStyles((theme) => ({
@@ -87,11 +88,7 @@ export default function EventMain({ event }) {
               时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
               {startDate.slice(11, 16)}
             </Typography>
-            <Typography
-              variant="subtitle2"
-              color="textSecondary"
-              color="primary"
-            >
+            <Typography variant="subtitle2" color="primary">
               {eventStatus}
             </Typography>
             <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
