@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
-import SignUpRequest from "./SignUpRequireDialog";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
 import { Box } from "@mui/system";
 // import LinesEllipsis from "react-lines-ellipsis";
 
