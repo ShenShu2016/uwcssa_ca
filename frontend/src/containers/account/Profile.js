@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AboutMe from "../../components/Account/Profile/AboutMe";
-import BasicInfo from "../../components/Account/BasicInfo";
+import BasicInfo from "../../components/Account/Profile/BasicInfo";
 import Education from "../../components/Account/Profile/Education";
 import Experience from "../../components/Account/Profile/Experience";
 import { makeStyles } from "@mui/styles";
@@ -38,12 +38,12 @@ export default function Profile() {
 
   return (
     <div>
-      <BasicInfo userAuth={userAuth} user={user} />
+      <BasicInfo user={user} ownerID={username} />
 
       <div className={classes.root}>
         <AboutMe user={user} />
-        <Education userAuth={userAuth} user={user} />
-        <Experience userAuth={userAuth} user={user} />
+        <Education userAuth={userAuth} user={user} ownerID={username} />
+        <Experience userAuth={userAuth} user={user} ownerID={username} />
       </div>
     </div>
   );

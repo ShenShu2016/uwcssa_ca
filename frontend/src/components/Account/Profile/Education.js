@@ -13,6 +13,7 @@ import Create from "./Education/Create";
 import Edit from "./Education/Edit";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
+import { usePermit } from "../../../Hooks/usePermit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Education({ user, userAuth }) {
+export default function Education({ user, userAuth, ownerID }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
   const [education, setEducation] = useState({
@@ -49,6 +50,7 @@ export default function Education({ user, userAuth }) {
     school: "",
     startDate: "",
   });
+  const isPermit = usePermit(ownerID, "admin");
   const handleEditClickOpen = (education) => {
     setEditOpen(true);
     setEducation(education);
@@ -72,7 +74,7 @@ export default function Education({ user, userAuth }) {
           <Typography variant="h6" sx={{ m: 1, fontWeight: "600" }}>
             教育经历
           </Typography>
-          {userAuth.user.username === user.username && (
+          {isPermit && (
             <IconButton
               aria-label="create"
               onClick={handleCreateClickOpen}
@@ -83,7 +85,7 @@ export default function Education({ user, userAuth }) {
             </IconButton>
           )}
         </Box>
-        {userAuth.user.username === user.username && (
+        {isPermit && (
           <Create
             createOpen={createOpen}
             handleCreateClose={handleCreateClose}
@@ -108,7 +110,7 @@ export default function Education({ user, userAuth }) {
                   <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
                     {school}
                   </Typography>
-                  {userAuth.user.username === user.username && (
+                  {isPermit && (
                     <IconButton
                       aria-label="edit"
                       color="info"

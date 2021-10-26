@@ -13,6 +13,7 @@ import Create from "./Experience/Create";
 import Edit from "./Experience/Edit";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
+import { usePermit } from "../../../Hooks/usePermit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Experience({ user, userAuth }) {
+export default function Experience({ user, userAuth, ownerID }) {
   const classes = useStyles();
+  const isPermit = usePermit(ownerID, "admin");
+
   const [experience, setExperience] = useState({
     companyName: "",
     description: "",
@@ -47,6 +50,7 @@ export default function Experience({ user, userAuth }) {
     location: "",
     title: "",
   });
+
   const [editOpen, setEditOpen] = useState(false);
   const handleEditClickOpen = (experience) => {
     setEditOpen(true);
@@ -71,7 +75,7 @@ export default function Experience({ user, userAuth }) {
           <Typography variant="h6" sx={{ m: 1, fontWeight: "600" }}>
             工作经验
           </Typography>
-          {userAuth.user.username === user.username && (
+          {isPermit && (
             <IconButton
               aria-label="create"
               onClick={handleCreateClickOpen}
@@ -82,7 +86,7 @@ export default function Experience({ user, userAuth }) {
             </IconButton>
           )}
         </Box>
-        {userAuth.user.username === user.username && (
+        {isPermit && (
           <Create
             createOpen={createOpen}
             handleCreateClose={handleCreateClose}
@@ -109,7 +113,7 @@ export default function Experience({ user, userAuth }) {
                     {title}
                   </Typography>
 
-                  {userAuth.user.username === user.username && (
+                  {isPermit && (
                     <IconButton
                       aria-label="edit"
                       color="info"

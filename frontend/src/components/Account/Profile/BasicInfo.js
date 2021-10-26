@@ -8,11 +8,12 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Edit from "./Profile/Info/Edit";
+import Edit from "./Info/Edit";
 import EditIcon from "@mui/icons-material/Edit";
-import S3Image from "../S3/S3Image";
+import S3Image from "../../S3/S3Image";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { usePermit } from "../../../Hooks/usePermit";
 
 const useStyles = makeStyles({
   root: {
@@ -39,9 +40,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicInfo({ user, userAuth }) {
+export default function BasicInfo({ user, ownerID }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
+
+  const isPermit = usePermit(ownerID, "admin");
 
   const handleEditClickOpen = () => {
     setEditOpen(true);
@@ -92,7 +95,7 @@ export default function BasicInfo({ user, userAuth }) {
                 sx={{ width: 150, height: 150 }}
                 className={classes.avatar}
               />
-              {userAuth.user.username === user.username && (
+              {isPermit && (
                 <Button
                   variant="contained"
                   endIcon={<EditIcon />}
