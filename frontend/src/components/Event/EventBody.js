@@ -11,10 +11,8 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import SignUpRequest from "../Auth/SignUpRequireDialog";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PropTypes from "prop-types";
-import SignUpRequest from "../Event/SignUpRequireDialog";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { useSelector } from "react-redux";
 

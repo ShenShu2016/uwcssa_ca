@@ -9,9 +9,7 @@ import { createArticle, createArticleComment } from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/article-action-types";
-import Storage from "@aws-amplify/storage";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { v4 as uuid } from "uuid";
 
 export const setArticles = () => async (dispatch) => {
   try {
