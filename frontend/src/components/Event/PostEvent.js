@@ -3,40 +3,35 @@ import {
   Button,
   Container,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
-  Grid,
-  Typography,
-  FormControlLabel,
-  Checkbox,
-  FormGroup,
   Switch,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-
 import React, { useEffect, useState } from "react";
 import {
   postEvent,
-  postEventPoster,
   postEventImg,
+  postEventPoster,
   setTopics,
 } from "../../redux/actions/eventActions";
 import { useDispatch, useSelector } from "react-redux";
-import { createTopic } from "../../graphql/mutations";
+
 import API from "@aws-amplify/api";
-import PublishIcon from "@mui/icons-material/Publish";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { useHistory } from "react-router";
-import { styled } from "@mui/material/styles";
-import S3Image from "../../components/S3/S3Image";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import Stack from "@mui/material/Stack";
-import DatePicker from "@mui/lab/DatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import PublishIcon from "@mui/icons-material/Publish";
+import S3Image from "../../components/S3/S3Image";
+import { createTopic } from "../../graphql/mutations";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {

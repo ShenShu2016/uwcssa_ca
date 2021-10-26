@@ -12,7 +12,6 @@ import React, { useEffect, useState } from "react";
 import { createTopic, createType } from "../../../graphql/mutations";
 import {
   postArticle,
-  postArticleImg,
   setTopics,
   setTypes,
 } from "../../../redux/actions/articleActions";
@@ -23,6 +22,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import S3Image from "../../../components/S3/S3Image";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
+import { postImage } from "../../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -82,10 +82,12 @@ export default function PostArticle() {
     dispatch(setTypes());
   }, [dispatch]);
 
-  const { topics, types } = useSelector((state) => state.allArticles);
+  const { topics, types } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
-    const response = await dispatch(postArticleImg(e.target.files[0]));
+    const imageData = e.target.files[0];
+    const imageLocation = "article";
+    const response = await dispatch(postImage(imageData, imageLocation));
     if (response) {
       setImgKey(response.key);
     }

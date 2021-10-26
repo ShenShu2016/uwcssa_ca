@@ -46,7 +46,7 @@ export default function Main({ article }) {
     createdAt,
     like,
     unlike,
-  } = article.article;
+  } = article;
   // console.log("imageURL", imageURL);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function Main({ article }) {
 
   return (
     <div className={classes.root}>
-      {Object.keys(article.article).length === 0 ? (
+      {Object.keys(article).length === 0 ? (
         <div>...Loading</div>
       ) : (
         <Box className={classes.main}>

@@ -1,3 +1,5 @@
+import { Box, IconButton } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import {
   removeSelectedEvent,
@@ -5,13 +7,9 @@ import {
 } from "../../redux/actions/eventActions";
 import { useDispatch, useSelector } from "react-redux";
 
-import EventBody from "../Event/EventBody";
-
-import { makeStyles } from "@mui/styles";
-import { Link, useParams } from "react-router-dom";
-import { Container, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Box } from "@mui/system";
+import EventBody from "../Event/EventBody";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   root: {

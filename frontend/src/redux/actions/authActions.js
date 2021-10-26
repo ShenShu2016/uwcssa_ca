@@ -1,26 +1,29 @@
+import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/auth-action-types";
 import Auth from "@aws-amplify/auth";
-import axios from "axios";
+import { getUser } from "../../graphql/queries";
 
-export const load_user = () => async (dispatch) => {
-  Auth.currentAuthenticatedUser()
-    .then((response) => {
-      dispatch({
-        type: ActionTypes.USER_LOADED_SUCCESS,
-        payload: response,
-      });
-      dispatch({
-        type: ActionTypes.AUTHENTICATED_SUCCESS,
-      });
-    })
-    .catch((response) => {
-      dispatch({
-        type: ActionTypes.USER_LOADED_FAIL,
-      });
-      dispatch({
-        type: ActionTypes.AUTHENTICATED_FAIL,
-      });
+export const setUser = () => async (dispatch) => {
+  try {
+    const response = await Auth.currentAuthenticatedUser();
+    dispatch({
+      type: ActionTypes.USER_AUTHENTICATED_LOADED_SUCCESS,
+      payload: response,
     });
+    const { username } = response;
+    dispatch(setUserProfile(username));
+    return {
+      result: true,
+    };
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.USER_AUTHENTICATED_LOADED_FAIL,
+    });
+    return {
+      result: false,
+      error: error,
+    };
+  }
 };
 
 export const signIn = (username, password) => async (dispatch) => {
@@ -30,7 +33,7 @@ export const signIn = (username, password) => async (dispatch) => {
       type: ActionTypes.SIGN_IN_SUCCESS,
       payload: response,
     });
-    dispatch(load_user());
+    dispatch(setUserProfile(username));
     return {
       result: true,
     };
@@ -42,6 +45,22 @@ export const signIn = (username, password) => async (dispatch) => {
       result: false,
       error: error,
     };
+  }
+};
+
+export const setUserProfile = (username) => async (dispatch) => {
+  try {
+    const response = await API.graphql({
+      query: getUser,
+      variables: { id: username },
+      authMode: "AWS_IAM",
+    });
+    dispatch({
+      type: ActionTypes.SET_USER_PROFILE,
+      payload: response.data.getUser,
+    });
+  } catch (error) {
+    console.log("error on fetching User profile", error);
   }
 };
 
@@ -94,58 +113,58 @@ export const emailConfirm =
     }
   };
 
-export const reset_password = (email) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+// export const reset_password = (email) => async (dispatch) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
 
-  const body = JSON.stringify({ email });
+//   const body = JSON.stringify({ email });
 
-  try {
-    await axios.post(
-      `${process.env.REACT_APP_API_URL}/auth/password/reset/`,
-      body,
-      config
-    );
+//   try {
+//     await axios.post(
+//       `${process.env.REACT_APP_API_URL}/auth/password/reset/`,
+//       body,
+//       config
+//     );
 
-    dispatch({
-      type: ActionTypes.PASSWORD_RESET_SUCCESS,
-    });
-  } catch (err) {
-    dispatch({
-      type: ActionTypes.PASSWORD_RESET_FAIL,
-    });
-  }
-};
+//     dispatch({
+//       type: ActionTypes.PASSWORD_RESET_SUCCESS,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: ActionTypes.PASSWORD_RESET_FAIL,
+//     });
+//   }
+// };
 
-export const reset_password_confirm =
-  (uid, token, new_password1, new_password2) => async (dispatch) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+// export const reset_password_confirm =
+//   (uid, token, new_password1, new_password2) => async (dispatch) => {
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     };
 
-    const body = JSON.stringify({ uid, token, new_password1, new_password2 });
+//     const body = JSON.stringify({ uid, token, new_password1, new_password2 });
 
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/password/reset/confirm/`,
-        body,
-        config
-      );
+//     try {
+//       await axios.post(
+//         `${process.env.REACT_APP_API_URL}/auth/password/reset/confirm/`,
+//         body,
+//         config
+//       );
 
-      dispatch({
-        type: ActionTypes.PASSWORD_RESET_CONFIRM_SUCCESS,
-      });
-    } catch (err) {
-      dispatch({
-        type: ActionTypes.PASSWORD_RESET_CONFIRM_FAIL,
-      });
-    }
-  };
+//       dispatch({
+//         type: ActionTypes.PASSWORD_RESET_CONFIRM_SUCCESS,
+//       });
+//     } catch (err) {
+//       dispatch({
+//         type: ActionTypes.PASSWORD_RESET_CONFIRM_FAIL,
+//       });
+//     }
+//   };
 
 export const signOut = () => async (dispatch) => {
   try {
@@ -153,6 +172,9 @@ export const signOut = () => async (dispatch) => {
     dispatch({
       type: ActionTypes.SIGN_OUT,
     });
+    return {
+      result: true,
+    };
   } catch (error) {
     console.log("error signing out", error);
   }

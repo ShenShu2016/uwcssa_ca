@@ -1,18 +1,18 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   CssBaseline,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, Redirect } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Auth from "@aws-amplify/auth";
-import { CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import amazonLogo from "../../static/svg icons/amazon.svg";
@@ -21,7 +21,9 @@ import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { removeURLFrom } from "../../redux/actions/generalAction";
 import { signIn } from "../../redux/actions/authActions";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -82,10 +84,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const [loading, setLoading] = useState(); //logging state
   const [errorMessage, setErrorMessage] = useState(null);
   const timer = useRef();
+
+  const { urlFrom } = useSelector((state) => state.general);
 
   useEffect(() => {
     return () => {
@@ -100,7 +104,14 @@ export default function SignIn() {
       setLoading(true); //开始转圈
       const response = await dispatch(signIn(username, password));
       if (response.result) {
-        timer.current = window.setTimeout(() => {}, 1000);
+        timer.current = window.setTimeout(() => {
+          if (urlFrom) {
+            dispatch(removeURLFrom());
+            history.push(urlFrom);
+          } else {
+            history.push("/");
+          }
+        }, 1000);
       } else {
         timer.current = window.setTimeout(() => {
           setLoading(false);
@@ -111,9 +122,6 @@ export default function SignIn() {
     }
   };
 
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
-  );
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -133,10 +141,6 @@ export default function SignIn() {
       console.log("there was an error google logging in ", error);
     }
   };
-
-  if (isAuthenticated === true) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <Container component="main" maxWidth="xs">

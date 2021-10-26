@@ -39,14 +39,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DashboardBasicInfo({ user, userAuth }) {
+export default function DashboardBasicInfo({ userProfile }) {
   const classes = useStyles();
-
   const [avatarURL, setAvatarURL] = useState(null);
+
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(user.avatarImgPath, {
+        const imageAccessURL = await Storage.get(userProfile.avatarImgPath, {
           level: "public",
           expires: 120,
           download: false,
@@ -57,10 +57,10 @@ export default function DashboardBasicInfo({ user, userAuth }) {
         setAvatarURL(null);
       }
     };
-    if (user.avatarImgPath) {
+    if (userProfile.avatarImgPath) {
       getImage();
     }
-  }, [user]);
+  }, [userProfile]);
 
   return (
     <div>
@@ -68,7 +68,7 @@ export default function DashboardBasicInfo({ user, userAuth }) {
         <Card elevation={0} className={classes.header}>
           <CardActionArea>
             <S3Image
-              S3Key={user.backGroundImgPath}
+              S3Key={userProfile.backGroundImgPath}
               style={{
                 width: "100%",
                 height: "250px",
@@ -91,7 +91,7 @@ export default function DashboardBasicInfo({ user, userAuth }) {
                 color="primary"
                 className={classes.edit}
                 component={Link}
-                to={`/account/profile/${userAuth.user.username}`}
+                to={`/account/profile/${userProfile.username}`}
               >
                 查看我的信息
               </Button>
@@ -102,7 +102,7 @@ export default function DashboardBasicInfo({ user, userAuth }) {
               noWrap
               sx={{ fontWeight: "700" }}
             >
-              {user.username}
+              {userProfile.username}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               待定

@@ -31,11 +31,13 @@ export const setArticles = () => async (dispatch) => {
 
 export const selectedArticle = (articleID) => async (dispatch) => {
   try {
+    console.log("seletced article ", articleID);
     const response = await API.graphql({
       query: getArticle,
       variables: { id: articleID },
       authMode: "AWS_IAM",
     });
+    console.log("response", response);
     dispatch({
       type: ActionTypes.SELECTED_ARTICLE,
       payload: response.data.getArticle,
@@ -54,7 +56,7 @@ export const selectedArticleComments = (articleID) => async (dispatch) => {
         articleID: articleID,
         sortDirection: "DESC",
         filter: { active: { eq: 1 } },
-        limit: 10,
+        // limit: 10,
       },
       authMode: "AWS_IAM",
     });
@@ -182,25 +184,5 @@ export const postArticle = (createArticleInput) => async (dispatch) => {
       result: false,
       response: error,
     };
-  }
-};
-export const postArticleImg = (imgData) => async (dispatch) => {
-  try {
-    const response = await Storage.put(
-      `article/${uuid()}.${imgData.name.split(".").pop()}`,
-      imgData,
-      { contentType: "image/*" }
-    );
-    dispatch({
-      type: ActionTypes.POST_ARTICLE_IMG_SUCCESS,
-      payload: response,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: ActionTypes.POST_ARTICLE_IMG_FAIL,
-      payload: error,
-    });
   }
 };

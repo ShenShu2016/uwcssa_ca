@@ -1,8 +1,5 @@
-import { ActionTypes } from "../constants/user-action-types";
+import { ActionTypes } from "../constants/profile-action-types";
 
-const initialState = {
-  userCounts: "",
-};
 const initialStateUser = {
   username: "",
   email: "",
@@ -20,26 +17,14 @@ const initialStateUser = {
   userEducations: { items: [] },
   userExperiences: { items: [] },
 };
-export const userReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case ActionTypes.SET_USER_COUNTS:
-      return { ...state, userCounts: payload };
-    default:
-      return state;
-  }
-};
 
-export const selectedUserReducer = (
-  state = initialStateUser,
-  { type, payload }
-) => {
+export const profileReducer = (state = initialStateUser, { type, payload }) => {
   switch (type) {
     case ActionTypes.SELECTED_USER:
       return { ...state, ...payload };
-
     case ActionTypes.UPDATE_USER_INFO_SUCCESS:
       return { ...state, ...payload };
-    case ActionTypes.REMOVE_SELECTED_USER:
+    case ActionTypes.REMOVE_SELECTED_PROFILE:
       return { ...initialStateUser, ...payload };
     default:
       return state;

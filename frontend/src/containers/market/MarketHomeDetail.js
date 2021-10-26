@@ -79,7 +79,7 @@ export default function MarketHomeDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath, {
+        const imageAccessURL = await Storage.get(imagePath[0], {
           level: "public",
           expires: 120,
           download: false,

@@ -28,7 +28,6 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import PublicIcon from "@mui/icons-material/Public";
-import { Redirect } from "react-router";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ShopIcon from "@mui/icons-material/Shop";
 import WorkIcon from "@mui/icons-material/Work";
@@ -128,6 +127,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
@@ -135,7 +135,6 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
-  const history = useHistory();
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [drawer, setDrawer] = useState(false);
 
@@ -166,12 +165,13 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const [redirect, setRedirect] = useState(false);
-  const signOut_user = () => {
+  const signOut_user = async () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    dispatch(signOut());
-    setRedirect(true);
+    const response = await dispatch(signOut());
+    if (response.result) {
+      history.push("/");
+    }
   };
 
   const menuId = "primary-search-account-menu";
@@ -412,7 +412,6 @@ export default function Header() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {redirect ? <Redirect to="/" /> : <div></div>}
     </div>
   );
 }

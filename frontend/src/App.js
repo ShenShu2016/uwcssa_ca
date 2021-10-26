@@ -53,17 +53,17 @@ import SignUp from "./containers/authentication/SignUp";
 import Staff from "./containers/staff/Staff";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
-import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
+import { setUser } from "./redux/actions/authActions";
 import store from "./redux/store";
+
+Amplify.configure(awsconfig);
 
 const theme = createTheme({
   typography: {
     fontFamily: "Noto Sans SC",
   },
 });
-
-Amplify.configure(awsconfig);
 
 const useStyles = makeStyles({
   headerBody: {
@@ -79,6 +79,7 @@ const useStyles = makeStyles({
     },
   },
 });
+
 export default function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -94,7 +95,7 @@ export default function App() {
   );
 
   useEffect(() => {
-    dispatch(load_user());
+    dispatch(setUser());
   }, [dispatch]);
 
   useEffect(() => {

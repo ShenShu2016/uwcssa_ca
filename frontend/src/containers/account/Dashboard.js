@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
-import {
-  removeSelectedUser,
-  selectedUser,
-} from "../../redux/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-
 import DashboardBasicInfo from "../../components/Account/Dashboard/DashboardBasicInfo";
 import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
 import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
 import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
 import MyMarketPosts from "../../components/Account/Dashboard/MyMarketPosts";
+import React from "react";
 import { makeStyles } from "@mui/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -30,20 +25,11 @@ const useStyles = makeStyles({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const userAuth = useSelector((state) => state.userAuth);
-  useEffect(() => {
-    if (userAuth.user.username && userAuth.user.username !== "") {
-      dispatch(selectedUser(userAuth.user.username));
-    }
-    return () => dispatch(removeSelectedUser());
-  }, [userAuth, dispatch]);
-
-  const user = useSelector((state) => state.user);
+  const { userProfile } = useSelector((state) => state.userAuth);
 
   return (
     <div>
-      <DashboardBasicInfo userAuth={userAuth} user={user} />
+      <DashboardBasicInfo userProfile={userProfile} />
       <div className={classes.root}>
         <div className={classes.infoCards}>
           <FavoriteTopic />

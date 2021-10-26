@@ -53,12 +53,12 @@ export default function MarketComponent({ item, type }) {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath, {
+        const imageAccessURL = await Storage.get(imagePath[0], {
           level: "public",
           expires: 120,
           download: false,
         });
-        // console.log("imageAccessURL", imageAccessURL);
+        //console.log("imageAccessURL", imageAccessURL);
         setImageURL(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);

@@ -1,8 +1,8 @@
 import {
-  articleReducer,
-  pudArticleReducer,
-  selectedArticleReducer,
-} from "./articleReducer";
+  eventReducer,
+  pudEventReducer,
+  selectedEventReducer,
+} from "./eventReducer";
 import {
   forumReducer,
   selectedForumPostCommentReducer,
@@ -11,31 +11,30 @@ import {
   selectedForumTopicReducer,
 } from "./forumReducer";
 import {
-  postUserEducationReducer,
-  postUserExperienceReducer,
-  putUserEducationReducer,
-  putUserExperienceReducer,
-  selectedUserReducer,
-  userReducer,
-} from "./userReducer";
-import {
   marketItemReducer,
   selectedMarketItemReducer,
 } from "./marketItemReducer";
+import {
+  postUserEducationReducer,
+  postUserExperienceReducer,
+  profileReducer,
+  putUserEducationReducer,
+  putUserExperienceReducer,
+} from "./profileReducer";
+
+import { articleReducer } from "./articleReducer";
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
+import { generalReducer } from "./generalReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
-import {
-  eventReducer,
-  pudEventReducer,
-  selectedEventReducer,
-} from "./eventReducer";
 
 const reducers = combineReducers({
+  general: generalReducer,
   userAuth: authReducer,
-  allArticles: articleReducer,
-  article: selectedArticleReducer,
-  pudArticle: pudArticleReducer,
+  profile: profileReducer,
+
+  article: articleReducer,
+
   allUwcssaJobs: uwcssaJobReducer,
 
   forum: forumReducer,
@@ -44,8 +43,6 @@ const reducers = combineReducers({
   forumPost: selectedForumPostReducer,
   forumPostComment: selectedForumPostCommentReducer,
 
-  allUsers: userReducer,
-  user: selectedUserReducer,
   createUserEducation: postUserEducationReducer,
   updateUserEducation: putUserEducationReducer,
   createUserExperience: postUserExperienceReducer,
