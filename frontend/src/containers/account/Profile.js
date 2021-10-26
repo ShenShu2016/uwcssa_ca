@@ -11,6 +11,7 @@ import Education from "../../components/Account/Profile/Education";
 import Experience from "../../components/Account/Profile/Experience";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +26,7 @@ export default function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { username } = useParams();
+  useTitle(`${username}的资料`);
 
   useEffect(() => {
     if (username && username !== "") {

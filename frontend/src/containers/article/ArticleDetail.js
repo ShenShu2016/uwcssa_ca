@@ -3,19 +3,19 @@ import {
   removeSelectedArticle,
   selectedArticle,
   selectedArticleComments,
-} from "../redux/actions/articleActions";
+} from "../../redux/actions/articleActions";
 import { useDispatch, useSelector } from "react-redux";
 
-import ArticleComments from "../components/Article/ArticleComments";
-import ArticleCommentsPost from "../components/Article/ArticleDetail/ArticleCommentsPost";
-import ArticleSideBar from "../components/Article/ArticleSideBar";
+import ArticleComments from "../../components/Article/ArticleComments";
+import ArticleCommentsPost from "../../components/Article/ArticleDetail/ArticleCommentsPost";
+import ArticleSideBar from "../../components/Article/ArticleSideBar";
 import { Box } from "@mui/system";
-import Main from "../components/Article/ArticleDetail/Main";
+import Main from "../../components/Article/ArticleDetail/Main";
 import { Typography } from "@mui/material";
 // import { loadMoreArticleComments } from "../redux/actions/articleActions";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
-import { useTitle } from "../Hooks/useTitle";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {

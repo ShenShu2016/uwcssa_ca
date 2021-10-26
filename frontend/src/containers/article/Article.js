@@ -2,11 +2,11 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ArticleComponent from "../components/Article/ArticleComponent";
-import ArticleSideBar from "../components/Article/ArticleSideBar";
+import ArticleComponent from "../../components/Article/ArticleComponent";
+import ArticleSideBar from "../../components/Article/ArticleSideBar";
 import { makeStyles } from "@mui/styles";
-import { setArticles } from "../redux/actions/articleActions";
-import { useTitle } from "../Hooks/useTitle";
+import { setArticles } from "../../redux/actions/articleActions";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {

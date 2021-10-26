@@ -5,8 +5,8 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Amplify from "aws-amplify";
-import Article from "./containers/Article";
-import ArticleDetail from "./containers/ArticleDetail";
+import Article from "./containers/article/Article";
+import ArticleDetail from "./containers/article/ArticleDetail";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";

@@ -6,6 +6,7 @@ import MyMarketPosts from "../../components/Account/Dashboard/MyMarketPosts";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
 
 export default function Dashboard() {
   const classes = useStyles();
+  useTitle("个人中心");
   const { userProfile } = useSelector((state) => state.userAuth);
 
   return (
