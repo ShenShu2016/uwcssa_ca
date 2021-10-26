@@ -186,23 +186,3 @@ export const postArticle = (createArticleInput) => async (dispatch) => {
     };
   }
 };
-export const postArticleImg = (imgData) => async (dispatch) => {
-  try {
-    const response = await Storage.put(
-      `article/${uuid()}.${imgData.name.split(".").pop()}`,
-      imgData,
-      { contentType: "image/*" }
-    );
-    dispatch({
-      type: ActionTypes.POST_ARTICLE_IMG_SUCCESS,
-      payload: response,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: ActionTypes.POST_ARTICLE_IMG_FAIL,
-      payload: error,
-    });
-  }
-};

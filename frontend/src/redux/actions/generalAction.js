@@ -1,6 +1,7 @@
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/general-action-types";
-
+import Storage from "@aws-amplify/storage";
+import { v4 as uuid } from "uuid";
 const userCountsQuery = `query ListUsers {
     listUsers {
         items {
@@ -32,5 +33,27 @@ export const setUserCounts = () => async (dispatch) => {
     });
   } catch (error) {
     console.log("error on fetching Users", error);
+  }
+};
+
+export const postImage = (imageData, imageLocation) => async (dispatch) => {
+  try {
+    const response = await Storage.put(
+      `${imageLocation}/${uuid()}.${imageData.name.split(".").pop()}`,
+      imageData,
+      { contentType: "image/*" }
+    );
+    console.log(response);
+    dispatch({
+      type: ActionTypes.POST_IMAGE_SUCCESS,
+      payload: response,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ActionTypes.POST_IMAGE_FAIL,
+      payload: error,
+    });
   }
 };

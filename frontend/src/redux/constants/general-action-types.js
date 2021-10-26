@@ -3,4 +3,7 @@ export const ActionTypes = {
   SET_URL_FROM: "general/setURLFrom",
   REMOVE_URL_FROM: "general/removeURLFrom",
   REMOVE_SELECTED_PROFILE: "general/removeSelectedProfile",
+
+  POST_IMAGE_SUCCESS: "general/put/imageSuccess",
+  POST_IMAGE_FAIL: "general/put/imageFail",
 };
