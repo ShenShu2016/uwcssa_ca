@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: null,
   user: { username: "", attributes: { email: "" } },
   cognitoGroup: [null],
+  userProfile: {},
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -17,7 +18,11 @@ export const authReducer = (state = initialState, { type, payload }) => {
         cognitoGroup:
           payload.signInUserSession.accessToken.payload["cognito:groups"],
       };
-
+    case ActionTypes.SET_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: payload,
+      };
     case ActionTypes.USER_AUTHENTICATED_LOADED_FAIL:
     case ActionTypes.SIGN_IN_FAIL:
     case ActionTypes.SIGN_UP_FAIL:
@@ -27,6 +32,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         isAuthenticated: false,
         user: { username: "", attributes: { email: "" } },
         cognitoGroup: ["unAuthenticated"],
+        userProfile: {},
       };
 
     case ActionTypes.SIGN_UP_SUCCESS:

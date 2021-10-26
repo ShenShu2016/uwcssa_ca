@@ -22,10 +22,10 @@ import {
 import {
   postUserEducationReducer,
   postUserExperienceReducer,
+  profileReducer,
   putUserEducationReducer,
   putUserExperienceReducer,
-  selectedUserReducer,
-} from "./userReducer";
+} from "./profileReducer";
 
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
@@ -35,7 +35,7 @@ import { uwcssaJobReducer } from "./uwcssaJobReducer";
 const reducers = combineReducers({
   general: generalReducer,
   userAuth: authReducer,
-  user: selectedUserReducer,
+  profile: profileReducer,
 
   allArticles: articleReducer,
   article: selectedArticleReducer,

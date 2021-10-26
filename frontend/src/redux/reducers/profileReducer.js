@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/user-action-types";
+import { ActionTypes } from "../constants/profile-action-types";
 
 const initialStateUser = {
   username: "",
@@ -18,16 +18,13 @@ const initialStateUser = {
   userExperiences: { items: [] },
 };
 
-export const selectedUserReducer = (
-  state = initialStateUser,
-  { type, payload }
-) => {
+export const profileReducer = (state = initialStateUser, { type, payload }) => {
   switch (type) {
     case ActionTypes.SELECTED_USER:
       return { ...state, ...payload };
     case ActionTypes.UPDATE_USER_INFO_SUCCESS:
       return { ...state, ...payload };
-    case ActionTypes.REMOVE_SELECTED_USER:
+    case ActionTypes.REMOVE_SELECTED_PROFILE:
       return { ...initialStateUser, ...payload };
     default:
       return state;

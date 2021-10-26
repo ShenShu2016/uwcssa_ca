@@ -90,7 +90,7 @@ export default function SignIn() {
   const timer = useRef();
 
   const { urlFrom } = useSelector((state) => state.general);
-  console.log(urlFrom);
+
   useEffect(() => {
     return () => {
       clearTimeout(timer.current);
@@ -105,7 +105,6 @@ export default function SignIn() {
       const response = await dispatch(signIn(username, password));
       if (response.result) {
         timer.current = window.setTimeout(() => {
-          console.log("urlFrom", urlFrom);
           if (urlFrom) {
             dispatch(removeURLFrom());
             history.push(urlFrom);

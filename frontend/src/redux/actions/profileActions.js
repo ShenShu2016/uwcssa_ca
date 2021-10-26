@@ -7,24 +7,13 @@ import {
 } from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
-import { ActionTypes } from "../constants/user-action-types";
+import { ActionTypes } from "../constants/profile-action-types";
 import Storage from "@aws-amplify/storage";
 import { getUser } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
-export const setURLFrom = (location) => async (dispatch) => {
-  dispatch({
-    type: ActionTypes.SET_URL_FROM,
-    payload: location.pathname,
-  });
-};
-
-export const removeURLFrom = () => async (dispatch) => {
-  dispatch({ type: ActionTypes.REMOVE_URL_FROM });
-};
-
-export const selectedUser = (username) => async (dispatch) => {
+export const selectedProfile = (username) => async (dispatch) => {
   try {
     const response = await API.graphql({
       query: getUser,
@@ -40,9 +29,8 @@ export const selectedUser = (username) => async (dispatch) => {
   }
 };
 
-export const putUserInfo = (updateUserInput) => async (dispatch) => {
+export const putUserProfile = (updateUserInput) => async (dispatch) => {
   try {
-    console.log("updateUserInput", updateUserInput);
     const response = await API.graphql(
       graphqlOperation(updateUser, {
         input: updateUserInput,
@@ -52,9 +40,6 @@ export const putUserInfo = (updateUserInput) => async (dispatch) => {
       type: ActionTypes.UPDATE_USER_INFO_SUCCESS,
       payload: response.data.updateUser,
     });
-    console.log(response.data.updateUser);
-    // dispatch(selectedUser(response.data.updateUserInput.user.username));
-    //用来刷新页面的
   } catch (error) {
     dispatch({
       type: ActionTypes.UPDATE_USER_INFO_FAIL,
@@ -106,11 +91,12 @@ export const postBackGroundImg = (imgData) => async (dispatch) => {
   }
 };
 
-export const removeSelectedUser = () => async (dispatch) => {
+export const removeSelectedProfile = () => async (dispatch) => {
   dispatch({
-    type: ActionTypes.REMOVE_SELECTED_USER,
+    type: ActionTypes.REMOVE_SELECTED_PROFILE,
   });
 };
+
 export const postUserEducation =
   (createUserEducationInput) => async (dispatch) => {
     try {
@@ -123,7 +109,9 @@ export const postUserEducation =
         type: ActionTypes.POST_USER_EDUCATION_SUCCESS,
         payload: response,
       });
-      dispatch(selectedUser(response.data.createUserEducation.user.username));
+      dispatch(
+        selectedProfile(response.data.createUserEducation.user.username)
+      );
     } catch (error) {
       console.log("error on posting User Education", error);
       dispatch({
@@ -144,7 +132,9 @@ export const putUserEducation =
         type: ActionTypes.UPDATE_USER_EDUCATION_SUCCESS,
         payload: response.data.updateUserEducation,
       });
-      dispatch(selectedUser(response.data.updateUserEducation.user.username));
+      dispatch(
+        selectedProfile(response.data.updateUserEducation.user.username)
+      );
       //用来刷新页面的
     } catch (error) {
       dispatch({
@@ -167,7 +157,9 @@ export const postUserExperience =
         type: ActionTypes.POST_USER_EXPERIENCE_SUCCESS,
         payload: response,
       });
-      dispatch(selectedUser(response.data.createUserExperience.user.username));
+      dispatch(
+        selectedProfile(response.data.createUserExperience.user.username)
+      );
     } catch (error) {
       console.log("error on posting User Experience", error);
       dispatch({
@@ -189,7 +181,9 @@ export const putUserExperience =
         type: ActionTypes.UPDATE_USER_EXPERIENCE_SUCCESS,
         payload: response.data.updateUserExperience,
       });
-      dispatch(selectedUser(response.data.updateUserExperience.user.username));
+      dispatch(
+        selectedProfile(response.data.updateUserExperience.user.username)
+      );
       //用来刷新页面的
     } catch (error) {
       dispatch({

@@ -12,8 +12,8 @@ import React, { useEffect, useState } from "react";
 import {
   postAvatarImg,
   postBackGroundImg,
-  putUserInfo,
-} from "../../../../redux/actions/userActions";
+  putUserProfile,
+} from "../../../../redux/actions/profileActions";
 
 import S3Image from "../../../S3/S3Image";
 import { makeStyles } from "@mui/styles";
@@ -92,7 +92,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const update = () => {
-    dispatch(putUserInfo(updateUserInput));
+    dispatch(putUserProfile(updateUserInput));
     handleEditClose();
   };
 

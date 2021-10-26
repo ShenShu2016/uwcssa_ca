@@ -1,19 +1,29 @@
+import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/auth-action-types";
 import Auth from "@aws-amplify/auth";
+import { getUser } from "../../graphql/queries";
 
-export const load_user = () => async (dispatch) => {
-  Auth.currentAuthenticatedUser()
-    .then((response) => {
-      dispatch({
-        type: ActionTypes.USER_AUTHENTICATED_LOADED_SUCCESS,
-        payload: response,
-      });
-    })
-    .catch(() => {
-      dispatch({
-        type: ActionTypes.USER_AUTHENTICATED_LOADED_FAIL,
-      });
+export const setUser = () => async (dispatch) => {
+  try {
+    const response = await Auth.currentAuthenticatedUser();
+    dispatch({
+      type: ActionTypes.USER_AUTHENTICATED_LOADED_SUCCESS,
+      payload: response,
     });
+    const { username } = response;
+    dispatch(setUserProfile(username));
+    return {
+      result: true,
+    };
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.USER_AUTHENTICATED_LOADED_FAIL,
+    });
+    return {
+      result: false,
+      error: error,
+    };
+  }
 };
 
 export const signIn = (username, password) => async (dispatch) => {
@@ -23,6 +33,7 @@ export const signIn = (username, password) => async (dispatch) => {
       type: ActionTypes.SIGN_IN_SUCCESS,
       payload: response,
     });
+    dispatch(setUserProfile(username));
     return {
       result: true,
     };
@@ -34,6 +45,22 @@ export const signIn = (username, password) => async (dispatch) => {
       result: false,
       error: error,
     };
+  }
+};
+
+export const setUserProfile = (username) => async (dispatch) => {
+  try {
+    const response = await API.graphql({
+      query: getUser,
+      variables: { id: username },
+      authMode: "AWS_IAM",
+    });
+    dispatch({
+      type: ActionTypes.SET_USER_PROFILE,
+      payload: response.data.getUser,
+    });
+  } catch (error) {
+    console.log("error on fetching User profile", error);
   }
 };
 
