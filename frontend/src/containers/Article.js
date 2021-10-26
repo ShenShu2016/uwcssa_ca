@@ -46,7 +46,7 @@ export default function Article() {
     dispatch(setArticles());
   }, [dispatch]);
 
-  const articles = useSelector((state) => state.allArticles.articles);
+  const { articles } = useSelector((state) => state.article);
 
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;

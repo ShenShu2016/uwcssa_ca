@@ -1,9 +1,4 @@
 import {
-  articleReducer,
-  pudArticleReducer,
-  selectedArticleReducer,
-} from "./articleReducer";
-import {
   eventReducer,
   pudEventReducer,
   selectedEventReducer,
@@ -27,6 +22,7 @@ import {
   putUserExperienceReducer,
 } from "./profileReducer";
 
+import { articleReducer } from "./articleReducer";
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
 import { generalReducer } from "./generalReducer";
@@ -37,9 +33,8 @@ const reducers = combineReducers({
   userAuth: authReducer,
   profile: profileReducer,
 
-  allArticles: articleReducer,
-  article: selectedArticleReducer,
-  pudArticle: pudArticleReducer,
+  article: articleReducer,
+
   allUwcssaJobs: uwcssaJobReducer,
 
   forum: forumReducer,

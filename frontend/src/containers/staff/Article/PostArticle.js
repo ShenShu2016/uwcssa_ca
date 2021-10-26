@@ -82,7 +82,7 @@ export default function PostArticle() {
     dispatch(setTypes());
   }, [dispatch]);
 
-  const { topics, types } = useSelector((state) => state.allArticles);
+  const { topics, types } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
     const response = await dispatch(postArticleImg(e.target.files[0]));

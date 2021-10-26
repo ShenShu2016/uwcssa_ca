@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   CardActions,
@@ -9,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
 import React from "react";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
@@ -38,43 +38,17 @@ const useStyles = makeStyles({
   },
 });
 
-function stringToColor(string) {
-  let hash = 0;
-  let i;
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = "#";
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.substr(-2);
-  }
-  /* eslint-enable no-bitwise */
-  return color;
-}
-
-function stringAvatar(name) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-    },
-    children: `${name.slice(0, 1)}`,
-  };
-}
-
-export default function ArticleComments({ article }) {
+export default function ArticleComments({ comments }) {
   const classes = useStyles();
   // console.log(article, "article");
   return (
     <div className={classes.root}>
       <Typography className={classes.subTitle}>评论：</Typography>
-      {Object.keys(article.comments).length === 0 ? (
+      {Object.keys(comments).length === 0 ? (
         ""
       ) : (
         <div>
-          {article.comments.map((comment) => {
+          {comments.map((comment) => {
             const { id, content, createdAt, like, unlike, owner } = comment;
 
             return (
@@ -85,7 +59,7 @@ export default function ArticleComments({ article }) {
                       component={Link}
                       to={`/account/profile/${owner}`}
                       sx={{ p: 0, textDecoration: "none" }}
-                      avatar={<Avatar {...stringAvatar(owner.toUpperCase())} />}
+                      avatar={<CustomAvatar link={false} username={owner} />}
                     />
                   </Grid>
                   <Grid item xs>
@@ -144,7 +118,7 @@ export default function ArticleComments({ article }) {
         </div>
       )}
       <Box className="moreCommentsStatus">
-        {article.commentsNextToken ? (
+        {comments.commentsNextToken ? (
           <Box>
             <Typography
               variant="h5"

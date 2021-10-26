@@ -46,9 +46,9 @@ export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { articleID } = useParams();
+  console.log("articleID", articleID);
   // const [canFetch, setCanFetch] = useState(true);
-  const article = useSelector((state) => state.article);
-  useTitle(article.article.title);
+
   // const nextToken = article.commentsNextToken;
 
   useEffect(() => {
@@ -59,6 +59,8 @@ export default function ArticleDetail() {
     return () => dispatch(removeSelectedArticle());
   }, [articleID, dispatch]);
 
+  const { article, comments } = useSelector((state) => state.article.selected);
+  useTitle(article.title);
   // useEffect(() => {
   //   window.onscroll = async (e) => {
   //     const scrollY = window.scrollY; //当前上方高度
@@ -93,13 +95,13 @@ export default function ArticleDetail() {
         className={classes.title}
         sx={{ fontWeight: 700 }}
       >
-        {article.article.title}
+        {article.title}
       </Typography>
       <Box className={classes.main}>
         <Box className={classes.body}>
           <Main article={article} />
           <ArticleCommentsPost article={article} />
-          <ArticleComments article={article} />
+          <ArticleComments comments={comments} />
         </Box>
         <Box>
           <ArticleSideBar />
