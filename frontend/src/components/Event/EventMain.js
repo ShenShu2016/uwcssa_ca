@@ -1,5 +1,6 @@
 import {
   Button,
+  Box,
   Card,
   CardActionArea,
   CardActions,
@@ -10,12 +11,13 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import SignUpRequest from "./SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
+
 // import LinesEllipsis from "react-lines-ellipsis";
 
 const useStyles = makeStyles((theme) => ({

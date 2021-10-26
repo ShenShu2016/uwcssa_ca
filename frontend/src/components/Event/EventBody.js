@@ -11,6 +11,8 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PropTypes from "prop-types";
 import SignUpRequest from "../Event/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
@@ -154,7 +156,11 @@ export default function EventBody({ event }) {
 
                 <CardActions>
                   {userInfo.isAuthenticated ? (
-                    <Button size="small" component={Link} to="">
+                    <Button
+                      size="small"
+                      component={Link}
+                      to={`/event/${event.id}/eventSignUp`}
+                    >
                       报名
                     </Button>
                   ) : (

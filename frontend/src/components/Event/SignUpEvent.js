@@ -75,7 +75,7 @@ export default function EventSignUp() {
                 }}
                 size="large"
                 component={Link}
-                to="/event/eventSignUp/individual"
+                to="/event/eventSignUp/individual" //{`/event/${event.id}/eventSignUp/individual`}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <PersonIcon />
