@@ -21,7 +21,7 @@ import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { removeURLFrom } from "../../redux/actions/userActions";
+import { removeURLFrom } from "../../redux/actions/generalAction";
 import { signIn } from "../../redux/actions/authActions";
 import { useHistory } from "react-router";
 
@@ -89,7 +89,7 @@ export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState(null);
   const timer = useRef();
 
-  const { urlFrom } = useSelector((state) => state.url);
+  const { urlFrom } = useSelector((state) => state.general);
   console.log(urlFrom);
   useEffect(() => {
     return () => {

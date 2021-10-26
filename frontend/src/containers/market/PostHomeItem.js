@@ -103,7 +103,7 @@ export default function PostMarketHome() {
             })
           )
         );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        setImgKeyFromServer((url) => url.concat(imageAccessURL)); //url没有定义，这个啥意思
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImgKeyFromServer([]);

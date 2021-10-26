@@ -1,8 +1,5 @@
 import { ActionTypes } from "../constants/user-action-types";
 
-const initialState = {
-  userCounts: "",
-};
 const initialStateUser = {
   username: "",
   email: "",
@@ -21,30 +18,6 @@ const initialStateUser = {
   userExperiences: { items: [] },
 };
 
-const initialStateURL = {
-  urlFrom: null,
-};
-
-export const urlReducer = (state = initialStateURL, { type, payload }) => {
-  switch (type) {
-    case ActionTypes.SET_URL_FROM:
-      return { ...state, urlFrom: payload };
-    case ActionTypes.REMOVE_URL_FROM:
-      return initialStateURL;
-    default:
-      return state;
-  }
-};
-
-export const userReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case ActionTypes.SET_USER_COUNTS:
-      return { ...state, userCounts: payload };
-    default:
-      return state;
-  }
-};
-
 export const selectedUserReducer = (
   state = initialStateUser,
   { type, payload }
@@ -52,7 +25,6 @@ export const selectedUserReducer = (
   switch (type) {
     case ActionTypes.SELECTED_USER:
       return { ...state, ...payload };
-
     case ActionTypes.UPDATE_USER_INFO_SUCCESS:
       return { ...state, ...payload };
     case ActionTypes.REMOVE_SELECTED_USER:

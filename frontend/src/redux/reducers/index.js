@@ -25,18 +25,18 @@ import {
   putUserEducationReducer,
   putUserExperienceReducer,
   selectedUserReducer,
-  urlReducer,
-  userReducer,
 } from "./userReducer";
 
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
+import { generalReducer } from "./generalReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
 const reducers = combineReducers({
+  general: generalReducer,
   userAuth: authReducer,
   user: selectedUserReducer,
-  url: urlReducer,
+
   allArticles: articleReducer,
   article: selectedArticleReducer,
   pudArticle: pudArticleReducer,
@@ -48,7 +48,6 @@ const reducers = combineReducers({
   forumPost: selectedForumPostReducer,
   forumPostComment: selectedForumPostCommentReducer,
 
-  allUsers: userReducer,
   createUserEducation: postUserEducationReducer,
   updateUserEducation: putUserEducationReducer,
   createUserExperience: postUserExperienceReducer,

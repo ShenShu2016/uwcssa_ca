@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { setURLFrom } from "../../redux/actions/userActions";
+import { setURLFrom } from "../../redux/actions/generalAction";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 

@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@mui/styles";
-import { setUserCounts } from "../../redux/actions/userActions";
+import { setUserCounts } from "../../redux/actions/generalAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
 export default function UwcssaIntro() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const userAuth = useSelector((state) => state.userAuth);
-  const userCounts = useSelector((state) => state.allUsers.userCounts);
+  const { userAuth } = useSelector((state) => state);
+  const { userCounts } = useSelector((state) => state.general);
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
