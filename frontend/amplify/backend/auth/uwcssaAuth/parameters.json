@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "uwinAuth",
+    "identityPoolName": "uwcssaAuthIdentityPool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "uwcssa4d135c08",
-    "userPoolName": "uwinAuth",
+    "resourceNameTruncated": "uwcssa102dc046",
+    "userPoolName": "uwcssaAuthUserPool",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -29,10 +29,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "uwinAu4d135c08_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "uwcssa102dc046_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "4d135c08",
-    "resourceName": "uwinAuth",
+    "sharedId": "102dc046",
+    "resourceName": "uwcssaAuth",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -47,26 +47,18 @@
         ]
     },
     "useDefault": "manual",
-    "thirdPartyAuth": true,
-    "authProviders": [
-        "accounts.google.com"
-    ],
+    "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,
     "triggers": "{\n  \"PostConfirmation\": [\n    \"add-to-group\",\n    \"custom\"\n  ]\n}",
-    "hostedUI": true,
-    "hostedUIDomainName": "uwincssa",
-    "authProvidersUserPool": [
-        "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"uwinAuthPostConfirmation\"\n  }\n]",
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"uwcssaAuthPostConfirmation\"\n  }\n]",
     "breakCircularDependency": true,
     "permissions": [
         "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
@@ -74,13 +66,12 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "uwinAuthPostConfirmation",
+            "resourceName": "uwcssaAuthPostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",
                 "Name"
             ]
         }
-    ],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}"
+    ]
 }

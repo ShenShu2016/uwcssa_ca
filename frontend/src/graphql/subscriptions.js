@@ -1,6 +1,453 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUwcssaJobResume = /* GraphQL */ `
+  subscription OnCreateUwcssaJobResume($owner: String) {
+    onCreateUwcssaJobResume(owner: $owner) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUwcssaJobResume = /* GraphQL */ `
+  subscription OnUpdateUwcssaJobResume($owner: String) {
+    onUpdateUwcssaJobResume(owner: $owner) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUwcssaJobResume = /* GraphQL */ `
+  subscription OnDeleteUwcssaJobResume($owner: String) {
+    onDeleteUwcssaJobResume(owner: $owner) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
@@ -12,14 +459,32 @@ export const onCreateUser = /* GraphQL */ `
       lastName
       intro
       major
-      avatarImgPath
-      backGroundImgPath
-      linkedin
+      avatarImgS3Key
+      backGroundImgS3Key
+      linkedIn
       github
+      sortKey
       createdAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
       uWindsorEmail
-      tags
+      badges
       userEducations {
         items {
           id
@@ -55,12 +520,287 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
+      topics {
+        items {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      articles {
+        items {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      articleComments {
+        items {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      departments {
+        items {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      forumTopics {
+        items {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      forumPosts {
+        items {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPostComments {
+        items {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPostSubComments {
+        items {
+          id
+          content
+          active
+          createdAt
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       marketUserInfo {
         items {
           id
           phone
           weChat
           email
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketItems {
+        items {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketVehicles {
+        items {
+          id
+          vehicleType
+          imgS3Keys
+          location
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          price
+          description
+          active
+          createdAt
+          sortKey
+          tags
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketRentals {
+        items {
+          id
+          imgS3Keys
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          price
+          address
+          description
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          tags
+          active
+          sortKey
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      beingLiked {
+        items {
+          id
+          itemID
           userID
           createdAt
           updatedAt
@@ -82,14 +822,32 @@ export const onUpdateUser = /* GraphQL */ `
       lastName
       intro
       major
-      avatarImgPath
-      backGroundImgPath
-      linkedin
+      avatarImgS3Key
+      backGroundImgS3Key
+      linkedIn
       github
+      sortKey
       createdAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
       uWindsorEmail
-      tags
+      badges
       userEducations {
         items {
           id
@@ -125,12 +883,287 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
+      topics {
+        items {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      articles {
+        items {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      articleComments {
+        items {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      departments {
+        items {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      forumTopics {
+        items {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      forumPosts {
+        items {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPostComments {
+        items {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPostSubComments {
+        items {
+          id
+          content
+          active
+          createdAt
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       marketUserInfo {
         items {
           id
           phone
           weChat
           email
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketItems {
+        items {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketVehicles {
+        items {
+          id
+          vehicleType
+          imgS3Keys
+          location
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          price
+          description
+          active
+          createdAt
+          sortKey
+          tags
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketRentals {
+        items {
+          id
+          imgS3Keys
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          price
+          address
+          description
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          tags
+          active
+          sortKey
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      beingLiked {
+        items {
+          id
+          itemID
           userID
           createdAt
           updatedAt
@@ -152,14 +1185,32 @@ export const onDeleteUser = /* GraphQL */ `
       lastName
       intro
       major
-      avatarImgPath
-      backGroundImgPath
-      linkedin
+      avatarImgS3Key
+      backGroundImgS3Key
+      linkedIn
       github
+      sortKey
       createdAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
       uWindsorEmail
-      tags
+      badges
       userEducations {
         items {
           id
@@ -195,12 +1246,287 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      topics {
+        items {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      articles {
+        items {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      articleComments {
+        items {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      events {
+        items {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      departments {
+        items {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      forumTopics {
+        items {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
+      forumPosts {
+        items {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPostComments {
+        items {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPostSubComments {
+        items {
+          id
+          content
+          active
+          createdAt
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       marketUserInfo {
         items {
           id
           phone
           weChat
           email
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketItems {
+        items {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketVehicles {
+        items {
+          id
+          vehicleType
+          imgS3Keys
+          location
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          price
+          description
+          active
+          createdAt
+          sortKey
+          tags
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      marketRentals {
+        items {
+          id
+          imgS3Keys
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          price
+          address
+          description
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          tags
+          active
+          sortKey
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      beingLiked {
+        items {
+          id
+          itemID
           userID
           createdAt
           updatedAt
@@ -234,21 +1560,76 @@ export const onCreateUserEducation = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -279,21 +1660,76 @@ export const onUpdateUserEducation = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -324,21 +1760,76 @@ export const onDeleteUserEducation = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -370,21 +1861,76 @@ export const onCreateUserExperience = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -416,21 +1962,76 @@ export const onUpdateUserExperience = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -462,21 +2063,76 @@ export const onDeleteUserExperience = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -489,26 +2145,104 @@ export const onCreateTopic = /* GraphQL */ `
     onCreateTopic {
       id
       name
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       articles {
         items {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          topicID
-          typeID
+          imgS3Keys
+          tags
+          sortKey
           active
           createdAt
-          ByCreatedAt
+          topicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -520,19 +2254,20 @@ export const onCreateTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgPath
-          qrCode
-          poster
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
           content
           location
           sponsor
+          tags
           eventStatus
           active
-          topicID
           createdAt
-          ByCreatedAt
+          sortKey
+          topicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -544,26 +2279,104 @@ export const onUpdateTopic = /* GraphQL */ `
     onUpdateTopic {
       id
       name
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       articles {
         items {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          topicID
-          typeID
+          imgS3Keys
+          tags
+          sortKey
           active
           createdAt
-          ByCreatedAt
+          topicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -575,19 +2388,20 @@ export const onUpdateTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgPath
-          qrCode
-          poster
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
           content
           location
           sponsor
+          tags
           eventStatus
           active
-          topicID
           createdAt
-          ByCreatedAt
+          sortKey
+          topicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -599,26 +2413,104 @@ export const onDeleteTopic = /* GraphQL */ `
     onDeleteTopic {
       id
       name
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       articles {
         items {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          topicID
-          typeID
+          imgS3Keys
+          tags
+          sortKey
           active
           createdAt
-          ByCreatedAt
+          topicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -630,112 +2522,20 @@ export const onDeleteTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgPath
-          qrCode
-          poster
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
           content
           location
           sponsor
+          tags
           eventStatus
           active
-          topicID
           createdAt
-          ByCreatedAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onCreateType = /* GraphQL */ `
-  subscription OnCreateType {
-    onCreateType {
-      id
-      name
-      like
-      unlike
-      createdAt
-      updatedAt
-      owner
-      articles {
-        items {
-          id
-          title
-          content
-          imagePath
-          like
-          unlike
+          sortKey
           topicID
-          typeID
-          active
-          createdAt
-          ByCreatedAt
+          userID
           updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onUpdateType = /* GraphQL */ `
-  subscription OnUpdateType {
-    onUpdateType {
-      id
-      name
-      like
-      unlike
-      createdAt
-      updatedAt
-      owner
-      articles {
-        items {
-          id
-          title
-          content
-          imagePath
-          like
-          unlike
-          topicID
-          typeID
-          active
-          createdAt
-          ByCreatedAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onDeleteType = /* GraphQL */ `
-  subscription OnDeleteType {
-    onDeleteType {
-      id
-      name
-      like
-      unlike
-      createdAt
-      updatedAt
-      owner
-      articles {
-        items {
-          id
-          title
-          content
-          imagePath
-          like
-          unlike
-          topicID
-          typeID
-          active
-          createdAt
-          ByCreatedAt
-          updatedAt
-          owner
         }
         nextToken
       }
@@ -748,23 +2548,121 @@ export const onCreateArticle = /* GraphQL */ `
       id
       title
       content
-      imagePath
-      like
-      unlike
-      topicID
-      typeID
+      imgS3Keys
+      tags
+      sortKey
       active
       createdAt
-      ByCreatedAt
+      topicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       topic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         articles {
           nextToken
         }
@@ -772,27 +2670,24 @@ export const onCreateArticle = /* GraphQL */ `
           nextToken
         }
       }
-      type {
-        id
-        name
-        like
-        unlike
-        createdAt
-        updatedAt
-        owner
-        articles {
-          nextToken
-        }
-      }
-      owner
       articleComments {
         items {
           id
           content
-          like
-          unlike
           active
           articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
           createdAt
           updatedAt
           owner
@@ -808,23 +2703,121 @@ export const onUpdateArticle = /* GraphQL */ `
       id
       title
       content
-      imagePath
-      like
-      unlike
-      topicID
-      typeID
+      imgS3Keys
+      tags
+      sortKey
       active
       createdAt
-      ByCreatedAt
+      topicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       topic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         articles {
           nextToken
         }
@@ -832,27 +2825,24 @@ export const onUpdateArticle = /* GraphQL */ `
           nextToken
         }
       }
-      type {
-        id
-        name
-        like
-        unlike
-        createdAt
-        updatedAt
-        owner
-        articles {
-          nextToken
-        }
-      }
-      owner
       articleComments {
         items {
           id
           content
-          like
-          unlike
           active
           articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
           createdAt
           updatedAt
           owner
@@ -868,23 +2858,121 @@ export const onDeleteArticle = /* GraphQL */ `
       id
       title
       content
-      imagePath
-      like
-      unlike
-      topicID
-      typeID
+      imgS3Keys
+      tags
+      sortKey
       active
       createdAt
-      ByCreatedAt
+      topicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       topic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         articles {
           nextToken
         }
@@ -892,27 +2980,24 @@ export const onDeleteArticle = /* GraphQL */ `
           nextToken
         }
       }
-      type {
-        id
-        name
-        like
-        unlike
-        createdAt
-        updatedAt
-        owner
-        articles {
-          nextToken
-        }
-      }
-      owner
       articleComments {
         items {
           id
           content
-          like
-          unlike
           active
           articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
           createdAt
           updatedAt
           owner
@@ -927,49 +3012,163 @@ export const onCreateArticleComment = /* GraphQL */ `
     onCreateArticleComment {
       id
       content
-      like
-      unlike
       active
       articleID
       createdAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       article {
         id
         title
         content
-        imagePath
-        like
-        unlike
-        topicID
-        typeID
+        imgS3Keys
+        tags
+        sortKey
         active
         createdAt
-        ByCreatedAt
+        topicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         topic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        type {
-          id
-          name
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
         articleComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
       owner
+      articleSubComments {
+        items {
+          id
+          content
+          active
+          articleCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -978,49 +3177,163 @@ export const onUpdateArticleComment = /* GraphQL */ `
     onUpdateArticleComment {
       id
       content
-      like
-      unlike
       active
       articleID
       createdAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       article {
         id
         title
         content
-        imagePath
-        like
-        unlike
-        topicID
-        typeID
+        imgS3Keys
+        tags
+        sortKey
         active
         createdAt
-        ByCreatedAt
+        topicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         topic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        type {
-          id
-          name
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
         articleComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
       owner
+      articleSubComments {
+        items {
+          id
+          content
+          active
+          articleCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -1029,49 +3342,628 @@ export const onDeleteArticleComment = /* GraphQL */ `
     onDeleteArticleComment {
       id
       content
-      like
-      unlike
       active
       articleID
       createdAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       article {
         id
         title
         content
-        imagePath
-        like
-        unlike
-        topicID
-        typeID
+        imgS3Keys
+        tags
+        sortKey
         active
         createdAt
-        ByCreatedAt
+        topicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         topic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        type {
-          id
-          name
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
         articleComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
       owner
+      articleSubComments {
+        items {
+          id
+          content
+          active
+          articleCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateArticleSubComment = /* GraphQL */ `
+  subscription OnCreateArticleSubComment {
+    onCreateArticleSubComment {
+      id
+      content
+      active
+      articleCommentID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateArticleSubComment = /* GraphQL */ `
+  subscription OnUpdateArticleSubComment {
+    onUpdateArticleSubComment {
+      id
+      content
+      active
+      articleCommentID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteArticleSubComment = /* GraphQL */ `
+  subscription OnDeleteArticleSubComment {
+    onDeleteArticleSubComment {
+      id
+      content
+      active
+      articleCommentID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -1084,26 +3976,127 @@ export const onCreateEvent = /* GraphQL */ `
       endDate
       online
       group
-      backGroundImgPath
-      qrCode
-      poster
+      backGroundImgS3Key
+      qrCodeImgS3Key
+      posterImgS3Key
       content
       location
       sponsor
+      tags
       eventStatus
       active
-      topicID
       createdAt
-      ByCreatedAt
+      sortKey
+      topicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       topic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         articles {
           nextToken
         }
@@ -1111,7 +4104,6 @@ export const onCreateEvent = /* GraphQL */ `
           nextToken
         }
       }
-      owner
       eventParticipants {
         items {
           id
@@ -1122,9 +4114,21 @@ export const onCreateEvent = /* GraphQL */ `
           weChat
           message
           numberOfPeople
-          eventParticipantStatus
           active
+          createdAt
+          eventParticipantStatus
           eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
           createdAt
           updatedAt
           owner
@@ -1143,26 +4147,127 @@ export const onUpdateEvent = /* GraphQL */ `
       endDate
       online
       group
-      backGroundImgPath
-      qrCode
-      poster
+      backGroundImgS3Key
+      qrCodeImgS3Key
+      posterImgS3Key
       content
       location
       sponsor
+      tags
       eventStatus
       active
-      topicID
       createdAt
-      ByCreatedAt
+      sortKey
+      topicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       topic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         articles {
           nextToken
         }
@@ -1170,7 +4275,6 @@ export const onUpdateEvent = /* GraphQL */ `
           nextToken
         }
       }
-      owner
       eventParticipants {
         items {
           id
@@ -1181,9 +4285,21 @@ export const onUpdateEvent = /* GraphQL */ `
           weChat
           message
           numberOfPeople
-          eventParticipantStatus
           active
+          createdAt
+          eventParticipantStatus
           eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
           createdAt
           updatedAt
           owner
@@ -1202,26 +4318,127 @@ export const onDeleteEvent = /* GraphQL */ `
       endDate
       online
       group
-      backGroundImgPath
-      qrCode
-      poster
+      backGroundImgS3Key
+      qrCodeImgS3Key
+      posterImgS3Key
       content
       location
       sponsor
+      tags
       eventStatus
       active
-      topicID
       createdAt
-      ByCreatedAt
+      sortKey
+      topicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       topic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         articles {
           nextToken
         }
@@ -1229,7 +4446,6 @@ export const onDeleteEvent = /* GraphQL */ `
           nextToken
         }
       }
-      owner
       eventParticipants {
         items {
           id
@@ -1240,9 +4456,21 @@ export const onDeleteEvent = /* GraphQL */ `
           weChat
           message
           numberOfPeople
-          eventParticipantStatus
           active
+          createdAt
+          eventParticipantStatus
           eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
           createdAt
           updatedAt
           owner
@@ -1263,11 +4491,94 @@ export const onCreateEventParticipant = /* GraphQL */ `
       weChat
       message
       numberOfPeople
-      eventParticipantStatus
       active
-      eventID
       createdAt
+      eventParticipantStatus
+      eventID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       event {
         id
         title
@@ -1275,29 +4586,50 @@ export const onCreateEventParticipant = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgPath
-        qrCode
-        poster
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
         content
         location
         sponsor
+        tags
         eventStatus
         active
-        topicID
         createdAt
-        ByCreatedAt
+        sortKey
+        topicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         topic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        owner
         eventParticipants {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -1316,11 +4648,94 @@ export const onUpdateEventParticipant = /* GraphQL */ `
       weChat
       message
       numberOfPeople
-      eventParticipantStatus
       active
-      eventID
       createdAt
+      eventParticipantStatus
+      eventID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       event {
         id
         title
@@ -1328,29 +4743,50 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgPath
-        qrCode
-        poster
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
         content
         location
         sponsor
+        tags
         eventStatus
         active
-        topicID
         createdAt
-        ByCreatedAt
+        sortKey
+        topicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         topic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        owner
         eventParticipants {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -1369,11 +4805,94 @@ export const onDeleteEventParticipant = /* GraphQL */ `
       weChat
       message
       numberOfPeople
-      eventParticipantStatus
       active
-      eventID
       createdAt
+      eventParticipantStatus
+      eventID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       event {
         id
         title
@@ -1381,29 +4900,50 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgPath
-        qrCode
-        poster
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
         content
         location
         sponsor
+        tags
         eventStatus
         active
-        topicID
         createdAt
-        ByCreatedAt
+        sortKey
+        topicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         topic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        owner
         eventParticipants {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -1419,11 +4959,91 @@ export const onCreateDepartment = /* GraphQL */ `
       introduction
       email
       leader
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       uwcssaJobs {
         items {
           id
@@ -1431,16 +5051,16 @@ export const onCreateDepartment = /* GraphQL */ `
           title
           requirements
           bonus
-          imagePath
-          departmentID
+          imgS3Key
           benefits
           schedule
           like
           unlike
           active
           createdAt
+          departmentID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1455,11 +5075,91 @@ export const onUpdateDepartment = /* GraphQL */ `
       introduction
       email
       leader
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       uwcssaJobs {
         items {
           id
@@ -1467,16 +5167,16 @@ export const onUpdateDepartment = /* GraphQL */ `
           title
           requirements
           bonus
-          imagePath
-          departmentID
+          imgS3Key
           benefits
           schedule
           like
           unlike
           active
           createdAt
+          departmentID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1491,11 +5191,91 @@ export const onDeleteDepartment = /* GraphQL */ `
       introduction
       email
       leader
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       uwcssaJobs {
         items {
           id
@@ -1503,16 +5283,16 @@ export const onDeleteDepartment = /* GraphQL */ `
           title
           requirements
           bonus
-          imagePath
-          departmentID
+          imgS3Key
           benefits
           schedule
           like
           unlike
           active
           createdAt
+          departmentID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1527,46 +5307,146 @@ export const onCreateUwcssaJob = /* GraphQL */ `
       title
       requirements
       bonus
-      imagePath
-      departmentID
+      imgS3Key
       benefits
       schedule
       like
       unlike
       active
       createdAt
+      departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       department {
         id
         name
         introduction
         email
         leader
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         uwcssaJobs {
           nextToken
         }
-      }
-      owner
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          uwcssaJobID
-          uwcssaJobResumeStatus
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -1579,46 +5459,146 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
       title
       requirements
       bonus
-      imagePath
-      departmentID
+      imgS3Key
       benefits
       schedule
       like
       unlike
       active
       createdAt
+      departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       department {
         id
         name
         introduction
         email
         leader
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         uwcssaJobs {
           nextToken
         }
-      }
-      owner
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          uwcssaJobID
-          uwcssaJobResumeStatus
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -1631,194 +5611,147 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
       title
       requirements
       bonus
-      imagePath
-      departmentID
+      imgS3Key
       benefits
       schedule
       like
       unlike
       active
       createdAt
+      departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       department {
         id
         name
         introduction
         email
         leader
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         uwcssaJobs {
           nextToken
         }
       }
-      owner
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFilePath
-          phone
-          message
-          createdAt
-          uwcssaJobID
-          uwcssaJobResumeStatus
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onCreateUwcssaJobResume = /* GraphQL */ `
-  subscription OnCreateUwcssaJobResume($owner: String) {
-    onCreateUwcssaJobResume(owner: $owner) {
-      id
-      name
-      email
-      resumeFilePath
-      phone
-      message
-      createdAt
-      uwcssaJobID
-      uwcssaJobResumeStatus
-      updatedAt
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imagePath
-        departmentID
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        updatedAt
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateUwcssaJobResume = /* GraphQL */ `
-  subscription OnUpdateUwcssaJobResume($owner: String) {
-    onUpdateUwcssaJobResume(owner: $owner) {
-      id
-      name
-      email
-      resumeFilePath
-      phone
-      message
-      createdAt
-      uwcssaJobID
-      uwcssaJobResumeStatus
-      updatedAt
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imagePath
-        departmentID
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        updatedAt
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteUwcssaJobResume = /* GraphQL */ `
-  subscription OnDeleteUwcssaJobResume($owner: String) {
-    onDeleteUwcssaJobResume(owner: $owner) {
-      id
-      name
-      email
-      resumeFilePath
-      phone
-      message
-      createdAt
-      uwcssaJobID
-      uwcssaJobResumeStatus
-      updatedAt
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imagePath
-        departmentID
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        updatedAt
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
@@ -1827,22 +5760,99 @@ export const onCreateForumTopic = /* GraphQL */ `
     onCreateForumTopic {
       id
       name
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumSubTopics {
         items {
           id
           name
-          like
-          unlike
-          active
-          forumTopicID
           createdAt
+          forumTopicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1854,22 +5864,99 @@ export const onUpdateForumTopic = /* GraphQL */ `
     onUpdateForumTopic {
       id
       name
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumSubTopics {
         items {
           id
           name
-          like
-          unlike
-          active
-          forumTopicID
           createdAt
+          forumTopicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1881,22 +5968,99 @@ export const onDeleteForumTopic = /* GraphQL */ `
     onDeleteForumTopic {
       id
       name
-      like
-      unlike
+      userID
       createdAt
       updatedAt
-      owner
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumSubTopics {
         items {
           id
           name
-          like
-          unlike
-          active
-          forumTopicID
           createdAt
+          forumTopicID
+          userID
           updatedAt
-          owner
         }
         nextToken
       }
@@ -1908,36 +6072,132 @@ export const onCreateForumSubTopic = /* GraphQL */ `
     onCreateForumSubTopic {
       id
       name
-      like
-      unlike
-      active
-      forumTopicID
       createdAt
+      forumTopicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumTopic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumSubTopics {
           nextToken
         }
       }
-      owner
       forumPosts {
         items {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          createdAt
+          imgS3Keys
+          tags
           active
+          createdAt
           forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -1951,36 +6211,132 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
     onUpdateForumSubTopic {
       id
       name
-      like
-      unlike
-      active
-      forumTopicID
       createdAt
+      forumTopicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumTopic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumSubTopics {
           nextToken
         }
       }
-      owner
       forumPosts {
         items {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          createdAt
+          imgS3Keys
+          tags
           active
+          createdAt
           forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -1994,36 +6350,132 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
     onDeleteForumSubTopic {
       id
       name
-      like
-      unlike
-      active
-      forumTopicID
       createdAt
+      forumTopicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumTopic {
         id
         name
-        like
-        unlike
+        userID
         createdAt
         updatedAt
-        owner
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumSubTopics {
           nextToken
         }
       }
-      owner
       forumPosts {
         items {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          createdAt
+          imgS3Keys
+          tags
           active
+          createdAt
           forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -2038,32 +6490,128 @@ export const onCreateForumPost = /* GraphQL */ `
       id
       title
       content
-      imagePath
-      like
-      unlike
-      createdAt
+      imgS3Keys
+      tags
       active
+      createdAt
       forumSubTopicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumSubTopic {
         id
         name
-        like
-        unlike
-        active
-        forumTopicID
         createdAt
+        forumTopicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumTopic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        owner
         forumPosts {
           nextToken
         }
@@ -2073,11 +6621,21 @@ export const onCreateForumPost = /* GraphQL */ `
         items {
           id
           content
-          like
-          unlike
           createdAt
           active
           forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -2092,32 +6650,128 @@ export const onUpdateForumPost = /* GraphQL */ `
       id
       title
       content
-      imagePath
-      like
-      unlike
-      createdAt
+      imgS3Keys
+      tags
       active
+      createdAt
       forumSubTopicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumSubTopic {
         id
         name
-        like
-        unlike
-        active
-        forumTopicID
         createdAt
+        forumTopicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumTopic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        owner
         forumPosts {
           nextToken
         }
@@ -2127,11 +6781,21 @@ export const onUpdateForumPost = /* GraphQL */ `
         items {
           id
           content
-          like
-          unlike
           createdAt
           active
           forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -2146,32 +6810,128 @@ export const onDeleteForumPost = /* GraphQL */ `
       id
       title
       content
-      imagePath
-      like
-      unlike
-      createdAt
+      imgS3Keys
+      tags
       active
+      createdAt
       forumSubTopicID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumSubTopic {
         id
         name
-        like
-        unlike
-        active
-        forumTopicID
         createdAt
+        forumTopicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumTopic {
           id
           name
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
         }
-        owner
         forumPosts {
           nextToken
         }
@@ -2181,11 +6941,21 @@ export const onDeleteForumPost = /* GraphQL */ `
         items {
           id
           content
-          like
-          unlike
           createdAt
           active
           forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -2199,36 +6969,136 @@ export const onCreateForumPostComment = /* GraphQL */ `
     onCreateForumPostComment {
       id
       content
-      like
-      unlike
       createdAt
       active
       forumPostID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
         content
-        imagePath
-        like
-        unlike
-        createdAt
+        imgS3Keys
+        tags
         active
+        createdAt
         forumSubTopicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumSubTopic {
           id
           name
-          like
-          unlike
-          active
-          forumTopicID
           createdAt
+          forumTopicID
+          userID
           updatedAt
-          owner
         }
         owner
         forumPostComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -2237,10 +7107,21 @@ export const onCreateForumPostComment = /* GraphQL */ `
         items {
           id
           content
-          like
-          unlike
+          active
           createdAt
           forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -2254,36 +7135,136 @@ export const onUpdateForumPostComment = /* GraphQL */ `
     onUpdateForumPostComment {
       id
       content
-      like
-      unlike
       createdAt
       active
       forumPostID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
         content
-        imagePath
-        like
-        unlike
-        createdAt
+        imgS3Keys
+        tags
         active
+        createdAt
         forumSubTopicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumSubTopic {
           id
           name
-          like
-          unlike
-          active
-          forumTopicID
           createdAt
+          forumTopicID
+          userID
           updatedAt
-          owner
         }
         owner
         forumPostComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -2292,10 +7273,21 @@ export const onUpdateForumPostComment = /* GraphQL */ `
         items {
           id
           content
-          like
-          unlike
+          active
           createdAt
           forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -2309,36 +7301,136 @@ export const onDeleteForumPostComment = /* GraphQL */ `
     onDeleteForumPostComment {
       id
       content
-      like
-      unlike
       createdAt
       active
       forumPostID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
         content
-        imagePath
-        like
-        unlike
-        createdAt
+        imgS3Keys
+        tags
         active
+        createdAt
         forumSubTopicID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumSubTopic {
           id
           name
-          like
-          unlike
-          active
-          forumTopicID
           createdAt
+          forumTopicID
+          userID
           updatedAt
-          owner
         }
         owner
         forumPostComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -2347,10 +7439,21 @@ export const onDeleteForumPostComment = /* GraphQL */ `
         items {
           id
           content
-          like
-          unlike
+          active
           createdAt
           forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -2364,30 +7467,130 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
     onCreateForumPostSubComment {
       id
       content
-      like
-      unlike
+      active
       createdAt
       forumPostCommentID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumPostComment {
         id
         content
-        like
-        unlike
         createdAt
         active
         forumPostID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumPost {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          createdAt
+          imgS3Keys
+          tags
           active
+          createdAt
           forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -2395,8 +7598,22 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
         forumPostSubComments {
           nextToken
         }
+        likes {
+          nextToken
+        }
       }
       owner
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -2405,30 +7622,130 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
     onUpdateForumPostSubComment {
       id
       content
-      like
-      unlike
+      active
       createdAt
       forumPostCommentID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumPostComment {
         id
         content
-        like
-        unlike
         createdAt
         active
         forumPostID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumPost {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          createdAt
+          imgS3Keys
+          tags
           active
+          createdAt
           forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -2436,8 +7753,22 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
         forumPostSubComments {
           nextToken
         }
+        likes {
+          nextToken
+        }
       }
       owner
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -2446,30 +7777,130 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
     onDeleteForumPostSubComment {
       id
       content
-      like
-      unlike
+      active
       createdAt
       forumPostCommentID
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       forumPostComment {
         id
         content
-        like
-        unlike
         createdAt
         active
         forumPostID
+        userID
         updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         forumPost {
           id
           title
           content
-          imagePath
-          like
-          unlike
-          createdAt
+          imgS3Keys
+          tags
           active
+          createdAt
           forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -2477,8 +7908,22 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         forumPostSubComments {
           nextToken
         }
+        likes {
+          nextToken
+        }
       }
       owner
+      likes {
+        items {
+          id
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -2501,21 +7946,76 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -2542,21 +8042,76 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -2583,21 +8138,76 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgPath
-        backGroundImgPath
-        linkedin
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
         github
+        sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
-        tags
+        badges
         userEducations {
           nextToken
         }
         userExperiences {
           nextToken
         }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
           nextToken
         }
       }
@@ -2610,7 +8220,7 @@ export const onCreateMarketItem = /* GraphQL */ `
     onCreateMarketItem {
       id
       name
-      imagePath
+      imgS3Keys
       title
       price
       description
@@ -2618,10 +8228,93 @@ export const onCreateMarketItem = /* GraphQL */ `
       marketItemCondition
       marketItemCategory
       tags
+      sortKey
       active
       createdAt
-      ByCreatedAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -2631,7 +8324,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
     onUpdateMarketItem {
       id
       name
-      imagePath
+      imgS3Keys
       title
       price
       description
@@ -2639,10 +8332,93 @@ export const onUpdateMarketItem = /* GraphQL */ `
       marketItemCondition
       marketItemCategory
       tags
+      sortKey
       active
       createdAt
-      ByCreatedAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -2652,7 +8428,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
     onDeleteMarketItem {
       id
       name
-      imagePath
+      imgS3Keys
       title
       price
       description
@@ -2660,10 +8436,93 @@ export const onDeleteMarketItem = /* GraphQL */ `
       marketItemCondition
       marketItemCategory
       tags
+      sortKey
       active
       createdAt
-      ByCreatedAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -2673,7 +8532,7 @@ export const onCreateMarketVehicle = /* GraphQL */ `
     onCreateMarketVehicle {
       id
       vehicleType
-      imagePath
+      imgS3Keys
       location
       year
       make
@@ -2685,8 +8544,92 @@ export const onCreateMarketVehicle = /* GraphQL */ `
       description
       active
       createdAt
-      ByCreatedAt
+      sortKey
+      tags
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -2696,7 +8639,7 @@ export const onUpdateMarketVehicle = /* GraphQL */ `
     onUpdateMarketVehicle {
       id
       vehicleType
-      imagePath
+      imgS3Keys
       location
       year
       make
@@ -2708,8 +8651,92 @@ export const onUpdateMarketVehicle = /* GraphQL */ `
       description
       active
       createdAt
-      ByCreatedAt
+      sortKey
+      tags
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
@@ -2719,7 +8746,7 @@ export const onDeleteMarketVehicle = /* GraphQL */ `
     onDeleteMarketVehicle {
       id
       vehicleType
-      imagePath
+      imgS3Keys
       location
       year
       make
@@ -2731,18 +8758,102 @@ export const onDeleteMarketVehicle = /* GraphQL */ `
       description
       active
       createdAt
-      ByCreatedAt
+      sortKey
+      tags
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
 `;
-export const onCreateMarketHome = /* GraphQL */ `
-  subscription OnCreateMarketHome {
-    onCreateMarketHome {
+export const onCreateMarketRental = /* GraphQL */ `
+  subscription OnCreateMarketRental {
+    onCreateMarketRental {
       id
-      imagePath
-      marketHomeSaleRent
+      imgS3Keys
+      marketRentalSaleRent
       propertyType
       bedroomCounts
       bathroomsCounts
@@ -2756,20 +8867,104 @@ export const onCreateMarketHome = /* GraphQL */ `
       heatingType
       catFriendly
       dogFriendly
+      tags
       active
+      sortKey
       createdAt
-      ByCreatedAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
 `;
-export const onUpdateMarketHome = /* GraphQL */ `
-  subscription OnUpdateMarketHome {
-    onUpdateMarketHome {
+export const onUpdateMarketRental = /* GraphQL */ `
+  subscription OnUpdateMarketRental {
+    onUpdateMarketRental {
       id
-      imagePath
-      marketHomeSaleRent
+      imgS3Keys
+      marketRentalSaleRent
       propertyType
       bedroomCounts
       bathroomsCounts
@@ -2783,20 +8978,104 @@ export const onUpdateMarketHome = /* GraphQL */ `
       heatingType
       catFriendly
       dogFriendly
+      tags
       active
+      sortKey
       createdAt
-      ByCreatedAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
       owner
     }
   }
 `;
-export const onDeleteMarketHome = /* GraphQL */ `
-  subscription OnDeleteMarketHome {
-    onDeleteMarketHome {
+export const onDeleteMarketRental = /* GraphQL */ `
+  subscription OnDeleteMarketRental {
+    onDeleteMarketRental {
       id
-      imagePath
-      marketHomeSaleRent
+      imgS3Keys
+      marketRentalSaleRent
       propertyType
       bedroomCounts
       bathroomsCounts
@@ -2810,10 +9089,1597 @@ export const onDeleteMarketHome = /* GraphQL */ `
       heatingType
       catFriendly
       dogFriendly
+      tags
       active
+      sortKey
       createdAt
-      ByCreatedAt
+      userID
       updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateLike = /* GraphQL */ `
+  subscription OnCreateLike {
+    onCreateLike {
+      id
+      itemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      article {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleSubComment {
+        id
+        content
+        active
+        articleCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        articleComment {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPost {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostComment {
+        id
+        content
+        createdAt
+        active
+        forumPostID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostSubComment {
+        id
+        content
+        active
+        createdAt
+        forumPostCommentID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPostComment {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateLike = /* GraphQL */ `
+  subscription OnUpdateLike {
+    onUpdateLike {
+      id
+      itemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      article {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleSubComment {
+        id
+        content
+        active
+        articleCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        articleComment {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPost {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostComment {
+        id
+        content
+        createdAt
+        active
+        forumPostID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostSubComment {
+        id
+        content
+        active
+        createdAt
+        forumPostCommentID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPostComment {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteLike = /* GraphQL */ `
+  subscription OnDeleteLike {
+    onDeleteLike {
+      id
+      itemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      article {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleSubComment {
+        id
+        content
+        active
+        articleCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        articleComment {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPost {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostComment {
+        id
+        content
+        createdAt
+        active
+        forumPostID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostSubComment {
+        id
+        content
+        active
+        createdAt
+        forumPostCommentID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPostComment {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
       owner
     }
   }

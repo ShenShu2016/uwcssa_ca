@@ -1,19 +1,19 @@
 {
   "function": {
-    "uwinAuthPostConfirmation": {
+    "uwcssaAuthPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "auth": {
-    "uwinAuth": {
+    "uwcssaAuth": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "uwinAuthPostConfirmation",
+          "resourceName": "uwcssaAuthPostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -24,7 +24,7 @@
       "customAuth": false,
       "frontendAuthConfig": {
         "loginMechanisms": [
-          "GOOGLE"
+          "PREFERRED_USERNAME"
         ],
         "signupAttributes": [
           "EMAIL"
@@ -43,8 +43,14 @@
       }
     }
   },
+  "storage": {
+    "uwcssas3": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  },
   "api": {
-    "uwcssaca": {
+    "uwcssa": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -52,7 +58,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authuwinAuth"
+              "userPoolId": "authuwcssaAuth"
             }
           },
           "additionalAuthenticationProviders": [
@@ -62,12 +68,6 @@
           ]
         }
       }
-    }
-  },
-  "storage": {
-    "uwcssaS3": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
     }
   }
 }
