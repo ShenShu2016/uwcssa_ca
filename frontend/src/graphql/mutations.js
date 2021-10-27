@@ -21,23 +21,6 @@ export const createUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       updatedAt
       uWindsorEmail
       badges
@@ -190,6 +173,23 @@ export const createUser = /* GraphQL */ `
           departmentID
           userID
           updatedAt
+        }
+        nextToken
+      }
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
         }
         nextToken
       }
@@ -387,23 +387,6 @@ export const updateUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       updatedAt
       uWindsorEmail
       badges
@@ -556,6 +539,23 @@ export const updateUser = /* GraphQL */ `
           departmentID
           userID
           updatedAt
+        }
+        nextToken
+      }
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
         }
         nextToken
       }
@@ -753,23 +753,6 @@ export const deleteUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       updatedAt
       uWindsorEmail
       badges
@@ -922,6 +905,23 @@ export const deleteUser = /* GraphQL */ `
           departmentID
           userID
           updatedAt
+        }
+        nextToken
+      }
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
         }
         nextToken
       }
@@ -1131,9 +1131,6 @@ export const createUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1162,6 +1159,9 @@ export const createUserEducation = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1234,9 +1234,6 @@ export const updateUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1265,6 +1262,9 @@ export const updateUserEducation = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1337,9 +1337,6 @@ export const deleteUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1368,6 +1365,9 @@ export const deleteUserEducation = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1441,9 +1441,6 @@ export const createUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1472,6 +1469,9 @@ export const createUserExperience = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1545,9 +1545,6 @@ export const updateUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1576,6 +1573,9 @@ export const updateUserExperience = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1649,9 +1649,6 @@ export const deleteUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1680,6 +1677,9 @@ export const deleteUserExperience = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1746,9 +1746,6 @@ export const createTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1777,6 +1774,9 @@ export const createTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1883,9 +1883,6 @@ export const updateTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -1914,6 +1911,9 @@ export const updateTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2020,9 +2020,6 @@ export const deleteTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -2051,6 +2048,9 @@ export const deleteTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2163,9 +2163,6 @@ export const createArticle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -2194,6 +2191,9 @@ export const createArticle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2321,9 +2321,6 @@ export const updateArticle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -2352,6 +2349,9 @@ export const updateArticle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2479,9 +2479,6 @@ export const deleteArticle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -2510,6 +2507,9 @@ export const deleteArticle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2633,9 +2633,6 @@ export const createArticleComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -2664,6 +2661,9 @@ export const createArticleComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2801,9 +2801,6 @@ export const updateArticleComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -2832,6 +2829,9 @@ export const updateArticleComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2969,9 +2969,6 @@ export const deleteArticleComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -3000,6 +2997,9 @@ export const deleteArticleComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3137,9 +3137,6 @@ export const createArticleSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -3168,6 +3165,9 @@ export const createArticleSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3295,9 +3295,6 @@ export const updateArticleSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -3326,6 +3323,9 @@ export const updateArticleSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3453,9 +3453,6 @@ export const deleteArticleSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -3484,6 +3481,9 @@ export const deleteArticleSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3624,9 +3624,6 @@ export const createEvent = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -3655,6 +3652,9 @@ export const createEvent = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3798,9 +3798,6 @@ export const updateEvent = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -3829,6 +3826,9 @@ export const updateEvent = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3972,9 +3972,6 @@ export const deleteEvent = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4003,6 +4000,9 @@ export const deleteEvent = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4140,9 +4140,6 @@ export const createEventParticipant = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4171,6 +4168,9 @@ export const createEventParticipant = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4300,9 +4300,6 @@ export const updateEventParticipant = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4331,6 +4328,9 @@ export const updateEventParticipant = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4460,9 +4460,6 @@ export const deleteEventParticipant = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4491,6 +4488,9 @@ export const deleteEventParticipant = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4614,9 +4614,6 @@ export const createDepartment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4645,6 +4642,9 @@ export const createDepartment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4733,9 +4733,6 @@ export const updateDepartment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4764,6 +4761,9 @@ export const updateDepartment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4852,9 +4852,6 @@ export const deleteDepartment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -4883,6 +4880,9 @@ export const deleteDepartment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4961,23 +4961,6 @@ export const createUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       userID
       updatedAt
       user {
@@ -4995,9 +4978,6 @@ export const createUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5026,6 +5006,9 @@ export const createUwcssaJob = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5093,6 +5076,23 @@ export const createUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
+      }
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
     }
   }
@@ -5116,23 +5116,6 @@ export const updateUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       userID
       updatedAt
       user {
@@ -5150,9 +5133,6 @@ export const updateUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5181,6 +5161,9 @@ export const updateUwcssaJob = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5248,6 +5231,23 @@ export const updateUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
+      }
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
     }
   }
@@ -5271,23 +5271,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       userID
       updatedAt
       user {
@@ -5305,9 +5288,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5336,6 +5316,9 @@ export const deleteUwcssaJob = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5403,6 +5386,23 @@ export const deleteUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
+      }
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
     }
   }
@@ -5439,9 +5439,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5470,6 +5467,9 @@ export const createUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5520,9 +5520,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
-        uwcssaJobResumes {
-          nextToken
-        }
         userID
         updatedAt
         user {
@@ -5553,6 +5550,9 @@ export const createUwcssaJobResume = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        uwcssaJobResumes {
+          nextToken
         }
       }
       owner
@@ -5591,9 +5591,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5622,6 +5619,9 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5672,9 +5672,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
-        uwcssaJobResumes {
-          nextToken
-        }
         userID
         updatedAt
         user {
@@ -5705,6 +5702,9 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        uwcssaJobResumes {
+          nextToken
         }
       }
       owner
@@ -5743,9 +5743,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5774,6 +5771,9 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5824,9 +5824,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
-        uwcssaJobResumes {
-          nextToken
-        }
         userID
         updatedAt
         user {
@@ -5857,6 +5854,9 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        uwcssaJobResumes {
+          nextToken
         }
       }
       owner
@@ -5889,9 +5889,6 @@ export const createForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -5920,6 +5917,9 @@ export const createForumTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5996,9 +5996,6 @@ export const updateForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6027,6 +6024,9 @@ export const updateForumTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6103,9 +6103,6 @@ export const deleteForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6134,6 +6131,9 @@ export const deleteForumTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6211,9 +6211,6 @@ export const createForumSubTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6242,6 +6239,9 @@ export const createForumSubTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6353,9 +6353,6 @@ export const updateForumSubTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6384,6 +6381,9 @@ export const updateForumSubTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6495,9 +6495,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6526,6 +6523,9 @@ export const deleteForumSubTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6641,9 +6641,6 @@ export const createForumPost = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6672,6 +6669,9 @@ export const createForumPost = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6804,9 +6804,6 @@ export const updateForumPost = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6835,6 +6832,9 @@ export const updateForumPost = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -6967,9 +6967,6 @@ export const deleteForumPost = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -6998,6 +6995,9 @@ export const deleteForumPost = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -7127,9 +7127,6 @@ export const createForumPostComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -7158,6 +7155,9 @@ export const createForumPostComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -7296,9 +7296,6 @@ export const updateForumPostComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -7327,6 +7324,9 @@ export const updateForumPostComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -7465,9 +7465,6 @@ export const deleteForumPostComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -7496,6 +7493,9 @@ export const deleteForumPostComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -7634,9 +7634,6 @@ export const createForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -7665,6 +7662,9 @@ export const createForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -7792,9 +7792,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -7823,6 +7820,9 @@ export const updateForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -7950,9 +7950,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -7981,6 +7978,9 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8108,9 +8108,6 @@ export const createMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8139,6 +8136,9 @@ export const createMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8207,9 +8207,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8238,6 +8235,9 @@ export const updateMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8306,9 +8306,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8337,6 +8334,9 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8413,9 +8413,6 @@ export const createMarketItem = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8444,6 +8441,9 @@ export const createMarketItem = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8520,9 +8520,6 @@ export const updateMarketItem = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8551,6 +8548,9 @@ export const updateMarketItem = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8627,9 +8627,6 @@ export const deleteMarketItem = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8658,6 +8655,9 @@ export const deleteMarketItem = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8737,9 +8737,6 @@ export const createMarketVehicle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8768,6 +8765,9 @@ export const createMarketVehicle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8847,9 +8847,6 @@ export const updateMarketVehicle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8878,6 +8875,9 @@ export const updateMarketVehicle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -8957,9 +8957,6 @@ export const deleteMarketVehicle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -8988,6 +8985,9 @@ export const deleteMarketVehicle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9071,9 +9071,6 @@ export const createMarketRental = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -9102,6 +9099,9 @@ export const createMarketRental = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9185,9 +9185,6 @@ export const updateMarketRental = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -9216,6 +9213,9 @@ export const updateMarketRental = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9299,9 +9299,6 @@ export const deleteMarketRental = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -9330,6 +9327,9 @@ export const deleteMarketRental = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9396,9 +9396,6 @@ export const createLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -9427,6 +9424,9 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9478,9 +9478,6 @@ export const createLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -9509,6 +9506,9 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9900,9 +9900,6 @@ export const updateLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -9931,6 +9928,9 @@ export const updateLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -9982,9 +9982,6 @@ export const updateLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -10013,6 +10010,9 @@ export const updateLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -10404,9 +10404,6 @@ export const deleteLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -10435,6 +10432,9 @@ export const deleteLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -10486,9 +10486,6 @@ export const deleteLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        uwcssaJobResumes {
-          nextToken
-        }
         updatedAt
         uWindsorEmail
         badges
@@ -10517,6 +10514,9 @@ export const deleteLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        uwcssaJobResumes {
           nextToken
         }
         forumTopics {

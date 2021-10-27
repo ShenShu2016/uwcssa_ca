@@ -421,8 +421,8 @@ type UwcssaJobResume
     rules: [
       { allow: owner } # 需要改只能上传和查看
       { allow: groups, groups: ["admin", "staff"] }
-      # { allow: private, operations: [read] }
-      # { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
     ]
   )
   @key(
