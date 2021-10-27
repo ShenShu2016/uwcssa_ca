@@ -1,4 +1,79 @@
 {
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssaca-production-01110-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-production-01110-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-production-01110-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssaca-production-01110-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-production-01110-unauthRole",
+      "StackName": "amplify-uwcssaca-production-01110",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-production-01110/ca1fad70-19c8-11ec-8709-0aa0c2860894",
+      "AmplifyAppId": "dmsl2mfclfxp3",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-production-01110-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "uwin": {}
+      },
+      "function": {
+        "uwinPostConfirmation": {
+          "deploymentBucketName": "amplify-uwcssaca-production-01110-deployment",
+          "s3Key": "amplify-builds/uwinPostConfirmation-696e334e766164465369-build.zip"
+        }
+      }
+    }
+  },
+  "testone": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssaca-testone-140629-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-testone-140629-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-testone-140629-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssaca-testone-140629-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-testone-140629-unauthRole",
+      "StackName": "amplify-uwcssaca-testone-140629",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-testone-140629/4df86340-22e2-11ec-86a5-02ea4533fe38",
+      "AmplifyAppId": "dmsl2mfclfxp3",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-testone-140629-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "uwinAuth": {}
+      },
+      "function": {
+        "uwinAuthPostConfirmation": {
+          "deploymentBucketName": "amplify-uwcssaca-testone-140629-deployment",
+          "s3Key": "amplify-builds/uwinAuthPostConfirmation-56336751592b32795141-build.zip"
+        }
+      }
+    }
+  },
+  "testing": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssaca-testing-193957-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-testing-193957-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssaca-testing-193957-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssaca-testing-193957-deployment",
+      "UnauthRoleName": "amplify-uwcssaca-testing-193957-unauthRole",
+      "StackName": "amplify-uwcssaca-testing-193957",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssaca-testing-193957/37e8c580-295a-11ec-af0c-0283dea58ef6",
+      "AmplifyAppId": "dmsl2mfclfxp3",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssaca-testing-193957-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "uwinAuth": {}
+      },
+      "function": {
+        "uwinAuthPostConfirmation": {
+          "deploymentBucketName": "amplify-uwcssaca-testing-193957-deployment",
+          "s3Key": "amplify-builds/uwinAuthPostConfirmation-71566971643559776244-build.zip"
+        }
+      }
+    }
+  },
   "develop": {
     "awscloudformation": {
       "AuthRoleName": "amplify-uwcssaca-develop-233420-authRole",
@@ -14,15 +89,13 @@
     },
     "categories": {
       "auth": {
-        "uwinAuth": {
-          "googleClientId": "1067602080073-mlhi1gk3uflq8v3b6hrm152vr0otofrs.apps.googleusercontent.com"
-        }
+        "uwin": {},
+        "uwinAuth": {}
       },
       "function": {
         "uwinAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssaca-develop-233420-deployment",
-          "s3Key": "amplify-builds/uwinAuthPostConfirmation-375250724a7335504758-build.zip",
-          "GROUP": "anyone"
+          "s3Key": "amplify-builds/uwinAuthPostConfirmation-3868673055483856587a-build.zip"
         }
       }
     }
