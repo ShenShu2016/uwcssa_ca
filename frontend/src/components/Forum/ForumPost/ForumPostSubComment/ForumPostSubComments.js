@@ -14,7 +14,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { deleteForumPostSubComment } from "../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
   root: {
@@ -30,14 +29,6 @@ const useStyles = makeStyles({
 
 const ForumPostSubComments = ({ forumPostComment }) => {
   const classes = useStyles();
-  //Delete the forum post SubComment
-  const delForumPostSubComment = (forumPostSubCommentId) => {
-    const delForumPostSubCommentInput = {
-      id: forumPostSubCommentId,
-      forumPostSubCommentForumPostCommentId: forumPostComment.id,
-    };
-    deleteForumPostSubComment(delForumPostSubCommentInput);
-  };
   return (
     <div className={classes.root}>
       <Typography className={classes.subTitle}>评论：</Typography>
@@ -95,13 +86,6 @@ const ForumPostSubComments = ({ forumPostComment }) => {
                       startIcon={<ThumbDownIcon />}
                     >
                       {unlike.length}
-                    </Button>
-                    <Button
-                      size="small"
-                      color="primary"
-                      onClick={delForumPostSubComment({ id })}
-                    >
-                      删除
                     </Button>
                   </CardActions>
                 </Card>

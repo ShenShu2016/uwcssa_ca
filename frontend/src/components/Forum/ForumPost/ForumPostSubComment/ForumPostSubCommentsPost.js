@@ -1,21 +1,19 @@
 import {
   Avatar,
-  Box,
   Button,
+  Box,
+  Grid,
   CardActions,
   CardHeader,
-  Grid,
-  TextField,
   Typography,
+  TextField,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
-import SignInRequest from "../ForumPostDetail/SignInRequest";
 import { makeStyles } from "@mui/styles";
-import { postForumPostComment } from "../../../redux/actions/forumAction";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import SignInRequest from "../SignInRequest";
+import { postForumPostSubComment } from "../../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
   root: {},
@@ -49,26 +47,28 @@ function stringAvatar(name) {
   };
 }
 
-function ForumPostCommentsPost({ forumPost }) {
+export default function ForumPostSubCommentsPost({ forumPostComment }) {
+  console.log(forumPostComment)
   const classes = useStyles();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userAuth);
   const [formData, setFormData] = useState({
     comment: "",
   });
+
   const { comment } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const createForumPostCommentInput = {
+  const createForumPostSubCommentInput = {
     content: comment,
     like: [],
     unlike: [],
-    active: 1,
-    forumPostID: forumPost.id,
+    forumPostCommentID: forumPostComment.id,
   };
   const postComment = (e) => {
-    dispatch(postForumPostComment(createForumPostCommentInput));
+    dispatch(postForumPostSubComment(createForumPostSubCommentInput));
+    // console.log(forumPostComment);
     setFormData({ comment: "" });
   };
 
@@ -76,7 +76,19 @@ function ForumPostCommentsPost({ forumPost }) {
     <div>
       {userInfo.isAuthenticated ? (
         <div>
-          <Typography className={classes.subTitle}>发布新评论：</Typography>
+          <Typography className={classes.subTitle}>
+            回复
+            <Button
+              variant="text"
+              // target="_top"
+              component={Link}
+              color="secondary"
+              // to={`/forumSubTopic/${id}`}
+            >
+              @{forumPostComment.owner}
+            </Button>
+            评论：
+          </Typography>
           <Box className={classes.main}>
             <Grid container spacing={0}>
               <Grid item xs={"auto"}>
@@ -112,7 +124,7 @@ function ForumPostCommentsPost({ forumPost }) {
                     onClick={() => {
                       setFormData({
                         comment: "",
-                      });
+                      })
                     }}
                   >
                     取消
@@ -136,5 +148,3 @@ function ForumPostCommentsPost({ forumPost }) {
     </div>
   );
 }
-
-export default ForumPostCommentsPost;

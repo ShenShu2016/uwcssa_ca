@@ -5,7 +5,7 @@ import {
   Box,
   Typography,
   MobileStepper,
-  // Skeleton,
+  Skeleton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@mui/styles";
@@ -13,7 +13,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { setForumTopics } from "../../redux/actions/forumAction";
@@ -58,12 +58,12 @@ const images = [
   },
 ];
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-const ForumMain = ({ setForumTopics }) => {
-  useEffect(() => {
-    setForumTopics();
-    console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export default function ForumMain() {
+  const dispatch = useDispatch();
   const { forumTopics } = useSelector((state) => state.forum);
+  useEffect(() => {
+    dispatch(setForumTopics());
+  }, [dispatch]);
   // console.log("forumTopics", forumTopics);
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -90,6 +90,9 @@ const ForumMain = ({ setForumTopics }) => {
           <Typography variant="h5">UWCSSA 论坛</Typography>
         </Box>
         {/* forum type link */}
+        {Object.keys(forumTopics).length === 0 ? (
+            <Skeleton variant="text" animation="wave" width={200} height={28} />
+          ) : (
         <Box sx={{ marginTop: "4rem" }}>
           {/* 后期动态改变 type: FourmTopic */}
           <Grid container spacing={0} className={classes.forumTopic}>
@@ -114,6 +117,7 @@ const ForumMain = ({ setForumTopics }) => {
             })}
           </Grid>
         </Box>
+          )}
         {/* forum sportlight slide */}
         <Box className={classes.sportlight}>
           <Box
@@ -205,5 +209,3 @@ const ForumMain = ({ setForumTopics }) => {
     </div>
   );
 };
-
-export default connect(null, { setForumTopics })(ForumMain);
