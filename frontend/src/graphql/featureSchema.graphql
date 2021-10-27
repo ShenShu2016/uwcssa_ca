@@ -25,11 +25,11 @@ type User
   lastName: String
   intro: String
   major: String
-  avatarImgPath: String
-  backGroundImgPath: String
-  linkedin: String
+  avatarImgS3Key: String
+  backGroundImgS3Key: String
+  linkedIn: String
   github: String
-  tags: [String]
+  badges: [String]
     @auth(
       rules: [
         { allow: owner, operations: [read] }
@@ -43,6 +43,28 @@ type User
     @connection(keyName: "byUser", fields: ["id"])
   marketUserInfo: [MarketUserInfo]
     @connection(keyName: "byUser", fields: ["id"])
+  likes: [Like] @connection(keyName: "byUser", fields: ["id"])
+  topics: [Topic] @connection(keyName: "byUser", fields: ["id"])
+  articles: [Article] @connection(keyName: "byUser", fields: ["id"])
+  articleComments: [ArticleComment]
+    @connection(keyName: "byUser", fields: ["id"])
+  events: [Event] @connection(keyName: "byUser", fields: ["id"])
+  eventParticipants: [EventParticipant]
+    @connection(keyName: "byUser", fields: ["id"])
+  departments: [Department] @connection(keyName: "byUser", fields: ["id"])
+  uwcssaJobs: [UwcssaJob] @connection(keyName: "byUser", fields: ["id"])
+  uwcssaJobResumes: [uwcssaJobResume]
+    @connection(keyName: "byUser", fields: ["id"])
+  forumTopics: [ForumTopic] @connection(keyName: "byUser", fields: ["id"])
+  forumSubTopics: [ForumSubTopic] @connection(keyName: "byUser", fields: ["id"])
+  forumPosts: [ForumPost] @connection(keyName: "byUser", fields: ["id"])
+  forumPostComments: [ForumPostComment]
+    @connection(keyName: "byUser", fields: ["id"])
+  forumPostSubComments: [ForumPostSubComment]
+    @connection(keyName: "byUser", fields: ["id"])
+  marketItems: [MarketItem] @connection(keyName: "byUser", fields: ["id"])
+  marketVehicles: [MarketVehicle] @connection(keyName: "byUser", fields: ["id"])
+  marketRentals: [MarketRental] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type UserEducation
@@ -60,13 +82,14 @@ type UserEducation
   school: String!
   degree: String
   fieldOfStudy: String
-  startDate: AWSDateTime!
+  startDate: AWSDateTime
   endDate: AWSDateTime
   grade: Int
   description: String
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
+
 type UserExperience
   @model
   @auth(
@@ -83,7 +106,7 @@ type UserExperience
   employmentType: String
   companyName: String!
   location: String
-  startDate: AWSDateTime!
+  startDate: AWSDateTime
   endDate: AWSDateTime
   industry: String
   description: String
@@ -95,69 +118,82 @@ type Topic
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   name: String!
-  like: [String]!
-  unlike: [String]!
+  # like: [String]!
+  # unlike: [String]!
   articles: [Article] @connection(keyName: "byTopic", fields: ["id"])
   events: [Event] @connection(keyName: "byTopic", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
-type Type
-  @model
-  @auth(
-    rules: [
-      { allow: owner }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  ) {
-  id: ID!
-  name: String!
-  like: [String]!
-  unlike: [String]!
-  articles: [Article] @connection(keyName: "byType", fields: ["id"])
-}
+# type Type
+#   @model
+#   @auth(
+#     rules: [
+#       { allow: owner }
+#       { allow: groups, groups: ["admin", "staff"] }
+#       { allow: private, operations: [read] }
+#       { allow: public, operations: [read], provider: iam }
+#     ]
+#   ) {
+#   id: ID!
+#   name: String!
+#   like: [String]!
+#   unlike: [String]!
+#   articles: [Article] @connection(keyName: "byType", fields: ["id"])
+# }
+# 不需要了，用不着
 
 type Article
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
   )
   @key(
-    name: "articleByCreatedAt"
-    fields: ["ByCreatedAt", "active", "createdAt"]
-    queryField: "articleByCreatedAt"
+    name: "articleBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "articleBySortKey"
   )
   @key(name: "byTopic", fields: ["topicID"])
-  @key(name: "byType", fields: ["typeID"]) {
+  # @key(name: "byType", fields: ["typeID"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   title: String!
   content: String!
-  imagePath: String
-  like: [String]!
-  unlike: [String]!
+  imgS3Keys: [String]
+  # like: [String]!
+  # unlike: [String]!
+  likes: [Like] @connection(keyName: "byArticle", fields: ["id"])
+  tags: [String]
+  sortKey: SortKey! #用来当第二索引的
+  active: Boolean!
+  createdAt: AWSDateTime!
   topicID: ID!
   topic: Topic! @connection(fields: ["topicID"])
-  typeID: ID!
-  active: Int!
-  type: Type! @connection(fields: ["typeID"])
+  # typeID: ID!
+  # type: Type! @connection(fields: ["typeID"])
   articleComments: [ArticleComment]
     @connection(keyName: "byArticle", fields: ["id"])
-  createdAt: AWSDateTime!
-  ByCreatedAt: String! #用来当第二索引的
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+enum SortKey {
+  SortKey
 }
 
 type ArticleComment
@@ -171,22 +207,28 @@ type ArticleComment
     ]
   )
   @key(
-    name: "byArticleID"
-    fields: ["articleID", "active", "createdAt"]
-    queryField: "byArticleID"
+    name: "articleCommentSortByArticleID"
+    fields: ["articleID", "createdAt"]
+    queryField: "articleCommentSortByArticleID"
   )
-  @key(name: "byArticle", fields: ["articleID", "createdAt"]) {
+  @key(name: "byArticle", fields: ["articleID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   content: String!
-  like: [String]!
-  unlike: [String]!
-  active: Int!
+  # like: [String]!
+  # unlike: [String]!
+  likes: [Like] @connection(keyName: "byArticleComment", fields: ["id"])
+  active: Boolean!
   articleID: ID!
   article: Article! @connection(fields: ["articleID"])
   createdAt: AWSDateTime!
+  articleSubComments: [ArticleSubComment]
+    @connection(keyName: "byArticleComment", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
-type Event
+type ArticleSubComment
   @model
   @auth(
     rules: [
@@ -197,32 +239,68 @@ type Event
     ]
   )
   @key(
-    name: "eventByCreatedAt"
-    fields: ["ByCreatedAt", "active", "createdAt"]
-    queryField: "eventByCreatedAt"
+    name: "articleSubCommentSortByArticleCommentID"
+    fields: ["articleCommentID", "createdAt"]
+    queryField: "articleSubCommentSortByArticleCommentID"
   )
-  @key(name: "byTopic", fields: ["topicID"]) {
+  @key(name: "byArticleComment", fields: ["articleCommentID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  content: String!
+  # like: [String]!
+  # unlike: [String]!
+  likes: [Like] @connection(keyName: "byArticleSubComment", fields: ["id"])
+  active: Boolean!
+  articleCommentID: ID!
+  articleComment: ArticleComment! @connection(fields: ["articleCommentID"])
+  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type Event
+  @model
+  @auth(
+    rules: [
+      # { allow: owner }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "eventSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "eventSortBySortKey"
+  )
+  @key(name: "byTopic", fields: ["topicID"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   title: String!
   startDate: AWSDateTime!
   endDate: AWSDateTime!
   online: Boolean! #代表线上线下
   group: Boolean!
-  backGroundImgPath: String
-  qrCode: String
-  poster: String
+  backGroundImgS3Key: String
+  qrCodeImgS3Key: String
+  posterImgS3Key: String
   content: String
   location: String
   sponsor: [String]
+  tags: [String]
   eventStatus: EventStatus!
-  active: Int!
+  active: Boolean!
+  createdAt: AWSDateTime!
+  sortKey: SortKey!
   topicID: ID!
   topic: Topic! @connection(fields: ["topicID"])
   eventParticipants: [EventParticipant]
     @connection(keyName: "byEvent", fields: ["id"])
-  createdAt: AWSDateTime!
-  ByCreatedAt: String!
+  likes: [Like] @connection(keyName: "byEvent", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
+
 enum EventStatus {
   ComingSoon
   InProgress
@@ -242,10 +320,11 @@ type EventParticipant
     ]
   )
   @key(
-    name: "byEventID"
-    fields: ["eventID", "active", "createdAt"]
-    queryField: "byEventID"
+    name: "EventParticipantSortByEventID"
+    fields: ["eventID", "createdAt"]
+    queryField: "EventParticipantSortByEventID"
   )
+  @key(name: "byUser", fields: ["userID"])
   @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
   id: ID!
   name: String!
@@ -255,12 +334,15 @@ type EventParticipant
   weChat: String
   message: String
   numberOfPeople: Int!
+  active: Boolean!
+  createdAt: AWSDateTime!
   eventParticipantStatus: EventParticipantStatus!
-  active: Int!
   eventID: ID!
   event: Event! @connection(fields: ["eventID"])
-  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
+
 enum EventParticipantStatus {
   ArriveOnTime
   CanNotArrive
@@ -271,54 +353,58 @@ type Department
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   name: String!
   introduction: String
   email: String
   leader: String
-  like: [String]!
-  unlike: [String]!
   uwcssaJobs: [UwcssaJob] @connection(keyName: "byDepartment", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type UwcssaJob
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
   )
   @key(
-    name: "byDepartmentID"
-    fields: ["departmentID", "active", "createdAt"]
-    queryField: "byDepartmentID"
+    name: "UwcssaJobSortByDepartmentID"
+    fields: ["departmentID", "createdAt"]
+    queryField: "UwcssaJobSortByDepartmentID"
   )
-  @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
+  @key(name: "byDepartment", fields: ["departmentID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   introduction: String!
   title: String!
   requirements: [String]!
   bonus: [String]!
-  imagePath: String
-  departmentID: ID!
-  department: Department @connection(fields: ["departmentID"])
+  imgS3Key: String
   benefits: [String]!
   schedule: [String]!
   like: [String]!
   unlike: [String]!
-  active: Int!
+  active: Boolean!
   createdAt: AWSDateTime!
+  departmentID: ID!
+  department: Department @connection(fields: ["departmentID"])
   uwcssaJobResumes: [UwcssaJobResume]
     @connection(keyName: "byUwcssaJob", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type UwcssaJobResume
@@ -332,21 +418,24 @@ type UwcssaJobResume
     ]
   )
   @key(
-    name: "byUwcssaJobID"
+    name: "uwcssaJobResumeSortByUwcssaJobID"
     fields: ["uwcssaJobID", "createdAt"]
-    queryField: "byUwcssaJobID"
+    queryField: "uwcssaJobResumeSortByUwcssaJobID"
   )
-  @key(name: "byUwcssaJob", fields: ["uwcssaJobID", "createdAt"]) {
+  @key(name: "byUwcssaJob", fields: ["uwcssaJobID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   name: String!
   email: String!
-  resumeFilePath: String
+  resumeFileS3Key: String
   phone: String!
   message: String
+  uwcssaJobResumeStatus: UwcssaJobResumeStatus!
   createdAt: AWSDateTime!
   uwcssaJobID: ID!
   uwcssaJob: UwcssaJob! @connection(fields: ["uwcssaJobID"])
-  uwcssaJobResumeStatus: UwcssaJobResumeStatus!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 enum UwcssaJobResumeStatus {
@@ -359,41 +448,43 @@ type ForumTopic
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   name: String!
-  like: [String]!
-  unlike: [String]!
   forumSubTopics: [ForumSubTopic]!
     @connection(keyName: "byForumTopic", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type ForumSubTopic
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(name: "byForumTopic", fields: ["forumTopicID", "createdAt"]) {
+  @key(name: "byForumTopic", fields: ["forumTopicID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   name: String!
-  like: [String]!
-  unlike: [String]!
-  active: Int!
+  createdAt: AWSDateTime!
   forumTopicID: ID!
   forumTopic: ForumTopic! @connection(fields: ["forumTopicID"])
   forumPosts: [ForumPost]!
     @connection(keyName: "byForumSubTopic", fields: ["id"])
-  createdAt: AWSDateTime!
+
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type ForumPost
@@ -407,23 +498,28 @@ type ForumPost
     ]
   )
   @key(
-    name: "byForumSubTopicID"
-    fields: ["forumSubTopicID", "active", "createdAt"]
-    queryField: "byForumSubTopicID"
+    name: "ForumPostByForumSubTopicID"
+    fields: ["forumSubTopicID", "createdAt"]
+    queryField: "ForumPostByForumSubTopicID"
   )
-  @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"]) {
+  @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   title: String!
   content: String!
-  imagePath: String
-  like: [String]!
-  unlike: [String]!
+  imgS3Keys: [String]
+  tags: [String]
+  # like: [String]!
+  # unlike: [String]!
+  likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
+  active: Boolean!
   createdAt: AWSDateTime!
-  active: Int!
   forumSubTopicID: ID!
   forumSubTopic: ForumSubTopic! @connection(fields: ["forumSubTopicID"])
   forumPostComments: [ForumPostComment]!
     @connection(keyName: "byForumPost", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type ForumPostComment
@@ -437,21 +533,25 @@ type ForumPostComment
     ]
   )
   @key(
-    name: "byForumPostID"
-    fields: ["forumPostID", "active", "createdAt"]
-    queryField: "byForumPostID"
+    name: "ForumPostCommentSortByForumPostID"
+    fields: ["forumPostID", "createdAt"]
+    queryField: "ForumPostCommentSortByForumPostID"
   )
-  @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
+  @key(name: "byForumPost", fields: ["forumPostID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   content: String!
-  like: [String]!
-  unlike: [String]!
+  # like: [String]!
+  # unlike: [String]!
+  likes: [Like] @connection(keyName: "byForumPostComment", fields: ["id"])
   createdAt: AWSDateTime!
-  active: Int!
+  active: Boolean!
   forumPostID: ID!
   forumPost: ForumPost! @connection(fields: ["forumPostID"])
   forumPostSubComments: [ForumPostSubComment]!
     @connection(keyName: "byForumPostComment", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type ForumPostSubComment
@@ -465,22 +565,24 @@ type ForumPostSubComment
     ]
   )
   @key(
-    name: "byForumPostCommentID"
+    name: "ForumPostSubCommentByForumPostCommentID"
     fields: ["forumPostCommentID", "createdAt"]
-    queryField: "byForumPostCommentID"
+    queryField: "ForumPostSubCommentByForumPostCommentID"
   )
-  @key(
-    name: "byForumPostComment"
-    fields: ["forumPostCommentID", "createdAt"]
-  ) {
+  @key(name: "byForumPostComment", fields: ["forumPostCommentID", "createdAt"])
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   content: String!
-  like: [String]!
-  unlike: [String]!
+  # like: [String]!
+  # unlike: [String]!
+  likes: [Like] @connection(keyName: "byForumPostSubComment", fields: ["id"])
+  active: Boolean!
   createdAt: AWSDateTime!
   forumPostCommentID: ID!
   forumPostComment: ForumPostComment!
     @connection(fields: ["forumPostCommentID"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type MarketUserInfo
@@ -513,13 +615,19 @@ type MarketItem
     ]
   )
   @key(
-    name: "marketItemByCreatedAt"
-    fields: ["ByCreatedAt", "active", "createdAt"]
-    queryField: "marketItemByCreatedAt"
-  ) {
+    name: "marketItemSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "marketItemSortBySortKey"
+  )
+  @key(
+    name: "marketItemSortByMarketItemCategory"
+    fields: ["marketItemCategory", "createdAt"]
+    queryField: "marketItemSortByMarketItemCategory"
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   name: String!
-  imagePath: [String]!
+  imgS3Keys: [String]!
   title: String!
   price: Int
   description: String
@@ -527,9 +635,11 @@ type MarketItem
   marketItemCondition: MarketItemCondition!
   marketItemCategory: MarketItemCategory!
   tags: [String]
-  active: Int!
+  sortKey: SortKey!
+  active: Boolean!
   createdAt: AWSDateTime!
-  ByCreatedAt: String!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 enum MarketItemCondition {
@@ -552,8 +662,8 @@ enum MarketItemCategory {
   BooksMoviesMusic
 
   BagsLuggage
-  WomensClothingShoes
-  MensClothingShoes
+  WomenClothingShoes
+  MenClothingShoes
   JewelryAccessories
 
   HealthBeauty
@@ -588,13 +698,19 @@ type MarketVehicle
     ]
   )
   @key(
-    name: "marketVehicleByCreatedAt"
-    fields: ["ByCreatedAt", "active", "createdAt"]
-    queryField: "marketVehicleByCreatedAt"
-  ) {
+    name: "marketVehicleSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "marketVehicleSortBySortKey"
+  )
+  @key(
+    name: "marketVehicleSortByVehicleType"
+    fields: ["vehicleType", "createdAt"]
+    queryField: "marketVehicleSortByVehicleType"
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   vehicleType: VehicleType!
-  imagePath: [String]!
+  imgS3Keys: [String]!
   location: String
   year: Int!
   make: String!
@@ -604,10 +720,12 @@ type MarketVehicle
   fuelType: String
   price: Int
   description: String
-  active: Int!
+  active: Boolean!
   createdAt: AWSDateTime!
-  ByCreatedAt: String!
-  #tag
+  sortKey: SortKey!
+  tags: [String]
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 enum VehicleType {
@@ -619,7 +737,7 @@ enum VehicleType {
   Other
 }
 
-type MarketHome
+type MarketRental
   @model
   @auth(
     rules: [
@@ -630,13 +748,19 @@ type MarketHome
     ]
   )
   @key(
-    name: "marketHomeByCreatedAt"
-    fields: ["ByCreatedAt", "active", "createdAt"]
-    queryField: "marketHomeByCreatedAt"
-  ) {
+    name: "marketRentalSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "marketRentalSortBySortKey"
+  )
+  @key(
+    name: "marketRentalSortByMarketRentalSaleRent"
+    fields: ["marketRentalSaleRent", "createdAt"]
+    queryField: "marketRentalSortByMarketRentalSaleRent"
+  )
+  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  imagePath: [String]!
-  marketHomeSaleRent: MarketHomeSaleRent!
+  imgS3Keys: [String]!
+  marketRentalSaleRent: MarketRentalSaleRent!
   propertyType: PropertyType!
   bedroomCounts: Int
   bathroomsCounts: Int
@@ -650,12 +774,15 @@ type MarketHome
   heatingType: HeatingType
   catFriendly: Boolean
   dogFriendly: Boolean
-  active: Int!
+  tags: [String]
+  active: Boolean!
+  sortKey: SortKey!
   createdAt: AWSDateTime!
-  ByCreatedAt: String!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
-enum MarketHomeSaleRent {
+enum MarketRentalSaleRent {
   Rent
   ForSale
   Other
@@ -688,5 +815,33 @@ enum HeatingType {
   ElectricHeating
   GasHeating
   RadiatorHeating
-  # Other
+  Other
+}
+
+type Like
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(name: "byArticle", fields: ["itemID"])
+  @key(name: "byArticleComment", fields: ["itemID"])
+  @key(name: "byArticleSubComment", fields: ["itemID"])
+  @key(name: "byEvent", fields: ["itemID"])
+  @key(name: "byForumPost", fields: ["itemID"])
+  @key(name: "byForumPostComment", fields: ["itemID"])
+  @key(name: "byForumPostSubComment", fields: ["itemID"]) {
+  id: ID!
+  itemID: ID!
+  article: Article! @connection(fields: ["itemID"])
+  articleComment: ArticleComment! @connection(fields: ["itemID"])
+  articleSubComment: ArticleSubComment! @connection(fields: ["itemID"])
+  event: Event! @connection(fields: ["itemID"])
+  forumPost: ForumPost! @connection(fields: ["itemID"])
+  forumPostComment: ForumPostComment! @connection(fields: ["itemID"])
+  forumPostSubComment: ForumPostSubComment! @connection(fields: ["itemID"])
 }
