@@ -19,17 +19,12 @@ const useStyles = makeStyles((theme) => ({
 const ForumTopicMain = ({ forumTopic }) => {
   const classes = useStyles();
   // console.log(forumTopic);
-  const { name, forumSubTopics } = forumTopic;
+  const { forumSubTopics } = forumTopic;
   //   const { forumSubTopicData } = forumSubTopics;
   //   console.log(forumSubTopics.items);
   return (
     <div className={classes.root}>
       <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
-        <Box
-          sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}
-        >
-          <Typography variant="h3">{name}</Typography>
-        </Box>
         {/* forum type link */}
         <Box sx={{ marginTop: "4rem" }}>
           <Grid container spacing={0} className={classes.forumSubTopic}>

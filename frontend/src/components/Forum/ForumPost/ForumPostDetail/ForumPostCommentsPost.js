@@ -3,9 +3,7 @@ import {
   Button,
   Box,
   Grid,
-  Card,
   CardActions,
-  CardContent,
   CardHeader,
   Typography,
   TextField,
@@ -15,8 +13,8 @@ import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
-import SignInRequest from "../ForumPostDetail/SignInRequest";
-import { postForumPostComment } from "../../../redux/actions/forumAction";
+import SignInRequest from "../SignInRequest";
+import { postForumPostComment } from "../../../../redux/actions/forumAction";
 
 const useStyles = makeStyles({
   root: {},

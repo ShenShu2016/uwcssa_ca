@@ -18,10 +18,13 @@ import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/Forum";
-import ForumPostUpload from "./components/Forum/CurdTesting/ForumPostUpload";
-import ForumPostCommentDetail from "./components/Forum/CurdTesting/ForumPostCommentDetail";
-import ForumPost from "./components/Forum/CurdTesting/ForumPost";
-import ForumPostList from "./components/Forum/CurdTesting/ForumPostList";
+import ForumTopic from "./components/Forum//ForumTopic/ForumTopic";
+import ForumTopicCURD from "./components/Forum/ForumTopic/ForumTopicCURD";
+import ForumSubTopic from "./components/Forum/ForumSubTopic/ForumSubTopic";
+import ForumPostUpload from "./components/Forum/ForumPost/ForumPostUpload";
+import ForumPostCommentDetail from "./components/Forum/ForumPost/ForumPostSubComment/ForumPostCommentDetail";
+import ForumPost from "./components/Forum/ForumPost/ForumPost";
+import ForumPostList from "./components/Forum/ForumPost/ForumPostList";
 import FoundingTeam from "./containers/FoundingTeam";
 import Group from "./components/Event/group";
 import Header from "./containers/Header";
@@ -48,9 +51,6 @@ import awsconfig from "./aws-exports";
 import { load_user } from "./redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
-import ForumTopic from "./components/Forum/ForumTopic";
-import ForumSubTopic from "./components/Forum/ForumSubTopic";
-import ForumTopicCURD from "./components/Forum/CurdTesting/ForumTopicCURD";
 
 const theme = createTheme({
   typography: {
