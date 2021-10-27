@@ -9,17 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { createTopic, createType } from "../../../graphql/mutations";
-import {
-  postArticle,
-  setTopics,
-  setTypes,
-} from "../../../redux/actions/articleActions";
+import { postArticle, setTopics } from "../../../redux/actions/articleActions";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import PublishIcon from "@mui/icons-material/Publish";
 import S3Image from "../../../components/S3/S3Image";
+import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 import { postImage } from "../../../redux/actions/generalAction";
@@ -79,7 +75,7 @@ export default function PostArticle() {
 
   useEffect(() => {
     dispatch(setTopics());
-    dispatch(setTypes());
+    // dispatch(setTypes());
   }, [dispatch]);
 
   const { topics, types } = useSelector((state) => state.article);
@@ -132,16 +128,16 @@ export default function PostArticle() {
 
   const [typeData, setTypeData] = useState({ name: "" });
 
-  const uploadType = async () => {
-    const { name } = typeData;
-    const createTypeInput = {
-      name,
-      like: [],
-      unlike: [],
-    };
-    await API.graphql(graphqlOperation(createType, { input: createTypeInput }));
-    dispatch(setTypes());
-  };
+  // const uploadType = async () => {
+  //   const { name } = typeData;
+  //   const createTypeInput = {
+  //     name,
+  //     like: [],
+  //     unlike: [],
+  //   };
+  //   await API.graphql(graphqlOperation(createType, { input: createTypeInput }));
+  //   dispatch(setTypes());
+  // };
 
   return (
     <div className={classes.root}>
@@ -235,14 +231,14 @@ export default function PostArticle() {
           value={typeData.name}
           onChange={(e) => setTypeData({ ...typeData, name: e.target.value })}
         />
-        <Button
+        {/* <Button
           variant="contained"
           endIcon={<PublishIcon />}
           onClick={uploadType}
           color="primary"
         >
           上传新的Type
-        </Button>
+        </Button> */}
       </div>
       <Box>
         <label htmlFor="contained-button-file">

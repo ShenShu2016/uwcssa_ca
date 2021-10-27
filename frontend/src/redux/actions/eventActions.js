@@ -1,10 +1,10 @@
+import { createEvent, createEventParticipant } from "../../graphql/mutations";
 import {
-  eventByCreatedAt,
-  byEventID,
+  eventParticipantSortByEventID,
+  eventSortBySortKey,
   getEvent,
   listTopics,
 } from "../../graphql/queries";
-import { createEvent, createEventParticipant } from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/event-action-types";
@@ -15,13 +15,13 @@ import { v4 as uuid } from "uuid";
 export const setEvents = () => async (dispatch) => {
   try {
     const eventData = await API.graphql({
-      query: eventByCreatedAt,
+      query: eventSortBySortKey,
       variables: { ByCreatedAt: "Event", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SET_EVENTS,
-      payload: eventData.data.eventByCreatedAt.items,
+      payload: eventData.data.eventSortBySortKey.items,
     });
   } catch (error) {
     console.log("error on fetching Event setEvents", error);
@@ -48,7 +48,7 @@ export const selectedEventParticipants = (eventID) => async (dispatch) => {
   console.log("selectedEventParticipants,eventID", eventID);
   try {
     const eventParticipantData = await API.graphql({
-      query: byEventID,
+      query: eventParticipantSortByEventID,
       variables: {
         EventID: eventID,
         sortDirection: "DESC",
@@ -60,7 +60,7 @@ export const selectedEventParticipants = (eventID) => async (dispatch) => {
     console.log("eventParticipantData", eventParticipantData);
     dispatch({
       type: ActionTypes.SELECTED_EVENT_PARTICIPANTS,
-      payload: eventParticipantData.data.byEventID,
+      payload: eventParticipantData.data.eventParticipantSortByEventID,
     });
   } catch (error) {
     console.log("error on selectedEventParticipants", error);

@@ -66,7 +66,7 @@ export default function CustomAvatar({ username, variant, sx, link }) {
   useEffect(() => {
     const getAvatarImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(userData.avatarImgPath, {
+        const imageAccessURL = await Storage.get(userData.avatarImgS3Key, {
           level: "public",
           expires: 120,
           download: false,
@@ -77,7 +77,7 @@ export default function CustomAvatar({ username, variant, sx, link }) {
         setAvatarURL(null);
       }
     };
-    if (userData.avatarImgPath) {
+    if (userData.avatarImgS3Key) {
       getAvatarImage();
     }
   }, [userData]);

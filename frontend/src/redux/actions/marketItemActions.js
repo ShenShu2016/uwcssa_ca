@@ -1,15 +1,15 @@
 import {
-  createMarketHome,
   createMarketItem,
+  createMarketRental,
   createMarketVehicle,
 } from "../../graphql/mutations";
 import {
-  getMarketHome,
   getMarketItem,
+  getMarketRental,
   getMarketVehicle,
-  marketHomeByCreatedAt,
-  marketItemByCreatedAt,
-  marketVehicleByCreatedAt,
+  marketItemSortBySortKey,
+  marketRentalSortBySortKey,
+  marketVehicleSortBySortKey,
 } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
@@ -21,13 +21,13 @@ import { v4 as uuid } from "uuid";
 export const setMarketItems = () => async (dispatch) => {
   try {
     const MarketItemsData = await API.graphql({
-      query: marketItemByCreatedAt,
+      query: marketItemSortBySortKey,
       variables: { ByCreatedAt: "MarketItem", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SET_MARKET_ITEMS,
-      payload: MarketItemsData.data.marketItemByCreatedAt.items,
+      payload: MarketItemsData.data.marketItemSortBySortKey.items,
     });
   } catch (error) {
     console.log("error on fetching MarketItem", error);
@@ -37,13 +37,13 @@ export const setMarketItems = () => async (dispatch) => {
 export const setMarketHome = () => async (dispatch) => {
   try {
     const MarketHomeData = await API.graphql({
-      query: marketHomeByCreatedAt,
+      query: marketRentalSortBySortKey,
       variables: { ByCreatedAt: "MarketHome", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SET_MARKET_HOME,
-      payload: MarketHomeData.data.marketHomeByCreatedAt.items,
+      payload: MarketHomeData.data.marketRentalSortBySortKey.items,
     });
   } catch (error) {
     console.log("error on fetching MarketHome", error);
@@ -53,13 +53,13 @@ export const setMarketHome = () => async (dispatch) => {
 export const setMarketVehicles = () => async (dispatch) => {
   try {
     const MarketVehicleData = await API.graphql({
-      query: marketVehicleByCreatedAt,
+      query: marketVehicleSortBySortKey,
       variables: { ByCreatedAt: "MarketVehicle", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SET_MARKET_VEHICLE,
-      payload: MarketVehicleData.data.marketVehicleByCreatedAt.items,
+      payload: MarketVehicleData.data.marketVehicleSortBySortKey.items,
     });
   } catch (error) {
     console.log("error on fetching MarketItem", error);
@@ -75,7 +75,7 @@ export const selectedMarketItem = (marketItemId, type) => async (dispatch) => {
     } else if (type === "vehicle") {
       return getMarketVehicle;
     } else if (type === "rental") {
-      return getMarketHome;
+      return getMarketRental;
     }
   };
 
@@ -85,7 +85,7 @@ export const selectedMarketItem = (marketItemId, type) => async (dispatch) => {
     } else if (type === "vehicle") {
       return response.data.getMarketVehicle;
     } else if (type === "rental") {
-      return response.data.getMarketHome;
+      return response.data.getMarketRental;
     }
   };
   // const getVariables=(type)=>{
@@ -178,7 +178,7 @@ export const postMarketHome = (createMarketHomeInput) => async (dispatch) => {
   console.log("createMarketHomeInput", createMarketHomeInput);
   try {
     const response = await API.graphql(
-      graphqlOperation(createMarketHome, { input: createMarketHomeInput })
+      graphqlOperation(createMarketRental, { input: createMarketHomeInput })
     );
     dispatch({
       type: ActionTypes.POST_MARKET_HOME_SUCCESS,

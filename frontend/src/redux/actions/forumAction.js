@@ -2,21 +2,16 @@ import {
   createForumPost,
   createForumPostComment,
   createForumPostSubComment,
-  // createForumSubTopic,
-  // createForumTopic,
-  // deleteForumPost,
 } from "../../graphql/mutations";
 import {
+  forumPostCommentSortByForumPostID,
   getForumPost,
   getForumPostComment,
-  // listForumPostComments,
-  // listForumPostSubComments,
+  getForumSubTopic,
+  getForumTopic,
   listForumPosts,
   listForumSubTopics,
   listForumTopics,
-  byForumSubTopicID,
-  getForumTopic,
-  getForumSubTopic,
 } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
@@ -83,7 +78,6 @@ export const removeSelectedForumSubTopic = () => async (dispatch) => {
     type: ActionTypes.REMOVE_SELECTED_FORUMSUBTOPIC,
   });
 };
-
 
 export const setForumSubTopics = () => async (dispatch) => {
   try {
@@ -164,28 +158,29 @@ export const postForumPostImg = (imgData) => async (dispatch) => {
   }
 };
 
-export const selectedForumSubTopicPosts = (forumSubTopicID) => async (dispatch) => {
-  console.log("selectedForumSubTopicPosts,forumSubTopicID", forumSubTopicID);
-  try {
-    const forumSubTopicPostData = await API.graphql({
-      query: byForumSubTopicID,
-      variables: {
-        forumSubTopicID: forumSubTopicID,
-        sortDirection: "DESC",
-        filter: { active: { eq: 1 } },
-        limit: 10,
-      },
-      authMode: "AWS_IAM",
-    });
-    console.log("forumSubTopicPostData", forumSubTopicPostData);
-    dispatch({
-      type: ActionTypes.SELECTED_FORUMSUBTOPIC_POSTS,
-      payload: forumSubTopicPostData.data.byforumSubTopicID,
-    });
-  } catch (error) {
-    console.log("error on selectedforumSubTopicPosts", error);
-  }
-};
+export const selectedForumSubTopicPosts =
+  (forumSubTopicID) => async (dispatch) => {
+    console.log("selectedForumSubTopicPosts,forumSubTopicID", forumSubTopicID);
+    try {
+      const forumSubTopicPostData = await API.graphql({
+        query: forumPostCommentSortByForumPostID,
+        variables: {
+          forumSubTopicID: forumSubTopicID,
+          sortDirection: "DESC",
+          filter: { active: { eq: 1 } },
+          limit: 10,
+        },
+        authMode: "AWS_IAM",
+      });
+      console.log("forumSubTopicPostData", forumSubTopicPostData);
+      dispatch({
+        type: ActionTypes.SELECTED_FORUMSUBTOPIC_POSTS,
+        payload: forumSubTopicPostData.data.byforumSubTopicID,
+      });
+    } catch (error) {
+      console.log("error on selectedforumSubTopicPosts", error);
+    }
+  };
 
 export const selectedForumPost = (forumPostID) => async (dispatch) => {
   try {
@@ -246,11 +241,7 @@ export const postForumPostComment =
         type: ActionTypes.POST_FORUMPOST_COMMENT_SUCCESS,
         payload: response,
       });
-      dispatch(
-        selectedForumPost(
-          createForumPostCommentInput.forumPostID
-        )
-      );
+      dispatch(selectedForumPost(createForumPostCommentInput.forumPostID));
     } catch (error) {
       console.log("error on posting ForumPostComment", error);
       dispatch({
