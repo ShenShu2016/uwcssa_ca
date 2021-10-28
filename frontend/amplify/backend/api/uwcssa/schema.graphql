@@ -798,13 +798,13 @@ type Like
   id: ID!
   like: Boolean!
   itemID: ID!
-  article: Article! @connection(fields: ["itemID"])
-  articleComment: ArticleComment! @connection(fields: ["itemID"])
-  articleSubComment: ArticleSubComment! @connection(fields: ["itemID"])
-  event: Event! @connection(fields: ["itemID"])
-  forumPost: ForumPost! @connection(fields: ["itemID"])
-  forumPostComment: ForumPostComment! @connection(fields: ["itemID"])
-  forumPostSubComment: ForumPostSubComment! @connection(fields: ["itemID"])
+  article: Article @connection(fields: ["itemID"])
+  articleComment: ArticleComment @connection(fields: ["itemID"])
+  articleSubComment: ArticleSubComment @connection(fields: ["itemID"])
+  event: Event @connection(fields: ["itemID"])
+  forumPost: ForumPost @connection(fields: ["itemID"])
+  forumPostComment: ForumPostComment @connection(fields: ["itemID"])
+  forumPostSubComment: ForumPostSubComment @connection(fields: ["itemID"])
   userBeingLiked: User @connection(fields: ["itemID"])
   userID: ID!
   user: User! @connection(fields: ["userID"])

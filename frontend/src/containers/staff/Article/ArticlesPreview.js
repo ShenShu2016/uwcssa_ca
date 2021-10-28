@@ -66,7 +66,7 @@ export default function ArticlesPreview() {
   useEffect(() => {
     dispatch(setArticles());
   }, [dispatch]);
-  const articles = useSelector((state) => state.allArticles.articles);
+  const { articles } = useSelector((state) => state.article);
 
   const rows = articles.map((article) => {
     const {
@@ -74,9 +74,6 @@ export default function ArticlesPreview() {
       content,
       title,
       topic,
-      type,
-      like,
-      unlike,
       createdAt,
       // updateAt,
       owner,
@@ -86,11 +83,7 @@ export default function ArticlesPreview() {
       content: content.slice(0, 20),
       title: title,
       topic: topic.name,
-      type: type.name,
-      like: like.length,
-      unlike: unlike.length,
       createdAt: createdAt,
-      // updateAt,
       owner,
     };
   });

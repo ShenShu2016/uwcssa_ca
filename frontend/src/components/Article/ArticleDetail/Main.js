@@ -1,23 +1,24 @@
 import {
   Box,
   Button,
-  CardActionArea,
   CardActions,
   CardHeader,
-  CardMedia,
   Chip,
+  CircularProgress,
   Divider,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
-import Storage from "@aws-amplify/storage";
+import S3Image from "../../S3/S3Image";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
+import { setLike } from "../../../redux/actions/generalAction";
+import { useDispatch } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(() => ({
   root: {
     paddingTop: "1rem",
     width: "100%",
@@ -31,45 +32,52 @@ const useStyles = makeStyles({
   buttonGroup: {
     marginBlock: "2rem",
   },
-});
+}));
 
 export default function Main({ article }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const [imageURL, setImageURL] = useState(null);
-  const { content, imgS3Keys, tags, topic, createdAt, user, userID } = article;
+  const [likesCount, setLikesCount] = useState({ like: 0, disLike: 0 });
+
+  const { id, content, imgS3Keys, tags, topic, createdAt, user, userID } =
+    article;
 
   useEffect(() => {
-    const getImage = async () => {
-      try {
-        const imageAccessURL = await Storage.get(imgS3Keys[0], {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setImageURL(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImageURL(null);
-      }
-    };
-    if (imgS3Keys) {
-      getImage();
+    if (Object.keys(article).length !== 0) {
+      setLikesCount({
+        like: article.likes.items.filter((x) => x.like === true).length,
+        disLike: article.likes.items.filter((x) => x.like === false).length,
+      });
     }
-  }, [imgS3Keys]);
+  }, [article]);
 
+  const handleLikeBTNClick = (event) => {
+    const itemID = id;
+    const isLike = true;
+    const response = dispatch(setLike(itemID, userID, isLike));
+    if (response) {
+      setLikesCount({ ...likesCount, like: likesCount.like + 1 });
+    }
+  };
+
+  const handleDisLikeBTNClick = (event) => {
+    const itemID = id;
+    const isLike = false;
+    const response = dispatch(setLike(itemID, userID, isLike));
+    if (response) {
+      setLikesCount({ ...likesCount, disLike: likesCount.disLike + 1 });
+    }
+  };
   return (
     <div className={classes.root}>
       {Object.keys(article).length === 0 ? (
-        <div>...Loading</div>
+        <div>
+          <CircularProgress />
+        </div>
       ) : (
         <Box className={classes.main}>
-          <CardActionArea
-            onClick={() => {
-              window.open(imageURL);
-            }}
-          >
-            <CardMedia component="img" image={imageURL} />
-          </CardActionArea>
+          <S3Image S3Key={imgS3Keys[0]} />
+
           <CardActions sx={{ px: 0 }}>
             <Button size="small" color="primary">
               Topic: {topic.name}
@@ -100,11 +108,21 @@ export default function Main({ article }) {
           </Box>
           <Divider />
           <Box className={classes.buttonGroup}>
-            <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-              {/* {like.length} */}
+            <Button
+              size="small"
+              color="primary"
+              startIcon={<ThumbUpIcon />}
+              onClick={handleLikeBTNClick}
+            >
+              {likesCount.like}
             </Button>
-            <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-              {/* {unlike.length} */}
+            <Button
+              size="small"
+              color="primary"
+              startIcon={<ThumbDownIcon />}
+              onClick={handleDisLikeBTNClick}
+            >
+              {likesCount.disLike}
             </Button>
           </Box>
         </Box>

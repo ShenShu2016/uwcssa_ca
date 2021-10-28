@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginTop: "4rem",
     maxWidth: "1536px",
-    paddingInline: "2rem",
-    [theme.breakpoints.down("lg")]: {
+    paddingInline: "3rem",
+    [theme.breakpoints.down("sm")]: {
       paddingInline: "0.5rem",
     },
   },

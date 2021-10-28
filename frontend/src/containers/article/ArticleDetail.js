@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     paddingBlock: "3rem",
     maxWidth: "1536px",
-    paddingInline: "0.5rem",
+    paddingInline: "3rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingInline: "0.5rem",
+    },
   },
   title: {
     textAlign: "center",

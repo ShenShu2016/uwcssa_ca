@@ -1,7 +1,10 @@
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/general-action-types";
 import Storage from "@aws-amplify/storage";
+import { createLike } from "../../graphql/mutations";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
+
 const userCountsQuery = `query ListUsers {
     listUsers {
         items {
@@ -33,6 +36,30 @@ export const setUserCounts = () => async (dispatch) => {
     });
   } catch (error) {
     console.log("error on fetching Users", error);
+  }
+};
+
+export const setLike = (itemID, userID, isLike) => async (dispatch) => {
+  try {
+    const response = await API.graphql(
+      graphqlOperation(createLike, {
+        input: { like: isLike, itemID: itemID, userID: userID },
+      })
+    );
+    if (isLike) {
+      dispatch({
+        type: ActionTypes.SET_LIKE,
+        payload: response,
+      });
+    } else {
+      dispatch({
+        type: ActionTypes.SET_DISLIKE,
+        payload: response,
+      });
+    }
+    return true;
+  } catch (error) {
+    console.log(error);
   }
 };
 
