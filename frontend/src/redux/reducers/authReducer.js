@@ -32,7 +32,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         isAuthenticated: false,
         user: { username: "", attributes: { email: "" } },
         cognitoGroup: ["unAuthenticated"],
-        userProfile: {},
+        userProfile: { username: "" },
       };
 
     case ActionTypes.SIGN_UP_SUCCESS:
