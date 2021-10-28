@@ -29,8 +29,8 @@ export default function ArticleCommentsPost({ article }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const userInfo = useSelector((state) => state.userAuth);
-
+  const { userAuth } = useSelector((state) => state);
+  const { username } = useSelector((state) => state.userAuth.user);
   const [formData, setFormData] = useState({
     comment: "",
   });
@@ -44,10 +44,9 @@ export default function ArticleCommentsPost({ article }) {
 
   const createArticleCommentInput = {
     content: comment,
-    like: [],
-    unlike: [],
-    active: 1,
+    active: true,
     articleID: article.id,
+    userID: username,
   };
 
   const postComment = async (e) => {
@@ -69,7 +68,7 @@ export default function ArticleCommentsPost({ article }) {
 
   return (
     <div>
-      {userInfo.isAuthenticated ? "" : <SignInRequest />}
+      {userAuth.isAuthenticated ? "" : <SignInRequest />}
 
       <div>
         <Typography className={classes.subTitle}>发布新评论：</Typography>
@@ -80,8 +79,8 @@ export default function ArticleCommentsPost({ article }) {
                 sx={{ px: 0 }}
                 avatar={
                   <CustomAvatar
-                    username={userInfo.user.username}
-                    link={userInfo.isAuthenticated}
+                    username={userAuth.user.username}
+                    link={userAuth.isAuthenticated}
                   />
                 }
               />
@@ -93,7 +92,7 @@ export default function ArticleCommentsPost({ article }) {
                   variant="standard"
                   fullWidth
                   multiline
-                  disabled={loading || !userInfo.isAuthenticated}
+                  disabled={loading || !userAuth.isAuthenticated}
                   id="comment"
                   name="comment"
                   value={comment}
@@ -105,7 +104,7 @@ export default function ArticleCommentsPost({ article }) {
                   color="primary"
                   size="large"
                   variant="text"
-                  disabled={loading || !userInfo.isAuthenticated}
+                  disabled={loading || !userAuth.isAuthenticated}
                   onClick={() => {
                     setFormData({
                       comment: "",
@@ -119,7 +118,7 @@ export default function ArticleCommentsPost({ article }) {
                   size="large"
                   variant="contained"
                   onClick={postComment}
-                  disabled={loading || !userInfo.isAuthenticated}
+                  disabled={loading || !userAuth.isAuthenticated}
                 >
                   评论
                   {loading && (

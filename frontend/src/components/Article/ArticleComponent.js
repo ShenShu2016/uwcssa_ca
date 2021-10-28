@@ -35,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
 function ArticleComponent({ article }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
-  const { id, content, title, imagePath, createdAt, owner } = article;
+  const { id, content, title, imgS3Keys, createdAt, userID } = article;
 
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath, {
+        const imageAccessURL = await Storage.get(imgS3Keys, {
           level: "public",
           expires: 120,
           download: false,
@@ -52,10 +52,10 @@ function ArticleComponent({ article }) {
         setImageURL(null);
       }
     };
-    if (imagePath) {
+    if (imgS3Keys) {
       getImage();
     }
-  }, [imagePath]);
+  }, [imgS3Keys]);
 
   return (
     <div>
@@ -83,7 +83,7 @@ function ArticleComponent({ article }) {
               <Grid item xs={"auto"} sx={{ paddingBottom: "0.5rem" }}>
                 <CardActionArea
                   component={Link}
-                  to={`/account/profile/${owner}`}
+                  to={`/account/profile/${userID}`}
                 >
                   <CardHeader
                     sx={{ p: 0 }}
@@ -92,10 +92,10 @@ function ArticleComponent({ article }) {
                         link={false}
                         variant={"square"}
                         sx={{ width: 16, height: 16 }}
-                        username={owner}
+                        username={userID}
                       />
                     }
-                    title={owner}
+                    title={userID}
                   />
                 </CardActionArea>
               </Grid>

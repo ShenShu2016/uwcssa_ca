@@ -14,7 +14,11 @@ export const setArticles = () => async (dispatch) => {
   try {
     const articleData = await API.graphql({
       query: articleSortBySortKey,
-      variables: { ByCreatedAt: "Article", sortDirection: "DESC" },
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
       authMode: "AWS_IAM",
     });
     dispatch({
@@ -28,10 +32,10 @@ export const setArticles = () => async (dispatch) => {
 
 export const selectedArticle = (articleID) => async (dispatch) => {
   try {
-    console.log("seletced article ", articleID);
+    console.log("selected article ", articleID);
     const response = await API.graphql({
       query: getArticle,
-      variables: { id: articleID },
+      variables: { id: articleID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
     console.log("response", response);
@@ -52,7 +56,7 @@ export const selectedArticleComments = (articleID) => async (dispatch) => {
       variables: {
         articleID: articleID,
         sortDirection: "DESC",
-        filter: { active: { eq: 1 } },
+        filter: { active: { eq: true } },
         // limit: 10,
       },
       authMode: "AWS_IAM",

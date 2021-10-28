@@ -846,6 +846,7 @@ type Like
   @key(name: "byForumPostComment", fields: ["itemID"])
   @key(name: "byForumPostSubComment", fields: ["itemID"]) {
   id: ID!
+  like: Boolean!
   itemID: ID!
   article: Article! @connection(fields: ["itemID"])
   articleComment: ArticleComment! @connection(fields: ["itemID"])

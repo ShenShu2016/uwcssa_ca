@@ -49,7 +49,7 @@ export default function ArticleComments({ comments }) {
       ) : (
         <div>
           {comments.map((comment) => {
-            const { id, content, createdAt, like, unlike, owner } = comment;
+            const { id, content, createdAt, userID } = comment;
 
             return (
               <Box key={id} mb={2} className={classes.main}>
@@ -57,9 +57,9 @@ export default function ArticleComments({ comments }) {
                   <Grid item xs={"auto"}>
                     <CardHeader
                       component={Link}
-                      to={`/account/profile/${owner}`}
+                      to={`/account/profile/${userID}`}
                       sx={{ p: 0, textDecoration: "none" }}
-                      avatar={<CustomAvatar link={false} username={owner} />}
+                      avatar={<CustomAvatar link={false} username={userID} />}
                     />
                   </Grid>
                   <Grid item xs>
@@ -69,7 +69,7 @@ export default function ArticleComments({ comments }) {
                         variant="subtitle2"
                         sx={{ fontSize: "13px", color: "#030303" }}
                       >
-                        {owner}
+                        {userID}
                       </Typography>
                       <Typography variant="caption" sx={{ color: "#606060" }}>
                         {/* {createdAt.slice(0, 10)} {createdAt.slice(11, 19)} */}
@@ -97,14 +97,14 @@ export default function ArticleComments({ comments }) {
                         sx={{ p: 0 }}
                         style={{ width: "22px" }}
                       >
-                        {like.length}
+                        {/* {like.length} */}
                       </Button>
                       <Button
                         size="small"
                         color="primary"
                         startIcon={<ThumbDownAltOutlinedIcon />}
                       >
-                        {unlike.length}
+                        {/* {unlike.length} */}
                       </Button>
                       <Button size="small" color="primary">
                         回复

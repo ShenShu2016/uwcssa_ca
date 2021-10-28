@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Chip,
   FormControl,
   InputLabel,
   MenuItem,
@@ -64,45 +65,45 @@ const Input = styled("input")({
 export default function PostArticle() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgKey, setImgKey] = useState("");
+  const [imgS3Keys, setImgS3Keys] = useState("");
   const history = useHistory();
+  const { username } = useSelector((state) => state.userAuth.user);
+  const [tagInput, setTagInput] = useState("");
   const [articleData, setArticleData] = useState({
     title: "",
     content: "",
     topicID: "",
-    typeID: "",
+    tags: [],
   });
-
+  console.log(articleData);
   useEffect(() => {
     dispatch(setTopics());
-    // dispatch(setTypes());
   }, [dispatch]);
 
-  const { topics, types } = useSelector((state) => state.article);
+  const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
     const imageData = e.target.files[0];
     const imageLocation = "article";
     const response = await dispatch(postImage(imageData, imageLocation));
     if (response) {
-      setImgKey(response.key);
+      setImgS3Keys(response.key);
     }
   };
 
   const uploadArticle = async () => {
     //Upload the article
-    const { title, content, topicID, typeID } = articleData;
+    const { title, content, topicID, tags } = articleData;
 
     const createArticleInput = {
       title,
       content,
-      imagePath: imgKey,
-      like: [],
-      unlike: [],
+      imgS3Keys: [imgS3Keys],
       topicID: topicID,
-      typeID: typeID,
-      active: 1,
-      ByCreatedAt: "Article",
+      active: true,
+      sortKey: "SortKey",
+      userID: username,
+      tags: tags,
     };
     const response = await dispatch(postArticle(createArticleInput));
 
@@ -113,32 +114,41 @@ export default function PostArticle() {
   const [topicData, setTopicData] = useState({ name: "" });
 
   const uploadTopic = async () => {
-    //Upload the topic
-    const { name } = topicData;
     const createTopicInput = {
-      name,
-      like: [],
-      unlike: [],
+      name: topicData.name,
+      userID: username,
     };
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
     dispatch(setTopics());
+    setTopicData({ name: "" });
   };
 
-  const [typeData, setTypeData] = useState({ name: "" });
+  const deleteHandler = (i) => () => {
+    const { tags: newTags } = { ...articleData };
+    setArticleData({
+      ...articleData,
+      tags: newTags.filter((tag) => tag !== i),
+    });
+  };
 
-  // const uploadType = async () => {
-  //   const { name } = typeData;
-  //   const createTypeInput = {
-  //     name,
-  //     like: [],
-  //     unlike: [],
-  //   };
-  //   await API.graphql(graphqlOperation(createType, { input: createTypeInput }));
-  //   dispatch(setTypes());
-  // };
-
+  const inputKeyDown = (e) => {
+    const val = e.target.value;
+    console.log("tagSuccess", articleData.tags);
+    if (e.key === "Enter" && val) {
+      if (
+        articleData.tags.find((tag) => tag.toLowerCase() === val.toLowerCase())
+      ) {
+        return;
+      }
+      e.preventDefault();
+      const newTags = [...articleData.tags].concat([val]);
+      setArticleData({ ...articleData, tags: newTags });
+      setTagInput("");
+      console.log("tagSuccess", articleData.tags);
+    }
+  };
   return (
     <div className={classes.root}>
       <Typography variant="h4" sx={{ textAlign: "center", mb: 2 }}>
@@ -182,34 +192,6 @@ export default function PostArticle() {
           </FormControl>
         </Box>
       </Box>
-      <Box className={classes.type}>
-        <div className="newType">
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            fullWidth
-          >
-            <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={articleData.typeID}
-              onChange={(e) =>
-                setArticleData({ ...articleData, typeID: e.target.value })
-              }
-              label="Type"
-            >
-              {types.map((type) => {
-                return (
-                  <MenuItem value={type.id} key={type.id}>
-                    {type.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-      </Box>
       <div className="newTopic">
         <TextField
           label="Topic"
@@ -225,21 +207,20 @@ export default function PostArticle() {
           上传新的topic
         </Button>
       </div>
-      <div className="newType">
+      <Box className={classes.content}>
         <TextField
-          label="Type"
-          value={typeData.name}
-          onChange={(e) => setTypeData({ ...typeData, name: e.target.value })}
+          label="tags"
+          value={tagInput}
+          variant="outlined"
+          fullWidth
+          onKeyDown={inputKeyDown}
+          onChange={(e) => setTagInput(e.target.value)}
         />
-        {/* <Button
-          variant="contained"
-          endIcon={<PublishIcon />}
-          onClick={uploadType}
-          color="primary"
-        >
-          上传新的Type
-        </Button> */}
-      </div>
+      </Box>
+
+      {articleData.tags.map((data) => {
+        return <Chip key={data} label={data} onDelete={deleteHandler(data)} />;
+      })}
       <Box>
         <label htmlFor="contained-button-file">
           <Input
@@ -256,7 +237,7 @@ export default function PostArticle() {
           </Button>
         </label>
       </Box>
-      <S3Image S3Key={imgKey} style={{ width: "100%" }} />
+      <S3Image S3Key={imgS3Keys} style={{ width: "100%" }} />
       <Box className={classes.content}>
         <TextField
           label="Content"

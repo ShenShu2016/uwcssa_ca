@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   body: {
-    maxWidth: "1100px",
+    width: "1100px",
     [theme.breakpoints.down("lg")]: {
       maxWidth: "100%",
     },
