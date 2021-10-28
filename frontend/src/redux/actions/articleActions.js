@@ -32,13 +32,11 @@ export const setArticles = () => async (dispatch) => {
 
 export const selectedArticle = (articleID) => async (dispatch) => {
   try {
-    console.log("selected article ", articleID);
     const response = await API.graphql({
       query: getArticle,
       variables: { id: articleID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
-    console.log("response", response);
     dispatch({
       type: ActionTypes.SELECTED_ARTICLE,
       payload: response.data.getArticle,

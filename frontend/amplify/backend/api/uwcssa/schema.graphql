@@ -50,29 +50,25 @@ type User
     @connection(keyName: "byUser", fields: ["id"])
   marketUserInfo: [MarketUserInfo]
     @connection(keyName: "byUser", fields: ["id"])
-  likes: [Like] @connection(keyName: "byUser", fields: ["id"])
+  likes: [Like]
   beingLiked: [Like] @connection(keyName: "byUserBeingLiked", fields: ["id"])
-  topics: [Topic] @connection(keyName: "byUser", fields: ["id"])
-  articles: [Article] @connection(keyName: "byUser", fields: ["id"])
+  topics: [Topic]
+  articles: [Article]
   articleComments: [ArticleComment]
-    @connection(keyName: "byUser", fields: ["id"])
-  events: [Event] @connection(keyName: "byUser", fields: ["id"])
+  events: [Event]
   eventParticipants: [EventParticipant]
-    @connection(keyName: "byUser", fields: ["id"])
-  departments: [Department] @connection(keyName: "byUser", fields: ["id"])
-  uwcssaJobs: [UwcssaJob] @connection(keyName: "byUser", fields: ["id"])
+  departments: [Department]
+  uwcssaJobs: [UwcssaJob]
   uwcssaJobResumes: [UwcssaJobResume]
-    @connection(keyName: "byUser", fields: ["id"])
-  forumTopics: [ForumTopic] @connection(keyName: "byUser", fields: ["id"])
-  forumSubTopics: [ForumSubTopic] @connection(keyName: "byUser", fields: ["id"])
+  forumTopics: [ForumTopic]
+  forumSubTopics: [ForumSubTopic]
   forumPosts: [ForumPost] @connection(keyName: "byUser", fields: ["id"])
   forumPostComments: [ForumPostComment]
-    @connection(keyName: "byUser", fields: ["id"])
   forumPostSubComments: [ForumPostSubComment]
-    @connection(keyName: "byUser", fields: ["id"])
-  marketItems: [MarketItem] @connection(keyName: "byUser", fields: ["id"])
-  marketVehicles: [MarketVehicle] @connection(keyName: "byUser", fields: ["id"])
-  marketRentals: [MarketRental] @connection(keyName: "byUser", fields: ["id"])
+  marketItems: [MarketItem]
+  marketVehicles: [MarketVehicle]
+  marketRentals: [MarketRental]
+  webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type UserEducation
@@ -131,35 +127,14 @@ type Topic
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(name: "byUser", fields: ["userID"]) {
+  ) {
   id: ID!
   name: String!
-  # like: [String]!
-  # unlike: [String]!
   articles: [Article] @connection(keyName: "byTopic", fields: ["id"])
   events: [Event] @connection(keyName: "byTopic", fields: ["id"])
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
-
-# type Type
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: owner }
-#       { allow: groups, groups: ["admin", "staff"] }
-#       { allow: private, operations: [read] }
-#       { allow: public, operations: [read], provider: iam }
-#     ]
-#   ) {
-#   id: ID!
-#   name: String!
-#   like: [String]!
-#   unlike: [String]!
-#   articles: [Article] @connection(keyName: "byType", fields: ["id"])
-# }
-# 不需要了，用不着
 
 type Article
   @model
@@ -176,15 +151,11 @@ type Article
     fields: ["sortKey", "createdAt"]
     queryField: "articleSortBySortKey"
   )
-  @key(name: "byTopic", fields: ["topicID"])
-  # @key(name: "byType", fields: ["typeID"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byTopic", fields: ["topicID"]) {
   id: ID!
   title: String!
   content: String!
   imgS3Keys: [String]
-  # like: [String]!
-  # unlike: [String]!
   likes: [Like] @connection(keyName: "byArticle", fields: ["id"])
   tags: [String]
   sortKey: SortKey! #用来当第二索引的
@@ -192,8 +163,6 @@ type Article
   createdAt: AWSDateTime!
   topicID: ID!
   topic: Topic! @connection(fields: ["topicID"])
-  # typeID: ID!
-  # type: Type! @connection(fields: ["typeID"])
   articleComments: [ArticleComment]
     @connection(keyName: "byArticle", fields: ["id"])
   userID: ID!
@@ -219,12 +188,9 @@ type ArticleComment
     fields: ["articleID", "createdAt"]
     queryField: "articleCommentSortByArticleID"
   )
-  @key(name: "byArticle", fields: ["articleID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byArticle", fields: ["articleID", "createdAt"]) {
   id: ID!
   content: String!
-  # like: [String]!
-  # unlike: [String]!
   likes: [Like] @connection(keyName: "byArticleComment", fields: ["id"])
   active: Boolean!
   articleID: ID!
@@ -251,12 +217,9 @@ type ArticleSubComment
     fields: ["articleCommentID", "createdAt"]
     queryField: "articleSubCommentSortByArticleCommentID"
   )
-  @key(name: "byArticleComment", fields: ["articleCommentID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byArticleComment", fields: ["articleCommentID", "createdAt"]) {
   id: ID!
   content: String!
-  # like: [String]!
-  # unlike: [String]!
   likes: [Like] @connection(keyName: "byArticleSubComment", fields: ["id"])
   active: Boolean!
   articleCommentID: ID!
@@ -281,8 +244,7 @@ type Event
     fields: ["sortKey", "createdAt"]
     queryField: "eventSortBySortKey"
   )
-  @key(name: "byTopic", fields: ["topicID"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byTopic", fields: ["topicID"]) {
   id: ID!
   title: String!
   startDate: AWSDateTime!
@@ -332,7 +294,6 @@ type EventParticipant
     fields: ["eventID", "createdAt"]
     queryField: "EventParticipantSortByEventID"
   )
-  @key(name: "byUser", fields: ["userID"])
   @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
   id: ID!
   name: String!
@@ -366,8 +327,7 @@ type Department
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(name: "byUser", fields: ["userID"]) {
+  ) {
   id: ID!
   name: String!
   introduction: String
@@ -393,8 +353,7 @@ type UwcssaJob
     fields: ["departmentID", "createdAt"]
     queryField: "UwcssaJobSortByDepartmentID"
   )
-  @key(name: "byDepartment", fields: ["departmentID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
   id: ID!
   introduction: String!
   title: String!
@@ -430,8 +389,7 @@ type UwcssaJobResume
     fields: ["uwcssaJobID", "createdAt"]
     queryField: "uwcssaJobResumeSortByUwcssaJobID"
   )
-  @key(name: "byUwcssaJob", fields: ["uwcssaJobID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byUwcssaJob", fields: ["uwcssaJobID", "createdAt"]) {
   id: ID!
   name: String!
   email: String!
@@ -461,8 +419,7 @@ type ForumTopic
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(name: "byUser", fields: ["userID"]) {
+  ) {
   id: ID!
   name: String!
   forumSubTopics: [ForumSubTopic]!
@@ -481,8 +438,7 @@ type ForumSubTopic
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(name: "byForumTopic", fields: ["forumTopicID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byForumTopic", fields: ["forumTopicID", "createdAt"]) {
   id: ID!
   name: String!
   createdAt: AWSDateTime!
@@ -490,7 +446,6 @@ type ForumSubTopic
   forumTopic: ForumTopic! @connection(fields: ["forumTopicID"])
   forumPosts: [ForumPost]!
     @connection(keyName: "byForumSubTopic", fields: ["id"])
-
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -510,15 +465,13 @@ type ForumPost
     fields: ["forumSubTopicID", "createdAt"]
     queryField: "ForumPostSortByForumSubTopicID"
   )
-  @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byUser", fields: ["userID"])
+  @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"]) {
   id: ID!
   title: String!
   content: String!
   imgS3Keys: [String]
   tags: [String]
-  # like: [String]!
-  # unlike: [String]!
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
   active: Boolean!
   createdAt: AWSDateTime!
@@ -545,8 +498,7 @@ type ForumPostComment
     fields: ["forumPostID", "createdAt"]
     queryField: "ForumPostCommentSortByForumPostID"
   )
-  @key(name: "byForumPost", fields: ["forumPostID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
   content: String!
   # like: [String]!
@@ -577,8 +529,10 @@ type ForumPostSubComment
     fields: ["forumPostCommentID", "createdAt"]
     queryField: "ForumPostSubCommentSortByForumPostCommentID"
   )
-  @key(name: "byForumPostComment", fields: ["forumPostCommentID", "createdAt"])
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(
+    name: "byForumPostComment"
+    fields: ["forumPostCommentID", "createdAt"]
+  ) {
   id: ID!
   content: String!
   # like: [String]!
@@ -631,8 +585,7 @@ type MarketItem
     name: "marketItemSortByMarketItemCategory"
     fields: ["marketItemCategory", "createdAt"]
     queryField: "marketItemSortByMarketItemCategory"
-  )
-  @key(name: "byUser", fields: ["userID"]) {
+  ) {
   id: ID!
   name: String!
   imgS3Keys: [String]!
@@ -714,8 +667,7 @@ type MarketVehicle
     name: "marketVehicleSortByVehicleType"
     fields: ["vehicleType", "createdAt"]
     queryField: "marketVehicleSortByVehicleType"
-  )
-  @key(name: "byUser", fields: ["userID"]) {
+  ) {
   id: ID!
   vehicleType: VehicleType!
   imgS3Keys: [String]!
@@ -764,8 +716,7 @@ type MarketRental
     name: "marketRentalSortByMarketRentalSaleRent"
     fields: ["marketRentalSaleRent", "createdAt"]
     queryField: "marketRentalSortByMarketRentalSaleRent"
-  )
-  @key(name: "byUser", fields: ["userID"]) {
+  ) {
   id: ID!
   imgS3Keys: [String]!
   marketRentalSaleRent: MarketRentalSaleRent!
@@ -837,7 +788,6 @@ type Like
     ]
   )
   @key(name: "byUserBeingLiked", fields: ["itemID"])
-  @key(name: "byUser", fields: ["userID"])
   @key(name: "byArticle", fields: ["itemID"])
   @key(name: "byArticleComment", fields: ["itemID"])
   @key(name: "byArticleSubComment", fields: ["itemID"])

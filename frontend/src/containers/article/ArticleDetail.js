@@ -46,10 +46,6 @@ export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { articleID } = useParams();
-  console.log("articleID", articleID);
-  // const [canFetch, setCanFetch] = useState(true);
-
-  // const nextToken = article.commentsNextToken;
 
   useEffect(() => {
     if (articleID && articleID !== "") {
