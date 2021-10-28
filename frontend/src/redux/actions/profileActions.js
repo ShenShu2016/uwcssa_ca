@@ -8,10 +8,8 @@ import {
 
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/profile-action-types";
-import Storage from "@aws-amplify/storage";
 import { getUser } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { v4 as uuid } from "uuid";
 
 export const selectedProfile = (username) => async (dispatch) => {
   try {

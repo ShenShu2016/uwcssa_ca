@@ -30,7 +30,6 @@ export default function ArticleCommentsPost({ article }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { userAuth } = useSelector((state) => state);
-  const { username } = useSelector((state) => state.userAuth.user);
   const [formData, setFormData] = useState({
     comment: "",
   });
@@ -46,7 +45,7 @@ export default function ArticleCommentsPost({ article }) {
     content: comment,
     active: true,
     articleID: article.id,
-    userID: username,
+    userID: userAuth.user.username,
   };
 
   const postComment = async (e) => {
@@ -79,7 +78,7 @@ export default function ArticleCommentsPost({ article }) {
                 sx={{ px: 0 }}
                 avatar={
                   <CustomAvatar
-                    username={userAuth.user.username}
+                    user={userAuth.userProfile}
                     link={userAuth.isAuthenticated}
                   />
                 }

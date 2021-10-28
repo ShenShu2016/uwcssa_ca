@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 function ArticleComponent({ article }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
-  const { id, content, title, imgS3Keys, createdAt, userID } = article;
+  const { id, content, title, imgS3Keys, createdAt, userID, user } = article;
 
   useEffect(() => {
     const getImage = async () => {
@@ -92,7 +92,7 @@ function ArticleComponent({ article }) {
                         link={false}
                         variant={"square"}
                         sx={{ width: 16, height: 16 }}
-                        username={userID}
+                        user={user}
                       />
                     }
                     title={userID}

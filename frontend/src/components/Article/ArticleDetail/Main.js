@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 export default function Main({ article }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
-  const { content, imgS3Keys, tags, topic, createdAt, userID } = article;
+  const { content, imgS3Keys, tags, topic, createdAt, user, userID } = article;
 
   useEffect(() => {
     const getImage = async () => {
@@ -77,7 +77,7 @@ export default function Main({ article }) {
           </CardActions>
           <CardHeader
             sx={{ px: 0, my: 2 }}
-            avatar={<CustomAvatar username={userID} link={true} />}
+            avatar={<CustomAvatar user={user} link={true} />}
             title={userID}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
               11,

@@ -49,7 +49,7 @@ export default function ArticleComments({ comments }) {
       ) : (
         <div>
           {comments.map((comment) => {
-            const { id, content, createdAt, userID } = comment;
+            const { id, content, createdAt, userID, user } = comment;
 
             return (
               <Box key={id} mb={2} className={classes.main}>
@@ -59,7 +59,7 @@ export default function ArticleComments({ comments }) {
                       component={Link}
                       to={`/account/profile/${userID}`}
                       sx={{ p: 0, textDecoration: "none" }}
-                      avatar={<CustomAvatar link={false} username={userID} />}
+                      avatar={<CustomAvatar link={false} user={user} />}
                     />
                   </Grid>
                   <Grid item xs>

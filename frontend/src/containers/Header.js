@@ -389,7 +389,7 @@ export default function Header() {
               >
                 {/* <AccountCircle fontSize={"large"} /> */}
                 <CustomAvatar
-                  username={userAuth.user.username}
+                  user={userAuth.userProfile}
                   sx={{ width: 35, height: 35 }}
                 />
               </IconButton>

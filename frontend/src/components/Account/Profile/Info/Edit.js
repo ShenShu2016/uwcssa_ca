@@ -9,15 +9,11 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import {
-  postAvatarImg,
-  postBackGroundImg,
-  putUserProfile,
-} from "../../../../redux/actions/profileActions";
 
 import S3Image from "../../../S3/S3Image";
 import { makeStyles } from "@mui/styles";
 import { postImage } from "../../../../redux/actions/generalAction";
+import { putUserProfile } from "../../../../redux/actions/profileActions";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
