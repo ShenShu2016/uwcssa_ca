@@ -9,16 +9,19 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  postMarketHome,
   postMarketItemImg,
+  postMarketRental,
 } from "../../redux/actions/marketItemActions";
+import { useDispatch, useSelector } from "react-redux";
 
+import Chip from "@mui/material/Chip";
 import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+
+// import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,15 +57,17 @@ const useStyles = makeStyles((theme) => ({
 const Input = styled("input")({
   display: "none",
 });
-export default function PostMarketHome() {
+
+export default function PostMarketRental() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [imgKeyToServer, setImgKeyToServer] = useState([]);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
-
+  const [tagInput, setTagInput] = useState("");
+  const { username } = useSelector((state) => state.userAuth.user);
   const history = useHistory();
 
-  const [marketHomeData, setMarketHomeData] = useState({
+  const [marketRentalData, setMarketRentalData] = useState({
     marketHomeSaleRent: "Other",
     propertyType: "Other",
     bedroomCounts: 0,
@@ -77,8 +82,9 @@ export default function PostMarketHome() {
     heatingType: "CentralHeating",
     catFriendly: true,
     dogFriendly: true,
+    tags: [],
   });
-  console.log("marketHomeData", marketHomeData);
+  console.log("marketRentalData", marketRentalData);
 
   const uploadMarketItemImg = async (e) => {
     const response = await Promise.all(
@@ -103,7 +109,7 @@ export default function PostMarketHome() {
             })
           )
         );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL)); //url没有定义，这个啥意思
+        setImgKeyFromServer((url) => url.concat(imageAccessURL));
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImgKeyFromServer([]);
@@ -114,8 +120,8 @@ export default function PostMarketHome() {
     }
   }, [imgKeyToServer]);
 
-  const uploadMarketHome = async () => {
-    //Upload the marketHome
+  const uploadMarketRental = async () => {
+    //Upload the marketRental
     const {
       marketHomeSaleRent,
       propertyType,
@@ -131,9 +137,10 @@ export default function PostMarketHome() {
       heatingType,
       catFriendly,
       dogFriendly,
-    } = marketHomeData;
+      tags,
+    } = marketRentalData;
 
-    const createMarketHomeInput = {
+    const createMarketRentalInput = {
       marketHomeSaleRent: marketHomeSaleRent,
       propertyType: propertyType,
       bedroomCounts: bedroomCounts,
@@ -149,16 +156,19 @@ export default function PostMarketHome() {
       heatingType: heatingType,
       catFriendly: catFriendly,
       dogFriendly: dogFriendly,
-      active: 1,
+      tags: tags,
+      active: true,
       ByCreatedAt: "MarketHome",
+      userID: username,
+      sortKey: "SortKey",
     };
-    console.log("createMarketHomeInput", createMarketHomeInput);
+    console.log("createMarketRentalInput", createMarketRentalInput);
 
-    const response = await dispatch(postMarketHome(createMarketHomeInput));
+    const response = await dispatch(postMarketRental(createMarketRentalInput));
     console.log("response", response);
     if (response.result) {
       history.push(
-        `/market/rental/${response.response.data.createMarketHome.id}`
+        `/market/rental/${response.response.data.createMarketRental.id}`
       );
     }
   };
@@ -185,6 +195,33 @@ export default function PostMarketHome() {
     { value: true, label: "爱汪" },
     { value: false, label: "不爱汪" },
   ];
+
+  const deleteHandler = (i) => () => {
+    const { tags: newTags } = { ...marketRentalData };
+    setMarketRentalData({
+      ...marketRentalData,
+      tags: newTags.filter((tag) => tag !== i),
+    });
+  };
+
+  const inputKeyDown = (e) => {
+    const val = e.target.value;
+    console.log("tagSuccess", marketRentalData.tags);
+    if (e.key === "Enter" && val) {
+      if (
+        marketRentalData.tags.find(
+          (tag) => tag.toLowerCase() === val.toLowerCase()
+        )
+      ) {
+        return;
+      }
+      e.preventDefault();
+      const newTags = [...marketRentalData.tags].concat([val]);
+      setMarketRentalData({ ...marketRentalData, tags: newTags });
+      setTagInput("");
+      console.log("tagSuccess", marketRentalData.tags);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -214,15 +251,15 @@ export default function PostMarketHome() {
         <div className="newTopic">
           <FormControl variant="outlined" fullWidth>
             <InputLabel id="demo-simple-select-outlined-label2">
-              Home for Sale of Rent
+              Home for Sale or Rent
             </InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label2"
               id="demo-simple-select-outlined2"
-              value={marketHomeData.marketHomeSaleRent}
+              value={marketRentalData.marketHomeSaleRent}
               onChange={(e) =>
-                setMarketHomeData({
-                  ...marketHomeData,
+                setMarketRentalData({
+                  ...marketRentalData,
                   marketHomeSaleRent: e.target.value,
                 })
               }
@@ -240,28 +277,28 @@ export default function PostMarketHome() {
         </div>
       </Box>
 
-      <Box className={classes.type}>
-        <div className="newType">
+      <Box className={classes.topic}>
+        <div className="newTopic">
           <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label">
-              PropertyType
+            <InputLabel id="demo-simple-select-outlined-label2">
+              propertyType
             </InputLabel>
             <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={marketHomeData.propertyType}
+              labelId="demo-simple-select-outlined-label2"
+              id="demo-simple-select-outlined2"
+              value={marketRentalData.propertyType}
               onChange={(e) =>
-                setMarketHomeData({
-                  ...marketHomeData,
+                setMarketRentalData({
+                  ...marketRentalData,
                   propertyType: e.target.value,
                 })
               }
               label="propertyType"
             >
-              {propertyType.map((propertyType) => {
+              {propertyType.map((property) => {
                 return (
-                  <MenuItem value={propertyType.value} key={propertyType.value}>
-                    {propertyType.label}
+                  <MenuItem value={property.value} key={property.value}>
+                    {property.label}
                   </MenuItem>
                 );
               })}
@@ -273,12 +310,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="bedroomCounts"
-          value={marketHomeData.bedroomCounts}
+          value={marketRentalData.bedroomCounts}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               bedroomCounts: e.target.value,
             })
           }
@@ -288,12 +325,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="bathroomCounts"
-          value={marketHomeData.bathroomCounts}
+          value={marketRentalData.bathroomCounts}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               bathroomsCounts: e.target.value,
             })
           }
@@ -303,12 +340,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="price"
-          value={marketHomeData.price}
+          value={marketRentalData.price}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               price: e.target.value,
             })
           }
@@ -318,12 +355,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="address"
-          value={marketHomeData.address}
+          value={marketRentalData.address}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               address: e.target.value,
             })
           }
@@ -333,12 +370,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="propertySize"
-          value={marketHomeData.propertySize}
+          value={marketRentalData.propertySize}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               propertySize: e.target.value,
             })
           }
@@ -348,12 +385,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="dateAvailable"
-          value={marketHomeData.dateAvailable}
+          value={marketRentalData.dateAvailable}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               dateAvailable: e.target.value,
             })
           }
@@ -363,12 +400,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="laundryType"
-          value={marketHomeData.laundryType}
+          value={marketRentalData.laundryType}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               laundryType: e.target.value,
             })
           }
@@ -378,12 +415,12 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="airConditionType"
-          value={marketHomeData.airConditionType}
+          value={marketRentalData.airConditionType}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               airConditionType: e.target.value,
             })
           }
@@ -392,13 +429,28 @@ export default function PostMarketHome() {
 
       <Box className={classes.content}>
         <TextField
+          label="tags"
+          value={tagInput}
+          variant="outlined"
+          fullWidth
+          onKeyDown={inputKeyDown}
+          onChange={(e) => setTagInput(e.target.value)}
+        />
+      </Box>
+
+      {marketRentalData.tags.map((data) => {
+        return <Chip key={data} label={data} onDelete={deleteHandler(data)} />;
+      })}
+
+      <Box className={classes.content}>
+        <TextField
           label="heatingType"
-          value={marketHomeData.heatingType}
+          value={marketRentalData.heatingType}
           variant="outlined"
           fullWidth
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               heatingType: e.target.value,
             })
           }
@@ -414,10 +466,10 @@ export default function PostMarketHome() {
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={marketHomeData.catFriendly}
+              value={marketRentalData.catFriendly}
               onChange={(e) =>
-                setMarketHomeData({
-                  ...marketHomeData,
+                setMarketRentalData({
+                  ...marketRentalData,
                   catFriendly: e.target.value,
                 })
               }
@@ -444,10 +496,10 @@ export default function PostMarketHome() {
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={marketHomeData.dogFriendly}
+              value={marketRentalData.dogFriendly}
               onChange={(e) =>
-                setMarketHomeData({
-                  ...marketHomeData,
+                setMarketRentalData({
+                  ...marketRentalData,
                   dogFriendly: e.target.value,
                 })
               }
@@ -468,14 +520,14 @@ export default function PostMarketHome() {
       <Box className={classes.content}>
         <TextField
           label="description"
-          value={marketHomeData.description}
+          value={marketRentalData.description}
           variant="outlined"
           minRows={5}
           fullWidth
           multiline
           onChange={(e) =>
-            setMarketHomeData({
-              ...marketHomeData,
+            setMarketRentalData({
+              ...marketRentalData,
               description: e.target.value,
             })
           }
@@ -485,7 +537,7 @@ export default function PostMarketHome() {
       <Button
         variant="contained"
         endIcon={<PublishIcon />}
-        onClick={uploadMarketHome}
+        onClick={uploadMarketRental}
         color="primary"
       >
         上传MarketHome

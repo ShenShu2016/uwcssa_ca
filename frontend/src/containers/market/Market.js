@@ -1,8 +1,8 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
-  setMarketHome,
   setMarketItems,
+  setMarketRental,
   setMarketVehicles,
 } from "../../redux/actions/marketItemActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,35 +38,45 @@ export default function Market() {
   useEffect(() => {
     dispatch(setMarketItems());
     dispatch(setMarketVehicles());
-    dispatch(setMarketHome());
+    dispatch(setMarketRental());
   }, [dispatch]);
 
-  const { marketItems, marketVehicles, marketHomes } = useSelector(
+  const { marketItems, marketVehicles, marketRentals } = useSelector(
     (state) => state.allMarketItems
   );
 
-  const marketItemRenderList = marketItems.map((marketItem) => {
-    return (
-      <MarketComponent item={marketItem} type={"item"} key={marketItem.id} />
-    );
-  });
+  const marketItemRenderList =
+    marketItems &&
+    marketItems.map((marketItem) => {
+      return (
+        <MarketComponent item={marketItem} type={"item"} key={marketItem.id} />
+      );
+    });
   console.log("marketVehicles", marketVehicles);
 
-  const marketVehicleRenderList = marketVehicles.map((marketVehicle) => {
-    return (
-      <MarketComponent
-        item={marketVehicle}
-        type={"vehicle"}
-        key={marketVehicle.id}
-      />
-    );
-  });
+  const marketVehicleRenderList =
+    marketVehicles &&
+    marketVehicles.map((marketVehicle) => {
+      return (
+        <MarketComponent
+          item={marketVehicle}
+          type={"vehicle"}
+          key={marketVehicle.id}
+        />
+      );
+    });
 
-  const marketHomeRenderList = marketHomes.map((marketHome) => {
-    return (
-      <MarketComponent item={marketHome} type={"rental"} key={marketHome.id} />
-    );
-  });
+  const marketRentalRenderList =
+    marketRentals &&
+    marketRentals.map((marketRental) => {
+      return (
+        <MarketComponent
+          item={marketRental}
+          type={"rental"}
+          key={marketRental.id}
+        />
+      );
+    });
 
   return (
     <Box className={classes.root}>
@@ -87,7 +97,7 @@ export default function Market() {
         <Typography variant="h5" className={classes.title}>
           房屋
         </Typography>
-        <Box className={classes.items}>{marketHomeRenderList}</Box>
+        <Box className={classes.items}>{marketRentalRenderList}</Box>
         <Divider />
       </Box>
     </Box>

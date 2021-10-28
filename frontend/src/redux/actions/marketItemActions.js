@@ -22,7 +22,11 @@ export const setMarketItems = () => async (dispatch) => {
   try {
     const MarketItemsData = await API.graphql({
       query: marketItemSortBySortKey,
-      variables: { ByCreatedAt: "MarketItem", sortDirection: "DESC" },
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
       authMode: "AWS_IAM",
     });
     dispatch({
@@ -34,19 +38,19 @@ export const setMarketItems = () => async (dispatch) => {
   }
 };
 
-export const setMarketHome = () => async (dispatch) => {
+export const setMarketRental = () => async (dispatch) => {
   try {
-    const MarketHomeData = await API.graphql({
+    const MarketRentalData = await API.graphql({
       query: marketRentalSortBySortKey,
-      variables: { ByCreatedAt: "MarketHome", sortDirection: "DESC" },
+      variables: { ByCreatedAt: "MarketRental", sortDirection: "DESC" },
       authMode: "AWS_IAM",
     });
     dispatch({
-      type: ActionTypes.SET_MARKET_HOME,
-      payload: MarketHomeData.data.marketRentalSortBySortKey.items,
+      type: ActionTypes.SET_MARKET_Rental,
+      payload: MarketRentalData.data.marketRentalSortBySortKey.items,
     });
   } catch (error) {
-    console.log("error on fetching MarketHome", error);
+    console.log("error on fetching MarketRental", error);
   }
 };
 
@@ -174,31 +178,32 @@ export const postMarketVehicle =
     }
   };
 
-export const postMarketHome = (createMarketHomeInput) => async (dispatch) => {
-  console.log("createMarketHomeInput", createMarketHomeInput);
-  try {
-    const response = await API.graphql(
-      graphqlOperation(createMarketRental, { input: createMarketHomeInput })
-    );
-    dispatch({
-      type: ActionTypes.POST_MARKET_HOME_SUCCESS,
-      payload: response,
-    });
-    return {
-      result: true,
-      response: response,
-    };
-  } catch (error) {
-    dispatch({
-      type: ActionTypes.POST_MARKET_HOME_FAIL,
-      payload: error,
-    });
-    return {
-      result: false,
-      response: error,
-    };
-  }
-};
+export const postMarketRental =
+  (createMarketRentalInput) => async (dispatch) => {
+    console.log("createMarketRentalInput", createMarketRentalInput);
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createMarketRental, { input: createMarketRentalInput })
+      );
+      dispatch({
+        type: ActionTypes.POST_MARKET_RENTAL_SUCCESS,
+        payload: response,
+      });
+      return {
+        result: true,
+        response: response,
+      };
+    } catch (error) {
+      dispatch({
+        type: ActionTypes.POST_MARKET_RENTAL_FAIL,
+        payload: error,
+      });
+      return {
+        result: false,
+        response: error,
+      };
+    }
+  };
 
 export const postMarketItemImg = (imgData) => async (dispatch) => {
   try {

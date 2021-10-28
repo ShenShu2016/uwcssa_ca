@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     paddingInline: "1rem",
   },
 });
-export default function MarketHomeDetail() {
+export default function MarketRentalDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
