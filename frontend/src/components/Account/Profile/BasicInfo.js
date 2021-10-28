@@ -57,7 +57,7 @@ export default function BasicInfo({ user, ownerID }) {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(user.avatarImgPath, {
+        const imageAccessURL = await Storage.get(user.avatarImgS3Key, {
           level: "public",
           expires: 120,
           download: false,
@@ -68,7 +68,7 @@ export default function BasicInfo({ user, ownerID }) {
         setAvatarURL(null);
       }
     };
-    if (user.avatarImgPath) {
+    if (user.avatarImgS3Key) {
       getImage();
     }
   }, [user]);
@@ -78,7 +78,7 @@ export default function BasicInfo({ user, ownerID }) {
         <Card elevation={0} className={classes.header}>
           <CardActionArea>
             <S3Image
-              S3Key={user.backGroundImgPath}
+              S3Key={user.backGroundImgS3Key}
               style={{
                 width: "100%",
                 height: "250px",

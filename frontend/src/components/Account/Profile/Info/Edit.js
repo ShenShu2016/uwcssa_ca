@@ -17,6 +17,7 @@ import {
 
 import S3Image from "../../../S3/S3Image";
 import { makeStyles } from "@mui/styles";
+import { postImage } from "../../../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
@@ -40,8 +41,8 @@ export default function Edit({ user, editOpen, handleEditClose }) {
 
   useEffect(() => {
     setFormData(user);
-    setAvatarImgKey(user.avatarImgPath);
-    setBackGroundImgKey(user.backGroundImgPath);
+    setAvatarImgKey(user.avatarImgS3Key);
+    setBackGroundImgKey(user.backGroundImgS3Key);
   }, [user]);
 
   const [formData, setFormData] = useState({
@@ -50,16 +51,16 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     lastName: user.lastName,
     intro: user.intro,
     major: user.major,
-    linkedin: user.linkedin,
+    linkedIn: user.linkedIn,
     github: user.github,
   });
 
-  const [avatarImgKey, setAvatarImgKey] = useState(user.avatarImgPath);
+  const [avatarImgKey, setAvatarImgKey] = useState(user.avatarImgS3Key);
   const [backGroundImgKey, setBackGroundImgKey] = useState(
     user.backGroundImgKey
   );
   //   console.log("formData", formData);
-  const { id, firstName, lastName, intro, major, linkedin, github } = formData;
+  const { id, firstName, lastName, intro, major, linkedIn, github } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,21 +72,25 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     lastName: lastName,
     intro: intro,
     major: major,
-    avatarImgPath: avatarImgKey,
-    backGroundImgPath: backGroundImgKey,
-    linkedin: linkedin,
+    avatarImgS3Key: avatarImgKey,
+    backGroundImgS3Key: backGroundImgKey,
+    linkedIn: linkedIn,
     github: github,
   };
 
   const uploadAvatarImg = async (e) => {
-    const response = await dispatch(postAvatarImg(e.target.files[0]));
+    const imageData = e.target.files[0];
+    const imageLocation = "user/Avatar";
+    const response = await dispatch(postImage(imageData, imageLocation));
     if (response) {
       setAvatarImgKey(response.key);
     }
   };
 
   const uploadBackGroundImgImg = async (e) => {
-    const response = await dispatch(postBackGroundImg(e.target.files[0]));
+    const imageData = e.target.files[0];
+    const imageLocation = "user/BackGround";
+    const response = await dispatch(postImage(imageData, imageLocation));
     if (response) {
       setBackGroundImgKey(response.key);
     }
@@ -170,10 +175,10 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               fullWidth
               margin="dense"
               variant="outlined"
-              id="linkedin"
-              name="linkedin"
+              id="linkedIn"
+              name="linkedIn"
               label="LinkedIn 网址"
-              value={linkedin}
+              value={linkedIn}
               onChange={(e) => onChange(e)}
             />
             <div className={classes.splitter} />

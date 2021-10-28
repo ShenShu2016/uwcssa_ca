@@ -49,48 +49,6 @@ export const putUserProfile = (updateUserInput) => async (dispatch) => {
   }
 };
 
-export const postAvatarImg = (imgData) => async (dispatch) => {
-  try {
-    const response = await Storage.put(
-      `user/Avatar/${uuid()}.${imgData.name.split(".").pop()}`,
-      imgData,
-      { contentType: "image/*" }
-    );
-    dispatch({
-      type: ActionTypes.POST_AVATAR_IMG_SUCCESS,
-      payload: response,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: ActionTypes.POST_AVATAR_IMG_FAIL,
-      payload: error,
-    });
-  }
-};
-
-export const postBackGroundImg = (imgData) => async (dispatch) => {
-  try {
-    const response = await Storage.put(
-      `user/Background/${uuid()}.${imgData.name.split(".").pop()}`,
-      imgData,
-      { contentType: "image/*" }
-    );
-    dispatch({
-      type: ActionTypes.POST_BACKGROUND_IMG_SUCCESS,
-      payload: response,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: ActionTypes.POST_BACKGROUND_IMG_FAIL,
-      payload: error,
-    });
-  }
-};
-
 export const removeSelectedProfile = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.REMOVE_SELECTED_PROFILE,
