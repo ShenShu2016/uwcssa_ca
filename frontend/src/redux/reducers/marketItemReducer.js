@@ -3,7 +3,7 @@ import { ActionTypes } from "../constants/marketItem-action-types";
 const initialState = {
   marketItems: [],
   marketVehicles: [],
-  marketHomes: [],
+  marketRentals: [],
 };
 
 export const marketItemReducer = (state = initialState, { type, payload }) => {
@@ -12,8 +12,8 @@ export const marketItemReducer = (state = initialState, { type, payload }) => {
       return { ...state, marketItems: payload };
     case ActionTypes.SET_MARKET_VEHICLE:
       return { ...state, marketVehicles: payload };
-    case ActionTypes.SET_MARKET_HOME:
-      return { ...state, marketHomes: payload };
+    case ActionTypes.SET_MARKET_RENTAL:
+      return { ...state, marketRentals: payload };
     default:
       return state;
   }

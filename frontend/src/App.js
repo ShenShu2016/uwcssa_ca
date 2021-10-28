@@ -33,15 +33,15 @@ import Home from "./containers/Home";
 import Individual from "./components/Event/individual";
 import Market from "./containers/market/Market";
 import MarketCreate from "./containers/market/MarketCreate";
-import MarketHomeDetail from "./containers/market/MarketHomeDetail";
 import MarketItemDetail from "./containers/market/MarketItemDetail";
+import MarketRentalDetail from "./containers/market/MarketRentalDetail";
 import MarketVehicleDetail from "./containers/market/MarketVehicleDetail ";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import PostEvent from "./components/Event/PostEvent";
-import PostMarketHome from "./containers/market/PostHomeItem";
 import PostMarketItem from "./containers/market/PostMarketItem";
+import PostMarketRental from "./containers/market/PostRentalItem";
 import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import PrivateRoute from "./components/PrivateRoute";
@@ -237,7 +237,7 @@ export default function App() {
               <Route
                 path="/market/create/rental"
                 exact
-                component={PostMarketHome}
+                component={PostMarketRental}
               />
               <Route path="/market/create/rental" exact />
               <Route path="/market" exact component={Market} />          
@@ -254,7 +254,7 @@ export default function App() {
               <Route
                 path="/market/rental/:id"
                 exact
-                component={MarketHomeDetail}
+                component={MarketRentalDetail}
               />
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
