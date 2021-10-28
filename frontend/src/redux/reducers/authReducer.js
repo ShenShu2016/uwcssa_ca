@@ -4,7 +4,7 @@ const initialState = {
   isAuthenticated: null,
   user: { username: "", attributes: { email: "" } },
   cognitoGroup: [null],
-  userProfile: {},
+  userProfile: { username: "" },
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {

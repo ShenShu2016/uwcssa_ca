@@ -2,7 +2,7 @@ type User
   @model
   @auth(
     rules: [
-      { allow: owner, ownerField: "owner" }
+      { allow: owner, ownerField: "owner", operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -208,7 +208,7 @@ type ArticleComment
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -240,7 +240,7 @@ type ArticleSubComment
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -321,7 +321,7 @@ type EventParticipant
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -419,10 +419,10 @@ type UwcssaJobResume
   @model
   @auth(
     rules: [
-      { allow: owner } # 需要改只能上传和查看
+      { allow: owner, operations: [create, read] } # 需要改只能上传和查看
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
+      # { allow: private, operations: [read] }
+      # { allow: public, operations: [read], provider: iam }
     ]
   )
   @key(
@@ -499,7 +499,7 @@ type ForumPost
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -534,7 +534,7 @@ type ForumPostComment
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -566,7 +566,7 @@ type ForumPostSubComment
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -597,7 +597,7 @@ type MarketUserInfo
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -616,7 +616,7 @@ type MarketItem
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -699,7 +699,7 @@ type MarketVehicle
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -749,7 +749,7 @@ type MarketRental
   @model
   @auth(
     rules: [
-      { allow: owner }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -836,8 +836,8 @@ type Like
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(name: "byUserBeingLiked", fields: ["userID"])
-  @key(name: "byUser", fields: ["itemID"])
+  @key(name: "byUserBeingLiked", fields: ["itemID"])
+  @key(name: "byUser", fields: ["userID"])
   @key(name: "byArticle", fields: ["itemID"])
   @key(name: "byArticleComment", fields: ["itemID"])
   @key(name: "byArticleSubComment", fields: ["itemID"])
@@ -855,7 +855,27 @@ type Like
   forumPost: ForumPost! @connection(fields: ["itemID"])
   forumPostComment: ForumPostComment! @connection(fields: ["itemID"])
   forumPostSubComment: ForumPostSubComment! @connection(fields: ["itemID"])
-  user: User! @connection(fields: ["itemID"])
+  userBeingLiked: User @connection(fields: ["itemID"])
   userID: ID!
-  userBeingLiked: User @connection(fields: ["userID"])
+  user: User! @connection(fields: ["userID"])
+}
+
+type WebFeedBack
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["admin"], operations: [create, read, update] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  like: Boolean!
+  rate: Int!
+  reason: String
+  improvement: String
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }

@@ -1,6 +1,291 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUwcssaJobResume = /* GraphQL */ `
+  query GetUwcssaJobResume($id: ID!) {
+    getUwcssaJobResume(id: $id) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listUwcssaJobResumes = /* GraphQL */ `
+  query ListUwcssaJobResumes(
+    $filter: ModelUwcssaJobResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaJobResumes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        resumeFileS3Key
+        phone
+        message
+        uwcssaJobResumeStatus
+        createdAt
+        uwcssaJobID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        uwcssaJob {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
+  query UwcssaJobResumeSortByUwcssaJobID(
+    $uwcssaJobID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUwcssaJobResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    uwcssaJobResumeSortByUwcssaJobID(
+      uwcssaJobID: $uwcssaJobID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        resumeFileS3Key
+        phone
+        message
+        uwcssaJobResumeStatus
+        createdAt
+        uwcssaJobID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        uwcssaJob {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const userSortBySortKey = /* GraphQL */ `
   query UserSortBySortKey(
     $sortKey: SortKey
@@ -33,6 +318,9 @@ export const userSortBySortKey = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -61,9 +349,6 @@ export const userSortBySortKey = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -121,6 +406,23 @@ export const getUser = /* GraphQL */ `
       github
       sortKey
       createdAt
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
       uWindsorEmail
       badges
@@ -276,23 +578,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumTopics {
         items {
           id
@@ -445,6 +730,7 @@ export const getUser = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -456,6 +742,7 @@ export const getUser = /* GraphQL */ `
       beingLiked {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -489,6 +776,9 @@ export const listUsers = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -517,9 +807,6 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -589,6 +876,9 @@ export const getUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -617,9 +907,6 @@ export const getUserEducation = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -734,6 +1021,9 @@ export const getUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -762,9 +1052,6 @@ export const getUserExperience = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -873,6 +1160,9 @@ export const getTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -901,9 +1191,6 @@ export const getTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1056,6 +1343,9 @@ export const getArticle = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -1084,9 +1374,6 @@ export const getArticle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1171,6 +1458,7 @@ export const getArticle = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -1329,6 +1617,9 @@ export const getArticleComment = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -1357,9 +1648,6 @@ export const getArticleComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1458,6 +1746,7 @@ export const getArticleComment = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -1622,6 +1911,9 @@ export const getArticleSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -1650,9 +1942,6 @@ export const getArticleSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -1741,6 +2030,7 @@ export const getArticleSubComment = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -1910,6 +2200,9 @@ export const getEvent = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -1938,9 +2231,6 @@ export const getEvent = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2032,6 +2322,7 @@ export const getEvent = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -2215,6 +2506,9 @@ export const getEventParticipant = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -2243,9 +2537,6 @@ export const getEventParticipant = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2518,6 +2809,9 @@ export const getDepartment = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -2546,9 +2840,6 @@ export const getDepartment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2667,6 +2958,23 @@ export const getUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -2684,6 +2992,9 @@ export const getUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -2712,9 +3023,6 @@ export const getUwcssaJob = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -2783,23 +3091,6 @@ export const getUwcssaJob = /* GraphQL */ `
           nextToken
         }
       }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -2824,6 +3115,9 @@ export const listUwcssaJobs = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -2854,9 +3148,6 @@ export const listUwcssaJobs = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       nextToken
@@ -2894,6 +3185,9 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -2925,294 +3219,6 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getUwcssaJobResume = /* GraphQL */ `
-  query GetUwcssaJobResume($id: ID!) {
-    getUwcssaJobResume(id: $id) {
-      id
-      name
-      email
-      resumeFileS3Key
-      phone
-      message
-      uwcssaJobResumeStatus
-      createdAt
-      uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        topics {
-          nextToken
-        }
-        articles {
-          nextToken
-        }
-        articleComments {
-          nextToken
-        }
-        events {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
-        departments {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
-          nextToken
-        }
-        forumTopics {
-          nextToken
-        }
-        forumSubTopics {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        marketVehicles {
-          nextToken
-        }
-        marketRentals {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-      }
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imgS3Key
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        departmentID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const listUwcssaJobResumes = /* GraphQL */ `
-  query ListUwcssaJobResumes(
-    $filter: ModelUwcssaJobResumeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUwcssaJobResumes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        email
-        resumeFileS3Key
-        phone
-        message
-        uwcssaJobResumeStatus
-        createdAt
-        uwcssaJobID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        uwcssaJob {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
-  query UwcssaJobResumeSortByUwcssaJobID(
-    $uwcssaJobID: ID
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelUwcssaJobResumeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    uwcssaJobResumeSortByUwcssaJobID(
-      uwcssaJobID: $uwcssaJobID
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        email
-        resumeFileS3Key
-        phone
-        message
-        uwcssaJobResumeStatus
-        createdAt
-        uwcssaJobID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        uwcssaJob {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        owner
       }
       nextToken
     }
@@ -3241,6 +3247,9 @@ export const getForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -3269,9 +3278,6 @@ export const getForumTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3386,6 +3392,9 @@ export const getForumSubTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -3414,9 +3423,6 @@ export const getForumSubTopic = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3577,6 +3583,9 @@ export const getForumPost = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -3605,9 +3614,6 @@ export const getForumPost = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3698,6 +3704,7 @@ export const getForumPost = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -3858,6 +3865,9 @@ export const getForumPostComment = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -3886,9 +3896,6 @@ export const getForumPostComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -3988,6 +3995,7 @@ export const getForumPostComment = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -4156,6 +4164,9 @@ export const getForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4184,9 +4195,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4275,6 +4283,7 @@ export const getForumPostSubComment = /* GraphQL */ `
       likes {
         items {
           id
+          like
           itemID
           userID
           createdAt
@@ -4431,6 +4440,9 @@ export const getMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4459,9 +4471,6 @@ export const getMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4575,6 +4584,9 @@ export const getMarketItem = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4603,9 +4615,6 @@ export const getMarketItem = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -4846,6 +4855,9 @@ export const getMarketVehicle = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4874,9 +4886,6 @@ export const getMarketVehicle = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5130,6 +5139,9 @@ export const getMarketRental = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -5158,9 +5170,6 @@ export const getMarketRental = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5390,11 +5399,12 @@ export const getLike = /* GraphQL */ `
   query GetLike($id: ID!) {
     getLike(id: $id) {
       id
+      like
       itemID
       userID
       createdAt
       updatedAt
-      user {
+      userBeingLiked {
         id
         username
         email
@@ -5409,6 +5419,9 @@ export const getLike = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -5437,9 +5450,6 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5476,7 +5486,7 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
       }
-      userBeingLiked {
+      user {
         id
         username
         email
@@ -5491,6 +5501,9 @@ export const getLike = /* GraphQL */ `
         github
         sortKey
         createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -5519,9 +5532,6 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        uwcssaJobResumes {
           nextToken
         }
         forumTopics {
@@ -5896,6 +5906,655 @@ export const listLikes = /* GraphQL */ `
     listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        like
+        itemID
+        userID
+        createdAt
+        updatedAt
+        userBeingLiked {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComment {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        articleSubComment {
+          id
+          content
+          active
+          articleCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostComment {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComment {
+          id
+          content
+          active
+          createdAt
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getWebFeedBack = /* GraphQL */ `
+  query GetWebFeedBack($id: ID!) {
+    getWebFeedBack(id: $id) {
+      id
+      like
+      itemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        uwcssaJobResumes {
+          nextToken
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        topics {
+          nextToken
+        }
+        articles {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        departments {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        forumTopics {
+          nextToken
+        }
+        forumSubTopics {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        marketVehicles {
+          nextToken
+        }
+        marketRentals {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+      }
+      article {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleComment {
+        id
+        content
+        active
+        articleID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        article {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        articleSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      articleSubComment {
+        id
+        content
+        active
+        articleCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        articleComment {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPost {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostComment {
+        id
+        content
+        createdAt
+        active
+        forumPostID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      forumPostSubComment {
+        id
+        content
+        active
+        createdAt
+        forumPostCommentID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumPostComment {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listWebFeedBacks = /* GraphQL */ `
+  query ListWebFeedBacks(
+    $filter: ModelWebFeedBackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWebFeedBacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        like
         itemID
         userID
         createdAt
