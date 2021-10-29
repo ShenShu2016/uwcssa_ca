@@ -40,7 +40,7 @@ export default function MarketComponent({ item, type }) {
     title,
     // description,
     price,
-    imagePath,
+    imgS3Keys,
     // marketItemCategory,
     // marketItemCondition,
     location,
@@ -53,7 +53,7 @@ export default function MarketComponent({ item, type }) {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath[0], {
+        const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
           download: false,
@@ -65,10 +65,10 @@ export default function MarketComponent({ item, type }) {
         setImageURL(null);
       }
     };
-    if (imagePath) {
+    if (imgS3Keys) {
       getImage();
     }
-  }, [imagePath]);
+  }, [imgS3Keys]);
 
   return (
     <Paper elevation={0} className={classes.root}>

@@ -76,7 +76,7 @@ export default function Main({ article }) {
         </div>
       ) : (
         <Box className={classes.main}>
-          <S3Image S3Key={imgS3Keys[0]} />
+          <S3Image S3Key={imgS3Keys[0]} style={{ width: "100%" }} />
 
           <CardActions sx={{ px: 0 }}>
             <Button size="small" color="primary">
