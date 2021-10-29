@@ -42,7 +42,11 @@ export const setMarketRental = () => async (dispatch) => {
   try {
     const MarketRentalData = await API.graphql({
       query: marketRentalSortBySortKey,
-      variables: { ByCreatedAt: "MarketRental", sortDirection: "DESC" },
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
       authMode: "AWS_IAM",
     });
     dispatch({
@@ -58,7 +62,11 @@ export const setMarketVehicles = () => async (dispatch) => {
   try {
     const MarketVehicleData = await API.graphql({
       query: marketVehicleSortBySortKey,
-      variables: { ByCreatedAt: "MarketVehicle", sortDirection: "DESC" },
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
       authMode: "AWS_IAM",
     });
     dispatch({

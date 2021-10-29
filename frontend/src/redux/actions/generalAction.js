@@ -63,6 +63,33 @@ export const setLike = (itemID, userID, isLike) => async (dispatch) => {
   }
 };
 
+export const postMultipleImages =
+  (imageData, imageLocation) => async (dispatch) => {
+    try {
+      const response = await Promise.all(
+        Array.from(imageData).map((img) =>
+          Storage.put(
+            `${imageLocation}/${uuid()}.${img.name.split(".").pop()}`,
+            img,
+            { contentType: "image/*" }
+          )
+        )
+      );
+      console.log(response);
+      dispatch({
+        type: ActionTypes.POST_IMAGE_SUCCESS,
+        payload: response,
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: ActionTypes.POST_IMAGE_FAIL,
+        payload: error,
+      });
+    }
+  };
+
 export const postImage = (imageData, imageLocation) => async (dispatch) => {
   try {
     const response = await Storage.put(
