@@ -116,7 +116,7 @@ export default function Event() {
     dispatch(setEvents());
   }, [dispatch]);
 
-  const events = useSelector((state) => state.allEvents.events);
+  const { events } = useSelector((state) => state.event);
 
   const renderList = events.map((event) => {
     return <EventMain event={event} key={event.id} />;
