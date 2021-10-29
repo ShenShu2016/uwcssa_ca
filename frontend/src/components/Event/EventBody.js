@@ -3,13 +3,14 @@ import {
   Button,
   CardActions,
   CardMedia,
+  CircularProgress,
   Container,
-  Paper,
   Tab,
   Tabs,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
@@ -84,6 +85,7 @@ export default function EventBody({ event }) {
       }
     };
     if (posterImgS3Key) {
+      console.log(posterImgS3Key);
       getPoster();
     }
   }, [posterImgS3Key]);
@@ -92,7 +94,9 @@ export default function EventBody({ event }) {
   return (
     <Box>
       {Object.keys(event).length === 0 ? (
-        <div>...Loading</div>
+        <div>
+          <CircularProgress />
+        </div>
       ) : (
         <Container size="lg">
           <Container size="sm">

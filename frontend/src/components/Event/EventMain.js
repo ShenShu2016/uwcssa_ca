@@ -74,6 +74,10 @@ export default function EventMain({ event }) {
     };
     if (posterImgS3Key) {
       getPoster();
+    } else {
+      setPosterURL(
+        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
+      );
     }
   }, [posterImgS3Key]);
 

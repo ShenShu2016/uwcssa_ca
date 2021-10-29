@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import {
@@ -25,6 +25,7 @@ export default function EventDetail() {
   const dispatch = useDispatch();
   const { eventID } = useParams();
   const { event } = useSelector((state) => state.event.selected);
+  useTitle(`近期活动 ${event.title}`);
 
   useEffect(() => {
     if (eventID && eventID !== "") {
