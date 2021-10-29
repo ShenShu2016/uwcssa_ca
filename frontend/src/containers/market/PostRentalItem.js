@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
   menuPaper: {
     maxHeight: 100,
   },
+  imgKeyFromServer: {
+    width: "100%",
+  },
 }));
 
 const Input = styled("input")({
@@ -75,7 +78,7 @@ export default function PostMarketRental() {
   const history = useHistory();
 
   const [marketRentalData, setMarketRentalData] = useState({
-    marketHomeSaleRent: "Other",
+    marketRentalSaleRent: "Other",
     propertyType: "Other",
     bedroomCounts: 0,
     bathroomsCounts: 0,
@@ -129,7 +132,7 @@ export default function PostMarketRental() {
   const uploadMarketRental = async () => {
     //Upload the marketRental
     const {
-      marketHomeSaleRent,
+      marketRentalSaleRent,
       propertyType,
       bedroomCounts,
       bathroomsCounts,
@@ -147,7 +150,7 @@ export default function PostMarketRental() {
     } = marketRentalData;
 
     const createMarketRentalInput = {
-      marketHomeSaleRent: marketHomeSaleRent,
+      marketRentalSaleRent: marketRentalSaleRent,
       propertyType: propertyType,
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
@@ -179,7 +182,7 @@ export default function PostMarketRental() {
     }
   };
 
-  const marketHomeSaleRent = [
+  const marketRentalSaleRent = [
     { value: "ForSale", label: "出售" },
     { value: "Rent", label: "租赁" },
     { value: "Other", label: "其他" },
@@ -280,7 +283,12 @@ export default function PostMarketRental() {
 
       {imgKeyToServer &&
         imgKeyFromServer.map((imgKey) => (
-          <img src={imgKey} key={imgKey} alt="images" />
+          <img
+            src={imgKey}
+            key={imgKey}
+            alt="images"
+            className={classes.imgKeyFromServer}
+          />
         ))}
 
       <Box className={classes.content}>
@@ -294,18 +302,18 @@ export default function PostMarketRental() {
                 <Select
                   labelId="demo-simple-select-outlined-label2"
                   id="demo-simple-select-outlined2"
-                  value={marketRentalData.marketHomeSaleRent}
+                  value={marketRentalData.marketRentalSaleRent}
                   required
                   MenuProps={{ classes: { paper: classes.menuPaper } }}
                   onChange={(e) =>
                     setMarketRentalData({
                       ...marketRentalData,
-                      marketHomeSaleRent: e.target.value,
+                      marketRentalSaleRent: e.target.value,
                     })
                   }
-                  label="marketHomeSaleRent"
+                  label="marketRentalSaleRent"
                 >
-                  {marketHomeSaleRent.map((category) => {
+                  {marketRentalSaleRent.map((category) => {
                     return (
                       <MenuItem value={category.value} key={category.value}>
                         {category.label}

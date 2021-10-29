@@ -42,7 +42,7 @@ export default function Market() {
   }, [dispatch]);
 
   const { marketItems, marketVehicles, marketRentals } = useSelector(
-    (state) => state.allMarketItems
+    (state) => state.market
   );
 
   const marketItemRenderList =

@@ -5,6 +5,7 @@ import {
   CardActionArea,
   CardHeader,
   CardMedia,
+  CircularProgress,
   Divider,
   IconButton,
   Typography,
@@ -48,12 +49,12 @@ export default function MarketItemDetail() {
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
-  const marketItem = useSelector((state) => state.marketItem);
+  const { marketItem } = useSelector((state) => state.market.selected);
   console.log("marketItem", marketItem);
   const {
     // id,
     // name,
-    imagePath,
+    imgS3Keys,
     title,
     price,
     description,
@@ -70,7 +71,7 @@ export default function MarketItemDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath, {
+        const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
           download: false,
@@ -82,15 +83,17 @@ export default function MarketItemDetail() {
         setImageURL(null);
       }
     };
-    if (imagePath) {
+    if (imgS3Keys) {
       getImage();
     }
-  }, [imagePath]);
+  }, [imgS3Keys]);
 
   return (
     <div className={classes.root}>
       {Object.keys(marketItem).length === 0 ? (
-        <div>...Loading</div>
+        <div>
+          <CircularProgress />
+        </div>
       ) : (
         <Box>
           <CardHeader
@@ -119,7 +122,7 @@ export default function MarketItemDetail() {
 
           <CardActionArea
             onClick={() => {
-              window.open(imageURL);
+              window.open(imageURL[0]);
             }}
           >
             <CardMedia component="img" image={imageURL} />

@@ -48,12 +48,12 @@ export default function MarketRentalDetail() {
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
-  const marketItem = useSelector((state) => state.marketItem);
+  const { marketItem } = useSelector((state) => state.market.selected);
   console.log("marketItem", marketItem);
   const {
     // id,
     // name,
-    imagePath,
+    imgS3Keys,
     title,
     price,
     description,
@@ -62,7 +62,7 @@ export default function MarketRentalDetail() {
     createdAt,
     // ByCreatedAt,
     owner,
-    marketHomeSaleRent,
+    marketRentalSaleRent,
     propertyType,
     // bedroomCounts,
     // bathroomsCounts,
@@ -79,7 +79,7 @@ export default function MarketRentalDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath[0], {
+        const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
           download: false,
@@ -91,10 +91,10 @@ export default function MarketRentalDetail() {
         setImageURL(null);
       }
     };
-    if (imagePath) {
+    if (imgS3Keys) {
       getImage();
     }
-  }, [imagePath]);
+  }, [imgS3Keys]);
 
   return (
     <div className={classes.root}>
@@ -135,7 +135,7 @@ export default function MarketRentalDetail() {
           </CardActionArea>
           <Divider />
           <Typography variant="h3" color="red" className={classes.title}>
-            Home for Sale or Rent：{marketHomeSaleRent}
+            Home for Sale or Rent：{marketRentalSaleRent}
           </Typography>
           <Typography variant="h3" color="red" className={classes.title}>
             类型：{propertyType}

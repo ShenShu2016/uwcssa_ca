@@ -48,12 +48,12 @@ export default function MarketVehicleDetail() {
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
-  const marketItem = useSelector((state) => state.marketItem);
+  const { marketItem } = useSelector((state) => state.market.selected);
   console.log("marketItem", marketItem);
   const {
     // id,
     // name,
-    imagePath,
+    imgS3Keys,
     title,
     price,
     description,
@@ -70,7 +70,7 @@ export default function MarketVehicleDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath, {
+        const imageAccessURL = await Storage.get(imgS3Keys, {
           level: "public",
           expires: 120,
           download: false,
@@ -82,10 +82,10 @@ export default function MarketVehicleDetail() {
         setImageURL(null);
       }
     };
-    if (imagePath) {
+    if (imgS3Keys) {
       getImage();
     }
-  }, [imagePath]);
+  }, [imgS3Keys]);
 
   return (
     <div className={classes.root}>
