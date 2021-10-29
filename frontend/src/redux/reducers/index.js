@@ -1,8 +1,4 @@
-import {
-  eventReducer,
-  pudEventReducer,
-  selectedEventReducer,
-} from "./eventReducer";
+import { eventReducer } from "./eventReducer";
 import {
   forumReducer,
   selectedForumPostCommentReducer,
@@ -50,8 +46,6 @@ const reducers = combineReducers({
   allMarketItems: marketItemReducer,
   marketItem: selectedMarketItemReducer,
 
-  allEvents: eventReducer,
-  event: selectedEventReducer,
-  pudEvent: pudEventReducer,
+  event: eventReducer,
 });
 export default reducers;

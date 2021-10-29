@@ -51,7 +51,7 @@ export default function EventMain({ event }) {
     id,
     content,
     title,
-    poster,
+    posterImgS3Key,
     location,
     startDate,
     eventStatus,
@@ -61,7 +61,7 @@ export default function EventMain({ event }) {
   useEffect(() => {
     const getPoster = async () => {
       try {
-        const posterAccessURL = await Storage.get(poster, {
+        const posterAccessURL = await Storage.get(posterImgS3Key, {
           level: "public",
           expires: 120,
           download: false,
@@ -72,10 +72,10 @@ export default function EventMain({ event }) {
         setPosterURL(null);
       }
     };
-    if (poster) {
+    if (posterImgS3Key) {
       getPoster();
     }
-  }, [poster]);
+  }, [posterImgS3Key]);
 
   const userInfo = useSelector((state) => state.userAuth);
 

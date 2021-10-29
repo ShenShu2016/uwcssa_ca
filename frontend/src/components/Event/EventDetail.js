@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import {
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EventBody from "../Event/EventBody";
 import { makeStyles } from "@mui/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +24,7 @@ export default function EventDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { eventID } = useParams();
-  const event = useSelector((state) => state.event);
+  const { event } = useSelector((state) => state.event.selected);
 
   useEffect(() => {
     if (eventID && eventID !== "") {
@@ -38,6 +39,7 @@ export default function EventDetail() {
         <IconButton component={Link} to="/event">
           <ArrowBackIcon />
         </IconButton>
+
         <EventBody event={event} />
       </Box>
     </div>

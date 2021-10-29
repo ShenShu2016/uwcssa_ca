@@ -13,12 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import {
-  postEvent,
-  postEventImg,
-  postEventPoster,
-  setTopics,
-} from "../../redux/actions/eventActions";
+import { postEvent, setTopics } from "../../redux/actions/eventActions";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -32,7 +27,8 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
-
+import { useTitle } from "../../Hooks/useTitle";
+import { postImage } from "../../redux/actions/generalAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -59,10 +55,11 @@ const Input = styled("input")({
 });
 export default function PostEvent() {
   const classes = useStyles();
-
+  useTitle("活动创建");
   const dispatch = useDispatch();
-  const [posterKey, setPosterKey] = useState("");
-  const [imgKey, setImgKey] = useState("");
+  const [backGroundImgS3Key, setBackGroundImgS3Key] = useState("");
+  const [qrCodeImgS3Key, setQrCodeImgS3Key] = useState("");
+  const [posterImgS3Key, setPosterImgS3Key] = useState("");
 
   const history = useHistory();
   const [eventData, setEventData] = useState({
@@ -74,26 +71,44 @@ export default function PostEvent() {
     group: false,
     location: "",
     topicID: "",
+    sponsor: "",
+    tags: "",
     eventStatus: "ComingSoon",
   });
-  console.log("eventData", eventData);
+  console.log(eventData);
   useEffect(() => {
     dispatch(setTopics());
   }, [dispatch]);
 
-  const { topics } = useSelector((state) => state.allEvents);
+  const { topics } = useSelector((state) => state.event);
+  const { username } = useSelector((state) => state.userAuth.user);
 
   const uploadEventImg = async (e) => {
-    const response = await dispatch(postEventImg(e.target.files[0]));
+    const backgroundImageData = e.target.files[0];
+    const backgroundImageLocation = "event";
+    const response = await dispatch(
+      postImage(backgroundImageData, backgroundImageLocation)
+    );
     if (response) {
-      setImgKey(response.key);
+      setBackGroundImgS3Key(response.key);
     }
   };
 
   const uploadEventPoster = async (e) => {
-    const response = await dispatch(postEventPoster(e.target.files[0]));
+    const posterData = e.target.files[0];
+    const posterLocation = "event";
+    const response = await dispatch(postImage(posterData, posterLocation));
     if (response) {
-      setPosterKey(response.key);
+      setPosterImgS3Key(response.key);
+    }
+  };
+
+  const uploadEventQrCode = async (e) => {
+    const qrCodeData = e.target.files[0];
+    const qrCodeLocation = "event";
+    const response = await dispatch(postImage(qrCodeData, qrCodeLocation));
+    if (response) {
+      setQrCodeImgS3Key(response.key);
     }
   };
 
@@ -108,6 +123,8 @@ export default function PostEvent() {
       location,
       topicID,
       eventStatus,
+      sponsor,
+      tags,
     } = eventData;
 
     const createEventInput = {
@@ -118,31 +135,37 @@ export default function PostEvent() {
       online,
       group,
       location,
+      backGroundImgS3Key,
+      posterImgS3Key,
+      qrCodeImgS3Key,
       eventStatus,
-      poster: posterKey,
-      backGroundImgPath: imgKey,
+      sortKey: "SortKey",
       topicID: topicID,
-      active: 1,
-      ByCreatedAt: "Event",
+      active: true,
+      sponsor,
+      tags,
+      userID: username,
     };
+
     const response = await dispatch(postEvent(createEventInput));
 
     if (response.result) {
-      history.push(`/event`);
+      history.push(`/event/${response.response.data.createEvent.id}`);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
 
   const uploadTopic = async () => {
     //Upload the topic
-    const { name } = topicData;
     const createTopicInput = {
-      name,
+      name: topicData.name,
+      userID: username,
     };
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
     dispatch(setTopics());
+    setTopicData({ name: "" });
   };
 
   return (
@@ -190,6 +213,7 @@ export default function PostEvent() {
                 })}
               </Select>
             </FormControl>
+
             <TextField
               margin="normal"
               fullWidth
@@ -207,6 +231,15 @@ export default function PostEvent() {
             >
               上传新的类别
             </Button>
+            <TextField
+              margin="normal"
+              fullWidth
+              label="赞助商"
+              value={eventData.sponsor}
+              onChange={(e) =>
+                setEventData({ ...eventData, sponsor: e.target.value })
+              }
+            />
           </Box>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Box>
@@ -324,10 +357,10 @@ export default function PostEvent() {
               }
             />
             <Box>
-              <label htmlFor="contained-button-file">
+              <label htmlFor="poster">
                 <Input
                   accept="poster/*"
-                  id="contained-button-file"
+                  id="poster"
                   type="file"
                   onChange={(e) => {
                     uploadEventPoster(e);
@@ -336,12 +369,13 @@ export default function PostEvent() {
                 <Button variant="contained" component="span">
                   上传活动海报
                 </Button>
-                <S3Image S3Key={posterKey} style={{ width: "100%" }} />
               </label>
-              <label htmlFor="contained-button-file" sx={{ margin: "normal" }}>
+              <S3Image S3Key={posterImgS3Key} style={{ width: "100%" }} />
+
+              <label htmlFor="uploadEventImg" sx={{ margin: "normal" }}>
                 <Input
                   accept="image/*"
-                  id="contained-button-file"
+                  id="uploadEventImg"
                   type="file"
                   onChange={(e) => {
                     // setImgData();
@@ -352,8 +386,22 @@ export default function PostEvent() {
                   上传背景图片
                 </Button>
               </label>
+              <S3Image S3Key={backGroundImgS3Key} style={{ width: "100%" }} />
+              <label htmlFor="uploadEventQrCode">
+                <Input
+                  accept="poster/*"
+                  id="uploadEventQrCode"
+                  type="file"
+                  onChange={(e) => {
+                    uploadEventQrCode(e);
+                  }}
+                />
+                <Button variant="contained" component="span">
+                  上传活动QR
+                </Button>
+              </label>
+              <S3Image S3Key={qrCodeImgS3Key} style={{ width: "100%" }} />
             </Box>
-            <S3Image S3Key={imgKey} style={{ width: "100%" }} />
             <Button
               variant="contained"
               endIcon={<PublishIcon />}
