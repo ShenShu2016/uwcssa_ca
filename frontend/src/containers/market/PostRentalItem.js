@@ -2,22 +2,25 @@ import {
   Box,
   Button,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import {
-  postMarketItemImg,
-  postMarketRental,
-} from "../../redux/actions/marketItemActions";
 import { useDispatch, useSelector } from "react-redux";
 
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import Chip from "@mui/material/Chip";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { postMarketRental } from "../../redux/actions/marketItemActions";
+import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -52,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
   },
+  menuPaper: {
+    maxHeight: 100,
+  },
 }));
 
 const Input = styled("input")({
@@ -64,6 +70,7 @@ export default function PostMarketRental() {
   const [imgKeyToServer, setImgKeyToServer] = useState([]);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const [tagInput, setTagInput] = useState("");
+  const [error, setError] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
   const history = useHistory();
 
@@ -87,11 +94,10 @@ export default function PostMarketRental() {
   console.log("marketRentalData", marketRentalData);
 
   const uploadMarketItemImg = async (e) => {
-    const response = await Promise.all(
-      Array.from(e.target.files).map((file) =>
-        dispatch(postMarketItemImg(file))
-      )
-    );
+    const imgData = e.target.files;
+    const imgLocation = "marketItem";
+    const response = await dispatch(postMultipleImages(imgData, imgLocation));
+
     if (response) {
       setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
     }
@@ -146,7 +152,7 @@ export default function PostMarketRental() {
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
       price: price,
-      imagePath: imgKeyToServer,
+      imgS3Keys: imgKeyToServer,
       address: address,
       description: description,
       propertySize: propertySize,
@@ -158,7 +164,7 @@ export default function PostMarketRental() {
       dogFriendly: dogFriendly,
       tags: tags,
       active: true,
-      ByCreatedAt: "MarketHome",
+      createdAt: new Date().toISOString(),
       userID: username,
       sortKey: "SortKey",
     };
@@ -184,6 +190,27 @@ export default function PostMarketRental() {
     { value: "RoomOnly", label: "单间" },
     { value: "TownHouse", label: "Townhouse" },
     { value: "Other", label: "其他" },
+  ];
+
+  const laundryType = [
+    { value: "InUnitLaundry", label: "In Unit Laundry" },
+    { value: "LaundryInBuilding", label: "Laundry In Building" },
+    { value: "LaundryAvailable", label: "Laundry Available" },
+    { value: "None", label: "None" },
+    { value: "Other", label: "Other" },
+  ];
+  const AirConditionType = [
+    { value: "CentralAC", label: "Central AC" },
+    { value: "ACAvailable", label: "AC Available" },
+    { value: "None", label: "None" },
+    { value: "Other", label: "Other" },
+  ];
+  const HeatingType = [
+    { value: "CentralHeating", label: "Central Heating" },
+    { value: "ElectricHeating", label: "Electric Heating" },
+    { value: "GasHeating", label: "Gas Heating" },
+    { value: "RadiatorHeating", label: "Radiator Heating" },
+    { value: "Other", label: "Other" },
   ];
 
   const catFriendly = [
@@ -213,18 +240,27 @@ export default function PostMarketRental() {
           (tag) => tag.toLowerCase() === val.toLowerCase()
         )
       ) {
-        return;
+        setTagInput("");
+        setError("The tag has been already created!");
+      } else {
+        e.preventDefault();
+        const newTags = [...marketRentalData.tags].concat([val]);
+        setMarketRentalData({ ...marketRentalData, tags: newTags });
+        setTagInput("");
+        setError("");
+        console.log("tagSuccess", marketRentalData.tags);
       }
-      e.preventDefault();
-      const newTags = [...marketRentalData.tags].concat([val]);
-      setMarketRentalData({ ...marketRentalData, tags: newTags });
-      setTagInput("");
-      console.log("tagSuccess", marketRentalData.tags);
     }
   };
 
   return (
     <div className={classes.root}>
+      <Box>
+        <Typography variant="h4" gutterBottom component="div">
+          New Home Listing
+        </Typography>
+      </Box>
+
       <Box>
         <label htmlFor="contained-button-file">
           <Input
@@ -247,291 +283,355 @@ export default function PostMarketRental() {
           <img src={imgKey} key={imgKey} alt="images" />
         ))}
 
-      <Box className={classes.topic}>
-        <div className="newTopic">
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label2">
-              Home for Sale or Rent
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label2"
-              id="demo-simple-select-outlined2"
-              value={marketRentalData.marketHomeSaleRent}
+      <Box className={classes.content}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <div className="newTopic">
+              <FormControl variant="outlined" fullWidth required>
+                <InputLabel id="demo-simple-select-outlined-label2">
+                  Home for Sale or Rent
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label2"
+                  id="demo-simple-select-outlined2"
+                  value={marketRentalData.marketHomeSaleRent}
+                  required
+                  MenuProps={{ classes: { paper: classes.menuPaper } }}
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      marketHomeSaleRent: e.target.value,
+                    })
+                  }
+                  label="marketHomeSaleRent"
+                >
+                  {marketHomeSaleRent.map((category) => {
+                    return (
+                      <MenuItem value={category.value} key={category.value}>
+                        {category.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={6}>
+            <div className="newTopic">
+              <FormControl variant="outlined" fullWidth required>
+                <InputLabel id="demo-simple-select-outlined-label2">
+                  Property Type
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label2"
+                  id="demo-simple-select-outlined2"
+                  value={marketRentalData.propertyType}
+                  required
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      propertyType: e.target.value,
+                    })
+                  }
+                  label="propertyType"
+                >
+                  {propertyType.map((property) => {
+                    return (
+                      <MenuItem value={property.value} key={property.value}>
+                        {property.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              label="Bedroom Counts"
+              value={marketRentalData.bedroomCounts}
+              variant="outlined"
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
-                  marketHomeSaleRent: e.target.value,
+                  bedroomCounts: e.target.value,
                 })
               }
-              label="marketHomeSaleRent"
-            >
-              {marketHomeSaleRent.map((category) => {
-                return (
-                  <MenuItem value={category.value} key={category.value}>
-                    {category.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-      </Box>
+            />
+          </Grid>
 
-      <Box className={classes.topic}>
-        <div className="newTopic">
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label2">
-              propertyType
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label2"
-              id="demo-simple-select-outlined2"
-              value={marketRentalData.propertyType}
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              label="Bathroom Counts"
+              value={marketRentalData.bathroomCounts}
+              variant="outlined"
+              placeholder={"eg: 2"}
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
-                  propertyType: e.target.value,
+                  bathroomsCounts: e.target.value,
                 })
               }
-              label="propertyType"
-            >
-              {propertyType.map((property) => {
-                return (
-                  <MenuItem value={property.value} key={property.value}>
-                    {property.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-      </Box>
+            />
+          </Grid>
 
-      <Box className={classes.content}>
-        <TextField
-          label="bedroomCounts"
-          value={marketRentalData.bedroomCounts}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              bedroomCounts: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="bathroomCounts"
-          value={marketRentalData.bathroomCounts}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              bathroomsCounts: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="price"
-          value={marketRentalData.price}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              price: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="address"
-          value={marketRentalData.address}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              address: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="propertySize"
-          value={marketRentalData.propertySize}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              propertySize: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="dateAvailable"
-          value={marketRentalData.dateAvailable}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              dateAvailable: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="laundryType"
-          value={marketRentalData.laundryType}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              laundryType: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="airConditionType"
-          value={marketRentalData.airConditionType}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              airConditionType: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.content}>
-        <TextField
-          label="tags"
-          value={tagInput}
-          variant="outlined"
-          fullWidth
-          onKeyDown={inputKeyDown}
-          onChange={(e) => setTagInput(e.target.value)}
-        />
-      </Box>
-
-      {marketRentalData.tags.map((data) => {
-        return <Chip key={data} label={data} onDelete={deleteHandler(data)} />;
-      })}
-
-      <Box className={classes.content}>
-        <TextField
-          label="heatingType"
-          value={marketRentalData.heatingType}
-          variant="outlined"
-          fullWidth
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              heatingType: e.target.value,
-            })
-          }
-        />
-      </Box>
-
-      <Box className={classes.type}>
-        <div className="newType">
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label">
-              CatFriendly
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={marketRentalData.catFriendly}
+          <Grid item xs={6}>
+            <TextField
+              label="Price"
+              value={marketRentalData.price}
+              variant="outlined"
+              fullWidth
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
-                  catFriendly: e.target.value,
+                  price: e.target.value,
                 })
               }
-              label="catFriendly"
-            >
-              {catFriendly.map((cat) => {
-                return (
-                  <MenuItem value={cat.value} key={cat.value}>
-                    {cat.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-      </Box>
+            />
+          </Grid>
 
-      <Box className={classes.type}>
-        <div className="newType">
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label">
-              DogFriendly
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={marketRentalData.dogFriendly}
+          <Grid item xs={6}>
+            <TextField
+              label="Property Size"
+              value={marketRentalData.propertySize}
+              variant="outlined"
+              fullWidth
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
-                  dogFriendly: e.target.value,
+                  propertySize: e.target.value,
                 })
               }
-              label="dogFriendly"
-            >
-              {dogFriendly.map((dog) => {
-                return (
-                  <MenuItem value={dog.value} key={dog.value}>
-                    {dog.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-      </Box>
+            />
+          </Grid>
 
-      <Box className={classes.content}>
-        <TextField
-          label="description"
-          value={marketRentalData.description}
-          variant="outlined"
-          minRows={5}
-          fullWidth
-          multiline
-          onChange={(e) =>
-            setMarketRentalData({
-              ...marketRentalData,
-              description: e.target.value,
-            })
-          }
-        />
+          <Grid item xs={12}>
+            <TextField
+              label="Address"
+              value={marketRentalData.address}
+              variant="outlined"
+              fullWidth
+              onChange={(e) =>
+                setMarketRentalData({
+                  ...marketRentalData,
+                  address: e.target.value,
+                })
+              }
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <div>
+                <DateTimePicker
+                  label="Date Available"
+                  value={marketRentalData.dateAvailable}
+                  id="dateAvailable"
+                  onChange={(e) => {
+                    console.log("e", e);
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      dateAvailable: e,
+                    });
+                  }}
+                  renderInput={(params) => <TextField fullWidth {...params} />}
+                />
+              </div>
+            </LocalizationProvider>
+          </Grid>
+
+          <Grid item xs={6}>
+            <div className="newTopic">
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="demo-simple-select-outlined-label2">
+                  Laundry Type
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label2"
+                  id="demo-simple-select-outlined2"
+                  value={marketRentalData.laundryType}
+                  required
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      laundryType: e.target.value,
+                    })
+                  }
+                  label="laundryType"
+                >
+                  {laundryType.map((property) => {
+                    return (
+                      <MenuItem value={property.value} key={property.value}>
+                        {property.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={6}>
+            <div className="newTopic">
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="demo-simple-select-outlined-label2">
+                  Air Conditioning Type
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label2"
+                  id="demo-simple-select-outlined2"
+                  value={marketRentalData.airConditionType}
+                  required
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      airConditionType: e.target.value,
+                    })
+                  }
+                  label="airConditionType"
+                >
+                  {AirConditionType.map((property) => {
+                    return (
+                      <MenuItem value={property.value} key={property.value}>
+                        {property.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={6}>
+            <div className="newTopic">
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="demo-simple-select-outlined-label2">
+                  Heating Type
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label2"
+                  id="demo-simple-select-outlined2"
+                  value={marketRentalData.heatingType}
+                  required
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      heatingType: e.target.value,
+                    })
+                  }
+                  label="heatingType"
+                >
+                  {HeatingType.map((property) => {
+                    return (
+                      <MenuItem value={property.value} key={property.value}>
+                        {property.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              label="Tags"
+              value={tagInput}
+              variant="outlined"
+              fullWidth
+              onKeyDown={inputKeyDown}
+              error={Boolean(error)}
+              helperText={error}
+              onChange={(e) => setTagInput(e.target.value)}
+            />
+            {marketRentalData.tags.map((data) => {
+              return (
+                <Chip key={data} label={data} onDelete={deleteHandler(data)} />
+              );
+            })}
+          </Grid>
+
+          <Grid item xs={3}>
+            <div className="newType">
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Cat Friendly
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={marketRentalData.catFriendly}
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      catFriendly: e.target.value,
+                    })
+                  }
+                  label="catFriendly"
+                >
+                  {catFriendly.map((cat) => {
+                    return (
+                      <MenuItem value={cat.value} key={cat.value}>
+                        {cat.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={3}>
+            <div className="newType">
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Dog Friendly
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={marketRentalData.dogFriendly}
+                  onChange={(e) =>
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      dogFriendly: e.target.value,
+                    })
+                  }
+                  label="dogFriendly"
+                >
+                  {dogFriendly.map((dog) => {
+                    return (
+                      <MenuItem value={dog.value} key={dog.value}>
+                        {dog.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              label="Description"
+              value={marketRentalData.description}
+              variant="outlined"
+              minRows={5}
+              fullWidth
+              multiline
+              onChange={(e) =>
+                setMarketRentalData({
+                  ...marketRentalData,
+                  description: e.target.value,
+                })
+              }
+            />
+          </Grid>
+        </Grid>
       </Box>
 
       <Button
@@ -540,7 +640,7 @@ export default function PostMarketRental() {
         onClick={uploadMarketRental}
         color="primary"
       >
-        上传MarketHome
+        上传 MarketHome
       </Button>
     </div>
   );
