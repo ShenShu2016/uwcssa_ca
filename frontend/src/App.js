@@ -211,7 +211,11 @@ export default function App() {
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />
-              <Route path="/resetPassword" exact component={ResetPassword} />
+              <Route
+                path="/resetPassword/:username"
+                exact
+                component={ResetPassword}
+              />
               <Route
                 path="/emailConfirm/:username"
                 exact

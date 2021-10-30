@@ -11,8 +11,12 @@ export const ActionTypes = {
   SIGN_UP_FAIL: "auth/signUpFail",
   EMAIL_CONFIRM_SUCCESS: "auth/emailConfirmSuccess",
   EMAIL_CONFIRM_FAIL: "auth/emailConfirmFail",
-  // USER_LOADED_SUCCESS: "auth/userInfoLoadedSuccess",
-  // USER_LOADED_FAIL: "auth/userInfoLoadedFail",
+
+  FORGOT_PASSWORD_SUCCESS: "auth/forgotPasswordSuccess",
+  FORGOT_PASSWORD_FAIL: "auth/forgotPasswordFail",
+
+  FORGOT_PASSWORD_SUBMIT_SUCCESS: "auth/forgotPasswordSubmitSuccess",
+  FORGOT_PASSWORD_SUBMIT_FAIL: "auth/forgotPasswordSubmitFail",
 
   // PASSWORD_RESET_SUCCESS: "auth/passwordResetSuccess",
   // PASSWORD_RESET_FAIL: "auth/passwordResetFail",

@@ -24,6 +24,7 @@ import { makeStyles } from "@mui/styles";
 import { removeURLFrom } from "../../redux/actions/generalAction";
 import { signIn } from "../../redux/actions/authActions";
 import { useHistory } from "react-router";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,11 +39,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     marginBottom: theme.spacing(5),
   },
-
   submit: {
     margin: theme.spacing(5, 4, 0),
   },
-
   button: {
     marginLeft: "1rem",
     marginRight: "4rem",
@@ -83,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  useTitle("UWCSSA登录");
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(); //logging state
@@ -245,7 +245,7 @@ export default function SignIn() {
             variant="outlined"
             className={classes.third_party_button}
             onClick={(event) => handleGoogleSignIn(event)}
-            // disabled
+            disabled
           >
             <Grid item xs={8} lg={6}>
               <img

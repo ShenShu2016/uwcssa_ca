@@ -6,14 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Redirect } from "react-router";
 import { emailConfirm } from "../../redux/actions/authActions";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { useParams } from "react-router";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
 export default function EmailConfirm() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  const [emailConfirmed, setEmailConfirmed] = useState(false);
+  const [loading, setLoading] = useState(); //logging state
+  const [errorMessage, setErrorMessage] = useState(null);
+  const timer = useRef();
+  useTitle("验证邮箱");
   const { username } = useParams();
-
+  const history = useHistory();
   const [formData, setFormData] = useState({
     username: username,
     authenticationCode: "",
@@ -39,18 +42,27 @@ export default function EmailConfirm() {
   };
   const confirmSignUp = async () => {
     const { username, authenticationCode } = formData;
-    const response = await dispatch(emailConfirm(username, authenticationCode));
-
-    if (response.result) {
-      setEmailConfirmed(true);
-    } else {
-      alert(response.error.message);
+    if (!loading) {
+      // console.log("setLoading(loading)", loading);
+      setLoading(true); //开始转圈
+      const response = await dispatch(
+        emailConfirm(username, authenticationCode)
+      );
+      if (response.result) {
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+          console.log("response", response);
+          history.push(`/signIn`);
+        }, 1000);
+      } else {
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+          console.log(response.response.error.message);
+          setErrorMessage(response.response.error.message);
+        }, 1000);
+      }
     }
   };
-
-  if (emailConfirmed) {
-    return <Redirect to="/signIn" />;
-  }
 
   return (
     <Container>
@@ -70,6 +82,8 @@ export default function EmailConfirm() {
                 label="用户名"
                 name="username"
                 autoComplete="username"
+                error={errorMessage ? true : false}
+                helperText={errorMessage}
                 value={username}
                 onChange={(event) => onChange(event)}
               />
@@ -82,6 +96,8 @@ export default function EmailConfirm() {
                 name="authenticationCode"
                 label="验证码"
                 id="authenticationCode"
+                error={errorMessage ? true : false}
+                helperText={errorMessage}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
