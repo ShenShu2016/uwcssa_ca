@@ -19,8 +19,8 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { postImage } from "../../redux/actions/generalAction";
 import { postMarketRental } from "../../redux/actions/marketItemActions";
-import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -70,11 +70,12 @@ const Input = styled("input")({
 export default function PostMarketRental() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgKeyToServer, setImgKeyToServer] = useState([]);
-  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  const [imgKeyToServer, setImgKeyToServer] = useState(null);
+  const [imgKeyFromServer, setImgKeyFromServer] = useState(null);
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
+
   const history = useHistory();
 
   const [marketRentalData, setMarketRentalData] = useState({
@@ -99,26 +100,33 @@ export default function PostMarketRental() {
   const uploadMarketItemImg = async (e) => {
     const imgData = e.target.files;
     const imgLocation = "marketItem";
-    const response = await dispatch(postMultipleImages(imgData, imgLocation));
+    const response = await dispatch(postImage(imgData, imgLocation));
 
     if (response) {
-      setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
+      setImgKeyToServer(response.key);
+      // setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
     }
   };
-
+  console.log("imgkeytoserver", imgKeyToServer);
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Promise.all(
-          Array.from(imgKeyToServer).map((key) =>
-            Storage.get(key, {
-              level: "public",
-              expires: 120,
-              download: false,
-            })
-          )
-        );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        // const imageAccessURL = await Promise.all(
+        //   Array.from(imgKeyToServer).map((key) =>
+        //     Storage.get(key, {
+        //       level: "public",
+        //       expires: 120,
+        //       download: false,
+        //     })
+        //   )
+        // );
+        const imageAccessURL = await Storage.get(imgKeyToServer, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        // setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        setImgKeyFromServer(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImgKeyFromServer([]);
@@ -281,7 +289,7 @@ export default function PostMarketRental() {
         </label>
       </Box>
 
-      {imgKeyToServer &&
+      {/* {imgKeyToServer &&
         imgKeyFromServer.map((imgKey) => (
           <img
             src={imgKey}
@@ -289,7 +297,15 @@ export default function PostMarketRental() {
             alt="images"
             className={classes.imgKeyFromServer}
           />
-        ))}
+        ))} */}
+      {imgKeyFromServer && (
+        <img
+          src={imgKeyFromServer}
+          key={imgKeyFromServer}
+          alt="images"
+          className={classes.imgKeyFromServer}
+        />
+      )}
 
       <Box className={classes.content}>
         <Grid container spacing={2}>
