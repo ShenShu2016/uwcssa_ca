@@ -65,30 +65,76 @@ export const setLike = (itemID, userID, isLike) => async (dispatch) => {
 };
 
 export const postMultipleImages =
-  (imageData, imageLocation) => async (dispatch) => {
+  (imagesData, imageLocation) => async (dispatch) => {
+    dispatch({ type: ActionTypes.REMOVE_MULTIPLE_IMAGEs });
+    console.log("imagesData", imagesData);
     try {
-      const response = await Promise.all(
-        Array.from(imageData).map((img) =>
-          Storage.put(
-            `${imageLocation}/${uuid()}.${img.name.split(".").pop()}`,
-            img,
-            { contentType: "image/*" }
-          )
+      await Promise.all(
+        Array.from(imagesData).map(
+          (imageData) =>
+            new Compressor(imageData, {
+              quality: 0.6,
+              success(result) {
+                console.log("Result", result);
+                Storage.put(
+                  `${imageLocation}/${uuid()}.${result.name.split(".").pop()}`,
+                  result,
+                  { contentType: "image/*" }
+                ).then((e) => {
+                  console.log("response 上传成功了", e);
+                  dispatch({
+                    type: ActionTypes.POST_MULTIPLE_IMAGES_SUCCESS,
+                    payload: e.key,
+                  });
+                });
+              },
+            })
         )
       );
-      console.log(response);
-      dispatch({
-        type: ActionTypes.POST_IMAGE_SUCCESS,
-        payload: response,
-      });
-      return response;
     } catch (error) {
       console.log(error);
       dispatch({
-        type: ActionTypes.POST_IMAGE_FAIL,
+        type: ActionTypes.POST_MULTIPLE_IMAGES_FAIL,
         payload: error,
       });
     }
+
+    // async function compress(files) {
+    //   for (const file of files) {
+    //     await new Promise((resolve, reject) => {
+    //       new Compressor(file, {
+    //         quality: 0.6,
+    //         success(result) {
+    //           Storage.put(
+    //             `${imageLocation}/${uuid()}.${result.name.split(".").pop()}`,
+    //             result,
+    //             { contentType: "image/*" }
+    //           ).then((e) => {
+    //             console.log("response 上传成功了", e);
+    //             dispatch({
+    //               type: ActionTypes.POST_MULTIPLE_IMAGES_SUCCESS,
+    //               payload: e,
+    //             });
+    //             resolve();
+    //           });
+    //         },
+    //       });
+    //     });
+    //   }
+    // }
+
+    // compress(imagesData)
+    //   .then((result) => {
+    //     console.log("Compress success");
+    //     console.log("result", result);
+    //   })
+    //   .catch((err) => {
+    //     console.log("Compress error");
+    //   })
+    //   .finally(() => {
+    //     console.log("Compress complete");
+    //     return true;
+    //   });
   };
 
 export const postImage = (imageData, imageLocation) => async (dispatch) => {

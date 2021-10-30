@@ -122,7 +122,7 @@ export default function PostMarketRental() {
         //     })
         //   )
         // );
-        const imageAccessURL = await Storage.get(imageKey[0].key, {
+        const imageAccessURL = await Storage.get(imageKey.key, {
           level: "public",
           expires: 120,
           download: false,
@@ -134,7 +134,7 @@ export default function PostMarketRental() {
         setImgKeyFromServer();
       }
     };
-    if (imageKey[0]) {
+    if (imageKey.key) {
       console.log("我tm来一次");
       getImage();
     }

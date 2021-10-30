@@ -59,12 +59,14 @@ const Input = styled("input")({
 export default function PostMarketVehicle() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgKeyToServer, setImgKeyToServer] = useState([]);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
+  const { imageKeys } = useSelector((state) => state.general);
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
+  const [renderTrigger, setRenderTrigger] = useState(null);
   const history = useHistory();
+  // console.log("imgKeys", imageKeys);
 
   const [marketVehicleData, setMarketVehicleData] = useState({
     vehicleType: "",
@@ -79,22 +81,20 @@ export default function PostMarketVehicle() {
     description: "",
     tags: [],
   });
-  console.log("marketVehicleData", marketVehicleData);
+  // console.log("marketVehicleData", marketVehicleData);
   const uploadMarketItemImg = async (e) => {
-    const imgData = e.target.files;
-    const imgLocation = "marketItem";
-    const response = await dispatch(postMultipleImages(imgData, imgLocation));
-
-    if (response) {
-      setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
-    }
+    const imagesData = e.target.files;
+    setRenderTrigger(imagesData.length);
+    const imgLocation = "marketVehicle";
+    await dispatch(postMultipleImages(imagesData, imgLocation));
   };
 
   useEffect(() => {
     const getImage = async () => {
       try {
+        setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imgKeyToServer).map((key) =>
+          Array.from(imageKeys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -108,11 +108,12 @@ export default function PostMarketVehicle() {
         setImgKeyFromServer([]);
       }
     };
-    if (imgKeyToServer) {
+    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
       getImage();
     }
-  }, [imgKeyToServer]);
+  }, [imageKeys, renderTrigger]);
 
+  // console.log("imgKeyFromServer", imgKeyFromServer);
   const uploadMarketVehicle = async () => {
     const {
       vehicleType,
@@ -130,7 +131,7 @@ export default function PostMarketVehicle() {
 
     const createMarketVehicleInput = {
       vehicleType,
-      imgS3Keys: imgKeyToServer,
+      imgS3Keys: imageKeys,
       location: location,
       year: year,
       make: make,
@@ -221,7 +222,7 @@ export default function PostMarketVehicle() {
         </label>
       </Box>
 
-      {imgKeyToServer &&
+      {imgKeyFromServer &&
         imgKeyFromServer.map((imgKey) => (
           <img src={imgKey} key={imgKey} alt="images" />
         ))}

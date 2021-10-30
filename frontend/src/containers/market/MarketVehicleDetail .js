@@ -70,7 +70,7 @@ export default function MarketVehicleDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imgS3Keys, {
+        const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
           download: false,
