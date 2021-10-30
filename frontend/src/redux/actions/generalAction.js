@@ -1,5 +1,6 @@
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/general-action-types";
+import Compressor from "compressorjs";
 import Storage from "@aws-amplify/storage";
 import { createLike } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
@@ -92,17 +93,26 @@ export const postMultipleImages =
 
 export const postImage = (imageData, imageLocation) => async (dispatch) => {
   try {
-    const response = await Storage.put(
-      `${imageLocation}/${uuid()}.${imageData.name.split(".").pop()}`,
-      imageData,
-      { contentType: "image/*" }
-    );
-    console.log(response);
-    dispatch({
-      type: ActionTypes.POST_IMAGE_SUCCESS,
-      payload: response,
+    const tempUuid = uuid();
+    const imgData0 = imageData[0];
+    new Compressor(imgData0, {
+      quality: 0.6,
+      success(result) {
+        console.log("Result", result);
+        Storage.put(
+          `${imageLocation}/${tempUuid}.${result.name.split(".").pop()}`,
+          result,
+          { contentType: "image/*" }
+        ).then((e) => {
+          console.log("response", e);
+          dispatch({
+            type: ActionTypes.POST_IMAGE_SUCCESS,
+            payload: e,
+          });
+        });
+      },
     });
-    return response;
+    return `${imageLocation}/${tempUuid}.${imgData0.name.split(".").pop()}`;
   } catch (error) {
     console.log(error);
     dispatch({
