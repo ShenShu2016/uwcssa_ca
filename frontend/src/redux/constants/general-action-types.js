@@ -6,7 +6,9 @@ export const ActionTypes = {
 
   POST_IMAGE_SUCCESS: "general/put/imageSuccess",
   POST_IMAGE_FAIL: "general/put/imageFail",
+  POST_IMAGES_SUCCESS: "general/put/imagesSuccess",
 
+  POST_IMAGES_FAIL: "general/put/imageFail",
   SET_LIKE: "general/put/likeSuccess",
   SET_DISLIKE: "general/put/disLikeSuccess",
 };

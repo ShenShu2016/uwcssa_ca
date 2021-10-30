@@ -112,7 +112,7 @@ export const postImage = (imageData, imageLocation) => async (dispatch) => {
         });
       },
     });
-    return `${imageLocation}/${tempUuid}.${imgData0.name.split(".").pop()}`;
+    // return `${imageLocation}/${tempUuid}.${imgData0.name.split(".").pop()}`;
   } catch (error) {
     console.log(error);
     dispatch({

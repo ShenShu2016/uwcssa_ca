@@ -70,12 +70,14 @@ const Input = styled("input")({
 export default function PostMarketRental() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgKeyToServer, setImgKeyToServer] = useState(null);
+  // const [imgKeyToServer, setImgKeyToServer] = useState(null);
   const [imgKeyFromServer, setImgKeyFromServer] = useState(null);
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
+  const { imageKey } = useSelector((state) => state.general);
 
+  // console.log("imageKeys", imageKeys, imageKeys[0].key);
   const history = useHistory();
 
   const [marketRentalData, setMarketRentalData] = useState({
@@ -95,19 +97,19 @@ export default function PostMarketRental() {
     dogFriendly: true,
     tags: [],
   });
-  console.log("marketRentalData", marketRentalData);
+  // console.log("marketRentalData", marketRentalData);
 
   const uploadMarketItemImg = async (e) => {
     const imgData = e.target.files;
     const imgLocation = "marketItem";
-    const response = await dispatch(postImage(imgData, imgLocation));
-
-    if (response) {
-      setImgKeyToServer(response.key);
-      // setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
-    }
+    dispatch(postImage(imgData, imgLocation));
+    // if (response) {
+    //   console.log("if (response)", response);
+    //   setImgKeyToServer(response);
+    //   // setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
+    // }
   };
-  console.log("imgkeytoserver", imgKeyToServer);
+  // console.log("imgkeyterver", imgKeyToServer);
   useEffect(() => {
     const getImage = async () => {
       try {
@@ -120,7 +122,7 @@ export default function PostMarketRental() {
         //     })
         //   )
         // );
-        const imageAccessURL = await Storage.get(imgKeyToServer, {
+        const imageAccessURL = await Storage.get(imageKey[0].key, {
           level: "public",
           expires: 120,
           download: false,
@@ -129,13 +131,14 @@ export default function PostMarketRental() {
         setImgKeyFromServer(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer([]);
+        setImgKeyFromServer();
       }
     };
-    if (imgKeyToServer) {
+    if (imageKey[0]) {
+      console.log("我tm来一次");
       getImage();
     }
-  }, [imgKeyToServer]);
+  }, [imageKey]);
 
   const uploadMarketRental = async () => {
     //Upload the marketRental
@@ -163,7 +166,7 @@ export default function PostMarketRental() {
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
       price: price,
-      imgS3Keys: imgKeyToServer,
+      imgS3Keys: [imageKey[0].key],
       address: address,
       description: description,
       propertySize: propertySize,
@@ -244,7 +247,7 @@ export default function PostMarketRental() {
 
   const inputKeyDown = (e) => {
     const val = e.target.value;
-    console.log("tagSuccess", marketRentalData.tags);
+    // console.log("tagSuccess", marketRentalData.tags);
     if (e.key === "Enter" && val) {
       if (
         marketRentalData.tags.find(

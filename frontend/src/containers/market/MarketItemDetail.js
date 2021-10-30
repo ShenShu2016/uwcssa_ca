@@ -71,6 +71,7 @@ export default function MarketItemDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
+        console.log("我tm又莱拉imgS3Keys[0]", imgS3Keys[0]);
         const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
