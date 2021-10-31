@@ -141,7 +141,7 @@ export default function MarketRentalDetail() {
             类型：{propertyType}
           </Typography>
           <Typography variant="h3" color="red" className={classes.title}>
-            价格：{price}
+            价格：$ {price}
           </Typography>
           <Typography variant="h3" color="red" className={classes.title}>
             位置：{address}
