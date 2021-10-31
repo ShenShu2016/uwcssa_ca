@@ -27,6 +27,7 @@ import ForumSubTopic from "./components/Forum/ForumSubTopic/ForumSubTopic";
 import ForumTopic from "./components/Forum//ForumTopic/ForumTopic";
 import ForumTopicCURD from "./components/Forum/ForumTopic/ForumTopicCURD";
 import FoundingTeam from "./containers/FoundingTeam";
+import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Group from "./components/Event/group";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
@@ -280,6 +281,11 @@ export default function App() {
                 component={Group}
               />
               <Route path="/event/:eventID" exact component={EventDetail} />
+              <Route
+                path="/test/googleMapsPlace"
+                exact
+                component={GoogleMapsPlace}
+              />
               <Route>404 Not Found!</Route>
             </Switch>
             <Snackbar
