@@ -1,21 +1,13 @@
-import {
-  Box,
-  Button,
-  Chip,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { marketVehicleOptions } from "./marketVehicleOptions";
 import { postMarketVehicle } from "../../redux/actions/marketItemActions";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
@@ -62,9 +54,8 @@ export default function PostMarketVehicle() {
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const { imageKeys } = useSelector((state) => state.general);
-  const [tagInput, setTagInput] = useState("");
-  const [error, setError] = useState("");
   const [renderTrigger, setRenderTrigger] = useState(null);
+  const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
   // console.log("imgKeys", imageKeys);
 
@@ -114,6 +105,8 @@ export default function PostMarketVehicle() {
   }, [imageKeys, renderTrigger]);
 
   // console.log("imgKeyFromServer", imgKeyFromServer);
+  // console.log("imageKeys", imageKeys);
+
   const uploadMarketVehicle = async () => {
     const {
       vehicleType,
@@ -126,7 +119,6 @@ export default function PostMarketVehicle() {
       fuelType,
       price,
       description,
-      tags,
     } = marketVehicleData;
 
     const createMarketVehicleInput = {
@@ -141,7 +133,7 @@ export default function PostMarketVehicle() {
       fuelType: fuelType,
       price: price,
       description: description,
-      tags: tags,
+      tags: GetTags(),
       active: true,
       createdAt: new Date().toISOstring,
       sortKey: "SortKey",
@@ -159,44 +151,6 @@ export default function PostMarketVehicle() {
     }
   };
 
-  const deleteHandler = (i) => () => {
-    const { tags: newTags } = { ...marketVehicleData };
-    setMarketVehicleData({
-      ...marketVehicleData,
-      tags: newTags.filter((tag) => tag !== i),
-    });
-  };
-
-  const inputKeyDown = (e) => {
-    const val = e.target.value;
-    console.log("tagSuccess", marketVehicleData.tags);
-    if (e.key === "Enter" && val) {
-      if (
-        marketVehicleData.tags.find(
-          (tag) => tag.toLowerCase() === val.toLowerCase()
-        )
-      ) {
-        setTagInput("");
-        setError("The tag has been already created!");
-      } else {
-        e.preventDefault();
-        const newTags = [...marketVehicleData.tags].concat([val]);
-        setMarketVehicleData({ ...marketVehicleData, tags: newTags });
-        setTagInput("");
-        setError("");
-        console.log("tagSuccess", marketVehicleData.tags);
-      }
-    }
-  };
-
-  const marketVehicleTypeList = [
-    { value: "CarTruck", label: "Car Truck" },
-    { value: "Motorcycle", label: "Motorcycle" },
-    { value: "PowerSport", label: "PowerSport" },
-    { value: "RVCamper", label: "RV Camper" },
-    { value: "Trailer", label: "Trailer" },
-    { value: "Other", label: "其他" },
-  ];
   return (
     <div className={classes.root}>
       <Box>
@@ -230,36 +184,18 @@ export default function PostMarketVehicle() {
       <Box className={classes.content}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <div className="newType">
-              <FormControl variant="outlined" fullWidth required>
-                <InputLabel id="demo-simple-select-outlined-label2">
-                  Vehicle Type
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-outlined-label2"
-                  id="demo-simple-select-outlined2"
-                  value={marketVehicleData.vehicleType}
-                  onChange={(e) =>
-                    setMarketVehicleData({
-                      ...marketVehicleData,
-                      vehicleType: e.target.value,
-                    })
-                  }
-                  label="vehicleType"
-                >
-                  {marketVehicleTypeList.map((vehicleType) => {
-                    return (
-                      <MenuItem
-                        value={vehicleType.value}
-                        key={vehicleType.value}
-                      >
-                        {vehicleType.label}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
+            <MarketForm
+              title="Vehicle Type"
+              value={marketVehicleData.vehicleType}
+              options={marketVehicleTypeList}
+              required={true}
+              onChange={(e) =>
+                setMarketVehicleData({
+                  ...marketVehicleData,
+                  vehicleType: e.target.value,
+                })
+              }
+            />
           </Grid>
 
           <Grid item xs={6}>
@@ -278,22 +214,9 @@ export default function PostMarketVehicle() {
           </Grid>
 
           <Grid item xs={6}>
-            <TextField
-              label="Tags"
-              value={tagInput}
-              variant="outlined"
-              fullWidth
-              onKeyDown={inputKeyDown}
-              error={Boolean(error)}
-              helperText={error}
-              onChange={(e) => setTagInput(e.target.value)}
-            />
-            {marketVehicleData.tags.map((data) => {
-              return (
-                <Chip key={data} label={data} onDelete={deleteHandler(data)} />
-              );
-            })}
+            <CustomTags />
           </Grid>
+
           <Grid item xs={6}>
             <TextField
               label="Year"

@@ -41,7 +41,7 @@ import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import PostEvent from "./components/Event/PostEvent";
 import PostMarketItem from "./containers/market/PostMarketItem";
-import PostMarketRental from "./containers/market/PostRentalItem";
+import PostMarketRental from "./containers/market/PostMarketRental";
 import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import PrivateRoute from "./components/PrivateRoute";

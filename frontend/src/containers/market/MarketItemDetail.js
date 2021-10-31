@@ -61,7 +61,7 @@ export default function MarketItemDetail() {
     location,
     marketItemCondition,
     marketItemCategory,
-    // tags,
+    tags,
     // active,
     createdAt,
     // ByCreatedAt,
@@ -130,7 +130,10 @@ export default function MarketItemDetail() {
           </CardActionArea>
           <Divider />
           <Typography variant="h3" color="red" className={classes.title}>
-            价格：{price}
+            Tags：{tags}
+          </Typography>
+          <Typography variant="h3" color="red" className={classes.title}>
+            价格：$ {price}
           </Typography>
           <Typography variant="h3" color="red" className={classes.title}>
             位置：{location}

@@ -1,21 +1,13 @@
-import {
-  Box,
-  Button,
-  Chip,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { marketItemOptions } from "./marketItemOptions";
 import { postMarketItem } from "../../redux/actions/marketItemActions";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
@@ -53,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
   menuPaper: {
     maxHeight: 10,
   },
+  imgKeyFromServer: {
+    width: "100%",
+  },
 }));
 
 const Input = styled("input")({
@@ -61,11 +56,12 @@ const Input = styled("input")({
 export default function PostMarketItem() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgKeyToServer, setImgKeyToServer] = useState([]);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const [tagInput, setTagInput] = useState("");
-  const [error, setError] = useState("");
+  const { imageKeys } = useSelector((state) => state.general);
+  const [renderTrigger, setRenderTrigger] = useState(null);
+  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
+
   const history = useHistory();
 
   const [marketItemData, setMarketItemData] = useState({
@@ -81,20 +77,18 @@ export default function PostMarketItem() {
   console.log("marketItemData", marketItemData);
 
   const uploadMarketItemImg = async (e) => {
-    const imgData = e.target.files;
+    const imagesData = e.target.files;
+    setRenderTrigger(imagesData.length);
     const imgLocation = "marketItem";
-    const response = await dispatch(postMultipleImages(imgData, imgLocation));
-
-    if (response) {
-      setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
-    }
+    await dispatch(postMultipleImages(imagesData, imgLocation));
   };
 
   useEffect(() => {
     const getImage = async () => {
       try {
+        setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imgKeyToServer).map((key) =>
+          Array.from(imageKeys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -108,10 +102,10 @@ export default function PostMarketItem() {
         setImgKeyFromServer([]);
       }
     };
-    if (imgKeyToServer) {
+    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
       getImage();
     }
-  }, [imgKeyToServer]);
+  }, [imageKeys, renderTrigger]);
 
   const uploadMarketItem = async () => {
     //Upload the marketItem
@@ -122,7 +116,6 @@ export default function PostMarketItem() {
       marketItemCondition,
       price,
       location,
-      tags,
     } = marketItemData;
 
     const createMarketItemInput = {
@@ -130,11 +123,11 @@ export default function PostMarketItem() {
       name: title,
       description: description,
       price: price,
-      imgS3Keys: imgKeyToServer,
+      imgS3Keys: imageKeys,
       marketItemCategory: marketItemCategory,
       marketItemCondition: marketItemCondition,
       location: location,
-      tags: tags,
+      tags: GetTags(),
       active: true,
       createdAt: new Date().toISOString(),
       userID: username,
@@ -147,77 +140,6 @@ export default function PostMarketItem() {
       history.push(
         `/market/item/${response.response.data.createMarketItem.id}`
       );
-    }
-  };
-  const marketItemConditionList = [
-    { value: "New", label: "全新" },
-    { value: "UsedLikeNew", label: "基本全新" },
-    { value: "UsedGood", label: "7成新" },
-    { value: "UsedFair", label: "可以使用" },
-    { value: "Other", label: "其他" },
-  ];
-  const marketItemCategoryList = [
-    { value: "Tools", label: "工具" },
-    { value: "Furniture", label: "家具" },
-    { value: "HouseHold", label: "家庭" },
-    { value: "Garden", label: "园艺" },
-    { value: "Appliances", label: "家电" },
-
-    { value: "VideoGames", label: "电视游戏" },
-    { value: "BooksMoviesMusic", label: "书籍，电影，音乐" },
-
-    { value: "BagsLuggage", label: "箱包行李" },
-    { value: "WomensClothingShoes", label: "女装，女鞋" },
-    { value: "MensClothingShoes", label: "男装，男鞋" },
-    { value: "JewelryAccessories", label: "珠宝首饰" },
-
-    { value: "HealthBeauty", label: "健康美容" },
-    { value: "PetSupplies", label: "宠物用品" },
-    { value: "BabyKids", label: "婴儿玩具" },
-    { value: "ToysGames", label: "玩具游戏" },
-
-    { value: "ElectronicsComputers", label: "电子产品，电脑" },
-    { value: "MobilePhones", label: "手机" },
-
-    { value: "Bicycles", label: "自行车" },
-    { value: "ArtsCrafts", label: "工艺品" },
-    { value: "SportsOutdoors", label: "运动户外" },
-    { value: "AutoParts", label: "汽车零件" },
-    { value: "MusicalInstruments", label: "乐器" },
-    { value: "AntiquesCollectibles", label: "古董收藏品" },
-
-    { value: "GarageSale", label: "车库特卖" },
-    { value: "Miscellaneous", label: "各种各样的" },
-    { value: "Other", label: "其他" },
-  ];
-
-  const deleteHandler = (i) => () => {
-    const { tags: newTags } = { ...marketItemData };
-    setMarketItemData({
-      ...marketItemData,
-      tags: newTags.filter((tag) => tag !== i),
-    });
-  };
-
-  const inputKeyDown = (e) => {
-    const val = e.target.value;
-    console.log("tagSuccess", marketItemData.tags);
-    if (e.key === "Enter" && val) {
-      if (
-        marketItemData.tags.find(
-          (tag) => tag.toLowerCase() === val.toLowerCase()
-        )
-      ) {
-        setTagInput("");
-        setError("The tag has been already created!");
-      } else {
-        e.preventDefault();
-        const newTags = [...marketItemData.tags].concat([val]);
-        setMarketItemData({ ...marketItemData, tags: newTags });
-        setTagInput("");
-        setError("");
-        console.log("tagSuccess", marketItemData.tags);
-      }
     }
   };
 
@@ -246,9 +168,14 @@ export default function PostMarketItem() {
         </label>
       </Box>
 
-      {imgKeyToServer &&
+      {imgKeyFromServer &&
         imgKeyFromServer.map((imgKey) => (
-          <img src={imgKey} key={imgKey} alt="images" />
+          <img
+            className={classes.imgKeyFromServer}
+            src={imgKey}
+            key={imgKey}
+            alt="images"
+          />
         ))}
 
       <Box className={classes.content}>
@@ -282,81 +209,35 @@ export default function PostMarketItem() {
           </Grid>
 
           <Grid item xs={6}>
-            <div className="newTopic">
-              <FormControl variant="outlined" fullWidth required>
-                <InputLabel id="demo-simple-select-outlined-label2">
-                  Category
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-outlined-label2"
-                  id="demo-simple-select-outlined2"
-                  value={marketItemData.marketItemCategory}
-                  onChange={(e) =>
-                    setMarketItemData({
-                      ...marketItemData,
-                      marketItemCategory: e.target.value,
-                    })
-                  }
-                  MenuProps={{ classes: { paper: classes.menuPaper } }}
-                  label="Category"
-                >
-                  {marketItemCategoryList.map((category) => {
-                    return (
-                      <MenuItem value={category.value} key={category.value}>
-                        {category.label}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Tags"
-              value={tagInput}
-              variant="outlined"
-              fullWidth
-              placeholder="eg. 自用"
-              onKeyDown={inputKeyDown}
-              error={Boolean(error)}
-              helperText={error}
-              onChange={(e) => setTagInput(e.target.value)}
+            <MarketForm
+              title="Category"
+              value={marketItemData.marketItemCategory}
+              options={marketItemCategoryList}
+              required={true}
+              onChange={(e) =>
+                setMarketItemData({
+                  ...marketItemData,
+                  marketItemCategory: e.target.value,
+                })
+              }
             />
-            {marketItemData.tags.map((data) => {
-              return (
-                <Chip key={data} label={data} onDelete={deleteHandler(data)} />
-              );
-            })}
           </Grid>
           <Grid item xs={6}>
-            <div className="newType">
-              <FormControl variant="outlined" fullWidth required>
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Condition
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-outlined-label"
-                  id="demo-simple-select-outlined"
-                  value={marketItemData.marketItemCondition}
-                  onChange={(e) =>
-                    setMarketItemData({
-                      ...marketItemData,
-                      marketItemCondition: e.target.value,
-                    })
-                  }
-                  label="Condition"
-                >
-                  {marketItemConditionList.map((condition) => {
-                    return (
-                      <MenuItem value={condition.value} key={condition.value}>
-                        {condition.label}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
+            <CustomTags />
+          </Grid>
+          <Grid item xs={6}>
+            <MarketForm
+              title="Condition"
+              value={marketItemData.marketItemCondition}
+              options={marketItemConditionList}
+              required={true}
+              onChange={(e) =>
+                setMarketItemData({
+                  ...marketItemData,
+                  marketItemCondition: e.target.value,
+                })
+              }
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
