@@ -32,8 +32,8 @@ const departments = `query ListDepartments {
   }
 }`;
 
-export const listUwcssaJobs = `query ListUwcssaJobs {
-    listUwcssaJobs {
+export const listUwcssaJobs = `query ListUwcssaJobs($filter: ModelUwcssaJobFilterInput) {
+    listUwcssaJobs(filter: $filter) {
       items {
         id
         introduction
@@ -50,21 +50,6 @@ export const listUwcssaJobs = `query ListUwcssaJobs {
         updatedAt
         departmentID
         userID
-        uwcssaJobResumes {
-          items {
-            id
-            name
-            email
-            resumeFileS3Key
-            phone
-            message
-            createdAt
-            updatedAt
-            uwcssaJobID
-            userID
-            uwcssaJobResumeStatus
-          }
-        }
         department {
           id
           name

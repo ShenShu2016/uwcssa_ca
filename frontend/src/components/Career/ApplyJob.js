@@ -17,6 +17,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
+import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,11 +72,11 @@ export default function ApplyJob(props) {
   const fetchJob = async () => {
     try {
       const jobData = await API.graphql({
-        query: getUwcssaJob,
-        variables: { id: id },
+        query: listUwcssaJobs,
+        variables: { filter: {id: {eq: id}} },
         authMode: "AWS_IAM",
       });
-      const job = jobData.data.getUwcssaJob;
+      const job = jobData.data.listUwcssaJobs.items[0];
       console.log("jobTitle: ", job.title);
       setApplyData({ ...applyData, job: job });
     } catch (error) {
@@ -131,10 +132,11 @@ export default function ApplyJob(props) {
             name: applyData.applyName,
             email: applyData.applyEmail,
             phone: applyData.applyPhone,
-            resumeFilePath: key,
+            resumeFileS3Key: key,
             message: applyData.message,
             uwcssaJobID: applyData.job.id,
             uwcssaJobResumeStatus: "pending",
+            userID: userAuth.user.username
           };
           const newUwcssaJobResume = await API.graphql(
             graphqlOperation(createUwcssaJobResume, {

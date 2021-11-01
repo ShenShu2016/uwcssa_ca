@@ -5,6 +5,7 @@ import API from "@aws-amplify/api";
 import { Link } from "react-router-dom";
 import { getUwcssaJob } from "../../graphql/queries";
 import { makeStyles } from "@mui/styles";
+import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions"
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,11 +35,11 @@ export default function JobDetail(props) {
   const fetchJob = async () => {
     try {
       const jobData = await API.graphql({
-        query: getUwcssaJob,
-        variables: { id: id },
+        query: listUwcssaJobs,
+        variables: { filter: {id: {eq: id}} },
         authMode: "AWS_IAM",
       });
-      const job = jobData.data.getUwcssaJob;
+      const job = jobData.data.listUwcssaJobs.items[0];
       console.log("jobData", jobData);
       setJob(job);
     } catch (error) {

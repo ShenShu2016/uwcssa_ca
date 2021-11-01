@@ -75,7 +75,7 @@ export default function PostDepartment(props) {
         setTimeout(() => {
           const url = document.URL
           window.open(url,"_self")
-          props.history.push("/staff/uwcssaJob");
+          // props.history.push("/staff/uwcssaJob");
         }, 1200);
       }
     } catch (error) {
