@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     marginLeft: "1rem",
   },
   root: {
-    maxWidth: "960px",
+    maxWidth: "940px",
     margin: "auto",
     paddingBlock: "3rem",
     paddingInline: "1rem",

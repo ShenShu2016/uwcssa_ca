@@ -1,25 +1,26 @@
-import React, { useEffect } from "react";
-import { makeStyles } from "@mui/styles";
 import {
   Box,
-  Typography,
-  Container,
-  Chip,
-  Button,
-  Paper,
-  MobileStepper,
-  useTheme,
   Breadcrumbs,
+  Button,
+  Chip,
+  Container,
   Grid,
+  MobileStepper,
+  Paper,
+  Typography,
+  useTheme,
 } from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import EventMain from "../components/Event/EventMain";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { Link } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@mui/styles";
 import { setEvents } from "../redux/actions/eventActions";
-import EventMain from "../components/Event/EventMain";
 import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
