@@ -90,7 +90,7 @@ export default function ArticlesPreview() {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4">ArticlesPreview</Typography>
+      <Typography variant="h4" sx={{margin: 3}}>ArticlesPreview</Typography>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}
