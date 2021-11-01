@@ -1,47 +1,109 @@
-import { Box } from "@mui/system";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import React from "react";
-import { Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import React, { useState } from "react";
+import {Box, List, ListItemText } from "@mui/material";
+import ListItemButton from "@mui/material/ListItemButton";
+import uwcssa_logo from "../../static/uwcssa_logo.svg";
+import PostEvent from "../../components/Event/PostEvent";
+import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
+import PostDepartment from "./UwcssaJob/PostDepartment";
+import PostArticle from "./Article/PostArticle";
+import Grid from '@mui/material/Grid';
+import PropTypes from "prop-types";
+import ArticlesPreview from "./Article/ArticlesPreview";
+import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview"
+function TabPanel(props) {
+  const { children, value, index } = props;
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: "960px",
-    margin: "auto",
-    display: "block",
-  },
-});
-const Staff = () => {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Typography variant="h4">Staff</Typography>
-      <Box>
-        <Button
-          variant="contained"
-          component={Link}
-          to="/staff/article/postArticle"
-        >
-          Go Create Article
-        </Button>
-      </Box>
-      <Box>
-        <Button
-          variant="contained"
-          component={Link}
-          to="/staff/uwcssaJob/postUwcssaJob"
-        >
-          Go Create UwcssaJob
-        </Button>
-      </Box>
-      <Box>
-        <Link to="/staff/article">Article Preview</Link>
-        <div></div>
-        <Link to="/staff/uwcssaJob">UwcssaJob Preview</Link>
-      </Box>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+    >
+      {value === index && (
+        <Box>
+          {children}
+        </Box>
+      )}
     </div>
   );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
-export default Staff;
+export default function Staff() {
+  const [value, setValue] = useState(0);
+  const [liveComponent, setLiveComponent] = useState("Main");
+
+  return (
+    <div>
+      <Grid container>
+        <Grid item xs={2}>
+          <Box role="presentation">
+            <List sx={{marginTop: 3}}>
+              <div>
+              <ListItemButton 
+                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
+                  onClick={()=>{setValue(0);setLiveComponent("Main")}}
+                  selected={liveComponent === "Main"}
+                >
+                  <ListItemText primary="管理首页" />
+                </ListItemButton>
+                <ListItemButton 
+                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
+                  onClick={()=>{setValue(1);setLiveComponent("PostEvent")}}
+                  selected={liveComponent === "PostEvent"}
+                >
+                  <ListItemText primary="活动策划" />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
+                  onClick={()=>{setValue(2);setLiveComponent("PostUwcssaJob")}}
+                  selected={liveComponent === "PostUwcssaJob"}
+                >
+                  <ListItemText primary="职位招聘" />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
+                  onClick={()=>{setValue(3);setLiveComponent("PostDepartment")}}
+                  selected={liveComponent === "PostDepartment"}
+                >
+                  <ListItemText primary="部门管理" />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
+                  onClick={()=>{setValue(4);setLiveComponent("PostArticle")}}
+                  selected={liveComponent === "PostArticle"}
+                >
+                  <ListItemText primary="新闻发布" />
+                </ListItemButton>
+              </div>
+            </List>
+          </Box>
+        </Grid>
+        <Grid item xs={10}>
+          <TabPanel value={value} index={0}>
+            <ArticlesPreview />
+            <UwcssaJobsPreview />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <PostEvent />
+          </TabPanel>
+          <TabPanel value={value} index={2} >
+            <PostUwcssaJob />
+          </TabPanel>
+          <TabPanel value={value} index={3} >
+            <PostDepartment />
+          </TabPanel>
+          <TabPanel value={value} index={4} >
+            <PostArticle />
+          </TabPanel> 
+        </Grid>
+      </Grid>
+    </div>  
+  );
+}

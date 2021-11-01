@@ -88,7 +88,7 @@ export default function UwcssaJobsPreview() {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4">Uwcssa Jobs Preview</Typography>
+      <Typography variant="h4" sx={{margin: 3}}>Uwcssa Jobs Preview</Typography>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}
