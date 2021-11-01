@@ -4,31 +4,28 @@ import { ActionTypes } from "../constants/uwcssaJob-action-types";
 const departments = `query ListDepartments {
   listDepartments {
     items {
-      createdAt
-      email
-      introduction
-      leader
-      like
+      id
       name
-      owner
-      unlike
-      updatedAt
+      introduction
+      email
+      leader
+      userID
       uwcssaJobs {
         items {
-          benefits
-          bonus
-          schedule
-          createdAt
           id
-          active
-          imagePath
           introduction
-          like
-          owner
-          requirements
           title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
           unlike
+          active
+          createdAt
           updatedAt
+          departmentID
         }
       }
     }
@@ -43,7 +40,7 @@ export const listUwcssaJobs = `query ListUwcssaJobs {
         title
         requirements
         bonus
-        imagePath
+        imgS3Key
         benefits
         schedule
         like
@@ -51,29 +48,32 @@ export const listUwcssaJobs = `query ListUwcssaJobs {
         active
         createdAt
         updatedAt
-        department {
-          name
-          introduction
-          email
-          leader
-          like
-          unlike
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
+        departmentID
+        userID
         uwcssaJobResumes {
           items {
             id
             name
             email
-            resumeFilePath
+            resumeFileS3Key
             phone
             message
             createdAt
             updatedAt
+            uwcssaJobID
+            userID
+            uwcssaJobResumeStatus
           }
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
         }
       }
     }
