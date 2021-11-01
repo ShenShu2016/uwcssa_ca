@@ -6,7 +6,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Amplify from "aws-amplify";
 import Article from "./containers/article/Article";
-import ArticleDetail from "./containers/article/ArticleDetail";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";
@@ -222,13 +221,8 @@ export default function App() {
                 exact
                 component={EmailConfirm}
               />
-              <Route path="/article" exact component={Article} />
-              <Route
-                path="/article/:articleID"
-                exact
-                component={ArticleDetail}
-              />
-                  <Route path="/market/create" exact component={MarketCreate} />
+              <Route path="/article" component={Article} />
+              <Route path="/market/create" exact component={MarketCreate} />
               <Route
                 path="/market/create/item"
                 exact
