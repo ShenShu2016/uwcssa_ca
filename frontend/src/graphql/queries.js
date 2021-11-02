@@ -179,6 +179,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -640,6 +641,7 @@ export const userSortBySortKey = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -860,6 +862,7 @@ export const getUser = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -880,6 +883,7 @@ export const getUser = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -1356,6 +1360,7 @@ export const getUser = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -1374,6 +1379,7 @@ export const getUser = /* GraphQL */ `
         content
         active
         createdAt
+        forumPostID
         forumPostCommentID
         userID
         updatedAt
@@ -1395,6 +1401,20 @@ export const getUser = /* GraphQL */ `
           updatedAt
           uWindsorEmail
           badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
         }
         forumPostComment {
           id
@@ -1579,6 +1599,7 @@ export const getUser = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -1799,6 +1820,7 @@ export const listUsers = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -2072,6 +2094,7 @@ export const getUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -2390,6 +2413,7 @@ export const getUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -2702,6 +2726,7 @@ export const getTopic = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -3058,6 +3083,7 @@ export const getArticle = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -3505,6 +3531,7 @@ export const getArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -3972,6 +3999,7 @@ export const getArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -4434,6 +4462,7 @@ export const getEvent = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -4913,6 +4942,7 @@ export const getEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -5389,6 +5419,7 @@ export const getDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -5745,6 +5776,7 @@ export const getUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -6173,6 +6205,7 @@ export const getForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -6491,6 +6524,7 @@ export const getForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -6620,6 +6654,7 @@ export const getForumSubTopic = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -6688,6 +6723,7 @@ export const getForumPost = /* GraphQL */ `
       tags
       active
       createdAt
+      lastReplyAt
       forumSubTopicID
       userID
       updatedAt
@@ -6855,6 +6891,7 @@ export const getForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -6997,6 +7034,20 @@ export const getForumPost = /* GraphQL */ `
         }
         nextToken
       }
+      forumPostSubComments {
+        items {
+          id
+          content
+          active
+          createdAt
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       likes {
         items {
           id
@@ -7027,6 +7078,7 @@ export const listForumPosts = /* GraphQL */ `
         tags
         active
         createdAt
+        lastReplyAt
         forumSubTopicID
         userID
         updatedAt
@@ -7059,6 +7111,9 @@ export const listForumPosts = /* GraphQL */ `
         }
         owner
         forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
           nextToken
         }
         likes {
@@ -7094,6 +7149,7 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
         tags
         active
         createdAt
+        lastReplyAt
         forumSubTopicID
         userID
         updatedAt
@@ -7126,6 +7182,80 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
         }
         owner
         forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
+  query ForumPostSortByForumPostLastReplyAt(
+    $forumSubTopicID: ID
+    $lastReplyAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ForumPostSortByForumPostLastReplyAt(
+      forumSubTopicID: $forumSubTopicID
+      lastReplyAt: $lastReplyAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
           nextToken
         }
         likes {
@@ -7310,6 +7440,7 @@ export const getForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -7409,6 +7540,7 @@ export const getForumPostComment = /* GraphQL */ `
         tags
         active
         createdAt
+        lastReplyAt
         forumSubTopicID
         userID
         updatedAt
@@ -7443,6 +7575,9 @@ export const getForumPostComment = /* GraphQL */ `
         forumPostComments {
           nextToken
         }
+        forumPostSubComments {
+          nextToken
+        }
         likes {
           nextToken
         }
@@ -7454,6 +7589,7 @@ export const getForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -7522,6 +7658,7 @@ export const listForumPostComments = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -7591,6 +7728,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -7615,6 +7753,7 @@ export const getForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      forumPostID
       forumPostCommentID
       userID
       updatedAt
@@ -7782,6 +7921,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -7873,6 +8013,56 @@ export const getForumPostSubComment = /* GraphQL */ `
           nextToken
         }
       }
+      forumPost {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
       forumPostComment {
         id
         content
@@ -7908,6 +8098,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -7953,6 +8144,7 @@ export const listForumPostSubComments = /* GraphQL */ `
         content
         active
         createdAt
+        forumPostID
         forumPostCommentID
         userID
         updatedAt
@@ -7974,6 +8166,20 @@ export const listForumPostSubComments = /* GraphQL */ `
           updatedAt
           uWindsorEmail
           badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
         }
         forumPostComment {
           id
@@ -8016,6 +8222,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
         content
         active
         createdAt
+        forumPostID
         forumPostCommentID
         userID
         updatedAt
@@ -8037,6 +8244,20 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           updatedAt
           uWindsorEmail
           badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
         }
         forumPostComment {
           id
@@ -8231,6 +8452,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -8548,6 +8770,7 @@ export const getMarketItem = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -8992,6 +9215,7 @@ export const getMarketVehicle = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -9449,6 +9673,7 @@ export const getMarketRental = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -9902,6 +10127,7 @@ export const getLike = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -10157,6 +10383,7 @@ export const getLike = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -10445,6 +10672,7 @@ export const getLike = /* GraphQL */ `
         tags
         active
         createdAt
+        lastReplyAt
         forumSubTopicID
         userID
         updatedAt
@@ -10477,6 +10705,9 @@ export const getLike = /* GraphQL */ `
         }
         owner
         forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
           nextToken
         }
         likes {
@@ -10518,6 +10749,7 @@ export const getLike = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -10536,6 +10768,7 @@ export const getLike = /* GraphQL */ `
         content
         active
         createdAt
+        forumPostID
         forumPostCommentID
         userID
         updatedAt
@@ -10557,6 +10790,20 @@ export const getLike = /* GraphQL */ `
           updatedAt
           uWindsorEmail
           badges
+        }
+        forumPost {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
         }
         forumPostComment {
           id
@@ -10692,6 +10939,7 @@ export const listLikes = /* GraphQL */ `
           tags
           active
           createdAt
+          lastReplyAt
           forumSubTopicID
           userID
           updatedAt
@@ -10712,6 +10960,7 @@ export const listLikes = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt
@@ -10898,6 +11147,7 @@ export const getWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          forumPostID
           forumPostCommentID
           userID
           updatedAt

@@ -465,6 +465,11 @@ type ForumPost
     fields: ["forumSubTopicID", "createdAt"]
     queryField: "ForumPostSortByForumSubTopicID"
   )
+  @key(
+    name: "ForumPostSortByForumPostLastReplyAt"
+    fields: ["forumSubTopicID", "lastReplyAt"]
+    queryField: "ForumPostSortByForumPostLastReplyAt"
+  )
   @key(name: "byUser", fields: ["userID"])
   @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"]) {
   id: ID!
@@ -475,10 +480,14 @@ type ForumPost
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
   active: Boolean!
   createdAt: AWSDateTime!
+  lastReplyAt: AWSDateTime!
   forumSubTopicID: ID!
   forumSubTopic: ForumSubTopic! @connection(fields: ["forumSubTopicID"])
   forumPostComments: [ForumPostComment]!
     @connection(keyName: "byForumPost", fields: ["id"])
+  forumPostSubComments: [ForumPostSubComment]!
+    @connection(keyName: "byForumPost", fields: ["id"])
+
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -529,10 +538,8 @@ type ForumPostSubComment
     fields: ["forumPostCommentID", "createdAt"]
     queryField: "ForumPostSubCommentSortByForumPostCommentID"
   )
-  @key(
-    name: "byForumPostComment"
-    fields: ["forumPostCommentID", "createdAt"]
-  ) {
+  @key(name: "byForumPostComment", fields: ["forumPostCommentID", "createdAt"])
+  @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
   content: String!
   # like: [String]!
@@ -540,6 +547,8 @@ type ForumPostSubComment
   likes: [Like] @connection(keyName: "byForumPostSubComment", fields: ["id"])
   active: Boolean!
   createdAt: AWSDateTime!
+  forumPostID: ID!
+  forumPost: ForumPost! @connection(fields: ["forumPostID"])
   forumPostCommentID: ID!
   forumPostComment: ForumPostComment!
     @connection(fields: ["forumPostCommentID"])

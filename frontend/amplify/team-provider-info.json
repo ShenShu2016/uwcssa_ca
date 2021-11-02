@@ -18,6 +18,10 @@
           "GROUP": "anyone",
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-446b616c5152586f4956-build.zip"
+        },
+        "updateLastReplyAt": {
+          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
+          "s3Key": "amplify-builds/updateLastReplyAt-6b535632584232744349-build.zip"
         }
       },
       "auth": {
