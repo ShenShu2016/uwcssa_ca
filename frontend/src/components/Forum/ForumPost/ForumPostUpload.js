@@ -6,21 +6,21 @@ import {
   Select,
   InputLabel,
   TextField,
-  Typography,
+  Chip,
   FormControl,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
+import S3Image from "../../S3/S3Image";
 import { useDispatch, useSelector } from "react-redux";
 import {
   postForumPost,
-  postForumPostImg,
   setForumSubTopics,
-  setForumTopics,
 } from "../../../redux/actions/forumAction";
-import { AmplifyS3Image } from "@aws-amplify/ui-react";
 import PublishIcon from "@mui/icons-material/Publish";
 import { useHistory } from "react-router";
+import { postImage } from "../../../redux/actions/generalAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -34,44 +34,75 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f4f4f4",
   },
 }));
+const Input = styled("input")({
+  display: "none",
+});
 
 function ForumPostUpload() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [imgData, setImgData] = useState("");
-  const [imgKey, setImgKey] = useState("");
+  const [imgS3Keys, setImgS3Keys] = useState("");
   const history = useHistory();
+  const { username } = useSelector((state) => state.userAuth.user);
+  const [tagInput, setTagInput] = useState("");
   const [forumPostData, setForumPostData] = useState({
     title:"",
     content: "",
     forumSubTopicId: "",
+    tags:[],
   });
+  console.log(forumPostData);
   useEffect(() => {
-    dispatch(setForumTopics());
     dispatch(setForumSubTopics());
-    // console.log("using effect");
   }, [dispatch]);
   const { forumSubTopics } = useSelector((state) => state.forum);
   // console.log("forumTopics", forumTopics);
   // console.log("forumSubTopics", forumSubTopics);
 
-  const uploadForumPostImg = async () => {
-    const response = await dispatch(postForumPostImg(imgData));
+  const uploadForumPostImg = async (e) => {
+    const imageData = e.target.files[0];
+    const imageLocation = "forumPost";
+    const response = await dispatch(postImage(imageData,imageLocation));
     // console.log("response.key", response.key);
-    setImgKey(response.key);
+    if (response){
+      setImgS3Keys(response.key);
+    }
+  };
+  const deleteHandler = (i) => () => {
+    const { tags: newTags } = { ...forumPostData };
+    setForumPostData({
+      ...forumPostData,
+      tags: newTags.filter((tag) => tag !== i),
+    });
   };
 
+  const inputKeyDown = (e) => {
+    const val = e.target.value;
+    console.log("tagSuccess", forumPostData.tags);
+    if (e.key === "Enter" && val) {
+      if (
+        forumPostData.tags.find((tag) => tag.toLowerCase() === val.toLowerCase())
+      ) {
+        return;
+      }
+      e.preventDefault();
+      const newTags = [...forumPostData.tags].concat([val]);
+      setForumPostData({ ...forumPostData, tags: newTags });
+      setTagInput("");
+      console.log("tagSuccess", forumPostData.tags);
+    }
+  };
   //Upload the forum post
   const uploadForumPost = async () => {
-    const { title, content, forumSubTopicId } = forumPostData;
+    const { title, content, forumSubTopicId, tags } = forumPostData;
     const createForumPostInput = {
       title,
       content,
-      imagePath: imgKey,
-      like: [],
-      unlike: [],
-      active:1,
+      imgS3Keys: [imgS3Keys],
+      active:true,
+      userID: username,
       forumSubTopicID: forumSubTopicId,
+      tags: tags,
     };
     const response = await dispatch(postForumPost(createForumPostInput));
     // console.log(
@@ -126,30 +157,36 @@ function ForumPostUpload() {
               setForumPostData({ ...forumPostData, title: e.target.value })
             }
           />
+          <TextField
+          label="tags"
+          value={tagInput}
+          variant="outlined"
+          fullWidth
+          onKeyDown={inputKeyDown}
+          onChange={(e) => setTagInput(e.target.value)}
+        />
+        {forumPostData.tags.map((data) => {
+          return <Chip key={data} label={data} onDelete={deleteHandler(data)} />;
+      })}
         </Grid>
         <Grid item xs={6}>
-          <Box className={classes.imgPreview}>
-            {imgKey === "" ? (
-              <Typography variant="h4">添加照片</Typography>
-            ) : (
-              <AmplifyS3Image path={imgKey} />
-            )}
-            <input
-              type="file"
-              accept="image/png"
-              onChange={(e) => {
-                setImgData(e.target.files[0]);
-                console.log("imgData", imgData);
-              }}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={uploadForumPostImg}
-            >
-              上传图片
-            </Button>
-          </Box>
+        <Box>
+        <label htmlFor="contained-button-file">
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            type="file"
+            onChange={(e) => {
+              // setImgData();
+              uploadForumPostImg(e);
+            }}
+          />
+          <Button variant="contained" component="span">
+            上传图片
+          </Button>
+        </label>
+      </Box>
+      <S3Image S3Key={imgS3Keys} style={{ width: "100%" }} />
         </Grid>
         <Grid item xs={6}>
           <Box className={classes.content}>

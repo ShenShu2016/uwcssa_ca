@@ -55,25 +55,12 @@ const ForumPostList = ({ setForumPosts }) => {
   }, []);
   const forumPosts = useSelector((state) => state.forum.forumPosts);
   console.log(forumPosts);
-  //  Delete the forum topic
-  // const delForumPost = async (forumPostId) => {
-  //   const { id } = { id: forumPostId };
-  //   console.log("DelForumTopicId", id);
-  //   const delForumPostInput = {
-  //     id,
-  //   };
-  //   await API.graphql(
-  //     graphqlOperation(deleteForumPost, { input: delForumPostInput })
-  //   );
-  // };
   const renderList = forumPosts.map((forumPost) => {
     const {
       id,
       title,
       content,
       imagePath,
-      like,
-      unlike,
       createdAt,
       forumSubTopic,
       // updateAt,
@@ -138,10 +125,10 @@ const ForumPostList = ({ setForumPosts }) => {
           </Grid>
           <CardActions>
             <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-              {like.length}
+              {/* {like.length} */}
             </Button>
             <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-              {unlike.length}
+              {/* {unlike.length} */}
             </Button>
             <Button
               size="small"

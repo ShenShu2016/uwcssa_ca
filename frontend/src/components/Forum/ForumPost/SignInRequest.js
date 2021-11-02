@@ -1,7 +1,11 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
+
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import { setURLFrom } from "../../../redux/actions/generalAction";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
   content: {
@@ -17,6 +21,12 @@ const useStyles = makeStyles({
 const SignInRequest = () => {
   const classes = useStyles();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setURLFrom(location));
+    // console.log("location,", location);
+  }, [dispatch, location]);
 
   return (
     <Container className={classes.content}>
@@ -30,10 +40,7 @@ const SignInRequest = () => {
             variant="contained"
             color="primary"
             component={Link}
-            to={{
-              pathname: "/signIn",
-              state: { from: location.pathname },
-            }}
+            to="/signIn"
           >
             登入
           </Button>

@@ -1,21 +1,21 @@
 import {
-  Avatar,
   Box,
   Button,
   CardActionArea,
   CardHeader,
-  CardMedia,
+  Chip,
   Divider,
   Typography,
-  Skeleton,
+  // Skeleton,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+import CustomAvatar from "../../../CustomMUI/CustomAvatar";
+import S3Image from "../../../S3/S3Image";
+import React, { useState } from "react";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ForumPostCommentsPost from "./ForumPostCommentsPost";
-import Storage from "@aws-amplify/storage";
 const useStyles = makeStyles({
   title: {
     marginBlock: "2rem",
@@ -25,70 +25,36 @@ const useStyles = makeStyles({
   },
 });
 
-function ForumPostMain({ forumPost, isLoading }) {
+function ForumPostMain({ forumPost}) {
   const classes = useStyles();
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
-  const [imageURL, setImageURL] = useState(null);
   const {
+    // id,
     content,
-    // title,
-    imagePath,
-    like,
-    unlike,
+    imgS3Keys,
     createdAt,
-    // updateAt,
-    owner,
+    userID,
+    tags,
+    user,
   } = forumPost;
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        const imageAccessURL = await Storage.get(imagePath, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        // console.log("imageAccessURL", imageAccessURL);
-        setImageURL(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImageURL(null);
-      }
-    };
-    if (imagePath) {
-      getImage();
-    }
-  }, [imagePath]);
   return (
     <div>
-      {Object.keys(forumPost).length===0 ? (
-        <Skeleton variant="rectangular" width={210} height={118} />
-      ) : (
         <Box className={classes.main}>
-          <CardHeader
+        <CardHeader
             sx={{ px: 0, my: 2 }}
-            avatar={
-              <Avatar
-                aria-label="recipe"
-                className={classes.avatar}
-                component={Link}
-                to={`/account/profile/${owner}`}
-              >
-                {owner.toUpperCase().slice(0, 1)}
-              </Avatar>
-            }
-            title={owner}
+            avatar={<CustomAvatar user={user} link={true} />}
+            title={userID}
             subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
               11,
               19
             )}`}
           />
-          <CardActionArea
-            onClick={() => {
-              window.open(imageURL);
-            }}
-          >
-            <CardMedia component="img" image={imageURL} />
+          {tags.map((data) => {
+            return <Chip key={data} label={data} />;
+          })}
+          <CardActionArea>
+          <S3Image S3Key={imgS3Keys[0]} style={{ width: "100%" }} />
           </CardActionArea>
           <Divider />
           <Box sx={{ my: 2 }}>
@@ -104,13 +70,13 @@ function ForumPostMain({ forumPost, isLoading }) {
           <Divider />
           <Box className={classes.buttonGroup}>
             <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-              {like.length}
+              {/* {like.length} */}
             </Button>
             <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-              {unlike.length}
+              {/* {unlike.length} */}
             </Button>
             <Button size="small" color="primary" onClick={replySwitch}>
-              回复
+              评论
             </Button>
             
           </Box>
@@ -119,7 +85,6 @@ function ForumPostMain({ forumPost, isLoading }) {
           {isReplying && <ForumPostCommentsPost forumPost={forumPost} />}
           </Box>
         </Box>
-      )}
     </div>
   );
 }

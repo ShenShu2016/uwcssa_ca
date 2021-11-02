@@ -39,31 +39,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ForumTopicCURD()  {
+function ForumTopicCURD() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { username } = useSelector((state) => state.userAuth.user);
   useEffect(() => {
     dispatch(setForumTopics());
     dispatch(setForumSubTopics());
-    console.log("using effect");
   }, [dispatch]);
   const { forumTopics, forumSubTopics } = useSelector((state) => state.forum);
   // console.log("forumTopics", forumTopics);
   // console.log("forumSubTopics", forumSubTopics);
   const [forumTopicData, setForumTopicData] = useState({ name: "" });
-  
+
   //upload the forum topic
   const uploadForumTopic = async () => {
     console.log("AddForumTopicData", forumTopicData);
-    const { name } = forumTopicData;
     const createForumTopicInput = {
-      name,
-      like: [],
-      unlike: [],
+      name: forumTopicData.name,
+      userID: username,
     };
     await API.graphql(
       graphqlOperation(createForumTopic, { input: createForumTopicInput })
     );
+    dispatch(setForumTopics());
+    setForumTopicData({ name: "" });
   };
   //Delete the forum topic
   const [forumTopicId, setForumTopicId] = useState({ id: "" });
@@ -82,22 +82,20 @@ function ForumTopicCURD()  {
   const [selectForumTopicData, selectForumTopic] = useState({ id: "" });
   console.log("selectForumTopicData", selectForumTopicData);
   const [forumSubTopicData, setForumSubTopicData] = useState({});
-  
+
   const uploadForumSubTopic = async () => {
     console.log("ForumSubTopicData", forumSubTopicData);
-    const { name } = forumSubTopicData;
-    const topicId = selectForumTopicData.id;
     console.log("selectForumTopicData", selectForumTopicData);
     const createForumSubTopicInput = {
-      name,
-      like: [],
-      unlike: [],
-      active:1,
-      forumTopicID: topicId,
+      name: forumSubTopicData.name,
+      forumTopicID: selectForumTopicData.id,
+      userID: username,
     };
     await API.graphql(
       graphqlOperation(createForumSubTopic, { input: createForumSubTopicInput })
     );
+    dispatch(setForumSubTopics());
+    setForumSubTopicData({ name: "" });
   };
   //Delete the forum Sub topic
   const [forumSubTopicId, setForumSubTopicId] = useState({ id: "" });
@@ -184,10 +182,12 @@ function ForumTopicCURD()  {
               <div key={forumTopic.name}>
                 <Grid container spacing={4}>
                   <Grid item xs={6}>
-                    <Typography variant="h4">Topic:{forumTopic.name}</Typography>
+                    <Typography variant="h4">
+                      Topic:{forumTopic.name}
+                    </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                  <Typography variant="h4">Id:{forumTopic.id}</Typography>
+                    <Typography variant="h4">Id:{forumTopic.id}</Typography>
                   </Grid>
                 </Grid>
               </div>
@@ -272,7 +272,7 @@ function ForumTopicCURD()  {
             删除Forum Sub topic
           </Button>
         </Grid>
-        
+
         {/* list forum sub topic */}
         <Grid item xs={12}>
           <Typography variant="h3">ForumSubTopic</Typography>
@@ -291,9 +291,7 @@ function ForumTopicCURD()  {
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <Typography variant="h4">
-                      Id:{forumSubTopic.id}
-                    </Typography>
+                    <Typography variant="h4">Id:{forumSubTopic.id}</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h4">
@@ -308,5 +306,5 @@ function ForumTopicCURD()  {
       </Grid>
     </div>
   );
-};
+}
 export default ForumTopicCURD;

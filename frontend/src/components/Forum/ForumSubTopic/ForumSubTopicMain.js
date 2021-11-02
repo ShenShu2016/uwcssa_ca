@@ -2,7 +2,6 @@ import {
   Box,
   LinearProgress,
   Typography,
-  Skeleton,
 } from "@mui/material";
 import ForumSubTopicPostComponent from "./ForumSubTopicPostComponent";
 import { makeStyles } from "@mui/styles";
@@ -20,22 +19,17 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 }));
-export default function ForumSubTopicMain({isLoading,forumPost, postsNextToken }) {
+export default function ForumSubTopicMain({forumPost, postsNextToken }) {
   const classes = useStyles();
-  console.log(isLoading);
-  const forumPostsData = forumPost;
+  // const forumPostsData = forumPost;
   return (
     <div className={classes.root}>
       <Box sx={{ padding: "1rem", maxwidth: "100%" }}>
-        {isLoading ? (
-        <Skeleton variant="rectangular" width={210} height={118} />
-      ) : (
           <div>
-            {forumPostsData.map((forumPost) => {
+            {forumPost.map((forumPost) => {
              return <ForumSubTopicPostComponent forumPost={forumPost} />
             })}
           </div>
-        )}
         <Box className="moreCommentsStatus">
           {postsNextToken ? (
             <Box>

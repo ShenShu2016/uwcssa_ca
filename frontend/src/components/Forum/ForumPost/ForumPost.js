@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
-  loadMoreForumPostComments,
   removeSelectedForumPost,
   selectedForumPost,
   selectedForumPostComments,
@@ -35,50 +34,18 @@ export default function ForumPost() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { forumPostID } = useParams();
-  const [canFetch, setCanFetch] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-  const forumPost = useSelector((state) => state.forumPost);
-  const nextToken = forumPost.commentsNextToken;
+  const { forumPost, comments, commentsNextToken } = useSelector(
+    (state) => state.forum.selectedForumPost
+  );
 
   useEffect(() => {
-    async function fetchData() {
-      console.log(forumPostID);
+
       if (forumPostID && forumPostID !== "") {
-        const response = await dispatch(selectedForumPost(forumPostID));
-        await dispatch(selectedForumPostComments(forumPostID));
-        setIsLoading(!response);
+        dispatch(selectedForumPost(forumPostID));
+        dispatch(selectedForumPostComments(forumPostID));
       }
-      console.log(isLoading);
-    }
-    fetchData();
     return () => dispatch(removeSelectedForumPost());
-  }, [forumPostID, dispatch, isLoading]);
-
-  useEffect(() => {
-    // console.log("start load data")
-    window.onscroll = async (e) => {
-      const scrollY = window.scrollY; //当前上方高度
-      const scrollTop = e.target.scrollingElement.clientHeight; //窗口高度
-      const scrollHeight = e.target.scrollingElement.scrollHeight; //总高度
-      // console.log(canFetch, scrollHeight - scrollY - scrollTop);
-      // console.log("nextToken", nextToken);
-      if (scrollY + scrollTop >= scrollHeight - 500 && nextToken) {
-        // 这个问题需要解决，为啥前面加起来有小数点。并且如果我在前面一点就想load的话这个东西会重复读
-        if (canFetch) {
-          setCanFetch(false);
-          // setCanFetch(false); //！ 问题，为什么一次 就不行，两次就可以了
-          console.log("canFetch，it should be false", canFetch);
-          const response = await dispatch(
-            loadMoreForumPostComments(forumPostID, nextToken)
-          );
-          setCanFetch(response);
-          setIsLoading(!response);
-          // console.log(response);
-          // console.log(canFetch);
-        }
-      }
-    };
-  }, [nextToken, forumPostID, dispatch, canFetch]);
+  }, [forumPostID, dispatch]);
 
   console.log(forumPost);
 
@@ -86,11 +53,18 @@ export default function ForumPost() {
     <div className={classes.root}>
       <Grid container spacing={0}>
         <Grid item xs={11} sm={10} md={9}>
-          {isLoading ? (
+          {Object.keys(forumPost).length === 0 ? (
             <Skeleton variant="rectangular" width={210} height={118} />
           ) : (
             <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
-              <Typography variant="h5">{forumPost.forumPost.title}</Typography>
+              <Typography
+                variant="h4"
+                className={classes.title}
+                sx={{ fontWeight: 700 }}
+              >
+                {forumPost.title}
+              </Typography>
+
               <Breadcrumbs aria-label="breadcrumb">
                 <span style={{}}>
                   <Button color="inherit" component={Link} to={`/`}>
@@ -106,40 +80,36 @@ export default function ForumPost() {
                   <Button
                     color="inherit"
                     component={Link}
-                    to={`/forumTopic/${forumPost.forumPost.forumSubTopic.forumTopic.id}`}
+                    to={`/forumTopic/${forumPost.forumSubTopic.forumTopic.id}`}
                   >
-                    {forumPost.forumPost.forumSubTopic.forumTopic.name}
+                    {forumPost.forumSubTopic.forumTopic.name}
                   </Button>
                 </span>
                 <span style={{ cursor: "not-allowed" }}>
                   <Button
                     color="inherit"
                     component={Link}
-                    to={`/forumSubTopic/${forumPost.forumPost.forumSubTopic.id}`}
+                    to={`/forumSubTopic/${forumPost.forumSubTopic.id}`}
                   >
-                    {forumPost.forumPost.forumSubTopic.name}
+                    {forumPost.forumSubTopic.name}
                   </Button>
                 </span>
               </Breadcrumbs>
             </Box>
           )}
-
-          <ForumPostMain
-            forumPost={forumPost.forumPost}
-            isLoading={isLoading}
-          />
-          {
-            // Object.keys(forumPost).length===0
-            isLoading ? (
-              <Skeleton variant="rectangular" width={210} height={118} />
-            ) : (
-              <ForumPostComments
-                comments={forumPost.comments}
-                commentsNextToken={forumPost.commentsNextToken}
-              />
-            )
-          }
-
+          {Object.keys(forumPost).length === 0 ? (
+            <Skeleton variant="rectangular" width={210} height={118} />
+          ) : (
+            <ForumPostMain forumPost={forumPost} />
+          )}
+          {Object.keys(comments).length === 0 ? (
+            <Skeleton variant="rectangular" width={210} height={118} />
+          ) : (
+            <ForumPostComments
+              comments={comments}
+              commentsNextToken={commentsNextToken}
+            />
+          )}
         </Grid>
 
         <Grid item sm={2} md={3}>
