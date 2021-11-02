@@ -1,12 +1,4 @@
 import {
-
-  eventReducer,
-  pudEventReducer,
-  selectedEventReducer,
-} from "./eventReducer";
-import { forumReducer } from "./forumReducer";
-
-import {
   postUserEducationReducer,
   postUserExperienceReducer,
   profileReducer,
@@ -18,6 +10,7 @@ import { articleReducer } from "./articleReducer";
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
 import { eventReducer } from "./eventReducer";
+import { forumReducer } from "./forumReducer";
 import { generalReducer } from "./generalReducer";
 import { marketReducer } from "./marketReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
