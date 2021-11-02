@@ -1,31 +1,36 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import {
+  Box,
+  Button,
+  Rating,
+  TextField,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from "@mui/material";
+import React, { useState } from "react";
 
-import { Box } from "@mui/system";
-import { Button } from "@mui/material"; // 按钮
-import { Rating } from "@mui/material";
-import React from "react";
-import { TextField } from "@mui/material"; // 文字输入
-import { ThemeProvider } from "@mui/material";
-import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+
+// 按钮
 
 //定义评价等级
 const labels = {
-  1: "totally useless",
-  2: "very difficult",
+  1: "Totally useless",
+  2: "Very difficult",
   3: "Poor",
   4: "Ok",
   5: "Good",
-  6: "very easy",
-  7: "perfect",
+  6: "Very easy",
+  7: "Perfect",
 };
 
 //定义不同页面的字号：
 const theme = createTheme();
-
+//不要在这里用这个东西createTheme。这个是全局的
 theme.typography.h5 = {
   fontSize: "1rem",
   "@media (min-width:1200px)": {
+    //！为什么这里不用breakpoint
     fontSize: "1rem",
   },
   [theme.breakpoints.up("md")]: {
@@ -40,8 +45,8 @@ const useStyles = makeStyles(() => ({
 
 export default function UserFeedBack() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(7); // 评价默认值是7 （满分）
-  const [hover, setHover] = React.useState(-1); //
+  const [value, setValue] = useState(7); // 评价默认值是7 （满分）
+  const [hover, setHover] = useState(-1); //
 
   return (
     <div className={classes.root}>

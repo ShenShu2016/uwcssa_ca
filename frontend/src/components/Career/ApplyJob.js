@@ -12,12 +12,11 @@ import React, { useEffect, useState } from "react";
 import API from "@aws-amplify/api";
 import Storage from "@aws-amplify/storage";
 import { createUwcssaJobResume } from "../../graphql/mutations";
-import { getUwcssaJob } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +72,7 @@ export default function ApplyJob(props) {
     try {
       const jobData = await API.graphql({
         query: listUwcssaJobs,
-        variables: { filter: {id: {eq: id}} },
+        variables: { filter: { id: { eq: id } } },
         authMode: "AWS_IAM",
       });
       const job = jobData.data.listUwcssaJobs.items[0];
@@ -136,7 +135,7 @@ export default function ApplyJob(props) {
             message: applyData.message,
             uwcssaJobID: applyData.job.id,
             uwcssaJobResumeStatus: "pending",
-            userID: userAuth.user.username
+            userID: userAuth.user.username,
           };
           const newUwcssaJobResume = await API.graphql(
             graphqlOperation(createUwcssaJobResume, {

@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import API from "@aws-amplify/api";
 import { Link } from "react-router-dom";
-import { getUwcssaJob } from "../../graphql/queries";
+import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
 import { makeStyles } from "@mui/styles";
-import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions"
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,7 +35,7 @@ export default function JobDetail(props) {
     try {
       const jobData = await API.graphql({
         query: listUwcssaJobs,
-        variables: { filter: {id: {eq: id}} },
+        variables: { filter: { id: { eq: id } } },
         authMode: "AWS_IAM",
       });
       const job = jobData.data.listUwcssaJobs.items[0];

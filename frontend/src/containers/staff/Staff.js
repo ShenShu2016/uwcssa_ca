@@ -1,15 +1,14 @@
+import { Box, Grid, List, ListItemButton, ListItemText } from "@mui/material";
 import React, { useState } from "react";
-import {Box, List, ListItemText } from "@mui/material";
-import ListItemButton from "@mui/material/ListItemButton";
-import uwcssa_logo from "../../static/uwcssa_logo.svg";
+
+import ArticlesPreview from "./Article/ArticlesPreview";
+import PostArticle from "./Article/PostArticle";
+import PostDepartment from "./UwcssaJob/PostDepartment";
 import PostEvent from "../../components/Event/PostEvent";
 import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
-import PostDepartment from "./UwcssaJob/PostDepartment";
-import PostArticle from "./Article/PostArticle";
-import Grid from '@mui/material/Grid';
 import PropTypes from "prop-types";
-import ArticlesPreview from "./Article/ArticlesPreview";
-import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview"
+import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
+
 function TabPanel(props) {
   const { children, value, index } = props;
 
@@ -20,11 +19,7 @@ function TabPanel(props) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
     >
-      {value === index && (
-        <Box>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -44,39 +39,54 @@ export default function Staff() {
       <Grid container>
         <Grid item xs={2}>
           <Box role="presentation">
-            <List sx={{marginTop: 3}}>
+            <List sx={{ marginTop: 3 }}>
               <div>
-              <ListItemButton 
-                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
-                  onClick={()=>{setValue(0);setLiveComponent("Main")}}
+                <ListItemButton
+                  sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
+                  onClick={() => {
+                    setValue(0);
+                    setLiveComponent("Main");
+                  }}
                   selected={liveComponent === "Main"}
                 >
                   <ListItemText primary="管理首页" />
                 </ListItemButton>
-                <ListItemButton 
-                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
-                  onClick={()=>{setValue(1);setLiveComponent("PostEvent")}}
+                <ListItemButton
+                  sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
+                  onClick={() => {
+                    setValue(1);
+                    setLiveComponent("PostEvent");
+                  }}
                   selected={liveComponent === "PostEvent"}
                 >
                   <ListItemText primary="活动策划" />
                 </ListItemButton>
                 <ListItemButton
-                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
-                  onClick={()=>{setValue(2);setLiveComponent("PostUwcssaJob")}}
+                  sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
+                  onClick={() => {
+                    setValue(2);
+                    setLiveComponent("PostUwcssaJob");
+                  }}
                   selected={liveComponent === "PostUwcssaJob"}
                 >
                   <ListItemText primary="职位招聘" />
                 </ListItemButton>
                 <ListItemButton
-                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
-                  onClick={()=>{setValue(3);setLiveComponent("PostDepartment")}}
+                  sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
+                  onClick={() => {
+                    setValue(3);
+                    setLiveComponent("PostDepartment");
+                  }}
                   selected={liveComponent === "PostDepartment"}
                 >
                   <ListItemText primary="部门管理" />
                 </ListItemButton>
                 <ListItemButton
-                  sx={{textAlign: "center", marginTop: 2, color: "steelblue"}}
-                  onClick={()=>{setValue(4);setLiveComponent("PostArticle")}}
+                  sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
+                  onClick={() => {
+                    setValue(4);
+                    setLiveComponent("PostArticle");
+                  }}
                   selected={liveComponent === "PostArticle"}
                 >
                   <ListItemText primary="新闻发布" />
@@ -93,17 +103,17 @@ export default function Staff() {
           <TabPanel value={value} index={1}>
             <PostEvent />
           </TabPanel>
-          <TabPanel value={value} index={2} >
+          <TabPanel value={value} index={2}>
             <PostUwcssaJob />
           </TabPanel>
-          <TabPanel value={value} index={3} >
+          <TabPanel value={value} index={3}>
             <PostDepartment />
           </TabPanel>
-          <TabPanel value={value} index={4} >
+          <TabPanel value={value} index={4}>
             <PostArticle />
-          </TabPanel> 
+          </TabPanel>
         </Grid>
       </Grid>
-    </div>  
+    </div>
   );
 }
