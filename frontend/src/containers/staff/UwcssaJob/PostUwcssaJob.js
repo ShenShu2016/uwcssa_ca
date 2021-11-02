@@ -55,7 +55,7 @@ export default function PostUwcssaJob(props) {
     bonus: [""],
     benefits: [""],
     schedule: [""],
-    owner: user ? user.username : "",
+    userID: user ? user.username : "",
     departmentName: "",
   });
 
@@ -94,6 +94,7 @@ export default function PostUwcssaJob(props) {
         unlike: [""],
         active: 1,
         departmentID: departmentID,
+        userID: uwcssaJobData.userID,
       };
       const newUwcssaJob = await API.graphql(
         graphqlOperation(createUwcssaJob, { input: createUwcssaJobInput })
@@ -102,7 +103,9 @@ export default function PostUwcssaJob(props) {
       if (newUwcssaJob) {
         setSubmitSuccess(true);
         setTimeout(() => {
-          props.history.push("/staff/uwcssaJob");
+          const url = document.URL
+          window.open(url,"_self")
+          // props.history.push("/staff/uwcssaJob");
         }, 1200);
       }
     } catch (error) {
