@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Grid,
@@ -10,7 +9,9 @@ import {
   // Skeleton,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React ,{ useState }from "react";
+import CustomAvatar from "../../../CustomMUI/CustomAvatar";
+import React, { useState } from "react";
+import moment from "moment";
 import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
@@ -28,37 +29,12 @@ const useStyles = makeStyles({
   cardContent: {},
   main: {},
 });
-function stringToColor(string) {
-  let hash = 0;
-  let i;
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = "#";
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.substr(-2);
-  }
-  /* eslint-enable no-bitwise */
-  return color;
-}
-
-function stringAvatar(name) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-    },
-    children: `${name.slice(0, 1)}`,
-  };
-}
 
 export default function ForumPostCommentComponent({ comment }) {
   const classes = useStyles();
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
-  const { id, content, createdAt, like, unlike, owner } = comment;
+  const { id, content, createdAt, userID, user } = comment;
 
   return (
     <div>
@@ -67,9 +43,9 @@ export default function ForumPostCommentComponent({ comment }) {
           <Grid item xs={"auto"}>
             <CardHeader
               component={Link}
-              to={`/account/profile/${owner}`}
+              to={`/account/profile/${userID}`}
               sx={{ p: 0, textDecoration: "none" }}
-              avatar={<Avatar {...stringAvatar(owner.toUpperCase())} />}
+              avatar={<CustomAvatar link={false} user={user} />}
             />
           </Grid>
           <Grid item xs>
@@ -79,10 +55,11 @@ export default function ForumPostCommentComponent({ comment }) {
                 variant="subtitle2"
                 sx={{ fontSize: "13px", color: "#030303" }}
               >
-                {owner}
+                {userID}
               </Typography>
               <Typography variant="caption" sx={{ color: "#606060" }}>
-                {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
+                {/* {createdAt.slice(0, 10)} {createdAt.slice(11, 19)} */}
+                {moment(createdAt).fromNow()}
               </Typography>
             </Box>
             <Box sx={{ my: 1 }}>
@@ -107,23 +84,23 @@ export default function ForumPostCommentComponent({ comment }) {
                 sx={{ p: 0 }}
                 style={{ width: "22px" }}
               >
-                {like.length}
+                {/* {like.length} */}
               </Button>
               <Button
                 size="small"
                 color="primary"
                 startIcon={<ThumbDownAltOutlinedIcon />}
               >
-                {unlike.length}
+                {/* {unlike.length} */}
               </Button>
               {isReplying ? (
-              <Button size="small" color="primary" onClick={replySwitch}>
-              收起评论
-            </Button>
-              ):(
-              <Button size="small" color="primary" onClick={replySwitch}>
-                评论({comment.forumPostSubComments.length})
-              </Button>
+                <Button size="small" color="primary" onClick={replySwitch}>
+                  收起评论
+                </Button>
+              ) : (
+                <Button size="small" color="primary" onClick={replySwitch}>
+                  评论({comment.forumPostSubComments.length})
+                </Button>
               )}
               {/* <Button size="small" color="primary" onClick={replySwitch}>
                 回复
@@ -138,7 +115,6 @@ export default function ForumPostCommentComponent({ comment }) {
           </Grid>
         </Grid>
       </Box>
-
     </div>
   );
 }

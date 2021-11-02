@@ -99,32 +99,29 @@ export const removeSelectedForumSubTopic = () => async (dispatch) => {
   });
 };
 
-// export const selectedForumSubTopicPosts =
-//   (forumSubTopicID) => async (dispatch) => {
-//     console.log("selectedForumSubTopicPosts,forumSubTopicID", forumSubTopicID);
-
-//     try {
-//       const forumSubTopicPostData = await API.graphql({
-//         query: forumPostSortByForumSubTopicID,
-//         variables: {
-//           forumSubTopicID: forumSubTopicID,
-//           sortDirection: "DESC",
-//           filter: { active: { eq: 1 } },
-//           limit: 4,
-//         },
-//         authMode: "AWS_IAM",
-//       });
-//       console.log("forumSubTopicPostData", forumSubTopicPostData);
-//       dispatch({
-//         type: ActionTypes.SELECTED_FORUMSUBTOPIC_POSTS,
-//         payload: forumSubTopicPostData.data.forumPostSortByForumSubTopicID,
-//       });
-//       return true;
-//     } catch (error) {
-//       console.log("error on selectedforumSubTopicPosts", error);
-//       return false;
-//     }
-//   };
+export const selectedForumSubTopicPosts =
+  (forumSubTopicID) => async (dispatch) => {
+    console.log("selectedForumSubTopicPosts,forumSubTopicID", forumSubTopicID);
+    try {
+      const forumSubTopicPostData = await API.graphql({
+        query: forumPostSortByForumSubTopicID,
+        variables: {
+          forumSubTopicID: forumSubTopicID,
+          sortDirection: "DESC",
+          filter: { active: { eq: true } },
+          // limit: 4,
+        },
+        authMode: "AWS_IAM",
+      });
+      console.log("forumSubTopicPostData", forumSubTopicPostData);
+      dispatch({
+        type: ActionTypes.SELECTED_FORUMSUBTOPIC_POSTS,
+        payload: forumSubTopicPostData.data.ForumPostSortByForumSubTopicID,
+      });
+    } catch (error) {
+      console.log("error on selectedforumSubTopicPosts", error);
+    }
+  };
 
 export const loadMoreForumSubTopicPosts =
   (forumSubTopicID, nextToken) => async (dispatch) => {
@@ -134,7 +131,7 @@ export const loadMoreForumSubTopicPosts =
         variables: {
           forumSubTopicID: forumSubTopicID,
           sortDirection: "DESC",
-          filter: { active: { eq: 1 } },
+          filter: { active: { eq: true } },
           limit: 3,
           nextToken: nextToken,
         },
@@ -145,10 +142,8 @@ export const loadMoreForumSubTopicPosts =
         type: ActionTypes.LOAD_MORE_FORUMSUBTOPIC_POSTS,
         payload: forumSubTopicPostsData.data.forumPostSortByForumSubTopicID,
       });
-      return true;
     } catch (error) {
       console.log("error on Load more data", error);
-      return false;
     }
   };
 //ForumPost
@@ -162,6 +157,7 @@ export const setForumPosts = () => async (dispatch) => {
       type: ActionTypes.SET_FORUMPOSTS,
       payload: forumPostData.data.listForumPosts.items,
     });
+    console.log(forumPostData);
   } catch (error) {
     console.log("error on fetching ForumPost", error);
   }
@@ -175,8 +171,9 @@ export const postForumPost = (createForumPostInput) => async (dispatch) => {
     );
     dispatch({
       type: ActionTypes.POST_FORUMPOST_SUCCESS,
-      payload: response,
+      payload: [response.data.createForumPost],
     });
+    console.log(response);
     return {
       result: true,
       response: response,
@@ -215,46 +212,20 @@ export const postForumPostImg = (imgData) => async (dispatch) => {
   }
 };
 
-export const selectedForumSubTopicPosts =
-  (forumSubTopicID) => async (dispatch) => {
-    console.log("selectedForumSubTopicPosts,forumSubTopicID", forumSubTopicID);
-    try {
-      const forumSubTopicPostData = await API.graphql({
-        query: forumPostCommentSortByForumPostID,
-        variables: {
-          forumSubTopicID: forumSubTopicID,
-          sortDirection: "DESC",
-          filter: { active: { eq: 1 } },
-          limit: 10,
-        },
-        authMode: "AWS_IAM",
-      });
-      console.log("forumSubTopicPostData", forumSubTopicPostData);
-      dispatch({
-        type: ActionTypes.SELECTED_FORUMSUBTOPIC_POSTS,
-        payload: forumSubTopicPostData.data.byforumSubTopicID,
-      });
-    } catch (error) {
-      console.log("error on selectedforumSubTopicPosts", error);
-    }
-  };
-
 export const selectedForumPost = (forumPostID) => async (dispatch) => {
   try {
     // console.log(forumPostID);
     const response = await API.graphql({
       query: getForumPost,
-      variables: { id: forumPostID },
+      variables: { id: forumPostID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
     dispatch({
       type: ActionTypes.SELECTED_FORUMPOST,
       payload: response.data.getForumPost,
     });
-    return true;
   } catch (error) {
     console.log("error on selecting ForumPost", error);
-    return false;
   }
 };
 
@@ -272,15 +243,15 @@ export const selectedForumPostComments = (forumPostID) => async (dispatch) => {
       variables: {
         forumPostID: forumPostID,
         sortDirection: "DESC",
-        filter: { active: { eq: 1 } },
-        limit: 4,
+        filter: { active: { eq: true } },
+        // limit: 4,
       },
       authMode: "AWS_IAM",
     });
     console.log("forumSubTopicPostData", forumPostCommentsData);
     dispatch({
       type: ActionTypes.SELECTED_FORUMPOST_COMMENTS,
-      payload: forumPostCommentsData.data.forumPostCommentSortByForumPostID,
+      payload: forumPostCommentsData.data.ForumPostCommentSortByForumPostID,
     });
   } catch (error) {
     console.log("error on selectedForumPostComments", error);
@@ -323,15 +294,24 @@ export const postForumPostComment =
 
       dispatch({
         type: ActionTypes.POST_FORUMPOST_COMMENT_SUCCESS,
-        payload: response,
+        payload: [response.data.createForumPostComment],
       });
-
-      dispatch(selectedForumPost(createForumPostCommentInput.forumPostID));
+      dispatch(
+        selectedForumPostComments(createForumPostCommentInput.forumPostID)
+      );
+      return {
+        result: true,
+        response: response,
+      };
     } catch (error) {
       console.log("error on posting ForumPostComment", error);
       dispatch({
         type: ActionTypes.POST_FORUMPOST_COMMENT_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 
@@ -340,7 +320,7 @@ export const selectedForumPostComment =
     try {
       const response = await API.graphql({
         query: getForumPostComment,
-        variables: { id: forumPostCommentID },
+        variables: { id: forumPostCommentID, filter: { active: { eq: true } } },
         authMode: "AWS_IAM",
       });
       dispatch({
@@ -367,8 +347,8 @@ export const selectedForumPostCommentSubComments =
         variables: {
           forumPostCommentID: forumPostCommentID,
           sortDirection: "DESC",
-          // filter: { active: { eq: 1 } },
-          limit: 4,
+          filter: { active: { eq: true } },
+          // limit: 4,
         },
         authMode: "AWS_IAM",
       });
@@ -376,7 +356,7 @@ export const selectedForumPostCommentSubComments =
       dispatch({
         type: ActionTypes.SELECTED_FORUMPOST_COMMENT_SUBCOMMENTS,
         payload:
-          forumPostCommentData.data.forumPostSubCommentSortByForumPostCommentID,
+          forumPostCommentData.data.ForumPostSubCommentSortByForumPostCommentID,
       });
     } catch (error) {
       console.log("error on selectedForumPostCommentSubComments", error);
@@ -428,11 +408,19 @@ export const postForumPostSubComment =
           createForumPostSubCommentInput.forumPostCommentID
         )
       );
+      return {
+        result: true,
+        response: response,
+      };
     } catch (error) {
       console.log("error on posting ForumPostSubComment", error);
       dispatch({
         type: ActionTypes.POST_FORUMPOST_SUBCOMMENT_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 
