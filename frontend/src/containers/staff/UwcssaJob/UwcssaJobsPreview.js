@@ -82,13 +82,15 @@ export default function UwcssaJobsPreview() {
       like: like.filter((e) => e !== "").length,
       unlike: unlike.filter((e) => e !== "").length,
       active: active,
-      applied: uwcssaJobResumes.items.length,
+      applied: uwcssaJobResumes,
     };
   });
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" sx={{margin: 3}}>Uwcssa Jobs Preview</Typography>
+      <Typography variant="h4" sx={{ margin: 3 }}>
+        Uwcssa Jobs Preview
+      </Typography>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}
