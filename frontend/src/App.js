@@ -32,17 +32,10 @@ import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Individual from "./components/Event/individual";
 import Market from "./containers/market/Market";
-import MarketCreate from "./containers/market/MarketCreate";
-import MarketItemDetail from "./containers/market/MarketItemDetail";
-import MarketRentalDetail from "./containers/market/MarketRentalDetail";
-import MarketVehicleDetail from "./containers/market/MarketVehicleDetail ";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import PostEvent from "./components/Event/PostEvent";
-import PostMarketItem from "./containers/market/PostMarketItem";
-import PostMarketRental from "./containers/market/PostMarketRental";
-import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./containers/account/Profile";
@@ -222,40 +215,9 @@ export default function App() {
                 exact
                 component={EmailConfirm}
               />
+              <Route path="/market" component={Market} /> 
               <Route path="/article" component={Article} />
-              <Route path="/market/create" exact component={MarketCreate} />
-              <Route
-                path="/market/create/item"
-                exact
-                component={PostMarketItem}
-              />
-              <Route
-                path="/market/create/vehicle"
-                exact
-                component={PostMarketVehicle}
-              />
-              <Route
-                path="/market/create/rental"
-                exact
-                component={PostMarketRental}
-              />
-              <Route path="/market/create/rental" exact />
-              <Route path="/market" exact component={Market} />          
-              <Route
-                path="/market/item/:id"
-                exact
-                component={MarketItemDetail}
-              />
-              <Route
-                path="/market/vehicle/:id"
-                exact
-                component={MarketVehicleDetail}
-              />
-              <Route
-                path="/market/rental/:id"
-                exact
-                component={MarketRentalDetail}
-              />
+                      
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
