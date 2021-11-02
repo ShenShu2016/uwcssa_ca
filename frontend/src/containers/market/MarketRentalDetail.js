@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AutoSwipeableViews from "../../components/Market/AutoSwipeableViews";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import MessageIcon from "@mui/icons-material/Message";
@@ -33,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "1rem",
   },
   root: {
-    // maxWidth: "960px",
     margin: "auto",
     paddingBlock: "3rem",
   },
   boxSize: {
     paddingInline: "3rem",
-    height: "100%",
+    maxWidth: "100%",
     overflow: "hidden",
+    justifyContent: "center",
     // maxWidth: "100%",
     [theme.breakpoints.down("md")]: {
       paddingInline: "0",
@@ -113,14 +114,26 @@ export default function MarketRentalDetail() {
   return (
     <div className={classes.root}>
       {Object.keys(marketItem).length === 0 ? (
-        <div>...Loading</div>
+        <Box
+          sx={{
+            height: "50vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Stack spacing={2} direction="row">
+            <CircularProgress />
+            <CircularProgress color="secondary" />
+            <CircularProgress color="success" />
+            <CircularProgress color="inherit" />
+          </Stack>
+        </Box>
       ) : (
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} alignItems="flex-start" direction="row">
             <Grid item md={9} xs={12}>
-              <Box className={classes.boxSize}>
-                <AutoSwipeableViews images={[imageURL]} />
-              </Box>
+              <AutoSwipeableViews images={[imageURL]} />
             </Grid>
             <Grid item md={3} xs={12}>
               <Paper>
@@ -196,7 +209,7 @@ export default function MarketRentalDetail() {
                 <Box
                   sx={{
                     margin: "0.5rem",
-                    bgcolor: "#ff9800",
+                    // bgcolor: "#ff9800",
                   }}
                 >
                   <CardHeader
