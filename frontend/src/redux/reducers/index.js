@@ -3,13 +3,7 @@ import {
   pudEventReducer,
   selectedEventReducer,
 } from "./eventReducer";
-import {
-  forumReducer,
-  selectedForumPostCommentReducer,
-  selectedForumPostReducer,
-  selectedForumSubTopicReducer,
-  selectedForumTopicReducer,
-} from "./forumReducer";
+import { forumReducer } from "./forumReducer";
 import {
   marketItemReducer,
   selectedMarketItemReducer,
@@ -38,10 +32,6 @@ const reducers = combineReducers({
   allUwcssaJobs: uwcssaJobReducer,
 
   forum: forumReducer,
-  forumTopic: selectedForumTopicReducer,
-  forumSubTopic: selectedForumSubTopicReducer,
-  forumPost: selectedForumPostReducer,
-  forumPostComment: selectedForumPostCommentReducer,
 
   createUserEducation: postUserEducationReducer,
   updateUserEducation: putUserEducationReducer,

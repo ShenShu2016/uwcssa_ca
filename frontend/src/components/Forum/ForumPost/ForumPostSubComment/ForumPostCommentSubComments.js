@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Box,
   Button,
   Grid,
@@ -12,6 +11,8 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import CustomAvatar from "../../../CustomMUI/CustomAvatar";
+import moment from "moment";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -23,31 +24,6 @@ const useStyles = makeStyles({
     marginBlock: "2rem",
   },
 });
-function stringToColor(string) {
-  let hash = 0;
-  let i;
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = "#";
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.substr(-2);
-  }
-  /* eslint-enable no-bitwise */
-  return color;
-}
-
-function stringAvatar(name) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-    },
-    children: `${name.slice(0, 1)}`,
-  };
-}
 export default function ForumPostCommentSubComments({subComments, subCommentsNextToken}){
   const classes = useStyles();
   console.log(subComments);
@@ -56,16 +32,16 @@ export default function ForumPostCommentSubComments({subComments, subCommentsNex
     <div>
       <Box>
         {subComments.map((subComment) =>{
-          const { id, content, createdAt, like, unlike, owner } = subComment;
+          const { id, content, createdAt, userID, user } = subComment;
           return (
             <Box key={id} mb={2} className={classes.main}>
         <Grid container spacing={0} justifyContent="space-between">
           <Grid item xs={"auto"}>
-            <CardHeader
+          <CardHeader
               component={Link}
-              to={`/account/profile/${owner}`}
+              to={`/account/profile/${userID}`}
               sx={{ p: 0, textDecoration: "none" }}
-              avatar={<Avatar {...stringAvatar(owner.toUpperCase())} />}
+              avatar={<CustomAvatar link={false} user={user} />}
             />
           </Grid>
           <Grid item xs>
@@ -75,10 +51,10 @@ export default function ForumPostCommentSubComments({subComments, subCommentsNex
                 variant="subtitle2"
                 sx={{ fontSize: "13px", color: "#030303" }}
               >
-                {owner}
+               {userID}
               </Typography>
               <Typography variant="caption" sx={{ color: "#606060" }}>
-                {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
+              {moment(createdAt).fromNow()}
               </Typography>
             </Box>
             <Box sx={{ my: 1 }}>
@@ -102,14 +78,14 @@ export default function ForumPostCommentSubComments({subComments, subCommentsNex
                 sx={{ p: 0 }}
                 style={{ width: "22px" }}
               >
-                {like.length}
+                {/* {like.length} */}
               </Button>
               <Button
                 size="small"
                 color="primary"
                 startIcon={<ThumbDownAltOutlinedIcon />}
               >
-                {unlike.length}
+                {/* {unlike.length} */}
               </Button>
               <Button size="small" color="primary">
                 回复

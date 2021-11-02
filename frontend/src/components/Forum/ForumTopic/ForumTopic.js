@@ -31,18 +31,20 @@ function ForumTopic() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { forumTopicID } = useParams();
-  const forumTopic = useSelector((state) => state.forumTopic);
+  console.log(forumTopicID);
   useEffect(() => {
+    console.log("use");
     if (forumTopicID && forumTopicID !== "") {
       dispatch(selectedForumTopic(forumTopicID));
     }
     return () => dispatch(removeSelectedForumTopic());
   }, [forumTopicID, dispatch]);
-  //   console.log(forumTopic);
+  const forumTopic = useSelector((state) => state.forum.selectedForumTopic);
+  // console.log(forumTopic);
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
-        {Object.keys(forumTopic.forumTopic).length === 0 ? (
+        {Object.keys(forumTopic).length === 0  ? (
           <Skeleton variant="rectangular" width={210} height={118} />
         ) : (
           <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
@@ -71,7 +73,6 @@ function ForumTopic() {
                 </span>
               </Breadcrumbs>
             </Box>
-
             <ForumTopicMain forumTopic={forumTopic.forumTopic} />
           </Grid>
         )}

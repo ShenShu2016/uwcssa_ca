@@ -1,5 +1,4 @@
 import {
-    Avatar,
     CardActionArea,
     CardHeader,
     Grid,
@@ -12,8 +11,10 @@ import {
   import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
   import { Link } from "react-router-dom";
+  import CustomAvatar from "../../CustomMUI/CustomAvatar";
   import Storage from "@aws-amplify/storage";
   import { makeStyles } from "@mui/styles";
+  import moment from "moment";
   
   const useStyles = makeStyles((theme) => ({
     paper: {},
@@ -41,33 +42,35 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
         id,
         title,
         content,
-        imagePath,
-        like,
-        unlike,
+        imgS3Keys,
         createdAt,
-        // updateAt,
-        owner,
+        userID,
+        user,
       } = forumPost;
   
-    useEffect(() => {
-      const getImage = async () => {
-        try {
-          const imageAccessURL = await Storage.get(imagePath, {
-            level: "public",
-            expires: 120,
-            download: false,
-          });
-          // console.log("imageAccessURL", imageAccessURL);
-          setImageURL(imageAccessURL);
-        } catch (error) {
-          console.error("error accessing the Image from s3", error);
-          setImageURL(null);
+      useEffect(() => {
+        const getImage = async () => {
+          try {
+            const imageAccessURL = await Storage.get(imgS3Keys, {
+              level: "public",
+              expires: 120,
+              download: false,
+            });
+            // console.log("imageAccessURL", imageAccessURL);
+            setImageURL(imageAccessURL);
+          } catch (error) {
+            console.error("error accessing the Image from s3", error);
+            setImageURL(null);
+          }
+        };
+        if (imgS3Keys[0]) {
+          getImage();
+        } else {
+          setImageURL(
+            "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
+          );
         }
-      };
-      if (imagePath) {
-        getImage();
-      }
-    }, [imagePath]);
+      }, [imgS3Keys]);
   
     return (
       <div>
@@ -92,24 +95,25 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                 alignItems="flex-start"
                 sx={{ height: "100%" }}
               >
-                <Grid item xs={"auto"} sx={{ paddingBottom: "0.5rem" }}>
+              <Grid item xs={"auto"} sx={{ paddingBottom: "0.5rem" }}>
+                <CardActionArea
+                  component={Link}
+                  to={`/account/profile/${userID}`}
+                >
                   <CardHeader
-                    sx={{ p: 0  }}
+                    sx={{ p: 0 }}
                     avatar={
-                      <Avatar
-                        aria-label="recipe"
-                        className={classes.avatar}
-                        component={Link}
-                        to={`/account/profile/${owner}`}
-                        sx={{ width: 28, height: 28 }}
-                        // variant="square"
-                      >
-                        {owner.toUpperCase().slice(0, 1)}
-                      </Avatar>
+                      <CustomAvatar
+                        link={false}
+                        variant={"square"}
+                        sx={{ width: 18, height: 23 }}
+                        user={user}
+                      />
                     }
-                    title={owner}
+                    title={userID}
                   />
-                </Grid>
+                </CardActionArea>
+              </Grid>
                 <CardActionArea component={Link} to={`/forumPost/${id}`}>
                   <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
                     <div style={{ maxHeight: "48px", overflow: "hidden" }}>
@@ -145,7 +149,7 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                   <Divider />
                   <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
                     <Typography variant="overline" color="textSecondary">
-                      {createdAt.slice(0, 10)} {createdAt.slice(11, 19)}
+                    {moment(createdAt).fromNow()}
                     </Typography>
                     <Button
                         size="small"
@@ -154,14 +158,14 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                         sx={{ p: 0 }}
                         style={{ width: "22px" }}
                       >
-                        {like.length}
+                        {/* {like.length} */}
                       </Button>
                       <Button
                         size="small"
                         color="primary"
                         startIcon={<ThumbDownAltOutlinedIcon />}
                       >
-                        {unlike.length}
+                        {/* {unlike.length} */}
                       </Button>
                   </Grid>
 
