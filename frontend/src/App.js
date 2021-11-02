@@ -51,6 +51,7 @@ import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
 import Staff from "./containers/staff/Staff";
+import UserFeedBack from "./containers/UserFeedBack";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
@@ -275,6 +276,7 @@ export default function App() {
                 component={Group}
               />
               <Route path="/event/:eventID" exact component={EventDetail} />
+              <Route path="/rating" exact component={UserFeedBack} />
               <Route
                 path="/test/googleMapsPlace"
                 exact
