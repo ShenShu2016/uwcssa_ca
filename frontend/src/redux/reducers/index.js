@@ -1,13 +1,11 @@
 import {
+
   eventReducer,
   pudEventReducer,
   selectedEventReducer,
 } from "./eventReducer";
 import { forumReducer } from "./forumReducer";
-import {
-  marketItemReducer,
-  selectedMarketItemReducer,
-} from "./marketItemReducer";
+
 import {
   postUserEducationReducer,
   postUserExperienceReducer,
@@ -19,7 +17,9 @@ import {
 import { articleReducer } from "./articleReducer";
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
+import { eventReducer } from "./eventReducer";
 import { generalReducer } from "./generalReducer";
+import { marketReducer } from "./marketReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
 const reducers = combineReducers({
@@ -37,11 +37,8 @@ const reducers = combineReducers({
   updateUserEducation: putUserEducationReducer,
   createUserExperience: postUserExperienceReducer,
   updateUserExperience: putUserExperienceReducer,
-  allMarketItems: marketItemReducer,
-  marketItem: selectedMarketItemReducer,
+  market: marketReducer,
 
-  allEvents: eventReducer,
-  event: selectedEventReducer,
-  pudEvent: pudEventReducer,
+  event: eventReducer,
 });
 export default reducers;

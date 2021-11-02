@@ -7,17 +7,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import Alert from "@mui/material/Alert";
+import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Redirect } from "react-router";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signUp } from "../../redux/actions/authActions";
-import Alert from '@mui/material/Alert';
-import { CircularProgress } from "@mui/material";
-import { green } from "@mui/material/colors";
-
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,17 +44,18 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(3),
   },
   alert: {
-    marginTop:"1.5rem",
+    marginTop: "1.5rem",
   },
 }));
 
 export default function SignUp() {
   const classes = useStyles();
+  useTitle("UWCSSA注册");
   const dispatch = useDispatch();
   const [accountCreated, setAccountCreated] = useState(false);
   const [buttonState, setButtonState] = useState(true);
   const [alert, setAlert] = useState(false);
-  const [alertContent, setAlertContent] = useState('');
+  const [alertContent, setAlertContent] = useState("");
   const [loadingState, setLoadingState] = useState(false);
   //const emailFormat = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const timer = useRef();
@@ -92,19 +94,18 @@ export default function SignUp() {
       如果email长度为0，disable按钮
       如果email长度大于1，并且不为0，enable按钮
     */
-    if(formData.email.length === 0)
-      setButtonState(true); 
-    
-    if(formData.email.length > 1 && formData.email.length!== 0)
+    if (formData.email.length === 0) setButtonState(true);
+
+    if (formData.email.length > 1 && formData.email.length !== 0)
       setButtonState(false);
     console.log(formData);
-  }; 
+  };
 
   const onSignUp = async () => {
     const { username, password, email } = formData;
     const response = await dispatch(signUp(username, password, email));
     setLoadingState(true);
-    if (response.result) {      
+    if (response.result) {
       setAccountCreated(true);
     } else {
       timer.current = window.setTimeout(() => {
@@ -113,7 +114,7 @@ export default function SignUp() {
         setAlert(true);
         console.log(response.error.message);
       }, 1000);
-      
+
       console.log(response.error.message);
     }
   };
@@ -136,7 +137,13 @@ export default function SignUp() {
           已经有账户了？
           <Link to="/signIn">登入</Link>
         </Typography>
-        {alert  ? <Alert className={classes.alert} severity='error'>{alertContent}</Alert> : <></> }
+        {alert ? (
+          <Alert className={classes.alert} severity="error">
+            {alertContent}
+          </Alert>
+        ) : (
+          <></>
+        )}
         <form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -149,7 +156,7 @@ export default function SignUp() {
                 type="username"
                 id="username"
                 autoComplete="username"
-                error={alert}              
+                error={alert}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -159,10 +166,10 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="email"
-                label="Email" 
+                label="Email"
                 type="email"
                 id="email"
-                error={buttonState || alert}                
+                error={buttonState || alert}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -176,7 +183,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                error={alert}                
+                error={alert}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -191,22 +198,22 @@ export default function SignUp() {
             >
               注册
               {loadingState && (
-                  <CircularProgress
-                    size={24}
-                    sx={{
-                      color: green[500],
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      marginTop: "-0.75rem",
-                      marginLeft: "-0.75rem",
-                    }}
-                  />
-                )}
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Grid>
         </form>
       </div>
     </Container>
   );
-};
+}

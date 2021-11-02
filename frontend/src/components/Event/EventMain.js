@@ -51,7 +51,7 @@ export default function EventMain({ event }) {
     id,
     content,
     title,
-    poster,
+    posterImgS3Key,
     location,
     startDate,
     eventStatus,
@@ -61,7 +61,7 @@ export default function EventMain({ event }) {
   useEffect(() => {
     const getPoster = async () => {
       try {
-        const posterAccessURL = await Storage.get(poster, {
+        const posterAccessURL = await Storage.get(posterImgS3Key, {
           level: "public",
           expires: 120,
           download: false,
@@ -72,10 +72,14 @@ export default function EventMain({ event }) {
         setPosterURL(null);
       }
     };
-    if (poster) {
+    if (posterImgS3Key) {
       getPoster();
+    } else {
+      setPosterURL(
+        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
+      );
     }
-  }, [poster]);
+  }, [posterImgS3Key]);
 
   const userInfo = useSelector((state) => state.userAuth);
 

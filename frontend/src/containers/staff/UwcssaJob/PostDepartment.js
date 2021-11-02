@@ -6,13 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import API from "@aws-amplify/api";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createDepartment } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
+import { useSelector } from "react-redux";
+import store from "../../../redux/store";
+import { setDepartments } from "../../../redux/actions/uwcssaJobActions";
 
 const useStyles = makeStyles({
   root: {
@@ -25,13 +27,18 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
 });
-export default function PostDepartment(props) {
-  const classes = useStyles();
 
-  // const { user } = useSelector((state) => state.userAuth);
+export default function PostDepartment(props) {
+  useEffect(() => {
+    setDepartments()(store.dispatch);
+  }, []);
+  const classes = useStyles();
+  const { user } = useSelector((state) => state.userAuth);
   const [info, setInfo] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailure, setSubmitFailure] = useState(false);
+  const [exist, setExist] = useState(false);
+  const departments = useSelector((state) => state.allUwcssaJobs.departments);
 
   const [departmentData, setDepartmentData] = useState({
     name: "",
@@ -45,14 +52,19 @@ export default function PostDepartment(props) {
       setInfo(true);
       return;
     }
+    const departmentsList = departments.map((department => department.name))
+
+    if (departmentsList.includes(departmentData.name)) {
+      setExist(true);
+      return;
+    }
     try {
       const createDepartmentInput = {
         name: departmentData.name,
         introduction: departmentData.introduction,
         email: departmentData.email,
         leader: departmentData.leader,
-        like: [""],
-        unlike: [""],
+        userID: user.username,
       };
       const newDepartment = await API.graphql(
         graphqlOperation(createDepartment, { input: createDepartmentInput })
@@ -61,7 +73,9 @@ export default function PostDepartment(props) {
       if (newDepartment) {
         setSubmitSuccess(true);
         setTimeout(() => {
-          props.history.push("/staff/uwcssaJob");
+          const url = document.URL
+          window.open(url,"_self")
+          // props.history.push("/staff/uwcssaJob");
         }, 1200);
       }
     } catch (error) {
@@ -80,6 +94,10 @@ export default function PostDepartment(props) {
 
   const handleCloseFailure = (event, reason) => {
     setSubmitFailure(false);
+  };
+
+  const handleCloseExist = (event, reason) => {
+    setExist(false);
   };
 
   return (
@@ -181,6 +199,16 @@ export default function PostDepartment(props) {
       >
         <Alert severity="error" onClose={handleCloseFailure}>
           提交失败,请重试!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={exist}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={handleCloseExist}
+      >
+        <Alert severity="error" onClose={handleCloseExist}>
+          部门已存在!
         </Alert>
       </Snackbar>
     </div>

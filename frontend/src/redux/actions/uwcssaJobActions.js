@@ -4,46 +4,43 @@ import { ActionTypes } from "../constants/uwcssaJob-action-types";
 const departments = `query ListDepartments {
   listDepartments {
     items {
-      createdAt
-      email
-      introduction
-      leader
-      like
+      id
       name
-      owner
-      unlike
-      updatedAt
+      introduction
+      email
+      leader
+      userID
       uwcssaJobs {
         items {
-          benefits
-          bonus
-          schedule
-          createdAt
           id
-          active
-          imagePath
           introduction
-          like
-          owner
-          requirements
           title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
           unlike
+          active
+          createdAt
           updatedAt
+          departmentID
         }
       }
     }
   }
 }`;
 
-export const listUwcssaJobs = `query ListUwcssaJobs {
-    listUwcssaJobs {
+export const listUwcssaJobs = `query ListUwcssaJobs($filter: ModelUwcssaJobFilterInput) {
+    listUwcssaJobs(filter: $filter) {
       items {
         id
         introduction
         title
         requirements
         bonus
-        imagePath
+        imgS3Key
         benefits
         schedule
         like
@@ -51,29 +48,17 @@ export const listUwcssaJobs = `query ListUwcssaJobs {
         active
         createdAt
         updatedAt
+        departmentID
+        userID
         department {
+          id
           name
           introduction
           email
           leader
-          like
-          unlike
+          userID
           createdAt
           updatedAt
-          owner
-        }
-        owner
-        uwcssaJobResumes {
-          items {
-            id
-            name
-            email
-            resumeFilePath
-            phone
-            message
-            createdAt
-            updatedAt
-          }
         }
       }
     }

@@ -45,7 +45,7 @@ export default function Openings() {
                 {department.uwcssaJobs.items.length === 0
                   ? ""
                   : department.uwcssaJobs.items.map((job) => {
-                      return job.active===1 ? (
+                      return job.active? (
                         <div key={job.id}>
                           <br />
                           <div

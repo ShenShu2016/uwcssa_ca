@@ -6,7 +6,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Amplify from "aws-amplify";
 import Article from "./containers/article/Article";
-import ArticleDetail from "./containers/article/ArticleDetail";
 import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";
@@ -27,22 +26,16 @@ import ForumSubTopic from "./components/Forum/ForumSubTopic/ForumSubTopic";
 import ForumTopic from "./components/Forum//ForumTopic/ForumTopic";
 import ForumTopicCURD from "./components/Forum/ForumTopic/ForumTopicCURD";
 import FoundingTeam from "./containers/FoundingTeam";
+import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Group from "./components/Event/group";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Individual from "./components/Event/individual";
 import Market from "./containers/market/Market";
-import MarketCreate from "./containers/market/MarketCreate";
-import MarketItemDetail from "./containers/market/MarketItemDetail";
-import MarketRentalDetail from "./containers/market/MarketRentalDetail";
-import MarketVehicleDetail from "./containers/market/MarketVehicleDetail ";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
 import PostEvent from "./components/Event/PostEvent";
-import PostMarketItem from "./containers/market/PostMarketItem";
-import PostMarketRental from "./containers/market/PostRentalItem";
-import PostMarketVehicle from "./containers/market/PostMarketVehicle";
 import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./containers/account/Profile";
@@ -51,6 +44,7 @@ import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
 import Staff from "./containers/staff/Staff";
+import UserFeedBack from "./containers/UserFeedBack";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
@@ -211,51 +205,19 @@ export default function App() {
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />
-              <Route path="/resetPassword" exact component={ResetPassword} />
+              <Route
+                path="/resetPassword/:username"
+                exact
+                component={ResetPassword}
+              />
               <Route
                 path="/emailConfirm/:username"
                 exact
                 component={EmailConfirm}
               />
-              <Route path="/article" exact component={Article} />
-              <Route
-                path="/article/:articleID"
-                exact
-                component={ArticleDetail}
-              />
-                  <Route path="/market/create" exact component={MarketCreate} />
-              <Route
-                path="/market/create/item"
-                exact
-                component={PostMarketItem}
-              />
-              <Route
-                path="/market/create/vehicle"
-                exact
-                component={PostMarketVehicle}
-              />
-              <Route
-                path="/market/create/rental"
-                exact
-                component={PostMarketRental}
-              />
-              <Route path="/market/create/rental" exact />
-              <Route path="/market" exact component={Market} />          
-              <Route
-                path="/market/item/:id"
-                exact
-                component={MarketItemDetail}
-              />
-              <Route
-                path="/market/vehicle/:id"
-                exact
-                component={MarketVehicleDetail}
-              />
-              <Route
-                path="/market/rental/:id"
-                exact
-                component={MarketRentalDetail}
-              />
+              <Route path="/market" component={Market} /> 
+              <Route path="/article" component={Article} />
+                      
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
@@ -276,6 +238,12 @@ export default function App() {
                 component={Group}
               />
               <Route path="/event/:eventID" exact component={EventDetail} />
+              <Route path="/rating" exact component={UserFeedBack} />
+              <Route
+                path="/test/googleMapsPlace"
+                exact
+                component={GoogleMapsPlace}
+              />
               <Route>404 Not Found!</Route>
             </Switch>
             <Snackbar

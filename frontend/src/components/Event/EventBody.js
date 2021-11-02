@@ -3,6 +3,7 @@ import {
   Button,
   CardActions,
   CardMedia,
+  CircularProgress,
   Container,
   Tab,
   Tabs,
@@ -65,14 +66,14 @@ export default function EventBody({ event }) {
     eventStatus,
     location,
     content,
-    poster,
+    posterImgS3Key,
     topic,
-  } = event.event;
+  } = event;
 
   useEffect(() => {
     const getPoster = async () => {
       try {
-        const posterAccessURL = await Storage.get(poster, {
+        const posterAccessURL = await Storage.get(posterImgS3Key, {
           level: "public",
           expires: 120,
           download: false,
@@ -83,20 +84,40 @@ export default function EventBody({ event }) {
         setPosterURL(null);
       }
     };
-    if (poster) {
+    if (posterImgS3Key) {
+      console.log(posterImgS3Key);
       getPoster();
     }
-  }, [poster]);
+  }, [posterImgS3Key]);
   console.log("posterURL", posterURL);
 
   return (
     <Box>
-      {Object.keys(event.event).length === 0 ? (
-        <div>...Loading</div>
+      {Object.keys(event).length === 0 ? (
+        <div>
+          <CircularProgress />
+        </div>
       ) : (
         <Container size="lg">
           <Container size="sm">
-            <CardMedia component="img" height="300" image={posterURL} />
+            <Box
+              style={{
+                display: "flex",
+                alignItem: "center",
+                justifyContent: "center",
+                background:
+                  "linear-gradient(to top, rgba(255,0,0,0) 0 70%, rgba(63, 81, 181, 1) )",
+              }}
+            >
+              <CardMedia
+                component="img"
+                style={{
+                  width: "auto",
+                  maxHeight: "300px",
+                }}
+                image={posterURL}
+              />
+            </Box>
 
             <Box
               sx={{
@@ -112,20 +133,15 @@ export default function EventBody({ event }) {
                   flexDirection: "column",
                 }}
               >
-                <Typography
-                  variant="subtitle1"
-                  color="text.secondary"
-                  component="div"
-                >
+                <Typography variant="subtitle1" component="div" color="red">
                   <b>
                     {startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
                     {startDate.slice(11, 16)} - {endDate.slice(11, 16)}
                   </b>
                 </Typography>
-                <Typography component="div" variant="h5" color="red">
+                <Typography component="div" variant="h4" gutterBottom>
                   <b>{title}</b>
                 </Typography>
-
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"

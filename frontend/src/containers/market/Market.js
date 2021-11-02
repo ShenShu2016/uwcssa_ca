@@ -1,105 +1,29 @@
-import { Box, Divider, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import {
-  setMarketItems,
-  setMarketRental,
-  setMarketVehicles,
-} from "../../redux/actions/marketItemActions";
-import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch } from "react-router-dom";
 
-import MarketComponent from "../../components/Market/MarketComponent";
-import { makeStyles } from "@mui/styles";
-import { useTitle } from "../../Hooks/useTitle";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    marginTop: "4rem",
-    maxWidth: "1500px",
-    paddingInline: "0.5rem",
-  },
-  title: {
-    textAlign: "center",
-    color: "#0D1F48",
-    paddingBottom: "3rem",
-  },
-  items: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-  },
-}));
+import { Box } from "@mui/material";
+import MarketCreate from "./MarketCreate";
+import MarketItemDetail from "./MarketItemDetail";
+import MarketList from "./marketList";
+import MarketRentalDetail from "./MarketRentalDetail";
+import MarketVehicleDetail from "./MarketVehicleDetail ";
+import PostMarketItem from "./PostMarketItem";
+import PostMarketRental from "./PostMarketRental";
+import PostMarketVehicle from "./PostMarketVehicle";
+import React from "react";
 
 export default function Market() {
-  useTitle("市场");
-  const dispatch = useDispatch();
-  const classes = useStyles();
-
-  useEffect(() => {
-    dispatch(setMarketItems());
-    dispatch(setMarketVehicles());
-    dispatch(setMarketRental());
-  }, [dispatch]);
-
-  const { marketItems, marketVehicles, marketRentals } = useSelector(
-    (state) => state.allMarketItems
-  );
-
-  const marketItemRenderList =
-    marketItems &&
-    marketItems.map((marketItem) => {
-      return (
-        <MarketComponent item={marketItem} type={"item"} key={marketItem.id} />
-      );
-    });
-  console.log("marketVehicles", marketVehicles);
-
-  const marketVehicleRenderList =
-    marketVehicles &&
-    marketVehicles.map((marketVehicle) => {
-      return (
-        <MarketComponent
-          item={marketVehicle}
-          type={"vehicle"}
-          key={marketVehicle.id}
-        />
-      );
-    });
-
-  const marketRentalRenderList =
-    marketRentals &&
-    marketRentals.map((marketRental) => {
-      return (
-        <MarketComponent
-          item={marketRental}
-          type={"rental"}
-          key={marketRental.id}
-        />
-      );
-    });
-
   return (
-    <Box className={classes.root}>
-      <Box>
-        <Typography variant="h3" className={classes.title}>
-          二手商城
-        </Typography>
-        <Typography variant="h5" className={classes.title}>
-          Item
-        </Typography>
-        <Box className={classes.items}>{marketItemRenderList}</Box>
-        <Divider />
-        <Typography variant="h5" className={classes.title}>
-          汽车
-        </Typography>
-        <Box className={classes.items}>{marketVehicleRenderList}</Box>
-        <Divider />
-        <Typography variant="h5" className={classes.title}>
-          房屋
-        </Typography>
-        <Box className={classes.items}>{marketRentalRenderList}</Box>
-        <Divider />
-      </Box>
+    <Box>
+      <Switch>
+        <Route exact path="/market" component={MarketList} />
+        <Route path="/market/create" component={MarketCreate} />
+        <Route path="/market/create/item" component={PostMarketItem} />
+        <Route path="/market/create/vehicle" component={PostMarketVehicle} />
+        <Route path="/market/create/rental" component={PostMarketRental} />
+        <Route path="/market/item/:id" component={MarketItemDetail} />
+        <Route path="/market/vehicle/:id" component={MarketVehicleDetail} />
+        <Route path="/market/rental/:id" component={MarketRentalDetail} />
+      </Switch>
     </Box>
   );
 }

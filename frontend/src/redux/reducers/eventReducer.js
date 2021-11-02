@@ -1,73 +1,65 @@
 import { ActionTypes } from "../constants/event-action-types";
 
-const initialStateEvent = {
+const initialState = {
   events: [],
   topics: [],
+  selected: {
+    event: {},
+    participants: [],
+    participantsNextToken: "",
+  },
+  mutation: {
+    postEvent: {},
+    updateEvent: [],
+    deleteEvent: [],
+  },
 };
 
-const initialStateSelectedEvent = {
-  event: {},
-  participants: [],
-  participantsNextToken: "",
-};
-
-const initialStatePUDEvent = {
-  postEvent: {},
-  postPoster: {},
-  postImage: {},
-  updateEvent: [],
-  deleteEvent: [],
-};
-
-export const eventReducer = (state = initialStateEvent, { type, payload }) => {
+export const eventReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_EVENTS:
       return { ...state, events: payload };
     case ActionTypes.SET_TOPICS:
       return { ...state, topics: payload };
-    default:
-      return state;
-  }
-};
 
-export const selectedEventReducer = (
-  state = initialStateSelectedEvent,
-  { type, payload }
-) => {
-  switch (type) {
     case ActionTypes.SELECTED_EVENT:
-      return { ...state, event: payload };
+      return { ...state, selected: { ...state.selected, event: payload } };
     case ActionTypes.SELECTED_EVENT_PARTICIPANTS:
       return {
         ...state,
-        comments: payload.items,
-        commentsNextToken: payload.nextToken,
+        selected: {
+          ...state.selected,
+          participants: payload.items,
+          participantsNextToken: payload.nextToken,
+        },
       };
-
+    case ActionTypes.EVENT_PARTICIPANT_POST_SUCCESS:
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          participants: [...payload, ...state.selected.participants],
+        },
+      };
     case ActionTypes.REMOVE_SELECTED_EVENT:
-      return initialStateSelectedEvent;
-    default:
-      return state;
-  }
-};
-
-export const pudEventReducer = (
-  state = initialStatePUDEvent,
-  { type, payload }
-) => {
-  switch (type) {
+      return {
+        ...state,
+        selected: {
+          event: {},
+          participants: [],
+          participantsNextToken: "",
+        },
+      };
     case ActionTypes.POST_EVENT_SUCCESS:
-      return { ...state, postEvent: payload };
+      return {
+        ...state,
+        mutation: { ...state.mutation, postEvent: payload },
+      };
     case ActionTypes.POST_EVENT_FAIL:
-      return { ...state, postEvent: payload };
-    case ActionTypes.POST_EVENT_POSTER_SUCCESS:
-      return { ...state, postPoster: payload };
-    case ActionTypes.POST_EVENT_POSTER_FAIL:
-      return { ...state, postPoster: payload };
-    case ActionTypes.POST_EVENT_IMG_SUCCESS:
-      return { ...state, postImage: payload };
-    case ActionTypes.POST_EVENT_IMG_FAIL:
-      return { ...state, postImage: payload };
+      return {
+        ...state,
+        mutation: { ...state.mutation, postEvent: payload },
+      };
     default:
       return state;
   }

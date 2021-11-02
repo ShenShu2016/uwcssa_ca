@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     marginLeft: "1rem",
   },
   root: {
-    maxWidth: "960px",
+    maxWidth: "940px",
     margin: "auto",
     paddingBlock: "3rem",
     paddingInline: "1rem",
@@ -48,19 +48,19 @@ export default function MarketVehicleDetail() {
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
-  const marketItem = useSelector((state) => state.marketItem);
+  const { marketItem } = useSelector((state) => state.market.selected);
   console.log("marketItem", marketItem);
   const {
     // id,
     // name,
-    imagePath,
+    imgS3Keys,
     title,
     price,
     description,
     location,
     marketItemCondition,
     marketItemCategory,
-    // tags,
+    tags,
     // active,
     createdAt,
     // ByCreatedAt,
@@ -70,7 +70,7 @@ export default function MarketVehicleDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imagePath, {
+        const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
           download: false,
@@ -82,10 +82,10 @@ export default function MarketVehicleDetail() {
         setImageURL(null);
       }
     };
-    if (imagePath) {
+    if (imgS3Keys) {
       getImage();
     }
-  }, [imagePath]);
+  }, [imgS3Keys]);
 
   return (
     <div className={classes.root}>
@@ -126,7 +126,10 @@ export default function MarketVehicleDetail() {
           </CardActionArea>
           <Divider />
           <Typography variant="h3" color="red" className={classes.title}>
-            价格：{price}
+            Tags: {tags}
+          </Typography>
+          <Typography variant="h3" color="red" className={classes.title}>
+            价格：$ {price}
           </Typography>
           <Typography variant="h3" color="red" className={classes.title}>
             位置：{location}

@@ -16,7 +16,11 @@ export const setEvents = () => async (dispatch) => {
   try {
     const eventData = await API.graphql({
       query: eventSortBySortKey,
-      variables: { ByCreatedAt: "Event", sortDirection: "DESC" },
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
       authMode: "AWS_IAM",
     });
     dispatch({
@@ -32,7 +36,7 @@ export const selectedEvent = (eventID) => async (dispatch) => {
   try {
     const response = await API.graphql({
       query: getEvent,
-      variables: { id: eventID },
+      variables: { id: eventID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
     dispatch({
@@ -52,8 +56,8 @@ export const selectedEventParticipants = (eventID) => async (dispatch) => {
       variables: {
         EventID: eventID,
         sortDirection: "DESC",
-        filter: { active: { eq: 1 } },
-        limit: 10,
+        filter: { active: { eq: true } },
+        // limit: 10,
       },
       authMode: "AWS_IAM",
     });
@@ -81,18 +85,23 @@ export const postEventParticipant =
           input: createEventParticipantInput,
         })
       );
-
       dispatch({
         type: ActionTypes.EVENT_PARTICIPANT_ADD_SUCCESS,
         payload: response,
       });
-      console.log();
-      dispatch(selectedEventParticipants(createEventParticipantInput.eventID));
+      return {
+        result: true,
+        response: response,
+      };
     } catch (error) {
       console.log("error on adding EventParticipant", error);
       dispatch({
         type: ActionTypes.EVENT_PARTICIPANT_ADD_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 
@@ -136,6 +145,7 @@ export const postEvent = (createEventInput) => async (dispatch) => {
     };
   }
 };
+
 export const postEventPoster = (posterData) => async (dispatch) => {
   try {
     const response = await Storage.put(

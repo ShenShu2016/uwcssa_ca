@@ -113,6 +113,57 @@ export const emailConfirm =
     }
   };
 
+export const forgotPassword = (username) => async (dispatch) => {
+  try {
+    const response = await Auth.forgotPassword(username);
+    dispatch({
+      type: ActionTypes.EMAIL_CONFIRM_SUCCESS,
+    });
+    return {
+      result: true,
+      response: response,
+    };
+  } catch (error) {
+    console.log("error confirming signing up:", error);
+    dispatch({
+      type: ActionTypes.EMAIL_CONFIRM_FAIL,
+    });
+    return {
+      result: false,
+      error: error,
+    };
+  }
+};
+
+export const forgotPassWordSubmit =
+  (code, username, new_password) => async (dispatch) => {
+    try {
+      const response = await Auth.forgotPasswordSubmit(
+        username,
+        code,
+        new_password
+      );
+      dispatch({
+        type: ActionTypes.FORGOT_PASSWORD_SUBMIT_SUCCESS,
+      });
+      console.log(response);
+      return {
+        result: true,
+        response: response,
+      };
+    } catch (error) {
+      console.log("error confirming FORGOT_PASSWORD_SUBMIT_FAIL:", error);
+      console.log(error);
+      dispatch({
+        type: ActionTypes.FORGOT_PASSWORD_SUBMIT_FAIL,
+      });
+      return {
+        result: false,
+        error: error,
+      };
+    }
+  };
+
 // export const reset_password = (email) => async (dispatch) => {
 //   const config = {
 //     headers: {
