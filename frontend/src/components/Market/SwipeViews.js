@@ -100,8 +100,8 @@ export default function SwipeViews({ images }) {
 
       <Box
         sx={{
-          maxwidth: "100%",
-          maxheight: "100%",
+          maxWidth: "100%",
+          maxHeight: "100%",
           // bgcolor: "blue",
           top: "0",
           left: "0",
@@ -115,8 +115,8 @@ export default function SwipeViews({ images }) {
         <Box
           component="img"
           src={images[activeStep]}
-          maxheight="100%"
-          maxwidth="100%"
+          maxHeight="100%"
+          maxWidth="100%"
           sx={{
             position: "absolute",
             left: "0",

@@ -161,7 +161,7 @@ export default function MarketRentalDetail() {
             // bgcolor="yellow"
             className={classes.info}
           >
-            <Paper maxwidth="100%">
+            <Paper sx={{ maxWidth: "100%" }}>
               <Typography variant="h5" marginLeft="0.5rem" paddingTop="0.5rem">
                 {propertyType},{bedroomCounts} Bedrooms, {marketRentalSaleRent}
               </Typography>
