@@ -1,8 +1,8 @@
 import {
   Avatar,
   Box,
+  Button,
   CardHeader,
-  Chip,
   Divider,
   IconButton,
   Paper,
@@ -15,7 +15,6 @@ import {
 } from "../../redux/actions/marketItemActions";
 import { useDispatch, useSelector } from "react-redux";
 
-import AutoSwipeableViews from "../../components/Market/AutoSwipeableViews";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
@@ -25,27 +24,43 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import Stack from "@mui/material/Stack";
 import Storage from "@aws-amplify/storage";
+import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   bread: {
-    marginTop: "4rem",
-    marginLeft: "1rem",
+    // marginTop: "4rem",
+    // marginLeft: "1rem",
   },
   root: {
     margin: "auto",
-    paddingBlock: "3rem",
+    // paddingBlock: "3rem",
   },
-  boxSize: {
-    paddingInline: "3rem",
-    maxWidth: "100%",
-    overflow: "hidden",
-    justifyContent: "center",
-    // maxWidth: "100%",
+  photo: {
     [theme.breakpoints.down("md")]: {
-      paddingInline: "0",
-      // height: "100%",
+      width: "100%",
+      height: "50vh",
+    },
+  },
+  contain: {
+    width: "100%",
+    overflow: "hidden",
+    height: "90vh",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      height: "100%",
+    },
+  },
+  info: {
+    width: "360px",
+    height: "100%",
+    float: "left",
+    overflowY: "scroll",
+    overflowX: "hidden",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "100%",
     },
   },
 }));
@@ -53,8 +68,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MarketRentalDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  const [imageURL, setImageURL] = useState(null);
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
   console.log("id", id);
   useEffect(() => {
@@ -95,22 +109,27 @@ export default function MarketRentalDetail() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imgS3Keys[0], {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        // console.log("imageAccessURL", imageAccessURL);
-        setImageURL(imageAccessURL);
+        setImgKeyFromServer([]);
+        const imageAccessURL = await Promise.all(
+          Array.from(imgS3Keys).map((key) =>
+            Storage.get(key, {
+              level: "public",
+              expires: 120,
+              download: false,
+            })
+          )
+        );
+        setImgKeyFromServer((url) => url.concat(imageAccessURL));
       } catch (error) {
         console.error("error accessing the Image from s3", error);
-        setImageURL(null);
+        setImgKeyFromServer([]);
       }
     };
     if (imgS3Keys) {
       getImage();
     }
   }, [imgS3Keys]);
+
   return (
     <div className={classes.root}>
       {Object.keys(marketItem).length === 0 ? (
@@ -130,113 +149,117 @@ export default function MarketRentalDetail() {
           </Stack>
         </Box>
       ) : (
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={1} alignItems="flex-start" direction="row">
-            <Grid item md={9} xs={12}>
-              <AutoSwipeableViews images={[imageURL]} />
-            </Grid>
-            <Grid item md={3} xs={12}>
-              <Paper>
-                <Typography
-                  variant="h5"
-                  marginLeft="0.5rem"
-                  paddingTop="0.5rem"
-                >
-                  {propertyType},{bedroomCounts} Bedrooms,{" "}
-                  {marketRentalSaleRent}
-                </Typography>
-                <Typography margin="0.5rem">$ {price}</Typography>
-                <Typography margin="0.5rem">
-                  发布日期： {createdAt.slice(0, 10)}
-                </Typography>
-                <Stack
-                  justifyContent="center"
-                  marginY="0.5rem"
-                  direction="row"
-                  spacing={1}
-                >
-                  <Chip
-                    icon={<MessageIcon />}
-                    onClick={() => console.log("clicked!")}
-                    label="Contact"
-                  />
-                  <Chip
-                    icon={<BookmarksIcon />}
-                    onClick={() => console.log("clicked!")}
-                    label="Save"
-                  />
-                  <Chip
-                    icon={<ShareIcon />}
-                    onClick={() => console.log("clicked!")}
-                    label="Share"
-                  />
-                </Stack>
-                <Divider />
-                <Typography marginLeft="0.5rem">Details</Typography>
-                <Grid marginLeft="0.5rem" container spacing={2}>
-                  <Grid item xs={4}>
-                    AC Type
-                  </Grid>
-                  <Grid item xs={8}>
-                    {airConditionType}
-                  </Grid>
-                  <Grid item xs={4}>
-                    Heating Type
-                  </Grid>
-                  <Grid item xs={8}>
-                    {heatingType}
-                  </Grid>
-                  <Grid item xs={4}>
-                    Pet Friendly
-                  </Grid>
-                  <Grid item xs={8}>
-                    {catFriendly && dogFriendly ? "可以养" : "不可以养"}
-                  </Grid>
-                </Grid>
-                <Typography marginLeft="0.5rem" marginTop="0.5rem">
-                  Descriptions
-                </Typography>
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          className={classes.contain}
+        >
+          <SwipeViews images={imgKeyFromServer} />
 
-                <Typography marginLeft="0.5rem">{description}</Typography>
-                <Box
-                  sx={{ margin: "0.5rem", bgcolor: "#4caf50", height: "200px" }}
+          <Box
+            // bgcolor="yellow"
+            className={classes.info}
+          >
+            <Paper maxwidth="100%">
+              <Typography variant="h5" marginLeft="0.5rem" paddingTop="0.5rem">
+                {propertyType},{bedroomCounts} Bedrooms, {marketRentalSaleRent}
+              </Typography>
+              <Typography margin="0.5rem">$ {price}</Typography>
+              <Typography margin="0.5rem">
+                发布日期： {createdAt.slice(0, 10)}
+              </Typography>
+              <Stack
+                justifyContent="center"
+                marginY="0.5rem"
+                direction="row"
+                spacing={1}
+              >
+                <Button
+                  startIcon={<MessageIcon />}
+                  onClick={() => console.log("clicked!")}
+                  variant="contained"
                 >
-                  Google map
-                </Box>
-                <Typography margin="0.5rem">Address {address}</Typography>
-                <Divider />
-                <Typography margin="0.5rem">Seller Infos</Typography>
-                <Box
-                  sx={{
-                    margin: "0.5rem",
-                    // bgcolor: "#ff9800",
-                  }}
+                  Contact
+                </Button>
+                <Button
+                  startIcon={<BookmarksIcon />}
+                  onClick={() => console.log("clicked!")}
+                  variant="contained"
                 >
-                  <CardHeader
-                    avatar={
-                      <Avatar
-                        aria-label="recipe"
-                        className={classes.avatar}
-                        component={Link}
-                        to={`/account/profile/${owner}`}
-                      ></Avatar>
-                    }
-                    action={
-                      <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                    title={owner}
-                    subheader={`发布日期： ${createdAt.slice(
-                      0,
-                      10
-                    )} ${createdAt.slice(11, 19)}`}
-                  />
-                </Box>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Box>
+                  Save
+                </Button>
+                <Button
+                  startIcon={<ShareIcon />}
+                  onClick={() => console.log("clicked!")}
+                  variant="contained"
+                >
+                  Share
+                </Button>
+              </Stack>
+              <Divider />
+              <Typography marginX="0.5rem">Details</Typography>
+              <Grid marginX="0.5rem" container spacing={2}>
+                <Grid item xs={4}>
+                  AC Type
+                </Grid>
+                <Grid item xs={8}>
+                  {airConditionType}
+                </Grid>
+                <Grid item xs={4}>
+                  Heating Type
+                </Grid>
+                <Grid item xs={8}>
+                  {heatingType}
+                </Grid>
+                <Grid item xs={4}>
+                  Pet Friendly
+                </Grid>
+                <Grid item xs={8}>
+                  {catFriendly && dogFriendly ? "可以养" : "不可以养"}
+                </Grid>
+              </Grid>
+              <Typography marginX="0.5rem" marginTop="0.5rem">
+                Descriptions
+              </Typography>
+
+              <Typography marginX="0.5rem">{description}</Typography>
+              <Box
+                sx={{ margin: "0.5rem", bgcolor: "#4caf50", height: "200px" }}
+              >
+                Google map
+              </Box>
+              <Typography margin="0.5rem">Address {address}</Typography>
+              <Divider />
+              <Typography margin="0.5rem">Seller Infos</Typography>
+              <Box
+                sx={{
+                  margin: "0.5rem",
+                  // bgcolor: "#ff9800",
+                }}
+              >
+                <CardHeader
+                  avatar={
+                    <Avatar
+                      aria-label="recipe"
+                      className={classes.avatar}
+                      component={Link}
+                      to={`/account/profile/${owner}`}
+                    ></Avatar>
+                  }
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  title={owner}
+                  subheader={`发布日期： ${createdAt.slice(
+                    0,
+                    10
+                  )} ${createdAt.slice(11, 19)}`}
+                />
+              </Box>
+            </Paper>
+          </Box>
+        </Stack>
       )}
     </div>
   );

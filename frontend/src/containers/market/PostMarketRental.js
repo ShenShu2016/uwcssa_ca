@@ -11,8 +11,8 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
-import { postImage } from "../../redux/actions/generalAction";
 import { postMarketRental } from "../../redux/actions/marketItemActions";
+import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -23,12 +23,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "960px",
     margin: "auto",
     paddingTop: "5rem",
-  },
-
-  imgPreview: {
-    minHeight: "300px",
-    backgroundColor: "#f4f4f4",
-    textAlign: "center",
   },
   titleInput: {
     marginBlock: "2rem",
@@ -50,8 +44,11 @@ const useStyles = makeStyles((theme) => ({
   menuPaper: {
     maxHeight: 100,
   },
-  imgKeyFromServer: {
-    width: "100%",
+  imgPreview: {
+    minWidth: "300px",
+    maxWidth: "700px",
+    backgroundColor: "#f4f4f4",
+    textAlign: "center",
   },
 }));
 
@@ -63,9 +60,10 @@ export default function PostMarketRental() {
   const classes = useStyles();
   const dispatch = useDispatch();
   // const [imgKeyToServer, setImgKeyToServer] = useState(null);
-  const [imgKeyFromServer, setImgKeyFromServer] = useState(null);
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKey } = useSelector((state) => state.general);
+  const { imageKeys } = useSelector((state) => state.general);
+  const [renderTrigger, setRenderTrigger] = useState(null);
   const {
     marketRentalSaleRent,
     propertyType,
@@ -98,45 +96,35 @@ export default function PostMarketRental() {
   });
   // console.log("marketRentalData", marketRentalData);
   const uploadMarketItemImg = async (e) => {
-    const imgData = e.target.files;
+    const imagesData = e.target.files;
+    setRenderTrigger(imagesData.length);
     const imgLocation = "marketItem";
-    await dispatch(postImage(imgData, imgLocation));
-    // if (response) {
-    //   console.log("if (response)", response);
-    //   setImgKeyToServer(response);
-    //   // setImgKeyToServer(response.map((ResponseKey) => ResponseKey.key));
-    // }
+    await dispatch(postMultipleImages(imagesData, imgLocation));
   };
-  // console.log("imgKeyToServer", imgKeyToServer);
+
   useEffect(() => {
     const getImage = async () => {
       try {
-        // const imageAccessURL = await Promise.all(
-        //   Array.from(imgKeyToServer).map((key) =>
-        //     Storage.get(key, {
-        //       level: "public",
-        //       expires: 120,
-        //       download: false,
-        //     })
-        //   )
-        // );
-        const imageAccessURL = await Storage.get(imageKey.key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        // setImgKeyFromServer((url) => url.concat(imageAccessURL));
-        setImgKeyFromServer(imageAccessURL);
+        setImgKeyFromServer([]);
+        const imageAccessURL = await Promise.all(
+          Array.from(imageKeys).map((key) =>
+            Storage.get(key, {
+              level: "public",
+              expires: 120,
+              download: false,
+            })
+          )
+        );
+        setImgKeyFromServer((url) => url.concat(imageAccessURL));
       } catch (error) {
         console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer();
+        setImgKeyFromServer([]);
       }
     };
-    if (imageKey.key) {
-      console.log("我tm来一次");
+    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
       getImage();
     }
-  }, [imageKey]);
+  }, [imageKeys, renderTrigger]);
 
   const uploadMarketRental = async () => {
     //Upload the marketRental
@@ -163,7 +151,7 @@ export default function PostMarketRental() {
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
       price: price,
-      imgS3Keys: [imageKey[0].key],
+      imgS3Keys: imageKeys,
       address: address,
       description: description,
       propertySize: propertySize,
@@ -223,14 +211,15 @@ export default function PostMarketRental() {
             className={classes.imgKeyFromServer}
           />
         ))} */}
-      {imgKeyFromServer && (
-        <img
-          src={imgKeyFromServer}
-          key={imgKeyFromServer}
-          alt="images"
-          className={classes.imgKeyFromServer}
-        />
-      )}
+      {imgKeyFromServer &&
+        imgKeyFromServer.map((imgKey, imgKeyIdx) => (
+          <Box
+            component="img"
+            src={imgKey}
+            key={imgKeyIdx}
+            className={classes.imgPreview}
+          />
+        ))}
 
       <Box className={classes.content}>
         <Grid container spacing={2}>

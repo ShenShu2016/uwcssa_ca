@@ -16,10 +16,10 @@ export default function Market() {
     <Box>
       <Switch>
         <Route exact path="/market" component={MarketList} />
-        <Route path="/market/create" component={MarketCreate} />
         <Route path="/market/create/item" component={PostMarketItem} />
         <Route path="/market/create/vehicle" component={PostMarketVehicle} />
         <Route path="/market/create/rental" component={PostMarketRental} />
+        <Route path="/market/create" component={MarketCreate} />
         <Route path="/market/item/:id" component={MarketItemDetail} />
         <Route path="/market/vehicle/:id" component={MarketVehicleDetail} />
         <Route path="/market/rental/:id" component={MarketRentalDetail} />
