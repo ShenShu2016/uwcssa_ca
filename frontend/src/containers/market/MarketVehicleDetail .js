@@ -21,6 +21,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles({
   bread: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
 export default function MarketVehicleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  useTitle("二手车辆");
   const [imageURL, setImageURL] = useState(null);
   const { id } = useParams();
   console.log("id", id);

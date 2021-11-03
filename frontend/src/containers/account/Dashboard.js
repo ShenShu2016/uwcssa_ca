@@ -26,9 +26,8 @@ const useStyles = makeStyles({
 
 export default function Dashboard() {
   const classes = useStyles();
-  useTitle("个人中心");
   const { userProfile } = useSelector((state) => state.userAuth);
-
+  useTitle(`${userProfile.username}的个人中心`);
   return (
     <div>
       <DashboardBasicInfo userProfile={userProfile} />

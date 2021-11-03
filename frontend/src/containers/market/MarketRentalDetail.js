@@ -27,6 +27,7 @@ import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   bread: {
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MarketRentalDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  useTitle("租房信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
   console.log("id", id);

@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Auth from "@aws-amplify/auth";
+// import Auth from "@aws-amplify/auth";
 import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -109,7 +109,7 @@ export default function SignIn() {
             dispatch(removeURLFrom());
             history.push(urlFrom);
           } else {
-            history.push("/");
+            history.push("/account/dashboard");
           }
         }, 1000);
       } else {
@@ -132,15 +132,15 @@ export default function SignIn() {
   const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
 
-  const handleGoogleSignIn = async function (event) {
-    event.preventDefault();
-    try {
-      const response = await Auth.federatedSignIn({ provider: "Google" });
-      console.log("google auth response", response);
-    } catch (error) {
-      console.log("there was an error google logging in ", error);
-    }
-  };
+  // const handleGoogleSignIn = async function (event) {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await Auth.federatedSignIn({ provider: "Google" });
+  //     console.log("google auth response", response);
+  //   } catch (error) {
+  //     console.log("there was an error google logging in ", error);
+  //   }
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -244,7 +244,7 @@ export default function SignIn() {
             type="submit"
             variant="outlined"
             className={classes.third_party_button}
-            onClick={(event) => handleGoogleSignIn(event)}
+            // onClick={(event) => handleGoogleSignIn(event)}
             disabled
           >
             <Grid item xs={8} lg={6}>

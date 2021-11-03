@@ -15,6 +15,7 @@ import { postMarketRental } from "../../redux/actions/marketItemActions";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
+import { useTitle } from "../../Hooks/useTitle";
 
 // import { useTitle } from "../../Hooks/useTitle";
 
@@ -59,6 +60,7 @@ const Input = styled("input")({
 export default function PostMarketRental() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  useTitle("发布租房信息");
   // const [imgKeyToServer, setImgKeyToServer] = useState(null);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);

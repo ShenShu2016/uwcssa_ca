@@ -12,6 +12,7 @@ import { postMarketVehicle } from "../../redux/actions/marketItemActions";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +52,7 @@ const Input = styled("input")({
 export default function PostMarketVehicle() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const { imageKeys } = useSelector((state) => state.general);
