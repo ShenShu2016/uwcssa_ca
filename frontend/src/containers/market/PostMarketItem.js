@@ -171,11 +171,11 @@ export default function PostMarketItem() {
       </Box>
 
       {imgKeyFromServer &&
-        imgKeyFromServer.map((imgKey) => (
+        imgKeyFromServer.map((imgKey, imgKeyIdx) => (
           <img
             className={classes.imgKeyFromServer}
             src={imgKey}
-            key={imgKey}
+            key={imgKeyIdx}
             alt="images"
           />
         ))}

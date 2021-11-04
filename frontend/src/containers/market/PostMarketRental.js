@@ -204,15 +204,6 @@ export default function PostMarketRental() {
         </label>
       </Box>
 
-      {/* {imgKeyToServer &&
-        imgKeyFromServer.map((imgKey) => (
-          <img
-            src={imgKey}
-            key={imgKey}
-            alt="images"
-            className={classes.imgKeyFromServer}
-          />
-        ))} */}
       {imgKeyFromServer &&
         imgKeyFromServer.map((imgKey, imgKeyIdx) => (
           <Box

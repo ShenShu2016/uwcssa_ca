@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   contain: {
     height: "100%",
-    width: "75%",
+    width: "calc(100% - 360px)",
     // bgcolor="black"
     position: "relative",
     overflow: "hidden",
@@ -154,7 +154,7 @@ export default function SwipeViews({ images }) {
                 height="40px"
                 width="40px"
                 borderRadius="5px"
-                sx={imgKey === activeStep ? null : { filter: "blur(2px)" }}
+                sx={imgKey === activeStep ? null : { filter: "blur(1px)" }}
                 onClick={() => setActiveStep(imgKey)}
               />
             );

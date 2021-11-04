@@ -179,8 +179,8 @@ export default function PostMarketVehicle() {
       </Box>
 
       {imgKeyFromServer &&
-        imgKeyFromServer.map((imgKey) => (
-          <img src={imgKey} key={imgKey} alt="images" />
+        imgKeyFromServer.map((imgKey, imgKeyIdx) => (
+          <img src={imgKey} key={imgKeyIdx} alt="images" />
         ))}
 
       <Box className={classes.content}>

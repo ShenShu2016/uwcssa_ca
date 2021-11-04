@@ -3,9 +3,13 @@ import {
   Box,
   Button,
   CardHeader,
+  Chip,
+  CircularProgress,
   Divider,
+  Grid,
   IconButton,
   Paper,
+  Stack,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -16,24 +20,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import CircularProgress from "@mui/material/CircularProgress";
-import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
-import Stack from "@mui/material/Stack";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
+import { marketRentalOptions } from "./marketRentalOptions";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
-  bread: {
-    // marginTop: "4rem",
-    // marginLeft: "1rem",
-  },
   root: {
     margin: "auto",
     // paddingBlock: "3rem",
@@ -48,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     overflow: "hidden",
     height: "90vh",
+    bgcolor: "black",
     [theme.breakpoints.down("md")]: {
       display: "block",
       height: "100%",
@@ -72,6 +71,12 @@ export default function MarketRentalDetail() {
   useTitle("租房信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
+  const {
+    marketRentalSaleRent: RentOrSale,
+    propertyType: PType,
+    airConditionType: ACType,
+    heatingType: HType,
+  } = marketRentalOptions;
   console.log("id", id);
   useEffect(() => {
     if (id && id !== "") {
@@ -89,7 +94,7 @@ export default function MarketRentalDetail() {
     // title,
     price,
     description,
-    // tags,
+    tags,
     // active,
     createdAt,
     // ByCreatedAt,
@@ -162,11 +167,24 @@ export default function MarketRentalDetail() {
             className={classes.info}
           >
             <Paper sx={{ maxWidth: "100%" }}>
-              <Typography variant="h5" marginLeft="0.5rem" paddingTop="0.5rem">
-                {propertyType},{bedroomCounts} Bedrooms, {marketRentalSaleRent}
+              <Typography
+                fontWeight="bold"
+                variant="h5"
+                marginLeft="1rem"
+                paddingTop="0.5rem"
+              >
+                {PType.filter((item) => item.value === propertyType)[0].label},
+                {bedroomCounts} bedrooms,
+                {
+                  RentOrSale.filter(
+                    (item) => item.value === marketRentalSaleRent
+                  )[0].label
+                }
               </Typography>
-              <Typography margin="0.5rem">$ {price}</Typography>
-              <Typography margin="0.5rem">
+              <Typography marginX="1rem" marginTop="0.25rem">
+                $ {price}
+              </Typography>
+              <Typography marginX="1rem" variant="caption" color="gray">
                 发布日期： {createdAt.slice(0, 10)}
               </Typography>
               <Stack
@@ -198,19 +216,24 @@ export default function MarketRentalDetail() {
                 </Button>
               </Stack>
               <Divider />
-              <Typography marginX="0.5rem">Details</Typography>
+              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+                Details
+              </Typography>
               <Grid marginX="0.5rem" container spacing={2}>
                 <Grid item xs={4}>
                   AC Type
                 </Grid>
                 <Grid item xs={8}>
-                  {airConditionType}
+                  {
+                    ACType.filter((item) => item.value === airConditionType)[0]
+                      .label
+                  }
                 </Grid>
                 <Grid item xs={4}>
                   Heating Type
                 </Grid>
                 <Grid item xs={8}>
-                  {heatingType}
+                  {HType.filter((item) => item.value === heatingType)[0].label}
                 </Grid>
                 <Grid item xs={4}>
                   Pet Friendly
@@ -219,22 +242,51 @@ export default function MarketRentalDetail() {
                   {catFriendly && dogFriendly ? "可以养" : "不可以养"}
                 </Grid>
               </Grid>
-              <Typography marginX="0.5rem" marginTop="0.5rem">
+              {tags && (
+                <Box>
+                  <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+                    Tags
+                  </Typography>
+                </Box>
+              )}
+              <Stack
+                direction="row"
+                marginX="1rem"
+                marginBottom="0.5rem"
+                spacing={2}
+              >
+                {tags.map((tag, tagIdx) => {
+                  return <Chip key={tagIdx} label={tag} color="primary" />;
+                })}
+              </Stack>
+              <Divider />
+              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                 Descriptions
               </Typography>
 
-              <Typography marginX="0.5rem">{description}</Typography>
+              <Typography marginX="1rem" marginY="0.25rem">
+                {description}
+              </Typography>
               <Box
-                sx={{ margin: "0.5rem", bgcolor: "#4caf50", height: "200px" }}
+                sx={{
+                  marginX: "1rem",
+                  marginY: "0.25rem",
+                  bgcolor: "#4caf50",
+                  height: "200px",
+                }}
               >
                 Google map
               </Box>
-              <Typography margin="0.5rem">Address {address}</Typography>
+              <Typography marginX="1rem" marginY="0.25rem">
+                {address}
+              </Typography>
               <Divider />
-              <Typography margin="0.5rem">Seller Infos</Typography>
+              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+                Seller Infos
+              </Typography>
               <Box
                 sx={{
-                  margin: "0.5rem",
+                  margin: "1rem",
                   // bgcolor: "#ff9800",
                 }}
               >
