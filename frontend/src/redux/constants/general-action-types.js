@@ -13,4 +13,6 @@ export const ActionTypes = {
 
   SET_LIKE: "general/put/likeSuccess",
   SET_DISLIKE: "general/put/disLikeSuccess",
+  DELETE_LIKE: "general/delete/like",
+  UPDATE_LIKE: "general/update/like",
 };

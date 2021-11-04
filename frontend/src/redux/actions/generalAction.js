@@ -1,8 +1,9 @@
+import { createLike, deleteLike, updateLike } from "../../graphql/mutations";
+
 import API from "@aws-amplify/api";
 import { ActionTypes } from "../constants/general-action-types";
 import Compressor from "compressorjs";
 import Storage from "@aws-amplify/storage";
-import { createLike } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
@@ -44,8 +45,21 @@ export const setLike = (itemID, userID, isLike) => async (dispatch) => {
   try {
     const response = await API.graphql(
       graphqlOperation(createLike, {
-        input: { like: isLike, itemID: itemID, userID: userID },
+        input: {
+          id: `${itemID}-${userID}`,
+          like: isLike,
+          itemID: itemID,
+          userID: userID,
+        },
       })
+    );
+    console.log(
+      "setLike ,table, itemID, userID, isLike,response",
+      `${itemID}-${userID}`,
+      itemID,
+      userID,
+      isLike,
+      response
     );
     if (isLike) {
       dispatch({
@@ -59,6 +73,56 @@ export const setLike = (itemID, userID, isLike) => async (dispatch) => {
       });
     }
     return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeLike = (itemID, userID, isLike) => async (dispatch) => {
+  try {
+    const response = await API.graphql(
+      graphqlOperation(updateLike, {
+        input: {
+          id: `${itemID}-${userID}`,
+          like: isLike,
+        },
+      })
+    );
+    console.log(
+      "setLike ,table, itemID, userID, isLike,response",
+      `${itemID}-${userID}`,
+      isLike,
+      itemID,
+      userID,
+      response
+    );
+    dispatch({
+      type: ActionTypes.UPDATE_LIKE,
+      payload: response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeLike = (itemID, userID) => async (dispatch) => {
+  try {
+    const response = await API.graphql(
+      graphqlOperation(deleteLike, {
+        input: {
+          id: `${itemID}-${userID}`,
+        },
+      })
+    );
+    console.log(
+      "setLike ,table, itemID, userID, isLike,response",
+      `${itemID}-${userID}`,
+      response
+    );
+    dispatch({
+      type: ActionTypes.DELETE_LIKE,
+      payload: response,
+    });
   } catch (error) {
     console.log(error);
   }
