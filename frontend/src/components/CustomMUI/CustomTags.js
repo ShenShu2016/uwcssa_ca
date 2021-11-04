@@ -63,10 +63,10 @@ export default function CustomTags() {
         direction="row"
         sx={{ color: "action.active", marginTop: "0.5rem" }}
       >
-        {tags.map((tag) => {
+        {tags.map((tag, tagIdx) => {
           return (
             <Chip
-              key={tag}
+              key={tagIdx}
               label={tag}
               onDelete={deleteHandler(tag)}
               color="primary"

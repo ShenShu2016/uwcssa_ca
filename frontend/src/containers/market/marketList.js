@@ -47,33 +47,33 @@ export default function MarketList() {
 
   const marketItemRenderList =
     marketItems &&
-    marketItems.map((marketItem) => {
+    marketItems.map((marketItem, marketItemIdx) => {
       return (
-        <MarketComponent item={marketItem} type={"item"} key={marketItem.id} />
+        <MarketComponent item={marketItem} type={"item"} key={marketItemIdx} />
       );
     });
   console.log("marketVehicles", marketVehicles);
 
   const marketVehicleRenderList =
     marketVehicles &&
-    marketVehicles.map((marketVehicle) => {
+    marketVehicles.map((marketVehicle, marketVehicleIdx) => {
       return (
         <MarketComponent
           item={marketVehicle}
           type={"vehicle"}
-          key={marketVehicle.id}
+          key={marketVehicleIdx}
         />
       );
     });
 
   const marketRentalRenderList =
     marketRentals &&
-    marketRentals.map((marketRental) => {
+    marketRentals.map((marketRental, marketRentalIdx) => {
       return (
         <MarketComponent
           item={marketRental}
           type={"rental"}
-          key={marketRental.id}
+          key={marketRentalIdx}
         />
       );
     });

@@ -23,9 +23,9 @@ const MarketForm = ({ title, value, onChange, options, required }) => {
           onChange={onChange}
           label={title} //title
         >
-          {options.map((category) => {
+          {options.map((category, categoryIdx) => {
             return (
-              <MenuItem value={category.value} key={category.value}>
+              <MenuItem value={category.value} key={categoryIdx}>
                 {category.label}
               </MenuItem>
             );
