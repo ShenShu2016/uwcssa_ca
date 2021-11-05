@@ -167,17 +167,14 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 The following people have contributed to the project:
 
 * [Shen Shu](https://shushengacademy.com/zh-hans/) [![wakatime](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca.svg)](https://wakatime.com/badge/github/ShenShu2016/uwcssa_ca)
-* [Kerun Pan](https://github.com/KerunPan)
 * [Shikai(Zoe) Jin](https://github.com/shikaijin) [![wakatime](https://wakatime.com/badge/github/shikaijin/uwcssa_ca.svg)](https://wakatime.com/badge/github/shikaijin/uwcssa_ca)
-* [Jinhua Long](https://github.com/lzg187ljh)
-* [ChangkuanGao](https://github.com/gao14o)
+* [Xinyu Ji](https://github.com/Quennel-coder) [![wakatime](https://wakatime.com/badge/github/Quennel-coder/uwcssa_ca.svg)](https://wakatime.com/badge/github/Quennel-coder/uwcssa_ca)
+* [Mike Yu](https://github.com/mikezerone) [![wakatime](https://wakatime.com/badge/user/87ae1253-731f-4a92-894d-f7db74f0e775/project/8a56b42a-0d68-4f1a-a923-3be9cd79208c.svg)](https://wakatime.com/badge/user/87ae1253-731f-4a92-894d-f7db74f0e775/project/8a56b42a-0d68-4f1a-a923-3be9cd79208c)
+* [Yichao Ma](https://github.com/Bubbrex) [![wakatime](https://wakatime.com/badge/user/9660bf0a-6e72-4cbf-8967-09dadd419fd3/project/b13d5131-33c1-48e8-a279-986a04b599fa.svg)](https://wakatime.com/badge/user/9660bf0a-6e72-4cbf-8967-09dadd419fd3/project/b13d5131-33c1-48e8-a279-986a04b599fa)
 * [Fanyu Zeng](https://github.com/CokeUltraman) [![wakatime](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca.svg)](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca)
-* [Heng Wei](https://github.com/theOGcat)
 * [Changye Ma](https://github.com/ChangyeMa) [![wakatime](https://wakatime.com/badge/github/ChangyeMa/uwcssa_ca.svg)](https://wakatime.com/badge/github/ChangyeMa/uwcssa_ca)
 * [Yanhao Wang](https://github.com/DG-xixuan) [![wakatime](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca.svg)](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca)
-* [Chengyue Wei](https://github.com/KevinVVei)
-* [Mike Yu](https://github.com/mikezerone)
-
+* [Kerun Pan](https://github.com/KerunPan)
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- CONTRIBUTING -->
