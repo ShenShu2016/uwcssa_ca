@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "api": {
+      "uwcssa": [
+        "Mutation"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

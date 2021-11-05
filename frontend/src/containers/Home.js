@@ -1,13 +1,11 @@
-import React from "react";
-import FeatureIntro from "../components/Home/FeatureIntro";
-import Hiring from "../components/Home/Hiring";
-import UwcssaIntro from "../components/Home/UwcssaIntro";
 import ContactUs from "../components/Home/ContactUs";
-const Home = ({ loggedIn }) => (
+import FeatureIntro from "../components/Home/FeatureIntro";
+import React from "react";
+import UwcssaIntro from "../components/Home/UwcssaIntro";
+const Home = () => (
   <div>
-    <UwcssaIntro loggedIn={loggedIn} />
+    <UwcssaIntro />
     <FeatureIntro />
-    <Hiring />
     <ContactUs />
   </div>
 );

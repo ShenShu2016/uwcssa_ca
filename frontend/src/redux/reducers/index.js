@@ -1,23 +1,21 @@
-import { combineReducers } from "redux";
-import { productReducer, selectedProductReducer } from "./productReducer";
-import { newsReducer, selectedSingleNewsReducer } from "./newReducer";
+import { articleReducer } from "./articleReducer";
 import { authReducer } from "./authReducer";
-import { userReducer } from "./userReducer";
-import {
-  newsCommentsReducer,
-  selectedNewsCommReducer,
-  newsCommPostReducer,
-} from "./newComReducer";
+import { combineReducers } from "redux";
+import { eventReducer } from "./eventReducer";
+import { forumReducer } from "./forumReducer";
+import { generalReducer } from "./generalReducer";
+import marketReducer from "./marketSlice";
+import { profileReducer } from "./profileReducer";
+import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
 const reducers = combineReducers({
+  general: generalReducer,
   userAuth: authReducer,
-  allUsers: userReducer,
-  allProducts: productReducer,
-  product: selectedProductReducer,
-  allNews: newsReducer,
-  singleNews: selectedSingleNewsReducer,
-  allNewsComments: newsCommentsReducer,
-  newsComment: selectedNewsCommReducer,
-  newsCommentPost: newsCommPostReducer,
+  profile: profileReducer,
+  article: articleReducer,
+  allUwcssaJobs: uwcssaJobReducer,
+  forum: forumReducer,
+  market: marketReducer,
+  event: eventReducer,
 });
 export default reducers;

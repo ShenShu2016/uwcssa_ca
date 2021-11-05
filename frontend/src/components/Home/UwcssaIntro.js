@@ -1,94 +1,105 @@
-import React from "react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  CircularProgress,
+  Container,
+  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import GitHubButton from "react-github-btn";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import { Button } from "@material-ui/core";
-import cssalog from "../../static/cssalogo.png";
-import Box from "@material-ui/core/Box";
-import { Grid } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
-import { ButtonGroup } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+import cssalogo from "../../static/cssa-logo.png";
+import { makeStyles } from "@mui/styles";
+import { setUserCounts } from "../../redux/actions/generalAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: "block",
     backgroundColor: "#fff",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginBottom: "2rem",
+    paddingBottom: "2rem",
+    backgroundImage: `url(${cssalogo})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    [theme.breakpoints.only("lg")]: {
+      height: "835px",
+    },
   },
   webIntro: {
-    width: 700,
     minWidth: "40%",
     maxWidth: "100%",
     textAlign: "center",
+    paddingBottom: "auto",
+    marginBottom: "auto",
+  },
+  titleBox: {
+    height: "100%",
+    width: "calc(100% - 30px)",
+    margin: "auto",
+    fontWeight: 500,
+    paddingTop: "5rem",
+    marginBottom: "2rem",
+    lineHeight: "130%",
+    [theme.breakpoints.only("sm")]: {
+      width: "calc(100% - 190px)",
+      marginLeft: "190px",
+    },
+    [theme.breakpoints.only("md")]: {
+      width: "calc(100% - 260px)",
+      marginLeft: "260px",
+    },
   },
   title: {
-    marginTop: "5rem",
-    marginBottom: "3rem",
-    fontWeight: 700,
-    paddingInline: "1rem",
+    marginBottom: "2rem",
+    maxWidth: 1000,
   },
   slogan: {
-    marginTop: "3rem",
-    marginBottom: "3rem",
-    fontWeight: 700,
+    marginBottom: "2rem",
   },
   webData: {
     marginTop: "3rem",
     marginBottom: "3rem",
     fontWeight: 700,
   },
-  paper: {
-    marginInline: "0.5rem",
+  buttonBox: {
+    marginBottom: "1rem",
   },
-  logoBox: {
-    width: 700,
-    minWidth: "40%",
-    maxWidth: "100%",
-    backgroundImage: `url(${cssalog})`,
-    backgroundSize: "cover",
-    minHeight: 500,
+  repoInfo: {
+    display: "flex",
+    flexDirection: "row",
+    alignContent: "space-between",
+    width: "80%",
+    margin: "auto",
+    marginTop: "3rem",
   },
   relateWeb: {
     display: "flex",
-    marginTop: "6rem",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    marginTop: "3rem",
     marginBottom: "3rem",
-    justifyContent: "space-between",
-    margin: "10",
-    paddingRight: "1rem",
   },
-  repoInfo: {
-    textAlign: "start",
-    width: "80%",
-    margin: "auto",
-    marginTop: "7rem",
+  relateButton: {
+    marginLeft: "1rem",
   },
 }));
-
-const UwcssaIntro = ({ loggedIn }) => {
+export default function UwcssaIntro() {
   const classes = useStyles();
-  // const userCounts = useSelector((state) => state.allUsers.users.count);
-  // const dispatch = useDispatch();
-
-  // const fetchUsers = async () => {
-  //   const response = await axios
-  //     .get(`${process.env.REACT_APP_API_URL}/users/total_counts/`)
-  //     .catch((err) => {
-  //       console.log("Err", err);
-  //     });
-
-  //   dispatch(setUsers(response.data));
-  // };
-  // console.log(userCounts);
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // console.log("Users:", userCounts);
-
+  const dispatch = useDispatch();
+  const { userAuth } = useSelector((state) => state);
+  const { userCounts } = useSelector((state) => state.general);
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
+  useEffect(() => {
+    dispatch(setUserCounts());
+  }, [dispatch]);
   const guestButton = () => (
     <div>
       <Button
@@ -97,7 +108,7 @@ const UwcssaIntro = ({ loggedIn }) => {
         content="textOnly"
         color="primary"
         component={Link}
-        to="/login"
+        to="/signIn"
       >
         成为会员
       </Button>
@@ -106,134 +117,166 @@ const UwcssaIntro = ({ loggedIn }) => {
 
   const authButton = () => (
     <div>
-      <Typography variant="h4">Welcome: </Typography>
-      <Typography variant="h5">
-        {/* {userAuth.user ? userAuth.user.username : ""} */}
-      </Typography>
+      <div>
+        <Typography variant="h4">欢迎 : </Typography>
+        <Box mt={1} mb={1}>
+          <Typography variant="h5" noWrap>
+            {userAuth.user.username}
+          </Typography>
+        </Box>
+        <Box mt={1} mb={1}>
+          <Typography variant="subtitle1" color={"secondary"}>
+            {userAuth.user.username.slice(0, 7) === "google_"
+              ? "我们建议您在我们网站注册账户，体验完整的系统"
+              : ""}
+          </Typography>
+        </Box>
+        <Box mt={2} mb={1}>
+          <Button
+            variant="contained"
+            color={"primary"}
+            size="large"
+            component={Link}
+            to="/account/dashboard"
+          >
+            个人中心
+          </Button>
+        </Box>
+      </div>
     </div>
   );
-
   return (
-    <div>
-      <Box className={classes.root} width="100%">
-        <Box className={classes.webIntro}>
-          <Typography variant="h6" className={classes.title}>
-            UWCSSA.CA - 温莎最大的在线华人学生学者社交网络社区
-          </Typography>
-          <Typography variant="h4" className={classes.slogan}>
-            A STUDENT Community like No Other
-          </Typography>
-          <Box className={classes.webData}>
-            <Grid container spacing={0}>
-              <Grid item xs={6}>
-                <Paper className={classes.paper}>
-                  <Typography variant="h5">666</Typography>
-                  <Typography variant="h5">用户</Typography>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.paper}>
-                  <Typography variant="h5">5000</Typography>
-                  <Typography variant="h5">帖子</Typography>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Box>
-          {loggedIn ? authButton() : guestButton()}
-          <Box className={classes.relateWeb}>
-            <Typography variant="h5">相关页面</Typography>
-            <ButtonGroup
-              color="primary"
-              aria-label="text primary button group"
-              variant="outlined"
-              size="large"
-              content="textOnly"
-            >
-              <Button disabled={true}>UWCSSA新闻</Button>
-              <Button disabled={true}>UWCSSA活动</Button>
-              <Button
-                variant="outlined"
-                size="large"
-                content="textOnly"
-                color="primary"
-                disabled={true}
-              >
-                UWCSSA论坛（建设中）
-              </Button>
-            </ButtonGroup>
-          </Box>
-        </Box>
-        <Box className={classes.logoBox}>
+    <React.Fragment>
+      <CssBaseline />
+      <div>
+        <div className={classes.root}>
           <Box className={classes.webIntro}>
-            <Typography variant="h4" className={classes.title}>
-              此网站 UWCSSA_CA - 为 GitHub 开源项目
-            </Typography>
+            <Container size="lg">
+              <Grid item sm>
+                <Box className={classes.titleBox}>
+                  <Grid item xs={12} sm={8} md={7}>
+                    <Typography variant="h6" className={classes.title}>
+                      UWCSSA.CA - 温莎最大的在线华人学生学者社交网络社区
+                    </Typography>
+                    <Typography variant="h4" className={classes.slogan}>
+                      <b>A Student Community like No Other</b>
+                    </Typography>
 
-            <Grid container spacing={1} className={classes.repoInfo}>
-              <Grid item xs={12} sm={3}>
-                <GitHubButton
-                  href="https://github.com/ShenShu2016/uwcssa_ca"
-                  data-icon="octicon-star"
-                  data-size="large"
-                  data-show-count="true"
-                  aria-label="Star ShenShu2016/uwcssa_ca on GitHub"
-                >
-                  Star
-                </GitHubButton>
+                    <Box className={classes.webData}>
+                      <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                          <Paper className={classes.paper}>
+                            <Typography variant="h5">
+                              {userCounts ? userCounts : <CircularProgress />}
+                            </Typography>
+                            <Typography variant="h5">用户</Typography>
+                          </Paper>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Paper className={classes.paper}>
+                            <Typography variant="h5">5000</Typography>
+                            <Typography variant="h5">帖子</Typography>
+                          </Paper>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                    <Box className={classes.buttonBox}>
+                      {isAuthenticated ? authButton() : guestButton()}
+                    </Box>
+
+                    <Grid container spacing={1} className={classes.repoInfo}>
+                      <Grid item xs={12} align="center">
+                        <Typography variant="h6" gutterBottom>
+                          此网站 UWCSSA.CA - 为 GitHub 开源项目
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <GitHubButton
+                          href="https://github.com/ShenShu2016/uwcssa_ca"
+                          data-icon="octicon-star"
+                          data-show-count="true"
+                          aria-label="Star ntkme/github-buttons on GitHub"
+                        >
+                          Star
+                        </GitHubButton>
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <GitHubButton
+                          href="https://github.com/ShenShu2016/uwcssa_ca/fork"
+                          data-icon="octicon-repo-forked"
+                          data-show-count="true"
+                          aria-label="Fork ShenShu2016/uwcssa_ca on GitHub"
+                        >
+                          Fork
+                        </GitHubButton>
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <GitHubButton
+                          href="https://github.com/ShenShu2016/uwcssa_ca/issues"
+                          data-icon="octicon-issue-opened"
+                          data-show-count="true"
+                          aria-label="Issue ShenShu2016/uwcssa_ca on GitHub"
+                        >
+                          Issue
+                        </GitHubButton>
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <GitHubButton
+                          href="https://github.com/ShenShu2016/uwcssa_ca/subscription"
+                          data-icon="octicon-eye"
+                          data-show-count="true"
+                          aria-label="Watch ShenShu2016/uwcssa_ca on GitHub"
+                        >
+                          Watch
+                        </GitHubButton>
+                      </Grid>
+
+                      <Grid
+                        item
+                        xs={12}
+                        align="center"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          flexWrap: "wrap",
+                          justifyContent: "center",
+                        }}
+                      >
+                        如果你喜欢我们的项目记得点
+                        <StarBorderRoundedIcon />
+                        哦~
+                      </Grid>
+                    </Grid>
+                    <Box className={classes.relateWeb}>
+                      <Typography variant="h5">相关页面</Typography>
+                      <ButtonGroup
+                        color="primary"
+                        aria-label="text primary button group"
+                        variant="outlined"
+                        size="medium"
+                        content="textOnly"
+                        className={classes.relateButton}
+                      >
+                        <Button disabled={true}>UWCSSA新闻</Button>
+                        <Button disabled={true}>UWCSSA活动</Button>
+                        <Button
+                          variant="outlined"
+                          size="medium"
+                          content="textOnly"
+                          color="primary"
+                          disabled={true}
+                        >
+                          UWCSSA论坛（建设中）
+                        </Button>
+                      </ButtonGroup>
+                    </Box>
+                  </Grid>
+                </Box>
               </Grid>
-              <Grid item xs={12} sm={9}>
-                喜欢我们的网站请点个赞吧！
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <GitHubButton
-                  href="https://github.com/ShenShu2016/uwcssa_ca/fork"
-                  data-icon="octicon-repo-forked"
-                  data-size="large"
-                  data-show-count="true"
-                  aria-label="Fork ShenShu2016/uwcssa_ca on GitHub"
-                >
-                  Fork
-                </GitHubButton>
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                如果你兴趣成为我们的协作者，等待你的Pull Request！
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <GitHubButton
-                  href="https://github.com/ShenShu2016/uwcssa_ca/issues"
-                  data-icon="octicon-issue-opened"
-                  data-size="large"
-                  data-show-count="true"
-                  aria-label="Issue ShenShu2016/uwcssa_ca on GitHub"
-                >
-                  Issue
-                </GitHubButton>
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                如果有BUG请提交，我们会第一时间处理。
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <GitHubButton
-                  href="https://github.com/ShenShu2016/uwcssa_ca/subscription"
-                  data-icon="octicon-eye"
-                  data-size="large"
-                  data-show-count="true"
-                  aria-label="Watch ShenShu2016/uwcssa_ca on GitHub"
-                >
-                  Watch
-                </GitHubButton>
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                开发者如有更新，会马上提醒的哦～
-              </Grid>
-            </Grid>
+            </Container>
           </Box>
-        </Box>
-      </Box>
-    </div>
+        </div>
+      </div>
+    </React.Fragment>
   );
-};
-
-// 这里有奇怪的问题，具体我也不知道
-
-export default UwcssaIntro;
+}

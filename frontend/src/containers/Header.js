@@ -1,23 +1,87 @@
+import {
+  AppBar,
+  Button,
+  CssBaseline,
+  Drawer,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import Button from "@material-ui/core/Button";
-import StorefrontIcon from "@material-ui/icons/Storefront";
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router";
+import { alpha, styled } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArticleIcon from "@mui/icons-material/Article";
+import CustomAvatar from "../components/CustomMUI/CustomAvatar";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import DrawerList from "../components/Drawer/DrawerList";
+import EventIcon from "@mui/icons-material/Event";
+import ForumIcon from "@mui/icons-material/Forum";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import MenuIcon from "@mui/icons-material/Menu";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import PublicIcon from "@mui/icons-material/Public";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ShopIcon from "@mui/icons-material/Shop";
+import WorkIcon from "@mui/icons-material/Work";
+import { makeStyles } from "@mui/styles";
+import { signOut } from "../redux/actions/authActions";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color:
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
+    "& .MuiMenuItem-root": {
+      "& .MuiSvgIcon-root": {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      "&:active": {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        ),
+      },
+    },
+  },
+}));
+
 const useStyles = makeStyles((theme) => ({
+  toolbar: {
+    // maxWidth: "1300px",
+  },
   grow: {
     flexGrow: 1,
   },
@@ -39,18 +103,19 @@ const useStyles = makeStyles((theme) => ({
   uwcssaLogo: {
     width: 36,
     height: 36,
-    marginRight: "1rem",
+    marginInline: "1rem",
   },
 
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    marginInline: "1rem",
+    [theme.breakpoints.up("1260")]: {
       display: "flex",
     },
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("1260")]: {
       display: "none",
     },
   },
@@ -59,13 +124,29 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
 }));
-
-const Header = ({ loggedIn, signOut }) => {
+export default function Header() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
+  const userAuth = useSelector((state) => state.userAuth);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [drawer, setDrawer] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setDrawer(open);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,18 +165,18 @@ const Header = ({ loggedIn, signOut }) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const [redirect, setRedirect] = useState(false);
-
-  const logout_user = () => {
+  const signOut_user = async () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    signOut();
-    setRedirect(true);
+    const response = await dispatch(signOut());
+    if (response.result) {
+      history.push("/");
+    }
   };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
-    <Menu
+    <StyledMenu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
@@ -104,11 +185,43 @@ const Header = ({ loggedIn, signOut }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Setting</MenuItem>
-      <MenuItem onClick={logout_user}>Log Out</MenuItem>
-    </Menu>
+      <MenuItem
+        onClick={handleMenuClose}
+        component={Link}
+        to="/account/dashboard"
+      >
+        <DashboardIcon />
+        个人中心
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        component={Link}
+        to={
+          userAuth.user === null
+            ? ""
+            : `/account/profile/${userAuth.user.username}`
+        }
+      >
+        <PublicIcon />
+        个人资料
+      </MenuItem>
+      <MenuItem
+        onClick={handleMenuClose}
+        component={Link}
+        to="/account/myAccount"
+      >
+        <ManageAccountsIcon />
+        我的账户
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <SettingsIcon />
+        设置
+      </MenuItem>
+      <MenuItem onClick={signOut_user}>
+        <LogoutIcon />
+        注销
+      </MenuItem>
+    </StyledMenu>
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -121,43 +234,15 @@ const Header = ({ loggedIn, signOut }) => {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      sx={{ maxWidth: "300px" }}
     >
-      <MenuItem component={Link} to="/" onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose}>
         <IconButton>
-          <StorefrontIcon />
+          <ArrowBackIcon />
         </IconButton>
-        <p>主页</p>
+        <p>左上角有功能键哦</p>
       </MenuItem>
-      <MenuItem component={Link} to="/products" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>样例_PRODUCTS</p>
-      </MenuItem>
-      <MenuItem component={Link} to="/graphqltesting" onClick={handleMenuClose}>
-        <IconButton>
-          <StorefrontIcon />
-        </IconButton>
-        <p>GraphQLTesting</p>
-      </MenuItem>
-
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      {loggedIn ? (
+      {isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             aria-label="account of current user"
@@ -167,10 +252,10 @@ const Header = ({ loggedIn, signOut }) => {
           >
             <AccountCircle />
           </IconButton>
-          <p>Profile</p>
+          <p>{userAuth.user.username}</p>
         </MenuItem>
       ) : (
-        <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
+        <MenuItem component={Link} to="/signIn" onClick={handleMenuClose}>
           <IconButton
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
@@ -187,15 +272,29 @@ const Header = ({ loggedIn, signOut }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <CssBaseline />
+      <AppBar>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleDrawer(true)}
+            edge="start"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer open={drawer} onClose={toggleDrawer(false)}>
+            <DrawerList toggleDrawer={toggleDrawer} />
+          </Drawer>
           <img
             src={uwcssaLogo}
             alt="uwcssaLogo"
             className={classes.uwcssaLogo}
           />
           <Typography
-            onClick={(event) => (window.location.href = "/")}
+            onClick={() => {
+              history.push("/");
+            }}
             style={{ cursor: "pointer" }}
             className={classes.title2}
             variant="h5"
@@ -204,10 +303,12 @@ const Header = ({ loggedIn, signOut }) => {
             UWCSSA
           </Typography>
           <Typography
-            onClick={(event) => (window.location.href = "/")}
-            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push("/");
+            }}
+            style={{ cursor: "pointer", fontSize: "25px" }}
             className={classes.title}
-            variant="h6"
+            // variant="h6"
             noWrap
           >
             温莎大学中国学生学者联谊会
@@ -217,52 +318,67 @@ const Header = ({ loggedIn, signOut }) => {
           <div className={classes.sectionDesktop}>
             <Button
               variant="text"
-              style={{ color: "#FFF" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
-              to="/products"
+              to="/article"
+              startIcon={<ArticleIcon />}
             >
-              样例_Products
+              近期新闻
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
-              to="/graphqltesting"
+              to="/event"
+              startIcon={<EventIcon />}
             >
-              GraphQLTesting
+              活动
             </Button>
-
             <Button
               variant="text"
-              style={{ color: "#FFF" }}
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
               component={Link}
-              to="/news"
+              to="/forum"
+              startIcon={<ForumIcon />}
             >
-              News
+              论坛
             </Button>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            {loggedIn ? (
+            <Button
+              variant="text"
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              component={Link}
+              to="/market"
+              startIcon={<ShopIcon />}
+            >
+              商城
+            </Button>
+            <Button
+              variant="text"
+              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              component={Link}
+              to="/career"
+              startIcon={<WorkIcon />}
+            >
+              加入我们
+            </Button>
+            {isAuthenticated ? (
               ""
             ) : (
               <Button
                 component={Link}
-                to="/login"
+                to="/signIn"
                 variant="text"
-                style={{ color: "#FFF" }}
+                style={{
+                  color: "#FFF",
+                  fontSize: "20px",
+                  marginInline: "1rem",
+                }}
+                startIcon={<LoginIcon />}
               >
                 登陆
               </Button>
             )}
-            {loggedIn ? (
+            {isAuthenticated ? (
               <IconButton
                 edge="end"
                 aria-label="account of current user"
@@ -271,7 +387,11 @@ const Header = ({ loggedIn, signOut }) => {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                {/* <AccountCircle fontSize={"large"} /> */}
+                <CustomAvatar
+                  user={userAuth.userProfile}
+                  sx={{ width: 35, height: 35 }}
+                />
               </IconButton>
             ) : (
               ""
@@ -292,9 +412,6 @@ const Header = ({ loggedIn, signOut }) => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {redirect ? <Redirect to="/" /> : <div></div>}
     </div>
   );
-};
-
-export default Header;
+}

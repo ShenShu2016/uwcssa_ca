@@ -1,26 +1,30 @@
+import {
+  Box,
+  Grid,
+  Link,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import { List } from "@material-ui/core";
-import { ListItem } from "@material-ui/core";
-import { ListItemText } from "@material-ui/core";
-import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Grid from "@material-ui/core/Grid";
-import iconJS from "../../static/svg icons/javascript-programming-language.svg";
-import iconDjango from "../../static/svg icons/django.svg";
 import iconAws from "../../static/svg icons/aws.svg";
+import iconCss from "../../static/svg icons/css.svg";
+import iconDjango from "../../static/svg icons/django.svg";
 import iconDocker from "../../static/svg icons/docker.svg";
 import iconGithub from "../../static/svg icons/github.svg";
+import iconHtml from "../../static/svg icons/html.svg";
+import iconJS from "../../static/svg icons/javascript-programming-language.svg";
+import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
 import iconPython from "../../static/svg icons/python-programming-language.svg";
 import iconReact from "../../static/svg icons/react-js.svg";
 import iconRedis from "../../static/svg icons/redis.svg";
-import iconCss from "../../static/svg icons/css.svg";
-import iconMaterialUi from "../../static/svg icons/material-ui-1.svg";
-import iconHtml from "../../static/svg icons/html.svg";
 import iconRestAPI from "../../static/svg icons/rest-api.svg";
-import { Button } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -86,18 +90,23 @@ const Hiring = () => {
               <ListItemText primary="-热爱电脑" />
             </ListItem>
           </List>
-          <Button
-            variant="text"
-            target="_top"
-            href={`mailto:uwincssa.it@gmail.com`}
+          <Link
+            variant="h6"
+            color="inherit"
+            href="mailto:uwincssa.it@gmail.com"
+            xs={12}
+            className={classes.contractInfo}
+            style={{
+              display: "flex",
+              alignItems: "left",
+              flexWrap: "wrap",
+              justifyContent: "left",
+            }}
           >
-            <Typography variant="h5" className={classes.contractInfo}>
-              请将简历发至: <EmailOutlinedIcon />
-              uwincssa.it@gmail.com
-            </Typography>
-          </Button>
+            请将简历发至: <EmailOutlinedIcon />
+            uwincssa.it@gmail.com
+          </Link>
         </Box>
-
         <Box className={classes.niceToHave}>
           <Typography variant="h4" className={classes.title}>
             我们使用的技术栈

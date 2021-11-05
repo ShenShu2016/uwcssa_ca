@@ -1,291 +1,232 @@
-import axios from "axios";
-import { ActionTypes } from "../contants/auth-action-types";
+import API from "@aws-amplify/api";
+import { ActionTypes } from "../constants/auth-action-types";
+import Auth from "@aws-amplify/auth";
+import { getUser } from "../../graphql/queries";
 
-export const load_user = () => async (dispatch) => {
-  if (localStorage.getItem("access")) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `JWT ${localStorage.getItem("access")}`,
-        Accept: "application/json",
-      },
-    };
-
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/auth/user/`,
-        config
-      );
-
-      dispatch({
-        type: ActionTypes.USER_LOADED_SUCCESS,
-        payload: res.data,
-      });
-    } catch (err) {
-      dispatch({
-        type: ActionTypes.USER_LOADED_FAIL,
-      });
-    }
-  } else {
-    dispatch({
-      type: ActionTypes.USER_LOADED_FAIL,
-    });
-  }
-};
-
-export const googleAuthenticate = (state, code) => async (dispatch) => {
-  if (state && code && !localStorage.getItem("access")) {
-    const config = {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    };
-
-    const details = {
-      state: state,
-      code: code,
-    };
-
-    const formBody = Object.keys(details)
-      .map(
-        (key) =>
-          encodeURIComponent(key) + "=" + encodeURIComponent(details[key])
-      )
-      .join("&");
-
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?${formBody}`,
-        config
-      );
-
-      dispatch({
-        type: ActionTypes.GOOGLE_AUTH_SUCCESS,
-        payload: res.data,
-      });
-
-      dispatch(load_user());
-    } catch (err) {
-      dispatch({
-        type: ActionTypes.GOOGLE_AUTH_FAIL,
-      });
-    }
-  }
-};
-
-export const facebookAuthenticate = (state, code) => async (dispatch) => {
-  if (state && code && !localStorage.getItem("access")) {
-    const config = {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    };
-
-    const details = {
-      state: state,
-      code: code,
-    };
-
-    const formBody = Object.keys(details)
-      .map(
-        (key) =>
-          encodeURIComponent(key) + "=" + encodeURIComponent(details[key])
-      )
-      .join("&");
-
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/o/facebook/?${formBody}`,
-        config
-      );
-
-      dispatch({
-        type: ActionTypes.FACEBOOK_AUTH_SUCCESS,
-        payload: res.data,
-      });
-
-      dispatch(load_user());
-    } catch (err) {
-      dispatch({
-        type: ActionTypes.FACEBOOK_AUTH_FAIL,
-      });
-    }
-  }
-};
-
-export const checkAuthenticated = () => async (dispatch) => {
-  if (localStorage.getItem("access")) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    };
-
-    const body = JSON.stringify({ token: localStorage.getItem("access") });
-
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/jwttoken/verify/`,
-        body,
-        config
-      );
-
-      if (res.data.code !== "token_not_valid") {
-        dispatch({
-          type: ActionTypes.AUTHENTICATED_SUCCESS,
-        });
-      } else {
-        dispatch({
-          type: ActionTypes.AUTHENTICATED_FAIL,
-        });
-      }
-    } catch (err) {
-      dispatch({
-        type: ActionTypes.AUTHENTICATED_FAIL,
-      });
-    }
-  } else {
-    dispatch({
-      type: ActionTypes.AUTHENTICATED_FAIL,
-    });
-  }
-};
-
-export const login = (email, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const body = JSON.stringify({ email, password });
-
+export const setUser = () => async (dispatch) => {
   try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/auth/jwttoken/`,
-      body,
-      config
-    );
-
+    const response = await Auth.currentAuthenticatedUser();
     dispatch({
-      type: ActionTypes.LOGIN_SUCCESS,
-      payload: res.data,
+      type: ActionTypes.USER_AUTHENTICATED_LOADED_SUCCESS,
+      payload: response,
     });
-
-    dispatch(load_user());
-  } catch (err) {
+    const { username } = response;
+    dispatch(setUserProfile(username));
+    return {
+      result: true,
+    };
+  } catch (error) {
     dispatch({
-      type: ActionTypes.LOGIN_FAIL,
+      type: ActionTypes.USER_AUTHENTICATED_LOADED_FAIL,
     });
+    return {
+      result: false,
+      error: error,
+    };
   }
 };
 
-export const signup =
-  (username, email, password1, password2) => async (dispatch) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+export const signIn = (username, password) => async (dispatch) => {
+  try {
+    const response = await Auth.signIn(username, password);
+    dispatch({
+      type: ActionTypes.SIGN_IN_SUCCESS,
+      payload: response,
+    });
+    dispatch(setUserProfile(username));
+    return {
+      result: true,
     };
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.SIGN_IN_FAIL,
+    });
+    return {
+      result: false,
+      error: error,
+    };
+  }
+};
 
-    const body = JSON.stringify({ username, email, password1, password2 });
+export const setUserProfile = (username) => async (dispatch) => {
+  try {
+    const response = await API.graphql({
+      query: getUser,
+      variables: { id: username },
+      authMode: "AWS_IAM",
+    });
+    dispatch({
+      type: ActionTypes.SET_USER_PROFILE,
+      payload: response.data.getUser,
+    });
+  } catch (error) {
+    console.log("error on fetching User profile", error);
+  }
+};
 
+export const signUp = (username, password, email) => async (dispatch) => {
+  try {
+    console.log("start signed up!");
+    const response = await Auth.signUp({
+      username,
+      password,
+      attributes: { email },
+    });
+    dispatch({
+      type: ActionTypes.SIGN_UP_SUCCESS,
+      payload: response.data,
+    });
+    return {
+      result: true,
+    };
+  } catch (error) {
+    console.log("error signing up:", error);
+    dispatch({
+      type: ActionTypes.SIGN_UP_FAIL,
+    });
+    return {
+      result: false,
+      error: error,
+    };
+  }
+};
+
+export const emailConfirm =
+  (username, authenticationCode) => async (dispatch) => {
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/registration/`,
-        body,
-        config
-      );
-
+      await Auth.confirmSignUp(username, authenticationCode);
       dispatch({
-        type: ActionTypes.SIGNUP_SUCCESS,
-        payload: res.data,
+        type: ActionTypes.EMAIL_CONFIRM_SUCCESS,
       });
-    } catch (err) {
+      return {
+        result: true,
+      };
+    } catch (error) {
+      console.log("error confirming signing up:", error);
       dispatch({
-        type: ActionTypes.SIGNUP_FAIL,
+        type: ActionTypes.EMAIL_CONFIRM_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 
-export const verify = (key) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+export const forgotPassword = (username) => async (dispatch) => {
   try {
-    await axios.get(
-      `${process.env.REACT_APP_API_URL}/accounts/confirm-email/${key}/`,
-      config
-    );
-
+    const response = await Auth.forgotPassword(username);
     dispatch({
-      type: ActionTypes.ACTIVATION_SUCCESS,
+      type: ActionTypes.EMAIL_CONFIRM_SUCCESS,
     });
-  } catch (err) {
-    dispatch({
-      type: ActionTypes.ACTIVATION_FAIL,
-    });
-  }
-};
-
-export const reset_password = (email) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const body = JSON.stringify({ email });
-
-  try {
-    await axios.post(
-      `${process.env.REACT_APP_API_URL}/auth/password/reset/`,
-      body,
-      config
-    );
-
-    dispatch({
-      type: ActionTypes.PASSWORD_RESET_SUCCESS,
-    });
-  } catch (err) {
-    dispatch({
-      type: ActionTypes.PASSWORD_RESET_FAIL,
-    });
-  }
-};
-
-export const reset_password_confirm =
-  (uid, token, new_password1, new_password2) => async (dispatch) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+    return {
+      result: true,
+      response: response,
     };
+  } catch (error) {
+    console.log("error confirming signing up:", error);
+    dispatch({
+      type: ActionTypes.EMAIL_CONFIRM_FAIL,
+    });
+    return {
+      result: false,
+      error: error,
+    };
+  }
+};
 
-    const body = JSON.stringify({ uid, token, new_password1, new_password2 });
-
+export const forgotPassWordSubmit =
+  (code, username, new_password) => async (dispatch) => {
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/password/reset/confirm/`,
-        body,
-        config
+      const response = await Auth.forgotPasswordSubmit(
+        username,
+        code,
+        new_password
       );
-
       dispatch({
-        type: ActionTypes.PASSWORD_RESET_CONFIRM_SUCCESS,
+        type: ActionTypes.FORGOT_PASSWORD_SUBMIT_SUCCESS,
       });
-    } catch (err) {
+      console.log(response);
+      return {
+        result: true,
+        response: response,
+      };
+    } catch (error) {
+      console.log("error confirming FORGOT_PASSWORD_SUBMIT_FAIL:", error);
+      console.log(error);
       dispatch({
-        type: ActionTypes.PASSWORD_RESET_CONFIRM_FAIL,
+        type: ActionTypes.FORGOT_PASSWORD_SUBMIT_FAIL,
       });
+      return {
+        result: false,
+        error: error,
+      };
     }
   };
 
-export const logout = () => (dispatch) => {
-  dispatch({
-    type: ActionTypes.LOGOUT,
-  });
+// export const reset_password = (email) => async (dispatch) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+
+//   const body = JSON.stringify({ email });
+
+//   try {
+//     await axios.post(
+//       `${process.env.REACT_APP_API_URL}/auth/password/reset/`,
+//       body,
+//       config
+//     );
+
+//     dispatch({
+//       type: ActionTypes.PASSWORD_RESET_SUCCESS,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: ActionTypes.PASSWORD_RESET_FAIL,
+//     });
+//   }
+// };
+
+// export const reset_password_confirm =
+//   (uid, token, new_password1, new_password2) => async (dispatch) => {
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     };
+
+//     const body = JSON.stringify({ uid, token, new_password1, new_password2 });
+
+//     try {
+//       await axios.post(
+//         `${process.env.REACT_APP_API_URL}/auth/password/reset/confirm/`,
+//         body,
+//         config
+//       );
+
+//       dispatch({
+//         type: ActionTypes.PASSWORD_RESET_CONFIRM_SUCCESS,
+//       });
+//     } catch (err) {
+//       dispatch({
+//         type: ActionTypes.PASSWORD_RESET_CONFIRM_FAIL,
+//       });
+//     }
+//   };
+
+export const signOut = () => async (dispatch) => {
+  try {
+    await Auth.signOut();
+    dispatch({
+      type: ActionTypes.SIGN_OUT,
+    });
+    return {
+      result: true,
+    };
+  } catch (error) {
+    console.log("error signing out", error);
+  }
 };
