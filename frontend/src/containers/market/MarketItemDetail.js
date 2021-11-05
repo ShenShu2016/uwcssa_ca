@@ -16,7 +16,7 @@ import React, { useEffect, useState } from "react";
 import {
   removeSelectedMarketItem,
   selectedMarketItem,
-} from "../../redux/actions/marketItemActions";
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
@@ -30,6 +30,30 @@ import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "./marketItemOptions";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
+
+// import {
+//   removeSelectedMarketItem,
+//   selectedMarketItem,
+// } from "../../redux/reducers/marketSlice";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import {
+//   removeSelectedMarketItem,
+//   selectedMarketItem,
+// } from "../../redux/actions/marketItemActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +99,7 @@ export default function MarketItemDetail() {
   useEffect(() => {
     if (id && id !== "") {
       const type = "item";
-      dispatch(selectedMarketItem(id, type));
+      dispatch(selectedMarketItem({ id, type }));
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);

@@ -1,15 +1,21 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
-  setMarketItems,
-  setMarketRental,
-  setMarketVehicles,
-} from "../../redux/actions/marketItemActions";
+  fetchMarketItems,
+  fetchMarketRentals,
+  fetchMarketVehicles,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import MarketComponent from "../../components/Market/MarketComponent";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
+
+// import {
+//   setMarketItems,
+//   setMarketRental,
+//   setMarketVehicles,
+// } from "../../redux/actions/marketItemActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,15 +41,31 @@ export default function MarketList() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  useEffect(() => {
-    dispatch(setMarketItems());
-    dispatch(setMarketVehicles());
-    dispatch(setMarketRental());
-  }, [dispatch]);
+  const {
+    marketItems,
+    marketVehicles,
+    marketRentals,
+    fetchMarketItemsStatus,
+    fetchMarketRentalsStatus,
+    fetchMarketVehiclesStatus,
+  } = useSelector((state) => state.market);
 
-  const { marketItems, marketVehicles, marketRentals } = useSelector(
-    (state) => state.market
-  );
+  useEffect(() => {
+    if (fetchMarketItemsStatus === "idle" || undefined) {
+      dispatch(fetchMarketItems());
+    }
+    if (fetchMarketRentalsStatus === "idle" || undefined) {
+      dispatch(fetchMarketRentals());
+    }
+    if (fetchMarketVehiclesStatus === "idle" || undefined) {
+      dispatch(fetchMarketVehicles());
+    }
+  }, [
+    fetchMarketItemsStatus,
+    fetchMarketRentalsStatus,
+    fetchMarketVehiclesStatus,
+    dispatch,
+  ]);
 
   const marketItemRenderList =
     marketItems &&

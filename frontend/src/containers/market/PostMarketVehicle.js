@@ -146,9 +146,9 @@ export default function PostMarketVehicle() {
       postMarketVehicle(createMarketVehicleInput)
     );
     console.log("response", response);
-    if (response.result) {
+    if (response.payload.result) {
       history.push(
-        `/market/vehicle/${response.response.data.createMarketVehicle.id}`
+        `/market/vehicle/${response.payload.response.data.createMarketVehicle.id}`
       );
     }
   };
