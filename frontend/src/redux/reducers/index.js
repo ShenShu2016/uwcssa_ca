@@ -4,7 +4,7 @@ import { combineReducers } from "redux";
 import { eventReducer } from "./eventReducer";
 import { forumReducer } from "./forumReducer";
 import { generalReducer } from "./generalReducer";
-import { marketReducer } from "./marketReducer";
+import marketReducer from "./marketSlice";
 import { profileReducer } from "./profileReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
 

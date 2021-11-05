@@ -11,11 +11,13 @@ import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
-import { postMarketRental } from "../../redux/actions/marketItemActions";
+import { postMarketRental } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+
+// import { postMarketRental } from "../../redux/actions/marketItemActions";
 
 // import { useTitle } from "../../Hooks/useTitle";
 
@@ -172,9 +174,9 @@ export default function PostMarketRental() {
 
     const response = await dispatch(postMarketRental(createMarketRentalInput));
     console.log("response", response);
-    if (response.result) {
+    if (response.payload.result) {
       history.push(
-        `/market/rental/${response.response.data.createMarketRental.id}`
+        `/market/rental/${response.payload.response.data.createMarketRental.id}`
       );
     }
   };

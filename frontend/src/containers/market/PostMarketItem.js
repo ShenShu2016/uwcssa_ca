@@ -8,11 +8,13 @@ import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "./marketItemOptions";
-import { postMarketItem } from "../../redux/actions/marketItemActions";
+import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+
+// import { postMarketItem } from "../../redux/actions/marketItemActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -137,10 +139,9 @@ export default function PostMarketItem() {
     };
 
     const response = await dispatch(postMarketItem(createMarketItemInput));
-    console.log("response", response);
-    if (response.result) {
+    if (response.payload.result) {
       history.push(
-        `/market/item/${response.response.data.createMarketItem.id}`
+        `/market/item/${response.payload.response.data.createMarketItem.id}`
       );
     }
   };

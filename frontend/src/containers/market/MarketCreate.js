@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     marginTop: "3rem",
-    height: "85vh",
+    marginBottom: "10rem",
+    height: "85%",
   },
   title: {
     minWidth: "40%",
@@ -62,7 +63,7 @@ function MarketCreate() {
         <Box className={classes.title}>
           <Typography variant="h4">选择你要发布的商品类型</Typography>
         </Box>
-        <Grid container spacing={4} className={classes.boxChoice}>
+        <Grid container spacing={4} className={classes.boxChoice} height="100%">
           <Grid item xs={12} sm={6} md={4}>
             <Paper>
               <IconButton
