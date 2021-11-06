@@ -864,6 +864,16 @@ export const getUser = /* GraphQL */ `
           updatedAt
           owner
         }
+        eventSubComment {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -5615,6 +5625,18 @@ export const getEventSubComment = /* GraphQL */ `
         }
       }
       owner
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -5667,6 +5689,9 @@ export const listEventSubComments = /* GraphQL */ `
           owner
         }
         owner
+        likes {
+          nextToken
+        }
       }
       nextToken
     }
@@ -5727,6 +5752,9 @@ export const eventSubCommentSortByEventCommentID = /* GraphQL */ `
           owner
         }
         owner
+        likes {
+          nextToken
+        }
       }
       nextToken
     }
@@ -11698,6 +11726,48 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
       }
+      eventSubComment {
+        id
+        content
+        active
+        eventCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+        likes {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
@@ -11970,6 +12040,16 @@ export const listLikes = /* GraphQL */ `
           content
           active
           eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        eventSubComment {
+          id
+          content
+          active
+          eventCommentID
           createdAt
           userID
           updatedAt

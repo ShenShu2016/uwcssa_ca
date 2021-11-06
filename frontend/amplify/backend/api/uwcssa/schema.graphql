@@ -327,7 +327,7 @@ type EventSubComment
   @key(name: "byEventComment", fields: ["eventCommentID", "createdAt"]) {
   id: ID!
   content: String!
-  # likes: [Like] @connection(keyName: "byEventSubComment", fields: ["id"])
+  likes: [Like] @connection(keyName: "byEventSubComment", fields: ["id"])
   active: Boolean!
   eventCommentID: ID!
   eventComment: EventComment! @connection(fields: ["eventCommentID"])
@@ -859,6 +859,7 @@ type Like
   @key(name: "byArticleSubComment", fields: ["itemID"])
   @key(name: "byEvent", fields: ["itemID"])
   @key(name: "byEventComment", fields: ["itemID"])
+  @key(name: "byEventSubComment", fields: ["itemID"])
   @key(name: "byForumPost", fields: ["itemID"])
   @key(name: "byForumPostComment", fields: ["itemID"])
   @key(name: "byForumPostSubComment", fields: ["itemID"]) {
@@ -870,6 +871,7 @@ type Like
   articleSubComment: ArticleSubComment @connection(fields: ["itemID"])
   event: Event @connection(fields: ["itemID"])
   eventComment: EventComment @connection(fields: ["itemID"])
+  eventSubComment: EventSubComment @connection(fields: ["itemID"])
   forumPost: ForumPost @connection(fields: ["itemID"])
   forumPostComment: ForumPostComment @connection(fields: ["itemID"])
   forumPostSubComment: ForumPostSubComment @connection(fields: ["itemID"])
