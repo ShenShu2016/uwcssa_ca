@@ -21,6 +21,7 @@ import {
 import PublishIcon from "@mui/icons-material/Publish";
 import { useHistory } from "react-router";
 import { postImage } from "../../../redux/actions/generalAction";
+import { useTitle } from "../../../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -40,6 +41,7 @@ const Input = styled("input")({
 
 function ForumPostUpload() {
   const classes = useStyles();
+  useTitle("发布帖子");
   const dispatch = useDispatch();
   const [imgS3Keys, setImgS3Keys] = useState("");
   const history = useHistory();
@@ -63,7 +65,7 @@ function ForumPostUpload() {
     const imageData = e.target.files[0];
     const imageLocation = "forumPost";
     const response = await dispatch(postImage(imageData,imageLocation));
-    // console.log("response.key", response.key);
+    console.log("response.key", response);
     if (response){
       setImgS3Keys(response.key);
     }
@@ -75,7 +77,6 @@ function ForumPostUpload() {
       tags: newTags.filter((tag) => tag !== i),
     });
   };
-
   const inputKeyDown = (e) => {
     const val = e.target.value;
     console.log("tagSuccess", forumPostData.tags);
@@ -100,6 +101,7 @@ function ForumPostUpload() {
       content,
       imgS3Keys: [imgS3Keys],
       active:true,
+      // lastReplyAt:
       userID: username,
       forumSubTopicID: forumSubTopicId,
       tags: tags,

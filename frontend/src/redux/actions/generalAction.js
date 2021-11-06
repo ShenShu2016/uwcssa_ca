@@ -139,6 +139,7 @@ export const postMultipleImages =
 
 export const postImage = (imageData, imageLocation) => async (dispatch) => {
   try {
+    console.log(imageData);
     const tempUuid = uuid();
     const imgData0 = imageData[0];
     new Compressor(imgData0, {

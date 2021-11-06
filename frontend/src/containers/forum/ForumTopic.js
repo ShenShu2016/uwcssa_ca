@@ -11,14 +11,14 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import ForumAdSide from "../ForumAdSide";
-import ForumTopicMain from "./ForumTopicMain";
-import OpenIconSpeedDial from "../OpenIconSpeedDial";
+import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
+import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
 
 import {
   selectedForumTopic,
   removeSelectedForumTopic,
-} from "../../../redux/actions/forumAction";
+} from "../../redux/actions/forumAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -33,7 +33,6 @@ function ForumTopic() {
   const { forumTopicID } = useParams();
   console.log(forumTopicID);
   useEffect(() => {
-    console.log("use");
     if (forumTopicID && forumTopicID !== "") {
       dispatch(selectedForumTopic(forumTopicID));
     }
@@ -66,7 +65,7 @@ function ForumTopic() {
                     color="inherit"
                     component={Link}
                     disabled
-                    to={`/forumTopic/${forumTopic.forumTopic.id}`}
+                    to={`/forum/forumTopic/${forumTopic.forumTopic.id}`}
                   >
                     {forumTopic.forumTopic.name}
                   </Button>
