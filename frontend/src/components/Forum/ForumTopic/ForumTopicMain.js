@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTitle } from "../../../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -19,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
 const ForumTopicMain = ({ forumTopic }) => {
   const classes = useStyles();
   // console.log(forumTopic);
-  const { forumSubTopics } = forumTopic;
+  const { name,forumSubTopics } = forumTopic;
+  useTitle(name+"-论坛");
   //   const { forumSubTopicData } = forumSubTopics;
   //   console.log(forumSubTopics.items);
   return (
@@ -39,7 +41,7 @@ const ForumTopicMain = ({ forumTopic }) => {
                         // target="_top"
                         component={Link}
                         color="primary"
-                        to={`/forumSubTopic/${id}`}
+                        to={`/forum/forumSubTopic/${id}`}
                       >
                         {name}
                         <ArrowForwardIcon />

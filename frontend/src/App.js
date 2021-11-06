@@ -17,14 +17,7 @@ import EventDetail from "./components/Event/EventDetail";
 import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
-import Forum from "./containers/Forum";
-import ForumPost from "./components/Forum/ForumPost/ForumPost";
-import ForumPostCommentDetail from "./components/Forum/ForumPost/ForumPostSubComment/ForumPostCommentDetail";
-import ForumPostList from "./components/Forum/ForumPost/ForumPostList";
-import ForumPostUpload from "./components/Forum/ForumPost/ForumPostUpload";
-import ForumSubTopic from "./components/Forum/ForumSubTopic/ForumSubTopic";
-import ForumTopic from "./components/Forum//ForumTopic/ForumTopic";
-import ForumTopicCURD from "./components/Forum/ForumTopic/ForumTopicCURD";
+import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Group from "./components/Event/group";
@@ -174,34 +167,6 @@ export default function App() {
                 exact
                 component={PostEvent}
               />
-              <Route path="/forum" exact component={Forum} />
-              <Route path="/forumTopicCURD" exact component={ForumTopicCURD} />
-              <Route
-                path="/forumTopic/:forumTopicID"
-                exact
-                component={ForumTopic}
-              />
-              <Route
-                path="/forumSubTopic/:forumSubTopicID"
-                exact
-                component={ForumSubTopic}
-              />
-              <Route
-                path="/forumPostUpload"
-                exact
-                component={ForumPostUpload}
-              />
-              <Route path="/forumPostList" exact component={ForumPostList} />
-              <Route
-                path="/forumPost/:forumPostID"
-                exact
-                component={ForumPost}
-              />
-              <Route
-                path="/forumPost/forumPostComment/:forumPostCommentId"
-                exact
-                component={ForumPostCommentDetail}
-              />
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />
@@ -217,7 +182,7 @@ export default function App() {
               />
               <Route path="/market" component={Market} /> 
               <Route path="/article" component={Article} />
-                      
+              <Route path="/forum"  component={Forum} />
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />

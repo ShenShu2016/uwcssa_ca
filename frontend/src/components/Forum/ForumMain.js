@@ -105,7 +105,7 @@ export default function ForumMain() {
                         variant="text"
                         color="primary"
                         component={Link}
-                        to={`/forumTopic/${forumTopic.id}`}
+                        to={`/forum/forumTopic/${forumTopic.id}`}
                       >
                         {forumTopic.name}
                         <ArrowForwardIcon />

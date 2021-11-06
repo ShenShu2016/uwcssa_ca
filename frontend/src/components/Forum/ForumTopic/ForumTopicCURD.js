@@ -87,6 +87,7 @@ function ForumTopicCURD() {
     console.log("ForumSubTopicData", forumSubTopicData);
     console.log("selectForumTopicData", selectForumTopicData);
     const createForumSubTopicInput = {
+      id:forumSubTopicData.name,
       name: forumSubTopicData.name,
       forumTopicID: selectForumTopicData.id,
       userID: username,
@@ -157,7 +158,7 @@ function ForumTopicCURD() {
             endIcon={<PublishIcon />}
             onClick={uploadForumTopic}
             color="primary"
-            to="/forumtest"
+            // to="/forumtest"
           >
             上传新的Forum topic
           </Button>

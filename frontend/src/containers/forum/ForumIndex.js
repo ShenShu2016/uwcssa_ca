@@ -3,10 +3,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import ForumAdSide from "../components/Forum/ForumAdSide";
-import ForumMain from "../components/Forum/ForumMain";
-import OpenIconSpeedDial from "../components/Forum/OpenIconSpeedDial";
-
+import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumMain from "../../components/Forum/ForumMain";
+import OpenIconSpeedDial from "../../components/Forum/OpenIconSpeedDial";
+import { useTitle } from "../../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Forum = () => {
+export default function ForumIndex() {
+  useTitle("UWCSSA 论坛");
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -33,5 +34,3 @@ const Forum = () => {
     </div>
   );
 };
-
-export default Forum;
