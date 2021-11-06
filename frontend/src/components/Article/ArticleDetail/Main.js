@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  changeLike,
+  postLike,
+  putLike,
   removeLike,
-  setLike,
-} from "../../../redux/actions/generalAction";
+} from "../../../redux/reducers/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
@@ -23,6 +23,12 @@ import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { makeStyles } from "@mui/styles";
+
+// import {
+//   changeLike,
+//   removeLike,
+//   setLike,
+// } from "../../../redux/actions/generalAction";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -71,12 +77,13 @@ export default function Main({ article }) {
     }
   }, [article, userID]);
 
-  const handleLikeBTNClick = (event) => {
+  const handleLikeBTNClick = async (event) => {
     const itemID = id;
     const isLike = true;
     if (likesDetail.likeUp === false && likesDetail.disLikeUp === false) {
-      const response = dispatch(setLike(itemID, userID, isLike));
-      if (response) {
+      const response = await dispatch(postLike({ itemID, userID, isLike }));
+      if (response.meta.requestStatus === "fulfilled") {
+        console.log(response);
         setLikesDetail({
           ...likesDetail,
           like: likesDetail.like + 1,
@@ -85,8 +92,8 @@ export default function Main({ article }) {
         });
       }
     } else if (likesDetail.likeUp === true) {
-      const response = dispatch(removeLike(itemID, userID));
-      if (response) {
+      const response = await dispatch(removeLike({ itemID, userID }));
+      if (response.meta.requestStatus === "fulfilled") {
         setLikesDetail({
           ...likesDetail,
           like: likesDetail.like - 1,
@@ -95,8 +102,8 @@ export default function Main({ article }) {
         });
       }
     } else if (likesDetail.likeUp === false && likesDetail.disLikeUp === true) {
-      const response = dispatch(changeLike(itemID, userID, isLike));
-      if (response) {
+      const response = await dispatch(putLike({ itemID, userID, isLike }));
+      if (response.meta.requestStatus === "fulfilled") {
         setLikesDetail({
           ...likesDetail,
           like: likesDetail.like + 1,
@@ -108,13 +115,13 @@ export default function Main({ article }) {
     }
   };
 
-  const handleDisLikeBTNClick = (event) => {
+  const handleDisLikeBTNClick = async (event) => {
     const itemID = id;
     const isLike = false;
 
     if (likesDetail.likeUp === false && likesDetail.disLikeUp === false) {
-      const response = dispatch(setLike(itemID, userID, isLike));
-      if (response) {
+      const response = await dispatch(postLike({ itemID, userID, isLike }));
+      if (response.meta.requestStatus === "fulfilled") {
         setLikesDetail({
           ...likesDetail,
           disLike: likesDetail.disLike + 1,
@@ -123,8 +130,8 @@ export default function Main({ article }) {
         });
       }
     } else if (likesDetail.disLikeUp === true) {
-      const response = dispatch(removeLike(itemID, userID));
-      if (response) {
+      const response = await dispatch(removeLike({ itemID, userID }));
+      if (response.meta.requestStatus === "fulfilled") {
         setLikesDetail({
           ...likesDetail,
           disLike: likesDetail.disLike - 1,
@@ -133,8 +140,8 @@ export default function Main({ article }) {
         });
       }
     } else if (likesDetail.likeUp === true && likesDetail.disLikeUp === false) {
-      const response = dispatch(changeLike(itemID, userID, isLike));
-      if (response) {
+      const response = await dispatch(putLike({ itemID, userID, isLike }));
+      if (response.meta.requestStatus === "fulfilled") {
         setLikesDetail({
           like: likesDetail.like - 1,
           disLike: likesDetail.disLike + 1,

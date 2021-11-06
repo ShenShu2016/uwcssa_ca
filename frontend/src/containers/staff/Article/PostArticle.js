@@ -19,7 +19,7 @@ import S3Image from "../../../components/S3/S3Image";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
-import { postImage } from "../../../redux/actions/generalAction";
+import { postSingleImage } from "../../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -83,11 +83,14 @@ export default function PostArticle() {
   const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
-    const imageData = e.target.files[0];
+    const imageData = e.target.files;
     const imageLocation = "article";
-    const response = await dispatch(postImage(imageData, imageLocation));
-    if (response) {
-      setImgS3Keys(response.key);
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
+    console.log("我是function 返回值 response", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      setImgS3Keys(response.payload);
     }
   };
 
