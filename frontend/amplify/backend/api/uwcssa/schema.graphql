@@ -301,6 +301,35 @@ type EventComment
   active: Boolean!
   eventID: ID!
   event: Event! @connection(fields: ["eventID"])
+  eventSubComments: [EventSubComment]
+    @connection(keyName: "byEventComment", fields: ["id"])
+  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type EventSubComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "eventSubCommentSortByEventCommentID"
+    fields: ["eventCommentID", "createdAt"]
+    queryField: "eventSubCommentSortByEventCommentID"
+  )
+  @key(name: "byEventComment", fields: ["eventCommentID", "createdAt"]) {
+  id: ID!
+  content: String!
+  # likes: [Like] @connection(keyName: "byEventSubComment", fields: ["id"])
+  active: Boolean!
+  eventCommentID: ID!
+  eventComment: EventComment! @connection(fields: ["eventCommentID"])
   createdAt: AWSDateTime!
   userID: ID!
   user: User! @connection(fields: ["userID"])
