@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
+// import {
+//   removeSelectedArticle,
+//   selectedArticle,
+//   selectedArticleComments,
+// } from "../../redux/actions/articleActions";
 import {
   removeSelectedArticle,
   selectedArticle,
   selectedArticleComments,
-} from "../../redux/actions/articleActions";
+} from "../../redux/reducers/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComments from "../../components/Article/ArticleComments";
@@ -52,8 +57,8 @@ export default function ArticleDetail() {
 
   useEffect(() => {
     if (articleID && articleID !== "") {
-      dispatch(selectedArticle(articleID));
-      dispatch(selectedArticleComments(articleID));
+      dispatch(selectedArticle({ articleID }));
+      dispatch(selectedArticleComments({ articleID }));
     }
     return () => dispatch(removeSelectedArticle());
   }, [articleID, dispatch]);

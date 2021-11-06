@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { postArticle, setTopics } from "../../../redux/actions/articleActions";
+import { fetchTopics, postArticle } from "../../../redux/reducers/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -77,7 +77,7 @@ export default function PostArticle() {
   });
   console.log(articleData);
   useEffect(() => {
-    dispatch(setTopics());
+    dispatch(fetchTopics());
   }, [dispatch]);
 
   const { topics } = useSelector((state) => state.article);
@@ -108,23 +108,24 @@ export default function PostArticle() {
       userID: username,
       tags: tags,
     };
-    const response = await dispatch(postArticle(createArticleInput));
+    const response = await dispatch(postArticle({ createArticleInput }));
 
-    if (response.result) {
-      history.push(`/article/${response.response.data.createArticle.id}`);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/article/${response.payload.data.createArticle.id}`);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
 
   const uploadTopic = async () => {
     const createTopicInput = {
+      id: topicData.name,
       name: topicData.name,
       userID: username,
     };
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
-    dispatch(setTopics());
+    dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
 

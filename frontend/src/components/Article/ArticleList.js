@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComponent from "../../components/Article/ArticleComponent";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
+import { fetchArticles } from "../../redux/reducers/articleSlice";
 import { makeStyles } from "@mui/styles";
-import { setArticles } from "../../redux/actions/articleActions";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ export default function ArticleList() {
   const dispatch = useDispatch();
   const classes = useStyles();
   useEffect(() => {
-    dispatch(setArticles());
+    dispatch(fetchArticles());
   }, [dispatch]);
 
   const { articles } = useSelector((state) => state.article);

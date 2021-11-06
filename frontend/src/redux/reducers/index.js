@@ -1,4 +1,4 @@
-import { articleReducer } from "./articleReducer";
+import articleReducer from "./articleSlice";
 import { authReducer } from "./authReducer";
 import { combineReducers } from "redux";
 import { eventReducer } from "./eventReducer";
