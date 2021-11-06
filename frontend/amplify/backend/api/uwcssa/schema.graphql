@@ -264,6 +264,7 @@ type Event
   sortKey: SortKey!
   topicID: ID!
   topic: Topic! @connection(fields: ["topicID"])
+  eventComments: [EventComment] @connection(keyName: "byEvent", fields: ["id"])
   eventParticipants: [EventParticipant]
     @connection(keyName: "byEvent", fields: ["id"])
   likes: [Like] @connection(keyName: "byEvent", fields: ["id"])
@@ -277,6 +278,32 @@ enum EventStatus {
   SignUpClosed
   Finished
   Canceled
+}
+
+type EventComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "eventCommentSortByEventID"
+    fields: ["eventID", "createdAt"]
+    queryField: "eventCommentSortByEventID"
+  )
+  @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
+  id: ID!
+  content: String!
+  active: Boolean!
+  eventID: ID!
+  event: Event! @connection(fields: ["eventID"])
+  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type EventParticipant
