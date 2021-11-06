@@ -11,7 +11,7 @@ const initialState = {
   userCounts: "",
   urlFrom: null,
   imageKey: {},
-  imageKeys: [],
+  imageKeys: {},
   likes: [],
 
   //  Status: "idle",
@@ -136,25 +136,36 @@ export const postSingleImage = createAsyncThunk(
 export const postMultipleImages = createAsyncThunk(
   "general/postMultipleImages",
   async ({ imagesData, imageLocation }) => {
-    await Promise.all(
-      Array.from(imagesData).map(
-        (imageData) =>
-          new Compressor(imageData, {
-            quality: 0.6,
+    let imgS3Keys = [];
+    await new Promise(async function (resolve) {
+      let numProcessedImages = 0;
+      let numImagesToProcess = imagesData.length;
+      for (let i = 0; i < numImagesToProcess; i++) {
+        const file = imagesData[i];
+        await new Promise((resolve) => {
+          new Compressor(file, {
+            quality: 0.5,
             success(result) {
-              console.log("Result", result);
               Storage.put(
                 `${imageLocation}/${uuid()}.${result.name.split(".").pop()}`,
                 result,
                 { contentType: "image/*" }
               ).then((e) => {
                 console.log("response 上传成功了", e);
-                return e.key;
+                imgS3Keys.push(e.key);
+                resolve();
               });
             },
-          })
-      )
-    );
+          });
+        });
+        numProcessedImages += 1;
+      }
+      console.log("numProcessedImages", numProcessedImages);
+      if (numProcessedImages === numImagesToProcess) {
+        resolve();
+      }
+    });
+    return imgS3Keys;
   }
 );
 
@@ -224,7 +235,7 @@ const generalSlice = createSlice({
       })
       .addCase(postMultipleImages.fulfilled, (state, action) => {
         state.postMultipleImagesStatus = "succeeded";
-        state.imageKeys.unshift(action.payload);
+        state.imageKeys = action.payload;
       })
       .addCase(postMultipleImages.rejected, (state, action) => {
         state.postMultipleImagesStatus = "failed";

@@ -9,7 +9,7 @@ import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "./marketItemOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
-import { postMultipleImages } from "../../redux/actions/generalAction";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
@@ -63,7 +63,6 @@ export default function PostMarketItem() {
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const { imageKeys } = useSelector((state) => state.general);
-  const [renderTrigger, setRenderTrigger] = useState(null);
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
 
   const history = useHistory();
@@ -82,9 +81,8 @@ export default function PostMarketItem() {
 
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    setRenderTrigger(imagesData.length);
-    const imgLocation = "marketItem";
-    await dispatch(postMultipleImages(imagesData, imgLocation));
+    const imageLocation = "marketItem";
+    dispatch(postMultipleImages({ imagesData, imageLocation }));
   };
 
   useEffect(() => {
@@ -106,10 +104,11 @@ export default function PostMarketItem() {
         setImgKeyFromServer([]);
       }
     };
-    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
+    console.log("imageKeys", imageKeys);
+    if (imageKeys) {
       getImage();
     }
-  }, [imageKeys, renderTrigger]);
+  }, [imageKeys]);
 
   const uploadMarketItem = async () => {
     //Upload the marketItem
