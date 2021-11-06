@@ -61,6 +61,9 @@ export const setUserProfile = (username) => async (dispatch) => {
     });
   } catch (error) {
     console.log("error on fetching User profile", error);
+    dispatch({
+      type: ActionTypes.SET_USER_PROFILE_Fail,
+    });
   }
 };
 

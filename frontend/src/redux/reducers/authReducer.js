@@ -23,6 +23,11 @@ export const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         userProfile: payload,
       };
+    case ActionTypes.SET_USER_PROFILE_Fail:
+      return {
+        ...state,
+        user: { username: "", attributes: { email: "" } },
+      };
     case ActionTypes.USER_AUTHENTICATED_LOADED_FAIL:
     case ActionTypes.SIGN_IN_FAIL:
     case ActionTypes.SIGN_UP_FAIL:

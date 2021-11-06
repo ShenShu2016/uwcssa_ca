@@ -6,6 +6,7 @@ export const ActionTypes = {
   SIGN_IN_FAIL: "auth/signInFail",
 
   SET_USER_PROFILE: "auth/get/userProfile",
+  SET_USER_PROFILE_Fail: "auth/get/userProfileFail",
 
   SIGN_UP_SUCCESS: "auth/signUpSuccess",
   SIGN_UP_FAIL: "auth/signUpFail",
