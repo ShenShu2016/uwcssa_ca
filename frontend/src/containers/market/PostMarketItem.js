@@ -62,7 +62,7 @@ export default function PostMarketItem() {
   useTitle("发布二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKeys } = useSelector((state) => state.general);
+  const [imageKeys, setImageKeys] = useState([]);
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
 
   const history = useHistory();
@@ -82,7 +82,13 @@ export default function PostMarketItem() {
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
     const imageLocation = "marketItem";
-    dispatch(postMultipleImages({ imagesData, imageLocation }));
+
+    const response = await dispatch(
+      postMultipleImages({ imagesData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setImageKeys(response.payload);
+    }
   };
 
   useEffect(() => {
