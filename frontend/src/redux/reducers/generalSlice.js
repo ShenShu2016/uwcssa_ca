@@ -16,6 +16,11 @@ const initialState = {
 
   //  Status: "idle",
   //  Error: null,
+  setURLFromStatus: "idle",
+  setURLFromError: null,
+
+  removeURLFromStatus: "idle",
+  removeURLFromError: null,
   fetchUserCountsError: null,
   fetchUserCountsStatus: "idle",
   postLikeStatus: "idle",
@@ -38,16 +43,19 @@ const userCountsQuery = `query ListUsers {
     }
 }`;
 
-// export const setURLFrom = (location) => async (dispatch) => {
-//   dispatch({
-//     type: ActionTypes.SET_URL_FROM,
-//     payload: location.pathname,
-//   });
-// };
+export const setURLFrom = createAsyncThunk(
+  "general/setURLFrom",
+  async ({ location }) => {
+    return location;
+  }
+);
 
-// export const removeURLFrom = () => async (dispatch) => {
-//   dispatch({ type: ActionTypes.REMOVE_URL_FROM });
-// };
+export const removeURLFrom = createAsyncThunk(
+  "general/removeURLFrom",
+  async () => {
+    return;
+  }
+);
 
 export const fetchUserCounts = createAsyncThunk(
   "general/fetchUserCounts",
@@ -174,13 +182,37 @@ const generalSlice = createSlice({
   initialState,
   reducers: {
     //有API call 的不能放这里
-    removePostMultipleImages(state, action) {
-      state.imageKeys = [];
-      console.log("remove selected multipleImages successfully!");
+    removeURLFrom(state, action) {
+      state.urlFrom = {};
+      console.log("remove selected removeURLFrom successfully!");
     },
   },
   extraReducers(builder) {
     builder
+      // Cases for status of fetchUserCounts (pending, fulfilled, and rejected)
+      .addCase(setURLFrom.pending, (state, action) => {
+        state.setURLFromStatus = "loading";
+      })
+      .addCase(setURLFrom.fulfilled, (state, action) => {
+        state.setURLFromStatus = "succeeded";
+        state.urlFrom = action.payload;
+      })
+      .addCase(setURLFrom.rejected, (state, action) => {
+        state.setURLFromStatus = "failed";
+        state.setURLFromError = action.error.message;
+      })
+      // Cases for status of fetchUserCounts (pending, fulfilled, and rejected)
+      .addCase(removeURLFrom.pending, (state, action) => {
+        state.removeLikeStatus = "loading";
+      })
+      .addCase(removeURLFrom.fulfilled, (state, action) => {
+        state.removeLikeStatus = "succeeded";
+        state.urlFrom = action.payload;
+      })
+      .addCase(removeURLFrom.rejected, (state, action) => {
+        state.removeLikeStatus = "failed";
+        state.removeURLFromError = action.error.message;
+      })
       // Cases for status of fetchUserCounts (pending, fulfilled, and rejected)
       .addCase(fetchUserCounts.pending, (state, action) => {
         state.fetchUserCountsStatus = "loading";
@@ -255,7 +287,5 @@ const generalSlice = createSlice({
       });
   },
 });
-
-export const { removePostMultipleImages } = generalSlice.actions;
 
 export default generalSlice.reducer;
