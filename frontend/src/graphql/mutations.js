@@ -121,6 +121,16 @@ export const createUser = /* GraphQL */ `
           userID
           updatedAt
         }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -1039,6 +1049,16 @@ export const updateUser = /* GraphQL */ `
           userID
           updatedAt
         }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -1956,6 +1976,16 @@ export const deleteUser = /* GraphQL */ `
           topicID
           userID
           updatedAt
+        }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
         }
         forumPost {
           id
@@ -9806,6 +9836,18 @@ export const createEventComment = /* GraphQL */ `
         }
         nextToken
       }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -10144,6 +10186,18 @@ export const updateEventComment = /* GraphQL */ `
           eventCommentID
           createdAt
           userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
           updatedAt
           owner
         }
@@ -10492,6 +10546,18 @@ export const deleteEventComment = /* GraphQL */ `
         }
         nextToken
       }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -10815,6 +10881,9 @@ export const createEventSubComment = /* GraphQL */ `
         }
         owner
         eventSubComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -11144,6 +11213,9 @@ export const updateEventSubComment = /* GraphQL */ `
         eventSubComments {
           nextToken
         }
+        likes {
+          nextToken
+        }
       }
       owner
     }
@@ -11469,6 +11541,9 @@ export const deleteEventSubComment = /* GraphQL */ `
         }
         owner
         eventSubComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -24480,6 +24555,63 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
       }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
@@ -25356,6 +25488,63 @@ export const updateLike = /* GraphQL */ `
           nextToken
         }
       }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
@@ -26226,6 +26415,63 @@ export const deleteLike = /* GraphQL */ `
           nextToken
         }
         eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
           nextToken
         }
         likes {

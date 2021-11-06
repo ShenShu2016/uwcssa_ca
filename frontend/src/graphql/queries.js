@@ -854,6 +854,16 @@ export const getUser = /* GraphQL */ `
           userID
           updatedAt
         }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -5120,6 +5130,18 @@ export const getEventComment = /* GraphQL */ `
         }
         nextToken
       }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -5181,6 +5203,9 @@ export const listEventComments = /* GraphQL */ `
         }
         owner
         eventSubComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -5256,6 +5281,9 @@ export const eventCommentSortByEventID = /* GraphQL */ `
         }
         owner
         eventSubComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -5580,6 +5608,9 @@ export const getEventSubComment = /* GraphQL */ `
         }
         owner
         eventSubComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }
@@ -11610,6 +11641,63 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
       }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
       forumPost {
         id
         title
@@ -11876,6 +11964,16 @@ export const listLikes = /* GraphQL */ `
           topicID
           userID
           updatedAt
+        }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
         }
         forumPost {
           id
