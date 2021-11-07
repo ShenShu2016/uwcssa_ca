@@ -13,4 +13,8 @@ export const ActionTypes = {
   REMOVE_SELECTED_EVENT: "event/removeSelectedEvent",
   EVENT_PARTICIPANT_POST_SUCCESS: "event/participantPostSuccess",
   EVENT_PARTICIPANT_POST_FAIL: "event/participantPostFail",
+  SELECTED_EVENT_COMMENTS: "event/selectedComments",
+  EVENT_COMMENT_POST_SUCCESS: "event/commentPostSuccess",
+  EVENT_COMMENT_POST_FAIL: "event/commentPostFail",
+  LOAD_MORE_EVENT_COMMENTS: "event/loadMoreComments",
 };

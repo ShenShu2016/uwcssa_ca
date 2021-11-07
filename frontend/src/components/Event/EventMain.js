@@ -12,10 +12,10 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import SignUpRequest from "../Auth/SignUpRequireDialog";
+//import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 
 // import LinesEllipsis from "react-lines-ellipsis";
 
@@ -81,7 +81,7 @@ export default function EventMain({ event }) {
     }
   }, [posterImgS3Key]);
 
-  const userInfo = useSelector((state) => state.userAuth);
+  // const userInfo = useSelector((state) => state.userAuth);
 
   return (
     <Grid item xs={2} sm={4} md={4} key={event.title}>
@@ -130,17 +130,9 @@ export default function EventMain({ event }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {userInfo.isAuthenticated ? (
-            <Button
-              size="small"
-              component={Link}
-              to={`/event/${event.id}/eventSignUp`}
-            >
-              报名
-            </Button>
-          ) : (
-            <SignUpRequest />
-          )}
+          <Button size="small" disabled>
+            分享
+          </Button>
         </CardActions>
       </Card>
     </Grid>

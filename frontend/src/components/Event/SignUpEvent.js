@@ -15,6 +15,12 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+// import {
+//   removeSelectedEvent,
+//   selectedEvent,
+// } from "../../redux/actions/eventActions";
+import { useSelector } from "react-redux";
+// import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventSignUp() {
   const classes = useStyles();
+  // const dispatch = useDispatch();
+
+  const { event } = useSelector((state) => state.event.selected);
+
   return (
     <Box className={classes.root}>
       <Container size="lg">
@@ -75,7 +85,7 @@ export default function EventSignUp() {
                 }}
                 size="large"
                 component={Link}
-                to="/event/eventSignUp/individual" //{`/event/${event.id}/eventSignUp/individual`}
+                to={`/event/${event.id}/eventSignUp/individual`}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <PersonIcon />
@@ -98,7 +108,7 @@ export default function EventSignUp() {
                 }}
                 size="large"
                 component={Link}
-                to="/event/eventSignUp/group"
+                to={`/event/${event.id}/eventSignUp/group`}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <GroupIcon />
