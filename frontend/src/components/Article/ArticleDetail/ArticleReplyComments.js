@@ -23,11 +23,7 @@ const useStyles = makeStyles({
   card: {},
 });
 
-export default function ArticleReplyComments({ replyOpenID, item }) {
-  //   const [replyOpen, setReplyOpen] = useState(true);
-
-  //   console.log("ArticleSubComments", comment);
-  //   console.log("item", item);
+export default function ArticleReplyComments({ isReplyOpen, item }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -35,7 +31,7 @@ export default function ArticleReplyComments({ replyOpenID, item }) {
   const [formData, setFormData] = useState({
     comment: "",
   });
-  const { id } = item;
+
   const onChange = (e) => {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,10 +40,9 @@ export default function ArticleReplyComments({ replyOpenID, item }) {
   const createArticleSubCommentInput = {
     content: comment,
     active: true,
-    articleCommentID: id,
+    articleCommentID: item.id,
     userID: userAuth.user.username,
   };
-  //   console.log(createArticleSubCommentInput);
 
   const postSubComment = async (e) => {
     if (!loading) {
@@ -66,10 +61,9 @@ export default function ArticleReplyComments({ replyOpenID, item }) {
     }
   };
 
-  //   console.log("replyOpenID === id", replyOpenID === id);
   return (
     <div>
-      {replyOpenID === id ? (
+      {isReplyOpen ? (
         <Box>
           <div>
             <Box className={classes.main}>

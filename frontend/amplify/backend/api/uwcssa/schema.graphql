@@ -632,216 +632,216 @@ type MarketUserInfo
   user: User! @connection(fields: ["userID"])
 }
 
-type MarketItem
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(
-    name: "marketItemSortBySortKey"
-    fields: ["sortKey", "createdAt"]
-    queryField: "marketItemSortBySortKey"
-  )
-  @key(
-    name: "marketItemSortByMarketItemCategory"
-    fields: ["marketItemCategory", "createdAt"]
-    queryField: "marketItemSortByMarketItemCategory"
-  ) {
-  id: ID!
-  name: String!
-  imgS3Keys: [String]!
-  title: String!
-  price: Int
-  description: String
-  location: String
-  marketItemCondition: MarketItemCondition!
-  marketItemCategory: MarketItemCategory!
-  tags: [String]
-  sortKey: SortKey!
-  active: Boolean!
-  createdAt: AWSDateTime!
-  userID: ID!
-  user: User! @connection(fields: ["userID"])
-}
+# type MarketItem
+#   @model
+#   @auth(
+#     rules: [
+#       { allow: owner, operations: [create, read, update] }
+#       { allow: groups, groups: ["admin", "staff"] }
+#       { allow: private, operations: [read] }
+#       { allow: public, operations: [read], provider: iam }
+#     ]
+#   )
+#   @key(
+#     name: "marketItemSortBySortKey"
+#     fields: ["sortKey", "createdAt"]
+#     queryField: "marketItemSortBySortKey"
+#   )
+#   @key(
+#     name: "marketItemSortByMarketItemCategory"
+#     fields: ["marketItemCategory", "createdAt"]
+#     queryField: "marketItemSortByMarketItemCategory"
+#   ) {
+#   id: ID!
+#   name: String!
+#   imgS3Keys: [String]!
+#   title: String!
+#   price: Int
+#   description: String
+#   location: String
+#   marketItemCondition: MarketItemCondition!
+#   marketItemCategory: MarketItemCategory!
+#   tags: [String]
+#   sortKey: SortKey!
+#   active: Boolean!
+#   createdAt: AWSDateTime!
+#   userID: ID!
+#   user: User! @connection(fields: ["userID"])
+# }
 
-enum MarketItemCondition {
-  New
-  UsedLikeNew
-  UsedGood
-  UsedFair
+# enum MarketItemCondition {
+#   New
+#   UsedLikeNew
+#   UsedGood
+#   UsedFair
 
-  Other
-}
+#   Other
+# }
 
-enum MarketItemCategory {
-  Tools
-  Furniture
-  HouseHold
-  Garden
-  Appliances
+# enum MarketItemCategory {
+#   Tools
+#   Furniture
+#   HouseHold
+#   Garden
+#   Appliances
 
-  VideoGames
-  BooksMoviesMusic
+#   VideoGames
+#   BooksMoviesMusic
 
-  BagsLuggage
-  WomenClothingShoes
-  MenClothingShoes
-  JewelryAccessories
+#   BagsLuggage
+#   WomenClothingShoes
+#   MenClothingShoes
+#   JewelryAccessories
 
-  HealthBeauty
-  PetSupplies
-  BabyKids
-  ToysGames
+#   HealthBeauty
+#   PetSupplies
+#   BabyKids
+#   ToysGames
 
-  ElectronicsComputers
-  MobilePhones
+#   ElectronicsComputers
+#   MobilePhones
 
-  Bicycles
-  ArtsCrafts
-  SportsOutdoors
-  AutoParts
-  MusicalInstruments
-  AntiquesCollectibles
+#   Bicycles
+#   ArtsCrafts
+#   SportsOutdoors
+#   AutoParts
+#   MusicalInstruments
+#   AntiquesCollectibles
 
-  GarageSale
-  Miscellaneous
+#   GarageSale
+#   Miscellaneous
 
-  Other
-}
+#   Other
+# }
 
-type MarketVehicle
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(
-    name: "marketVehicleSortBySortKey"
-    fields: ["sortKey", "createdAt"]
-    queryField: "marketVehicleSortBySortKey"
-  )
-  @key(
-    name: "marketVehicleSortByVehicleType"
-    fields: ["vehicleType", "createdAt"]
-    queryField: "marketVehicleSortByVehicleType"
-  ) {
-  id: ID!
-  vehicleType: VehicleType!
-  imgS3Keys: [String]!
-  location: String
-  year: Int!
-  make: String!
-  model: String!
-  exteriorColor: String
-  interiorColor: String
-  fuelType: String
-  price: Int
-  description: String
-  active: Boolean!
-  createdAt: AWSDateTime!
-  sortKey: SortKey!
-  tags: [String]
-  userID: ID!
-  user: User! @connection(fields: ["userID"])
-}
+# type MarketVehicle
+#   @model
+#   @auth(
+#     rules: [
+#       { allow: owner, operations: [create, read, update] }
+#       { allow: groups, groups: ["admin", "staff"] }
+#       { allow: private, operations: [read] }
+#       { allow: public, operations: [read], provider: iam }
+#     ]
+#   )
+#   @key(
+#     name: "marketVehicleSortBySortKey"
+#     fields: ["sortKey", "createdAt"]
+#     queryField: "marketVehicleSortBySortKey"
+#   )
+#   @key(
+#     name: "marketVehicleSortByVehicleType"
+#     fields: ["vehicleType", "createdAt"]
+#     queryField: "marketVehicleSortByVehicleType"
+#   ) {
+#   id: ID!
+#   vehicleType: VehicleType!
+#   imgS3Keys: [String]!
+#   location: String
+#   year: Int!
+#   make: String!
+#   model: String!
+#   exteriorColor: String
+#   interiorColor: String
+#   fuelType: String
+#   price: Int
+#   description: String
+#   active: Boolean!
+#   createdAt: AWSDateTime!
+#   sortKey: SortKey!
+#   tags: [String]
+#   userID: ID!
+#   user: User! @connection(fields: ["userID"])
+# }
 
-enum VehicleType {
-  CarTruck
-  Motorcycle
-  PowerSport
-  RVCamper
-  Trailer
-  Other
-}
+# enum VehicleType {
+#   CarTruck
+#   Motorcycle
+#   PowerSport
+#   RVCamper
+#   Trailer
+#   Other
+# }
 
-type MarketRental
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(
-    name: "marketRentalSortBySortKey"
-    fields: ["sortKey", "createdAt"]
-    queryField: "marketRentalSortBySortKey"
-  )
-  @key(
-    name: "marketRentalSortByMarketRentalSaleRent"
-    fields: ["marketRentalSaleRent", "createdAt"]
-    queryField: "marketRentalSortByMarketRentalSaleRent"
-  ) {
-  id: ID!
-  imgS3Keys: [String]!
-  marketRentalSaleRent: MarketRentalSaleRent!
-  propertyType: PropertyType!
-  bedroomCounts: Int
-  bathroomsCounts: Int
-  price: Int
-  address: String
-  description: String
-  propertySize: Int
-  dateAvailable: AWSDateTime
-  laundryType: LaundryType
-  airConditionType: AirConditionType
-  heatingType: HeatingType
-  catFriendly: Boolean
-  dogFriendly: Boolean
-  tags: [String]
-  active: Boolean!
-  sortKey: SortKey!
-  createdAt: AWSDateTime!
-  userID: ID!
-  user: User! @connection(fields: ["userID"])
-}
+# type MarketRental
+#   @model
+#   @auth(
+#     rules: [
+#       { allow: owner, operations: [create, read, update] }
+#       { allow: groups, groups: ["admin", "staff"] }
+#       { allow: private, operations: [read] }
+#       { allow: public, operations: [read], provider: iam }
+#     ]
+#   )
+#   @key(
+#     name: "marketRentalSortBySortKey"
+#     fields: ["sortKey", "createdAt"]
+#     queryField: "marketRentalSortBySortKey"
+#   )
+#   @key(
+#     name: "marketRentalSortByMarketRentalSaleRent"
+#     fields: ["marketRentalSaleRent", "createdAt"]
+#     queryField: "marketRentalSortByMarketRentalSaleRent"
+#   ) {
+#   id: ID!
+#   imgS3Keys: [String]!
+#   marketRentalSaleRent: MarketRentalSaleRent!
+#   propertyType: PropertyType!
+#   bedroomCounts: Int
+#   bathroomsCounts: Int
+#   price: Int
+#   address: String
+#   description: String
+#   propertySize: Int
+#   dateAvailable: AWSDateTime
+#   laundryType: LaundryType
+#   airConditionType: AirConditionType
+#   heatingType: HeatingType
+#   catFriendly: Boolean
+#   dogFriendly: Boolean
+#   tags: [String]
+#   active: Boolean!
+#   sortKey: SortKey!
+#   createdAt: AWSDateTime!
+#   userID: ID!
+#   user: User! @connection(fields: ["userID"])
+# }
 
-enum MarketRentalSaleRent {
-  Rent
-  ForSale
-  Other
-}
+# enum MarketRentalSaleRent {
+#   Rent
+#   ForSale
+#   Other
+# }
 
-enum PropertyType {
-  Apartment
-  House
-  RoomOnly
-  Townhouse
-  Other
-}
-enum LaundryType {
-  InUnitLaundry
-  LaundryInBuilding
-  LaundryAvailable
-  None
-  Other
-}
+# enum PropertyType {
+#   Apartment
+#   House
+#   RoomOnly
+#   Townhouse
+#   Other
+# }
+# enum LaundryType {
+#   InUnitLaundry
+#   LaundryInBuilding
+#   LaundryAvailable
+#   None
+#   Other
+# }
 
-enum AirConditionType {
-  CentralAC
-  ACAvailable
-  None
-  Other
-}
+# enum AirConditionType {
+#   CentralAC
+#   ACAvailable
+#   None
+#   Other
+# }
 
-enum HeatingType {
-  CentralHeating
-  ElectricHeating
-  GasHeating
-  RadiatorHeating
-  Other
-}
+# enum HeatingType {
+#   CentralHeating
+#   ElectricHeating
+#   GasHeating
+#   RadiatorHeating
+#   Other
+# }
 
 type Like
   @model
