@@ -65,9 +65,9 @@ type User
   forumPosts: [ForumPost] @connection(keyName: "byUser", fields: ["id"])
   forumPostComments: [ForumPostComment]
   forumPostSubComments: [ForumPostSubComment]
-  marketItems: [MarketItem]
-  marketVehicles: [MarketVehicle]
-  marketRentals: [MarketRental]
+  # marketItems: [MarketItem]
+  # marketVehicles: [MarketVehicle]
+  # marketRentals: [MarketRental]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
 }
 
