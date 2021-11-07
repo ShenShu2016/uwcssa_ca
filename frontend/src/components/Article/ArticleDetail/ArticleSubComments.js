@@ -135,9 +135,9 @@ export default function ArticleSubComments({ comment }) {
                     </Box>
                     <CardActions sx={{ p: 0 }}>
                       <LikeButtonGroup item={ArticleSubComment} />
-                      <Button size="small" color="primary">
+                      {/* <Button size="small" color="primary">
                         回复
-                      </Button>
+                      </Button> */}
                     </CardActions>
                   </Grid>
                 </Grid>

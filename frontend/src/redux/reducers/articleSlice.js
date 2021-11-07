@@ -3,7 +3,11 @@ import {
   articleSortBySortKey,
   listTopics,
 } from "../../graphql/queries";
-import { createArticle, createArticleComment } from "../../graphql/mutations";
+import {
+  createArticle,
+  createArticleComment,
+  createArticleSubComment,
+} from "../../graphql/mutations";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import API from "@aws-amplify/api";
@@ -36,6 +40,8 @@ const initialState = {
   removeSelectedArticleError: null,
   postArticleCommentStatus: "idle",
   postArticleCommentError: null,
+  postArticleSubCommentStatus: "idle",
+  postArticleSubCommentError: null,
   fetchTopicsStatus: "idle",
   fetchTopicsError: null,
   postArticleStatus: "idle",
@@ -117,6 +123,19 @@ export const postArticleComment = createAsyncThunk(
       })
     );
     return response.data.createArticleComment;
+  }
+);
+
+export const postArticleSubComment = createAsyncThunk(
+  "article/postArticleSubComment",
+  async ({ createArticleSubCommentInput }) => {
+    // console.log(createArticleSubCommentInput);
+    const response = await API.graphql(
+      graphqlOperation(createArticleSubComment, {
+        input: createArticleSubCommentInput,
+      })
+    );
+    return response.data.createArticleSubComment;
   }
 );
 
@@ -209,6 +228,24 @@ const articleSlice = createSlice({
       .addCase(postArticleComment.rejected, (state, action) => {
         state.postArticleCommentStatus = "failed";
         state.postArticleCommentError = action.error.message;
+      })
+      // Cases for status of postArticleSubComment (pending, fulfilled, and rejected)
+      .addCase(postArticleSubComment.pending, (state, action) => {
+        state.postArticleSubCommentStatus = "loading";
+      })
+      .addCase(postArticleSubComment.fulfilled, (state, action) => {
+        state.postArticleSubCommentStatus = "succeeded";
+        state.selected.article.articleComments.items.map(
+          (item, i) =>
+            item.id === action.payload.articleCommentID &&
+            state.selected.article.articleComments.items[
+              i
+            ].articleSubComments.items.unshift(action.payload)
+        );
+      })
+      .addCase(postArticleSubComment.rejected, (state, action) => {
+        state.postArticleSubCommentStatus = "failed";
+        state.postArticleSubCommentError = action.error.message;
       })
       // Cases for status of removeLike (pending, fulfilled, and rejected)
       .addCase(fetchTopics.pending, (state, action) => {

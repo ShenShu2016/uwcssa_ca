@@ -7,12 +7,13 @@ import {
   LinearProgress,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
+import ArticleReplyComments from "./ArticleReplyComments";
 import ArticleSubComments from "./ArticleSubComments";
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../LikeButtonGroup";
 import { Link } from "react-router-dom";
-import React from "react";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 
@@ -40,7 +41,15 @@ const useStyles = makeStyles({
 
 export default function ArticleComments({ article }) {
   const classes = useStyles();
+  const [replyOpenID, setReplyOpenID] = useState(null);
   // console.log("ArticleComments", article);
+  const handleSubCommentReply = (id) => {
+    if (replyOpenID === id) {
+      setReplyOpenID(null);
+    } else {
+      setReplyOpenID(id);
+    }
+  };
   return (
     <div className={classes.root}>
       <Typography className={classes.subTitle}>评论：</Typography>
@@ -91,10 +100,20 @@ export default function ArticleComments({ article }) {
                     </Box>
                     <CardActions sx={{ p: 0 }}>
                       <LikeButtonGroup item={comment} />
-                      <Button size="small" color="primary">
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={(e) => handleSubCommentReply(id)}
+                      >
                         回复
                       </Button>
                     </CardActions>
+                    <Box>
+                      <ArticleReplyComments
+                        item={comment}
+                        replyOpenID={replyOpenID}
+                      />
+                    </Box>
                     <Box>
                       <ArticleSubComments comment={comment} />
                     </Box>
