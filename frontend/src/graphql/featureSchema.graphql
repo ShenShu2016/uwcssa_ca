@@ -66,8 +66,8 @@ type User
   forumPostComments: [ForumPostComment]
   forumPostSubComments: [ForumPostSubComment]
   marketItems: [MarketItem]
-  marketVehicles: [MarketVehicle]
-  marketRentals: [MarketRental]
+  # marketVehicles: [MarketVehicle]
+  # marketRentals: [MarketRental]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
 }
 
@@ -692,6 +692,9 @@ type MarketItem
   heatingType: HeatingType
   catFriendly: Boolean
   dogFriendly: Boolean
+  contactPhone: String
+  contactWeChat: String
+  contactEmail: String
   sortKey: SortKey!
   active: Boolean!
   createdAt: AWSDateTime!
