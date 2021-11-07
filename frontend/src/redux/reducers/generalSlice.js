@@ -82,7 +82,8 @@ export const postLike = createAsyncThunk(
         },
       })
     );
-    return response;
+    console.log(response);
+    return response.data;
   }
 );
 
@@ -97,7 +98,8 @@ export const putLike = createAsyncThunk(
         },
       })
     );
-    return response;
+    console.log(response);
+    return response.data;
   }
 );
 
@@ -111,7 +113,8 @@ export const removeLike = createAsyncThunk(
         },
       })
     );
-    return response;
+    console.log(response);
+    return response.data;
   }
 );
 
@@ -235,7 +238,7 @@ const generalSlice = createSlice({
       })
       .addCase(postLike.rejected, (state, action) => {
         state.postLikeStatus = "failed";
-        state.postLikeError = action.error.message;
+        state.postLikeError = action.payload;
       })
       // Cases for status of putLike (pending, fulfilled, and rejected)
       .addCase(putLike.pending, (state, action) => {
@@ -247,7 +250,7 @@ const generalSlice = createSlice({
       })
       .addCase(putLike.rejected, (state, action) => {
         state.putLikeStatus = "failed";
-        state.putLikeError = action.error.message;
+        state.putLikeError = action.payload;
       })
       // Cases for status of removeLike (pending, fulfilled, and rejected)
       .addCase(removeLike.pending, (state, action) => {
@@ -259,7 +262,7 @@ const generalSlice = createSlice({
       })
       .addCase(removeLike.rejected, (state, action) => {
         state.removeLikeStatus = "failed";
-        state.removeLikeError = action.error.message;
+        state.removeLikeError = action.payload;
       })
       // Cases for status of postMultipleImages (pending, fulfilled, and rejected)
       .addCase(postMultipleImages.pending, (state, action) => {

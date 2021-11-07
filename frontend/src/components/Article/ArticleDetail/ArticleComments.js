@@ -8,11 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 
-import CustomAvatar from "../CustomMUI/CustomAvatar";
+import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import LikeButtonGroup from "../../LikeButtonGroup";
 import { Link } from "react-router-dom";
 import React from "react";
-import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
-import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 
@@ -38,17 +37,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ArticleComments({ comments }) {
+export default function ArticleComments({ article }) {
   const classes = useStyles();
-  // console.log(article, "article");
+  // console.log("ArticleComments", article);
   return (
     <div className={classes.root}>
       <Typography className={classes.subTitle}>评论：</Typography>
-      {Object.keys(comments).length === 0 ? (
+      {article.active !== true ? (
         ""
       ) : (
         <div>
-          {comments.map((comment) => {
+          {article.articleComments.items.map((comment) => {
             const { id, content, createdAt, userID, user } = comment;
 
             return (
@@ -90,22 +89,7 @@ export default function ArticleComments({ comments }) {
                       </Typography>
                     </Box>
                     <CardActions sx={{ p: 0 }}>
-                      <Button
-                        size="small"
-                        color="primary"
-                        startIcon={<ThumbUpAltOutlinedIcon />}
-                        sx={{ p: 0 }}
-                        style={{ width: "22px" }}
-                      >
-                        {/* {like.length} */}
-                      </Button>
-                      <Button
-                        size="small"
-                        color="primary"
-                        startIcon={<ThumbDownAltOutlinedIcon />}
-                      >
-                        {/* {unlike.length} */}
-                      </Button>
+                      <LikeButtonGroup item={comment} />
                       <Button size="small" color="primary">
                         回复
                       </Button>
@@ -118,7 +102,7 @@ export default function ArticleComments({ comments }) {
         </div>
       )}
       <Box className="moreCommentsStatus">
-        {comments.commentsNextToken ? (
+        {article.articleComments.commentsNextToken ? (
           <Box>
             <Typography
               variant="h5"

@@ -1,13 +1,13 @@
 import {
   articleCommentSortByArticleID,
   articleSortBySortKey,
-  getArticle,
   listTopics,
 } from "../../graphql/queries";
 import { createArticle, createArticleComment } from "../../graphql/mutations";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import API from "@aws-amplify/api";
+import { getArticle } from "../CustomQuery/ArticleQueries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const initialState = {
@@ -15,9 +15,7 @@ const initialState = {
   topics: [],
   types: [],
   selected: {
-    article: {},
-    comments: [],
-    commentsNextToken: "",
+    article: { articleComments: { nextToken: null } },
   },
   mutation: {
     postArticle: {},
@@ -153,7 +151,7 @@ const articleSlice = createSlice({
   reducers: {
     //有API call 的不能放这里
     removeSelectedArticle(state, action) {
-      state.selected = { article: {}, comments: [], commentsNextToken: "" };
+      state.selected = { article: { articleComments: { nextToken: null } } };
       console.log("remove selected removeSelectedArticle successfully!");
     },
   },
