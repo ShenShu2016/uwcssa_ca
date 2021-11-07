@@ -101,7 +101,7 @@ function ForumPostUpload() {
       content,
       imgS3Keys: [imgS3Keys],
       active:true,
-      // lastReplyAt:
+      lastReplyAt:{S:Date.tolSOString()},
       userID: username,
       forumSubTopicID: forumSubTopicId,
       tags: tags,

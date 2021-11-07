@@ -20,9 +20,9 @@ import {
   deleteForumTopic,
 } from "../../../graphql/mutations";
 import {
-  setForumSubTopics,
-  setForumTopics,
-} from "../../../redux/actions/forumAction";
+  fetchForumSubTopics,
+  fetchForumTopics,
+} from "../../../redux/reducers/forumSlice";
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
@@ -44,8 +44,8 @@ function ForumTopicCURD() {
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.userAuth.user);
   useEffect(() => {
-    dispatch(setForumTopics());
-    dispatch(setForumSubTopics());
+    dispatch(fetchForumTopics());
+    dispatch(fetchForumSubTopics());
   }, [dispatch]);
   const { forumTopics, forumSubTopics } = useSelector((state) => state.forum);
   // console.log("forumTopics", forumTopics);
@@ -56,13 +56,14 @@ function ForumTopicCURD() {
   const uploadForumTopic = async () => {
     console.log("AddForumTopicData", forumTopicData);
     const createForumTopicInput = {
+      id: forumTopicData.name,
       name: forumTopicData.name,
       userID: username,
     };
     await API.graphql(
       graphqlOperation(createForumTopic, { input: createForumTopicInput })
     );
-    dispatch(setForumTopics());
+    dispatch(fetchForumTopics());
     setForumTopicData({ name: "" });
   };
   //Delete the forum topic
@@ -95,7 +96,7 @@ function ForumTopicCURD() {
     await API.graphql(
       graphqlOperation(createForumSubTopic, { input: createForumSubTopicInput })
     );
-    dispatch(setForumSubTopics());
+    dispatch(fetchForumSubTopics());
     setForumSubTopicData({ name: "" });
   };
   //Delete the forum Sub topic
@@ -281,23 +282,18 @@ function ForumTopicCURD() {
             return (
               <div key={forumSubTopic.name}>
                 <Grid container spacing={4}>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography variant="h4">
                       SubTopic:{forumSubTopic.name}
                     </Typography>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography variant="h4">
                       Topic:{forumSubTopic.forumTopic.name}
                     </Typography>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography variant="h4">Id:{forumSubTopic.id}</Typography>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <Typography variant="h4">
-                      Active:{forumSubTopic.active}
-                    </Typography>
                   </Grid>
                 </Grid>
               </div>
