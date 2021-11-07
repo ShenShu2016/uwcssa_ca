@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import ArticleSubComments from "./ArticleSubComments";
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../LikeButtonGroup";
 import { Link } from "react-router-dom";
@@ -94,6 +95,9 @@ export default function ArticleComments({ article }) {
                         回复
                       </Button>
                     </CardActions>
+                    <Box>
+                      <ArticleSubComments comment={comment} />
+                    </Box>
                   </Grid>
                 </Grid>
               </Box>
