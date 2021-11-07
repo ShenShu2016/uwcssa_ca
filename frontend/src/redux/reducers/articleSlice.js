@@ -108,13 +108,6 @@ export const loadMoreArticleComments = createAsyncThunk(
   }
 );
 
-// export const removeSelectedArticle = createAsyncThunk(
-//   "article/selected/removeSelectedArticle",
-//   async () => {
-//     return;
-//   }
-// );
-
 export const postArticleComment = createAsyncThunk(
   "article/postArticleComment",
   async ({ createArticleCommentInput }) => {
@@ -211,7 +204,7 @@ const articleSlice = createSlice({
       })
       .addCase(postArticleComment.fulfilled, (state, action) => {
         state.postArticleCommentStatus = "succeeded";
-        state.selected.comments.unshift(action.payload);
+        state.selected.article.articleComments.items.unshift(action.payload);
       })
       .addCase(postArticleComment.rejected, (state, action) => {
         state.postArticleCommentStatus = "failed";
