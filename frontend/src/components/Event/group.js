@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,16 +9,8 @@ import Grid from "@mui/material/Grid";
 import GroupIcon from "@mui/icons-material/Group";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-// import { validator } from "./validator";
-// import useForm from "./useForm";
-import {
-  postEventParticipant,
-  removeSelectedEvent,
-  selectedEvent,
-} from "../../redux/actions/eventActions";
-import { useTitle } from "../../Hooks/useTitle";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { validator } from "./validator";
+import useForm from "./useForm";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -38,74 +30,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Individual() {
   const classes = useStyles();
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { eventID } = useParams();
 
-  const { event } = useSelector((state) => state.event.selected);
-  useTitle(`近期活动 ${event.title} 团体报名`);
-
-  useEffect(() => {
-    if (eventID && eventID !== "") {
-      dispatch(selectedEvent(eventID));
-    }
-    return () => dispatch(removeSelectedEvent());
-  }, [eventID, dispatch]);
-  const [eventParticipantData, setEventParticipantData] = useState({
-    name: "",
+  const initState = {
+    fullName: "",
     email: "",
     address: "",
-    phone: "",
+    guest: "",
     message: "",
-    numberOfPeople: "",
-  });
-
-  const { username } = useSelector((state) => state.userAuth.user);
-
-  const uploadEventParticipant = async () => {
-    const { name, email, address, phone, message, numberOfPeople } =
-      eventParticipantData;
-    const createEventParticipantInput = {
-      name,
-      email,
-      address,
-      phone,
-      message,
-      numberOfPeople,
-
-      active: true,
-
-      userID: username,
-    };
-
-    const response = await dispatch(
-      postEventParticipant(createEventParticipantInput)
-    );
-
-    if (response.result) {
-      history.push(`/event`);
-    }
   };
 
-  //   {
-  //     /*
-  //     const submit = () => {
-  //     console.log(" Submitted");
-  //   };
-  //       const { handleBlur, state, errors } = useForm({
-  //        eventParticipantData,
-  //        callback: submit,
-  //        validator,
-  //      });
+  const submit = () => {
+    console.log(" Submitted");
+  };
 
-  // const isValidForm =
-  //     state.fullName.length > 0 &&
-  //     !errors.fullName &&
-  //     state.email.length > 0 &&
-  //     !errors.email &&
-  //     state.guest.length > 0 &&
-  //     !errors.guest;*/
-  //   }
+  const { handleChange, handleSubmit, handleBlur, state, errors } = useForm({
+    initState,
+    callback: submit,
+    validator,
+  });
+
+  const isValidForm =
+    state.fullName.length > 0 &&
+    !errors.fullName &&
+    state.email.length > 0 &&
+    !errors.email &&
+    state.guest.length > 0 &&
+    !errors.guest;
 
   return (
     <div>
@@ -137,18 +87,12 @@ export default function Individual() {
                 required
                 fullWidth
                 label="申请人姓名"
-                name="name"
-                // defaultValue={state.fullName}
-                value={eventParticipantData.name}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    name: e.target.value,
-                  })
-                }
-                //error={!!errors.fullName}
-                //helperText={errors.fullName}
-                // onBlur={handleBlur}
+                name="fullName"
+                defaultValue={state.fullName}
+                onChange={handleChange}
+                error={!!errors.fullName}
+                helperText={errors.fullName}
+                onBlur={handleBlur}
               />
 
               <TextField
@@ -157,43 +101,11 @@ export default function Individual() {
                 fullWidth
                 label="申请人邮箱"
                 name="email"
-                //defaultValue={state.email}
-                value={eventParticipantData.email}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    email: e.target.value,
-                  })
-                }
-                //error={!!errors.email}
-                //helperText={errors.email}
-                // onBlur={handleBlur}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                name="Phone"
-                label="申请人手机号码"
-                value={eventParticipantData.phone}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    phone: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                name="weChat"
-                label="申请人微信号"
-                value={eventParticipantData.weChat}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    weChat: e.target.value,
-                  })
-                }
+                defaultValue={state.email}
+                onChange={handleChange}
+                error={!!errors.email}
+                helperText={errors.email}
+                onBlur={handleBlur}
               />
               <TextField
                 margin="normal"
@@ -201,55 +113,35 @@ export default function Individual() {
                 label="地址（如需接送）"
                 name="address"
                 autoComplete="address"
-                value={eventParticipantData.address}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    address: e.target.value,
-                  })
-                }
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                label="参加人数"
-                name="numberOfPeople"
-                // defaultValue={state.guest}
-                value={eventParticipantData.numberOfPeople}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    numberOfPeople: e.target.value,
-                  })
-                }
-                // error={!!errors.guest}
-                // helperText={errors.guest}
-                // onBlur={handleBlur}
+                label="携带人数"
+                name="guest"
+                defaultValue={state.guest}
+                onChange={handleChange}
+                error={!!errors.guest}
+                helperText={errors.guest}
+                onBlur={handleBlur}
               />
               <TextField
                 margin="normal"
                 fullWidth
                 label="备注"
                 name="message"
+                autoComplete="message"
                 multiline
                 rows={4}
-                value={eventParticipantData.message}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    message: e.target.value,
-                  })
-                }
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                // disabled={!isValidForm}
-                onClick={uploadEventParticipant}
-                // onClick={isValidForm ? handleSubmit : null}
+                disabled={!isValidForm}
+                onClick={isValidForm ? handleSubmit : null}
               >
                 提交
               </Button>
@@ -257,7 +149,7 @@ export default function Individual() {
               <Grid item>
                 <Button
                   component={Link}
-                  to={`/event/${event.id}`}
+                  to="/event/eventSignUp"
                   variant="body2"
                 >
                   返回

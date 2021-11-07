@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useForm = ({ eventParticipantData, callback, validator }) => {
-  const [state, setState] = useState(eventParticipantData);
+const useForm = ({ initState, callback, validator }) => {
+  const [state, setState] = useState(initState);
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 

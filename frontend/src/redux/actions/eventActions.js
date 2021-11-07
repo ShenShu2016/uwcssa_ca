@@ -1,10 +1,5 @@
+import { createEvent, createEventParticipant } from "../../graphql/mutations";
 import {
-  createEvent,
-  createEventParticipant,
-  createEventComment,
-} from "../../graphql/mutations";
-import {
-  eventCommentSortByEventID,
   eventParticipantSortByEventID,
   eventSortBySortKey,
   getEvent,
@@ -59,7 +54,7 @@ export const selectedEventParticipants = (eventID) => async (dispatch) => {
     const eventParticipantData = await API.graphql({
       query: eventParticipantSortByEventID,
       variables: {
-        eventID: eventID,
+        EventID: eventID,
         sortDirection: "DESC",
         filter: { active: { eq: true } },
         // limit: 10,
@@ -76,51 +71,6 @@ export const selectedEventParticipants = (eventID) => async (dispatch) => {
   }
 };
 
-export const selectedEventComments = (eventID) => async (dispatch) => {
-  try {
-    const eventCommentData = await API.graphql({
-      query: eventCommentSortByEventID,
-      variables: {
-        eventID: eventID,
-        sortDirection: "DESC",
-        filter: { active: { eq: true } },
-      },
-      authMode: "AWS_IAM",
-    });
-    dispatch({
-      type: ActionTypes.SELECTED_EVENT_COMMENTS,
-      payload: eventCommentData.data.eventCommentSortByEventID,
-    });
-  } catch (error) {
-    console.log("error on selectedEventComments", error);
-  }
-};
-
-export const loadMoreEventComments =
-  (eventID, nextToken) => async (dispatch) => {
-    try {
-      const eventCommentData = await API.graphql({
-        query: eventCommentSortByEventID,
-        variables: {
-          eventID: eventID,
-          sortDirection: "DESC",
-          filter: { active: { eq: 1 } },
-          limit: 10,
-          nextToken: nextToken,
-        },
-        authMode: "AWS_IAM",
-      });
-      dispatch({
-        type: ActionTypes.LOAD_MORE_EVENT_COMMENTS,
-        payload: eventCommentData.data.eventCommentSortByEventID,
-      });
-      return true;
-    } catch (error) {
-      console.log("error on Load more data", error);
-      return false;
-    }
-  };
-
 export const removeSelectedEvent = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.REMOVE_SELECTED_EVENT,
@@ -136,7 +86,7 @@ export const postEventParticipant =
         })
       );
       dispatch({
-        type: ActionTypes.EVENT_PARTICIPANT_POST_SUCCESS,
+        type: ActionTypes.EVENT_PARTICIPANT_ADD_SUCCESS,
         payload: response,
       });
       return {
@@ -146,35 +96,7 @@ export const postEventParticipant =
     } catch (error) {
       console.log("error on adding EventParticipant", error);
       dispatch({
-        type: ActionTypes.EVENT_PARTICIPANT_POST_FAIL,
-      });
-      return {
-        result: false,
-        error: error,
-      };
-    }
-  };
-
-export const postEventComment =
-  (createEventCommentInput) => async (dispatch) => {
-    try {
-      const response = await API.graphql(
-        graphqlOperation(createEventComment, {
-          input: createEventCommentInput,
-        })
-      );
-      dispatch({
-        type: ActionTypes.EVENT_COMMENT_POST_SUCCESS,
-        payload: [response.data.createEventComment],
-      });
-      return {
-        result: true,
-        response: response,
-      };
-    } catch (error) {
-      console.log("error on posting EventComment", error);
-      dispatch({
-        type: ActionTypes.EVENT_COMMENT_POST_FAIL,
+        type: ActionTypes.EVENT_PARTICIPANT_ADD_FAIL,
       });
       return {
         result: false,

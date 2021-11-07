@@ -5,8 +5,6 @@ const initialState = {
   topics: [],
   selected: {
     event: {},
-    comments: [],
-    commentsNextToken: "",
     participants: [],
     participantsNextToken: "",
   },
@@ -33,32 +31,6 @@ export const eventReducer = (state = initialState, { type, payload }) => {
           ...state.selected,
           participants: payload.items,
           participantsNextToken: payload.nextToken,
-        },
-      };
-    case ActionTypes.SELECTED_EVENT_COMMENTS:
-      return {
-        ...state,
-        selected: {
-          ...state.selected,
-          comments: payload.items,
-          commentsNextToken: payload.nextToken,
-        },
-      };
-    case ActionTypes.EVENT_COMMENT_POST_SUCCESS:
-      return {
-        ...state,
-        selected: {
-          ...state.selected,
-          comments: [...payload, ...state.selected.comments],
-        },
-      };
-    case ActionTypes.LOAD_MORE_EVENT_COMMENTS:
-      return {
-        ...state,
-        selected: {
-          ...state.selected,
-          comments: [...state.selected.comments, ...payload.items],
-          commentsNextToken: payload.nextToken,
         },
       };
     case ActionTypes.EVENT_PARTICIPANT_POST_SUCCESS:
