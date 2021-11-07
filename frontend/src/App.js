@@ -24,7 +24,7 @@ import Group from "./components/Event/group";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Individual from "./components/Event/individual";
-import Market from "./containers/market/Market";
+// import Market from "./containers/market/Market";
 import MyAccount from "./containers/account/MyAccount";
 import PostArticle from "./containers/staff/Article/PostArticle";
 import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
@@ -180,9 +180,9 @@ export default function App() {
                 exact
                 component={EmailConfirm}
               />
-              <Route path="/market" component={Market} /> 
+              {/* <Route path="/market" component={Market} />  */}
               <Route path="/article" component={Article} />
-              <Route path="/forum"  component={Forum} />
+              <Route path="/forum" component={Forum} />
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
