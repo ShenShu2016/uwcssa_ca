@@ -665,23 +665,23 @@ type MarketItem
   id: ID!
   name: String!
   imgS3Keys: [String]!
-  title: String!
+  title: String
   price: Int
   marketType: MarketType!
   description: String
   location: String
-  marketItemCondition: MarketItemCondition!
-  marketItemCategory: MarketItemCategory!
+  marketItemCondition: MarketItemCondition
+  marketItemCategory: MarketItemCategory
   tags: [String]
-  vehicleType: VehicleType!
+  vehicleType: VehicleType
   year: Int!
   make: String!
   model: String!
   exteriorColor: String
   interiorColor: String
   fuelType: String
-  marketRentalSaleRent: MarketRentalSaleRent!
-  propertyType: PropertyType!
+  marketRentalSaleRent: MarketRentalSaleRent
+  propertyType: PropertyType
   bedroomCounts: Int
   bathroomsCounts: Int
   address: String
