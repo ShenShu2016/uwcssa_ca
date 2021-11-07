@@ -57,7 +57,11 @@ function MarketCreate() {
                 商城
               </Button>
             </span>
-            <Typography>{""}</Typography>
+            <span style={{ cursor: "not-allowed" }}>
+              <Button color="inherit" component={Link} to="/market/create">
+                發佈商品
+              </Button>
+            </span>
           </Breadcrumbs>
         </Box>
         <Box className={classes.title}>
