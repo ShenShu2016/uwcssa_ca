@@ -24,7 +24,7 @@ function AboutMe({ user }) {
           专业: {user.major}
         </Typography>
         <Typography variant="h6" sx={{ m: 1, fontWeight: "600" }}>
-          LinkedIn: {user.linkedin}
+          LinkedIn: {user.linkedIn}
         </Typography>
         <Typography variant="h6" sx={{ m: 1, fontWeight: "600" }}>
           GitHub: {user.github}
