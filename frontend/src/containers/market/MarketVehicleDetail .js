@@ -36,19 +36,6 @@ import { useTitle } from "../../Hooks/useTitle";
 //   selectedMarketItem,
 // } from "../../redux/actions/marketItemActions";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -93,8 +80,7 @@ export default function MarketVehicleDetail() {
   console.log("id", id);
   useEffect(() => {
     if (id && id !== "") {
-      const type = "vehicle";
-      dispatch(selectedMarketItem({ id, type }));
+      dispatch(selectedMarketItem(id));
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);

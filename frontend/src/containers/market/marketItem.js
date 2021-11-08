@@ -4,8 +4,10 @@ import {
   Button,
   Chip,
   Divider,
+  InputAdornment,
   Paper,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -30,6 +32,7 @@ import MarketForm from "../../components/Market/marketForm";
 import SearchIcon from "@mui/icons-material/Search";
 import { fetchMarketItems } from "../../redux/reducers/marketSlice";
 import { makeStyles } from "@mui/styles";
+import { marketItemOptions } from "./marketItemOptions";
 import { styled } from "@mui/material/styles";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -58,6 +61,9 @@ export default function MarketItem() {
         display: "block",
         height: "100%",
       },
+    },
+    titleInput: {
+      marginBlock: "2rem",
     },
     paper: {
       padding: "1rem",
@@ -95,7 +101,21 @@ export default function MarketItem() {
   useTitle("Item");
   const dispatch = useDispatch();
   const classes = useStyles();
+  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const [sortKey, setSortKey] = useState("original");
+  const [filterList, setFilterList] = useState({
+    min: "",
+    max: "",
+    category: "",
+    condition: "",
+    clickedTag: "",
+  });
+
+  const [sortedFilteredMarketItems, setSortedFilteredMarketItems] = useState(
+    []
+  );
+  // const [images, setImages] = useState();
+
   const { marketItems, fetchMarketItemsStatus } = useSelector(
     (state) => state.market
   );
@@ -111,10 +131,31 @@ export default function MarketItem() {
     { value: "PriceDesc", label: "Price: highest first" },
     { value: "PriceAsc", label: "Price: lowest first" },
   ];
+
+  // let urls = [];
+  // marketItems.forEach((item) => {
+  //   item.imgS3Keys.map((subitem) => urls.push(subitem));
+  // });
+  // const preloadImages = () => {
+  //   setImages(
+  //     urls.map((url, urlIdx) => {
+  //       let img = new Image();
+  //       img.onload = () => handleImageLoad(urlIdx);
+  //       img.src = url;
+  //       return { url: url, loaded: false };
+  //     })
+  //   );
+  // };
+  // const handleImageLoad = (index) => {
+  //   setImages((img) => (img.loaded = true));
+  // };
+
   let tags = [];
-  marketItems.forEach((item) => {
-    item.tags.map((subitem) => tags.push(subitem));
-  });
+  marketItems
+    .filter((a) => a.tags !== null)
+    .forEach((item) => {
+      item.tags.map((subitem) => tags.push(subitem));
+    });
   const countTags = (arr) =>
     arr.reduce((obj, e) => {
       obj[e] = (obj[e] || 0) + 1;
@@ -122,28 +163,95 @@ export default function MarketItem() {
     }, {});
   const occurrence = countTags(tags);
   const sortedOccurrence = Object.keys(occurrence).sort(
-    (a, b) => occurrence[a] - occurrence[b]
+    (a, b) => occurrence[b] - occurrence[a]
   );
-  console.log("Sorted Occurrence", sortedOccurrence);
-  const sortedFunction = (sortKey) => {
-    if (sortKey === "original") {
-      return marketItems;
-    }
-    if (sortKey === "PriceDesc") {
-      const copyMarketItems = [...marketItems];
-      const sortedItems = copyMarketItems.sort((a, b) => b.price - a.price);
-      return sortedItems;
-    }
-    if (sortKey === "PriceAsc") {
-      const copyMarketItems = [...marketItems];
-      const sortedItems = copyMarketItems.sort((a, b) => a.price - b.price);
-      return sortedItems;
-    }
-  };
-  const sortedMarketItems = sortedFunction(sortKey);
+
+  useEffect(() => {
+    const firstStageFilterFunction = ({ min, max }, marketItems) => {
+      if (min !== "" && max !== "") {
+        return marketItems.filter(
+          (item) => item.price >= min && item.price <= max
+        );
+      } else if (min === "" && max !== "") {
+        return marketItems.filter((item) => item.price <= max);
+      } else if (min !== "" && max === "") {
+        return marketItems.filter((item) => item.price >= min);
+      } else if (min === "" && max === "") {
+        return marketItems;
+      }
+    };
+    const secondStageFilterFunction = (
+      { category, condition },
+      firstStageFilteredMarketItems
+    ) => {
+      if (category === "" && condition === "") {
+        return firstStageFilteredMarketItems;
+      } else if (category === "" && condition !== "") {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.marketItemCondition === condition
+        );
+      } else if (category !== "" && condition === "") {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.marketItemCategory === category
+        );
+      }
+    };
+    const thirdStageFilterFunction = (
+      { clickedTag },
+      secondStageFilteredMarketItems
+    ) => {
+      if (clickedTag !== "") {
+        const temp1 = secondStageFilteredMarketItems.filter(
+          (item) => item.tags !== null
+        );
+        const temp2 = temp1.filter(
+          (subItem) => subItem.tags.includes(clickedTag) === true
+        );
+        console.log("temp1", temp1);
+        console.log("temp2", temp2);
+        return temp2;
+      } else {
+        return secondStageFilteredMarketItems;
+      }
+    };
+    const sortedFunction = (sortKey, filteredMarketItems) => {
+      if (sortKey === "original") {
+        return filteredMarketItems;
+      }
+      if (sortKey === "PriceDesc") {
+        const copyMarketItems = [...filteredMarketItems];
+        const sortedItems = copyMarketItems.sort((a, b) => b.price - a.price);
+        return sortedItems;
+      }
+      if (sortKey === "PriceAsc") {
+        const copyMarketItems = [...filteredMarketItems];
+        const sortedItems = copyMarketItems.sort((a, b) => a.price - b.price);
+        return sortedItems;
+      }
+    };
+
+    const firstStageFilteredMarketItems = firstStageFilterFunction(
+      filterList,
+      marketItems
+    );
+    const secondStageFilteredMarketItems = secondStageFilterFunction(
+      filterList,
+      firstStageFilteredMarketItems
+    );
+    const thirdStageFilteredMarketItems = thirdStageFilterFunction(
+      filterList,
+      secondStageFilteredMarketItems
+    );
+    setSortedFilteredMarketItems(
+      sortedFunction(sortKey, thirdStageFilteredMarketItems)
+    );
+  }, [setSortedFilteredMarketItems, marketItems, filterList, sortKey]);
+
+  console.log("sortedFilteredMarketItems", sortedFilteredMarketItems);
+
   const itemRenderList =
-    sortedMarketItems &&
-    sortedMarketItems.map((marketItem, marketItemIdx) => {
+    sortedFilteredMarketItems &&
+    sortedFilteredMarketItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent item={marketItem} type={"item"} key={marketItemIdx} />
       );
@@ -226,70 +334,6 @@ export default function MarketItem() {
               <ListItemText primary="房屋" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
         </List>
       </nav>
     );
@@ -333,7 +377,7 @@ export default function MarketItem() {
               sx={{ margin: "1rem" }}
               startIcon={<AddIcon />}
               component={Link}
-              to="/market/create"
+              to="/market/create/item"
             >
               Add new listing
             </Button>
@@ -359,12 +403,71 @@ export default function MarketItem() {
             >
               Price Range
             </Typography>
+            <Stack direction="row" spacing={2}>
+              <TextField
+                sx={{ maxWidth: "100%" }}
+                label="Min Price"
+                variant="outlined"
+                type="number"
+                helperText="eg. 1000 CAD $"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">CAD $</InputAdornment>
+                  ),
+                }}
+                value={filterList.min}
+                className={classes.titleInput}
+                onChange={(e) => {
+                  setFilterList({ ...filterList, min: e.target.value });
+                }}
+              />
+              <TextField
+                sx={{ maxWidth: "100%" }}
+                label="Max Price"
+                variant="outlined"
+                type="number"
+                helperText="eg. 25000 CAD $"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">CAD $</InputAdornment>
+                  ),
+                }}
+                value={filterList.max}
+                className={classes.titleInput}
+                onChange={(e) =>
+                  setFilterList({ ...filterList, max: e.target.value })
+                }
+              />
+            </Stack>
+
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
               Category
             </Typography>
+            <MarketForm
+              title="Category"
+              value={filterList.category}
+              options={marketItemCategoryList}
+              onChange={(e) =>
+                setFilterList({
+                  ...filterList,
+                  category: e.target.value,
+                })
+              }
+            />
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
               Condition
             </Typography>
+            <MarketForm
+              title="Condition"
+              value={filterList.condition}
+              options={marketItemConditionList}
+              onChange={(e) =>
+                setFilterList({
+                  ...filterList,
+                  condition: e.target.value,
+                })
+              }
+            />
             <Divider />
           </Box>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
@@ -378,13 +481,14 @@ export default function MarketItem() {
     );
   };
 
+  console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
       >
-        <FilterInfo />
+        {FilterInfo()}
         <Box className={classes.img}>
           <Paper
             elevation={3}
@@ -402,12 +506,15 @@ export default function MarketItem() {
               direction="row"
               sx={{ color: "action.active", marginTop: "0.5rem" }}
             >
-              {sortedOccurrence.slice(0, 4).map((tag, tagIdx) => {
+              {sortedOccurrence.slice(0, 5).map((tag, tagIdx) => {
                 return (
                   <Chip
                     key={tagIdx}
                     avatar={<Avatar>{occurrence[tag]}</Avatar>}
                     label={tag}
+                    onClick={(e) => {
+                      setFilterList({ ...filterList, clickedTag: tag });
+                    }}
                   />
                 );
               })}

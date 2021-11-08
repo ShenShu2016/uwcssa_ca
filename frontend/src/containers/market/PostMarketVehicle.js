@@ -8,7 +8,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketVehicleOptions } from "./marketVehicleOptions";
-import { postMarketVehicle } from "../../redux/actions/marketItemActions";
+import { postMarketItem } from "../../redux/actions/marketItemActions";
 import { postMultipleImages } from "../../redux/actions/generalAction";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
@@ -142,9 +142,7 @@ export default function PostMarketVehicle() {
       userID: username,
     };
 
-    const response = await dispatch(
-      postMarketVehicle(createMarketVehicleInput)
-    );
+    const response = await dispatch(postMarketItem(createMarketVehicleInput));
     console.log("response", response);
     if (response.payload.result) {
       history.push(
