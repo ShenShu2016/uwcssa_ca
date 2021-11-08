@@ -36,20 +36,6 @@ import { useTitle } from "../../Hooks/useTitle";
 //   selectedMarketItem,
 // } from "../../redux/reducers/marketSlice";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import {
 //   removeSelectedMarketItem,
 //   selectedMarketItem,
@@ -97,11 +83,13 @@ export default function MarketItemDetail() {
   const { id } = useParams();
   console.log("id", id);
   useEffect(() => {
-    if (id && id !== "") {
-      const type = "item";
-      dispatch(selectedMarketItem({ id, type }));
-    }
-    return () => dispatch(removeSelectedMarketItem());
+    const getItems = async () => {
+      if (id && id !== "") {
+        await dispatch(selectedMarketItem({ id }));
+      }
+      return () => dispatch(removeSelectedMarketItem());
+    };
+    getItems();
   }, [id, dispatch]);
   const { marketItem } = useSelector((state) => state.market.selected);
   const {

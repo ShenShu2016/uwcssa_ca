@@ -3,6 +3,7 @@ import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
@@ -14,7 +15,7 @@ import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
-// import { postMarketItem } from "../../redux/actions/marketItemActions";
+// import { postMarketItem } from "../.221./redux/actions/marketItemActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,6 +129,7 @@ export default function PostMarketItem() {
     } = marketItemData;
 
     const createMarketItemInput = {
+      marketType: "Item",
       title: title,
       name: title,
       description: description,
@@ -138,16 +140,15 @@ export default function PostMarketItem() {
       location: location,
       tags: GetTags(),
       active: true,
-      createdAt: new Date().toISOString(),
       userID: username,
       sortKey: "SortKey",
     };
+    console.log("check!", createMarketItemInput);
 
-    const response = await dispatch(postMarketItem(createMarketItemInput));
-    if (response.payload.result) {
-      history.push(
-        `/market/item/${response.payload.response.data.createMarketItem.id}`
-      );
+    const response = await dispatch(postMarketItem({ createMarketItemInput }));
+    console.log("Something should be here", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/market/item/${response.payload.data.createMarketItem.id}`);
     }
   };
 
@@ -208,6 +209,11 @@ export default function PostMarketItem() {
               fullWidth
               type="number"
               placeholder="eg. 200 (Currency: CAD $)"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
               value={marketItemData.price}
               className={classes.titleInput}
               onChange={(e) =>

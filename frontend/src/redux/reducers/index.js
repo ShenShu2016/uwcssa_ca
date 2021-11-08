@@ -5,7 +5,7 @@ import { eventReducer } from "./eventReducer";
 import forumReducer from "./forumSlice";
 import generalReducer from "./generalSlice";
 // import { generalReducer } from "./generalReducer";
-// import marketReducer from "./marketSlice";
+import marketReducer from "./marketSlice";
 import { profileReducer } from "./profileReducer";
 import { uwcssaJobReducer } from "./uwcssaJobReducer";
 
@@ -16,7 +16,7 @@ const reducers = combineReducers({
   article: articleReducer,
   allUwcssaJobs: uwcssaJobReducer,
   forum: forumReducer,
-  // market: marketReducer,
+  market: marketReducer,
   event: eventReducer,
 });
 export default reducers;

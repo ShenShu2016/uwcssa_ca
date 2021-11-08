@@ -1,14 +1,10 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import {
-  fetchMarketItems,
-  fetchMarketRentals,
-  fetchMarketVehicles,
-} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "./marketSideBar";
+import { fetchMarketItems } from "../../redux/reducers/marketSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -74,31 +70,15 @@ export default function MarketList() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const {
-    marketItems,
-    marketVehicles,
-    marketRentals,
-    fetchMarketItemsStatus,
-    fetchMarketRentalsStatus,
-    fetchMarketVehiclesStatus,
-  } = useSelector((state) => state.market);
+  const { marketItems, fetchMarketItemsStatus } = useSelector(
+    (state) => state.market
+  );
 
   useEffect(() => {
     if (fetchMarketItemsStatus === "idle" || undefined) {
       dispatch(fetchMarketItems());
     }
-    if (fetchMarketRentalsStatus === "idle" || undefined) {
-      dispatch(fetchMarketRentals());
-    }
-    if (fetchMarketVehiclesStatus === "idle" || undefined) {
-      dispatch(fetchMarketVehicles());
-    }
-  }, [
-    fetchMarketItemsStatus,
-    fetchMarketRentalsStatus,
-    fetchMarketVehiclesStatus,
-    dispatch,
-  ]);
+  }, [fetchMarketItemsStatus, dispatch]);
 
   const marketItemRenderList =
     marketItems &&
@@ -107,31 +87,7 @@ export default function MarketList() {
         <MarketComponent item={marketItem} type={"item"} key={marketItemIdx} />
       );
     });
-  console.log("marketVehicles", marketVehicles);
-
-  const marketVehicleRenderList =
-    marketVehicles &&
-    marketVehicles.map((marketVehicle, marketVehicleIdx) => {
-      return (
-        <MarketComponent
-          item={marketVehicle}
-          type={"vehicle"}
-          key={marketVehicleIdx}
-        />
-      );
-    });
-
-  const marketRentalRenderList =
-    marketRentals &&
-    marketRentals.map((marketRental, marketRentalIdx) => {
-      return (
-        <MarketComponent
-          item={marketRental}
-          type={"rental"}
-          key={marketRentalIdx}
-        />
-      );
-    });
+  console.log("marketVehicles", marketItems);
 
   return (
     <Box className={classes.root}>
@@ -142,14 +98,11 @@ export default function MarketList() {
         <MarketSideBar />
         <Box className={classes.img}>
           <Typography variant="h3" className={classes.title}>
-            二手商城
-          </Typography>
-          <Typography variant="h5" className={classes.title}>
-            Item
+            輻射4
           </Typography>
           <Box className={classes.items}>{marketItemRenderList}</Box>
           <Divider />
-          <Typography variant="h5" className={classes.title}>
+          {/* <Typography variant="h5" className={classes.title}>
             汽车
           </Typography>
           <Box className={classes.items}>{marketVehicleRenderList}</Box>
@@ -158,7 +111,7 @@ export default function MarketList() {
             房屋
           </Typography>
           <Box className={classes.items}>{marketRentalRenderList}</Box>
-          <Divider />
+          <Divider /> */}
         </Box>
       </Stack>
     </Box>
