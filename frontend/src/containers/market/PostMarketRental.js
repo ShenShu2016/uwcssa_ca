@@ -12,7 +12,7 @@ import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
-import { postMultipleImages } from "../../redux/actions/generalAction";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";

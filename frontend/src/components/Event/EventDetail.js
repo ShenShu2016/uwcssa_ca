@@ -1,10 +1,14 @@
 import { Box, IconButton } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
+// import {
+//   removeSelectedEvent,
+//   selectedEvent,
+// } from "../../redux/actions/eventActions";
 import {
   removeSelectedEvent,
   selectedEvent,
-} from "../../redux/actions/eventActions";
+} from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";

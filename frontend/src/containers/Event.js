@@ -2,7 +2,6 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  Chip,
   Container,
   Grid,
   MobileStepper,
@@ -19,8 +18,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Link } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { makeStyles } from "@mui/styles";
 import { fetchEvents } from "../../src/redux/reducers/eventSlice";
+import { makeStyles } from "@mui/styles";
 import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({

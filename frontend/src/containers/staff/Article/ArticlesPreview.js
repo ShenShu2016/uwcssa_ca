@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
+import { fetchArticles } from "../../../redux/reducers/articleSlice";
 import { makeStyles } from "@mui/styles";
-import { setArticles } from "../../../redux/actions/articleActions";
 
 const useStyles = makeStyles({
   root: {
@@ -64,7 +64,7 @@ export default function ArticlesPreview() {
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setArticles());
+    dispatch(fetchArticles());
   }, [dispatch]);
   const { articles } = useSelector((state) => state.article);
 
@@ -90,7 +90,9 @@ export default function ArticlesPreview() {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" sx={{margin: 3}}>ArticlesPreview</Typography>
+      <Typography variant="h4" sx={{ margin: 3 }}>
+        ArticlesPreview
+      </Typography>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}

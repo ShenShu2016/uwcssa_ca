@@ -1,27 +1,29 @@
 import {
   Box,
-  Grid,
   Button,
-  MenuItem,
-  Select,
-  InputLabel,
-  TextField,
   Chip,
   FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import S3Image from "../../S3/S3Image";
-import { useDispatch, useSelector } from "react-redux";
 import {
   postForumPost,
   setForumSubTopics,
-} from "../../../redux/actions/forumAction";
+} from "../../../redux/OldNotUse/forumAction";
+import { useDispatch, useSelector } from "react-redux";
+
 import PublishIcon from "@mui/icons-material/Publish";
+import S3Image from "../../S3/S3Image";
+import { makeStyles } from "@mui/styles";
+import { postSingleImage } from "../../../redux/reducers/generalSlice";
+import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
-import { postImage } from "../../../redux/actions/generalAction";
 import { useTitle } from "../../../Hooks/useTitle";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
@@ -48,10 +50,10 @@ function ForumPostUpload() {
   const { username } = useSelector((state) => state.userAuth.user);
   const [tagInput, setTagInput] = useState("");
   const [forumPostData, setForumPostData] = useState({
-    title:"",
+    title: "",
     content: "",
     forumSubTopicId: "",
-    tags:[],
+    tags: [],
   });
   console.log(forumPostData);
   useEffect(() => {
@@ -62,11 +64,13 @@ function ForumPostUpload() {
   // console.log("forumSubTopics", forumSubTopics);
 
   const uploadForumPostImg = async (e) => {
-    const imageData = e.target.files[0];
+    const imageData = e.target.files;
     const imageLocation = "forumPost";
-    const response = await dispatch(postImage(imageData,imageLocation));
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
     console.log("response.key", response);
-    if (response){
+    if (response) {
       setImgS3Keys(response.key);
     }
   };
@@ -82,7 +86,9 @@ function ForumPostUpload() {
     console.log("tagSuccess", forumPostData.tags);
     if (e.key === "Enter" && val) {
       if (
-        forumPostData.tags.find((tag) => tag.toLowerCase() === val.toLowerCase())
+        forumPostData.tags.find(
+          (tag) => tag.toLowerCase() === val.toLowerCase()
+        )
       ) {
         return;
       }
@@ -100,8 +106,8 @@ function ForumPostUpload() {
       title,
       content,
       imgS3Keys: [imgS3Keys],
-      active:true,
-      lastReplyAt:{S:Date.tolSOString()},
+      active: true,
+      lastReplyAt: { S: Date.tolSOString() },
       userID: username,
       forumSubTopicID: forumSubTopicId,
       tags: tags,
@@ -160,35 +166,37 @@ function ForumPostUpload() {
             }
           />
           <TextField
-          label="tags"
-          value={tagInput}
-          variant="outlined"
-          fullWidth
-          onKeyDown={inputKeyDown}
-          onChange={(e) => setTagInput(e.target.value)}
-        />
-        {forumPostData.tags.map((data) => {
-          return <Chip key={data} label={data} onDelete={deleteHandler(data)} />;
-      })}
+            label="tags"
+            value={tagInput}
+            variant="outlined"
+            fullWidth
+            onKeyDown={inputKeyDown}
+            onChange={(e) => setTagInput(e.target.value)}
+          />
+          {forumPostData.tags.map((data) => {
+            return (
+              <Chip key={data} label={data} onDelete={deleteHandler(data)} />
+            );
+          })}
         </Grid>
         <Grid item xs={6}>
-        <Box>
-        <label htmlFor="contained-button-file">
-          <Input
-            accept="image/*"
-            id="contained-button-file"
-            type="file"
-            onChange={(e) => {
-              // setImgData();
-              uploadForumPostImg(e);
-            }}
-          />
-          <Button variant="contained" component="span">
-            上传图片
-          </Button>
-        </label>
-      </Box>
-      <S3Image S3Key={imgS3Keys} style={{ width: "100%" }} />
+          <Box>
+            <label htmlFor="contained-button-file">
+              <Input
+                accept="image/*"
+                id="contained-button-file"
+                type="file"
+                onChange={(e) => {
+                  // setImgData();
+                  uploadForumPostImg(e);
+                }}
+              />
+              <Button variant="contained" component="span">
+                上传图片
+              </Button>
+            </label>
+          </Box>
+          <S3Image S3Key={imgS3Keys} style={{ width: "100%" }} />
         </Grid>
         <Grid item xs={6}>
           <Box className={classes.content}>
@@ -218,6 +226,6 @@ function ForumPostUpload() {
       </Grid>
     </div>
   );
-};
+}
 
 export default ForumPostUpload;
