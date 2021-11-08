@@ -59,10 +59,12 @@ export default function CustomAvatar({ user, variant, sx, link }) {
       getAvatarImage();
     }
   }, [user]);
+  console.log("user", user);
+  console.log("user", user);
 
   return (
     <div>
-      {user ? (
+      {user.username ? (
         <div>
           {user.avatarImgS3Key ? (
             <Avatar
@@ -85,7 +87,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
           )}
         </div>
       ) : (
-        <div />
+        <Avatar variant={variant} className={classes.avatar} style={sx} />
       )}
     </div>
   );
