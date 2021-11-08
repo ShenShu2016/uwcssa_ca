@@ -117,6 +117,7 @@ export const loadMoreArticleComments = createAsyncThunk(
 export const postArticleComment = createAsyncThunk(
   "article/postArticleComment",
   async ({ createArticleCommentInput }) => {
+    console.log("createArticleCommentInput", createArticleCommentInput);
     const response = await API.graphql(
       graphqlOperation(createArticleComment, {
         input: createArticleCommentInput,
@@ -129,6 +130,7 @@ export const postArticleComment = createAsyncThunk(
 export const postArticleSubComment = createAsyncThunk(
   "article/postArticleSubComment",
   async ({ createArticleSubCommentInput }) => {
+    console.log("createArticleSubCommentInput", createArticleSubCommentInput);
     // console.log(createArticleSubCommentInput);
     const response = await API.graphql(
       graphqlOperation(createArticleSubComment, {
@@ -223,6 +225,10 @@ const articleSlice = createSlice({
       })
       .addCase(postArticleComment.fulfilled, (state, action) => {
         state.postArticleCommentStatus = "succeeded";
+        console.log(
+          "postArticleComment",
+          state.selected.article.articleComments.items
+        );
         state.selected.article.articleComments.items.unshift(action.payload);
       })
       .addCase(postArticleComment.rejected, (state, action) => {
@@ -235,13 +241,9 @@ const articleSlice = createSlice({
       })
       .addCase(postArticleSubComment.fulfilled, (state, action) => {
         state.postArticleSubCommentStatus = "succeeded";
-        state.selected.article.articleComments.items.map(
-          (item, i) =>
-            item.id === action.payload.articleCommentID &&
-            state.selected.article.articleComments.items[
-              i
-            ].articleSubComments.items.unshift(action.payload)
-        );
+        state.selected.article.articleComments.items[
+          action.meta.arg.idx
+        ].articleSubComments.items.unshift(action.payload);
       })
       .addCase(postArticleSubComment.rejected, (state, action) => {
         state.postArticleSubCommentStatus = "failed";

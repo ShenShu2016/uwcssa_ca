@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   card: {},
 });
 
-export default function ArticleReplyComments({ isReplyOpen, item }) {
+export default function ArticleReplyComments({ isReplyOpen, item, idx }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ export default function ArticleReplyComments({ isReplyOpen, item }) {
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
-        postArticleSubComment({ createArticleSubCommentInput })
+        postArticleSubComment({ createArticleSubCommentInput, idx })
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);

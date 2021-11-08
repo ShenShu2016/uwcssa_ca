@@ -28,7 +28,13 @@ export default function ArticleComments({ article }) {
       ) : (
         <div>
           {article.articleComments.items.map((comment, idx) => {
-            return <ArticleCommentsComponents comment={comment} key={idx} />;
+            return (
+              <ArticleCommentsComponents
+                comment={comment}
+                key={idx}
+                idx={idx}
+              />
+            );
           })}
         </div>
       )}

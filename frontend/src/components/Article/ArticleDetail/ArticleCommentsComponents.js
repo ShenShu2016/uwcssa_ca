@@ -17,28 +17,10 @@ import { makeStyles } from "@mui/styles";
 import moment from "moment";
 
 const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    margin: "auto",
-  },
-  subTitle: {
-    paddingBlock: "3rem 1rem",
-  },
-  cardContent: {},
   main: {},
-  moreCommentsStatus: {
-    width: "100%",
-    margin: "auto",
-  },
-  moreVertIcon: {
-    // display: "none",
-    // "&:hover": {
-    //   color: "red",
-    // },
-  },
 });
 
-export default function ArticleCommentsComponents({ comment }) {
+export default function ArticleCommentsComponents({ comment, idx }) {
   const classes = useStyles();
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   // console.log("ArticleComments", article);
@@ -91,7 +73,7 @@ export default function ArticleCommentsComponents({ comment }) {
                 <Button
                   size="small"
                   color="primary"
-                  onClick={(e) => handleSubCommentReply(id)}
+                  onClick={(e) => handleSubCommentReply()}
                 >
                   回复
                 </Button>
@@ -100,6 +82,7 @@ export default function ArticleCommentsComponents({ comment }) {
                 <ArticleReplyComments
                   item={comment}
                   isReplyOpen={isReplyOpen}
+                  idx={idx}
                 />
               </Box>
               <Box>
