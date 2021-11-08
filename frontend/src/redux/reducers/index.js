@@ -2,7 +2,7 @@ import articleReducer from "./articleSlice";
 // import { authReducer } from "./authReducer";
 import authReducer from "./authSlice";
 import { combineReducers } from "redux";
-import { eventReducer } from "./eventReducer";
+import eventReducer from "./eventSlice";
 import forumReducer from "./forumSlice";
 import generalReducer from "./generalSlice";
 // import { generalReducer } from "./generalReducer";

@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { postEvent, setTopics } from "../../redux/actions/eventActions";
+import { fetchTopics, postEvent } from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -28,7 +28,7 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import { postImage } from "../../redux/actions/generalAction";
+import { postSingleImage } from "../../redux/reducers/generalSlice";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -77,7 +77,7 @@ export default function PostEvent() {
   });
   console.log(eventData);
   useEffect(() => {
-    dispatch(setTopics());
+    dispatch(fetchTopics());
   }, [dispatch]);
 
   const { topics } = useSelector((state) => state.event);
@@ -87,28 +87,32 @@ export default function PostEvent() {
     const backgroundImageData = e.target.files[0];
     const backgroundImageLocation = "event";
     const response = await dispatch(
-      postImage(backgroundImageData, backgroundImageLocation)
+      postSingleImage(backgroundImageData, backgroundImageLocation)
     );
-    if (response) {
-      setBackGroundImgS3Key(response.key);
+    if (response.meta.requestStatus === "fulfilled") {
+      setBackGroundImgS3Key(response.payload);
     }
   };
 
   const uploadEventPoster = async (e) => {
     const posterData = e.target.files[0];
     const posterLocation = "event";
-    const response = await dispatch(postImage(posterData, posterLocation));
-    if (response) {
-      setPosterImgS3Key(response.key);
+    const response = await dispatch(
+      postSingleImage(posterData, posterLocation)
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setPosterImgS3Key(response.payload);
     }
   };
 
   const uploadEventQrCode = async (e) => {
     const qrCodeData = e.target.files[0];
     const qrCodeLocation = "event";
-    const response = await dispatch(postImage(qrCodeData, qrCodeLocation));
+    const response = await dispatch(
+      postSingleImage(qrCodeData, qrCodeLocation)
+    );
     if (response) {
-      setQrCodeImgS3Key(response.key);
+      setQrCodeImgS3Key(response.payload);
     }
   };
 
@@ -164,7 +168,7 @@ export default function PostEvent() {
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
-    dispatch(setTopics());
+    dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
 
