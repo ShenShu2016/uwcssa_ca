@@ -1,6 +1,7 @@
 import { Box, LinearProgress, Typography } from "@mui/material";
 
 import ArticleCommentsComponents from "./ArticleCommentsComponents";
+// import CustomAlert from "../../CustomMUI/CustomAlert";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
@@ -36,6 +37,7 @@ export default function ArticleComments({ article }) {
               />
             );
           })}
+          {/* <CustomAlert /> */}
         </div>
       )}
       <Box className="moreCommentsStatus">

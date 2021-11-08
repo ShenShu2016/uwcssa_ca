@@ -1,4 +1,3 @@
-import { Alert, Snackbar } from "@mui/material";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
@@ -10,6 +9,7 @@ import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
+import CustomAlert from "./components/CustomMUI/CustomAlert";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/Event";
@@ -70,23 +70,23 @@ const useStyles = makeStyles({
 export default function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(true);
-  const handleClose = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  console.log("isAlertOpen", isAlertOpen);
   const { isAuthenticated, cognitoGroup } = useSelector(
     (state) => state.userAuth
   );
-
+  const handleAlertClose = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setIsAlertOpen(false);
+  };
   useEffect(() => {
     dispatch(setUser());
   }, [dispatch]);
 
   useEffect(() => {
-    setOpen(isAuthenticated);
+    setIsAlertOpen(isAuthenticated);
   }, [isAuthenticated]);
 
   return (
@@ -211,20 +211,11 @@ export default function App() {
               />
               <Route>404 Not Found!</Route>
             </Switch>
-            <Snackbar
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-              open={open}
-              autoHideDuration={3000}
-              onClose={handleClose}
-            >
-              <Alert
-                onClose={handleClose}
-                severity="success"
-                sx={{ width: "100%" }}
-              >
-                登陆成功
-              </Alert>
-            </Snackbar>
+            <CustomAlert
+              isAlertOpen={isAlertOpen}
+              handleAlertClose={handleAlertClose}
+              message={"登錄成功"}
+            />
           </div>
           <Footer />
         </Router>
