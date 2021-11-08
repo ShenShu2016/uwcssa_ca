@@ -40,39 +40,45 @@ export default function LikeButtonGroup({ item }) {
     const itemID = id;
     const isLike = true;
     if (likesDetail.likeUp === false && likesDetail.disLikeUp === false) {
+      setLikesDetail({
+        ...likesDetail,
+        like: likesDetail.like + 1,
+        likeUp: true,
+        disLikeUp: false,
+      });
       const response = await dispatch(postLike({ itemID, userID, isLike }));
       console.log(response);
+
       if (response.meta.requestStatus === "fulfilled") {
         console.log(response);
-        setLikesDetail({
-          ...likesDetail,
-          like: likesDetail.like + 1,
-          likeUp: true,
-          disLikeUp: false,
-        });
+        // Do something later
       }
     } else if (likesDetail.likeUp === true) {
+      setLikesDetail({
+        ...likesDetail,
+        like: likesDetail.like - 1,
+        likeUp: false,
+        disLikeUp: false,
+      });
       const response = await dispatch(removeLike({ itemID, userID }));
       console.log(response);
+
       if (response.meta.requestStatus === "fulfilled") {
-        setLikesDetail({
-          ...likesDetail,
-          like: likesDetail.like - 1,
-          likeUp: false,
-          disLikeUp: false,
-        });
+        // Do something later
       }
     } else if (likesDetail.likeUp === false && likesDetail.disLikeUp === true) {
+      setLikesDetail({
+        ...likesDetail,
+        like: likesDetail.like + 1,
+        disLike: likesDetail.disLike - 1,
+        likeUp: true,
+        disLikeUp: false,
+      });
       const response = await dispatch(putLike({ itemID, userID, isLike }));
       console.log(response);
+
       if (response.meta.requestStatus === "fulfilled") {
-        setLikesDetail({
-          ...likesDetail,
-          like: likesDetail.like + 1,
-          disLike: likesDetail.disLike - 1,
-          likeUp: true,
-          disLikeUp: false,
-        });
+        // Do something later
       }
     }
   };
@@ -81,37 +87,43 @@ export default function LikeButtonGroup({ item }) {
     const isLike = false;
 
     if (likesDetail.likeUp === false && likesDetail.disLikeUp === false) {
+      setLikesDetail({
+        ...likesDetail,
+        disLike: likesDetail.disLike + 1,
+        likeUp: false,
+        disLikeUp: true,
+      });
       const response = await dispatch(postLike({ itemID, userID, isLike }));
       console.log(response);
+
       if (response.meta.requestStatus === "fulfilled") {
-        setLikesDetail({
-          ...likesDetail,
-          disLike: likesDetail.disLike + 1,
-          likeUp: false,
-          disLikeUp: true,
-        });
+        // Do something later
       }
     } else if (likesDetail.disLikeUp === true) {
+      setLikesDetail({
+        ...likesDetail,
+        disLike: likesDetail.disLike - 1,
+        likeUp: false,
+        disLikeUp: false,
+      });
       const response = await dispatch(removeLike({ itemID, userID }));
       console.log(response);
+
       if (response.meta.requestStatus === "fulfilled") {
-        setLikesDetail({
-          ...likesDetail,
-          disLike: likesDetail.disLike - 1,
-          likeUp: false,
-          disLikeUp: false,
-        });
+        // Do something later
       }
     } else if (likesDetail.likeUp === true && likesDetail.disLikeUp === false) {
+      setLikesDetail({
+        like: likesDetail.like - 1,
+        disLike: likesDetail.disLike + 1,
+        likeUp: false,
+        disLikeUp: true,
+      });
       const response = await dispatch(putLike({ itemID, userID, isLike }));
       console.log(response);
+
       if (response.meta.requestStatus === "fulfilled") {
-        setLikesDetail({
-          like: likesDetail.like - 1,
-          disLike: likesDetail.disLike + 1,
-          likeUp: false,
-          disLikeUp: true,
-        });
+        // Do something later
       }
     }
   };
