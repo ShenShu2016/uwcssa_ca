@@ -737,7 +737,7 @@ enum MarketItemCategory {
   PetSupplies
   BabyKids
   ToysGames
-
+  MarketItem
   ElectronicsComputers
   MobilePhones
 
