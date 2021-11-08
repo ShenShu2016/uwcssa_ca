@@ -604,6 +604,8 @@ type ForumPostSubComment
   likes: [Like] @connection(keyName: "byForumPostSubComment", fields: ["id"])
   active: Boolean!
   createdAt: AWSDateTime!
+  replyToUserID: ID!
+  replyTo: User @connection(fields: ["replyToUserID"])
   forumPostID: ID!
   forumPost: ForumPost! @connection(fields: ["forumPostID"])
   forumPostCommentID: ID!

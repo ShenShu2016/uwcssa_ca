@@ -179,6 +179,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -479,6 +480,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -779,6 +781,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -1067,6 +1070,7 @@ export const onCreateUser = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -1566,10 +1570,30 @@ export const onCreateUser = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -1941,6 +1965,7 @@ export const onUpdateUser = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -2440,10 +2465,30 @@ export const onUpdateUser = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -2815,6 +2860,7 @@ export const onDeleteUser = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -3314,10 +3360,30 @@ export const onDeleteUser = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -3701,6 +3767,7 @@ export const onCreateUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -3952,6 +4019,7 @@ export const onUpdateUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4203,6 +4271,7 @@ export const onDeleteUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4455,6 +4524,7 @@ export const onCreateUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4707,6 +4777,7 @@ export const onUpdateUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4959,6 +5030,7 @@ export const onDeleteUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -5204,6 +5276,7 @@ export const onCreateTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -5489,6 +5562,7 @@ export const onUpdateTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -5774,6 +5848,7 @@ export const onDeleteTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6065,6 +6140,7 @@ export const onCreateArticle = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6372,6 +6448,7 @@ export const onUpdateArticle = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6679,6 +6756,7 @@ export const onDeleteArticle = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6982,6 +7060,7 @@ export const onCreateArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -7299,6 +7378,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -7616,6 +7696,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -7933,6 +8014,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -8240,6 +8322,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -8547,6 +8630,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -8867,6 +8951,7 @@ export const onCreateEvent = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -9203,6 +9288,7 @@ export const onUpdateEvent = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -9539,6 +9625,7 @@ export const onDeleteEvent = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -9862,6 +9949,7 @@ export const onCreateEventComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -10191,6 +10279,7 @@ export const onUpdateEventComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -10520,6 +10609,7 @@ export const onDeleteEventComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -10849,6 +10939,7 @@ export const onCreateEventSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -11165,6 +11256,7 @@ export const onUpdateEventSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -11481,6 +11573,7 @@ export const onDeleteEventSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -11804,6 +11897,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12115,6 +12209,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12426,6 +12521,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12731,6 +12827,7 @@ export const onCreateDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12998,6 +13095,7 @@ export const onUpdateDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13265,6 +13363,7 @@ export const onDeleteDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13556,6 +13655,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13859,6 +13959,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14162,6 +14263,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14438,6 +14540,7 @@ export const onCreateForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14693,6 +14796,7 @@ export const onUpdateForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14948,6 +15052,7 @@ export const onDeleteForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15204,6 +15309,7 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15495,6 +15601,7 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15786,6 +15893,7 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16082,6 +16190,7 @@ export const onCreateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16208,6 +16317,7 @@ export const onCreateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16409,6 +16519,7 @@ export const onUpdateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16535,6 +16646,7 @@ export const onUpdateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16736,6 +16848,7 @@ export const onDeleteForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16862,6 +16975,7 @@ export const onDeleteForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17059,6 +17173,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17185,6 +17300,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17382,6 +17498,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17508,6 +17625,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17705,6 +17823,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17831,6 +17950,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17861,10 +17981,245 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      replyToUserID
       forumPostID
       forumPostCommentID
       userID
       updatedAt
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
       user {
         id
         username
@@ -18029,6 +18384,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -18220,10 +18576,245 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      replyToUserID
       forumPostID
       forumPostCommentID
       userID
       updatedAt
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
       user {
         id
         username
@@ -18388,6 +18979,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -18579,10 +19171,245 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      replyToUserID
       forumPostID
       forumPostCommentID
       userID
       updatedAt
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
       user {
         id
         username
@@ -18747,6 +19574,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -19105,6 +19933,7 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -19352,6 +20181,7 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -19599,6 +20429,7 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -19877,6 +20708,7 @@ export const onCreateMarketItem = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -20155,6 +20987,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -20433,6 +21266,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -20679,6 +21513,7 @@ export const onCreateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -20912,6 +21747,7 @@ export const onCreateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -21376,10 +22212,30 @@ export const onCreateLike = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -21605,6 +22461,7 @@ export const onUpdateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -21838,6 +22695,7 @@ export const onUpdateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -22302,10 +23160,30 @@ export const onUpdateLike = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -22531,6 +23409,7 @@ export const onDeleteLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -22764,6 +23643,7 @@ export const onDeleteLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -23228,10 +24108,30 @@ export const onDeleteLike = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -23459,6 +24359,7 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -23707,6 +24608,7 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -23955,6 +24857,7 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
