@@ -17,7 +17,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Redirect } from "react-router";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { signUp } from "../../redux/actions/authActions";
+import { signUp } from "../../redux/reducers/authSlice";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -103,9 +103,10 @@ export default function SignUp() {
 
   const onSignUp = async () => {
     const { username, password, email } = formData;
-    const response = await dispatch(signUp(username, password, email));
+    const response = await dispatch(signUp({ username, password, email }));
     setLoadingState(true);
-    if (response.result) {
+    console.log("onSignUp", response);
+    if (response.meta.requestStatus === "fulfilled") {
       setAccountCreated(true);
     } else {
       timer.current = window.setTimeout(() => {

@@ -2,6 +2,7 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { fetchUserProfile, loadUser } from "./redux/reducers/authSlice";
 
 import Amplify from "aws-amplify";
 import Article from "./containers/article/Article";
@@ -41,7 +42,6 @@ import UserFeedBack from "./containers/UserFeedBack";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
-import { setUser } from "./redux/actions/authActions";
 import store from "./redux/store";
 
 Amplify.configure(awsconfig);
@@ -82,7 +82,15 @@ export default function App() {
     setIsAlertOpen(false);
   };
   useEffect(() => {
-    dispatch(setUser());
+    async function initialUser() {
+      const response = await dispatch(loadUser());
+      console.log("loadUser", response);
+      if (response.meta.requestStatus === "fulfilled") {
+        const { username } = response.payload;
+        await dispatch(fetchUserProfile({ username }));
+      }
+    }
+    initialUser();
   }, [dispatch]);
 
   useEffect(() => {

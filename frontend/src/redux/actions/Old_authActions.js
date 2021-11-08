@@ -1,5 +1,5 @@
 import API from "@aws-amplify/api";
-import { ActionTypes } from "../constants/auth-action-types";
+import { ActionTypes } from "../constants/Old_auth-action-types";
 import Auth from "@aws-amplify/auth";
 import { getUser } from "../../graphql/queries";
 

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 
-import { forgotPassword } from "../../redux/actions/authActions";
+import { forgotPassword } from "../../redux/reducers/authSlice";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
@@ -71,8 +71,8 @@ export default function ForgotPassword() {
     if (!loading) {
       // console.log("setLoading(loading)", loading);
       setLoading(true); //开始转圈
-      const response = await dispatch(forgotPassword(username));
-      if (response.result) {
+      const response = await dispatch(forgotPassword({ username }));
+      if (response.meta.requestStatus === "fulfilled") {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log("response", response);

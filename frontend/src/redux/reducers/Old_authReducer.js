@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/auth-action-types";
+import { ActionTypes } from "../constants/Old_auth-action-types";
 
 const initialState = {
   isAuthenticated: null,

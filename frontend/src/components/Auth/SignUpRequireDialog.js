@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -10,11 +11,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
-
+import { Link, Redirect } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
@@ -24,8 +24,8 @@ import appleLogo from "../../static/svg icons/apple.svg";
 import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
-import { signIn } from "../../redux/actions/authActions";
-import { Link, Redirect } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import { signIn } from "../../redux/reducers/authSlice";
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -112,8 +112,8 @@ export default function AlertDialog() {
     if (!loading) {
       // console.log("setLoading(loading)", loading);
       setLoading(true); //开始转圈
-      const response = await dispatch(signIn(username, password));
-      if (response.result) {
+      const response = await dispatch(signIn({ username, password }));
+      if (response.meta.requestStatus === "fulfilled") {
         timer.current = window.setTimeout(() => {}, 1000);
       } else {
         timer.current = window.setTimeout(() => {
