@@ -62,24 +62,30 @@ export default function CustomAvatar({ user, variant, sx, link }) {
 
   return (
     <div>
-      {user.avatarImgS3Key ? (
-        <Avatar
-          component={link === true ? Link : ""}
-          to={link === true ? `/account/profile/${user.username}` : ""}
-          src={avatarURL}
-          variant={variant}
-          className={classes.avatar}
-          style={sx}
-        />
+      {user ? (
+        <div>
+          {user.avatarImgS3Key ? (
+            <Avatar
+              component={link === true ? Link : ""}
+              to={link === true ? `/account/profile/${user.username}` : ""}
+              src={avatarURL}
+              variant={variant}
+              className={classes.avatar}
+              style={sx}
+            />
+          ) : (
+            <Avatar
+              component={link === true ? Link : ""}
+              to={link === true ? `/account/profile/${user.username}` : ""}
+              variant={variant}
+              className={classes.avatar}
+              style={sx}
+              {...stringAvatar(user.username.toUpperCase())}
+            />
+          )}
+        </div>
       ) : (
-        <Avatar
-          component={link === true ? Link : ""}
-          to={link === true ? `/account/profile/${user.username}` : ""}
-          variant={variant}
-          className={classes.avatar}
-          style={sx}
-          {...stringAvatar(user.username.toUpperCase())}
-        />
+        <div />
       )}
     </div>
   );
