@@ -22,7 +22,7 @@ import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { removeURLFrom } from "../../redux/actions/generalAction";
+import { removeURLFrom } from "../../redux/reducers/generalSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 

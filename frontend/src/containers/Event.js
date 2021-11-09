@@ -2,7 +2,6 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  Chip,
   Container,
   Grid,
   MobileStepper,
@@ -19,8 +18,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Link } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { fetchEvents } from "../../src/redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
-import { setEvents } from "../redux/actions/eventActions";
 import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -108,13 +107,13 @@ export default function Event() {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
-  };
+  // const handleClick = () => {
+  //   console.info("You clicked the Chip.");
+  // };
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setEvents());
+    dispatch(fetchEvents());
   }, [dispatch]);
 
   const { events } = useSelector((state) => state.event);
@@ -227,7 +226,7 @@ export default function Event() {
             近期活动
           </Typography>
           <Box className={classes.timeTag}>
-            <Chip
+            {/* <Chip
               label="今天"
               variant="outlined"
               sx={{
@@ -276,7 +275,7 @@ export default function Event() {
                 marginBlock: "0.3rem",
               }}
               onClick={handleClick}
-            />
+            /> */}
           </Box>
         </Box>
 

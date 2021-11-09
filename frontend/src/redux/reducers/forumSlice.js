@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import API from "@aws-amplify/api";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import {
   createForumPost,
   createForumPostComment,
@@ -18,6 +16,9 @@ import {
   listForumSubTopics,
   listForumTopics,
 } from "../../graphql/queries";
+
+import API from "@aws-amplify/api";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const initialState = {
   forumTopics: [],
@@ -246,6 +247,13 @@ const forumSlice = createSlice({
     removeSelectedForumPost(state, action) {
       state.selected = { forumPost: { comments: { nextToken: null } } };
     },
+    removeSelectedForumSubTopic(state, action) {
+      //do something
+    },
+
+    removeSelectedForumTopic(state, action) {
+      //do something
+    },
   },
   extraReducers(builder) {
     builder
@@ -323,5 +331,9 @@ const forumSlice = createSlice({
       });
   },
 });
-export const { removeSelectedForumPost } = forumSlice.actions;
+export const {
+  removeSelectedForumPost,
+  removeSelectedForumSubTopic,
+  removeSelectedForumTopic,
+} = forumSlice.actions;
 export default forumSlice.reducer;

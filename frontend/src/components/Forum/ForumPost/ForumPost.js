@@ -1,25 +1,33 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
+  Box,
+  Breadcrumbs,
+  Button,
   Grid,
   Skeleton,
-  Breadcrumbs,
-  Box,
-  Button,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import {
   removeSelectedForumPost,
   selectedForumPost,
   selectedForumPostComments,
-} from "../../../redux/actions/forumAction";
-import ForumPostComments from "./ForumPostDetail/ForumPostComments";
+} from "../../../redux/reducers/forumSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 // import ForumPostCommentsPost from "../ForumPostDetail/ForumPostCommentsPost";
 import ForumAdSide from "../ForumAdSide";
+import ForumPostComments from "./ForumPostDetail/ForumPostComments";
 import ForumPostMain from "./ForumPostDetail/ForumPostMain";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
+// import {
+//   removeSelectedForumPost,
+//   selectedForumPost,
+//   selectedForumPostComments,
+// } from "../../../redux/actions/forumAction";
+
+
 
 const useStyles = makeStyles({
   root: {
@@ -39,11 +47,10 @@ export default function ForumPost() {
   );
 
   useEffect(() => {
-
-      if (forumPostID && forumPostID !== "") {
-        dispatch(selectedForumPost(forumPostID));
-        dispatch(selectedForumPostComments(forumPostID));
-      }
+    if (forumPostID && forumPostID !== "") {
+      dispatch(selectedForumPost(forumPostID));
+      dispatch(selectedForumPostComments(forumPostID));
+    }
     return () => dispatch(removeSelectedForumPost());
   }, [forumPostID, dispatch]);
 

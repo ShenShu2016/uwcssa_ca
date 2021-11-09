@@ -1,28 +1,30 @@
 import {
-  Box,
   Avatar,
+  Box,
   Button,
-  Paper,
-  Grid,
-  CardActions,
   CardActionArea,
+  CardActions,
   CardContent,
   CardHeader,
+  Grid,
   IconButton,
+  Paper,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
+
 // import { API } from "aws-amplify";
 import { AmplifyS3Image } from "@aws-amplify/ui-react";
 // import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { Link } from "react-router-dom";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 // import { deleteForumPost } from "../../../graphql/mutations";
-import { setForumPosts } from "../../../redux/actions/forumAction";
+// import { fetchForumPosts } from "../../../redux/actions/forumAction";
+import { fetchForumPosts } from "../../../redux/reducers/forumSlice";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -47,10 +49,10 @@ const useStyles = makeStyles({
   },
 });
 
-const ForumPostList = ({ setForumPosts }) => {
+const ForumPostList = ({ fetchForumPosts }) => {
   const classes = useStyles();
   useEffect(() => {
-    setForumPosts();
+    fetchForumPosts();
     console.log("using effect"); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const forumPosts = useSelector((state) => state.forum.forumPosts);
@@ -67,7 +69,6 @@ const ForumPostList = ({ setForumPosts }) => {
       owner,
     } = forumPost;
     return (
-
       <Paper className={classes.paper} key={id} elevation={5}>
         <CardHeader
           sx={{ p: 1 }}
@@ -147,8 +148,7 @@ const ForumPostList = ({ setForumPosts }) => {
               SubTopic:{forumSubTopic.name}
             </Button>
           </CardActions>
-          <Grid item xs={12}>
-        </Grid>
+          <Grid item xs={12}></Grid>
         </div>
       </Paper>
     );
@@ -164,4 +164,4 @@ const ForumPostList = ({ setForumPosts }) => {
     </Box>
   );
 };
-export default connect(null, { setForumPosts })(ForumPostList);
+export default connect(null, { fetchForumPosts })(ForumPostList); //不要再用這個了

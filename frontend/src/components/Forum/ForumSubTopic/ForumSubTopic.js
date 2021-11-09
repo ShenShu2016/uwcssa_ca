@@ -1,16 +1,23 @@
 import { Grid, Skeleton } from "@mui/material";
 import React, { useEffect } from "react";
+// import {
+//   removeSelectedForumSubTopic,
+//   selectedForumSubTopic,
+//   selectedForumSubTopicPosts,
+// } from "../../../redux/actions/forumAction";
 import {
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
   selectedForumSubTopicPosts,
-} from "../../../redux/actions/forumAction";
+} from "../../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
+
 import ForumAdSide from "../ForumAdSide";
 import ForumSubTopicMain from "./ForumSubTopicMain";
 import OpenIconSpeedDial from "../OpenIconSpeedDial";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
+
 const useStyles = makeStyles({
   bread: {
     marginTop: "4rem",

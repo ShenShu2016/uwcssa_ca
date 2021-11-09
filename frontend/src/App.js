@@ -43,7 +43,7 @@ import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
-
+import EventGrid from "./components/Event/EventDataGrid";
 Amplify.configure(awsconfig);
 
 const theme = createTheme({
@@ -210,6 +210,7 @@ export default function App() {
                 exact
                 component={Group}
               />
+              <Route path="/eventDataGrid" exact component={EventGrid} />
               <Route path="/event/:eventID" exact component={EventDetail} />
               <Route path="/rating" exact component={UserFeedBack} />
               <Route

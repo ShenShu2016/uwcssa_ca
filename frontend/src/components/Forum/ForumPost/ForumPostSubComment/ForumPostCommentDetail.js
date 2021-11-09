@@ -5,7 +5,8 @@ import ForumPostCommentsMain from "./ForumPostCommentsMain";
 import ForumPostSubComments from "./ForumPostSubComments";
 import ForumPostSubCommentsPost from "./ForumPostSubCommentsPost";
 import { makeStyles } from "@mui/styles";
-import { selectedForumPostComment } from "../../../../redux/actions/forumAction";
+// import { selectedForumPostComment } from "../../../../redux/actions/forumAction";
+import { selectedForumPostComments } from "../../../../redux/reducers/forumSlice";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -17,14 +18,14 @@ const useStyles = makeStyles({
   },
 });
 
-const ForumPostCommentDetail = ({ selectedForumPostComment }) => {
+const ForumPostCommentDetail = ({ selectedForumPostComments }) => {
   const classes = useStyles();
   const { forumPostCommentId } = useParams();
 
   useEffect(() => {
     console.log(forumPostCommentId);
     if (forumPostCommentId && forumPostCommentId !== "") {
-      selectedForumPostComment(forumPostCommentId);
+      selectedForumPostComments({ forumPostCommentId });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -40,6 +41,8 @@ const ForumPostCommentDetail = ({ selectedForumPostComment }) => {
     </div>
   );
 };
-export default connect(null, { selectedForumPostComment })(
+
+export default connect(null, { selectedForumPostComments })(
+  //老哥不要再用這個了
   ForumPostCommentDetail
 );

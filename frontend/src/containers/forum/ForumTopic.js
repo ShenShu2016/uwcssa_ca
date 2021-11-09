@@ -1,24 +1,30 @@
 import {
+  Box,
+  Breadcrumbs,
+  Button,
   Grid,
   Skeleton,
-  Breadcrumbs,
-  Box,
-  Button,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import {
+  removeSelectedForumTopic,
+  selectedForumTopic,
+} from "../../redux/reducers/forumSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import ForumAdSide from "../../components/Forum/ForumAdSide";
 import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
+import { Link } from "react-router-dom";
 import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
+import { makeStyles } from "@mui/styles";
+import { useParams } from "react-router-dom";
 
-import {
-  selectedForumTopic,
-  removeSelectedForumTopic,
-} from "../../redux/actions/forumAction";
+// import {
+//   selectedForumTopic,
+//   removeSelectedForumTopic,
+// } from "../../redux/actions/forumAction";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -43,7 +49,7 @@ function ForumTopic() {
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
-        {Object.keys(forumTopic).length === 0  ? (
+        {Object.keys(forumTopic).length === 0 ? (
           <Skeleton variant="rectangular" width={210} height={118} />
         ) : (
           <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
