@@ -15,6 +15,7 @@ import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/Event";
 import EventDetail from "./components/Event/EventDetail";
+import EventGrid from "./components/Event/EventDataGrid";
 import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
@@ -43,7 +44,7 @@ import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
-import EventGrid from "./components/Event/EventDataGrid";
+
 Amplify.configure(awsconfig);
 
 const theme = createTheme({
@@ -71,7 +72,7 @@ export default function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  console.log("isAlertOpen", isAlertOpen);
+  // console.log("isAlertOpen", isAlertOpen);
   const { isAuthenticated, cognitoGroup } = useSelector(
     (state) => state.userAuth
   );
@@ -84,7 +85,7 @@ export default function App() {
   useEffect(() => {
     async function initialUser() {
       const response = await dispatch(loadUser());
-      console.log("loadUser", response);
+      // console.log("loadUser", response);
       if (response.meta.requestStatus === "fulfilled") {
         const { username } = response.payload;
         await dispatch(fetchUserProfile({ username }));

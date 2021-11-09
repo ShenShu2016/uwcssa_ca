@@ -3,6 +3,7 @@ import {
   createEvent,
   createEventComment,
   createEventParticipant,
+  createEventSubComment,
 } from "../../graphql/mutations";
 import {
   eventCommentSortByEventID,
@@ -48,6 +49,8 @@ const initialState = {
   removeSelectedEventError: null,
   postEventCommentStatus: "idle",
   postEventCommentError: null,
+  postEventSubCommentStatus: "idle",
+  postEventSubCommentStatusError: null,
   postEventParticipantStatus: "idle",
   postEventParticipantError: null,
   fetchTopicsStatus: "idle",
@@ -170,6 +173,18 @@ export const postEventComment = createAsyncThunk(
       })
     );
     return response.data.createEventComment;
+  }
+);
+
+export const postEventSubComment = createAsyncThunk(
+  "event/postEventSubComment",
+  async ({ createEventSubCommentInput }) => {
+    const response = await API.graphql(
+      graphqlOperation(createEventSubComment, {
+        input: createEventSubCommentInput,
+      })
+    );
+    return response.data.createEventSubComment;
   }
 );
 
@@ -304,11 +319,25 @@ const eventSlice = createSlice({
       })
       .addCase(postEventComment.fulfilled, (state, action) => {
         state.postEventCommentStatus = "succeeded";
-        state.selected.comments.unshift(action.payload);
+        state.selected.event.eventComments.items.unshift(action.payload);
       })
       .addCase(postEventComment.rejected, (state, action) => {
         state.postEventCommentStatus = "failed";
         state.postEventCommentError = action.error.message;
+      })
+      // Cases for status of postEventSubComment (pending, fulfilled, and rejected)
+      .addCase(postEventSubComment.pending, (state, action) => {
+        state.postEventSubCommentStatus = "loading";
+      })
+      .addCase(postEventSubComment.fulfilled, (state, action) => {
+        state.postEventCommentStatus = "succeeded";
+        state.selected.event.eventComments.items[
+          action.meta.arg.idx
+        ].eventSubComments.items.unshift(action.payload);
+      })
+      .addCase(postEventSubComment.rejected, (state, action) => {
+        state.postEventSubCommentStatus = "failed";
+        state.postEventSubCommentError = action.error.message;
       })
       // Cases for status of postEventParticipant (pending, fulfilled, and rejected)
       .addCase(postEventParticipant.pending, (state, action) => {

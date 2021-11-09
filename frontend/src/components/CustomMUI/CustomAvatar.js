@@ -59,8 +59,6 @@ export default function CustomAvatar({ user, variant, sx, link }) {
       getAvatarImage();
     }
   }, [user]);
-  console.log("user", user);
-  console.log("user", user);
 
   return (
     <div>

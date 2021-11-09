@@ -47,6 +47,67 @@ export const getEvent = /* GraphQL */ `
           userID
           updatedAt
           owner
+          likes {
+            items {
+              id
+              like
+              itemID
+              userID
+              createdAt
+              updatedAt
+              owner
+              user {
+                id
+                username
+                owner
+                avatarImgS3Key
+              }
+            }
+            nextToken
+          }
+          user {
+            id
+            username
+            owner
+            avatarImgS3Key
+          }
+          eventSubComments {
+            items {
+              id
+              content
+              active
+              eventCommentID
+              createdAt
+              userID
+              updatedAt
+              owner
+              likes {
+                items {
+                  id
+                  like
+                  itemID
+                  userID
+                  createdAt
+                  updatedAt
+                  owner
+                  user {
+                    id
+                    username
+                    owner
+                    avatarImgS3Key
+                  }
+                }
+                nextToken
+              }
+              user {
+                id
+                username
+                owner
+                avatarImgS3Key
+              }
+            }
+            nextToken
+          }
         }
         nextToken
       }
@@ -79,6 +140,12 @@ export const getEvent = /* GraphQL */ `
           createdAt
           updatedAt
           owner
+          user {
+            id
+            username
+            owner
+            avatarImgS3Key
+          }
         }
         nextToken
       }

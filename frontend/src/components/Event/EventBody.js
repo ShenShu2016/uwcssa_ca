@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CardActions,
   CardMedia,
   CircularProgress,
   Container,
@@ -10,6 +11,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import EventComments from "./EventDetail/Comment/EventComments";
+import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
@@ -27,11 +30,8 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {/* 为什么这里要加上typography？？？？ */}
     </div>
   );
 }
@@ -84,12 +84,12 @@ export default function EventBody({ event }) {
       }
     };
     if (posterImgS3Key) {
-      console.log(posterImgS3Key);
+      // console.log(posterImgS3Key);
       getPoster();
     }
   }, [posterImgS3Key]);
-  console.log("posterURL", posterURL);
-  console.log("event", event);
+  // console.log("posterURL", posterURL);
+  // console.log("event", event);
   return (
     <Box>
       {event.startDate ? (
@@ -161,7 +161,7 @@ export default function EventBody({ event }) {
             </Box>
             <TabPanel value={value} index={0}>
               {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
-              {/* <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%" }}>
                 {content}
                 <CardActions>
                   {userInfo.isAuthenticated ? (
@@ -176,8 +176,8 @@ export default function EventBody({ event }) {
                     <SignUpRequest />
                   )}
                 </CardActions>
-              </Box> */}
-              {content}
+              </Box>
+              {/* {content}
               {userInfo.isAuthenticated ? (
                 <Button
                   size="small"
@@ -188,10 +188,11 @@ export default function EventBody({ event }) {
                 </Button>
               ) : (
                 <SignUpRequest />
-              )}
+              )} */}
             </TabPanel>
-            <TabPanel value={value} index={1}>
-              建设中。。。
+            <TabPanel value={value} index={1} component={"div"}>
+              <EventCommentsPost event={event} />
+              <EventComments event={event} />
             </TabPanel>
           </Box>
         </Container>
