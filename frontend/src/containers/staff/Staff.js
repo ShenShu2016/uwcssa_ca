@@ -8,6 +8,7 @@ import PostEvent from "../../components/Event/PostEvent";
 import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import PropTypes from "prop-types";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
+import EventGrid from "../../components/Event/EventDataGrid";
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -51,7 +52,7 @@ export default function Staff() {
                 >
                   <ListItemText primary="管理首页" />
                 </ListItemButton>
-                <ListItemButton
+                {/* <ListItemButton
                   sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
                   onClick={() => {
                     setValue(1);
@@ -60,6 +61,16 @@ export default function Staff() {
                   selected={liveComponent === "PostEvent"}
                 >
                   <ListItemText primary="活动策划" />
+                </ListItemButton> */}
+                <ListItemButton
+                  sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
+                  onClick={() => {
+                    setValue(1);
+                    setLiveComponent("EventGrid");
+                  }}
+                  selected={liveComponent === "EventGrid"}
+                >
+                  <ListItemText primary="UWCSSA 活动" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
@@ -101,8 +112,11 @@ export default function Staff() {
             <UwcssaJobsPreview />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <PostEvent />
+            <EventGrid />
           </TabPanel>
+          {/* <TabPanel value={value} index={1}>
+            <PostEvent />
+          </TabPanel> */}
           <TabPanel value={value} index={2}>
             <PostUwcssaJob />
           </TabPanel>
