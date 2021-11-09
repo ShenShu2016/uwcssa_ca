@@ -6,19 +6,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
-import React, { useState } from "react";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
 import { makeStyles } from "@mui/styles";
+import { postEventParticipant } from "../../redux/reducers/eventSlice";
+import { useHistory } from "react-router";
 // import useForm from "./useForm";
 // import { validator } from "./validator";
 import { useTitle } from "../../Hooks/useTitle";
-import { useDispatch, useSelector } from "react-redux";
-import { postEventParticipant } from "../../redux/reducers/eventSlice";
-import { useHistory } from "react-router";
-import SignUpRequest from "../Auth/SignUpRequireDialog";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -55,6 +55,7 @@ export default function Individual() {
     numberOfPeople: "",
   });
   const uploadEventParticipant = async () => {
+    console.log("????");
     const { name, email, address, phone, weChat, message } =
       eventParticipantData;
 
@@ -72,10 +73,10 @@ export default function Individual() {
     };
 
     const response = await dispatch(
-      postEventParticipant(createEventParticipantInput)
+      postEventParticipant({ createEventParticipantInput })
     );
-
-    if (response.result) {
+    console.log("postEventParticipant", response);
+    if (response.meta.requestStatus === "fulfilled") {
       history.push(`/event`);
     }
   };

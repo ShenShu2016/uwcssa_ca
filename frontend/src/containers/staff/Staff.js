@@ -2,13 +2,13 @@ import { Box, Grid, List, ListItemButton, ListItemText } from "@mui/material";
 import React, { useState } from "react";
 
 import ArticlesPreview from "./Article/ArticlesPreview";
+import EventGrid from "../../components/Event/EventDataGrid";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
-import PostEvent from "../../components/Event/PostEvent";
+// import PostEvent from "../../components/Event/PostEvent";
 import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import PropTypes from "prop-types";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
-import EventGrid from "../../components/Event/EventDataGrid";
 
 function TabPanel(props) {
   const { children, value, index } = props;

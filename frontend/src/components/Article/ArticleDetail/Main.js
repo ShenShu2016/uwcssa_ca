@@ -4,8 +4,8 @@ import {
   CardActions,
   CardHeader,
   Chip,
-  CircularProgress,
   Divider,
+  Skeleton,
   Typography,
 } from "@mui/material";
 
@@ -39,13 +39,12 @@ export default function Main({ article }) {
   return (
     <div className={classes.root}>
       {article.active !== true ? (
-        <div>
-          <CircularProgress />
+        <div className={classes.main}>
+          <Skeleton variant="rectangular" height={300} />
         </div>
       ) : (
         <Box className={classes.main}>
           <S3Image S3Key={imgS3Keys[0]} style={{ width: "100%" }} />
-
           <CardActions sx={{ px: 0 }}>
             <Button size="small" color="primary">
               Topic: {topic.name}

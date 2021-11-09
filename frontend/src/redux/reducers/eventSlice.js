@@ -1,16 +1,16 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createEvent,
-  createEventParticipant,
   createEventComment,
+  createEventParticipant,
 } from "../../graphql/mutations";
 import {
-  eventParticipantSortByEventID,
   eventCommentSortByEventID,
+  eventParticipantSortByEventID,
   eventSortBySortKey,
   getEvent,
   listTopics,
 } from "../../graphql/queries";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
@@ -175,12 +175,18 @@ export const postEventComment = createAsyncThunk(
 export const postEventParticipant = createAsyncThunk(
   "event/postEventParticipant",
   async ({ createEventParticipantInput }) => {
+    console.log("createEventParticipantInput", createEventParticipantInput);
+    // try {
     const response = await API.graphql(
       graphqlOperation(createEventParticipant, {
         input: createEventParticipantInput,
       })
     );
-    return response.data.createEventParticipant;
+    return response;
+    // } catch (err) {
+    //   console.log(err);
+    //   return err;
+    // }
   }
 );
 

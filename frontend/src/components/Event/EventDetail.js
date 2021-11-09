@@ -33,7 +33,7 @@ export default function EventDetail() {
 
   useEffect(() => {
     if (eventID && eventID !== "") {
-      dispatch(selectedEvent(eventID));
+      dispatch(selectedEvent({ eventID }));
     }
     return () => dispatch(removeSelectedEvent());
   }, [eventID, dispatch]);

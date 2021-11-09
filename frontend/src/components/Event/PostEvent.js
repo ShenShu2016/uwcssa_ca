@@ -25,10 +25,11 @@ import S3Image from "../../components/S3/S3Image";
 import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
+import { postSingleImage } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import { postSingleImage } from "../../redux/reducers/generalSlice";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -84,10 +85,10 @@ export default function PostEvent() {
   const { username } = useSelector((state) => state.userAuth.user);
 
   const uploadEventImg = async (e) => {
-    const backgroundImageData = e.target.files[0];
-    const backgroundImageLocation = "event";
+    const imageData = e.target.files;
+    const imageLocation = "event";
     const response = await dispatch(
-      postSingleImage(backgroundImageData, backgroundImageLocation)
+      postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
       setBackGroundImgS3Key(response.payload);
@@ -95,10 +96,10 @@ export default function PostEvent() {
   };
 
   const uploadEventPoster = async (e) => {
-    const posterData = e.target.files[0];
-    const posterLocation = "event";
+    const imageData = e.target.files;
+    const imageLocation = "event";
     const response = await dispatch(
-      postSingleImage(posterData, posterLocation)
+      postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
       setPosterImgS3Key(response.payload);
@@ -106,10 +107,10 @@ export default function PostEvent() {
   };
 
   const uploadEventQrCode = async (e) => {
-    const qrCodeData = e.target.files[0];
-    const qrCodeLocation = "event";
+    const imageData = e.target.files;
+    const imageLocation = "event";
     const response = await dispatch(
-      postSingleImage(qrCodeData, qrCodeLocation)
+      postSingleImage({ imageData, imageLocation })
     );
     if (response) {
       setQrCodeImgS3Key(response.payload);
@@ -151,10 +152,10 @@ export default function PostEvent() {
       userID: username,
     };
 
-    const response = await dispatch(postEvent(createEventInput));
+    const response = await dispatch(postEvent({ createEventInput }));
 
-    if (response.result) {
-      history.push(`/event/${response.response.data.createEvent.id}`);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/event/${response.payload.data.createEvent.id}`);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });

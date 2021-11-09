@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -52,13 +52,22 @@ export default function ArticleList() {
     return <ArticleComponent article={article} key={article.id} />;
   });
   // console.log("renderList", renderList);
+  const skeletonList = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
+    return (
+      <Box key={num}>
+        <Skeleton variant="rectangular" height={200} sx={{ my: 1 }} />
+      </Box>
+    );
+  });
   return (
     <Box className={classes.root}>
       <Typography variant="h3" className={classes.title}>
         近期新闻
       </Typography>
       <Box className={classes.main}>
-        <Box className={classes.body}>{renderList}</Box>
+        <Box className={classes.body}>
+          {articles.length > 0 ? renderList : skeletonList}
+        </Box>
         <Box>
           <ArticleSideBar />
         </Box>
