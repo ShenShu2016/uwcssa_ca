@@ -8,7 +8,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketVehicleOptions } from "./marketVehicleOptions";
-import { postMarketItem } from "../../redux/OldNotUse/marketItemActions";
+import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
   },
+  imgKeyFromServer: {
+    width: "100%",
+  },
 }));
 
 const Input = styled("input")({
@@ -55,8 +58,7 @@ export default function PostMarketVehicle() {
   useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKeys } = useSelector((state) => state.general);
-  const [renderTrigger, setRenderTrigger] = useState(null);
+  const [imageKeys, setImageKeys] = useState([]);
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
   // console.log("imgKeys", imageKeys);
@@ -77,9 +79,15 @@ export default function PostMarketVehicle() {
   // console.log("marketVehicleData", marketVehicleData);
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    setRenderTrigger(imagesData.length);
-    const imgLocation = "marketVehicle";
-    await dispatch(postMultipleImages(imagesData, imgLocation));
+    const imageLocation = "market/vehicle";
+
+    const response = await dispatch(
+      postMultipleImages({ imagesData, imageLocation })
+    );
+    // console.log("response!!!", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      setImageKeys(response.payload);
+    }
   };
 
   useEffect(() => {
@@ -101,10 +109,11 @@ export default function PostMarketVehicle() {
         setImgKeyFromServer([]);
       }
     };
-    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
+    // console.log("imageKeys", imageKeys);
+    if (imageKeys) {
       getImage();
     }
-  }, [imageKeys, renderTrigger]);
+  }, [imageKeys]);
 
   // console.log("imgKeyFromServer", imgKeyFromServer);
   // console.log("imageKeys", imageKeys);
@@ -124,6 +133,7 @@ export default function PostMarketVehicle() {
     } = marketVehicleData;
 
     const createMarketVehicleInput = {
+      marketType: "Vehicle",
       vehicleType,
       imgS3Keys: imageKeys,
       location: location,
@@ -137,16 +147,15 @@ export default function PostMarketVehicle() {
       description: description,
       tags: GetTags(),
       active: true,
-      createdAt: new Date().toISOstring,
       sortKey: "SortKey",
       userID: username,
     };
-
+    console.log("Check!", createMarketVehicleInput);
     const response = await dispatch(postMarketItem(createMarketVehicleInput));
     console.log("response", response);
-    if (response.payload.result) {
+    if (response.meta.requestStatus === "fulfilled") {
       history.push(
-        `/market/vehicle/${response.payload.response.data.createMarketVehicle.id}`
+        `/market/vehicle/${response.payload.data.createMarketItem.id}`
       );
     }
   };
@@ -178,7 +187,12 @@ export default function PostMarketVehicle() {
 
       {imgKeyFromServer &&
         imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-          <img src={imgKey} key={imgKeyIdx} alt="images" />
+          <img
+            className={classes.imgKeyFromServer}
+            src={imgKey}
+            key={imgKeyIdx}
+            alt="images"
+          />
         ))}
 
       <Box className={classes.content}>

@@ -85,7 +85,7 @@ export default function MarketItemDetail() {
   useEffect(() => {
     const getItems = async () => {
       if (id && id !== "") {
-        await dispatch(selectedMarketItem({ id }));
+        await dispatch(selectedMarketItem(id));
       }
       return () => dispatch(removeSelectedMarketItem());
     };

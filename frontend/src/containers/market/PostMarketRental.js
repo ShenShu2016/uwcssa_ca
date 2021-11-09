@@ -66,8 +66,7 @@ export default function PostMarketRental() {
   // const [imgKeyToServer, setImgKeyToServer] = useState(null);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKeys } = useSelector((state) => state.general);
-  const [renderTrigger, setRenderTrigger] = useState(null);
+  const [imageKeys, setImageKeys] = useState([]);
   const {
     marketRentalSaleRent,
     propertyType,
@@ -101,9 +100,14 @@ export default function PostMarketRental() {
   // console.log("marketRentalData", marketRentalData);
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    setRenderTrigger(imagesData.length);
-    const imgLocation = "marketItem";
-    await dispatch(postMultipleImages(imagesData, imgLocation));
+    const imageLocation = "market/rental";
+
+    const response = await dispatch(
+      postMultipleImages({ imagesData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setImageKeys(response.payload);
+    }
   };
 
   useEffect(() => {
@@ -125,10 +129,11 @@ export default function PostMarketRental() {
         setImgKeyFromServer([]);
       }
     };
-    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
+    console.log("imageKeys", imageKeys);
+    if (imageKeys) {
       getImage();
     }
-  }, [imageKeys, renderTrigger]);
+  }, [imageKeys]);
 
   const uploadMarketRental = async () => {
     //Upload the marketRental
@@ -150,6 +155,7 @@ export default function PostMarketRental() {
     } = marketRentalData;
 
     const createMarketRentalInput = {
+      marketType: "Rental",
       marketRentalSaleRent: marketRentalSaleRent,
       propertyType: propertyType,
       bedroomCounts: bedroomCounts,
@@ -173,10 +179,10 @@ export default function PostMarketRental() {
     console.log("createMarketRentalInput", createMarketRentalInput);
 
     const response = await dispatch(postMarketItem(createMarketRentalInput));
-    console.log("response", response);
-    if (response.payload.result) {
+    console.log("Something should be here", response);
+    if (response.meta.requestStatus === "fulfilled") {
       history.push(
-        `/market/rental/${response.payload.response.data.createMarketRental.id}`
+        `/market/rental/${response.payload.data.createMarketItem.id}`
       );
     }
   };

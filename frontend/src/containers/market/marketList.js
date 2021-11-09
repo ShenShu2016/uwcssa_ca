@@ -84,7 +84,11 @@ export default function MarketList() {
     marketItems &&
     marketItems.map((marketItem, marketItemIdx) => {
       return (
-        <MarketComponent item={marketItem} type={"item"} key={marketItemIdx} />
+        <MarketComponent
+          item={marketItem}
+          type={marketItem.marketType.toLowerCase()}
+          key={marketItemIdx}
+        />
       );
     });
   console.log("marketVehicles", marketItems);
