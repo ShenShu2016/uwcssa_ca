@@ -6,11 +6,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
-import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import { makeStyles } from "@mui/styles";
@@ -41,10 +41,10 @@ export default function Individual() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { userAuth } = useSelector((state) => state);
-
-  const { event } = useSelector((state) => state.event.selected);
-  useTitle(`近期活动 ${event.title} 个人报名`);
-
+  const { eventID } = useParams();
+  //const { event } = useSelector((state) => state.event.selected); 思路有问题
+  useTitle(`近期活动 ${eventID} 个人报名`);
+  console.log("event.id", eventID);
   const [eventParticipantData, setEventParticipantData] = useState({
     name: "",
     email: "",
@@ -60,6 +60,7 @@ export default function Individual() {
       eventParticipantData;
 
     const createEventParticipantInput = {
+      id: `${eventID}-${userAuth.user.username}`, //这样的话她智能报名一次了
       name,
       email,
       address,
@@ -67,8 +68,9 @@ export default function Individual() {
       weChat,
       message,
       numberOfPeople: 1,
+      eventParticipantStatus: "ArriveOnTime",
       active: true,
-      eventID: event.id,
+      eventID: eventID,
       userID: userAuth.user.username,
     };
 

@@ -8,11 +8,11 @@ import {
   eventCommentSortByEventID,
   eventParticipantSortByEventID,
   eventSortBySortKey,
-  getEvent,
   listTopics,
 } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
+import { getEvent } from "../CustomQuery/EventQueries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const initialState = {
@@ -21,8 +21,8 @@ const initialState = {
   types: [],
   selected: {
     event: {
-      eventComments: { nextToken: null },
-      eventParticipants: { nextToken: null },
+      eventComments: { nextToken: null, items: [] },
+      eventParticipants: { nextToken: null, items: [] },
     },
   },
   mutation: {
@@ -36,10 +36,10 @@ const initialState = {
   fetchEventsError: null,
   selectedEventStatus: "idle",
   selectedEventsError: null,
-  selectedEventCommentsStatus: "idle",
-  selectedEventCommentsError: null,
-  selectedEventParticipantsStatus: "idle",
-  selectedEventParticipantsError: null,
+  // selectedEventCommentsStatus: "idle",
+  // selectedEventCommentsError: null,
+  // selectedEventParticipantsStatus: "idle",
+  // selectedEventParticipantsError: null,
   loadMoreEventCommentsStatus: "idle",
   loadMoreEventCommentsError: null,
   loadMoreEventParticipantsStatus: "idle",
@@ -83,40 +83,41 @@ export const selectedEvent = createAsyncThunk(
   }
 );
 
-export const selectedEventComments = createAsyncThunk(
-  "event/selected/eventComments",
-  async ({ eventID }) => {
-    const eventCommentData = await API.graphql({
-      query: eventCommentSortByEventID,
-      variables: {
-        eventID: eventID,
-        sortDirection: "DESC",
-        filter: { active: { eq: true } },
-        // limit: 10,
-      },
-      authMode: "AWS_IAM",
-    });
+// export const selectedEventComments = createAsyncThunk(
+//   "event/selected/eventComments",
+//   async ({ eventID }) => {
+//     const eventCommentData = await API.graphql({
+//       query: eventCommentSortByEventID,
+//       variables: {
+//         eventID: eventID,
+//         sortDirection: "DESC",
+//         filter: { active: { eq: true } },
+//         // limit: 10,
+//       },
+//       authMode: "AWS_IAM",
+//     });
 
-    return eventCommentData.data.eventCommentSortByEventID.items;
-  }
-);
-export const selectedEventParticipants = createAsyncThunk(
-  "event/selected/eventParticipants",
-  async ({ eventID }) => {
-    const eventParticipantData = await API.graphql({
-      query: eventParticipantSortByEventID,
-      variables: {
-        eventID: eventID,
-        sortDirection: "DESC",
-        filter: { active: { eq: true } },
-        // limit: 10,
-      },
-      authMode: "AWS_IAM",
-    });
+//     return eventCommentData.data.eventCommentSortByEventID.items;
+//   }
+// );
 
-    return eventParticipantData.data.eventParticipantSortByEventID.items;
-  }
-);
+// export const selectedEventParticipants = createAsyncThunk(
+//   "event/selected/eventParticipants",
+//   async ({ eventID }) => {
+//     const eventParticipantData = await API.graphql({
+//       query: eventParticipantSortByEventID,
+//       variables: {
+//         eventID: eventID,
+//         sortDirection: "DESC",
+//         filter: { active: { eq: true } },
+//         // limit: 10,
+//       },
+//       authMode: "AWS_IAM",
+//     });
+
+//     return eventParticipantData.data.eventParticipantSortByEventID.items;
+//   }
+// );
 
 export const loadMoreEventComments = createAsyncThunk(
   "event/selected/loadMoreEventComments",
@@ -176,17 +177,17 @@ export const postEventParticipant = createAsyncThunk(
   "event/postEventParticipant",
   async ({ createEventParticipantInput }) => {
     console.log("createEventParticipantInput", createEventParticipantInput);
-    // try {
-    const response = await API.graphql(
-      graphqlOperation(createEventParticipant, {
-        input: createEventParticipantInput,
-      })
-    );
-    return response;
-    // } catch (err) {
-    //   console.log(err);
-    //   return err;
-    // }
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createEventParticipant, {
+          input: createEventParticipantInput,
+        })
+      );
+      return response;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 );
 
@@ -216,8 +217,8 @@ const eventSlice = createSlice({
     removeSelectedEvent(state, action) {
       state.selected = {
         event: {
-          eventComments: { nextToken: null },
-          eventParticipants: { nextToken: null },
+          eventComments: { nextToken: null, items: [] },
+          eventParticipants: { nextToken: null, items: [] },
         },
       };
       console.log("remove selected removeSelectedEvent successfully!");
@@ -249,30 +250,30 @@ const eventSlice = createSlice({
         state.selectedEventStatus = "failed";
         state.selectedEventsError = action.error.message;
       })
-      // Cases for status of selectedEventComments (pending, fulfilled, and rejected)
-      .addCase(selectedEventComments.pending, (state, action) => {
-        state.selectedEventCommentsStatus = "loading";
-      })
-      .addCase(selectedEventComments.fulfilled, (state, action) => {
-        state.selectedEventCommentsStatus = "succeeded";
-        state.selected.comments = action.payload;
-      })
-      .addCase(selectedEventComments.rejected, (state, action) => {
-        state.selectedEventCommentsStatus = "failed";
-        state.selectedEventCommentsError = action.error.message;
-      })
-      // Cases for status of selectedEventParticipants (pending, fulfilled, and rejected)
-      .addCase(selectedEventParticipants.pending, (state, action) => {
-        state.selectedEventParticipantsStatus = "loading";
-      })
-      .addCase(selectedEventParticipants.fulfilled, (state, action) => {
-        state.selectedEventParticipantsStatus = "succeeded";
-        state.selected.participants = action.payload;
-      })
-      .addCase(selectedEventParticipants.rejected, (state, action) => {
-        state.selectedEventParticipantsStatus = "failed";
-        state.selectedEventParticipantsError = action.error.message;
-      })
+      // // Cases for status of selectedEventComments (pending, fulfilled, and rejected)
+      // .addCase(selectedEventComments.pending, (state, action) => {
+      //   state.selectedEventCommentsStatus = "loading";
+      // })
+      // .addCase(selectedEventComments.fulfilled, (state, action) => {
+      //   state.selectedEventCommentsStatus = "succeeded";
+      //   state.selected.comments = action.payload;
+      // })
+      // .addCase(selectedEventComments.rejected, (state, action) => {
+      //   state.selectedEventCommentsStatus = "failed";
+      //   state.selectedEventCommentsError = action.error.message;
+      // })
+      // // Cases for status of selectedEventParticipants (pending, fulfilled, and rejected)
+      // .addCase(selectedEventParticipants.pending, (state, action) => {
+      //   state.selectedEventParticipantsStatus = "loading";
+      // })
+      // .addCase(selectedEventParticipants.fulfilled, (state, action) => {
+      //   state.selectedEventParticipantsStatus = "succeeded";
+      //   state.selected.participants = action.payload;
+      // })
+      // .addCase(selectedEventParticipants.rejected, (state, action) => {
+      //   state.selectedEventParticipantsStatus = "failed";
+      //   state.selectedEventParticipantsError = action.error.message;
+      // })
       // Cases for status of postLike (pending, fulfilled, and rejected)
       .addCase(loadMoreEventComments.pending, (state, action) => {
         state.loadMoreEventCommentsStatus = "loading";
@@ -315,7 +316,7 @@ const eventSlice = createSlice({
       })
       .addCase(postEventParticipant.fulfilled, (state, action) => {
         state.postEventParticipantStatus = "succeeded";
-        state.selected.participants.unshift(action.payload);
+        state.selected.event.eventParticipants.items.unshift(action.payload);
       })
       .addCase(postEventParticipant.rejected, (state, action) => {
         state.postEventParticipantStatus = "failed";

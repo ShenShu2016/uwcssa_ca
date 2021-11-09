@@ -44,7 +44,6 @@ export default function EventDetail() {
         <IconButton component={Link} to="/event">
           <ArrowBackIcon />
         </IconButton>
-
         <EventBody event={event} />
       </Box>
     </div>
