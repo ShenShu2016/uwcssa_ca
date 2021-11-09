@@ -82,7 +82,7 @@ export default function PostMarketItem() {
 
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    const imageLocation = "marketItem";
+    const imageLocation = "market/item";
 
     const response = await dispatch(
       postMultipleImages({ imagesData, imageLocation })
@@ -145,7 +145,7 @@ export default function PostMarketItem() {
     };
     console.log("check!", createMarketItemInput);
 
-    const response = await dispatch(postMarketItem({ createMarketItemInput }));
+    const response = await dispatch(postMarketItem(createMarketItemInput));
     console.log("Something should be here", response);
     if (response.meta.requestStatus === "fulfilled") {
       history.push(`/market/item/${response.payload.data.createMarketItem.id}`);

@@ -92,7 +92,7 @@ export const fetchMarketItems = createAsyncThunk(
 
 export const selectedMarketItem = createAsyncThunk(
   "market/selectedMarketItem",
-  async ({ id }) => {
+  async (id) => {
     const response = await API.graphql({
       query: getMarketItem,
       variables: { id: id },
@@ -102,26 +102,28 @@ export const selectedMarketItem = createAsyncThunk(
   }
 );
 
-export const postMarketItem = createAsyncThunk(
-  "market/postMarketItem",
-  async ({ createMarketItemInput }) => {
-    console.log("盡了沒？", createMarketItemInput);
-    const response = await API.graphql(
-      graphqlOperation(createMarketItem, { input: createMarketItemInput })
-    );
-    console.log("上傳成功了沒", response);
-    return response;
-  }
-);
 // export const postMarketItem = createAsyncThunk(
 //   "market/postMarketItem",
 //   async ({ createMarketItemInput }) => {
+//     console.log("盡了沒？", createMarketItemInput);
 //     const response = await API.graphql(
 //       graphqlOperation(createMarketItem, { input: createMarketItemInput })
 //     );
+//     console.log("上傳成功了沒", response);
 //     return response;
 //   }
-// ); 你有點問題，莫名其妙出bug！
+// );
+export const postMarketItem = createAsyncThunk(
+  "market/postMarketItem",
+  async (createMarketItemInput) => {
+    console.log("盡了沒?", createMarketItemInput);
+    const response = await API.graphql(
+      graphqlOperation(createMarketItem, { input: createMarketItemInput })
+    );
+    return response;
+  }
+);
+// 你有點問題，莫名其妙出bug！
 
 // export const postMarketVehicle = createAsyncThunk(
 //   "market/postMarketVehicle",

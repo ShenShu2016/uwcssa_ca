@@ -253,16 +253,18 @@ export default function MarketRentalDetail() {
                   </Typography>
                 </Box>
               )}
-              <Stack
-                direction="row"
-                marginX="1rem"
-                marginBottom="0.5rem"
-                spacing={2}
-              >
+              <Box sx={{ marginX: "1rem", marginBottom: "0.5rem" }}>
                 {tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} color="primary" />;
+                  return (
+                    <Chip
+                      key={tagIdx}
+                      label={tag}
+                      color="primary"
+                      sx={{ margin: "0.5rem" }}
+                    />
+                  );
                 })}
-              </Stack>
+              </Box>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                 Descriptions
