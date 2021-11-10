@@ -4,9 +4,7 @@ export const sortOptions = [
   { value: "PriceAsc", label: "Price: lowest first" },
 ];
 
-export default function marketItemFilter(marketItems, filterList) {
-  console.log("marketItems", marketItems);
-  console.log("filterList", filterList);
+export default function marketItemFilter(marketItems, filterList, type) {
   const firstStageFilterFunction = ({ min, max }, marketItems) => {
     if (min !== "" && max !== "") {
       return marketItems.filter(
@@ -20,20 +18,155 @@ export default function marketItemFilter(marketItems, filterList) {
       return marketItems;
     }
   };
-  const secondStageFilterFunction = (
-    { category, condition },
-    firstStageFilteredMarketItems
-  ) => {
-    if (category === "" && condition === "") {
-      return firstStageFilteredMarketItems;
-    } else if (category === "" && condition !== "") {
-      return firstStageFilteredMarketItems.filter(
-        (item) => item.marketItemCondition === condition
-      );
-    } else if (category !== "" && condition === "") {
-      return firstStageFilteredMarketItems.filter(
-        (item) => item.marketItemCategory === category
-      );
+  const secondStageFilterFunction = (props, firstStageFilteredMarketItems) => {
+    if (type === "item") {
+      const { condition, category } = props;
+      if (category === "" && condition === "") {
+        return firstStageFilteredMarketItems;
+      } else if (category === "" && condition !== "") {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.marketItemCondition === condition
+        );
+      } else if (category !== "" && condition === "") {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.marketItemCategory === category
+        );
+      } else {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.marketItemCategory === category
+        );
+        return temp.filter((item) => item.marketItemCondition === condition);
+      }
+    } else if (type === "vehicle") {
+      const { vehicleType, year, make, model } = props;
+      if (vehicleType === "" && year === "" && make === "" && model === "") {
+        return firstStageFilteredMarketItems;
+      } else if (
+        vehicleType !== "" &&
+        year === "" &&
+        make === "" &&
+        model === ""
+      ) {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.vehicleType === vehicleType
+        );
+      } else if (
+        vehicleType === "" &&
+        year !== "" &&
+        make === "" &&
+        model === ""
+      ) {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.year === year
+        );
+      } else if (
+        vehicleType === "" &&
+        year === "" &&
+        make !== "" &&
+        model === ""
+      ) {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.make === make
+        );
+      } else if (
+        vehicleType === "" &&
+        year === "" &&
+        make === "" &&
+        model !== ""
+      ) {
+        return firstStageFilteredMarketItems.filter(
+          (item) => item.model === model
+        );
+      } else if (
+        vehicleType !== "" &&
+        year !== "" &&
+        make === "" &&
+        model === ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.vehicleType === vehicleType
+        );
+        return temp.filter((item) => item.year === year);
+      } else if (
+        vehicleType === "" &&
+        year !== "" &&
+        make !== "" &&
+        model === ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.year === year
+        );
+        return temp.filter((item) => item.make === make);
+      } else if (
+        vehicleType === "" &&
+        year === "" &&
+        make !== "" &&
+        model !== ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.make === make
+        );
+        return temp.filter((item) => item.model === model);
+      } else if (
+        vehicleType !== "" &&
+        year === "" &&
+        make !== "" &&
+        model === ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.vehicleType === vehicleType
+        );
+        return temp.filter((item) => item.make === make);
+      } else if (
+        vehicleType === "" &&
+        year !== "" &&
+        make === "" &&
+        model !== ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.year === year
+        );
+        return temp.filter((item) => item.model === model);
+      } else if (
+        vehicleType !== "" &&
+        year === "" &&
+        make === "" &&
+        model !== ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.vehicleType === vehicleType
+        );
+        return temp.filter((item) => item.model === model);
+      } else if (
+        vehicleType !== "" &&
+        year !== "" &&
+        make !== "" &&
+        model === ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.vehicleType === vehicleType
+        );
+        let temp2 = temp.filter((item) => item.year === year);
+        return temp2.filter((item) => item.make === make);
+      } else if (
+        vehicleType === "" &&
+        year !== "" &&
+        make !== "" &&
+        model !== ""
+      ) {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.year === year
+        );
+        let temp2 = temp.filter((item) => item.make === make);
+        return temp2.filter((item) => item.model === model);
+      } else {
+        let temp = firstStageFilteredMarketItems.filter(
+          (item) => item.vehicleType === vehicleType
+        );
+        let temp2 = temp.filter((item) => item.year === year);
+        let temp3 = temp2.filter((item) => item.make === make);
+        return temp3.filter((item) => item.model === model);
+      }
     }
   };
   const thirdStageFilterFunction = (
@@ -47,8 +180,6 @@ export default function marketItemFilter(marketItems, filterList) {
       const temp2 = temp1.filter(
         (subItem) => subItem.tags.includes(clickedTag) === true
       );
-      console.log("temp1", temp1);
-      console.log("temp2", temp2);
       return temp2;
     } else {
       return secondStageFilteredMarketItems;
@@ -86,7 +217,6 @@ export default function marketItemFilter(marketItems, filterList) {
     filterList.sortKey,
     thirdStageFilteredMarketItems
   );
-  console.log("result", sortedFilteredMarketItems);
 
   return sortedFilteredMarketItems;
 }

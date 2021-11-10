@@ -1,19 +1,22 @@
-import React, { useState } from "react";
-import { TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  InputAdornment,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import InputAdornment from "@mui/material/InputAdornment";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 
@@ -22,7 +25,7 @@ function ConfirmationDialogRaw(props) {
   const [newLocationInfo, setNewLocationInfo] = useState("");
   const [newLocationRadius, setNewLocationRadius] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) {
       setNewLocationInfo(valueProp);
     }
@@ -37,12 +40,6 @@ function ConfirmationDialogRaw(props) {
     backgroundColor: "rgb(243, 246, 249)",
     marginBottom: "1rem",
   }));
-
-  // const handleEntering = () => {
-  //   if (radioGroupRef.current != null) {
-  //     radioGroupRef.current.focus();
-  //   }
-  // };
 
   const handleCancel = () => {
     onClose();
@@ -119,9 +116,9 @@ ConfirmationDialogRaw.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ConfirmationDialog() {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("Some Location Here");
+export default function ConfirmationDialog({ type = "plain" }) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("Location");
 
   const handleClickListItem = () => {
     setOpen(true);
@@ -134,19 +131,39 @@ export default function ConfirmationDialog() {
       setValue(newValue);
     }
   };
-
-  return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      <List component="div" role="group">
-        <ListItem
-          button
-          aria-haspopup="true"
-          aria-controls="ringtone-menu"
-          aria-label="phone ringtone"
+  if (type === "plain") {
+    return (
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        <List component="div" role="group">
+          <ListItem
+            button
+            aria-haspopup="true"
+            aria-controls="ringtone-menu"
+            aria-label="phone ringtone"
+            onClick={handleClickListItem}
+          >
+            <ListItemText primary="Current Searching Area" secondary={value} />
+          </ListItem>
+          <ConfirmationDialogRaw
+            id="ringtone-menu"
+            keepMounted
+            open={open}
+            onClose={handleClose}
+            value={value}
+          />
+        </List>
+      </Box>
+    );
+  } else if (type === "button") {
+    return (
+      <React.Fragment>
+        <Button
+          variant="contained"
+          startIcon={<LocationOnIcon />}
           onClick={handleClickListItem}
         >
-          <ListItemText primary="Current Searching Area" secondary={value} />
-        </ListItem>
+          {value}
+        </Button>
         <ConfirmationDialogRaw
           id="ringtone-menu"
           keepMounted
@@ -154,7 +171,7 @@ export default function ConfirmationDialog() {
           onClose={handleClose}
           value={value}
         />
-      </List>
-    </Box>
-  );
+      </React.Fragment>
+    );
+  }
 }

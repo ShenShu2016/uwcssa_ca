@@ -10,7 +10,7 @@ import marketItemFilter from "./marketItemFilter";
 import { marketItemStyle } from "./marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
-export default function MarketItem() {
+export default function MarketVehicle() {
   const useStyles = marketItemStyle;
   useTitle("Item");
   const dispatch = useDispatch();
@@ -19,8 +19,10 @@ export default function MarketItem() {
     sortKey: "original",
     min: "",
     max: "",
-    category: "",
-    condition: "",
+    vehicleType: "",
+    year: "",
+    make: "",
+    model: "",
     clickedTag: "",
   });
 
@@ -30,7 +32,7 @@ export default function MarketItem() {
     (state) => state.market
   );
   const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Item"
+    (item) => item.marketType === "Vehicle"
   );
 
   console.log("true items", trueMarketItems);
@@ -40,7 +42,11 @@ export default function MarketItem() {
     }
   }, [fetchMarketItemsStatus, dispatch]);
 
-  const filteredItems = marketItemFilter(trueMarketItems, filterList, "item");
+  const filteredItems = marketItemFilter(
+    trueMarketItems,
+    filterList,
+    "vehicle"
+  );
   console.log("say something", filteredItems);
 
   // let urls = [];
@@ -82,12 +88,19 @@ export default function MarketItem() {
   const handleMin = (e) => {
     setFilterList({ ...filterList, min: e.target.value });
   };
-  const handleCategory = (e) => {
-    setFilterList({ ...filterList, category: e.target.value });
+  const handleVehicleType = (e) => {
+    setFilterList({ ...filterList, vehicleType: e.target.value });
   };
-  const handleCondition = (e) => {
-    setFilterList({ ...filterList, condition: e.target.value });
+  const handleYear = (e) => {
+    setFilterList({ ...filterList, year: e.target.value });
   };
+  const handleModel = (e) => {
+    setFilterList({ ...filterList, model: e.target.value });
+  };
+  const handleMake = (e) => {
+    setFilterList({ ...filterList, make: e.target.value });
+  };
+
   const handleClick = (tag) => {
     setFilterList({ ...filterList, clickedTag: tag });
   };
@@ -97,8 +110,10 @@ export default function MarketItem() {
       sortKey: "original",
       min: "",
       max: "",
-      category: "",
-      condition: "",
+      vehicleType: "",
+      year: "",
+      make: "",
+      model: "",
       clickedTag: "",
     });
   };
@@ -111,25 +126,30 @@ export default function MarketItem() {
       >
         <FilterInfo
           form="plain"
-          type="item"
+          type="vehicle"
           filterList={filterList}
           handleSortKey={handleSortKey}
           handleMin={handleMin}
           handleMax={handleMax}
-          handleCategory={handleCategory}
-          handleCondition={handleCondition}
+          handleVehicleType={handleVehicleType}
+          handleYear={handleYear}
+          handleMake={handleMake}
+          handleModel={handleModel}
           handleReset={handleReset}
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
+            type="vehicle"
             trueMarketItems={trueMarketItems}
             handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
             handleMax={handleMax}
-            handleCategory={handleCategory}
-            handleCondition={handleCondition}
+            handleVehicleType={handleVehicleType}
+            handleYear={handleYear}
+            handleMake={handleMake}
+            handleModel={handleModel}
             handleReset={handleReset}
           />
           <Box className={classes.items}>{itemRenderList}</Box>

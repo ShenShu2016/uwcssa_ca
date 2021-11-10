@@ -102,7 +102,7 @@ export default function MarketList() {
         <MarketSideBar />
         <Box className={classes.img}>
           <Typography variant="h3" className={classes.title}>
-            輻射4
+            辐射4
           </Typography>
           <Box className={classes.items}>{marketItemRenderList}</Box>
           <Divider />

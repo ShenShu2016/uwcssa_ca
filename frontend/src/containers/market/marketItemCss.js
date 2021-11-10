@@ -6,8 +6,8 @@ export const marketItemStyle = makeStyles((theme) => ({
     width: "360px",
     height: "100%",
     float: "left",
-    overflowY: "scroll",
-    // overflow: "hidden",
+    // overflowY: "scroll",
+    overflow: "hidden",
     position: "relative",
     //   backgroundColor: "black",
     [theme.breakpoints.down("md")]: {
@@ -29,7 +29,9 @@ export const marketItemStyle = makeStyles((theme) => ({
     marginBlock: "2rem",
   },
   paper: {
-    padding: "1rem",
+    paddingLeft: "1rem",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
     //   backgroundColor: "black",
     position: "absolute",
     top: "0",
@@ -37,6 +39,9 @@ export const marketItemStyle = makeStyles((theme) => ({
     right: "0",
     overflow: "hidden",
     marginRight: "5px",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
   img: {
     padding: "2rem",
@@ -47,7 +52,7 @@ export const marketItemStyle = makeStyles((theme) => ({
     float: "left",
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      height: "50vh",
+      height: "100%",
     },
   },
   title: {
@@ -59,5 +64,23 @@ export const marketItemStyle = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     flexWrap: "wrap",
+  },
+  imgPaper1: {
+    alignContent: "center",
+    marginBottom: "1rem",
+    padding: "2rem",
+    display: "block",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  },
+  imgPaper2: {
+    alignContent: "center",
+    marginBottom: "1rem",
+    padding: "2rem",
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+    },
   },
 }));
