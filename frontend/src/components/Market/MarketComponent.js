@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { marketRentalOptions } from "../../containers/market/marketRentalOptions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,12 +45,19 @@ export default function MarketComponent({ item, type }) {
     // marketItemCategory,
     // marketItemCondition,
     location,
+    year,
+    make,
     model,
+    address,
+    marketRentalSaleRent,
+    bedroomCounts,
+    propertyType,
     // tags,
     // active,
     // ByCreatedAt,
   } = item;
-
+  const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
+    marketRentalOptions;
   useEffect(() => {
     const getImage = async () => {
       try {
@@ -70,11 +78,10 @@ export default function MarketComponent({ item, type }) {
     }
   }, [imgS3Keys]);
 
-  return (
-    <Paper elevation={0} className={classes.root}>
-      <CardActionArea component={Link} to={`/market/${type}/${id}`}>
-        <img src={imageURL} alt="" className={classes.s3image} />
-        <Box my={"8px"}>
+  const displayInfo = () => {
+    if (type === "item") {
+      return (
+        <React.Fragment>
           <Box my={"4px"}>
             <Typography
               sx={{
@@ -85,18 +92,6 @@ export default function MarketComponent({ item, type }) {
               }}
             >
               ${price}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "600",
-                lineHeight: "1.3333",
-              }}
-            >
-              {model}
             </Typography>
           </Box>
           <Box my={"4px"}>
@@ -123,7 +118,104 @@ export default function MarketComponent({ item, type }) {
               {location}
             </Typography>
           </Box>
-        </Box>
+        </React.Fragment>
+      );
+    } else if (type === "vehicle") {
+      return (
+        <React.Fragment>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "600",
+                lineHeight: "1.3333",
+              }}
+            >
+              ${price}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "400",
+                lineHeight: "1.3333",
+              }}
+            >
+              {year} {make} {model}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "13px",
+                color: "#65676B",
+                fontWeight: "400",
+                lineHeight: "1.2308",
+              }}
+            >
+              {location}
+            </Typography>
+          </Box>
+        </React.Fragment>
+      );
+    } else if (type === "rental") {
+      return (
+        <React.Fragment>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "600",
+                lineHeight: "1.3333",
+              }}
+            >
+              ${price}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "17px",
+                color: "#505050",
+                fontWeight: "400",
+                lineHeight: "1.33333",
+              }}
+            >
+              {PType.filter((item) => item.value === propertyType)[0].label},
+              {bedroomCounts} bedrooms,
+              {
+                RentOrSale.filter(
+                  (item) => item.value === marketRentalSaleRent
+                )[0].label
+              }
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "13px",
+                color: "#65676B",
+                fontWeight: "400",
+                lineHeight: "1.2308",
+              }}
+            >
+              {address}
+            </Typography>
+          </Box>
+        </React.Fragment>
+      );
+    }
+  };
+
+  return (
+    <Paper elevation={0} className={classes.root}>
+      <CardActionArea component={Link} to={`/market/${type}/${id}`}>
+        <img src={imageURL} alt="" className={classes.s3image} />
+        <Box my={"8px"}>{displayInfo()}</Box>
       </CardActionArea>
     </Paper>
   );

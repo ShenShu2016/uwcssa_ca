@@ -6,6 +6,7 @@ import MarketItem from "./marketItem";
 import MarketItemDetail from "./MarketItemDetail";
 import MarketList from "./marketList";
 import MarketRentalDetail from "./MarketRentalDetail";
+import MarketVehicle from "./marketVehicle";
 import MarketVehicleDetail from "./MarketVehicleDetail ";
 import PostMarketItem from "./PostMarketItem";
 import PostMarketRental from "./PostMarketRental";
@@ -25,6 +26,7 @@ export default function Market() {
         <Route path="/market/vehicle/:id" component={MarketVehicleDetail} />
         <Route path="/market/rental/:id" component={MarketRentalDetail} />
         <Route path="/market/item/" component={MarketItem} />
+        <Route path="/market/vehicle/" component={MarketVehicle} />
       </Switch>
     </Box>
   );

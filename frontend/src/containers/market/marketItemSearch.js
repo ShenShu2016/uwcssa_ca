@@ -7,6 +7,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 import HouseIcon from "@mui/icons-material/House";
@@ -90,12 +91,52 @@ export const CategoryIcons = () => {
           icon={<AddShoppingCartIcon />}
         />
         <IconList to="/market/vehicle" label="汽車" icon={<DriveEtaIcon />} />
-        <IconList to="/market/vehicle" label="汽車" icon={<DriveEtaIcon />} />
-        <IconList to="/market/vehicle" label="汽車" icon={<DriveEtaIcon />} />
-        <IconList to="/market/vehicle" label="汽車" icon={<DriveEtaIcon />} />
-        <IconList to="/market/vehicle" label="汽車" icon={<DriveEtaIcon />} />
-
         <IconList to="/market/rental" label="房屋" icon={<HouseIcon />} />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
+        <IconList
+          to="/market/vehicle"
+          label="凑数"
+          icon={<AccessibilityNewIcon />}
+        />
       </List>
     </nav>
   );

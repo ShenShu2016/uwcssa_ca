@@ -81,22 +81,32 @@ export default function MarketItemDetail() {
   useTitle("二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
+
   console.log("id", id);
+
   useEffect(() => {
     const getItems = async () => {
       if (id && id !== "") {
-        await dispatch(selectedMarketItem(id));
+        try {
+          await dispatch(selectedMarketItem(id)).unwrap();
+          console.log("Successfully get items");
+        } catch (error) {
+          console.error("Failed to get items", error);
+        } finally {
+          return () => dispatch(removeSelectedMarketItem());
+        }
       }
-      return () => dispatch(removeSelectedMarketItem());
     };
     getItems();
   }, [id, dispatch]);
+
   const { marketItem } = useSelector((state) => state.market.selected);
   const {
     marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
   console.log("marketItem", marketItem);
+
   const {
     // id,
     // name,

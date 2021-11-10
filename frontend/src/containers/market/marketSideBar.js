@@ -1,23 +1,24 @@
-import { Box, Button, Divider, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Typography,
+} from "@mui/material";
+import { CategoryIcons, SearchArea } from "./marketItemSearch";
 
 import AddIcon from "@mui/icons-material/Add";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import DriveEtaIcon from "@mui/icons-material/DriveEta";
-import HouseIcon from "@mui/icons-material/House";
-import InputBase from "@mui/material/InputBase";
 import { Link } from "react-router-dom";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import MarketFIlterLocation from "./marketFilterLocation";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
 
 const MarketSideBar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -46,55 +47,6 @@ const MarketSideBar = () => {
     },
   }));
   const classes = useStyles();
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: "rgb(243, 246, 249)",
-    marginRight: theme.spacing(2),
-    width: "100%",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-      },
-    },
-  }));
-
-  const SearchArea = () => {
-    return (
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
-    );
-  };
 
   const UtilityIcons = () => {
     return (
@@ -121,102 +73,6 @@ const MarketSideBar = () => {
     );
   };
 
-  const CategoryIcons = () => {
-    return (
-      <nav aria-label="main mailbox folders">
-        <List sx={{ overflow: "auto", position: "relative" }}>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} to="/market/item">
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="二手商品" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DriveEtaIcon />
-              </ListItemIcon>
-              <ListItemText primary="汽車" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>{" "}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="房屋" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </nav>
-    );
-  };
   return (
     <Box className={classes.info}>
       <Paper className={classes.paper} elevation={3}>
