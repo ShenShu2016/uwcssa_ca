@@ -8,7 +8,7 @@ import forumReducer from "./forumSlice";
 import generalReducer from "./generalSlice";
 // import { generalReducer } from "./generalReducer";
 import marketReducer from "./marketSlice";
-import { profileReducer } from "./profileReducer";
+import profileReducer from "./profileSlice";
 
 const reducers = combineReducers({
   general: generalReducer,

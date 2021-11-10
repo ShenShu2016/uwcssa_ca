@@ -18,7 +18,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { postUserEducation } from "../../../../redux/actions/profileActions";
+import { postUserEducation } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -63,7 +63,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
   };
 
   const create = () => {
-    dispatch(postUserEducation(createUserEducationInput));
+    dispatch(postUserEducation({ createUserEducationInput }));
     handleCreateClose();
     setFormData({
       degree: "",

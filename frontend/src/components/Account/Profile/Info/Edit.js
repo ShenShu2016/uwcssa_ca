@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import S3Image from "../../../S3/S3Image";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/reducers/generalSlice";
-import { putUserProfile } from "../../../../redux/actions/profileActions";
+import { putUserProfile } from "../../../../redux/reducers/profileSlice";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
@@ -97,7 +97,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const update = () => {
-    dispatch(putUserProfile(updateUserInput));
+    dispatch(putUserProfile({ updateUserInput }));
     handleEditClose();
   };
 

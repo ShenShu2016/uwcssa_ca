@@ -18,7 +18,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { postUserExperience } from "../../../../redux/actions/profileActions";
+import { postUserExperience } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -75,7 +75,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
   };
 
   const create = () => {
-    dispatch(postUserExperience(createUserExperienceInput));
+    dispatch(postUserExperience({ createUserExperienceInput }));
     handleCreateClose();
     setFormData({
       companyName: "",
