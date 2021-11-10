@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
   },
 });
-export default function Edit({ experience, editOpen, handleEditClose }) {
+export default function Edit({ experience, editOpen, handleEditClose, idx }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -79,7 +79,7 @@ export default function Edit({ experience, editOpen, handleEditClose }) {
   };
 
   const update = () => {
-    dispatch(putUserExperience({ updateUserExperienceInput }));
+    dispatch(putUserExperience({ updateUserExperienceInput, idx }));
     handleEditClose();
   };
 

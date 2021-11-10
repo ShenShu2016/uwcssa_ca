@@ -110,7 +110,7 @@ export const postUserExperience = createAsyncThunk(
 
 export const putUserExperience = createAsyncThunk(
   "profile/putUserExperience",
-  async ({ updateUserExperienceInput }) => {
+  async ({ updateUserExperienceInput, idx }) => {
     const response = await API.graphql(
       graphqlOperation(updateUserExperience, {
         input: updateUserExperienceInput,
@@ -121,7 +121,7 @@ export const putUserExperience = createAsyncThunk(
 );
 
 const profileSlice = createSlice({
-  name: "article",
+  name: "profile",
   initialState,
   reducers: {
     //有API call 的不能放这里
@@ -168,7 +168,7 @@ const profileSlice = createSlice({
       })
       .addCase(putUserProfile.fulfilled, (state, action) => {
         state.putUserProfileStatus = "succeeded";
-        state = action.payload;
+        state.user = action.payload;
       })
       .addCase(putUserProfile.rejected, (state, action) => {
         state.putUserProfileStatus = "failed";
@@ -195,6 +195,8 @@ const profileSlice = createSlice({
       .addCase(putUserEducation.fulfilled, (state, action) => {
         state.putUserEducationStatus = "succeeded";
         //! need to do later
+        state.user.userEducations.items[action.meta.arg.idx] =
+          action.payload.data.updateUserEducation;
       })
       .addCase(putUserEducation.rejected, (state, action) => {
         state.putUserEducationStatus = "failed";
@@ -220,9 +222,8 @@ const profileSlice = createSlice({
       })
       .addCase(putUserExperience.fulfilled, (state, action) => {
         state.putUserExperienceStatus = "succeeded";
-        state.selected.article.articleComments.items[
-          action.meta.arg.idx
-        ].articleSubComments.items.unshift(action.payload);
+        state.user.userExperiences.items[action.meta.arg.idx] =
+          action.payload.data.updateUserExperience;
       })
       .addCase(putUserExperience.rejected, (state, action) => {
         state.putUserExperienceStatus = "failed";
