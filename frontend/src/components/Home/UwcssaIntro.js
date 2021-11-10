@@ -93,13 +93,17 @@ export default function UwcssaIntro() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { userAuth } = useSelector((state) => state);
-  const { userCounts } = useSelector((state) => state.general);
+  const { userCounts, fetchUserCountsStatus } = useSelector(
+    (state) => state.general
+  );
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
   useEffect(() => {
-    dispatch(fetchUserCounts());
-  }, [dispatch]);
+    if (fetchUserCountsStatus === "idle" || undefined) {
+      dispatch(fetchUserCounts());
+    }
+  }, [dispatch, fetchUserCountsStatus]);
   const guestButton = () => (
     <div>
       <Button

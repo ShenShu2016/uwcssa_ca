@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import API from "@aws-amplify/api";
 import { Link } from "react-router-dom";
-import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
+// import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
+import { listUwcssaJobs } from "../../redux/CustomQuery/CareerQueries";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
