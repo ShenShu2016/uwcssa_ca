@@ -5,168 +5,60 @@ export const sortOptions = [
 ];
 
 export default function marketItemFilter(marketItems, filterList, type) {
-  const firstStageFilterFunction = ({ min, max }, marketItems) => {
-    if (min !== "" && max !== "") {
-      return marketItems.filter(
-        (item) => item.price >= min && item.price <= max
-      );
-    } else if (min === "" && max !== "") {
-      return marketItems.filter((item) => item.price <= max);
-    } else if (min !== "" && max === "") {
-      return marketItems.filter((item) => item.price >= min);
-    } else if (min === "" && max === "") {
-      return marketItems;
+  const firstStageFilterFunction = (
+    { min, max, minYear, maxYear },
+    marketItems
+  ) => {
+    if (type === "item" || "rental") {
+      if (min !== "" && max !== "") {
+        return marketItems.filter(
+          (item) => item.price >= min && item.price <= max
+        );
+      } else if (min === "" && max !== "") {
+        return marketItems.filter((item) => item.price <= max);
+      } else if (min !== "" && max === "") {
+        return marketItems.filter((item) => item.price >= min);
+      } else if (min === "" && max === "") {
+        return marketItems;
+      }
+    } else if (type === "vehicle") {
+      const getPrice = (items) => {
+        if (min !== "" && max !== "") {
+          return items.filter((item) => item.price >= min && item.price <= max);
+        } else if (min === "" && max !== "") {
+          return items.filter((item) => item.price <= max);
+        } else if (min !== "" && max === "") {
+          return items.filter((item) => item.price >= min);
+        } else if (min === "" && max === "") {
+          return items;
+        }
+      };
+      const temp = getPrice(marketItems);
+      if (minYear !== "" && maxYear !== "") {
+        return temp.filter(
+          (item) => item.price >= minYear && item.price <= maxYear
+        );
+      } else if (minYear === "" && maxYear !== "") {
+        return temp.filter((item) => item.price <= maxYear);
+      } else if (minYear !== "" && maxYear === "") {
+        return temp.filter((item) => item.price >= minYear);
+      } else if (minYear === "" && maxYear === "") {
+        return temp;
+      }
     }
   };
   const secondStageFilterFunction = (props, firstStageFilteredMarketItems) => {
-    if (type === "item") {
-      const { condition, category } = props;
-      if (category === "" && condition === "") {
-        return firstStageFilteredMarketItems;
-      } else if (category === "" && condition !== "") {
-        return firstStageFilteredMarketItems.filter(
-          (item) => item.marketItemCondition === condition
-        );
-      } else if (category !== "" && condition === "") {
-        return firstStageFilteredMarketItems.filter(
-          (item) => item.marketItemCategory === category
-        );
-      } else {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.marketItemCategory === category
-        );
-        return temp.filter((item) => item.marketItemCondition === condition);
-      }
-    } else if (type === "vehicle") {
-      const { vehicleType, year, make, model } = props;
-      if (vehicleType === "" && year === "" && make === "" && model === "") {
-        return firstStageFilteredMarketItems;
-      } else if (
-        vehicleType !== "" &&
-        year === "" &&
-        make === "" &&
-        model === ""
-      ) {
-        return firstStageFilteredMarketItems.filter(
-          (item) => item.vehicleType === vehicleType
-        );
-      } else if (
-        vehicleType === "" &&
-        year !== "" &&
-        make === "" &&
-        model === ""
-      ) {
-        return firstStageFilteredMarketItems.filter(
-          (item) => item.year === year
-        );
-      } else if (
-        vehicleType === "" &&
-        year === "" &&
-        make !== "" &&
-        model === ""
-      ) {
-        return firstStageFilteredMarketItems.filter(
-          (item) => item.make === make
-        );
-      } else if (
-        vehicleType === "" &&
-        year === "" &&
-        make === "" &&
-        model !== ""
-      ) {
-        return firstStageFilteredMarketItems.filter(
-          (item) => item.model === model
-        );
-      } else if (
-        vehicleType !== "" &&
-        year !== "" &&
-        make === "" &&
-        model === ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.vehicleType === vehicleType
-        );
-        return temp.filter((item) => item.year === year);
-      } else if (
-        vehicleType === "" &&
-        year !== "" &&
-        make !== "" &&
-        model === ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.year === year
-        );
-        return temp.filter((item) => item.make === make);
-      } else if (
-        vehicleType === "" &&
-        year === "" &&
-        make !== "" &&
-        model !== ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.make === make
-        );
-        return temp.filter((item) => item.model === model);
-      } else if (
-        vehicleType !== "" &&
-        year === "" &&
-        make !== "" &&
-        model === ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.vehicleType === vehicleType
-        );
-        return temp.filter((item) => item.make === make);
-      } else if (
-        vehicleType === "" &&
-        year !== "" &&
-        make === "" &&
-        model !== ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.year === year
-        );
-        return temp.filter((item) => item.model === model);
-      } else if (
-        vehicleType !== "" &&
-        year === "" &&
-        make === "" &&
-        model !== ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.vehicleType === vehicleType
-        );
-        return temp.filter((item) => item.model === model);
-      } else if (
-        vehicleType !== "" &&
-        year !== "" &&
-        make !== "" &&
-        model === ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.vehicleType === vehicleType
-        );
-        let temp2 = temp.filter((item) => item.year === year);
-        return temp2.filter((item) => item.make === make);
-      } else if (
-        vehicleType === "" &&
-        year !== "" &&
-        make !== "" &&
-        model !== ""
-      ) {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.year === year
-        );
-        let temp2 = temp.filter((item) => item.make === make);
-        return temp2.filter((item) => item.model === model);
-      } else {
-        let temp = firstStageFilteredMarketItems.filter(
-          (item) => item.vehicleType === vehicleType
-        );
-        let temp2 = temp.filter((item) => item.year === year);
-        let temp3 = temp2.filter((item) => item.make === make);
-        return temp3.filter((item) => item.model === model);
-      }
+    if (Object.entries(props).length === 0) {
+      return firstStageFilteredMarketItems;
+    } else {
+      const result = firstStageFilteredMarketItems.filter((item) =>
+        Object.keys(props)
+          .map((key) => props[key] === item[key])
+          .every(Boolean) === true
+          ? item
+          : null
+      );
+      return result;
     }
   };
   const thirdStageFilterFunction = (
@@ -201,18 +93,49 @@ export default function marketItemFilter(marketItems, filterList, type) {
     }
   };
 
+  const {
+    category: marketItemCategory,
+    condition: marketItemCondition,
+    vehicleType,
+    make,
+    model,
+    marketRentalSaleRent,
+    propertyType,
+    airConditioningType,
+    heatingType,
+  } = filterList;
+
+  let categoryFilterList = {
+    marketItemCategory,
+    marketItemCondition,
+    vehicleType,
+    make,
+    model,
+    marketRentalSaleRent,
+    propertyType,
+    airConditioningType,
+    heatingType,
+  };
+
+  for (let key in categoryFilterList) {
+    if (categoryFilterList[key] === "" || categoryFilterList[key] === undefined)
+      delete categoryFilterList[key];
+  }
+
   const firstStageFilteredMarketItems = firstStageFilterFunction(
     filterList,
     marketItems
   );
   const secondStageFilteredMarketItems = secondStageFilterFunction(
-    filterList,
+    categoryFilterList,
     firstStageFilteredMarketItems
   );
+
   const thirdStageFilteredMarketItems = thirdStageFilterFunction(
     filterList,
     secondStageFilteredMarketItems
   );
+
   const sortedFilteredMarketItems = sortedFunction(
     filterList.sortKey,
     thirdStageFilteredMarketItems

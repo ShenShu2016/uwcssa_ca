@@ -20,6 +20,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 import FilterInfo from "./marketItemFilterInfo";
 import HomeIcon from "@mui/icons-material/Home";
+import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
 import MarketFIlterLocation from "./marketFilterLocation";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -80,6 +81,15 @@ export default function MarketImgTopFilter({
   handleMax,
   handleCategory,
   handleCondition,
+  handleVehicleType,
+  handleMinYear,
+  handleMaxYear,
+  handleMake,
+  handleModel,
+  handleMarketRentalSaleRent,
+  handlePropertyType,
+  handleAirConditioningType,
+  handleHeatingType,
   handleReset,
 }) {
   const useStyles = marketItemStyle;
@@ -177,6 +187,18 @@ export default function MarketImgTopFilter({
                 </Button>
               </span>
             ) : null}
+            {type === "rental" ? (
+              <span style={{ cursor: "not-allowed" }}>
+                <Button
+                  startIcon={<HouseIcon />}
+                  color="inherit"
+                  component={Link}
+                  to="/market/rental"
+                >
+                  Rental
+                </Button>
+              </span>
+            ) : null}
           </Breadcrumbs>
         </Box>
         <Button
@@ -234,6 +256,15 @@ export default function MarketImgTopFilter({
             handleCategory={handleCategory}
             handleCondition={handleCondition}
             handleReset={handleReset}
+            handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+            handlePropertyType={handlePropertyType}
+            handleAirConditioningType={handleAirConditioningType}
+            handleHeatingType={handleHeatingType}
+            handleVehicleType={handleVehicleType}
+            handleMinYear={handleMinYear}
+            handleMaxYear={handleMaxYear}
+            handleMake={handleMake}
+            handleModel={handleModel}
           />
         </Stack>
       </Paper>

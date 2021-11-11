@@ -185,21 +185,24 @@ export default function MarketVehicleDetail() {
                 <Button
                   startIcon={<MessageIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Contact
                 </Button>
                 <Button
                   startIcon={<BookmarksIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Save
                 </Button>
                 <Button
                   startIcon={<ShareIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Share
                 </Button>
@@ -255,7 +258,7 @@ export default function MarketVehicleDetail() {
                 spacing={2}
               >
                 {tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} color="primary" />;
+                  return <Chip key={tagIdx} label={tag} />;
                 })}
               </Stack>
               <Divider />
@@ -265,16 +268,17 @@ export default function MarketVehicleDetail() {
               <Typography marginX="1rem" marginY="0.25rem">
                 {description}
               </Typography>
-              <Box
+              <Paper
                 sx={{
                   marginX: "1rem",
                   marginY: "0.25rem",
-                  bgcolor: "#4caf50",
-                  height: "200px",
+                  height: "250px",
+                  backgroundColor: "rgb(243, 246, 249)",
+                  marginBottom: "1rem",
                 }}
               >
-                Google map
-              </Box>
+                Google Map
+              </Paper>
               <Typography marginX="1rem" marginY="0.25rem">
                 {location}
               </Typography>

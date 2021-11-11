@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -81,20 +82,20 @@ export default function PostMarketRental() {
   const history = useHistory();
 
   const [marketRentalData, setMarketRentalData] = useState({
-    marketRentalSaleRent: "Other",
-    propertyType: "Other",
-    bedroomCounts: 0,
-    bathroomsCounts: 0,
-    price: 0,
+    marketRentalSaleRent: "",
+    propertyType: "",
+    bedroomCounts: "",
+    bathroomsCounts: "",
+    price: "",
     address: "",
     description: "",
-    propertySize: 0,
-    dateAvailable: "2019-05-03T18:18:13.683Z",
-    laundryType: "Other",
-    airConditionType: "Other",
-    heatingType: "CentralHeating",
-    catFriendly: true,
-    dogFriendly: true,
+    propertySize: "",
+    dateAvailable: new Date(),
+    laundryType: "",
+    airConditionType: "",
+    heatingType: "",
+    catFriendly: "",
+    dogFriendly: "",
     tags: [],
   });
   // console.log("marketRentalData", marketRentalData);
@@ -260,6 +261,7 @@ export default function PostMarketRental() {
               label="Bedroom Counts"
               value={marketRentalData.bedroomCounts}
               variant="outlined"
+              placeholder="eg. 2"
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
@@ -291,6 +293,13 @@ export default function PostMarketRental() {
               value={marketRentalData.price}
               variant="outlined"
               fullWidth
+              type="number"
+              placeholder="eg. 25000 (Currency: CAD $)"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
@@ -306,6 +315,13 @@ export default function PostMarketRental() {
               value={marketRentalData.propertySize}
               variant="outlined"
               fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    Squared Meters
+                  </InputAdornment>
+                ),
+              }}
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
