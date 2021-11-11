@@ -10,7 +10,7 @@ import marketItemFilter from "./marketItemFilter";
 import { marketItemStyle } from "./marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
-export default function MarketVehicle() {
+export default function MarketRental() {
   const useStyles = marketItemStyle;
   useTitle("Item");
   const dispatch = useDispatch();
@@ -19,11 +19,10 @@ export default function MarketVehicle() {
     sortKey: "original",
     min: "",
     max: "",
-    vehicleType: "",
-    minYear: "",
-    maxYear: "",
-    make: "",
-    model: "",
+    marketRentalSaleRent: "",
+    propertyType: "",
+    airConditioningType: "",
+    heatingType: "",
     clickedTag: "",
   });
 
@@ -33,7 +32,7 @@ export default function MarketVehicle() {
     (state) => state.market
   );
   const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Vehicle"
+    (item) => item.marketType === "Rental"
   );
 
   console.log("true items", trueMarketItems);
@@ -43,11 +42,7 @@ export default function MarketVehicle() {
     }
   }, [fetchMarketItemsStatus, dispatch]);
 
-  const filteredItems = marketItemFilter(
-    trueMarketItems,
-    filterList,
-    "vehicle"
-  );
+  const filteredItems = marketItemFilter(trueMarketItems, filterList, "rental");
   console.log("say something", filteredItems);
 
   // let urls = [];
@@ -89,22 +84,18 @@ export default function MarketVehicle() {
   const handleMin = (e) => {
     setFilterList({ ...filterList, min: e.target.value });
   };
-  const handleVehicleType = (e) => {
-    setFilterList({ ...filterList, vehicleType: e.target.value });
+  const handleMarketRentalSaleRent = (e) => {
+    setFilterList({ ...filterList, marketRentalSaleRent: e.target.value });
   };
-  const handleMinYear = (e) => {
-    setFilterList({ ...filterList, minYear: e.target.value });
+  const handlePropertyType = (e) => {
+    setFilterList({ ...filterList, propertyType: e.target.value });
   };
-  const handleMaxYear = (e) => {
-    setFilterList({ ...filterList, maxYear: e.target.value });
+  const handleAirConditioningType = (e) => {
+    setFilterList({ ...filterList, airConditioningType: e.target.value });
   };
-  const handleModel = (e) => {
-    setFilterList({ ...filterList, model: e.target.value });
+  const handleHeatingType = (e) => {
+    setFilterList({ ...filterList, heatingType: e.target.value });
   };
-  const handleMake = (e) => {
-    setFilterList({ ...filterList, make: e.target.value });
-  };
-
   const handleClick = (tag) => {
     setFilterList({ ...filterList, clickedTag: tag });
   };
@@ -114,10 +105,10 @@ export default function MarketVehicle() {
       sortKey: "original",
       min: "",
       max: "",
-      vehicleType: "",
-      year: "",
-      make: "",
-      model: "",
+      marketRentalSaleRent: "",
+      propertyType: "",
+      airConditioningType: "",
+      heatingType: "",
       clickedTag: "",
     });
   };
@@ -130,32 +121,30 @@ export default function MarketVehicle() {
       >
         <FilterInfo
           form="plain"
-          type="vehicle"
+          type="rental"
           filterList={filterList}
           handleSortKey={handleSortKey}
           handleMin={handleMin}
           handleMax={handleMax}
-          handleVehicleType={handleVehicleType}
-          handleMinYear={handleMinYear}
-          handleMaxYear={handleMaxYear}
-          handleMake={handleMake}
-          handleModel={handleModel}
+          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+          handlePropertyType={handlePropertyType}
+          handleAirConditioningType={handleAirConditioningType}
+          handleHeatingType={handleHeatingType}
           handleReset={handleReset}
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
-            type="vehicle"
+            type="rental"
             trueMarketItems={trueMarketItems}
             handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
             handleMax={handleMax}
-            handleVehicleType={handleVehicleType}
-            handleMinYear={handleMinYear}
-            handleMaxYear={handleMaxYear}
-            handleMake={handleMake}
-            handleModel={handleModel}
+            handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+            handlePropertyType={handlePropertyType}
+            handleAirConditioningType={handleAirConditioningType}
+            handleHeatingType={handleHeatingType}
             handleReset={handleReset}
           />
           <Box className={classes.items}>{itemRenderList}</Box>

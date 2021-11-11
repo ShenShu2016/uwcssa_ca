@@ -21,12 +21,14 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import HomeIcon from "@mui/icons-material/Home";
+import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
 import MarketFIlterLocation from "./marketFilterLocation";
 import MarketForm from "../../components/Market/marketForm";
 import PropTypes from "prop-types";
 import { marketItemOptions } from "./marketItemOptions";
 import { marketItemStyle } from "./marketItemCss";
+import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
 import { sortOptions } from "./marketItemFilter";
 
@@ -41,17 +43,24 @@ function ConfirmationDialogRaw(props) {
     handleMin,
     handleMax,
     handleVehicleType,
-    handleYear,
+    handleMinYear,
+    handleMaxYear,
     handleMake,
     handleModel,
     handleCategory,
     handleCondition,
+    handleMarketRentalSaleRent,
+    handlePropertyType,
+    handleAirConditioningType,
+    handleHeatingType,
     handleReset,
     ...other
   } = props;
 
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const { marketVehicleTypeList } = marketVehicleOptions;
+  const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
+    marketRentalOptions;
   const useStyles = marketItemStyle;
   const classes = useStyles();
 
@@ -139,7 +148,6 @@ function ConfirmationDialogRaw(props) {
         </Stack>
         {type === "item" ? (
           <React.Fragment>
-            {" "}
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
               Category
             </Typography>
@@ -171,21 +179,42 @@ function ConfirmationDialogRaw(props) {
               options={marketVehicleTypeList}
               onChange={(e) => handleVehicleType(e)}
             />
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Year
+            <Typography
+              marginTop="1rem"
+              variant="h6"
+              marginBottom="1rem"
+              fontWeight="bold"
+            >
+              Year Range
             </Typography>
-            <MarketForm
-              title="Year"
-              value={filterList.vehicleType} // Need to change the style to (min,max)
-              options={marketVehicleTypeList} //
-              disabled={true}
-              onChange={(e) => handleYear(e)}
-            />
+            <Stack direction="row" spacing={2}>
+              <TextField
+                sx={{ maxWidth: "100%" }}
+                label="Min Year"
+                variant="outlined"
+                type="number"
+                helperText="eg. 2012"
+                value={filterList.minYear}
+                className={classes.titleInput}
+                onChange={(e) => handleMinYear(e)}
+              />
+              <TextField
+                sx={{ maxWidth: "100%" }}
+                label="Max Year"
+                variant="outlined"
+                type="number"
+                helperText="eg. 2021"
+                value={filterList.maxYear}
+                className={classes.titleInput}
+                onChange={(e) => handleMaxYear(e)}
+              />
+            </Stack>
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
               Make
             </Typography>
             <MarketForm
               title="Make"
+              disabled={true}
               value={filterList.vehicleType} // Need to generate corresponding list
               options={marketVehicleTypeList} //
               onChange={(e) => handleMake(e)}
@@ -195,9 +224,50 @@ function ConfirmationDialogRaw(props) {
             </Typography>
             <MarketForm
               title="Model"
+              disabled={true}
               value={filterList.vehicleType} // Need to generate corresponding list
               options={marketVehicleTypeList} //
               onChange={(e) => handleModel(e)}
+            />
+          </React.Fragment>
+        ) : null}
+        {type === "rental" ? (
+          <React.Fragment>
+            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+              Home for Rent or Sale
+            </Typography>
+            <MarketForm
+              title="Home for Rent or Sale"
+              value={filterList.marketRentalSaleRent}
+              options={marketRentalSaleRent}
+              onChange={(e) => handleMarketRentalSaleRent(e)}
+            />
+            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+              Property Type
+            </Typography>
+            <MarketForm
+              title="Property Type"
+              value={filterList.propertyType}
+              options={propertyType}
+              onChange={(e) => handlePropertyType(e)}
+            />
+            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+              AC Type
+            </Typography>
+            <MarketForm
+              title="AC Type"
+              value={filterList.airConditioningType}
+              options={airConditionType}
+              onChange={(e) => handleAirConditioningType(e)}
+            />
+            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+              Heating Type
+            </Typography>
+            <MarketForm
+              title="Heating Type"
+              value={filterList.heatingType}
+              options={heatingType}
+              onChange={(e) => handleHeatingType(e)}
             />
           </React.Fragment>
         ) : null}
@@ -207,7 +277,6 @@ function ConfirmationDialogRaw(props) {
           width="100%"
           // maxHeight="400px" overflow="auto"
         >
-          {" "}
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             Categories
           </Typography>
@@ -238,17 +307,24 @@ export default function FilterInfo({
   handleMin,
   handleMax,
   handleVehicleType,
-  handleYear,
+  handleMinYear,
+  handleMaxYear,
   handleMake,
   handleModel,
   handleCategory,
   handleCondition,
   handleReset,
+  handleMarketRentalSaleRent,
+  handlePropertyType,
+  handleAirConditioningType,
+  handleHeatingType,
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const { marketVehicleTypeList } = marketVehicleOptions;
+  const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
+    marketRentalOptions;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
   if (form === "plain") {
@@ -288,6 +364,18 @@ export default function FilterInfo({
                     to="/market/vehicle"
                   >
                     Vehicle
+                  </Button>
+                </span>
+              ) : null}
+              {type === "rental" ? (
+                <span style={{ cursor: "not-allowed" }}>
+                  <Button
+                    startIcon={<HouseIcon />}
+                    color="inherit"
+                    component={Link}
+                    to="/market/rental"
+                  >
+                    Rental
                   </Button>
                 </span>
               ) : null}
@@ -426,16 +514,36 @@ export default function FilterInfo({
                   options={marketVehicleTypeList}
                   onChange={(e) => handleVehicleType(e)}
                 />
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Year
+                <Typography
+                  marginTop="1rem"
+                  variant="h6"
+                  marginBottom="1rem"
+                  fontWeight="bold"
+                >
+                  Year Range
                 </Typography>
-                <MarketForm
-                  title="Year"
-                  value={filterList.vehicleType} // Need to change the style to (min,max)
-                  options={marketVehicleTypeList} //
-                  disabled={true}
-                  onChange={(e) => handleYear(e)}
-                />
+                <Stack direction="row" spacing={2}>
+                  <TextField
+                    sx={{ maxWidth: "100%" }}
+                    label="Min Year"
+                    variant="outlined"
+                    type="number"
+                    helperText="eg. 2012"
+                    value={filterList.minYear}
+                    className={classes.titleInput}
+                    onChange={(e) => handleMinYear(e)}
+                  />
+                  <TextField
+                    sx={{ maxWidth: "100%" }}
+                    label="Max Year"
+                    variant="outlined"
+                    type="number"
+                    helperText="eg. 2021"
+                    value={filterList.maxYear}
+                    className={classes.titleInput}
+                    onChange={(e) => handleMaxYear(e)}
+                  />
+                </Stack>
                 <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
                   Make
                 </Typography>
@@ -455,6 +563,46 @@ export default function FilterInfo({
                   value={filterList.vehicleType} // Need to generate corresponding list
                   options={marketVehicleTypeList} //
                   onChange={(e) => handleModel(e)}
+                />
+              </React.Fragment>
+            ) : null}
+            {type === "rental" ? (
+              <React.Fragment>
+                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+                  Home for Rent or Sale
+                </Typography>
+                <MarketForm
+                  title="Home for Rent or Sale"
+                  value={filterList.marketRentalSaleRent}
+                  options={marketRentalSaleRent}
+                  onChange={(e) => handleMarketRentalSaleRent(e)}
+                />
+                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+                  Property Type
+                </Typography>
+                <MarketForm
+                  title="Property Type"
+                  value={filterList.propertyType}
+                  options={propertyType}
+                  onChange={(e) => handlePropertyType(e)}
+                />
+                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+                  AC Type
+                </Typography>
+                <MarketForm
+                  title="AC Type"
+                  value={filterList.airConditioningType}
+                  options={airConditionType}
+                  onChange={(e) => handleAirConditioningType(e)}
+                />
+                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+                  Heating Type
+                </Typography>
+                <MarketForm
+                  title="Heating Type"
+                  value={filterList.heatingType}
+                  options={heatingType}
+                  onChange={(e) => handleHeatingType(e)}
                 />
               </React.Fragment>
             ) : null}
@@ -502,11 +650,20 @@ export default function FilterInfo({
           value={value}
           type={type}
           filterList={filterList}
+          handleMinYear={handleMinYear}
+          handleMaxYear={handleMaxYear}
           handleSortKey={handleSortKey}
           handleMin={handleMin}
           handleMax={handleMax}
           handleCategory={handleCategory}
+          handleVehicleType={handleVehicleType}
+          handleMake={handleMake}
+          handleModel={handleModel}
           handleCondition={handleCondition}
+          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+          handlePropertyType={handlePropertyType}
+          handleAirConditioningType={handleAirConditioningType}
+          handleHeatingType={handleHeatingType}
           handleReset={handleReset}
         />
       </React.Fragment>

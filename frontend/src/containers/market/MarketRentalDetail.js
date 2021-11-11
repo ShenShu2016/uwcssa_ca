@@ -200,21 +200,24 @@ export default function MarketRentalDetail() {
                 <Button
                   startIcon={<MessageIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Contact
                 </Button>
                 <Button
                   startIcon={<BookmarksIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Save
                 </Button>
                 <Button
                   startIcon={<ShareIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Share
                 </Button>
@@ -256,12 +259,7 @@ export default function MarketRentalDetail() {
               <Box sx={{ marginX: "1rem", marginBottom: "0.5rem" }}>
                 {tags.map((tag, tagIdx) => {
                   return (
-                    <Chip
-                      key={tagIdx}
-                      label={tag}
-                      color="primary"
-                      sx={{ margin: "0.5rem" }}
-                    />
+                    <Chip key={tagIdx} label={tag} sx={{ margin: "0.5rem" }} />
                   );
                 })}
               </Box>
@@ -273,16 +271,17 @@ export default function MarketRentalDetail() {
               <Typography marginX="1rem" marginY="0.25rem">
                 {description}
               </Typography>
-              <Box
+              <Paper
                 sx={{
                   marginX: "1rem",
                   marginY: "0.25rem",
-                  bgcolor: "#4caf50",
-                  height: "200px",
+                  height: "250px",
+                  backgroundColor: "rgb(243, 246, 249)",
+                  marginBottom: "1rem",
                 }}
               >
-                Google map
-              </Box>
+                Google Map
+              </Paper>
               <Typography marginX="1rem" marginY="0.25rem">
                 {address}
               </Typography>
