@@ -1,10 +1,5 @@
 import { Grid, Skeleton } from "@mui/material";
 import React, { useEffect } from "react";
-// import {
-//   removeSelectedForumSubTopic,
-//   selectedForumSubTopic,
-//   selectedForumSubTopicPosts,
-// } from "../../../redux/actions/forumAction";
 import {
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
@@ -14,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ForumAdSide from "../ForumAdSide";
 import ForumSubTopicMain from "./ForumSubTopicMain";
+import ForumSubTopicPosts from "./ForumSubTopicPosts";
 import OpenIconSpeedDial from "../OpenIconSpeedDial";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
@@ -34,11 +30,8 @@ export default function ForumSubTopic() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { forumSubTopicID } = useParams();
-  const { forumSubTopic, posts } = useSelector(
-    (state) => state.forum.selectedForumSubTopic
-  );
-  console.log(forumSubTopic);
-  console.log(posts);
+
+  // console.log(posts);
   useEffect(() => {
     if (forumSubTopicID && forumSubTopicID !== "") {
       dispatch(selectedForumSubTopic(forumSubTopicID));
@@ -46,6 +39,10 @@ export default function ForumSubTopic() {
     }
     return () => dispatch(removeSelectedForumSubTopic());
   }, [forumSubTopicID, dispatch]);
+  const { forumSubTopic, forumSubTopicPosts } = useSelector(
+    (state) => state.forum.selected
+  );
+  console.log(forumSubTopic);
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -53,11 +50,12 @@ export default function ForumSubTopic() {
           {Object.keys(forumSubTopic).length === 0 ? (
             <Skeleton variant="rectangular" width={210} height={118} />
           ) : (
-            <ForumSubTopicMain
-              forumSubTopic={forumSubTopic}
-              forumPost={posts}
-              // postsNextToken={forumSubTopic.postsNextToken}
-            />
+            <ForumSubTopicMain forumSubTopic={forumSubTopic} />
+          )}
+          {Object.keys(forumSubTopicPosts).length === 0 ? (
+            <Skeleton variant="rectangular" width={210} height={118} />
+          ) : (
+            <ForumSubTopicPosts posts={forumSubTopicPosts} />
           )}
         </Grid>
         <Grid item sm={1} md={2}>

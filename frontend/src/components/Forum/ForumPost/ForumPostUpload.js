@@ -12,8 +12,8 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   postForumPost,
-  setForumSubTopics,
-} from "../../../redux/OldNotUse/forumAction";
+  fetchForumSubTopics,
+} from "../../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import PublishIcon from "@mui/icons-material/Publish";
@@ -57,10 +57,9 @@ function ForumPostUpload() {
   });
   console.log(forumPostData);
   useEffect(() => {
-    dispatch(setForumSubTopics());
+    dispatch(fetchForumSubTopics());
   }, [dispatch]);
-  const { forumSubTopics } = useSelector((state) => state.forum);
-  // console.log("forumTopics", forumTopics);
+  const {forumSubTopics} = useSelector((state) => state.forum);
   // console.log("forumSubTopics", forumSubTopics);
 
   const uploadForumPostImg = async (e) => {
@@ -69,9 +68,9 @@ function ForumPostUpload() {
     const response = await dispatch(
       postSingleImage({ imageData, imageLocation })
     );
-    console.log("response.key", response);
-    if (response) {
-      setImgS3Keys(response.key);
+    console.log("response", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      setImgS3Keys(response.payload);
     }
   };
   const deleteHandler = (i) => () => {
@@ -99,6 +98,10 @@ function ForumPostUpload() {
       console.log("tagSuccess", forumPostData.tags);
     }
   };
+  const date = new Date().toISOString();
+  // const a = date.timeNow().tolSOString();
+  // const a = { S: date.tolSOString() }
+  // console.log(date);
   //Upload the forum post
   const uploadForumPost = async () => {
     const { title, content, forumSubTopicId, tags } = forumPostData;
@@ -107,12 +110,13 @@ function ForumPostUpload() {
       content,
       imgS3Keys: [imgS3Keys],
       active: true,
-      lastReplyAt: { S: Date.tolSOString() },
+      lastReplyAt: date,
       userID: username,
       forumSubTopicID: forumSubTopicId,
       tags: tags,
     };
     const response = await dispatch(postForumPost(createForumPostInput));
+    console.log(response);
     // console.log(
     //   "response.response.data.createForumPost.id",
     //   response.response.data.createForumPost.id

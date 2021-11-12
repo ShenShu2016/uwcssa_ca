@@ -6,6 +6,7 @@ import {
   CircularProgress,
   Grid,
   TextField,
+  Collapse,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
   card: {},
 });
 
-function ForumPostCommentsPost({ forumPost }) {
+function ForumPostCommentsPost({ forumPost, isReplying }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -45,13 +46,14 @@ function ForumPostCommentsPost({ forumPost }) {
     forumPostID: forumPost.id,
     userID: userAuth.user.username,
   };
+  // console.log(loading);
   const postComment = async (e) => {
     if (!loading) {
       setLoading(true);
       const response = await dispatch(
         postForumPostComment(createForumPostCommentInput)
       );
-      if (response.result) {
+      if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
         setFormData({
           comment: "",
@@ -65,74 +67,76 @@ function ForumPostCommentsPost({ forumPost }) {
     <div>
       {userAuth.isAuthenticated ? "" : <SignInRequest />}
       <div>
-        <Typography className={classes.subTitle}>发布新评论：</Typography>
-        <Box className={classes.main}>
-          <Grid container spacing={0}>
-            <Grid item xs={"auto"}>
-              <CardHeader
-                sx={{ px: 0 }}
-                avatar={
-                  <CustomAvatar
-                    user={userAuth.userProfile}
-                    link={userAuth.isAuthenticated}
-                  />
-                }
-              />
-            </Grid>
-            <Grid item xs>
-              <Box sx={{ my: 1 }}>
-                <TextField
-                  label="发表公开评论..."
-                  variant="standard"
-                  fullWidth
-                  multiline
-                  disabled={loading || !userAuth.isAuthenticated}
-                  id="comment"
-                  name="comment"
-                  value={comment}
-                  onChange={(e) => onChange(e)}
-                />
-              </Box>
-              <CardActions sx={{ p: 0, justifyContent: "flex-end" }}>
-                <Button
-                  color="primary"
-                  size="large"
-                  variant="text"
-                  disabled={loading || !userAuth.isAuthenticated}
-                  onClick={() => {
-                    setFormData({
-                      comment: "",
-                    });
-                  }}
-                >
-                  取消
-                </Button>
-                <Button
-                  color="primary"
-                  size="large"
-                  variant="contained"
-                  onClick={postComment}
-                  disabled={loading || !userAuth.isAuthenticated}
-                >
-                  评论
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      sx={{
-                        color: green[500],
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        marginTop: "-0.75rem",
-                        marginLeft: "-0.75rem",
-                      }}
+        <Collapse in={isReplying}>
+          <Typography className={classes.subTitle}>发布新评论：</Typography>
+          <Box className={classes.main}>
+            <Grid container spacing={0}>
+              <Grid item xs={"auto"}>
+                <CardHeader
+                  sx={{ px: 0 }}
+                  avatar={
+                    <CustomAvatar
+                      user={userAuth.userProfile}
+                      link={userAuth.isAuthenticated}
                     />
-                  )}
-                </Button>
-              </CardActions>
+                  }
+                />
+              </Grid>
+              <Grid item xs>
+                <Box sx={{ my: 1 }}>
+                  <TextField
+                    label="发表公开评论..."
+                    variant="standard"
+                    fullWidth
+                    multiline
+                    disabled={loading || !userAuth.isAuthenticated}
+                    id="comment"
+                    name="comment"
+                    value={comment}
+                    onChange={(e) => onChange(e)}
+                  />
+                </Box>
+                <CardActions sx={{ p: 0, justifyContent: "flex-end" }}>
+                  <Button
+                    color="primary"
+                    size="large"
+                    variant="text"
+                    disabled={loading || !userAuth.isAuthenticated}
+                    onClick={() => {
+                      setFormData({
+                        comment: "",
+                      });
+                    }}
+                  >
+                    取消
+                  </Button>
+                  <Button
+                    color="primary"
+                    size="large"
+                    variant="contained"
+                    onClick={postComment}
+                    disabled={loading || !userAuth.isAuthenticated}
+                  >
+                    评论
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
+                </CardActions>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        </Collapse>
       </div>
     </div>
   );

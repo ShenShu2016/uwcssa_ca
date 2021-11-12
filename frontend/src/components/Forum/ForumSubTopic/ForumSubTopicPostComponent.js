@@ -5,11 +5,11 @@ import {
     Paper,
     Typography,
     Divider,
-    Button,
+    // Button,
   } from "@mui/material";
   import React, { useEffect, useState } from "react";
-  import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
-import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
+//   import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+// import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
   import { Link } from "react-router-dom";
   import CustomAvatar from "../../CustomMUI/CustomAvatar";
   import Storage from "@aws-amplify/storage";
@@ -63,12 +63,8 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
             setImageURL(null);
           }
         };
-        if (imgS3Keys){
+        if (imgS3Keys[0]){
           getImage();
-        } else {
-          setImageURL(
-            "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
-          );
         }
       }, [imgS3Keys]);
   
@@ -106,7 +102,7 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                       <CustomAvatar
                         link={false}
                         variant={"square"}
-                        sx={{ width: 18, height: 23 }}
+                        sx={{ width: 16, height: 24 }}
                         user={user}
                       />
                     }
@@ -114,7 +110,7 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                   />
                 </CardActionArea>
               </Grid>
-                <CardActionArea component={Link} to={`/forumPost/${id}`}>
+                <CardActionArea component={Link} to={`/forum/forumPost/${id}`}>
                   <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
                     <div style={{ maxHeight: "48px", overflow: "hidden" }}>
                       <Typography
@@ -151,32 +147,31 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                     <Typography variant="overline" color="textSecondary">
                     {moment(createdAt).fromNow()}
                     </Typography>
-                    <Button
+                    {/* <Button
                         size="small"
                         color="primary"
                         startIcon={<ThumbUpAltOutlinedIcon />}
                         sx={{ p: 0 }}
                         style={{ width: "22px" }}
                       >
-                        {/* {like.length} */}
+                        {like.length}
                       </Button>
                       <Button
                         size="small"
                         color="primary"
                         startIcon={<ThumbDownAltOutlinedIcon />}
                       >
-                        {/* {unlike.length} */}
-                      </Button>
+                        {unlike.length}
+                      </Button> */}
                   </Grid>
 
               </Grid>
             </Grid>
             <Grid item xs={"auto"}>
               <div>
-                {imageURL &&
+                {imgS3Keys[0] &&
                 <CardActionArea>
                   <img src={imageURL} alt="" className={classes.s3image} />
-                  
                 </CardActionArea>
                 }
               </div>
