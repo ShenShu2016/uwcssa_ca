@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import {
+  getProfile,
   removeSelectedProfile,
-  selectedProfile,
-} from "../../redux/actions/profileActions";
+} from "../../redux/reducers/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AboutMe from "../../components/Account/Profile/AboutMe";
@@ -30,13 +30,13 @@ export default function Profile() {
 
   useEffect(() => {
     if (username && username !== "") {
-      dispatch(selectedProfile(username));
+      dispatch(getProfile({ username }));
     }
     return () => dispatch(removeSelectedProfile());
   }, [username, dispatch]);
 
-  const userAuth = useSelector((state) => state.userAuth);
-  const user = useSelector((state) => state.profile);
+  const { userAuth } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.profile);
 
   return (
     <div>

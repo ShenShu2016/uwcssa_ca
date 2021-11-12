@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import EventComments from "./EventDetail/Comment/EventComments";
+import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
@@ -28,11 +30,8 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {/* 为什么这里要加上typography？？？？ */}
     </div>
   );
 }
@@ -51,7 +50,7 @@ function a11yProps(index) {
 }
 
 export default function EventBody({ event }) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -85,19 +84,15 @@ export default function EventBody({ event }) {
       }
     };
     if (posterImgS3Key) {
-      console.log(posterImgS3Key);
+      // console.log(posterImgS3Key);
       getPoster();
     }
   }, [posterImgS3Key]);
-  console.log("posterURL", posterURL);
-
+  // console.log("posterURL", posterURL);
+  // console.log("event", event);
   return (
     <Box>
-      {Object.keys(event).length === 0 ? (
-        <div>
-          <CircularProgress />
-        </div>
-      ) : (
+      {event.startDate ? (
         <Container size="lg">
           <Container size="sm">
             <Box
@@ -140,7 +135,7 @@ export default function EventBody({ event }) {
                   </b>
                 </Typography>
                 <Typography component="div" variant="h4" gutterBottom>
-                  <b>{title}</b>
+                  {title}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -165,9 +160,9 @@ export default function EventBody({ event }) {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
+              {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
               <Box sx={{ width: "100%" }}>
-                <Typography paragraph>{content}</Typography>
-
+                {content}
                 <CardActions>
                   {userInfo.isAuthenticated ? (
                     <Button
@@ -182,12 +177,29 @@ export default function EventBody({ event }) {
                   )}
                 </CardActions>
               </Box>
+              {/* {content}
+              {userInfo.isAuthenticated ? (
+                <Button
+                  size="small"
+                  component={Link}
+                  to={`/event/${event.id}/eventSignUp`}
+                >
+                  报名
+                </Button>
+              ) : (
+                <SignUpRequest />
+              )} */}
             </TabPanel>
-            <TabPanel value={value} index={1}>
-              建设中。。。
+            <TabPanel value={value} index={1} component={"div"}>
+              <EventCommentsPost event={event} />
+              <EventComments event={event} />
             </TabPanel>
           </Box>
         </Container>
+      ) : (
+        <div>
+          <CircularProgress />
+        </div>
       )}
     </Box>
   );

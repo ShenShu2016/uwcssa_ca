@@ -1,6 +1,7 @@
 import {
   Avatar,
   Button,
+  CircularProgress,
   Container,
   Grid,
   TextField,
@@ -9,7 +10,8 @@ import {
 import React, { useRef, useState } from "react";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { emailConfirm } from "../../redux/actions/authActions";
+import { emailConfirm } from "../../redux/reducers/authSlice";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
@@ -46,9 +48,9 @@ export default function EmailConfirm() {
       // console.log("setLoading(loading)", loading);
       setLoading(true); //开始转圈
       const response = await dispatch(
-        emailConfirm(username, authenticationCode)
+        emailConfirm({ username, authenticationCode })
       );
-      if (response.result) {
+      if (response.meta.requestStatus === "fulfilled") {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log("response", response);
@@ -85,6 +87,7 @@ export default function EmailConfirm() {
                 error={errorMessage ? true : false}
                 helperText={errorMessage}
                 value={username}
+                disabled={loading}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -98,6 +101,7 @@ export default function EmailConfirm() {
                 id="authenticationCode"
                 error={errorMessage ? true : false}
                 helperText={errorMessage}
+                disabled={loading}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
@@ -110,6 +114,19 @@ export default function EmailConfirm() {
               onClick={confirmSignUp}
             >
               Confirm Sign Up
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Grid>
         </form>

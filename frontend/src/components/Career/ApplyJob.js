@@ -13,7 +13,7 @@ import API from "@aws-amplify/api";
 import Storage from "@aws-amplify/storage";
 import { createUwcssaJobResume } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
+import { listUwcssaJobs } from "../../redux/CustomQuery/CareerQueries";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";

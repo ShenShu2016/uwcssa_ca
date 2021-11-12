@@ -32,7 +32,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ShopIcon from "@mui/icons-material/Shop";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
-import { signOut } from "../redux/actions/authActions";
+import { signOut } from "../redux/reducers/authSlice";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
 const StyledMenu = styled((props) => (
@@ -169,7 +169,7 @@ export default function Header() {
     setAnchorEl(null);
     handleMobileMenuClose();
     const response = await dispatch(signOut());
-    if (response.result) {
+    if (response.meta.requestStatus === "fulfilled") {
       history.push("/");
     }
   };

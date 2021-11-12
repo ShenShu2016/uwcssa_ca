@@ -12,8 +12,8 @@ import React, { useEffect, useState } from "react";
 
 import S3Image from "../../../S3/S3Image";
 import { makeStyles } from "@mui/styles";
-import { postImage } from "../../../../redux/actions/generalAction";
-import { putUserProfile } from "../../../../redux/actions/profileActions";
+import { postSingleImage } from "../../../../redux/reducers/generalSlice";
+import { putUserProfile } from "../../../../redux/reducers/profileSlice";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Edit({ user, editOpen, handleEditClose }) {
+export default function Edit({ user, editOpen, handleEditClose, idx }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -75,25 +75,30 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const uploadAvatarImg = async (e) => {
-    const imageData = e.target.files[0];
+    const imageData = e.target.files;
     const imageLocation = "user/Avatar";
-    const response = await dispatch(postImage(imageData, imageLocation));
-    if (response) {
-      setAvatarImgKey(response.key);
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setAvatarImgKey(response.payload);
     }
   };
 
   const uploadBackGroundImgImg = async (e) => {
-    const imageData = e.target.files[0];
+    const imageData = e.target.files;
     const imageLocation = "user/BackGround";
-    const response = await dispatch(postImage(imageData, imageLocation));
-    if (response) {
-      setBackGroundImgKey(response.key);
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setBackGroundImgKey(response.payload);
     }
   };
 
   const update = () => {
-    dispatch(putUserProfile(updateUserInput));
+    console.log("education", idx);
+    dispatch(putUserProfile({ updateUserInput }));
     handleEditClose();
   };
 

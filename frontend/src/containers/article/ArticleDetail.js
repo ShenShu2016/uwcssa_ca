@@ -2,17 +2,15 @@ import React, { useEffect } from "react";
 import {
   removeSelectedArticle,
   selectedArticle,
-  selectedArticleComments,
-} from "../../redux/actions/articleActions";
+} from "../../redux/reducers/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ArticleComments from "../../components/Article/ArticleComments";
+import ArticleComments from "../../components/Article/ArticleDetail/ArticleComments";
 import ArticleCommentsPost from "../../components/Article/ArticleDetail/ArticleCommentsPost";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
 import { Box } from "@mui/system";
 import Main from "../../components/Article/ArticleDetail/Main";
 import { Typography } from "@mui/material";
-// import { loadMoreArticleComments } from "../redux/actions/articleActions";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
@@ -40,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     maxWidth: "1100px",
+    width: "100%",
     [theme.breakpoints.down("lg")]: {
       maxWidth: "100%",
     },
@@ -52,14 +51,14 @@ export default function ArticleDetail() {
 
   useEffect(() => {
     if (articleID && articleID !== "") {
-      dispatch(selectedArticle(articleID));
-      dispatch(selectedArticleComments(articleID));
+      dispatch(selectedArticle({ articleID }));
     }
     return () => dispatch(removeSelectedArticle());
   }, [articleID, dispatch]);
 
-  const { article, comments } = useSelector((state) => state.article.selected);
+  const { article } = useSelector((state) => state.article.selected);
   useTitle(article.title);
+
   // useEffect(() => {
   //   window.onscroll = async (e) => {
   //     const scrollY = window.scrollY; //当前上方高度
@@ -100,7 +99,7 @@ export default function ArticleDetail() {
         <Box className={classes.body}>
           <Main article={article} />
           <ArticleCommentsPost article={article} />
-          <ArticleComments comments={comments} />
+          <ArticleComments article={article} />
         </Box>
         <Box>
           <ArticleSideBar />

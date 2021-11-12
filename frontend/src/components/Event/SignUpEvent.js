@@ -9,12 +9,19 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 
 import GroupIcon from "@mui/icons-material/Group";
-import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+
+// import {
+//   removeSelectedEvent,
+//   selectedEvent,
+// } from "../../redux/actions/eventActions";
+
+// import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventSignUp() {
   const classes = useStyles();
+  const { eventID } = useParams();
+  // const { event } = useSelector((state) => state.event.selected); //这种方法不可取，如果人家直接分享了链接的话，你是不是在select里面就没有event了？
+
   return (
     <Box className={classes.root}>
       <Container size="lg">
@@ -75,7 +85,7 @@ export default function EventSignUp() {
                 }}
                 size="large"
                 component={Link}
-                to="/event/eventSignUp/individual" //{`/event/${event.id}/eventSignUp/individual`}
+                to={`/event/${eventID}/eventSignUp/individual`}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <PersonIcon />
@@ -98,7 +108,8 @@ export default function EventSignUp() {
                 }}
                 size="large"
                 component={Link}
-                to="/event/eventSignUp/group"
+                to={`/event/${eventID}/eventSignUp/group`}
+                disabled
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <GroupIcon />

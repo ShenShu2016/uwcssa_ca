@@ -63,7 +63,7 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
             setImageURL(null);
           }
         };
-        if (imgS3Keys[0]) {
+        if (imgS3Keys){
           getImage();
         } else {
           setImageURL(

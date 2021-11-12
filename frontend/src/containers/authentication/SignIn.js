@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { fetchUserProfile, signIn } from "../../redux/reducers/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 // import Auth from "@aws-amplify/auth";
@@ -21,8 +22,7 @@ import facebookLogo from "../../static/svg icons/facebook.svg";
 import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { removeURLFrom } from "../../redux/actions/generalAction";
-import { signIn } from "../../redux/actions/authActions";
+import { removeURLFrom } from "../../redux/reducers/generalSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -102,22 +102,26 @@ export default function SignIn() {
     if (!loading) {
       // console.log("setLoading(loading)", loading);
       setLoading(true); //开始转圈
-      const response = await dispatch(signIn(username, password));
-      if (response.result) {
-        timer.current = window.setTimeout(() => {
-          if (urlFrom) {
-            dispatch(removeURLFrom());
-            history.push(urlFrom);
-          } else {
-            history.push("/account/dashboard");
-          }
-        }, 1000);
-      } else {
-        timer.current = window.setTimeout(() => {
-          setLoading(false);
-          console.log(response.error.message);
-          setErrorMessage(response.error.message);
-        }, 1000);
+      const response = await dispatch(signIn({ username, password }));
+      if (response.meta.requestStatus === "fulfilled") {
+        const { username } = response.payload;
+        const response2 = await dispatch(fetchUserProfile({ username }));
+        if (response2.meta.requestStatus === "fulfilled") {
+          timer.current = window.setTimeout(() => {
+            if (urlFrom) {
+              dispatch(removeURLFrom());
+              history.push(urlFrom);
+            } else {
+              history.push("/account/dashboard");
+            }
+          }, 1000);
+        } else {
+          timer.current = window.setTimeout(() => {
+            setLoading(false);
+            console.log(response.error.message);
+            setErrorMessage(response.error.message);
+          }, 1000);
+        }
       }
     }
   };
@@ -131,16 +135,6 @@ export default function SignIn() {
 
   const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
-
-  // const handleGoogleSignIn = async function (event) {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await Auth.federatedSignIn({ provider: "Google" });
-  //     console.log("google auth response", response);
-  //   } catch (error) {
-  //     console.log("there was an error google logging in ", error);
-  //   }
-  // };
 
   return (
     <Container component="main" maxWidth="xs">

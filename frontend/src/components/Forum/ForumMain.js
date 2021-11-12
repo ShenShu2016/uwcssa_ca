@@ -16,7 +16,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import { setForumTopics } from "../../redux/actions/forumAction";
+import { fetchForumTopics } from "../../redux/reducers/forumSlice";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -62,7 +62,7 @@ export default function ForumMain() {
   const dispatch = useDispatch();
   const { forumTopics } = useSelector((state) => state.forum);
   useEffect(() => {
-    dispatch(setForumTopics());
+    dispatch(fetchForumTopics());
   }, [dispatch]);
   // console.log("forumTopics", forumTopics);
   const theme = useTheme();
@@ -105,7 +105,7 @@ export default function ForumMain() {
                         variant="text"
                         color="primary"
                         component={Link}
-                        to={`/forumTopic/${forumTopic.id}`}
+                        to={`/forum/forumTopic/${forumTopic.id}`}
                       >
                         {forumTopic.name}
                         <ArrowForwardIcon />

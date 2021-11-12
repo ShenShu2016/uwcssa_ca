@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
-import { postMarketRental } from "../../redux/reducers/marketSlice";
-import { postMultipleImages } from "../../redux/actions/generalAction";
+import { postMarketItem } from "../../redux/reducers/marketSlice";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
@@ -66,8 +67,7 @@ export default function PostMarketRental() {
   // const [imgKeyToServer, setImgKeyToServer] = useState(null);
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKeys } = useSelector((state) => state.general);
-  const [renderTrigger, setRenderTrigger] = useState(null);
+  const [imageKeys, setImageKeys] = useState([]);
   const {
     marketRentalSaleRent,
     propertyType,
@@ -82,28 +82,33 @@ export default function PostMarketRental() {
   const history = useHistory();
 
   const [marketRentalData, setMarketRentalData] = useState({
-    marketRentalSaleRent: "Other",
-    propertyType: "Other",
-    bedroomCounts: 0,
-    bathroomsCounts: 0,
-    price: 0,
+    marketRentalSaleRent: "",
+    propertyType: "",
+    bedroomCounts: "",
+    bathroomsCounts: "",
+    price: "",
     address: "",
     description: "",
-    propertySize: 0,
-    dateAvailable: "2019-05-03T18:18:13.683Z",
-    laundryType: "Other",
-    airConditionType: "Other",
-    heatingType: "CentralHeating",
-    catFriendly: true,
-    dogFriendly: true,
+    propertySize: "",
+    dateAvailable: new Date(),
+    laundryType: "",
+    airConditionType: "",
+    heatingType: "",
+    catFriendly: "",
+    dogFriendly: "",
     tags: [],
   });
   // console.log("marketRentalData", marketRentalData);
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    setRenderTrigger(imagesData.length);
-    const imgLocation = "marketItem";
-    await dispatch(postMultipleImages(imagesData, imgLocation));
+    const imageLocation = "market/rental";
+
+    const response = await dispatch(
+      postMultipleImages({ imagesData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setImageKeys(response.payload);
+    }
   };
 
   useEffect(() => {
@@ -125,10 +130,11 @@ export default function PostMarketRental() {
         setImgKeyFromServer([]);
       }
     };
-    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
+    console.log("imageKeys", imageKeys);
+    if (imageKeys) {
       getImage();
     }
-  }, [imageKeys, renderTrigger]);
+  }, [imageKeys]);
 
   const uploadMarketRental = async () => {
     //Upload the marketRental
@@ -150,6 +156,7 @@ export default function PostMarketRental() {
     } = marketRentalData;
 
     const createMarketRentalInput = {
+      marketType: "Rental",
       marketRentalSaleRent: marketRentalSaleRent,
       propertyType: propertyType,
       bedroomCounts: bedroomCounts,
@@ -172,11 +179,11 @@ export default function PostMarketRental() {
     };
     console.log("createMarketRentalInput", createMarketRentalInput);
 
-    const response = await dispatch(postMarketRental(createMarketRentalInput));
-    console.log("response", response);
-    if (response.payload.result) {
+    const response = await dispatch(postMarketItem(createMarketRentalInput));
+    console.log("Something should be here", response);
+    if (response.meta.requestStatus === "fulfilled") {
       history.push(
-        `/market/rental/${response.payload.response.data.createMarketRental.id}`
+        `/market/rental/${response.payload.data.createMarketItem.id}`
       );
     }
   };
@@ -254,6 +261,7 @@ export default function PostMarketRental() {
               label="Bedroom Counts"
               value={marketRentalData.bedroomCounts}
               variant="outlined"
+              placeholder="eg. 2"
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
@@ -285,6 +293,13 @@ export default function PostMarketRental() {
               value={marketRentalData.price}
               variant="outlined"
               fullWidth
+              type="number"
+              placeholder="eg. 25000 (Currency: CAD $)"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,
@@ -300,6 +315,13 @@ export default function PostMarketRental() {
               value={marketRentalData.propertySize}
               variant="outlined"
               fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    Squared Meters
+                  </InputAdornment>
+                ),
+              }}
               onChange={(e) =>
                 setMarketRentalData({
                   ...marketRentalData,

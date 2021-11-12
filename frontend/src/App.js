@@ -1,8 +1,8 @@
-import { Alert, Snackbar } from "@mui/material";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { fetchUserProfile, loadUser } from "./redux/reducers/authSlice";
 
 import Amplify from "aws-amplify";
 import Article from "./containers/article/Article";
@@ -10,21 +10,16 @@ import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
+import CustomAlert from "./components/CustomMUI/CustomAlert";
 import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/Event";
 import EventDetail from "./components/Event/EventDetail";
+import EventGrid from "./components/Event/EventDataGrid";
 import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
-import Forum from "./containers/Forum";
-import ForumPost from "./components/Forum/ForumPost/ForumPost";
-import ForumPostCommentDetail from "./components/Forum/ForumPost/ForumPostSubComment/ForumPostCommentDetail";
-import ForumPostList from "./components/Forum/ForumPost/ForumPostList";
-import ForumPostUpload from "./components/Forum/ForumPost/ForumPostUpload";
-import ForumSubTopic from "./components/Forum/ForumSubTopic/ForumSubTopic";
-import ForumTopic from "./components/Forum//ForumTopic/ForumTopic";
-import ForumTopicCURD from "./components/Forum/ForumTopic/ForumTopicCURD";
+import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Group from "./components/Event/group";
@@ -48,7 +43,6 @@ import UserFeedBack from "./containers/UserFeedBack";
 import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
-import { setUser } from "./redux/actions/authActions";
 import store from "./redux/store";
 
 Amplify.configure(awsconfig);
@@ -77,23 +71,31 @@ const useStyles = makeStyles({
 export default function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(true);
-  const handleClose = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  // console.log("isAlertOpen", isAlertOpen);
   const { isAuthenticated, cognitoGroup } = useSelector(
     (state) => state.userAuth
   );
-
+  const handleAlertClose = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setIsAlertOpen(false);
+  };
   useEffect(() => {
-    dispatch(setUser());
+    async function initialUser() {
+      const response = await dispatch(loadUser());
+      // console.log("loadUser", response);
+      if (response.meta.requestStatus === "fulfilled") {
+        const { username } = response.payload;
+        await dispatch(fetchUserProfile({ username }));
+      }
+    }
+    initialUser();
   }, [dispatch]);
 
   useEffect(() => {
-    setOpen(isAuthenticated);
+    setIsAlertOpen(isAuthenticated);
   }, [isAuthenticated]);
 
   return (
@@ -174,34 +176,6 @@ export default function App() {
                 exact
                 component={PostEvent}
               />
-              <Route path="/forum" exact component={Forum} />
-              <Route path="/forumTopicCURD" exact component={ForumTopicCURD} />
-              <Route
-                path="/forumTopic/:forumTopicID"
-                exact
-                component={ForumTopic}
-              />
-              <Route
-                path="/forumSubTopic/:forumSubTopicID"
-                exact
-                component={ForumSubTopic}
-              />
-              <Route
-                path="/forumPostUpload"
-                exact
-                component={ForumPostUpload}
-              />
-              <Route path="/forumPostList" exact component={ForumPostList} />
-              <Route
-                path="/forumPost/:forumPostID"
-                exact
-                component={ForumPost}
-              />
-              <Route
-                path="/forumPost/forumPostComment/:forumPostCommentId"
-                exact
-                component={ForumPostCommentDetail}
-              />
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
               <Route path="/forgotPassword" exact component={ForgotPassword} />
@@ -217,7 +191,7 @@ export default function App() {
               />
               <Route path="/market" component={Market} /> 
               <Route path="/article" component={Article} />
-                      
+              <Route path="/forum" component={Forum} />
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
@@ -237,6 +211,7 @@ export default function App() {
                 exact
                 component={Group}
               />
+              <Route path="/eventDataGrid" exact component={EventGrid} />
               <Route path="/event/:eventID" exact component={EventDetail} />
               <Route path="/rating" exact component={UserFeedBack} />
               <Route
@@ -246,20 +221,11 @@ export default function App() {
               />
               <Route>404 Not Found!</Route>
             </Switch>
-            <Snackbar
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-              open={open}
-              autoHideDuration={3000}
-              onClose={handleClose}
-            >
-              <Alert
-                onClose={handleClose}
-                severity="success"
-                sx={{ width: "100%" }}
-              >
-                登陆成功
-              </Alert>
-            </Snackbar>
+            <CustomAlert
+              isAlertOpen={isAlertOpen}
+              handleAlertClose={handleAlertClose}
+              message={"登錄成功"}
+            />
           </div>
           <Footer />
         </Router>

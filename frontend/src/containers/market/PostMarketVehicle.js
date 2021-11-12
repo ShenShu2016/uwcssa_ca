@@ -3,13 +3,14 @@ import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketVehicleOptions } from "./marketVehicleOptions";
-import { postMarketVehicle } from "../../redux/actions/marketItemActions";
-import { postMultipleImages } from "../../redux/actions/generalAction";
+import { postMarketItem } from "../../redux/reducers/marketSlice";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
@@ -43,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
   },
+  imgKeyFromServer: {
+    width: "100%",
+  },
 }));
 
 const Input = styled("input")({
@@ -55,8 +59,7 @@ export default function PostMarketVehicle() {
   useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKeys } = useSelector((state) => state.general);
-  const [renderTrigger, setRenderTrigger] = useState(null);
+  const [imageKeys, setImageKeys] = useState([]);
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
   // console.log("imgKeys", imageKeys);
@@ -77,9 +80,15 @@ export default function PostMarketVehicle() {
   // console.log("marketVehicleData", marketVehicleData);
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    setRenderTrigger(imagesData.length);
-    const imgLocation = "marketVehicle";
-    await dispatch(postMultipleImages(imagesData, imgLocation));
+    const imageLocation = "market/vehicle";
+
+    const response = await dispatch(
+      postMultipleImages({ imagesData, imageLocation })
+    );
+    // console.log("response!!!", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      setImageKeys(response.payload);
+    }
   };
 
   useEffect(() => {
@@ -101,10 +110,11 @@ export default function PostMarketVehicle() {
         setImgKeyFromServer([]);
       }
     };
-    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
+    // console.log("imageKeys", imageKeys);
+    if (imageKeys) {
       getImage();
     }
-  }, [imageKeys, renderTrigger]);
+  }, [imageKeys]);
 
   // console.log("imgKeyFromServer", imgKeyFromServer);
   // console.log("imageKeys", imageKeys);
@@ -124,6 +134,7 @@ export default function PostMarketVehicle() {
     } = marketVehicleData;
 
     const createMarketVehicleInput = {
+      marketType: "Vehicle",
       vehicleType,
       imgS3Keys: imageKeys,
       location: location,
@@ -137,18 +148,15 @@ export default function PostMarketVehicle() {
       description: description,
       tags: GetTags(),
       active: true,
-      createdAt: new Date().toISOstring,
       sortKey: "SortKey",
       userID: username,
     };
-
-    const response = await dispatch(
-      postMarketVehicle(createMarketVehicleInput)
-    );
+    console.log("Check!", createMarketVehicleInput);
+    const response = await dispatch(postMarketItem(createMarketVehicleInput));
     console.log("response", response);
-    if (response.payload.result) {
+    if (response.meta.requestStatus === "fulfilled") {
       history.push(
-        `/market/vehicle/${response.payload.response.data.createMarketVehicle.id}`
+        `/market/vehicle/${response.payload.data.createMarketItem.id}`
       );
     }
   };
@@ -180,11 +188,49 @@ export default function PostMarketVehicle() {
 
       {imgKeyFromServer &&
         imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-          <img src={imgKey} key={imgKeyIdx} alt="images" />
+          <img
+            className={classes.imgKeyFromServer}
+            src={imgKey}
+            key={imgKeyIdx}
+            alt="images"
+          />
         ))}
 
       <Box className={classes.content}>
         <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              label="Make"
+              autoFocus
+              variant="outlined"
+              fullWidth
+              required
+              placeholder="eg. Subaru"
+              value={marketVehicleData.make}
+              onChange={(e) =>
+                setMarketVehicleData({
+                  ...marketVehicleData,
+                  make: e.target.value,
+                })
+              }
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              label="Model"
+              variant="outlined"
+              placeholder="IMPREZA WRX STI"
+              fullWidth
+              required
+              value={marketVehicleData.model}
+              onChange={(e) =>
+                setMarketVehicleData({
+                  ...marketVehicleData,
+                  model: e.target.value,
+                })
+              }
+            />
+          </Grid>
           <Grid item xs={6}>
             <MarketForm
               title="Vehicle Type"
@@ -216,7 +262,7 @@ export default function PostMarketVehicle() {
           </Grid>
 
           <Grid item xs={6}>
-            <CustomTags />
+            <CustomTags placeholder="新车， 无事故..." />
           </Grid>
 
           <Grid item xs={6}>
@@ -236,38 +282,7 @@ export default function PostMarketVehicle() {
               }
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Make"
-              variant="outlined"
-              fullWidth
-              required
-              placeholder="eg. Subaru"
-              value={marketVehicleData.make}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  make: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Model"
-              variant="outlined"
-              placeholder="IMPREZA WRX STI"
-              fullWidth
-              required
-              value={marketVehicleData.model}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  model: e.target.value,
-                })
-              }
-            />
-          </Grid>
+
           <Grid item xs={6}>
             <TextField
               label="Price"
@@ -275,6 +290,11 @@ export default function PostMarketVehicle() {
               fullWidth
               type="number"
               placeholder="eg. 25000 (Currency: CAD $)"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
               value={marketVehicleData.price}
               className={classes.titleInput}
               onChange={(e) =>
@@ -337,6 +357,7 @@ export default function PostMarketVehicle() {
               minRows={5}
               variant="outlined"
               multiline
+              placeholder="Describe your vehicle in a detailed manner!"
               fullWidth
               onChange={(e) =>
                 setMarketVehicleData({

@@ -179,6 +179,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -191,49 +192,24 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -241,13 +217,27 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -502,6 +492,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -514,49 +505,24 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -564,13 +530,27 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -825,6 +805,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -837,49 +818,24 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -887,13 +843,27 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -1087,6 +1057,26 @@ export const onCreateUser = /* GraphQL */ `
           userID
           updatedAt
         }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        eventSubComment {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -1116,6 +1106,7 @@ export const onCreateUser = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -1295,6 +1286,9 @@ export const onCreateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        eventComments {
+          nextToken
         }
         eventParticipants {
           nextToken
@@ -1612,10 +1606,30 @@ export const onCreateUser = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -1670,87 +1684,24 @@ export const onCreateUser = /* GraphQL */ `
         imgS3Keys
         title
         price
+        marketType
         description
         location
         marketItemCondition
         marketItemCategory
         tags
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        owner
-      }
-      marketVehicles {
-        id
         vehicleType
-        imgS3Keys
-        location
         year
         make
         model
         exteriorColor
         interiorColor
         fuelType
-        price
-        description
-        active
-        createdAt
-        sortKey
-        tags
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        owner
-      }
-      marketRentals {
-        id
-        imgS3Keys
         marketRentalSaleRent
         propertyType
         bedroomCounts
         bathroomsCounts
-        price
         address
-        description
         propertySize
         dateAvailable
         laundryType
@@ -1758,9 +1709,11 @@ export const onCreateUser = /* GraphQL */ `
         heatingType
         catFriendly
         dogFriendly
-        tags
-        active
+        contactPhone
+        contactWeChat
+        contactEmail
         sortKey
+        active
         createdAt
         userID
         updatedAt
@@ -1784,6 +1737,37 @@ export const onCreateUser = /* GraphQL */ `
           badges
         }
         owner
+      }
+      foundingMember {
+        id
+        active
+        title
+        brief
+        moreBrief
+        mainPart
+        imgS3Key
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
       }
       updatedAt
       uWindsorEmail
@@ -1999,6 +1983,26 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           updatedAt
         }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        eventSubComment {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -2028,6 +2032,7 @@ export const onUpdateUser = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -2207,6 +2212,9 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        eventComments {
+          nextToken
         }
         eventParticipants {
           nextToken
@@ -2524,10 +2532,30 @@ export const onUpdateUser = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -2582,87 +2610,24 @@ export const onUpdateUser = /* GraphQL */ `
         imgS3Keys
         title
         price
+        marketType
         description
         location
         marketItemCondition
         marketItemCategory
         tags
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        owner
-      }
-      marketVehicles {
-        id
         vehicleType
-        imgS3Keys
-        location
         year
         make
         model
         exteriorColor
         interiorColor
         fuelType
-        price
-        description
-        active
-        createdAt
-        sortKey
-        tags
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        owner
-      }
-      marketRentals {
-        id
-        imgS3Keys
         marketRentalSaleRent
         propertyType
         bedroomCounts
         bathroomsCounts
-        price
         address
-        description
         propertySize
         dateAvailable
         laundryType
@@ -2670,9 +2635,11 @@ export const onUpdateUser = /* GraphQL */ `
         heatingType
         catFriendly
         dogFriendly
-        tags
-        active
+        contactPhone
+        contactWeChat
+        contactEmail
         sortKey
+        active
         createdAt
         userID
         updatedAt
@@ -2696,6 +2663,37 @@ export const onUpdateUser = /* GraphQL */ `
           badges
         }
         owner
+      }
+      foundingMember {
+        id
+        active
+        title
+        brief
+        moreBrief
+        mainPart
+        imgS3Key
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
       }
       updatedAt
       uWindsorEmail
@@ -2911,6 +2909,26 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           updatedAt
         }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        eventSubComment {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
         forumPost {
           id
           title
@@ -2940,6 +2958,7 @@ export const onDeleteUser = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -3119,6 +3138,9 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        eventComments {
+          nextToken
         }
         eventParticipants {
           nextToken
@@ -3436,10 +3458,30 @@ export const onDeleteUser = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -3494,87 +3536,24 @@ export const onDeleteUser = /* GraphQL */ `
         imgS3Keys
         title
         price
+        marketType
         description
         location
         marketItemCondition
         marketItemCategory
         tags
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        owner
-      }
-      marketVehicles {
-        id
         vehicleType
-        imgS3Keys
-        location
         year
         make
         model
         exteriorColor
         interiorColor
         fuelType
-        price
-        description
-        active
-        createdAt
-        sortKey
-        tags
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        owner
-      }
-      marketRentals {
-        id
-        imgS3Keys
         marketRentalSaleRent
         propertyType
         bedroomCounts
         bathroomsCounts
-        price
         address
-        description
         propertySize
         dateAvailable
         laundryType
@@ -3582,9 +3561,11 @@ export const onDeleteUser = /* GraphQL */ `
         heatingType
         catFriendly
         dogFriendly
-        tags
-        active
+        contactPhone
+        contactWeChat
+        contactEmail
         sortKey
+        active
         createdAt
         userID
         updatedAt
@@ -3608,6 +3589,37 @@ export const onDeleteUser = /* GraphQL */ `
           badges
         }
         owner
+      }
+      foundingMember {
+        id
+        active
+        title
+        brief
+        moreBrief
+        mainPart
+        imgS3Key
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
       }
       updatedAt
       uWindsorEmail
@@ -3884,6 +3896,7 @@ export const onCreateUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -3896,49 +3909,24 @@ export const onCreateUserEducation = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -3946,13 +3934,27 @@ export const onCreateUserEducation = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -4158,6 +4160,7 @@ export const onUpdateUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4170,49 +4173,24 @@ export const onUpdateUserEducation = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -4220,13 +4198,27 @@ export const onUpdateUserEducation = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -4432,6 +4424,7 @@ export const onDeleteUserEducation = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4444,49 +4437,24 @@ export const onDeleteUserEducation = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -4494,13 +4462,27 @@ export const onDeleteUserEducation = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -4707,6 +4689,7 @@ export const onCreateUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4719,49 +4702,24 @@ export const onCreateUserExperience = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -4769,13 +4727,27 @@ export const onCreateUserExperience = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -4982,6 +4954,7 @@ export const onUpdateUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -4994,49 +4967,24 @@ export const onUpdateUserExperience = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -5044,13 +4992,27 @@ export const onUpdateUserExperience = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -5257,6 +5219,7 @@ export const onDeleteUserExperience = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -5269,49 +5232,24 @@ export const onDeleteUserExperience = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -5319,13 +5257,27 @@ export const onDeleteUserExperience = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -5525,6 +5477,7 @@ export const onCreateTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -5537,49 +5490,24 @@ export const onCreateTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -5587,13 +5515,27 @@ export const onCreateTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -5833,6 +5775,7 @@ export const onUpdateTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -5845,49 +5788,24 @@ export const onUpdateTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -5895,13 +5813,27 @@ export const onUpdateTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -6141,6 +6073,7 @@ export const onDeleteTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6153,49 +6086,24 @@ export const onDeleteTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -6203,13 +6111,27 @@ export const onDeleteTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -6455,6 +6377,7 @@ export const onCreateArticle = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6467,49 +6390,24 @@ export const onCreateArticle = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -6517,13 +6415,27 @@ export const onCreateArticle = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -6785,6 +6697,7 @@ export const onUpdateArticle = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -6797,49 +6710,24 @@ export const onUpdateArticle = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -6847,13 +6735,27 @@ export const onUpdateArticle = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -7115,6 +7017,7 @@ export const onDeleteArticle = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -7127,49 +7030,24 @@ export const onDeleteArticle = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -7177,13 +7055,27 @@ export const onDeleteArticle = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -7441,6 +7333,7 @@ export const onCreateArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -7453,49 +7346,24 @@ export const onCreateArticleComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -7503,13 +7371,27 @@ export const onCreateArticleComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -7781,6 +7663,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -7793,49 +7676,24 @@ export const onUpdateArticleComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -7843,13 +7701,27 @@ export const onUpdateArticleComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -8121,6 +7993,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -8133,49 +8006,24 @@ export const onDeleteArticleComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -8183,13 +8031,27 @@ export const onDeleteArticleComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -8461,6 +8323,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -8473,49 +8336,24 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -8523,13 +8361,27 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -8791,6 +8643,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -8803,49 +8656,24 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -8853,13 +8681,27 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -9121,6 +8963,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -9133,49 +8976,24 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -9183,13 +9001,27 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -9464,6 +9296,7 @@ export const onCreateEvent = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -9476,49 +9309,24 @@ export const onCreateEvent = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -9526,13 +9334,27 @@ export const onCreateEvent = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -9587,6 +9409,19 @@ export const onCreateEvent = /* GraphQL */ `
         events {
           nextToken
         }
+      }
+      eventComments {
+        items {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       eventParticipants {
         items {
@@ -9810,6 +9645,7 @@ export const onUpdateEvent = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -9822,49 +9658,24 @@ export const onUpdateEvent = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -9872,13 +9683,27 @@ export const onUpdateEvent = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -9933,6 +9758,19 @@ export const onUpdateEvent = /* GraphQL */ `
         events {
           nextToken
         }
+      }
+      eventComments {
+        items {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       eventParticipants {
         items {
@@ -10156,6 +9994,7 @@ export const onDeleteEvent = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -10168,49 +10007,24 @@ export const onDeleteEvent = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -10218,13 +10032,27 @@ export const onDeleteEvent = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -10280,6 +10108,19 @@ export const onDeleteEvent = /* GraphQL */ `
           nextToken
         }
       }
+      eventComments {
+        items {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       eventParticipants {
         items {
           id
@@ -10300,6 +10141,2019 @@ export const onDeleteEvent = /* GraphQL */ `
         }
         nextToken
       }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateEventComment = /* GraphQL */ `
+  subscription OnCreateEventComment {
+    onCreateEventComment {
+      id
+      content
+      active
+      eventID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      eventSubComments {
+        items {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateEventComment = /* GraphQL */ `
+  subscription OnUpdateEventComment {
+    onUpdateEventComment {
+      id
+      content
+      active
+      eventID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      eventSubComments {
+        items {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteEventComment = /* GraphQL */ `
+  subscription OnDeleteEventComment {
+    onDeleteEventComment {
+      id
+      content
+      active
+      eventID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      event {
+        id
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgS3Key
+        qrCodeImgS3Key
+        posterImgS3Key
+        content
+        location
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      eventSubComments {
+        items {
+          id
+          content
+          active
+          eventCommentID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateEventSubComment = /* GraphQL */ `
+  subscription OnCreateEventSubComment {
+    onCreateEventSubComment {
+      id
+      content
+      active
+      eventCommentID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateEventSubComment = /* GraphQL */ `
+  subscription OnUpdateEventSubComment {
+    onUpdateEventSubComment {
+      id
+      content
+      active
+      eventCommentID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteEventSubComment = /* GraphQL */ `
+  subscription OnDeleteEventSubComment {
+    onDeleteEventSubComment {
+      id
+      content
+      active
+      eventCommentID
+      createdAt
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      owner
       likes {
         items {
           id
@@ -10496,6 +12350,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -10508,49 +12363,24 @@ export const onCreateEventParticipant = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -10558,13 +12388,27 @@ export const onCreateEventParticipant = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -10634,6 +12478,9 @@ export const onCreateEventParticipant = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        eventComments {
+          nextToken
         }
         eventParticipants {
           nextToken
@@ -10827,6 +12674,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -10839,49 +12687,24 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -10889,13 +12712,27 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -10965,6 +12802,9 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        eventComments {
+          nextToken
         }
         eventParticipants {
           nextToken
@@ -11158,6 +12998,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -11170,49 +13011,24 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -11220,13 +13036,27 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -11296,6 +13126,9 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        eventComments {
+          nextToken
         }
         eventParticipants {
           nextToken
@@ -11483,6 +13316,7 @@ export const onCreateDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -11495,49 +13329,24 @@ export const onCreateDepartment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -11545,13 +13354,27 @@ export const onCreateDepartment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -11773,6 +13596,7 @@ export const onUpdateDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -11785,49 +13609,24 @@ export const onUpdateDepartment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -11835,13 +13634,27 @@ export const onUpdateDepartment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -12063,6 +13876,7 @@ export const onDeleteDepartment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12075,49 +13889,24 @@ export const onDeleteDepartment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -12125,13 +13914,27 @@ export const onDeleteDepartment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -12377,6 +14180,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12389,49 +14193,24 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -12439,13 +14218,27 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -12703,6 +14496,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -12715,49 +14509,24 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -12765,13 +14534,27 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -13029,6 +14812,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13041,49 +14825,24 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -13091,13 +14850,27 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -13328,6 +15101,7 @@ export const onCreateForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13340,49 +15114,24 @@ export const onCreateForumTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -13390,13 +15139,27 @@ export const onCreateForumTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -13606,6 +15369,7 @@ export const onUpdateForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13618,49 +15382,24 @@ export const onUpdateForumTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -13668,13 +15407,27 @@ export const onUpdateForumTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -13884,6 +15637,7 @@ export const onDeleteForumTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -13896,49 +15650,24 @@ export const onDeleteForumTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -13946,13 +15675,27 @@ export const onDeleteForumTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -14163,6 +15906,7 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14175,49 +15919,24 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -14225,13 +15944,27 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -14477,6 +16210,7 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14489,49 +16223,24 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -14539,13 +16248,27 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -14791,6 +16514,7 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -14803,49 +16527,24 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -14853,13 +16552,27 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -15110,6 +16823,7 @@ export const onCreateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15122,49 +16836,24 @@ export const onCreateForumPost = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -15172,13 +16861,27 @@ export const onCreateForumPost = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -15259,6 +16962,7 @@ export const onCreateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15460,6 +17164,7 @@ export const onUpdateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15472,49 +17177,24 @@ export const onUpdateForumPost = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -15522,13 +17202,27 @@ export const onUpdateForumPost = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -15609,6 +17303,7 @@ export const onUpdateForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15810,6 +17505,7 @@ export const onDeleteForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -15822,49 +17518,24 @@ export const onDeleteForumPost = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -15872,13 +17543,27 @@ export const onDeleteForumPost = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -15959,6 +17644,7 @@ export const onDeleteForumPost = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16156,6 +17842,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16168,49 +17855,24 @@ export const onCreateForumPostComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -16218,13 +17880,27 @@ export const onCreateForumPostComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -16305,6 +17981,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16502,6 +18179,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16514,49 +18192,24 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -16564,13 +18217,27 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -16651,6 +18318,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16848,6 +18516,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -16860,49 +18529,24 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -16910,13 +18554,27 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -16997,6 +18655,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17027,10 +18686,257 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      replyToUserID
       forumPostID
       forumPostCommentID
       userID
       updatedAt
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
       user {
         id
         username
@@ -17195,6 +19101,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17207,49 +19114,24 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -17257,13 +19139,27 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -17409,10 +19305,257 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      replyToUserID
       forumPostID
       forumPostCommentID
       userID
       updatedAt
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
       user {
         id
         username
@@ -17577,6 +19720,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17589,49 +19733,24 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -17639,13 +19758,27 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -17791,10 +19924,257 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
       content
       active
       createdAt
+      replyToUserID
       forumPostID
       forumPostCommentID
       userID
       updatedAt
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
       user {
         id
         username
@@ -17959,6 +20339,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -17971,49 +20352,24 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -18021,13 +20377,27 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -18340,6 +20710,7 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -18352,49 +20723,24 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -18402,13 +20748,27 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -18610,6 +20970,7 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -18622,49 +20983,24 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -18672,13 +21008,27 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -18880,6 +21230,7 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -18892,49 +21243,24 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -18942,13 +21268,27 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -18984,11 +21324,34 @@ export const onCreateMarketItem = /* GraphQL */ `
       imgS3Keys
       title
       price
+      marketType
       description
       location
       marketItemCondition
       marketItemCategory
       tags
+      vehicleType
+      year
+      make
+      model
+      exteriorColor
+      interiorColor
+      fuelType
+      marketRentalSaleRent
+      propertyType
+      bedroomCounts
+      bathroomsCounts
+      address
+      propertySize
+      dateAvailable
+      laundryType
+      airConditionType
+      heatingType
+      catFriendly
+      dogFriendly
+      contactPhone
+      contactWeChat
+      contactEmail
       sortKey
       active
       createdAt
@@ -19158,6 +21521,7 @@ export const onCreateMarketItem = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -19170,49 +21534,24 @@ export const onCreateMarketItem = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -19220,13 +21559,27 @@ export const onCreateMarketItem = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -19262,11 +21615,34 @@ export const onUpdateMarketItem = /* GraphQL */ `
       imgS3Keys
       title
       price
+      marketType
       description
       location
       marketItemCondition
       marketItemCategory
       tags
+      vehicleType
+      year
+      make
+      model
+      exteriorColor
+      interiorColor
+      fuelType
+      marketRentalSaleRent
+      propertyType
+      bedroomCounts
+      bathroomsCounts
+      address
+      propertySize
+      dateAvailable
+      laundryType
+      airConditionType
+      heatingType
+      catFriendly
+      dogFriendly
+      contactPhone
+      contactWeChat
+      contactEmail
       sortKey
       active
       createdAt
@@ -19436,6 +21812,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -19448,49 +21825,24 @@ export const onUpdateMarketItem = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -19498,13 +21850,27 @@ export const onUpdateMarketItem = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -19540,1131 +21906,24 @@ export const onDeleteMarketItem = /* GraphQL */ `
       imgS3Keys
       title
       price
+      marketType
       description
       location
       marketItemCondition
       marketItemCategory
       tags
-      sortKey
-      active
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
-          vehicleType
-          imgS3Keys
-          location
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          price
-          address
-          description
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          tags
-          active
-          sortKey
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onCreateMarketVehicle = /* GraphQL */ `
-  subscription OnCreateMarketVehicle {
-    onCreateMarketVehicle {
-      id
       vehicleType
-      imgS3Keys
-      location
       year
       make
       model
       exteriorColor
       interiorColor
       fuelType
-      price
-      description
-      active
-      createdAt
-      sortKey
-      tags
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
-          vehicleType
-          imgS3Keys
-          location
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          price
-          address
-          description
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          tags
-          active
-          sortKey
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateMarketVehicle = /* GraphQL */ `
-  subscription OnUpdateMarketVehicle {
-    onUpdateMarketVehicle {
-      id
-      vehicleType
-      imgS3Keys
-      location
-      year
-      make
-      model
-      exteriorColor
-      interiorColor
-      fuelType
-      price
-      description
-      active
-      createdAt
-      sortKey
-      tags
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
-          vehicleType
-          imgS3Keys
-          location
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          price
-          address
-          description
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          tags
-          active
-          sortKey
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteMarketVehicle = /* GraphQL */ `
-  subscription OnDeleteMarketVehicle {
-    onDeleteMarketVehicle {
-      id
-      vehicleType
-      imgS3Keys
-      location
-      year
-      make
-      model
-      exteriorColor
-      interiorColor
-      fuelType
-      price
-      description
-      active
-      createdAt
-      sortKey
-      tags
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
-          vehicleType
-          imgS3Keys
-          location
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          price
-          address
-          description
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          tags
-          active
-          sortKey
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onCreateMarketRental = /* GraphQL */ `
-  subscription OnCreateMarketRental {
-    onCreateMarketRental {
-      id
-      imgS3Keys
       marketRentalSaleRent
       propertyType
       bedroomCounts
       bathroomsCounts
-      price
       address
-      description
       propertySize
       dateAvailable
       laundryType
@@ -20672,9 +21931,11 @@ export const onCreateMarketRental = /* GraphQL */ `
       heatingType
       catFriendly
       dogFriendly
-      tags
-      active
+      contactPhone
+      contactWeChat
+      contactEmail
       sortKey
+      active
       createdAt
       userID
       updatedAt
@@ -20842,6 +22103,7 @@ export const onCreateMarketRental = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -20854,49 +22116,24 @@ export const onCreateMarketRental = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -20904,13 +22141,27 @@ export const onCreateMarketRental = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -20938,30 +22189,18 @@ export const onCreateMarketRental = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateMarketRental = /* GraphQL */ `
-  subscription OnUpdateMarketRental {
-    onUpdateMarketRental {
+export const onCreateFoundingMember = /* GraphQL */ `
+  subscription OnCreateFoundingMember {
+    onCreateFoundingMember {
       id
-      imgS3Keys
-      marketRentalSaleRent
-      propertyType
-      bedroomCounts
-      bathroomsCounts
-      price
-      address
-      description
-      propertySize
-      dateAvailable
-      laundryType
-      airConditionType
-      heatingType
-      catFriendly
-      dogFriendly
-      tags
       active
-      sortKey
-      createdAt
+      title
+      brief
+      moreBrief
+      mainPart
+      imgS3Key
       userID
+      createdAt
       updatedAt
       user {
         id
@@ -21127,6 +22366,7 @@ export const onUpdateMarketRental = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -21139,49 +22379,24 @@ export const onUpdateMarketRental = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -21189,13 +22404,27 @@ export const onUpdateMarketRental = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -21219,34 +22448,21 @@ export const onUpdateMarketRental = /* GraphQL */ `
           nextToken
         }
       }
-      owner
     }
   }
 `;
-export const onDeleteMarketRental = /* GraphQL */ `
-  subscription OnDeleteMarketRental {
-    onDeleteMarketRental {
+export const onUpdateFoundingMember = /* GraphQL */ `
+  subscription OnUpdateFoundingMember {
+    onUpdateFoundingMember {
       id
-      imgS3Keys
-      marketRentalSaleRent
-      propertyType
-      bedroomCounts
-      bathroomsCounts
-      price
-      address
-      description
-      propertySize
-      dateAvailable
-      laundryType
-      airConditionType
-      heatingType
-      catFriendly
-      dogFriendly
-      tags
       active
-      sortKey
-      createdAt
+      title
+      brief
+      moreBrief
+      mainPart
+      imgS3Key
       userID
+      createdAt
       updatedAt
       user {
         id
@@ -21412,6 +22628,7 @@ export const onDeleteMarketRental = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -21424,49 +22641,24 @@ export const onDeleteMarketRental = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -21474,13 +22666,27 @@ export const onDeleteMarketRental = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -21504,7 +22710,268 @@ export const onDeleteMarketRental = /* GraphQL */ `
           nextToken
         }
       }
-      owner
+    }
+  }
+`;
+export const onDeleteFoundingMember = /* GraphQL */ `
+  subscription OnDeleteFoundingMember {
+    onDeleteFoundingMember {
+      id
+      active
+      title
+      brief
+      moreBrief
+      mainPart
+      imgS3Key
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -21681,6 +23148,7 @@ export const onCreateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -21693,49 +23161,24 @@ export const onCreateLike = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -21743,13 +23186,27 @@ export const onCreateLike = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -21937,6 +23394,7 @@ export const onCreateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -21949,49 +23407,24 @@ export const onCreateLike = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -21999,13 +23432,27 @@ export const onCreateLike = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -22211,9 +23658,111 @@ export const onCreateLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        eventComments {
+          nextToken
+        }
         eventParticipants {
           nextToken
         }
+        likes {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      eventSubComment {
+        id
+        content
+        active
+        eventCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
         likes {
           nextToken
         }
@@ -22322,10 +23871,30 @@ export const onCreateLike = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -22551,6 +24120,7 @@ export const onUpdateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -22563,49 +24133,24 @@ export const onUpdateLike = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -22613,13 +24158,27 @@ export const onUpdateLike = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -22807,6 +24366,7 @@ export const onUpdateLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -22819,49 +24379,24 @@ export const onUpdateLike = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -22869,13 +24404,27 @@ export const onUpdateLike = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -23081,9 +24630,111 @@ export const onUpdateLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        eventComments {
+          nextToken
+        }
         eventParticipants {
           nextToken
         }
+        likes {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      eventSubComment {
+        id
+        content
+        active
+        eventCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
         likes {
           nextToken
         }
@@ -23192,10 +24843,30 @@ export const onUpdateLike = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -23421,6 +25092,7 @@ export const onDeleteLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -23433,49 +25105,24 @@ export const onDeleteLike = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -23483,13 +25130,27 @@ export const onDeleteLike = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -23677,6 +25338,7 @@ export const onDeleteLike = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -23689,49 +25351,24 @@ export const onDeleteLike = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -23739,13 +25376,27 @@ export const onDeleteLike = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -23951,9 +25602,111 @@ export const onDeleteLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        eventComments {
+          nextToken
+        }
         eventParticipants {
           nextToken
         }
+        likes {
+          nextToken
+        }
+      }
+      eventComment {
+        id
+        content
+        active
+        eventID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        event {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        eventSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      eventSubComment {
+        id
+        content
+        active
+        eventCommentID
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        eventComment {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
         likes {
           nextToken
         }
@@ -24062,10 +25815,30 @@ export const onDeleteLike = /* GraphQL */ `
         content
         active
         createdAt
+        replyToUserID
         forumPostID
         forumPostCommentID
         userID
         updatedAt
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
         user {
           id
           username
@@ -24293,6 +26066,7 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -24305,49 +26079,24 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -24355,13 +26104,27 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -24564,6 +26327,7 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -24576,49 +26340,24 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -24626,13 +26365,27 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -24835,6 +26588,7 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           content
           active
           createdAt
+          replyToUserID
           forumPostID
           forumPostCommentID
           userID
@@ -24847,49 +26601,24 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           imgS3Keys
           title
           price
+          marketType
           description
           location
           marketItemCondition
           marketItemCategory
           tags
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        marketVehicles {
-          id
           vehicleType
-          imgS3Keys
-          location
           year
           make
           model
           exteriorColor
           interiorColor
           fuelType
-          price
-          description
-          active
-          createdAt
-          sortKey
-          tags
-          userID
-          updatedAt
-          owner
-        }
-        marketRentals {
-          id
-          imgS3Keys
           marketRentalSaleRent
           propertyType
           bedroomCounts
           bathroomsCounts
-          price
           address
-          description
           propertySize
           dateAvailable
           laundryType
@@ -24897,13 +26626,27 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           heatingType
           catFriendly
           dogFriendly
-          tags
-          active
+          contactPhone
+          contactWeChat
+          contactEmail
           sortKey
+          active
           createdAt
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail

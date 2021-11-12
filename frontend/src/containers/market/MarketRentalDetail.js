@@ -36,20 +36,6 @@ import { useTitle } from "../../Hooks/useTitle";
 //   selectedMarketItem,
 // } from "../../redux/actions/marketItemActions";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -99,8 +85,7 @@ export default function MarketRentalDetail() {
   console.log("id", id);
   useEffect(() => {
     if (id && id !== "") {
-      const type = "rental";
-      dispatch(selectedMarketItem({ id, type }));
+      dispatch(selectedMarketItem(id));
     }
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
@@ -215,21 +200,24 @@ export default function MarketRentalDetail() {
                 <Button
                   startIcon={<MessageIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Contact
                 </Button>
                 <Button
                   startIcon={<BookmarksIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Save
                 </Button>
                 <Button
                   startIcon={<ShareIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Share
                 </Button>
@@ -268,16 +256,13 @@ export default function MarketRentalDetail() {
                   </Typography>
                 </Box>
               )}
-              <Stack
-                direction="row"
-                marginX="1rem"
-                marginBottom="0.5rem"
-                spacing={2}
-              >
+              <Box sx={{ marginX: "1rem", marginBottom: "0.5rem" }}>
                 {tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} color="primary" />;
+                  return (
+                    <Chip key={tagIdx} label={tag} sx={{ margin: "0.5rem" }} />
+                  );
                 })}
-              </Stack>
+              </Box>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                 Descriptions
@@ -286,16 +271,17 @@ export default function MarketRentalDetail() {
               <Typography marginX="1rem" marginY="0.25rem">
                 {description}
               </Typography>
-              <Box
+              <Paper
                 sx={{
                   marginX: "1rem",
                   marginY: "0.25rem",
-                  bgcolor: "#4caf50",
-                  height: "200px",
+                  height: "250px",
+                  backgroundColor: "rgb(243, 246, 249)",
+                  marginBottom: "1rem",
                 }}
               >
-                Google map
-              </Box>
+                Google Map
+              </Paper>
               <Typography marginX="1rem" marginY="0.25rem">
                 {address}
               </Typography>

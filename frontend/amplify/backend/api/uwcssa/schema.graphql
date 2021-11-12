@@ -66,8 +66,9 @@ type User
   forumPostComments: [ForumPostComment]
   forumPostSubComments: [ForumPostSubComment]
   marketItems: [MarketItem]
-  marketVehicles: [MarketVehicle]
-  marketRentals: [MarketRental]
+  # marketVehicles: [MarketVehicle]
+  # marketRentals: [MarketRental]
+  foundingMember: [FoundingMember]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
 }
 
@@ -264,6 +265,7 @@ type Event
   sortKey: SortKey!
   topicID: ID!
   topic: Topic! @connection(fields: ["topicID"])
+  eventComments: [EventComment] @connection(keyName: "byEvent", fields: ["id"])
   eventParticipants: [EventParticipant]
     @connection(keyName: "byEvent", fields: ["id"])
   likes: [Like] @connection(keyName: "byEvent", fields: ["id"])
@@ -277,6 +279,62 @@ enum EventStatus {
   SignUpClosed
   Finished
   Canceled
+}
+
+type EventComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "eventCommentSortByEventID"
+    fields: ["eventID", "createdAt"]
+    queryField: "eventCommentSortByEventID"
+  )
+  @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
+  id: ID!
+  content: String!
+  likes: [Like] @connection(keyName: "byEventComment", fields: ["id"])
+  active: Boolean!
+  eventID: ID!
+  event: Event! @connection(fields: ["eventID"])
+  eventSubComments: [EventSubComment]
+    @connection(keyName: "byEventComment", fields: ["id"])
+  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type EventSubComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "eventSubCommentSortByEventCommentID"
+    fields: ["eventCommentID", "createdAt"]
+    queryField: "eventSubCommentSortByEventCommentID"
+  )
+  @key(name: "byEventComment", fields: ["eventCommentID", "createdAt"]) {
+  id: ID!
+  content: String!
+  likes: [Like] @connection(keyName: "byEventSubComment", fields: ["id"])
+  active: Boolean!
+  eventCommentID: ID!
+  eventComment: EventComment! @connection(fields: ["eventCommentID"])
+  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type EventParticipant
@@ -547,6 +605,8 @@ type ForumPostSubComment
   likes: [Like] @connection(keyName: "byForumPostSubComment", fields: ["id"])
   active: Boolean!
   createdAt: AWSDateTime!
+  replyToUserID: ID!
+  replyTo: User @connection(fields: ["replyToUserID"])
   forumPostID: ID!
   forumPost: ForumPost! @connection(fields: ["forumPostID"])
   forumPostCommentID: ID!
@@ -594,22 +654,62 @@ type MarketItem
     name: "marketItemSortByMarketItemCategory"
     fields: ["marketItemCategory", "createdAt"]
     queryField: "marketItemSortByMarketItemCategory"
+  )
+  @key(
+    name: "marketVehicleSortByVehicleType"
+    fields: ["vehicleType", "createdAt"]
+    queryField: "marketVehicleSortByVehicleType"
+  )
+  @key(
+    name: "marketRentalSortByMarketRentalSaleRent"
+    fields: ["marketRentalSaleRent", "createdAt"]
+    queryField: "marketRentalSortByMarketRentalSaleRent"
   ) {
   id: ID!
-  name: String!
-  imgS3Keys: [String]!
-  title: String!
+  name: String
+  imgS3Keys: [String]
+  title: String
   price: Int
+  marketType: MarketType!
   description: String
   location: String
-  marketItemCondition: MarketItemCondition!
-  marketItemCategory: MarketItemCategory!
+  marketItemCondition: MarketItemCondition
+  marketItemCategory: MarketItemCategory
   tags: [String]
+  vehicleType: VehicleType
+  year: Int
+  make: String
+  model: String
+  exteriorColor: String
+  interiorColor: String
+  fuelType: String
+  marketRentalSaleRent: MarketRentalSaleRent
+  propertyType: PropertyType
+  bedroomCounts: Int
+  bathroomsCounts: Int
+  address: String
+  propertySize: Int
+  dateAvailable: AWSDateTime
+  laundryType: LaundryType
+  airConditionType: AirConditionType
+  heatingType: HeatingType
+  catFriendly: Boolean
+  dogFriendly: Boolean
+  contactPhone: String
+  contactWeChat: String
+  contactEmail: String
   sortKey: SortKey!
   active: Boolean!
   createdAt: AWSDateTime!
   userID: ID!
   user: User! @connection(fields: ["userID"])
+}
+
+enum MarketType {
+  Item
+  Vehicle
+  Rental
+  Other
 }
 
 enum MarketItemCondition {
@@ -657,46 +757,6 @@ enum MarketItemCategory {
   Other
 }
 
-type MarketVehicle
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(
-    name: "marketVehicleSortBySortKey"
-    fields: ["sortKey", "createdAt"]
-    queryField: "marketVehicleSortBySortKey"
-  )
-  @key(
-    name: "marketVehicleSortByVehicleType"
-    fields: ["vehicleType", "createdAt"]
-    queryField: "marketVehicleSortByVehicleType"
-  ) {
-  id: ID!
-  vehicleType: VehicleType!
-  imgS3Keys: [String]!
-  location: String
-  year: Int!
-  make: String!
-  model: String!
-  exteriorColor: String
-  interiorColor: String
-  fuelType: String
-  price: Int
-  description: String
-  active: Boolean!
-  createdAt: AWSDateTime!
-  sortKey: SortKey!
-  tags: [String]
-  userID: ID!
-  user: User! @connection(fields: ["userID"])
-}
-
 enum VehicleType {
   CarTruck
   Motorcycle
@@ -704,50 +764,6 @@ enum VehicleType {
   RVCamper
   Trailer
   Other
-}
-
-type MarketRental
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  )
-  @key(
-    name: "marketRentalSortBySortKey"
-    fields: ["sortKey", "createdAt"]
-    queryField: "marketRentalSortBySortKey"
-  )
-  @key(
-    name: "marketRentalSortByMarketRentalSaleRent"
-    fields: ["marketRentalSaleRent", "createdAt"]
-    queryField: "marketRentalSortByMarketRentalSaleRent"
-  ) {
-  id: ID!
-  imgS3Keys: [String]!
-  marketRentalSaleRent: MarketRentalSaleRent!
-  propertyType: PropertyType!
-  bedroomCounts: Int
-  bathroomsCounts: Int
-  price: Int
-  address: String
-  description: String
-  propertySize: Int
-  dateAvailable: AWSDateTime
-  laundryType: LaundryType
-  airConditionType: AirConditionType
-  heatingType: HeatingType
-  catFriendly: Boolean
-  dogFriendly: Boolean
-  tags: [String]
-  active: Boolean!
-  sortKey: SortKey!
-  createdAt: AWSDateTime!
-  userID: ID!
-  user: User! @connection(fields: ["userID"])
 }
 
 enum MarketRentalSaleRent {
@@ -786,6 +802,26 @@ enum HeatingType {
   Other
 }
 
+type FoundingMember
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  active: Boolean!
+  title: String
+  brief: String
+  moreBrief: String
+  mainPart: [String]
+  imgS3Key: [String]
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
 type Like
   @model
   @auth(
@@ -801,6 +837,8 @@ type Like
   @key(name: "byArticleComment", fields: ["itemID"])
   @key(name: "byArticleSubComment", fields: ["itemID"])
   @key(name: "byEvent", fields: ["itemID"])
+  @key(name: "byEventComment", fields: ["itemID"])
+  @key(name: "byEventSubComment", fields: ["itemID"])
   @key(name: "byForumPost", fields: ["itemID"])
   @key(name: "byForumPostComment", fields: ["itemID"])
   @key(name: "byForumPostSubComment", fields: ["itemID"]) {
@@ -811,6 +849,8 @@ type Like
   articleComment: ArticleComment @connection(fields: ["itemID"])
   articleSubComment: ArticleSubComment @connection(fields: ["itemID"])
   event: Event @connection(fields: ["itemID"])
+  eventComment: EventComment @connection(fields: ["itemID"])
+  eventSubComment: EventSubComment @connection(fields: ["itemID"])
   forumPost: ForumPost @connection(fields: ["itemID"])
   forumPostComment: ForumPostComment @connection(fields: ["itemID"])
   forumPostSubComment: ForumPostSubComment @connection(fields: ["itemID"])

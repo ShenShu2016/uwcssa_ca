@@ -1,10 +1,14 @@
 import { Box, IconButton } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
+// import {
+//   removeSelectedEvent,
+//   selectedEvent,
+// } from "../../redux/actions/eventActions";
 import {
   removeSelectedEvent,
   selectedEvent,
-} from "../../redux/actions/eventActions";
+} from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -29,7 +33,7 @@ export default function EventDetail() {
 
   useEffect(() => {
     if (eventID && eventID !== "") {
-      dispatch(selectedEvent(eventID));
+      dispatch(selectedEvent({ eventID }));
     }
     return () => dispatch(removeSelectedEvent());
   }, [eventID, dispatch]);
@@ -40,7 +44,6 @@ export default function EventDetail() {
         <IconButton component={Link} to="/event">
           <ArrowBackIcon />
         </IconButton>
-
         <EventBody event={event} />
       </Box>
     </div>

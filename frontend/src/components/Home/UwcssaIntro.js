@@ -16,8 +16,8 @@ import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
+import { fetchUserCounts } from "../../redux/reducers/generalSlice";
 import { makeStyles } from "@mui/styles";
-import { setUserCounts } from "../../redux/actions/generalAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,13 +93,17 @@ export default function UwcssaIntro() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { userAuth } = useSelector((state) => state);
-  const { userCounts } = useSelector((state) => state.general);
+  const { userCounts, fetchUserCountsStatus } = useSelector(
+    (state) => state.general
+  );
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
   useEffect(() => {
-    dispatch(setUserCounts());
-  }, [dispatch]);
+    if (fetchUserCountsStatus === "idle" || undefined) {
+      dispatch(fetchUserCounts());
+    }
+  }, [dispatch, fetchUserCountsStatus]);
   const guestButton = () => (
     <div>
       <Button

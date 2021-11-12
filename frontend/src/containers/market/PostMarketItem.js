@@ -3,18 +3,19 @@ import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "./marketItemOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
-import { postMultipleImages } from "../../redux/actions/generalAction";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
-// import { postMarketItem } from "../../redux/actions/marketItemActions";
+// import { postMarketItem } from "../.221./redux/actions/marketItemActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,8 +63,7 @@ export default function PostMarketItem() {
   useTitle("发布二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const { imageKeys } = useSelector((state) => state.general);
-  const [renderTrigger, setRenderTrigger] = useState(null);
+  const [imageKeys, setImageKeys] = useState([]);
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
 
   const history = useHistory();
@@ -82,9 +82,14 @@ export default function PostMarketItem() {
 
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    setRenderTrigger(imagesData.length);
-    const imgLocation = "marketItem";
-    await dispatch(postMultipleImages(imagesData, imgLocation));
+    const imageLocation = "market/item";
+
+    const response = await dispatch(
+      postMultipleImages({ imagesData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setImageKeys(response.payload);
+    }
   };
 
   useEffect(() => {
@@ -106,10 +111,11 @@ export default function PostMarketItem() {
         setImgKeyFromServer([]);
       }
     };
-    if (imageKeys.length === renderTrigger && imageKeys.length !== 0) {
+    console.log("imageKeys", imageKeys);
+    if (imageKeys) {
       getImage();
     }
-  }, [imageKeys, renderTrigger]);
+  }, [imageKeys]);
 
   const uploadMarketItem = async () => {
     //Upload the marketItem
@@ -123,6 +129,7 @@ export default function PostMarketItem() {
     } = marketItemData;
 
     const createMarketItemInput = {
+      marketType: "Item",
       title: title,
       name: title,
       description: description,
@@ -133,16 +140,15 @@ export default function PostMarketItem() {
       location: location,
       tags: GetTags(),
       active: true,
-      createdAt: new Date().toISOString(),
       userID: username,
       sortKey: "SortKey",
     };
+    console.log("check!", createMarketItemInput);
 
     const response = await dispatch(postMarketItem(createMarketItemInput));
-    if (response.payload.result) {
-      history.push(
-        `/market/item/${response.payload.response.data.createMarketItem.id}`
-      );
+    console.log("Something should be here", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/market/item/${response.payload.data.createMarketItem.id}`);
     }
   };
 
@@ -187,6 +193,8 @@ export default function PostMarketItem() {
             <TextField
               label="Title"
               variant="outlined"
+              placeholder="Give your item the coolest name!"
+              autoFocus
               fullWidth
               required
               value={marketItemData.title}
@@ -203,6 +211,11 @@ export default function PostMarketItem() {
               fullWidth
               type="number"
               placeholder="eg. 200 (Currency: CAD $)"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
               value={marketItemData.price}
               className={classes.titleInput}
               onChange={(e) =>
@@ -226,7 +239,7 @@ export default function PostMarketItem() {
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomTags />
+            <CustomTags placeholder="新装修， 独立卫浴..." />
           </Grid>
           <Grid item xs={6}>
             <MarketForm
@@ -263,6 +276,7 @@ export default function PostMarketItem() {
               minRows={5}
               variant="outlined"
               multiline
+              placeholder="Describe your items in a more detailed manner!"
               fullWidth
               onChange={(e) =>
                 setMarketItemData({

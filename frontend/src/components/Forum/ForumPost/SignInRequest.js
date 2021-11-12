@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { setURLFrom } from "../../../redux/actions/generalAction";
+import { setURLFrom } from "../../../redux/reducers/generalSlice";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -24,7 +24,7 @@ const SignInRequest = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setURLFrom(location));
+    dispatch(setURLFrom({ location }));
     // console.log("location,", location);
   }, [dispatch, location]);
 

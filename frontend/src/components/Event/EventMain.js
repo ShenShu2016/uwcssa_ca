@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EventMain({ event }) {
   const classes = useStyles();
   const [posterURL, setPosterURL] = useState(null);
-  console.log("event", event);
+  // console.log("event", event);
   const {
     id,
     content,

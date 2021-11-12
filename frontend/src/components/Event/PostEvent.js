@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { postEvent, setTopics } from "../../redux/actions/eventActions";
+import { fetchTopics, postEvent } from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -25,10 +25,11 @@ import S3Image from "../../components/S3/S3Image";
 import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
+import { postSingleImage } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import { postImage } from "../../redux/actions/generalAction";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -77,38 +78,42 @@ export default function PostEvent() {
   });
   console.log(eventData);
   useEffect(() => {
-    dispatch(setTopics());
+    dispatch(fetchTopics());
   }, [dispatch]);
 
   const { topics } = useSelector((state) => state.event);
   const { username } = useSelector((state) => state.userAuth.user);
 
   const uploadEventImg = async (e) => {
-    const backgroundImageData = e.target.files[0];
-    const backgroundImageLocation = "event";
+    const imageData = e.target.files;
+    const imageLocation = "event";
     const response = await dispatch(
-      postImage(backgroundImageData, backgroundImageLocation)
+      postSingleImage({ imageData, imageLocation })
     );
-    if (response) {
-      setBackGroundImgS3Key(response.key);
+    if (response.meta.requestStatus === "fulfilled") {
+      setBackGroundImgS3Key(response.payload);
     }
   };
 
   const uploadEventPoster = async (e) => {
-    const posterData = e.target.files[0];
-    const posterLocation = "event";
-    const response = await dispatch(postImage(posterData, posterLocation));
-    if (response) {
-      setPosterImgS3Key(response.key);
+    const imageData = e.target.files;
+    const imageLocation = "event";
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      setPosterImgS3Key(response.payload);
     }
   };
 
   const uploadEventQrCode = async (e) => {
-    const qrCodeData = e.target.files[0];
-    const qrCodeLocation = "event";
-    const response = await dispatch(postImage(qrCodeData, qrCodeLocation));
+    const imageData = e.target.files;
+    const imageLocation = "event";
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
     if (response) {
-      setQrCodeImgS3Key(response.key);
+      setQrCodeImgS3Key(response.payload);
     }
   };
 
@@ -147,10 +152,10 @@ export default function PostEvent() {
       userID: username,
     };
 
-    const response = await dispatch(postEvent(createEventInput));
+    const response = await dispatch(postEvent({ createEventInput }));
 
-    if (response.result) {
-      history.push(`/event/${response.response.data.createEvent.id}`);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/event/${response.payload.data.createEvent.id}`);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
@@ -164,7 +169,7 @@ export default function PostEvent() {
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
-    dispatch(setTopics());
+    dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
 

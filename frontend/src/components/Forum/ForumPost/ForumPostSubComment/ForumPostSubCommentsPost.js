@@ -4,18 +4,19 @@ import {
   CardActions,
   CardHeader,
   Grid,
-  // CircularProgress,
   TextField,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
+import SignInRequest from "../SignInRequest";
 // import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
-import CustomAvatar from "../../../CustomMUI/CustomAvatar";
-import SignInRequest from "../SignInRequest";
-import { postForumPostSubComment } from "../../../../redux/actions/forumAction";
+// import { postForumPostSubComment } from "../../../../redux/actions/forumAction";
+import { postForumPostSubComment } from "../../../../redux/reducers/forumSlice";
 
 const useStyles = makeStyles({
   root: {},

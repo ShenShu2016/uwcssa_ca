@@ -15,7 +15,8 @@ import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import SignInRequest from "../SignInRequest";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postArticleComment } from "../../../redux/actions/articleActions";
+// import { postArticleComment } from "../../../redux/actions/articleActions";
+import { postArticleComment } from "../../../redux/reducers/articleSlice";
 
 const useStyles = makeStyles({
   root: {},
@@ -52,9 +53,9 @@ export default function ArticleCommentsPost({ article }) {
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
-        postArticleComment(createArticleCommentInput)
+        postArticleComment({ createArticleCommentInput })
       );
-      if (response.result) {
+      if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
         setFormData({
           comment: "",

@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { postArticle, setTopics } from "../../../redux/actions/articleActions";
+import { fetchTopics, postArticle } from "../../../redux/reducers/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -19,7 +19,7 @@ import S3Image from "../../../components/S3/S3Image";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
-import { postImage } from "../../../redux/actions/generalAction";
+import { postSingleImage } from "../../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -77,17 +77,20 @@ export default function PostArticle() {
   });
   console.log(articleData);
   useEffect(() => {
-    dispatch(setTopics());
+    dispatch(fetchTopics());
   }, [dispatch]);
 
   const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
-    const imageData = e.target.files[0];
+    const imageData = e.target.files;
     const imageLocation = "article";
-    const response = await dispatch(postImage(imageData, imageLocation));
-    if (response) {
-      setImgS3Keys(response.key);
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
+    console.log("我是function 返回值 response", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      setImgS3Keys(response.payload);
     }
   };
 
@@ -105,23 +108,24 @@ export default function PostArticle() {
       userID: username,
       tags: tags,
     };
-    const response = await dispatch(postArticle(createArticleInput));
+    const response = await dispatch(postArticle({ createArticleInput }));
 
-    if (response.result) {
-      history.push(`/article/${response.response.data.createArticle.id}`);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/article/${response.payload.data.createArticle.id}`);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
 
   const uploadTopic = async () => {
     const createTopicInput = {
+      id: topicData.name,
       name: topicData.name,
       userID: username,
     };
     await API.graphql(
       graphqlOperation(createTopic, { input: createTopicInput })
     );
-    dispatch(setTopics());
+    dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
 

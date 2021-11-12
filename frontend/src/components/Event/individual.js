@@ -6,14 +6,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
-import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
-import React from "react";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
 import { makeStyles } from "@mui/styles";
-import useForm from "./useForm";
-import { validator } from "./validator";
+import { postEventParticipant } from "../../redux/reducers/eventSlice";
+import { useHistory } from "react-router";
+// import useForm from "./useForm";
+// import { validator } from "./validator";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -33,117 +38,180 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Individual() {
   const classes = useStyles();
-
-  const initState = {
-    fullName: "",
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { userAuth } = useSelector((state) => state);
+  const { eventID } = useParams();
+  //const { event } = useSelector((state) => state.event.selected); 思路有问题
+  useTitle(`近期活动 ${eventID} 个人报名`);
+  console.log("event.id", eventID);
+  const [eventParticipantData, setEventParticipantData] = useState({
+    name: "",
     email: "",
     address: "",
+    phone: "",
+    weChat: "",
     message: "",
-  };
-
-  const submit = () => {
-    console.log(" Submitted");
-  };
-
-  const { handleChange, handleSubmit, handleBlur, state, errors } = useForm({
-    initState,
-    callback: submit,
-    validator,
+    numberOfPeople: "",
   });
+  const uploadEventParticipant = async () => {
+    console.log("????");
+    const { name, email, address, phone, weChat, message } =
+      eventParticipantData;
 
-  const isValidForm =
-    state.fullName.length > 0 &&
-    !errors.fullName &&
-    state.email.length > 0 &&
-    !errors.email;
+    const createEventParticipantInput = {
+      id: `${eventID}-${userAuth.user.username}`, //这样的话她智能报名一次了
+      name,
+      email,
+      address,
+      phone,
+      weChat,
+      message,
+      numberOfPeople: 1,
+      eventParticipantStatus: "ArriveOnTime",
+      active: true,
+      eventID: eventID,
+      userID: userAuth.user.username,
+    };
+
+    const response = await dispatch(
+      postEventParticipant({ createEventParticipantInput })
+    );
+    console.log("postEventParticipant", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/event`);
+    }
+  };
 
   return (
     <div>
-      <Grid container component="main" sx={{ height: "100%" }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={6}
-          sx={{
-            backgroundImage:
-              "url(https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/63/2020/10/why-do-we-celebrate-halloween-920x613.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={6} elevation={6} square noValidate>
-          <Box className={classes.rightBox}>
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <PersonIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              个人报名
-            </Typography>
-            <Box>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="姓名"
-                name="fullName"
-                defaultValue={state.fullName}
-                onChange={handleChange}
-                error={!!errors.fullName}
-                helperText={errors.fullName}
-                onBlur={handleBlur}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="邮箱"
-                name="email"
-                defaultValue={state.email}
-                onChange={handleChange}
-                error={!!errors.email}
-                helperText={errors.email}
-                onBlur={handleBlur}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                name="address"
-                label="地址（如需接送）"
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                label="备注"
-                name="message"
-                multiline
-                rows={4}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                disabled={!isValidForm}
-                onClick={isValidForm ? handleSubmit : null}
-              >
-                提交
-              </Button>
+      {userAuth.isAuthenticated ? "" : <SignUpRequest />}
+      <div>
+        <Grid container component="main" sx={{ height: "100%" }}>
+          <CssBaseline />
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={6}
+            sx={{
+              backgroundImage:
+                "url(https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/63/2020/10/why-do-we-celebrate-halloween-920x613.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <Grid item xs={12} sm={8} md={6} elevation={6} noValidate>
+            <Box className={classes.rightBox}>
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <PersonIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                个人报名
+              </Typography>
+              <Box>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="姓名"
+                  name="name"
+                  value={eventParticipantData.name}
+                  onChange={(e) =>
+                    setEventParticipantData({
+                      ...eventParticipantData,
+                      name: e.target.value,
+                    })
+                  }
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="邮箱"
+                  name="email"
+                  value={eventParticipantData.email}
+                  onChange={(e) =>
+                    setEventParticipantData({
+                      ...eventParticipantData,
+                      email: e.target.value,
+                    })
+                  }
+                />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  name="phone"
+                  label="手机号码"
+                  value={eventParticipantData.phone}
+                  onChange={(e) =>
+                    setEventParticipantData({
+                      ...eventParticipantData,
+                      phone: e.target.value,
+                    })
+                  }
+                />
 
-              <Grid item>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  name="weChat"
+                  label="微信号"
+                  value={eventParticipantData.weChat}
+                  onChange={(e) =>
+                    setEventParticipantData({
+                      ...eventParticipantData,
+                      weChat: e.target.value,
+                    })
+                  }
+                />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  name="address"
+                  label="地址（如需接送）"
+                  value={eventParticipantData.address}
+                  onChange={(e) =>
+                    setEventParticipantData({
+                      ...eventParticipantData,
+                      address: e.target.value,
+                    })
+                  }
+                />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="备注"
+                  name="message"
+                  multiline
+                  rows={4}
+                  value={eventParticipantData.message}
+                  onChange={(e) =>
+                    setEventParticipantData({
+                      ...eventParticipantData,
+                      message: e.target.value,
+                    })
+                  }
+                />
                 <Button
-                  component={Link}
-                  to="/event/eventSignUp"
-                  variant="body2"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={uploadEventParticipant}
                 >
-                  返回
+                  提交
                 </Button>
-              </Grid>
+                <Grid item>
+                  <Button component={Link} to="/event" variant="body2">
+                    返回
+                  </Button>
+                </Grid>
+              </Box>
             </Box>
-          </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     </div>
   );
 }
