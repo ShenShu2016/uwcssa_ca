@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   CardHeader,
@@ -20,7 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import { Link } from "react-router-dom";
+import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
@@ -36,6 +35,7 @@ import { useTitle } from "../../Hooks/useTitle";
 //   selectedMarketItem,
 // } from "../../redux/actions/marketItemActions";
 
+//点太快，selectedMarket来不及删，会产生bug
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -111,6 +111,7 @@ export default function MarketRentalDetail() {
     // propertySize,
     // dateAvailable,
     // laundryType,
+    user,
     airConditionType,
     heatingType,
     catFriendly,
@@ -297,12 +298,13 @@ export default function MarketRentalDetail() {
               >
                 <CardHeader
                   avatar={
-                    <Avatar
-                      aria-label="recipe"
+                    <CustomAvatar
+                      // aria-label="recipe"
                       className={classes.avatar}
-                      component={Link}
-                      to={`/account/profile/${owner}`}
-                    ></Avatar>
+                      component={true}
+                      user={user}
+                      // to={`/account/profile/${owner}`}
+                    ></CustomAvatar>
                   }
                   action={
                     <IconButton aria-label="settings">

@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  Grid,
   Paper,
   Stack,
   Typography,
@@ -207,6 +208,8 @@ export default function MarketImgTopFilter({
             fontWeight: "bold",
             color: "rgba(0, 0, 0, 0.54)",
             fontSize: "1.25rem",
+            marginLeft: "5px",
+            marginBottom: "0.5rem",
             padding: 0,
           }}
           onClick={handleClickListItem}
@@ -220,31 +223,33 @@ export default function MarketImgTopFilter({
           onClose={handleClose}
           value={value}
         />
-        <Stack
+        <Grid
+          container
           spacing={1}
-          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
           sx={{
             color: "action.active",
-            marginTop: "0.5rem",
             marginBottom: "1rem",
           }}
         >
           {sortedOccurrence.slice(0, 5).map((tag, tagIdx) => {
             return (
-              <Chip
-                key={tagIdx}
-                avatar={<Avatar>{occurrence[tag]}</Avatar>}
-                label={tag}
-                onClick={() => {
-                  handleClick(tag);
-                }}
-              />
+              <Grid item key={tagIdx}>
+                <Chip
+                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
+                  label={tag}
+                  onClick={() => {
+                    handleClick(tag);
+                  }}
+                />
+              </Grid>
             );
           })}
-        </Stack>
+        </Grid>
         <SearchArea />
         <Divider sx={{ marginY: "1rem" }} />
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" justifyContent="flex-end">
           <MarketFIlterLocation type="button" />
           <FilterInfo
             form="button"

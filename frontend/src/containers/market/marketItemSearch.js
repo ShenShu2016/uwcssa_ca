@@ -23,10 +23,10 @@ export const SearchArea = () => {
     backgroundColor: "rgb(243, 246, 249)",
     marginRight: theme.spacing(2),
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   marginLeft: theme.spacing(3),
+    //   width: "auto",
+    // },
   }));
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -52,6 +52,7 @@ export const SearchArea = () => {
       },
     },
   }));
+  //Search Bar not finished yet
   return (
     <Search>
       <SearchIconWrapper>
@@ -60,6 +61,7 @@ export const SearchArea = () => {
       <StyledInputBase
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
+        disabled
       />
     </Search>
   );
