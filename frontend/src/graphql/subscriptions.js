@@ -227,6 +227,18 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -528,6 +540,18 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -828,6 +852,18 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -1701,6 +1737,37 @@ export const onCreateUser = /* GraphQL */ `
           badges
         }
         owner
+      }
+      foundingMember {
+        id
+        active
+        title
+        brief
+        moreBrief
+        mainPart
+        imgS3Key
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
       }
       updatedAt
       uWindsorEmail
@@ -2597,6 +2664,37 @@ export const onUpdateUser = /* GraphQL */ `
         }
         owner
       }
+      foundingMember {
+        id
+        active
+        title
+        brief
+        moreBrief
+        mainPart
+        imgS3Key
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+      }
       updatedAt
       uWindsorEmail
       badges
@@ -3492,6 +3590,37 @@ export const onDeleteUser = /* GraphQL */ `
         }
         owner
       }
+      foundingMember {
+        id
+        active
+        title
+        brief
+        moreBrief
+        mainPart
+        imgS3Key
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+      }
       updatedAt
       uWindsorEmail
       badges
@@ -3815,6 +3944,18 @@ export const onCreateUserEducation = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4067,6 +4208,18 @@ export const onUpdateUserEducation = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4318,6 +4471,18 @@ export const onDeleteUserEducation = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -4572,6 +4737,18 @@ export const onCreateUserExperience = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -4824,6 +5001,18 @@ export const onUpdateUserExperience = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -5078,6 +5267,18 @@ export const onDeleteUserExperience = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -5323,6 +5524,18 @@ export const onCreateTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -5610,6 +5823,18 @@ export const onUpdateTopic = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -5895,6 +6120,18 @@ export const onDeleteTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -6187,6 +6424,18 @@ export const onCreateArticle = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -6496,6 +6745,18 @@ export const onUpdateArticle = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -6804,6 +7065,18 @@ export const onDeleteArticle = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -7107,6 +7380,18 @@ export const onCreateArticleComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -7426,6 +7711,18 @@ export const onUpdateArticleComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -7743,6 +8040,18 @@ export const onDeleteArticleComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -8062,6 +8371,18 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -8370,6 +8691,18 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -8677,6 +9010,18 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -8998,6 +9343,18 @@ export const onCreateEvent = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -9336,6 +9693,18 @@ export const onUpdateEvent = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -9673,6 +10042,18 @@ export const onDeleteEvent = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -9996,6 +10377,18 @@ export const onCreateEventComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -10327,6 +10720,18 @@ export const onUpdateEventComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -10656,6 +11061,18 @@ export const onDeleteEventComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -10987,6 +11404,18 @@ export const onCreateEventSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -11304,6 +11733,18 @@ export const onUpdateEventSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -11620,6 +12061,18 @@ export const onDeleteEventSubComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -11945,6 +12398,18 @@ export const onCreateEventParticipant = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -12256,6 +12721,18 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -12569,6 +13046,18 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -12875,6 +13364,18 @@ export const onCreateDepartment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -13143,6 +13644,18 @@ export const onUpdateDepartment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -13410,6 +13923,18 @@ export const onDeleteDepartment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -13702,6 +14227,18 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -14007,6 +14544,18 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -14311,6 +14860,18 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -14588,6 +15149,18 @@ export const onCreateForumTopic = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -14843,6 +15416,18 @@ export const onUpdateForumTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -15100,6 +15685,18 @@ export const onDeleteForumTopic = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -15356,6 +15953,18 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -15649,6 +16258,18 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -15940,6 +16561,18 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -16237,6 +16870,18 @@ export const onCreateForumPost = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -16567,6 +17212,18 @@ export const onUpdateForumPost = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -16896,6 +17553,18 @@ export const onDeleteForumPost = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -17220,6 +17889,18 @@ export const onCreateForumPostComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -17546,6 +18227,18 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -17870,6 +18563,18 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -18198,6 +18903,18 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -18431,6 +19148,18 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -18793,6 +19522,18 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -19026,6 +19767,18 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -19388,6 +20141,18 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -19621,6 +20386,18 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -19981,6 +20758,18 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -20229,6 +21018,18 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -20476,6 +21277,18 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -20756,6 +21569,18 @@ export const onCreateMarketItem = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -21034,6 +21859,18 @@ export const onUpdateMarketItem = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -21314,6 +22151,18 @@ export const onDeleteMarketItem = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -21337,6 +22186,792 @@ export const onDeleteMarketItem = /* GraphQL */ `
         }
       }
       owner
+    }
+  }
+`;
+export const onCreateFoundingMember = /* GraphQL */ `
+  subscription OnCreateFoundingMember {
+    onCreateFoundingMember {
+      id
+      active
+      title
+      brief
+      moreBrief
+      mainPart
+      imgS3Key
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateFoundingMember = /* GraphQL */ `
+  subscription OnUpdateFoundingMember {
+    onUpdateFoundingMember {
+      id
+      active
+      title
+      brief
+      moreBrief
+      mainPart
+      imgS3Key
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteFoundingMember = /* GraphQL */ `
+  subscription OnDeleteFoundingMember {
+    onDeleteFoundingMember {
+      id
+      active
+      title
+      brief
+      moreBrief
+      mainPart
+      imgS3Key
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -21560,6 +23195,18 @@ export const onCreateLike = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -21794,6 +23441,18 @@ export const onCreateLike = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -22509,6 +24168,18 @@ export const onUpdateLike = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -22742,6 +24413,18 @@ export const onUpdateLike = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -23457,6 +25140,18 @@ export const onDeleteLike = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -23690,6 +25385,18 @@ export const onDeleteLike = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
@@ -24407,6 +26114,18 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -24656,6 +26375,18 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           updatedAt
           owner
         }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
         updatedAt
         uWindsorEmail
         badges
@@ -24904,6 +26635,18 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           userID
           updatedAt
           owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
         }
         updatedAt
         uWindsorEmail
