@@ -93,6 +93,7 @@ function ForumTopicCURD() {
       forumTopicID: selectForumTopicData.id,
       userID: username,
     };
+    console.log(createForumSubTopicInput);
     await API.graphql(
       graphqlOperation(createForumSubTopic, { input: createForumSubTopicInput })
     );
@@ -111,24 +112,6 @@ function ForumTopicCURD() {
       graphqlOperation(deleteForumSubTopic, { input: delForumSubTopicInput })
     );
   };
-
-  // const [forumTopics, setForumTopics] = useState([]);
-  // const fetchForumTopics = async () => {
-  //   //List the forum topics
-  //   try {
-  //     const forumTopicData = await API.graphql({
-  //       query: listForumTopics,
-  //       authMode: "AWS_IAM",
-  //     });
-
-  //     const forumTopicName = forumTopicData.data.listForumTopics.items;
-  //     console.log("forumTopicData", forumTopicData);
-
-  //     setForumTopics(forumTopicName);
-  //   } catch (error) {
-  //     console.log("error on fetching Article", error);
-  //   }
-  // };
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
