@@ -173,7 +173,6 @@ The following people have contributed to the project:
 * [Yichao Ma](https://github.com/Bubbrex) [![wakatime](https://wakatime.com/badge/user/9660bf0a-6e72-4cbf-8967-09dadd419fd3/project/b13d5131-33c1-48e8-a279-986a04b599fa.svg)](https://wakatime.com/badge/user/9660bf0a-6e72-4cbf-8967-09dadd419fd3/project/b13d5131-33c1-48e8-a279-986a04b599fa)
 * [Fanyu Zeng](https://github.com/CokeUltraman) [![wakatime](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca.svg)](https://wakatime.com/badge/github/CokeUltraman/uwcssa_ca)
 * [Changye Ma](https://github.com/ChangyeMa) [![wakatime](https://wakatime.com/badge/github/ChangyeMa/uwcssa_ca.svg)](https://wakatime.com/badge/github/ChangyeMa/uwcssa_ca)
-* [Yanhao Wang](https://github.com/DG-xixuan) [![wakatime](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca.svg)](https://wakatime.com/badge/github/DG-xixuan/uwcssa_ca)
 * [Kerun Pan](https://github.com/KerunPan)
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
