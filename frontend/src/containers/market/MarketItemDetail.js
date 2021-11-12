@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   CardHeader,
@@ -20,7 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import { Link } from "react-router-dom";
+import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
@@ -120,6 +119,8 @@ export default function MarketItemDetail() {
     tags,
     // active,
     createdAt,
+    user,
+    // userID,
     // ByCreatedAt,
     owner,
   } = marketItem;
@@ -301,12 +302,13 @@ export default function MarketItemDetail() {
               >
                 <CardHeader
                   avatar={
-                    <Avatar
-                      aria-label="recipe"
+                    <CustomAvatar
+                      // aria-label="recipe"
                       className={classes.avatar}
-                      component={Link}
-                      to={`/account/profile/${owner}`}
-                    ></Avatar>
+                      component={true}
+                      user={user}
+                      // to={`/account/profile/${owner}`}
+                    ></CustomAvatar>
                   }
                   action={
                     <IconButton aria-label="settings">
@@ -314,10 +316,7 @@ export default function MarketItemDetail() {
                     </IconButton>
                   }
                   title={owner}
-                  subheader={`发布日期： ${createdAt.slice(
-                    0,
-                    10
-                  )} ${createdAt.slice(11, 19)}`}
+                  subheader={`发布日期： ${createdAt.slice(0, 10)} `}
                 />
               </Box>
             </Paper>

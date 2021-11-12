@@ -30,7 +30,7 @@ export default function MarketItem() {
     (state) => state.market
   );
   const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Item"
+    (item) => item.marketType === "Item" && item.description !== null
   );
 
   console.log("true items", trueMarketItems);
@@ -94,6 +94,7 @@ export default function MarketItem() {
 
   const handleReset = () => {
     setFilterList({
+      ...filterList,
       sortKey: "original",
       min: "",
       max: "",
@@ -122,6 +123,7 @@ export default function MarketItem() {
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
+            type="item"
             trueMarketItems={trueMarketItems}
             handleClick={handleClick}
             filterList={filterList}

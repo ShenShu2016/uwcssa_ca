@@ -32,7 +32,7 @@ export default function MarketRental() {
     (state) => state.market
   );
   const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Rental"
+    (item) => item.marketType === "Rental" && item.description !== null
   );
 
   console.log("true items", trueMarketItems);
