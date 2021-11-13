@@ -292,7 +292,7 @@ export default function Header() {
   return (
     <div className={classes.grow}>
       <CssBaseline />
-      <StyledAppBar color="inherit" variant="outlined">
+      <StyledAppBar color="inherit" elevation={0} variant="outlined">
         <StyledToolBar>
           <IconButton
             color="inherit"

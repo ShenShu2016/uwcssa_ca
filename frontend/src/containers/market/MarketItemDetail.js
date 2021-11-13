@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CardHeader,
-  Chip,
   CircularProgress,
   Divider,
   Grid,
@@ -93,7 +92,7 @@ export default function MarketItemDetail() {
   console.log("id", id);
   console.log("啥玩意", marketItem);
   const {
-    marketItemConditionList: Conditions,
+    // marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
 
@@ -239,9 +238,9 @@ export default function MarketItemDetail() {
                 marginBottom="0.5rem"
                 spacing={2}
               >
-                {marketItem.tags.map((tag, tagIdx) => {
+                {/* {marketItem.tags.map((tag, tagIdx) => {
                   return <Chip key={tagIdx} label={tag} />;
-                })}
+                })} */}
               </Stack>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">

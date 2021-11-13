@@ -21,4 +21,6 @@ export default configureStore({
     market: marketReducer,
     event: eventReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
