@@ -89,11 +89,11 @@ export default function EventMain({ event }) {
         <CardActionArea component={Link} to={`/event/${id}`}>
           <CardMedia component="img" height="194" image={posterURL} />
           <CardContent>
-            <Typography variant="subtitle2">
+            <Typography variant="subtitle2" gutterBottom>
               时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
               {startDate.slice(11, 16)}
             </Typography>
-            <Typography variant="subtitle2" color="primary">
+            <Typography variant="subtitle2" color="primary" gutterBottom>
               {eventStatus}
             </Typography>
             <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
@@ -103,19 +103,25 @@ export default function EventMain({ event }) {
                   wordBreak: "break-word",
                   overflow: "hidden",
                 }}
+                gutterBottom
               >
                 <b>{title}</b>
               </Typography>
             </Box>
 
-            <Typography variant="subtitle2" color="textSecondary">
+            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
               地址： {location}
             </Typography>
-            <Typography variant="subtitle2" color="textSecondary">
+            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
               类别： {topic.name}
             </Typography>
-
-            <Box style={{ maxHeight: "40px", overflow: "hidden" }}>
+            {/* 
+            <Box
+              style={{
+                height: "40px",
+                overflow: "hidden",
+              }}
+            >
               <Typography
                 variant="body2"
                 color="text.secondary"
@@ -126,6 +132,16 @@ export default function EventMain({ event }) {
               >
                 {content}
               </Typography>
+            </Box> */}
+
+            <Box sx={{ overflow: "hidden", height: "30px" }}>
+              <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                <Grid item xs zeroMinWidth>
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    {content}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Box>
           </CardContent>
         </CardActionArea>

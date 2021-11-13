@@ -2,7 +2,8 @@ import { Box, Grid, List, ListItemButton, ListItemText } from "@mui/material";
 import React, { useState } from "react";
 
 import ArticlesPreview from "./Article/ArticlesPreview";
-import EventGrid from "../../components/Event/EventDataGrid";
+// import EventGrid from "../../components/Event/EventDataGrid";
+import EventTable from "../../components/Event/EventTable";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
 // import PostEvent from "../../components/Event/PostEvent";
@@ -66,9 +67,9 @@ export default function Staff() {
                   sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
                   onClick={() => {
                     setValue(1);
-                    setLiveComponent("EventGrid");
+                    setLiveComponent("EventTable");
                   }}
-                  selected={liveComponent === "EventGrid"}
+                  selected={liveComponent === "EventTable"}
                 >
                   <ListItemText primary="UWCSSA 活动" />
                 </ListItemButton>
@@ -112,7 +113,7 @@ export default function Staff() {
             <UwcssaJobsPreview />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <EventGrid />
+            <EventTable />
           </TabPanel>
           {/* <TabPanel value={value} index={1}>
             <PostEvent />
