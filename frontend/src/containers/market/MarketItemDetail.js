@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   CardHeader,
+  Chip,
   CircularProgress,
   Divider,
   Grid,
@@ -139,6 +140,7 @@ export default function MarketItemDetail() {
     }
   }, [marketItem]);
   console.log("starter", starter);
+  // console.log("marketItem.tags", marketItem.tags);
   return (
     <div className={classes.root}>
       {marketItem ? (
@@ -161,7 +163,6 @@ export default function MarketItemDetail() {
               >
                 {marketItem.title}
               </Typography>
-
               <Typography marginX="1rem" marginTop="0.25rem">
                 $ {marketItem.price}
               </Typography>
@@ -227,26 +228,31 @@ export default function MarketItemDetail() {
               </Grid>
               {marketItem.tags && (
                 <Box>
-                  <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                    Tags
-                  </Typography>
+                  <Box>
+                    <Typography
+                      marginX="1rem"
+                      marginY="0.25rem"
+                      fontWeight="600"
+                    >
+                      Tags
+                    </Typography>
+                  </Box>
+                  <Stack
+                    direction="row"
+                    marginX="1rem"
+                    marginBottom="0.5rem"
+                    spacing={2}
+                  >
+                    {marketItem.tags.map((tag, tagIdx) => {
+                      return <Chip key={tagIdx} label={tag} />;
+                    })}
+                  </Stack>
                 </Box>
               )}
-              <Stack
-                direction="row"
-                marginX="1rem"
-                marginBottom="0.5rem"
-                spacing={2}
-              >
-                {/* {marketItem.tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} />;
-                })} */}
-              </Stack>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                 Descriptions
               </Typography>
-
               <Typography marginX="1rem" marginY="0.25rem">
                 {marketItem.description}
               </Typography>
