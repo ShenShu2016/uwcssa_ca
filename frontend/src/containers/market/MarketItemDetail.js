@@ -13,8 +13,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  removeSelectedMarketItem,
-  selectAllMarketItems,
   selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/reducers/marketSlice";

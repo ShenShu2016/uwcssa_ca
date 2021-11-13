@@ -13,7 +13,6 @@ import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
 import EventRouter from "./containers/Event/EventRouter";
-import Footer from "./containers/Footer";
 import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
