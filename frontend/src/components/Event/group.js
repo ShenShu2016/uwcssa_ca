@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import GroupIcon from "@mui/icons-material/Group";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import { validator } from "./validator";
-import useForm from "./useForm";
+import { useHistory } from "react-router";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useTitle } from "../../Hooks/useTitle";
+import { postEventParticipant } from "../../redux/reducers/eventSlice";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -30,32 +33,66 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Individual() {
   const classes = useStyles();
-
-  const initState = {
-    fullName: "",
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { userAuth } = useSelector((state) => state);
+  const { eventID } = useParams();
+  console.log(useParams, "useParams");
+  useTitle(`近期活动 ${eventID} 团体报名`);
+  console.log("event.id", eventID);
+  const [eventParticipantData, setEventParticipantData] = useState({
+    name: "",
     email: "",
     address: "",
-    guest: "",
+    phone: "",
+    weChat: "",
     message: "",
-  };
-
-  const submit = () => {
-    console.log(" Submitted");
-  };
-
-  const { handleChange, handleSubmit, handleBlur, state, errors } = useForm({
-    initState,
-    callback: submit,
-    validator,
+    numberOfPeople: "",
   });
+  const uploadEventParticipant = async () => {
+    const { name, email, address, phone, weChat, message, numberOfPeople } =
+      eventParticipantData;
 
-  const isValidForm =
-    state.fullName.length > 0 &&
-    !errors.fullName &&
-    state.email.length > 0 &&
-    !errors.email &&
-    state.guest.length > 0 &&
-    !errors.guest;
+    const createEventParticipantInput = {
+      id: `${eventID}-${userAuth.user.username}`,
+      name,
+      email,
+      address,
+      phone,
+      weChat,
+      message,
+      numberOfPeople,
+      eventParticipantStatus: "ArriveOnTime",
+      active: true,
+      eventID: eventID,
+      userID: userAuth.user.username,
+    };
+    const response = await dispatch(
+      postEventParticipant({ createEventParticipantInput })
+    );
+    console.log("postEventParticipant", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/event`);
+    }
+  };
+
+  // const submit = () => {
+  //   console.log(" Submitted");
+  // };
+
+  // const { handleChange, handleSubmit, handleBlur, state, errors } = useForm({
+  //   initState,
+  //   callback: submit,
+  //   validator,
+  // });
+
+  // const isValidForm =
+  //   state.fullName.length > 0 &&
+  //   !errors.fullName &&
+  //   state.email.length > 0 &&
+  //   !errors.email &&
+  //   state.guest.length > 0 &&
+  //   !errors.guest;
 
   return (
     <div>
@@ -87,44 +124,80 @@ export default function Individual() {
                 required
                 fullWidth
                 label="申请人姓名"
-                name="fullName"
-                defaultValue={state.fullName}
-                onChange={handleChange}
-                error={!!errors.fullName}
-                helperText={errors.fullName}
-                onBlur={handleBlur}
+                name="name"
+                value={eventParticipantData.name}
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    name: e.target.value,
+                  })
+                }
               />
-
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 label="申请人邮箱"
                 name="email"
-                defaultValue={state.email}
-                onChange={handleChange}
-                error={!!errors.email}
-                helperText={errors.email}
-                onBlur={handleBlur}
+                value={eventParticipantData.email}
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    email: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                name="weChat"
+                label="申请人微信号"
+                value={eventParticipantData.weChat}
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    weChat: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                name="phone"
+                label="申请人手机号码"
+                value={eventParticipantData.phone}
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    phone: e.target.value,
+                  })
+                }
               />
               <TextField
                 margin="normal"
                 fullWidth
                 label="地址（如需接送）"
                 name="address"
-                autoComplete="address"
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    address: e.target.value,
+                  })
+                }
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                label="携带人数"
-                name="guest"
-                defaultValue={state.guest}
-                onChange={handleChange}
-                error={!!errors.guest}
-                helperText={errors.guest}
-                onBlur={handleBlur}
+                label="参加总人数（含申请人）"
+                name="numberOfPeople"
+                value={eventParticipantData.numberOfPeople}
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    numberOfPeople: e.target.value,
+                  })
+                }
               />
               <TextField
                 margin="normal"
@@ -134,14 +207,20 @@ export default function Individual() {
                 autoComplete="message"
                 multiline
                 rows={4}
+                value={eventParticipantData.message}
+                onChange={(e) =>
+                  setEventParticipantData({
+                    ...eventParticipantData,
+                    message: e.target.value,
+                  })
+                }
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                disabled={!isValidForm}
-                onClick={isValidForm ? handleSubmit : null}
+                onClick={uploadEventParticipant}
               >
                 提交
               </Button>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../containers/market/marketRentalOptions";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ export default function MarketComponent({ item, type }) {
     marketRentalSaleRent,
     bedroomCounts,
     propertyType,
+    createdAt,
     // tags,
     // active,
     // ByCreatedAt,
@@ -117,6 +119,18 @@ export default function MarketComponent({ item, type }) {
             >
               {location}
             </Typography>
+            <Box my={"4px"}>
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  color: "#65676B",
+                  fontWeight: "400",
+                  lineHeight: "1.2308",
+                }}
+              >
+                {moment(createdAt).fromNow()}
+              </Typography>
+            </Box>
           </Box>
         </React.Fragment>
       );
@@ -159,6 +173,18 @@ export default function MarketComponent({ item, type }) {
               {location}
             </Typography>
           </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "13px",
+                color: "#65676B",
+                fontWeight: "400",
+                lineHeight: "1.2308",
+              }}
+            >
+              {moment(createdAt).fromNow()}
+            </Typography>
+          </Box>
         </React.Fragment>
       );
     } else if (type === "rental") {
@@ -194,6 +220,7 @@ export default function MarketComponent({ item, type }) {
               }
             </Typography>
           </Box>
+
           <Box my={"4px"}>
             <Typography
               sx={{
@@ -204,6 +231,18 @@ export default function MarketComponent({ item, type }) {
               }}
             >
               {address}
+            </Typography>
+          </Box>
+          <Box my={"4px"}>
+            <Typography
+              sx={{
+                fontSize: "13px",
+                color: "#65676B",
+                fontWeight: "400",
+                lineHeight: "1.2308",
+              }}
+            >
+              {moment(createdAt).fromNow()}
             </Typography>
           </Box>
         </React.Fragment>

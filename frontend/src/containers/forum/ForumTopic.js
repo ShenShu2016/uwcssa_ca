@@ -44,7 +44,7 @@ function ForumTopic() {
     }
     return () => dispatch(removeSelectedForumTopic());
   }, [forumTopicID, dispatch]);
-  const forumTopic = useSelector((state) => state.forum.selectedForumTopic);
+  const forumTopic = useSelector((state) => state.forum.selected.forumTopic);
   // console.log(forumTopic);
   return (
     <div className={classes.root}>
@@ -54,7 +54,7 @@ function ForumTopic() {
         ) : (
           <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
             <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
-              <Typography variant="h5">{forumTopic.forumTopic.name}</Typography>
+              <Typography variant="h5">{forumTopic.name}</Typography>
               <Breadcrumbs aria-label="breadcrumb">
                 <span style={{}}>
                   <Button color="inherit" component={Link} to={`/`}>
@@ -71,14 +71,14 @@ function ForumTopic() {
                     color="inherit"
                     component={Link}
                     disabled
-                    to={`/forum/forumTopic/${forumTopic.forumTopic.id}`}
+                    to={`/forum/forumTopic/${forumTopic.id}`}
                   >
-                    {forumTopic.forumTopic.name}
+                    {forumTopic.name}
                   </Button>
                 </span>
               </Breadcrumbs>
             </Box>
-            <ForumTopicMain forumTopic={forumTopic.forumTopic} />
+            <ForumTopicMain forumTopic={forumTopic} />
           </Grid>
         )}
         <Grid item sm={1} md={2}>

@@ -35,6 +35,22 @@ import { makeStyles } from "@mui/styles";
 import { signOut } from "../redux/reducers/authSlice";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
+const StyledAppBar = styled((props) => <AppBar {...props} />)(({ theme }) => ({
+  // "& .MuiPaper-root": {
+  //   "& .MuiAppBar-root": {
+  //     boxShadow: "none",
+  //   },
+  // },
+}));
+
+const StyledToolBar = styled((props) => <Toolbar {...props} />)(
+  ({ theme }) => ({
+    // "& .MuiToolbar-root": {
+    //   height: "56px",
+    // },
+  })
+);
+
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -109,19 +125,22 @@ const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "none",
     marginInline: "1rem",
-    [theme.breakpoints.up("1260")]: {
+    [theme.breakpoints.up("1300")]: {
       display: "flex",
     },
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("1260")]: {
+    [theme.breakpoints.up("1300")]: {
       display: "none",
     },
   },
   link: {
     color: "#fff",
     textDecoration: "none",
+  },
+  appBarRoot: {
+    root: { boxShadow: "none" },
   },
 }));
 export default function Header() {
@@ -273,8 +292,8 @@ export default function Header() {
   return (
     <div className={classes.grow}>
       <CssBaseline />
-      <AppBar>
-        <Toolbar>
+      <StyledAppBar color="inherit">
+        <StyledToolBar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -318,7 +337,7 @@ export default function Header() {
           <div className={classes.sectionDesktop}>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              style={{ fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/article"
               startIcon={<ArticleIcon />}
@@ -327,7 +346,7 @@ export default function Header() {
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              style={{ fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/event"
               startIcon={<EventIcon />}
@@ -336,7 +355,7 @@ export default function Header() {
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              style={{ fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/forum"
               startIcon={<ForumIcon />}
@@ -345,7 +364,7 @@ export default function Header() {
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              style={{ fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/market"
               startIcon={<ShopIcon />}
@@ -354,7 +373,7 @@ export default function Header() {
             </Button>
             <Button
               variant="text"
-              style={{ color: "#FFF", fontSize: "20px", marginInline: "1rem" }}
+              style={{ fontSize: "20px", marginInline: "1rem" }}
               component={Link}
               to="/career"
               startIcon={<WorkIcon />}
@@ -369,7 +388,6 @@ export default function Header() {
                 to="/signIn"
                 variant="text"
                 style={{
-                  color: "#FFF",
                   fontSize: "20px",
                   marginInline: "1rem",
                 }}
@@ -408,8 +426,8 @@ export default function Header() {
               <MoreIcon />
             </IconButton>
           </div>
-        </Toolbar>
-      </AppBar>
+        </StyledToolBar>
+      </StyledAppBar>
       {renderMobileMenu}
       {renderMenu}
     </div>

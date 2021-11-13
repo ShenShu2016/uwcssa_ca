@@ -32,6 +32,249 @@ import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
 import { sortOptions } from "./marketItemFilter";
 
+const FilterContent = (props) => {
+  const {
+    type,
+    filterList,
+    handleSortKey,
+    handleMin,
+    handleMax,
+    handleVehicleType,
+    handleMinYear,
+    handleMaxYear,
+    handleMake,
+    handleModel,
+    handleCategory,
+    handleCondition,
+    handleMarketRentalSaleRent,
+    handlePropertyType,
+    handleAirConditioningType,
+    handleHeatingType,
+    handleReset,
+  } = props;
+  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
+  const { marketVehicleTypeList } = marketVehicleOptions;
+  const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
+    marketRentalOptions;
+  const useStyles = marketItemStyle;
+  const classes = useStyles();
+  return (
+    <React.Fragment>
+      <Box
+        flexDirection="row"
+        display="flex"
+        position="relative"
+        className={classes.specialBox}
+      >
+        <Typography variant="h6" fontWeight="bold" className={classes.special}>
+          Location Filters
+        </Typography>
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          className={classes.specialNot}
+        >
+          Filters
+        </Typography>
+
+        <Button
+          variant="outlined"
+          onClick={handleReset}
+          sx={{ right: 0, position: "absolute" }}
+        >
+          Reset All
+        </Button>
+      </Box>
+      <Box className={classes.special}>
+        <MarketFIlterLocation />
+      </Box>
+      <MarketForm
+        title="Sort by"
+        value={filterList.sortKey}
+        options={sortOptions}
+        required={false}
+        onChange={(e) => handleSortKey(e)}
+      />
+      <Typography
+        marginTop="1rem"
+        variant="h6"
+        marginBottom="1rem"
+        fontWeight="bold"
+      >
+        Price Range
+      </Typography>
+      <Stack direction="row" spacing={2}>
+        <TextField
+          sx={{ maxWidth: "100%" }}
+          label="Min Price"
+          variant="outlined"
+          type="number"
+          helperText="eg. 1000 CAD $"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">CAD $</InputAdornment>
+            ),
+          }}
+          value={filterList.min}
+          className={classes.titleInput}
+          onChange={(e) => handleMin(e)}
+        />
+        <TextField
+          sx={{ maxWidth: "100%" }}
+          label="Max Price"
+          variant="outlined"
+          type="number"
+          helperText="eg. 25000 CAD $"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">CAD $</InputAdornment>
+            ),
+          }}
+          value={filterList.max}
+          className={classes.titleInput}
+          onChange={(e) => handleMax(e)}
+        />
+      </Stack>
+      {type === "item" ? (
+        <React.Fragment>
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Category
+          </Typography>
+          <MarketForm
+            title="Category"
+            value={filterList.category}
+            options={marketItemCategoryList}
+            onChange={(e) => handleCategory(e)}
+          />
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Condition
+          </Typography>
+          <MarketForm
+            title="Condition"
+            value={filterList.condition}
+            options={marketItemConditionList}
+            onChange={(e) => handleCondition(e)}
+          />
+        </React.Fragment>
+      ) : null}
+      {type === "vehicle" ? (
+        <React.Fragment>
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Vehicle Type
+          </Typography>
+          <MarketForm
+            title="Vehicle Type"
+            value={filterList.vehicleType}
+            options={marketVehicleTypeList}
+            onChange={(e) => handleVehicleType(e)}
+          />
+          <Typography
+            marginTop="1rem"
+            variant="h6"
+            marginBottom="1rem"
+            fontWeight="bold"
+          >
+            Year Range
+          </Typography>
+          <Stack direction="row" spacing={2}>
+            <TextField
+              sx={{ maxWidth: "100%" }}
+              label="Min Year"
+              variant="outlined"
+              type="number"
+              helperText="eg. 2012"
+              value={filterList.minYear}
+              className={classes.titleInput}
+              onChange={(e) => handleMinYear(e)}
+            />
+            <TextField
+              sx={{ maxWidth: "100%" }}
+              label="Max Year"
+              variant="outlined"
+              type="number"
+              helperText="eg. 2021"
+              value={filterList.maxYear}
+              className={classes.titleInput}
+              onChange={(e) => handleMaxYear(e)}
+            />
+          </Stack>
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Make
+          </Typography>
+          <MarketForm
+            title="Make"
+            disabled={true}
+            value={filterList.vehicleType} // Need to generate corresponding list
+            options={marketVehicleTypeList} //
+            onChange={(e) => handleMake(e)}
+          />
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Model
+          </Typography>
+          <MarketForm
+            title="Model"
+            disabled={true}
+            value={filterList.vehicleType} // Need to generate corresponding list
+            options={marketVehicleTypeList} //
+            onChange={(e) => handleModel(e)}
+          />
+        </React.Fragment>
+      ) : null}
+      {type === "rental" ? (
+        <React.Fragment>
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Home for Rent or Sale
+          </Typography>
+          <MarketForm
+            title="Home for Rent or Sale"
+            value={filterList.marketRentalSaleRent}
+            options={marketRentalSaleRent}
+            onChange={(e) => handleMarketRentalSaleRent(e)}
+          />
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Property Type
+          </Typography>
+          <MarketForm
+            title="Property Type"
+            value={filterList.propertyType}
+            options={propertyType}
+            onChange={(e) => handlePropertyType(e)}
+          />
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            AC Type
+          </Typography>
+          <MarketForm
+            title="AC Type"
+            value={filterList.airConditioningType}
+            options={airConditionType}
+            onChange={(e) => handleAirConditioningType(e)}
+          />
+          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+            Heating Type
+          </Typography>
+          <MarketForm
+            title="Heating Type"
+            value={filterList.heatingType}
+            options={heatingType}
+            onChange={(e) => handleHeatingType(e)}
+          />
+        </React.Fragment>
+      ) : null}
+      <Divider />
+
+      <Box
+        width="100%"
+        // maxHeight="400px" overflow="auto"
+      >
+        <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+          Categories
+        </Typography>
+        <CategoryIcons />
+      </Box>
+    </React.Fragment>
+  );
+};
+
 function ConfirmationDialogRaw(props) {
   const {
     onClose,
@@ -57,13 +300,6 @@ function ConfirmationDialogRaw(props) {
     ...other
   } = props;
 
-  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-  const { marketVehicleTypeList } = marketVehicleOptions;
-  const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
-    marketRentalOptions;
-  const useStyles = marketItemStyle;
-  const classes = useStyles();
-
   const handleCancel = () => {
     onClose();
   };
@@ -80,208 +316,27 @@ function ConfirmationDialogRaw(props) {
       open={open}
       {...other}
     >
-      <DialogTitle>Filters</DialogTitle>
+      <DialogTitle>Find Your Items</DialogTitle>
       <DialogContent dividers>
-        <Box
-          flexDirection="row"
-          display="flex"
-          position="relative"
-          sx={{ marginBottom: "1rem" }}
-        >
-          <Typography variant="h6" fontWeight="bold">
-            Location Filters
-          </Typography>
-          <Button
-            variant="outlined"
-            onClick={handleReset}
-            sx={{ right: 0, position: "absolute" }}
-          >
-            Reset All
-          </Button>
-        </Box>
-        <MarketForm
-          title="Sort by"
-          value={filterList.sortKey}
-          options={sortOptions}
-          required={false}
-          onChange={(e) => handleSortKey(e)}
+        <FilterContent
+          type={type}
+          filterList={filterList}
+          handleMinYear={handleMinYear}
+          handleMaxYear={handleMaxYear}
+          handleSortKey={handleSortKey}
+          handleMin={handleMin}
+          handleMax={handleMax}
+          handleCategory={handleCategory}
+          handleVehicleType={handleVehicleType}
+          handleMake={handleMake}
+          handleModel={handleModel}
+          handleCondition={handleCondition}
+          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+          handlePropertyType={handlePropertyType}
+          handleAirConditioningType={handleAirConditioningType}
+          handleHeatingType={handleHeatingType}
+          handleReset={handleReset}
         />
-        <Typography
-          marginTop="1rem"
-          variant="h6"
-          marginBottom="1rem"
-          fontWeight="bold"
-        >
-          Price Range
-        </Typography>
-        <Stack direction="row" spacing={2}>
-          <TextField
-            sx={{ maxWidth: "100%" }}
-            label="Min Price"
-            variant="outlined"
-            type="number"
-            helperText="eg. 1000 CAD $"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">CAD $</InputAdornment>
-              ),
-            }}
-            value={filterList.min}
-            className={classes.titleInput}
-            onChange={(e) => handleMin(e)}
-          />
-          <TextField
-            sx={{ maxWidth: "100%" }}
-            label="Max Price"
-            variant="outlined"
-            type="number"
-            helperText="eg. 25000 CAD $"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">CAD $</InputAdornment>
-              ),
-            }}
-            value={filterList.max}
-            className={classes.titleInput}
-            onChange={(e) => handleMax(e)}
-          />
-        </Stack>
-        {type === "item" ? (
-          <React.Fragment>
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Category
-            </Typography>
-            <MarketForm
-              title="Category"
-              value={filterList.category}
-              options={marketItemCategoryList}
-              onChange={(e) => handleCategory(e)}
-            />
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Condition
-            </Typography>
-            <MarketForm
-              title="Condition"
-              value={filterList.condition}
-              options={marketItemConditionList}
-              onChange={(e) => handleCondition(e)}
-            />
-          </React.Fragment>
-        ) : null}
-        {type === "vehicle" ? (
-          <React.Fragment>
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Vehicle Type
-            </Typography>
-            <MarketForm
-              title="Vehicle Type"
-              value={filterList.vehicleType}
-              options={marketVehicleTypeList}
-              onChange={(e) => handleVehicleType(e)}
-            />
-            <Typography
-              marginTop="1rem"
-              variant="h6"
-              marginBottom="1rem"
-              fontWeight="bold"
-            >
-              Year Range
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              <TextField
-                sx={{ maxWidth: "100%" }}
-                label="Min Year"
-                variant="outlined"
-                type="number"
-                helperText="eg. 2012"
-                value={filterList.minYear}
-                className={classes.titleInput}
-                onChange={(e) => handleMinYear(e)}
-              />
-              <TextField
-                sx={{ maxWidth: "100%" }}
-                label="Max Year"
-                variant="outlined"
-                type="number"
-                helperText="eg. 2021"
-                value={filterList.maxYear}
-                className={classes.titleInput}
-                onChange={(e) => handleMaxYear(e)}
-              />
-            </Stack>
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Make
-            </Typography>
-            <MarketForm
-              title="Make"
-              disabled={true}
-              value={filterList.vehicleType} // Need to generate corresponding list
-              options={marketVehicleTypeList} //
-              onChange={(e) => handleMake(e)}
-            />
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Model
-            </Typography>
-            <MarketForm
-              title="Model"
-              disabled={true}
-              value={filterList.vehicleType} // Need to generate corresponding list
-              options={marketVehicleTypeList} //
-              onChange={(e) => handleModel(e)}
-            />
-          </React.Fragment>
-        ) : null}
-        {type === "rental" ? (
-          <React.Fragment>
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Home for Rent or Sale
-            </Typography>
-            <MarketForm
-              title="Home for Rent or Sale"
-              value={filterList.marketRentalSaleRent}
-              options={marketRentalSaleRent}
-              onChange={(e) => handleMarketRentalSaleRent(e)}
-            />
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Property Type
-            </Typography>
-            <MarketForm
-              title="Property Type"
-              value={filterList.propertyType}
-              options={propertyType}
-              onChange={(e) => handlePropertyType(e)}
-            />
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              AC Type
-            </Typography>
-            <MarketForm
-              title="AC Type"
-              value={filterList.airConditioningType}
-              options={airConditionType}
-              onChange={(e) => handleAirConditioningType(e)}
-            />
-            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-              Heating Type
-            </Typography>
-            <MarketForm
-              title="Heating Type"
-              value={filterList.heatingType}
-              options={heatingType}
-              onChange={(e) => handleHeatingType(e)}
-            />
-          </React.Fragment>
-        ) : null}
-        <Divider />
-
-        <Box
-          width="100%"
-          // maxHeight="400px" overflow="auto"
-        >
-          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Categories
-          </Typography>
-          <CategoryIcons />
-        </Box>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
@@ -321,12 +376,9 @@ export default function FilterInfo({
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
-  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-  const { marketVehicleTypeList } = marketVehicleOptions;
-  const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
-    marketRentalOptions;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
+
   if (form === "plain") {
     return (
       <Box className={classes.info}>
@@ -392,7 +444,7 @@ export default function FilterInfo({
           >
             <SearchArea />
             <Button
-              variant="contained"
+              variant="outlined"
               sx={{ margin: "1rem" }}
               startIcon={<AddIcon />}
               component={Link}
@@ -421,202 +473,25 @@ export default function FilterInfo({
               },
             }}
           >
-            <Box flexDirection="row" display="flex" position="relative">
-              <Typography variant="h6" fontWeight="bold">
-                Location Filters
-              </Typography>
-              <Button
-                variant="outlined"
-                onClick={handleReset}
-                sx={{ right: 0, position: "absolute" }}
-              >
-                Reset All
-              </Button>
-            </Box>
-            <MarketFIlterLocation />
-            <MarketForm
-              title="Sort by"
-              value={filterList.sortKey}
-              options={sortOptions}
-              required={false}
-              onChange={(e) => handleSortKey(e)}
+            <FilterContent
+              type={type}
+              filterList={filterList}
+              handleMinYear={handleMinYear}
+              handleMaxYear={handleMaxYear}
+              handleSortKey={handleSortKey}
+              handleMin={handleMin}
+              handleMax={handleMax}
+              handleCategory={handleCategory}
+              handleVehicleType={handleVehicleType}
+              handleMake={handleMake}
+              handleModel={handleModel}
+              handleCondition={handleCondition}
+              handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+              handlePropertyType={handlePropertyType}
+              handleAirConditioningType={handleAirConditioningType}
+              handleHeatingType={handleHeatingType}
+              handleReset={handleReset}
             />
-            <Typography
-              marginTop="1rem"
-              variant="h6"
-              marginBottom="1rem"
-              fontWeight="bold"
-            >
-              Price Range
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              <TextField
-                sx={{ maxWidth: "100%" }}
-                label="Min Price"
-                variant="outlined"
-                type="number"
-                helperText="eg. 1000 CAD $"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">CAD $</InputAdornment>
-                  ),
-                }}
-                value={filterList.min}
-                className={classes.titleInput}
-                onChange={(e) => handleMin(e)}
-              />
-              <TextField
-                sx={{ maxWidth: "100%" }}
-                label="Max Price"
-                variant="outlined"
-                type="number"
-                helperText="eg. 25000 CAD $"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">CAD $</InputAdornment>
-                  ),
-                }}
-                value={filterList.max}
-                className={classes.titleInput}
-                onChange={(e) => handleMax(e)}
-              />
-            </Stack>
-            {type === "item" ? (
-              <React.Fragment>
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Category
-                </Typography>
-                <MarketForm
-                  title="Category"
-                  value={filterList.category}
-                  options={marketItemCategoryList}
-                  onChange={(e) => handleCategory(e)}
-                />
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Condition
-                </Typography>
-                <MarketForm
-                  title="Condition"
-                  value={filterList.condition}
-                  options={marketItemConditionList}
-                  onChange={(e) => handleCondition(e)}
-                />
-              </React.Fragment>
-            ) : null}
-            {type === "vehicle" ? (
-              <React.Fragment>
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Vehicle Type
-                </Typography>
-                <MarketForm
-                  title="Vehicle Type"
-                  value={filterList.vehicleType}
-                  options={marketVehicleTypeList}
-                  onChange={(e) => handleVehicleType(e)}
-                />
-                <Typography
-                  marginTop="1rem"
-                  variant="h6"
-                  marginBottom="1rem"
-                  fontWeight="bold"
-                >
-                  Year Range
-                </Typography>
-                <Stack direction="row" spacing={2}>
-                  <TextField
-                    sx={{ maxWidth: "100%" }}
-                    label="Min Year"
-                    variant="outlined"
-                    type="number"
-                    helperText="eg. 2012"
-                    value={filterList.minYear}
-                    className={classes.titleInput}
-                    onChange={(e) => handleMinYear(e)}
-                  />
-                  <TextField
-                    sx={{ maxWidth: "100%" }}
-                    label="Max Year"
-                    variant="outlined"
-                    type="number"
-                    helperText="eg. 2021"
-                    value={filterList.maxYear}
-                    className={classes.titleInput}
-                    onChange={(e) => handleMaxYear(e)}
-                  />
-                </Stack>
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Make
-                </Typography>
-                <MarketForm
-                  title="Make"
-                  disabled={true}
-                  value={filterList.vehicleType} // Need to generate corresponding list
-                  options={marketVehicleTypeList} //
-                  onChange={(e) => handleMake(e)}
-                />
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Model
-                </Typography>
-                <MarketForm
-                  title="Model"
-                  disabled={true}
-                  value={filterList.vehicleType} // Need to generate corresponding list
-                  options={marketVehicleTypeList} //
-                  onChange={(e) => handleModel(e)}
-                />
-              </React.Fragment>
-            ) : null}
-            {type === "rental" ? (
-              <React.Fragment>
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Home for Rent or Sale
-                </Typography>
-                <MarketForm
-                  title="Home for Rent or Sale"
-                  value={filterList.marketRentalSaleRent}
-                  options={marketRentalSaleRent}
-                  onChange={(e) => handleMarketRentalSaleRent(e)}
-                />
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Property Type
-                </Typography>
-                <MarketForm
-                  title="Property Type"
-                  value={filterList.propertyType}
-                  options={propertyType}
-                  onChange={(e) => handlePropertyType(e)}
-                />
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  AC Type
-                </Typography>
-                <MarketForm
-                  title="AC Type"
-                  value={filterList.airConditioningType}
-                  options={airConditionType}
-                  onChange={(e) => handleAirConditioningType(e)}
-                />
-                <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-                  Heating Type
-                </Typography>
-                <MarketForm
-                  title="Heating Type"
-                  value={filterList.heatingType}
-                  options={heatingType}
-                  onChange={(e) => handleHeatingType(e)}
-                />
-              </React.Fragment>
-            ) : null}
-            <Divider />
-
-            <Box
-              width="100%"
-              // maxHeight="400px" overflow="auto"
-            >
-              <Typography variant="h6" marginTop="1rem" fontWeight="bold">
-                Categories
-              </Typography>
-              <CategoryIcons />
-            </Box>
           </Box>
         </Paper>
       </Box>
@@ -636,7 +511,7 @@ export default function FilterInfo({
     return (
       <React.Fragment>
         <Button
-          variant="contained"
+          variant="outlined"
           startIcon={<FilterListIcon />}
           onClick={handleClickListItem}
         >

@@ -83,7 +83,7 @@ const MarketSideBar = () => {
           <SearchArea />
           <UtilityIcons />
           <Button
-            variant="contained"
+            variant="outlined"
             sx={{ marginX: "1rem", marginBottom: "1rem" }}
             startIcon={<AddIcon />}
             component={Link}
@@ -103,7 +103,7 @@ const MarketSideBar = () => {
         <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
           Categories
         </Typography>
-        <Box width="100%" maxHeight="400px" overflow="auto">
+        <Box width="100%" maxHeight="500px" overflow="auto">
           <CategoryIcons />
         </Box>
       </Paper>

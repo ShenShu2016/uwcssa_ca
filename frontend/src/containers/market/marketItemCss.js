@@ -51,6 +51,7 @@ export const marketItemStyle = makeStyles((theme) => ({
     overflowY: "auto",
     float: "left",
     [theme.breakpoints.down("md")]: {
+      padding: "0.5rem",
       width: "100%",
       height: "100%",
     },
@@ -81,6 +82,24 @@ export const marketItemStyle = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.down("md")]: {
       display: "block",
+      padding: "1rem",
+    },
+  },
+  special: {
+    display: "block",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  },
+  specialNot: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+    },
+  },
+  specialBox: {
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "1rem",
     },
   },
 }));

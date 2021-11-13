@@ -33,7 +33,7 @@ export default function MarketVehicle() {
     (state) => state.market
   );
   const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Vehicle"
+    (item) => item.marketType === "Vehicle" && item.description !== null
   );
 
   console.log("true items", trueMarketItems);
@@ -104,7 +104,6 @@ export default function MarketVehicle() {
   const handleMake = (e) => {
     setFilterList({ ...filterList, make: e.target.value });
   };
-
   const handleClick = (tag) => {
     setFilterList({ ...filterList, clickedTag: tag });
   };

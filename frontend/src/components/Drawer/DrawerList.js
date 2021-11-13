@@ -53,7 +53,14 @@ const DrawerList = ({ toggleDrawer }) => {
               <ListItemIcon>
                 <ArticleIcon />
               </ListItemIcon>
-              <ListItemText primary="近期新闻" />
+              <ListItemText
+                primary="近期新闻"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
             </ListItemButton>
             <ListItemButton
               component={Link}
@@ -63,7 +70,14 @@ const DrawerList = ({ toggleDrawer }) => {
               <ListItemIcon>
                 <EventIcon />
               </ListItemIcon>
-              <ListItemText primary="活动" />
+              <ListItemText
+                primary="活动"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
             </ListItemButton>
             <ListItemButton
               component={Link}
@@ -73,14 +87,28 @@ const DrawerList = ({ toggleDrawer }) => {
               <ListItemIcon>
                 <WorkIcon />
               </ListItemIcon>
-              <ListItemText primary="开放职位" />
+              <ListItemText
+                primary="开放职位"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
             </ListItemButton>
             <div>
               <ListItemButton onClick={handleClickForum}>
                 <ListItemIcon>
                   <ForumIcon />
                 </ListItemIcon>
-                <ListItemText primary="论坛" />
+                <ListItemText
+                  primary="论坛"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
                 {openForum ? <ExpandMore /> : <ExpandLess />}
               </ListItemButton>
 
@@ -92,7 +120,14 @@ const DrawerList = ({ toggleDrawer }) => {
                     onClick={toggleDrawer(false)}
                     sx={{ pl: 4 }}
                   >
-                    <ListItemText primary="论坛首页" />
+                    <ListItemText
+                      primary="论坛首页"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
@@ -102,10 +137,17 @@ const DrawerList = ({ toggleDrawer }) => {
                     to="/forum/forumPostUpload"
                     onClick={toggleDrawer(false)}
                   >
-                    <ListItemText primary="发布帖子" />
+                    <ListItemText
+                      primary="发布帖子"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                   <ListItemButton
                     sx={{ pl: 4 }}
                     component={Link}
@@ -114,7 +156,7 @@ const DrawerList = ({ toggleDrawer }) => {
                   >
                     <ListItemText primary="论坛主题" />
                   </ListItemButton>
-                </ListItem>
+                </ListItem> */}
                 <ListItem>
                   <ListItemButton
                     sx={{ pl: 4 }}
@@ -127,7 +169,14 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem>
                 <ListItem>
                   <ListItemButton sx={{ pl: 4 }} disabled>
-                    <ListItemText primary="举报审核" />
+                    <ListItemText
+                      primary="举报审核"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
               </Collapse>
@@ -138,7 +187,14 @@ const DrawerList = ({ toggleDrawer }) => {
                 <ListItemIcon>
                   <ShopIcon />
                 </ListItemIcon>
-                <ListItemText primary="商城" />
+                <ListItemText
+                  primary="商城"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
                 {openMarket ? <ExpandMore /> : <ExpandLess />}
               </ListItemButton>
 
@@ -150,7 +206,14 @@ const DrawerList = ({ toggleDrawer }) => {
                     onClick={toggleDrawer(false)}
                     sx={{ pl: 4 }}
                   >
-                    <ListItemText primary="商城首页" />
+                    <ListItemText
+                      primary="商城首页"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
@@ -160,7 +223,14 @@ const DrawerList = ({ toggleDrawer }) => {
                     component={Link}
                     to="/market/create"
                   >
-                    <ListItemText primary="发布商品" />
+                    <ListItemText
+                      primary="发布商品"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
@@ -170,13 +240,27 @@ const DrawerList = ({ toggleDrawer }) => {
                     component={Link}
                     to="/market"
                   >
-                    <ListItemText primary="查看全部商品" />
+                    <ListItemText
+                      primary="查看全部商品"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
 
                 <ListItem>
                   <ListItemButton sx={{ pl: 4 }} disabled>
-                    <ListItemText primary="举报审核" />
+                    <ListItemText
+                      primary="举报审核"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
               </Collapse>
@@ -196,7 +280,14 @@ const DrawerList = ({ toggleDrawer }) => {
                     style={{ height: "24px" }}
                   />
                 </ListItemIcon>
-                <ListItemText primary="学生会" />
+                <ListItemText
+                  primary="学生会"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
                 {openStaff ? <ExpandMore /> : <ExpandLess />}
               </ListItemButton>
             </ListItem>
@@ -208,17 +299,38 @@ const DrawerList = ({ toggleDrawer }) => {
                   to="/staff"
                   onClick={toggleDrawer(false)}
                 >
-                  <ListItemText primary="学生会管理系统首页" />
+                  <ListItemText
+                    primary="学生会管理系统首页"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="成员" />
+                  <ListItemText
+                    primary="成员"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="财务" />
+                  <ListItemText
+                    primary="财务"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
@@ -228,7 +340,14 @@ const DrawerList = ({ toggleDrawer }) => {
                   to="/staff/event/postEvent"
                   onClick={toggleDrawer(false)}
                 >
-                  <ListItemText primary="活动策划" />
+                  <ListItemText
+                    primary="活动策划"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
@@ -238,7 +357,14 @@ const DrawerList = ({ toggleDrawer }) => {
                   component={Link}
                   to="/staff/uwcssaJob/postUwcssaJob"
                 >
-                  <ListItemText primary="职位招聘" />
+                  <ListItemText
+                    primary="职位招聘"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
@@ -248,7 +374,14 @@ const DrawerList = ({ toggleDrawer }) => {
                   component={Link}
                   to="/staff/uwcssaJob/postDepartment"
                 >
-                  <ListItemText primary="部门管理" />
+                  <ListItemText
+                    primary="部门管理"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
@@ -258,7 +391,14 @@ const DrawerList = ({ toggleDrawer }) => {
                   component={Link}
                   to="/staff/article/postArticle"
                 >
-                  <ListItemText primary="新闻发布" />
+                  <ListItemText
+                    primary="新闻发布"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
@@ -266,14 +406,28 @@ const DrawerList = ({ toggleDrawer }) => {
                   sx={{ pl: 4 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
-                  to="/forumTopic"
+                  to="/forum/forumTopicCURD"
                 >
-                  <ListItemText primary="论坛管理" />
+                  <ListItemText
+                    primary="论坛管理"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem>
                 <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText primary="举报审核" />
+                  <ListItemText
+                    primary="举报审核"
+                    primaryTypographyProps={{
+                      fontSize: 18,
+                      fontWeight: "medium",
+                      color: "primary",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
             </Collapse>
@@ -290,7 +444,14 @@ const DrawerList = ({ toggleDrawer }) => {
               <ListItemIcon>
                 <GroupIcon />
               </ListItemIcon>
-              <ListItemText primary="创始团队以及贡献者" />
+              <ListItemText
+                primary="创始团队以及贡献者"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
             </ListItemButton>
           </div>
         </List>

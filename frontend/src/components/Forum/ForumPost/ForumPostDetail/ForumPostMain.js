@@ -1,36 +1,30 @@
 import {
   Box,
   Button,
-  CardActionArea,
-  CardHeader,
-  Chip,
+  // CardActionArea,
+  // CardHeader,
+  // Chip,
   Divider,
   Typography,
+  Breadcrumbs,
   // Skeleton,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-// import { Link } from "react-router-dom";
-import CustomAvatar from "../../../CustomMUI/CustomAvatar";
-import S3Image from "../../../S3/S3Image";
+import { Link } from "react-router-dom";
+// import CustomAvatar from "../../../CustomMUI/CustomAvatar";
+import LikeButtonGroup from "../../../LikeButtonGroup";
+// import S3Image from "../../../S3/S3Image";
+import { useTitle } from "../../../../Hooks/useTitle";
 import React, { useState } from "react";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ForumPostCommentsPost from "./ForumPostCommentsPost";
-const useStyles = makeStyles({
-  title: {
-    marginBlock: "2rem",
-  },
-  content: {
-    marginBlock: "2rem",
-  },
-});
+// import ForumPostCommentsPost from "./ForumPostCommentsPost";
+import ForumPostUserComponent from "./ForumPostUserComponent";
+import ForumPostContentComponent from "./ForumPostContentComponent";
 
-function ForumPostMain({ forumPost}) {
-  const classes = useStyles();
+export default function ForumPostMain({ forumPost }) {
+  useTitle(forumPost.title);
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
   const {
-    // id,
+    id,
     content,
     imgS3Keys,
     createdAt,
@@ -40,53 +34,113 @@ function ForumPostMain({ forumPost}) {
   } = forumPost;
   return (
     <div>
-        <Box className={classes.main}>
-        <CardHeader
-            sx={{ px: 0, my: 2 }}
-            avatar={<CustomAvatar user={user} link={true} />}
-            title={userID}
-            subheader={`发布日期： ${createdAt.slice(0, 10)} ${createdAt.slice(
-              11,
-              19
-            )}`}
-          />
-          {tags.map((data) => {
-            return <Chip key={data} label={data} />;
-          })}
-          <CardActionArea>
-          <S3Image S3Key={imgS3Keys[0]} style={{ width: "100%" }} />
-          </CardActionArea>
-          <Divider />
-          <Box sx={{ my: 2 }}>
-            <Typography
-              variant="body1"
-              className={classes.content}
-              component="span"
-              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+      <Box
+        sx={{
+          p: 0,
+          m: 0,
+        }}
+      >
+        <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 700 }}
+          >
+            {forumPost.title}
+          </Typography>
+
+          <Breadcrumbs aria-label="breadcrumb">
+            <span style={{}}>
+              <Button color="inherit" component={Link} to={`/`}>
+                UWCSSA
+              </Button>
+            </span>
+            <span style={{}}>
+              <Button color="inherit" component={Link} to={`/forum`}>
+                论坛
+              </Button>
+            </span>
+            <span style={{ cursor: "not-allowed" }}>
+              <Button
+                color="inherit"
+                component={Link}
+                to={`/forum/forumTopic/${forumPost.forumSubTopic.forumTopic.id}`}
+              >
+                {forumPost.forumSubTopic.forumTopic.name}
+              </Button>
+            </span>
+            <span style={{ cursor: "not-allowed" }}>
+              <Button
+                color="inherit"
+                component={Link}
+                to={`/forum/forumSubTopic/${forumPost.forumSubTopic.id}`}
+              >
+                {forumPost.forumSubTopic.name}
+              </Button>
+            </span>
+          </Breadcrumbs>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "flex-start", sm: "center" },
+            // height: 220,
+            border: (theme) => `1px solid ${theme.palette.divider}`,
+            borderRadius: 1,
+            bgcolor: "background.paper",
+            color: "text.secondary",
+          }}
+        >
+          <ForumPostUserComponent user={user} userID={userID} id={id} />
+          <Divider orientation="vertical" flexItem />
+          <Box
+            sx={{
+              width:{xs:300,sm:600},
+              minHeight:220,
+              display: "flex",
+              flexDirection: "column",
+              // justifyContent: "space-between",
+            }}
+          >
+            <ForumPostContentComponent
+              tags={tags}
+              content={content}
+              imgS3Keys={imgS3Keys}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                justifyContent: "space-between",
+              }}
             >
-              {content}
-            </Typography>
-          </Box>
-          <Divider />
-          <Box className={classes.buttonGroup}>
-            <Button size="small" color="primary" startIcon={<ThumbUpIcon />}>
-              {/* {like.length} */}
-            </Button>
-            <Button size="small" color="primary" startIcon={<ThumbDownIcon />}>
-              {/* {unlike.length} */}
-            </Button>
-            <Button size="small" color="primary" onClick={replySwitch}>
-              评论
-            </Button>
-            
-          </Box>
-          <Divider />
-          <Box>
-          {isReplying && <ForumPostCommentsPost forumPost={forumPost} />}
+              <LikeButtonGroup item={forumPost} />
+              {!isReplying ? (
+                <Box>
+                  <Typography
+                    variant="caption"
+                    component="span"
+                    style={{ color: "grey" }}
+                  >
+                    {createdAt.slice(0, 10)}
+                    {' '}
+                    {createdAt.slice(11, 16)}
+                  </Typography>
+                  <Button size="small" color="primary" onClick={replySwitch}>
+                    回复 （共{forumPost.forumPostComments.items.length}回复贴）
+                  </Button>
+                </Box>
+              ) : (
+                <Button size="small" color="primary" onClick={replySwitch}>
+                  收起回复 （编辑中）
+                </Button>
+              )}
+            </Box>
+             {/* <ForumPostCommentsPost forumPost={forumPost} isReplying={isReplying} /> */}
           </Box>
         </Box>
+      </Box>
     </div>
   );
 }
-
-export default ForumPostMain;

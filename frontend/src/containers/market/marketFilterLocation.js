@@ -158,7 +158,7 @@ export default function ConfirmationDialog({ type = "plain" }) {
     return (
       <React.Fragment>
         <Button
-          variant="contained"
+          variant="outlined"
           startIcon={<LocationOnIcon />}
           onClick={handleClickListItem}
         >

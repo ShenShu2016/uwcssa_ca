@@ -4,43 +4,32 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { fetchUserProfile, loadUser } from "./redux/reducers/authSlice";
 
+import Account from "./containers/account/Account";
 import Amplify from "aws-amplify";
 import Article from "./containers/article/Article";
-import ArticlesPreview from "./containers/staff/Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
-import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
-import Event from "./containers/Event";
-import EventDetail from "./components/Event/EventDetail";
-import EventGrid from "./components/Event/EventDataGrid";
-import EventSignUp from "./components/Event/SignUpEvent";
+import EventRouter from "./containers/Event/EventRouter";
+// import EventGrid from "./components/Event/EventDataGrid";
+import EventTable from "./components/Event/EventTable";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
-import Group from "./components/Event/group";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Individual from "./components/Event/individual";
 import Market from "./containers/market/Market";
-import MyAccount from "./containers/account/MyAccount";
-import PostArticle from "./containers/staff/Article/PostArticle";
-import PostDepartment from "./containers/staff/UwcssaJob/PostDepartment";
-import PostEvent from "./components/Event/PostEvent";
-import PostUwcssaJob from "./containers/staff/UwcssaJob/PostUwcssaJob";
 import PrivateRoute from "./components/PrivateRoute";
-import Profile from "./containers/account/Profile";
 import ResetPassword from "./containers/authentication/ResetPassword";
 import ScrollToTop from "./Hooks/ScrollToTop";
 import SignIn from "./containers/authentication/SignIn";
 import SignUp from "./containers/authentication/SignUp";
-import Staff from "./containers/staff/Staff";
+import StaffRouter from "./containers/staff/StaffRouter";
 import UserFeedBack from "./containers/UserFeedBack";
-import UwcssaJobsPreview from "./containers/staff/UwcssaJob/UwcssaJobsPreview";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
@@ -111,70 +100,14 @@ export default function App() {
               <PrivateRoute
                 cognitoGroup={cognitoGroup}
                 allowRoles="anyone"
-                path="/account/dashboard"
-                exact
-                component={Dashboard}
-              />
-              <Route
-                path="/account/profile/:username"
-                exact
-                component={Profile}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="anyone"
-                path="/account/myAccount"
-                exact
-                component={MyAccount}
+                path="/account"
+                component={Account}
               />
               <PrivateRoute
                 cognitoGroup={cognitoGroup}
                 allowRoles="staff"
                 path="/staff"
-                exact
-                component={Staff}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="staff"
-                path="/staff/article"
-                exact
-                component={ArticlesPreview}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="staff"
-                path="/staff/uwcssaJob"
-                exact
-                component={UwcssaJobsPreview}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="staff"
-                path="/staff/article/postArticle"
-                exact
-                component={PostArticle}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="staff"
-                path="/staff/uwcssaJob/postUwcssaJob"
-                exact
-                component={PostUwcssaJob}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="staff"
-                path="/staff/uwcssaJob/postDepartment"
-                exact
-                component={PostDepartment}
-              />
-              <PrivateRoute
-                cognitoGroup={cognitoGroup}
-                allowRoles="staff"
-                path="/staff/event/postEvent"
-                exact
-                component={PostEvent}
+                component={StaffRouter}
               />
               <Route path="/signIn" exact component={SignIn} />
               <Route path="/signUp" exact component={SignUp} />
@@ -195,24 +128,7 @@ export default function App() {
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
-              <Route path="/event" exact component={Event} />
-              <Route
-                path="/event/:eventID/eventSignUp"
-                exact
-                component={EventSignUp}
-              />
-              <Route
-                path="/event/:eventID/eventSignUp/individual"
-                exact
-                component={Individual}
-              />
-              <Route
-                path="/event/:eventID/eventSignUp/group"
-                exact
-                component={Group}
-              />
-              <Route path="/eventDataGrid" exact component={EventGrid} />
-              <Route path="/event/:eventID" exact component={EventDetail} />
+              <Route path="/event" component={EventRouter} />
               <Route path="/rating" exact component={UserFeedBack} />
               <Route
                 path="/test/googleMapsPlace"
