@@ -1,23 +1,26 @@
-import { 
-  Box, 
-  Button, 
-  Grid, 
-  Paper, 
-  Typography 
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
 } from "@mui/material";
+
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import BugReportOutlinedIcon from "@mui/icons-material/BugReportOutlined";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import Footer from "./Footer";
 import React from "react";
 import cssaLogo from "../static/cssalogo.png";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root:{
+  root: {
     textAlign: "center",
-    flexDirection:"row",
-    alignItems:"center",
+    flexDirection: "row",
+    alignItems: "center",
     display: "flex",
     marginTop: "2rem",
     color: "#0D1F48",
@@ -25,34 +28,34 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: "5rem",
   },
-  paper:{
-    height:"100%",
-    textAlign:"center",
-    width:"300px",
+  paper: {
+    height: "100%",
+    textAlign: "center",
+    width: "300px",
   },
-  img:{
-    width:"50%",
-    height:"700px",
+  img: {
+    width: "50%",
+    height: "700px",
     display: "flex",
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
-    marginRight:"200px",
-  }
+    marginRight: "200px",
+  },
 }));
 
 export default function ContactUs() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <img src={cssaLogo} alt=" UWCSSA LOGO"  className={classes.img}/>
-      
-      <Box
+    <Box>
+      <div className={classes.root}>
+        <img src={cssaLogo} alt=" UWCSSA LOGO" className={classes.img} />
+
+        <Box
           sx={{
             maxWidth: "100%",
             textAlign: "center",
           }}
-          
         >
           <Typography variant="h3" className={classes.title}>
             联系我们
@@ -144,7 +147,10 @@ export default function ContactUs() {
               </Grid>
             </Grid>
           </Box>
-      </Box>
-    </div>
+        </Box>
+      </div>
+      <CssBaseline />
+      <Footer />
+    </Box>
   );
 }

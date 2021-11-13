@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 
 import ArticlesPreview from "./Article/ArticlesPreview";
 import { Box } from "@mui/system";
+import Footer from "../Footer";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
 import PostEvent from "../../components/Event/PostEvent";
@@ -34,6 +35,7 @@ export default function StaffRouter() {
           component={PostDepartment}
         />
       </Switch>
+      <Footer />
     </Box>
   );
 }

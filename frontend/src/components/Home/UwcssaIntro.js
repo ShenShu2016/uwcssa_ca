@@ -112,7 +112,7 @@ export default function UwcssaIntro() {
         content="textOnly"
         color="primary"
         component={Link}
-        to="/signIn"
+        to="/auth/signIn"
       >
         成为会员
       </Button>

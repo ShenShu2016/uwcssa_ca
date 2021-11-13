@@ -145,7 +145,7 @@ export default function SignIn() {
         </Typography>
         <Typography>
           还没有账户？
-          <Link to="/signUp">注册</Link>
+          <Link to="/auth/signUp">注册</Link>
         </Typography>
         <form
           className={classes.form}
@@ -216,7 +216,7 @@ export default function SignIn() {
               <Button
                 variant="outlined"
                 component={Link}
-                to="/forgotPassword"
+                to="/auth/forgotPassword"
                 color="primary"
                 className={classes.submit}
                 disabled={loading}

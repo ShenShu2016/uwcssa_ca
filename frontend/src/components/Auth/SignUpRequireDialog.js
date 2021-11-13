@@ -250,7 +250,7 @@ export default function AlertDialog() {
                   <Button
                     variant="outlined"
                     component={Link}
-                    to="/forgotPassword"
+                    to="/auth/forgotPassword"
                     color="primary"
                     className={classes.submit}
                     disabled={loading}
@@ -343,7 +343,7 @@ export default function AlertDialog() {
             onClick={handleClose}
             autoFocus
             component={Link}
-            to="/signUp"
+            to="/auth/signUp"
           >
             去注册
           </Button>

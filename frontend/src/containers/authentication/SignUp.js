@@ -124,7 +124,7 @@ export default function SignUp() {
     return <Redirect to="/" />;
   }
   if (accountCreated) {
-    return <Redirect to={`/emailConfirm/${formData.username}`} />;
+    return <Redirect to={`/auth/emailConfirm/${formData.username}`} />;
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -136,7 +136,7 @@ export default function SignUp() {
         <Typography variant="h5">注册</Typography>
         <Typography>
           已经有账户了？
-          <Link to="/signIn">登入</Link>
+          <Link to="/auth/signIn">登入</Link>
         </Typography>
         {alert ? (
           <Alert className={classes.alert} severity="error">
