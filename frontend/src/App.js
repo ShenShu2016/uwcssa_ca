@@ -12,20 +12,16 @@ import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
-import Event from "./containers/Event";
-import EventDetail from "./components/Event/EventDetail";
+import EventRouter from "./containers/Event/EventRouter";
 // import EventGrid from "./components/Event/EventDataGrid";
 import EventTable from "./components/Event/EventTable";
-import EventSignUp from "./components/Event/SignUpEvent";
 import Footer from "./containers/Footer";
 import ForgotPassword from "./containers/authentication/ForgotPassword";
 import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
-import Group from "./components/Event/group";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Individual from "./components/Event/individual";
 import Market from "./containers/market/Market";
 import PrivateRoute from "./components/PrivateRoute";
 import ResetPassword from "./containers/authentication/ResetPassword";
@@ -132,25 +128,7 @@ export default function App() {
               <Route path="/foundingTeam" exact component={FoundingTeam} />
               <Route path="/contactUs" exact component={ContactUs} />
               <Route path="/career" component={Career} />
-              <Route path="/event" exact component={Event} />
-              <Route
-                path="/event/:eventID/eventSignUp"
-                exact
-                component={EventSignUp}
-              />
-              <Route
-                path="/event/:eventID/eventSignUp/individual"
-                exact
-                component={Individual}
-              />
-              <Route
-                path="/event/:eventID/eventSignUp/group"
-                exact
-                component={Group}
-              />
-              {/* <Route path="/eventDataGrid" exact component={EventGrid} /> */}
-              <Route path="/eventTable" exact component={EventTable} />
-              <Route path="/event/:eventID" exact component={EventDetail} />
+              <Route path="/event" component={EventRouter} />
               <Route path="/rating" exact component={UserFeedBack} />
               <Route
                 path="/test/googleMapsPlace"
