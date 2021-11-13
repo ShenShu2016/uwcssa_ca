@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { marketRentalOptions } from "../../containers/market/marketRentalOptions";
+import { marketRentalOptions } from "./marketRentalOptions";
 import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
@@ -211,7 +211,7 @@ export default function MarketComponent({ item, type }) {
                 lineHeight: "1.33333",
               }}
             >
-              {PType.filter((item) => item.value === propertyType)[0].label},
+              {PType.filter((item) => item.value === propertyType).label},
               {bedroomCounts} bedrooms,
               {
                 RentOrSale.filter(
