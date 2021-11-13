@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     marginTop: "3rem",
-    height: "85vh",
+    height: "50vh",
   },
   title: {
     minWidth: "40%",
@@ -109,7 +109,6 @@ export default function EventSignUp() {
                 size="large"
                 component={Link}
                 to={`/event/${eventID}/eventSignUp/group`}
-                disabled
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <GroupIcon />
