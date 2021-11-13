@@ -97,31 +97,31 @@ export default function MarketItemDetail() {
     marketItemCategoryList: Category,
   } = marketItemOptions;
 
-  const {
-    // id,
-    // name,
-    imgS3Keys,
-    title,
-    price,
-    description,
-    location,
-    marketItemCondition,
-    marketItemCategory,
-    tags,
-    // active,
-    createdAt,
-    user,
-    // userID,
-    // ByCreatedAt,
-    owner,
-  } = marketItem;
+  // const {
+  //   // id,
+  //   // name,
+  //   imgS3Keys,
+  //   title,
+  //   price,
+  //   description,
+  //   location,
+  //   marketItemCondition,
+  //   marketItemCategory,
+  //   tags,
+  //   // active,
+  //   createdAt,
+  //   user,
+  //   // userID,
+  //   // ByCreatedAt,
+  //   owner,
+  // } = marketItem;
 
   useEffect(() => {
     const getImage = async () => {
       try {
         setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imgS3Keys).map((key) =>
+          Array.from(marketItem.imgS3Keys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -135,10 +135,10 @@ export default function MarketItemDetail() {
         setImgKeyFromServer([]);
       }
     };
-    if (imgS3Keys) {
+    if (marketItem) {
       getImage();
     }
-  }, [imgS3Keys]);
+  }, [marketItem]);
   console.log("starter", starter);
   return (
     <div className={classes.root}>
@@ -160,14 +160,14 @@ export default function MarketItemDetail() {
                 marginLeft="1rem"
                 paddingTop="0.5rem"
               >
-                {title}
+                {marketItem.title}
               </Typography>
 
               <Typography marginX="1rem" marginTop="0.25rem">
-                $ {price}
+                $ {marketItem.price}
               </Typography>
               <Typography marginX="1rem" variant="caption" color="gray">
-                发布日期： {createdAt.slice(0, 10)}
+                发布日期： {marketItem.createdAt.slice(0, 10)}
               </Typography>
               <Stack
                 justifyContent="center"
@@ -210,22 +210,23 @@ export default function MarketItemDetail() {
                 </Grid>
                 <Grid item xs={8}>
                   {
-                    Category.filter((item) => item.value === marketItemCategory)
-                      .label
+                    Category.filter(
+                      (item) => item.value === marketItem.marketItemCategory
+                    ).label
                   }
                 </Grid>
                 <Grid item xs={4}>
                   Condition
                 </Grid>
                 <Grid item xs={8}>
-                  {
+                  {/* {
                     Conditions.filter(
                       (item) => item.value === marketItemCondition
                     )[0].label
-                  }
+                  } */}
                 </Grid>
               </Grid>
-              {tags && (
+              {marketItem.tags && (
                 <Box>
                   <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                     Tags
@@ -238,7 +239,7 @@ export default function MarketItemDetail() {
                 marginBottom="0.5rem"
                 spacing={2}
               >
-                {tags.map((tag, tagIdx) => {
+                {marketItem.tags.map((tag, tagIdx) => {
                   return <Chip key={tagIdx} label={tag} />;
                 })}
               </Stack>
@@ -248,7 +249,7 @@ export default function MarketItemDetail() {
               </Typography>
 
               <Typography marginX="1rem" marginY="0.25rem">
-                {description}
+                {marketItem.description}
               </Typography>
               <Paper
                 sx={{
@@ -262,7 +263,7 @@ export default function MarketItemDetail() {
                 Google Map
               </Paper>
               <Typography margin="1rem" marginY="0.25rem">
-                {location}
+                {marketItem.location}
               </Typography>
               <Divider />
               <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
@@ -280,7 +281,7 @@ export default function MarketItemDetail() {
                       // aria-label="recipe"
                       className={classes.avatar}
                       component={true}
-                      user={user}
+                      user={marketItem.user}
                       // to={`/account/profile/${owner}`}
                     ></CustomAvatar>
                   }
@@ -289,8 +290,8 @@ export default function MarketItemDetail() {
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title={owner}
-                  subheader={`发布日期： ${createdAt.slice(0, 10)} `}
+                  title={marketItem.owner}
+                  subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
                 />
               </Box>
             </Paper>
