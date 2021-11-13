@@ -26,7 +26,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
-import { marketRentalOptions } from "./marketRentalOptions";
+import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -87,6 +87,7 @@ export default function MarketRentalDetail() {
     if (id && id !== "") {
       dispatch(selectedMarketItem(id));
     }
+    console.log("removed!!!!");
     return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
   const { marketItem } = useSelector((state) => state.market.selected);

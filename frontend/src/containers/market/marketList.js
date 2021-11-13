@@ -1,12 +1,16 @@
 import { Box, Stack } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  fetchMarketItems,
+  selectAllMarketItems,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import MarketComponent from "../../components/Market/MarketComponent";
-import MarketSideBar from "./marketSideBar";
-import MarketTopBar from "./marketTopBar";
-import { fetchMarketItems } from "../../redux/reducers/marketSlice";
-import { marketItemStyle } from "./marketItemCss";
+import MarketSideBar from "../../components/Market/marketSideBar";
+import MarketTopBar from "../../components/Market/marketTopBar";
+import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
+import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
 // setMarketItems,
@@ -20,15 +24,11 @@ export default function MarketList() {
   const useStyles = marketItemStyle;
   const classes = useStyles();
 
-  const { marketItems, fetchMarketItemsStatus } = useSelector(
-    (state) => state.market
-  );
+  const marketItems = useSelector(selectAllMarketItems);
 
   useEffect(() => {
-    if (fetchMarketItemsStatus === "idle" || undefined) {
-      dispatch(fetchMarketItems());
-    }
-  }, [fetchMarketItemsStatus, dispatch]);
+    dispatch(fetchMarketItems(marketItemSortBySortKey));
+  }, [dispatch]);
 
   const marketItemRenderList =
     marketItems &&
@@ -42,7 +42,6 @@ export default function MarketList() {
       );
     });
   console.log("marketVehicles", marketItems);
-
   return (
     <Box className={classes.root}>
       <Stack

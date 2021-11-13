@@ -14,6 +14,8 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   removeSelectedMarketItem,
+  selectAllMarketItems,
+  selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +28,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
-import { marketItemOptions } from "./marketItemOptions";
+import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -80,31 +82,22 @@ export default function MarketItemDetail() {
   useTitle("二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
-
-  console.log("id", id);
+  const [starter, setStarter] = useState(false);
 
   useEffect(() => {
-    const getItems = async () => {
-      if (id && id !== "") {
-        try {
-          await dispatch(selectedMarketItem(id)).unwrap();
-          console.log("Successfully get items");
-        } catch (error) {
-          console.error("Failed to get items", error);
-        } finally {
-          return () => dispatch(removeSelectedMarketItem());
-        }
-      }
-    };
-    getItems();
-  }, [id, dispatch]);
+    console.log("试试看");
+    dispatch(selectedMarketItem(id));
+    setStarter(true);
 
-  const { marketItem } = useSelector((state) => state.market.selected);
+    // return () => dispatch(removeSelectedMarketItem());
+  }, [id, dispatch]);
+  const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  console.log("id", id);
+  console.log("啥玩意", marketItem);
   const {
     marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
-  console.log("marketItem", marketItem);
 
   const {
     // id,
@@ -148,26 +141,10 @@ export default function MarketItemDetail() {
       getImage();
     }
   }, [imgS3Keys]);
-
+  console.log("starter", starter);
   return (
     <div className={classes.root}>
-      {Object.keys(marketItem).length === 0 ? (
-        <Box
-          sx={{
-            height: "50vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack spacing={2} direction="row">
-            <CircularProgress />
-            <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
-          </Stack>
-        </Box>
-      ) : (
+      {marketItem ? (
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
@@ -235,9 +212,8 @@ export default function MarketItemDetail() {
                 </Grid>
                 <Grid item xs={8}>
                   {
-                    Category.filter(
-                      (item) => item.value === marketItemCategory
-                    )[0].label
+                    Category.filter((item) => item.value === marketItemCategory)
+                      .label
                   }
                 </Grid>
                 <Grid item xs={4}>
@@ -322,6 +298,22 @@ export default function MarketItemDetail() {
             </Paper>
           </Box>
         </Stack>
+      ) : (
+        <Box
+          sx={{
+            height: "50vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Stack spacing={2} direction="row">
+            <CircularProgress />
+            <CircularProgress color="secondary" />
+            <CircularProgress color="success" />
+            <CircularProgress color="inherit" />
+          </Stack>
+        </Box>
       )}
     </div>
   );
