@@ -12,7 +12,20 @@ import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
+
+// import Dashboard from "./containers/account/Dashboard";
+// import EmailConfirm from "./containers/authentication/EmailConfirm";
+// import Event from "./containers/Event";
+// import EventDetail from "./components/Event/EventDetail";
+// import Success from "./components/Event/Success";
+// // import EventGrid from "./components/Event/EventDataGrid";
+// import EventTable from "./components/Event/EventTable";
+// import EventSignUp from "./components/Event/SignUpEvent";
+// import Footer from "./containers/Footer";
+// import ForgotPassword from "./containers/authentication/ForgotPassword";
+
 import EventRouter from "./containers/Event/EventRouter";
+
 import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
@@ -118,6 +131,7 @@ export default function App() {
               path="/test/googleMapsPlace"
               exact
               component={GoogleMapsPlace}
+
             />
             <Route exact path="/NoPermission" component={NoPermission} />
             <Route>404 Not Found!</Route>

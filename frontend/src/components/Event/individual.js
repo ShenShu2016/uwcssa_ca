@@ -45,6 +45,7 @@ export default function Individual() {
   //const { event } = useSelector((state) => state.event.selected); 思路有问题
   useTitle(`近期活动 ${eventID} 个人报名`);
   console.log("event.id", eventID);
+
   const [eventParticipantData, setEventParticipantData] = useState({
     name: "",
     email: "",
@@ -79,9 +80,15 @@ export default function Individual() {
     );
     console.log("postEventParticipant", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/event`);
+      history.push(`/event/${eventID}/eventSignUp/success`);
     }
   };
+
+  const isValid =
+    eventParticipantData.name.length > 0 &&
+    eventParticipantData.email.length > 0 &&
+    eventParticipantData.phone.length > 0 &&
+    eventParticipantData.weChat.length > 0;
 
   return (
     <div>
@@ -141,6 +148,7 @@ export default function Individual() {
                 <TextField
                   margin="normal"
                   fullWidth
+                  required
                   name="phone"
                   label="手机号码"
                   value={eventParticipantData.phone}
@@ -155,6 +163,7 @@ export default function Individual() {
                 <TextField
                   margin="normal"
                   fullWidth
+                  required
                   name="weChat"
                   label="微信号"
                   value={eventParticipantData.weChat}
@@ -198,7 +207,8 @@ export default function Individual() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={uploadEventParticipant}
+                  disabled={!isValid}
+                  onClick={isValid ? uploadEventParticipant : null}
                 >
                   提交
                 </Button>
