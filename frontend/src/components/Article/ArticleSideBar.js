@@ -1,7 +1,9 @@
+import { List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
+
 import ArticleSideBarAD from "../AdSense/ArticleSideBarAD";
-import { Paper } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "1rem",
@@ -28,11 +30,66 @@ function ArticleSideBar() {
   const classes = useStyles();
   return (
     <Paper variant="outlined" className={classes.root}>
-      <img
+      {/* <img
         src="https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
         alt="作者"
         style={{ width: "100%" }}
-      />
+      /> */}
+      <Typography variant="h1" color="error">
+        招收实习生！
+      </Typography>
+      <List>
+        <ListItem>
+          <ListItemText
+            primary="JavaScript 开发"
+            primaryTypographyProps={{
+              fontSize: 18,
+              fontWeight: "medium",
+              color: "primary",
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="测试工程师"
+            primaryTypographyProps={{
+              fontSize: 18,
+              fontWeight: "medium",
+              color: "primary",
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="项目经理"
+            primaryTypographyProps={{
+              fontSize: 18,
+              fontWeight: "medium",
+              color: "primary",
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="Business Analyst"
+            primaryTypographyProps={{
+              fontSize: 18,
+              fontWeight: "medium",
+              color: "primary",
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="Data Analyst"
+            primaryTypographyProps={{
+              fontSize: 18,
+              fontWeight: "medium",
+              color: "primary",
+            }}
+          />
+        </ListItem>
+      </List>
       <ArticleSideBarAD />
     </Paper>
   );
