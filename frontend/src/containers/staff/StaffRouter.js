@@ -9,7 +9,7 @@ import PostEvent from "../../components/Event/PostEvent";
 import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import React from "react";
 import Staff from "./Staff";
-import UwcssaJobsPreview from "../../components/Event/EventDataGrid";
+import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
 
 export default function StaffRouter() {
   return (
