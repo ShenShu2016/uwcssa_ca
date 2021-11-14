@@ -4,7 +4,6 @@ import {
   Breadcrumbs,
   Button,
 } from "@mui/material";
-import ForumSubTopicPostComponent from "./ForumSubTopicPostComponent";
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -22,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 }));
-export default function ForumSubTopicMain({ forumSubTopic, forumPost }) {
+export default function ForumSubTopicMain( {forumSubTopic} ) {
   const classes = useStyles();
+  console.log(forumSubTopic);
   useTitle(forumSubTopic.name + "-" + forumSubTopic.forumTopic.name + "-论坛");
-  // const forumPostsData = forumPost;
   return (
     <div className={classes.root}>
       <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
@@ -61,32 +60,6 @@ export default function ForumSubTopicMain({ forumSubTopic, forumPost }) {
             </Button>
           </span>
         </Breadcrumbs>
-      </Box>
-      <Box sx={{ padding: "1rem", maxwidth: "100%" }}>
-        <div>
-          {forumPost.map((forumPost) => {
-            return <ForumSubTopicPostComponent forumPost={forumPost} />;
-          })}
-        </div>
-        {/* <Box className="moreCommentsStatus">
-          {postsNextToken ? (
-            <Box>
-              <Typography
-                variant="h5"
-                color="primary"
-                align="center"
-                sx={{ my: 3 }}
-              >
-                再往下翻一翻 加载更多
-              </Typography>
-              <LinearProgress />
-            </Box>
-          ) : (
-            <Typography variant="h5" align="center" sx={{ my: 3 }}>
-              已经到达底部
-            </Typography>
-          )}
-        </Box> */}
       </Box>
     </div>
   );

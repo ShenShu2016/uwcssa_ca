@@ -1,17 +1,9 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Divider,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, Card, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import Create from "./Education/Create";
-import Edit from "./Education/Edit";
-import EditIcon from "@mui/icons-material/Edit";
+import EducationListing from "./Education/EducationListing";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../../Hooks/usePermit";
 
@@ -39,26 +31,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Education({ user, userAuth, ownerID }) {
   const classes = useStyles();
-  const [editOpen, setEditOpen] = useState(false);
-  const [education, setEducation] = useState({
-    degree: "",
-    description: "",
-    endDate: "",
-    fieldOfStudy: "",
-    grade: "",
-    id: "",
-    school: "",
-    startDate: "",
-  });
-  const isPermit = usePermit(ownerID, "admin");
-  const handleEditClickOpen = (education) => {
-    setEditOpen(true);
-    setEducation(education);
-  };
-  const handleEditClose = () => {
-    setEditOpen(false);
-  };
 
+  const isPermit = usePermit(ownerID, "admin");
   const [createOpen, setCreateOpen] = useState(false);
   const handleCreateClickOpen = () => {
     setCreateOpen(true);
@@ -92,65 +66,18 @@ export default function Education({ user, userAuth, ownerID }) {
             username={user.username}
           />
         )}
-        {user.userEducations.items.map((education) => {
-          const {
-            degree,
-            description,
-            endDate,
-            fieldOfStudy,
-            grade,
-            id,
-            school,
-            startDate,
-          } = education;
+        {user.userEducations.items.map((education, idx) => {
           return (
-            <div key={id}>
-              <CardContent>
-                <div className={classes.school}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
-                    {school}
-                  </Typography>
-                  {isPermit && (
-                    <IconButton
-                      aria-label="edit"
-                      color="info"
-                      size="small"
-                      onClick={(e) => handleEditClickOpen(education)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                  )}
-                </div>
-                <Typography variant="subtitle2" sx={{}}>
-                  {degree} {" - "} {fieldOfStudy} {" - "} {grade}
-                </Typography>
-                <Typography
-                  sx={{ mb: 1.5 }}
-                  variant="subtitle2"
-                  color="text.secondary"
-                >
-                  {startDate && startDate.slice(0, 7)} -{" "}
-                  {endDate && endDate.slice(0, 7)}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ mb: 2 }}
-                  component="span"
-                  style={{ whiteSpace: "pre" }}
-                >
-                  {description}
-                </Typography>
-                <Divider />
-              </CardContent>
+            <div key={idx}>
+              <EducationListing
+                education={education}
+                idx={idx}
+                ownerID={ownerID}
+              />
             </div>
           );
         })}
       </Card>
-      <Edit
-        editOpen={editOpen}
-        education={education}
-        handleEditClose={handleEditClose}
-      />
     </div>
   );
 }

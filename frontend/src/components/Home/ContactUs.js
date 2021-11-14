@@ -1,8 +1,10 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 
+import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import wechatQrCode from "../../static/wechatQrCode.png";
+
+// import wechatQrCode from "../../static/wechatQrCode.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   ColorButton: {},
 }));
-const ContactUs = () => {
+
+export default function ContactUs() {
   const classes = useStyles();
 
   return (
@@ -55,6 +58,8 @@ const ContactUs = () => {
               marginTop: "1rem",
               marginBottom: "2rem",
             }}
+            component={Link}
+            to="/career"
           >
             加入我们
           </Button>
@@ -80,12 +85,14 @@ const ContactUs = () => {
               marginTop: "1rem",
               marginBottom: "2rem",
             }}
+            component={Link}
+            to="/contactUs"
           >
             联系我们
           </Button>
         </Box>
         <Divider />
-        <Box className={classes.cards}>
+        {/* <Box className={classes.cards}>
           <Typography variant="h5" className={classes.title}>
             支持我们
           </Typography>
@@ -93,9 +100,8 @@ const ContactUs = () => {
             如果你喜欢我们的网站，可以扫描下方二维码进行捐款，帮助我们建立一个更好的网站！
           </Typography>
           <img src={wechatQrCode} alt="QrCode" className={classes.qrCode} />
-        </Box>
+        </Box> */}
       </Box>
     </div>
   );
-};
-export default ContactUs;
+}

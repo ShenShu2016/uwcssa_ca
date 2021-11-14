@@ -8,7 +8,7 @@ import {
   forumPostCommentSortByForumPostID,
   forumPostSortByForumSubTopicID,
   forumPostSubCommentSortByForumPostCommentID,
-  getForumPost,
+  // getForumPost,
   getForumPostComment,
   getForumSubTopic,
   getForumTopic,
@@ -16,7 +16,7 @@ import {
   listForumSubTopics,
   listForumTopics,
 } from "../../graphql/queries";
-
+import { getForumPost } from "../CustomQuery/ForumPostQueries";
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
@@ -24,11 +24,13 @@ const initialState = {
   forumTopics: [],
   forumSubTopics: [],
   forumPosts: [],
+  selectedForumTopic: {},
+
   selected: {
     forumTopic: {},
-    forumSubTopic: { posts: { nextToken: null } },
-    forumPost: { comments: { nextToken: null } },
-    forumPostComment: { subComments: { nextToken: null } },
+    forumSubTopic: {},
+    forumSubTopicPosts: {},
+    forumPost: { forumPostComments: { nextToken: null } },
   },
   // selectedForumTopic: {},
   // selectedForumSubTopic: {
@@ -123,7 +125,7 @@ export const selectedForumSubTopic = createAsyncThunk(
 );
 export const selectedForumSubTopicPosts = createAsyncThunk(
   "forum/selectedForumSubTopicPosts",
-  async ({ forumSubTopicID }) => {
+  async (forumSubTopicID) => {
     const forumSubTopicPostData = await API.graphql({
       query: forumPostSortByForumSubTopicID,
       variables: {
@@ -191,12 +193,14 @@ export const selectedForumPostComments = createAsyncThunk(
 export const postForumPostComment = createAsyncThunk(
   "forum/postForumPostComment",
   async (createForumPostCommentInput) => {
+    console.log(createForumPostCommentInput);
     const response = await API.graphql(
       graphqlOperation(createForumPostComment, {
         input: createForumPostCommentInput,
       })
     );
-    return { result: true, response };
+    // console.log(response.data.createForumPostComment)
+    return response.data.createForumPostComment;
   }
 );
 
@@ -230,13 +234,15 @@ export const selectedForumPostCommentSubComments = createAsyncThunk(
 );
 export const postForumPostSubComment = createAsyncThunk(
   "forum/postForumPostSubComment",
-  async (createForumPostSubCommentInput) => {
+  async ({ createForumPostSubCommentInput }) => {
+    console.log(createForumPostSubCommentInput);
     const response = await API.graphql(
       graphqlOperation(createForumPostSubComment, {
         input: createForumPostSubCommentInput,
       })
     );
-    return { result: true, response };
+
+    return response.data.createForumPostSubComment;
   }
 );
 
@@ -244,15 +250,29 @@ const forumSlice = createSlice({
   name: "forum",
   initialState,
   reducers: {
-    removeSelectedForumPost(state, action) {
-      state.selected = { forumPost: { comments: { nextToken: null } } };
+    removeSelectedForumTopic(state, action) {
+      state.selected = {
+        forumTopic: {},
+        forumSubTopic: {},
+        forumSubTopicPosts: {},
+        forumPost: { forumPostComments: { nextToken: null } },
+      };
     },
     removeSelectedForumSubTopic(state, action) {
-      //do something
+      state.selected = {
+        forumTopic: {},
+        forumSubTopic: {},
+        forumSubTopicPosts: {},
+        forumPost: { forumPostComments: { nextToken: null } },
+      };
     },
-
-    removeSelectedForumTopic(state, action) {
-      //do something
+    removeSelectedForumPost(state, action) {
+      state.selected = {
+        forumTopic: {},
+        forumSubTopic: {},
+        forumSubTopicPosts: {},
+        forumPost: { forumPostComments: { nextToken: null } },
+      };
     },
   },
   extraReducers(builder) {
@@ -311,7 +331,7 @@ const forumSlice = createSlice({
       })
       .addCase(selectedForumSubTopicPosts.fulfilled, (state, action) => {
         state.selectedForumSubTopicPostsStatus = "succeeded";
-        state.selected.forumSubTopic.posts = action.payload;
+        state.selected.forumSubTopicPosts = action.payload;
       })
       .addCase(selectedForumSubTopicPosts.rejected, (state, action) => {
         state.selectedForumSubTopicPostsStatus = "failed";
@@ -328,12 +348,56 @@ const forumSlice = createSlice({
       .addCase(fetchForumPosts.rejected, (state, action) => {
         state.fetchForumPostsStatus = "failed";
         state.fetchForumPostsError = action.error.message;
+      })
+      //selectedForumPost
+      .addCase(selectedForumPost.pending, (state, action) => {
+        state.selectedForumPostStatus = "loading";
+      })
+      .addCase(selectedForumPost.fulfilled, (state, action) => {
+        state.selectedForumPostStatus = "succeeded";
+        state.selected.forumPost = action.payload;
+      })
+      .addCase(selectedForumPost.rejected, (state, action) => {
+        state.selectedForumPostStatus = "failed";
+        state.selectedForumPostError = action.error.message;
+      })
+      //postForumPostComment
+      .addCase(postForumPostComment.pending, (state, action) => {
+        state.postForumPostCommentStatus = "loading";
+      })
+      .addCase(postForumPostComment.fulfilled, (state, action) => {
+        state.postForumPostCommentStatus = "succeeded";
+        console.log(
+          "postArticleComment",
+          state.selected.forumPost.forumPostComments.items
+        );
+        state.selected.forumPost.forumPostComments.items.unshift(
+          action.payload
+        );
+      })
+      .addCase(postForumPostComment.rejected, (state, action) => {
+        state.postForumPostCommentStatus = "failed";
+        state.postForumPostCommentError = action.error.message;
+      })
+      //postForumPostSubComment
+      .addCase(postForumPostSubComment.pending, (state, action) => {
+        state.postForumPostSubCommentStatus = "loading";
+      })
+      .addCase(postForumPostSubComment.fulfilled, (state, action) => {
+        state.postForumPostSubCommentStatus = "succeeded";
+        state.selected.forumPost.forumPostComments.items[
+          action.meta.arg.idx
+        ].forumPostSubComments.items.unshift(action.payload);
+      })
+      .addCase(postForumPostSubComment.rejected, (state, action) => {
+        state.postForumPostSubCommentStatus = "failed";
+        state.postForumPostSubCommentError = action.error.message;
       });
   },
 });
 export const {
-  removeSelectedForumPost,
-  removeSelectedForumSubTopic,
   removeSelectedForumTopic,
+  removeSelectedForumSubTopic,
+  removeSelectedForumPost,
 } = forumSlice.actions;
 export default forumSlice.reducer;

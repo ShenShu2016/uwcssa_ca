@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   CardHeader,
@@ -20,14 +19,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import { Link } from "react-router-dom";
+import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
-import { marketVehicleOptions } from "./marketVehicleOptions";
+import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
+import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -101,6 +101,7 @@ export default function MarketVehicleDetail() {
     interiorColor,
     fuelType,
     tags,
+    user,
     // active,
     createdAt,
     // ByCreatedAt,
@@ -174,7 +175,7 @@ export default function MarketVehicleDetail() {
                 $ {price}
               </Typography>
               <Typography marginX="1rem" variant="caption" color="gray">
-                发布日期： {createdAt.slice(0, 10)}
+                {moment(createdAt).fromNow()}
               </Typography>
               <Stack
                 justifyContent="center"
@@ -185,21 +186,24 @@ export default function MarketVehicleDetail() {
                 <Button
                   startIcon={<MessageIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Contact
                 </Button>
                 <Button
                   startIcon={<BookmarksIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Save
                 </Button>
                 <Button
                   startIcon={<ShareIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Share
                 </Button>
@@ -255,7 +259,7 @@ export default function MarketVehicleDetail() {
                 spacing={2}
               >
                 {tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} color="primary" />;
+                  return <Chip key={tagIdx} label={tag} />;
                 })}
               </Stack>
               <Divider />
@@ -265,16 +269,17 @@ export default function MarketVehicleDetail() {
               <Typography marginX="1rem" marginY="0.25rem">
                 {description}
               </Typography>
-              <Box
+              <Paper
                 sx={{
                   marginX: "1rem",
                   marginY: "0.25rem",
-                  bgcolor: "#4caf50",
-                  height: "200px",
+                  height: "250px",
+                  backgroundColor: "rgb(243, 246, 249)",
+                  marginBottom: "1rem",
                 }}
               >
-                Google map
-              </Box>
+                Google Map
+              </Paper>
               <Typography marginX="1rem" marginY="0.25rem">
                 {location}
               </Typography>
@@ -290,12 +295,13 @@ export default function MarketVehicleDetail() {
               >
                 <CardHeader
                   avatar={
-                    <Avatar
-                      aria-label="recipe"
+                    <CustomAvatar
+                      // aria-label="recipe"
                       className={classes.avatar}
-                      component={Link}
-                      to={`/account/profile/${owner}`}
-                    ></Avatar>
+                      component={true}
+                      user={user}
+                      // to={`/account/profile/${owner}`}
+                    ></CustomAvatar>
                   }
                   action={
                     <IconButton aria-label="settings">
@@ -303,10 +309,7 @@ export default function MarketVehicleDetail() {
                     </IconButton>
                   }
                   title={owner}
-                  subheader={`发布日期： ${createdAt.slice(
-                    0,
-                    10
-                  )} ${createdAt.slice(11, 19)}`}
+                  subheader={`发布日期： ${createdAt.slice(0, 10)} `}
                 />
               </Box>
             </Paper>

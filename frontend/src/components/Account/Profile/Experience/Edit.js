@@ -18,7 +18,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { putUserExperience } from "../../../../redux/actions/profileActions";
+import { putUserExperience } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
   },
 });
-export default function Edit({ experience, editOpen, handleEditClose }) {
+export default function Edit({ experience, editOpen, handleEditClose, idx }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -79,7 +79,7 @@ export default function Edit({ experience, editOpen, handleEditClose }) {
   };
 
   const update = () => {
-    dispatch(putUserExperience(updateUserExperienceInput));
+    dispatch(putUserExperience({ updateUserExperienceInput, idx }));
     handleEditClose();
   };
 

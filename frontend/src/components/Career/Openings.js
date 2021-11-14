@@ -1,14 +1,13 @@
+import { Divider, Typography } from "@mui/material";
 import { React, useEffect } from "react";
 import {
-  setDepartments,
-  setUwcssaJobs,
-} from "../../redux/actions/uwcssaJobActions";
+  fetchDepartments,
+  fetchUwcssaJobs,
+} from "../../redux/reducers/careerSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import { Divider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import store from "../../redux/store";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -26,12 +25,19 @@ const useStyles = makeStyles(() => ({
 
 export default function Openings() {
   const classes = useStyles();
-  useEffect(() => {
-    setDepartments()(store.dispatch);
-    setUwcssaJobs()(store.dispatch);
-  }, []);
+  const dispatch = useDispatch();
+  const { departments, fetchUwcssaJobsStatus, fetchDepartmentsStatus } =
+    useSelector((state) => state.career);
 
-  const departments = useSelector((state) => state.allUwcssaJobs.departments);
+  useEffect(() => {
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+    if (fetchUwcssaJobsStatus === "idle" || undefined) {
+      dispatch(fetchUwcssaJobs());
+    }
+  }, [dispatch, fetchUwcssaJobsStatus, fetchDepartmentsStatus]);
+
   console.log("Departments:", departments);
 
   return (
@@ -45,7 +51,7 @@ export default function Openings() {
                 {department.uwcssaJobs.items.length === 0
                   ? ""
                   : department.uwcssaJobs.items.map((job) => {
-                      return job.active? (
+                      return job.active ? (
                         <div key={job.id}>
                           <br />
                           <div
@@ -58,7 +64,15 @@ export default function Openings() {
                               {job.title}
                             </Link>
                           </div>
-                          <div style={{ display: "inline-block", width: "20%", textAlign: "right" }}>{job.createdAt.slice(0,10)}</div>
+                          <div
+                            style={{
+                              display: "inline-block",
+                              width: "20%",
+                              textAlign: "right",
+                            }}
+                          >
+                            {job.createdAt.slice(0, 10)}
+                          </div>
                           <br />
                         </div>
                       ) : (

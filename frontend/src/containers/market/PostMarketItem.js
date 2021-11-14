@@ -8,7 +8,7 @@ import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { marketItemOptions } from "./marketItemOptions";
+import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
@@ -193,6 +193,8 @@ export default function PostMarketItem() {
             <TextField
               label="Title"
               variant="outlined"
+              placeholder="Give your item the coolest name!"
+              autoFocus
               fullWidth
               required
               value={marketItemData.title}
@@ -237,7 +239,7 @@ export default function PostMarketItem() {
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomTags />
+            <CustomTags placeholder="新装修， 独立卫浴..." />
           </Grid>
           <Grid item xs={6}>
             <MarketForm
@@ -274,6 +276,7 @@ export default function PostMarketItem() {
               minRows={5}
               variant="outlined"
               multiline
+              placeholder="Describe your items in a more detailed manner!"
               fullWidth
               onChange={(e) =>
                 setMarketItemData({

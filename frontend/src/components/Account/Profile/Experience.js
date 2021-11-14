@@ -1,17 +1,9 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Divider,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, Card, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import Create from "./Experience/Create";
-import Edit from "./Experience/Edit";
-import EditIcon from "@mui/icons-material/Edit";
+import ExperienceListing from "./Experience/ExperienceListing";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../../Hooks/usePermit";
 
@@ -40,25 +32,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Experience({ user, userAuth, ownerID }) {
   const classes = useStyles();
   const isPermit = usePermit(ownerID, "admin");
-
-  const [experience, setExperience] = useState({
-    companyName: "",
-    description: "",
-    employmentType: "",
-    id: "",
-    industry: "",
-    location: "",
-    title: "",
-  });
-
-  const [editOpen, setEditOpen] = useState(false);
-  const handleEditClickOpen = (experience) => {
-    setEditOpen(true);
-    setExperience(experience);
-  };
-  const handleEditClose = () => {
-    setEditOpen(false);
-  };
 
   const [createOpen, setCreateOpen] = useState(false);
   const handleCreateClickOpen = () => {
@@ -93,69 +66,18 @@ export default function Experience({ user, userAuth, ownerID }) {
             username={user.username}
           />
         )}
-        {user.userExperiences.items.map((experience) => {
-          const {
-            companyName,
-            description,
-            employmentType,
-            endDate,
-            id,
-            industry,
-            location,
-            startDate,
-            title,
-          } = experience;
+        {user.userExperiences.items.map((experience, idx) => {
           return (
-            <div key={id}>
-              <CardContent>
-                <div className={classes.company}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: "600" }}>
-                    {title}
-                  </Typography>
-
-                  {isPermit && (
-                    <IconButton
-                      aria-label="edit"
-                      color="info"
-                      size="small"
-                      onClick={(e) => handleEditClickOpen(experience)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                  )}
-                </div>
-                <Typography variant="subtitle2" sx={{}}>
-                  {companyName} {" - "} {industry} {" - "} {employmentType}
-                </Typography>
-                <Typography
-                  sx={{ mb: 1.5 }}
-                  variant="subtitle2"
-                  color="text.secondary"
-                >
-                  {startDate && startDate.slice(0, 4)} -{" "}
-                  {endDate && endDate.slice(0, 4)}
-                  <br />
-                  {location}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ mb: 2 }}
-                  component="span"
-                  style={{ whiteSpace: "pre" }}
-                >
-                  {description}
-                </Typography>
-                <Divider />
-              </CardContent>
+            <div key={idx}>
+              <ExperienceListing
+                experience={experience}
+                idx={idx}
+                ownerID={ownerID}
+              />
             </div>
           );
         })}
       </Card>
-      <Edit
-        editOpen={editOpen}
-        experience={experience}
-        handleEditClose={handleEditClose}
-      />
     </div>
   );
 }

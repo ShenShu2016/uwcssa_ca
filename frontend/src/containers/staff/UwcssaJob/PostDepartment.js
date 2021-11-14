@@ -6,15 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import API from "@aws-amplify/api";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createDepartment } from "../../../graphql/mutations";
+import { fetchDepartments } from "../../../redux/reducers/careerSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
-import store from "../../../redux/store";
-import { setDepartments } from "../../../redux/actions/uwcssaJobActions";
 
 const useStyles = makeStyles({
   root: {
@@ -29,16 +29,18 @@ const useStyles = makeStyles({
 });
 
 export default function PostDepartment(props) {
+  const dispatch = useDispatch();
+  const { departments } = useSelector((state) => state.career);
   useEffect(() => {
-    setDepartments()(store.dispatch);
-  }, []);
+    dispatch(fetchDepartments());
+  }, [dispatch]);
+
   const classes = useStyles();
   const { user } = useSelector((state) => state.userAuth);
   const [info, setInfo] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailure, setSubmitFailure] = useState(false);
   const [exist, setExist] = useState(false);
-  const departments = useSelector((state) => state.allUwcssaJobs.departments);
 
   const [departmentData, setDepartmentData] = useState({
     name: "",
@@ -52,7 +54,7 @@ export default function PostDepartment(props) {
       setInfo(true);
       return;
     }
-    const departmentsList = departments.map((department => department.name))
+    const departmentsList = departments.map((department) => department.name);
 
     if (departmentsList.includes(departmentData.name)) {
       setExist(true);
@@ -73,8 +75,8 @@ export default function PostDepartment(props) {
       if (newDepartment) {
         setSubmitSuccess(true);
         setTimeout(() => {
-          const url = document.URL
-          window.open(url,"_self")
+          const url = document.URL;
+          window.open(url, "_self");
           // props.history.push("/staff/uwcssaJob");
         }, 1200);
       }

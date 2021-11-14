@@ -54,7 +54,7 @@ export default function EmailConfirm() {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log("response", response);
-          history.push(`/signIn`);
+          history.push(`/auth/signIn`);
         }, 1000);
       } else {
         timer.current = window.setTimeout(() => {
@@ -67,9 +67,9 @@ export default function EmailConfirm() {
   };
 
   return (
-    <Container>
+    <Container sx={{ mb: "2rem" }}>
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <Avatar sx={{ margin: "1rem", height: "50px", width: "50px" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">验证</Typography>
@@ -77,7 +77,6 @@ export default function EmailConfirm() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 id="username "
@@ -93,7 +92,6 @@ export default function EmailConfirm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 name="authenticationCode"
@@ -108,7 +106,8 @@ export default function EmailConfirm() {
           </Grid>
           <Grid marginTop="2rem">
             <Button
-              variant="outlined"
+              variant="contained"
+              fullWidth
               color="primary"
               className={classes.submit}
               onClick={confirmSignUp}

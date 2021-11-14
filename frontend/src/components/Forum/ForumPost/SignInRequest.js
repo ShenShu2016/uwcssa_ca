@@ -40,7 +40,7 @@ const SignInRequest = () => {
             variant="contained"
             color="primary"
             component={Link}
-            to="/signIn"
+            to="/auth/signIn"
           >
             登入
           </Button>
@@ -50,7 +50,7 @@ const SignInRequest = () => {
             variant="contained"
             color="primary"
             component={Link}
-            to="/signUp"
+            to="/auth/signUp"
           >
             注册
           </Button>

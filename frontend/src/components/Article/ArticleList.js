@@ -39,14 +39,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ArticleList() {
   useTitle("近期新闻");
-
   const dispatch = useDispatch();
   const classes = useStyles();
-  useEffect(() => {
-    dispatch(fetchArticles());
-  }, [dispatch]);
+  const { articles, fetchArticlesStatus } = useSelector(
+    (state) => state.article
+  );
 
-  const { articles } = useSelector((state) => state.article);
+  useEffect(() => {
+    if (fetchArticlesStatus === "idle" || undefined) {
+      dispatch(fetchArticles());
+    }
+  }, [dispatch, fetchArticlesStatus]);
 
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;

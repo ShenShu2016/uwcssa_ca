@@ -1,5 +1,6 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 
+import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import uwcssabbs from "../../static/uwcssabbs.gif";
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FeatureIntro = () => {
+export default function FeatureIntro() {
   const classes = useStyles();
 
   return (
@@ -63,6 +64,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/forum/forumTopic/学习帮助"
               >
                 学习帮助
               </Button>
@@ -75,6 +78,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/forum/forumTopic/大学和大学课程"
               >
                 大学和大学课程
               </Button>
@@ -87,6 +92,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/forum/forumTopic/职业和工作"
               >
                 职业和工作
               </Button>
@@ -99,6 +106,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/forum/forumTopic/娱乐"
               >
                 娱乐
               </Button>
@@ -111,6 +120,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/forum/forumTopic/生活"
               >
                 生活
               </Button>
@@ -123,6 +134,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/forum/forumTopic/住房"
               >
                 住房
               </Button>
@@ -135,6 +148,8 @@ const FeatureIntro = () => {
                   marginRight: "1rem",
                   marginBlock: "0.3rem",
                 }}
+                component={Link}
+                to="/market"
               >
                 商城
               </Button>
@@ -146,6 +161,4 @@ const FeatureIntro = () => {
       </Box>
     </div>
   );
-};
-
-export default FeatureIntro;
+}

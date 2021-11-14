@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   CardHeader,
@@ -14,20 +13,20 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  removeSelectedMarketItem,
+  selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import { Link } from "react-router-dom";
+import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
-import { marketItemOptions } from "./marketItemOptions";
+import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -81,45 +80,48 @@ export default function MarketItemDetail() {
   useTitle("二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
-  console.log("id", id);
+  const [starter, setStarter] = useState(false);
+
   useEffect(() => {
-    const getItems = async () => {
-      if (id && id !== "") {
-        await dispatch(selectedMarketItem(id));
-      }
-      return () => dispatch(removeSelectedMarketItem());
-    };
-    getItems();
+    console.log("试试看");
+    dispatch(selectedMarketItem(id));
+    setStarter(true);
+
+    // return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
-  const { marketItem } = useSelector((state) => state.market.selected);
+  const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  console.log("id", id);
+  console.log("啥玩意", marketItem);
   const {
-    marketItemConditionList: Conditions,
+    // marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
-  console.log("marketItem", marketItem);
-  const {
-    // id,
-    // name,
-    imgS3Keys,
-    title,
-    price,
-    description,
-    location,
-    marketItemCondition,
-    marketItemCategory,
-    tags,
-    // active,
-    createdAt,
-    // ByCreatedAt,
-    owner,
-  } = marketItem;
+
+  // const {
+  //   // id,
+  //   // name,
+  //   imgS3Keys,
+  //   title,
+  //   price,
+  //   description,
+  //   location,
+  //   marketItemCondition,
+  //   marketItemCategory,
+  //   tags,
+  //   // active,
+  //   createdAt,
+  //   user,
+  //   // userID,
+  //   // ByCreatedAt,
+  //   owner,
+  // } = marketItem;
 
   useEffect(() => {
     const getImage = async () => {
       try {
         setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imgS3Keys).map((key) =>
+          Array.from(marketItem.imgS3Keys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -133,30 +135,15 @@ export default function MarketItemDetail() {
         setImgKeyFromServer([]);
       }
     };
-    if (imgS3Keys) {
+    if (marketItem) {
       getImage();
     }
-  }, [imgS3Keys]);
-
+  }, [marketItem]);
+  console.log("starter", starter);
+  // console.log("marketItem.tags", marketItem.tags);
   return (
     <div className={classes.root}>
-      {Object.keys(marketItem).length === 0 ? (
-        <Box
-          sx={{
-            height: "50vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack spacing={2} direction="row">
-            <CircularProgress />
-            <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
-          </Stack>
-        </Box>
-      ) : (
+      {marketItem ? (
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
@@ -174,14 +161,13 @@ export default function MarketItemDetail() {
                 marginLeft="1rem"
                 paddingTop="0.5rem"
               >
-                {title}
+                {marketItem.title}
               </Typography>
-
               <Typography marginX="1rem" marginTop="0.25rem">
-                $ {price}
+                $ {marketItem.price}
               </Typography>
               <Typography marginX="1rem" variant="caption" color="gray">
-                发布日期： {createdAt.slice(0, 10)}
+                发布日期： {marketItem.createdAt.slice(0, 10)}
               </Typography>
               <Stack
                 justifyContent="center"
@@ -192,21 +178,24 @@ export default function MarketItemDetail() {
                 <Button
                   startIcon={<MessageIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Contact
                 </Button>
                 <Button
                   startIcon={<BookmarksIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Save
                 </Button>
                 <Button
                   startIcon={<ShareIcon />}
                   onClick={() => console.log("clicked!")}
-                  variant="contained"
+                  variant="outlined"
+                  color="info"
                 >
                   Share
                 </Button>
@@ -222,58 +211,64 @@ export default function MarketItemDetail() {
                 <Grid item xs={8}>
                   {
                     Category.filter(
-                      (item) => item.value === marketItemCategory
-                    )[0].label
+                      (item) => item.value === marketItem.marketItemCategory
+                    ).label
                   }
                 </Grid>
                 <Grid item xs={4}>
                   Condition
                 </Grid>
                 <Grid item xs={8}>
-                  {
+                  {/* {
                     Conditions.filter(
                       (item) => item.value === marketItemCondition
                     )[0].label
-                  }
+                  } */}
                 </Grid>
               </Grid>
-              {tags && (
+              {marketItem.tags && (
                 <Box>
-                  <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                    Tags
-                  </Typography>
+                  <Box>
+                    <Typography
+                      marginX="1rem"
+                      marginY="0.25rem"
+                      fontWeight="600"
+                    >
+                      Tags
+                    </Typography>
+                  </Box>
+                  <Stack
+                    direction="row"
+                    marginX="1rem"
+                    marginBottom="0.5rem"
+                    spacing={2}
+                  >
+                    {marketItem.tags.map((tag, tagIdx) => {
+                      return <Chip key={tagIdx} label={tag} />;
+                    })}
+                  </Stack>
                 </Box>
               )}
-              <Stack
-                direction="row"
-                marginX="1rem"
-                marginBottom="0.5rem"
-                spacing={2}
-              >
-                {tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} color="primary" />;
-                })}
-              </Stack>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                 Descriptions
               </Typography>
-
               <Typography marginX="1rem" marginY="0.25rem">
-                {description}
+                {marketItem.description}
               </Typography>
-              <Box
+              <Paper
                 sx={{
                   marginX: "1rem",
                   marginY: "0.25rem",
-                  bgcolor: "#4caf50",
-                  height: "200px",
+                  height: "250px",
+                  backgroundColor: "rgb(243, 246, 249)",
+                  marginBottom: "1rem",
                 }}
               >
-                Google map
-              </Box>
+                Google Map
+              </Paper>
               <Typography margin="1rem" marginY="0.25rem">
-                {location}
+                {marketItem.location}
               </Typography>
               <Divider />
               <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
@@ -287,28 +282,42 @@ export default function MarketItemDetail() {
               >
                 <CardHeader
                   avatar={
-                    <Avatar
-                      aria-label="recipe"
+                    <CustomAvatar
+                      // aria-label="recipe"
                       className={classes.avatar}
-                      component={Link}
-                      to={`/account/profile/${owner}`}
-                    ></Avatar>
+                      component={true}
+                      user={marketItem.user}
+                      // to={`/account/profile/${owner}`}
+                    ></CustomAvatar>
                   }
                   action={
                     <IconButton aria-label="settings">
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title={owner}
-                  subheader={`发布日期： ${createdAt.slice(
-                    0,
-                    10
-                  )} ${createdAt.slice(11, 19)}`}
+                  title={marketItem.owner}
+                  subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
                 />
               </Box>
             </Paper>
           </Box>
         </Stack>
+      ) : (
+        <Box
+          sx={{
+            height: "50vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Stack spacing={2} direction="row">
+            <CircularProgress />
+            <CircularProgress color="secondary" />
+            <CircularProgress color="success" />
+            <CircularProgress color="inherit" />
+          </Stack>
+        </Box>
       )}
     </div>
   );

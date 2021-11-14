@@ -18,7 +18,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { putUserEducation } from "../../../../redux/actions/profileActions";
+import { putUserEducation } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Edit({ education, editOpen, handleEditClose }) {
+export default function Edit({ education, editOpen, handleEditClose, idx }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ export default function Edit({ education, editOpen, handleEditClose }) {
     startDate: startDate,
   };
   const update = (e) => {
-    dispatch(putUserEducation(updateUserEducationInput));
+    dispatch(putUserEducation({ updateUserEducationInput, idx }));
     handleEditClose();
   };
   return (

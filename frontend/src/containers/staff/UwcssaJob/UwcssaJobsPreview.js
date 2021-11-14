@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import {
-  setDepartments,
-  setUwcssaJobs,
-} from "../../../redux/actions/uwcssaJobActions";
+  fetchDepartments,
+  fetchUwcssaJobs,
+} from "../../../redux/reducers/careerSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
@@ -61,15 +61,22 @@ const columns = [
 export default function UwcssaJobsPreview() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const {
+    departments,
+    uwcssaJobs,
+    fetchUwcssaJobsStatus,
+    fetchDepartmentsStatus,
+  } = useSelector((state) => state.career);
 
   useEffect(() => {
-    dispatch(setDepartments());
-    dispatch(setUwcssaJobs());
-  }, [dispatch]);
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+    if (fetchUwcssaJobsStatus === "idle" || undefined) {
+      dispatch(fetchUwcssaJobs());
+    }
+  }, [dispatch, fetchUwcssaJobsStatus, fetchDepartmentsStatus]);
 
-  const { departments, uwcssaJobs } = useSelector(
-    (state) => state.allUwcssaJobs
-  );
   console.log("departments, uwcssaJobs", departments, uwcssaJobs);
 
   const rows = uwcssaJobs.map((uwcssaJob) => {

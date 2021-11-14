@@ -3,11 +3,12 @@ import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { marketVehicleOptions } from "./marketVehicleOptions";
+import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
@@ -198,59 +199,9 @@ export default function PostMarketVehicle() {
       <Box className={classes.content}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <MarketForm
-              title="Vehicle Type"
-              value={marketVehicleData.vehicleType}
-              options={marketVehicleTypeList}
-              required={true}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  vehicleType: e.target.value,
-                })
-              }
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              label="Location"
-              value={marketVehicleData.location}
-              variant="outlined"
-              fullWidth
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  location: e.target.value,
-                })
-              }
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <CustomTags />
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              label="Year"
-              variant="outlined"
-              fullWidth
-              type="number"
-              placeholder="eg. 2021"
-              required
-              value={marketVehicleData.year}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  year: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
             <TextField
               label="Make"
+              autoFocus
               variant="outlined"
               fullWidth
               required
@@ -281,12 +232,69 @@ export default function PostMarketVehicle() {
             />
           </Grid>
           <Grid item xs={6}>
+            <MarketForm
+              title="Vehicle Type"
+              value={marketVehicleData.vehicleType}
+              options={marketVehicleTypeList}
+              required={true}
+              onChange={(e) =>
+                setMarketVehicleData({
+                  ...marketVehicleData,
+                  vehicleType: e.target.value,
+                })
+              }
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              label="Location"
+              value={marketVehicleData.location}
+              variant="outlined"
+              fullWidth
+              onChange={(e) =>
+                setMarketVehicleData({
+                  ...marketVehicleData,
+                  location: e.target.value,
+                })
+              }
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <CustomTags placeholder="新车， 无事故..." />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              label="Year"
+              variant="outlined"
+              fullWidth
+              type="number"
+              placeholder="eg. 2021"
+              required
+              value={marketVehicleData.year}
+              onChange={(e) =>
+                setMarketVehicleData({
+                  ...marketVehicleData,
+                  year: e.target.value,
+                })
+              }
+            />
+          </Grid>
+
+          <Grid item xs={6}>
             <TextField
               label="Price"
               variant="outlined"
               fullWidth
               type="number"
               placeholder="eg. 25000 (Currency: CAD $)"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
               value={marketVehicleData.price}
               className={classes.titleInput}
               onChange={(e) =>
@@ -349,6 +357,7 @@ export default function PostMarketVehicle() {
               minRows={5}
               variant="outlined"
               multiline
+              placeholder="Describe your vehicle in a detailed manner!"
               fullWidth
               onChange={(e) =>
                 setMarketVehicleData({

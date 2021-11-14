@@ -68,6 +68,7 @@ type User
   marketItems: [MarketItem]
   # marketVehicles: [MarketVehicle]
   # marketRentals: [MarketRental]
+  foundingMember: [FoundingMember]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
 }
 
@@ -756,46 +757,6 @@ enum MarketItemCategory {
   Other
 }
 
-# type MarketVehicle
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: owner, operations: [create, read, update] }
-#       { allow: groups, groups: ["admin", "staff"] }
-#       { allow: private, operations: [read] }
-#       { allow: public, operations: [read], provider: iam }
-#     ]
-#   )
-#   @key(
-#     name: "marketVehicleSortBySortKey"
-#     fields: ["sortKey", "createdAt"]
-#     queryField: "marketVehicleSortBySortKey"
-#   )
-#   @key(
-#     name: "marketVehicleSortByVehicleType"
-#     fields: ["vehicleType", "createdAt"]
-#     queryField: "marketVehicleSortByVehicleType"
-#   ) {
-#   id: ID!
-#   vehicleType: VehicleType!
-#   imgS3Keys: [String]!
-#   location: String
-#   year: Int!
-#   make: String!
-#   model: String!
-#   exteriorColor: String
-#   interiorColor: String
-#   fuelType: String
-#   price: Int
-#   description: String
-#   active: Boolean!
-#   createdAt: AWSDateTime!
-#   sortKey: SortKey!
-#   tags: [String]
-#   userID: ID!
-#   user: User! @connection(fields: ["userID"])
-# }
-
 enum VehicleType {
   CarTruck
   Motorcycle
@@ -804,50 +765,6 @@ enum VehicleType {
   Trailer
   Other
 }
-
-# type MarketRental
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: owner, operations: [create, read, update] }
-#       { allow: groups, groups: ["admin", "staff"] }
-#       { allow: private, operations: [read] }
-#       { allow: public, operations: [read], provider: iam }
-#     ]
-#   )
-#   @key(
-#     name: "marketRentalSortBySortKey"
-#     fields: ["sortKey", "createdAt"]
-#     queryField: "marketRentalSortBySortKey"
-#   )
-#   @key(
-#     name: "marketRentalSortByMarketRentalSaleRent"
-#     fields: ["marketRentalSaleRent", "createdAt"]
-#     queryField: "marketRentalSortByMarketRentalSaleRent"
-#   ) {
-#   id: ID!
-#   imgS3Keys: [String]!
-#   marketRentalSaleRent: MarketRentalSaleRent!
-#   propertyType: PropertyType!
-#   bedroomCounts: Int
-#   bathroomsCounts: Int
-#   price: Int
-#   address: String
-#   description: String
-#   propertySize: Int
-#   dateAvailable: AWSDateTime
-#   laundryType: LaundryType
-#   airConditionType: AirConditionType
-#   heatingType: HeatingType
-#   catFriendly: Boolean
-#   dogFriendly: Boolean
-#   tags: [String]
-#   active: Boolean!
-#   sortKey: SortKey!
-#   createdAt: AWSDateTime!
-#   userID: ID!
-#   user: User! @connection(fields: ["userID"])
-# }
 
 enum MarketRentalSaleRent {
   Rent
@@ -883,6 +800,26 @@ enum HeatingType {
   GasHeating
   RadiatorHeating
   Other
+}
+
+type FoundingMember
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  active: Boolean!
+  title: String
+  brief: String
+  moreBrief: String
+  mainPart: [String]
+  imgS3Key: [String]
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
 }
 
 type Like

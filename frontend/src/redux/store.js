@@ -1,17 +1,26 @@
-import { applyMiddleware, createStore } from "redux";
+import articleReducer from "./reducers/articleSlice";
+// import { authReducer } from "./reducers/authReducer";
+import authReducer from "./reducers/authSlice";
+import careerSlice from "./reducers/careerSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import eventReducer from "./reducers/eventSlice";
+import forumReducer from "./reducers/forumSlice";
+import generalReducer from "./reducers/generalSlice";
+// import { generalReducer } from "./reducers/generalReducer";
+import marketReducer from "./reducers/marketSlice";
+import profileReducer from "./reducers/profileSlice";
 
-import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducers from "./reducers/index";
-import thunk from "redux-thunk";
-
-const initialState = {};
-
-const middleware = [thunk];
-
-const store = createStore(
-  rootReducers,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
-
-export default store;
+export default configureStore({
+  reducer: {
+    general: generalReducer,
+    userAuth: authReducer,
+    profile: profileReducer,
+    article: articleReducer,
+    career: careerSlice,
+    forum: forumReducer,
+    market: marketReducer,
+    event: eventReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+});

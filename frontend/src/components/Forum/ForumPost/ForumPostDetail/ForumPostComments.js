@@ -1,12 +1,13 @@
 import {
-  Box,
-  Typography,
-  LinearProgress,
+  // Box,
+  // Typography,
+  // LinearProgress,
   // Skeleton,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import ForumPostCommentComponent from "./ForumPostCommentComponent";
+import ForumPostCommentMain from "../ForumPostComment/ForumPostCommentMain";
+// import ForumPostCommentComponent from "./ForumPostCommentComponent";
 
 const useStyles = makeStyles({
   root: {
@@ -20,41 +21,28 @@ const useStyles = makeStyles({
   main: {},
 });
 
-const ForumPostComments = ({ comments, commentsNextToken }) => {
+export default function ForumPostComments ({ forumPost }) {
   const classes = useStyles();
-  // console.log(forumPost.comments);
+  // console.log(forumPost.forumPostComments);
   // const sortForumPostCommentsData = forumPostCommentsData.sort((a, b) => (a.createdAt > b.createdAt) ? 1:-1).reverse();
   return (
     <div className={classes.root}>
-      <Typography className={classes.subTitle}>评论：</Typography>
-
-      <div>
-        {comments.map((comment) => {
-          return <ForumPostCommentComponent comment={comment} />
-        })}
-      </div>
-
-      <Box className="moreCommentsStatus">
-        {commentsNextToken ? (
-          <Box>
-            <Typography
-              variant="h5"
-              color="primary"
-              align="center"
-              sx={{ my: 3 }}
-            >
-              再往下翻一翻 加载更多
-            </Typography>
-            <LinearProgress />
-          </Box>
-        ) : (
-          <Typography variant="h5" align="center" sx={{ my: 3 }}>
-            已经到达底部
-          </Typography>
-        )}
-      </Box>
+      {/* <Typography className={classes.subTitle}>评论：</Typography> */}
+      {forumPost.active !== true ? (
+        ""
+      ) : (
+        <div>
+          {forumPost.forumPostComments.items.map((comment, idx) => {
+            return (
+              <ForumPostCommentMain
+                comment={comment}
+                key={idx}
+                idx={idx}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
-
-export default ForumPostComments;

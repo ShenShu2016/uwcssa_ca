@@ -1,84 +1,34 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React, { useEffect } from "react";
+import {
+  fetchMarketItems,
+  selectAllMarketItems,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import MarketComponent from "../../components/Market/MarketComponent";
-import MarketSideBar from "./marketSideBar";
-import { fetchMarketItems } from "../../redux/reducers/marketSlice";
-import { makeStyles } from "@mui/styles";
+import MarketSideBar from "../../components/Market/marketSideBar";
+import MarketTopBar from "../../components/Market/marketTopBar";
+import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
+import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
-// import {
-// import MarketSideBar from './marketSideBar';
 // setMarketItems,
 //   setMarketRental,
 //   setMarketVehicles,
 // } from "../../redux/actions/marketItemActions";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  title: {
-    textAlign: "center",
-    color: "#0D1F48",
-    paddingBottom: "3rem",
-  },
-  items: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-  },
-  contain: {
-    width: "100%",
-    overflow: "hidden",
-    height: "100vh",
-    bgcolor: "black",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      height: "100%",
-    },
-  },
-  info: {
-    width: "360px",
-    height: "100%",
-    float: "left",
-    // overflowY: "scroll",
-    overflow: "hidden",
-    position: "relative",
-
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "100%",
-    },
-  },
-  img: {
-    padding: "2rem",
-    height: "100%",
-    width: "calc(100% - 360px)",
-    // bgcolor="black"
-    position: "relative",
-    overflowY: "auto",
-    float: "left",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "50vh",
-    },
-  },
-}));
-
 export default function MarketList() {
   useTitle("市场");
   const dispatch = useDispatch();
+  const useStyles = marketItemStyle;
   const classes = useStyles();
 
-  const { marketItems, fetchMarketItemsStatus } = useSelector(
-    (state) => state.market
-  );
+  const marketItems = useSelector(selectAllMarketItems);
 
   useEffect(() => {
-    if (fetchMarketItemsStatus === "idle" || undefined) {
-      dispatch(fetchMarketItems());
-    }
-  }, [fetchMarketItemsStatus, dispatch]);
+    dispatch(fetchMarketItems(marketItemSortBySortKey));
+  }, [dispatch]);
 
   const marketItemRenderList =
     marketItems &&
@@ -92,7 +42,6 @@ export default function MarketList() {
       );
     });
   console.log("marketVehicles", marketItems);
-
   return (
     <Box className={classes.root}>
       <Stack
@@ -101,11 +50,9 @@ export default function MarketList() {
       >
         <MarketSideBar />
         <Box className={classes.img}>
-          <Typography variant="h3" className={classes.title}>
-            輻射4
-          </Typography>
+          <MarketTopBar />
           <Box className={classes.items}>{marketItemRenderList}</Box>
-          <Divider />
+
           {/* <Typography variant="h5" className={classes.title}>
             汽车
           </Typography>

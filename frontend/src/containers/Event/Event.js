@@ -9,14 +9,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import EventMain from "../components/Event/EventMain";
-
-import { Link } from "react-router-dom";
-import { fetchEvents } from "../../src/redux/reducers/eventSlice";
-import { makeStyles } from "@mui/styles";
-import { useTitle } from "../Hooks/useTitle";
+import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
-import Filter from "../components/Event/Filter";
+import Filter from "../../components/Event/Filter";
+import { Link } from "react-router-dom";
+import { fetchEvents } from "../../redux/reducers/eventSlice";
+import { makeStyles } from "@mui/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
