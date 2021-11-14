@@ -48,7 +48,7 @@ const columns = [
   },
 ];
 
-export default function UwcssaJobsPreview() {
+export default function EventPreview() {
   const classes = useStyles();
   const dispatch = useDispatch();
 

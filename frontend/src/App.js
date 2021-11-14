@@ -15,6 +15,7 @@ import Dashboard from "./containers/account/Dashboard";
 import EmailConfirm from "./containers/authentication/EmailConfirm";
 import Event from "./containers/Event";
 import EventDetail from "./components/Event/EventDetail";
+import Success from "./components/Event/Success";
 // import EventGrid from "./components/Event/EventDataGrid";
 import EventTable from "./components/Event/EventTable";
 import EventSignUp from "./components/Event/SignUpEvent";
@@ -211,6 +212,11 @@ export default function App() {
                 path="/event/:eventID/eventSignUp/group"
                 exact
                 component={Group}
+              />{" "}
+              <Route
+                path="/event/:eventID/eventSignUp/success"
+                exact
+                component={Success}
               />
               {/* <Route path="/eventDataGrid" exact component={EventGrid} /> */}
               <Route path="/eventTable" exact component={EventTable} />
