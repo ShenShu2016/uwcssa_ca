@@ -13,14 +13,16 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEvents } from "../../redux/reducers/eventSlice";
+
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
-import { alpha } from "@mui/material/styles";
 import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import { fetchEvents } from "../../redux/reducers/eventSlice";
+import { fetchEvents_Staff } from "../../redux/reducers/staffSlice";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -110,10 +112,10 @@ export default function SimpleTable() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchEvents());
+    dispatch(fetchEvents_Staff());
   }, [dispatch]);
 
-  const { events } = useSelector((state) => state.event);
+  const { events } = useSelector((state) => state.staff);
 
   // console.log("events", events);
 
