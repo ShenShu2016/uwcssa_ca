@@ -1,36 +1,38 @@
-import { 
-    Grid,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import { makeStyles } from "@mui/styles";
 import ForumAdSide from "../../components/Forum/ForumAdSide";
-import ForumMain from "../../components/Forum/ForumMain";
+import ForumIndexMain from "../../components/Forum/ForumIndex/ForumIndexMain";
 import OpenIconSpeedDial from "../../components/Forum/OpenIconSpeedDial";
 import { useTitle } from "../../Hooks/useTitle";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    flexDirection: "row",
-  },
-}));
 
 export default function ForumIndex() {
-  useTitle("UWCSSA 论坛");
-  const classes = useStyles();
+  useTitle("论坛-UWCSSA ");
   return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
-        <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
-          <ForumMain />
-        </Grid>
-          <Grid item sm={1} md={2}>
-            <ForumAdSide />
-          </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <OpenIconSpeedDial />
-        </Grid>
-      </Grid>
+    <div>
+      <Box
+        sx={{
+          display: "flex",
+          margin:"auto",
+          maxWidth: "1536px",
+          // paddingInline:{xs:0,sm:"1rem"},
+          flexDirection: {xs:"column",sm:"row"},
+        }}
+      >
+        <Box sx={{
+          maxWidth:"1200px",
+          width:"100%",
+        }}>
+        <ForumIndexMain />
+        </Box>
+
+        <ForumAdSide />
+        <Box sx={{
+          width:110,
+          alginItems:"center",
+        }}>
+        <OpenIconSpeedDial />
+        </Box>
+      </Box>
     </div>
   );
-};
+}

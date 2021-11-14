@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   card: {},
 });
 
-function ForumPostCommentsPost({ forumPost, isReplying }) {
+export default function ForumPostCommentPost({ forumPost, isReplying }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -141,5 +141,3 @@ function ForumPostCommentsPost({ forumPost, isReplying }) {
     </div>
   );
 }
-
-export default ForumPostCommentsPost;

@@ -15,7 +15,7 @@ import LikeButtonGroup from "../../../LikeButtonGroup";
 // import S3Image from "../../../S3/S3Image";
 import { useTitle } from "../../../../Hooks/useTitle";
 import React, { useState } from "react";
-// import ForumPostCommentsPost from "./ForumPostCommentsPost";
+import ForumPostCommentPost from "./ForumPostCommentPost";
 import ForumPostUserComponent from "./ForumPostUserComponent";
 import ForumPostContentComponent from "./ForumPostContentComponent";
 
@@ -137,9 +137,11 @@ export default function ForumPostMain({ forumPost }) {
                 </Button>
               )}
             </Box>
-             {/* <ForumPostCommentsPost forumPost={forumPost} isReplying={isReplying} /> */}
+  
           </Box>
+        
         </Box>
+        <ForumPostCommentPost forumPost={forumPost} isReplying={isReplying} />
       </Box>
     </div>
   );
