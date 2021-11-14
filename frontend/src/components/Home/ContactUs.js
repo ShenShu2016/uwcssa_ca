@@ -86,7 +86,7 @@ export default function ContactUs() {
               marginBottom: "2rem",
             }}
             component={Link}
-            tp="/contactUs"
+            to="/contactUs"
           >
             联系我们
           </Button>

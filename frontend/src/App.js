@@ -19,6 +19,7 @@ import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Market from "./containers/market/Market";
+import NoPermission from "./containers/NoPermission";
 import PrivateRoute from "./components/PrivateRoute";
 import ScrollToTop from "./Hooks/ScrollToTop";
 import StaffRouter from "./containers/staff/StaffRouter";
@@ -118,6 +119,7 @@ export default function App() {
               exact
               component={GoogleMapsPlace}
             />
+            <Route exact path="/NoPermission" component={NoPermission} />
             <Route>404 Not Found!</Route>
           </Switch>
           <CustomAlert
