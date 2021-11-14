@@ -13,12 +13,15 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  putUserExperience,
+  removeUserExperience,
+} from "../../../../redux/reducers/profileSlice";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { putUserExperience } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -82,7 +85,10 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
     dispatch(putUserExperience({ updateUserExperienceInput, idx }));
     handleEditClose();
   };
-
+  const handleDelete = (e) => {
+    dispatch(removeUserExperience({ updateUserExperienceInput, idx }));
+    handleEditClose();
+  };
   return (
     <div className={classes.root}>
       <div>
@@ -203,6 +209,9 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
             />
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleDelete} size="large">
+              删除
+            </Button>
             <Button onClick={handleEditClose} size="large">
               Cancel
             </Button>

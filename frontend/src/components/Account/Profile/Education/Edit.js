@@ -13,12 +13,15 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  putUserEducation,
+  removeUserEducation,
+} from "../../../../redux/reducers/profileSlice";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { putUserEducation } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -71,6 +74,10 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
   };
   const update = (e) => {
     dispatch(putUserEducation({ updateUserEducationInput, idx }));
+    handleEditClose();
+  };
+  const handleDelete = (e) => {
+    dispatch(removeUserEducation({ updateUserEducationInput, idx }));
     handleEditClose();
   };
   return (
@@ -182,8 +189,11 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
             />
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleDelete} size="large">
+              删除
+            </Button>
             <Button onClick={handleEditClose} size="large">
-              Cancel
+              取消
             </Button>
             <Button onClick={update} variant="contained" size="large">
               更新

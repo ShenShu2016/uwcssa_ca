@@ -39,7 +39,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
     degree: "",
     description: "",
     fieldOfStudy: "",
-    grade: "",
+    grade: null,
     school: "",
   });
 

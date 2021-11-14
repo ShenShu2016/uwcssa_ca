@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserEducation,
   createUserExperience,
+  deleteUserEducation,
+  deleteUserExperience,
   updateUser,
   updateUserEducation,
   updateUserExperience,
@@ -42,10 +44,14 @@ const initialState = {
   postUserEducationError: null,
   putUserEducationStatus: "idle",
   putUserEducationError: null,
+  removeUserEducationStatus: "idle",
+  removeUserEducationError: null,
   postUserExperienceStatus: "idle",
   postUserExperienceError: null,
   putUserExperienceStatus: "idle",
   putUserExperienceError: null,
+  removeUserExperienceStatus: "idle",
+  removeUserExperienceError: null,
 };
 
 export const getProfile = createAsyncThunk(
@@ -96,6 +102,18 @@ export const putUserEducation = createAsyncThunk(
   }
 );
 
+export const removeUserEducation = createAsyncThunk(
+  "profile/deleteUserEducation",
+  async ({ updateUserEducationInput, idx }) => {
+    const response = await API.graphql(
+      graphqlOperation(deleteUserEducation, {
+        input: { id: updateUserEducationInput.id },
+      })
+    );
+    return response;
+  }
+);
+
 export const postUserExperience = createAsyncThunk(
   "profile/postUserExperience",
   async ({ createUserExperienceInput }) => {
@@ -114,6 +132,18 @@ export const putUserExperience = createAsyncThunk(
     const response = await API.graphql(
       graphqlOperation(updateUserExperience, {
         input: updateUserExperienceInput,
+      })
+    );
+    return response;
+  }
+);
+
+export const removeUserExperience = createAsyncThunk(
+  "profile/deleteUserExperience",
+  async ({ updateUserExperienceInput, idx }) => {
+    const response = await API.graphql(
+      graphqlOperation(deleteUserExperience, {
+        input: { id: updateUserExperienceInput.id },
       })
     );
     return response;
@@ -194,13 +224,24 @@ const profileSlice = createSlice({
       })
       .addCase(putUserEducation.fulfilled, (state, action) => {
         state.putUserEducationStatus = "succeeded";
-        //! need to do later
         state.user.userEducations.items[action.meta.arg.idx] =
           action.payload.data.updateUserEducation;
       })
       .addCase(putUserEducation.rejected, (state, action) => {
         state.putUserEducationStatus = "failed";
         state.putUserEducationError = action.error.message;
+      })
+      // Cases for status of removeUserEducation (pending, fulfilled, and rejected)
+      .addCase(removeUserEducation.pending, (state, action) => {
+        state.removeUserEducationStatus = "loading";
+      })
+      .addCase(removeUserEducation.fulfilled, (state, action) => {
+        state.removeUserEducationStatus = "succeeded";
+        state.user.userEducations.items.splice([action.meta.arg.idx], 1);
+      })
+      .addCase(removeUserEducation.rejected, (state, action) => {
+        state.removeUserEducationStatus = "failed";
+        state.removeUserEducationError = action.error.message;
       })
       // Cases for status of postUserExperience (pending, fulfilled, and rejected)
       .addCase(postUserExperience.pending, (state, action) => {
@@ -228,6 +269,18 @@ const profileSlice = createSlice({
       .addCase(putUserExperience.rejected, (state, action) => {
         state.putUserExperienceStatus = "failed";
         state.putUserExperienceError = action.error.message;
+      })
+      // Cases for status of removeUserEducation (pending, fulfilled, and rejected)
+      .addCase(removeUserExperience.pending, (state, action) => {
+        state.removeUserExperienceStatus = "loading";
+      })
+      .addCase(removeUserExperience.fulfilled, (state, action) => {
+        state.removeUserExperienceStatus = "succeeded";
+        state.user.userExperiences.items.splice([action.meta.arg.idx], 1);
+      })
+      .addCase(removeUserExperience.rejected, (state, action) => {
+        state.removeUserExperienceStatus = "failed";
+        state.removeUserExperienceError = action.error.message;
       });
   },
 });
