@@ -15,11 +15,7 @@ export default function AuthRouter() {
       <Switch>
         <Route exact path="/auth/signIn" component={SignIn} />
         <Route exact path="/auth/signUp" component={SignUp} />
-        <Route
-          exact
-          path="/auth/auth/forgotPassword"
-          component={ForgotPassword}
-        />
+        <Route exact path="/auth/forgotPassword" component={ForgotPassword} />
         <Route
           exact
           path="/auth/resetPassword/:username"
