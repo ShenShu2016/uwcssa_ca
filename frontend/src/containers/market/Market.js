@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import { Box } from "@mui/material";
+import { Loading } from "../../components/Market/loading";
 import MarketCreate from "./MarketCreate";
 import MarketItem from "./marketItem";
 import MarketItemDetail from "./MarketItemDetail";
@@ -29,6 +30,7 @@ export default function Market() {
         <Route path="/market/item/" component={MarketItem} />
         <Route path="/market/vehicle/" component={MarketVehicle} />
         <Route path="/market/rental/" component={MarketRental} />
+        <Route path="/market/loading/" component={Loading} />
       </Switch>
     </Box>
   );

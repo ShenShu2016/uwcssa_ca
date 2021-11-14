@@ -3,7 +3,6 @@ import {
   Button,
   CardHeader,
   Chip,
-  CircularProgress,
   Divider,
   Grid,
   IconButton,
@@ -13,13 +12,14 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  removeSelectedMarketItem,
+  selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   contain: {
     width: "100%",
     overflow: "hidden",
-    height: "90vh",
+    height: "calc(100vh - 64px)",
     bgcolor: "black",
     [theme.breakpoints.down("md")]: {
       display: "block",
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width: "360px",
     height: "100%",
     float: "left",
-    overflowY: "scroll",
+    overflowY: "auto",
     overflowX: "hidden",
     [theme.breakpoints.down("md")]: {
       width: "100%",
@@ -76,44 +76,61 @@ export default function MarketVehicleDetail() {
   useTitle("二手车辆");
   const { marketVehicleTypeList: VType } = marketVehicleOptions;
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  const [starter, setStarter] = useState(false);
   const { id } = useParams();
-  console.log("id", id);
+
   useEffect(() => {
-    if (id && id !== "") {
-      dispatch(selectedMarketItem(id));
-    }
-    return () => dispatch(removeSelectedMarketItem());
+    dispatch(selectedMarketItem(id));
   }, [id, dispatch]);
-  const { marketItem } = useSelector((state) => state.market.selected);
+
+  const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const status = useSelector((state) => state.market.selectedMarketItemStatus);
+  useEffect(() => {
+    if (
+      marketItem === undefined ||
+      marketItem === null ||
+      marketItem.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (marketItem.fuelType === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+    }
+  }, [marketItem]);
+
+  console.log("id", id);
   console.log("marketItem", marketItem);
-  const {
-    // id,
-    // name,
-    imgS3Keys,
-    price,
-    description,
-    location,
-    vehicleType,
-    make,
-    year,
-    model,
-    exteriorColor,
-    interiorColor,
-    fuelType,
-    tags,
-    user,
-    // active,
-    createdAt,
-    // ByCreatedAt,
-    owner,
-  } = marketItem;
+  // const {
+  //   // id,
+  //   // name,
+  //   imgS3Keys,
+  //   price,
+  //   description,
+  //   location,
+  //   vehicleType,
+  //   make,
+  //   year,
+  //   model,
+  //   exteriorColor,
+  //   interiorColor,
+  //   fuelType,
+  //   tags,
+  //   user,
+  //   // active,
+  //   createdAt,
+  //   // ByCreatedAt,
+  //   owner,
+  // } = marketItem;
 
   useEffect(() => {
     const getImage = async () => {
       try {
         setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imgS3Keys).map((key) =>
+          Array.from(marketItem.imgS3Keys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -127,29 +144,15 @@ export default function MarketVehicleDetail() {
         setImgKeyFromServer([]);
       }
     };
-    if (imgS3Keys) {
+    if (starter) {
       getImage();
     }
-  }, [imgS3Keys]);
+  }, [starter, marketItem]);
 
   return (
     <div className={classes.root}>
-      {Object.keys(marketItem).length === 0 ? (
-        <Box
-          sx={{
-            height: "50vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack spacing={2} direction="row">
-            <CircularProgress />
-            <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
-          </Stack>
-        </Box>
+      {starter === false ? (
+        <Loading status={status} />
       ) : (
         <Stack
           direction={{ xs: "column", md: "row" }}
@@ -168,14 +171,14 @@ export default function MarketVehicleDetail() {
                 marginLeft="1rem"
                 paddingTop="0.5rem"
               >
-                {year} {make} {model}
+                {marketItem.year} {marketItem.make} {marketItem.model}
               </Typography>
 
               <Typography marginX="1rem" marginTop="0.25rem">
-                $ {price}
+                $ {marketItem.price}
               </Typography>
               <Typography marginX="1rem" variant="caption" color="gray">
-                {moment(createdAt).fromNow()}
+                {moment(marketItem.createdAt).fromNow()}
               </Typography>
               <Stack
                 justifyContent="center"
@@ -217,35 +220,39 @@ export default function MarketVehicleDetail() {
                   Vehicle Type
                 </Grid>
                 <Grid item xs={8}>
-                  {VType.filter((item) => item.value === vehicleType)[0].label}
+                  {
+                    VType.filter(
+                      (item) => item.value === marketItem.vehicleType
+                    )[0].label
+                  }
                 </Grid>
                 <Grid item xs={4}>
                   Make/Model
                 </Grid>
                 <Grid item xs={8}>
-                  {year} {make} {model}
+                  {marketItem.year} {marketItem.make} {marketItem.model}
                 </Grid>
                 <Grid item xs={4}>
                   Exterior Color
                 </Grid>
                 <Grid item xs={8}>
-                  {exteriorColor}
+                  {marketItem.exteriorColor}
                 </Grid>
                 <Grid item xs={4}>
                   Interior Color
                 </Grid>
                 <Grid item xs={8}>
-                  {interiorColor}
+                  {marketItem.interiorColor}
                 </Grid>
                 <Grid item xs={4}>
                   Furl Type
                 </Grid>
                 <Grid item xs={8}>
-                  {fuelType}
+                  {marketItem.fuelType}
                 </Grid>
               </Grid>
 
-              {tags && (
+              {marketItem.tags && (
                 <Box>
                   <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                     Tags
@@ -258,7 +265,7 @@ export default function MarketVehicleDetail() {
                 marginBottom="0.5rem"
                 spacing={2}
               >
-                {tags.map((tag, tagIdx) => {
+                {marketItem.tags.map((tag, tagIdx) => {
                   return <Chip key={tagIdx} label={tag} />;
                 })}
               </Stack>
@@ -267,7 +274,7 @@ export default function MarketVehicleDetail() {
                 Descriptions
               </Typography>
               <Typography marginX="1rem" marginY="0.25rem">
-                {description}
+                {marketItem.description}
               </Typography>
               <Paper
                 sx={{
@@ -281,7 +288,7 @@ export default function MarketVehicleDetail() {
                 Google Map
               </Paper>
               <Typography marginX="1rem" marginY="0.25rem">
-                {location}
+                {marketItem.location}
               </Typography>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
@@ -299,7 +306,7 @@ export default function MarketVehicleDetail() {
                       // aria-label="recipe"
                       className={classes.avatar}
                       component={true}
-                      user={user}
+                      user={marketItem.user}
                       // to={`/account/profile/${owner}`}
                     ></CustomAvatar>
                   }
@@ -308,8 +315,8 @@ export default function MarketVehicleDetail() {
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title={owner}
-                  subheader={`发布日期： ${createdAt.slice(0, 10)} `}
+                  title={marketItem.owner}
+                  subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
                 />
               </Box>
             </Paper>

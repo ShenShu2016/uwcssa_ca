@@ -3,7 +3,6 @@ import {
   Button,
   CardHeader,
   Chip,
-  CircularProgress,
   Divider,
   Grid,
   IconButton,
@@ -13,13 +12,14 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
-  removeSelectedMarketItem,
+  selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
@@ -35,7 +35,7 @@ import { useTitle } from "../../Hooks/useTitle";
 //   selectedMarketItem,
 // } from "../../redux/actions/marketItemActions";
 
-//点太快，selectedMarket来不及删，会产生bug
+//点太快，selectedMarket来不及删，会产生bug; Solved!
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   contain: {
     width: "100%",
     overflow: "hidden",
-    height: "90vh",
+    height: "calc(100vh - 64px)",
     bgcolor: "black",
     [theme.breakpoints.down("md")]: {
       display: "block",
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width: "360px",
     height: "100%",
     float: "left",
-    overflowY: "scroll",
+    overflowY: "auto",
     overflowX: "hidden",
     [theme.breakpoints.down("md")]: {
       width: "100%",
@@ -76,6 +76,7 @@ export default function MarketRentalDetail() {
   useTitle("租房信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
+  const [starter, setStarter] = useState(false);
   const {
     marketRentalSaleRent: RentOrSale,
     propertyType: PType,
@@ -84,47 +85,61 @@ export default function MarketRentalDetail() {
   } = marketRentalOptions;
   console.log("id", id);
   useEffect(() => {
-    if (id && id !== "") {
-      dispatch(selectedMarketItem(id));
-    }
-    console.log("removed!!!!");
-    return () => dispatch(removeSelectedMarketItem());
+    dispatch(selectedMarketItem(id));
   }, [id, dispatch]);
-  const { marketItem } = useSelector((state) => state.market.selected);
+
+  const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const status = useSelector((state) => state.market.selectedMarketItemStatus);
   console.log("marketItem", marketItem);
-  const {
-    // id,
-    // name,
-    imgS3Keys,
-    // title,
-    price,
-    description,
-    tags,
-    // active,
-    createdAt,
-    // ByCreatedAt,
-    owner,
-    marketRentalSaleRent,
-    propertyType,
-    bedroomCounts,
-    // bathroomsCounts,
-    address,
-    // propertySize,
-    // dateAvailable,
-    // laundryType,
-    user,
-    airConditionType,
-    heatingType,
-    catFriendly,
-    dogFriendly,
-  } = marketItem;
+  useEffect(() => {
+    if (
+      marketItem === undefined ||
+      marketItem === null ||
+      marketItem.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (marketItem.catFriendly === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+    }
+  }, [marketItem]);
+
+  // const {
+  //   // id,
+  //   // name,
+  //   imgS3Keys,
+  //   // title,
+  //   price,
+  //   description,
+  //   tags,
+  //   // active,
+  //   createdAt,
+  //   // ByCreatedAt,
+  //   owner,
+  //   marketRentalSaleRent,
+  //   propertyType,
+  //   bedroomCounts,
+  //   // bathroomsCounts,
+  //   address,
+  //   // propertySize,
+  //   // dateAvailable,
+  //   // laundryType,
+  //   user,
+  //   airConditionType,
+  //   heatingType,
+  //   catFriendly,
+  //   dogFriendly,
+  // } = marketItem;
 
   useEffect(() => {
     const getImage = async () => {
       try {
         setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imgS3Keys).map((key) =>
+          Array.from(marketItem.imgS3Keys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -138,29 +153,15 @@ export default function MarketRentalDetail() {
         setImgKeyFromServer([]);
       }
     };
-    if (imgS3Keys) {
+    if (starter) {
       getImage();
     }
-  }, [imgS3Keys]);
+  }, [starter, marketItem]);
 
   return (
     <div className={classes.root}>
-      {Object.keys(marketItem).length === 0 ? (
-        <Box
-          sx={{
-            height: "50vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack spacing={2} direction="row">
-            <CircularProgress />
-            <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
-          </Stack>
-        </Box>
+      {starter === false ? (
+        <Loading status={status} />
       ) : (
         <Stack
           direction={{ xs: "column", md: "row" }}
@@ -179,19 +180,23 @@ export default function MarketRentalDetail() {
                 marginLeft="1rem"
                 paddingTop="0.5rem"
               >
-                {PType.filter((item) => item.value === propertyType)[0].label},
-                {bedroomCounts} bedrooms,
+                {
+                  PType.filter(
+                    (item) => item.value === marketItem.propertyType
+                  )[0].label
+                }
+                ,{marketItem.bedroomCounts} bedrooms,
                 {
                   RentOrSale.filter(
-                    (item) => item.value === marketRentalSaleRent
+                    (item) => item.value === marketItem.marketRentalSaleRent
                   )[0].label
                 }
               </Typography>
               <Typography marginX="1rem" marginTop="0.25rem">
-                $ {price}
+                $ {marketItem.price}
               </Typography>
               <Typography marginX="1rem" variant="caption" color="gray">
-                发布日期： {createdAt.slice(0, 10)}
+                发布日期： {marketItem.createdAt.slice(0, 10)}
               </Typography>
               <Stack
                 justifyContent="center"
@@ -234,24 +239,31 @@ export default function MarketRentalDetail() {
                 </Grid>
                 <Grid item xs={8}>
                   {
-                    ACType.filter((item) => item.value === airConditionType)[0]
-                      .label
+                    ACType.filter(
+                      (item) => item.value === marketItem.airConditionType
+                    )[0].label
                   }
                 </Grid>
                 <Grid item xs={4}>
                   Heating Type
                 </Grid>
                 <Grid item xs={8}>
-                  {HType.filter((item) => item.value === heatingType)[0].label}
+                  {
+                    HType.filter(
+                      (item) => item.value === marketItem.heatingType
+                    )[0].label
+                  }
                 </Grid>
                 <Grid item xs={4}>
                   Pet Friendly
                 </Grid>
                 <Grid item xs={8}>
-                  {catFriendly && dogFriendly ? "可以养" : "不可以养"}
+                  {marketItem.catFriendly && marketItem.dogFriendly
+                    ? "可以养"
+                    : "不可以养"}
                 </Grid>
               </Grid>
-              {tags && (
+              {marketItem.tags && (
                 <Box>
                   <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                     Tags
@@ -259,7 +271,7 @@ export default function MarketRentalDetail() {
                 </Box>
               )}
               <Box sx={{ marginX: "1rem", marginBottom: "0.5rem" }}>
-                {tags.map((tag, tagIdx) => {
+                {marketItem.tags.map((tag, tagIdx) => {
                   return (
                     <Chip key={tagIdx} label={tag} sx={{ margin: "0.5rem" }} />
                   );
@@ -271,7 +283,7 @@ export default function MarketRentalDetail() {
               </Typography>
 
               <Typography marginX="1rem" marginY="0.25rem">
-                {description}
+                {marketItem.description}
               </Typography>
               <Paper
                 sx={{
@@ -285,7 +297,7 @@ export default function MarketRentalDetail() {
                 Google Map
               </Paper>
               <Typography marginX="1rem" marginY="0.25rem">
-                {address}
+                {marketItem.address}
               </Typography>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
@@ -303,7 +315,7 @@ export default function MarketRentalDetail() {
                       // aria-label="recipe"
                       className={classes.avatar}
                       component={true}
-                      user={user}
+                      user={marketItem.user}
                       // to={`/account/profile/${owner}`}
                     ></CustomAvatar>
                   }
@@ -312,11 +324,8 @@ export default function MarketRentalDetail() {
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title={owner}
-                  subheader={`发布日期： ${createdAt.slice(
-                    0,
-                    10
-                  )} ${createdAt.slice(11, 19)}`}
+                  title={marketItem.owner}
+                  subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)}`}
                 />
               </Box>
             </Paper>

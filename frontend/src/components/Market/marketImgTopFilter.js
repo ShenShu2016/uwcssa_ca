@@ -104,18 +104,23 @@ export default function MarketImgTopFilter({
     .forEach((item) => {
       item.tags.map((subitem) => tags.push(subitem));
     });
+
   const countTags = (arr) =>
     arr.reduce((obj, e) => {
       obj[e] = (obj[e] || 0) + 1;
       return obj;
     }, {});
+
   const occurrence = countTags(tags);
+
   const sortedOccurrence = Object.keys(occurrence).sort(
     (a, b) => occurrence[b] - occurrence[a]
   );
+
   const handleClickListItem = () => {
     setOpen(true);
   };
+
   const handleClose = (newValue) => {
     setOpen(false);
 
@@ -123,6 +128,7 @@ export default function MarketImgTopFilter({
       setValue(newValue);
     }
   };
+
   return (
     <React.Fragment>
       {/* ImgTopFIlter for large screen */}
