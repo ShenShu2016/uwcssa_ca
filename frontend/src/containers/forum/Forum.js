@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import { Box } from "@mui/material";
+import Footer from "../Footer";
 import ForumIndex from "./ForumIndex";
 import ForumPost from "../../components/Forum/ForumPost/ForumPost";
 import ForumPostCommentDetail from "../../components/Forum/ForumPost/ForumPostSubComment/ForumPostCommentDetail";
@@ -17,7 +18,11 @@ export default function Forum() {
       <Switch>
         <Route exact path="/forum" component={ForumIndex} />
         <Route path="/forum/forumTopicCURD" exact component={ForumTopicCURD} />
-        <Route path="/forum/forumTopic/:forumTopicID" exact component={ForumTopic} />
+        <Route
+          path="/forum/forumTopic/:forumTopicID"
+          exact
+          component={ForumTopic}
+        />
         <Route
           path="/forum/forumSubTopic/:forumSubTopicID"
           exact
@@ -40,6 +45,7 @@ export default function Forum() {
           component={ForumPostCommentDetail}
         />
       </Switch>
+      <Footer />
     </Box>
   );
 }

@@ -81,7 +81,7 @@ export default function ResetPassword() {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log("response", response);
-          history.push(`/signIn`);
+          history.push(`/auth/signIn`);
         }, 1000);
       } else {
         timer.current = window.setTimeout(() => {

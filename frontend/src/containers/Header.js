@@ -274,7 +274,7 @@ export default function Header() {
           <p>{userAuth.user.username}</p>
         </MenuItem>
       ) : (
-        <MenuItem component={Link} to="/signIn" onClick={handleMenuClose}>
+        <MenuItem component={Link} to="/auth/signIn" onClick={handleMenuClose}>
           <IconButton
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
@@ -292,7 +292,7 @@ export default function Header() {
   return (
     <div className={classes.grow}>
       <CssBaseline />
-      <StyledAppBar color="inherit">
+      <StyledAppBar color="inherit" elevation={0} variant="outlined">
         <StyledToolBar>
           <IconButton
             color="inherit"
@@ -385,7 +385,7 @@ export default function Header() {
             ) : (
               <Button
                 component={Link}
-                to="/signIn"
+                to="/auth/signIn"
                 variant="text"
                 style={{
                   fontSize: "20px",

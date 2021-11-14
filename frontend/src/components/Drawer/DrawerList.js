@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
+import AddIcon from "@mui/icons-material/Add";
 import ArticleIcon from "@mui/icons-material/Article";
 import Collapse from "@mui/material/Collapse";
 import EventIcon from "@mui/icons-material/Event";
@@ -39,7 +40,7 @@ const DrawerList = ({ toggleDrawer }) => {
   return (
     <div>
       <Box
-        sx={{ width: 250 }}
+        sx={{ width: 300 }}
         role="presentation"
         onKeyDown={toggleDrawer(false)}
       >
@@ -51,7 +52,7 @@ const DrawerList = ({ toggleDrawer }) => {
               onClick={toggleDrawer(false)}
             >
               <ListItemIcon>
-                <ArticleIcon />
+                <ArticleIcon color="primary" />
               </ListItemIcon>
               <ListItemText
                 primary="近期新闻"
@@ -68,7 +69,7 @@ const DrawerList = ({ toggleDrawer }) => {
               onClick={toggleDrawer(false)}
             >
               <ListItemIcon>
-                <EventIcon />
+                <EventIcon color="primary" />
               </ListItemIcon>
               <ListItemText
                 primary="活动"
@@ -85,7 +86,7 @@ const DrawerList = ({ toggleDrawer }) => {
               onClick={toggleDrawer(false)}
             >
               <ListItemIcon>
-                <WorkIcon />
+                <WorkIcon color="primary" />
               </ListItemIcon>
               <ListItemText
                 primary="开放职位"
@@ -99,7 +100,7 @@ const DrawerList = ({ toggleDrawer }) => {
             <div>
               <ListItemButton onClick={handleClickForum}>
                 <ListItemIcon>
-                  <ForumIcon />
+                  <ForumIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText
                   primary="论坛"
@@ -118,7 +119,7 @@ const DrawerList = ({ toggleDrawer }) => {
                     component={Link}
                     to="/forum"
                     onClick={toggleDrawer(false)}
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                   >
                     <ListItemText
                       primary="论坛首页"
@@ -132,7 +133,7 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem>
                 <ListItem>
                   <ListItemButton
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                     component={Link}
                     to="/forum/forumPostUpload"
                     onClick={toggleDrawer(false)}
@@ -145,11 +146,12 @@ const DrawerList = ({ toggleDrawer }) => {
                         color: "primary",
                       }}
                     />
+                    <AddIcon color="primary" />
                   </ListItemButton>
                 </ListItem>
                 {/* <ListItem>
                   <ListItemButton
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                     component={Link}
                     to="/forum/forumTopicCURD"
                     onClick={toggleDrawer(false)}
@@ -159,16 +161,23 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem> */}
                 <ListItem>
                   <ListItemButton
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                     component={Link}
                     to="/forumPostList"
                     onClick={toggleDrawer(false)}
                   >
-                    <ListItemText primary="forumPostList" />
+                    <ListItemText
+                      primary="forumPostList"
+                      primaryTypographyProps={{
+                        fontSize: 18,
+                        fontWeight: "medium",
+                        color: "primary",
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemButton sx={{ pl: 7 }} disabled>
                     <ListItemText
                       primary="举报审核"
                       primaryTypographyProps={{
@@ -185,7 +194,7 @@ const DrawerList = ({ toggleDrawer }) => {
             <div>
               <ListItemButton onClick={handleClickMarket}>
                 <ListItemIcon>
-                  <ShopIcon />
+                  <ShopIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText
                   primary="商城"
@@ -204,7 +213,7 @@ const DrawerList = ({ toggleDrawer }) => {
                     component={Link}
                     to="/market"
                     onClick={toggleDrawer(false)}
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                   >
                     <ListItemText
                       primary="商城首页"
@@ -218,7 +227,7 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem>
                 <ListItem>
                   <ListItemButton
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                     onClick={toggleDrawer(false)}
                     component={Link}
                     to="/market/create"
@@ -231,11 +240,12 @@ const DrawerList = ({ toggleDrawer }) => {
                         color: "primary",
                       }}
                     />
+                    <AddIcon color="primary" />
                   </ListItemButton>
                 </ListItem>
                 <ListItem>
                   <ListItemButton
-                    sx={{ pl: 4 }}
+                    sx={{ pl: 7 }}
                     onClick={toggleDrawer(false)}
                     component={Link}
                     to="/market"
@@ -252,7 +262,7 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem>
 
                 <ListItem>
-                  <ListItemButton sx={{ pl: 4 }} disabled>
+                  <ListItemButton sx={{ pl: 7 }} disabled>
                     <ListItemText
                       primary="举报审核"
                       primaryTypographyProps={{
@@ -294,7 +304,7 @@ const DrawerList = ({ toggleDrawer }) => {
             <Collapse in={openStaff} timeout="auto">
               <ListItem>
                 <ListItemButton
-                  sx={{ pl: 4 }}
+                  sx={{ pl: 7 }}
                   component={Link}
                   to="/staff"
                   onClick={toggleDrawer(false)}
@@ -335,7 +345,7 @@ const DrawerList = ({ toggleDrawer }) => {
               </ListItem>
               <ListItem>
                 <ListItemButton
-                  sx={{ pl: 4 }}
+                  sx={{ pl: 7 }}
                   component={Link}
                   to="/staff/event/postEvent"
                   onClick={toggleDrawer(false)}
@@ -352,7 +362,7 @@ const DrawerList = ({ toggleDrawer }) => {
               </ListItem>
               <ListItem>
                 <ListItemButton
-                  sx={{ pl: 4 }}
+                  sx={{ pl: 7 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
                   to="/staff/uwcssaJob/postUwcssaJob"
@@ -369,7 +379,7 @@ const DrawerList = ({ toggleDrawer }) => {
               </ListItem>
               <ListItem>
                 <ListItemButton
-                  sx={{ pl: 4 }}
+                  sx={{ pl: 7 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
                   to="/staff/uwcssaJob/postDepartment"
@@ -386,7 +396,7 @@ const DrawerList = ({ toggleDrawer }) => {
               </ListItem>
               <ListItem>
                 <ListItemButton
-                  sx={{ pl: 4 }}
+                  sx={{ pl: 7 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
                   to="/staff/article/postArticle"
@@ -403,7 +413,7 @@ const DrawerList = ({ toggleDrawer }) => {
               </ListItem>
               <ListItem>
                 <ListItemButton
-                  sx={{ pl: 4 }}
+                  sx={{ pl: 7 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
                   to="/forum/forumTopicCURD"
@@ -442,7 +452,7 @@ const DrawerList = ({ toggleDrawer }) => {
               onClick={toggleDrawer(false)}
             >
               <ListItemIcon>
-                <GroupIcon />
+                <GroupIcon color="primary" />
               </ListItemIcon>
               <ListItemText
                 primary="创始团队以及贡献者"

@@ -109,7 +109,7 @@ export default function ApplyJob(props) {
     if (userAuth.isAuthenticated === false) {
       setOpen(true);
       setTimeout(() => {
-        props.history.push("/signIn");
+        props.history.push("/auth/signIn");
       }, 1200);
     } else {
       if (

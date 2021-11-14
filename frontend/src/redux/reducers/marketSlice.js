@@ -1,28 +1,38 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMarketItem, marketItemSortBySortKey } from "../../graphql/queries";
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
 
 import API from "@aws-amplify/api";
 import { createMarketItem } from "../../graphql/mutations";
+import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 // import Storage from "@aws-amplify/storage";
 
 // import { v4 as uuid } from "uuid";
 
-const initialState = {
-  marketItems: [],
+const marketAdapter = createEntityAdapter({
+  // selectId: (item) => item.id,
+  sortComparer: (a, b) => b.updatedAt.localeCompare(a.updatedAt),
+});
+
+const initialState = marketAdapter.getInitialState({
+  // marketItems: [],
   // marketVehicles: [],
   // marketRentals: [],
-  selected: {
-    marketItem: {},
-    // marketVehicle: {},
-    // marketRental: {},
-  },
+  // selected: {
+  //   marketItem: {},
+  // marketVehicle: {},
+  // marketRental: {},
+  // },
   // mutation: {
   //   marketItem: { postItem: {}, updateItem: {}, deleteItem: {} },
   //   marketVehicle: { postVehicle: {}, updateVehicle: {}, deleteVehicle: {} },
   //   marketRental: { postRental: {}, updateRental: {}, deleteRental: {} },
   // },
+
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
   // fetchMarketVehiclesStatus: "idle",
@@ -39,13 +49,13 @@ const initialState = {
   // postMarketRentalError: null,
   postMarketItemImgStatus: "idle",
   postMarketItemImgError: null,
-};
+});
 
 export const fetchMarketItems = createAsyncThunk(
   "market/fetchMarketItems",
-  async () => {
+  async (query) => {
     const MarketItemsData = await API.graphql({
-      query: marketItemSortBySortKey,
+      query: query,
       variables: {
         sortKey: "SortKey",
         sortDirection: "DESC",
@@ -116,7 +126,6 @@ export const selectedMarketItem = createAsyncThunk(
 export const postMarketItem = createAsyncThunk(
   "market/postMarketItem",
   async (createMarketItemInput) => {
-    console.log("盡了沒?", createMarketItemInput);
     const response = await API.graphql(
       graphqlOperation(createMarketItem, { input: createMarketItemInput })
     );
@@ -176,7 +185,9 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        state.marketItems = action.payload;
+        // state.marketItems = action.payload;
+        marketAdapter.removeAll(state);
+        marketAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
         state.fetchMarketItemsStatus = "failed";
@@ -212,7 +223,9 @@ const marketSlice = createSlice({
       })
       .addCase(selectedMarketItem.fulfilled, (state, action) => {
         state.selectedMarketItemStatus = "succeeded";
-        state.selected.marketItem = action.payload;
+        // state.selected.marketItem = action.payload;
+        console.log("看看长啥样", action.payload);
+        marketAdapter.addOne(state, action.payload);
       })
       .addCase(selectedMarketItem.rejected, (state, action) => {
         state.selectedMarketItemStatus = "failed";
@@ -224,8 +237,9 @@ const marketSlice = createSlice({
       })
       .addCase(postMarketItem.fulfilled, (state, action) => {
         state.postMarketItemStatus = "succeeded";
-        state.marketItems.unshift(action.payload.data.createMarketItem);
-        state.postMarketItemStatus = "idle";
+        // state.marketItems.unshift(action.payload.data.createMarketItem);
+        marketAdapter.addOne(state, action.payload);
+        // state.postMarketItemStatus = "idle";
       })
       .addCase(postMarketItem.rejected, (state, action) => {
         state.postMarketItemStatus = "failed";
@@ -278,5 +292,11 @@ const marketSlice = createSlice({
 });
 
 export const { removeSelectedMarketItem } = marketSlice.actions;
+
+export const {
+  selectAll: selectAllMarketItems,
+  selectById: selectMarketItemById,
+  selectIds: selectMarketItemIds,
+} = marketAdapter.getSelectors((state) => state.market);
 
 export default marketSlice.reducer;

@@ -1,13 +1,17 @@
 import { Box, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketItems,
+  selectAllMarketItems,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import FilterInfo from "./marketItemFilterInfo";
+import FilterInfo from "../../components/Market/marketItemFilterInfo";
 import MarketComponent from "../../components/Market/MarketComponent";
-import MarketImgTopFilter from "./marketImgTopFilter";
-import { fetchMarketItems } from "../../redux/reducers/marketSlice";
-import marketItemFilter from "./marketItemFilter";
-import { marketItemStyle } from "./marketItemCss";
+import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import marketItemFilter from "../../components/Market/marketItemFilter";
+import { marketItemSortBySortKeyItem } from "../../components/Market//marketQueries";
+import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketItem() {
@@ -25,21 +29,16 @@ export default function MarketItem() {
   });
 
   // const [images, setImages] = useState();
+  const marketItems = useSelector(selectAllMarketItems);
+  useEffect(() => {
+    dispatch(fetchMarketItems(marketItemSortBySortKeyItem));
+  }, [dispatch]);
 
-  const { marketItems, fetchMarketItemsStatus } = useSelector(
-    (state) => state.market
-  );
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Item" && item.description !== null
   );
 
   console.log("true items", trueMarketItems);
-  useEffect(() => {
-    if (fetchMarketItemsStatus === "idle" || undefined) {
-      dispatch(fetchMarketItems());
-    }
-  }, [fetchMarketItemsStatus, dispatch]);
-
   const filteredItems = marketItemFilter(trueMarketItems, filterList, "item");
   console.log("say something", filteredItems);
 

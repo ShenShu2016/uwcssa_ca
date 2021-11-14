@@ -76,7 +76,7 @@ export default function ForgotPassword() {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log("response", response);
-          history.push(`/resetPassword/${username}`);
+          history.push(`/auth/resetPassword/${username}`);
         }, 1000);
       } else {
         timer.current = window.setTimeout(() => {

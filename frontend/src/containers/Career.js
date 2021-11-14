@@ -1,11 +1,11 @@
 import ApplyJob from "../components/Career/ApplyJob";
+import Footer from "./Footer";
 import JobDetail from "../components/Career/JobDetail";
 import Openings from "../components/Career/Openings";
 import React from "react";
 import { Route } from "react-router";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     // backgroundColor: "#F3F2EF",
@@ -27,6 +27,7 @@ export default function Career() {
       <Route exact path="/career" component={Openings} />
       <Route path="/career/jobDetail/:id" component={JobDetail} />
       <Route path="/career/applyJob/:id" component={ApplyJob} />
+      <Footer />
     </div>
   );
 }

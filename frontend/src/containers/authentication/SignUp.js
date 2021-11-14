@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Alert from "@mui/material/Alert";
+import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -19,30 +20,30 @@ import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signUp } from "../../redux/reducers/authSlice";
 import { useTitle } from "../../Hooks/useTitle";
+import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "75%", // Fix IE 11 issue.
-    marginTop: theme.spacing(4.5),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  register_button: {
-    marginTop: "2rem",
-    marginBottom: "2rem",
-    marginLeft: theme.spacing(3),
-  },
+  // paper: {
+  //   marginTop: theme.spacing(8),
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  // },
+  // avatar: {
+  //   margin: theme.spacing(1),
+  //   backgroundColor: theme.palette.secondary.main,
+  // },
+  // form: {
+  //   marginTop: theme.spacing(4.5),
+  // },
+  // submit: {
+  //   margin: theme.spacing(3, 0, 2),
+  // },
+  // register_button: {
+  //   marginTop: "2rem",
+  //   marginBottom: "2rem",
+  //   marginLeft: theme.spacing(3),
+  // },
   alert: {
     marginTop: "1.5rem",
   },
@@ -72,9 +73,7 @@ export default function SignUp() {
     };
   }, []);
 
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
-  );
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
 
   const onChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -124,19 +123,29 @@ export default function SignUp() {
     return <Redirect to="/" />;
   }
   if (accountCreated) {
-    return <Redirect to={`/emailConfirm/${formData.username}`} />;
+    return <Redirect to={`/auth/emailConfirm/${formData.username}`} />;
   }
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <Box
+        sx={{
+          marginTop: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={uwcssa_logo}
+          alt="uwcssaLogo"
+          style={{ margin: "1rem", height: "50px" }}
+        />
+
         <Typography variant="h5">注册</Typography>
         <Typography>
           已经有账户了？
-          <Link to="/signIn">登入</Link>
+          <Link to="/auth/signIn">登入</Link>
         </Typography>
         {alert ? (
           <Alert className={classes.alert} severity="error">
@@ -145,11 +154,10 @@ export default function SignUp() {
         ) : (
           <></>
         )}
-        <form className={classes.form}>
+        <Box component="form" noValidate sx={{ mt: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 name="username"
@@ -163,7 +171,6 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 name="email"
@@ -176,11 +183,10 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 name="password"
-                label="输入密码"
+                label="密码"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -189,32 +195,32 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
-          <Grid className={classes.register_button}>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              disabled={buttonState || loadingState}
-              onClick={onSignUp}
-            >
-              注册
-              {loadingState && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: green[500],
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
-            </Button>
-          </Grid>
-        </form>
-      </div>
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            className={classes.submit}
+            disabled={buttonState || loadingState}
+            onClick={onSignUp}
+            sx={{ mt: 3, mb: 2 }}
+          >
+            注册
+            {loadingState && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: green[500],
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-0.75rem",
+                  marginLeft: "-0.75rem",
+                }}
+              />
+            )}
+          </Button>
+        </Box>
+      </Box>
     </Container>
   );
 }

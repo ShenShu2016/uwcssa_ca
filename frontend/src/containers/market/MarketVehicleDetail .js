@@ -26,7 +26,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
-import { marketVehicleOptions } from "./marketVehicleOptions";
+import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
