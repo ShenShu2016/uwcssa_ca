@@ -11,12 +11,16 @@ import {
   // getForumPost,
   getForumPostComment,
   getForumSubTopic,
-  getForumTopic,
+  // getForumTopic,
   listForumPosts,
   listForumSubTopics,
-  listForumTopics,
+  // listForumTopics,
 } from "../../graphql/queries";
-import { getForumPost } from "../CustomQuery/ForumPostQueries";
+import {
+  getForumPost,
+  getForumTopic,
+  listForumTopics,
+} from "../CustomQuery/ForumQueries";
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
@@ -24,35 +28,20 @@ const initialState = {
   forumTopics: [],
   forumSubTopics: [],
   forumPosts: [],
-  selectedForumTopic: {},
-
   selected: {
     forumTopic: {},
     forumSubTopic: {},
     forumSubTopicPosts: {},
     forumPost: { forumPostComments: { nextToken: null } },
   },
-  // selectedForumTopic: {},
-  // selectedForumSubTopic: {
-  //   forumSubTopic: {},
-  //   posts: [],
-  //   postsNextToken: "",
-  // },
-  // selectedForumPost: {
-  //   forumPost: {},
-  //   comments: [],
-  //   commentsNextToken: "",
-  // },
-  // selectedForumPostComment: {
-  //   forumPostComment: {},
-  //   subComments: [],
-  //   subCommentsNextToken: "",
-  // },
+
   //forumTopic
   fetchForumTopicsStatus: "idle",
   fetchForumTopicsError: null,
   selectedForumTopicStatus: "idle",
   selectedForumTopicError: null,
+  selectedForumTopicDetailStatus: "idle",
+  selectedForumTopicDetailError: null,
   //forumSubTopic
   fetchForumSubTopicsStatus: "idle",
   fetchForumSubTopicsError: null,
@@ -60,6 +49,7 @@ const initialState = {
   selectedForumSubTopicError: null,
   selectedForumSubTopicPostsStatus: "idle",
   selectedForumSubTopicPostsError: null,
+
   //forumPost
   postForumPostStatus: "idle",
   postForumPostError: null,
@@ -94,13 +84,12 @@ export const selectedForumTopic = createAsyncThunk(
   async (forumTopicID) => {
     const response = await API.graphql({
       query: getForumTopic,
-      variables: { id: forumTopicID },
+      variables: { id: forumTopicID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
     return response.data.getForumTopic;
   }
 );
-
 //forumSubTopic
 export const fetchForumSubTopics = createAsyncThunk(
   "forum/fetchForumSubTopics",
@@ -301,7 +290,6 @@ const forumSlice = createSlice({
         state.selectedForumTopicStatus = "failed";
         state.selectedForumTopicError = action.error.message;
       })
-      //fetchForumSubTopics
       .addCase(fetchForumSubTopics.pending, (state, action) => {
         state.fetchForumSubTopicsStatus = "loading";
       })

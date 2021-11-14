@@ -132,3 +132,100 @@ export const getForumPost = /* GraphQL */ `
     }
   }
 `;
+
+export const getForumTopic = /* GraphQL */ `
+  query GetForumTopic($id: ID!) {
+    getForumTopic(id: $id) {
+      id
+      name
+      userID
+      createdAt
+      updatedAt
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+          forumPosts(filter: { active: { eq: true } }, sortDirection: DESC) {
+            items {
+              id
+              title
+              content
+              imgS3Keys
+              tags
+              active
+              createdAt
+              lastReplyAt
+              forumSubTopicID
+              userID
+              updatedAt
+              user {
+                username
+                avatarImgS3Key
+                badges
+              }
+              owner
+            }
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+
+export const listForumTopics = /* GraphQL */ `
+  query ListForumTopics(
+    $filter: ModelForumTopicFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForumTopics(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        userID
+        createdAt
+        updatedAt
+        forumSubTopics {
+          items {
+            id
+            name
+            createdAt
+            forumTopicID
+            userID
+            updatedAt
+            forumPosts(filter: { active: { eq: true } }, sortDirection: DESC) {
+              items {
+                id
+                title
+                content
+                imgS3Keys
+                tags
+                active
+                createdAt
+                lastReplyAt
+                forumSubTopicID
+                userID
+                updatedAt
+                user {
+                  username
+                  avatarImgS3Key
+                  badges
+                }
+                owner
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
