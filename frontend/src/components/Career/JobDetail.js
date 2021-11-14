@@ -67,6 +67,18 @@ export default function JobDetail(props) {
           })
         : ""}
       <br />
+      <Typography variant="h6">BONUS:</Typography>
+      <br />
+      {job.bonus
+        ? job.bonus.map((bonus, index) => {
+            return (
+              <div key={index}>
+                <li className={classes.body}>{bonus}</li>
+              </div>
+            );
+          })
+        : ""}
+      <br />
       <Typography variant="h6">SCHEDULE:</Typography>
       <br />
       {job.schedule
@@ -86,18 +98,6 @@ export default function JobDetail(props) {
             return (
               <div key={index}>
                 <li className={classes.body}>{benefit}</li>
-              </div>
-            );
-          })
-        : ""}
-      <br />
-      <Typography variant="h6">BONUS:</Typography>
-      <br />
-      {job.bonus
-        ? job.bonus.map((bonus, index) => {
-            return (
-              <div key={index}>
-                <li className={classes.body}>{bonus}</li>
               </div>
             );
           })

@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
+import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
 import marketItemFilter from "../../components/Market/marketItemFilter";
@@ -19,6 +20,8 @@ export default function MarketItem() {
   useTitle("Item");
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  const [starter, setStarter] = useState(false);
   const [filterList, setFilterList] = useState({
     sortKey: "original",
     min: "",
@@ -30,17 +33,34 @@ export default function MarketItem() {
 
   // const [images, setImages] = useState();
   const marketItems = useSelector(selectAllMarketItems);
+  const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+
   useEffect(() => {
     dispatch(fetchMarketItems(marketItemSortBySortKeyItem));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (
+      marketItems === undefined ||
+      marketItems === null ||
+      marketItems.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (marketItems[0].marketItemCategory === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+    }
+  }, [marketItems]);
+
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Item" && item.description !== null
   );
-
-  console.log("true items", trueMarketItems);
+  console.log("Started", starter);
+  console.log("market Items", marketItems);
   const filteredItems = marketItemFilter(trueMarketItems, filterList, "item");
-  console.log("say something", filteredItems);
 
   // let urls = [];
   // marketItems.forEach((item) => {
@@ -105,26 +125,16 @@ export default function MarketItem() {
   console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        className={classes.contain}
-      >
-        <FilterInfo
-          form="plain"
-          type="item"
-          filterList={filterList}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleCategory={handleCategory}
-          handleCondition={handleCondition}
-          handleReset={handleReset}
-        />
-        <Box className={classes.img}>
-          <MarketImgTopFilter
+      {starter === false ? (
+        <Loading status={status} />
+      ) : (
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          className={classes.contain}
+        >
+          <FilterInfo
+            form="plain"
             type="item"
-            trueMarketItems={trueMarketItems}
-            handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
@@ -133,9 +143,23 @@ export default function MarketItem() {
             handleCondition={handleCondition}
             handleReset={handleReset}
           />
-          <Box className={classes.items}>{itemRenderList}</Box>
-        </Box>
-      </Stack>
+          <Box className={classes.img}>
+            <MarketImgTopFilter
+              type="item"
+              trueMarketItems={trueMarketItems}
+              handleClick={handleClick}
+              filterList={filterList}
+              handleSortKey={handleSortKey}
+              handleMin={handleMin}
+              handleMax={handleMax}
+              handleCategory={handleCategory}
+              handleCondition={handleCondition}
+              handleReset={handleReset}
+            />
+            <Box className={classes.items}>{itemRenderList}</Box>
+          </Box>
+        </Stack>
+      )}
     </Box>
   );
 }

@@ -57,7 +57,7 @@ export default function EventBody({ event }) {
   };
   const userInfo = useSelector((state) => state.userAuth);
   const [posterURL, setPosterURL] = useState(null);
-
+  const [qrCodeURL, setQrCodeURL] = useState(null);
   const {
     title,
     startDate,
@@ -66,6 +66,7 @@ export default function EventBody({ event }) {
     location,
     content,
     posterImgS3Key,
+    qrCodeImgS3Key,
     topic,
   } = event;
 
@@ -90,10 +91,30 @@ export default function EventBody({ event }) {
   }, [posterImgS3Key]);
   // console.log("posterURL", posterURL);
   // console.log("event", event);
+
+  useEffect(() => {
+    const getQrCode = async () => {
+      try {
+        const qrCodeAccessURL = await Storage.get(qrCodeImgS3Key, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        setQrCodeURL(qrCodeAccessURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setQrCodeURL(null);
+      }
+    };
+    if (qrCodeImgS3Key) {
+      getQrCode();
+    }
+  }, [qrCodeImgS3Key]);
+
   return (
     <Box>
       {event.startDate ? (
-        <Container size="lg">
+        <div>
           <Container size="sm">
             <Box
               style={{
@@ -163,6 +184,29 @@ export default function EventBody({ event }) {
               {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
               <Box sx={{ width: "100%" }}>
                 {content}
+                <Typography
+                  variant="subtitle1"
+                  sx={{ marginTop: "3rem" }}
+                  gutterBottom
+                >
+                  <b>如果你对此活动有任何疑问可以扫描以下二维码</b>
+                </Typography>
+                {qrCodeURL ? (
+                  <CardMedia
+                    component="img"
+                    style={{
+                      width: "auto",
+                      maxHeight: "150px",
+                      marginBottom: "3rem",
+                    }}
+                    image={qrCodeURL}
+                  />
+                ) : (
+                  <Typography variant="subtitle1" sx={{ marginBottom: "3rem" }}>
+                    暂无二维码
+                  </Typography>
+                )}
+
                 <CardActions>
                   {userInfo.isAuthenticated ? (
                     <Button
@@ -195,7 +239,7 @@ export default function EventBody({ event }) {
               <EventComments event={event} />
             </TabPanel>
           </Box>
-        </Container>
+        </div>
       ) : (
         <div>
           <CircularProgress />

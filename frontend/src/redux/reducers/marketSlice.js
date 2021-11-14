@@ -9,44 +9,18 @@ import { createMarketItem } from "../../graphql/mutations";
 import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
-// import Storage from "@aws-amplify/storage";
-
-// import { v4 as uuid } from "uuid";
-
 const marketAdapter = createEntityAdapter({
   // selectId: (item) => item.id,
   sortComparer: (a, b) => b.updatedAt.localeCompare(a.updatedAt),
 });
 
 const initialState = marketAdapter.getInitialState({
-  // marketItems: [],
-  // marketVehicles: [],
-  // marketRentals: [],
-  // selected: {
-  //   marketItem: {},
-  // marketVehicle: {},
-  // marketRental: {},
-  // },
-  // mutation: {
-  //   marketItem: { postItem: {}, updateItem: {}, deleteItem: {} },
-  //   marketVehicle: { postVehicle: {}, updateVehicle: {}, deleteVehicle: {} },
-  //   marketRental: { postRental: {}, updateRental: {}, deleteRental: {} },
-  // },
-
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
-  // fetchMarketVehiclesStatus: "idle",
-  // fetchMarketVehiclesError: null,
-  // fetchMarketRentalsStatus: "idle",
-  // fetchMarketRentalsError: null,
   selectedMarketItemStatus: "idle",
   selectedMarketItemError: null,
   postMarketItemStatus: "idle",
   postMarketItemError: null,
-  // postMarketVehicleStatus: "idle",
-  // postMarketVehicleError: null,
-  // postMarketRentalStatus: "idle",
-  // postMarketRentalError: null,
   postMarketItemImgStatus: "idle",
   postMarketItemImgError: null,
 });
@@ -68,38 +42,6 @@ export const fetchMarketItems = createAsyncThunk(
   }
 );
 
-// export const fetchMarketVehicles = createAsyncThunk(
-//   "market/fetchMarketVehicles",
-//   async () => {
-//     const MarketVehicleData = await API.graphql({
-//       query: marketVehicleSortBySortKey,
-//       variables: {
-//         sortKey: "SortKey",
-//         sortDirection: "DESC",
-//         filter: { active: { eq: true } },
-//       },
-//       authMode: "AWS_IAM",
-//     });
-//     return MarketVehicleData.data.marketVehicleSortBySortKey.items;
-//   }
-// );
-
-// export const fetchMarketRentals = createAsyncThunk(
-//   "market/fetchMarketRentals",
-//   async () => {
-//     const MarketRentalData = await API.graphql({
-//       query: marketRentalSortBySortKey,
-//       variables: {
-//         sortKey: "SortKey",
-//         sortDirection: "DESC",
-//         filter: { active: { eq: true } },
-//       },
-//       authMode: "AWS_IAM",
-//     });
-//     return MarketRentalData.data.marketRentalSortBySortKey.items;
-//   }
-// );
-
 export const selectedMarketItem = createAsyncThunk(
   "market/selectedMarketItem",
   async (id) => {
@@ -112,17 +54,6 @@ export const selectedMarketItem = createAsyncThunk(
   }
 );
 
-// export const postMarketItem = createAsyncThunk(
-//   "market/postMarketItem",
-//   async ({ createMarketItemInput }) => {
-//     console.log("盡了沒？", createMarketItemInput);
-//     const response = await API.graphql(
-//       graphqlOperation(createMarketItem, { input: createMarketItemInput })
-//     );
-//     console.log("上傳成功了沒", response);
-//     return response;
-//   }
-// );
 export const postMarketItem = createAsyncThunk(
   "market/postMarketItem",
   async (createMarketItemInput) => {
@@ -132,41 +63,6 @@ export const postMarketItem = createAsyncThunk(
     return response;
   }
 );
-// 你有點問題，莫名其妙出bug！
-
-// export const postMarketVehicle = createAsyncThunk(
-//   "market/postMarketVehicle",
-//   async (createMarketVehicleInput) => {
-//     const response = await API.graphql(
-//       graphqlOperation(createMarketVehicle, { input: createMarketVehicleInput })
-//     );
-//     return { result: true, response };
-//   }
-// );
-
-// export const postMarketRental = createAsyncThunk(
-//   "market/postMarketRental",
-//   async (createMarketRentalInput) => {
-//     const response = await API.graphql(
-//       graphqlOperation(createMarketRental, { input: createMarketRentalInput })
-//     );
-//     return { result: true, response };
-//   }
-// );
-
-// export const postMarketItemImg = createAsyncThunk(
-//   "market/postMarketItemImg",
-//   async (imgData) => {
-//     const response = await Storage.put(
-//       `marketItem/${uuid()}${imgData.name}`,
-//       imgData,
-//       {
-//         contentType: "image/*",
-//       }
-//     );
-//     return response;
-//   }
-// );
 
 const marketSlice = createSlice({
   name: "market",
@@ -186,46 +82,19 @@ const marketSlice = createSlice({
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
         // state.marketItems = action.payload;
-        marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
         state.fetchMarketItemsStatus = "failed";
         state.fetchMarketItemsError = action.error.message;
       })
-      // Cases for status of fetchMarketVehicles (pending, fulfilled, and rejected)
-      // .addCase(fetchMarketVehicles.pending, (state, action) => {
-      //   state.fetchMarketVehiclesStatus = "loading";
-      // })
-      // .addCase(fetchMarketVehicles.fulfilled, (state, action) => {
-      //   state.fetchMarketVehiclesStatus = "succeeded";
-      //   state.marketVehicles = action.payload;
-      // })
-      // .addCase(fetchMarketVehicles.rejected, (state, action) => {
-      //   state.fetchMarketVehiclesStatus = "failed";
-      //   state.fetchMarketVehiclesError = action.error.message;
-      // })
-      // // Cases for status of fetchMarketRentals (pending, fulfilled, and rejected)
-      // .addCase(fetchMarketRentals.pending, (state, action) => {
-      //   state.fetchMarketRentalsStatus = "loading";
-      // })
-      // .addCase(fetchMarketRentals.fulfilled, (state, action) => {
-      //   state.fetchMarketRentalsStatus = "succeeded";
-      //   state.marketRentals = action.payload;
-      // })
-      // .addCase(fetchMarketRentals.rejected, (state, action) => {
-      //   state.fetchMarketRentalsStatus = "failed";
-      //   state.fetchMarketRentalsError = action.error.message;
-      // })
       // Cases for status of selectedMarketItem (pending, fulfilled, and rejected)
       .addCase(selectedMarketItem.pending, (state, action) => {
         state.selectedMarketItemStatus = "loading";
       })
       .addCase(selectedMarketItem.fulfilled, (state, action) => {
         state.selectedMarketItemStatus = "succeeded";
-        // state.selected.marketItem = action.payload;
-        console.log("看看长啥样", action.payload);
-        marketAdapter.addOne(state, action.payload);
+        marketAdapter.upsertOne(state, action.payload);
       })
       .addCase(selectedMarketItem.rejected, (state, action) => {
         state.selectedMarketItemStatus = "failed";
@@ -245,49 +114,6 @@ const marketSlice = createSlice({
         state.postMarketItemStatus = "failed";
         state.postMarketItemError = action.error.message;
       });
-    // Cases for status of postMarketVehicle (pending, fulfilled, and rejected)
-    // .addCase(postMarketVehicle.pending, (state, action) => {
-    //   state.postMarketVehicleStatus = "loading";
-    // })
-    // .addCase(postMarketVehicle.fulfilled, (state, action) => {
-    //   state.postMarketVehicleStatus = "succeeded";
-    //   state.marketVehicles.unshift(
-    //     action.payload.response.data.createMarketVehicle
-    //   );
-    //   state.postMarketVehicleStatus = "idle";
-    // })
-    // .addCase(postMarketVehicle.rejected, (state, action) => {
-    //   state.postMarketVehicleStatus = "failed";
-    //   state.postMarketVehicleError = action.error.message;
-    // })
-    // // Cases for status of postMarketRental (pending, fulfilled, and rejected)
-    // .addCase(postMarketRental.pending, (state, action) => {
-    //   state.postMarketRentalStatus = "loading";
-    // })
-    // .addCase(postMarketRental.fulfilled, (state, action) => {
-    //   state.postMarketRentalStatus = "succeeded";
-    //   state.marketRentals.unshift(
-    //     action.payload.response.data.createMarketRental
-    //   );
-    //   state.postMarketRentalStatus = "idle";
-    // })
-    // .addCase(postMarketRental.rejected, (state, action) => {
-    //   state.postMarketRentalStatus = "failed";
-    //   state.postMarketRentalError = action.error.message;
-    // });
-    // // Cases for status of postMarketItemImg (pending, fulfilled, and rejected)
-    // .addCase(postMarketItemImg.pending, (state, action) => {
-    //   state.postMarketItemImgStatus = "loading";
-    // })
-    // .addCase(postMarketItemImg.fulfilled, (state, action) => {
-    //   state.postMarketItemImgStatus = "succeeded";
-    //   state.mutation.postItemImg.push(action.payload);
-    //   state.postMarketItemImgStatus = "idle";
-    // })
-    // .addCase(postMarketItemImg.rejected, (state, action) => {
-    //   state.postMarketItemImgStatus = "failed";
-    //   state.postMarketItemImgError = action.error.message;
-    // });
   },
 });
 

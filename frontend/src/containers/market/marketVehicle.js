@@ -1,12 +1,17 @@
 import { Box, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketItems,
+  selectAllMarketItems,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
+import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
-import { fetchMarketItems } from "../../redux/reducers/marketSlice";
 import marketItemFilter from "../../components/Market/marketItemFilter";
+import { marketItemSortBySortKeyVehicle } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -15,6 +20,7 @@ export default function MarketVehicle() {
   useTitle("Item");
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [starter, setStarter] = useState(false);
   const [filterList, setFilterList] = useState({
     sortKey: "original",
     min: "",
@@ -29,20 +35,34 @@ export default function MarketVehicle() {
 
   // const [images, setImages] = useState();
 
-  const { marketItems, fetchMarketItemsStatus } = useSelector(
-    (state) => state.market
-  );
+  const marketItems = useSelector(selectAllMarketItems);
+  const status = useSelector((state) => state.market.fetchMarketItemsStatus);
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Vehicle" && item.description !== null
   );
 
   console.log("true items", trueMarketItems);
   useEffect(() => {
-    if (fetchMarketItemsStatus === "idle" || undefined) {
-      dispatch(fetchMarketItems());
-    }
-  }, [fetchMarketItemsStatus, dispatch]);
+    dispatch(fetchMarketItems(marketItemSortBySortKeyVehicle));
+  }, [dispatch]);
 
+  useEffect(() => {
+    if (
+      marketItems === undefined ||
+      marketItems === null ||
+      marketItems.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (marketItems[0].fuelType === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+    }
+  }, [marketItems]);
+
+  console.log("Started!", starter);
   const filteredItems = marketItemFilter(
     trueMarketItems,
     filterList,
@@ -114,7 +134,8 @@ export default function MarketVehicle() {
       min: "",
       max: "",
       vehicleType: "",
-      year: "",
+      minYear: "",
+      maxYear: "",
       make: "",
       model: "",
       clickedTag: "",
@@ -123,29 +144,16 @@ export default function MarketVehicle() {
   console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        className={classes.contain}
-      >
-        <FilterInfo
-          form="plain"
-          type="vehicle"
-          filterList={filterList}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleVehicleType={handleVehicleType}
-          handleMinYear={handleMinYear}
-          handleMaxYear={handleMaxYear}
-          handleMake={handleMake}
-          handleModel={handleModel}
-          handleReset={handleReset}
-        />
-        <Box className={classes.img}>
-          <MarketImgTopFilter
+      {starter === false ? (
+        <Loading status={status} />
+      ) : (
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          className={classes.contain}
+        >
+          <FilterInfo
+            form="plain"
             type="vehicle"
-            trueMarketItems={trueMarketItems}
-            handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
@@ -157,9 +165,26 @@ export default function MarketVehicle() {
             handleModel={handleModel}
             handleReset={handleReset}
           />
-          <Box className={classes.items}>{itemRenderList}</Box>
-        </Box>
-      </Stack>
+          <Box className={classes.img}>
+            <MarketImgTopFilter
+              type="vehicle"
+              trueMarketItems={trueMarketItems}
+              handleClick={handleClick}
+              filterList={filterList}
+              handleSortKey={handleSortKey}
+              handleMin={handleMin}
+              handleMax={handleMax}
+              handleVehicleType={handleVehicleType}
+              handleMinYear={handleMinYear}
+              handleMaxYear={handleMaxYear}
+              handleMake={handleMake}
+              handleModel={handleModel}
+              handleReset={handleReset}
+            />
+            <Box className={classes.items}>{itemRenderList}</Box>
+          </Box>
+        </Stack>
+      )}
     </Box>
   );
 }

@@ -41,6 +41,10 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
     setBackGroundImgKey(user.backGroundImgS3Key);
   }, [user]);
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   const [formData, setFormData] = useState({
     id: user.id,
     firstName: user.firstName,
@@ -111,7 +115,7 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
           <DialogContent>
             <TextField
               required
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="firstName"
@@ -124,7 +128,7 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
             />
             <TextField
               required
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="lastName"
@@ -172,7 +176,7 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
             </Box>
             <S3Image S3Key={backGroundImgKey} style={{ width: "100%" }} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -184,7 +188,7 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -197,7 +201,7 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
 
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -210,7 +214,7 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              // autoFocus
               fullWidth
               margin="dense"
               id="intro"

@@ -13,12 +13,15 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  putUserEducation,
+  removeUserEducation,
+} from "../../../../redux/reducers/profileSlice";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { putUserEducation } from "../../../../redux/reducers/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
@@ -73,6 +76,10 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
     dispatch(putUserEducation({ updateUserEducationInput, idx }));
     handleEditClose();
   };
+  const handleDelete = (e) => {
+    dispatch(removeUserEducation({ updateUserEducationInput, idx }));
+    handleEditClose();
+  };
   return (
     <div className={classes.root}>
       <div>
@@ -82,7 +89,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
           <DialogContent>
             <TextField
               required
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="school"
@@ -116,7 +123,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
             </FormControl>
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -154,7 +161,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
             </LocalizationProvider>
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -167,7 +174,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               margin="dense"
               variant="outlined"
               id="description"
@@ -182,8 +189,11 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
             />
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleDelete} size="large">
+              删除
+            </Button>
             <Button onClick={handleEditClose} size="large">
-              Cancel
+              取消
             </Button>
             <Button onClick={update} variant="contained" size="large">
               更新

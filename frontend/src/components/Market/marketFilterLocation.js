@@ -131,6 +131,7 @@ export default function ConfirmationDialog({ type = "plain" }) {
       setValue(newValue);
     }
   };
+
   if (type === "plain") {
     return (
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>

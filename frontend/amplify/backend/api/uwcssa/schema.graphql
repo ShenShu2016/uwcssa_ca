@@ -84,7 +84,7 @@ type UserEducation
   )
   @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  school: String!
+  school: String
   degree: String
   fieldOfStudy: String
   startDate: AWSDateTime
@@ -107,9 +107,9 @@ type UserExperience
   )
   @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  title: String!
+  title: String
   employmentType: String
-  companyName: String!
+  companyName: String
   location: String
   startDate: AWSDateTime
   endDate: AWSDateTime

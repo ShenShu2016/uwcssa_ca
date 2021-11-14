@@ -72,7 +72,7 @@ export default function Individual() {
     );
     console.log("postEventParticipant", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/event`);
+      history.push(`/event/${eventID}/eventSignUp/success`);
     }
   };
 
@@ -93,6 +93,13 @@ export default function Individual() {
   //   !errors.email &&
   //   state.guest.length > 0 &&
   //   !errors.guest;
+
+  const isValid =
+    eventParticipantData.name.length > 0 &&
+    eventParticipantData.email.length > 0 &&
+    eventParticipantData.phone.length > 0 &&
+    eventParticipantData.weChat.length > 0 &&
+    eventParticipantData.numberOfPeople.length > 0;
 
   return (
     <div>
@@ -150,6 +157,7 @@ export default function Individual() {
               <TextField
                 margin="normal"
                 fullWidth
+                required
                 name="weChat"
                 label="申请人微信号"
                 value={eventParticipantData.weChat}
@@ -163,6 +171,7 @@ export default function Individual() {
               <TextField
                 margin="normal"
                 fullWidth
+                required
                 name="phone"
                 label="申请人手机号码"
                 value={eventParticipantData.phone}
@@ -220,7 +229,8 @@ export default function Individual() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={uploadEventParticipant}
+                disabled={!isValid}
+                onClick={isValid ? uploadEventParticipant : null}
               >
                 提交
               </Button>

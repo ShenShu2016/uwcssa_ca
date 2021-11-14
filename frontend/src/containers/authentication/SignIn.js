@@ -58,13 +58,14 @@ export default function SignIn() {
               history.push("/account/dashboard");
             }
           }, 1000);
-        } else {
-          timer.current = window.setTimeout(() => {
-            setLoading(false);
-            console.log(response.error.message);
-            setErrorMessage(response.error.message);
-          }, 1000);
         }
+      } else {
+        console.log("我是出错的地方");
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+          console.log(response.error.message);
+          setErrorMessage(response.error.message);
+        }, 1000);
       }
     }
   };

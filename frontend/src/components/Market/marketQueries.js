@@ -121,6 +121,7 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
     }
   }
 `;
+
 export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
   query MarketItemSortBySortKeyVehicle(
     $sortKey: SortKey
@@ -182,6 +183,7 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
     }
   }
 `;
+
 export const marketItemSortBySortKeyRental = /* GraphQL */ `
   query MarketItemSortBySortKeyRental(
     $sortKey: SortKey

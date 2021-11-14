@@ -20,7 +20,7 @@ export default function PrivateRoute({
             cognitoGroup.includes(allowRoles) ? (
               <Component {...props} />
             ) : (
-              <Redirect to="/auth/signIn" />
+              <Redirect to="/noPermission" />
             )
           }
         />

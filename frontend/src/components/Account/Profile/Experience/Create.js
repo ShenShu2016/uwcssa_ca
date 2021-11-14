@@ -98,7 +98,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
           <DialogContent>
             <TextField
               required
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="title"
@@ -132,7 +132,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
             </FormControl>
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -144,7 +144,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -181,7 +181,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
             </LocalizationProvider>
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -194,7 +194,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="description"

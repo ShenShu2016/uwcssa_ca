@@ -8,6 +8,7 @@ import Footer from "../Footer.js";
 import Group from "../../components/Event/group";
 import Individual from "../../components/Event/individual";
 import React from "react";
+import Success from "../../components/Event/Success";
 
 export default function EventRouter() {
   return (
@@ -30,6 +31,11 @@ export default function EventRouter() {
           component={Group}
         />
         <Route exact path="/event/:eventID" component={EventDetail} />
+        <Route
+          exact
+          path="/event/:eventID/eventSignUp/success"
+          component={Success}
+        />
       </Switch>
       <Footer />
     </Box>

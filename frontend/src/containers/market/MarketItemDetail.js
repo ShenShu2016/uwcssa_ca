@@ -3,7 +3,6 @@ import {
   Button,
   CardHeader,
   Chip,
-  CircularProgress,
   Divider,
   Grid,
   IconButton,
@@ -20,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   contain: {
     width: "100%",
     overflow: "hidden",
-    height: "90vh",
+    height: "calc(100vh - 64px)",
     bgcolor: "black",
     [theme.breakpoints.down("md")]: {
       display: "block",
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     width: "360px",
     height: "100%",
     float: "left",
-    overflowY: "scroll",
+    overflowY: "auto",
     overflowX: "hidden",
     [theme.breakpoints.down("md")]: {
       width: "100%",
@@ -83,17 +83,31 @@ export default function MarketItemDetail() {
   const [starter, setStarter] = useState(false);
 
   useEffect(() => {
-    console.log("试试看");
     dispatch(selectedMarketItem(id));
-    setStarter(true);
-
-    // return () => dispatch(removeSelectedMarketItem());
   }, [id, dispatch]);
+
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const status = useSelector((state) => state.market.selectedMarketItemStatus);
+  useEffect(() => {
+    if (
+      marketItem === undefined ||
+      marketItem === null ||
+      marketItem.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (marketItem.marketItemCategory === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+    }
+  }, [marketItem]);
+
   console.log("id", id);
   console.log("啥玩意", marketItem);
   const {
-    // marketItemConditionList: Conditions,
+    marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
 
@@ -135,15 +149,17 @@ export default function MarketItemDetail() {
         setImgKeyFromServer([]);
       }
     };
-    if (marketItem) {
+    if (starter) {
       getImage();
     }
-  }, [marketItem]);
+  }, [starter, marketItem]);
   console.log("starter", starter);
   // console.log("marketItem.tags", marketItem.tags);
   return (
     <div className={classes.root}>
-      {marketItem ? (
+      {starter === false ? (
+        <Loading status={status} />
+      ) : (
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
@@ -212,18 +228,18 @@ export default function MarketItemDetail() {
                   {
                     Category.filter(
                       (item) => item.value === marketItem.marketItemCategory
-                    ).label
+                    )[0].label
                   }
                 </Grid>
                 <Grid item xs={4}>
                   Condition
                 </Grid>
                 <Grid item xs={8}>
-                  {/* {
+                  {
                     Conditions.filter(
-                      (item) => item.value === marketItemCondition
+                      (item) => item.value === marketItem.marketItemCondition
                     )[0].label
-                  } */}
+                  }
                 </Grid>
               </Grid>
               {marketItem.tags && (
@@ -249,6 +265,16 @@ export default function MarketItemDetail() {
                   </Stack>
                 </Box>
               )}
+              <Stack
+                direction="row"
+                marginX="1rem"
+                marginBottom="0.5rem"
+                spacing={2}
+              >
+                {marketItem.tags.map((tag, tagIdx) => {
+                  return <Chip key={tagIdx} label={tag} />;
+                })}
+              </Stack>
               <Divider />
               <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
                 Descriptions
@@ -302,22 +328,6 @@ export default function MarketItemDetail() {
             </Paper>
           </Box>
         </Stack>
-      ) : (
-        <Box
-          sx={{
-            height: "50vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack spacing={2} direction="row">
-            <CircularProgress />
-            <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
-          </Stack>
-        </Box>
       )}
     </div>
   );
