@@ -47,6 +47,7 @@ export default function marketItemFilter(marketItems, filterList, type) {
       }
     }
   };
+
   const secondStageFilterFunction = (props, firstStageFilteredMarketItems) => {
     if (Object.entries(props).length === 0) {
       return firstStageFilteredMarketItems;
@@ -61,6 +62,7 @@ export default function marketItemFilter(marketItems, filterList, type) {
       return result;
     }
   };
+
   const thirdStageFilterFunction = (
     { clickedTag },
     secondStageFilteredMarketItems
@@ -77,21 +79,7 @@ export default function marketItemFilter(marketItems, filterList, type) {
       return secondStageFilteredMarketItems;
     }
   };
-  // const forthStageFilterFunction = (
-  //   searchList,
-  //   thirdStageFilteredMarketItems
-  // ) => {
-  //   console.log("searchList", searchList);
-  //   console.log("Test!!!!!!!!!", thirdStageFilteredMarketItems);
-  //   if (searchList === "") {
-  //     return thirdStageFilteredMarketItems;
-  //   } else {
-  //     return thirdStageFilteredMarketItems.filter((item) =>
-  //       // item.title.includes(searchList) ||
-  //       item.description.includes(searchList)
-  //     );
-  //   }
-  // };
+
   const sortedFunction = (sortKey, filteredMarketItems) => {
     if (sortKey === "original") {
       return filteredMarketItems;
@@ -141,6 +129,7 @@ export default function marketItemFilter(marketItems, filterList, type) {
     filterList,
     marketItems
   );
+
   const secondStageFilteredMarketItems = secondStageFilterFunction(
     categoryFilterList,
     firstStageFilteredMarketItems
@@ -151,15 +140,9 @@ export default function marketItemFilter(marketItems, filterList, type) {
     secondStageFilteredMarketItems
   );
 
-  // const forthStageFilteredMarketItems = forthStageFilterFunction(
-  //   filterList.searchList,
-  //   thirdStageFilteredMarketItems
-  // );
-
   const sortedFilteredMarketItems = sortedFunction(
     filterList.sortKey,
     thirdStageFilteredMarketItems
-    // forthStageFilteredMarketItems
   );
 
   return sortedFilteredMarketItems;

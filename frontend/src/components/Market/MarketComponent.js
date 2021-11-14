@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MarketComponent({ item, type }) {
   const classes = useStyles();
-
   const [imageURL, setImageURL] = useState(null);
 
   const {
@@ -58,8 +57,10 @@ export default function MarketComponent({ item, type }) {
     // active,
     // ByCreatedAt,
   } = item;
+
   const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
     marketRentalOptions;
+
   useEffect(() => {
     const getImage = async () => {
       try {
@@ -211,7 +212,7 @@ export default function MarketComponent({ item, type }) {
                 lineHeight: "1.33333",
               }}
             >
-              {PType.filter((item) => item.value === propertyType).label},
+              {PType.filter((item) => item.value === propertyType)[0].label},
               {bedroomCounts} bedrooms,
               {
                 RentOrSale.filter(

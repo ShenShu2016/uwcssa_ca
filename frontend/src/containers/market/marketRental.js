@@ -1,12 +1,17 @@
 import { Box, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketItems,
+  selectAllMarketItems,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
+import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
-import { fetchMarketItems } from "../../redux/reducers/marketSlice";
 import marketItemFilter from "../../components/Market/marketItemFilter";
+import { marketItemSortBySortKeyRental } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -15,6 +20,8 @@ export default function MarketRental() {
   useTitle("Item");
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [starter, setStarter] = useState(false);
+
   const [filterList, setFilterList] = useState({
     sortKey: "original",
     min: "",
@@ -28,22 +35,34 @@ export default function MarketRental() {
 
   // const [images, setImages] = useState();
 
-  const { marketItems, fetchMarketItemsStatus } = useSelector(
-    (state) => state.market
-  );
+  const marketItems = useSelector(selectAllMarketItems);
+  const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Rental" && item.description !== null
   );
 
-  console.log("true items", trueMarketItems);
   useEffect(() => {
-    if (fetchMarketItemsStatus === "idle" || undefined) {
-      dispatch(fetchMarketItems());
+    dispatch(fetchMarketItems(marketItemSortBySortKeyRental));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (
+      marketItems === undefined ||
+      marketItems === null ||
+      marketItems.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (marketItems[0].catFriendly === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
     }
-  }, [fetchMarketItemsStatus, dispatch]);
+  }, [marketItems]);
 
   const filteredItems = marketItemFilter(trueMarketItems, filterList, "rental");
-  console.log("say something", filteredItems);
 
   // let urls = [];
   // marketItems.forEach((item) => {
@@ -115,28 +134,16 @@ export default function MarketRental() {
   console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        className={classes.contain}
-      >
-        <FilterInfo
-          form="plain"
-          type="rental"
-          filterList={filterList}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-          handlePropertyType={handlePropertyType}
-          handleAirConditioningType={handleAirConditioningType}
-          handleHeatingType={handleHeatingType}
-          handleReset={handleReset}
-        />
-        <Box className={classes.img}>
-          <MarketImgTopFilter
+      {starter === false ? (
+        <Loading status={status} />
+      ) : (
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          className={classes.contain}
+        >
+          <FilterInfo
+            form="plain"
             type="rental"
-            trueMarketItems={trueMarketItems}
-            handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
@@ -147,9 +154,25 @@ export default function MarketRental() {
             handleHeatingType={handleHeatingType}
             handleReset={handleReset}
           />
-          <Box className={classes.items}>{itemRenderList}</Box>
-        </Box>
-      </Stack>
+          <Box className={classes.img}>
+            <MarketImgTopFilter
+              type="rental"
+              trueMarketItems={trueMarketItems}
+              handleClick={handleClick}
+              filterList={filterList}
+              handleSortKey={handleSortKey}
+              handleMin={handleMin}
+              handleMax={handleMax}
+              handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+              handlePropertyType={handlePropertyType}
+              handleAirConditioningType={handleAirConditioningType}
+              handleHeatingType={handleHeatingType}
+              handleReset={handleReset}
+            />
+            <Box className={classes.items}>{itemRenderList}</Box>
+          </Box>
+        </Stack>
+      )}
     </Box>
   );
 }

@@ -52,12 +52,15 @@ const FilterContent = (props) => {
     handleHeatingType,
     handleReset,
   } = props;
+
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const { marketVehicleTypeList } = marketVehicleOptions;
   const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
     marketRentalOptions;
+
   const useStyles = marketItemStyle;
   const classes = useStyles();
+
   return (
     <React.Fragment>
       <Box
@@ -262,10 +265,7 @@ const FilterContent = (props) => {
       ) : null}
       <Divider />
 
-      <Box
-        width="100%"
-        // maxHeight="400px" overflow="auto"
-      >
+      <Box width="100%">
         <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
           Categories
         </Typography>

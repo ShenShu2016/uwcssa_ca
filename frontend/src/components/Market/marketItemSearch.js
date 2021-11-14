@@ -52,7 +52,7 @@ export const SearchArea = () => {
       },
     },
   }));
-  //Search Bar not finished yet
+
   return (
     <Search>
       <SearchIconWrapper>
