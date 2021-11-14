@@ -9,6 +9,7 @@ import generalReducer from "./reducers/generalSlice";
 // import { generalReducer } from "./reducers/generalReducer";
 import marketReducer from "./reducers/marketSlice";
 import profileReducer from "./reducers/profileSlice";
+import staffReducer from "./reducers/staffSlice";
 
 export default configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export default configureStore({
     forum: forumReducer,
     market: marketReducer,
     event: eventReducer,
+    staff: staffReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

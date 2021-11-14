@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Hiring = () => {
+export default function Hiring() {
   const classes = useStyles();
   return (
     <div>
@@ -245,6 +245,4 @@ const Hiring = () => {
       </Box>
     </div>
   );
-};
-
-export default Hiring;
+}

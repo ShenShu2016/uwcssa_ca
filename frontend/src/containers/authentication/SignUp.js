@@ -1,9 +1,13 @@
 import {
-  Avatar,
   Button,
   Container,
   CssBaseline,
+  FormControl,
   Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
   Typography,
 } from "@mui/material";
@@ -11,38 +15,40 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Alert from "@mui/material/Alert";
+import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Redirect } from "react-router";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signUp } from "../../redux/reducers/authSlice";
 import { useTitle } from "../../Hooks/useTitle";
+import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "75%", // Fix IE 11 issue.
-    marginTop: theme.spacing(4.5),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  register_button: {
-    marginTop: "2rem",
-    marginBottom: "2rem",
-    marginLeft: theme.spacing(3),
-  },
+  // paper: {
+  //   marginTop: theme.spacing(8),
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  // },
+  // avatar: {
+  //   margin: theme.spacing(1),
+  //   backgroundColor: theme.palette.secondary.main,
+  // },
+  // form: {
+  //   marginTop: theme.spacing(4.5),
+  // },
+  // submit: {
+  //   margin: theme.spacing(3, 0, 2),
+  // },
+  // register_button: {
+  //   marginTop: "2rem",
+  //   marginBottom: "2rem",
+  //   marginLeft: theme.spacing(3),
+  // },
   alert: {
     marginTop: "1.5rem",
   },
@@ -53,10 +59,11 @@ export default function SignUp() {
   useTitle("UWCSSA注册");
   const dispatch = useDispatch();
   const [accountCreated, setAccountCreated] = useState(false);
-  const [buttonState, setButtonState] = useState(true);
+  // const [buttonState, setButtonState] = useState(true);
   const [alert, setAlert] = useState(false);
   const [alertContent, setAlertContent] = useState("");
   const [loadingState, setLoadingState] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
   //const emailFormat = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const timer = useRef();
 
@@ -72,14 +79,12 @@ export default function SignUp() {
     };
   }, []);
 
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
-  );
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
 
   const onChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setFormData({ ...formData, [event.target.id]: event.target.value });
     setAlert(false);
-    setButtonState(true);
+    // setButtonState(true);
 
     /*
       由于useState是异步操作并且在onChange里面，它只能够获取用户输入的数据-1，也就是要慢一步。
@@ -94,13 +99,19 @@ export default function SignUp() {
       如果email长度为0，disable按钮
       如果email长度大于1，并且不为0，enable按钮
     */
-    if (formData.email.length === 0) setButtonState(true);
+    // if (formData.email.length === 0) setButtonState(true);
 
-    if (formData.email.length > 1 && formData.email.length !== 0)
-      setButtonState(false);
-    console.log(formData);
+    // if (formData.email.length > 1 && formData.email.length !== 0)
+    //   setButtonState(false);
+    // console.log(formData);
   };
 
+  const handleClickShowPassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
+  // const handleChangePW = (prop) => (event) => {
+  //   set({ ...values, [prop]: event.target.value });
+  // };
   const onSignUp = async () => {
     const { username, password, email } = formData;
     const response = await dispatch(signUp({ username, password, email }));
@@ -127,12 +138,22 @@ export default function SignUp() {
     return <Redirect to={`/auth/emailConfirm/${formData.username}`} />;
   }
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <Box
+        sx={{
+          marginTop: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={uwcssa_logo}
+          alt="uwcssaLogo"
+          style={{ margin: "1rem", height: "50px" }}
+        />
+
         <Typography variant="h5">注册</Typography>
         <Typography>
           已经有账户了？
@@ -145,11 +166,10 @@ export default function SignUp() {
         ) : (
           <></>
         )}
-        <form className={classes.form}>
+        <Box component="form" noValidate sx={{ my: "1rem" }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 name="username"
@@ -163,58 +183,91 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="standard"
                 required
                 fullWidth
                 name="email"
                 label="Email"
                 type="email"
                 id="email"
-                error={buttonState || alert}
-                onChange={(event) => onChange(event)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="standard"
-                required
-                fullWidth
-                name="password"
-                label="输入密码"
-                type="password"
-                id="password"
-                autoComplete="current-password"
                 error={alert}
                 onChange={(event) => onChange(event)}
               />
             </Grid>
-          </Grid>
-          <Grid className={classes.register_button}>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              disabled={buttonState || loadingState}
-              onClick={onSignUp}
-            >
-              注册
-              {loadingState && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: green[500],
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
+            <Grid item xs={12}>
+              {/* <TextField
+                required
+                fullWidth
+                name="password"
+                label="密码"
+                type={isShowPassword ? "text" : "password"}
+                id="password"
+                autoComplete="current-password"
+                error={alert}
+                onChange={(event) => onChange(event)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {isShowPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              /> */}
+              <FormControl fullWidth variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  密码
+                </InputLabel>
+                <OutlinedInput
+                  id="password"
+                  type={isShowPassword ? "text" : "password"}
+                  onChange={(event) => onChange(event)}
+                  autoFocus
+                  error={alert}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {isShowPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
                 />
-              )}
-            </Button>
+              </FormControl>
+            </Grid>
           </Grid>
-        </form>
-      </div>
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            className={classes.submit}
+            disabled={loadingState}
+            onClick={onSignUp}
+            sx={{ mt: 3, mb: 2 }}
+          >
+            注册
+            {loadingState && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: green[500],
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-0.75rem",
+                  marginLeft: "-0.75rem",
+                }}
+              />
+            )}
+          </Button>
+        </Box>
+      </Box>
     </Container>
   );
 }

@@ -15,14 +15,14 @@ import { Link, Redirect } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Auth from "@aws-amplify/auth";
+// import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import amazonLogo from "../../static/svg icons/amazon.svg";
 import appleLogo from "../../static/svg icons/apple.svg";
-import facebookLogo from "../../static/svg icons/facebook.svg";
-import googleLogo from "../../static/svg icons/google.svg";
+// import facebookLogo from "../../static/svg icons/facebook.svg";
+// import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signIn } from "../../redux/reducers/authSlice";
@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     marginTop: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: 300,
+    },
   },
   form: {
     width: "75%", // Fix IE 11 issue.
@@ -138,15 +141,15 @@ export default function AlertDialog() {
   const onChange = (event) =>
     setFormData({ ...formData, [event.target.name]: event.target.value });
 
-  const handleGoogleSignIn = async function (event) {
-    event.preventDefault();
-    try {
-      const response = await Auth.federatedSignIn({ provider: "Google" });
-      console.log("google auth response", response);
-    } catch (error) {
-      console.log("there was an error google logging in ", error);
-    }
-  };
+  // const handleGoogleSignIn = async function (event) {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await Auth.federatedSignIn({ provider: "Google" });
+  //     console.log("google auth response", response);
+  //   } catch (error) {
+  //     console.log("there was an error google logging in ", error);
+  //   }
+  // };
 
   if (isAuthenticated === true) {
     return <Redirect to="/" />;
@@ -260,7 +263,7 @@ export default function AlertDialog() {
                 </Grid>
               </Grid>
             </form>
-            <Grid
+            {/* <Grid
               item
               xs={10}
               lg={10}
@@ -315,7 +318,7 @@ export default function AlertDialog() {
                   Facebook Sign in
                 </Grid>
               </Button>
-            </Grid>
+            </Grid> */}
 
             {/* 之后增加点按转入网站的功能 */}
             <Box className={classes.more_third_party}>

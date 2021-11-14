@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     marginTop: "3rem",
-    height: "50vh",
+    height: "90vh",
   },
   title: {
     minWidth: "40%",
