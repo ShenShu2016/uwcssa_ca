@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Zoom } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { postLike, putLike, removeLike } from "../redux/reducers/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function LikeButtonGroup({ item }) {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ export default function LikeButtonGroup({ item }) {
   //   console.log("我是item", item);
   const [likesDetail, setLikesDetail] = useState({
     like: 0,
+    likeUserName: "",
     disLike: 0,
+    dislikeUserName: "",
     likeUp: false,
     disLikeUp: false,
   });
@@ -23,15 +26,16 @@ export default function LikeButtonGroup({ item }) {
 
   useEffect(() => {
     if (Object.keys(item).length !== 0) {
+      const likeTrue = item.likes.items.filter((x) => x.like === true);
+      const LikeFalse = item.likes.items.filter((x) => x.like === false);
+      // console.log(likeTrue);
       setLikesDetail({
-        like: item.likes.items.filter((x) => x.like === true).length,
-        disLike: item.likes.items.filter((x) => x.like === false).length,
-        likeUp:
-          item.likes.items.filter((x) => x.like === true && x.owner === userID)
-            .length >= 1,
-        disLikeUp:
-          item.likes.items.filter((x) => x.like === false && x.owner === userID)
-            .length >= 1,
+        like: likeTrue.length,
+        disLike: LikeFalse.length,
+        likeUp: likeTrue.filter((x) => x.owner === userID).length >= 1,
+        disLikeUp: LikeFalse.filter((x) => x.owner === userID).length >= 1,
+        likeUserName: likeTrue.map((x) => x.userID).join(),
+        dislikeUserName: LikeFalse.map((x) => x.userID).join(),
       });
     }
   }, [item, userID]);
@@ -130,26 +134,37 @@ export default function LikeButtonGroup({ item }) {
 
   return (
     <Box>
-      <Button
-        size="small"
-        color="primary"
-        startIcon={
-          likesDetail.likeUp ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />
-        }
-        onClick={handleLikeBTNClick}
+      <Tooltip title={`${likesDetail.likeUserName}`} TransitionComponent={Zoom}>
+        <Button
+          size="small"
+          color="primary"
+          startIcon={
+            likesDetail.likeUp ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />
+          }
+          onClick={handleLikeBTNClick}
+        >
+          {likesDetail.like}
+        </Button>
+      </Tooltip>
+      <Tooltip
+        title={`${likesDetail.dislikeUserName}`}
+        TransitionComponent={Zoom}
       >
-        {likesDetail.like}
-      </Button>
-      <Button
-        size="small"
-        color="primary"
-        startIcon={
-          likesDetail.disLikeUp ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />
-        }
-        onClick={handleDisLikeBTNClick}
-      >
-        {likesDetail.disLike}
-      </Button>
+        <Button
+          size="small"
+          color="primary"
+          startIcon={
+            likesDetail.disLikeUp ? (
+              <ThumbDownIcon />
+            ) : (
+              <ThumbDownOutlinedIcon />
+            )
+          }
+          onClick={handleDisLikeBTNClick}
+        >
+          {likesDetail.disLike}
+        </Button>
+      </Tooltip>
     </Box>
   );
 }
