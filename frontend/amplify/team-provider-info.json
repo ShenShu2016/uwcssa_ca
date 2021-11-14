@@ -19,11 +19,11 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-4d5a7857483456757248-build.zip"
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-446b616c5152586f4956-build.zip"
         },
         "updateLastReplyAt": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/updateLastReplyAt-4172786b734f334e5468-build.zip"
+          "s3Key": "amplify-builds/updateLastReplyAt-6b535632584232744349-build.zip"
         }
       }
     }
