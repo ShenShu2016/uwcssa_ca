@@ -96,9 +96,7 @@ export default function UwcssaIntro() {
   const { userCounts, fetchUserCountsStatus } = useSelector(
     (state) => state.general
   );
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
-  );
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
   useEffect(() => {
     if (fetchUserCountsStatus === "idle" || undefined) {
       dispatch(fetchUserCounts());
@@ -114,7 +112,7 @@ export default function UwcssaIntro() {
         component={Link}
         to="/auth/signIn"
       >
-        成为会员
+        注册帐号
       </Button>
     </div>
   );
@@ -150,7 +148,7 @@ export default function UwcssaIntro() {
     </div>
   );
   return (
-    <React.Fragment>
+    <Box>
       <CssBaseline />
       <div>
         <div className={classes.root}>
@@ -261,14 +259,19 @@ export default function UwcssaIntro() {
                         content="textOnly"
                         className={classes.relateButton}
                       >
-                        <Button disabled={true}>UWCSSA新闻</Button>
-                        <Button disabled={true}>UWCSSA活动</Button>
+                        <Button component={Link} to="/article">
+                          UWCSSA新闻
+                        </Button>
+                        <Button component={Link} to="/event">
+                          UWCSSA活动
+                        </Button>
                         <Button
                           variant="outlined"
                           size="medium"
                           content="textOnly"
                           color="primary"
-                          disabled={true}
+                          component={Link}
+                          to="/forum"
                         >
                           UWCSSA论坛（建设中）
                         </Button>
@@ -281,6 +284,6 @@ export default function UwcssaIntro() {
           </Box>
         </div>
       </div>
-    </React.Fragment>
+    </Box>
   );
 }
