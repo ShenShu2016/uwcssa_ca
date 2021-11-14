@@ -92,7 +92,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
           <DialogContent>
             <TextField
               required
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="title"
@@ -126,7 +126,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
             </FormControl>
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -138,7 +138,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -175,7 +175,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
             </LocalizationProvider>
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               variant="outlined"
@@ -188,7 +188,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
             />
             <div className={classes.splitter} />
             <TextField
-              autoFocus
+              //autoFocus
               fullWidth
               margin="dense"
               id="description"
