@@ -41,7 +41,7 @@ export default function LikeButtonGroup({ item }) {
       });
     }
   }, [item, username]);
-  console.log("likesDetail", likesDetail);
+  // console.log("likesDetail", likesDetail);
   const handleLikeBTNClick = async (event) => {
     if (!isAuthenticated) {
       history.push("/auth/signIn");
