@@ -191,23 +191,52 @@ export default function EventBody({ event }) {
                 >
                   <b>如果你对此活动有任何疑问可以扫描以下二维码</b>
                 </Typography>
-                {qrCodeURL ? (
-                  <CardMedia
-                    component="img"
-                    style={{
-                      width: "auto",
-                      maxHeight: "150px",
-                      marginBottom: "3rem",
-                    }}
-                    image={qrCodeURL}
-                  />
+
+                {userInfo.isAuthenticated ? (
+                  <div>
+                    {qrCodeURL ? (
+                      <CardMedia
+                        component="img"
+                        style={{
+                          width: "auto",
+                          maxHeight: "150px",
+                          marginBottom: "3rem",
+                        }}
+                        image={qrCodeURL}
+                      />
+                    ) : (
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ marginBottom: "3rem" }}
+                      >
+                        暂无二维码
+                      </Typography>
+                    )}
+                    <CardActions>
+                      <Button
+                        size="small"
+                        component={Link}
+                        to={`/event/${event.id}/eventSignUp`}
+                      >
+                        报名
+                      </Button>
+                    </CardActions>
+                  </div>
                 ) : (
-                  <Typography variant="subtitle1" sx={{ marginBottom: "3rem" }}>
-                    暂无二维码
-                  </Typography>
+                  <div>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ marginBottom: "3rem" }}
+                    >
+                      需要登入才能扫描哦
+                    </Typography>
+                    <CardActions>
+                      <SignUpRequest />
+                    </CardActions>
+                  </div>
                 )}
 
-                <CardActions>
+                {/* <CardActions>
                   {userInfo.isAuthenticated ? (
                     <Button
                       size="small"
@@ -219,7 +248,7 @@ export default function EventBody({ event }) {
                   ) : (
                     <SignUpRequest />
                   )}
-                </CardActions>
+                </CardActions> */}
               </Box>
               {/* {content}
               {userInfo.isAuthenticated ? (
