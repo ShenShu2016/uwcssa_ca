@@ -9,6 +9,7 @@ const MarketForm = ({
   onChange,
   options,
   required,
+  error = false,
   disabled = false,
 }) => {
   const useStyles = makeStyles((theme) => ({
@@ -20,8 +21,15 @@ const MarketForm = ({
 
   return (
     <div className="newTopic">
-      <FormControl variant="outlined" fullWidth required={required}>
-        <InputLabel id="demo-simple-select-outlined-label2">{title}</InputLabel>
+      <FormControl
+        variant="outlined"
+        fullWidth
+        required={required}
+        error={error}
+      >
+        <InputLabel id="demo-simple-select-outlined-label2">{`${title} ${
+          error ? "is required!" : ""
+        }`}</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label2"
           id="demo-simple-select-outlined2"

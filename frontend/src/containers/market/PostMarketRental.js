@@ -412,7 +412,7 @@ export default function PostMarketRental() {
           </Grid>
 
           <Grid item xs={6}>
-            <CustomTags />
+            <CustomTags placeholder="无烟，新装修..." />
           </Grid>
 
           <Grid item xs={3}>

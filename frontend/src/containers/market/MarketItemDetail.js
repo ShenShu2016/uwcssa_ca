@@ -44,7 +44,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
   },
-  photo: {
+  images: {
+    height: "100%",
+    width: "calc(100% - 360px)",
+    // bgcolor="black"
+    position: "relative",
+    overflow: "hidden",
+    float: "left",
     [theme.breakpoints.down("md")]: {
       width: "100%",
       height: "50vh",
@@ -73,6 +79,164 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+export function MarketItemInfo({ marketItem }) {
+  const classes = useStyles();
+
+  const {
+    marketItemConditionList: Conditions,
+    marketItemCategoryList: Category,
+  } = marketItemOptions;
+  return (
+    <Paper sx={{ maxWidth: "100%" }}>
+      <Typography
+        fontWeight="bold"
+        variant="h5"
+        marginLeft="1rem"
+        paddingTop="0.5rem"
+      >
+        {marketItem.title.length === 0 ? "Title Goes Here" : marketItem.title}
+      </Typography>
+      <Typography marginX="1rem" marginTop="0.25rem">
+        $ {marketItem.price.length === 0 ? "Price Goes Here" : marketItem.price}
+      </Typography>
+      <Typography marginX="1rem" variant="caption" color="gray">
+        发布日期：
+        {marketItem.createdAt.length === 0
+          ? ""
+          : marketItem.createdAt.slice(0, 10)}
+      </Typography>
+      <Stack
+        justifyContent="center"
+        marginY="0.5rem"
+        direction="row"
+        spacing={1}
+      >
+        <Button
+          startIcon={<MessageIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="info"
+        >
+          Contact
+        </Button>
+        <Button
+          startIcon={<BookmarksIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="info"
+        >
+          Save
+        </Button>
+        <Button
+          startIcon={<ShareIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="info"
+        >
+          Share
+        </Button>
+      </Stack>
+      <Divider />
+      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+        Details
+      </Typography>
+      <Grid marginX="0.5rem" container spacing={2}>
+        <Grid item xs={4}>
+          Category
+        </Grid>
+        <Grid item xs={8}>
+          {Category.includes(marketItem.marketItemCategory)
+            ? Category.filter(
+                (item) => item.value === marketItem.marketItemCategory
+              )[0].label
+            : ""}
+        </Grid>
+        <Grid item xs={4}>
+          Condition
+        </Grid>
+        <Grid item xs={8}>
+          {Conditions.includes(marketItem.marketItemCondition)
+            ? Conditions.filter(
+                (item) => item.value === marketItem.marketItemCondition
+              )[0].label
+            : ""}
+        </Grid>
+      </Grid>
+      {marketItem.tags && (
+        <Box>
+          <Box>
+            <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+              Tags
+            </Typography>
+          </Box>
+          <Stack
+            direction="row"
+            marginX="1rem"
+            marginBottom="0.5rem"
+            spacing={2}
+          >
+            {marketItem.tags.map((tag, tagIdx) => {
+              return <Chip key={tagIdx} label={tag} />;
+            })}
+          </Stack>
+        </Box>
+      )}
+      <Divider />
+      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+        Descriptions
+      </Typography>
+      <Typography marginX="1rem" marginY="0.25rem">
+        {marketItem.description}
+      </Typography>
+      <Paper
+        sx={{
+          marginX: "1rem",
+          marginY: "0.25rem",
+          height: "250px",
+          backgroundColor: "rgb(243, 246, 249)",
+          marginBottom: "1rem",
+        }}
+      >
+        Google Map
+      </Paper>
+      <Typography margin="1rem" marginY="0.25rem">
+        {marketItem.location.length === 0
+          ? "Location Goes Here"
+          : marketItem.location}
+      </Typography>
+      <Divider />
+      <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
+        Seller Infos
+      </Typography>
+      <Box
+        sx={{
+          margin: "1rem",
+          // bgcolor: "#ff9800",
+        }}
+      >
+        <CardHeader
+          avatar={
+            <CustomAvatar
+              // aria-label="recipe"
+              className={classes.avatar}
+              component={true}
+              user={marketItem.user}
+              // to={`/account/profile/${owner}`}
+            ></CustomAvatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={marketItem.owner}
+          subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
+        />
+      </Box>
+    </Paper>
+  );
+}
 
 export default function MarketItemDetail() {
   const classes = useStyles();
@@ -106,10 +270,6 @@ export default function MarketItemDetail() {
 
   console.log("id", id);
   console.log("啥玩意", marketItem);
-  const {
-    marketItemConditionList: Conditions,
-    marketItemCategoryList: Category,
-  } = marketItemOptions;
 
   // const {
   //   // id,
@@ -164,168 +324,14 @@ export default function MarketItemDetail() {
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
         >
-          <SwipeViews images={imgKeyFromServer} />
-
+          <Box className={classes.images}>
+            <SwipeViews images={imgKeyFromServer} />
+          </Box>
           <Box
             // bgcolor="yellow"
             className={classes.info}
           >
-            <Paper sx={{ maxWidth: "100%" }}>
-              <Typography
-                fontWeight="bold"
-                variant="h5"
-                marginLeft="1rem"
-                paddingTop="0.5rem"
-              >
-                {marketItem.title}
-              </Typography>
-              <Typography marginX="1rem" marginTop="0.25rem">
-                $ {marketItem.price}
-              </Typography>
-              <Typography marginX="1rem" variant="caption" color="gray">
-                发布日期： {marketItem.createdAt.slice(0, 10)}
-              </Typography>
-              <Stack
-                justifyContent="center"
-                marginY="0.5rem"
-                direction="row"
-                spacing={1}
-              >
-                <Button
-                  startIcon={<MessageIcon />}
-                  onClick={() => console.log("clicked!")}
-                  variant="outlined"
-                  color="info"
-                >
-                  Contact
-                </Button>
-                <Button
-                  startIcon={<BookmarksIcon />}
-                  onClick={() => console.log("clicked!")}
-                  variant="outlined"
-                  color="info"
-                >
-                  Save
-                </Button>
-                <Button
-                  startIcon={<ShareIcon />}
-                  onClick={() => console.log("clicked!")}
-                  variant="outlined"
-                  color="info"
-                >
-                  Share
-                </Button>
-              </Stack>
-              <Divider />
-              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                Details
-              </Typography>
-              <Grid marginX="0.5rem" container spacing={2}>
-                <Grid item xs={4}>
-                  Category
-                </Grid>
-                <Grid item xs={8}>
-                  {
-                    Category.filter(
-                      (item) => item.value === marketItem.marketItemCategory
-                    )[0].label
-                  }
-                </Grid>
-                <Grid item xs={4}>
-                  Condition
-                </Grid>
-                <Grid item xs={8}>
-                  {
-                    Conditions.filter(
-                      (item) => item.value === marketItem.marketItemCondition
-                    )[0].label
-                  }
-                </Grid>
-              </Grid>
-              {marketItem.tags && (
-                <Box>
-                  <Box>
-                    <Typography
-                      marginX="1rem"
-                      marginY="0.25rem"
-                      fontWeight="600"
-                    >
-                      Tags
-                    </Typography>
-                  </Box>
-                  <Stack
-                    direction="row"
-                    marginX="1rem"
-                    marginBottom="0.5rem"
-                    spacing={2}
-                  >
-                    {marketItem.tags.map((tag, tagIdx) => {
-                      return <Chip key={tagIdx} label={tag} />;
-                    })}
-                  </Stack>
-                </Box>
-              )}
-              <Stack
-                direction="row"
-                marginX="1rem"
-                marginBottom="0.5rem"
-                spacing={2}
-              >
-                {marketItem.tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} />;
-                })}
-              </Stack>
-              <Divider />
-              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                Descriptions
-              </Typography>
-              <Typography marginX="1rem" marginY="0.25rem">
-                {marketItem.description}
-              </Typography>
-              <Paper
-                sx={{
-                  marginX: "1rem",
-                  marginY: "0.25rem",
-                  height: "250px",
-                  backgroundColor: "rgb(243, 246, 249)",
-                  marginBottom: "1rem",
-                }}
-              >
-                Google Map
-              </Paper>
-              <Typography margin="1rem" marginY="0.25rem">
-                {marketItem.location}
-              </Typography>
-              <Divider />
-              <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
-                Seller Infos
-              </Typography>
-              <Box
-                sx={{
-                  margin: "1rem",
-                  // bgcolor: "#ff9800",
-                }}
-              >
-                <CardHeader
-                  avatar={
-                    <CustomAvatar
-                      // aria-label="recipe"
-                      className={classes.avatar}
-                      component={true}
-                      user={marketItem.user}
-                      // to={`/account/profile/${owner}`}
-                    ></CustomAvatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={marketItem.owner}
-                  subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
-                />
-              </Box>
-            </Paper>
+            <MarketItemInfo marketItem={marketItem} />
           </Box>
         </Stack>
       )}

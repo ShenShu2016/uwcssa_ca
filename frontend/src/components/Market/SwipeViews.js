@@ -4,25 +4,26 @@ import React, { useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import IconButton from "@mui/material/IconButton";
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles((theme) => ({
-  contain: {
-    height: "100%",
-    width: "calc(100% - 360px)",
-    // bgcolor="black"
-    position: "relative",
-    overflow: "hidden",
-    float: "left",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "50vh",
-    },
-  },
-}));
+// import { makeStyles } from "@mui/styles";
+
+// const useStyles = makeStyles((theme) => ({
+//   contain: {
+//     height: "100%",
+//     width: "calc(100% - 360px)",
+//     // bgcolor="black"
+//     position: "relative",
+//     overflow: "hidden",
+//     float: "left",
+//     [theme.breakpoints.down("md")]: {
+//       width: "100%",
+//       height: "50vh",
+//     },
+//   },
+// }));
 
 export default function SwipeViews({ images }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = images.length;
   console.log("maxSteps", maxSteps);
@@ -35,7 +36,8 @@ export default function SwipeViews({ images }) {
   };
 
   return (
-    <Box className={classes.contain}>
+    // <Box className={classes.contain}>
+    <Box width="100%" height="100%" position="relative" overflow="hidden">
       <Box
         sx={{
           backgroundImage: `url(${images[activeStep]})`,
@@ -46,12 +48,12 @@ export default function SwipeViews({ images }) {
           transform: "scale(1.1)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          backgroundPosition: "bottom",
+          backgroundPosition: "center",
         }}
       >
         something
       </Box>
-      {maxSteps === 1 ? null : (
+      {maxSteps <= 1 ? null : (
         <Box
           sx={{
             bgcolor: "white",
@@ -68,13 +70,13 @@ export default function SwipeViews({ images }) {
             aria-label="upload picture"
             component="span"
             disabled={activeStep === 0 ? true : false}
-            onClick={handleBack}
+            onClick={() => handleBack()}
           >
             <ArrowBackIosNewIcon />
           </IconButton>
         </Box>
       )}
-      {maxSteps === 1 ? null : (
+      {maxSteps <= 1 ? null : (
         <Box
           sx={{
             bgcolor: "white",
@@ -91,7 +93,7 @@ export default function SwipeViews({ images }) {
             aria-label="upload picture"
             component="span"
             disabled={activeStep === maxSteps - 1 ? true : false}
-            onClick={handleNext}
+            onClick={() => handleNext()}
           >
             <ArrowForwardIosIcon />
           </IconButton>
