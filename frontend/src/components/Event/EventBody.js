@@ -1,10 +1,13 @@
 import {
   Box,
   Button,
+  Card,
   CardActions,
+  CardContent,
   CardMedia,
   CircularProgress,
   Container,
+  Grid,
   Tab,
   Tabs,
   Typography,
@@ -68,6 +71,7 @@ export default function EventBody({ event }) {
     posterImgS3Key,
     qrCodeImgS3Key,
     topic,
+    sponsor,
   } = event;
 
   useEffect(() => {
@@ -115,7 +119,7 @@ export default function EventBody({ event }) {
     <Box>
       {event.startDate ? (
         <div>
-          <Container size="sm">
+          <Container size="md">
             <Box
               style={{
                 display: "flex",
@@ -127,10 +131,7 @@ export default function EventBody({ event }) {
             >
               <CardMedia
                 component="img"
-                style={{
-                  width: "auto",
-                  maxHeight: "300px",
-                }}
+                sx={{ width: "auto", maxHeight: "300px" }}
                 image={posterURL}
               />
             </Box>
@@ -164,79 +165,216 @@ export default function EventBody({ event }) {
                   component="div"
                   gutterBottom
                 >
-                  {location} | {topic.name} | {eventStatus}
+                  {location}
                 </Typography>
               </Box>
             </Box>
           </Container>
-          <Box sx={{ width: "100%" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab label="活动详情" {...a11yProps(0)} />
-                <Tab label="活动讨论" {...a11yProps(1)} />
-              </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-              {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
-              <Box sx={{ width: "100%" }}>
-                {content}
-                <Typography
-                  variant="subtitle1"
-                  sx={{ marginTop: "3rem" }}
-                  gutterBottom
+          <div sx={{ width: "100%" }}>
+            <Container size="md">
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
                 >
-                  <b>如果你对此活动有任何疑问可以扫描以下二维码</b>
-                </Typography>
+                  <Tab label="活动详情" {...a11yProps(0)} />
+                  <Tab label="活动讨论" {...a11yProps(1)} />
+                </Tabs>
+              </Box>
+            </Container>
 
-                {userInfo.isAuthenticated ? (
-                  <div>
-                    {qrCodeURL ? (
-                      <CardMedia
-                        component="img"
-                        style={{
-                          width: "auto",
-                          maxHeight: "150px",
-                          marginBottom: "3rem",
-                        }}
-                        image={qrCodeURL}
-                      />
-                    ) : (
+            <Box sx={{ width: "100%", bgcolor: "#EBF5FB" }}>
+              <TabPanel value={value} index={0}>
+                {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
+                <Container size="md">
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Grid
+                      container
+                      spacing={{ xs: 2, md: 3 }}
+                      columns={{ xs: 6, sm: 8, md: 12 }}
+                    >
+                      <Grid item xs={6} sm={8} md={8}>
+                        <Card>
+                          <CardContent>
+                            <Typography
+                              variant="h5"
+                              component="div"
+                              gutterBottom
+                            >
+                              <b>Details</b>
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                              Sponsored by {sponsor}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                              Location: {location}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                              Topic: {topic.name}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                              Status: {eventStatus}
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              sx={{ marginTop: "1rem" }}
+                              gutterBottom
+                            >
+                              {content}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                      <Grid item xs={6} sm={8} md={4}>
+                        <Card>
+                          <CardContent>
+                            <Typography
+                              variant="h5"
+                              component="div"
+                              gutterBottom
+                            >
+                              <b>Participants</b>
+                            </Typography>
+                            <Typography
+                              variant="h6"
+                              sx={{ textAlign: "center" }}
+                              gutterBottom
+                            >
+                              100 GOING
+                            </Typography>
+                            {userInfo.isAuthenticated ? (
+                              <CardActions>
+                                <Button
+                                  size="small"
+                                  component={Link}
+                                  to={`/event/${event.id}/eventSignUp`}
+                                >
+                                  报名
+                                </Button>
+                              </CardActions>
+                            ) : (
+                              <SignUpRequest />
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                      <Grid item xs={6} sm={8} md={8}>
+                        <Card>
+                          <CardContent>
+                            <Typography
+                              variant="h5"
+                              component="div"
+                              gutterBottom
+                            >
+                              <b>Contact</b>
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              如果你对此活动有任何疑问可以扫描以下二维码
+                            </Typography>
+                            {userInfo.isAuthenticated ? (
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {qrCodeURL ? (
+                                  <CardMedia
+                                    component="img"
+                                    style={{
+                                      width: "auto",
+                                      maxHeight: "150px",
+                                    }}
+                                    image={qrCodeURL}
+                                  />
+                                ) : (
+                                  <Box
+                                    sx={{
+                                      display: "flex",
+                                      justifyContent: "center",
+                                    }}
+                                  >
+                                    <Typography variant="subtitle1">
+                                      暂无二维码
+                                    </Typography>
+                                  </Box>
+                                )}
+                              </Box>
+                            ) : (
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                <Typography
+                                  variant="subtitle1"
+                                  sx={{ marginBottom: "3rem" }}
+                                >
+                                  需要登入才能扫描哦
+                                </Typography>
+                              </Box>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                  {/* <Typography
+                    variant="subtitle1"
+                    sx={{ marginTop: "3rem" }}
+                    gutterBottom
+                  >
+                    <b>如果你对此活动有任何疑问可以扫描以下二维码</b>
+                  </Typography>
+
+                  {userInfo.isAuthenticated ? (
+                    <div>
+                      {qrCodeURL ? (
+                        <CardMedia
+                          component="img"
+                          style={{
+                            width: "auto",
+                            maxHeight: "150px",
+                            marginBottom: "3rem",
+                          }}
+                          image={qrCodeURL}
+                        />
+                      ) : (
+                        <Typography
+                          variant="subtitle1"
+                          sx={{ marginBottom: "3rem" }}
+                        >
+                          暂无二维码
+                        </Typography>
+                      )}
+                      <CardActions>
+                        <Button
+                          size="small"
+                          component={Link}
+                          to={`/event/${event.id}/eventSignUp`}
+                        >
+                          报名
+                        </Button>
+                      </CardActions>
+                    </div>
+                  ) : (
+                    <div>
                       <Typography
                         variant="subtitle1"
                         sx={{ marginBottom: "3rem" }}
                       >
-                        暂无二维码
+                        需要登入才能扫描哦
                       </Typography>
-                    )}
-                    <CardActions>
-                      <Button
-                        size="small"
-                        component={Link}
-                        to={`/event/${event.id}/eventSignUp`}
-                      >
-                        报名
-                      </Button>
-                    </CardActions>
-                  </div>
-                ) : (
-                  <div>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ marginBottom: "3rem" }}
-                    >
-                      需要登入才能扫描哦
-                    </Typography>
-                    <CardActions>
-                      <SignUpRequest />
-                    </CardActions>
-                  </div>
-                )}
+                      <CardActions>
+                        <SignUpRequest />
+                      </CardActions>
+                    </div>
+                  )} */}
 
-                {/* <CardActions>
+                  {/* <CardActions>
                   {userInfo.isAuthenticated ? (
                     <Button
                       size="small"
@@ -249,8 +387,8 @@ export default function EventBody({ event }) {
                     <SignUpRequest />
                   )}
                 </CardActions> */}
-              </Box>
-              {/* {content}
+                </Container>
+                {/* {content}
               {userInfo.isAuthenticated ? (
                 <Button
                   size="small"
@@ -262,12 +400,13 @@ export default function EventBody({ event }) {
               ) : (
                 <SignUpRequest />
               )} */}
-            </TabPanel>
-            <TabPanel value={value} index={1} component={"div"}>
-              <EventCommentsPost event={event} />
-              <EventComments event={event} />
-            </TabPanel>
-          </Box>
+              </TabPanel>
+              <TabPanel value={value} index={1} component={"div"}>
+                <EventCommentsPost event={event} />
+                <EventComments event={event} />
+              </TabPanel>
+            </Box>
+          </div>
         </div>
       ) : (
         <div>
