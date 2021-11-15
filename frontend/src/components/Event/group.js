@@ -10,7 +10,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
-
+import eventImg from "../../static/event.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useTitle } from "../../Hooks/useTitle";
 import { postEventParticipant } from "../../redux/reducers/eventSlice";
@@ -111,8 +111,7 @@ export default function Individual() {
           sm={4}
           md={6}
           sx={{
-            backgroundImage:
-              "url(https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/63/2020/10/why-do-we-celebrate-halloween-920x613.png)",
+            backgroundImage: `url(${eventImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -132,6 +131,8 @@ export default function Individual() {
                 fullWidth
                 label="申请人姓名"
                 name="name"
+                autoComplete="name"
+                autoFocus
                 value={eventParticipantData.name}
                 onChange={(e) =>
                   setEventParticipantData({
@@ -146,6 +147,8 @@ export default function Individual() {
                 fullWidth
                 label="申请人邮箱"
                 name="email"
+                autoComplete="email"
+                autoFocus
                 value={eventParticipantData.email}
                 onChange={(e) =>
                   setEventParticipantData({
@@ -159,6 +162,8 @@ export default function Individual() {
                 fullWidth
                 required
                 name="weChat"
+                autoComplete="weChat"
+                autoFocus
                 label="申请人微信号"
                 value={eventParticipantData.weChat}
                 onChange={(e) =>
@@ -173,6 +178,8 @@ export default function Individual() {
                 fullWidth
                 required
                 name="phone"
+                autoComplete="phone"
+                autoFocus
                 label="申请人手机号码"
                 value={eventParticipantData.phone}
                 onChange={(e) =>
@@ -187,6 +194,8 @@ export default function Individual() {
                 fullWidth
                 label="地址（如需接送）"
                 name="address"
+                autoComplete="address"
+                autoFocus
                 onChange={(e) =>
                   setEventParticipantData({
                     ...eventParticipantData,
@@ -200,6 +209,8 @@ export default function Individual() {
                 fullWidth
                 label="参加总人数（含申请人）"
                 name="numberOfPeople"
+                autoComplete="numberOfPeople"
+                autoFocus
                 value={eventParticipantData.numberOfPeople}
                 onChange={(e) =>
                   setEventParticipantData({
