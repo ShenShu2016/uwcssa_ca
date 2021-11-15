@@ -129,7 +129,7 @@ export default function Event() {
         </Box>
 
         <div>
-          <Box sx={{ bgcolor: "#EBF5FB", paddingBottom: "3rem" }}>
+          <Box sx={{ bgcolor: "#F9F9F9", paddingBottom: "3rem" }}>
             <Container>
               <Grid
                 container

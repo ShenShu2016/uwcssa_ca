@@ -109,12 +109,41 @@ export default function EventMain({ event }) {
               </Typography>
             </Box>
 
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              地址： {location}
-            </Typography>
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              类别： {topic.name}
-            </Typography>
+            {location ? (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                地址： {location}
+              </Typography>
+            ) : (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                地址： 无
+              </Typography>
+            )}
+            {topic.name ? (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                类别： {topic.name}
+              </Typography>
+            ) : (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                类别： 无
+              </Typography>
+            )}
+
             {/* 
             <Box
               style={{
