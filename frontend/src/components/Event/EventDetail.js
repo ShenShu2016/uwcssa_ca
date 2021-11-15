@@ -18,10 +18,9 @@ import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: "1200px",
     margin: "auto",
-    paddingBlock: "3rem",
-    paddingInline: "1rem",
+    // paddingBlock: "3rem",
+    // paddingInline: "1rem",
   },
 });
 export default function EventDetail() {
@@ -40,12 +39,12 @@ export default function EventDetail() {
 
   return (
     <div className={classes.root}>
-      <Box>
+      <Box sx={{ paddingBlock: "1rem", paddingInline: "1rem" }}>
         <IconButton component={Link} to="/event">
           <ArrowBackIcon />
         </IconButton>
-        <EventBody event={event} />
       </Box>
+      <EventBody event={event} />
     </div>
   );
 }
