@@ -41,7 +41,13 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     // paddingBlock: "3rem",
   },
-  photo: {
+  images: {
+    height: "100%",
+    width: "calc(100% - 360px)",
+    // bgcolor="black"
+    position: "relative",
+    overflow: "hidden",
+    float: "left",
     [theme.breakpoints.down("md")]: {
       width: "100%",
       height: "50vh",
@@ -167,12 +173,10 @@ export default function MarketRentalDetail() {
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
         >
-          <SwipeViews images={imgKeyFromServer} />
-
-          <Box
-            // bgcolor="yellow"
-            className={classes.info}
-          >
+          <Box className={classes.images}>
+            <SwipeViews images={imgKeyFromServer} />
+          </Box>
+          <Box className={classes.info}>
             <Paper sx={{ maxWidth: "100%" }}>
               <Typography
                 fontWeight="bold"

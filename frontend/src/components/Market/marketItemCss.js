@@ -18,7 +18,7 @@ export const marketItemStyle = makeStyles((theme) => ({
   contain: {
     width: "100%",
     overflow: "hidden",
-    height: "100vh",
+    height: "calc(100vh - 64px)",
     //   bgcolor: "black",
     [theme.breakpoints.down("md")]: {
       display: "block",

@@ -49,6 +49,8 @@ export default function MarketItem() {
     } else {
       if (marketItems[0].marketItemCategory === undefined) {
         setStarter(false);
+      } else if (marketItems[0].tags === undefined) {
+        setStarter(false);
       } else {
         setStarter(true);
       }

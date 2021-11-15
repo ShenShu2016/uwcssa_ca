@@ -81,7 +81,7 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        // state.marketItems = action.payload;
+        marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
