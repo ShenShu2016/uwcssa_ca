@@ -15,8 +15,13 @@ export function GetTags() {
 //create a custom tag input
 //able to add/delete tag
 //when a tag was duplicated, an error message ("this tag has been already been created!") would pop up
-export default function CustomTags({ placeholder }) {
-  const [tags, setTags] = useState([]);
+export default function CustomTags({
+  placeholder,
+  initial = ["Tags Here"],
+  onKeyDown = null,
+  onDelete = null,
+}) {
+  const [tags, setTags] = useState(initial);
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
 
@@ -27,6 +32,7 @@ export default function CustomTags({ placeholder }) {
   const deleteHandler = (something) => () => {
     const newTags = [...tags].filter((tag) => tag !== something);
     setTags(newTags);
+    onDelete(something);
   };
 
   function inputKeyDown(e) {
@@ -40,6 +46,7 @@ export default function CustomTags({ placeholder }) {
       } else {
         e.preventDefault();
         const newTags = Array.from(tags).concat(val);
+        onKeyDown(val);
         setTags(newTags);
         setTagInput("");
         setError("");

@@ -27,6 +27,7 @@ import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
+import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -87,24 +88,42 @@ export function MarketItemInfo({ marketItem }) {
     marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
+
+  const {
+    // id,
+    // name,
+    // imgS3Keys,
+    title,
+    price,
+    description,
+    location,
+    marketItemCondition,
+    marketItemCategory,
+    tags,
+    // active,
+    createdAt,
+    user,
+    // userID,
+    // ByCreatedAt,
+    owner,
+  } = marketItem;
+
   return (
     <Paper sx={{ maxWidth: "100%" }}>
       <Typography
         fontWeight="bold"
         variant="h5"
         marginLeft="1rem"
+        marginRight="1rem"
         paddingTop="0.5rem"
       >
-        {marketItem.title.length === 0 ? "Title Goes Here" : marketItem.title}
+        {title.length === 0 ? "Title Goes Here" : title}
       </Typography>
       <Typography marginX="1rem" marginTop="0.25rem">
-        $ {marketItem.price.length === 0 ? "Price Goes Here" : marketItem.price}
+        $ {price.length === 0 ? "Price Goes Here" : price}
       </Typography>
       <Typography marginX="1rem" variant="caption" color="gray">
-        发布日期：
-        {marketItem.createdAt.length === 0
-          ? ""
-          : marketItem.createdAt.slice(0, 10)}
+        {createdAt.length === 0 ? "" : moment(createdAt).fromNow()}
       </Typography>
       <Stack
         justifyContent="center"
@@ -146,24 +165,22 @@ export function MarketItemInfo({ marketItem }) {
           Category
         </Grid>
         <Grid item xs={8}>
-          {Category.includes(marketItem.marketItemCategory)
-            ? Category.filter(
-                (item) => item.value === marketItem.marketItemCategory
-              )[0].label
+          {Category.map((item) => item.value).includes(marketItemCategory)
+            ? Category.filter((item) => item.value === marketItemCategory)[0]
+                .label
             : ""}
         </Grid>
         <Grid item xs={4}>
           Condition
         </Grid>
         <Grid item xs={8}>
-          {Conditions.includes(marketItem.marketItemCondition)
-            ? Conditions.filter(
-                (item) => item.value === marketItem.marketItemCondition
-              )[0].label
+          {Conditions.map((item) => item.value).includes(marketItemCondition)
+            ? Conditions.filter((item) => item.value === marketItemCondition)[0]
+                .label
             : ""}
         </Grid>
       </Grid>
-      {marketItem.tags && (
+      {tags && (
         <Box>
           <Box>
             <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
@@ -176,7 +193,7 @@ export function MarketItemInfo({ marketItem }) {
             marginBottom="0.5rem"
             spacing={2}
           >
-            {marketItem.tags.map((tag, tagIdx) => {
+            {tags.map((tag, tagIdx) => {
               return <Chip key={tagIdx} label={tag} />;
             })}
           </Stack>
@@ -187,7 +204,7 @@ export function MarketItemInfo({ marketItem }) {
         Descriptions
       </Typography>
       <Typography marginX="1rem" marginY="0.25rem">
-        {marketItem.description}
+        {description.length === 0 ? "Description Goes Here" : description}
       </Typography>
       <Paper
         sx={{
@@ -201,9 +218,7 @@ export function MarketItemInfo({ marketItem }) {
         Google Map
       </Paper>
       <Typography margin="1rem" marginY="0.25rem">
-        {marketItem.location.length === 0
-          ? "Location Goes Here"
-          : marketItem.location}
+        {location.length === 0 ? "Location Goes Here" : location}
       </Typography>
       <Divider />
       <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
@@ -221,7 +236,7 @@ export function MarketItemInfo({ marketItem }) {
               // aria-label="recipe"
               className={classes.avatar}
               component={true}
-              user={marketItem.user}
+              user={user}
               // to={`/account/profile/${owner}`}
             ></CustomAvatar>
           }
@@ -230,8 +245,8 @@ export function MarketItemInfo({ marketItem }) {
               <MoreVertIcon />
             </IconButton>
           }
-          title={marketItem.owner}
-          subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
+          title={owner}
+          subheader={`发布日期： ${createdAt.slice(0, 10)} `}
         />
       </Box>
     </Paper>
@@ -252,6 +267,7 @@ export default function MarketItemDetail() {
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const status = useSelector((state) => state.market.selectedMarketItemStatus);
+
   useEffect(() => {
     if (
       marketItem === undefined ||
@@ -267,28 +283,6 @@ export default function MarketItemDetail() {
       }
     }
   }, [marketItem]);
-
-  console.log("id", id);
-  console.log("啥玩意", marketItem);
-
-  // const {
-  //   // id,
-  //   // name,
-  //   imgS3Keys,
-  //   title,
-  //   price,
-  //   description,
-  //   location,
-  //   marketItemCondition,
-  //   marketItemCategory,
-  //   tags,
-  //   // active,
-  //   createdAt,
-  //   user,
-  //   // userID,
-  //   // ByCreatedAt,
-  //   owner,
-  // } = marketItem;
 
   useEffect(() => {
     const getImage = async () => {
@@ -313,8 +307,7 @@ export default function MarketItemDetail() {
       getImage();
     }
   }, [starter, marketItem]);
-  console.log("starter", starter);
-  // console.log("marketItem.tags", marketItem.tags);
+
   return (
     <div className={classes.root}>
       {starter === false ? (

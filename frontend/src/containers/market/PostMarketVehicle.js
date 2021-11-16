@@ -1,15 +1,32 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  IconButton,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketItems,
+  postMarketItem,
+} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
+import { MarketVehicleInfo } from "./MarketVehicleDetail ";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
+import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
+import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
-import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
@@ -17,35 +34,80 @@ import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "960px",
     margin: "auto",
-    paddingTop: "5rem",
-  },
-
-  imgPreview: {
-    minHeight: "300px",
-    backgroundColor: "#f4f4f4",
-    textAlign: "center",
+    height: "calc(100vh - 64px)",
   },
   titleInput: {
     marginBlock: "2rem",
   },
-  content: {
-    marginBlock: "2rem",
-  },
-  type: {
-    marginBlock: "2rem",
-  },
-  topic: {
-    marginBlock: "2rem",
-  },
-  newTopic: {
-    textAlign: "center",
-    width: "100%",
-    margin: "auto",
-  },
+  content: {},
   imgKeyFromServer: {
     width: "100%",
+  },
+  images: {
+    height: "100%",
+    width: "calc(100% - 360px)",
+    // bgcolor="black"
+    position: "relative",
+    overflow: "hidden",
+    float: "left",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "50vh",
+    },
+  },
+  contain: {
+    width: "100%",
+    overflow: "hidden",
+    height: "calc(100vh - 64px)",
+    bgcolor: "black",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      height: "100%",
+    },
+  },
+  info: {
+    width: "360px",
+    height: "100%",
+    float: "left",
+    paddingRight: "5px",
+    overflow: "hidden",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "100%",
+    },
+  },
+  previewImg: {
+    width: "100px",
+    height: "100px",
+    position: "relative",
+    zIndex: "1",
+  },
+  preview: {
+    width: "calc(100% - 360px)",
+    height: "calc(100vh - 64px)",
+    padding: "2rem",
+    float: "right",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      height: "100%",
+    },
+  },
+  previewImgRight: {
+    width: "calc(100% - 350px)",
+    height: "100%",
+    position: "relative",
+    backgroundColor: "rgb(243, 246, 249)",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "50vh",
+    },
+  },
+  previewInfo: {
+    width: "350px",
+    height: "100%",
+    overflowY: "auto",
+    overflowX: "hidden",
   },
 }));
 
@@ -59,10 +121,41 @@ export default function PostMarketVehicle() {
   useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const [imageKeys, setImageKeys] = useState([]);
+  const [imageKeys, setImageKeys] = useState("");
+  const user = useSelector((state) => state.userAuth.userProfile);
+  const [uploadStatus, setUploadStatus] = useState("idle");
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
-  // console.log("imgKeys", imageKeys);
+
+  const [fakeItems, setFakeItems] = useState({
+    price: "Price",
+    description: "Descriptions",
+    location: "Location",
+    make: "Toyota",
+    model: "GR86",
+    year: "2022",
+    vehicleType: "Truck",
+    exteriorColor: "Black",
+    interiorColor: "Red",
+    fuelType: "Gasoline",
+    tags: ["Tags Goes Here"],
+    createdAt: new Date().toISOString().slice(0, 10),
+    user: user,
+    owner: username,
+  });
+  const [error, setError] = useState({
+    imageKeys: false,
+    price: false,
+    make: false,
+    model: false,
+    year: false,
+    vehicleType: false,
+    location: false,
+    description: false,
+    exteriorColor: false,
+    interiorColor: false,
+    fuelTYpe: false,
+  });
 
   const [marketVehicleData, setMarketVehicleData] = useState({
     vehicleType: "",
@@ -94,7 +187,7 @@ export default function PostMarketVehicle() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        setImgKeyFromServer([]);
+        // setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
           Array.from(imageKeys).map((key) =>
             Storage.get(key, {
@@ -151,233 +244,466 @@ export default function PostMarketVehicle() {
       sortKey: "SortKey",
       userID: username,
     };
-    console.log("Check!", createMarketVehicleInput);
-    const response = await dispatch(postMarketItem(createMarketVehicleInput));
-    console.log("response", response);
-    if (response.meta.requestStatus === "fulfilled") {
-      history.push(
-        `/market/vehicle/${response.payload.data.createMarketItem.id}`
+    const canSave = {
+      imageKeys,
+      price,
+      make,
+      model,
+      year,
+      vehicleType,
+      location,
+      description,
+      exteriorColor,
+      interiorColor,
+      fuelType,
+    };
+
+    if (Object.values(canSave).every((item) => item !== "")) {
+      dispatch(fetchMarketItems(marketItemSortBySortKey));
+      const response = await dispatch(postMarketItem(createMarketVehicleInput));
+      console.log("Something should be here", response);
+      if (response.meta.requestStatus === "fulfilled") {
+        history.push(
+          `/market/vehicle/${response.payload.data.createMarketItem.id}`
+        );
+      }
+      console.log("Can upload");
+    } else {
+      const newError = {};
+      Object.keys(canSave).forEach((item) =>
+        canSave[item] === ""
+          ? (newError[item] = true)
+          : (newError[item] = false)
       );
+      setError(newError);
     }
+  };
+
+  const handleDeleteImg = (imgKey) => {
+    const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
+    setImgKeyFromServer(newImg);
+  };
+
+  const handleKeyDown = (e) => {
+    const newTags = [...fakeItems.tags, e];
+    setFakeItems({ ...fakeItems, tags: newTags });
+  };
+
+  const handleDelete = (e) => {
+    const newTags = fakeItems.tags.filter((tag) => tag !== e);
+    setFakeItems({ ...fakeItems, tags: newTags });
   };
 
   return (
     <div className={classes.root}>
-      <Box>
-        <Typography variant="h4" gutterBottom component="div">
-          New Vehicle Listing
-        </Typography>
-      </Box>
-
-      <Box>
-        <label htmlFor="contained-button-file">
-          <Input
-            accept="image/*"
-            id="contained-button-file"
-            type="file"
-            multiple
-            onChange={(e) => {
-              uploadMarketItemImg(e);
+      <Stack className={classes.contain} direction="row">
+        <Box className={classes.info}>
+          <Paper
+            elevation={3}
+            sx={{
+              maxWidth: "100%",
+              padding: "1rem",
+              height: "100%",
+              overflowY: "auto",
+              overflowX: "hidden",
             }}
-          />
-          <Button variant="contained" component="span">
-            上传图片
-          </Button>
-        </label>
-      </Box>
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                gutterBottom
+                component="div"
+                fontWeight="bold"
+              >
+                New Vehicle Listing
+              </Typography>
+            </Box>
 
-      {imgKeyFromServer &&
-        imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-          <img
-            className={classes.imgKeyFromServer}
-            src={imgKey}
-            key={imgKeyIdx}
-            alt="images"
-          />
-        ))}
-
-      <Box className={classes.content}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              label="Make"
-              autoFocus
-              variant="outlined"
-              fullWidth
-              required
-              placeholder="eg. Subaru"
-              value={marketVehicleData.make}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  make: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Model"
-              variant="outlined"
-              placeholder="IMPREZA WRX STI"
-              fullWidth
-              required
-              value={marketVehicleData.model}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  model: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <MarketForm
-              title="Vehicle Type"
-              value={marketVehicleData.vehicleType}
-              options={marketVehicleTypeList}
-              required={true}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  vehicleType: e.target.value,
-                })
-              }
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              label="Location"
-              value={marketVehicleData.location}
-              variant="outlined"
-              fullWidth
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  location: e.target.value,
-                })
-              }
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <CustomTags placeholder="新车， 无事故..." />
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              label="Year"
-              variant="outlined"
-              fullWidth
-              type="number"
-              placeholder="eg. 2021"
-              required
-              value={marketVehicleData.year}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  year: e.target.value,
-                })
-              }
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-              label="Price"
-              variant="outlined"
-              fullWidth
-              type="number"
-              placeholder="eg. 25000 (Currency: CAD $)"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">CAD $</InputAdornment>
-                ),
+            {imgKeyFromServer.length !== 0 ? (
+              <label htmlFor="contained-button-file">
+                <Input
+                  accept="image/*"
+                  id="contained-button-file"
+                  type="file"
+                  required
+                  multiple
+                  onChange={(e) => {
+                    uploadMarketItemImg(e);
+                  }}
+                />
+                <Button variant="outlined" component="span">
+                  Upload More {imgKeyFromServer.length}/5
+                </Button>
+              </label>
+            ) : null}
+            <Paper
+              elevation={1}
+              bgcolor="rgb(243, 246, 249)"
+              sx={{
+                marginY: "1rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "0.25rem",
+                width: "100%",
+                height: "130px",
+                backgroundColor: "rgb(243, 246, 249)",
               }}
-              value={marketVehicleData.price}
-              className={classes.titleInput}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  price: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Exterior Color"
-              variant="outlined"
-              fullWidth
-              placeholder="eg. World Rally Blue"
-              value={marketVehicleData.exteriorColor}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  exteriorColor: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Interior Color"
-              variant="outlined"
-              fullWidth
-              placeholder="eg. Black"
-              value={marketVehicleData.interiorColor}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  interiorColor: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Fuel Type"
-              variant="outlined"
-              fullWidth
-              placeholder="eg. Gasoline"
-              value={marketVehicleData.fuelType}
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  fuelType: e.target.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="description"
-              value={marketVehicleData.description}
-              minRows={5}
-              variant="outlined"
-              multiline
-              placeholder="Describe your vehicle in a detailed manner!"
-              fullWidth
-              onChange={(e) =>
-                setMarketVehicleData({
-                  ...marketVehicleData,
-                  description: e.target.value,
-                })
-              }
-            />
-          </Grid>
-        </Grid>
-      </Box>
+            >
+              {imgKeyFromServer.length === 0 ? (
+                uploadStatus !== "succeeded" ? (
+                  <label htmlFor="contained-button-file">
+                    <Stack
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Input
+                        accept="image/*"
+                        id="contained-button-file"
+                        type="file"
+                        required
+                        multiple
+                        onChange={(e) => {
+                          uploadMarketItemImg(e);
+                          setError({ ...error, imageKeys: false });
+                          setUploadStatus("succeeded");
+                          setTimeout(() => {
+                            setUploadStatus("idle");
+                          }, 2500);
+                        }}
+                      />
+                      <Typography fontSize="15px" fontWeight="lighter">
+                        Upload your images from HERE!
+                      </Typography>
+                      {error.imageKeys ? (
+                        <Typography color="error">
+                          * At least ONE image is required!
+                        </Typography>
+                      ) : null}
+                      <AddPhotoAlternateIcon sx={{ fontSize: 60 }} />
+                    </Stack>
+                  </label>
+                ) : (
+                  <Stack
+                    direction="column"
+                    spacing={1}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Typography fontSize="15px" fontWeight="lighter">
+                      Loading preview...
+                    </Typography>
+                    <CircularProgress />
+                  </Stack>
+                )
+              ) : (
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  justifyContent="center"
+                  alignItems="center"
+                  width="100%"
+                  height="100%"
+                  color="rgb(243, 246, 249)"
+                  sx={{ overflowX: "auto" }}
+                >
+                  {imgKeyFromServer &&
+                    imgKeyFromServer.map((imgKey, imgKeyIdx) => (
+                      <Box key={imgKeyIdx} className={classes.previewImg}>
+                        <Box
+                          component="img"
+                          src={imgKey}
+                          key={imgKeyIdx}
+                          alt="images"
+                          zIndex="1"
+                          f
+                          borderRadius="5px"
+                          sx={{
+                            height: "100px",
+                            width: "100px",
+                          }}
+                        />
+                        <IconButton
+                          color="inherit"
+                          key={imgKey}
+                          onClick={() => handleDeleteImg(imgKey)}
+                          sx={{
+                            top: 0,
+                            right: 0,
+                            zIndex: "2",
+                            position: "absolute",
+                          }}
+                        >
+                          <HighlightOffIcon />
+                        </IconButton>
+                      </Box>
+                    ))}
+                </Stack>
+              )}
+            </Paper>
 
-      <Button
-        variant="contained"
-        endIcon={<PublishIcon />}
-        onClick={uploadMarketVehicle}
-        color="primary"
-      >
-        上传MarketItem
-      </Button>
+            <Box className={classes.content}>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Make"
+                  autoFocus
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={Boolean(error.make)}
+                  placeholder="eg. Subaru"
+                  value={marketVehicleData.make}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      make: e.target.value,
+                    });
+                    setError({ ...error, make: false });
+                    setFakeItems({ ...fakeItems, make: e.target.value });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Model"
+                  variant="outlined"
+                  placeholder="IMPREZA WRX STI"
+                  fullWidth
+                  required
+                  error={Boolean(error.model)}
+                  value={marketVehicleData.model}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      model: e.target.value,
+                    });
+                    setError({ ...error, model: false });
+                    setFakeItems({ ...fakeItems, model: e.target.value });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <MarketForm
+                  title="Vehicle Type"
+                  value={marketVehicleData.vehicleType}
+                  options={marketVehicleTypeList}
+                  required={true}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      vehicleType: e.target.value,
+                    });
+                    setError({ ...error, vehicleType: false });
+                    setFakeItems({ ...fakeItems, vehicleType: e.target.value });
+                  }}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Location"
+                  value={marketVehicleData.location}
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={Boolean(error.location)}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      location: e.target.value,
+                    });
+                    setError({ ...error, location: false });
+                    setFakeItems({ ...fakeItems, location: e.target.value });
+                  }}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <CustomTags
+                  placeholder="新车， 无事故..."
+                  initial={fakeItems.tags}
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  onDelete={(e) => handleDelete(e)}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Year"
+                  variant="outlined"
+                  fullWidth
+                  type="number"
+                  placeholder="eg. 2021"
+                  required
+                  error={error.year}
+                  value={marketVehicleData.year}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      year: e.target.value,
+                    });
+                    setError({ ...error, year: false });
+                    setFakeItems({ ...fakeItems, year: e.target.value });
+                  }}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Price"
+                  variant="outlined"
+                  fullWidth
+                  type="number"
+                  required
+                  error={Boolean(error.price)}
+                  placeholder="eg. 25000 (Currency: CAD $)"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">CAD $</InputAdornment>
+                    ),
+                  }}
+                  value={marketVehicleData.price}
+                  className={classes.titleInput}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      price: e.target.value,
+                    });
+                    setError({ ...error, price: false });
+                    setFakeItems({ ...fakeItems, price: e.target.value });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Exterior Color"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={Boolean(error.exteriorColor)}
+                  placeholder="eg. World Rally Blue"
+                  value={marketVehicleData.exteriorColor}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      exteriorColor: e.target.value,
+                    });
+                    setError({ ...error, exteriorColor: false });
+                    setFakeItems({
+                      ...fakeItems,
+                      exteriorColor: e.target.value,
+                    });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Interior Color"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={Boolean(error.interiorColor)}
+                  placeholder="eg. Black"
+                  value={marketVehicleData.interiorColor}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      interiorColor: e.target.value,
+                    });
+                    setError({ ...error, interiorColor: false });
+                    setFakeItems({
+                      ...fakeItems,
+                      interiorColor: e.target.value,
+                    });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Fuel Type"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  error={error.fuelType}
+                  placeholder="eg. Gasoline"
+                  value={marketVehicleData.fuelType}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      fuelType: e.target.value,
+                    });
+                    setError({ ...error, fuelType: false });
+                    setFakeItems({ ...fakeItems, fuelType: e.target.value });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="description"
+                  value={marketVehicleData.description}
+                  minRows={5}
+                  variant="outlined"
+                  multiline
+                  required
+                  error={Boolean(error.description)}
+                  placeholder="Describe your vehicle in a detailed manner!"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      description: e.target.value,
+                    });
+                    setError({ ...error, description: false });
+                    setFakeItems({ ...fakeItems, description: e.target.value });
+                  }}
+                />
+              </Box>
+            </Box>
+
+            <Button
+              variant="outlined"
+              endIcon={<PublishIcon />}
+              onClick={uploadMarketVehicle}
+              color="primary"
+            >
+              上传MarketItem
+            </Button>
+          </Paper>
+        </Box>
+        <Box className={classes.preview}>
+          <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              width="100%"
+              height="100%"
+            >
+              <Box className={classes.previewImgRight}>
+                {imgKeyFromServer.length !== 0 ? (
+                  <SwipeViews images={imgKeyFromServer} />
+                ) : (
+                  <Box
+                    height="50px"
+                    sx={{
+                      left: "50%",
+                      top: "40%",
+                      position: "absolute",
+                      transform: "translate(-50%,-50%)",
+                    }}
+                  >
+                    <Typography variant="h6">
+                      Your images will go here in the preview mode
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+              <Box className={classes.previewInfo}>
+                <MarketVehicleInfo marketItem={fakeItems} />
+              </Box>
+            </Stack>
+          </Paper>
+        </Box>
+      </Stack>
     </div>
   );
 }
