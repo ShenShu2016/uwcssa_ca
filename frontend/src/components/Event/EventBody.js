@@ -65,6 +65,7 @@ export default function EventBody({ event }) {
   const userInfo = useSelector((state) => state.userAuth);
   const [posterURL, setPosterURL] = useState(null);
   const [qrCodeURL, setQrCodeURL] = useState(null);
+  const [backGroundImgURL, setBackGroundImgURL] = useState(null);
   const {
     title,
     startDate,
@@ -72,6 +73,7 @@ export default function EventBody({ event }) {
     eventStatus,
     location,
     content,
+    backGroundImgS3Key,
     posterImgS3Key,
     qrCodeImgS3Key,
     topic,
@@ -119,27 +121,71 @@ export default function EventBody({ event }) {
     }
   }, [qrCodeImgS3Key]);
 
+  useEffect(() => {
+    const getQrCode = async () => {
+      try {
+        const backGroundImgURL = await Storage.get(backGroundImgS3Key, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        setBackGroundImgURL(backGroundImgURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setBackGroundImgURL(null);
+      }
+    };
+    if (backGroundImgS3Key) {
+      getQrCode();
+    }
+  }, [backGroundImgS3Key]);
+
   return (
     <Box>
       {event.startDate ? (
         <div>
           <Container size="md">
-            <Box
-              style={{
-                display: "flex",
-                alignItem: "center",
-                justifyContent: "center",
-                background:
-                  "linear-gradient(to top, rgba(255,0,0,0) 0 70%, rgba(63, 81, 181, 1) )",
-              }}
-            >
-              <CardMedia
-                component="img"
-                sx={{ width: "auto", maxHeight: "300px" }}
-                image={posterURL}
-              />
-            </Box>
-
+            <div>
+              <Box>
+                <CardMedia
+                  style={{
+                    // maxWidth: "100%",
+                    opacity: 0.4,
+                    height: "350px",
+                    objectFit: "cover",
+                    // background: `url(${backGroundImgURL})`,
+                    // blurRadius: 1,
+                    // backgroundSize: "contained",
+                    // borderStyle: "outset",
+                    // "linear-gradient(to top, rgba(255,0,0,0) 0 70%, rgba(63, 81, 181, 1) )",
+                  }}
+                  component="img"
+                  image={backGroundImgURL}
+                />
+              </Box>
+              <Card
+                sx={{
+                  maxWidth: 600,
+                  minWidth: 300,
+                  position: "absolute",
+                  top: "310px",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  zIndex: "2",
+                  borderRadius: "10px",
+                }}
+              >
+                <CardMedia
+                  sx={{
+                    display: "flex",
+                    objectFit: "cover",
+                    height: "300px",
+                  }}
+                  component="img"
+                  image={posterURL}
+                />
+              </Card>
+            </div>
             <Box
               sx={{
                 display: "flex",
@@ -160,7 +206,7 @@ export default function EventBody({ event }) {
                     {startDate.slice(11, 16)} - {endDate.slice(11, 16)}
                   </b>
                 </Typography>
-                <Typography component="div" variant="h4" gutterBottom>
+                <Typography component="div" variant="h5" gutterBottom>
                   {title}
                 </Typography>
                 <Typography
