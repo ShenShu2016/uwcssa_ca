@@ -21,6 +21,10 @@ import PropTypes from "prop-types";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { useSelector } from "react-redux";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import FlagIcon from "@mui/icons-material/Flag";
+import TopicIcon from "@mui/icons-material/Topic";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -184,7 +188,7 @@ export default function EventBody({ event }) {
               </Box>
             </Container>
 
-            <Box sx={{ width: "100%", bgcolor: "#EBF5FB" }}>
+            <Box sx={{ width: "100%", bgcolor: "#F9F9F9" }}>
               <TabPanel value={value} index={0}>
                 {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
                 <Container size="md">
@@ -204,18 +208,45 @@ export default function EventBody({ event }) {
                             >
                               <b>Details</b>
                             </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Sponsored by {sponsor}
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Location: {location}
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Topic: {topic.name}
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Status: {eventStatus}
-                            </Typography>
+                            {sponsor ? (
+                              <Typography variant="body2" gutterBottom>
+                                <FlagIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                Sponsored by {sponsor}
+                              </Typography>
+                            ) : null}
+                            {location ? (
+                              <Typography variant="body2" gutterBottom>
+                                <LocationOnIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                {location}
+                              </Typography>
+                            ) : null}
+                            {topic.name ? (
+                              <Typography variant="body2" gutterBottom>
+                                <TopicIcon
+                                  color="action"
+                                  sx={{
+                                    float: "left",
+                                    marginRight: "10px",
+                                  }}
+                                />
+                                {topic.name}
+                              </Typography>
+                            ) : null}
+                            {eventStatus ? (
+                              <Typography variant="body2" gutterBottom>
+                                <AccessTimeIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                {eventStatus}
+                              </Typography>
+                            ) : null}
                             <Typography
                               variant="body2"
                               sx={{ marginTop: "1rem" }}
@@ -402,8 +433,12 @@ export default function EventBody({ event }) {
               )} */}
               </TabPanel>
               <TabPanel value={value} index={1} component={"div"}>
-                <EventCommentsPost event={event} />
-                <EventComments event={event} />
+                <Card>
+                  <CardContent>
+                    <EventCommentsPost event={event} />
+                    <EventComments event={event} />
+                  </CardContent>
+                </Card>
               </TabPanel>
             </Box>
           </div>
