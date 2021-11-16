@@ -8,7 +8,7 @@ const MarketForm = ({
   value,
   onChange,
   options,
-  required,
+  required = false,
   error = false,
   disabled = false,
 }) => {

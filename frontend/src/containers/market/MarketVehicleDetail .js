@@ -76,11 +76,196 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export function MarketVehicleInfo({ marketItem }) {
+  const classes = useStyles();
+  const { marketVehicleTypeList: VType } = marketVehicleOptions;
+  const {
+    // id,
+    // name,
+    // imgS3Keys,
+    price,
+    description,
+    location,
+    vehicleType,
+    make,
+    year,
+    model,
+    exteriorColor,
+    interiorColor,
+    fuelType,
+    tags,
+    user,
+    // active,
+    createdAt,
+    // ByCreatedAt,
+    owner,
+  } = marketItem;
+  return (
+    <Paper sx={{ maxWidth: "100%" }}>
+      <Typography
+        fontWeight="bold"
+        variant="h5"
+        marginLeft="1rem"
+        marginRight="1rem"
+        paddingTop="0.5rem"
+      >
+        {year.length === 0 && make.length === 0 && model.length === 0
+          ? "Composite Title Goes Here"
+          : `${year} ${make} ${model}`}
+      </Typography>
+
+      <Typography marginX="1rem" marginTop="0.25rem">
+        $ {price.length === 0 ? "Price Goes Here" : price}
+      </Typography>
+      <Typography marginX="1rem" variant="caption" color="gray">
+        {createdAt.length === 0 ? "" : moment(createdAt).fromNow()}{" "}
+      </Typography>
+      <Stack
+        justifyContent="center"
+        marginY="0.5rem"
+        direction="row"
+        spacing={1}
+      >
+        <Button
+          startIcon={<MessageIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="info"
+        >
+          Contact
+        </Button>
+        <Button
+          startIcon={<BookmarksIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="info"
+        >
+          Save
+        </Button>
+        <Button
+          startIcon={<ShareIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="info"
+        >
+          Share
+        </Button>
+      </Stack>
+      <Divider />
+      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+        Details
+      </Typography>
+      <Grid marginX="0.5rem" container spacing={2}>
+        <Grid item xs={4}>
+          Vehicle Type
+        </Grid>
+        <Grid item xs={8}>
+          {VType.map((item) => item.value).includes(vehicleType)
+            ? VType.filter((item) => item.value === vehicleType)[0].label
+            : ""}
+        </Grid>
+        <Grid item xs={4}>
+          Make/Model
+        </Grid>
+        <Grid item xs={8}>
+          {year.length === 0 && make.length === 0 && model.length === 0
+            ? "Make & Model"
+            : `${year} ${make} ${model}`}
+        </Grid>
+        <Grid item xs={4}>
+          Exterior Color
+        </Grid>
+        <Grid item xs={8}>
+          {exteriorColor.length === 0
+            ? "Exterior Color Goes Here"
+            : exteriorColor}
+        </Grid>
+        <Grid item xs={4}>
+          Interior Color
+        </Grid>
+        <Grid item xs={8}>
+          {interiorColor.length === 0
+            ? "Interior Color Goes Here"
+            : interiorColor}
+        </Grid>
+        <Grid item xs={4}>
+          Furl Type
+        </Grid>
+        <Grid item xs={8}>
+          {fuelType.length === 0 ? "Fuel Type Color Goes Here" : fuelType}
+        </Grid>
+      </Grid>
+
+      {tags && (
+        <Box>
+          <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+            Tags
+          </Typography>
+        </Box>
+      )}
+      <Stack direction="row" marginX="1rem" marginBottom="0.5rem" spacing={2}>
+        {tags.map((tag, tagIdx) => {
+          return <Chip key={tagIdx} label={tag} />;
+        })}
+      </Stack>
+      <Divider />
+      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+        Descriptions
+      </Typography>
+      <Typography marginX="1rem" marginY="0.25rem">
+        {description.length === 0 ? "Description Goes Here" : description}
+      </Typography>
+      <Paper
+        sx={{
+          marginX: "1rem",
+          marginY: "0.25rem",
+          height: "250px",
+          backgroundColor: "rgb(243, 246, 249)",
+          marginBottom: "1rem",
+        }}
+      >
+        Google Map
+      </Paper>
+      <Typography marginX="1rem" marginY="0.25rem">
+        {location.length === 0 ? "Location Goes Here" : location}
+      </Typography>
+      <Divider />
+      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+        Seller Infos
+      </Typography>
+      <Box
+        sx={{
+          margin: "1rem",
+          // bgcolor: "#ff9800",
+        }}
+      >
+        <CardHeader
+          avatar={
+            <CustomAvatar
+              // aria-label="recipe"
+              className={classes.avatar}
+              component={true}
+              user={user}
+              // to={`/account/profile/${owner}`}
+            ></CustomAvatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={owner}
+          subheader={`发布日期： ${createdAt.slice(0, 10)} `}
+        />
+      </Box>
+    </Paper>
+  );
+}
+
 export default function MarketVehicleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   useTitle("二手车辆");
-  const { marketVehicleTypeList: VType } = marketVehicleOptions;
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const [starter, setStarter] = useState(false);
   const { id } = useParams();
@@ -106,30 +291,6 @@ export default function MarketVehicleDetail() {
       }
     }
   }, [marketItem]);
-
-  console.log("id", id);
-  console.log("marketItem", marketItem);
-  // const {
-  //   // id,
-  //   // name,
-  //   imgS3Keys,
-  //   price,
-  //   description,
-  //   location,
-  //   vehicleType,
-  //   make,
-  //   year,
-  //   model,
-  //   exteriorColor,
-  //   interiorColor,
-  //   fuelType,
-  //   tags,
-  //   user,
-  //   // active,
-  //   createdAt,
-  //   // ByCreatedAt,
-  //   owner,
-  // } = marketItem;
 
   useEffect(() => {
     const getImage = async () => {
@@ -171,162 +332,7 @@ export default function MarketVehicleDetail() {
             // bgcolor="yellow"
             className={classes.info}
           >
-            <Paper sx={{ maxWidth: "100%" }}>
-              <Typography
-                fontWeight="bold"
-                variant="h5"
-                marginLeft="1rem"
-                paddingTop="0.5rem"
-              >
-                {marketItem.year} {marketItem.make} {marketItem.model}
-              </Typography>
-
-              <Typography marginX="1rem" marginTop="0.25rem">
-                $ {marketItem.price}
-              </Typography>
-              <Typography marginX="1rem" variant="caption" color="gray">
-                {moment(marketItem.createdAt).fromNow()}
-              </Typography>
-              <Stack
-                justifyContent="center"
-                marginY="0.5rem"
-                direction="row"
-                spacing={1}
-              >
-                <Button
-                  startIcon={<MessageIcon />}
-                  onClick={() => console.log("clicked!")}
-                  variant="outlined"
-                  color="info"
-                >
-                  Contact
-                </Button>
-                <Button
-                  startIcon={<BookmarksIcon />}
-                  onClick={() => console.log("clicked!")}
-                  variant="outlined"
-                  color="info"
-                >
-                  Save
-                </Button>
-                <Button
-                  startIcon={<ShareIcon />}
-                  onClick={() => console.log("clicked!")}
-                  variant="outlined"
-                  color="info"
-                >
-                  Share
-                </Button>
-              </Stack>
-              <Divider />
-              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                Details
-              </Typography>
-              <Grid marginX="0.5rem" container spacing={2}>
-                <Grid item xs={4}>
-                  Vehicle Type
-                </Grid>
-                <Grid item xs={8}>
-                  {
-                    VType.filter(
-                      (item) => item.value === marketItem.vehicleType
-                    )[0].label
-                  }
-                </Grid>
-                <Grid item xs={4}>
-                  Make/Model
-                </Grid>
-                <Grid item xs={8}>
-                  {marketItem.year} {marketItem.make} {marketItem.model}
-                </Grid>
-                <Grid item xs={4}>
-                  Exterior Color
-                </Grid>
-                <Grid item xs={8}>
-                  {marketItem.exteriorColor}
-                </Grid>
-                <Grid item xs={4}>
-                  Interior Color
-                </Grid>
-                <Grid item xs={8}>
-                  {marketItem.interiorColor}
-                </Grid>
-                <Grid item xs={4}>
-                  Furl Type
-                </Grid>
-                <Grid item xs={8}>
-                  {marketItem.fuelType}
-                </Grid>
-              </Grid>
-
-              {marketItem.tags && (
-                <Box>
-                  <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                    Tags
-                  </Typography>
-                </Box>
-              )}
-              <Stack
-                direction="row"
-                marginX="1rem"
-                marginBottom="0.5rem"
-                spacing={2}
-              >
-                {marketItem.tags.map((tag, tagIdx) => {
-                  return <Chip key={tagIdx} label={tag} />;
-                })}
-              </Stack>
-              <Divider />
-              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                Descriptions
-              </Typography>
-              <Typography marginX="1rem" marginY="0.25rem">
-                {marketItem.description}
-              </Typography>
-              <Paper
-                sx={{
-                  marginX: "1rem",
-                  marginY: "0.25rem",
-                  height: "250px",
-                  backgroundColor: "rgb(243, 246, 249)",
-                  marginBottom: "1rem",
-                }}
-              >
-                Google Map
-              </Paper>
-              <Typography marginX="1rem" marginY="0.25rem">
-                {marketItem.location}
-              </Typography>
-              <Divider />
-              <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-                Seller Infos
-              </Typography>
-              <Box
-                sx={{
-                  margin: "1rem",
-                  // bgcolor: "#ff9800",
-                }}
-              >
-                <CardHeader
-                  avatar={
-                    <CustomAvatar
-                      // aria-label="recipe"
-                      className={classes.avatar}
-                      component={true}
-                      user={marketItem.user}
-                      // to={`/account/profile/${owner}`}
-                    ></CustomAvatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={marketItem.owner}
-                  subheader={`发布日期： ${marketItem.createdAt.slice(0, 10)} `}
-                />
-              </Box>
-            </Paper>
+            <MarketVehicleInfo marketItem={marketItem} />
           </Box>
         </Stack>
       )}
