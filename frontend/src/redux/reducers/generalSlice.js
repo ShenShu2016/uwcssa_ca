@@ -83,14 +83,14 @@ export const fetchForumPostCounts = createAsyncThunk(
 
 export const postLike = createAsyncThunk(
   "general/postLike",
-  async ({ itemID, userID, isLike }) => {
+  async ({ itemID, username, isLike }) => {
     const response = await API.graphql(
       graphqlOperation(createLike, {
         input: {
-          id: `${itemID}-${userID}`,
+          id: `${itemID}-${username}`,
           like: isLike,
           itemID: itemID,
-          userID: userID,
+          userID: username,
         },
       })
     );
