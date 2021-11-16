@@ -2,7 +2,11 @@ import {
   Alert,
   Box,
   Button,
+  FormControl,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   Snackbar,
   Table,
   TableBody,
@@ -13,17 +17,19 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Link } from "react-router-dom";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { createUwcssaJob } from "../../../graphql/mutations";
+import { fetchDepartments } from "../../../redux/reducers/careerSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listDepartments } from "../../../graphql/queries";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -41,12 +47,18 @@ const useStyles = makeStyles({
 });
 export default function PostUwcssaJob(props) {
   const classes = useStyles();
-
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userAuth);
+  const { departments } = useSelector((state) => state.career);
   const [info, setInfo] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailure, setSubmitFailure] = useState(false);
   const [depart, setDepart] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchDepartments());
+  }, [dispatch]);
 
   const [uwcssaJobData, setUwcssaJobData] = useState({
     introduction: "",
@@ -62,26 +74,26 @@ export default function PostUwcssaJob(props) {
   // let departmentList = [];
 
   const handleSubmit = async () => {
-    if (
-      !uwcssaJobData.title ||
-      !uwcssaJobData.departmentName ||
-      !uwcssaJobData.requirements.filter((e) => e !== "")
-    ) {
-      setInfo(true);
-      return;
-    }
-    let targetDepartment = await API.graphql({
-      query: listDepartments,
-      variables: { filter: { name: { eq: uwcssaJobData.departmentName } } },
-      authMode: "AWS_IAM",
-    });
-    if (targetDepartment.data.listDepartments.items.length === 0) {
-      setDepart(true);
-      return;
-    }
-    const departmentID = targetDepartment.data.listDepartments.items[0].id;
-    console.log("departmentID: ", departmentID);
-    console.log(uwcssaJobData);
+    // if (
+    //   !uwcssaJobData.title ||
+    //   !uwcssaJobData.departmentName ||
+    //   !uwcssaJobData.requirements.filter((e) => e !== "")
+    // ) {
+    //   setInfo(true);
+    //   return;
+    // }
+    // let targetDepartment = await API.graphql({
+    //   query: listDepartments,
+    //   variables: { filter: { name: { eq: uwcssaJobData.departmentName } } },
+    //   authMode: "AWS_IAM",
+    // });
+    // if (targetDepartment.data.listDepartments.items.length === 0) {
+    //   setDepart(true);
+    //   return;
+    // }
+    // const departmentID = targetDepartment.data.listDepartments.items[0].id;
+    // console.log("departmentID: ", departmentID);
+    // console.log(uwcssaJobData);
     try {
       const createUwcssaJobInput = {
         title: uwcssaJobData.title,
@@ -93,7 +105,7 @@ export default function PostUwcssaJob(props) {
         like: [""],
         unlike: [""],
         active: 1,
-        departmentID: departmentID,
+        departmentID: uwcssaJobData.departmentName,
         userID: uwcssaJobData.userID,
       };
       const newUwcssaJob = await API.graphql(
@@ -102,11 +114,9 @@ export default function PostUwcssaJob(props) {
       console.log("newUwcssaJob:", newUwcssaJob.data.createUwcssaJob);
       if (newUwcssaJob) {
         setSubmitSuccess(true);
-        setTimeout(() => {
-          const url = document.URL
-          window.open(url,"_self")
-          // props.history.push("/staff/uwcssaJob");
-        }, 1200);
+        history.push(
+          `/career/jobDetail/${newUwcssaJob.data.createUwcssaJob.id}`
+        );
       }
     } catch (error) {
       console.log("submit resume failure: ", error);
@@ -147,19 +157,38 @@ export default function PostUwcssaJob(props) {
       </Box>
       <Box>
         <Typography variant="h5">DEPARTMENT NAME</Typography>
-        <TextField
-          label="部门名称"
-          variant="outlined"
-          fullWidth
-          value={uwcssaJobData.departmentName}
-          sx={{ marginBlock: "2rem" }}
-          onChange={(e) =>
-            setUwcssaJobData({
-              ...uwcssaJobData,
-              departmentName: e.target.value,
-            })
-          }
-        />
+        <Button
+          variant="contained"
+          component={Link}
+          to="/staff/uwcssaJob/postDepartment"
+        >
+          如果没有请点击这里添加部门
+        </Button>
+        <FormControl variant="outlined" fullWidth sx={{ marginBlock: "2rem" }}>
+          <InputLabel id="demo-simple-select-outlined-label2">
+            部门名称
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label2"
+            id="demo-simple-select-outlined2"
+            value={uwcssaJobData.departmentName}
+            onChange={(e) =>
+              setUwcssaJobData({
+                ...uwcssaJobData,
+                departmentName: e.target.value,
+              })
+            }
+            label="Topic"
+          >
+            {departments.map((department) => {
+              return (
+                <MenuItem value={department.id} key={department.id}>
+                  {department.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </Box>
       <Box>
         <Typography variant="h5">INTRODUCTION</Typography>
