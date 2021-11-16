@@ -5,7 +5,6 @@ import {
   CardHeader,
   Chip,
   Divider,
-  LinearProgress,
   Skeleton,
   Typography,
 } from "@mui/material";
@@ -14,9 +13,10 @@ import React, { useEffect, useState } from "react";
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../LikeButtonGroup";
 import Storage from "@aws-amplify/storage";
+import SwipeViews from "../../Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: "1rem",
     width: "100%",
@@ -30,6 +30,14 @@ const useStyles = makeStyles(() => ({
   buttonGroup: {
     marginBlock: "2rem",
   },
+  swipeViews: {
+    width: "100%",
+    height: "750px",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "50vh",
+    },
+  },
 }));
 
 export default function Main({ article }) {
@@ -37,10 +45,12 @@ export default function Main({ article }) {
   // console.log("Main", article);
   const { content, imgS3Keys, tags, topic, createdAt, user, owner } = article;
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  console.log("imgS3Keys", imgS3Keys);
   useEffect(() => {
     const getImage = async () => {
       try {
         setImgKeyFromServer([]);
+        console.log("我炮击哪里了");
         const imageAccessURL = await Promise.all(
           Array.from(imgS3Keys).map((key) =>
             Storage.get(key, {
@@ -60,21 +70,25 @@ export default function Main({ article }) {
       getImage();
     }
   }, [imgS3Keys]);
-  console.log("imgKeyFromServer", imgKeyFromServer);
+  //console.log("imgKeyFromServer[0]", imgKeyFromServer[0]);
   return (
     <div className={classes.root}>
-      {article.active !== true ? (
-        <LinearProgress />
-      ) : (
+      {article.active === true ? (
         <Box className={classes.main}>
-          {imgKeyFromServer[0] ? (
-            <img
-              src={imgKeyFromServer[0]}
-              alt="sss"
-              style={{ width: "100%" }}
-            />
+          {imgS3Keys ? (
+            imgKeyFromServer[0] ? (
+              <Box className={classes.swipeViews}>
+                <SwipeViews images={imgKeyFromServer} />
+              </Box>
+            ) : (
+              <Box sx={{ my: 3 }}>
+                <Skeleton variant="text" />
+                <Skeleton variant="circular" width={40} height={40} />
+                <Skeleton variant="rectangular" height={300} />
+              </Box>
+            )
           ) : (
-            <Skeleton variant="rectangular" height={300} />
+            ""
           )}
           <CardActions sx={{ px: 0 }}>
             <Button size="small" color="primary">
@@ -108,6 +122,12 @@ export default function Main({ article }) {
           <Box className={classes.buttonGroup}>
             <LikeButtonGroup item={article} />
           </Box>
+        </Box>
+      ) : (
+        <Box sx={{ my: 3 }}>
+          <Skeleton variant="text" />
+          <Skeleton variant="circular" width={40} height={40} />
+          <Skeleton variant="rectangular" height={300} />
         </Box>
       )}
     </div>

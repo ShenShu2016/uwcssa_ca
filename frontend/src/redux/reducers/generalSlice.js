@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createLike, deleteLike, updateLike } from "../../graphql/mutations";
+import {
+  listForumPosts,
+  userSortBySortKey,
+} from "../CustomQuery/generialQueries";
 
 import API from "@aws-amplify/api";
 import Compressor from "compressorjs";
@@ -8,7 +12,8 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
 const initialState = {
-  userCounts: "",
+  users: null,
+  forumPostCounts: "",
   urlFrom: null,
   imageKey: {},
   imageKeys: {},
@@ -21,8 +26,10 @@ const initialState = {
 
   removeURLFromStatus: "idle",
   removeURLFromError: null,
-  fetchUserCountsError: null,
-  fetchUserCountsStatus: "idle",
+  fetchUsersError: null,
+  fetchUsersStatus: "idle",
+  fetchForumPostCountsStatus: "idle",
+  fetchForumPostCountsError: null,
   postLikeStatus: "idle",
   postLikeError: null,
   putLikeStatus: "idle",
@@ -34,14 +41,6 @@ const initialState = {
   postImageStatus: "idle",
   postImageError: null,
 };
-
-const userCountsQuery = `query ListUsers {
-    listUsers {
-        items {
-            id
-        }
-    }
-}`;
 
 export const setURLFrom = createAsyncThunk(
   "general/setURLFrom",
@@ -57,15 +56,28 @@ export const removeURLFrom = createAsyncThunk(
   }
 );
 
-export const fetchUserCounts = createAsyncThunk(
-  "general/fetchUserCounts",
+export const fetchUsers = createAsyncThunk("general/fetchUsers", async () => {
+  const usersData = await API.graphql({
+    query: userSortBySortKey,
+    variables: {
+      sortKey: "SortKey",
+      sortDirection: "DESC",
+    },
+    authMode: "AWS_IAM",
+  });
+
+  return usersData.data.userSortBySortKey.items;
+});
+
+export const fetchForumPostCounts = createAsyncThunk(
+  "general/fetchForumPostCounts",
   async () => {
-    const userCountsData = await API.graphql({
-      query: userCountsQuery,
+    const usersData = await API.graphql({
+      query: listForumPosts,
       authMode: "AWS_IAM",
     });
 
-    return userCountsData.data.listUsers.items.length;
+    return usersData.data.listForumPosts.items.length;
   }
 );
 
@@ -192,7 +204,7 @@ const generalSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      // Cases for status of fetchUserCounts (pending, fulfilled, and rejected)
+      // Cases for status of fetchUsers (pending, fulfilled, and rejected)
       .addCase(setURLFrom.pending, (state, action) => {
         state.setURLFromStatus = "loading";
       })
@@ -204,7 +216,7 @@ const generalSlice = createSlice({
         state.setURLFromStatus = "failed";
         state.setURLFromError = action.error.message;
       })
-      // Cases for status of fetchUserCounts (pending, fulfilled, and rejected)
+      // Cases for status of removeURLFrom (pending, fulfilled, and rejected)
       .addCase(removeURLFrom.pending, (state, action) => {
         state.removeLikeStatus = "loading";
       })
@@ -216,17 +228,29 @@ const generalSlice = createSlice({
         state.removeLikeStatus = "failed";
         state.removeURLFromError = action.error.message;
       })
-      // Cases for status of fetchUserCounts (pending, fulfilled, and rejected)
-      .addCase(fetchUserCounts.pending, (state, action) => {
-        state.fetchUserCountsStatus = "loading";
+      // Cases for status of fetchUsers (pending, fulfilled, and rejected)
+      .addCase(fetchUsers.pending, (state, action) => {
+        state.fetchUsersStatus = "loading";
       })
-      .addCase(fetchUserCounts.fulfilled, (state, action) => {
-        state.fetchUserCountsStatus = "succeeded";
-        state.userCounts = action.payload;
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.fetchUsersStatus = "succeeded";
+        state.users = action.payload;
       })
-      .addCase(fetchUserCounts.rejected, (state, action) => {
-        state.fetchUserCountsStatus = "failed";
-        state.fetchUserCountsError = action.error.message;
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.fetchUsersStatus = "failed";
+        state.fetchUsersError = action.error.message;
+      })
+      // Cases for status of fetchForumPostCounts (pending, fulfilled, and rejected)
+      .addCase(fetchForumPostCounts.pending, (state, action) => {
+        state.fetchForumPostCountsStatus = "loading";
+      })
+      .addCase(fetchForumPostCounts.fulfilled, (state, action) => {
+        state.fetchForumPostCountsStatus = "succeeded";
+        state.forumPostCounts = action.payload;
+      })
+      .addCase(fetchForumPostCounts.rejected, (state, action) => {
+        state.fetchForumPostCountsStatus = "failed";
+        state.fetchForumPostCountsError = action.error.message;
       })
       // Cases for status of postLike (pending, fulfilled, and rejected)
       .addCase(postLike.pending, (state, action) => {

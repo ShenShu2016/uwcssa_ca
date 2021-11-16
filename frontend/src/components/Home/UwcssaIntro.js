@@ -7,17 +7,23 @@ import {
   CssBaseline,
   Grid,
   Paper,
+  Tooltip,
   Typography,
+  Zoom,
 } from "@mui/material";
 import React, { useEffect } from "react";
+import {
+  fetchForumPostCounts,
+  fetchUsers,
+} from "../../redux/reducers/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
-import { fetchUserCounts } from "../../redux/reducers/generalSlice";
 import { makeStyles } from "@mui/styles";
+import { red } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,15 +99,26 @@ export default function UwcssaIntro() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { userAuth } = useSelector((state) => state);
-  const { userCounts, fetchUserCountsStatus } = useSelector(
-    (state) => state.general
-  );
+  const {
+    users,
+    fetchUsersStatus,
+    forumPostCounts,
+    fetchForumPostCountsStatus,
+  } = useSelector((state) => state.general);
   const { isAuthenticated } = useSelector((state) => state.userAuth);
+
   useEffect(() => {
-    if (fetchUserCountsStatus === "idle" || undefined) {
-      dispatch(fetchUserCounts());
+    if (fetchUsersStatus === "idle" || undefined) {
+      dispatch(fetchUsers());
     }
-  }, [dispatch, fetchUserCountsStatus]);
+  }, [dispatch, fetchUsersStatus]);
+
+  useEffect(() => {
+    if (fetchForumPostCountsStatus === "idle" || undefined) {
+      dispatch(fetchForumPostCounts());
+    }
+  }, [dispatch, fetchForumPostCountsStatus]);
+
   const guestButton = () => (
     <div>
       <Button
@@ -163,20 +180,52 @@ export default function UwcssaIntro() {
                     <Typography variant="h4" className={classes.slogan}>
                       <b>A Student Community like No Other</b>
                     </Typography>
-
                     <Box className={classes.webData}>
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
-                          <Paper className={classes.paper}>
-                            <Typography variant="h5">
-                              {userCounts ? userCounts : <CircularProgress />}
-                            </Typography>
-                            <Typography variant="h5">用户</Typography>
-                          </Paper>
+                          <Tooltip
+                            title={`${
+                              users &&
+                              users
+                                .map((x) => x.id)
+                                .join()
+                                .slice(0, 100)
+                            }...`}
+                            TransitionComponent={Zoom}
+                            arrow
+                            leaveDelay={200}
+                          >
+                            <Paper elevation={4}>
+                              <Typography variant="h5">
+                                {users ? (
+                                  users.length
+                                ) : (
+                                  <CircularProgress
+                                    style={{ height: "26px", width: "26px" }}
+                                  />
+                                )}
+                              </Typography>
+                              <Typography variant="h5">用户</Typography>
+                            </Paper>
+                          </Tooltip>
                         </Grid>
-                        <Grid item xs={6}>
-                          <Paper className={classes.paper}>
-                            <Typography variant="h5">5000</Typography>
+                        <Grid
+                          item
+                          xs={6}
+                          component={Link}
+                          to="/forum"
+                          sx={{ textDecoration: "none" }}
+                        >
+                          <Paper elevation={4}>
+                            <Typography variant="h5">
+                              {forumPostCounts ? (
+                                forumPostCounts
+                              ) : (
+                                <CircularProgress
+                                  style={{ height: "26px", width: "26px" }}
+                                />
+                              )}
+                            </Typography>
                             <Typography variant="h5">帖子</Typography>
                           </Paper>
                         </Grid>
@@ -193,6 +242,16 @@ export default function UwcssaIntro() {
                         </Typography>
                       </Grid>
                       <Grid item xs={6} sm={3}>
+                        <CircularProgress
+                          size={37}
+                          sx={{
+                            color: red[500],
+                            position: "absolute",
+                            //left: "-50px",
+                            marginLeft: "15px",
+                            marginTop: "-10px",
+                          }}
+                        />
                         <GitHubButton
                           href="https://github.com/ShenShu2016/uwcssa_ca"
                           data-icon="octicon-star"
@@ -232,7 +291,6 @@ export default function UwcssaIntro() {
                           Watch
                         </GitHubButton>
                       </Grid>
-
                       <Grid
                         item
                         xs={12}

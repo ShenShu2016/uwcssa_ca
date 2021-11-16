@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import API from "@aws-amplify/api";
 import { eventSortBySortKey } from "../CustomQuery/StaffQueries";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const initialState = {
   events: [],
