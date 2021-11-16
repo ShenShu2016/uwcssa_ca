@@ -11,7 +11,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const marketAdapter = createEntityAdapter({
   // selectId: (item) => item.id,
-  sortComparer: (a, b) => b.updatedAt.localeCompare(a.updatedAt),
+  sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = marketAdapter.getInitialState({
@@ -81,7 +81,7 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        // state.marketItems = action.payload;
+        marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {

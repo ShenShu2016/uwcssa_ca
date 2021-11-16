@@ -59,7 +59,7 @@ function MarketCreate() {
             </span>
             <span style={{ cursor: "not-allowed" }}>
               <Button color="inherit" component={Link} to="/market/create">
-                發佈商品
+                发布商品
               </Button>
             </span>
           </Breadcrumbs>

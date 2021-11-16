@@ -9,7 +9,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import eventImg from "../../static/event.jpg";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
@@ -102,8 +102,7 @@ export default function Individual() {
             sm={4}
             md={6}
             sx={{
-              backgroundImage:
-                "url(https://keyassets-p2.timeincuk.net/wp/prod/wp-content/uploads/sites/63/2020/10/why-do-we-celebrate-halloween-920x613.png)",
+              backgroundImage: `url(${eventImg})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -123,6 +122,8 @@ export default function Individual() {
                   fullWidth
                   label="姓名"
                   name="name"
+                  autoComplete="name"
+                  autoFocus
                   value={eventParticipantData.name}
                   onChange={(e) =>
                     setEventParticipantData({
@@ -137,6 +138,8 @@ export default function Individual() {
                   fullWidth
                   label="邮箱"
                   name="email"
+                  autoComplete="email"
+                  autoFocus
                   value={eventParticipantData.email}
                   onChange={(e) =>
                     setEventParticipantData({
@@ -150,6 +153,8 @@ export default function Individual() {
                   fullWidth
                   required
                   name="phone"
+                  autoComplete="phone"
+                  autoFocus
                   label="手机号码"
                   value={eventParticipantData.phone}
                   onChange={(e) =>
@@ -165,6 +170,8 @@ export default function Individual() {
                   fullWidth
                   required
                   name="weChat"
+                  autoComplete="weChat"
+                  autoFocus
                   label="微信号"
                   value={eventParticipantData.weChat}
                   onChange={(e) =>
@@ -178,6 +185,8 @@ export default function Individual() {
                   margin="normal"
                   fullWidth
                   name="address"
+                  autoComplete="address"
+                  autoFocus
                   label="地址（如需接送）"
                   value={eventParticipantData.address}
                   onChange={(e) =>

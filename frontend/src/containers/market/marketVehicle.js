@@ -56,6 +56,8 @@ export default function MarketVehicle() {
     } else {
       if (marketItems[0].fuelType === undefined) {
         setStarter(false);
+      } else if (marketItems[0].tags === undefined) {
+        setStarter(false);
       } else {
         setStarter(true);
       }

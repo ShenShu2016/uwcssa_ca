@@ -15,11 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import PublishIcon from "@mui/icons-material/Publish";
-import S3Image from "../../../components/S3/S3Image";
+import { Storage } from "@aws-amplify/storage";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
-import { postSingleImage } from "../../../redux/reducers/generalSlice";
+import { postMultipleImages } from "../../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 
@@ -64,11 +64,12 @@ const Input = styled("input")({
 
 export default function PostArticle() {
   const classes = useStyles();
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const dispatch = useDispatch();
-  const [imgS3Keys, setImgS3Keys] = useState("");
   const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
   const [tagInput, setTagInput] = useState("");
+  const [imageKeys, setImageKeys] = useState();
   const [articleData, setArticleData] = useState({
     title: "",
     content: "",
@@ -80,17 +81,43 @@ export default function PostArticle() {
     dispatch(fetchTopics());
   }, [dispatch]);
 
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        setImgKeyFromServer([]);
+        const imageAccessURL = await Promise.all(
+          Array.from(imageKeys).map((key) =>
+            Storage.get(key, {
+              level: "public",
+              expires: 120,
+              download: false,
+            })
+          )
+        );
+        setImgKeyFromServer((url) => url.concat(imageAccessURL));
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setImgKeyFromServer([]);
+      }
+    };
+    console.log("imageKeys", imageKeys);
+    if (imageKeys) {
+      getImage();
+    }
+  }, [imageKeys]);
+  console.log("imgKeyFromServer", imgKeyFromServer);
   const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
-    const imageData = e.target.files;
+    const imagesData = e.target.files;
     const imageLocation = "article";
+
     const response = await dispatch(
-      postSingleImage({ imageData, imageLocation })
+      postMultipleImages({ imagesData, imageLocation })
     );
     console.log("我是function 返回值 response", response);
     if (response.meta.requestStatus === "fulfilled") {
-      setImgS3Keys(response.payload);
+      setImageKeys(response.payload);
     }
   };
 
@@ -101,7 +128,7 @@ export default function PostArticle() {
     const createArticleInput = {
       title,
       content,
-      imgS3Keys: [imgS3Keys],
+      imgS3Keys: imageKeys,
       topicID: topicID,
       active: true,
       sortKey: "SortKey",
@@ -231,6 +258,7 @@ export default function PostArticle() {
             accept="image/*"
             id="contained-button-file"
             type="file"
+            multiple
             onChange={(e) => {
               // setImgData();
               uploadArticleImg(e);
@@ -241,7 +269,15 @@ export default function PostArticle() {
           </Button>
         </label>
       </Box>
-      <S3Image S3Key={imgS3Keys} style={{ width: "100%" }} />
+      {imgKeyFromServer &&
+        imgKeyFromServer.map((imgKey, imgKeyIdx) => (
+          <img
+            className={classes.imgKeyFromServer}
+            src={imgKey}
+            key={imgKeyIdx}
+            alt="images"
+          />
+        ))}
       <Box className={classes.content}>
         <TextField
           label="Content"

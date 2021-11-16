@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Zoom } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { postLike, putLike, removeLike } from "../redux/reducers/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,15 +7,20 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import Tooltip from "@mui/material/Tooltip";
+import { useHistory } from "react-router";
 
 export default function LikeButtonGroup({ item }) {
   const dispatch = useDispatch();
-  const userID = useSelector((state) => state.userAuth.user.username);
+  const history = useHistory();
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
+  const { username } = useSelector((state) => state.userAuth.user);
   const { id } = item;
-  //   console.log("我是item", item);
   const [likesDetail, setLikesDetail] = useState({
     like: 0,
+    likeUserName: "",
     disLike: 0,
+    dislikeUserName: "",
     likeUp: false,
     disLikeUp: false,
   });
@@ -23,20 +28,25 @@ export default function LikeButtonGroup({ item }) {
 
   useEffect(() => {
     if (Object.keys(item).length !== 0) {
+      const likeTrue = item.likes.items.filter((x) => x.like === true);
+      const LikeFalse = item.likes.items.filter((x) => x.like === false);
+      // console.log(likeTrue);
       setLikesDetail({
-        like: item.likes.items.filter((x) => x.like === true).length,
-        disLike: item.likes.items.filter((x) => x.like === false).length,
-        likeUp:
-          item.likes.items.filter((x) => x.like === true && x.owner === userID)
-            .length >= 1,
-        disLikeUp:
-          item.likes.items.filter((x) => x.like === false && x.owner === userID)
-            .length >= 1,
+        like: likeTrue.length,
+        disLike: LikeFalse.length,
+        likeUp: likeTrue.filter((x) => x.owner === username).length >= 1,
+        disLikeUp: LikeFalse.filter((x) => x.owner === username).length >= 1,
+        likeUserName: likeTrue.map((x) => x.owner).join(),
+        dislikeUserName: LikeFalse.map((x) => x.owner).join(),
       });
     }
-  }, [item, userID]);
-
+  }, [item, username]);
+  // console.log("likesDetail", likesDetail);
   const handleLikeBTNClick = async (event) => {
+    if (!isAuthenticated) {
+      history.push("/auth/signIn");
+      return;
+    }
     const itemID = id;
     const isLike = true;
     if (likesDetail.likeUp === false && likesDetail.disLikeUp === false) {
@@ -46,7 +56,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: true,
         disLikeUp: false,
       });
-      const response = await dispatch(postLike({ itemID, userID, isLike }));
+      const response = await dispatch(postLike({ itemID, username, isLike }));
       console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
@@ -60,7 +70,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: false,
         disLikeUp: false,
       });
-      const response = await dispatch(removeLike({ itemID, userID }));
+      const response = await dispatch(removeLike({ itemID, username }));
       console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
@@ -74,7 +84,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: true,
         disLikeUp: false,
       });
-      const response = await dispatch(putLike({ itemID, userID, isLike }));
+      const response = await dispatch(putLike({ itemID, username, isLike }));
       console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
@@ -83,6 +93,10 @@ export default function LikeButtonGroup({ item }) {
     }
   };
   const handleDisLikeBTNClick = async (event) => {
+    if (!isAuthenticated) {
+      history.push("/auth/signIn");
+      return;
+    }
     const itemID = id;
     const isLike = false;
 
@@ -93,7 +107,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: false,
         disLikeUp: true,
       });
-      const response = await dispatch(postLike({ itemID, userID, isLike }));
+      const response = await dispatch(postLike({ itemID, username, isLike }));
       console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
@@ -106,7 +120,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: false,
         disLikeUp: false,
       });
-      const response = await dispatch(removeLike({ itemID, userID }));
+      const response = await dispatch(removeLike({ itemID, username }));
       console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
@@ -119,7 +133,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: false,
         disLikeUp: true,
       });
-      const response = await dispatch(putLike({ itemID, userID, isLike }));
+      const response = await dispatch(putLike({ itemID, username, isLike }));
       console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
@@ -130,26 +144,52 @@ export default function LikeButtonGroup({ item }) {
 
   return (
     <Box>
-      <Button
-        size="small"
-        color="primary"
-        startIcon={
-          likesDetail.likeUp ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />
+      <Tooltip
+        title={
+          isAuthenticated
+            ? `${likesDetail.likeUserName}`
+            : `点击登录，登录后查看点赞者`
         }
-        onClick={handleLikeBTNClick}
+        TransitionComponent={Zoom}
+        arrow
+        leaveDelay={200}
       >
-        {likesDetail.like}
-      </Button>
-      <Button
-        size="small"
-        color="primary"
-        startIcon={
-          likesDetail.disLikeUp ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />
+        <Button
+          size="small"
+          color="primary"
+          startIcon={
+            likesDetail.likeUp ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />
+          }
+          onClick={handleLikeBTNClick}
+        >
+          {likesDetail.like}
+        </Button>
+      </Tooltip>
+      <Tooltip
+        title={
+          isAuthenticated
+            ? `${likesDetail.dislikeUserName}`
+            : `点击登录，登录后查看点赞者`
         }
-        onClick={handleDisLikeBTNClick}
+        TransitionComponent={Zoom}
+        arrow
+        leaveDelay={200}
       >
-        {likesDetail.disLike}
-      </Button>
+        <Button
+          size="small"
+          color="primary"
+          startIcon={
+            likesDetail.disLikeUp ? (
+              <ThumbDownIcon />
+            ) : (
+              <ThumbDownOutlinedIcon />
+            )
+          }
+          onClick={handleDisLikeBTNClick}
+        >
+          {likesDetail.disLike}
+        </Button>
+      </Tooltip>
     </Box>
   );
 }

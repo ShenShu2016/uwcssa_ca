@@ -448,7 +448,7 @@ export default function FilterInfo({
               sx={{ margin: "1rem" }}
               startIcon={<AddIcon />}
               component={Link}
-              to="/market/create/item"
+              to={`/market/create/${type}`}
             >
               Add new listing
             </Button>

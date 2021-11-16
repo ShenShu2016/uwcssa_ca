@@ -23,12 +23,16 @@ const useStyles = makeStyles((theme) => ({
     paddingInline: "3rem",
     [theme.breakpoints.down("sm")]: {
       paddingInline: "0.5rem",
+      paddingBlock: "1rem",
     },
   },
   title: {
     textAlign: "center",
     color: "#0D1F48",
     paddingBottom: "3rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "1rem",
+    },
   },
   main: {
     display: "flex",

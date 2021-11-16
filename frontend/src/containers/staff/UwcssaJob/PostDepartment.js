@@ -62,6 +62,7 @@ export default function PostDepartment(props) {
     }
     try {
       const createDepartmentInput = {
+        id: departmentData.name,
         name: departmentData.name,
         introduction: departmentData.introduction,
         email: departmentData.email,
@@ -74,11 +75,12 @@ export default function PostDepartment(props) {
       console.log("newDepartment:", newDepartment.data.createDepartment);
       if (newDepartment) {
         setSubmitSuccess(true);
-        setTimeout(() => {
-          const url = document.URL;
-          window.open(url, "_self");
-          // props.history.push("/staff/uwcssaJob");
-        }, 1200);
+
+        // setTimeout(() => {
+        //   const url = document.URL;
+        //   window.open(url, "_self");
+        //   // props.history.push("/staff/uwcssaJob");
+        // }, 1200);
       }
     } catch (error) {
       console.log("submit resume failure: ", error);

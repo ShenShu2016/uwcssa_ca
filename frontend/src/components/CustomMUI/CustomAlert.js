@@ -6,6 +6,7 @@ export default function CustomAlert({
   isAlertOpen,
   handleAlertClose,
   message,
+  severity = "success",
 }) {
   return (
     <Snackbar
@@ -16,7 +17,7 @@ export default function CustomAlert({
     >
       <Alert
         onClose={handleAlertClose}
-        severity="success"
+        severity={severity}
         sx={{ width: "100%" }}
       >
         {message}

@@ -40,7 +40,7 @@ function ArticleComponent({ article }) {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const imageAccessURL = await Storage.get(imgS3Keys, {
+        const imageAccessURL = await Storage.get(imgS3Keys[0], {
           level: "public",
           expires: 120,
           download: false,
@@ -52,7 +52,7 @@ function ArticleComponent({ article }) {
         setImageURL(null);
       }
     };
-    if (imgS3Keys[0]) {
+    if (imgS3Keys) {
       getImage();
     } else {
       setImageURL(

@@ -15,8 +15,13 @@ export function GetTags() {
 //create a custom tag input
 //able to add/delete tag
 //when a tag was duplicated, an error message ("this tag has been already been created!") would pop up
-export default function CustomTags() {
-  const [tags, setTags] = useState([]);
+export default function CustomTags({
+  placeholder,
+  initial = ["Tags Here"],
+  onKeyDown = null,
+  onDelete = null,
+}) {
+  const [tags, setTags] = useState(initial);
   const [tagInput, setTagInput] = useState("");
   const [error, setError] = useState("");
 
@@ -27,6 +32,7 @@ export default function CustomTags() {
   const deleteHandler = (something) => () => {
     const newTags = [...tags].filter((tag) => tag !== something);
     setTags(newTags);
+    onDelete(something);
   };
 
   function inputKeyDown(e) {
@@ -40,6 +46,7 @@ export default function CustomTags() {
       } else {
         e.preventDefault();
         const newTags = Array.from(tags).concat(val);
+        onKeyDown(val);
         setTags(newTags);
         setTagInput("");
         setError("");
@@ -53,6 +60,7 @@ export default function CustomTags() {
         value={tagInput}
         variant="outlined"
         fullWidth
+        placeholder={placeholder}
         onKeyDown={inputKeyDown}
         error={Boolean(error)}
         helperText={error}
@@ -65,12 +73,7 @@ export default function CustomTags() {
       >
         {tags.map((tag, tagIdx) => {
           return (
-            <Chip
-              key={tagIdx}
-              label={tag}
-              onDelete={deleteHandler(tag)}
-              color="primary"
-            />
+            <Chip key={tagIdx} label={tag} onDelete={deleteHandler(tag)} />
           );
         })}
       </Stack>
