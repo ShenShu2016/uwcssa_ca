@@ -177,6 +177,8 @@ export default function SignUp() {
                 type="username"
                 id="username"
                 autoComplete="username"
+                // placeholder=""
+                helperText="可以使用中文, 英文字母大小写不敏感， 全会变小写"
                 error={alert}
                 onChange={(event) => onChange(event)}
               />

@@ -122,7 +122,11 @@ const authSlice = createSlice({
       })
       .addCase(loadUser.rejected, (state, action) => {
         state.loadUserStatus = "failed";
-        state.loadUserError = action.error.message;
+        state.isAuthenticated = false;
+        state.user = { username: "", attributes: { email: "" } };
+        state.cognitoGroup = ["unAuthenticated"];
+        state.userProfile = { username: "" };
+        state.signInError = action.error.message;
       })
       // Cases for status of signIn (pending, fulfilled, and rejected)
       .addCase(signIn.pending, (state, action) => {

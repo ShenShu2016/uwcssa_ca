@@ -1,9 +1,9 @@
 import {
   Box,
-  Button,
+  // Button,
   Card,
   CardActionArea,
-  CardActions,
+  // CardActions,
   CardContent,
   CardMedia,
   Grid,
@@ -12,16 +12,28 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import SignUpRequest from "../Auth/SignUpRequireDialog";
+// import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 // import LinesEllipsis from "react-lines-ellipsis";
 
 const useStyles = makeStyles((theme) => ({
+  actionArea: {
+    maxWidth: 330,
+    minWidth: 256,
+    borderRadius: "16px",
+    transition: "0.2s",
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
+  },
   cardDetails: {
-    maxWidth: 345,
+    maxWidth: 330,
+    minWidth: 256,
+    borderRadius: "16px",
+    boxShadow: "none",
   },
   cardMedia: {
     display: "block",
@@ -81,12 +93,23 @@ export default function EventMain({ event }) {
     }
   }, [posterImgS3Key]);
 
-  const userInfo = useSelector((state) => state.userAuth);
+  // const userInfo = useSelector((state) => state.userAuth);
 
   return (
-    <Grid item xs={2} sm={4} md={4} key={event.title}>
-      <Card className={classes.cardDetails}>
-        <CardActionArea component={Link} to={`/event/${id}`}>
+    <Grid
+      item
+      xs={2}
+      sm={4}
+      md={4}
+      key={event.title}
+      sx={{ marginBottom: "1rem" }}
+    >
+      <CardActionArea
+        className={classes.actionArea}
+        component={Link}
+        to={`/event/${id}`}
+      >
+        <Card className={classes.cardDetails}>
           <CardMedia component="img" height="194" image={posterURL} />
           <CardContent>
             <Typography variant="subtitle2" gutterBottom>
@@ -173,8 +196,7 @@ export default function EventMain({ event }) {
               </Grid>
             </Box>
           </CardContent>
-        </CardActionArea>
-        <CardActions>
+          {/* <CardActions>
           {userInfo.isAuthenticated ? (
             <Button
               size="small"
@@ -186,8 +208,9 @@ export default function EventMain({ event }) {
           ) : (
             <SignUpRequest />
           )}
-        </CardActions>
-      </Card>
+        </CardActions> */}
+        </Card>
+      </CardActionArea>
     </Grid>
   );
 }

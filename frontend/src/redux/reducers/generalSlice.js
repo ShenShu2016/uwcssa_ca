@@ -101,11 +101,11 @@ export const postLike = createAsyncThunk(
 
 export const putLike = createAsyncThunk(
   "general/putLike",
-  async ({ itemID, userID, isLike }) => {
+  async ({ itemID, username, isLike }) => {
     const response = await API.graphql(
       graphqlOperation(updateLike, {
         input: {
-          id: `${itemID}-${userID}`,
+          id: `${itemID}-${username}`,
           like: isLike,
         },
       })
@@ -117,11 +117,11 @@ export const putLike = createAsyncThunk(
 
 export const removeLike = createAsyncThunk(
   "general/removeLike",
-  async ({ itemID, userID }) => {
+  async ({ itemID, username }) => {
     const response = await API.graphql(
       graphqlOperation(deleteLike, {
         input: {
-          id: `${itemID}-${userID}`,
+          id: `${itemID}-${username}`,
         },
       })
     );

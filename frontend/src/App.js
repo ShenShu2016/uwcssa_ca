@@ -12,20 +12,7 @@ import { Box } from "@mui/system";
 import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
-
-// import Dashboard from "./containers/account/Dashboard";
-// import EmailConfirm from "./containers/authentication/EmailConfirm";
-// import Event from "./containers/Event";
-// import EventDetail from "./components/Event/EventDetail";
-// import Success from "./components/Event/Success";
-// // import EventGrid from "./components/Event/EventDataGrid";
-// import EventTable from "./components/Event/EventTable";
-// import EventSignUp from "./components/Event/SignUpEvent";
-// import Footer from "./containers/Footer";
-// import ForgotPassword from "./containers/authentication/ForgotPassword";
-
 import EventRouter from "./containers/Event/EventRouter";
-
 import Forum from "./containers/forum/Forum";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
@@ -40,6 +27,19 @@ import UserFeedBack from "./containers/UserFeedBack";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
+
+// import Dashboard from "./containers/account/Dashboard";
+// import EmailConfirm from "./containers/authentication/EmailConfirm";
+// import Event from "./containers/Event";
+// import EventDetail from "./components/Event/EventDetail";
+// import Success from "./components/Event/Success";
+// // import EventGrid from "./components/Event/EventDataGrid";
+// import EventTable from "./components/Event/EventTable";
+// import EventSignUp from "./components/Event/SignUpEvent";
+// import Footer from "./containers/Footer";
+// import ForgotPassword from "./containers/authentication/ForgotPassword";
+
+
 
 // import EventGrid from "./components/Event/EventDataGrid";
 
@@ -71,9 +71,7 @@ export default function App() {
   const dispatch = useDispatch();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   // console.log("isAlertOpen", isAlertOpen);
-  const { isAuthenticated, cognitoGroup } = useSelector(
-    (state) => state.userAuth
-  );
+  const { isAuthenticated } = useSelector((state) => state.userAuth);
   const handleAlertClose = (reason) => {
     if (reason === "clickaway") {
       return;
@@ -108,13 +106,11 @@ export default function App() {
             <Route path="/" exact component={Home} />
             <Route path="/auth" component={AuthRouter} />
             <PrivateRoute
-              cognitoGroup={cognitoGroup}
               allowRoles="anyone"
               path="/account"
               component={Account}
             />
             <PrivateRoute
-              cognitoGroup={cognitoGroup}
               allowRoles="staff"
               path="/staff"
               component={StaffRouter}
@@ -131,7 +127,6 @@ export default function App() {
               path="/test/googleMapsPlace"
               exact
               component={GoogleMapsPlace}
-
             />
             <Route exact path="/NoPermission" component={NoPermission} />
             <Route>404 Not Found!</Route>

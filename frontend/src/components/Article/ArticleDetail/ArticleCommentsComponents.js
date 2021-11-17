@@ -27,9 +27,7 @@ export default function ArticleCommentsComponents({ comment, idx }) {
   const handleSubCommentReply = () => {
     setIsReplyOpen(!isReplyOpen);
   };
-  const handleClickAway = () => {
-    setIsReplyOpen(false);
-  };
+
   const { id, content, createdAt, userID, user } = comment;
   return (
     <div>
@@ -87,7 +85,6 @@ export default function ArticleCommentsComponents({ comment, idx }) {
                   isReplyOpen={isReplyOpen}
                   idx={idx}
                   handleSubCommentReply={handleSubCommentReply}
-                  handleClickAway={handleClickAway}
                 />
               </Box>
               <Box>

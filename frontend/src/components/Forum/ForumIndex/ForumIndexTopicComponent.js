@@ -1,16 +1,12 @@
-import {
-  Button,
-  Box,
-  Collapse,
+import { Box, Button, Collapse } from "@mui/material";
+import React, { useState } from "react";
 
-} from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import { styled } from "@mui/system";
-import { makeStyles } from "@mui/styles";
 import ForumIndexSubTopic from "./ForumIndexSubTopic";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/system";
 
 const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: "50%",
@@ -21,14 +17,14 @@ const StyledButton = styled(Button)(({ theme }) => ({
   height: 20,
   "& .label": {
     transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
-    color: "#DCDCDC",
+    color: "white",
   },
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.38)",
-    borderColor: "theme.palette.common.white,",
+    borderColor: "theme.palette.common.white",
     "& .label": {
       transform: "scale(1.3)",
-      color: "#1E90FF",
+      color: "dodgerBlue",
       [theme.breakpoints.up("md")]: {
         transform: "scale(1.7)",
       },
@@ -47,7 +43,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 const useStyles = makeStyles((theme) => ({
   navTopic: {
-    opacity: 1,
+    opacity: 0.9,
   },
   navTopicOpen: {
     opacity: 0.5,
@@ -60,12 +56,12 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
     setOpen(!open);
   };
   return (
-    <div key={forumTopic.id}>
+    <div>
       <Box
         sx={{
-          background: "linear-gradient(to right bottom, #1E90FF, #00CED1)",
-          color: "white",
+          // background: "linear-gradient(to right bottom, #1E90FF, #00CED1)",
           boxShadow: 1,
+          backgroundColor: "info.main",
           p: 1,
           m: 1,
           borderRadius: 1,
@@ -76,11 +72,14 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
           justifyContent: "space-between",
         }}
         className={open ? classes.navTopic : classes.navTopicOpen}
+        onClick={handleClick}
       >
-        <Box component="Typography">
+        <Box>
           <Button
             variant="subtitle2"
-            color="white"
+            sx={{
+              color: "white",
+            }}
             component={Link}
             to={`/forum/forumTopic/${forumTopic.id}`}
           >
@@ -88,25 +87,27 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
           </Button>
         </Box>
         {/* <Box component="Typography">最后发表</Box> */}
-        <Box component="Typography">
+        <Box>
           {open ? (
-            <StyledButton
-              size="small"
-              onClick={handleClick}
-              aria-label="small button group"
-            >
+            <StyledButton size="small" aria-label="small button group">
               <ExpandLess className="label" />
             </StyledButton>
           ) : (
-            <StyledButton size="small" onClick={handleClick}>
+            <StyledButton size="small">
               <ExpandMore className="label" />
             </StyledButton>
           )}
         </Box>
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
+        {/* 这里出发点有问题不能这么做 每次开关都要call 一次 图片 ，不行，应该一开始就fetch 了，只不过开关是隐藏，整个下面的component 应该是一个table或者别的形式的*/}
         {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
-          return <ForumIndexSubTopic forumSubTopic={forumSubTopic} />;
+          return (
+            <ForumIndexSubTopic
+              forumSubTopic={forumSubTopic}
+              key={forumSubTopic.id}
+            />
+          );
         })}
       </Collapse>
     </div>

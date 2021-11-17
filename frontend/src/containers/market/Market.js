@@ -19,6 +19,7 @@ import PostMarketItem from "./PostMarketItem";
 import PostMarketPet from "./PostMarketPet";
 import PostMarketRental from "./PostMarketRental";
 import PostMarketVehicle from "./PostMarketVehicle";
+import PrivateRoute from "../../components/PrivateRoute";
 import React from "react";
 
 export default function Market() {
@@ -26,12 +27,29 @@ export default function Market() {
     <Box>
       <Switch>
         <Route exact path="/market" component={MarketList} />
-        <Route path="/market/create/item" component={PostMarketItem} />
-        <Route path="/market/create/vehicle" component={PostMarketVehicle} />
-        <Route path="/market/create/rental" component={PostMarketRental} />
         <Route path="/market/create/pet" component={PostMarketPet} />
         <Route path="/market/create/carpool" component={PostMarketCarpool} />
-        <Route path="/market/create" component={MarketCreate} />
+        <PrivateRoute
+          allowRoles="anyone"
+          path="/market/create/item"
+          component={PostMarketItem}
+        />
+        <PrivateRoute
+          allowRoles="anyone"
+          path="/market/create/vehicle"
+          component={PostMarketVehicle}
+        />
+        <PrivateRoute
+          allowRoles="anyone"
+          path="/market/create/rental"
+          component={PostMarketRental}
+        />
+        <PrivateRoute
+          allowRoles="anyone"
+          path="/market/create/"
+          component={MarketCreate}
+        />
+
         <Route path="/market/item/:id" component={MarketItemDetail} />
         <Route path="/market/vehicle/:id" component={MarketVehicleDetail} />
         <Route path="/market/rental/:id" component={MarketRentalDetail} />
