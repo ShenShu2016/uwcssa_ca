@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,27 +30,29 @@ const useStyles = makeStyles({
 export default function ArticleCommentsPost({ article }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const { userAuth } = useSelector((state) => state);
-  const [formData, setFormData] = useState({
-    comment: "",
+  const {
+    handleSubmit,
+    control,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      comment: "",
+    },
   });
 
-  const { comment } = formData;
-
-  const onChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const createArticleCommentInput = {
-    content: comment,
-    active: true,
-    articleID: article.id,
-    userID: userAuth.user.username,
-  };
-
-  const postComment = async (e) => {
+  const [loading, setLoading] = useState(false);
+  const { isAuthenticated, user, userProfile } = useSelector(
+    (state) => state.userAuth
+  );
+  const onSubmit = async (e) => {
+    const createArticleCommentInput = {
+      content: getValues("comment"),
+      active: true,
+      articleID: article.id,
+      userID: user.username,
+    };
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
@@ -57,9 +60,7 @@ export default function ArticleCommentsPost({ article }) {
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
-        setFormData({
-          comment: "",
-        });
+        reset();
       } else {
         setLoading(false);
       }
@@ -68,35 +69,46 @@ export default function ArticleCommentsPost({ article }) {
 
   return (
     <div>
-      {userAuth.isAuthenticated ? "" : <SignInRequest />}
+      {isAuthenticated ? "" : <SignInRequest />}
 
       <div>
         <Typography className={classes.subTitle}>发布新评论：</Typography>
-        <Box className={classes.main}>
+        <Box
+          className={classes.main}
+          component={"form"}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Grid container spacing={0}>
             <Grid item xs={"auto"}>
               <CardHeader
                 sx={{ px: 0 }}
                 avatar={
-                  <CustomAvatar
-                    user={userAuth.userProfile}
-                    link={userAuth.isAuthenticated}
-                  />
+                  <CustomAvatar user={userProfile} link={isAuthenticated} />
                 }
               />
             </Grid>
             <Grid item xs>
               <Box sx={{ my: 1 }}>
-                <TextField
-                  label="发表公开评论..."
-                  variant="standard"
-                  fullWidth
-                  multiline
-                  disabled={loading || !userAuth.isAuthenticated}
-                  id="comment"
+                <Controller
                   name="comment"
-                  value={comment}
-                  onChange={(e) => onChange(e)}
+                  control={control}
+                  rules={{
+                    required: true,
+                    minLength: 1,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      label="发表公开评论..."
+                      variant="standard"
+                      fullWidth
+                      multiline
+                      disabled={loading || !isAuthenticated}
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.comment}
+                      helperText={errors.comment ? "不能为空" : null}
+                    />
+                  )}
                 />
               </Box>
               <CardActions sx={{ p: 0, justifyContent: "flex-end" }}>
@@ -104,12 +116,8 @@ export default function ArticleCommentsPost({ article }) {
                   color="primary"
                   size="large"
                   variant="text"
-                  disabled={loading || !userAuth.isAuthenticated}
-                  onClick={() => {
-                    setFormData({
-                      comment: "",
-                    });
-                  }}
+                  disabled={loading || !isAuthenticated}
+                  onClick={reset}
                 >
                   取消
                 </Button>
@@ -117,8 +125,8 @@ export default function ArticleCommentsPost({ article }) {
                   color="primary"
                   size="large"
                   variant="contained"
-                  onClick={postComment}
-                  disabled={loading || !userAuth.isAuthenticated}
+                  type="submit"
+                  disabled={loading || !isAuthenticated}
                 >
                   评论
                   {loading && (

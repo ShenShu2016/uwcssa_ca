@@ -12,10 +12,12 @@ import {
   colors,
   createTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import React, { forwardRef, useState } from "react";
 
 import API from "@aws-amplify/api";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import Footer from "../containers/Footer";
 import MuiAlert from "@mui/material/Alert";
 import { createWebFeedBack } from "../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
@@ -49,7 +51,7 @@ theme.typography.h5 = {
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
-    backgroundColor: "#cfe8fc",
+    // backgroundColor: "#cfe8fc",
   },
   TextField: {
     width: 250,
@@ -62,135 +64,173 @@ const useStyles = makeStyles((theme) => ({
 export default function UserFeedBack() {
   const classes = useStyles();
   const { username } = useSelector((state) => state.userAuth.user);
-  console.log("username", username);
-  const [value, setValue] = useState(5); // 评价默认值是7 （满分）
   const [hover, setHover] = useState(-1); //不知道是做什么用的
-  const [reason, setReason] = useState(""); //默认初始值为空
-  const [improvement, setImprovement] = useState(""); //默认初始值为空
-  const sendValue = () => {
-    return console.log(value, reason, improvement);
-  };
 
-  const [open, setOpen] = React.useState(false); //”提交成功“提示的打开状态
-  const handleClick = () => {
-    submitWebFeedBack();
-    setOpen(true);
-  };
+  const {
+    handleSubmit,
+    control,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      rate: 2,
+      reason: "",
+      improvement: "",
+    },
+  });
+
+  const [open, setOpen] = useState(false); //”提交成功“提示的打开状态
+
   const handleClose = () => {
     setOpen(false);
   };
 
   // 网上直接抄的Alert
-  const Alert = React.forwardRef(function Alert(props, ref) {
+  const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const submitWebFeedBack = async () => {
+  const onSubmit = async (data) => {
+    console.log(data);
     try {
       const response = await API.graphql(
         graphqlOperation(createWebFeedBack, {
-          input: {
-            like: true,
-            rate: value,
-            reason: reason,
-            improvement: improvement,
-            userID: username,
-          },
+          input: { ...data, userID: username, like: true },
         })
       );
       console.log("response: ", response);
-      return response.key;
+      setOpen(true);
+      reset();
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className={classes.root}>
-      <Box sx={{ bgcolor: "#cfe8fc", height: "2vh" }} />
-      <Container maxWidth="sm">
-        <Box mt={3} sx={{ bgcolor: "#cfe8fc" }} />
-        <Box border={1} sx={{ bgcolor: "white" }}>
-          <Stack
-            mt={3}
-            mx={5}
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Avatar sx={{ width: 50, height: 50, bgcolor: colors.green[500] }}>
-              <AssignmentIcon />
-            </Avatar>
-            <Typography variant="h5">意见箱</Typography>
-          </Stack>
-          <Box mt={4} mx={5}>
-            <ThemeProvider theme={theme}>
-              <Typography variant="h5">
-                你觉得我们的网站使用起来是否方便？
-              </Typography>
-            </ThemeProvider>
-          </Box>
-
-          <Box mt={3} mx={5}>
-            <Rating
-              name="hover-feedback"
-              value={value}
-              precision={1}
-              max={5}
-              size="large"
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-            />
-            {value !== null && (
-              <Box ml={0}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
-          </Box>
-
-          <Box mt={5} mx={5}>
-            <Box m="auto" alignItems="center" mt={2}>
-              <TextField
-                className={classes.TextField}
-                multiline={true}
-                id="reason"
-                label={"您给我们这个分数的主要原因是什么？"}
-                variant="outlined"
-                minRows={3}
-                onChange={(e) => setReason(e.target.value)}
-              />
-            </Box>
-          </Box>
-
-          <Box mt={5} mx={5}>
-            <Box m="auto" alignItems="center" mt={2}>
-              <TextField
-                className={classes.TextField}
-                multiline={true}
-                id="improvement"
-                label="我们可以做些什么来改善网站上的体验？"
-                variant="outlined"
-                minRows={3}
-                onChange={(e) => setImprovement(e.target.value)}
-              />
-            </Box>
-          </Box>
-          <Container></Container>
-          <Box mt={3} mb={3}>
-            <Button
-              type="submit"
-              color="primary"
-              size="large"
-              sx={{ borderRadius: 50 }}
-              onClick={() => {
-                handleClick();
-                sendValue();
-              }}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box sx={{ height: "2vh" }} />
+        <Container maxWidth="sm">
+          <Box mt={3} />
+          <Box border={3} sx={{ bgcolor: "white" }} borderRadius={15}>
+            <Stack
+              mt={3}
+              mx={5}
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              justifyContent="center"
             >
-              提交
-            </Button>
+              <Avatar
+                sx={{ width: 50, height: 50, bgcolor: colors.green[500] }}
+              >
+                <AssignmentIcon />
+              </Avatar>
+              <Typography variant="h5">意见箱</Typography>
+            </Stack>
+            <Box mt={4} mx={5}>
+              <ThemeProvider theme={theme}>
+                <Typography variant="h5">
+                  你觉得我们的网站使用起来是否方便？
+                </Typography>
+              </ThemeProvider>
+            </Box>
+
+            <Box mt={3} mx={5}>
+              <Controller
+                name="rate"
+                control={control}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <Rating
+                    precision={1}
+                    max={5}
+                    size="large"
+                    onChange={onChange}
+                    value={Number(value)}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                  />
+                )}
+              />
+              {getValues("rate") !== null && (
+                <Box ml={0}>
+                  {labels[hover !== -1 ? hover : getValues("rate")]}
+                </Box>
+              )}
+            </Box>
+            <Box mt={5} mx={5}>
+              <Box m="auto" alignItems="center" mt={2}>
+                <Controller
+                  name="reason"
+                  control={control}
+                  rules={{
+                    required: true,
+                    minLength: 10,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      className={classes.TextField}
+                      multiline={true}
+                      label={"您给我们这个分数的主要原因是什么？"}
+                      variant="outlined"
+                      minRows={3}
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.reason}
+                      helperText={
+                        errors.reason ? "请简短的告诉我们原因， 10个字" : null
+                      }
+                    />
+                  )}
+                />
+              </Box>
+            </Box>
+            <Box mt={5} mx={5}>
+              <Box m="auto" alignItems="center" mt={2}>
+                <Controller
+                  name="improvement"
+                  control={control}
+                  rules={{
+                    required: true,
+                    minLength: 10,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      className={classes.TextField}
+                      multiline={true}
+                      label="我们可以做些什么来改善网站上的体验？"
+                      variant="outlined"
+                      minRows={3}
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.improvement}
+                      helperText={
+                        errors.improvement
+                          ? "请简短的告诉我们原因, 10个字"
+                          : null
+                      }
+                    />
+                  )}
+                />
+              </Box>
+              <Box mt={3} mb={3}>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  // sx={{ borderRadius: 50 }}
+                  type="submit"
+                >
+                  提交
+                </Button>
+              </Box>
+            </Box>
 
             <Snackbar
               open={open}
@@ -207,9 +247,11 @@ export default function UserFeedBack() {
               </Alert>
             </Snackbar>
           </Box>
-        </Box>
-      </Container>
-      <Box mt={3} sx={{ bgcolor: "#cfe8fc", height: "2vh" }} />
+        </Container>
+        <Box mt={3} sx={{ height: "2vh" }} />
+      </form>
+
+      <Footer />
     </div>
   );
 }

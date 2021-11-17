@@ -8,6 +8,7 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,24 +24,34 @@ export default function ArticleReplyComments({
 }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { userAuth } = useSelector((state) => state);
-  const [formData, setFormData] = useState({
-    comment: "",
+  const { isAuthenticated, user, userProfile } = useSelector(
+    (state) => state.userAuth
+  );
+  const {
+    handleSubmit,
+    control,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      comment: "",
+    },
   });
 
-  const onChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const { comment } = formData;
-  const createArticleSubCommentInput = {
-    content: comment,
-    active: true,
-    articleCommentID: item.id,
-    userID: userAuth.user.username,
-  };
+  // const onChange = (e) => {
+  //   e.preventDefault();
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+  // const { comment } = formData;
 
-  const postSubComment = async (e) => {
+  const onSubmit = async (e) => {
+    const createArticleSubCommentInput = {
+      content: getValues("comment"),
+      active: true,
+      articleCommentID: item.id,
+      userID: user.username,
+    };
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
@@ -48,9 +59,8 @@ export default function ArticleReplyComments({
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
-        setFormData({
-          comment: "",
-        });
+        handleSubCommentReply();
+        reset();
       } else {
         setLoading(false);
       }
@@ -59,44 +69,49 @@ export default function ArticleReplyComments({
 
   return (
     <Collapse in={isReplyOpen}>
-      <Grid container spacing={0}>
+      <Grid
+        container
+        spacing={0}
+        component={"form"}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Grid item xs={"auto"}>
           <CardHeader
             sx={{ px: 0 }}
-            avatar={
-              <CustomAvatar
-                user={userAuth.userProfile}
-                link={userAuth.isAuthenticated}
-              />
-            }
+            avatar={<CustomAvatar user={userProfile} link={isAuthenticated} />}
           />
         </Grid>
         <Grid item xs>
           <Box sx={{ my: 1 }}>
-            <TextField
-              label="发表公开评论..."
-              variant="standard"
-              fullWidth
-              multiline
-              disabled={loading || !userAuth.isAuthenticated}
-              id="comment"
+            <Controller
               name="comment"
-              value={comment}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                minLength: 1,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="发表公开评论..."
+                  variant="standard"
+                  fullWidth
+                  multiline
+                  disabled={loading || !isAuthenticated}
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.comment}
+                  helperText={errors.comment ? "不能为空" : null}
+                />
+              )}
             />
           </Box>
           <CardActions sx={{ p: 0, justifyContent: "flex-end" }}>
             <Button
               color="primary"
-              size="small"
+              size="large"
               variant="text"
-              disabled={loading || !userAuth.isAuthenticated}
-              onClick={() => {
-                setFormData({
-                  comment: "",
-                });
-                handleSubCommentReply();
-              }}
+              disabled={loading || !isAuthenticated}
+              onClick={handleSubCommentReply}
             >
               取消
             </Button>
@@ -104,8 +119,8 @@ export default function ArticleReplyComments({
               color="primary"
               size="small"
               variant="contained"
-              onClick={postSubComment}
-              disabled={loading || !userAuth.isAuthenticated}
+              type="submit"
+              disabled={loading || !isAuthenticated}
             >
               评论
               {loading && (
