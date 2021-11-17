@@ -19,12 +19,14 @@ import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
+import EmojiTransportation from "@mui/icons-material/EmojiTransportation";
 import FilterInfo from "./marketItemFilterInfo";
 import HomeIcon from "@mui/icons-material/Home";
 import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
 import MarketFIlterLocation from "./marketFilterLocation";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PetsIcon from "@mui/icons-material/Pets";
 import PropTypes from "prop-types";
 import { marketItemStyle } from "./marketItemCss";
 
@@ -203,6 +205,30 @@ export default function MarketImgTopFilter({
                   to="/market/rental"
                 >
                   Rental
+                </Button>
+              </span>
+            ) : null}
+            {type === "pet" ? (
+              <span style={{ cursor: "not-allowed" }}>
+                <Button
+                  startIcon={<PetsIcon />}
+                  color="inherit"
+                  component={Link}
+                  to="/market/pet"
+                >
+                  Pet
+                </Button>
+              </span>
+            ) : null}
+            {type === "carpool" ? (
+              <span style={{ cursor: "not-allowed" }}>
+                <Button
+                  startIcon={<EmojiTransportation />}
+                  color="inherit"
+                  component={Link}
+                  to="/market/carpool"
+                >
+                  Carpool
                 </Button>
               </span>
             ) : null}

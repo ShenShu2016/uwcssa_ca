@@ -8,25 +8,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Global } from "@emotion/react";
+import { GetTags } from "../../components/CustomMUI/CustomTags";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import InputAdornment from "@mui/material/InputAdornment";
-import MarketForm from "../../components/Market/marketForm";
-import { MarketItemInfo } from "./MarketItemDetail";
+// import InputAdornment from "@mui/material/InputAdornment";
+// import MarketForm from "../../components/Market/marketForm";
+import { MarketPetInfo } from "./MarketPetDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { marketItemOptions } from "../../components/Market/marketItemOptions";
+// import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
@@ -89,12 +84,9 @@ const useStyles = makeStyles((theme) => ({
     height: "calc(100vh - 64px)",
     padding: "2rem",
     float: "right",
-    [theme.breakpoints.down("lg")]: {
+    [theme.breakpoints.down("md")]: {
       display: "block",
       height: "100%",
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "none",
     },
   },
   previewImgRight: {
@@ -102,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     position: "relative",
     backgroundColor: "rgb(243, 246, 249)",
-    [theme.breakpoints.down("lg")]: {
+    [theme.breakpoints.down("md")]: {
       width: "100%",
       height: "50vh",
     },
@@ -112,68 +104,24 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "100%",
-      overflow: "hidden",
-    },
-  },
-  drawer: {
-    display: "none",
-    [theme.breakpoints.down("lg")]: {
-      height: "70vh",
-      width: "100%",
-      overflow: "visible",
-    },
   },
 }));
 
 const Input = styled("input")({
   display: "none",
 });
-
-const drawerBleeding = 56;
-
-const Root = styled("div")(({ theme }) => ({
-  display: "none",
-  [theme.breakpoints.down("md")]: {
-    display: "block",
-    height: "100%",
-    backgroundColor:
-      theme.palette.mode === "light"
-        ? grey[100]
-        : theme.palette.background.default,
-  },
-}));
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
-}));
-
-const Puller = styled(Box)(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
-  borderRadius: 3,
-  position: "absolute",
-  top: 8,
-  left: "calc(50% - 15px)",
-}));
-
-export default function PostMarketItem() {
+export default function PostMarketPet() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  useTitle("发布二手商品信息");
+  useTitle("发布宠物信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
-  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
+  // const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const [imageKeys, setImageKeys] = useState("");
-  const [open, setOpen] = useState(false);
-
   const [fakeItems, setFakeItems] = useState({
     title: "Title",
     price: "Price",
@@ -195,6 +143,7 @@ export default function PostMarketItem() {
     location: false,
     description: false,
   });
+
   const [marketItemData, setMarketItemData] = useState({
     title: "",
     name: "",
@@ -205,11 +154,10 @@ export default function PostMarketItem() {
     location: "",
     tags: [],
   });
-  // console.log("marketItemData", marketItemData);
 
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    const imageLocation = "market/item";
+    const imageLocation = "market/pet";
 
     const response = await dispatch(
       postMultipleImages({ imagesData, imageLocation })
@@ -281,7 +229,7 @@ export default function PostMarketItem() {
     } = marketItemData;
 
     const createMarketItemInput = {
-      marketType: "Item",
+      marketType: "Pet",
       title: title,
       name: title,
       description: description,
@@ -310,7 +258,7 @@ export default function PostMarketItem() {
       const response = await dispatch(postMarketItem(createMarketItemInput));
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
-        history.push(`/market/item/${response.payload.id}`);
+        history.push(`/market/pet/${response.payload.id}`);
       }
       console.log("Can upload");
     } else {
@@ -334,19 +282,15 @@ export default function PostMarketItem() {
     setImageKeys(newKeys);
   };
 
-  const handleKeyDown = (e) => {
-    const newTags = [...fakeItems.tags, e];
-    setFakeItems({ ...fakeItems, tags: newTags });
-  };
+  // const handleKeyDown = (e) => {
+  //   const newTags = [...fakeItems.tags, e];
+  //   setFakeItems({ ...fakeItems, tags: newTags });
+  // };
 
-  const handleDelete = (e) => {
-    const newTags = fakeItems.tags.filter((tag) => tag !== e);
-    setFakeItems({ ...fakeItems, tags: newTags });
-  };
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
+  // const handleDelete = (e) => {
+  //   const newTags = fakeItems.tags.filter((tag) => tag !== e);
+  //   setFakeItems({ ...fakeItems, tags: newTags });
+  // };
 
   return (
     <div className={classes.root}>
@@ -369,7 +313,7 @@ export default function PostMarketItem() {
                 component="div"
                 fontWeight="bold"
               >
-                New Item Listing
+                New Pet Listing
               </Typography>
             </Box>
             {imgKeyFromServer.length !== 0 ? (
@@ -519,7 +463,7 @@ export default function PostMarketItem() {
                 />
               </Box>
 
-              <Box sx={{ marginY: "1rem" }}>
+              {/* <Box sx={{ marginY: "1rem" }}>
                 <TextField
                   label={`Price${Boolean(error.price) ? " is required!" : ""}`}
                   variant="outlined"
@@ -636,7 +580,7 @@ export default function PostMarketItem() {
                     setFakeItems({ ...fakeItems, description: e.target.value });
                   }}
                 />
-              </Box>
+              </Box> */}
             </Box>
             <Button
               // sx={{ marginY: "1rem" }}
@@ -644,6 +588,7 @@ export default function PostMarketItem() {
               endIcon={<PublishIcon />}
               onClick={uploadMarketItem}
               color="primary"
+              disabled //Disabled!
             >
               上传MarketItem
             </Button>
@@ -652,7 +597,7 @@ export default function PostMarketItem() {
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
             <Stack
-              direction={{ xs: "column", lg: "row" }}
+              direction={{ xs: "column", md: "row" }}
               width="100%"
               height="100%"
             >
@@ -676,90 +621,11 @@ export default function PostMarketItem() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketItemInfo marketItem={fakeItems} />
+                <MarketPetInfo marketItem={fakeItems} />
               </Box>
             </Stack>
           </Paper>
         </Box>
-        <Root>
-          <CssBaseline />
-          <Global
-            styles={{
-              ".MuiDrawer-root > .MuiPaper-root": {
-                height: "70%",
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-                // overflow: "visible",
-              },
-            }}
-          />
-          <Box sx={{ textAlign: "center", pt: 1 }}>
-            <IconButton onClick={toggleDrawer(true)}>
-              <VisibilityIcon />
-            </IconButton>
-          </Box>
-          <SwipeableDrawer
-            anchor="bottom"
-            open={open}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-            swipeAreaWidth={drawerBleeding}
-            disableSwipeToOpen={false}
-            ModalProps={{
-              keepMounted: true,
-            }}
-          >
-            <StyledBox
-              sx={{
-                position: "absolute",
-                right: 0,
-                left: 0,
-              }}
-            >
-              <Puller />
-              <Typography sx={{ p: 2, color: "text.secondary" }}>
-                Preview
-              </Typography>
-              <StyledBox
-                sx={{
-                  px: 2,
-                  pb: 2,
-                  height: "100%",
-                  overflow: "auto",
-                }}
-              >
-                <Stack
-                  direction={{ xs: "column", lg: "row" }}
-                  width="100%"
-                  overflow="auto"
-                >
-                  <Box className={classes.previewImgRight}>
-                    {imgKeyFromServer.length !== 0 ? (
-                      <SwipeViews images={imgKeyFromServer} />
-                    ) : (
-                      <Box
-                        height="50px"
-                        sx={{
-                          left: "50%",
-                          top: "40%",
-                          position: "absolute",
-                          transform: "translate(-50%,-50%)",
-                        }}
-                      >
-                        <Typography variant="h6">
-                          Your images will go here in the preview mode
-                        </Typography>
-                      </Box>
-                    )}
-                  </Box>
-                  <Box className={classes.previewInfo}>
-                    <MarketItemInfo marketItem={fakeItems} />
-                  </Box>
-                </Stack>
-              </StyledBox>
-            </StyledBox>
-          </SwipeableDrawer>
-        </Root>
       </Stack>
     </div>
   );

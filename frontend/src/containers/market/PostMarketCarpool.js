@@ -8,17 +8,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CssBaseline from "@mui/material/CssBaseline";
+import { GetTags } from "../../components/CustomMUI/CustomTags";
 import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import InputAdornment from "@mui/material/InputAdornment";
-import MarketForm from "../../components/Market/marketForm";
-import { MarketItemInfo } from "./MarketItemDetail";
+// import InputAdornment from "@mui/material/InputAdornment";
+// import MarketForm from "../../components/Market/marketForm";
+import { MarketCarpoolInfo } from "./MarketCarpoolDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
@@ -26,7 +26,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { marketItemOptions } from "../../components/Market/marketItemOptions";
+// import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
@@ -160,20 +160,19 @@ const Puller = styled(Box)(({ theme }) => ({
   left: "calc(50% - 15px)",
 }));
 
-export default function PostMarketItem() {
+export default function PostMarketCarpool() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  useTitle("发布二手商品信息");
+  useTitle("发布Carpool信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
+  const [open, setOpen] = useState(false);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
-  const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
+  // const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const [imageKeys, setImageKeys] = useState("");
-  const [open, setOpen] = useState(false);
-
   const [fakeItems, setFakeItems] = useState({
     title: "Title",
     price: "Price",
@@ -195,6 +194,7 @@ export default function PostMarketItem() {
     location: false,
     description: false,
   });
+
   const [marketItemData, setMarketItemData] = useState({
     title: "",
     name: "",
@@ -205,11 +205,10 @@ export default function PostMarketItem() {
     location: "",
     tags: [],
   });
-  // console.log("marketItemData", marketItemData);
 
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    const imageLocation = "market/item";
+    const imageLocation = "market/carpool";
 
     const response = await dispatch(
       postMultipleImages({ imagesData, imageLocation })
@@ -281,7 +280,7 @@ export default function PostMarketItem() {
     } = marketItemData;
 
     const createMarketItemInput = {
-      marketType: "Item",
+      marketType: "Carpool",
       title: title,
       name: title,
       description: description,
@@ -310,7 +309,7 @@ export default function PostMarketItem() {
       const response = await dispatch(postMarketItem(createMarketItemInput));
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
-        history.push(`/market/item/${response.payload.id}`);
+        history.push(`/market/carpool/${response.payload.id}`);
       }
       console.log("Can upload");
     } else {
@@ -334,19 +333,19 @@ export default function PostMarketItem() {
     setImageKeys(newKeys);
   };
 
-  const handleKeyDown = (e) => {
-    const newTags = [...fakeItems.tags, e];
-    setFakeItems({ ...fakeItems, tags: newTags });
-  };
-
-  const handleDelete = (e) => {
-    const newTags = fakeItems.tags.filter((tag) => tag !== e);
-    setFakeItems({ ...fakeItems, tags: newTags });
-  };
-
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  // const handleKeyDown = (e) => {
+  //   const newTags = [...fakeItems.tags, e];
+  //   setFakeItems({ ...fakeItems, tags: newTags });
+  // };
+
+  // const handleDelete = (e) => {
+  //   const newTags = fakeItems.tags.filter((tag) => tag !== e);
+  //   setFakeItems({ ...fakeItems, tags: newTags });
+  // };
 
   return (
     <div className={classes.root}>
@@ -369,7 +368,7 @@ export default function PostMarketItem() {
                 component="div"
                 fontWeight="bold"
               >
-                New Item Listing
+                New Carpool Listing
               </Typography>
             </Box>
             {imgKeyFromServer.length !== 0 ? (
@@ -519,124 +518,124 @@ export default function PostMarketItem() {
                 />
               </Box>
 
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label={`Price${Boolean(error.price) ? " is required!" : ""}`}
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={Boolean(error.price)}
-                  type="number"
-                  placeholder="eg. 200 (Currency: CAD $)"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">CAD $</InputAdornment>
-                    ),
-                  }}
-                  value={marketItemData.price}
-                  className={classes.titleInput}
-                  onChange={(e) => {
-                    setMarketItemData({
-                      ...marketItemData,
-                      price: e.target.value,
-                    });
-                    setError({ ...error, price: false });
-                    setFakeItems({ ...fakeItems, price: e.target.value });
-                  }}
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Category"
-                  value={marketItemData.marketItemCategory}
-                  options={marketItemCategoryList}
-                  required={true}
-                  error={Boolean(error.marketItemCategory)}
-                  onChange={(e) => {
-                    setMarketItemData({
-                      ...marketItemData,
-                      marketItemCategory: e.target.value,
-                    });
-                    setError({ ...error, marketItemCategory: false });
-                    setFakeItems({
-                      ...fakeItems,
-                      marketItemCategory: e.target.value,
-                    });
-                  }}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Condition"
-                  value={marketItemData.marketItemCondition}
-                  options={marketItemConditionList}
-                  required={true}
-                  error={Boolean(error.marketItemCondition)}
-                  onChange={(e) => {
-                    setMarketItemData({
-                      ...marketItemData,
-                      marketItemCondition: e.target.value,
-                    });
-                    setError({ ...error, marketItemCondition: false });
-                    setFakeItems({
-                      ...fakeItems,
-                      marketItemCondition: e.target.value,
-                    });
-                  }}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <CustomTags
-                  placeholder="新装修， 独立卫浴..."
-                  initial={fakeItems.tags}
-                  onKeyDown={(e) => handleKeyDown(e)}
-                  onDelete={(e) => handleDelete(e)}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label={`Location${
-                    Boolean(error.location) ? " is required!" : ""
-                  }`}
-                  value={marketItemData.location}
-                  variant="outlined"
-                  fullWidth
-                  error={Boolean(error.location)}
-                  required
-                  onChange={(e) => {
-                    setMarketItemData({
-                      ...marketItemData,
-                      location: e.target.value,
-                    });
-                    setError({ ...error, location: false });
-                    setFakeItems({ ...fakeItems, location: e.target.value });
-                  }}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label={`Description${
-                    Boolean(error.description) ? " is required!" : ""
-                  }`}
-                  value={marketItemData.description}
-                  minRows={5}
-                  variant="outlined"
-                  multiline
-                  error={Boolean(error.description)}
-                  required
-                  placeholder="Describe your items in a more detailed manner!"
-                  fullWidth
-                  onChange={(e) => {
-                    setMarketItemData({
-                      ...marketItemData,
-                      description: e.target.value,
-                    });
-                    setError({ ...error, description: false });
-                    setFakeItems({ ...fakeItems, description: e.target.value });
-                  }}
-                />
-              </Box>
+              {/* <Box sx={{ marginY: "1rem" }}>
+                  <TextField
+                    label={`Price${Boolean(error.price) ? " is required!" : ""}`}
+                    variant="outlined"
+                    fullWidth
+                    required
+                    error={Boolean(error.price)}
+                    type="number"
+                    placeholder="eg. 200 (Currency: CAD $)"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">CAD $</InputAdornment>
+                      ),
+                    }}
+                    value={marketItemData.price}
+                    className={classes.titleInput}
+                    onChange={(e) => {
+                      setMarketItemData({
+                        ...marketItemData,
+                        price: e.target.value,
+                      });
+                      setError({ ...error, price: false });
+                      setFakeItems({ ...fakeItems, price: e.target.value });
+                    }}
+                  />
+                </Box>
+  
+                <Box sx={{ marginY: "1rem" }}>
+                  <MarketForm
+                    title="Category"
+                    value={marketItemData.marketItemCategory}
+                    options={marketItemCategoryList}
+                    required={true}
+                    error={Boolean(error.marketItemCategory)}
+                    onChange={(e) => {
+                      setMarketItemData({
+                        ...marketItemData,
+                        marketItemCategory: e.target.value,
+                      });
+                      setError({ ...error, marketItemCategory: false });
+                      setFakeItems({
+                        ...fakeItems,
+                        marketItemCategory: e.target.value,
+                      });
+                    }}
+                  />
+                </Box>
+                <Box sx={{ marginY: "1rem" }}>
+                  <MarketForm
+                    title="Condition"
+                    value={marketItemData.marketItemCondition}
+                    options={marketItemConditionList}
+                    required={true}
+                    error={Boolean(error.marketItemCondition)}
+                    onChange={(e) => {
+                      setMarketItemData({
+                        ...marketItemData,
+                        marketItemCondition: e.target.value,
+                      });
+                      setError({ ...error, marketItemCondition: false });
+                      setFakeItems({
+                        ...fakeItems,
+                        marketItemCondition: e.target.value,
+                      });
+                    }}
+                  />
+                </Box>
+                <Box sx={{ marginY: "1rem" }}>
+                  <CustomTags
+                    placeholder="新装修， 独立卫浴..."
+                    initial={fakeItems.tags}
+                    onKeyDown={(e) => handleKeyDown(e)}
+                    onDelete={(e) => handleDelete(e)}
+                  />
+                </Box>
+                <Box sx={{ marginY: "1rem" }}>
+                  <TextField
+                    label={`Location${
+                      Boolean(error.location) ? " is required!" : ""
+                    }`}
+                    value={marketItemData.location}
+                    variant="outlined"
+                    fullWidth
+                    error={Boolean(error.location)}
+                    required
+                    onChange={(e) => {
+                      setMarketItemData({
+                        ...marketItemData,
+                        location: e.target.value,
+                      });
+                      setError({ ...error, location: false });
+                      setFakeItems({ ...fakeItems, location: e.target.value });
+                    }}
+                  />
+                </Box>
+                <Box sx={{ marginY: "1rem" }}>
+                  <TextField
+                    label={`Description${
+                      Boolean(error.description) ? " is required!" : ""
+                    }`}
+                    value={marketItemData.description}
+                    minRows={5}
+                    variant="outlined"
+                    multiline
+                    error={Boolean(error.description)}
+                    required
+                    placeholder="Describe your items in a more detailed manner!"
+                    fullWidth
+                    onChange={(e) => {
+                      setMarketItemData({
+                        ...marketItemData,
+                        description: e.target.value,
+                      });
+                      setError({ ...error, description: false });
+                      setFakeItems({ ...fakeItems, description: e.target.value });
+                    }}
+                  />
+                </Box> */}
             </Box>
             <Button
               // sx={{ marginY: "1rem" }}
@@ -644,6 +643,7 @@ export default function PostMarketItem() {
               endIcon={<PublishIcon />}
               onClick={uploadMarketItem}
               color="primary"
+              disabled //Disabled!
             >
               上传MarketItem
             </Button>
@@ -676,7 +676,7 @@ export default function PostMarketItem() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketItemInfo marketItem={fakeItems} />
+                <MarketCarpoolInfo marketItem={fakeItems} />
               </Box>
             </Stack>
           </Paper>
@@ -753,7 +753,7 @@ export default function PostMarketItem() {
                     )}
                   </Box>
                   <Box className={classes.previewInfo}>
-                    <MarketItemInfo marketItem={fakeItems} />
+                    <MarketCarpoolInfo marketItem={fakeItems} />
                   </Box>
                 </Stack>
               </StyledBox>

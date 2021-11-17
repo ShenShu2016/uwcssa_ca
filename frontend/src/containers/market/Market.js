@@ -2,15 +2,21 @@ import { Route, Switch } from "react-router-dom";
 
 import { Box } from "@mui/material";
 import { Loading } from "../../components/Market/loading";
+import MarketCarpool from "./marketCarpool";
+import MarketCarpoolDetail from "./MarketCarpoolDetail";
 import MarketCreate from "./MarketCreate";
 import MarketItem from "./marketItem";
 import MarketItemDetail from "./MarketItemDetail";
 import MarketList from "./marketList";
+import MarketPet from "./marketPet";
+import MarketPetDetail from "./MarketPetDetail";
 import MarketRental from "./marketRental";
 import MarketRentalDetail from "./MarketRentalDetail";
 import MarketVehicle from "./marketVehicle";
 import MarketVehicleDetail from "./MarketVehicleDetail ";
+import PostMarketCarpool from "./PostMarketCarpool";
 import PostMarketItem from "./PostMarketItem";
+import PostMarketPet from "./PostMarketPet";
 import PostMarketRental from "./PostMarketRental";
 import PostMarketVehicle from "./PostMarketVehicle";
 import React from "react";
@@ -23,13 +29,19 @@ export default function Market() {
         <Route path="/market/create/item" component={PostMarketItem} />
         <Route path="/market/create/vehicle" component={PostMarketVehicle} />
         <Route path="/market/create/rental" component={PostMarketRental} />
+        <Route path="/market/create/pet" component={PostMarketPet} />
+        <Route path="/market/create/carpool" component={PostMarketCarpool} />
         <Route path="/market/create" component={MarketCreate} />
         <Route path="/market/item/:id" component={MarketItemDetail} />
         <Route path="/market/vehicle/:id" component={MarketVehicleDetail} />
         <Route path="/market/rental/:id" component={MarketRentalDetail} />
+        <Route path="/market/pet/:id" component={MarketPetDetail} />
+        <Route path="/market/carpool/:id" component={MarketCarpoolDetail} />
         <Route path="/market/item/" component={MarketItem} />
         <Route path="/market/vehicle/" component={MarketVehicle} />
         <Route path="/market/rental/" component={MarketRental} />
+        <Route path="/market/pet/" component={MarketPet} />
+        <Route path="/market/carpool/" component={MarketCarpool} />
         <Route path="/market/loading/" component={Loading} />
       </Switch>
     </Box>
