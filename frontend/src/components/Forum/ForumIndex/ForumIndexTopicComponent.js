@@ -1,9 +1,4 @@
-import {
-  Button,
-  Box,
-  Collapse,
-
-} from "@mui/material";
+import { Button, Box, Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
@@ -21,14 +16,14 @@ const StyledButton = styled(Button)(({ theme }) => ({
   height: 20,
   "& .label": {
     transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
-    color: "#DCDCDC",
+    color: "white",
   },
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.38)",
-    borderColor: "theme.palette.common.white,",
+    borderColor: "theme.palette.common.white",
     "& .label": {
       transform: "scale(1.3)",
-      color: "#1E90FF",
+      color: "dodgerBlue",
       [theme.breakpoints.up("md")]: {
         transform: "scale(1.7)",
       },
@@ -47,7 +42,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 const useStyles = makeStyles((theme) => ({
   navTopic: {
-    opacity: 1,
+    opacity: 0.9,
   },
   navTopicOpen: {
     opacity: 0.5,
@@ -60,12 +55,12 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
     setOpen(!open);
   };
   return (
-    <div key={forumTopic.id}>
+    <div>
       <Box
         sx={{
-          background: "linear-gradient(to right bottom, #1E90FF, #00CED1)",
-          color: "white",
+          // background: "linear-gradient(to right bottom, #1E90FF, #00CED1)",
           boxShadow: 1,
+          backgroundColor: "info.main",
           p: 1,
           m: 1,
           borderRadius: 1,
@@ -77,10 +72,12 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
         }}
         className={open ? classes.navTopic : classes.navTopicOpen}
       >
-        <Box component="Typography">
+        <Box>
           <Button
             variant="subtitle2"
-            color="white"
+            sx={{
+              color: "white",
+            }}
             component={Link}
             to={`/forum/forumTopic/${forumTopic.id}`}
           >
@@ -88,7 +85,7 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
           </Button>
         </Box>
         {/* <Box component="Typography">最后发表</Box> */}
-        <Box component="Typography">
+        <Box>
           {open ? (
             <StyledButton
               size="small"
@@ -106,7 +103,7 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
         {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
-          return <ForumIndexSubTopic forumSubTopic={forumSubTopic} />;
+          return <ForumIndexSubTopic forumSubTopic={forumSubTopic} key={forumSubTopic.id}/>;
         })}
       </Collapse>
     </div>

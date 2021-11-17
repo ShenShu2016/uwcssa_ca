@@ -4,7 +4,7 @@ import {
   ListItemText,
   List,
   ListItem,
-  Typography,
+  // Typography,
   ListItemAvatar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
   const forumPost = forumSubTopic.forumPosts.items[0];
   console.log(forumPost);
   return (
-    <div>
+    <div key={forumSubTopic.id}>
       <List
         component="div"
         disablePadding
@@ -72,28 +72,26 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
               </ListItemAvatar>
               <ListItemText
                 primary={
-                  <Typography
+                  <Button
                     component={Link}
-                    underline="none"
                     to={`/forum/forumPost/${forumPost.id}`}
                     color="primary"
 
                   >
                     {forumPost.title}
-                  </Typography>
+                  </Button>
                 }
                 secondary={
                   <React.Fragment>
                     {"由"}
-                    <Typography
+                    <Button
                       // sx={{ display: "inline" }}
                       component={Link}
-                      underline="none"
                       to={`/account/profile/${forumPost.owner}`}
                       color="primary"
                     >
                       {forumPost.owner},
-                    </Typography>
+                    </Button>
                     {moment(forumPost.createdAt).fromNow()}
                   </React.Fragment>
                 }

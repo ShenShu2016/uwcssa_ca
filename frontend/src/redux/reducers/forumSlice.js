@@ -6,6 +6,7 @@ import {
 } from "../../graphql/mutations";
 import {
   forumPostCommentSortByForumPostID,
+  // forumPostSortByForumPostLastReplyAt,
   forumPostSortByForumSubTopicID,
   forumPostSubCommentSortByForumPostCommentID,
   // getForumPost,
@@ -20,6 +21,7 @@ import {
   getForumPost,
   getForumTopic,
   listForumTopics,
+  forumPostSortByForumPostLastReplyAt,
 } from "../CustomQuery/ForumQueries";
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
@@ -32,6 +34,7 @@ const initialState = {
     forumTopic: {},
     forumSubTopic: {},
     forumSubTopicPosts: {},
+    forumSubTopicPostsLastReply: {},
     forumPost: { forumPostComments: { nextToken: null } },
   },
 
@@ -49,6 +52,8 @@ const initialState = {
   selectedForumSubTopicError: null,
   selectedForumSubTopicPostsStatus: "idle",
   selectedForumSubTopicPostsError: null,
+  selectedForumSubTopicPostsLastReplyStatus: "idle",
+  selectedForumSubTopicPostsLastReplyError: null,
 
   //forumPost
   postForumPostStatus: "idle",
@@ -128,7 +133,22 @@ export const selectedForumSubTopicPosts = createAsyncThunk(
     return forumSubTopicPostData.data.ForumPostSortByForumSubTopicID;
   }
 );
-
+export const selectedForumSubTopicPostsLastReply = createAsyncThunk(
+  "forum/selectedForumSubTopicPostsLastReply",
+  async (forumSubTopicID) => {
+    const forumSubTopicPostData = await API.graphql({
+      query: forumPostSortByForumPostLastReplyAt,
+      variables: {
+        forumSubTopicID: forumSubTopicID,
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+        // limit: 4,
+      },
+      authMode: "AWS_IAM",
+    });
+    return forumSubTopicPostData.data.ForumPostSortByForumPostLastReplyAt;
+  }
+);
 //forumPost
 export const fetchForumPosts = createAsyncThunk(
   "forum/fetchForumPosts",
@@ -244,6 +264,7 @@ const forumSlice = createSlice({
         forumTopic: {},
         forumSubTopic: {},
         forumSubTopicPosts: {},
+        forumSubTopicPostsLastReply: {},
         forumPost: { forumPostComments: { nextToken: null } },
       };
     },
@@ -252,6 +273,7 @@ const forumSlice = createSlice({
         forumTopic: {},
         forumSubTopic: {},
         forumSubTopicPosts: {},
+        forumSubTopicPostsLastReply: {},
         forumPost: { forumPostComments: { nextToken: null } },
       };
     },
@@ -260,6 +282,7 @@ const forumSlice = createSlice({
         forumTopic: {},
         forumSubTopic: {},
         forumSubTopicPosts: {},
+        forumSubTopicPostsLastReply: {},
         forumPost: { forumPostComments: { nextToken: null } },
       };
     },
@@ -324,6 +347,18 @@ const forumSlice = createSlice({
       .addCase(selectedForumSubTopicPosts.rejected, (state, action) => {
         state.selectedForumSubTopicPostsStatus = "failed";
         state.selectedForumSubTopicPostsError = action.error.message;
+      })
+      //selectedForumSubTopicPostsLastReply
+      .addCase(selectedForumSubTopicPostsLastReply.pending, (state, action) => {
+        state.selectedForumSubTopicPostsLastReplyStatus = "loading";
+      })
+      .addCase(selectedForumSubTopicPostsLastReply.fulfilled, (state, action) => {
+        state.selectedForumSubTopicPostsLastReplyStatus = "succeeded";
+        state.selected.forumSubTopicPostsLastReply = action.payload;
+      })
+      .addCase(selectedForumSubTopicPostsLastReply.rejected, (state, action) => {
+        state.selectedForumSubTopicPostsLastReplyStatus = "failed";
+        state.selectedForumSubTopicPostsLastReplyError = action.error.message;
       })
       //fetchForumPosts
       .addCase(fetchForumPosts.pending, (state, action) => {

@@ -4,6 +4,7 @@ import {
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
   selectedForumSubTopicPosts,
+  selectedForumSubTopicPostsLastReply,
 } from "../../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,13 +37,17 @@ export default function ForumSubTopic() {
     if (forumSubTopicID && forumSubTopicID !== "") {
       dispatch(selectedForumSubTopic(forumSubTopicID));
       dispatch(selectedForumSubTopicPosts(forumSubTopicID));
+      dispatch(selectedForumSubTopicPostsLastReply(forumSubTopicID));
     }
     return () => dispatch(removeSelectedForumSubTopic());
   }, [forumSubTopicID, dispatch]);
-  const { forumSubTopic, forumSubTopicPosts } = useSelector(
-    (state) => state.forum.selected
-  );
-  console.log(forumSubTopic);
+  const { 
+    forumSubTopic, 
+    // forumSubTopicPosts, 
+    forumSubTopicPostsLastReply 
+  } =
+    useSelector((state) => state.forum.selected);
+  console.log(forumSubTopicPostsLastReply);
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -52,10 +57,10 @@ export default function ForumSubTopic() {
           ) : (
             <ForumSubTopicMain forumSubTopic={forumSubTopic} />
           )}
-          {Object.keys(forumSubTopicPosts).length === 0 ? (
+          {Object.keys(forumSubTopicPostsLastReply).length === 0 ? (
             <Skeleton variant="rectangular" width={210} height={118} />
           ) : (
-            <ForumSubTopicPosts posts={forumSubTopicPosts} />
+            <ForumSubTopicPosts posts={forumSubTopicPostsLastReply} />
           )}
         </Grid>
         <Grid item sm={1} md={2}>
