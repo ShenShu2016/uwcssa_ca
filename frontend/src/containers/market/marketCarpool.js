@@ -11,25 +11,25 @@ import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
 import marketItemFilter from "../../components/Market/marketItemFilter";
-import { marketItemSortBySortKeyVehicle } from "../../components/Market//marketQueries";
+import { marketItemSortBySortKeyRental } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
-export default function MarketVehicle() {
+export default function MarketCarpool() {
   const useStyles = marketItemStyle;
-  useTitle("Vehicle");
+  useTitle("Carpool");
   const dispatch = useDispatch();
   const classes = useStyles();
   const [starter, setStarter] = useState(false);
+
   const [filterList, setFilterList] = useState({
     sortKey: "original",
     min: "",
     max: "",
-    vehicleType: "",
-    minYear: "",
-    maxYear: "",
-    make: "",
-    model: "",
+    marketRentalSaleRent: "",
+    propertyType: "",
+    airConditioningType: "",
+    heatingType: "",
     clickedTag: "",
   });
 
@@ -37,13 +37,13 @@ export default function MarketVehicle() {
 
   const marketItems = useSelector(selectAllMarketItems);
   const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+
   const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Vehicle" && item.description !== null
+    (item) => item.marketType === "Carpool" && item.description !== null
   );
 
-  console.log("true items", trueMarketItems);
   useEffect(() => {
-    dispatch(fetchMarketItems(marketItemSortBySortKeyVehicle));
+    dispatch(fetchMarketItems(marketItemSortBySortKeyRental));
   }, [dispatch]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function MarketVehicle() {
     ) {
       setStarter(false);
     } else {
-      if (marketItems[0].fuelType === undefined) {
+      if (marketItems[0].catFriendly === undefined) {
         setStarter(false);
       } else if (marketItems[0].tags === undefined) {
         setStarter(false);
@@ -64,13 +64,11 @@ export default function MarketVehicle() {
     }
   }, [marketItems]);
 
-  console.log("Started!", starter);
   const filteredItems = marketItemFilter(
     trueMarketItems,
     filterList,
-    "vehicle"
+    "carpool"
   );
-  console.log("say something", filteredItems);
 
   // let urls = [];
   // marketItems.forEach((item) => {
@@ -111,20 +109,17 @@ export default function MarketVehicle() {
   const handleMin = (e) => {
     setFilterList({ ...filterList, min: e.target.value });
   };
-  const handleVehicleType = (e) => {
-    setFilterList({ ...filterList, vehicleType: e.target.value });
+  const handleMarketRentalSaleRent = (e) => {
+    setFilterList({ ...filterList, marketRentalSaleRent: e.target.value });
   };
-  const handleMinYear = (e) => {
-    setFilterList({ ...filterList, minYear: e.target.value });
+  const handlePropertyType = (e) => {
+    setFilterList({ ...filterList, propertyType: e.target.value });
   };
-  const handleMaxYear = (e) => {
-    setFilterList({ ...filterList, maxYear: e.target.value });
+  const handleAirConditioningType = (e) => {
+    setFilterList({ ...filterList, airConditioningType: e.target.value });
   };
-  const handleModel = (e) => {
-    setFilterList({ ...filterList, model: e.target.value });
-  };
-  const handleMake = (e) => {
-    setFilterList({ ...filterList, make: e.target.value });
+  const handleHeatingType = (e) => {
+    setFilterList({ ...filterList, heatingType: e.target.value });
   };
   const handleClick = (tag) => {
     setFilterList({ ...filterList, clickedTag: tag });
@@ -135,11 +130,10 @@ export default function MarketVehicle() {
       sortKey: "original",
       min: "",
       max: "",
-      vehicleType: "",
-      minYear: "",
-      maxYear: "",
-      make: "",
-      model: "",
+      marketRentalSaleRent: "",
+      propertyType: "",
+      airConditioningType: "",
+      heatingType: "",
       clickedTag: "",
     });
   };
@@ -155,32 +149,30 @@ export default function MarketVehicle() {
         >
           <FilterInfo
             form="plain"
-            type="vehicle"
+            type="carpool"
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
             handleMax={handleMax}
-            handleVehicleType={handleVehicleType}
-            handleMinYear={handleMinYear}
-            handleMaxYear={handleMaxYear}
-            handleMake={handleMake}
-            handleModel={handleModel}
+            handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+            handlePropertyType={handlePropertyType}
+            handleAirConditioningType={handleAirConditioningType}
+            handleHeatingType={handleHeatingType}
             handleReset={handleReset}
           />
           <Box className={classes.img}>
             <MarketImgTopFilter
-              type="vehicle"
+              type="carpool"
               trueMarketItems={trueMarketItems}
               handleClick={handleClick}
               filterList={filterList}
               handleSortKey={handleSortKey}
               handleMin={handleMin}
               handleMax={handleMax}
-              handleVehicleType={handleVehicleType}
-              handleMinYear={handleMinYear}
-              handleMaxYear={handleMaxYear}
-              handleMake={handleMake}
-              handleModel={handleModel}
+              handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+              handlePropertyType={handlePropertyType}
+              handleAirConditioningType={handleAirConditioningType}
+              handleHeatingType={handleHeatingType}
               handleReset={handleReset}
             />
             <Box className={classes.items}>{itemRenderList}</Box>

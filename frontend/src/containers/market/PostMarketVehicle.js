@@ -10,10 +10,6 @@ import {
 } from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
-import {
-  fetchMarketItems,
-  postMarketItem,
-} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
@@ -25,8 +21,8 @@ import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import { makeStyles } from "@mui/styles";
-import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
+import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
@@ -121,8 +117,9 @@ export default function PostMarketVehicle() {
   useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const [imageKeys, setImageKeys] = useState("");
+  const [imageKeys, setImageKeys] = useState({});
   const user = useSelector((state) => state.userAuth.userProfile);
+  const [trigger, setTrigger] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
@@ -180,7 +177,9 @@ export default function PostMarketVehicle() {
     );
     // console.log("response!!!", response);
     if (response.meta.requestStatus === "fulfilled") {
-      setImageKeys(response.payload);
+      const newImg = response.payload.map((key) => [key, "temp"]);
+      const temp = Object.entries(imageKeys).concat(newImg);
+      setImageKeys(Object.fromEntries(temp));
     }
   };
 
@@ -189,7 +188,7 @@ export default function PostMarketVehicle() {
       try {
         // setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imageKeys).map((key) =>
+          Object.keys(imageKeys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -197,20 +196,40 @@ export default function PostMarketVehicle() {
             })
           )
         );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        // setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        setImgKeyFromServer(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImgKeyFromServer([]);
       }
     };
     // console.log("imageKeys", imageKeys);
-    if (imageKeys) {
+    if (imageKeys && trigger === true) {
       getImage();
     }
-  }, [imageKeys]);
+  }, [imageKeys, trigger]);
 
-  // console.log("imgKeyFromServer", imgKeyFromServer);
-  // console.log("imageKeys", imageKeys);
+  useEffect(() => {
+    if (
+      Object.values(imageKeys).includes("temp") &&
+      Object.values(imageKeys).length === imgKeyFromServer.length &&
+      trigger
+    ) {
+      const images = Object.entries(imageKeys);
+      console.log("Bug here!", images);
+      if (Object.values(imageKeys).length === 1) {
+        let temp = {};
+        temp[images[0][0]] = imgKeyFromServer[0];
+        console.log("almost", temp);
+        setImageKeys(temp);
+      } else {
+        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
+        console.log("almost", images);
+        setImageKeys(Object.fromEntries(images));
+      }
+      setTrigger(false);
+    }
+  }, [imgKeyFromServer, imageKeys, trigger]);
 
   const uploadMarketVehicle = async () => {
     const {
@@ -229,7 +248,7 @@ export default function PostMarketVehicle() {
     const createMarketVehicleInput = {
       marketType: "Vehicle",
       vehicleType,
-      imgS3Keys: imageKeys,
+      imgS3Keys: Object.keys(imageKeys),
       location: location,
       year: year,
       make: make,
@@ -259,13 +278,10 @@ export default function PostMarketVehicle() {
     };
 
     if (Object.values(canSave).every((item) => item !== "")) {
-      dispatch(fetchMarketItems(marketItemSortBySortKey));
       const response = await dispatch(postMarketItem(createMarketVehicleInput));
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
-        history.push(
-          `/market/vehicle/${response.payload.data.createMarketItem.id}`
-        );
+        history.push(`/market/vehicle/${response.payload.id}`);
       }
       console.log("Can upload");
     } else {
@@ -281,7 +297,12 @@ export default function PostMarketVehicle() {
 
   const handleDeleteImg = (imgKey) => {
     const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
+    const images = { ...imageKeys };
+    const newKeys = Object.fromEntries(
+      Object.entries(images).filter(([key, value]) => value !== imgKey)
+    );
     setImgKeyFromServer(newImg);
+    setImageKeys(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -329,6 +350,7 @@ export default function PostMarketVehicle() {
                   multiple
                   onChange={(e) => {
                     uploadMarketItemImg(e);
+                    setTrigger(true);
                   }}
                 />
                 <Button variant="outlined" component="span">
@@ -368,6 +390,7 @@ export default function PostMarketVehicle() {
                           uploadMarketItemImg(e);
                           setError({ ...error, imageKeys: false });
                           setUploadStatus("succeeded");
+                          setTrigger(true);
                           setTimeout(() => {
                             setUploadStatus("idle");
                           }, 2500);

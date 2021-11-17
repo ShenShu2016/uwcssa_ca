@@ -17,7 +17,7 @@ import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketRental() {
   const useStyles = marketItemStyle;
-  useTitle("Item");
+  useTitle("Rental");
   const dispatch = useDispatch();
   const classes = useStyles();
   const [starter, setStarter] = useState(false);

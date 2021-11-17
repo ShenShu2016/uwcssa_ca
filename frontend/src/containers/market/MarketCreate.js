@@ -12,8 +12,10 @@ import {
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
+import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
 import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
+import PetsIcon from "@mui/icons-material/Pets";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   boxChoice: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 }));
 
@@ -133,6 +135,52 @@ function MarketCreate() {
                 </Avatar>
                 <Typography gutterBottom variant="h5">
                   房屋
+                </Typography>
+              </IconButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper>
+              <IconButton
+                style={{
+                  margin: "0 auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "200px",
+                  borderRadius: "0",
+                }}
+                size="large"
+                component={Link}
+                to="/market/create/pet"
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <PetsIcon />
+                </Avatar>
+                <Typography gutterBottom variant="h5">
+                  宠物
+                </Typography>
+              </IconButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Paper>
+              <IconButton
+                style={{
+                  margin: "0 auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "200px",
+                  borderRadius: "0",
+                }}
+                size="large"
+                component={Link}
+                to="/market/create/carpool"
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <EmojiTransportationIcon />
+                </Avatar>
+                <Typography gutterBottom variant="h5">
+                  Carpool
                 </Typography>
               </IconButton>
             </Paper>

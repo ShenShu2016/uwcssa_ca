@@ -10,8 +10,10 @@ import {
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
+import EmojiTransportation from "@mui/icons-material/EmojiTransportation";
 import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
+import PetsIcon from "@mui/icons-material/Pets";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled } from "@mui/material/styles";
@@ -94,15 +96,11 @@ export const CategoryIcons = () => {
         />
         <IconList to="/market/vehicle" label="汽車" icon={<DriveEtaIcon />} />
         <IconList to="/market/rental" label="房屋" icon={<HouseIcon />} />
+        <IconList to="/market/pet" label="宠物" icon={<PetsIcon />} />
         <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
+          to="/market/carpool"
+          label="Carpool"
+          icon={<EmojiTransportation />}
         />
         <IconList
           to="/market/vehicle"

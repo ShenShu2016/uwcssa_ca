@@ -60,7 +60,8 @@ export const postMarketItem = createAsyncThunk(
     const response = await API.graphql(
       graphqlOperation(createMarketItem, { input: createMarketItemInput })
     );
-    return response;
+    console.log("Plz Check Here!", response);
+    return response.data.createMarketItem;
   }
 );
 
