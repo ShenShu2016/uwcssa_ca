@@ -15,7 +15,7 @@ export default function ForumIndexTopic({ forumTopics }) {
         }}
       >
         {forumTopics.map((forumTopic) => {
-          return <ForumIndexTopicComponent forumTopic={forumTopic} />;
+          return <ForumIndexTopicComponent forumTopic={forumTopic} key={forumTopic.id} />;
         })}
       </Box>
     </div>
