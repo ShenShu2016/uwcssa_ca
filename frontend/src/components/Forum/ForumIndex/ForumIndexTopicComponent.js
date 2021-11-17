@@ -1,11 +1,12 @@
-import { Button, Box, Collapse } from "@mui/material";
+import { Box, Button, Collapse } from "@mui/material";
+import React, { useState } from "react";
+
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import { styled } from "@mui/system";
-import { makeStyles } from "@mui/styles";
 import ForumIndexSubTopic from "./ForumIndexSubTopic";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/system";
 
 const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: "50%",
@@ -71,6 +72,7 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
           justifyContent: "space-between",
         }}
         className={open ? classes.navTopic : classes.navTopicOpen}
+        onClick={handleClick}
       >
         <Box>
           <Button
@@ -87,23 +89,25 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
         {/* <Box component="Typography">最后发表</Box> */}
         <Box>
           {open ? (
-            <StyledButton
-              size="small"
-              onClick={handleClick}
-              aria-label="small button group"
-            >
+            <StyledButton size="small" aria-label="small button group">
               <ExpandLess className="label" />
             </StyledButton>
           ) : (
-            <StyledButton size="small" onClick={handleClick}>
+            <StyledButton size="small">
               <ExpandMore className="label" />
             </StyledButton>
           )}
         </Box>
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
+        {/* 这里出发点有问题不能这么做 每次开关都要call 一次 图片 ，不行，应该一开始就fetch 了，只不过开关是隐藏，整个下面的component 应该是一个table或者别的形式的*/}
         {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
-          return <ForumIndexSubTopic forumSubTopic={forumSubTopic} key={forumSubTopic.id}/>;
+          return (
+            <ForumIndexSubTopic
+              forumSubTopic={forumSubTopic}
+              key={forumSubTopic.id}
+            />
+          );
         })}
       </Collapse>
     </div>

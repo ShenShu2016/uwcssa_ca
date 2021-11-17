@@ -5,13 +5,16 @@ import {
   ImageListItemBar,
   Typography,
 } from "@mui/material";
+
 import React from "react";
+// import { height } from "@mui/system";
 import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
     display: "flex",
-    maxwidth: "100%",
+    maxWidth: "100%",
     flexDirection: "column",
     justifyContent: "center",
     borderLeft: "1px solid rgba(0, 0, 0, 0.05)",
@@ -31,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
     textAlign: "center",
     overflow: "hidden",
-    maxWidth: "xs",
   },
   pollSection: {
     marginTop: "6rem",
@@ -67,7 +69,11 @@ const ForumRightSide = () => {
 
       <Box className={classes.adPicture}>
         <Typography variant="h4">ADS</Typography>
-        <ImageList sx={{ width: 128, height: 320 }} cols={1} rowHeight={86}>
+        <ImageList
+          sx={{ width: "100%", height: "500px" }}
+          cols={2}
+          rowHeight={70}
+        >
           {itemData.map((item) => (
             <ImageListItem key={item.img}>
               <img
