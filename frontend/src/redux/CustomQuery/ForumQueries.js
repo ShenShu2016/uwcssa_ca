@@ -81,6 +81,7 @@ export const getForumPost = /* GraphQL */ `
           user {
             username
             avatarImgS3Key
+            badges
           }
           likes(sortDirection: DESC) {
             nextToken
@@ -113,6 +114,7 @@ export const getForumPost = /* GraphQL */ `
               user {
                 username
                 avatarImgS3Key
+                badges
               }
               likes(sortDirection: DESC) {
                 nextToken
