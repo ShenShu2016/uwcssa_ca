@@ -1,5 +1,8 @@
 import {
+  Alert,
+  Box,
   Button,
+  CircularProgress,
   Container,
   CssBaseline,
   FormControl,
@@ -11,12 +14,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Alert from "@mui/material/Alert";
-import { Box } from "@mui/system";
-import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
 import Visibility from "@mui/icons-material/Visibility";
@@ -24,31 +25,11 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { signUp } from "../../redux/reducers/authSlice";
+import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
-const useStyles = makeStyles((theme) => ({
-  // paper: {
-  //   marginTop: theme.spacing(8),
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  // },
-  // avatar: {
-  //   margin: theme.spacing(1),
-  //   backgroundColor: theme.palette.secondary.main,
-  // },
-  // form: {
-  //   marginTop: theme.spacing(4.5),
-  // },
-  // submit: {
-  //   margin: theme.spacing(3, 0, 2),
-  // },
-  // register_button: {
-  //   marginTop: "2rem",
-  //   marginBottom: "2rem",
-  //   marginLeft: theme.spacing(3),
-  // },
+const useStyles = makeStyles(() => ({
   alert: {
     marginTop: "1.5rem",
   },
@@ -56,69 +37,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  useTitle("UWCSSA注册");
+  useTitle("UWCSSA注册帐号");
   const dispatch = useDispatch();
-  const [accountCreated, setAccountCreated] = useState(false);
-  // const [buttonState, setButtonState] = useState(true);
+  const history = useHistory();
   const [alert, setAlert] = useState(false);
   const [alertContent, setAlertContent] = useState("");
   const [loadingState, setLoadingState] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
-  //const emailFormat = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const timer = useRef();
 
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    email: "",
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+      email: "",
+    },
   });
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
-
   const { isAuthenticated } = useSelector((state) => state.userAuth);
-
-  const onChange = (event) => {
-    setFormData({ ...formData, [event.target.id]: event.target.value });
-    setAlert(false);
-    // setButtonState(true);
-
-    /*
-      由于useState是异步操作并且在onChange里面，它只能够获取用户输入的数据-1，也就是要慢一步。
-      所以自身不能够实时刷新状态树来获取实时的数值，
-      需要配套使用useEffect来做一个callback来获取实时数据。
-      由于useState在onChange里面，看google别人怎么写的也做不出来
-      所以只能用这种蠢办法，而且有一个bug。
-      如果用户一次性输入完，那么状态树的数据长度此时还是为0。
-      需要用户再增删一个字符才可以enable按钮。
-    */
-    /*
-      如果email长度为0，disable按钮
-      如果email长度大于1，并且不为0，enable按钮
-    */
-    // if (formData.email.length === 0) setButtonState(true);
-
-    // if (formData.email.length > 1 && formData.email.length !== 0)
-    //   setButtonState(false);
-    // console.log(formData);
-  };
 
   const handleClickShowPassword = () => {
     setIsShowPassword(!isShowPassword);
   };
-  // const handleChangePW = (prop) => (event) => {
-  //   set({ ...values, [prop]: event.target.value });
-  // };
-  const onSignUp = async () => {
-    const { username, password, email } = formData;
-    const response = await dispatch(signUp({ username, password, email }));
+
+  const onSubmit = async (data) => {
     setLoadingState(true);
+    const response = await dispatch(signUp(data));
     console.log("onSignUp", response);
     if (response.meta.requestStatus === "fulfilled") {
-      setAccountCreated(true);
+      history.push(`/auth/emailConfirm/${getValues("username")}`);
     } else {
       timer.current = window.setTimeout(() => {
         setLoadingState(false);
@@ -134,9 +86,7 @@ export default function SignUp() {
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }
-  if (accountCreated) {
-    return <Redirect to={`/auth/emailConfirm/${formData.username}`} />;
-  }
+
   return (
     <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
       <CssBaseline />
@@ -166,92 +116,108 @@ export default function SignUp() {
         ) : (
           <></>
         )}
-        <Box component="form" noValidate sx={{ my: "1rem" }}>
+        <Box
+          component="form"
+          noValidate
+          sx={{ my: 4 }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
+            <Grid item xs={12} sx={{ my: 1 }}>
+              <Controller
                 name="username"
-                label="用户名"
-                type="username"
-                id="username"
-                autoComplete="username"
-                // placeholder=""
-                helperText="可以使用中文, 英文字母大小写不敏感， 全会变小写"
-                error={alert}
-                onChange={(event) => onChange(event)}
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    required
+                    label="用户名"
+                    variant="outlined"
+                    fullWidth
+                    autoComplete="username"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.username}
+                    helperText={errors.username ? "不能为空" : null}
+                  />
+                )}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
+
+            <Grid item xs={12} sx={{ my: 1 }}>
+              <Controller
                 name="email"
-                label="Email"
-                type="email"
-                id="email"
-                error={alert}
-                onChange={(event) => onChange(event)}
+                control={control}
+                rules={{
+                  required: true,
+                  pattern:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    required
+                    label="邮箱"
+                    variant="outlined"
+                    fullWidth
+                    autoComplete="email"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.email}
+                    helperText={errors.email ? "邮箱格式不对" : null}
+                  />
+                )}
               />
             </Grid>
-            <Grid item xs={12}>
-              {/* <TextField
-                required
-                fullWidth
+            <Grid item xs={12} sx={{ my: 1 }}>
+              <Controller
                 name="password"
-                label="密码"
-                type={isShowPassword ? "text" : "password"}
-                id="password"
-                autoComplete="current-password"
-                error={alert}
-                onChange={(event) => onChange(event)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                    >
-                      {isShowPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              /> */}
-              <FormControl fullWidth variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">
-                  密码
-                </InputLabel>
-                <OutlinedInput
-                  id="password"
-                  type={isShowPassword ? "text" : "password"}
-                  onChange={(event) => onChange(event)}
-                  autoFocus
-                  error={alert}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {isShowPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      密码
+                    </InputLabel>
+                    <OutlinedInput
+                      id="password"
+                      type={isShowPassword ? "text" : "password"}
+                      onChange={onChange}
+                      error={!!errors.password}
+                      helperText={errors.username ? "不能为空" : null}
+                      value={value}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                          >
+                            {isShowPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                  </FormControl>
+                )}
+              />
             </Grid>
           </Grid>
           <Button
+            type="submit"
             variant="contained"
             fullWidth
             color="primary"
-            className={classes.submit}
             disabled={loadingState}
-            onClick={onSignUp}
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ my: 4 }}
           >
             注册
             {loadingState && (

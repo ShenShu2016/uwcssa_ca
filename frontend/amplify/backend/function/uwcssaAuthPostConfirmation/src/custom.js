@@ -3,7 +3,11 @@ var ddb = new aws.DynamoDB();
 
 exports.handler = async (event) => {
   let date = new Date();
-  if (event.request.userAttributes.sub) {
+  console.log("event", event);
+  if (
+    event.request.userAttributes.sub &&
+    event.triggerSource !== "PostConfirmation_ConfirmForgotPassword"
+  ) {
     let params = {
       Item: {
         __typename: { S: "User" },

@@ -1,10 +1,14 @@
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
+  Container,
+  CssBaseline,
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
 
 import { forgotPassword } from "../../redux/reducers/authSlice";
@@ -13,38 +17,11 @@ import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
-const useStyles = makeStyles((theme) => ({
-  mainBackground: {
-    backgroundColor: "#fff",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-
-  webTitle: {
-    width: 700,
-    minWidth: "40%",
-    maxWidth: "100%",
-    textAlign: "center",
-    marginTop: "4rem",
-  },
-
-  instruction: {
-    minWidth: "40%",
-    maxWidth: "100%",
-    textAlign: "center",
-    marginTop: "4rem",
-    marginBottom: "10rem",
-  },
-
-  form: {
-    margin: "auto",
-    width: 300,
-  },
-
-  button: {
-    marginTop: "5rem",
+const useStyles = makeStyles(() => ({
+  alert: {
+    marginTop: "1.5rem",
   },
 }));
 
@@ -54,92 +31,119 @@ export default function ForgotPassword() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(); //logging state
-  const [errorMessage, setErrorMessage] = useState(null);
-
+  const [alert, setAlert] = useState(false);
+  const [alertContent, setAlertContent] = useState("");
   const timer = useRef();
-  const [formData, setFormData] = useState({
-    username: "",
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: "",
+    },
   });
 
-  const { username } = formData;
-
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     if (!loading) {
       // console.log("setLoading(loading)", loading);
       setLoading(true); //开始转圈
-      const response = await dispatch(forgotPassword({ username }));
+      const response = await dispatch(forgotPassword(data));
       if (response.meta.requestStatus === "fulfilled") {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log("response", response);
-          history.push(`/auth/resetPassword/${username}`);
+          history.push(`/auth/resetPassword/${getValues("username")}`);
         }, 1000);
       } else {
         timer.current = window.setTimeout(() => {
           setLoading(false);
-          console.log(response.response.error.message);
-          setErrorMessage(response.response.error.message);
+          console.log(response.error.message);
+          setAlertContent(response.error.message);
+          setAlert(true);
         }, 1000);
       }
     }
   };
 
   return (
-    <div>
-      <Box className={classes.mainBackground}>
-        <Box className={classes.webTitle}>
-          <Typography variant="h3">忘记密码</Typography>
-          <Typography variant="body1" className={classes.instruction}>
-            请输入你的注册邮箱，稍后我们将发送链接。
-          </Typography>
-          <form
-            className={classes.form}
-            noValidate
-            onSubmit={(e) => onSubmit(e)}
+    <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={uwcssa_logo}
+          alt="uwcssaLogo"
+          style={{ margin: "1rem", height: "50px" }}
+        />
+        <Typography component="h1" variant="h5">
+          忘记密码
+        </Typography>
+        {alert ? (
+          <Alert className={classes.alert} severity="error">
+            {alertContent}
+          </Alert>
+        ) : (
+          <></>
+        )}
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ my: 4 }}
+        >
+          <Controller
+            name="username"
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <TextField
+                required
+                label="用户名"
+                variant="outlined"
+                fullWidth
+                autoComplete="username"
+                onChange={onChange}
+                value={value}
+                error={!!errors.username}
+                helperText={errors.username ? "不能为空" : null}
+              />
+            )}
+          />
+          <Button
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            <TextField
-              variant="standard"
-              margin="normal"
-              required
-              id="username"
-              label="用户名"
-              name="username"
-              fullWidth
-              autoFocus
-              error={errorMessage ? true : false}
-              helperText={errorMessage}
-              value={username}
-              onChange={(e) => onChange(e)}
-            />
-            <Button
-              className={classes.button}
-              type="submit"
-              variant="outlined"
-              color="primary"
-              disabled={loading}
-            >
-              提交
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: green[500],
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
-            </Button>
-          </form>
+            提交
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: green[500],
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-0.75rem",
+                  marginLeft: "-0.75rem",
+                }}
+              />
+            )}
+          </Button>
         </Box>
       </Box>
-    </div>
+    </Container>
   );
 }
