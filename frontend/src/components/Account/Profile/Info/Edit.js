@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Edit({ user, editOpen, handleEditClose, idx }) {
+export default function Edit({ user, editOpen, handleEditClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -101,7 +101,6 @@ export default function Edit({ user, editOpen, handleEditClose, idx }) {
   };
 
   const update = () => {
-    console.log("education", idx);
     dispatch(putUserProfile({ updateUserInput }));
     handleEditClose();
   };
