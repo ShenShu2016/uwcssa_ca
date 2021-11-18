@@ -23,7 +23,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     backgroundColor: "rgba(255, 255, 255, 0.38)",
     borderColor: "theme.palette.common.white",
     "& .label": {
-      transform: "scale(1.3)",
+      transform: "scale(1.5)",
       color: "dodgerBlue",
       [theme.breakpoints.up("md")]: {
         transform: "scale(1.7)",
@@ -41,7 +41,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     height: 32,
   },
 }));
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   navTopic: {
     opacity: 0.9,
   },
@@ -100,7 +100,13 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
         </Box>
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {/* 这里出发点有问题不能这么做 每次开关都要call 一次 图片 ，不行，应该一开始就fetch 了，只不过开关是隐藏，整个下面的component 应该是一个table或者别的形式的*/}
+        {/* 
+        这里出发点有问题不能这么做 每次开关都要call 一次 图片 ，不行，应该一开始就fetch 了，只不过开关是隐藏，
+        整个下面的component 应该是一个table或者别的形式的
+        
+        这个没有重新fetch的意思啊，forumIndexSubTopic这个组件里面有console.log，开这个组件，就consolelog，关这个组件，就隐藏起来了。
+        */}
+        
         {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
           return (
             <ForumIndexSubTopic
