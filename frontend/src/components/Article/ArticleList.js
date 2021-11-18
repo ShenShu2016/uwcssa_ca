@@ -58,7 +58,9 @@ export default function ArticleList() {
   const skeletonList = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
     return (
       <Box key={num}>
-        <Skeleton variant="rectangular" height={200} sx={{ my: 1 }} />
+        <Skeleton variant="text" />
+        <Skeleton variant="circular" width={40} height={40} />
+        <Skeleton variant="rectangular" height={100} sx={{ my: 1 }} />
       </Box>
     );
   });

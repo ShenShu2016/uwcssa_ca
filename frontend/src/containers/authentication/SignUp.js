@@ -42,7 +42,7 @@ export default function SignUp() {
   const history = useHistory();
   const [alert, setAlert] = useState(false);
   const [alertContent, setAlertContent] = useState("");
-  const [loadingState, setLoadingState] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
   const timer = useRef();
 
@@ -66,14 +66,14 @@ export default function SignUp() {
   };
 
   const onSubmit = async (data) => {
-    setLoadingState(true);
+    setLoading(true);
     const response = await dispatch(signUp(data));
     console.log("onSignUp", response);
     if (response.meta.requestStatus === "fulfilled") {
       history.push(`/auth/emailConfirm/${getValues("username")}`);
     } else {
       timer.current = window.setTimeout(() => {
-        setLoadingState(false);
+        setLoading(false);
         setAlertContent(response.error.message);
         setAlert(true);
         console.log(response.error.message);
@@ -216,11 +216,11 @@ export default function SignUp() {
             variant="contained"
             fullWidth
             color="primary"
-            disabled={loadingState}
+            disabled={loading}
             sx={{ my: 4 }}
           >
             注册
-            {loadingState && (
+            {loading && (
               <CircularProgress
                 size={24}
                 sx={{

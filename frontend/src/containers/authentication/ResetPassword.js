@@ -127,6 +127,7 @@ export default function ResetPassword() {
                 required
                 label="验证码"
                 variant="outlined"
+                type="number"
                 fullWidth
                 onChange={onChange}
                 value={value}
