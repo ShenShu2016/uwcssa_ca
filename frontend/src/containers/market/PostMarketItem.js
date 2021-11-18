@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      height: "100%",
+      height: `calc(100% - ${drawerBleeding}px)`,
     },
   },
   previewImg: {
@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(243, 246, 249)",
     [theme.breakpoints.down("lg")]: {
       width: "100%",
-      height: "50vh",
+      height: "40vh",
     },
   },
   previewInfo: {
@@ -114,16 +114,43 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
     [theme.breakpoints.down("lg")]: {
       width: "100%",
-      height: "100%",
+      height: "100vh",
       overflow: "hidden",
     },
   },
   drawer: {
     display: "none",
-    [theme.breakpoints.down("lg")]: {
-      height: "70vh",
-      width: "100%",
-      overflow: "visible",
+    [theme.breakpoints.down("md")]: {
+      backgroundColor:
+        theme.palette.mode === "light"
+          ? grey[100]
+          : theme.palette.background.default,
+    },
+  },
+  puller: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      width: 30,
+      height: 6,
+      backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
+      borderRadius: 3,
+      position: "absolute",
+      top: 8,
+      left: "calc(50% - 15px)",
+    },
+  },
+  styledBox: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
+    },
+  },
+  icon: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
     },
   },
 }));
@@ -133,32 +160,6 @@ const Input = styled("input")({
 });
 
 const drawerBleeding = 56;
-
-const Root = styled("div")(({ theme }) => ({
-  display: "none",
-  [theme.breakpoints.down("md")]: {
-    display: "block",
-    height: "100%",
-    backgroundColor:
-      theme.palette.mode === "light"
-        ? grey[100]
-        : theme.palette.background.default,
-  },
-}));
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
-}));
-
-const Puller = styled(Box)(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
-  borderRadius: 3,
-  position: "absolute",
-  top: 8,
-  left: "calc(50% - 15px)",
-}));
 
 export default function PostMarketItem() {
   const classes = useStyles();
@@ -360,9 +361,10 @@ export default function PostMarketItem() {
               height: "100%",
               overflowY: "auto",
               overflowX: "hidden",
+              backgroundColor: "#f9f9f9",
             }}
           >
-            <Box>
+            <Stack direction="row" justifyContent="space-between">
               <Typography
                 variant="h5"
                 gutterBottom
@@ -371,7 +373,12 @@ export default function PostMarketItem() {
               >
                 New Item Listing
               </Typography>
-            </Box>
+              <Box className={classes.icon}>
+                <IconButton onClick={toggleDrawer(true)}>
+                  <VisibilityIcon />
+                </IconButton>
+              </Box>
+            </Stack>
             {imgKeyFromServer.length !== 0 ? (
               <label htmlFor="contained-button-file">
                 <Input
@@ -639,7 +646,7 @@ export default function PostMarketItem() {
               </Box>
             </Box>
             <Button
-              // sx={{ marginY: "1rem" }}
+              // sx={{ marginBottom: "2rem" }}
               variant="outlined"
               endIcon={<PublishIcon />}
               onClick={uploadMarketItem}
@@ -681,23 +688,16 @@ export default function PostMarketItem() {
             </Stack>
           </Paper>
         </Box>
-        <Root>
+        <Box className={classes.drawer}>
           <CssBaseline />
           <Global
             styles={{
               ".MuiDrawer-root > .MuiPaper-root": {
-                height: "70%",
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-                // overflow: "visible",
+                height: `calc(80% - ${drawerBleeding}px)`,
+                overflow: "visible",
               },
             }}
           />
-          <Box sx={{ textAlign: "center", pt: 1 }}>
-            <IconButton onClick={toggleDrawer(true)}>
-              <VisibilityIcon />
-            </IconButton>
-          </Box>
           <SwipeableDrawer
             anchor="bottom"
             open={open}
@@ -709,57 +709,55 @@ export default function PostMarketItem() {
               keepMounted: true,
             }}
           >
-            <StyledBox
+            <Box
+              className={classes.styledBox}
               sx={{
                 position: "absolute",
+                top: -drawerBleeding,
+                borderTopLeftRadius: 8,
+                borderTopRightRadius: 8,
+                visibility: "visible",
                 right: 0,
                 left: 0,
               }}
             >
-              <Puller />
+              <Box className={classes.puller} />
               <Typography sx={{ p: 2, color: "text.secondary" }}>
                 Preview
               </Typography>
-              <StyledBox
-                sx={{
-                  px: 2,
-                  pb: 2,
-                  height: "100%",
-                  overflow: "auto",
-                }}
+            </Box>
+            <Box overflow="hidden" height="100%">
+              <Box
+                width="100%"
+                height="100%"
+                sx={{ overflowX: "hidden", overflowY: "auto" }}
               >
-                <Stack
-                  direction={{ xs: "column", lg: "row" }}
-                  width="100%"
-                  overflow="auto"
-                >
-                  <Box className={classes.previewImgRight}>
-                    {imgKeyFromServer.length !== 0 ? (
-                      <SwipeViews images={imgKeyFromServer} />
-                    ) : (
-                      <Box
-                        height="50px"
-                        sx={{
-                          left: "50%",
-                          top: "40%",
-                          position: "absolute",
-                          transform: "translate(-50%,-50%)",
-                        }}
-                      >
-                        <Typography variant="h6">
-                          Your images will go here in the preview mode
-                        </Typography>
-                      </Box>
-                    )}
-                  </Box>
-                  <Box className={classes.previewInfo}>
-                    <MarketItemInfo marketItem={fakeItems} />
-                  </Box>
-                </Stack>
-              </StyledBox>
-            </StyledBox>
+                <Box className={classes.previewImgRight}>
+                  {imgKeyFromServer.length !== 0 ? (
+                    <SwipeViews images={imgKeyFromServer} />
+                  ) : (
+                    <Box
+                      height="50px"
+                      sx={{
+                        left: "50%",
+                        top: "40%",
+                        position: "absolute",
+                        transform: "translate(-50%,-50%)",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        Your images will go here in the preview mode
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+                <Box className={classes.previewInfo}>
+                  <MarketItemInfo marketItem={fakeItems} />
+                </Box>
+              </Box>
+            </Box>
           </SwipeableDrawer>
-        </Root>
+        </Box>
       </Stack>
     </div>
   );

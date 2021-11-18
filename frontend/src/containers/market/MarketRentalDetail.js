@@ -25,6 +25,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
+import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
 import { useParams } from "react-router-dom";
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function MarketRentalInfo({ marketItem }) {
   const classes = useStyles();
-
+  const currentUser = useSelector((state) => state.userAuth.user.username);
   const {
     marketRentalSaleRent: RentOrSale,
     propertyType: PType,
@@ -147,14 +148,25 @@ export function MarketRentalInfo({ marketItem }) {
         direction="row"
         spacing={1}
       >
-        <Button
-          startIcon={<MessageIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="info"
-        >
-          Contact
-        </Button>
+        {currentUser === owner ? (
+          <Button
+            startIcon={<UpdateIcon />}
+            onClick={() => console.log("clicked!")}
+            variant="outlined"
+            color="info"
+          >
+            Edit
+          </Button>
+        ) : (
+          <Button
+            startIcon={<MessageIcon />}
+            onClick={() => console.log("clicked!")}
+            variant="outlined"
+            color="info"
+          >
+            Contact
+          </Button>
+        )}
         <Button
           startIcon={<BookmarksIcon />}
           onClick={() => console.log("clicked!")}
