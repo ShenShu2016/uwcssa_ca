@@ -6,21 +6,39 @@ import {
   Typography,
   ListItemAvatar,
   Popover,
+  Fade,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import React from "react";
+import React, { useEffect } from "react";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
-
+const TitleTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "blue.50",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 300,
+    fontSize: theme.typography.pxToRem(12),
+    border: "1px solid grey[50]",
+  },
+}));
 export default function ForumIndexSubTopic({ forumSubTopic }) {
   const forumPost = forumSubTopic.forumPosts.items[0];
   console.log(forumPost);
   const [createDate, setCreateDate] = React.useState(false);
-  const yesterdayStart = moment().subtract(1, "d").startOf("day");
-  const yesterdayEnd = moment().subtract(1, "d").endOf("day");
-  if (moment(forumPost.createdAt).isBetween(yesterdayStart, yesterdayEnd)) {
-    setCreateDate(true);
-  }
+  // const yesterdayStart = moment().subtract(1, "d").startOf("day");
+  // const yesterdayEnd = moment().subtract(1, "d").endOf("day");
+  useEffect(() => {
+    const yesterdayStart = moment().subtract(1, "d").startOf("day");
+    const yesterdayEnd = moment().subtract(1, "d").endOf("day");
+    if (moment(forumPost.createdAt).isBetween(yesterdayStart, yesterdayEnd)) {
+      setCreateDate(true);
+    }
+  }, [forumPost.createdAt]);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElDate, setAnchorElDate] = React.useState(null);
 
@@ -92,11 +110,8 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                 alignItems: "center",
                 // bgcolor:"black",
                 overflow: "hidden",
-                
-                minWidth: { sm: 250 },
-                minHeight: { sm: 75 },
-                maxWidth: { sm: 250 },
-                maxHeight: { sm: 75 },
+                width: { sm: 250 },
+                height: { sm: 75 },
               }}
             >
               <ListItemAvatar>
@@ -109,38 +124,42 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                   }}
                 />
               </ListItemAvatar>
-              {/* <Box> */}
               <ListItemText
                 primary={
-                  <Typography
-                    component={Link}
-                    to={`/forum/forumPost/${forumPost.id}`}
-                    color="text.primary"
-                    variant="subtitle1"
-                    aria-owns={open ? "mouse-over-popover" : undefined}
-                    aria-haspopup="true"
-                    onMouseEnter={handlePopoverOpen}
-                    onMouseLeave={handlePopoverClose}
-                    noWrap="true"
-                    sx={{
-                      minWidth:250,
-                      maxWidth:250,
-                      minHeight:72,
-                      maxHeight:72,
-                      textDecorationLine: "none",
-                      "&: hover": { color: "primary.main" },
-                      wordBreak: "break-word",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {forumPost.title}
-                  </Typography>
+                  <React.Fragment>
+                    <TitleTooltip
+                      title={
+                        <Typography color="white">
+                          {forumPost.title}
+                        </Typography>
+                      }
+                      placement="top-start"
+                      arrow
+                      TransitionComponent={Fade}
+                      TransitionProps={{ timeout: 600 }}
+                    >
+                      <Typography
+                        component={Link}
+                        to={`/forum/forumPost/${forumPost.id}`}
+                        color="text.primary"
+                        variant="subtitle1"
+                        noWrap
+                        sx={{
+                          display: "block",
+                          maxWidth: 180,
+                          textDecorationLine: "none",
+                          "&: hover": { color: "primary.main" },
+                          overflow: "hidden",
+                        }}
+                      >
+                        {forumPost.title}
+                      </Typography>
+                    </TitleTooltip>
+                  </React.Fragment>
                 }
                 secondary={
                   <React.Fragment>
-                    {/* <Typography color="text.secondary" variant="body2"> */}
                     {"由"}
-                    {/* </Typography> */}
                     <Typography
                       component={Link}
                       to={`/account/profile/${forumPost.owner}`}
@@ -186,7 +205,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                       >
                         {/* {moment(forumPost.createdAt).format("MM月DD日")} */}
                         {forumPost.createdAt.slice(5, 7)}月
-                        {forumPost.createdAt.slice(8, 10)}号{" "}
+                        {forumPost.createdAt.slice(8, 10)}号
                       </Typography>
                     )}
                   </React.Fragment>
@@ -210,7 +229,9 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
-                <Typography sx={{ p: 0.8 }}>I use Popover.</Typography>
+                <Typography sx={{ p: 0.8 }}>
+                  我是{forumPost.owner},你是谁
+                </Typography>
               </Popover>
               <Popover
                 id="mouse-over-popover-date"
@@ -231,7 +252,8 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                 disableRestoreFocus
               >
                 <Typography sx={{ p: 0 }}>
-                  {forumPost.createdAt.slice(0, 10)}
+                  {forumPost.createdAt.slice(0, 10)}{"-"}
+                  {forumPost.createdAt.slice(11, 16)}
                 </Typography>
               </Popover>
             </Box>
