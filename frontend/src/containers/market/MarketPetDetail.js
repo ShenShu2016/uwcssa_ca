@@ -37,7 +37,7 @@ import { useTitle } from "../../Hooks/useTitle";
 //   selectedMarketItem,
 // } from "../../redux/reducers/marketSlice";
 
-// emoveSelectedMarketItem,
+// removeSelectedMarketItem,
 //   selectedMarketItem,
 // } from "../../redux/actions/marketItemActions";
 
