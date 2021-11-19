@@ -16,11 +16,13 @@ import { Link } from "react-router-dom";
 import { fetchEvents } from "../../redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
+import moment from "moment";
+import PastEvent from "../../components/Event/PastEvents";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    marginTop: "3rem",
+    marginTop: "2rem",
   },
   title: {
     textAlign: "center",
@@ -86,33 +88,35 @@ export default function Event() {
       : events;
 
     setFilteredEventList(
-      sortBy
-        ? [...filtered].sort((a, b) =>
-            sortBy === "nearest"
-              ? new Date(a.startDate).getTime() -
-                new Date(b.startDate).getTime()
-              : new Date(b.startDate).getTime() -
-                new Date(a.startDate).getTime()
-          )
-        : [...filtered].sort((a, b) => (a.id > b.id ? 1 : -1))
+      [...filtered].sort(
+        (a, b) =>
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      )
     );
   }, [selectedTopic, sortBy, eventList, events]);
 
   const renderList = filteredEventList
-    .sort(
-      (a, b) =>
-        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-    )
+    .filter((d) => d.startDate >= moment().format())
+    // .sort(
+    //   (a, b) =>
+    //     new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+    // )
     .map((event, idx) => {
       return <EventMain key={idx} event={event} />;
+    });
+
+  const pastList = filteredEventList
+    .filter((d) => d.endDate < moment().format())
+    .map((event, idx) => {
+      return <PastEvent key={idx} event={event} />;
     });
 
   return (
     <div>
       <Box className={classes.root}>
-        <Box>
+        <Box sx={{ marginLeft: "1rem" }}>
           <Breadcrumbs aria-label="breadcrumb">
-            <span style={{ cursor: "not-allowed" }}>
+            <span>
               <Button color="inherit" component={Link} to="/">
                 主页
               </Button>
@@ -121,7 +125,7 @@ export default function Event() {
         </Box>
         {/* <EventSliderShow /> */}
         <Box className={classes.list}>
-          <Typography variant="h4" className={classes.title}>
+          <Typography variant="h3" className={classes.title}>
             近期活动
           </Typography>
           <Box className={classes.timeTag}>
@@ -132,7 +136,7 @@ export default function Event() {
               // sortBy={sortBy}
             />
 
-            <h2>活动: {filteredEventList.length}</h2>
+            {/* <h2>活动: {filteredEventList.length}</h2> */}
           </Box>
         </Box>
 
@@ -153,6 +157,27 @@ export default function Event() {
                   查看更多
                 </Button>
               </Box> */}
+            </Container>
+          </Box>
+        </div>
+        <Box className={classes.list}>
+          <Typography variant="h3" className={classes.title}>
+            往期活动
+          </Typography>
+          <Box className={classes.timeTag}></Box>
+        </Box>
+
+        <div>
+          <Box sx={{ bgcolor: "#F9F9F9", paddingBottom: "3rem" }}>
+            <Container>
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 2, sm: 8, md: 12 }}
+                padding="0 1rem"
+              >
+                {pastList}
+              </Grid>
             </Container>
           </Box>
         </div>
