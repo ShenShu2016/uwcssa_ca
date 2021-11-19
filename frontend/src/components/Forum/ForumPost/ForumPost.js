@@ -6,18 +6,13 @@ import {
 } from "../../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-// import ForumPostCommentsPost from "../ForumPostDetail/ForumPostCommentsPost";
 import ForumAdSide from "../ForumAdSide";
 import ForumPostComments from "./ForumPostDetail/ForumPostComments";
 import ForumPostMain from "./ForumPostDetail/ForumPostMain";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 
-// import {
-//   removeSelectedForumPost,
-//   selectedForumPost,
-//   selectedForumPostComments,
-// } from "../../../redux/actions/forumAction";
+
 
 const useStyles = makeStyles({
   root: {
