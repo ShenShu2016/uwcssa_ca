@@ -25,7 +25,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import FlagIcon from "@mui/icons-material/Flag";
 import TopicIcon from "@mui/icons-material/Topic";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -78,6 +77,7 @@ export default function EventBody({ event }) {
     qrCodeImgS3Key,
     topic,
     sponsor,
+    eventParticipants,
   } = event;
 
   useEffect(() => {
@@ -313,13 +313,23 @@ export default function EventBody({ event }) {
                             >
                               <b>Participants</b>
                             </Typography>
-                            <Typography
-                              variant="h6"
-                              sx={{ textAlign: "center" }}
-                              gutterBottom
-                            >
-                              100 GOING
-                            </Typography>
+                            {eventParticipants.items.length !== 0 ? (
+                              <Typography
+                                variant="h6"
+                                sx={{ textAlign: "center" }}
+                                gutterBottom
+                              >
+                                0 Going
+                              </Typography>
+                            ) : (
+                              <Typography
+                                variant="h6"
+                                sx={{ textAlign: "center" }}
+                                gutterBottom
+                              >
+                                {eventParticipants.items.length} Going
+                              </Typography>
+                            )}
                             {userInfo.isAuthenticated ? (
                               <CardActions>
                                 <Button
