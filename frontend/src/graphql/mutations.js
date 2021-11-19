@@ -465,6 +465,9 @@ export const createUser = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -495,9 +498,6 @@ export const createUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       uwcssaJobResumes {
@@ -916,7 +916,6 @@ export const createUser = /* GraphQL */ `
       webFeedBack {
         items {
           id
-          like
           rate
           reason
           improvement
@@ -1394,6 +1393,9 @@ export const updateUser = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -1424,9 +1426,6 @@ export const updateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       uwcssaJobResumes {
@@ -1845,7 +1844,6 @@ export const updateUser = /* GraphQL */ `
       webFeedBack {
         items {
           id
-          like
           rate
           reason
           improvement
@@ -2323,6 +2321,9 @@ export const deleteUser = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -2353,9 +2354,6 @@ export const deleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       uwcssaJobResumes {
@@ -2774,7 +2772,6 @@ export const deleteUser = /* GraphQL */ `
       webFeedBack {
         items {
           id
-          like
           rate
           reason
           improvement
@@ -13169,6 +13166,23 @@ export const createUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -13448,23 +13462,6 @@ export const createUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
-      }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -13488,6 +13485,23 @@ export const updateUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -13767,23 +13781,6 @@ export const updateUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
-      }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -13807,6 +13804,23 @@ export const deleteUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -14086,23 +14100,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
-      }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -14384,6 +14381,9 @@ export const createUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -14414,9 +14414,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       owner
@@ -14700,6 +14697,9 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -14730,9 +14730,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       owner
@@ -15016,6 +15013,9 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -15046,9 +15046,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       owner
@@ -26105,7 +26102,6 @@ export const createWebFeedBack = /* GraphQL */ `
   ) {
     createWebFeedBack(input: $input, condition: $condition) {
       id
-      like
       rate
       reason
       improvement
@@ -26369,7 +26365,6 @@ export const updateWebFeedBack = /* GraphQL */ `
   ) {
     updateWebFeedBack(input: $input, condition: $condition) {
       id
-      like
       rate
       reason
       improvement
@@ -26633,7 +26628,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
   ) {
     deleteWebFeedBack(input: $input, condition: $condition) {
       id
-      like
       rate
       reason
       improvement
