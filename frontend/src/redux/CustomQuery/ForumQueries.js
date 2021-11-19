@@ -230,6 +230,68 @@ export const listForumTopics = /* GraphQL */ `
   }
 `;
 
+export const listForumPosts = /* GraphQL */ `
+  query ListForumPosts(
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForumPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
 export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
   query ForumPostSortByForumPostLastReplyAt(
     $forumSubTopicID: ID
