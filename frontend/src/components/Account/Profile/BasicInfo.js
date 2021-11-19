@@ -83,7 +83,7 @@ export default function BasicInfo({ user, ownerID }) {
     <div>
       <div className={classes.root}>
         <Card elevation={0} className={classes.header}>
-          <CardActionArea>
+          <CardActionArea onClick={handleEditClickOpen}>
             <S3Image
               S3Key={user.backGroundImgS3Key}
               style={{
@@ -111,8 +111,9 @@ export default function BasicInfo({ user, ownerID }) {
                 <Avatar
                   alt="avatar"
                   src={avatarURL}
-                  sx={{ width: 150, height: 150 }}
+                  sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
+                  onClick={handleEditClickOpen}
                 />
               </Badge>
               {isPermit && (

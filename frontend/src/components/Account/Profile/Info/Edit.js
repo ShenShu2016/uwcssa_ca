@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -11,6 +12,8 @@ import {
 import React, { useEffect, useState } from "react";
 
 import S3Image from "../../../S3/S3Image";
+import Storage from "@aws-amplify/storage";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/reducers/generalSlice";
 import { putUserProfile } from "../../../../redux/reducers/profileSlice";
@@ -34,16 +37,38 @@ const useStyles = makeStyles({
 export default function Edit({ user, editOpen, handleEditClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
+  const [avatarImgKey, setAvatarImgKey] = useState(user.avatarImgS3Key);
+  const [avatarURL, setAvatarURL] = useState(null);
+  const [backGroundImgKey, setBackGroundImgKey] = useState(
+    user.backGroundImgKey
+  );
   useEffect(() => {
     setFormData(user);
     setAvatarImgKey(user.avatarImgS3Key);
     setBackGroundImgKey(user.backGroundImgS3Key);
   }, [user]);
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const imageAccessURL = await Storage.get(user.avatarImgS3Key, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        setAvatarURL(imageAccessURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setAvatarURL(null);
+      }
+    };
+    if (user.avatarImgS3Key) {
+      getImage();
+    }
+  }, [user]);
+
+  console.log("avatarURL", avatarURL);
 
   const [formData, setFormData] = useState({
     id: user.id,
@@ -55,11 +80,6 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     github: user.github,
   });
 
-  const [avatarImgKey, setAvatarImgKey] = useState(user.avatarImgS3Key);
-  const [backGroundImgKey, setBackGroundImgKey] = useState(
-    user.backGroundImgKey
-  );
-  //   console.log("formData", formData);
   const { id, firstName, lastName, intro, major, linkedIn, github } = formData;
 
   const onChange = (e) => {
@@ -79,17 +99,21 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const uploadAvatarImg = async (e) => {
+    setLoading(true);
     const imageData = e.target.files;
     const imageLocation = "user/Avatar";
     const response = await dispatch(
       postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
+      console.log("response", response);
       setAvatarImgKey(response.payload);
+      setLoading(false);
     }
   };
 
   const uploadBackGroundImgImg = async (e) => {
+    setLoading(true);
     const imageData = e.target.files;
     const imageLocation = "user/BackGround";
     const response = await dispatch(
@@ -97,12 +121,17 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     );
     if (response.meta.requestStatus === "fulfilled") {
       setBackGroundImgKey(response.payload);
+      setLoading(false);
     }
   };
 
-  const update = () => {
-    dispatch(putUserProfile({ updateUserInput }));
+  const update = async () => {
+    setLoading(true);
+    const response = await dispatch(putUserProfile({ updateUserInput }));
     handleEditClose();
+    if (response) {
+      setLoading(false);
+    }
   };
 
   return (
@@ -139,7 +168,17 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               onChange={(e) => onChange(e)}
             />
             <div className={classes.splitter} />
-            <Box>
+            <Box sx={{ textAlign: "center" }}>
+              <S3Image
+                S3Key={avatarImgKey}
+                style={{
+                  width: 150,
+                  height: 150,
+                  borderRadius: "50%",
+                }}
+              />
+            </Box>
+            <Box my={"2rem"}>
               <label htmlFor="uploadAvatarImg">
                 <Input
                   accept="image/*"
@@ -150,14 +189,32 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                     uploadAvatarImg(e);
                   }}
                 />
-                <Button variant="contained" component="span">
+                <Button
+                  variant="contained"
+                  component="span"
+                  fullWidth
+                  disabled={loading}
+                >
                   上传头像
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
                 </Button>
               </label>
             </Box>
-            <S3Image S3Key={avatarImgKey} style={{ width: "100%" }} />
 
-            <Box>
+            <S3Image S3Key={backGroundImgKey} style={{ width: "100%" }} />
+            <Box my={"2rem"}>
               <label htmlFor="uploadBackGroundImgImg">
                 <Input
                   accept="image/*"
@@ -168,12 +225,29 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                     uploadBackGroundImgImg(e);
                   }}
                 />
-                <Button variant="contained" component="span">
+                <Button
+                  variant="contained"
+                  component="span"
+                  fullWidth
+                  disabled={loading}
+                >
                   上传背景
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
                 </Button>
               </label>
             </Box>
-            <S3Image S3Key={backGroundImgKey} style={{ width: "100%" }} />
             <TextField
               //autoFocus
               fullWidth
@@ -231,8 +305,26 @@ export default function Edit({ user, editOpen, handleEditClose }) {
             <Button onClick={handleEditClose} size="large">
               Cancel
             </Button>
-            <Button onClick={update} variant="contained" size="large">
+            <Button
+              onClick={update}
+              variant="contained"
+              size="large"
+              disabled={loading}
+            >
               更新
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </DialogActions>
         </Dialog>

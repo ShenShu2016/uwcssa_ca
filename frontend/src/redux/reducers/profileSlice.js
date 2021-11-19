@@ -4,7 +4,6 @@ import {
   createUserExperience,
   deleteUserEducation,
   deleteUserExperience,
-  updateUser,
   updateUserEducation,
   updateUserExperience,
 } from "../../graphql/mutations";
@@ -12,6 +11,7 @@ import {
 import API from "@aws-amplify/api";
 import { getUser } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { updateUser } from "../CustomQuery/ProfileQueries";
 
 const initialState = {
   user: {
@@ -74,6 +74,7 @@ export const putUserProfile = createAsyncThunk(
         input: updateUserInput,
       })
     );
+    console.log("response", response);
     return response.data.updateUser;
   }
 );
@@ -198,7 +199,14 @@ const profileSlice = createSlice({
       })
       .addCase(putUserProfile.fulfilled, (state, action) => {
         state.putUserProfileStatus = "succeeded";
-        state.user = action.payload;
+        state.user.firstName = action.payload.firstName;
+        state.user.lastName = action.payload.lastName;
+        state.user.major = action.payload.major;
+        state.user.avatarImgS3Key = action.payload.avatarImgS3Key;
+        state.user.backGroundImgS3Key = action.payload.backGroundImgS3Key;
+        state.user.linkedIn = action.payload.linkedIn;
+        state.user.github = action.payload.github;
+        state.user.intro = action.payload.intro;
       })
       .addCase(putUserProfile.rejected, (state, action) => {
         state.putUserProfileStatus = "failed";
