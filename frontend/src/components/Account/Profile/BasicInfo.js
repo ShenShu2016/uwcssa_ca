@@ -24,9 +24,6 @@ const useStyles = makeStyles({
     maxWidth: "960px",
     margin: "auto",
   },
-  banner: {
-    minHeight: "200px",
-  },
   avatar: {
     top: "-75px",
     marginLeft: "1rem",
@@ -83,7 +80,7 @@ export default function BasicInfo({ user, ownerID }) {
     <div>
       <div className={classes.root}>
         <Card elevation={0} className={classes.header}>
-          <CardActionArea onClick={handleEditClickOpen}>
+          <CardActionArea onClick={isPermit ? handleEditClickOpen : undefined}>
             <S3Image
               S3Key={user.backGroundImgS3Key}
               style={{
@@ -113,7 +110,7 @@ export default function BasicInfo({ user, ownerID }) {
                   src={avatarURL}
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
-                  onClick={handleEditClickOpen}
+                  onClick={isPermit ? handleEditClickOpen : undefined}
                 />
               </Badge>
               {isPermit && (
@@ -122,7 +119,7 @@ export default function BasicInfo({ user, ownerID }) {
                   endIcon={<EditIcon />}
                   color="primary"
                   className={classes.edit}
-                  onClick={() => handleEditClickOpen()}
+                  onClick={handleEditClickOpen}
                 >
                   点击编辑
                 </Button>
