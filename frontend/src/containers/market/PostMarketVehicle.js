@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     display: "none",
     [theme.breakpoints.down("md")]: {
+      display: "block",
       backgroundColor:
         theme.palette.mode === "light"
           ? grey[100]

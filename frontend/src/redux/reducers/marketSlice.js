@@ -3,9 +3,9 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
+import { createMarketItem, updateMarketItem } from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
-import { createMarketItem } from "../../graphql/mutations";
 import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
@@ -23,6 +23,8 @@ const initialState = marketAdapter.getInitialState({
   postMarketItemError: null,
   postMarketItemImgStatus: "idle",
   postMarketItemImgError: null,
+  updateMarketItemDetailStatus: "idle",
+  updateMarketItemDetailError: null,
 });
 
 export const fetchMarketItems = createAsyncThunk(
@@ -60,8 +62,18 @@ export const postMarketItem = createAsyncThunk(
     const response = await API.graphql(
       graphqlOperation(createMarketItem, { input: createMarketItemInput })
     );
-    console.log("Plz Check Here!", response);
     return response.data.createMarketItem;
+  }
+);
+
+export const updateMarketItemDetail = createAsyncThunk(
+  "market/updateMarketItemDetail",
+  async (updateMarketItemInput) => {
+    const response = await API.graphql(
+      graphqlOperation(updateMarketItem, { input: updateMarketItemInput })
+    );
+    console.log("Plz Check Here!", response);
+    return response.data.updateMarketItem;
   }
 );
 
@@ -114,6 +126,20 @@ const marketSlice = createSlice({
       .addCase(postMarketItem.rejected, (state, action) => {
         state.postMarketItemStatus = "failed";
         state.postMarketItemError = action.error.message;
+      })
+      // Cases for status of updateMarketItem (pending, fulfilled, and rejected)
+      .addCase(updateMarketItemDetail.pending, (state, action) => {
+        state.updateMarketItemDetailStatus = "loading";
+      })
+      .addCase(updateMarketItemDetail.fulfilled, (state, action) => {
+        state.updateMarketItemDetailStatus = "succeeded";
+        // state.marketItems.unshift(action.payload.data.createMarketItem);
+        marketAdapter.updateOne(state, action.payload);
+        // state.updateMarketItemStatus = "idle";
+      })
+      .addCase(updateMarketItemDetail.rejected, (state, action) => {
+        state.updateMarketItemDetailStatus = "failed";
+        state.updateMarketItemDetailError = action.error.message;
       });
   },
 });

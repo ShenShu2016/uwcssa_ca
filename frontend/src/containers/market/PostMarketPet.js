@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     display: "none",
     [theme.breakpoints.down("md")]: {
+      display: "block",
       backgroundColor:
         theme.palette.mode === "light"
           ? grey[100]
@@ -160,6 +161,7 @@ const Input = styled("input")({
 });
 
 const drawerBleeding = 56;
+
 export default function PostMarketPet() {
   const classes = useStyles();
   const dispatch = useDispatch();
