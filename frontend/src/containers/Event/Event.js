@@ -89,16 +89,23 @@ export default function Event() {
       sortBy
         ? [...filtered].sort((a, b) =>
             sortBy === "nearest"
-              ? a.startDate - b.startDate
-              : b.startDate - a.startDate
+              ? new Date(a.startDate).getTime() -
+                new Date(b.startDate).getTime()
+              : new Date(b.startDate).getTime() -
+                new Date(a.startDate).getTime()
           )
         : [...filtered].sort((a, b) => (a.id > b.id ? 1 : -1))
     );
   }, [selectedTopic, sortBy, eventList, events]);
 
-  const renderList = filteredEventList.map((event, idx) => {
-    return <EventMain key={idx} event={event} />;
-  });
+  const renderList = filteredEventList
+    .sort(
+      (a, b) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+    )
+    .map((event, idx) => {
+      return <EventMain key={idx} event={event} />;
+    });
 
   return (
     <div>
@@ -122,8 +129,9 @@ export default function Event() {
               handleSort={setSortBy}
               handleTopicChange={setSelectedTopic}
               selectedTopic={selectedTopic}
-              sortBy={sortBy}
+              // sortBy={sortBy}
             />
+
             <h2>活动: {filteredEventList.length}</h2>
           </Box>
         </Box>
