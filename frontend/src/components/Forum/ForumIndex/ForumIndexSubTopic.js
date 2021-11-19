@@ -1,28 +1,30 @@
 import {
   Box,
-  ListItemText,
   List,
   ListItem,
-  Typography,
   ListItemAvatar,
+  ListItemText,
   Popover,
+  Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
+
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import { Link } from "react-router-dom";
+
+// import moment from "moment";
 
 export default function ForumIndexSubTopic({ forumSubTopic }) {
   const forumPost = forumSubTopic.forumPosts.items[0];
   console.log(forumPost);
-  const [createDate, setCreateDate] = React.useState(false);
-  const yesterdayStart = moment().subtract(1, "d").startOf("day");
-  const yesterdayEnd = moment().subtract(1, "d").endOf("day");
-  if (moment(forumPost.createdAt).isBetween(yesterdayStart, yesterdayEnd)) {
-    setCreateDate(true);
-  }
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorElDate, setAnchorElDate] = React.useState(null);
+  //const [createDate, setCreateDate] = useState(false);
+  // const yesterdayStart = moment().subtract(1, "d").startOf("day");
+  // const yesterdayEnd = moment().subtract(1, "d").endOf("day");
+  // if (moment(forumPost.createdAt).isBetween(yesterdayStart, yesterdayEnd)) {
+  //   setCreateDate(true);
+  // } 这里有infinity loop
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElDate, setAnchorElDate] = useState(null);
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,9 +33,9 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
-  const handlePopoverOpenDate = (event) => {
-    setAnchorElDate(event.currentTarget);
-  };
+  // const handlePopoverOpenDate = (event) => {
+  //   setAnchorElDate(event.currentTarget);
+  // };
 
   const handlePopoverCloseDate = () => {
     setAnchorElDate(null);
@@ -92,7 +94,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                 alignItems: "center",
                 // bgcolor:"black",
                 overflow: "hidden",
-                
+
                 minWidth: { sm: 250 },
                 minHeight: { sm: 75 },
                 maxWidth: { sm: 250 },
@@ -123,10 +125,10 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                     onMouseLeave={handlePopoverClose}
                     noWrap="true"
                     sx={{
-                      minWidth:250,
-                      maxWidth:250,
-                      minHeight:72,
-                      maxHeight:72,
+                      minWidth: 250,
+                      maxWidth: 250,
+                      minHeight: 72,
+                      maxHeight: 72,
                       textDecorationLine: "none",
                       "&: hover": { color: "primary.main" },
                       wordBreak: "break-word",
@@ -136,61 +138,61 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                     {forumPost.title}
                   </Typography>
                 }
-                secondary={
-                  <React.Fragment>
-                    {/* <Typography color="text.secondary" variant="body2"> */}
-                    {"由"}
-                    {/* </Typography> */}
-                    <Typography
-                      component={Link}
-                      to={`/account/profile/${forumPost.owner}`}
-                      color="text.secondary"
-                      variant="body2"
-                      aria-owns={open ? "mouse-over-popover" : undefined}
-                      aria-haspopup="true"
-                      onMouseEnter={handlePopoverOpen}
-                      onMouseLeave={handlePopoverClose}
-                      sx={{
-                        textDecorationLine: "none",
-                        display: "inline",
-                        "&: hover": { color: "primary.main" },
-                      }}
-                    >
-                      {forumPost.owner},
-                    </Typography>
-                    {createDate ? (
-                      <Typography
-                        color="text.secondary"
-                        variant="body2"
-                        display="inline"
-                        aria-owns={
-                          openDate ? "mouse-over-popover-date" : undefined
-                        }
-                        aria-haspopup="true"
-                        onMouseEnter={handlePopoverOpenDate}
-                        onMouseLeave={handlePopoverCloseDate}
-                      >
-                        {moment(forumPost.createdAt).fromNow()}
-                      </Typography>
-                    ) : (
-                      <Typography
-                        color="text.secondary"
-                        variant="body2"
-                        display="inline"
-                        aria-owns={
-                          openDate ? "mouse-over-popover-date" : undefined
-                        }
-                        aria-haspopup="true"
-                        onMouseEnter={handlePopoverOpenDate}
-                        onMouseLeave={handlePopoverCloseDate}
-                      >
-                        {/* {moment(forumPost.createdAt).format("MM月DD日")} */}
-                        {forumPost.createdAt.slice(5, 7)}月
-                        {forumPost.createdAt.slice(8, 10)}号{" "}
-                      </Typography>
-                    )}
-                  </React.Fragment>
-                }
+                // secondary={
+                //   <React.Fragment>
+                //     {/* <Typography color="text.secondary" variant="body2"> */}
+                //     {"由"}
+                //     {/* </Typography> */}
+                //     <Typography
+                //       component={Link}
+                //       to={`/account/profile/${forumPost.owner}`}
+                //       color="text.secondary"
+                //       variant="body2"
+                //       aria-owns={open ? "mouse-over-popover" : undefined}
+                //       aria-haspopup="true"
+                //       onMouseEnter={handlePopoverOpen}
+                //       onMouseLeave={handlePopoverClose}
+                //       sx={{
+                //         textDecorationLine: "none",
+                //         display: "inline",
+                //         "&: hover": { color: "primary.main" },
+                //       }}
+                //     >
+                //       {forumPost.owner},
+                //     </Typography>
+                //     {createDate ? (
+                //       <Typography
+                //         color="text.secondary"
+                //         variant="body2"
+                //         display="inline"
+                //         aria-owns={
+                //           openDate ? "mouse-over-popover-date" : undefined
+                //         }
+                //         aria-haspopup="true"
+                //         onMouseEnter={handlePopoverOpenDate}
+                //         onMouseLeave={handlePopoverCloseDate}
+                //       >
+                //         {moment(forumPost.createdAt).fromNow()}
+                //       </Typography>
+                //     ) : (
+                //       <Typography
+                //         color="text.secondary"
+                //         variant="body2"
+                //         display="inline"
+                //         aria-owns={
+                //           openDate ? "mouse-over-popover-date" : undefined
+                //         }
+                //         aria-haspopup="true"
+                //         onMouseEnter={handlePopoverOpenDate}
+                //         onMouseLeave={handlePopoverCloseDate}
+                //       >
+                //         {/* {moment(forumPost.createdAt).format("MM月DD日")} */}
+                //         {forumPost.createdAt.slice(5, 7)}月
+                //         {forumPost.createdAt.slice(8, 10)}号{" "}
+                //       </Typography>
+                //     )}
+                //   </React.Fragment>
+                // }
               />
               <Popover
                 id="mouse-over-popover"
