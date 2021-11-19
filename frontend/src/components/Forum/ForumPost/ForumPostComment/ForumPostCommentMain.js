@@ -1,24 +1,21 @@
 import {
   Box,
   Button,
-  //   CardActionArea,
-  //   CardHeader,
-  //   Chip,
   Divider,
   Typography,
-  // Skeleton,
 } from "@mui/material";
+import React, { useState } from "react";
+
 // import { Link } from "react-router-dom";
 // import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
-import LikeButtonGroup from "../../../LikeButtonGroup";
-import React, { useState } from "react";
-import ForumPostSubCommentPost from "../ForumPostSubComment/ForumPostSubCommentPost";
-import ForumPostUserComponent from "../ForumPostDetail/ForumPostUserComponent";
 import ForumPostContentComponent from "../ForumPostDetail/ForumPostContentComponent";
+import ForumPostSubCommentPost from "../ForumPostSubComment/ForumPostSubCommentPost";
 import ForumPostSubComments from "../ForumPostSubComment/ForumPostSubComments";
-export default function ForumPostCommentMain({ comment, key, idx }) {
+import ForumPostUserComponent from "../ForumPostDetail/ForumPostUserComponent";
+import LikeButtonGroup from "../../../LikeButtonGroup";
+export default function ForumPostCommentMain({ comment, idx }) {
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
   const { id, content, createdAt, userID, user, forumPostSubComments } =

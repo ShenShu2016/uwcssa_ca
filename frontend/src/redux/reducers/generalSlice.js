@@ -42,6 +42,20 @@ const initialState = {
   postImageError: null,
 };
 
+const getQualityLevel = (file) => {
+  const { size } = file;
+  console.log("原始大小", size / 1000000, "MB");
+  if (size > 6000000) {
+    return 0;
+  } else if (size > 1000000) {
+    return 0.1;
+  } else if (size > 300000) {
+    return 0.4;
+  } else {
+    return 0.6;
+  }
+};
+
 export const setURLFrom = createAsyncThunk(
   "general/setURLFrom",
   async ({ location }) => {
@@ -83,14 +97,14 @@ export const fetchForumPostCounts = createAsyncThunk(
 
 export const postLike = createAsyncThunk(
   "general/postLike",
-  async ({ itemID, userID, isLike }) => {
+  async ({ itemID, username, isLike }) => {
     const response = await API.graphql(
       graphqlOperation(createLike, {
         input: {
-          id: `${itemID}-${userID}`,
+          id: `${itemID}-${username}`,
           like: isLike,
           itemID: itemID,
-          userID: userID,
+          userID: username,
         },
       })
     );
@@ -101,11 +115,11 @@ export const postLike = createAsyncThunk(
 
 export const putLike = createAsyncThunk(
   "general/putLike",
-  async ({ itemID, userID, isLike }) => {
+  async ({ itemID, username, isLike }) => {
     const response = await API.graphql(
       graphqlOperation(updateLike, {
         input: {
-          id: `${itemID}-${userID}`,
+          id: `${itemID}-${username}`,
           like: isLike,
         },
       })
@@ -117,11 +131,11 @@ export const putLike = createAsyncThunk(
 
 export const removeLike = createAsyncThunk(
   "general/removeLike",
-  async ({ itemID, userID }) => {
+  async ({ itemID, username }) => {
     const response = await API.graphql(
       graphqlOperation(deleteLike, {
         input: {
-          id: `${itemID}-${userID}`,
+          id: `${itemID}-${username}`,
         },
       })
     );
@@ -135,14 +149,14 @@ export const postSingleImage = createAsyncThunk(
   async ({ imageData, imageLocation }) => {
     console.log(imageData, imageLocation);
     const tempUuid = uuid();
-    const imgData0 = imageData[0];
+    const file = imageData[0];
     await new Promise((resolve) => {
-      new Compressor(imgData0, {
-        quality: 0.6,
+      new Compressor(file, {
+        quality: getQualityLevel(file),
         success(result) {
-          console.log("Result", result);
+          console.log("压缩后结果", result.size / 1000000, "MB");
           Storage.put(
-            `${imageLocation}/${tempUuid}.${imgData0.name.split(".").pop()}`,
+            `${imageLocation}/${tempUuid}.${result.name.split(".").pop()}`,
             result,
             { contentType: "image/*" }
           ).then((e) => {
@@ -152,7 +166,7 @@ export const postSingleImage = createAsyncThunk(
         },
       });
     });
-    return `${imageLocation}/${tempUuid}.${imgData0.name.split(".").pop()}`;
+    return `${imageLocation}/${tempUuid}.${file.name.split(".").pop()}`;
   }
 );
 
@@ -167,8 +181,9 @@ export const postMultipleImages = createAsyncThunk(
         const file = imagesData[i];
         await new Promise((resolve) => {
           new Compressor(file, {
-            quality: 0.5,
+            quality: getQualityLevel(file),
             success(result) {
+              console.log("压缩后结果", result.size / 1000000, "MB");
               Storage.put(
                 `${imageLocation}/${uuid()}.${result.name.split(".").pop()}`,
                 result,

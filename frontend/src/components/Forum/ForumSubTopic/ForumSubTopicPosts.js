@@ -17,7 +17,7 @@ export default function ForumSubTopicPosts( {posts} ) {
     <div className={classes.root}>
       <Box sx={{ padding: "1rem", maxwidth: "100%" }}>
         {posts.items.map((forumPost) => {
-          return <ForumSubTopicPostComponent forumPost={forumPost} />;
+          return <ForumSubTopicPostComponent forumPost={forumPost} key={forumPost.id} />;
         })}
       </Box>
     </div>

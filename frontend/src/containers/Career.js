@@ -2,6 +2,7 @@ import ApplyJob from "../components/Career/ApplyJob";
 import Footer from "./Footer";
 import JobDetail from "../components/Career/JobDetail";
 import Openings from "../components/Career/Openings";
+import PrivateRoute from "../components/PrivateRoute";
 import React from "react";
 import { Route } from "react-router";
 import { Typography } from "@mui/material";
@@ -26,7 +27,11 @@ export default function Career() {
       </Typography>
       <Route exact path="/career" component={Openings} />
       <Route path="/career/jobDetail/:id" component={JobDetail} />
-      <Route path="/career/applyJob/:id" component={ApplyJob} />
+      <PrivateRoute
+        allowRoles="anyone"
+        path="/career/applyJob/:id"
+        component={ApplyJob}
+      />
       <Footer />
     </div>
   );

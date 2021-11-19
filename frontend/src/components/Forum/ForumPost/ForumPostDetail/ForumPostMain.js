@@ -1,50 +1,26 @@
-import {
-  Box,
-  Button,
-  // CardActionArea,
-  // CardHeader,
-  // Chip,
-  Divider,
-  Typography,
-  Breadcrumbs,
-  // Skeleton,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Breadcrumbs, Button, Divider, Typography } from "@mui/material";
+import React, { useState } from "react";
+
+import ForumPostCommentPost from "./ForumPostCommentPost";
+import ForumPostContentComponent from "./ForumPostContentComponent";
+import ForumPostUserComponent from "./ForumPostUserComponent";
 // import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../../LikeButtonGroup";
+import { Link } from "react-router-dom";
 // import S3Image from "../../../S3/S3Image";
 import { useTitle } from "../../../../Hooks/useTitle";
-import React, { useState } from "react";
-import ForumPostCommentPost from "./ForumPostCommentPost";
-import ForumPostUserComponent from "./ForumPostUserComponent";
-import ForumPostContentComponent from "./ForumPostContentComponent";
 
 export default function ForumPostMain({ forumPost }) {
   useTitle(forumPost.title);
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
-  const {
-    id,
-    content,
-    imgS3Keys,
-    createdAt,
-    userID,
-    tags,
-    user,
-  } = forumPost;
+  const { id, content, imgS3Keys, createdAt, userID, tags, user } = forumPost;
+  console.log("forumPost", forumPost);
   return (
     <div>
-      <Box
-        sx={{
-          p: 0,
-          m: 0,
-        }}
-      >
-        <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
-          <Typography
-            variant="h4"
-            sx={{ fontWeight: 700 }}
-          >
+      <Box>
+        <Box sx={{ padding: "2rem", maxWidth: "100%" }}>
+          <Typography variant="h4" sx={{ fontWeight: 700 }}>
             {forumPost.title}
           </Typography>
 
@@ -96,8 +72,8 @@ export default function ForumPostMain({ forumPost }) {
           <Divider orientation="vertical" flexItem />
           <Box
             sx={{
-              width:{xs:300,sm:600},
-              minHeight:220,
+              width: { xs: 300, sm: 600 },
+              minHeight: 220,
               display: "flex",
               flexDirection: "column",
               // justifyContent: "space-between",
@@ -123,9 +99,7 @@ export default function ForumPostMain({ forumPost }) {
                     component="span"
                     style={{ color: "grey" }}
                   >
-                    {createdAt.slice(0, 10)}
-                    {' '}
-                    {createdAt.slice(11, 16)}
+                    {createdAt.slice(0, 10)} {createdAt.slice(11, 16)}
                   </Typography>
                   <Button size="small" color="primary" onClick={replySwitch}>
                     回复 （共{forumPost.forumPostComments.items.length}回复贴）
@@ -137,9 +111,7 @@ export default function ForumPostMain({ forumPost }) {
                 </Button>
               )}
             </Box>
-  
           </Box>
-        
         </Box>
         <ForumPostCommentPost forumPost={forumPost} isReplying={isReplying} />
       </Box>

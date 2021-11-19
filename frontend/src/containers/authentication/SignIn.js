@@ -1,57 +1,84 @@
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
   CircularProgress,
   Container,
   CssBaseline,
+  FormControl,
   FormControlLabel,
   Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import React, { useRef, useState } from "react";
 import { fetchUserProfile, signIn } from "../../redux/reducers/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-// import Auth from "@aws-amplify/auth";
 import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { green } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
 import { removeURLFrom } from "../../redux/reducers/generalSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
+const useStyles = makeStyles(() => ({
+  alert: {
+    marginTop: "1.5rem",
+  },
+}));
+
 export default function SignIn() {
   useTitle("UWCSSA登录");
+  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(); //logging state
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [alert, setAlert] = useState(false);
+  const [alertContent, setAlertContent] = useState("");
   const timer = useRef();
-
   const { urlFrom } = useSelector((state) => state.general);
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-  const handleSubmit = async function (event) {
-    event.preventDefault();
+  const onSubmit = async function (data) {
     if (!loading) {
       // console.log("setLoading(loading)", loading);
       setLoading(true); //开始转圈
-      const response = await dispatch(signIn({ username, password }));
+      const response = await dispatch(signIn(data));
       if (response.meta.requestStatus === "fulfilled") {
         const { username } = response.payload;
         const response2 = await dispatch(fetchUserProfile({ username }));
         if (response2.meta.requestStatus === "fulfilled") {
           timer.current = window.setTimeout(() => {
             if (urlFrom) {
+              reset();
               dispatch(removeURLFrom());
               history.push(urlFrom);
             } else {
@@ -64,21 +91,12 @@ export default function SignIn() {
         timer.current = window.setTimeout(() => {
           setLoading(false);
           console.log(response.error.message);
-          setErrorMessage(response.error.message);
+          setAlertContent(response.error.message);
+          setAlert(true);
         }, 1000);
       }
     }
   };
-
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
-  const { username, password } = formData;
-
-  const onChange = (event) =>
-    setFormData({ ...formData, [event.target.name]: event.target.value });
 
   return (
     <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
@@ -99,44 +117,80 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           登入
         </Typography>
+        {alert ? (
+          <Alert className={classes.alert} severity="error">
+            {alertContent}
+          </Alert>
+        ) : (
+          <></>
+        )}
         <Box
           component="form"
           noValidate
-          onSubmit={(event) => handleSubmit(event)}
-          sx={{ mt: 1 }}
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ my: 4 }}
         >
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="用户名"
+          <Controller
             name="username"
-            autoComplete="username"
-            autoFocus
-            value={username}
-            error={errorMessage ? true : false}
-            helperText={errorMessage}
-            onChange={(event) => onChange(event)}
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <TextField
+                required
+                label="用户名"
+                variant="outlined"
+                fullWidth
+                autoComplete="username"
+                onChange={onChange}
+                value={value}
+                error={!!errors.username}
+                helperText={errors.username ? "不能为空" : null}
+              />
+            )}
           />
-          <TextField
-            margin="normal"
-            required
+
+          <Controller
             name="password"
-            fullWidth
-            label="密码"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            error={errorMessage ? true : false}
-            helperText={errorMessage}
-            onChange={(event) => onChange(event)}
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <FormControl fullWidth variant="outlined" sx={{ my: 4 }}>
+                <InputLabel htmlFor="outlined-adornment-password">
+                  密码
+                </InputLabel>
+                <OutlinedInput
+                  id="password"
+                  type={isShowPassword ? "text" : "password"}
+                  onChange={onChange}
+                  autoFocus
+                  error={!!errors.password}
+                  value={value}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {isShowPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+            )}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="记住密码"
-          />
+          <Tooltip title={`这个东西装饰用的，按不按都一样`} arrow>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="记住密码"
+            />
+          </Tooltip>
           <Button
             type="submit"
             fullWidth
@@ -163,7 +217,7 @@ export default function SignIn() {
           <Grid container>
             <Grid item xs>
               <Link to="/auth/forgotPassword" variant="body2">
-                Forgot password?
+                忘记密码?
               </Link>
             </Grid>
             <Grid item>

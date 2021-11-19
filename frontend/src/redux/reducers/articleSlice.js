@@ -251,14 +251,14 @@ const articleSlice = createSlice({
       })
       // Cases for status of removeLike (pending, fulfilled, and rejected)
       .addCase(fetchTopics.pending, (state, action) => {
-        state.fetchArticlesStatus = "loading";
+        state.fetchTopicsStatus = "loading";
       })
       .addCase(fetchTopics.fulfilled, (state, action) => {
-        state.fetchArticlesStatus = "succeeded";
+        state.fetchTopicsStatus = "succeeded";
         state.topics = action.payload;
       })
       .addCase(fetchTopics.rejected, (state, action) => {
-        state.fetchArticlesStatus = "failed";
+        state.fetchTopicsStatus = "failed";
         state.fetchTopicsError = action.error.message;
       })
       // Cases for status of postArticle (pending, fulfilled, and rejected)

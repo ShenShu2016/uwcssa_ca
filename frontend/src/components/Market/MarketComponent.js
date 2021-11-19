@@ -6,6 +6,7 @@ import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
 import moment from "moment";
+import useHover from "../../Hooks/useHover";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MarketComponent({ item, type }) {
   const classes = useStyles();
   const [imageURL, setImageURL] = useState(null);
-
+  const [hoverRef, isHover] = useHover();
   const {
     id,
     title,
@@ -94,7 +95,7 @@ export default function MarketComponent({ item, type }) {
                 lineHeight: "1.3333",
               }}
             >
-              ${price}
+              ${price} {isHover ? "🥳" : "😩"}
             </Typography>
           </Box>
           <Box my={"4px"}>
@@ -147,7 +148,7 @@ export default function MarketComponent({ item, type }) {
                 lineHeight: "1.3333",
               }}
             >
-              ${price}
+              ${price} {isHover ? "🥳" : "😩"}
             </Typography>
           </Box>
           <Box my={"4px"}>
@@ -200,7 +201,7 @@ export default function MarketComponent({ item, type }) {
                 lineHeight: "1.3333",
               }}
             >
-              ${price}
+              ${price} {isHover ? "🥳" : "😩"}
             </Typography>
           </Box>
           <Box my={"4px"}>
@@ -253,7 +254,11 @@ export default function MarketComponent({ item, type }) {
 
   return (
     <Paper elevation={0} className={classes.root}>
-      <CardActionArea component={Link} to={`/market/${type}/${id}`}>
+      <CardActionArea
+        ref={hoverRef}
+        component={Link}
+        to={`/market/${type}/${id}`}
+      >
         <img src={imageURL} alt="" className={classes.s3image} />
         <Box my={"8px"}>{displayInfo()}</Box>
       </CardActionArea>

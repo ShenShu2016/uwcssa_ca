@@ -21,6 +21,10 @@ import PropTypes from "prop-types";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { useSelector } from "react-redux";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import FlagIcon from "@mui/icons-material/Flag";
+import TopicIcon from "@mui/icons-material/Topic";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,6 +65,7 @@ export default function EventBody({ event }) {
   const userInfo = useSelector((state) => state.userAuth);
   const [posterURL, setPosterURL] = useState(null);
   const [qrCodeURL, setQrCodeURL] = useState(null);
+  const [backGroundImgURL, setBackGroundImgURL] = useState(null);
   const {
     title,
     startDate,
@@ -68,6 +73,7 @@ export default function EventBody({ event }) {
     eventStatus,
     location,
     content,
+    backGroundImgS3Key,
     posterImgS3Key,
     qrCodeImgS3Key,
     topic,
@@ -115,27 +121,71 @@ export default function EventBody({ event }) {
     }
   }, [qrCodeImgS3Key]);
 
+  useEffect(() => {
+    const getQrCode = async () => {
+      try {
+        const backGroundImgURL = await Storage.get(backGroundImgS3Key, {
+          level: "public",
+          expires: 120,
+          download: false,
+        });
+        setBackGroundImgURL(backGroundImgURL);
+      } catch (error) {
+        console.error("error accessing the Image from s3", error);
+        setBackGroundImgURL(null);
+      }
+    };
+    if (backGroundImgS3Key) {
+      getQrCode();
+    }
+  }, [backGroundImgS3Key]);
+
   return (
     <Box>
       {event.startDate ? (
         <div>
           <Container size="md">
-            <Box
-              style={{
-                display: "flex",
-                alignItem: "center",
-                justifyContent: "center",
-                background:
-                  "linear-gradient(to top, rgba(255,0,0,0) 0 70%, rgba(63, 81, 181, 1) )",
-              }}
-            >
-              <CardMedia
-                component="img"
-                sx={{ width: "auto", maxHeight: "300px" }}
-                image={posterURL}
-              />
-            </Box>
-
+            <div>
+              <Box>
+                <CardMedia
+                  style={{
+                    // maxWidth: "100%",
+                    opacity: 0.4,
+                    height: "350px",
+                    objectFit: "cover",
+                    // background: `url(${backGroundImgURL})`,
+                    // blurRadius: 1,
+                    // backgroundSize: "contained",
+                    // borderStyle: "outset",
+                    // "linear-gradient(to top, rgba(255,0,0,0) 0 70%, rgba(63, 81, 181, 1) )",
+                  }}
+                  component="img"
+                  image={backGroundImgURL}
+                />
+              </Box>
+              <Card
+                sx={{
+                  maxWidth: 600,
+                  minWidth: 300,
+                  position: "absolute",
+                  top: "310px",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  zIndex: "2",
+                  borderRadius: "10px",
+                }}
+              >
+                <CardMedia
+                  sx={{
+                    display: "flex",
+                    objectFit: "cover",
+                    height: "300px",
+                  }}
+                  component="img"
+                  image={posterURL}
+                />
+              </Card>
+            </div>
             <Box
               sx={{
                 display: "flex",
@@ -156,7 +206,7 @@ export default function EventBody({ event }) {
                     {startDate.slice(11, 16)} - {endDate.slice(11, 16)}
                   </b>
                 </Typography>
-                <Typography component="div" variant="h4" gutterBottom>
+                <Typography component="div" variant="h5" gutterBottom>
                   {title}
                 </Typography>
                 <Typography
@@ -184,7 +234,7 @@ export default function EventBody({ event }) {
               </Box>
             </Container>
 
-            <Box sx={{ width: "100%", bgcolor: "#EBF5FB" }}>
+            <Box sx={{ width: "100%", bgcolor: "#F9F9F9" }}>
               <TabPanel value={value} index={0}>
                 {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
                 <Container size="md">
@@ -204,18 +254,45 @@ export default function EventBody({ event }) {
                             >
                               <b>Details</b>
                             </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Sponsored by {sponsor}
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Location: {location}
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Topic: {topic.name}
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Status: {eventStatus}
-                            </Typography>
+                            {sponsor ? (
+                              <Typography variant="body2" gutterBottom>
+                                <FlagIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                Sponsored by {sponsor}
+                              </Typography>
+                            ) : null}
+                            {location ? (
+                              <Typography variant="body2" gutterBottom>
+                                <LocationOnIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                {location}
+                              </Typography>
+                            ) : null}
+                            {topic.name ? (
+                              <Typography variant="body2" gutterBottom>
+                                <TopicIcon
+                                  color="action"
+                                  sx={{
+                                    float: "left",
+                                    marginRight: "10px",
+                                  }}
+                                />
+                                {topic.name}
+                              </Typography>
+                            ) : null}
+                            {eventStatus ? (
+                              <Typography variant="body2" gutterBottom>
+                                <AccessTimeIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                {eventStatus}
+                              </Typography>
+                            ) : null}
                             <Typography
                               variant="body2"
                               sx={{ marginTop: "1rem" }}
@@ -402,8 +479,12 @@ export default function EventBody({ event }) {
               )} */}
               </TabPanel>
               <TabPanel value={value} index={1} component={"div"}>
-                <EventCommentsPost event={event} />
-                <EventComments event={event} />
+                <Card>
+                  <CardContent>
+                    <EventCommentsPost event={event} />
+                    <EventComments event={event} />
+                  </CardContent>
+                </Card>
               </TabPanel>
             </Box>
           </div>

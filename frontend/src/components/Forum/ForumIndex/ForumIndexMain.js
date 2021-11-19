@@ -1,13 +1,14 @@
-import { Button, Grid, Box, Typography, Skeleton } from "@mui/material";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
+import { Box, Button, Grid, Skeleton, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ForumIndexSportLight from "./ForumIndexSportLight";
-import { fetchForumTopics } from "../../../redux/reducers/forumSlice";
+
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+// import ForumIndexSportLight from "./ForumIndexSportLight";
 import ForumIndexTopic from "./ForumIndexTopic";
+import { Link } from "react-router-dom";
+import { fetchForumTopics } from "../../../redux/reducers/forumSlice";
+import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -23,16 +24,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ForumIndexMain() {
   const dispatch = useDispatch();
-  const { forumTopics } = useSelector((state) => state.forum);
+  const { forumTopics, fetchForumTopicsStatus } = useSelector(
+    (state) => state.forum
+  );
+
   useEffect(() => {
-    dispatch(fetchForumTopics());
-  }, [dispatch]);
+    if (fetchForumTopicsStatus === "idle" || undefined) {
+      dispatch(fetchForumTopics());
+    }
+  }, [dispatch, fetchForumTopicsStatus]);
   // console.log("forumTopics", forumTopics);
 
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
+      <Box sx={{ padding: "2rem", width: "100%" }}>
         <Box
           sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}
         >
@@ -74,8 +80,8 @@ export default function ForumIndexMain() {
             </Grid>
           </Box>
         )}
-        <ForumIndexSportLight />
-        <ForumIndexTopic forumTopics={forumTopics}/>
+        {/* <ForumIndexSportLight /> */}
+        <ForumIndexTopic forumTopics={forumTopics} />
       </Box>
     </div>
   );

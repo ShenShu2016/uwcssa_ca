@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Chip,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -9,7 +9,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
+import React, { useEffect, useRef, useState } from "react";
 import { fetchTopics, postArticle } from "../../../redux/reducers/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,10 +20,12 @@ import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postMultipleImages } from "../../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
+import { useTitle } from "../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,11 +55,6 @@ const useStyles = makeStyles((theme) => ({
   topic: {
     marginBlock: "2rem",
   },
-  newTopic: {
-    textAlign: "center",
-    width: "100%",
-    margin: "auto",
-  },
 }));
 
 const Input = styled("input")({
@@ -64,19 +63,27 @@ const Input = styled("input")({
 
 export default function PostArticle() {
   const classes = useStyles();
+  useTitle("发布新闻");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
-  const [tagInput, setTagInput] = useState("");
+  const [tags, setTags] = useState([]);
   const [imageKeys, setImageKeys] = useState();
-  const [articleData, setArticleData] = useState({
-    title: "",
-    content: "",
-    topicID: "",
-    tags: [],
+  const [loading, setLoading] = useState(false);
+  const timer = useRef();
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: "",
+      content: "",
+      topicID: "",
+    },
   });
-  console.log(articleData);
   useEffect(() => {
     dispatch(fetchTopics());
   }, [dispatch]);
@@ -109,6 +116,7 @@ export default function PostArticle() {
   const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
+    setLoading(true);
     const imagesData = e.target.files;
     const imageLocation = "article";
 
@@ -118,27 +126,33 @@ export default function PostArticle() {
     console.log("我是function 返回值 response", response);
     if (response.meta.requestStatus === "fulfilled") {
       setImageKeys(response.payload);
+      setLoading(false);
     }
   };
 
-  const uploadArticle = async () => {
+  const onSubmit = async (data) => {
     //Upload the article
-    const { title, content, topicID, tags } = articleData;
-
+    setLoading(true);
     const createArticleInput = {
-      title,
-      content,
+      ...data,
       imgS3Keys: imageKeys,
-      topicID: topicID,
       active: true,
       sortKey: "SortKey",
       userID: username,
-      tags: tags,
+      tags: GetTags(),
     };
     const response = await dispatch(postArticle({ createArticleInput }));
 
     if (response.meta.requestStatus === "fulfilled") {
       history.push(`/article/${response.payload.data.createArticle.id}`);
+    } else {
+      timer.current = window.setTimeout(() => {
+        setLoading(false);
+
+        console.log(response.error.message);
+      }, 1000);
+
+      console.log(response.error.message);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
@@ -155,75 +169,78 @@ export default function PostArticle() {
     dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
-
-  const deleteHandler = (i) => () => {
-    const { tags: newTags } = { ...articleData };
-    setArticleData({
-      ...articleData,
-      tags: newTags.filter((tag) => tag !== i),
-    });
+  const handleKeyDown = (e) => {
+    const newTags = [...tags, e];
+    setTags(newTags);
   };
 
-  const inputKeyDown = (e) => {
-    const val = e.target.value;
-    console.log("tagSuccess", articleData.tags);
-    if (e.key === "Enter" && val) {
-      if (
-        articleData.tags.find((tag) => tag.toLowerCase() === val.toLowerCase())
-      ) {
-        return;
-      }
-      e.preventDefault();
-      const newTags = [...articleData.tags].concat([val]);
-      setArticleData({ ...articleData, tags: newTags });
-      setTagInput("");
-      console.log("tagSuccess", articleData.tags);
-    }
+  const handleDelete = (e) => {
+    const newTags = tags.filter((tag) => tag !== e);
+    setTags(newTags);
   };
   return (
-    <div className={classes.root}>
+    <Box
+      className={classes.root}
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <Typography variant="h4" sx={{ textAlign: "center", mb: 2 }}>
         发布文章
       </Typography>
       <Box className={classes.title}>
-        <TextField
-          label="文章标题"
-          variant="outlined"
-          fullWidth
-          value={articleData.title}
-          className={classes.titleInput}
-          onChange={(e) =>
-            setArticleData({ ...articleData, title: e.target.value })
-          }
+        <Controller
+          name="title"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              required
+              label="文章标题"
+              variant="outlined"
+              fullWidth
+              onChange={onChange}
+              value={value}
+              error={!!errors.title}
+              helperText={errors.title ? "不能为空" : null}
+            />
+          )}
         />
       </Box>
       <Box className={classes.topic}>
         <Box className="newTopic">
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="demo-simple-select-outlined-label2">
-              Topic
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label2"
-              id="demo-simple-select-outlined2"
-              value={articleData.topicID}
-              onChange={(e) =>
-                setArticleData({ ...articleData, topicID: e.target.value })
-              }
-              label="Topic"
-            >
-              {topics.map((topic) => {
-                return (
-                  <MenuItem value={topic.id} key={topic.id}>
-                    {topic.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
+          <Controller
+            name="topicID"
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="topicID">主题</InputLabel>
+                <Select
+                  labelId="topicID"
+                  value={value}
+                  onChange={onChange}
+                  label="主题"
+                  error={!!errors.topicID}
+                >
+                  {topics.map((topic) => {
+                    return (
+                      <MenuItem value={topic.id} key={topic.id}>
+                        {topic.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            )}
+          />
         </Box>
       </Box>
-      <div className="newTopic">
+      <Box>
         <TextField
           label="Topic"
           value={topicData.name}
@@ -237,21 +254,13 @@ export default function PostArticle() {
         >
           上传新的topic
         </Button>
-      </div>
-      <Box className={classes.content}>
-        <TextField
-          label="tags"
-          value={tagInput}
-          variant="outlined"
-          fullWidth
-          onKeyDown={inputKeyDown}
-          onChange={(e) => setTagInput(e.target.value)}
-        />
       </Box>
-
-      {articleData.tags.map((data) => {
-        return <Chip key={data} label={data} onDelete={deleteHandler(data)} />;
-      })}
+      <CustomTags
+        placeholder="新装修， 独立卫浴..."
+        initial={tags}
+        onKeyDown={(e) => handleKeyDown(e)}
+        onDelete={(e) => handleDelete(e)}
+      />
       <Box>
         <label htmlFor="contained-button-file">
           <Input
@@ -264,9 +273,29 @@ export default function PostArticle() {
               uploadArticleImg(e);
             }}
           />
-          <Button variant="contained" component="span">
-            上传图片
-          </Button>
+          <Box sx={{ my: 2 }}>
+            <Button
+              variant="contained"
+              component="span"
+              fullWidth
+              disabled={loading}
+            >
+              上传图片{" "}
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
+            </Button>
+          </Box>
         </label>
       </Box>
       {imgKeyFromServer &&
@@ -276,29 +305,56 @@ export default function PostArticle() {
             src={imgKey}
             key={imgKeyIdx}
             alt="images"
+            style={{ width: "100%" }}
           />
         ))}
       <Box className={classes.content}>
-        <TextField
-          label="Content"
-          value={articleData.content}
-          minRows={20}
-          variant="outlined"
-          multiline
-          fullWidth
-          onChange={(e) =>
-            setArticleData({ ...articleData, content: e.target.value })
-          }
+        <Controller
+          name="content"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              required
+              label="Content"
+              minRows={20}
+              variant="outlined"
+              fullWidth
+              multiline
+              onChange={onChange}
+              value={value}
+              error={!!errors.content}
+              helperText={errors.content ? "不能为空" : null}
+            />
+          )}
         />
       </Box>
       <Button
         variant="contained"
         endIcon={<PublishIcon />}
-        onClick={uploadArticle}
+        type="submit"
         color="primary"
+        fullWidth
+        disabled={loading}
+        sx={{ my: 4 }}
       >
         上传 Article
+        {loading && (
+          <CircularProgress
+            size={24}
+            sx={{
+              color: green[500],
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginTop: "-0.75rem",
+              marginLeft: "-0.75rem",
+            }}
+          />
+        )}
       </Button>
-    </div>
+    </Box>
   );
 }

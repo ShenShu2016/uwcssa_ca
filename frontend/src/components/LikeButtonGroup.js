@@ -56,6 +56,7 @@ export default function LikeButtonGroup({ item }) {
         likeUp: true,
         disLikeUp: false,
       });
+
       const response = await dispatch(postLike({ itemID, username, isLike }));
       console.log(response);
 

@@ -81,6 +81,7 @@ export const getForumPost = /* GraphQL */ `
           user {
             username
             avatarImgS3Key
+            badges
           }
           likes(sortDirection: DESC) {
             nextToken
@@ -113,6 +114,7 @@ export const getForumPost = /* GraphQL */ `
               user {
                 username
                 avatarImgS3Key
+                badges
               }
               likes(sortDirection: DESC) {
                 nextToken
@@ -222,6 +224,139 @@ export const listForumTopics = /* GraphQL */ `
               nextToken
             }
           }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
+  query ForumPostSortByForumPostLastReplyAt(
+    $forumSubTopicID: ID
+    $lastReplyAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ForumPostSortByForumPostLastReplyAt(
+      forumSubTopicID: $forumSubTopicID
+      lastReplyAt: $lastReplyAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        forumPostComments(
+          filter: { active: { eq: true } }
+          sortDirection: DESC
+        ) {
+          nextToken
+          items {
+            content
+            createdAt
+            id
+            owner
+            forumPostID
+            updatedAt
+            userID
+            user {
+              username
+              avatarImgS3Key
+            }
+            likes(sortDirection: DESC) {
+              nextToken
+              items {
+                id
+                itemID
+                like
+                owner
+                updatedAt
+                userID
+              }
+            }
+            forumPostSubComments(
+              filter: { active: { eq: true } }
+              sortDirection: DESC
+            ) {
+              nextToken
+              items {
+                content
+                createdAt
+                id
+                owner
+                updatedAt
+                replyToUserID
+                replyTo {
+                  username
+                  avatarImgS3Key
+                }
+                userID
+                user {
+                  username
+                  avatarImgS3Key
+                }
+                likes(sortDirection: DESC) {
+                  nextToken
+                  items {
+                    id
+                    itemID
+                    like
+                    owner
+                    updatedAt
+                    userID
+                  }
+                }
+              }
+            }
+          }
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
           nextToken
         }
       }

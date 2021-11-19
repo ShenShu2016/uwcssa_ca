@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   Card,
   CardActionArea,
@@ -13,6 +14,9 @@ import { Link } from "react-router-dom";
 import S3Image from "../../S3/S3Image";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
+import { useHistory } from "react-router";
+import uwindsor_shield from "../../../static/avatarIcons/uwindsor_shield.svg";
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +32,6 @@ const useStyles = makeStyles({
     marginLeft: "1rem",
   },
   edit: {
-    top: "-160px",
     float: "right",
   },
   info: {
@@ -38,9 +41,14 @@ const useStyles = makeStyles({
     height: "90px",
   },
 });
-
+const SmallAvatar = styled(Avatar)(({ theme }) => ({
+  width: 60,
+  height: 60,
+  border: `2px solid ${theme.palette.background.paper}`,
+}));
 export default function DashboardBasicInfo({ userProfile }) {
   const classes = useStyles();
+  const history = useHistory();
   const [avatarURL, setAvatarURL] = useState(null);
 
   useEffect(() => {
@@ -66,7 +74,11 @@ export default function DashboardBasicInfo({ userProfile }) {
     <div>
       <div className={classes.root}>
         <Card elevation={0} className={classes.header}>
-          <CardActionArea>
+          <CardActionArea
+            onClick={() => {
+              history.push(`/account/profile/${userProfile.username}`);
+            }}
+          >
             <S3Image
               S3Key={userProfile.backGroundImgS3Key}
               style={{
@@ -79,12 +91,28 @@ export default function DashboardBasicInfo({ userProfile }) {
           </CardActionArea>
           <CardContent className={classes.info}>
             <div className={classes.outer}>
-              <Avatar
-                alt="avatar"
-                src={avatarURL}
-                sx={{ width: 150, height: 150 }}
-                className={classes.avatar}
-              />
+              <Badge
+                invisible={!userProfile.badges.includes("uwindsor_shield")}
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                badgeContent={
+                  <SmallAvatar
+                    alt="uwindsor_shield"
+                    src={uwindsor_shield}
+                    sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
+                  />
+                }
+              >
+                <Avatar
+                  onClick={() => {
+                    history.push(`/account/profile/${userProfile.username}`);
+                  }}
+                  alt="avatar"
+                  src={avatarURL}
+                  sx={{ width: 150, height: 150, cursor: "pointer" }}
+                  className={classes.avatar}
+                />
+              </Badge>
               <Button
                 variant="contained"
                 endIcon={<EditIcon />}

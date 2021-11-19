@@ -72,7 +72,7 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   关于我们
                 </Typography>
-                <span style={{ cursor: "not-allowed" }}>
+                <span>
                   <Button
                     color="primary"
                     variant="text"
@@ -83,7 +83,7 @@ export default function StickyFooter() {
                     我们的团队
                   </Button>
                 </span>
-                <span style={{ cursor: "not-allowed" }}>
+                <span>
                   <Button
                     color="primary"
                     variant="text"
@@ -94,7 +94,7 @@ export default function StickyFooter() {
                     联系我们
                   </Button>
                 </span>
-                <span style={{ cursor: "not-allowed" }}>
+                <span>
                   <Button
                     color="primary"
                     variant="text"
@@ -111,7 +111,7 @@ export default function StickyFooter() {
                 <Typography variant="h6" gutterBottom>
                   资讯
                 </Typography>
-                <span style={{ cursor: "not-allowed" }}>
+                <span>
                   <Button
                     color="primary"
                     variant="text"
@@ -122,7 +122,7 @@ export default function StickyFooter() {
                     uwcssa新闻
                   </Button>
                 </span>
-                <span style={{ cursor: "not-allowed" }}>
+                <span>
                   <Button
                     color="primary"
                     variant="text"

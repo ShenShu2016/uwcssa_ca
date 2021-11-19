@@ -10,13 +10,11 @@ import {
 } from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
-import {
-  fetchMarketItems,
-  postMarketItem,
-} from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
@@ -24,9 +22,12 @@ import { MarketVehicleInfo } from "./MarketVehicleDetail ";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
+import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      height: "100%",
+      height: `calc(100% - ${drawerBleeding}px)`,
     },
   },
   previewImg: {
@@ -88,9 +89,12 @@ const useStyles = makeStyles((theme) => ({
     height: "calc(100vh - 64px)",
     padding: "2rem",
     float: "right",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("lg")]: {
       display: "block",
       height: "100%",
+    },
+    [theme.breakpoints.down("md")]: {
+      display: "none",
     },
   },
   previewImgRight: {
@@ -98,9 +102,9 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     position: "relative",
     backgroundColor: "rgb(243, 246, 249)",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("lg")]: {
       width: "100%",
-      height: "50vh",
+      height: "40vh",
     },
   },
   previewInfo: {
@@ -108,6 +112,46 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
+    [theme.breakpoints.down("lg")]: {
+      width: "100%",
+      height: "100vh",
+      overflow: "hidden",
+    },
+  },
+  drawer: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      backgroundColor:
+        theme.palette.mode === "light"
+          ? grey[100]
+          : theme.palette.background.default,
+    },
+  },
+  puller: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      width: 30,
+      height: 6,
+      backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
+      borderRadius: 3,
+      position: "absolute",
+      top: 8,
+      left: "calc(50% - 15px)",
+    },
+  },
+  styledBox: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
+    },
+  },
+  icon: {
+    display: "none",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+    },
   },
 }));
 
@@ -115,17 +159,21 @@ const Input = styled("input")({
   display: "none",
 });
 
+const drawerBleeding = 56;
+
 export default function PostMarketVehicle() {
   const classes = useStyles();
   const dispatch = useDispatch();
   useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const [imageKeys, setImageKeys] = useState("");
+  const [imageKeys, setImageKeys] = useState({});
   const user = useSelector((state) => state.userAuth.userProfile);
+  const [trigger, setTrigger] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
+  const [open, setOpen] = useState(false);
 
   const [fakeItems, setFakeItems] = useState({
     price: "Price",
@@ -180,7 +228,9 @@ export default function PostMarketVehicle() {
     );
     // console.log("response!!!", response);
     if (response.meta.requestStatus === "fulfilled") {
-      setImageKeys(response.payload);
+      const newImg = response.payload.map((key) => [key, "temp"]);
+      const temp = Object.entries(imageKeys).concat(newImg);
+      setImageKeys(Object.fromEntries(temp));
     }
   };
 
@@ -189,7 +239,7 @@ export default function PostMarketVehicle() {
       try {
         // setImgKeyFromServer([]);
         const imageAccessURL = await Promise.all(
-          Array.from(imageKeys).map((key) =>
+          Object.keys(imageKeys).map((key) =>
             Storage.get(key, {
               level: "public",
               expires: 120,
@@ -197,20 +247,40 @@ export default function PostMarketVehicle() {
             })
           )
         );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        // setImgKeyFromServer((url) => url.concat(imageAccessURL));
+        setImgKeyFromServer(imageAccessURL);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImgKeyFromServer([]);
       }
     };
     // console.log("imageKeys", imageKeys);
-    if (imageKeys) {
+    if (imageKeys && trigger === true) {
       getImage();
     }
-  }, [imageKeys]);
+  }, [imageKeys, trigger]);
 
-  // console.log("imgKeyFromServer", imgKeyFromServer);
-  // console.log("imageKeys", imageKeys);
+  useEffect(() => {
+    if (
+      Object.values(imageKeys).includes("temp") &&
+      Object.values(imageKeys).length === imgKeyFromServer.length &&
+      trigger
+    ) {
+      const images = Object.entries(imageKeys);
+      console.log("Bug here!", images);
+      if (Object.values(imageKeys).length === 1) {
+        let temp = {};
+        temp[images[0][0]] = imgKeyFromServer[0];
+        console.log("almost", temp);
+        setImageKeys(temp);
+      } else {
+        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
+        console.log("almost", images);
+        setImageKeys(Object.fromEntries(images));
+      }
+      setTrigger(false);
+    }
+  }, [imgKeyFromServer, imageKeys, trigger]);
 
   const uploadMarketVehicle = async () => {
     const {
@@ -229,7 +299,7 @@ export default function PostMarketVehicle() {
     const createMarketVehicleInput = {
       marketType: "Vehicle",
       vehicleType,
-      imgS3Keys: imageKeys,
+      imgS3Keys: Object.keys(imageKeys),
       location: location,
       year: year,
       make: make,
@@ -259,13 +329,10 @@ export default function PostMarketVehicle() {
     };
 
     if (Object.values(canSave).every((item) => item !== "")) {
-      dispatch(fetchMarketItems(marketItemSortBySortKey));
       const response = await dispatch(postMarketItem(createMarketVehicleInput));
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
-        history.push(
-          `/market/vehicle/${response.payload.data.createMarketItem.id}`
-        );
+        history.push(`/market/vehicle/${response.payload.id}`);
       }
       console.log("Can upload");
     } else {
@@ -281,7 +348,12 @@ export default function PostMarketVehicle() {
 
   const handleDeleteImg = (imgKey) => {
     const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
+    const images = { ...imageKeys };
+    const newKeys = Object.fromEntries(
+      Object.entries(images).filter(([key, value]) => value !== imgKey)
+    );
     setImgKeyFromServer(newImg);
+    setImageKeys(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -292,6 +364,10 @@ export default function PostMarketVehicle() {
   const handleDelete = (e) => {
     const newTags = fakeItems.tags.filter((tag) => tag !== e);
     setFakeItems({ ...fakeItems, tags: newTags });
+  };
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
   };
 
   return (
@@ -306,18 +382,24 @@ export default function PostMarketVehicle() {
               height: "100%",
               overflowY: "auto",
               overflowX: "hidden",
+              backgroundColor: "#f9f9f9",
             }}
           >
-            <Box>
+            <Stack direction="row" justifyContent="space-between">
               <Typography
                 variant="h5"
                 gutterBottom
                 component="div"
                 fontWeight="bold"
               >
-                New Vehicle Listing
+                New Item Listing
               </Typography>
-            </Box>
+              <Box className={classes.icon}>
+                <IconButton onClick={toggleDrawer(true)}>
+                  <VisibilityIcon />
+                </IconButton>
+              </Box>
+            </Stack>
 
             {imgKeyFromServer.length !== 0 ? (
               <label htmlFor="contained-button-file">
@@ -329,6 +411,7 @@ export default function PostMarketVehicle() {
                   multiple
                   onChange={(e) => {
                     uploadMarketItemImg(e);
+                    setTrigger(true);
                   }}
                 />
                 <Button variant="outlined" component="span">
@@ -368,6 +451,7 @@ export default function PostMarketVehicle() {
                           uploadMarketItemImg(e);
                           setError({ ...error, imageKeys: false });
                           setUploadStatus("succeeded");
+                          setTrigger(true);
                           setTimeout(() => {
                             setUploadStatus("idle");
                           }, 2500);
@@ -674,7 +758,7 @@ export default function PostMarketVehicle() {
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
             <Stack
-              direction={{ xs: "column", md: "row" }}
+              direction={{ xs: "column", lg: "row" }}
               width="100%"
               height="100%"
             >
@@ -702,6 +786,76 @@ export default function PostMarketVehicle() {
               </Box>
             </Stack>
           </Paper>
+        </Box>
+        <Box className={classes.drawer}>
+          <CssBaseline />
+          <Global
+            styles={{
+              ".MuiDrawer-root > .MuiPaper-root": {
+                height: `calc(80% - ${drawerBleeding}px)`,
+                overflow: "visible",
+              },
+            }}
+          />
+          <SwipeableDrawer
+            anchor="bottom"
+            open={open}
+            onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
+            swipeAreaWidth={drawerBleeding}
+            disableSwipeToOpen={false}
+            ModalProps={{
+              keepMounted: true,
+            }}
+          >
+            <Box
+              className={classes.styledBox}
+              sx={{
+                position: "absolute",
+                top: -drawerBleeding,
+                borderTopLeftRadius: 8,
+                borderTopRightRadius: 8,
+                visibility: "visible",
+                right: 0,
+                left: 0,
+              }}
+            >
+              <Box className={classes.puller} />
+              <Typography sx={{ p: 2, color: "text.secondary" }}>
+                Preview
+              </Typography>
+            </Box>
+            <Box overflow="hidden" height="100%">
+              <Box
+                width="100%"
+                height="100%"
+                sx={{ overflowX: "hidden", overflowY: "auto" }}
+              >
+                <Box className={classes.previewImgRight}>
+                  {imgKeyFromServer.length !== 0 ? (
+                    <SwipeViews images={imgKeyFromServer} />
+                  ) : (
+                    <Box
+                      height="50px"
+                      sx={{
+                        left: "50%",
+                        top: "40%",
+                        position: "absolute",
+                        transform: "translate(-50%,-50%)",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        Your images will go here in the preview mode
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+                <Box className={classes.previewInfo}>
+                  <MarketVehicleInfo marketItem={fakeItems} />
+                </Box>
+              </Box>
+            </Box>
+          </SwipeableDrawer>
         </Box>
       </Stack>
     </div>

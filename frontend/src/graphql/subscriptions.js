@@ -1,6 +1,945 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUwcssaJobResume = /* GraphQL */ `
+  subscription OnCreateUwcssaJobResume($owner: String) {
+    onCreateUwcssaJobResume(owner: $owner) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUwcssaJobResume = /* GraphQL */ `
+  subscription OnUpdateUwcssaJobResume($owner: String) {
+    onUpdateUwcssaJobResume(owner: $owner) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUwcssaJobResume = /* GraphQL */ `
+  subscription OnDeleteUwcssaJobResume($owner: String) {
+    onDeleteUwcssaJobResume(owner: $owner) {
+      id
+      name
+      email
+      resumeFileS3Key
+      phone
+      message
+      uwcssaJobResumeStatus
+      createdAt
+      uwcssaJobID
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        updatedAt
+        uWindsorEmail
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      uwcssaJob {
+        id
+        introduction
+        title
+        requirements
+        bonus
+        imgS3Key
+        benefits
+        schedule
+        like
+        unlike
+        active
+        createdAt
+        departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          uWindsorEmail
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+      }
+      owner
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
@@ -462,6 +1401,9 @@ export const onCreateUser = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -492,9 +1434,6 @@ export const onCreateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       uwcssaJobResumes {
@@ -913,7 +1852,6 @@ export const onCreateUser = /* GraphQL */ `
       webFeedBack {
         items {
           id
-          like
           rate
           reason
           improvement
@@ -1388,6 +2326,9 @@ export const onUpdateUser = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -1418,9 +2359,6 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       uwcssaJobResumes {
@@ -1839,7 +2777,6 @@ export const onUpdateUser = /* GraphQL */ `
       webFeedBack {
         items {
           id
-          like
           rate
           reason
           improvement
@@ -2314,6 +3251,9 @@ export const onDeleteUser = /* GraphQL */ `
         active
         createdAt
         departmentID
+        uwcssaJobResumes {
+          nextToken
+        }
         userID
         updatedAt
         user {
@@ -2344,9 +3284,6 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
         }
       }
       uwcssaJobResumes {
@@ -2765,7 +3702,6 @@ export const onDeleteUser = /* GraphQL */ `
       webFeedBack {
         items {
           id
-          like
           rate
           reason
           improvement
@@ -13058,6 +13994,23 @@ export const onCreateUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -13337,23 +14290,6 @@ export const onCreateUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
-      }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -13374,6 +14310,23 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -13653,23 +14606,6 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
-      }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
       }
     }
   }
@@ -13690,6 +14626,23 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      uwcssaJobResumes {
+        items {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       userID
       updatedAt
       user {
@@ -13970,962 +14923,6 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           nextToken
         }
       }
-      uwcssaJobResumes {
-        items {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const onCreateUwcssaJobResume = /* GraphQL */ `
-  subscription OnCreateUwcssaJobResume($owner: String) {
-    onCreateUwcssaJobResume(owner: $owner) {
-      id
-      name
-      email
-      resumeFileS3Key
-      phone
-      message
-      uwcssaJobResumeStatus
-      createdAt
-      uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          address
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          brief
-          moreBrief
-          mainPart
-          imgS3Key
-          userID
-          createdAt
-          updatedAt
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imgS3Key
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        departmentID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateUwcssaJobResume = /* GraphQL */ `
-  subscription OnUpdateUwcssaJobResume($owner: String) {
-    onUpdateUwcssaJobResume(owner: $owner) {
-      id
-      name
-      email
-      resumeFileS3Key
-      phone
-      message
-      uwcssaJobResumeStatus
-      createdAt
-      uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          address
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          brief
-          moreBrief
-          mainPart
-          imgS3Key
-          userID
-          createdAt
-          updatedAt
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imgS3Key
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        departmentID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteUwcssaJobResume = /* GraphQL */ `
-  subscription OnDeleteUwcssaJobResume($owner: String) {
-    onDeleteUwcssaJobResume(owner: $owner) {
-      id
-      name
-      email
-      resumeFileS3Key
-      phone
-      message
-      uwcssaJobResumeStatus
-      createdAt
-      uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgS3Key
-        backGroundImgS3Key
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          content
-          imgS3Keys
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgS3Key
-          qrCodeImgS3Key
-          posterImgS3Key
-          content
-          location
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          address
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgS3Keys
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          address
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          brief
-          moreBrief
-          mainPart
-          imgS3Key
-          userID
-          createdAt
-          updatedAt
-        }
-        updatedAt
-        uWindsorEmail
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        webFeedBack {
-          nextToken
-        }
-      }
-      uwcssaJob {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imgS3Key
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        departmentID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          uWindsorEmail
-          badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobResumes {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
@@ -25895,7 +25892,6 @@ export const onCreateWebFeedBack = /* GraphQL */ `
   subscription OnCreateWebFeedBack {
     onCreateWebFeedBack {
       id
-      like
       rate
       reason
       improvement
@@ -26156,7 +26152,6 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
   subscription OnUpdateWebFeedBack {
     onUpdateWebFeedBack {
       id
-      like
       rate
       reason
       improvement
@@ -26417,7 +26412,6 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
   subscription OnDeleteWebFeedBack {
     onDeleteWebFeedBack {
       id
-      like
       rate
       reason
       improvement

@@ -36,6 +36,7 @@ export const getEvent = /* GraphQL */ `
         github
         sortKey
         createdAt
+        badges
       }
       eventComments {
         items {
@@ -61,6 +62,7 @@ export const getEvent = /* GraphQL */ `
                 username
                 owner
                 avatarImgS3Key
+                badges
               }
             }
             nextToken
@@ -70,6 +72,7 @@ export const getEvent = /* GraphQL */ `
             username
             owner
             avatarImgS3Key
+            badges
           }
           eventSubComments {
             items {
@@ -95,6 +98,7 @@ export const getEvent = /* GraphQL */ `
                     username
                     owner
                     avatarImgS3Key
+                    badges
                   }
                 }
                 nextToken
@@ -104,6 +108,7 @@ export const getEvent = /* GraphQL */ `
                 username
                 owner
                 avatarImgS3Key
+                badges
               }
             }
             nextToken
@@ -145,6 +150,7 @@ export const getEvent = /* GraphQL */ `
             username
             owner
             avatarImgS3Key
+            badges
           }
         }
         nextToken
