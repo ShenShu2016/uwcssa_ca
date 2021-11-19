@@ -78,7 +78,7 @@
         },
         "updateLastReplyAt": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/updateLastReplyAt-6b535632584232744349-build.zip"
+          "s3Key": "amplify-builds/updateLastReplyAt-413349664e522f324f65-build.zip"
         }
       }
     }
