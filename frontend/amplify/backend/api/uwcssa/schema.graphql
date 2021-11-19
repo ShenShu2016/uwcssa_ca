@@ -871,7 +871,6 @@ type WebFeedBack
   )
   @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  like: Boolean!
   rate: Int!
   reason: String
   improvement: String

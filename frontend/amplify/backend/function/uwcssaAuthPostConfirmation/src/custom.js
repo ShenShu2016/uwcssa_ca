@@ -27,7 +27,9 @@ exports.handler = async (event) => {
           L: [
             event.request.userAttributes.email
               .toLowerCase()
-              .includes("@uwindsor.ca") && { S: "uwindsor_shield" },
+              .includes("@uwindsor.ca")
+              ? { S: "uwindsor_shield" }
+              : undefined,
           ],
         },
         sortKey: { S: "SortKey" },

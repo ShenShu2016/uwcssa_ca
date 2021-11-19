@@ -16,7 +16,7 @@ import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
-import uwindsor_shield from "../../../static/svg icons/uwindsor_shield.svg";
+import uwindsor_shield from "../../../static/avatarIcons/uwindsor_shield.svg";
 
 const useStyles = makeStyles({
   root: {

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import Storage from "@aws-amplify/storage";
-import crownsvgrepocom from "../../static/svg icons/crown-svgrepo-com.svg";
+import king from "../../static/avatarIcons/king.png";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-import uwindsor_shield from "../../static/svg icons/uwindsor_shield.svg";
+import uwindsor_shield from "../../static/avatarIcons/uwindsor_shield.svg";
 
 const useStyles = makeStyles({
   avatar: {
@@ -83,9 +83,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
             invisible={!user.badges.includes("king")}
             overlap="circular"
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            badgeContent={
-              <CrownAvatar alt="uwindsor_shield" src={crownsvgrepocom} />
-            }
+            badgeContent={<CrownAvatar alt="uwindsor_shield" src={king} />}
           >
             <Badge
               invisible={!user.badges.includes("uwindsor_shield")}
