@@ -13,7 +13,7 @@ import {
   getForumPostComment,
   getForumSubTopic,
   // getForumTopic,
-  listForumPosts,
+  // listForumPosts,
   listForumSubTopics,
   // listForumTopics,
 } from "../../graphql/queries";
@@ -21,6 +21,7 @@ import {
   getForumPost,
   getForumTopic,
   listForumTopics,
+  listForumPosts,
   forumPostSortByForumPostLastReplyAt,
 } from "../CustomQuery/ForumQueries";
 import API from "@aws-amplify/api";

@@ -63,7 +63,8 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
           boxShadow: 1,
           backgroundColor: "info.main",
           p: 1,
-          m: 1,
+          mx: 1,
+          mt: 3,
           borderRadius: 1,
           textAlign: "center",
           fontSize: "1rem",
@@ -106,7 +107,7 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
         
         这个没有重新fetch的意思啊，forumIndexSubTopic这个组件里面有console.log，开这个组件，就consolelog，关这个组件，就隐藏起来了。
         */}
-        
+
         {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
           return (
             <ForumIndexSubTopic

@@ -236,7 +236,11 @@ export const listForumPosts = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    listForumPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listForumPosts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         title

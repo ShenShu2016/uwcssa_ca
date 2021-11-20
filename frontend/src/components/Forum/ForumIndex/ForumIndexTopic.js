@@ -3,7 +3,7 @@ import React from "react";
 import ForumIndexTopicComponent from "./ForumIndexTopicComponent";
 
 export default function ForumIndexTopic({ forumTopics }) {
-  console.log(forumTopics);
+  // console.log(forumTopics);
   return (
     <div>
       <Box
