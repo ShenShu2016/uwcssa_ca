@@ -131,6 +131,7 @@ export function MarketItemInfo({ marketItem }) {
     marketItemCategory,
     tags,
     // active,
+    updatedAt,
     createdAt,
     user,
     // userID,
@@ -153,7 +154,7 @@ export function MarketItemInfo({ marketItem }) {
         $ {price.length === 0 ? "Price Goes Here" : price}
       </Typography>
       <Typography marginX="1rem" variant="caption" color="gray">
-        {createdAt.length === 0 ? "" : moment(createdAt).fromNow()}
+        更新于: {updatedAt.length === 0 ? "" : moment(updatedAt).fromNow()}
       </Typography>
       <Stack
         justifyContent="center"
@@ -165,7 +166,7 @@ export function MarketItemInfo({ marketItem }) {
           <Button
             component={Link}
             startIcon={<UpdateIcon />}
-            to={`/market/edit/${id}`}
+            to={`/market/edit/item/${id}`}
             variant="outlined"
             color="info"
           >

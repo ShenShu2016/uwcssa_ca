@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import { Link } from "react-router-dom";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -28,6 +29,7 @@ import SwipeViews from "../../components/Market/SwipeViews";
 import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
+import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -90,7 +92,7 @@ export function MarketRentalInfo({ marketItem }) {
   } = marketRentalOptions;
 
   const {
-    // id,
+    id,
     // name,
     // imgS3Keys,
     // title,
@@ -99,6 +101,7 @@ export function MarketRentalInfo({ marketItem }) {
     tags,
     // active,
     createdAt,
+    updatedAt,
     // ByCreatedAt,
     owner,
     marketRentalSaleRent,
@@ -140,7 +143,7 @@ export function MarketRentalInfo({ marketItem }) {
         $ {price.length === 0 ? "Price Goes Here" : price}
       </Typography>
       <Typography marginX="1rem" variant="caption" color="gray">
-        发布日期： {createdAt.length === 0 ? "" : createdAt.slice(0, 10)}
+        更新于: {updatedAt.length === 0 ? "" : moment(updatedAt).fromNow()}
       </Typography>
       <Stack
         justifyContent="center"
@@ -151,7 +154,8 @@ export function MarketRentalInfo({ marketItem }) {
         {currentUser === owner ? (
           <Button
             startIcon={<UpdateIcon />}
-            onClick={() => console.log("clicked!")}
+            component={Link}
+            to={`/market/edit/rental/${id}`}
             variant="outlined"
             color="info"
           >

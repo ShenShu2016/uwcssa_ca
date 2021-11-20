@@ -86,6 +86,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "100px",
     position: "relative",
+    backgroundColor: "rgb(0 0 0 / 20%)",
+    borderRadius: "5px",
     zIndex: "1",
   },
   preview: {
@@ -184,7 +186,7 @@ export default function EditMarketItemDetail() {
   const [imageKeys, setImageKeys] = useState(
     Object.fromEntries([[imgS3Keys, "temp"]])
   );
-  console.log("kanakn", imageKeys);
+
   const [open, setOpen] = useState(false);
 
   const [error, setError] = useState({
@@ -270,8 +272,9 @@ export default function EditMarketItemDetail() {
       location,
     } = marketItemData;
 
-    const createMarketItemInput = {
+    const updatedMarketItem = {
       marketType: "Item",
+      id: id,
       title: title,
       name: title,
       description: description,
@@ -285,7 +288,7 @@ export default function EditMarketItemDetail() {
       userID: marketItem.userID,
       sortKey: "SortKey",
     };
-    // console.log("check!", createMarketItemInput);
+    // console.log("check!", updateMarketItemDetail);
     const canSave = {
       imageKeys,
       title,
@@ -298,7 +301,7 @@ export default function EditMarketItemDetail() {
 
     if (Object.values(canSave).every((item) => item !== "")) {
       const response = await dispatch(
-        updateMarketItemDetail(createMarketItemInput)
+        updateMarketItemDetail(updatedMarketItem)
       );
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
@@ -472,8 +475,12 @@ export default function EditMarketItemDetail() {
                           zIndex="1"
                           borderRadius="5px"
                           sx={{
-                            height: "100px",
-                            width: "100px",
+                            top: "50%",
+                            left: "50%",
+                            position: "absolute",
+                            transform: "translate(-50%,-50%)",
+                            maxHeight: "100px",
+                            maxWidth: "100%",
                           }}
                         />
                         <IconButton
