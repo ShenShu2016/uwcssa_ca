@@ -27,7 +27,7 @@ const InsideLeftLineTag = () => {
 
   return (
     <div className={classes.root}>
-      <Box className={classes.tag}>往期活动</Box>
+      <Box className={classes.tag}>Finished</Box>
     </div>
   );
 };
