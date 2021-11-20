@@ -1,4 +1,12 @@
-import { Box, Button, Grid, Skeleton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Skeleton,
+  Typography,
+  // Divider,
+  Paper,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,58 +14,82 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // import ForumIndexSportLight from "./ForumIndexSportLight";
 import ForumIndexTopic from "./ForumIndexTopic";
 import { Link } from "react-router-dom";
-import { fetchForumTopics } from "../../../redux/reducers/forumSlice";
-import { makeStyles } from "@mui/styles";
+import {
+  fetchForumTopics,
+  fetchForumPosts,
+} from "../../../redux/reducers/forumSlice";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  forumTopic: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-}));
 export default function ForumIndexMain() {
   const dispatch = useDispatch();
-  const { forumTopics, fetchForumTopicsStatus } = useSelector(
-    (state) => state.forum
-  );
+  const {
+    forumTopics,
+    fetchForumTopicsStatus,
+    forumPosts,
+    fetchForumPostsStatus,
+  } = useSelector((state) => state.forum);
 
   useEffect(() => {
     if (fetchForumTopicsStatus === "idle" || undefined) {
       dispatch(fetchForumTopics());
     }
-  }, [dispatch, fetchForumTopicsStatus]);
-  // console.log("forumTopics", forumTopics);
-
-  const classes = useStyles();
+    if (fetchForumPostsStatus === "idle" || undefined) {
+      dispatch(fetchForumPosts());
+    }
+  }, [dispatch, fetchForumTopicsStatus,fetchForumPostsStatus]);
+  console.log("forumPosts", forumPosts);
   return (
-    <div className={classes.root}>
-      <Box sx={{ padding: "2rem", width: "100%" }}>
+    <div>
+      <Box sx={{ p: 1, width: "100%", backgroundColor: "grey" }}>
         <Box
-          sx={{ fontWeight: 400, marginTop: "0.8rem", marginBottom: "1rem" }}
+          sx={{
+            textAlign: "center",
+            fontWeight: 400,
+            mt: 2,
+            mb: 1,
+          }}
         >
-          <Typography variant="h5">UWCSSA 论坛</Typography>
-          <Typography id="back-to-top-anchor" />
+          <Typography
+            variant="h5"
+            color="text.primary"
+            component={Link}
+            to={`/`}
+            sx={{
+              textDecorationLine: "none",
+              "&: hover": { color: "primary.main" },
+            }}
+          >
+            UWCSSA
+          </Typography>
+          <Typography
+            variant="h5"
+            color="text.primary"
+            component={Link}
+            to={`/forum`}
+            sx={{
+              textDecorationLine: "none",
+              "&: hover": { color: "primary.main" },
+            }}
+          >
+            论坛
+          </Typography>
         </Box>
+        {/* <Divider /> */}
         {/* forum type link */}
         {Object.keys(forumTopics).length === 0 ? (
           <Skeleton
-            sx={{ mt: "4rem" }}
+            sx={{ mt: 2 }}
             variant="text"
             animation="wave"
             width={1080}
             height={28}
           />
         ) : (
-          <Box sx={{ mt: "4rem" }}>
-            {/* 后期动态改变 type: FourmTopic */}
-            <Grid container spacing={0} className={classes.forumTopic}>
+          <Paper elevation={0} sx={{ mt: 2 }}>
+            <Grid
+              container
+              spacing={0}
+              sx={{ justifyContent: "space-between" }}
+            >
               {forumTopics.map((forumTopic) => {
                 return (
                   <div key={forumTopic.id}>
@@ -78,7 +110,7 @@ export default function ForumIndexMain() {
                 );
               })}
             </Grid>
-          </Box>
+          </Paper>
         )}
         {/* <ForumIndexSportLight /> */}
         <ForumIndexTopic forumTopics={forumTopics} />
