@@ -21,22 +21,19 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   actionArea: {
-    maxWidth: 300,
+    maxWidth: 330,
     minWidth: 256,
-    borderRadius: 16,
+    borderRadius: "16px",
     transition: "0.2s",
     "&:hover": {
       transform: "scale(1.1)",
     },
   },
   cardDetails: {
-    maxWidth: 300,
+    maxWidth: 330,
     minWidth: 256,
-    borderRadius: 16,
+    borderRadius: "16px",
     boxShadow: "none",
-    "&:hover": {
-      boxShadow: "0 6px 12px 0 #757ce8",
-    },
   },
   cardMedia: {
     display: "block",
