@@ -58,6 +58,7 @@ function a11yProps(index) {
 
 export default function EventBody({ event }) {
   const [value, setValue] = useState(0);
+  const { userAuth } = useSelector((state) => state);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -70,7 +71,6 @@ export default function EventBody({ event }) {
     title,
     startDate,
     endDate,
-    eventStatus,
     location,
     content,
     backGroundImgS3Key,
@@ -285,15 +285,23 @@ export default function EventBody({ event }) {
                                 {topic.name}
                               </Typography>
                             ) : null}
-                            {eventStatus ? (
+                            {endDate > moment().format() ? (
                               <Typography variant="body2" gutterBottom>
                                 <AccessTimeIcon
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                {eventStatus}
+                                ComingSoon
                               </Typography>
-                            ) : null}
+                            ) : (
+                              <Typography variant="body2" gutterBottom>
+                                <AccessTimeIcon
+                                  color="action"
+                                  sx={{ float: "left", marginRight: "10px" }}
+                                />
+                                InProgress
+                              </Typography>
+                            )}
                             <Typography
                               variant="body2"
                               sx={{ marginTop: "1rem" }}
@@ -314,7 +322,7 @@ export default function EventBody({ event }) {
                             >
                               <b>Participants</b>
                             </Typography>
-                            {eventParticipants.items.length !== 0 ? (
+                            {eventParticipants.items.length === 0 ? (
                               <Typography
                                 variant="h6"
                                 sx={{ textAlign: "center" }}
@@ -328,21 +336,39 @@ export default function EventBody({ event }) {
                                 sx={{ textAlign: "center" }}
                                 gutterBottom
                               >
-                                {eventParticipants.items.length} Going
+                                {eventParticipants.items.reduce(function (
+                                  sum,
+                                  items
+                                ) {
+                                  return sum + items.numberOfPeople;
+                                },
+                                0)}{" "}
+                                Going
                               </Typography>
                             )}
                             {startDate > moment().format() ? (
                               <div>
                                 {userInfo.isAuthenticated ? (
-                                  <CardActions>
-                                    <Button
-                                      size="small"
-                                      component={Link}
-                                      to={`/event/${event.id}/eventSignUp`}
-                                    >
-                                      报名
-                                    </Button>
-                                  </CardActions>
+                                  <div>
+                                    {event.eventParticipants.items.some(
+                                      (item) =>
+                                        item.userID === userAuth.user.username
+                                    ) === false ? (
+                                      <CardActions>
+                                        <Button
+                                          size="small"
+                                          component={Link}
+                                          to={`/event/${event.id}/eventSignUp`}
+                                        >
+                                          报名
+                                        </Button>
+                                      </CardActions>
+                                    ) : (
+                                      <Typography variant="subtitle1">
+                                        你已经报过名啦~🥳
+                                      </Typography>
+                                    )}
+                                  </div>
                                 ) : (
                                   <SignUpRequest />
                                 )}

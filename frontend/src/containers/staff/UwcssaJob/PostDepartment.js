@@ -45,7 +45,7 @@ export default function PostDepartment(props) {
   const [departmentData, setDepartmentData] = useState({
     name: "",
     introduction: "",
-    email: "",
+    email: undefined,
     leader: "",
   });
 

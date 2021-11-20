@@ -59,7 +59,7 @@ export default function ApplyJob(props) {
     job: "",
     applyName: userAuth.user.username,
     applyEmail: userAuth.user.attributes.email,
-    applyPhone: "",
+    applyPhone: undefined,
     message: "",
   });
 

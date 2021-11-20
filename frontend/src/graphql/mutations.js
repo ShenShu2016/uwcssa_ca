@@ -44,7 +44,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -63,7 +62,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -201,7 +199,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -239,7 +236,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -280,7 +276,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -341,7 +336,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -392,7 +386,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -444,7 +437,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJobs {
@@ -486,7 +478,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         department {
@@ -528,7 +519,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJob {
@@ -572,7 +562,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopics {
@@ -602,7 +591,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumTopic {
@@ -640,7 +628,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -691,7 +678,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -710,7 +696,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -797,7 +782,6 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         owner
@@ -829,12 +813,10 @@ export const createUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
       }
       updatedAt
-      uWindsorEmail
       badges
       userEducations {
         items {
@@ -972,7 +954,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -991,7 +972,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -1129,7 +1109,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -1167,7 +1146,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -1208,7 +1186,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -1269,7 +1246,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -1320,7 +1296,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -1372,7 +1347,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJobs {
@@ -1414,7 +1388,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         department {
@@ -1456,7 +1429,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJob {
@@ -1500,7 +1472,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopics {
@@ -1530,7 +1501,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumTopic {
@@ -1568,7 +1538,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -1619,7 +1588,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -1638,7 +1606,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -1725,7 +1692,6 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         owner
@@ -1757,12 +1723,10 @@ export const updateUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
       }
       updatedAt
-      uWindsorEmail
       badges
       userEducations {
         items {
@@ -1900,7 +1864,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -1919,7 +1882,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -2057,7 +2019,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -2095,7 +2056,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -2136,7 +2096,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -2197,7 +2156,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -2248,7 +2206,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -2300,7 +2257,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJobs {
@@ -2342,7 +2298,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         department {
@@ -2384,7 +2339,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJob {
@@ -2428,7 +2382,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopics {
@@ -2458,7 +2411,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumTopic {
@@ -2496,7 +2448,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -2547,7 +2498,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -2566,7 +2516,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -2653,7 +2602,6 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         owner
@@ -2685,12 +2633,10 @@ export const deleteUser = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
       }
       updatedAt
-      uWindsorEmail
       badges
       userEducations {
         items {
@@ -3027,7 +2973,6 @@ export const createUserEducation = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -3294,7 +3239,6 @@ export const updateUserEducation = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -3561,7 +3505,6 @@ export const deleteUserEducation = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -3829,7 +3772,6 @@ export const createUserExperience = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -4097,7 +4039,6 @@ export const updateUserExperience = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -4365,7 +4306,6 @@ export const deleteUserExperience = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -4626,7 +4566,6 @@ export const createTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -4927,7 +4866,6 @@ export const updateTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -5228,7 +5166,6 @@ export const deleteTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -5535,7 +5472,6 @@ export const createArticle = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -5578,7 +5514,6 @@ export const createArticle = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -5858,7 +5793,6 @@ export const updateArticle = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -5901,7 +5835,6 @@ export const updateArticle = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -6181,7 +6114,6 @@ export const deleteArticle = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -6224,7 +6156,6 @@ export const deleteArticle = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -6500,7 +6431,6 @@ export const createArticleComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -6549,7 +6479,6 @@ export const createArticleComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -6833,7 +6762,6 @@ export const updateArticleComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -6882,7 +6810,6 @@ export const updateArticleComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -7166,7 +7093,6 @@ export const deleteArticleComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -7215,7 +7141,6 @@ export const deleteArticleComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -7499,7 +7424,6 @@ export const createArticleSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -7544,7 +7468,6 @@ export const createArticleSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -7822,7 +7745,6 @@ export const updateArticleSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -7867,7 +7789,6 @@ export const updateArticleSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -8145,7 +8066,6 @@ export const deleteArticleSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -8190,7 +8110,6 @@ export const deleteArticleSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -8481,7 +8400,6 @@ export const createEvent = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -8524,7 +8442,6 @@ export const createEvent = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -8833,7 +8750,6 @@ export const updateEvent = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -8876,7 +8792,6 @@ export const updateEvent = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -9185,7 +9100,6 @@ export const deleteEvent = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -9228,7 +9142,6 @@ export const deleteEvent = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articles {
@@ -9524,7 +9437,6 @@ export const createEventComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -9582,7 +9494,6 @@ export const createEventComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -9869,7 +9780,6 @@ export const updateEventComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -9927,7 +9837,6 @@ export const updateEventComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -10214,7 +10123,6 @@ export const deleteEventComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -10272,7 +10180,6 @@ export const deleteEventComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -10559,7 +10466,6 @@ export const createEventSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -10604,7 +10510,6 @@ export const createEventSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -10891,7 +10796,6 @@ export const updateEventSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -10936,7 +10840,6 @@ export const updateEventSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -11223,7 +11126,6 @@ export const deleteEventSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -11268,7 +11170,6 @@ export const deleteEventSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -11562,7 +11463,6 @@ export const createEventParticipant = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -11620,7 +11520,6 @@ export const createEventParticipant = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -11889,7 +11788,6 @@ export const updateEventParticipant = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -11947,7 +11845,6 @@ export const updateEventParticipant = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -12216,7 +12113,6 @@ export const deleteEventParticipant = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -12274,7 +12170,6 @@ export const deleteEventParticipant = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -12537,7 +12432,6 @@ export const createDepartment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -12820,7 +12714,6 @@ export const updateDepartment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -13103,7 +12996,6 @@ export const deleteDepartment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -13410,7 +13302,6 @@ export const createUwcssaJob = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -13456,7 +13347,6 @@ export const createUwcssaJob = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJobs {
@@ -13729,7 +13619,6 @@ export const updateUwcssaJob = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -13775,7 +13664,6 @@ export const updateUwcssaJob = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJobs {
@@ -14048,7 +13936,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -14094,7 +13981,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         uwcssaJobs {
@@ -14346,7 +14232,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -14402,7 +14287,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         department {
@@ -14662,7 +14546,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -14718,7 +14601,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         department {
@@ -14978,7 +14860,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -15034,7 +14915,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         department {
@@ -15288,7 +15168,6 @@ export const createForumTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -15559,7 +15438,6 @@ export const updateForumTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -15830,7 +15708,6 @@ export const deleteForumTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -16102,7 +15979,6 @@ export const createForumSubTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -16145,7 +16021,6 @@ export const createForumSubTopic = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopics {
@@ -16409,7 +16284,6 @@ export const updateForumSubTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -16452,7 +16326,6 @@ export const updateForumSubTopic = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopics {
@@ -16716,7 +16589,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -16759,7 +16631,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopics {
@@ -17028,7 +16899,6 @@ export const createForumPost = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -17072,7 +16942,6 @@ export const createForumPost = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumTopic {
@@ -17372,7 +17241,6 @@ export const updateForumPost = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -17416,7 +17284,6 @@ export const updateForumPost = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumTopic {
@@ -17716,7 +17583,6 @@ export const deleteForumPost = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -17760,7 +17626,6 @@ export const deleteForumPost = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumTopic {
@@ -18056,7 +17921,6 @@ export const createForumPostComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -18105,7 +17969,6 @@ export const createForumPostComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -18396,7 +18259,6 @@ export const updateForumPostComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -18445,7 +18307,6 @@ export const updateForumPostComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -18736,7 +18597,6 @@ export const deleteForumPostComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -18785,7 +18645,6 @@ export const deleteForumPostComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -19078,7 +18937,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -19324,7 +19182,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -19373,7 +19230,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -19419,7 +19275,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -19700,7 +19555,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -19946,7 +19800,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -19995,7 +19848,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -20041,7 +19893,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -20322,7 +20173,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -20568,7 +20418,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -20617,7 +20466,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -20663,7 +20511,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -20942,7 +20789,6 @@ export const createMarketUserInfo = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -21205,7 +21051,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -21468,7 +21313,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -21762,7 +21606,6 @@ export const createMarketItem = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -22056,7 +21899,6 @@ export const updateMarketItem = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -22350,7 +22192,6 @@ export const deleteMarketItem = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -22616,7 +22457,6 @@ export const createFoundingMember = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -22881,7 +22721,6 @@ export const updateFoundingMember = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -23146,7 +22985,6 @@ export const deleteFoundingMember = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -23407,7 +23245,6 @@ export const createLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -23653,7 +23490,6 @@ export const createLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -23702,7 +23538,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -23743,7 +23578,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -23791,7 +23625,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articleComment {
@@ -23846,7 +23679,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -23890,7 +23722,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -23947,7 +23778,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         eventComment {
@@ -23993,7 +23823,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -24039,7 +23868,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -24090,7 +23918,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -24109,7 +23936,6 @@ export const createLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -24382,7 +24208,6 @@ export const updateLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -24628,7 +24453,6 @@ export const updateLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -24677,7 +24501,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -24718,7 +24541,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -24766,7 +24588,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articleComment {
@@ -24821,7 +24642,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -24865,7 +24685,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -24922,7 +24741,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         eventComment {
@@ -24968,7 +24786,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -25014,7 +24831,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -25065,7 +24881,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -25084,7 +24899,6 @@ export const updateLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -25357,7 +25171,6 @@ export const deleteLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -25603,7 +25416,6 @@ export const deleteLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -25652,7 +25464,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -25693,7 +25504,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         article {
@@ -25741,7 +25551,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         articleComment {
@@ -25796,7 +25605,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         topic {
@@ -25840,7 +25648,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         event {
@@ -25897,7 +25704,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         eventComment {
@@ -25943,7 +25749,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumSubTopic {
@@ -25989,7 +25794,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -26040,7 +25844,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         user {
@@ -26059,7 +25862,6 @@ export const deleteLike = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
         forumPost {
@@ -26333,7 +26135,6 @@ export const createWebFeedBack = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -26596,7 +26397,6 @@ export const updateWebFeedBack = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken
@@ -26859,7 +26659,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        uWindsorEmail
         badges
         userEducations {
           nextToken

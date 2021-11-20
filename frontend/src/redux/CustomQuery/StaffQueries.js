@@ -52,7 +52,7 @@ export const eventSortBySortKey = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         topic {

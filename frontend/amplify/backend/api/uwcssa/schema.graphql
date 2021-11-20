@@ -15,7 +15,7 @@ type User
   ) {
   id: ID!
   username: String!
-  email: String!
+  email: AWSEmail!
   owner: String!
   firstName: String
   lastName: String
@@ -27,15 +27,15 @@ type User
   github: String
   sortKey: SortKey!
   createdAt: AWSDateTime!
-  uWindsorEmail: String
-    @auth(
-      rules: [
-        { allow: owner, operations: [read] }
-        { allow: groups, groups: ["admin"] }
-        { allow: private, operations: [read] }
-        { allow: public, operations: [read], provider: iam }
-      ]
-    )
+  # uWindsorEmail: String
+  #   @auth(
+  #     rules: [
+  #       { allow: owner, operations: [read] }
+  #       { allow: groups, groups: ["admin"] }
+  #       { allow: private, operations: [read] }
+  #       { allow: public, operations: [read], provider: iam }
+  #     ]
+  #   )
   badges: [String]
     @auth(
       rules: [
@@ -87,7 +87,7 @@ type UserEducation
   fieldOfStudy: String
   startDate: AWSDateTime
   endDate: AWSDateTime
-  grade: Int
+  grade: Float
   description: String
   userID: ID!
   user: User! @connection(fields: ["userID"])
@@ -351,9 +351,9 @@ type EventParticipant
   @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
   id: ID!
   name: String!
-  email: String!
+  email: AWSEmail!
   address: String
-  phone: String
+  phone: AWSPhone
   weChat: String
   message: String
   numberOfPeople: Int!
@@ -384,7 +384,7 @@ type Department
   id: ID!
   name: String!
   introduction: String
-  email: String
+  email: AWSEmail
   leader: String
   uwcssaJobs: [UwcssaJob] @connection(keyName: "byDepartment", fields: ["id"])
   userID: ID!
@@ -442,9 +442,9 @@ type UwcssaJobResume
   @key(name: "byUwcssaJob", fields: ["uwcssaJobID", "createdAt"]) {
   id: ID!
   name: String!
-  email: String!
+  email: AWSEmail!
   resumeFileS3Key: String
-  phone: String!
+  phone: AWSPhone!
   message: String
   uwcssaJobResumeStatus: UwcssaJobResumeStatus!
   createdAt: AWSDateTime!
@@ -614,9 +614,9 @@ type MarketUserInfo
   )
   @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  phone: String
+  phone: AWSPhone
   weChat: String
-  email: String
+  email: AWSEmail
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -681,9 +681,9 @@ type MarketItem
   heatingType: HeatingType
   catFriendly: Boolean
   dogFriendly: Boolean
-  contactPhone: String
+  contactPhone: AWSPhone
   contactWeChat: String
-  contactEmail: String
+  contactEmail: AWSEmail
   sortKey: SortKey!
   active: Boolean!
   createdAt: AWSDateTime!
@@ -857,7 +857,7 @@ type WebFeedBack
   )
   @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  rate: Int!
+  rate: Float!
   reason: String
   improvement: String
   userID: ID!
