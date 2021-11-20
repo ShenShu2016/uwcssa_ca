@@ -11,11 +11,15 @@ import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { grey } from "@mui/material/colors";
 import InsideLeftLineTag from "./tag";
+import LocationOn from "@mui/icons-material/LocationOn";
 
 const useStyles = makeStyles((theme) => ({
   cardDetails: {
     width: 300,
     borderRadius: 16,
+    backgroundColor: "transparent",
+    overflow: "initial",
+    height: 300,
   },
   cardMedia: {
     display: "block",
@@ -47,13 +51,25 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
     letterSpacing: "1px",
   },
+  content: {
+    position: "relative",
+    padding: 24,
+    margin: "-24% 16px 0",
+    backgroundColor: "#fff",
+    borderRadius: 4,
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+  },
+  locationIcon: {
+    marginRight: 4,
+    fontSize: 18,
+  },
 }));
 
 export default function PastEvent({ event }) {
   const classes = useStyles();
   const [posterURL, setPosterURL] = useState(null);
   // console.log("event", event);
-  const { content, title, posterImgS3Key, location, startDate, topic } = event;
+  const { title, startDate, location, content, posterImgS3Key } = event;
 
   useEffect(() => {
     const getPoster = async () => {
@@ -89,7 +105,7 @@ export default function PastEvent({ event }) {
       key={event.title}
       sx={{ marginBottom: "1rem" }}
     >
-      <Card container className={classes.cardDetails}>
+      <Card className={classes.cardDetails} elevation={0}>
         <Box sx={{ position: "relative" }}>
           <CardMedia
             component="img"
@@ -107,59 +123,92 @@ export default function PastEvent({ event }) {
           >
             <InsideLeftLineTag />
           </Box>
-        </Box>
-        <CardContent sx={{ opacity: 0.6 }}>
-          <Typography variant="subtitle2" gutterBottom>
-            时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-            {startDate.slice(11, 16)}
-          </Typography>
-          <Typography
-            variant="subtitle2"
-            color="primary"
-            gutterBottom
-          ></Typography>
-          <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
+
+          <CardContent className={classes.content}>
+            <Typography variant="subtitle2" gutterBottom>
+              时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
+              {startDate.slice(11, 16)}
+            </Typography>
             <Typography
-              variant="subtitle1"
-              style={{
-                wordBreak: "break-word",
-                overflow: "hidden",
-              }}
+              variant="subtitle2"
+              color="primary"
               gutterBottom
-            >
-              <b>{title}</b>
-            </Typography>
-          </Box>
+            ></Typography>
+            <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
+              <Typography
+                variant="subtitle1"
+                style={{
+                  wordBreak: "break-word",
+                  overflow: "hidden",
+                }}
+                gutterBottom
+              >
+                <b>{title}</b>
+              </Typography>
+            </Box>
 
-          {location ? (
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              地址： {location}
-            </Typography>
-          ) : (
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              地址： 无
-            </Typography>
-          )}
-          {topic.name ? (
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              类别： {topic.name}
-            </Typography>
-          ) : (
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-              类别： 无
-            </Typography>
-          )}
-
-          <Box sx={{ overflow: "hidden", height: "30px" }}>
-            <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-              <Grid item xs zeroMinWidth>
-                <Typography variant="body2" color="text.secondary" noWrap>
-                  {content}
+            {location ? (
+              <Box
+                color={"grey.500"}
+                display={"flex"}
+                alignItems={"center"}
+                mb={1}
+              >
+                <LocationOn />
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  {location}
                 </Typography>
+              </Box>
+            ) : (
+              <Box
+                color={"grey.500"}
+                display={"flex"}
+                alignItems={"center"}
+                mb={1}
+              >
+                <LocationOn />
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  无
+                </Typography>
+              </Box>
+            )}
+            {/* {topic.name ? (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                类别： {topic.name}
+              </Typography>
+            ) : (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                类别： 无
+              </Typography>
+            )} */}
+
+            <Box sx={{ overflow: "hidden", height: "30px" }}>
+              <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                <Grid item xs zeroMinWidth>
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    {content}
+                  </Typography>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        </CardContent>
+            </Box>
+          </CardContent>
+        </Box>
       </Card>
     </Grid>
   );
