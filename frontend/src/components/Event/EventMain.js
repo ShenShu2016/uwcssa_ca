@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 // import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
+import moment from "moment";
 // import { useSelector } from "react-redux";
 
 // import LinesEllipsis from "react-lines-ellipsis";
@@ -56,7 +57,34 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "2.5rem",
     },
   },
+  root: {
+    maxWidth: "110px",
+    minWidth: "100px",
+    padding: 0,
+  },
+  tag: {
+    display: "inline-block",
+    backgroundColor: "#3f50b5",
+    color: "#fff",
+    marginBottom: "0.5rem",
+    borderRadius: "0 3px 3px 0",
+    background: "#FFFFFF",
+    // borderLeft: `3px solid #f44336`,
+    fontWeight: "bold",
+    padding: "8px 16px",
+    // margin: spacing(0.5),
+  },
 }));
+
+const EventTag = ({ label }) => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Box className={classes.tag}>{label}</Box>
+    </div>
+  );
+};
 
 export default function EventMain({ event }) {
   const classes = useStyles();
@@ -69,7 +97,7 @@ export default function EventMain({ event }) {
     posterImgS3Key,
     location,
     startDate,
-    eventStatus,
+    endDate,
     topic,
   } = event;
 
@@ -113,64 +141,85 @@ export default function EventMain({ event }) {
         to={`/event/${id}`}
       >
         <Card className={classes.cardDetails}>
-          <CardMedia component="img" height="194" image={posterURL} />
-          <CardContent>
-            <Typography variant="subtitle2" gutterBottom>
-              时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-              {startDate.slice(11, 16)}
-            </Typography>
-            <Typography variant="subtitle2" color="primary" gutterBottom>
-              {eventStatus}
-            </Typography>
-            <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
-              <Typography
-                variant="subtitle1"
-                style={{
-                  wordBreak: "break-word",
-                  overflow: "hidden",
+          <Box sx={{ position: "relative" }}>
+            <CardMedia component="img" height="194" image={posterURL} />
+            {endDate > moment().format() ? (
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
                 }}
-                gutterBottom
               >
-                <b>{title}</b>
-              </Typography>
-            </Box>
-
-            {location ? (
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                gutterBottom
-              >
-                地址： {location}
-              </Typography>
+                <EventTag label={"ComingSoon"} />
+              </Box>
             ) : (
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                gutterBottom
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                }}
               >
-                地址： 无
-              </Typography>
+                <EventTag label={"InProgress"} />
+              </Box>
             )}
-            {topic.name ? (
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                gutterBottom
-              >
-                类别： {topic.name}
+            <CardContent>
+              <Typography variant="subtitle2" gutterBottom>
+                时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
+                {startDate.slice(11, 16)}
               </Typography>
-            ) : (
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                gutterBottom
-              >
-                类别： 无
-              </Typography>
-            )}
+              <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
+                <Typography
+                  variant="subtitle1"
+                  style={{
+                    wordBreak: "break-word",
+                    overflow: "hidden",
+                  }}
+                  gutterBottom
+                >
+                  <b>{title}</b>
+                </Typography>
+              </Box>
 
-            {/* 
+              {location ? (
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  地址： {location}
+                </Typography>
+              ) : (
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  地址： 无
+                </Typography>
+              )}
+              {topic.name ? (
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  类别： {topic.name}
+                </Typography>
+              ) : (
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  类别： 无
+                </Typography>
+              )}
+
+              {/* 
             <Box
               style={{
                 height: "40px",
@@ -189,17 +238,17 @@ export default function EventMain({ event }) {
               </Typography>
             </Box> */}
 
-            <Box sx={{ overflow: "hidden", height: "30px" }}>
-              <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                <Grid item xs zeroMinWidth>
-                  <Typography variant="body2" color="text.secondary" noWrap>
-                    {content}
-                  </Typography>
+              <Box sx={{ overflow: "hidden", height: "30px" }}>
+                <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body2" color="text.secondary" noWrap>
+                      {content}
+                    </Typography>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Box>
-          </CardContent>
-          {/* <CardActions>
+              </Box>
+            </CardContent>
+            {/* <CardActions>
           {userInfo.isAuthenticated ? (
             <Button
               size="small"
@@ -212,6 +261,7 @@ export default function EventMain({ event }) {
             <SignUpRequest />
           )}
         </CardActions> */}
+          </Box>
         </Card>
       </CardActionArea>
     </Grid>
