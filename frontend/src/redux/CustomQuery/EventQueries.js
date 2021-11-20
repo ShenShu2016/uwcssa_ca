@@ -177,7 +177,6 @@ export const getEvent = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
           badges
         }
       }

@@ -1,19 +1,20 @@
+import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import { Link, useParams } from "react-router-dom";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import GroupIcon from "@mui/icons-material/Group";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
-import { useHistory } from "react-router";
 import eventImg from "../../static/event.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { useTitle } from "../../Hooks/useTitle";
+import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/reducers/eventSlice";
+import { useHistory } from "react-router";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -44,7 +45,7 @@ export default function Individual() {
     name: "",
     email: "",
     address: "",
-    phone: "",
+    phone: undefined,
     weChat: "",
     message: "",
     numberOfPeople: "",

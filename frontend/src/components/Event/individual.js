@@ -9,10 +9,11 @@ import {
 import { Link, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import eventImg from "../../static/event.jpg";
+
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
+import eventImg from "../../static/event.jpg";
 import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/reducers/eventSlice";
 import { useHistory } from "react-router";
@@ -48,9 +49,9 @@ export default function Individual() {
 
   const [eventParticipantData, setEventParticipantData] = useState({
     name: "",
-    email: "",
+    email: undefined,
     address: "",
-    phone: "",
+    phone: undefined,
     weChat: "",
     message: "",
     numberOfPeople: "",

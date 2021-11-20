@@ -33,7 +33,7 @@ export const getForumPost = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         forumTopic {
@@ -238,11 +238,7 @@ export const listForumPosts = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    listForumPosts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listForumPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         title
@@ -271,7 +267,7 @@ export const listForumPosts = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         forumSubTopic {
@@ -343,7 +339,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         forumSubTopic {

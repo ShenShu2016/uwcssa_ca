@@ -54,7 +54,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         owner
@@ -112,7 +112,7 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
           backGroundImgS3Key
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         owner
@@ -174,7 +174,7 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         owner
@@ -240,7 +240,7 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-          uWindsorEmail
+
           badges
         }
         owner

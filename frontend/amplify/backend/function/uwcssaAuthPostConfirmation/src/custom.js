@@ -33,7 +33,6 @@ exports.handler = async (event) => {
           ],
         },
         sortKey: { S: "SortKey" },
-        uWindsorEmail: { S: "" },
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },
       },
