@@ -25,6 +25,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import FlagIcon from "@mui/icons-material/Flag";
 import TopicIcon from "@mui/icons-material/Topic";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import moment from "moment";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -330,18 +331,26 @@ export default function EventBody({ event }) {
                                 {eventParticipants.items.length} Going
                               </Typography>
                             )}
-                            {userInfo.isAuthenticated ? (
-                              <CardActions>
-                                <Button
-                                  size="small"
-                                  component={Link}
-                                  to={`/event/${event.id}/eventSignUp`}
-                                >
-                                  报名
-                                </Button>
-                              </CardActions>
+                            {startDate > moment().format() ? (
+                              <div>
+                                {userInfo.isAuthenticated ? (
+                                  <CardActions>
+                                    <Button
+                                      size="small"
+                                      component={Link}
+                                      to={`/event/${event.id}/eventSignUp`}
+                                    >
+                                      报名
+                                    </Button>
+                                  </CardActions>
+                                ) : (
+                                  <SignUpRequest />
+                                )}
+                              </div>
                             ) : (
-                              <SignUpRequest />
+                              <Typography variant="subtitle1">
+                                报名结束啦~🥳
+                              </Typography>
                             )}
                           </CardContent>
                         </Card>

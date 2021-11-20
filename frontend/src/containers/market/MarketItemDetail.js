@@ -19,6 +19,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Link } from "react-router-dom";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -81,6 +88,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function SimpleDialog(props) {
+  const classes = useStyles();
+  const { open, user, onClose } = props;
+
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Seller Contact Infos</DialogTitle>
+      <List sx={{ pt: 0 }}>
+        <ListItem button>
+          <ListItemAvatar>
+            <CustomAvatar
+              className={classes.avatar}
+              component={true}
+              user={user}
+            ></CustomAvatar>
+          </ListItemAvatar>
+          <ListItemText primary={user.email} />
+        </ListItem>
+      </List>
+    </Dialog>
+  );
+}
+
 export function MarketItemInfo({ marketItem }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
@@ -88,9 +118,9 @@ export function MarketItemInfo({ marketItem }) {
     marketItemConditionList: Conditions,
     marketItemCategoryList: Category,
   } = marketItemOptions;
-
+  const [open, setOpen] = useState(false);
   const {
-    // id,
+    id,
     // name,
     // imgS3Keys,
     title,
@@ -101,6 +131,7 @@ export function MarketItemInfo({ marketItem }) {
     marketItemCategory,
     tags,
     // active,
+    updatedAt,
     createdAt,
     user,
     // userID,
@@ -123,7 +154,7 @@ export function MarketItemInfo({ marketItem }) {
         $ {price.length === 0 ? "Price Goes Here" : price}
       </Typography>
       <Typography marginX="1rem" variant="caption" color="gray">
-        {createdAt.length === 0 ? "" : moment(createdAt).fromNow()}
+        更新于: {updatedAt.length === 0 ? "" : moment(updatedAt).fromNow()}
       </Typography>
       <Stack
         justifyContent="center"
@@ -133,8 +164,9 @@ export function MarketItemInfo({ marketItem }) {
       >
         {currentUser === owner ? (
           <Button
+            component={Link}
             startIcon={<UpdateIcon />}
-            onClick={() => console.log("clicked!")}
+            to={`/market/edit/item/${id}`}
             variant="outlined"
             color="info"
           >
@@ -143,13 +175,14 @@ export function MarketItemInfo({ marketItem }) {
         ) : (
           <Button
             startIcon={<MessageIcon />}
-            onClick={() => console.log("clicked!")}
+            onClick={() => setOpen(true)}
             variant="outlined"
             color="info"
           >
             Contact
           </Button>
         )}
+        <SimpleDialog open={open} user={user} onClose={() => setOpen(false)} />
         <Button
           startIcon={<BookmarksIcon />}
           onClick={() => console.log("clicked!")}

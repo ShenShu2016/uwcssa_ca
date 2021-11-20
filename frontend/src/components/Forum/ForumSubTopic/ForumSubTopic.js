@@ -1,4 +1,4 @@
-import { Grid, Skeleton } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   removeSelectedForumSubTopic,
@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ForumAdSide from "../ForumAdSide";
 import ForumSubTopicMain from "./ForumSubTopicMain";
 import ForumSubTopicPosts from "./ForumSubTopicPosts";
-import OpenIconSpeedDial from "../OpenIconSpeedDial";
+// import OpenIconSpeedDial from "../OpenIconSpeedDial";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/system";
 
@@ -37,39 +37,51 @@ export default function ForumSubTopic() {
   return (
     <Box
       sx={{
-        width: "100%",
+        display: "flex",
+        margin: "auto",
+        maxWidth: "100%",
+        paddingInline: { xs: 0, sm: "1rem" },
+        flexDirection: { xs: "column", sm: "row" },
+        bgcolor: "grey.50",
       }}
     >
-      <Grid container spacing={0}>
-        <Grid
-          item
-          xs={11}
-          sm={10}
-          md={9}
-          lg={9}
-          xl={9}
-          sx={{
-            bgcolor: "grey.200",
-          }}
-        >
-          {Object.keys(forumSubTopic).length === 0 ? (
-            <Skeleton variant="rectangular" width={210} height={118} />
-          ) : (
-            <ForumSubTopicMain forumSubTopic={forumSubTopic} />
-          )}
-          {Object.keys(forumSubTopicPostsLastReply).length === 0 ? (
-            <Skeleton variant="rectangular" width={210} height={118} />
-          ) : (
-            <ForumSubTopicPosts posts={forumSubTopicPostsLastReply} />
-          )}
-        </Grid>
-        <Grid item sm={1} md={2}>
-          <ForumAdSide />
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
+      <Box
+        sx={{
+          maxWidth: "1300px",
+          width: "100%",
+        }}
+      >
+        {Object.keys(forumSubTopic).length === 0 ? (
+          <Skeleton
+            variant="rectangular"
+            width={880}
+            height={220}
+            sx={{ m: 4 }}
+          />
+        ) : (
+          <ForumSubTopicMain forumSubTopic={forumSubTopic} />
+        )}
+        {Object.keys(forumSubTopicPostsLastReply).length === 0 ? (
+          <Skeleton
+            variant="rectangular"
+            width={880}
+            height={118}
+            sx={{ m: 5 }}
+          />
+        ) : (
+          <ForumSubTopicPosts posts={forumSubTopicPostsLastReply} />
+        )}
+      </Box>
+      <Box
+        sx={{
+          width: 220,
+        }}
+      >
+        <ForumAdSide />
+      </Box>
+      {/* <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <OpenIconSpeedDial />
-        </Grid>
-      </Grid>
+        </Grid> */}
     </Box>
   );
 }

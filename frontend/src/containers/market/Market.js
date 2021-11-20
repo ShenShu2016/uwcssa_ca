@@ -1,6 +1,9 @@
 import { Route, Switch } from "react-router-dom";
 
 import { Box } from "@mui/material";
+import EditMarketItemDetail from "./EditMarketItemDetail";
+import EditMarketRentalDetail from "./EditMarketRentalDetail";
+import EditMarketVehicleDetail from "./EditMarketVehicleDetail";
 import { Loading } from "../../components/Market/loading";
 import MarketCarpool from "./marketCarpool";
 import MarketCarpoolDetail from "./MarketCarpoolDetail";
@@ -27,8 +30,9 @@ export default function Market() {
     <Box>
       <Switch>
         <Route exact path="/market" component={MarketList} />
-        <Route path="/market/create/pet" component={PostMarketPet} />
         <Route path="/market/create/carpool" component={PostMarketCarpool} />
+        <Route path="/market/create/pet" component={PostMarketPet} />
+
         <PrivateRoute
           allowRoles="anyone"
           path="/market/create/item"
@@ -49,7 +53,15 @@ export default function Market() {
           path="/market/create/"
           component={MarketCreate}
         />
-
+        <Route path="/market/edit/item/:id" component={EditMarketItemDetail} />
+        <Route
+          path="/market/edit/vehicle/:id"
+          component={EditMarketVehicleDetail}
+        />
+        <Route
+          path="/market/edit/rental/:id"
+          component={EditMarketRentalDetail}
+        />
         <Route path="/market/item/:id" component={MarketItemDetail} />
         <Route path="/market/vehicle/:id" component={MarketVehicleDetail} />
         <Route path="/market/rental/:id" component={MarketRentalDetail} />

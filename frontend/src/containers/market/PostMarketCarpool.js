@@ -16,14 +16,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { GetTags } from "../../components/CustomMUI/CustomTags";
 import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-// import InputAdornment from "@mui/material/InputAdornment";
-// import MarketForm from "../../components/Market/marketForm";
 import { MarketCarpoolInfo } from "./MarketCarpoolDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+// import InputAdornment from "@mui/material/InputAdornment";
+// import MarketForm from "../../components/Market/marketForm";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 // import { marketItemOptions } from "../../components/Market/marketItemOptions";
@@ -82,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "100px",
     position: "relative",
+    backgroundColor: "rgb(0 0 0 / 20%)",
+    borderRadius: "5px",
     zIndex: "1",
   },
   preview: {
@@ -121,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     display: "none",
     [theme.breakpoints.down("md")]: {
+      display: "block",
       backgroundColor:
         theme.palette.mode === "light"
           ? grey[100]
@@ -161,7 +164,7 @@ const Input = styled("input")({
 
 const drawerBleeding = 56;
 
-export default function PostMarketCarpool() {
+export default function PostMarketPet() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -169,11 +172,11 @@ export default function PostMarketCarpool() {
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
-  const [open, setOpen] = useState(false);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
   // const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const [imageKeys, setImageKeys] = useState("");
+  const [open, setOpen] = useState(false);
   const [fakeItems, setFakeItems] = useState({
     title: "Title",
     price: "Price",
@@ -183,6 +186,7 @@ export default function PostMarketCarpool() {
     marketItemCategory: "Tools",
     tags: ["Tags Goes Here"],
     createdAt: new Date().toISOString().slice(0, 10),
+    updatedAt: new Date().toISOString().slice(0, 10),
     user: user,
     owner: username,
   });
@@ -209,7 +213,7 @@ export default function PostMarketCarpool() {
 
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
-    const imageLocation = "market/carpool";
+    const imageLocation = "market/pet";
 
     const response = await dispatch(
       postMultipleImages({ imagesData, imageLocation })
@@ -281,7 +285,7 @@ export default function PostMarketCarpool() {
     } = marketItemData;
 
     const createMarketItemInput = {
-      marketType: "Carpool",
+      marketType: "Pet",
       title: title,
       name: title,
       description: description,
@@ -310,7 +314,7 @@ export default function PostMarketCarpool() {
       const response = await dispatch(postMarketItem(createMarketItemInput));
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
-        history.push(`/market/carpool/${response.payload.id}`);
+        history.push(`/market/pet/${response.payload.id}`);
       }
       console.log("Can upload");
     } else {
@@ -480,8 +484,12 @@ export default function PostMarketCarpool() {
                           zIndex="1"
                           borderRadius="5px"
                           sx={{
-                            height: "100px",
-                            width: "100px",
+                            top: "50%",
+                            left: "50%",
+                            position: "absolute",
+                            transform: "translate(-50%,-50%)",
+                            maxHeight: "100px",
+                            maxWidth: "100%",
                           }}
                         />
                         <IconButton

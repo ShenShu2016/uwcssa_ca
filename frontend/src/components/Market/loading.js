@@ -21,17 +21,17 @@ export const Loading = (status = null) => {
         setProgress(99);
         setBuffer(99);
       }
-      if (status === "succeeded") {
-        setProgress(100);
-        console.log("Started!!!!!!!!!", status);
-      }
+      // if (status === "succeeded") {
+      //   setProgress(100);
+      //   console.log("Started!!!!!!!!!", status);
+      // }
     };
   });
 
   useEffect(() => {
     const timer = setInterval(() => {
       progressRef.current();
-    }, 5);
+    }, 50);
 
     return () => {
       clearInterval(timer);

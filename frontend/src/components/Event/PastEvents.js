@@ -1,24 +1,19 @@
 import {
   Box,
-  // Button,
   Card,
   CardActionArea,
-  // CardActions,
   CardContent,
   CardMedia,
   Grid,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
-import { Link } from "react-router-dom";
-// import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import moment from "moment";
-// import { useSelector } from "react-redux";
-
-// import LinesEllipsis from "react-lines-ellipsis";
+import { grey } from "@mui/material/colors";
+import InsideLeftLineTag from "./tag";
+import LocationOn from "@mui/icons-material/LocationOn";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   actionArea: {
@@ -34,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 300,
     minWidth: 256,
     borderRadius: 16,
+    color: "transparent",
     boxShadow: "none",
+    overflow: "initial",
+    height: 300,
     "&:hover": {
       boxShadow: "0 6px 12px 0 #757ce8",
     },
@@ -44,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: " auto",
     width: "50%",
+    position: "relative",
   },
 
   s3image: {
@@ -57,49 +56,36 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "2.5rem",
     },
   },
-  root: {
-    maxWidth: "110px",
-    minWidth: "100px",
-    padding: 0,
+  statLabel: {
+    fontSize: 12,
+    color: grey[500],
+    fontWeight: 500,
   },
-  tag: {
-    display: "inline-block",
-    backgroundColor: "#3f50b5",
-    color: "#fff",
-    marginBottom: "0.5rem",
-    borderRadius: "0 3px 3px 0",
-    background: "#FFFFFF",
-    // borderLeft: `3px solid #f44336`,
+  statValue: {
+    fontSize: 20,
     fontWeight: "bold",
-    padding: "8px 16px",
-    // margin: spacing(0.5),
+    marginBottom: 4,
+    letterSpacing: "1px",
+  },
+  content: {
+    position: "relative",
+    padding: 24,
+    margin: "-24% 16px 0",
+    backgroundColor: "#fff",
+    borderRadius: 4,
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+  },
+  locationIcon: {
+    marginRight: 4,
+    fontSize: 18,
   },
 }));
 
-const EventTag = ({ label }) => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Box className={classes.tag}>{label}</Box>
-    </div>
-  );
-};
-
-export default function EventMain({ event }) {
+export default function PastEvent({ event }) {
   const classes = useStyles();
   const [posterURL, setPosterURL] = useState(null);
   // console.log("event", event);
-  const {
-    id,
-    content,
-    title,
-    posterImgS3Key,
-    location,
-    startDate,
-    endDate,
-    topic,
-  } = event;
+  const { id, title, startDate, location, content, posterImgS3Key } = event;
 
   useEffect(() => {
     const getPoster = async () => {
@@ -140,37 +126,35 @@ export default function EventMain({ event }) {
         component={Link}
         to={`/event/${id}`}
       >
-        <Card className={classes.cardDetails}>
+        <Card className={classes.cardDetails} elevation={0}>
           <Box sx={{ position: "relative" }}>
-            <CardMedia component="img" height="194" image={posterURL} />
-            {endDate > moment().format() ? (
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                }}
-              >
-                <EventTag label={"ComingSoon"} />
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                }}
-              >
-                <EventTag label={"InProgress"} />
-              </Box>
-            )}
-            <CardContent>
+            <CardMedia
+              component="img"
+              height="194"
+              image={posterURL}
+              style={{ objectFit: "cover", opacity: 0.9 }}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+              }}
+            >
+              <InsideLeftLineTag />
+            </Box>
+
+            <CardContent className={classes.content}>
               <Typography variant="subtitle2" gutterBottom>
                 时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
                 {startDate.slice(11, 16)}
               </Typography>
+              <Typography
+                variant="subtitle2"
+                color="primary"
+                gutterBottom
+              ></Typography>
               <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
                 <Typography
                   variant="subtitle1"
@@ -185,58 +169,55 @@ export default function EventMain({ event }) {
               </Box>
 
               {location ? (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
+                <Box
+                  color={"grey.500"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
                 >
-                  地址： {location}
-                </Typography>
+                  <LocationOn />
+                  <Typography
+                    variant="subtitle2"
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    {location}
+                  </Typography>
+                </Box>
               ) : (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
+                <Box
+                  color={"grey.500"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
                 >
-                  地址： 无
-                </Typography>
+                  <LocationOn />
+                  <Typography
+                    variant="subtitle2"
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    无
+                  </Typography>
+                </Box>
               )}
-              {topic.name ? (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  类别： {topic.name}
-                </Typography>
-              ) : (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  类别： 无
-                </Typography>
-              )}
-
-              {/* 
-            <Box
-              style={{
-                height: "40px",
-                overflow: "hidden",
-              }}
-            >
+              {/* {topic.name ? (
               <Typography
-                variant="body2"
-                color="text.secondary"
-                style={{
-                  wordBreak: "break-word",
-                  overflow: "hidden",
-                }}
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
               >
-                {content}
+                类别： {topic.name}
               </Typography>
-            </Box> */}
+            ) : (
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                gutterBottom
+              >
+                类别： 无
+              </Typography>
+            )} */}
 
               <Box sx={{ overflow: "hidden", height: "30px" }}>
                 <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
@@ -248,19 +229,6 @@ export default function EventMain({ event }) {
                 </Grid>
               </Box>
             </CardContent>
-            {/* <CardActions>
-          {userInfo.isAuthenticated ? (
-            <Button
-              size="small"
-              component={Link}
-              to={`/event/${event.id}/eventSignUp`}
-            >
-              报名
-            </Button>
-          ) : (
-            <SignUpRequest />
-          )}
-        </CardActions> */}
           </Box>
         </Card>
       </CardActionArea>

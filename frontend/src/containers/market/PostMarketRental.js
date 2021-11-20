@@ -89,6 +89,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "100px",
     position: "relative",
+    backgroundColor: "rgb(0 0 0 / 20%)",
+    borderRadius: "5px",
     zIndex: "1",
   },
   preview: {
@@ -128,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     display: "none",
     [theme.breakpoints.down("md")]: {
+      display: "block",
       backgroundColor:
         theme.palette.mode === "light"
           ? grey[100]
@@ -194,6 +197,7 @@ export default function PostMarketRental() {
     description: "Descriptions",
     tags: ["Tags Goes Here"],
     createdAt: new Date().toISOString().slice(0, 10),
+    updatedAt: new Date().toISOString().slice(0, 10),
     owner: username,
     marketRentalSaleRent: "Rent",
     propertyType: "House",
@@ -529,8 +533,12 @@ export default function PostMarketRental() {
                           zIndex="1"
                           borderRadius="5px"
                           sx={{
-                            height: "100px",
-                            width: "100px",
+                            top: "50%",
+                            left: "50%",
+                            position: "absolute",
+                            transform: "translate(-50%,-50%)",
+                            maxHeight: "100px",
+                            maxWidth: "100%",
                           }}
                         />
                         <IconButton

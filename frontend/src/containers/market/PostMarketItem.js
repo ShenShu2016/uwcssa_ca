@@ -13,13 +13,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import CssBaseline from "@mui/material/CssBaseline";
 import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import { MarketItemInfo } from "./MarketItemDetail";
 import PublishIcon from "@mui/icons-material/Publish";
+import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -82,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "100px",
     position: "relative",
+    backgroundColor: "rgb(0 0 0 / 20%)",
+    borderRadius: "5px",
     zIndex: "1",
   },
   preview: {
@@ -121,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     display: "none",
     [theme.breakpoints.down("md")]: {
+      display: "block",
       backgroundColor:
         theme.palette.mode === "light"
           ? grey[100]
@@ -174,7 +177,6 @@ export default function PostMarketItem() {
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const [imageKeys, setImageKeys] = useState("");
   const [open, setOpen] = useState(false);
-
   const [fakeItems, setFakeItems] = useState({
     title: "Title",
     price: "Price",
@@ -184,6 +186,7 @@ export default function PostMarketItem() {
     marketItemCategory: "Tools",
     tags: ["Tags Goes Here"],
     createdAt: new Date().toISOString().slice(0, 10),
+    updatedAt: new Date().toISOString().slice(0, 10),
     user: user,
     owner: username,
   });
@@ -481,8 +484,12 @@ export default function PostMarketItem() {
                           zIndex="1"
                           borderRadius="5px"
                           sx={{
-                            height: "100px",
-                            width: "100px",
+                            top: "50%",
+                            left: "50%",
+                            position: "absolute",
+                            transform: "translate(-50%,-50%)",
+                            maxHeight: "100px",
+                            maxWidth: "100%",
                           }}
                         />
                         <IconButton
@@ -689,7 +696,7 @@ export default function PostMarketItem() {
           </Paper>
         </Box>
         <Box className={classes.drawer}>
-          <CssBaseline />
+          <ScopedCssBaseline />
           <Global
             styles={{
               ".MuiDrawer-root > .MuiPaper-root": {
@@ -726,34 +733,32 @@ export default function PostMarketItem() {
                 Preview
               </Typography>
             </Box>
-            <Box overflow="hidden" height="100%">
-              <Box
-                width="100%"
-                height="100%"
-                sx={{ overflowX: "hidden", overflowY: "auto" }}
-              >
-                <Box className={classes.previewImgRight}>
-                  {imgKeyFromServer.length !== 0 ? (
-                    <SwipeViews images={imgKeyFromServer} />
-                  ) : (
-                    <Box
-                      height="50px"
-                      sx={{
-                        left: "50%",
-                        top: "40%",
-                        position: "absolute",
-                        transform: "translate(-50%,-50%)",
-                      }}
-                    >
-                      <Typography variant="h6">
-                        Your images will go here in the preview mode
-                      </Typography>
-                    </Box>
-                  )}
-                </Box>
-                <Box className={classes.previewInfo}>
-                  <MarketItemInfo marketItem={fakeItems} />
-                </Box>
+            <Box
+              width="100%"
+              height="100%"
+              sx={{ overflowX: "hidden", overflowY: "auto" }}
+            >
+              <Box className={classes.previewImgRight}>
+                {imgKeyFromServer.length !== 0 ? (
+                  <SwipeViews images={imgKeyFromServer} />
+                ) : (
+                  <Box
+                    height="50px"
+                    sx={{
+                      left: "50%",
+                      top: "40%",
+                      position: "absolute",
+                      transform: "translate(-50%,-50%)",
+                    }}
+                  >
+                    <Typography variant="h6">
+                      Your images will go here in the preview mode
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+              <Box className={classes.previewInfo}>
+                <MarketItemInfo marketItem={fakeItems} />
               </Box>
             </Box>
           </SwipeableDrawer>

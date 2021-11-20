@@ -25,7 +25,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/Market/SwipeViews";
-import { UpdateIcon } from "@mui/icons-material/Update";
+import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import moment from "moment";
@@ -36,8 +36,6 @@ import { useTitle } from "../../Hooks/useTitle";
 //   removeSelectedMarketItem,
 //   selectedMarketItem,
 // } from "../../redux/reducers/marketSlice";
-
-// import {
 
 // removeSelectedMarketItem,
 //   selectedMarketItem,
