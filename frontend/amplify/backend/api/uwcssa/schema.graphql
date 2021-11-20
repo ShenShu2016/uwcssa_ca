@@ -66,8 +66,6 @@ type User
   forumPostComments: [ForumPostComment]
   forumPostSubComments: [ForumPostSubComment]
   marketItems: [MarketItem]
-  # marketVehicles: [MarketVehicle]
-  # marketRentals: [MarketRental]
   foundingMember: [FoundingMember]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
 }
@@ -123,7 +121,6 @@ type Topic
   @model
   @auth(
     rules: [
-      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -141,7 +138,6 @@ type Article
   @model
   @auth(
     rules: [
-      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -380,7 +376,6 @@ type Department
   @model
   @auth(
     rules: [
-      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -400,7 +395,6 @@ type UwcssaJob
   @model
   @auth(
     rules: [
-      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -438,8 +432,6 @@ type UwcssaJobResume
     rules: [
       { allow: owner, operations: [create, read] } # 需要改只能上传和查看
       { allow: groups, groups: ["admin", "staff"] }
-      # { allow: private, operations: [read] }
-      # { allow: public, operations: [read], provider: iam }
     ]
   )
   @key(
@@ -472,7 +464,6 @@ type ForumTopic
   @model
   @auth(
     rules: [
-      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -490,7 +481,6 @@ type ForumSubTopic
   @model
   @auth(
     rules: [
-      # { allow: owner }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -568,8 +558,6 @@ type ForumPostComment
   @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
   content: String!
-  # like: [String]!
-  # unlike: [String]!
   likes: [Like] @connection(keyName: "byForumPostComment", fields: ["id"])
   createdAt: AWSDateTime!
   active: Boolean!
@@ -600,8 +588,6 @@ type ForumPostSubComment
   @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
   content: String!
-  # like: [String]!
-  # unlike: [String]!
   likes: [Like] @connection(keyName: "byForumPostSubComment", fields: ["id"])
   active: Boolean!
   createdAt: AWSDateTime!
@@ -871,7 +857,6 @@ type WebFeedBack
   )
   @key(name: "byUser", fields: ["userID"]) {
   id: ID!
-  like: Boolean!
   rate: Int!
   reason: String
   improvement: String

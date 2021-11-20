@@ -23,7 +23,15 @@ exports.handler = async (event) => {
         backGroundImgS3Key: { S: "" },
         linkedIn: { S: "" },
         github: { S: "" },
-        badges: { L: [] },
+        badges: {
+          L: [
+            event.request.userAttributes.email
+              .toLowerCase()
+              .includes("@uwindsor.ca")
+              ? { S: "uwindsor_shield" }
+              : undefined,
+          ],
+        },
         sortKey: { S: "SortKey" },
         uWindsorEmail: { S: "" },
         createdAt: { S: date.toISOString() },

@@ -17,7 +17,7 @@ exports.handler = (event) => {
     let date = new Date();
     var id = record.dynamodb.NewImage.forumPostID["S"];
     let params = {
-      TableName: "ForumPost-ooc7vvqq6jgrbhbybwrqn7njxy-develop", //dynamodb table name
+      TableName: process.env.FORUMPOSTTABLE, //dynamodb table name
       Key: {
         id: id,
       },

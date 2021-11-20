@@ -31,6 +31,7 @@ export const getArticle = /* GraphQL */ `
           user {
             username
             avatarImgS3Key
+            badges
           }
         }
       }
@@ -46,6 +47,7 @@ export const getArticle = /* GraphQL */ `
           user {
             username
             avatarImgS3Key
+            badges
           }
           likes(sortDirection: DESC) {
             nextToken
@@ -73,6 +75,7 @@ export const getArticle = /* GraphQL */ `
               user {
                 username
                 avatarImgS3Key
+                badges
               }
               likes(sortDirection: DESC) {
                 nextToken

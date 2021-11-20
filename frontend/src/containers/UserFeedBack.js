@@ -96,7 +96,7 @@ export default function UserFeedBack() {
     try {
       const response = await API.graphql(
         graphqlOperation(createWebFeedBack, {
-          input: { ...data, userID: username, like: true },
+          input: { ...data, userID: username },
         })
       );
       console.log("response: ", response);
