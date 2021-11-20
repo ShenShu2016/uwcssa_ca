@@ -58,6 +58,7 @@ function a11yProps(index) {
 
 export default function EventBody({ event }) {
   const [value, setValue] = useState(0);
+  const { userAuth } = useSelector((state) => state);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -349,8 +350,10 @@ export default function EventBody({ event }) {
                               <div>
                                 {userInfo.isAuthenticated ? (
                                   <div>
-                                    {event.eventParticipants.items.userID !==
-                                    "" ? (
+                                    {event.eventParticipants.items.some(
+                                      (item) =>
+                                        item.userID === userAuth.user.username
+                                    ) === false ? (
                                       <CardActions>
                                         <Button
                                           size="small"
