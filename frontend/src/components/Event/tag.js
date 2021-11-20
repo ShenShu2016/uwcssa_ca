@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   },
   tag: {
     display: "inline-block",
-    backgroundColor: "#f44336",
+    backgroundColor: "#3f50b5",
     color: "#fff",
     marginBottom: "0.5rem",
     borderRadius: "0 3px 3px 0",
@@ -27,7 +27,7 @@ const InsideLeftLineTag = () => {
 
   return (
     <div className={classes.root}>
-      <Box className={classes.tag}>Closed</Box>
+      <Box className={classes.tag}>往期活动</Box>
     </div>
   );
 };
