@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import { Link } from "react-router-dom";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -82,7 +83,7 @@ export function MarketVehicleInfo({ marketItem }) {
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const { marketVehicleTypeList: VType } = marketVehicleOptions;
   const {
-    // id,
+    id,
     // name,
     // imgS3Keys,
     price,
@@ -99,6 +100,7 @@ export function MarketVehicleInfo({ marketItem }) {
     user,
     // active,
     createdAt,
+    updatedAt,
     // ByCreatedAt,
     owner,
   } = marketItem;
@@ -120,7 +122,7 @@ export function MarketVehicleInfo({ marketItem }) {
         $ {price.length === 0 ? "Price Goes Here" : price}
       </Typography>
       <Typography marginX="1rem" variant="caption" color="gray">
-        {createdAt.length === 0 ? "" : moment(createdAt).fromNow()}{" "}
+        更新于: {updatedAt.length === 0 ? "" : moment(updatedAt).fromNow()}
       </Typography>
       <Stack
         justifyContent="center"
@@ -131,7 +133,8 @@ export function MarketVehicleInfo({ marketItem }) {
         {currentUser === owner ? (
           <Button
             startIcon={<UpdateIcon />}
-            onClick={() => console.log("clicked!")}
+            component={Link}
+            to={`/market/edit/vehicle/${id}`}
             variant="outlined"
             color="info"
           >

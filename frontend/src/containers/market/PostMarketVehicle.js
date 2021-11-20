@@ -82,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "100px",
     position: "relative",
+    backgroundColor: "rgb(0 0 0 / 20%)",
+    borderRadius: "5px",
     zIndex: "1",
   },
   preview: {
@@ -189,6 +191,7 @@ export default function PostMarketVehicle() {
     fuelType: "Gasoline",
     tags: ["Tags Goes Here"],
     createdAt: new Date().toISOString().slice(0, 10),
+    updatedAt: new Date().toISOString().slice(0, 10),
     user: user,
     owner: username,
   });
@@ -393,7 +396,7 @@ export default function PostMarketVehicle() {
                 component="div"
                 fontWeight="bold"
               >
-                New Item Listing
+                New Vehicle Listing
               </Typography>
               <Box className={classes.icon}>
                 <IconButton onClick={toggleDrawer(true)}>
@@ -505,8 +508,12 @@ export default function PostMarketVehicle() {
                           f
                           borderRadius="5px"
                           sx={{
-                            height: "100px",
-                            width: "100px",
+                            top: "50%",
+                            left: "50%",
+                            position: "absolute",
+                            transform: "translate(-50%,-50%)",
+                            maxHeight: "100px",
+                            maxWidth: "100%",
                           }}
                         />
                         <IconButton

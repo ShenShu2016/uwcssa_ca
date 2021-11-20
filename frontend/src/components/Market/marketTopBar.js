@@ -18,6 +18,7 @@ import {
 import { CategoryIcons, SearchArea } from "./marketItemSearch";
 import React, { useState } from "react";
 
+import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import MarketFIlterLocation from "./marketFilterLocation";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -230,6 +231,9 @@ export default function MarketTopBar({
         <SearchArea />
         <Divider sx={{ marginY: "1rem" }} />
         <Stack spacing={2} direction="row" justifyContent="flex-end">
+          <Button startIcon={<AddIcon />} component={Link} to="/market/create">
+            Add
+          </Button>
           <Button onClick={handleClickListItem2}>Categories</Button>
           <CategoryDialog
             id="ringtone-menu"
