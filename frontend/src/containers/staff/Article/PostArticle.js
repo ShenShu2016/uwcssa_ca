@@ -252,7 +252,7 @@ export default function PostArticle() {
           onClick={uploadTopic}
           color="primary"
         >
-          上传新的topic
+          上传新的Topic
         </Button>
       </Box>
       <CustomTags

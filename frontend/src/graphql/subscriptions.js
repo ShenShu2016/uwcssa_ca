@@ -51,6 +51,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -362,6 +363,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -673,6 +675,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -999,6 +1002,7 @@ export const onCreateUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -1143,6 +1147,7 @@ export const onCreateUser = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -1213,6 +1218,7 @@ export const onCreateUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -1758,8 +1764,8 @@ export const onCreateUser = /* GraphQL */ `
           endDate
           grade
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -1776,8 +1782,8 @@ export const onCreateUser = /* GraphQL */ `
           endDate
           industry
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -1906,6 +1912,7 @@ export const onUpdateUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2050,6 +2057,7 @@ export const onUpdateUser = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -2120,6 +2128,7 @@ export const onUpdateUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2665,8 +2674,8 @@ export const onUpdateUser = /* GraphQL */ `
           endDate
           grade
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -2683,8 +2692,8 @@ export const onUpdateUser = /* GraphQL */ `
           endDate
           industry
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -2813,6 +2822,7 @@ export const onDeleteUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2957,6 +2967,7 @@ export const onDeleteUser = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3027,6 +3038,7 @@ export const onDeleteUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3572,8 +3584,8 @@ export const onDeleteUser = /* GraphQL */ `
           endDate
           grade
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -3590,8 +3602,8 @@ export const onDeleteUser = /* GraphQL */ `
           endDate
           industry
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -3666,8 +3678,8 @@ export const onCreateUserEducation = /* GraphQL */ `
       endDate
       grade
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -3705,6 +3717,7 @@ export const onCreateUserEducation = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3929,8 +3942,8 @@ export const onUpdateUserEducation = /* GraphQL */ `
       endDate
       grade
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -3968,6 +3981,7 @@ export const onUpdateUserEducation = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4192,8 +4206,8 @@ export const onDeleteUserEducation = /* GraphQL */ `
       endDate
       grade
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -4231,6 +4245,7 @@ export const onDeleteUserEducation = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4456,8 +4471,8 @@ export const onCreateUserExperience = /* GraphQL */ `
       endDate
       industry
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -4495,6 +4510,7 @@ export const onCreateUserExperience = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4720,8 +4736,8 @@ export const onUpdateUserExperience = /* GraphQL */ `
       endDate
       industry
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -4759,6 +4775,7 @@ export const onUpdateUserExperience = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4984,8 +5001,8 @@ export const onDeleteUserExperience = /* GraphQL */ `
       endDate
       industry
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -5023,6 +5040,7 @@ export const onDeleteUserExperience = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5280,6 +5298,7 @@ export const onCreateTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5495,6 +5514,7 @@ export const onCreateTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5577,6 +5597,7 @@ export const onUpdateTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5792,6 +5813,7 @@ export const onUpdateTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5874,6 +5896,7 @@ export const onDeleteTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6089,6 +6112,7 @@ export const onDeleteTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6134,6 +6158,7 @@ export const onCreateArticle = /* GraphQL */ `
       title
       content
       imgS3Keys
+      qrCodeImgS3Key
       tags
       sortKey
       active
@@ -6177,6 +6202,7 @@ export const onCreateArticle = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6452,6 +6478,7 @@ export const onUpdateArticle = /* GraphQL */ `
       title
       content
       imgS3Keys
+      qrCodeImgS3Key
       tags
       sortKey
       active
@@ -6495,6 +6522,7 @@ export const onUpdateArticle = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6770,6 +6798,7 @@ export const onDeleteArticle = /* GraphQL */ `
       title
       content
       imgS3Keys
+      qrCodeImgS3Key
       tags
       sortKey
       active
@@ -6813,6 +6842,7 @@ export const onDeleteArticle = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7127,6 +7157,7 @@ export const onCreateArticleComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7341,6 +7372,7 @@ export const onCreateArticleComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -7455,6 +7487,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7669,6 +7702,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -7783,6 +7817,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7997,6 +8032,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -8111,6 +8147,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8351,6 +8388,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8429,6 +8467,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8669,6 +8708,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8747,6 +8787,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8987,6 +9028,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9078,6 +9120,7 @@ export const onCreateEvent = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9425,6 +9468,7 @@ export const onUpdateEvent = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9772,6 +9816,7 @@ export const onDeleteEvent = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10106,6 +10151,7 @@ export const onCreateEventComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10446,6 +10492,7 @@ export const onUpdateEventComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10786,6 +10833,7 @@ export const onDeleteEventComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11126,6 +11174,7 @@ export const onCreateEventSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11453,6 +11502,7 @@ export const onUpdateEventSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11780,6 +11830,7 @@ export const onDeleteEventSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -12114,6 +12165,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -12436,6 +12488,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -12758,6 +12811,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -13074,6 +13128,7 @@ export const onCreateDepartment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -13353,6 +13408,7 @@ export const onUpdateDepartment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -13632,6 +13688,7 @@ export const onDeleteDepartment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -13935,6 +13992,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -14249,6 +14307,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -14563,6 +14622,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -14850,6 +14910,7 @@ export const onCreateForumTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -15117,6 +15178,7 @@ export const onUpdateForumTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -15384,6 +15446,7 @@ export const onDeleteForumTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -15652,6 +15715,7 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -15954,6 +16018,7 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -16256,6 +16321,7 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -16563,6 +16629,7 @@ export const onCreateForumPost = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -16902,6 +16969,7 @@ export const onUpdateForumPost = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -17241,6 +17309,7 @@ export const onDeleteForumPost = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -17576,6 +17645,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -17911,6 +17981,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -18246,6 +18317,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -18583,6 +18655,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -18828,6 +18901,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -19198,6 +19272,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -19443,6 +19518,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -19813,6 +19889,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -20058,6 +20135,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -20426,6 +20504,7 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -20685,6 +20764,7 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -20944,6 +21024,7 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -21234,6 +21315,7 @@ export const onCreateMarketItem = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -21524,6 +21606,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -21814,6 +21897,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -22076,6 +22160,7 @@ export const onCreateFoundingMember = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -22337,6 +22422,7 @@ export const onUpdateFoundingMember = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -22598,6 +22684,7 @@ export const onDeleteFoundingMember = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -22855,6 +22942,7 @@ export const onCreateLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -23100,6 +23188,7 @@ export const onCreateLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -23314,6 +23403,7 @@ export const onCreateLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -23384,6 +23474,7 @@ export const onCreateLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -23815,6 +23906,7 @@ export const onUpdateLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -24060,6 +24152,7 @@ export const onUpdateLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -24274,6 +24367,7 @@ export const onUpdateLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -24344,6 +24438,7 @@ export const onUpdateLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -24775,6 +24870,7 @@ export const onDeleteLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -25020,6 +25116,7 @@ export const onDeleteLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -25234,6 +25331,7 @@ export const onDeleteLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -25304,6 +25402,7 @@ export const onDeleteLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -25736,6 +25835,7 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -25995,6 +26095,7 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -26254,6 +26355,7 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active

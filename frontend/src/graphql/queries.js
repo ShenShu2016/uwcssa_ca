@@ -51,6 +51,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -499,6 +500,7 @@ export const userSortBySortKey = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -777,6 +779,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -921,6 +924,7 @@ export const getUser = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -991,6 +995,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -1536,8 +1541,8 @@ export const getUser = /* GraphQL */ `
           endDate
           grade
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -1554,8 +1559,8 @@ export const getUser = /* GraphQL */ `
           endDate
           industry
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -1662,6 +1667,7 @@ export const listUsers = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -1886,8 +1892,8 @@ export const getUserEducation = /* GraphQL */ `
       endDate
       grade
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -1925,6 +1931,7 @@ export const getUserEducation = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2154,8 +2161,8 @@ export const listUserEducations = /* GraphQL */ `
         endDate
         grade
         description
-        userID
         createdAt
+        userID
         updatedAt
         user {
           id
@@ -2193,8 +2200,8 @@ export const getUserExperience = /* GraphQL */ `
       endDate
       industry
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -2232,6 +2239,7 @@ export const getUserExperience = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2462,8 +2470,8 @@ export const listUserExperiences = /* GraphQL */ `
         endDate
         industry
         description
-        userID
         createdAt
+        userID
         updatedAt
         user {
           id
@@ -2533,6 +2541,7 @@ export const getTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2748,6 +2757,7 @@ export const getTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2835,6 +2845,7 @@ export const getArticle = /* GraphQL */ `
       title
       content
       imgS3Keys
+      qrCodeImgS3Key
       tags
       sortKey
       active
@@ -2878,6 +2889,7 @@ export const getArticle = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3158,6 +3170,7 @@ export const listArticles = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3223,6 +3236,7 @@ export const articleSortBySortKey = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3312,6 +3326,7 @@ export const getArticleComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3526,6 +3541,7 @@ export const getArticleComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3632,6 +3648,7 @@ export const listArticleComments = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3700,6 +3717,7 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3766,6 +3784,7 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4006,6 +4025,7 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4215,6 +4235,7 @@ export const getEvent = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4693,6 +4714,7 @@ export const getEventComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5177,6 +5199,7 @@ export const getEventSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5629,6 +5652,7 @@ export const getEventParticipant = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5979,7 +6003,7 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    EventParticipantSortByEventID(
+    eventParticipantSortByEventID(
       eventID: $eventID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -6095,6 +6119,7 @@ export const getDepartment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6440,6 +6465,7 @@ export const getUwcssaJob = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6751,7 +6777,7 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    UwcssaJobSortByDepartmentID(
+    uwcssaJobSortByDepartmentID(
       departmentID: $departmentID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -6855,6 +6881,7 @@ export const getForumTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7162,6 +7189,7 @@ export const getForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7516,6 +7544,7 @@ export const getForumPost = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7874,7 +7903,7 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostSortByForumSubTopicID(
+    forumPostSortByForumSubTopicID(
       forumSubTopicID: $forumSubTopicID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -7944,7 +7973,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostSortByForumPostLastReplyAt(
+    forumPostSortByForumPostLastReplyAt(
       forumSubTopicID: $forumSubTopicID
       lastReplyAt: $lastReplyAt
       sortDirection: $sortDirection
@@ -8051,6 +8080,7 @@ export const getForumPostComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8412,7 +8442,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostCommentSortByForumPostID(
+    forumPostCommentSortByForumPostID(
       forumPostID: $forumPostID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -8520,6 +8550,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8765,6 +8796,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9186,7 +9218,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostSubCommentSortByForumPostCommentID(
+    forumPostSubCommentSortByForumPostCommentID(
       forumPostCommentID: $forumPostCommentID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -9319,6 +9351,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9648,6 +9681,7 @@ export const getMarketItem = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10300,6 +10334,7 @@ export const getFoundingMember = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10598,6 +10633,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10843,6 +10879,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11057,6 +11094,7 @@ export const getLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -11127,6 +11165,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11568,6 +11607,7 @@ export const listLikes = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11726,6 +11766,7 @@ export const getWebFeedBack = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
