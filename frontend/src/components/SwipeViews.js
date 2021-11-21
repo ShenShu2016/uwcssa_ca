@@ -126,7 +126,7 @@ export default function SwipeViews({ images }) {
             margin: "auto",
             transform: `translate(-50%,-50%)`,
             width: "auto",
-            height: "100%",
+            height: "auto",
           }}
         />
       </Box>
