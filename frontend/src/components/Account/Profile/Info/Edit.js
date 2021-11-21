@@ -9,10 +9,10 @@ import {
   Divider,
   TextField,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 
 import S3Image from "../../../S3/S3Image";
-import Storage from "@aws-amplify/storage";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/reducers/generalSlice";
@@ -39,63 +39,43 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [avatarImgKey, setAvatarImgKey] = useState(user.avatarImgS3Key);
-  const [avatarURL, setAvatarURL] = useState(null);
   const [backGroundImgKey, setBackGroundImgKey] = useState(
     user.backGroundImgKey
   );
+
   useEffect(() => {
-    setFormData(user);
     setAvatarImgKey(user.avatarImgS3Key);
     setBackGroundImgKey(user.backGroundImgS3Key);
   }, [user]);
 
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        const imageAccessURL = await Storage.get(user.avatarImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setAvatarURL(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setAvatarURL(null);
-      }
-    };
-    if (user.avatarImgS3Key) {
-      getImage();
-    }
-  }, [user]);
-
-  console.log("avatarURL", avatarURL);
-
-  const [formData, setFormData] = useState({
-    id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    intro: user.intro,
-    major: user.major,
-    linkedIn: user.linkedIn,
-    github: user.github,
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      id: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      intro: user.intro,
+      major: user.major,
+      linkedIn: user.linkedIn,
+      github: user.github,
+    },
   });
 
-  const { id, firstName, lastName, intro, major, linkedIn, github } = formData;
-
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const updateUserInput = {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    intro: intro,
-    major: major,
-    avatarImgS3Key: avatarImgKey,
-    backGroundImgS3Key: backGroundImgKey,
-    linkedIn: linkedIn,
-    github: github,
+  const onSubmit = async (data) => {
+    const updateUserInput = {
+      ...data,
+      avatarImgS3Key: avatarImgKey,
+      backGroundImgS3Key: backGroundImgKey,
+    };
+    setLoading(true);
+    const response = await dispatch(putUserProfile({ updateUserInput }));
+    handleEditClose();
+    if (response) {
+      setLoading(false);
+    }
   };
 
   const uploadAvatarImg = async (e) => {
@@ -125,47 +105,54 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     }
   };
 
-  const update = async () => {
-    setLoading(true);
-    const response = await dispatch(putUserProfile({ updateUserInput }));
-    handleEditClose();
-    if (response) {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className={classes.root}>
-      <div>
+      <form>
         <Dialog open={editOpen} onClose={handleEditClose}>
           <DialogTitle>编辑 个人信息</DialogTitle>
           <Divider light />
           <DialogContent>
-            <TextField
-              required
-              //autoFocus
-              fullWidth
-              margin="dense"
-              id="firstName"
+            <Controller
               name="firstName"
-              label="名"
-              variant="outlined"
-              placeholder="张三的三"
-              value={firstName}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: false,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="名"
+                  variant="outlined"
+                  placeholder="张三的三"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.firstName}
+                  helperText={errors.firstName ? "不符合" : null}
+                />
+              )}
             />
-            <TextField
-              required
-              //autoFocus
-              fullWidth
-              margin="dense"
-              id="lastName"
+            <Controller
               name="lastName"
-              label="姓"
-              variant="outlined"
-              placeholder="张三的张"
-              value={lastName}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: false,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="姓"
+                  variant="outlined"
+                  placeholder="张三的张"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.lastName}
+                  helperText={errors.lastName ? "不符合" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
             <Box sx={{ textAlign: "center" }}>
@@ -248,57 +235,93 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 </Button>
               </label>
             </Box>
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="linkedIn"
-              name="linkedIn"
-              label="LinkedIn 网址"
-              value={linkedIn}
-              onChange={(e) => onChange(e)}
-            />
-            <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="github"
-              name="github"
-              label="GitHub 网址"
-              value={github}
-              onChange={(e) => onChange(e)}
-            />
 
-            <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="major"
-              name="major"
-              label="专业"
-              placeholder="例如：机械工程"
-              value={major}
-              onChange={(e) => onChange(e)}
+            <Controller
+              name="linkedIn"
+              control={control}
+              rules={{
+                required: false,
+                pattern: /linkedin.com/i,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="LinkedIn 网址"
+                  variant="outlined"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.linkedIn}
+                  helperText={errors.linkedIn ? "不能为空" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
-            <TextField
-              // autoFocus
-              fullWidth
-              margin="dense"
-              id="intro"
+            <Controller
+              name="github"
+              control={control}
+              rules={{
+                required: false,
+                pattern: /github.com/i,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="GitHub 网址"
+                  variant="outlined"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.github}
+                  helperText={errors.github ? "格式不对" : null}
+                />
+              )}
+            />
+            <div className={classes.splitter} />
+            <Controller
+              name="major"
+              control={control}
+              rules={{
+                required: false,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="专业"
+                  variant="outlined"
+                  placeholder="例如：机械工程"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.major}
+                  helperText={errors.major ? "不能为空" : null}
+                />
+              )}
+            />
+            <div className={classes.splitter} />
+            <Controller
               name="intro"
-              label="自我介绍"
-              variant="outlined"
-              multiline
-              value={intro}
-              maxRows={20}
-              minRows={5}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: false,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="自我介绍"
+                  variant="outlined"
+                  fullWidth
+                  margin="dense"
+                  multiline
+                  onChange={onChange}
+                  value={value}
+                  maxRows={20}
+                  minRows={5}
+                  error={!!errors.intro}
+                  helperText={errors.intro ? "不能为空" : null}
+                />
+              )}
             />
           </DialogContent>
           <DialogActions>
@@ -306,7 +329,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               Cancel
             </Button>
             <Button
-              onClick={update}
+              onClick={handleSubmit(onSubmit)}
               variant="contained"
               size="large"
               disabled={loading}
@@ -328,7 +351,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </form>
     </div>
   );
 }

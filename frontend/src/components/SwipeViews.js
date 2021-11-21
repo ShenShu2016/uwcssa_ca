@@ -120,10 +120,13 @@ export default function SwipeViews({ images }) {
           maxHeight="100%"
           maxWidth="100%"
           sx={{
-            position: "absolute",
-            left: "0",
-            right: "0",
+            position: "relative",
+            top: "50%",
+            left: "50%",
             margin: "auto",
+            transform: `translate(-50%,-50%)`,
+            width: "auto",
+            height: "100%",
           }}
         />
       </Box>

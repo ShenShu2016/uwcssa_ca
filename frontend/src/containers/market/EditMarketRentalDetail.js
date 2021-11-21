@@ -28,7 +28,7 @@ import MarketForm from "../../components/Market/marketForm";
 import { MarketRentalInfo } from "./MarketRentalDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";
@@ -185,9 +185,10 @@ export default function EditMarketRentalDetail() {
   const [imgKeyFromServer, setImgKeyFromServer] = useState(imgS3Keys);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
-  const [imageKeys, setImageKeys] = useState(
-    Object.fromEntries([[imgS3Keys, "temp"]])
-  );
+  let temp = [];
+  imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
+  const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
+
   const [open, setOpen] = useState(false);
 
   const {
@@ -865,7 +866,7 @@ export default function EditMarketRentalDetail() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketRentalInfo marketItem={fakeItems} />
+                <MarketRentalInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Stack>
           </Paper>
@@ -934,7 +935,7 @@ export default function EditMarketRentalDetail() {
                   )}
                 </Box>
                 <Box className={classes.previewInfo}>
-                  <MarketRentalInfo marketItem={fakeItems} />
+                  <MarketRentalInfo marketItem={fakeItems} mode="preview" />
                 </Box>
               </Box>
             </Box>

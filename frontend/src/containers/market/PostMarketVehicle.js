@@ -13,15 +13,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import { MarketVehicleInfo } from "./MarketVehicleDetail ";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";
@@ -790,21 +788,12 @@ export default function PostMarketVehicle() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketVehicleInfo marketItem={fakeItems} />
+                <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Stack>
           </Paper>
         </Box>
         <Box className={classes.drawer}>
-          <CssBaseline />
-          <Global
-            styles={{
-              ".MuiDrawer-root > .MuiPaper-root": {
-                height: `calc(80% - ${drawerBleeding}px)`,
-                overflow: "visible",
-              },
-            }}
-          />
           <SwipeableDrawer
             anchor="bottom"
             open={open}
@@ -814,6 +803,12 @@ export default function PostMarketVehicle() {
             disableSwipeToOpen={false}
             ModalProps={{
               keepMounted: true,
+            }}
+            sx={{
+              "& .MuiPaper-root": {
+                height: `calc(80% - ${drawerBleeding}px)`,
+                overflow: "visible",
+              },
             }}
           >
             <Box
@@ -859,7 +854,7 @@ export default function PostMarketVehicle() {
                   )}
                 </Box>
                 <Box className={classes.previewInfo}>
-                  <MarketVehicleInfo marketItem={fakeItems} />
+                  <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
                 </Box>
               </Box>
             </Box>

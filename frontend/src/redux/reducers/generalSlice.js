@@ -42,20 +42,6 @@ const initialState = {
   postImageError: null,
 };
 
-const getQualityLevel = (file) => {
-  const { size } = file;
-  console.log("原始大小", size / 1000000, "MB");
-  if (size > 6000000) {
-    return 0;
-  } else if (size > 1000000) {
-    return 0.1;
-  } else if (size > 300000) {
-    return 0.4;
-  } else {
-    return 0.6;
-  }
-};
-
 export const setURLFrom = createAsyncThunk(
   "general/setURLFrom",
   async ({ location }) => {
@@ -150,23 +136,28 @@ export const postSingleImage = createAsyncThunk(
     console.log(imageData, imageLocation);
     const tempUuid = uuid();
     const file = imageData[0];
+    let keyName = "";
+    console.log("原始大小", file.size / 1000000, "MB");
     await new Promise((resolve) => {
       new Compressor(file, {
-        quality: getQualityLevel(file),
+        quality: 0.6,
+        maxWidth: 1280,
+        maxHeight: 1280,
+        convertSize: 300000,
         success(result) {
+          keyName = `${imageLocation}/${tempUuid}.${result.name
+            .split(".")
+            .pop()}`;
+          console.log("result", result);
           console.log("压缩后结果", result.size / 1000000, "MB");
-          Storage.put(
-            `${imageLocation}/${tempUuid}.${result.name.split(".").pop()}`,
-            result,
-            { contentType: "image/*" }
-          ).then((e) => {
+          Storage.put(keyName, result, { contentType: "image/*" }).then((e) => {
             console.log("response", e);
             resolve();
           });
         },
       });
     });
-    return `${imageLocation}/${tempUuid}.${file.name.split(".").pop()}`;
+    return keyName;
   }
 );
 
@@ -179,9 +170,13 @@ export const postMultipleImages = createAsyncThunk(
       let numImagesToProcess = imagesData.length;
       for (let i = 0; i < numImagesToProcess; i++) {
         const file = imagesData[i];
+        console.log("原始大小", file.size / 1000000, "MB");
         await new Promise((resolve) => {
           new Compressor(file, {
-            quality: getQualityLevel(file),
+            quality: 0.6,
+            maxWidth: 1280,
+            maxHeight: 1280,
+            convertSize: 300000,
             success(result) {
               console.log("压缩后结果", result.size / 1000000, "MB");
               Storage.put(

@@ -6,6 +6,7 @@ import {
   Divider,
   Grid,
   IconButton,
+  ListItemIcon,
   Paper,
   Stack,
   Typography,
@@ -29,9 +30,10 @@ import ListItemText from "@mui/material/ListItemText";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
@@ -90,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SimpleDialog(props) {
   const classes = useStyles();
-  const { open, user, onClose } = props;
+  const { open, user, onClose, contactEmail, contactPhone } = props;
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -104,14 +106,20 @@ function SimpleDialog(props) {
               user={user}
             ></CustomAvatar>
           </ListItemAvatar>
-          <ListItemText primary={user.email} />
+          <ListItemText primary={contactEmail} />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <PhoneInTalkIcon />
+          </ListItemIcon>
+          <ListItemText primary={contactPhone} />
         </ListItem>
       </List>
     </Dialog>
   );
 }
 
-export function MarketItemInfo({ marketItem }) {
+export function MarketItemInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const {
@@ -136,6 +144,9 @@ export function MarketItemInfo({ marketItem }) {
     user,
     // userID,
     // ByCreatedAt,
+    contactEmail,
+    contactPhone,
+    // contactWeChat,
     owner,
   } = marketItem;
 
@@ -166,7 +177,11 @@ export function MarketItemInfo({ marketItem }) {
           <Button
             component={Link}
             startIcon={<UpdateIcon />}
-            to={`/market/edit/item/${id}`}
+            to={
+              mode === "detail"
+                ? `/market/edit/item/${id}`
+                : window.location.pathname
+            }
             variant="outlined"
             color="info"
           >
@@ -182,7 +197,13 @@ export function MarketItemInfo({ marketItem }) {
             Contact
           </Button>
         )}
-        <SimpleDialog open={open} user={user} onClose={() => setOpen(false)} />
+        <SimpleDialog
+          open={open}
+          user={user}
+          contactPhone={contactPhone}
+          contactEmail={contactEmail}
+          onClose={() => setOpen(false)}
+        />
         <Button
           startIcon={<BookmarksIcon />}
           onClick={() => console.log("clicked!")}

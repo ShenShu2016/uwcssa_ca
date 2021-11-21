@@ -25,7 +25,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MarketRentalInfo({ marketItem }) {
+export function MarketRentalInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const {
@@ -155,7 +155,11 @@ export function MarketRentalInfo({ marketItem }) {
           <Button
             startIcon={<UpdateIcon />}
             component={Link}
-            to={`/market/edit/rental/${id}`}
+            to={
+              mode === "detail"
+                ? `/market/edit/rental/${id}`
+                : window.location.pathname
+            }
             variant="outlined"
             color="info"
           >

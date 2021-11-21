@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   Paper,
   Stack,
@@ -25,7 +28,7 @@ import { MarketItemInfo } from "./MarketItemDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { Storage } from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";
@@ -183,9 +186,9 @@ export default function EditMarketItemDetail() {
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-  const [imageKeys, setImageKeys] = useState(
-    Object.fromEntries([[imgS3Keys, "temp"]])
-  );
+  let temp = [];
+  imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
+  const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
 
   const [open, setOpen] = useState(false);
 
@@ -197,6 +200,8 @@ export default function EditMarketItemDetail() {
     marketItemCondition: false,
     location: false,
     description: false,
+    contactEmail: false,
+    contactPhone: false,
   });
 
   const uploadMarketItemImg = async (e) => {
@@ -270,6 +275,9 @@ export default function EditMarketItemDetail() {
       marketItemCondition,
       price,
       location,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
     } = marketItemData;
 
     const updatedMarketItem = {
@@ -286,6 +294,9 @@ export default function EditMarketItemDetail() {
       tags: GetTags(),
       active: true,
       userID: marketItem.userID,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
       sortKey: "SortKey",
     };
     // console.log("check!", updateMarketItemDetail);
@@ -297,6 +308,8 @@ export default function EditMarketItemDetail() {
       marketItemCondition,
       location,
       description,
+      contactEmail,
+      contactPhone,
     };
 
     if (Object.values(canSave).every((item) => item !== "")) {
@@ -343,6 +356,8 @@ export default function EditMarketItemDetail() {
     setOpen(newOpen);
   };
 
+  console.log("imgKeys", imageKeys);
+  console.log("imgKeyfromServer", imgKeyFromServer);
   return (
     <div className={classes.root}>
       <Stack className={classes.contain} direction="row">
@@ -642,6 +657,67 @@ export default function EditMarketItemDetail() {
                   }}
                 />
               </Box>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Using default contact information"
+                />
+              </FormGroup>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Phone${
+                    Boolean(error.contactPhone) ? " is required!" : ""
+                  }`}
+                  value={marketItemData.contactPhone}
+                  variant="outlined"
+                  error={Boolean(error.contactPhone)}
+                  required
+                  placeholder="eg: (123) 456 789"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketItemData({
+                      ...marketItemData,
+                      contactPhone: e.target.value,
+                    });
+                    setError({ ...error, contactPhone: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Email${
+                    Boolean(error.contactEmail) ? " is required!" : ""
+                  }`}
+                  value={marketItemData.contactEmail}
+                  variant="outlined"
+                  error={Boolean(error.contactEmail)}
+                  required
+                  placeholder="wang123456@email.com "
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketItemData({
+                      ...marketItemData,
+                      contactEmail: e.target.value,
+                    });
+                    setError({ ...error, contactEmail: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Contact WeChat"
+                  value={marketItemData.contactWeChat}
+                  variant="outlined"
+                  placeholder="eg: Wang123"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketItemData({
+                      ...marketItemData,
+                      contactWeChat: e.target.value,
+                    });
+                  }}
+                />
+              </Box>
             </Box>
             <Button
               // sx={{ marginBottom: "2rem" }}
@@ -681,7 +757,7 @@ export default function EditMarketItemDetail() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketItemInfo marketItem={fakeItems} />
+                <MarketItemInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Stack>
           </Paper>
@@ -749,7 +825,7 @@ export default function EditMarketItemDetail() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketItemInfo marketItem={fakeItems} />
+                <MarketItemInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Box>
           </SwipeableDrawer>

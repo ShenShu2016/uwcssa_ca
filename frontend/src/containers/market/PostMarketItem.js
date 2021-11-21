@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   Paper,
   Stack,
@@ -12,16 +15,15 @@ import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// import { useForm, Controller } from "react-hook-form";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import { MarketItemInfo } from "./MarketItemDetail";
 import PublishIcon from "@mui/icons-material/Publish";
-import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { Storage } from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";
@@ -198,6 +200,8 @@ export default function PostMarketItem() {
     marketItemCondition: false,
     location: false,
     description: false,
+    contactEmail: false,
+    contactPhone: false,
   });
   const [marketItemData, setMarketItemData] = useState({
     title: "",
@@ -207,10 +211,20 @@ export default function PostMarketItem() {
     marketItemCategory: "",
     marketItemCondition: "",
     location: "",
+    contactEmail: "",
+    contactWeChat: "",
+    contactPhone: "",
     tags: [],
   });
   // console.log("marketItemData", marketItemData);
 
+  // const { control, handleSubmit } = useForm({
+  //   defaultValues: {
+  //   contactPhone:"",
+  //   contactWechat:"",
+  //   ContactEmail:"",
+  //   }
+  // });
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
     const imageLocation = "market/item";
@@ -282,6 +296,9 @@ export default function PostMarketItem() {
       marketItemCondition,
       price,
       location,
+      contactPhone,
+      contactEmail,
+      contactWeChat,
     } = marketItemData;
 
     const createMarketItemInput = {
@@ -294,6 +311,9 @@ export default function PostMarketItem() {
       marketItemCategory: marketItemCategory,
       marketItemCondition: marketItemCondition,
       location: location,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
       tags: GetTags(),
       active: true,
       userID: username,
@@ -308,6 +328,8 @@ export default function PostMarketItem() {
       marketItemCondition,
       location,
       description,
+      contactEmail,
+      contactPhone,
     };
 
     if (Object.values(canSave).every((item) => item !== "")) {
@@ -651,6 +673,67 @@ export default function PostMarketItem() {
                   }}
                 />
               </Box>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Using default contact information"
+                />
+              </FormGroup>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Phone${
+                    Boolean(error.contactPhone) ? " is required!" : ""
+                  }`}
+                  value={marketItemData.contactPhone}
+                  variant="outlined"
+                  error={Boolean(error.contactPhone)}
+                  required
+                  placeholder="eg: (123) 456 789"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketItemData({
+                      ...marketItemData,
+                      contactPhone: e.target.value,
+                    });
+                    setError({ ...error, contactPhone: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Email${
+                    Boolean(error.contactEmail) ? " is required!" : ""
+                  }`}
+                  value={marketItemData.contactEmail}
+                  variant="outlined"
+                  error={Boolean(error.contactEmail)}
+                  required
+                  placeholder="wang123456@email.com "
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketItemData({
+                      ...marketItemData,
+                      contactEmail: e.target.value,
+                    });
+                    setError({ ...error, contactEmail: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Contact WeChat"
+                  value={marketItemData.contactWeChat}
+                  variant="outlined"
+                  placeholder="eg: Wang123"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketItemData({
+                      ...marketItemData,
+                      contactWeChat: e.target.value,
+                    });
+                  }}
+                />
+              </Box>
             </Box>
             <Button
               // sx={{ marginBottom: "2rem" }}
@@ -690,21 +773,12 @@ export default function PostMarketItem() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketItemInfo marketItem={fakeItems} />
+                <MarketItemInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Stack>
           </Paper>
         </Box>
         <Box className={classes.drawer}>
-          <ScopedCssBaseline />
-          <Global
-            styles={{
-              ".MuiDrawer-root > .MuiPaper-root": {
-                height: `calc(80% - ${drawerBleeding}px)`,
-                overflow: "visible",
-              },
-            }}
-          />
           <SwipeableDrawer
             anchor="bottom"
             open={open}
@@ -714,6 +788,12 @@ export default function PostMarketItem() {
             disableSwipeToOpen={false}
             ModalProps={{
               keepMounted: true,
+            }}
+            sx={{
+              "& .MuiPaper-root": {
+                height: `calc(80% - ${drawerBleeding}px)`,
+                overflow: "visible",
+              },
             }}
           >
             <Box
@@ -754,11 +834,12 @@ export default function PostMarketItem() {
                     <Typography variant="h6">
                       Your images will go here in the preview mode
                     </Typography>
+                    func
                   </Box>
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketItemInfo marketItem={fakeItems} />
+                <MarketItemInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Box>
           </SwipeableDrawer>

@@ -40,13 +40,18 @@ export default function Profile() {
 
   return (
     <div>
-      <BasicInfo user={user} ownerID={username} />
-
-      <div className={classes.root}>
-        <AboutMe user={user} />
-        <Education userAuth={userAuth} user={user} ownerID={username} />
-        <Experience userAuth={userAuth} user={user} ownerID={username} />
-      </div>
+      {user.id ? (
+        <div>
+          <BasicInfo user={user} ownerID={username} />
+          <div className={classes.root}>
+            <AboutMe user={user} />
+            <Education userAuth={userAuth} user={user} ownerID={username} />
+            <Experience userAuth={userAuth} user={user} ownerID={username} />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
