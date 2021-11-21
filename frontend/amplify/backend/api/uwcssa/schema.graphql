@@ -63,6 +63,7 @@ type User
   marketItems: [MarketItem]
   foundingMember: [FoundingMember]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
+  userMutationLog: [UserMutationLog]
 }
 
 type UserEducation
@@ -520,6 +521,15 @@ type ForumPost
   imgS3Keys: [String]
   tags: [String]
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
+  essential: Boolean
+    @auth(
+      rules: [
+        { allow: owner, operations: [read] }
+        { allow: groups, groups: ["admin", "staff"] }
+        { allow: private, operations: [read] }
+        { allow: public, operations: [read], provider: iam }
+      ]
+    )
   active: Boolean!
   createdAt: AWSDateTime!
   lastReplyAt: AWSDateTime!
@@ -854,6 +864,37 @@ type WebFeedBack
   rate: Float!
   reason: String
   improvement: String
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type UserMutationLog
+  @model
+  @auth(
+    rules: [{ allow: groups, groups: ["admin"], operations: [read, update] }]
+  )
+  @key(
+    name: "userMutationLogSortByUserID"
+    fields: ["userID", "createdAt"]
+    queryField: "userMutationLogSortByUserID"
+  )
+  @key(
+    name: "userMutationLogSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "userMutationLogSortBySortKey"
+  )
+  @key(
+    name: "userMutationLogSortBy__typename"
+    fields: ["typename", "createdAt"]
+    queryField: "userMutationLogSortBy__typename"
+  ) {
+  id: ID!
+  eventName: String!
+  eventID: ID!
+  typename: String!
+  eventSourceARN: String!
+  createdAt: AWSDateTime!
+  sortKey: SortKey!
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
