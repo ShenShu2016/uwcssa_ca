@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MarketPetInfo({ marketItem }) {
+export function MarketPetInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const {

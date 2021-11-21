@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MarketRentalInfo({ marketItem }) {
+export function MarketRentalInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const {
@@ -155,7 +155,11 @@ export function MarketRentalInfo({ marketItem }) {
           <Button
             startIcon={<UpdateIcon />}
             component={Link}
-            to={`/market/edit/rental/${id}`}
+            to={
+              mode === "detail"
+                ? `/market/edit/rental/${id}`
+                : window.location.pathname
+            }
             variant="outlined"
             color="info"
           >
