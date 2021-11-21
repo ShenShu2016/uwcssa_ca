@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     position: "relative",
     padding: 24,
-    margin: "-24% 16px 0",
+    margin: "-24% 9px 0",
     backgroundColor: "#fff",
     borderRadius: 4,
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
@@ -85,7 +85,8 @@ export default function PastEvent({ event }) {
   const classes = useStyles();
   const [posterURL, setPosterURL] = useState(null);
   // console.log("event", event);
-  const { id, title, startDate, location, content, posterImgS3Key } = event;
+  const { id, title, startDate, endDate, location, content, posterImgS3Key } =
+    event;
 
   useEffect(() => {
     const getPoster = async () => {
@@ -148,7 +149,8 @@ export default function PastEvent({ event }) {
             <CardContent className={classes.content}>
               <Typography variant="subtitle2" gutterBottom>
                 时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-                {startDate.slice(11, 16)}
+                {startDate.slice(11, 16)} -{endDate.slice(5, 7)}月
+                {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
               </Typography>
               <Typography
                 variant="subtitle2"
