@@ -28,7 +28,7 @@ import { MarketItemInfo } from "./MarketItemDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { Storage } from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";

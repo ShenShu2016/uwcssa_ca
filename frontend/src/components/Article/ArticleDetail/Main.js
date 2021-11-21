@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../LikeButtonGroup";
 import Storage from "@aws-amplify/storage";
-import SwipeViews from "../../Market/SwipeViews";
+import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({

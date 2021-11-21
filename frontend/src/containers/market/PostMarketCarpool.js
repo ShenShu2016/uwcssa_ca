@@ -17,7 +17,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { MarketCarpoolInfo } from "./MarketCarpoolDetail";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 // import InputAdornment from "@mui/material/InputAdornment";
