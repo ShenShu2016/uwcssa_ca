@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MarketCarpoolInfo({ marketItem }) {
+export function MarketCarpoolInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const {

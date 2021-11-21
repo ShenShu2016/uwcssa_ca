@@ -176,9 +176,9 @@ export default function EditMarketVehicleDetail() {
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const { imgS3Keys } = marketItem;
-  const [imageKeys, setImageKeys] = useState(
-    Object.fromEntries([[imgS3Keys, "temp"]])
-  );
+  let temp = [];
+  imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
+  const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
 
   const [trigger, setTrigger] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -773,7 +773,7 @@ export default function EditMarketVehicleDetail() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketVehicleInfo marketItem={fakeItems} />
+                <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Stack>
           </Paper>
@@ -842,7 +842,7 @@ export default function EditMarketVehicleDetail() {
                   )}
                 </Box>
                 <Box className={classes.previewInfo}>
-                  <MarketVehicleInfo marketItem={fakeItems} />
+                  <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
                 </Box>
               </Box>
             </Box>

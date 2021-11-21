@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MarketVehicleInfo({ marketItem }) {
+export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const { marketVehicleTypeList: VType } = marketVehicleOptions;
@@ -134,7 +134,11 @@ export function MarketVehicleInfo({ marketItem }) {
           <Button
             startIcon={<UpdateIcon />}
             component={Link}
-            to={`/market/edit/vehicle/${id}`}
+            to={
+              mode === "preview"
+                ? `/market/edit/vehicle/${id}`
+                : window.location.pathname
+            }
             variant="outlined"
             color="info"
           >
