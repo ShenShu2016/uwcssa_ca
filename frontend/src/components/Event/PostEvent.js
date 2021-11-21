@@ -163,6 +163,7 @@ export default function PostEvent() {
   const uploadTopic = async () => {
     //Upload the topic
     const createTopicInput = {
+      id: topicData.name, //为了不让数据重复，直接定义ID
       name: topicData.name,
       userID: username,
     };
