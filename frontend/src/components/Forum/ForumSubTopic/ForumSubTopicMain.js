@@ -79,7 +79,7 @@ export default function ForumSubTopicMain({ forumSubTopic }) {
           <Button
             variant="contained"
             component={Link}
-            to={`/forum/forumSubTopic/${forumSubTopic.id}/post`}
+            to={`/forum/${forumSubTopic.id}/发布帖子`}
             endIcon={<SendIcon />}
             size="large"
           >
