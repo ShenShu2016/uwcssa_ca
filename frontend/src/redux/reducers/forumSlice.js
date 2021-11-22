@@ -6,24 +6,20 @@ import {
 } from "../../graphql/mutations";
 import {
   forumPostCommentSortByForumPostID,
-  // forumPostSortByForumPostLastReplyAt,
+  forumPostSortByForumPostLastReplyAt,
   forumPostSortByForumSubTopicID,
   forumPostSubCommentSortByForumPostCommentID,
-  // getForumPost,
   getForumPostComment,
   getForumSubTopic,
-  // getForumTopic,
-  // listForumPosts,
   listForumSubTopics,
-  // listForumTopics,
 } from "../../graphql/queries";
 import {
   getForumPost,
   getForumTopic,
-  listForumTopics,
   listForumPosts,
-  forumPostSortByForumPostLastReplyAt,
+  listForumTopics,
 } from "../CustomQuery/ForumQueries";
+
 import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
@@ -131,14 +127,14 @@ export const selectedForumSubTopicPosts = createAsyncThunk(
       },
       authMode: "AWS_IAM",
     });
-    return forumSubTopicPostData.data.ForumPostSortByForumSubTopicID;
+    return forumSubTopicPostData.data.forumPostSortByForumSubTopicID;
   }
 );
 export const selectedForumSubTopicPostsLastReply = createAsyncThunk(
   "forum/selectedForumSubTopicPostsLastReply",
   async (forumSubTopicID) => {
     const forumSubTopicPostData = await API.graphql({
-      query: forumPostSortByForumPostLastReplyAt,
+      query: forumPostSortByForumPostLastReplyAt, //这个我改成初始的了，你的那个好像有点问题你可以看看
       variables: {
         forumSubTopicID: forumSubTopicID,
         sortDirection: "DESC",
@@ -147,7 +143,7 @@ export const selectedForumSubTopicPostsLastReply = createAsyncThunk(
       },
       authMode: "AWS_IAM",
     });
-    return forumSubTopicPostData.data.ForumPostSortByForumPostLastReplyAt;
+    return forumSubTopicPostData.data.forumPostSortByForumPostLastReplyAt;
   }
 );
 //forumPost
@@ -195,7 +191,7 @@ export const selectedForumPostComments = createAsyncThunk(
       },
       authMode: "AWS_IAM",
     });
-    return forumPostCommentsData.data.ForumPostCommentSortByForumPostID;
+    return forumPostCommentsData.data.forumPostCommentSortByForumPostID;
   }
 );
 
@@ -239,7 +235,7 @@ export const selectedForumPostCommentSubComments = createAsyncThunk(
       authMode: "AWS_IAM",
     });
     return forumPostCommentData.data
-      .ForumPostSubCommentSortByForumPostCommentID;
+      .forumPostSubCommentSortByForumPostCommentID;
   }
 );
 export const postForumPostSubComment = createAsyncThunk(
@@ -353,14 +349,20 @@ const forumSlice = createSlice({
       .addCase(selectedForumSubTopicPostsLastReply.pending, (state, action) => {
         state.selectedForumSubTopicPostsLastReplyStatus = "loading";
       })
-      .addCase(selectedForumSubTopicPostsLastReply.fulfilled, (state, action) => {
-        state.selectedForumSubTopicPostsLastReplyStatus = "succeeded";
-        state.selected.forumSubTopicPostsLastReply = action.payload;
-      })
-      .addCase(selectedForumSubTopicPostsLastReply.rejected, (state, action) => {
-        state.selectedForumSubTopicPostsLastReplyStatus = "failed";
-        state.selectedForumSubTopicPostsLastReplyError = action.error.message;
-      })
+      .addCase(
+        selectedForumSubTopicPostsLastReply.fulfilled,
+        (state, action) => {
+          state.selectedForumSubTopicPostsLastReplyStatus = "succeeded";
+          state.selected.forumSubTopicPostsLastReply = action.payload;
+        }
+      )
+      .addCase(
+        selectedForumSubTopicPostsLastReply.rejected,
+        (state, action) => {
+          state.selectedForumSubTopicPostsLastReplyStatus = "failed";
+          state.selectedForumSubTopicPostsLastReplyError = action.error.message;
+        }
+      )
       //fetchForumPosts
       .addCase(fetchForumPosts.pending, (state, action) => {
         state.fetchForumPostsStatus = "loading";
