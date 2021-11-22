@@ -28,7 +28,7 @@ export default function Forum() {
           component={ForumSubTopic}
         />
         <Route
-          path="/forum/forumPostUpload"
+          path="/forum/:forumSubTopicID/发布帖子"
           exact
           component={ForumPostUpload}
         />

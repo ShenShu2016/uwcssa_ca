@@ -504,6 +504,11 @@ type ForumPost
     ]
   )
   @key(
+    name: "forumPostSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "forumPostSortBySortKey"
+  )
+  @key(
     name: "forumPostSortByForumSubTopicID"
     fields: ["forumSubTopicID", "createdAt"]
     queryField: "forumPostSortByForumSubTopicID"
@@ -521,6 +526,7 @@ type ForumPost
   imgS3Keys: [String]
   tags: [String]
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
+  sortKey: SortKey!
   essential: Boolean
     @auth(
       rules: [

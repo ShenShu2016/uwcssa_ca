@@ -9,10 +9,10 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // import ForumIndexSportLight from "./ForumIndexSportLight";
 import ForumIndexTopic from "./ForumIndexTopic";
+import ForumIndexDialog from "./ForumIndexDialog";
 import { Link } from "react-router-dom";
 import {
   fetchForumTopics,
@@ -20,6 +20,7 @@ import {
 } from "../../../redux/reducers/forumSlice";
 
 export default function ForumIndexMain() {
+  const { userAuth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const {
     forumTopics,
@@ -35,7 +36,7 @@ export default function ForumIndexMain() {
     if (fetchForumPostsStatus === "idle" || undefined) {
       dispatch(fetchForumPosts());
     }
-  }, [dispatch, fetchForumTopicsStatus,fetchForumPostsStatus]);
+  }, [dispatch, fetchForumTopicsStatus, fetchForumPostsStatus]);
   console.log("forumPosts", forumPosts);
   return (
     <div>
@@ -113,6 +114,30 @@ export default function ForumIndexMain() {
           </Paper>
         )}
         {/* <ForumIndexSportLight /> */}
+        {Object.keys(forumTopics).length === 0 ? (
+          <Skeleton
+            sx={{ mt: 2 }}
+            variant="text"
+            animation="wave"
+            width={1080}
+            height={28}
+          />
+        ) : (
+          <Box>
+            {userAuth.isAuthenticated && (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  pr: 2,
+                  mt: 3,
+                }}
+              >
+                <ForumIndexDialog forumTopics={forumTopics} />
+              </Box>
+            )}
+          </Box>
+        )}
         <ForumIndexTopic forumTopics={forumTopics} />
       </Box>
     </div>
