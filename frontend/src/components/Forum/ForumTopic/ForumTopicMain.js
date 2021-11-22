@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ForumTopicMain = ({ forumTopic }) => {
   const classes = useStyles();
-  console.log(forumTopic);
+  //console.log(forumTopic);
   const { name, forumSubTopics } = forumTopic;
   useTitle(name + "-论坛");
   //   const { forumSubTopicData } = forumSubTopics;

@@ -1,5 +1,6 @@
-import { Box, Breadcrumbs, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
+import CustomBreadcrumbs from "../../CustomMUI/CustomBreadcrumbs";
 import ForumSubTopicTip from "./ForumSubTopicTip";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -19,37 +20,7 @@ export default function ForumSubTopicMain({ forumSubTopic }) {
       }}
     >
       <Box sx={{ padding: "1rem", maxwidth: "100%" }}>
-        <Breadcrumbs aria-label="breadcrumb">
-          <span style={{}}>
-            <Button color="inherit" component={Link} to={`/`}>
-              UWCSSA
-            </Button>
-          </span>
-          <span style={{}}>
-            <Button color="inherit" component={Link} to={`/forum`}>
-              论坛
-            </Button>
-          </span>
-          <span style={{ cursor: "not-allowed" }}>
-            <Button
-              color="inherit"
-              component={Link}
-              to={`/forum/${forumSubTopic.forumTopic.id}`}
-            >
-              {forumSubTopic.forumTopic.name}
-            </Button>
-          </span>
-          <span style={{ cursor: "not-allowed" }}>
-            <Button
-              color="inherit"
-              component={Link}
-              disabled
-              to={`/forum/${forumSubTopic.forumTopicID}/${forumSubTopic.id}`}
-            >
-              {forumSubTopic.name}
-            </Button>
-          </span>
-        </Breadcrumbs>
+        <CustomBreadcrumbs />
       </Box>
       <Box
         sx={{

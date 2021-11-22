@@ -1,6 +1,5 @@
 import {
   Box,
-  Breadcrumbs,
   Button,
   Checkbox,
   CircularProgress,
@@ -15,7 +14,6 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
-import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import {
   postForumPost,
@@ -26,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import ForumAdSide from "../../components/Forum/ForumAdSide";
 import ForumPostImageSwipe from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostImageSwipe";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -36,6 +35,7 @@ import { indigo } from "@mui/material/colors";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
 const Input = styled("input")({
@@ -214,37 +214,7 @@ export default function ForumPostUpload() {
           />
         ) : (
           <Box sx={{ padding: "1rem", maxWidth: "100%" }}>
-            <Breadcrumbs aria-label="breadcrumb">
-              <span style={{}}>
-                <Button color="inherit" component={Link} to={`/`}>
-                  UWCSSA
-                </Button>
-              </span>
-              <span style={{}}>
-                <Button color="inherit" component={Link} to={`/forum`}>
-                  论坛
-                </Button>
-              </span>
-              <span style={{ cursor: "not-allowed" }}>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  to={`/forum/${forumSubTopic.forumTopic.id}`}
-                >
-                  {forumSubTopic.forumTopic.name}
-                </Button>
-              </span>
-              <span style={{ cursor: "not-allowed" }}>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  // disabled
-                  to={`/forum/${forumTopicID}/${forumSubTopic.id}`}
-                >
-                  {forumSubTopic.name}
-                </Button>
-              </span>
-            </Breadcrumbs>
+            <CustomBreadcrumbs />
           </Box>
         )}
         {/* upload and preview */}

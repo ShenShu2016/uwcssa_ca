@@ -1,11 +1,4 @@
-import {
-  Box,
-  Breadcrumbs,
-  Button,
-  Grid,
-  Skeleton,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   removeSelectedForumTopic,
@@ -13,9 +6,9 @@ import {
 } from "../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import ForumAdSide from "../../components/Forum/ForumAdSide";
 import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
-import { Link } from "react-router-dom";
 import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
@@ -37,7 +30,7 @@ function ForumTopic() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { forumTopicID } = useParams();
-  console.log(forumTopicID);
+  //console.log(forumTopicID);
   useEffect(() => {
     if (forumTopicID && forumTopicID !== "") {
       dispatch(selectedForumTopic(forumTopicID));
@@ -53,30 +46,9 @@ function ForumTopic() {
           <Skeleton variant="rectangular" width={210} height={118} />
         ) : (
           <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
-            <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
+            <Box sx={{ padding: "2rem", maxWidth: "100%" }}>
               <Typography variant="h5">{forumTopic.name}</Typography>
-              <Breadcrumbs aria-label="breadcrumb">
-                <span style={{}}>
-                  <Button color="inherit" component={Link} to={`/`}>
-                    UWCSSA
-                  </Button>
-                </span>
-                <span style={{}}>
-                  <Button color="inherit" component={Link} to={`/forum`}>
-                    论坛
-                  </Button>
-                </span>
-                <span style={{ cursor: "not-allowed" }}>
-                  <Button
-                    color="inherit"
-                    component={Link}
-                    disabled
-                    to={`/forum/${forumTopic.id}`}
-                  >
-                    {forumTopic.name}
-                  </Button>
-                </span>
-              </Breadcrumbs>
+              <CustomBreadcrumbs />
             </Box>
             <ForumTopicMain forumTopic={forumTopic} />
           </Grid>

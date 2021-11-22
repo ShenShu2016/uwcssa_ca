@@ -1,8 +1,6 @@
 import {
   Avatar,
   Box,
-  Breadcrumbs,
-  Button,
   Container,
   Grid,
   IconButton,
@@ -11,6 +9,7 @@ import {
 } from "@mui/material";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
 import HouseIcon from "@mui/icons-material/House";
@@ -48,23 +47,7 @@ function MarketCreate() {
     <Box className={classes.root}>
       <Container size="lg">
         <Box>
-          <Breadcrumbs aria-label="breadcrumb">
-            <span style={{ cursor: "not-allowed" }}>
-              <Button color="inherit" component={Link} to="/">
-                主页
-              </Button>
-            </span>
-            <span style={{ cursor: "not-allowed" }}>
-              <Button color="inherit" component={Link} to="/market">
-                商城
-              </Button>
-            </span>
-            <span style={{ cursor: "not-allowed" }}>
-              <Button color="inherit" component={Link} to="/market/create">
-                发布商品
-              </Button>
-            </span>
-          </Breadcrumbs>
+          <CustomBreadcrumbs />
         </Box>
         <Box className={classes.title}>
           <Typography variant="h4">选择你要发布的商品类型</Typography>
