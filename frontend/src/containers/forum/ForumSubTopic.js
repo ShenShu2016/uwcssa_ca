@@ -1,19 +1,19 @@
-import { Skeleton } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
   selectedForumSubTopicPosts,
   selectedForumSubTopicPostsLastReply,
-} from "../../../redux/reducers/forumSlice";
+} from "../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ForumAdSide from "../ForumAdSide";
-import ForumSubTopicMain from "./ForumSubTopicMain";
-import ForumSubTopicPosts from "./ForumSubTopicPosts";
+import { Box } from "@mui/system";
+import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumSubTopicMain from "../../components/Forum/ForumSubTopic/ForumSubTopicMain";
+import ForumSubTopicPosts from "../../components/Forum/ForumSubTopic/ForumSubTopicPosts";
+import { Skeleton } from "@mui/material";
 // import OpenIconSpeedDial from "../OpenIconSpeedDial";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/system";
 
 export default function ForumSubTopic() {
   const dispatch = useDispatch();

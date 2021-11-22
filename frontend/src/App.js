@@ -13,7 +13,7 @@ import Career from "./containers/Career";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
 import EventRouter from "./containers/Event/EventRouter";
-import Forum from "./containers/forum/Forum";
+import ForumRouter from "./containers/forum/ForumRouter";
 import FoundingTeam from "./containers/FoundingTeam";
 import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Header from "./containers/Header";
@@ -28,21 +28,6 @@ import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
 import store from "./redux/store";
 
-// import Dashboard from "./containers/account/Dashboard";
-// import EmailConfirm from "./containers/authentication/EmailConfirm";
-// import Event from "./containers/Event";
-// import EventDetail from "./components/Event/EventDetail";
-// import Success from "./components/Event/Success";
-// // import EventGrid from "./components/Event/EventDataGrid";
-// import EventTable from "./components/Event/EventTable";
-// import EventSignUp from "./components/Event/SignUpEvent";
-// import Footer from "./containers/Footer";
-// import ForgotPassword from "./containers/authentication/ForgotPassword";
-
-
-
-// import EventGrid from "./components/Event/EventDataGrid";
-
 Amplify.configure(awsconfig);
 
 const theme = createTheme({
@@ -52,12 +37,6 @@ const theme = createTheme({
 });
 
 const useStyles = makeStyles({
-  // headerBody: {
-  //   minHeight: `calc(100vh - 220px)`,
-  //   [theme.breakpoints.down("sm")]: {
-  //     minHeight: `calc(100vh - 350px)`,
-  //   },
-  // },
   headerBox: {
     paddingBottom: "64px",
     [theme.breakpoints.down("sm")]: {
@@ -117,7 +96,7 @@ export default function App() {
             />
             <Route path="/article" component={Article} />
             <Route path="/market" component={Market} /> 
-            <Route path="/forum" component={Forum} />
+            <Route path="/forum" component={ForumRouter} />
             <Route path="/foundingTeam" exact component={FoundingTeam} />
             <Route path="/contactUs" exact component={ContactUs} />
             <Route path="/career" component={Career} />

@@ -1,44 +1,44 @@
 import {
   Box,
-  Button,
-  Skeleton,
-  Checkbox,
-  Typography,
-  Stack,
-  Divider,
-  IconButton,
-  TextField,
   Breadcrumbs,
-  Paper,
-  FormControlLabel,
+  Button,
+  Checkbox,
   CircularProgress,
+  Divider,
+  FormControlLabel,
+  IconButton,
+  Paper,
+  Skeleton,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { indigo } from "@mui/material/colors";
-import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import {
   postForumPost,
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
-} from "../../../redux/reducers/forumSlice";
+} from "../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumPostImageSwipe from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostImageSwipe";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { indigo } from "@mui/material/colors";
 import {
   postMultipleImages,
-  // postSingleImage,
-} from "../../../redux/reducers/generalSlice";
-import { Controller, useForm } from "react-hook-form";
-import CustomTags, { GetTags } from "../../CustomMUI/CustomTags";
-import ForumAdSide from "../ForumAdSide";
-import ForumPostImageSwipe from "./ForumPostDetail/ForumPostImageSwipe";
+} from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
-import { useTitle } from "../../../Hooks/useTitle";
-import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import { useTitle } from "../../Hooks/useTitle";
 
 const Input = styled("input")({
   display: "none",
@@ -160,12 +160,14 @@ export default function ForumPostUpload() {
       forumSubTopicID: forumSubTopicID,
       tags: GetTags(),
       essential: false,
-      sortKey:"SortKey",
+      sortKey: "SortKey",
     };
     const response = await dispatch(postForumPost(createForumPostInput));
     console.log("response: ", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/forum/forumPost/${response.payload.response.data.createForumPost.id}`);
+      history.push(
+        `/forum/forumPost/${response.payload.response.data.createForumPost.id}`
+      );
     }
   };
   const handleDeleteImg = (imgKey) => {
@@ -617,8 +619,8 @@ export default function ForumPostUpload() {
                       }}
                     >
                       {imgKeyFromServer.length !== 0 ? (
-                        <Box sx={{height:210}}>
-                        <ForumPostImageSwipe images={imgKeyFromServer} />
+                        <Box sx={{ height: 210 }}>
+                          <ForumPostImageSwipe images={imgKeyFromServer} />
                         </Box>
                       ) : (
                         <Box sx={{ height: 40 }}>

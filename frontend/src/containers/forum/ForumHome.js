@@ -5,7 +5,7 @@ import ForumIndexMain from "../../components/Forum/ForumIndex/ForumIndexMain";
 import React from "react";
 import { useTitle } from "../../Hooks/useTitle";
 
-export default function ForumIndex() {
+export default function ForumHome() {
   useTitle("UWCSSA论坛");
   return (
     <div>
