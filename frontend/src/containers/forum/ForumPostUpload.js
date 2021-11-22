@@ -165,7 +165,7 @@ export default function ForumPostUpload() {
     console.log("response: ", response);
     if (response.meta.requestStatus === "fulfilled") {
       history.push(
-        `/forum/${response.payload.response.data.createForumPost.forumSubTopic.id}/${response.payload.response.data.createForumPost.forumSubTopic.forumTopicID}/${response.payload.response.data.createForumPost.id}`
+        `/forum/${response.payload.response.data.createForumPost.forumSubTopic.forumTopicID}/${response.payload.response.data.createForumPost.forumSubTopic.id}/${response.payload.response.data.createForumPost.id}`
       );
     }
   };
