@@ -22,10 +22,11 @@ import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+import EmailIcon from "@mui/icons-material/Email";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
@@ -91,29 +92,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SimpleDialog(props) {
-  const classes = useStyles();
-  const { open, user, onClose, contactEmail, contactPhone } = props;
+  const { open, onClose, contactEmail, contactPhone, contactWeChat } = props;
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Seller Contact Infos</DialogTitle>
       <List sx={{ pt: 0 }}>
         <ListItem button>
-          <ListItemAvatar>
-            <CustomAvatar
-              className={classes.avatar}
-              component={true}
-              user={user}
-            ></CustomAvatar>
-          </ListItemAvatar>
-          <ListItemText primary={contactEmail} />
-        </ListItem>
-        <ListItem button>
           <ListItemIcon>
             <PhoneInTalkIcon />
           </ListItemIcon>
           <ListItemText primary={contactPhone} />
         </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <EmailIcon />
+          </ListItemIcon>
+          <ListItemText primary={contactEmail} />
+        </ListItem>
+        {contactWeChat ? (
+          <ListItem button>
+            <ListItemIcon>
+              <FacebookIcon />
+            </ListItemIcon>
+            <ListItemText primary={contactWeChat} />
+          </ListItem>
+        ) : null}
       </List>
     </Dialog>
   );
@@ -146,7 +150,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
     // ByCreatedAt,
     contactEmail,
     contactPhone,
-    // contactWeChat,
+    contactWeChat,
     owner,
   } = marketItem;
 
@@ -202,6 +206,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
           user={user}
           contactPhone={contactPhone}
           contactEmail={contactEmail}
+          contactWeChat={contactWeChat}
           onClose={() => setOpen(false)}
         />
         <Button
