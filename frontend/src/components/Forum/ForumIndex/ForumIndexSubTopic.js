@@ -1,21 +1,23 @@
 import {
   Box,
-  ListItemText,
   List,
   ListItem,
-  Typography,
   ListItemAvatar,
+  ListItemText,
   Paper,
+  Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import React from "react";
+
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
-import ForumTimeComponent from "../ForumTimeComponent";
 import ForumPostTitleToolTip from "../ForumPost/ForumPostTitleToolTip";
 import ForumPostUserIDComponent from "../ForumPost/ForumPostUserIDComponent";
+import ForumTimeComponent from "../ForumTimeComponent";
+import { Link } from "react-router-dom";
+import React from "react";
+
 export default function ForumIndexSubTopic({ forumSubTopic }) {
   const forumPost = forumSubTopic.forumPosts.items[0];
-  // console.log(forumPost);
+  console.log(forumSubTopic);
   return (
     <div>
       <Paper
@@ -55,7 +57,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                   variant="h6"
                   color="text.primary"
                   component={Link}
-                  to={`/forum/forumSubTopic/${forumSubTopic.id}`}
+                  to={`/forum/${forumSubTopic.forumTopicID}/${forumSubTopic.id}`}
                   sx={{
                     textDecorationLine: "none",
                     "&: hover": { color: "primary.main" },

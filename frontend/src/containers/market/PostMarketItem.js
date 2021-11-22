@@ -13,6 +13,12 @@ import {
 } from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketUserInfo,
+  postMarketUserInfo,
+  selectMarketUserById,
+  updateMarketUserInfoDetail,
+} from "../../redux/reducers/marketUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 // import { useForm, Controller } from "react-hook-form";
@@ -176,6 +182,11 @@ export default function PostMarketItem() {
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
+  const [defaultInfo, setDefaultInfo] = useState(true);
+  console.log("username", username);
+  const marketUserInfo = useSelector((state) =>
+    selectMarketUserById(state, username)
+  );
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const [imageKeys, setImageKeys] = useState("");
   const [open, setOpen] = useState(false);
@@ -225,6 +236,11 @@ export default function PostMarketItem() {
   //   ContactEmail:"",
   //   }
   // });
+
+  useEffect(() => {
+    dispatch(fetchMarketUserInfo(username));
+  }, [username, dispatch]);
+  console.log("userInfo", marketUserInfo);
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
     const imageLocation = "market/item";
@@ -332,8 +348,24 @@ export default function PostMarketItem() {
       contactPhone,
     };
 
+    const userInfo = {
+      id: username,
+      phone: contactPhone,
+      weChat: contactWeChat,
+      email: contactEmail,
+      userID: username,
+    };
+
     if (Object.values(canSave).every((item) => item !== "")) {
       const response = await dispatch(postMarketItem(createMarketItemInput));
+      if (marketUserInfo === undefined) {
+        await dispatch(postMarketUserInfo(userInfo));
+      } else if (marketUserInfo !== undefined) {
+        if (defaultInfo === true) {
+          await dispatch(updateMarketUserInfoDetail(userInfo));
+        }
+      }
+
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
         history.push(`/market/item/${response.payload.id}`);
@@ -673,12 +705,38 @@ export default function PostMarketItem() {
                   }}
                 />
               </Box>
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label="Using default contact information"
-                />
-              </FormGroup>
+              {marketUserInfo === undefined ? (
+                <Typography variant="subtitle1" fontWeight="600">
+                  Fill the Contact Info and Save as default
+                </Typography>
+              ) : (
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={() => {
+                          setDefaultInfo((prev) => !prev);
+
+                          defaultInfo === true
+                            ? setMarketItemData({
+                                ...marketItemData,
+                                contactEmail: marketUserInfo.email,
+                                contactPhone: marketUserInfo.phone,
+                                contactWeChat: marketUserInfo.weChat,
+                              })
+                            : setMarketItemData({
+                                ...marketItemData,
+                                contactEmail: "",
+                                contactPhone: "",
+                                contactWeChat: "",
+                              });
+                        }}
+                      />
+                    }
+                    label="Use default contact information"
+                  />
+                </FormGroup>
+              )}
               <Box sx={{ marginY: "1rem" }}>
                 <TextField
                   label={`Contact Phone${
@@ -686,6 +744,7 @@ export default function PostMarketItem() {
                   }`}
                   value={marketItemData.contactPhone}
                   variant="outlined"
+                  disabled={defaultInfo === false ? true : false}
                   error={Boolean(error.contactPhone)}
                   required
                   placeholder="eg: (123) 456 789"
@@ -708,6 +767,7 @@ export default function PostMarketItem() {
                   variant="outlined"
                   error={Boolean(error.contactEmail)}
                   required
+                  disabled={defaultInfo === false ? true : false}
                   placeholder="wang123456@email.com "
                   fullWidth
                   onChange={(e) => {
@@ -726,6 +786,7 @@ export default function PostMarketItem() {
                   variant="outlined"
                   placeholder="eg: Wang123"
                   fullWidth
+                  disabled={defaultInfo === false ? true : false}
                   onChange={(e) => {
                     setMarketItemData({
                       ...marketItemData,

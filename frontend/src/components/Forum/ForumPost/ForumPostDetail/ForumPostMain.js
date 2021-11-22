@@ -1,12 +1,12 @@
-import { Box, Breadcrumbs, Button, Divider, Typography } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import React, { useState } from "react";
 
+import CustomBreadcrumbs from "../../../CustomMUI/CustomBreadcrumbs";
 import ForumPostCommentPost from "./ForumPostCommentPost";
 import ForumPostContentComponent from "./ForumPostContentComponent";
 import ForumPostUserComponent from "./ForumPostUserComponent";
 // import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../../LikeButtonGroup";
-import { Link } from "react-router-dom";
 // import S3Image from "../../../S3/S3Image";
 import { useTitle } from "../../../../Hooks/useTitle";
 
@@ -15,7 +15,7 @@ export default function ForumPostMain({ forumPost }) {
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
   const { id, content, imgS3Keys, createdAt, userID, tags, user } = forumPost;
-  console.log("forumPost", forumPost);
+  console.log("forumPost6666666666666666666", forumPost);
   return (
     <div>
       <Box>
@@ -23,37 +23,7 @@ export default function ForumPostMain({ forumPost }) {
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
             {forumPost.title}
           </Typography>
-
-          <Breadcrumbs aria-label="breadcrumb">
-            <span style={{}}>
-              <Button color="inherit" component={Link} to={`/`}>
-                UWCSSA
-              </Button>
-            </span>
-            <span style={{}}>
-              <Button color="inherit" component={Link} to={`/forum`}>
-                论坛
-              </Button>
-            </span>
-            <span style={{ cursor: "not-allowed" }}>
-              <Button
-                color="inherit"
-                component={Link}
-                to={`/forum/forumTopic/${forumPost.forumSubTopic.forumTopic.id}`}
-              >
-                {forumPost.forumSubTopic.forumTopic.name}
-              </Button>
-            </span>
-            <span style={{ cursor: "not-allowed" }}>
-              <Button
-                color="inherit"
-                component={Link}
-                to={`/forum/forumSubTopic/${forumPost.forumSubTopic.id}`}
-              >
-                {forumPost.forumSubTopic.name}
-              </Button>
-            </span>
-          </Breadcrumbs>
+          <CustomBreadcrumbs />
         </Box>
 
         <Box

@@ -15,7 +15,6 @@ export default function ForumPostUserComponent({ user, userID, id }) {
       }}
     >
       <Box
-        // component="CustomAvatar"你这个是做啥我没懂，红字主要原因
         sx={{
           m: { xs: 0, sm: 1 },
           width: { xs: 42, sm: 68 },

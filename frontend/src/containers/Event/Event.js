@@ -1,23 +1,16 @@
-import {
-  Box,
-  Breadcrumbs,
-  Button,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
-import { Link } from "react-router-dom";
+import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
-import { useTitle } from "../../Hooks/useTitle";
 import moment from "moment";
-import PastEvent from "../../components/Event/PastEvents";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,13 +108,7 @@ export default function Event() {
     <div>
       <Box className={classes.root}>
         <Box sx={{ marginLeft: "1rem" }}>
-          <Breadcrumbs aria-label="breadcrumb">
-            <span>
-              <Button color="inherit" component={Link} to="/">
-                主页
-              </Button>
-            </span>
-          </Breadcrumbs>
+          <CustomBreadcrumbs />
         </Box>
         {/* <EventSliderShow /> */}
         <Box className={classes.list}>

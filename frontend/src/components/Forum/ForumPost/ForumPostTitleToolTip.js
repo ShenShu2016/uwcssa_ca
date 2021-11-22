@@ -1,8 +1,10 @@
-import { Typography, Fade } from "@mui/material";
+import { Fade, Typography } from "@mui/material";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+
 import { Link } from "react-router-dom";
 import React from "react";
 import { styled } from "@mui/material/styles";
+
 const TitleTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -15,6 +17,7 @@ const TitleTooltip = styled(({ className, ...props }) => (
   },
 }));
 export default function ForumPostTitleToolTip({ forumPost }) {
+  console.log(forumPost);
   return (
     <div>
       <TitleTooltip

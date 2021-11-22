@@ -8,6 +8,7 @@ import forumReducer from "./reducers/forumSlice";
 import generalReducer from "./reducers/generalSlice";
 // import { generalReducer } from "./reducers/generalReducer";
 import marketReducer from "./reducers/marketSlice";
+import marketUserReducer from "./reducers/marketUserSlice";
 import profileReducer from "./reducers/profileSlice";
 import staffReducer from "./reducers/staffSlice";
 
@@ -20,6 +21,7 @@ export default configureStore({
     career: careerSlice,
     forum: forumReducer,
     market: marketReducer,
+    marketUser: marketUserReducer,
     event: eventReducer,
     staff: staffReducer,
   },

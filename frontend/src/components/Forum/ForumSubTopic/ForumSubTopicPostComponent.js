@@ -4,15 +4,15 @@ import {
   Grid,
   Paper,
   Typography,
-  // Button,
 } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import { Link } from "react-router-dom";
+import React from "react";
 import moment from "moment";
 
 export default function ForumSubTopicPostComponent({ forumPost }) {
-  // console.log("forumPost", forumPost);
+  console.log("forumPost", forumPost);
   const {
     id,
     title,
@@ -21,6 +21,7 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
     createdAt,
     userID,
     user,
+    forumSubTopic,
   } = forumPost;
   return (
     <div>
@@ -68,7 +69,10 @@ export default function ForumSubTopicPostComponent({ forumPost }) {
                   />
                 </CardActionArea>
               </Grid>
-              <CardActionArea component={Link} to={`/forum/forumPost/${id}`}>
+              <CardActionArea
+                component={Link}
+                to={`/forum/${forumSubTopic.forumTopicID}/${forumSubTopic.id}/${id}`}
+              >
                 <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
                   <div style={{ maxHeight: "48px", overflow: "hidden" }}>
                     <Typography

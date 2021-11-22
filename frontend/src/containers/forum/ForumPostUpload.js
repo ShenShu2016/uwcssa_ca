@@ -1,44 +1,42 @@
 import {
   Box,
   Button,
-  Skeleton,
   Checkbox,
-  Typography,
-  Stack,
-  Divider,
-  IconButton,
-  TextField,
-  Breadcrumbs,
-  Paper,
-  FormControlLabel,
   CircularProgress,
+  Divider,
+  FormControlLabel,
+  IconButton,
+  Paper,
+  Skeleton,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { indigo } from "@mui/material/colors";
+import { Controller, useForm } from "react-hook-form";
+import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import {
   postForumPost,
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
-} from "../../../redux/reducers/forumSlice";
+} from "../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
+import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumPostImageSwipe from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostImageSwipe";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
-import {
-  postMultipleImages,
-  // postSingleImage,
-} from "../../../redux/reducers/generalSlice";
-import { Controller, useForm } from "react-hook-form";
-import CustomTags, { GetTags } from "../../CustomMUI/CustomTags";
-import ForumAdSide from "../ForumAdSide";
-import ForumPostImageSwipe from "./ForumPostDetail/ForumPostImageSwipe";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { indigo } from "@mui/material/colors";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
-// import { useHistory } from "react-router";
-import { useTitle } from "../../../Hooks/useTitle";
-import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
+import { useTitle } from "../../Hooks/useTitle";
 
 const Input = styled("input")({
   display: "none",
@@ -46,12 +44,13 @@ const Input = styled("input")({
 
 export default function ForumPostUpload() {
   useTitle("发布帖子");
-  const { forumSubTopicID } = useParams();
-  // console.log(forumSubTopicID);
+  const { forumSubTopicID, forumTopicID } = useParams();
+
+  console.log(forumTopicID, forumSubTopicID);
   const dispatch = useDispatch();
   const [imageKeys, setImageKeys] = useState("");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
-  // const history = useHistory();
+  const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -153,28 +152,22 @@ export default function ForumPostUpload() {
   const onSubmit = async (data) => {
     const createForumPostInput = {
       ...data,
-      imgS3Keys: Object.keys(imageKeys),
+      imgS3Keys: imageKeys,
       active: checkActive,
       lastReplyAt: new Date().toISOString(),
       userID: username,
       forumSubTopicID: forumSubTopicID,
       tags: GetTags(),
+      essential: false,
+      sortKey: "SortKey",
     };
     const response = await dispatch(postForumPost(createForumPostInput));
     console.log("response: ", response);
     if (response.meta.requestStatus === "fulfilled") {
-      // history.push(`/forum/item/${response.payload.id}`);
+      history.push(
+        `/forum/${response.payload.response.data.createForumPost.forumSubTopic.forumTopicID}/${response.payload.response.data.createForumPost.forumSubTopic.id}/${response.payload.response.data.createForumPost.id}`
+      );
     }
-    console.log("Can upload");
-
-    // console.log(
-    //   "response.response.data.createForumPost.id",
-    //   response.response.data.createForumPost.id
-    // );
-    // console.log("response.result", response.result);
-    // if (response.result) {
-    //   history.push(`/forumPost/${response.response.data.createForumPost.id}`);
-    // }
   };
   const handleDeleteImg = (imgKey) => {
     const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
@@ -220,38 +213,8 @@ export default function ForumPostUpload() {
             sx={{ m: 4 }}
           />
         ) : (
-          <Box sx={{ padding: "1rem", maxwidth: "100%" }}>
-            <Breadcrumbs aria-label="breadcrumb">
-              <span style={{}}>
-                <Button color="inherit" component={Link} to={`/`}>
-                  UWCSSA
-                </Button>
-              </span>
-              <span style={{}}>
-                <Button color="inherit" component={Link} to={`/forum`}>
-                  论坛
-                </Button>
-              </span>
-              <span style={{ cursor: "not-allowed" }}>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  to={`/forum/forumTopic/${forumSubTopic.forumTopic.id}`}
-                >
-                  {forumSubTopic.forumTopic.name}
-                </Button>
-              </span>
-              <span style={{ cursor: "not-allowed" }}>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  disabled
-                  to={`/forum/forumSubTopic/${forumSubTopic.id}`}
-                >
-                  {forumSubTopic.name}
-                </Button>
-              </span>
-            </Breadcrumbs>
+          <Box sx={{ padding: "1rem", maxWidth: "100%" }}>
+            <CustomBreadcrumbs />
           </Box>
         )}
         {/* upload and preview */}
@@ -285,7 +248,7 @@ export default function ForumPostUpload() {
               <Box sx={{ my: 1 }}>
                 <IconButton onClick={handleClickOpen}>
                   <VisibilityIcon
-                    sx={open ? { color: "grey" } : { color: "blue" }}
+                    sx={open ? { color: "grey" } : { color: "teal" }}
                   />
                 </IconButton>
               </Box>
@@ -625,8 +588,8 @@ export default function ForumPostUpload() {
                       }}
                     >
                       {imgKeyFromServer.length !== 0 ? (
-                        <Box sx={{height:210}}>
-                        <ForumPostImageSwipe images={imgKeyFromServer} />
+                        <Box sx={{ height: 210 }}>
+                          <ForumPostImageSwipe images={imgKeyFromServer} />
                         </Box>
                       ) : (
                         <Box sx={{ height: 40 }}>

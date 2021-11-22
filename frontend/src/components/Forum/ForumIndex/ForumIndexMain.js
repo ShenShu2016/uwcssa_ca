@@ -2,22 +2,22 @@ import {
   Box,
   Button,
   Grid,
+  Paper,
   Skeleton,
   Typography,
-  // Divider,
-  Paper,
 } from "@mui/material";
 import React, { useEffect } from "react";
+import {
+  fetchForumPosts,
+  fetchForumTopics,
+} from "../../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
+
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ForumIndexDialog from "./ForumIndexDialog";
 // import ForumIndexSportLight from "./ForumIndexSportLight";
 import ForumIndexTopic from "./ForumIndexTopic";
-import ForumIndexDialog from "./ForumIndexDialog";
 import { Link } from "react-router-dom";
-import {
-  fetchForumTopics,
-  fetchForumPosts,
-} from "../../../redux/reducers/forumSlice";
 
 export default function ForumIndexMain() {
   const { userAuth } = useSelector((state) => state);
@@ -25,7 +25,7 @@ export default function ForumIndexMain() {
   const {
     forumTopics,
     fetchForumTopicsStatus,
-    forumPosts,
+    // forumPosts,
     fetchForumPostsStatus,
   } = useSelector((state) => state.forum);
 
@@ -37,7 +37,8 @@ export default function ForumIndexMain() {
       dispatch(fetchForumPosts());
     }
   }, [dispatch, fetchForumTopicsStatus, fetchForumPostsStatus]);
-  console.log("forumPosts", forumPosts);
+  // console.log("forumPosts", forumPosts);
+  // console.log("forumTopics", forumTopics);
   return (
     <div>
       <Box sx={{ p: 1, width: "100%", backgroundColor: "grey" }}>
@@ -100,7 +101,7 @@ export default function ForumIndexMain() {
                           variant="text"
                           color="primary"
                           component={Link}
-                          to={`/forum/forumTopic/${forumTopic.id}`}
+                          to={`/forum/${forumTopic.id}`}
                         >
                           {forumTopic.name}
                           <ArrowForwardIcon />

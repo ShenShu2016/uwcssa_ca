@@ -249,3 +249,17 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
     }
   }
 `;
+
+export const getMarketUserInfo = /* GraphQL */ `
+  query GetMarketUserInfo($id: ID!) {
+    getMarketUserInfo(id: $id) {
+      id
+      phone
+      weChat
+      email
+      userID
+      createdAt
+      updatedAt
+    }
+  }
+`;

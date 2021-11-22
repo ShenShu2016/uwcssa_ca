@@ -5,20 +5,22 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  InputLabel,
-  OutlinedInput,
-  MenuItem,
   FormControl,
-  Select,
   IconButton,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
 } from "@mui/material";
 import React, { useState } from "react";
+
+import CloseIcon from "@mui/icons-material/Close";
+import { Link } from "react-router-dom";
 // import { Controller, useForm } from "react-hook-form";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
+import { styled } from "@mui/material/styles";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -58,8 +60,8 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function ForumIndexDialog({ forumTopics }) {
-  const [open, setOpen] = React.useState(false);
-  const [select, setSelect] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [select, setSelect] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
     setSelectForumTopic({ forumTopic: "" });
@@ -77,8 +79,8 @@ export default function ForumIndexDialog({ forumTopics }) {
     forumTopic: "",
   });
   const [selectForumSubTopic, setSelectForumSubTopic] = useState({ id: "" });
-  console.log(selectForumSubTopic);
-  console.log(selectForumTopic);
+  // console.log(selectForumSubTopic);
+  // console.log(selectForumTopic);
   return (
     <div>
       <Button
@@ -182,7 +184,7 @@ export default function ForumIndexDialog({ forumTopics }) {
             autoFocus
             // onClick={handleClose}
             component={Link}
-            to={`/forum/${selectForumSubTopic.id}/发布帖子`}
+            to={`/forum/${selectForumTopic}/${selectForumSubTopic.id}/发布帖子`}
           >
             继续
           </Button>
