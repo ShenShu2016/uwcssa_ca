@@ -899,6 +899,7 @@ type UserMutationLog
   eventID: ID!
   typename: String!
   eventSourceARN: String!
+  record: AWSJSON!
   createdAt: AWSDateTime!
   sortKey: SortKey!
   userID: ID!
