@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import { fetchEvents } from "../../redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
-import moment from "moment";
 import PastEvent from "../../components/Event/PastEvents";
 
 const useStyles = makeStyles((theme) => ({
