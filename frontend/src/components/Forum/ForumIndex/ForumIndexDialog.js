@@ -58,8 +58,8 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function ForumIndexDialog({ forumTopics }) {
-  const [open, setOpen] = React.useState(false);
-  const [select, setSelect] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [select, setSelect] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
     setSelectForumTopic({ forumTopic: "" });
@@ -77,8 +77,8 @@ export default function ForumIndexDialog({ forumTopics }) {
     forumTopic: "",
   });
   const [selectForumSubTopic, setSelectForumSubTopic] = useState({ id: "" });
-  console.log(selectForumSubTopic);
-  console.log(selectForumTopic);
+  // console.log(selectForumSubTopic);
+  // console.log(selectForumTopic);
   return (
     <div>
       <Button

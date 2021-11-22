@@ -142,7 +142,6 @@ function ForumTopicCURD() {
             endIcon={<PublishIcon />}
             onClick={uploadForumTopic}
             color="primary"
-            // to="/forumtest"
           >
             上传新的Forum topic
           </Button>
