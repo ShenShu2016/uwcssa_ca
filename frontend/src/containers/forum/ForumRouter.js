@@ -9,10 +9,24 @@ import ForumSubTopic from "./ForumSubTopic";
 import ForumTopic from "./ForumTopic";
 import ForumTopicCURD from "./ForumTopicCURD";
 import React from "react";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: "auto",
+    marginTop: "4rem",
+    maxWidth: "1536px",
+    paddingInline: "3rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingInline: "0.5rem",
+    },
+  },
+}));
 
 export default function ForumRouter() {
+  const classes = useStyles();
   return (
-    <Box>
+    <Box className={classes.root}>
       <Switch>
         <Route exact path="/forum" component={ForumHome} />
         <Route
