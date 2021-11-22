@@ -246,6 +246,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -396,6 +397,7 @@ export const getUserMutationLog = /* GraphQL */ `
       eventID
       typename
       eventSourceARN
+      record
       createdAt
       sortKey
       userID
@@ -631,6 +633,7 @@ export const getUserMutationLog = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -677,6 +680,7 @@ export const listUserMutationLogs = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -797,6 +801,7 @@ export const userMutationLogSortByUserID = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -847,6 +852,7 @@ export const userMutationLogSortBySortKey = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -897,6 +903,7 @@ export const userMutationLogSortBy__typename = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -1172,6 +1179,7 @@ export const userSortBySortKey = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -1344,6 +1352,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1838,6 +1847,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1907,6 +1917,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -2026,6 +2037,7 @@ export const getUser = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -2093,6 +2105,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -2383,6 +2396,7 @@ export const listUsers = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -2658,6 +2672,7 @@ export const getUserEducation = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -2977,6 +2992,7 @@ export const getUserExperience = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -3290,6 +3306,7 @@ export const getTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -3649,6 +3666,7 @@ export const getArticle = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -4097,6 +4115,7 @@ export const getArticleComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -4566,6 +4585,7 @@ export const getArticleSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -5028,6 +5048,7 @@ export const getEvent = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -5518,6 +5539,7 @@ export const getEventComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -6014,6 +6036,7 @@ export const getEventSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -6478,6 +6501,7 @@ export const getEventParticipant = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -6956,6 +6980,7 @@ export const getDepartment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -7313,6 +7338,7 @@ export const getUwcssaJob = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -7740,6 +7766,7 @@ export const getForumTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -8059,6 +8086,7 @@ export const getForumSubTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -8120,6 +8148,7 @@ export const getForumSubTopic = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -8181,6 +8210,78 @@ export const listForumSubTopics = /* GraphQL */ `
     }
   }
 `;
+export const forumPostSortBySortKey = /* GraphQL */ `
+  query ForumPostSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    forumPostSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        essential
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const forumPostSortByForumSubTopicID = /* GraphQL */ `
   query ForumPostSortByForumSubTopicID(
     $forumSubTopicID: ID
@@ -8204,6 +8305,7 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -8275,6 +8377,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -8331,6 +8434,7 @@ export const getForumPost = /* GraphQL */ `
       content
       imgS3Keys
       tags
+      sortKey
       active
       createdAt
       lastReplyAt
@@ -8568,6 +8672,7 @@ export const getForumPost = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -8688,6 +8793,7 @@ export const listForumPosts = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -8977,6 +9083,7 @@ export const getForumPostComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -9009,6 +9116,7 @@ export const getForumPostComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -9127,6 +9235,7 @@ export const listForumPostComments = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -9197,6 +9306,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -9461,6 +9571,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -9718,6 +9829,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -9750,6 +9862,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -9826,6 +9939,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -9922,6 +10036,7 @@ export const listForumPostSubComments = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -10019,6 +10134,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -10288,6 +10404,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -10629,6 +10746,7 @@ export const getMarketItem = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -11293,6 +11411,7 @@ export const getFoundingMember = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -11603,6 +11722,7 @@ export const getLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -11860,6 +11980,7 @@ export const getLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -12179,6 +12300,7 @@ export const getLike = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -12255,6 +12377,7 @@ export const getLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -12324,6 +12447,7 @@ export const getLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -12484,6 +12608,7 @@ export const listLikes = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -12762,6 +12887,7 @@ export const getWebFeedBack = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID

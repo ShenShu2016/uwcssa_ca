@@ -146,6 +146,7 @@ export const createUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -640,6 +641,7 @@ export const createUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -709,6 +711,7 @@ export const createUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -828,6 +831,7 @@ export const createUser = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -895,6 +899,7 @@ export const createUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1092,6 +1097,7 @@ export const updateUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1586,6 +1592,7 @@ export const updateUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1655,6 +1662,7 @@ export const updateUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1774,6 +1782,7 @@ export const updateUser = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -1841,6 +1850,7 @@ export const updateUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -2038,6 +2048,7 @@ export const deleteUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -2532,6 +2543,7 @@ export const deleteUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -2601,6 +2613,7 @@ export const deleteUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -2720,6 +2733,7 @@ export const deleteUser = /* GraphQL */ `
         eventID
         typename
         eventSourceARN
+        record
         createdAt
         sortKey
         userID
@@ -2787,6 +2801,7 @@ export const deleteUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -3087,6 +3102,7 @@ export const createUserEducation = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -3365,6 +3381,7 @@ export const updateUserEducation = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -3643,6 +3660,7 @@ export const deleteUserEducation = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -3922,6 +3940,7 @@ export const createUserExperience = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -4201,6 +4220,7 @@ export const updateUserExperience = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -4480,6 +4500,7 @@ export const deleteUserExperience = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -4752,6 +4773,7 @@ export const createTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -5065,6 +5087,7 @@ export const updateTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -5378,6 +5401,7 @@ export const deleteTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -5698,6 +5722,7 @@ export const createArticle = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -6032,6 +6057,7 @@ export const updateArticle = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -6366,6 +6392,7 @@ export const deleteArticle = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -6695,6 +6722,7 @@ export const createArticleComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -7039,6 +7067,7 @@ export const updateArticleComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -7383,6 +7412,7 @@ export const deleteArticleComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -7727,6 +7757,7 @@ export const createArticleSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -8061,6 +8092,7 @@ export const updateArticleSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -8395,6 +8427,7 @@ export const deleteArticleSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -8742,6 +8775,7 @@ export const createEvent = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -9104,6 +9138,7 @@ export const updateEvent = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -9466,6 +9501,7 @@ export const deleteEvent = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -9815,6 +9851,7 @@ export const createEventComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -10170,6 +10207,7 @@ export const updateEventComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -10525,6 +10563,7 @@ export const deleteEventComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -10880,6 +10919,7 @@ export const createEventSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -11222,6 +11262,7 @@ export const updateEventSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -11564,6 +11605,7 @@ export const deleteEventSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -11913,6 +11955,7 @@ export const createEventParticipant = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -12250,6 +12293,7 @@ export const updateEventParticipant = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -12587,6 +12631,7 @@ export const deleteEventParticipant = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -12918,6 +12963,7 @@ export const createDepartment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -13212,6 +13258,7 @@ export const updateDepartment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -13506,6 +13553,7 @@ export const deleteDepartment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -13824,6 +13872,7 @@ export const createUwcssaJob = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -14153,6 +14202,7 @@ export const updateUwcssaJob = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -14482,6 +14532,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -14790,6 +14841,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -15116,6 +15168,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -15442,6 +15495,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -15762,6 +15816,7 @@ export const createForumTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -16044,6 +16099,7 @@ export const updateForumTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -16326,6 +16382,7 @@ export const deleteForumTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -16609,6 +16666,7 @@ export const createForumSubTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -16670,6 +16728,7 @@ export const createForumSubTopic = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -16927,6 +16986,7 @@ export const updateForumSubTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -16988,6 +17048,7 @@ export const updateForumSubTopic = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -17245,6 +17306,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -17306,6 +17368,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -17331,6 +17394,7 @@ export const createForumPost = /* GraphQL */ `
       content
       imgS3Keys
       tags
+      sortKey
       active
       createdAt
       lastReplyAt
@@ -17568,6 +17632,7 @@ export const createForumPost = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -17686,6 +17751,7 @@ export const updateForumPost = /* GraphQL */ `
       content
       imgS3Keys
       tags
+      sortKey
       active
       createdAt
       lastReplyAt
@@ -17923,6 +17989,7 @@ export const updateForumPost = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -18041,6 +18108,7 @@ export const deleteForumPost = /* GraphQL */ `
       content
       imgS3Keys
       tags
+      sortKey
       active
       createdAt
       lastReplyAt
@@ -18278,6 +18346,7 @@ export const deleteForumPost = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -18629,6 +18698,7 @@ export const createForumPostComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -18661,6 +18731,7 @@ export const createForumPostComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -18980,6 +19051,7 @@ export const updateForumPostComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -19012,6 +19084,7 @@ export const updateForumPostComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -19331,6 +19404,7 @@ export const deleteForumPostComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -19363,6 +19437,7 @@ export const deleteForumPostComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -19684,6 +19759,7 @@ export const createForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -19941,6 +20017,7 @@ export const createForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -19973,6 +20050,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -20049,6 +20127,7 @@ export const createForumPostSubComment = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -20328,6 +20407,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -20585,6 +20665,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -20617,6 +20698,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -20693,6 +20775,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -20972,6 +21055,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -21229,6 +21313,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -21261,6 +21346,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -21337,6 +21423,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -21614,6 +21701,7 @@ export const createMarketUserInfo = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -21888,6 +21976,7 @@ export const updateMarketUserInfo = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -22162,6 +22251,7 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -22467,6 +22557,7 @@ export const createMarketItem = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -22772,6 +22863,7 @@ export const updateMarketItem = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -23077,6 +23169,7 @@ export const deleteMarketItem = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -23354,6 +23447,7 @@ export const createFoundingMember = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -23630,6 +23724,7 @@ export const updateFoundingMember = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -23906,6 +24001,7 @@ export const deleteFoundingMember = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -24178,6 +24274,7 @@ export const createLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -24435,6 +24532,7 @@ export const createLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -24754,6 +24852,7 @@ export const createLike = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -24830,6 +24929,7 @@ export const createLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -24899,6 +24999,7 @@ export const createLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -25170,6 +25271,7 @@ export const updateLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -25427,6 +25529,7 @@ export const updateLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -25746,6 +25849,7 @@ export const updateLike = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -25822,6 +25926,7 @@ export const updateLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -25891,6 +25996,7 @@ export const updateLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -26162,6 +26268,7 @@ export const deleteLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -26419,6 +26526,7 @@ export const deleteLike = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -26738,6 +26846,7 @@ export const deleteLike = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -26814,6 +26923,7 @@ export const deleteLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -26883,6 +26993,7 @@ export const deleteLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -27155,6 +27266,7 @@ export const createWebFeedBack = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -27429,6 +27541,7 @@ export const updateWebFeedBack = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -27703,6 +27816,7 @@ export const deleteWebFeedBack = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -27744,6 +27858,7 @@ export const createUserMutationLog = /* GraphQL */ `
       eventID
       typename
       eventSourceARN
+      record
       createdAt
       sortKey
       userID
@@ -27979,6 +28094,7 @@ export const createUserMutationLog = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -28019,6 +28135,7 @@ export const updateUserMutationLog = /* GraphQL */ `
       eventID
       typename
       eventSourceARN
+      record
       createdAt
       sortKey
       userID
@@ -28254,6 +28371,7 @@ export const updateUserMutationLog = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
@@ -28294,6 +28412,7 @@ export const deleteUserMutationLog = /* GraphQL */ `
       eventID
       typename
       eventSourceARN
+      record
       createdAt
       sortKey
       userID
@@ -28529,6 +28648,7 @@ export const deleteUserMutationLog = /* GraphQL */ `
           eventID
           typename
           eventSourceARN
+          record
           createdAt
           sortKey
           userID
