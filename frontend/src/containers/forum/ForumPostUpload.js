@@ -33,9 +33,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { indigo } from "@mui/material/colors";
-import {
-  postMultipleImages,
-} from "../../redux/reducers/generalSlice";
+import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
@@ -46,8 +44,9 @@ const Input = styled("input")({
 
 export default function ForumPostUpload() {
   useTitle("发布帖子");
-  const { forumSubTopicID } = useParams();
-  // console.log(forumSubTopicID);
+  const { forumSubTopicID, forumTopicID } = useParams();
+
+  console.log(forumTopicID, forumSubTopicID);
   const dispatch = useDispatch();
   const [imageKeys, setImageKeys] = useState("");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
@@ -166,7 +165,7 @@ export default function ForumPostUpload() {
     console.log("response: ", response);
     if (response.meta.requestStatus === "fulfilled") {
       history.push(
-        `/forum/forumPost/${response.payload.response.data.createForumPost.id}`
+        `/forum/${response.payload.response.data.createForumPost.forumSubTopic.id}/${response.payload.response.data.createForumPost.forumSubTopic.forumTopicID}/${response.payload.response.data.createForumPost.id}`
       );
     }
   };
@@ -214,7 +213,7 @@ export default function ForumPostUpload() {
             sx={{ m: 4 }}
           />
         ) : (
-          <Box sx={{ padding: "1rem", maxwidth: "100%" }}>
+          <Box sx={{ padding: "1rem", maxWidth: "100%" }}>
             <Breadcrumbs aria-label="breadcrumb">
               <span style={{}}>
                 <Button color="inherit" component={Link} to={`/`}>
@@ -230,7 +229,7 @@ export default function ForumPostUpload() {
                 <Button
                   color="inherit"
                   component={Link}
-                  to={`/forum/forumTopic/${forumSubTopic.forumTopic.id}`}
+                  to={`/forum/${forumSubTopic.forumTopic.id}`}
                 >
                   {forumSubTopic.forumTopic.name}
                 </Button>
@@ -240,7 +239,7 @@ export default function ForumPostUpload() {
                   color="inherit"
                   component={Link}
                   // disabled
-                  to={`/forum/forumSubTopic/${forumSubTopic.id}`}
+                  to={`/forum/${forumTopicID}/${forumSubTopic.id}`}
                 >
                   {forumSubTopic.name}
                 </Button>

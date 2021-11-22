@@ -15,7 +15,7 @@ export default function ForumPostMain({ forumPost }) {
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
   const { id, content, imgS3Keys, createdAt, userID, tags, user } = forumPost;
-  console.log("forumPost", forumPost);
+  console.log("forumPost6666666666666666666", forumPost);
   return (
     <div>
       <Box>
@@ -39,7 +39,7 @@ export default function ForumPostMain({ forumPost }) {
               <Button
                 color="inherit"
                 component={Link}
-                to={`/forum/forumTopic/${forumPost.forumSubTopic.forumTopic.id}`}
+                to={`/forum/${forumPost.forumSubTopic.forumTopic.id}`}
               >
                 {forumPost.forumSubTopic.forumTopic.name}
               </Button>
@@ -48,7 +48,7 @@ export default function ForumPostMain({ forumPost }) {
               <Button
                 color="inherit"
                 component={Link}
-                to={`/forum/forumSubTopic/${forumPost.forumSubTopic.id}`}
+                to={`/forum/${forumPost.forumSubTopic.forumTopicID}/${forumPost.forumSubTopic.id}`}
               >
                 {forumPost.forumSubTopic.name}
               </Button>

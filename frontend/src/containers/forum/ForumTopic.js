@@ -71,7 +71,7 @@ function ForumTopic() {
                     color="inherit"
                     component={Link}
                     disabled
-                    to={`/forum/forumTopic/${forumTopic.id}`}
+                    to={`/forum/${forumTopic.id}`}
                   >
                     {forumTopic.name}
                   </Button>

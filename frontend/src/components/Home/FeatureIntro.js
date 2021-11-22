@@ -65,7 +65,7 @@ export default function FeatureIntro() {
                   marginBlock: "0.3rem",
                 }}
                 component={Link}
-                to="/forum/forumTopic/学习帮助"
+                to="/forum/学习帮助"
               >
                 学习帮助
               </Button>
@@ -79,7 +79,7 @@ export default function FeatureIntro() {
                   marginBlock: "0.3rem",
                 }}
                 component={Link}
-                to="/forum/forumTopic/大学和大学课程"
+                to="/forum/大学和大学课程"
               >
                 大学和大学课程
               </Button>
@@ -93,7 +93,7 @@ export default function FeatureIntro() {
                   marginBlock: "0.3rem",
                 }}
                 component={Link}
-                to="/forum/forumTopic/职业和工作"
+                to="/forum/职业和工作"
               >
                 职业和工作
               </Button>
@@ -107,7 +107,7 @@ export default function FeatureIntro() {
                   marginBlock: "0.3rem",
                 }}
                 component={Link}
-                to="/forum/forumTopic/娱乐"
+                to="/forum/娱乐"
               >
                 娱乐
               </Button>
@@ -121,7 +121,7 @@ export default function FeatureIntro() {
                   marginBlock: "0.3rem",
                 }}
                 component={Link}
-                to="/forum/forumTopic/生活"
+                to="/forum/生活"
               >
                 生活
               </Button>
@@ -135,7 +135,7 @@ export default function FeatureIntro() {
                   marginBlock: "0.3rem",
                 }}
                 component={Link}
-                to="/forum/forumTopic/住房"
+                to="/forum/住房"
               >
                 住房
               </Button>

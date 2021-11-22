@@ -1,15 +1,11 @@
-import {
-  Box,
-  // Typography,
-  Breadcrumbs,
-  Button,
-} from "@mui/material";
-import React from "react";
+import { Box, Breadcrumbs, Button } from "@mui/material";
+
+import ForumSubTopicTip from "./ForumSubTopicTip";
 import { Link } from "react-router-dom";
+import React from "react";
+import SendIcon from "@mui/icons-material/Send";
 import { useSelector } from "react-redux";
 import { useTitle } from "../../../Hooks/useTitle";
-import ForumSubTopicTip from "./ForumSubTopicTip";
-import SendIcon from "@mui/icons-material/Send";
 
 export default function ForumSubTopicMain({ forumSubTopic }) {
   console.log(forumSubTopic);
@@ -38,7 +34,7 @@ export default function ForumSubTopicMain({ forumSubTopic }) {
             <Button
               color="inherit"
               component={Link}
-              to={`/forum/forumTopic/${forumSubTopic.forumTopic.id}`}
+              to={`/forum/${forumSubTopic.forumTopic.id}`}
             >
               {forumSubTopic.forumTopic.name}
             </Button>
@@ -48,7 +44,7 @@ export default function ForumSubTopicMain({ forumSubTopic }) {
               color="inherit"
               component={Link}
               disabled
-              to={`/forum/forumSubTopic/${forumSubTopic.id}`}
+              to={`/forum/${forumSubTopic.forumTopicID}/${forumSubTopic.id}`}
             >
               {forumSubTopic.name}
             </Button>
@@ -79,7 +75,7 @@ export default function ForumSubTopicMain({ forumSubTopic }) {
           <Button
             variant="contained"
             component={Link}
-            to={`/forum/${forumSubTopic.id}/发布帖子`}
+            to={`/forum/${forumSubTopic.forumTopicID}/${forumSubTopic.id}/发布帖子`}
             endIcon={<SendIcon />}
             size="large"
           >

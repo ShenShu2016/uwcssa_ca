@@ -133,6 +133,7 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem>
                 <ListItem>
                   <ListItemButton
+                    disabled
                     sx={{ pl: 7 }}
                     component={Link}
                     to="/forum/forumPostUpload"

@@ -21,25 +21,22 @@ export default function ForumRouter() {
           component={ForumTopicCURD}
         />
         {/*这个应该放到staff里面或者别的什么地方，或者再开个forum admin */}
+        <Route exact path="/forum/:forumTopicID" component={ForumTopic} />
         <Route
           exact
-          path="/forum/forumTopic/:forumTopicID"
-          component={ForumTopic}
-        />
-        <Route
-          exact
-          path="/forum/forumSubTopic/:forumSubTopicID"
+          path="/forum/:forumTopicID/:forumSubTopicID"
           component={ForumSubTopic}
         />
         <Route
           exact
-          path="/forum/forumPost/:forumPostID"
-          component={ForumPost}
+          path="/forum/:forumTopicID/:forumSubTopicID/发布帖子"
+          component={ForumPostUpload}
         />
+        {/* 上下两个必须发布帖子在上 */}
         <Route
           exact
-          path="/forum/:forumSubTopicID/发布帖子"
-          component={ForumPostUpload}
+          path="/forum/:forumTopicID/:forumSubTopicID/:forumPostID"
+          component={ForumPost}
         />
       </Switch>
       <Footer />
