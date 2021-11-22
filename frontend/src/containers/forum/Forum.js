@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import Footer from "../Footer";
 import ForumIndex from "./ForumIndex";
 import ForumPost from "../../components/Forum/ForumPost/ForumPost";
-import ForumPostList from "../../components/Forum/ForumPost/ForumPostList";
 import ForumPostUpload from "../../components/Forum/ForumPost/ForumPostUpload";
 import ForumSubTopic from "../../components/Forum/ForumSubTopic/ForumSubTopic";
 import ForumTopic from "./ForumTopic";
@@ -32,7 +31,6 @@ export default function Forum() {
           exact
           component={ForumPostUpload}
         />
-        <Route path="/forum/forumPostList" exact component={ForumPostList} />
         <Route
           path="/forum/forumPost/:forumPostID"
           exact

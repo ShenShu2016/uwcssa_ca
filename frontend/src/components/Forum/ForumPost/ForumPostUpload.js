@@ -36,7 +36,7 @@ import CustomTags, { GetTags } from "../../CustomMUI/CustomTags";
 import ForumAdSide from "../ForumAdSide";
 import ForumPostImageSwipe from "./ForumPostDetail/ForumPostImageSwipe";
 import { styled } from "@mui/material/styles";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { useTitle } from "../../../Hooks/useTitle";
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 
@@ -51,7 +51,7 @@ export default function ForumPostUpload() {
   const dispatch = useDispatch();
   const [imageKeys, setImageKeys] = useState("");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
-  // const history = useHistory();
+  const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -153,28 +153,20 @@ export default function ForumPostUpload() {
   const onSubmit = async (data) => {
     const createForumPostInput = {
       ...data,
-      imgS3Keys: Object.keys(imageKeys),
+      imgS3Keys: imageKeys,
       active: checkActive,
       lastReplyAt: new Date().toISOString(),
       userID: username,
       forumSubTopicID: forumSubTopicID,
       tags: GetTags(),
+      essential: false,
+      sortKey:"SortKey",
     };
     const response = await dispatch(postForumPost(createForumPostInput));
     console.log("response: ", response);
     if (response.meta.requestStatus === "fulfilled") {
-      // history.push(`/forum/item/${response.payload.id}`);
+      history.push(`/forum/forumPost/${response.payload.response.data.createForumPost.id}`);
     }
-    console.log("Can upload");
-
-    // console.log(
-    //   "response.response.data.createForumPost.id",
-    //   response.response.data.createForumPost.id
-    // );
-    // console.log("response.result", response.result);
-    // if (response.result) {
-    //   history.push(`/forumPost/${response.response.data.createForumPost.id}`);
-    // }
   };
   const handleDeleteImg = (imgKey) => {
     const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
@@ -245,7 +237,7 @@ export default function ForumPostUpload() {
                 <Button
                   color="inherit"
                   component={Link}
-                  disabled
+                  // disabled
                   to={`/forum/forumSubTopic/${forumSubTopic.id}`}
                 >
                   {forumSubTopic.name}
@@ -285,7 +277,7 @@ export default function ForumPostUpload() {
               <Box sx={{ my: 1 }}>
                 <IconButton onClick={handleClickOpen}>
                   <VisibilityIcon
-                    sx={open ? { color: "grey" } : { color: "blue" }}
+                    sx={open ? { color: "grey" } : { color: "teal" }}
                   />
                 </IconButton>
               </Box>

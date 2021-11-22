@@ -25,7 +25,7 @@ export default function ForumIndexMain() {
   const {
     forumTopics,
     fetchForumTopicsStatus,
-    forumPosts,
+    // forumPosts,
     fetchForumPostsStatus,
   } = useSelector((state) => state.forum);
 
@@ -37,7 +37,8 @@ export default function ForumIndexMain() {
       dispatch(fetchForumPosts());
     }
   }, [dispatch, fetchForumTopicsStatus, fetchForumPostsStatus]);
-  console.log("forumPosts", forumPosts);
+  // console.log("forumPosts", forumPosts);
+  // console.log("forumTopics", forumTopics);
   return (
     <div>
       <Box sx={{ p: 1, width: "100%", backgroundColor: "grey" }}>
