@@ -83,14 +83,18 @@ export default function Event() {
 
   useEffect(() => {
     const filtered = selectedTopic
-      ? events.filter((item) => item.topic.name === selectedTopic)
+      ? selectedTopic === "全部"
+        ? events
+        : events.filter((item) => item.topic.name === selectedTopic)
       : events;
 
     setFilteredEventList(
-      [...filtered].sort(
-        (a, b) =>
-          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-      )
+      [...filtered]
+        .filter((d) => new Date(d.startDate) - new Date() >= 0)
+        .sort(
+          (a, b) =>
+            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        )
     );
   }, [selectedTopic, sortBy, eventList, events]);
 
@@ -104,11 +108,9 @@ export default function Event() {
   // );
   // console.log("pastEvent", pastEvent);
 
-  const renderList = filteredEventList
-    .filter((d) => new Date(d.startDate) - new Date() >= 0)
-    .map((event, idx) => {
-      return <EventMain key={idx} event={event} />;
-    });
+  const renderList = filteredEventList.map((event, idx) => {
+    return <EventMain key={idx} event={event} />;
+  });
 
   const pastList = events
     .filter((d) => new Date(d.startDate) - new Date() < 0)

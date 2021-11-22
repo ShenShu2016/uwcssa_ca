@@ -16,6 +16,7 @@ export default function Filter({
   sortBy,
 }) {
   let topicNames = [
+    "全部",
     "游戏",
     "节日",
     "电影",
