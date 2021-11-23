@@ -97,10 +97,11 @@ export default function Individual() {
 
   const isValid =
     eventParticipantData.name.length > 0 &&
-    eventParticipantData.email.length > 0 &&
-    eventParticipantData.phone.length > 0 &&
+    eventParticipantData.email !== "" &&
+    eventParticipantData.phone !== "" &&
     eventParticipantData.weChat.length > 0 &&
-    eventParticipantData.numberOfPeople.length > 0;
+    eventParticipantData.numberOfPeople.length > 0 &&
+    eventParticipantData.numberOfPeople.match(/^-?\d+$/);
 
   return (
     <div>
@@ -117,7 +118,7 @@ export default function Individual() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={6} elevation={6} square noValidate>
+        <Grid item xs={12} sm={8} md={6} elevation={6} noValidate>
           <Box className={classes.rightBox}>
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <GroupIcon />
@@ -131,6 +132,7 @@ export default function Individual() {
                 required
                 fullWidth
                 label="申请人姓名"
+                placeholder="张三"
                 name="name"
                 autoComplete="name"
                 autoFocus
@@ -148,8 +150,8 @@ export default function Individual() {
                 fullWidth
                 label="申请人邮箱"
                 name="email"
+                placeholder="e.g. xxxx@uwindsor.ca"
                 autoComplete="email"
-                autoFocus
                 value={eventParticipantData.email}
                 onChange={(e) =>
                   setEventParticipantData({
@@ -164,7 +166,6 @@ export default function Individual() {
                 required
                 name="weChat"
                 autoComplete="weChat"
-                autoFocus
                 label="申请人微信号"
                 value={eventParticipantData.weChat}
                 onChange={(e) =>
@@ -179,8 +180,8 @@ export default function Individual() {
                 fullWidth
                 required
                 name="phone"
+                placeholder="e.g. 1234567890"
                 autoComplete="phone"
-                autoFocus
                 label="申请人手机号码"
                 value={eventParticipantData.phone}
                 onChange={(e) =>
@@ -196,7 +197,6 @@ export default function Individual() {
                 label="地址（如需接送）"
                 name="address"
                 autoComplete="address"
-                autoFocus
                 onChange={(e) =>
                   setEventParticipantData({
                     ...eventParticipantData,
@@ -210,8 +210,8 @@ export default function Individual() {
                 fullWidth
                 label="参加总人数（含申请人）"
                 name="numberOfPeople"
+                placeholder="e.g. 5"
                 autoComplete="numberOfPeople"
-                autoFocus
                 value={eventParticipantData.numberOfPeople}
                 onChange={(e) =>
                   setEventParticipantData({

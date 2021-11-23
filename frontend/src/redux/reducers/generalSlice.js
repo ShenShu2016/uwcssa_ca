@@ -132,17 +132,19 @@ export const removeLike = createAsyncThunk(
 
 export const postSingleImage = createAsyncThunk(
   "general/postSingleImage",
-  async ({ imageData, imageLocation }) => {
-    console.log(imageData, imageLocation);
+  async ({ imageData, imageLocation, maxPixel }) => {
+    console.log(imageData, imageLocation, maxPixel);
+
     const tempUuid = uuid();
     const file = imageData[0];
     let keyName = "";
     console.log("原始大小", file.size / 1000000, "MB");
     await new Promise((resolve) => {
+      console.log("maxPixel", maxPixel ? maxPixel : 1280);
       new Compressor(file, {
         quality: 0.6,
-        maxWidth: 1280,
-        maxHeight: 1280,
+        maxWidth: maxPixel ? maxPixel : 1280,
+        maxHeight: maxPixel ? maxPixel : 1280,
         convertSize: 300000,
         success(result) {
           keyName = `${imageLocation}/${tempUuid}.${result.name
@@ -163,7 +165,7 @@ export const postSingleImage = createAsyncThunk(
 
 export const postMultipleImages = createAsyncThunk(
   "general/postMultipleImages",
-  async ({ imagesData, imageLocation }) => {
+  async ({ imagesData, imageLocation, maxPixel }) => {
     let imgS3Keys = [];
     await new Promise(async function (resolve) {
       let numProcessedImages = 0;
@@ -174,8 +176,8 @@ export const postMultipleImages = createAsyncThunk(
         await new Promise((resolve) => {
           new Compressor(file, {
             quality: 0.6,
-            maxWidth: 1280,
-            maxHeight: 1280,
+            maxWidth: maxPixel ? maxPixel : 1280,
+            maxHeight: maxPixel ? maxPixel : 1280,
             convertSize: 300000,
             success(result) {
               console.log("压缩后结果", result.size / 1000000, "MB");

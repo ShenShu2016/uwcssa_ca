@@ -82,8 +82,9 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     setLoading(true);
     const imageData = e.target.files;
     const imageLocation = "user/Avatar";
+    const maxPixel = 300;
     const response = await dispatch(
-      postSingleImage({ imageData, imageLocation })
+      postSingleImage({ imageData, imageLocation, maxPixel })
     );
     if (response.meta.requestStatus === "fulfilled") {
       console.log("response", response);

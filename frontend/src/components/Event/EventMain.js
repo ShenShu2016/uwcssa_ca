@@ -169,7 +169,8 @@ export default function EventMain({ event }) {
             <CardContent>
               <Typography variant="subtitle2" gutterBottom>
                 时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-                {startDate.slice(11, 16)}
+                {startDate.slice(11, 16)} - {endDate.slice(5, 7)}月
+                {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
               </Typography>
               <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
                 <Typography
