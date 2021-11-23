@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   Paper,
   Stack,
@@ -10,6 +13,12 @@ import {
 } from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketUserInfo,
+  postMarketUserInfo,
+  selectMarketUserById,
+  updateMarketUserInfoDetail,
+} from "../../redux/reducers/marketUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -180,7 +189,10 @@ export default function PostMarketRental() {
   const user = useSelector((state) => state.userAuth.userProfile);
   const [imageKeys, setImageKeys] = useState("");
   const [open, setOpen] = useState(false);
-
+  const [defaultInfo, setDefaultInfo] = useState(true);
+  const marketUserInfo = useSelector((state) =>
+    selectMarketUserById(state, username)
+  );
   const {
     marketRentalSaleRent,
     propertyType,
@@ -220,6 +232,8 @@ export default function PostMarketRental() {
     catFriendly: false,
     dogFriendly: false,
     bedroomCounts: false,
+    contactEmail: false,
+    contactPhone: false,
   });
   const history = useHistory();
 
@@ -238,9 +252,15 @@ export default function PostMarketRental() {
     heatingType: "",
     catFriendly: "",
     dogFriendly: "",
+    contactEmail: "",
+    contactWeChat: "",
+    contactPhone: "",
     tags: [],
   });
   // console.log("marketRentalData", marketRentalData);
+  useEffect(() => {
+    dispatch(fetchMarketUserInfo(username));
+  }, [username, dispatch]);
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
     const imageLocation = "market/rental";
@@ -318,6 +338,9 @@ export default function PostMarketRental() {
       heatingType,
       catFriendly,
       dogFriendly,
+      contactPhone,
+      contactEmail,
+      contactWeChat,
     } = marketRentalData;
 
     const createMarketRentalInput = {
@@ -337,6 +360,9 @@ export default function PostMarketRental() {
       heatingType: heatingType,
       catFriendly: catFriendly,
       dogFriendly: dogFriendly,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
       tags: GetTags(),
       active: true,
       userID: username,
@@ -356,9 +382,25 @@ export default function PostMarketRental() {
       catFriendly,
       dogFriendly,
       bedroomCounts,
+      contactEmail,
+      contactPhone,
+    };
+    const userInfo = {
+      id: username,
+      phone: contactPhone,
+      weChat: contactWeChat,
+      email: contactEmail,
+      userID: username,
     };
     if (Object.values(canSave).every((item) => item !== "")) {
       const response = await dispatch(postMarketItem(createMarketRentalInput));
+      if (marketUserInfo === undefined) {
+        await dispatch(postMarketUserInfo(userInfo));
+      } else if (marketUserInfo !== undefined) {
+        if (defaultInfo === true) {
+          await dispatch(updateMarketUserInfoDetail(userInfo));
+        }
+      }
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
         history.push(`/market/rental/${response.payload.id}`);
@@ -843,6 +885,96 @@ export default function PostMarketRental() {
                     });
                     setError({ ...error, description: false });
                     setFakeItems({ ...fakeItems, description: e.target.value });
+                  }}
+                />
+              </Box>
+              {marketUserInfo === undefined ? (
+                <Typography variant="subtitle1" fontWeight="600">
+                  Fill the Contact Info and Save as default
+                </Typography>
+              ) : (
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={() => {
+                          setDefaultInfo((prev) => !prev);
+
+                          defaultInfo === true
+                            ? setMarketRentalData({
+                                ...marketRentalData,
+                                contactEmail: marketUserInfo.email,
+                                contactPhone: marketUserInfo.phone,
+                                contactWeChat: marketUserInfo.weChat,
+                              })
+                            : setMarketRentalData({
+                                ...marketRentalData,
+                                contactEmail: "",
+                                contactPhone: "",
+                                contactWeChat: "",
+                              });
+                        }}
+                      />
+                    }
+                    label="Use default contact information"
+                  />
+                </FormGroup>
+              )}
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Phone${
+                    Boolean(error.contactPhone) ? " is required!" : ""
+                  }`}
+                  value={marketRentalData.contactPhone}
+                  variant="outlined"
+                  disabled={defaultInfo === false ? true : false}
+                  error={Boolean(error.contactPhone)}
+                  required
+                  placeholder="eg: (123) 456 789"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      contactPhone: e.target.value,
+                    });
+                    setError({ ...error, contactPhone: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Email${
+                    Boolean(error.contactEmail) ? " is required!" : ""
+                  }`}
+                  value={marketRentalData.contactEmail}
+                  variant="outlined"
+                  error={Boolean(error.contactEmail)}
+                  required
+                  disabled={defaultInfo === false ? true : false}
+                  placeholder="wang123456@email.com "
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      contactEmail: e.target.value,
+                    });
+                    setError({ ...error, contactEmail: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Contact WeChat"
+                  value={marketRentalData.contactWeChat}
+                  variant="outlined"
+                  placeholder="eg: Wang123"
+                  fullWidth
+                  disabled={defaultInfo === false ? true : false}
+                  onChange={(e) => {
+                    setMarketRentalData({
+                      ...marketRentalData,
+                      contactWeChat: e.target.value,
+                    });
                   }}
                 />
               </Box>

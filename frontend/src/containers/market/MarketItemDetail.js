@@ -3,10 +3,15 @@ import {
   Button,
   CardHeader,
   Chip,
+  Dialog,
+  DialogTitle,
   Divider,
   Grid,
   IconButton,
+  List,
+  ListItem,
   ListItemIcon,
+  ListItemText,
   Paper,
   Stack,
   Typography,
@@ -20,14 +25,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -188,6 +188,10 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
             }
             variant="outlined"
             color="info"
+            // sx={{
+            //   backgroundImage:
+            //     "linear-gradient(to bottom right, rgba(255,0,0,0), rgba(255,0,0,1))",
+            // }}
           >
             Edit
           </Button>
