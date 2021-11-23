@@ -87,8 +87,8 @@ export default function Individual() {
 
   const isValid =
     eventParticipantData.name.length > 0 &&
-    eventParticipantData.email.length > 0 &&
-    eventParticipantData.phone.length > 0 &&
+    eventParticipantData.email !== "" &&
+    eventParticipantData.phone !== "" &&
     eventParticipantData.weChat.length > 0;
 
   return (
@@ -123,6 +123,7 @@ export default function Individual() {
                   fullWidth
                   label="姓名"
                   name="name"
+                  placeholder="张三"
                   autoComplete="name"
                   autoFocus
                   value={eventParticipantData.name}
@@ -139,8 +140,8 @@ export default function Individual() {
                   fullWidth
                   label="邮箱"
                   name="email"
+                  placeholder="e.g. xxxx@uwindsor.ca"
                   autoComplete="email"
-                  autoFocus
                   value={eventParticipantData.email}
                   onChange={(e) =>
                     setEventParticipantData({
@@ -154,8 +155,8 @@ export default function Individual() {
                   fullWidth
                   required
                   name="phone"
+                  placeholder="e.g. 1234567890"
                   autoComplete="phone"
-                  autoFocus
                   label="手机号码"
                   value={eventParticipantData.phone}
                   onChange={(e) =>
@@ -172,7 +173,6 @@ export default function Individual() {
                   required
                   name="weChat"
                   autoComplete="weChat"
-                  autoFocus
                   label="微信号"
                   value={eventParticipantData.weChat}
                   onChange={(e) =>
@@ -187,7 +187,6 @@ export default function Individual() {
                   fullWidth
                   name="address"
                   autoComplete="address"
-                  autoFocus
                   label="地址（如需接送）"
                   value={eventParticipantData.address}
                   onChange={(e) =>

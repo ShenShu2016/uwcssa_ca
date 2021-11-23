@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
