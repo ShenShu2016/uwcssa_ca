@@ -9,7 +9,7 @@ import Group from "../../components/Event/group";
 import Individual from "../../components/Event/individual";
 import React from "react";
 import Success from "../../components/Event/Success";
-
+import PrivateRoute from "../../components/PrivateRoute";
 export default function EventRouter() {
   return (
     <Box>
@@ -20,13 +20,23 @@ export default function EventRouter() {
           path="/event/:eventID/eventSignUp"
           component={EventSignUp}
         />
-        <Route
+        {/* <Route
           exact
           path="/event/:eventID/eventSignUp/individual"
           component={Individual}
+        /> */}
+        <PrivateRoute
+          allowRoles="anyone"
+          path="/event/:eventID/eventSignUp/individual"
+          component={Individual}
         />
-        <Route
+        {/* <Route
           exact
+          path="/event/:eventID/eventSignUp/group"
+          component={Group}
+        /> */}
+        <PrivateRoute
+          allowRoles="anyone"
           path="/event/:eventID/eventSignUp/group"
           component={Group}
         />

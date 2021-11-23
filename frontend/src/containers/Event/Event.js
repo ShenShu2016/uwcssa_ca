@@ -3,14 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
+
 import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
 import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
-import moment from "moment";
 import { useTitle } from "../../Hooks/useTitle";
+import PastEvent from "../../components/Event/PastEvents";
+import moment from "moment";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +63,6 @@ export default function Event() {
   const [filteredEventList, setFilteredEventList] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
-
   const dispatch = useDispatch();
   const { events, fetchEventsStatus } = useSelector((state) => state.event);
 
@@ -77,29 +79,41 @@ export default function Event() {
 
   useEffect(() => {
     const filtered = selectedTopic
-      ? events.filter((item) => item.topic.name === selectedTopic)
+      ? selectedTopic === "全部"
+        ? events
+        : events.filter((item) => item.topic.name === selectedTopic)
       : events;
 
     setFilteredEventList(
-      [...filtered].sort(
-        (a, b) =>
-          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-      )
+      [...filtered]
+        .filter((d) => new Date(d.startDate) - new Date() >= 0)
+        .sort(
+          (a, b) =>
+            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        )
     );
   }, [selectedTopic, sortBy, eventList, events]);
 
-  const renderList = filteredEventList
-    .filter((d) => d.startDate >= moment().format())
-    // .sort(
-    //   (a, b) =>
-    //     new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-    // )
-    .map((event, idx) => {
-      return <EventMain key={idx} event={event} />;
-    });
+  // const currentEvent = filteredEventList.filter(
+  //   (d) => new Date(d.startDate) - new Date() >= 0
+  // );
+  // console.log("currentEvent", currentEvent);
 
-  const pastList = filteredEventList
-    .filter((d) => d.endDate < moment().format())
+  // const pastEvent = filteredEventList.filter(
+  //   (d) => new Date(d.startDate) - new Date() < 0
+  // );
+  // console.log("pastEvent", pastEvent);
+
+  const renderList = filteredEventList.map((event, idx) => {
+    return <EventMain key={idx} event={event} />;
+  });
+
+  const pastList = events
+    .filter((d) => new Date(d.startDate) - new Date() < 0)
+    .sort(
+      (a, b) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+    )
     .map((event, idx) => {
       return <PastEvent key={idx} event={event} />;
     });

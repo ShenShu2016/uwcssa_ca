@@ -346,7 +346,7 @@ export default function EventBody({ event }) {
                                 Going
                               </Typography>
                             )}
-                            {startDate > moment().format() ? (
+                            {endDate > moment().format() ? (
                               <div>
                                 {userInfo.isAuthenticated ? (
                                   <div>
