@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
-
 import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
@@ -11,9 +10,6 @@ import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
-import PastEvent from "../../components/Event/PastEvents";
-import moment from "moment";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
