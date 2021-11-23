@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   Paper,
   Stack,
@@ -10,6 +13,11 @@ import {
 } from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketUserInfo,
+  selectMarketUserById,
+  updateMarketUserInfoDetail,
+} from "../../redux/reducers/marketUserSlice";
 import {
   selectMarketItemById,
   updateMarketItemDetail,
@@ -177,13 +185,15 @@ export default function EditMarketVehicleDetail() {
   let temp = [];
   imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
   const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
-
+  const userInfo = useSelector((state) =>
+    selectMarketUserById(state, marketItem.userID)
+  );
   const [trigger, setTrigger] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
   const [open, setOpen] = useState(false);
-
+  const [defaultInfo, setDefaultInfo] = useState(false);
   const [fakeItems, setFakeItems] = useState(marketItem);
   const [error, setError] = useState({
     imageKeys: false,
@@ -197,6 +207,8 @@ export default function EditMarketVehicleDetail() {
     exteriorColor: false,
     interiorColor: false,
     fuelTYpe: false,
+    contactEmail: false,
+    contactPhone: false,
   });
 
   const [marketVehicleData, setMarketVehicleData] = useState(marketItem);
@@ -215,7 +227,9 @@ export default function EditMarketVehicleDetail() {
       setImageKeys(Object.fromEntries(temp));
     }
   };
-
+  useEffect(() => {
+    dispatch(fetchMarketUserInfo(marketItem.userID));
+  }, [marketItem.userID, dispatch]);
   useEffect(() => {
     const getImage = async () => {
       try {
@@ -276,6 +290,9 @@ export default function EditMarketVehicleDetail() {
       fuelType,
       price,
       description,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
     } = marketVehicleData;
 
     const updatedMarketVehicle = {
@@ -296,6 +313,9 @@ export default function EditMarketVehicleDetail() {
       active: true,
       sortKey: "SortKey",
       userID: marketItem.userId,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
     };
     const canSave = {
       imageKeys,
@@ -309,12 +329,24 @@ export default function EditMarketVehicleDetail() {
       exteriorColor,
       interiorColor,
       fuelType,
+      contactEmail,
+      contactPhone,
+    };
+
+    const userInfo = {
+      id: marketItem.userID,
+      email: contactEmail,
+      phone: contactPhone,
+      weChat: contactWeChat,
     };
 
     if (Object.values(canSave).every((item) => item !== "")) {
       const response = await dispatch(
         updateMarketItemDetail(updatedMarketVehicle)
       );
+      if (defaultInfo === true) {
+        await dispatch(updateMarketUserInfoDetail(userInfo));
+      }
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
         history.push(`/market/vehicle/${response.payload.id}`);
@@ -729,6 +761,90 @@ export default function EditMarketVehicleDetail() {
                     });
                     setError({ ...error, description: false });
                     setFakeItems({ ...fakeItems, description: e.target.value });
+                  }}
+                />
+              </Box>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      defaultChecked
+                      onChange={() => {
+                        setDefaultInfo((prev) => !prev);
+                        defaultInfo === true
+                          ? setMarketVehicleData({
+                              ...marketVehicleData,
+                              contactEmail: userInfo.email,
+                              contactPhone: userInfo.phone,
+                              contactWeChat: userInfo.weChat,
+                            })
+                          : setMarketVehicleData({
+                              ...marketVehicleData,
+                              contactEmail: "",
+                              contactPhone: "",
+                              contactWeChat: "",
+                            });
+                      }}
+                    />
+                  }
+                  label="Using default contact information"
+                />
+              </FormGroup>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Phone${
+                    Boolean(error.contactPhone) ? " is required!" : ""
+                  }`}
+                  value={marketVehicleData.contactPhone}
+                  variant="outlined"
+                  disabled={defaultInfo === false ? true : false}
+                  error={Boolean(error.contactPhone)}
+                  required
+                  placeholder="eg: (123) 456 789"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      contactPhone: e.target.value,
+                    });
+                    setError({ ...error, contactPhone: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Email${
+                    Boolean(error.contactEmail) ? " is required!" : ""
+                  }`}
+                  value={marketVehicleData.contactEmail}
+                  variant="outlined"
+                  error={Boolean(error.contactEmail)}
+                  required
+                  disabled={defaultInfo === false ? true : false}
+                  placeholder="wang123456@email.com "
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      contactEmail: e.target.value,
+                    });
+                    setError({ ...error, contactEmail: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Contact WeChat"
+                  value={marketVehicleData.contactWeChat}
+                  variant="outlined"
+                  placeholder="eg: Wang123"
+                  fullWidth
+                  disabled={defaultInfo === false ? true : false}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      contactWeChat: e.target.value,
+                    });
                   }}
                 />
               </Box>
