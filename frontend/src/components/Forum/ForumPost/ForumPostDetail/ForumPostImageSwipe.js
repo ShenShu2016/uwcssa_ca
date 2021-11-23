@@ -5,25 +5,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import IconButton from "@mui/material/IconButton";
 
-// import { makeStyles } from "@mui/styles";
-
-// const useStyles = makeStyles((theme) => ({
-//   contain: {
-//     height: "100%",
-//     width: "calc(100% - 360px)",
-//     // bgcolor="black"
-//     position: "relative",
-//     overflow: "hidden",
-//     float: "left",
-//     [theme.breakpoints.down("md")]: {
-//       width: "100%",
-//       height: "50vh",
-//     },
-//   },
-// }));
-
-export default function SwipeViews({ images }) {
-  // const classes = useStyles();
+export default function ForumPostImageSwipe({ images }) {
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = images.length;
   console.log("maxSteps", maxSteps);
@@ -36,23 +18,7 @@ export default function SwipeViews({ images }) {
   };
 
   return (
-    // <Box className={classes.contain}>
     <Box width="100%" height="100%" position="relative" overflow="hidden">
-      <Box
-        sx={{
-          backgroundImage: `url(${images[activeStep]})`,
-          filter: "blur(10px)",
-          zIndex: "-1",
-          width: "100%",
-          height: "100%",
-          transform: "scale(1.1)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        something
-      </Box>
       {maxSteps <= 1 ? null : (
         <Box
           sx={{
@@ -67,7 +33,7 @@ export default function SwipeViews({ images }) {
         >
           <IconButton
             color="info"
-            aria-label="upload picture"
+            aria-label="leftMove"
             component="span"
             disabled={activeStep === 0 ? true : false}
             onClick={() => handleBack()}
@@ -90,7 +56,7 @@ export default function SwipeViews({ images }) {
         >
           <IconButton
             color="info"
-            aria-label="upload picture"
+            aria-label="rightMove"
             component="span"
             disabled={activeStep === maxSteps - 1 ? true : false}
             onClick={() => handleNext()}
@@ -99,7 +65,6 @@ export default function SwipeViews({ images }) {
           </IconButton>
         </Box>
       )}
-
       <Box
         sx={{
           maxWidth: "100%",
@@ -108,7 +73,7 @@ export default function SwipeViews({ images }) {
           top: "0",
           left: "0",
           right: "0",
-          bottom: "60px",
+          bottom: "40px",
           zIndex: "1",
           position: "absolute",
           margin: "auto",
@@ -130,11 +95,11 @@ export default function SwipeViews({ images }) {
       <Box
         sx={{
           maxWidth: "100%",
-          height: "60px",
+          height: "20px",
           // bgcolor: "red",
-          bottom: "0",
-          left: "0",
-          right: "0",
+          bottom: 30,
+          left: 0,
+          right: 20,
           zIndex: "1",
           position: "absolute",
           margin: "auto",
@@ -143,7 +108,7 @@ export default function SwipeViews({ images }) {
         <Stack
           spacing={2}
           direction="row"
-          margin="10px"
+          // margin="10px"
           zIndex="5"
           justifyContent="center"
         >

@@ -1,3 +1,7 @@
+enum SortKey {
+  SortKey
+}
+
 type User
   @model
   @auth(
@@ -27,15 +31,6 @@ type User
   github: String
   sortKey: SortKey!
   createdAt: AWSDateTime!
-  # uWindsorEmail: String
-  #   @auth(
-  #     rules: [
-  #       { allow: owner, operations: [read] }
-  #       { allow: groups, groups: ["admin"] }
-  #       { allow: private, operations: [read] }
-  #       { allow: public, operations: [read], provider: iam }
-  #     ]
-  #   )
   badges: [String]
     @auth(
       rules: [
@@ -68,6 +63,7 @@ type User
   marketItems: [MarketItem]
   foundingMember: [FoundingMember]
   webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
+  userMutationLog: [UserMutationLog]
 }
 
 type UserEducation
@@ -80,7 +76,7 @@ type UserEducation
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byUser", fields: ["userID", "createdAt"]) {
   id: ID!
   school: String
   degree: String
@@ -89,6 +85,7 @@ type UserEducation
   endDate: AWSDateTime
   grade: Float
   description: String
+  createdAt: AWSDateTime!
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -103,7 +100,7 @@ type UserExperience
       { allow: public, operations: [read], provider: iam }
     ]
   )
-  @key(name: "byUser", fields: ["userID"]) {
+  @key(name: "byUser", fields: ["userID", "createdAt"]) {
   id: ID!
   title: String
   employmentType: String
@@ -113,6 +110,7 @@ type UserExperience
   endDate: AWSDateTime
   industry: String
   description: String
+  createdAt: AWSDateTime!
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -153,6 +151,7 @@ type Article
   title: String!
   content: String!
   imgS3Keys: [String]
+  qrCodeImgS3Key: String
   likes: [Like] @connection(keyName: "byArticle", fields: ["id"])
   tags: [String]
   sortKey: SortKey! #用来当第二索引的
@@ -164,10 +163,6 @@ type Article
     @connection(keyName: "byArticle", fields: ["id"])
   userID: ID!
   user: User! @connection(fields: ["userID"])
-}
-
-enum SortKey {
-  SortKey
 }
 
 type ArticleComment
@@ -344,9 +339,9 @@ type EventParticipant
     ]
   )
   @key(
-    name: "EventParticipantSortByEventID"
+    name: "eventParticipantSortByEventID"
     fields: ["eventID", "createdAt"]
-    queryField: "EventParticipantSortByEventID"
+    queryField: "eventParticipantSortByEventID"
   )
   @key(name: "byEvent", fields: ["eventID", "createdAt"]) {
   id: ID!
@@ -401,9 +396,9 @@ type UwcssaJob
     ]
   )
   @key(
-    name: "UwcssaJobSortByDepartmentID"
+    name: "uwcssaJobSortByDepartmentID"
     fields: ["departmentID", "createdAt"]
-    queryField: "UwcssaJobSortByDepartmentID"
+    queryField: "uwcssaJobSortByDepartmentID"
   )
   @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
   id: ID!
@@ -509,14 +504,19 @@ type ForumPost
     ]
   )
   @key(
-    name: "ForumPostSortByForumSubTopicID"
-    fields: ["forumSubTopicID", "createdAt"]
-    queryField: "ForumPostSortByForumSubTopicID"
+    name: "forumPostSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "forumPostSortBySortKey"
   )
   @key(
-    name: "ForumPostSortByForumPostLastReplyAt"
+    name: "forumPostSortByForumSubTopicID"
+    fields: ["forumSubTopicID", "createdAt"]
+    queryField: "forumPostSortByForumSubTopicID"
+  )
+  @key(
+    name: "forumPostSortByForumPostLastReplyAt"
     fields: ["forumSubTopicID", "lastReplyAt"]
-    queryField: "ForumPostSortByForumPostLastReplyAt"
+    queryField: "forumPostSortByForumPostLastReplyAt"
   )
   @key(name: "byUser", fields: ["userID"])
   @key(name: "byForumSubTopic", fields: ["forumSubTopicID", "createdAt"]) {
@@ -526,6 +526,16 @@ type ForumPost
   imgS3Keys: [String]
   tags: [String]
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
+  sortKey: SortKey!
+  essential: Boolean
+    @auth(
+      rules: [
+        { allow: owner, operations: [read] }
+        { allow: groups, groups: ["admin", "staff"] }
+        { allow: private, operations: [read] }
+        { allow: public, operations: [read], provider: iam }
+      ]
+    )
   active: Boolean!
   createdAt: AWSDateTime!
   lastReplyAt: AWSDateTime!
@@ -551,9 +561,9 @@ type ForumPostComment
     ]
   )
   @key(
-    name: "ForumPostCommentSortByForumPostID"
+    name: "forumPostCommentSortByForumPostID"
     fields: ["forumPostID", "createdAt"]
-    queryField: "ForumPostCommentSortByForumPostID"
+    queryField: "forumPostCommentSortByForumPostID"
   )
   @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
@@ -580,9 +590,9 @@ type ForumPostSubComment
     ]
   )
   @key(
-    name: "ForumPostSubCommentSortByForumPostCommentID"
+    name: "forumPostSubCommentSortByForumPostCommentID"
     fields: ["forumPostCommentID", "createdAt"]
-    queryField: "ForumPostSubCommentSortByForumPostCommentID"
+    queryField: "forumPostSubCommentSortByForumPostCommentID"
   )
   @key(name: "byForumPostComment", fields: ["forumPostCommentID", "createdAt"])
   @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
@@ -860,6 +870,38 @@ type WebFeedBack
   rate: Float!
   reason: String
   improvement: String
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type UserMutationLog
+  @model
+  @auth(
+    rules: [{ allow: groups, groups: ["admin"], operations: [read, update] }]
+  )
+  @key(
+    name: "userMutationLogSortByUserID"
+    fields: ["userID", "createdAt"]
+    queryField: "userMutationLogSortByUserID"
+  )
+  @key(
+    name: "userMutationLogSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "userMutationLogSortBySortKey"
+  )
+  @key(
+    name: "userMutationLogSortBy__typename"
+    fields: ["typename", "createdAt"]
+    queryField: "userMutationLogSortBy__typename"
+  ) {
+  id: ID!
+  eventName: String!
+  eventID: ID!
+  typename: String!
+  eventSourceARN: String!
+  record: AWSJSON!
+  createdAt: AWSDateTime!
+  sortKey: SortKey!
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }

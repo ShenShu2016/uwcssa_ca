@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   Paper,
   Stack,
@@ -10,18 +13,22 @@ import {
 } from "@mui/material";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
+import {
+  fetchMarketUserInfo,
+  postMarketUserInfo,
+  selectMarketUserById,
+  updateMarketUserInfoDetail,
+} from "../../redux/reducers/marketUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Global } from "@emotion/react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import { MarketVehicleInfo } from "./MarketVehicleDetail ";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { grey } from "@mui/material/colors";
@@ -170,14 +177,17 @@ export default function PostMarketVehicle() {
   useTitle("发布二手车辆信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
-  const [imageKeys, setImageKeys] = useState({});
+  const [imageKeys, setImageKeys] = useState("");
   const user = useSelector((state) => state.userAuth.userProfile);
   const [trigger, setTrigger] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const { marketVehicleTypeList } = marketVehicleOptions;
   const history = useHistory();
   const [open, setOpen] = useState(false);
-
+  const [defaultInfo, setDefaultInfo] = useState(true);
+  const marketUserInfo = useSelector((state) =>
+    selectMarketUserById(state, username)
+  );
   const [fakeItems, setFakeItems] = useState({
     price: "Price",
     description: "Descriptions",
@@ -207,6 +217,8 @@ export default function PostMarketVehicle() {
     exteriorColor: false,
     interiorColor: false,
     fuelTYpe: false,
+    contactEmail: false,
+    contactPhone: false,
   });
 
   const [marketVehicleData, setMarketVehicleData] = useState({
@@ -221,8 +233,16 @@ export default function PostMarketVehicle() {
     price: "",
     description: "",
     tags: [],
+    contactEmail: "",
+    contactWeChat: "",
+    contactPhone: "",
   });
   // console.log("marketVehicleData", marketVehicleData);
+
+  useEffect(() => {
+    dispatch(fetchMarketUserInfo(username));
+  }, [username, dispatch]);
+
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
     const imageLocation = "market/vehicle";
@@ -298,6 +318,9 @@ export default function PostMarketVehicle() {
       fuelType,
       price,
       description,
+      contactPhone,
+      contactEmail,
+      contactWeChat,
     } = marketVehicleData;
 
     const createMarketVehicleInput = {
@@ -317,6 +340,9 @@ export default function PostMarketVehicle() {
       active: true,
       sortKey: "SortKey",
       userID: username,
+      contactEmail,
+      contactPhone,
+      contactWeChat,
     };
     const canSave = {
       imageKeys,
@@ -330,10 +356,28 @@ export default function PostMarketVehicle() {
       exteriorColor,
       interiorColor,
       fuelType,
+      contactEmail,
+      contactPhone,
     };
 
-    if (Object.values(canSave).every((item) => item !== "")) {
+    const userInfo = {
+      id: username,
+      phone: contactPhone,
+      weChat: contactWeChat,
+      email: contactEmail,
+      userID: username,
+    };
+
+    if (Object.values(canSave).every((item) => item.length !== 0)) {
       const response = await dispatch(postMarketItem(createMarketVehicleInput));
+      if (marketUserInfo === undefined) {
+        await dispatch(postMarketUserInfo(userInfo));
+      } else if (marketUserInfo !== undefined) {
+        if (defaultInfo === true) {
+          await dispatch(updateMarketUserInfoDetail(userInfo));
+        }
+      }
+
       console.log("Something should be here", response);
       if (response.meta.requestStatus === "fulfilled") {
         history.push(`/market/vehicle/${response.payload.id}`);
@@ -342,7 +386,7 @@ export default function PostMarketVehicle() {
     } else {
       const newError = {};
       Object.keys(canSave).forEach((item) =>
-        canSave[item] === ""
+        canSave[item].length === 0
           ? (newError[item] = true)
           : (newError[item] = false)
       );
@@ -751,6 +795,96 @@ export default function PostMarketVehicle() {
                   }}
                 />
               </Box>
+              {marketUserInfo === undefined ? (
+                <Typography variant="subtitle1" fontWeight="600">
+                  Fill the Contact Info and Save as default
+                </Typography>
+              ) : (
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={() => {
+                          setDefaultInfo((prev) => !prev);
+
+                          defaultInfo === true
+                            ? setMarketVehicleData({
+                                ...marketVehicleData,
+                                contactEmail: marketUserInfo.email,
+                                contactPhone: marketUserInfo.phone,
+                                contactWeChat: marketUserInfo.weChat,
+                              })
+                            : setMarketVehicleData({
+                                ...marketVehicleData,
+                                contactEmail: "",
+                                contactPhone: "",
+                                contactWeChat: "",
+                              });
+                        }}
+                      />
+                    }
+                    label="Use default contact information"
+                  />
+                </FormGroup>
+              )}
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Phone${
+                    Boolean(error.contactPhone) ? " is required!" : ""
+                  }`}
+                  value={marketVehicleData.contactPhone}
+                  variant="outlined"
+                  disabled={defaultInfo === false ? true : false}
+                  error={Boolean(error.contactPhone)}
+                  required
+                  placeholder="eg: (123) 456 789"
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      contactPhone: e.target.value,
+                    });
+                    setError({ ...error, contactPhone: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label={`Contact Email${
+                    Boolean(error.contactEmail) ? " is required!" : ""
+                  }`}
+                  value={marketVehicleData.contactEmail}
+                  variant="outlined"
+                  error={Boolean(error.contactEmail)}
+                  required
+                  disabled={defaultInfo === false ? true : false}
+                  placeholder="wang123456@email.com "
+                  fullWidth
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      contactEmail: e.target.value,
+                    });
+                    setError({ ...error, contactEmail: false });
+                  }}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <TextField
+                  label="Contact WeChat"
+                  value={marketVehicleData.contactWeChat}
+                  variant="outlined"
+                  placeholder="eg: Wang123"
+                  fullWidth
+                  disabled={defaultInfo === false ? true : false}
+                  onChange={(e) => {
+                    setMarketVehicleData({
+                      ...marketVehicleData,
+                      contactWeChat: e.target.value,
+                    });
+                  }}
+                />
+              </Box>
             </Box>
 
             <Button
@@ -790,21 +924,12 @@ export default function PostMarketVehicle() {
                 )}
               </Box>
               <Box className={classes.previewInfo}>
-                <MarketVehicleInfo marketItem={fakeItems} />
+                <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
               </Box>
             </Stack>
           </Paper>
         </Box>
         <Box className={classes.drawer}>
-          <CssBaseline />
-          <Global
-            styles={{
-              ".MuiDrawer-root > .MuiPaper-root": {
-                height: `calc(80% - ${drawerBleeding}px)`,
-                overflow: "visible",
-              },
-            }}
-          />
           <SwipeableDrawer
             anchor="bottom"
             open={open}
@@ -814,6 +939,12 @@ export default function PostMarketVehicle() {
             disableSwipeToOpen={false}
             ModalProps={{
               keepMounted: true,
+            }}
+            sx={{
+              "& .MuiPaper-root": {
+                height: `calc(80% - ${drawerBleeding}px)`,
+                overflow: "visible",
+              },
             }}
           >
             <Box
@@ -859,7 +990,7 @@ export default function PostMarketVehicle() {
                   )}
                 </Box>
                 <Box className={classes.previewInfo}>
-                  <MarketVehicleInfo marketItem={fakeItems} />
+                  <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
                 </Box>
               </Box>
             </Box>

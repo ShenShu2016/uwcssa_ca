@@ -5,7 +5,6 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ForumIndexSubTopic from "./ForumIndexSubTopic";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/system";
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -41,16 +40,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     height: 32,
   },
 }));
-const useStyles = makeStyles(() => ({
-  navTopic: {
-    opacity: 0.9,
-  },
-  navTopicOpen: {
-    opacity: 0.5,
-  },
-}));
 export default function ForumIndexTopicComponent({ forumTopic }) {
-  const classes = useStyles();
   const [open, setOpen] = useState(true);
   const handleClick = () => {
     setOpen(!open);
@@ -58,21 +48,38 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
   return (
     <div>
       <Box
-        sx={{
-          // background: "linear-gradient(to right bottom, #1E90FF, #00CED1)",
-          boxShadow: 1,
-          backgroundColor: "info.main",
-          p: 1,
-          mx: 1,
-          mt: 3,
-          borderRadius: 1,
-          textAlign: "center",
-          fontSize: "1rem",
-          // fontWeight: "700",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-        className={open ? classes.navTopic : classes.navTopicOpen}
+        sx={
+          open
+            ? {
+                boxShadow: 1,
+                backgroundColor: "info.main",
+                p: 1,
+                mx: 1,
+                mt: 3,
+                borderRadius: 1,
+                textAlign: "center",
+                fontSize: "1rem",
+                // fontWeight: "700",
+                display: "flex",
+                justifyContent: "space-between",
+                opacity: 0.9,
+              }
+            : {
+                opacity: 0.5,
+                // background: "linear-gradient(to right bottom, #1E90FF, #00CED1)",
+                boxShadow: 1,
+                backgroundColor: "info.main",
+                p: 1,
+                mx: 1,
+                mt: 3,
+                borderRadius: 1,
+                textAlign: "center",
+                fontSize: "1rem",
+                // fontWeight: "700",
+                display: "flex",
+                justifyContent: "space-between",
+              }
+        }
         onClick={handleClick}
       >
         <Box>
@@ -82,7 +89,7 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
               color: "white",
             }}
             component={Link}
-            to={`/forum/forumTopic/${forumTopic.id}`}
+            to={`/forum/${forumTopic.id}`}
           >
             {forumTopic.name}
           </Button>
@@ -101,13 +108,6 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
         </Box>
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {/* 
-        这里出发点有问题不能这么做 每次开关都要call 一次 图片 ，不行，应该一开始就fetch 了，只不过开关是隐藏，
-        整个下面的component 应该是一个table或者别的形式的
-        
-        这个没有重新fetch的意思啊，forumIndexSubTopic这个组件里面有console.log，开这个组件，就consolelog，关这个组件，就隐藏起来了。
-        */}
-
         {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
           return (
             <ForumIndexSubTopic

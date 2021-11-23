@@ -3,16 +3,14 @@ import React, { useEffect } from "react";
 import {
   removeSelectedForumPost,
   selectedForumPost,
-} from "../../../redux/reducers/forumSlice";
+} from "../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ForumAdSide from "../ForumAdSide";
-import ForumPostComments from "./ForumPostDetail/ForumPostComments";
-import ForumPostMain from "./ForumPostDetail/ForumPostMain";
+import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumPostComments from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostComments";
+import ForumPostMain from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostMain";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
-
-
 
 const useStyles = makeStyles({
   root: {

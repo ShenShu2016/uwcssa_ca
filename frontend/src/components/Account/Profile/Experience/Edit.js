@@ -12,6 +12,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import {
   putUserExperience,
@@ -39,120 +40,157 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setFormData(experience);
     setStartDate(experience.startDate);
     setEndDate(experience.endDate);
   }, [experience]);
 
-  const [formData, setFormData] = useState({
-    companyName: experience.companyName,
-    description: experience.description,
-    employmentType: experience.employmentType,
-    id: experience.id,
-    industry: experience.industry,
-    location: experience.location,
-    title: experience.title,
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      companyName: experience.companyName,
+      description: experience.description,
+      employmentType: experience.employmentType,
+      id: experience.id,
+      industry: experience.industry,
+      location: experience.location,
+      title: experience.title,
+    },
   });
   const [startDate, setStartDate] = useState(experience.startDate);
   const [endDate, setEndDate] = useState(experience.endDate);
-  const {
-    companyName,
-    description,
-    employmentType,
-    id,
-    industry,
-    location,
-    title,
-  } = formData;
-
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const updateUserExperienceInput = {
-    companyName: companyName,
-    description: description,
-    employmentType: employmentType,
+    id: experience.id,
     endDate: endDate,
-    id: id,
-    industry: industry,
-    location: location,
     startDate: startDate,
-    title: title,
   };
 
-  const update = () => {
-    dispatch(putUserExperience({ updateUserExperienceInput, idx }));
-    handleEditClose();
+  const onSubmit = async (data) => {
+    const updateUserExperienceInput = {
+      ...data,
+      endDate: endDate,
+      startDate: startDate,
+    };
+    const response = await dispatch(
+      putUserExperience({ updateUserExperienceInput, idx })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      handleEditClose();
+    }
   };
+
   const handleDelete = (e) => {
     dispatch(removeUserExperience({ updateUserExperienceInput, idx }));
     handleEditClose();
   };
+
   return (
     <div className={classes.root}>
-      <div>
+      <form>
         <Dialog open={editOpen} onClose={handleEditClose}>
           <DialogTitle>编辑 工作经历</DialogTitle>
           <Divider light />
           <DialogContent>
-            <TextField
-              required
-              //autoFocus
-              fullWidth
-              margin="dense"
-              id="title"
+            <Controller
               name="title"
-              label="职位"
-              variant="outlined"
-              placeholder="例如：Rogers"
-              value={title}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="职位"
+                  variant="outlined"
+                  placeholder="例如：Rogers"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.title}
+                  helperText={errors.title ? "不符合" : null}
+                />
+              )}
             />
+
             <div className={classes.splitter} />
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="employmentType">雇佣类型</InputLabel>
-              <Select
-                labelId="employmentType"
-                id="employmentType"
-                name="employmentType"
-                value={employmentType}
-                onChange={(e) => onChange(e)}
-                label="文凭"
-              >
-                <MenuItem value="None">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value="Contract Full-time">全职合同</MenuItem>
-                <MenuItem value="Internship">实习</MenuItem>
-                <MenuItem value="Permanent Full-time">全职</MenuItem>
-                <MenuItem value="Co-op">Co-op</MenuItem>
-                <MenuItem value="Self-employed">自雇</MenuItem>
-              </Select>
-            </FormControl>
+            <Controller
+              name="employmentType"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="employmentType">雇佣类型</InputLabel>
+                  <Select
+                    labelId="employmentType"
+                    id="employmentType"
+                    name="employmentType"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.degree}
+                  >
+                    <MenuItem value="None">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="Contract Full-time">全职合同</MenuItem>
+                    <MenuItem value="Internship">实习</MenuItem>
+                    <MenuItem value="Permanent Full-time">全职</MenuItem>
+                    <MenuItem value="Co-op">Co-op</MenuItem>
+                    <MenuItem value="Self-employed">自雇</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
+
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="companyName"
+
+            <Controller
               name="companyName"
-              label="公司名称"
-              value={companyName}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="公司名称"
+                  variant="outlined"
+                  placeholder="Rogers"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.companyName}
+                  helperText={errors.companyName ? "不符合" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="location"
+            <Controller
               name="location"
-              label="位置"
-              value={location}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="位置"
+                  variant="outlined"
+                  placeholder="多伦多"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.location}
+                  helperText={errors.location ? "不符合" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -180,32 +218,49 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
               </Box>
             </LocalizationProvider>
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="industry"
+            <Controller
               name="industry"
-              label="行业"
-              placeholder="例如：通讯"
-              value={industry}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  variant="outlined"
+                  label="行业"
+                  placeholder="例如：通讯"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.industry}
+                  helperText={errors.industry ? "不符合" : null}
+                />
+              )}
             />
+
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              id="description"
+
+            <Controller
               name="description"
-              label="简介"
-              variant="outlined"
-              multiline
-              value={description}
-              maxRows={20}
-              minRows={5}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  variant="outlined"
+                  label="简介"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.description}
+                  helperText={errors.description ? "不符合" : null}
+                />
+              )}
             />
           </DialogContent>
           <DialogActions>
@@ -215,12 +270,16 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
             <Button onClick={handleEditClose} size="large">
               Cancel
             </Button>
-            <Button onClick={update} variant="contained" size="large">
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              variant="contained"
+              size="large"
+            >
               更新
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </form>
     </div>
   );
 }

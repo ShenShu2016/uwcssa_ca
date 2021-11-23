@@ -1,9 +1,11 @@
-import { Button, Grid, Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Button, Grid, Typography } from "@mui/material";
+
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
+import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../../Hooks/useTitle";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#fff",
@@ -19,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ForumTopicMain = ({ forumTopic }) => {
   const classes = useStyles();
-  // console.log(forumTopic);
-  const { name,forumSubTopics } = forumTopic;
-  useTitle(name+"-论坛");
+  //console.log(forumTopic);
+  const { name, forumSubTopics } = forumTopic;
+  useTitle(name + "-论坛");
   //   const { forumSubTopicData } = forumSubTopics;
   //   console.log(forumSubTopics.items);
   return (
@@ -41,7 +43,7 @@ const ForumTopicMain = ({ forumTopic }) => {
                         // target="_top"
                         component={Link}
                         color="primary"
-                        to={`/forum/forumSubTopic/${id}`}
+                        to={`/forum/${forumTopic.id}/${id}`}
                       >
                         {name}
                         <ArrowForwardIcon />

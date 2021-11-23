@@ -101,6 +101,7 @@ export default function SignUp() {
     } else {
       timer.current = window.setTimeout(() => {
         setLoading(false);
+        setOpen(false);
         setAlertContent(response.error.message);
         setAlert(true);
         console.log(response.error.message);

@@ -51,6 +51,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -237,6 +238,18 @@ export const getUwcssaJobResume = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -376,94 +389,20 @@ export const listUwcssaJobResumes = /* GraphQL */ `
     }
   }
 `;
-export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
-  query UwcssaJobResumeSortByUwcssaJobID(
-    $uwcssaJobID: ID
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelUwcssaJobResumeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    uwcssaJobResumeSortByUwcssaJobID(
-      uwcssaJobID: $uwcssaJobID
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        email
-        resumeFileS3Key
-        phone
-        message
-        uwcssaJobResumeStatus
-        createdAt
-        uwcssaJobID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        uwcssaJob {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgS3Key
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const userSortBySortKey = /* GraphQL */ `
-  query UserSortBySortKey(
-    $sortKey: SortKey
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    userSortBySortKey(
-      sortKey: $sortKey
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
+export const getUserMutationLog = /* GraphQL */ `
+  query GetUserMutationLog($id: ID!) {
+    getUserMutationLog(id: $id) {
+      id
+      eventName
+      eventID
+      typename
+      eventSourceARN
+      record
+      createdAt
+      sortKey
+      userID
+      updatedAt
+      user {
         id
         username
         email
@@ -499,6 +438,7 @@ export const userSortBySortKey = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -687,6 +627,564 @@ export const userSortBySortKey = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listUserMutationLogs = /* GraphQL */ `
+  query ListUserMutationLogs(
+    $filter: ModelUserMutationLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserMutationLogs(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventName
+        eventID
+        typename
+        eventSourceARN
+        record
+        createdAt
+        sortKey
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
+  query UwcssaJobResumeSortByUwcssaJobID(
+    $uwcssaJobID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUwcssaJobResumeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    uwcssaJobResumeSortByUwcssaJobID(
+      uwcssaJobID: $uwcssaJobID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        resumeFileS3Key
+        phone
+        message
+        uwcssaJobResumeStatus
+        createdAt
+        uwcssaJobID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaJob {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const userMutationLogSortByUserID = /* GraphQL */ `
+  query UserMutationLogSortByUserID(
+    $userID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserMutationLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userMutationLogSortByUserID(
+      userID: $userID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventName
+        eventID
+        typename
+        eventSourceARN
+        record
+        createdAt
+        sortKey
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const userMutationLogSortBySortKey = /* GraphQL */ `
+  query UserMutationLogSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserMutationLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userMutationLogSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventName
+        eventID
+        typename
+        eventSourceARN
+        record
+        createdAt
+        sortKey
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const userMutationLogSortBy__typename = /* GraphQL */ `
+  query UserMutationLogSortBy__typename(
+    $typename: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserMutationLogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userMutationLogSortBy__typename(
+      typename: $typename
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventName
+        eventID
+        typename
+        eventSourceARN
+        record
+        createdAt
+        sortKey
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const userSortBySortKey = /* GraphQL */ `
+  query UserSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgS3Key
+        backGroundImgS3Key
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          content
+          imgS3Keys
+          qrCodeImgS3Key
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgS3Key
+          qrCodeImgS3Key
+          posterImgS3Key
+          content
+          location
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          address
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgS3Key
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgS3Keys
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          address
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          brief
+          moreBrief
+          mainPart
+          imgS3Key
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -777,6 +1275,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -853,6 +1352,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -860,6 +1360,7 @@ export const getUser = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         forumPostComment {
           id
@@ -921,6 +1422,7 @@ export const getUser = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -991,6 +1493,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -1344,6 +1847,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1351,6 +1855,7 @@ export const getUser = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         owner
         forumPostSubComments {
@@ -1412,6 +1917,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1419,6 +1925,7 @@ export const getUser = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         forumPostComment {
           id
@@ -1524,6 +2031,36 @@ export const getUser = /* GraphQL */ `
           badges
         }
       }
+      userMutationLog {
+        id
+        eventName
+        eventID
+        typename
+        eventSourceARN
+        record
+        createdAt
+        sortKey
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+      }
       updatedAt
       badges
       userEducations {
@@ -1536,8 +2073,8 @@ export const getUser = /* GraphQL */ `
           endDate
           grade
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -1554,8 +2091,8 @@ export const getUser = /* GraphQL */ `
           endDate
           industry
           description
-          userID
           createdAt
+          userID
           updatedAt
           owner
         }
@@ -1568,6 +2105,7 @@ export const getUser = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -1575,6 +2113,7 @@ export const getUser = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         nextToken
       }
@@ -1662,6 +2201,7 @@ export const listUsers = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -1848,6 +2388,18 @@ export const listUsers = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -1886,8 +2438,8 @@ export const getUserEducation = /* GraphQL */ `
       endDate
       grade
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -1925,6 +2477,7 @@ export const getUserEducation = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2111,6 +2664,18 @@ export const getUserEducation = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -2154,8 +2719,8 @@ export const listUserEducations = /* GraphQL */ `
         endDate
         grade
         description
-        userID
         createdAt
+        userID
         updatedAt
         user {
           id
@@ -2193,8 +2758,8 @@ export const getUserExperience = /* GraphQL */ `
       endDate
       industry
       description
-      userID
       createdAt
+      userID
       updatedAt
       user {
         id
@@ -2232,6 +2797,7 @@ export const getUserExperience = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2418,6 +2984,18 @@ export const getUserExperience = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -2462,8 +3040,8 @@ export const listUserExperiences = /* GraphQL */ `
         endDate
         industry
         description
-        userID
         createdAt
+        userID
         updatedAt
         user {
           id
@@ -2533,6 +3111,7 @@ export const getTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2721,6 +3300,18 @@ export const getTopic = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -2748,6 +3339,7 @@ export const getTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -2835,6 +3427,7 @@ export const getArticle = /* GraphQL */ `
       title
       content
       imgS3Keys
+      qrCodeImgS3Key
       tags
       sortKey
       active
@@ -2878,6 +3471,7 @@ export const getArticle = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3064,6 +3658,18 @@ export const getArticle = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -3158,6 +3764,7 @@ export const listArticles = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3223,6 +3830,7 @@ export const articleSortBySortKey = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3312,6 +3920,7 @@ export const getArticleComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3500,6 +4109,18 @@ export const getArticleComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -3526,6 +4147,7 @@ export const getArticleComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -3632,6 +4254,7 @@ export const listArticleComments = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3700,6 +4323,7 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3766,6 +4390,7 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -3954,6 +4579,18 @@ export const getArticleSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -4006,6 +4643,7 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4215,6 +4853,7 @@ export const getEvent = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4401,6 +5040,18 @@ export const getEvent = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -4693,6 +5344,7 @@ export const getEventComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -4879,6 +5531,18 @@ export const getEventComment = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -5177,6 +5841,7 @@ export const getEventSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5363,6 +6028,18 @@ export const getEventSubComment = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -5629,6 +6306,7 @@ export const getEventParticipant = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -5815,6 +6493,18 @@ export const getEventParticipant = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -5979,7 +6669,7 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    EventParticipantSortByEventID(
+    eventParticipantSortByEventID(
       eventID: $eventID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -6095,6 +6785,7 @@ export const getDepartment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6281,6 +6972,18 @@ export const getDepartment = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -6440,6 +7143,7 @@ export const getUwcssaJob = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -6626,6 +7330,18 @@ export const getUwcssaJob = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -6751,7 +7467,7 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    UwcssaJobSortByDepartmentID(
+    uwcssaJobSortByDepartmentID(
       departmentID: $departmentID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -6855,6 +7571,7 @@ export const getForumTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7041,6 +7758,18 @@ export const getForumTopic = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -7162,6 +7891,7 @@ export const getForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7348,6 +8078,18 @@ export const getForumSubTopic = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -7406,6 +8148,7 @@ export const getForumSubTopic = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -7413,6 +8156,7 @@ export const getForumSubTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         nextToken
       }
@@ -7466,6 +8210,222 @@ export const listForumSubTopics = /* GraphQL */ `
     }
   }
 `;
+export const forumPostSortBySortKey = /* GraphQL */ `
+  query ForumPostSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    forumPostSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        essential
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const forumPostSortByForumSubTopicID = /* GraphQL */ `
+  query ForumPostSortByForumSubTopicID(
+    $forumSubTopicID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    forumPostSortByForumSubTopicID(
+      forumSubTopicID: $forumSubTopicID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        essential
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
+  query ForumPostSortByForumPostLastReplyAt(
+    $forumSubTopicID: ID
+    $lastReplyAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    forumPostSortByForumPostLastReplyAt(
+      forumSubTopicID: $forumSubTopicID
+      lastReplyAt: $lastReplyAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        essential
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getForumPost = /* GraphQL */ `
   query GetForumPost($id: ID!) {
     getForumPost(id: $id) {
@@ -7474,6 +8434,7 @@ export const getForumPost = /* GraphQL */ `
       content
       imgS3Keys
       tags
+      sortKey
       active
       createdAt
       lastReplyAt
@@ -7516,6 +8477,7 @@ export const getForumPost = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -7702,6 +8664,18 @@ export const getForumPost = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -7762,6 +8736,7 @@ export const getForumPost = /* GraphQL */ `
         }
       }
       owner
+      essential
       forumPostComments {
         items {
           id
@@ -7818,6 +8793,7 @@ export const listForumPosts = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -7851,146 +8827,7 @@ export const listForumPosts = /* GraphQL */ `
           updatedAt
         }
         owner
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const forumPostSortByForumSubTopicID = /* GraphQL */ `
-  query ForumPostSortByForumSubTopicID(
-    $forumSubTopicID: ID
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelForumPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    ForumPostSortByForumSubTopicID(
-      forumSubTopicID: $forumSubTopicID
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        content
-        imgS3Keys
-        tags
-        active
-        createdAt
-        lastReplyAt
-        forumSubTopicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        owner
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
-  query ForumPostSortByForumPostLastReplyAt(
-    $forumSubTopicID: ID
-    $lastReplyAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelForumPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    ForumPostSortByForumPostLastReplyAt(
-      forumSubTopicID: $forumSubTopicID
-      lastReplyAt: $lastReplyAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        content
-        imgS3Keys
-        tags
-        active
-        createdAt
-        lastReplyAt
-        forumSubTopicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgS3Key
-          backGroundImgS3Key
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        owner
+        essential
         forumPostComments {
           nextToken
         }
@@ -8051,6 +8888,7 @@ export const getForumPostComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8239,6 +9077,18 @@ export const getForumPostComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -8266,6 +9116,7 @@ export const getForumPostComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -8299,6 +9150,7 @@ export const getForumPostComment = /* GraphQL */ `
           updatedAt
         }
         owner
+        essential
         forumPostComments {
           nextToken
         }
@@ -8383,6 +9235,7 @@ export const listForumPostComments = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -8390,6 +9243,7 @@ export const listForumPostComments = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         owner
         forumPostSubComments {
@@ -8412,7 +9266,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostCommentSortByForumPostID(
+    forumPostCommentSortByForumPostID(
       forumPostID: $forumPostID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -8452,6 +9306,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -8459,6 +9314,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         owner
         forumPostSubComments {
@@ -8520,6 +9376,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8706,6 +9563,18 @@ export const getForumPostSubComment = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -8765,6 +9634,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -8953,6 +9823,18 @@ export const getForumPostSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -8980,6 +9862,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -9013,6 +9896,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           updatedAt
         }
         owner
+        essential
         forumPostComments {
           nextToken
         }
@@ -9055,6 +9939,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -9062,6 +9947,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         owner
         forumPostSubComments {
@@ -9150,6 +10036,7 @@ export const listForumPostSubComments = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -9157,6 +10044,7 @@ export const listForumPostSubComments = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         forumPostComment {
           id
@@ -9186,7 +10074,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostSubCommentSortByForumPostCommentID(
+    forumPostSubCommentSortByForumPostCommentID(
       forumPostCommentID: $forumPostCommentID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -9246,6 +10134,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -9253,6 +10142,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         forumPostComment {
           id
@@ -9319,6 +10209,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9505,6 +10396,18 @@ export const getMarketUserInfo = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -9648,6 +10551,7 @@ export const getMarketItem = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -9834,6 +10738,18 @@ export const getMarketItem = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -10300,6 +11216,7 @@ export const getFoundingMember = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10486,6 +11403,18 @@ export const getFoundingMember = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -10598,6 +11527,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -10784,6 +11714,18 @@ export const getLike = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt
@@ -10843,6 +11785,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11031,6 +11974,18 @@ export const getLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
         updatedAt
         badges
         userEducations {
@@ -11057,6 +12012,7 @@ export const getLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        qrCodeImgS3Key
         tags
         sortKey
         active
@@ -11127,6 +12083,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11343,6 +12300,7 @@ export const getLike = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -11376,6 +12334,7 @@ export const getLike = /* GraphQL */ `
           updatedAt
         }
         owner
+        essential
         forumPostComments {
           nextToken
         }
@@ -11418,6 +12377,7 @@ export const getLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -11425,6 +12385,7 @@ export const getLike = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         owner
         forumPostSubComments {
@@ -11486,6 +12447,7 @@ export const getLike = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -11493,6 +12455,7 @@ export const getLike = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         forumPostComment {
           id
@@ -11568,6 +12531,7 @@ export const listLikes = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11644,6 +12608,7 @@ export const listLikes = /* GraphQL */ `
           content
           imgS3Keys
           tags
+          sortKey
           active
           createdAt
           lastReplyAt
@@ -11651,6 +12616,7 @@ export const listLikes = /* GraphQL */ `
           userID
           updatedAt
           owner
+          essential
         }
         forumPostComment {
           id
@@ -11726,6 +12692,7 @@ export const getWebFeedBack = /* GraphQL */ `
           title
           content
           imgS3Keys
+          qrCodeImgS3Key
           tags
           sortKey
           active
@@ -11912,6 +12879,18 @@ export const getWebFeedBack = /* GraphQL */ `
           imgS3Key
           userID
           createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          eventID
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
           updatedAt
         }
         updatedAt

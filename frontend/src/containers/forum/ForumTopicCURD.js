@@ -1,30 +1,31 @@
 import {
   Button,
-  Link,
-  Grid,
-  TextField,
-  Typography,
   FormControl,
+  Grid,
   InputLabel,
+  Link,
   MenuItem,
   Select,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import PublishIcon from "@mui/icons-material/Publish";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   createForumSubTopic,
   createForumTopic,
   deleteForumSubTopic,
   deleteForumTopic,
-} from "../../../graphql/mutations";
+} from "../../graphql/mutations";
 import {
   fetchForumSubTopics,
   fetchForumTopics,
-} from "../../../redux/reducers/forumSlice";
+} from "../../redux/reducers/forumSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import API from "@aws-amplify/api";
+import PublishIcon from "@mui/icons-material/Publish";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { makeStyles } from "@mui/styles";
 
 // import { listForumTopics } from "../../../graphql/queries";
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +89,7 @@ function ForumTopicCURD() {
     console.log("ForumSubTopicData", forumSubTopicData);
     console.log("selectForumTopicData", selectForumTopicData);
     const createForumSubTopicInput = {
-      id:forumSubTopicData.name,
+      id: forumSubTopicData.name,
       name: forumSubTopicData.name,
       forumTopicID: selectForumTopicData.id,
       userID: username,
@@ -142,7 +143,6 @@ function ForumTopicCURD() {
             endIcon={<PublishIcon />}
             onClick={uploadForumTopic}
             color="primary"
-            // to="/forumtest"
           >
             上传新的Forum topic
           </Button>

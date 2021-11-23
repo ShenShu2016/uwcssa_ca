@@ -133,6 +133,7 @@ const DrawerList = ({ toggleDrawer }) => {
                 </ListItem>
                 <ListItem>
                   <ListItemButton
+                    disabled
                     sx={{ pl: 7 }}
                     component={Link}
                     to="/forum/forumPostUpload"
@@ -153,7 +154,7 @@ const DrawerList = ({ toggleDrawer }) => {
                   <ListItemButton
                     sx={{ pl: 7 }}
                     component={Link}
-                    to="/forum/forumTopicCURD"
+                    to="/forum/admin/forumTopicCURD"
                     onClick={toggleDrawer(false)}
                   >
                     <ListItemText primary="论坛主题" />
@@ -416,7 +417,7 @@ const DrawerList = ({ toggleDrawer }) => {
                   sx={{ pl: 7 }}
                   onClick={toggleDrawer(false)}
                   component={Link}
-                  to="/forum/forumTopicCURD"
+                  to="/forum/admin/forumTopicCURD"
                 >
                   <ListItemText
                     primary="论坛管理"

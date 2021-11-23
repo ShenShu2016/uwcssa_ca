@@ -3,9 +3,15 @@ import {
   Button,
   CardHeader,
   Chip,
+  Dialog,
+  DialogTitle,
   Divider,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Paper,
   Stack,
   Typography,
@@ -19,13 +25,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
+import EmailIcon from "@mui/icons-material/Email";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 import { Loading } from "../../components/Market/loading";
 import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import ShareIcon from "@mui/icons-material/Share";
 import Storage from "@aws-amplify/storage";
-import SwipeViews from "../../components/Market/SwipeViews";
+import SwipeViews from "../../components/SwipeViews";
 import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
@@ -79,7 +88,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MarketRentalInfo({ marketItem }) {
+function SimpleDialog(props) {
+  const { open, onClose, contactEmail, contactPhone, contactWeChat } = props;
+
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Seller Contact Infos</DialogTitle>
+      <List sx={{ pt: 0 }}>
+        <ListItem button>
+          <ListItemIcon>
+            <PhoneInTalkIcon />
+          </ListItemIcon>
+          <ListItemText primary={contactPhone} />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <EmailIcon />
+          </ListItemIcon>
+          <ListItemText primary={contactEmail} />
+        </ListItem>
+        {contactWeChat ? (
+          <ListItem button>
+            <ListItemIcon>
+              <FacebookIcon />
+            </ListItemIcon>
+            <ListItemText primary={contactWeChat} />
+          </ListItem>
+        ) : null}
+      </List>
+    </Dialog>
+  );
+}
+export function MarketRentalInfo({ marketItem, mode = "detail" }) {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.userAuth.user.username);
   const {
@@ -90,7 +130,7 @@ export function MarketRentalInfo({ marketItem }) {
     catFriendly: CF,
     dogFriendly: DF,
   } = marketRentalOptions;
-
+  const [open, setOpen] = useState(false);
   const {
     id,
     // name,
@@ -117,6 +157,9 @@ export function MarketRentalInfo({ marketItem }) {
     heatingType,
     catFriendly,
     dogFriendly,
+    contactEmail,
+    contactPhone,
+    contactWeChat,
   } = marketItem;
 
   return (
@@ -155,7 +198,11 @@ export function MarketRentalInfo({ marketItem }) {
           <Button
             startIcon={<UpdateIcon />}
             component={Link}
-            to={`/market/edit/rental/${id}`}
+            to={
+              mode === "detail"
+                ? `/market/edit/rental/${id}`
+                : window.location.pathname
+            }
             variant="outlined"
             color="info"
           >
@@ -164,13 +211,21 @@ export function MarketRentalInfo({ marketItem }) {
         ) : (
           <Button
             startIcon={<MessageIcon />}
-            onClick={() => console.log("clicked!")}
+            onClick={() => setOpen(true)}
             variant="outlined"
             color="info"
           >
             Contact
           </Button>
         )}
+        <SimpleDialog
+          open={open}
+          user={user}
+          contactPhone={contactPhone}
+          contactEmail={contactEmail}
+          contactWeChat={contactWeChat}
+          onClose={() => setOpen(false)}
+        />
         <Button
           startIcon={<BookmarksIcon />}
           onClick={() => console.log("clicked!")}

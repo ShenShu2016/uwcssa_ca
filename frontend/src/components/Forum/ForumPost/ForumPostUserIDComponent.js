@@ -1,8 +1,8 @@
 import { Typography, Popover } from "@mui/material";
 import { Link } from "react-router-dom";
-import React from "react";
+import React,{useState} from "react";
 export default function ForumPostUserIDComponent({ userID }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,8 +28,7 @@ export default function ForumPostUserIDComponent({ userID }) {
           "&: hover": { color: "primary.main" },
         }}
       >
-        {userID}
-        {", "}
+        {userID},
       </Typography>
       <Popover
         id="mouse-over-popover"
@@ -49,7 +48,7 @@ export default function ForumPostUserIDComponent({ userID }) {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <Typography sx={{ p: 0.8 }}>我是{userID},你是谁</Typography>
+        <Typography component={"div"} sx={{ p: 0.8 }}>我是{userID},你是谁</Typography>
       </Popover>
     </div>
   );

@@ -1,8 +1,6 @@
 import {
   Avatar,
   Box,
-  Breadcrumbs,
-  Button,
   Container,
   Grid,
   IconButton,
@@ -11,6 +9,7 @@ import {
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 
+import CustomBreadcrumbs from "../CustomMUI/CustomBreadcrumbs";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
@@ -54,19 +53,7 @@ export default function EventSignUp() {
     <Box className={classes.root}>
       <Container size="lg">
         <Box>
-          <Breadcrumbs aria-label="breadcrumb">
-            <span style={{ cursor: "not-allowed" }}>
-              <Button color="inherit" component={Link} to="/">
-                主页
-              </Button>
-            </span>
-            <span style={{ cursor: "not-allowed" }}>
-              <Button color="inherit" component={Link} to="/event">
-                活动
-              </Button>
-            </span>
-            <Typography>{""}</Typography>
-          </Breadcrumbs>
+          <CustomBreadcrumbs />
         </Box>
         <Box className={classes.title}>
           <Typography variant="h4">活动报名</Typography>

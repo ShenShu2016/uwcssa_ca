@@ -12,6 +12,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import {
   putUserEducation,
@@ -40,99 +41,131 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setFormData(education);
     setStartDate(education.startDate);
     setEndDate(education.endDate);
   }, [education]);
 
   const [startDate, setStartDate] = useState(education.startDate);
   const [endDate, setEndDate] = useState(education.endDate);
-  const [formData, setFormData] = useState({
-    degree: education.degree,
-    description: education.description,
-    fieldOfStudy: education.fieldOfStudy,
-    grade: education.grade,
-    id: education.id,
-    school: education.school,
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      degree: education.degree,
+      description: education.description,
+      fieldOfStudy: education.fieldOfStudy,
+      grade: education.grade,
+      id: education.id,
+      school: education.school,
+    },
   });
 
-  const { degree, description, fieldOfStudy, grade, id, school } = formData;
-
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const updateUserEducationInput = {
-    degree: degree,
-    description: description,
+    id: education.id,
     endDate: endDate,
-    fieldOfStudy: fieldOfStudy,
-    grade: grade,
-    id: id,
-    school: school,
     startDate: startDate,
   };
-  const update = (e) => {
-    dispatch(putUserEducation({ updateUserEducationInput, idx }));
-    handleEditClose();
+  const onSubmit = async (data) => {
+    const updateUserEducationInput = {
+      ...data,
+      endDate: endDate,
+      startDate: startDate,
+    };
+    const response = await dispatch(
+      putUserEducation({ updateUserEducationInput, idx })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      handleEditClose();
+    }
   };
   const handleDelete = (e) => {
     dispatch(removeUserEducation({ updateUserEducationInput, idx }));
     handleEditClose();
   };
+
   return (
     <div className={classes.root}>
-      <div>
+      <form>
         <Dialog open={editOpen} onClose={handleEditClose}>
           <DialogTitle>编辑 教育经历</DialogTitle>
           <Divider light />
           <DialogContent>
-            <TextField
-              required
-              //autoFocus
-              fullWidth
-              margin="dense"
-              id="school"
+            <Controller
               name="school"
-              label="学校"
-              variant="outlined"
-              placeholder="例如：温莎大学"
-              value={school}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  label="学校"
+                  variant="outlined"
+                  placeholder="例如：温莎大学"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.school}
+                  helperText={errors.school ? "不符合" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="degree">文凭</InputLabel>
-              <Select
-                labelId="degree"
-                id="degree"
-                name="degree"
-                value={degree}
-                onChange={(e) => onChange(e)}
-                label="文凭"
-              >
-                <MenuItem value="None">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value="Junior high school">初中</MenuItem>
-                <MenuItem value="High school">高中</MenuItem>
-                <MenuItem value="Undergraduate">本科</MenuItem>
-                <MenuItem value="Postgraduate">研究生</MenuItem>
-                <MenuItem value="PhD">博士</MenuItem>
-              </Select>
-            </FormControl>
+            <Controller
+              name="degree"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="degree">文凭</InputLabel>
+                  <Select
+                    labelId="degree"
+                    id="degree"
+                    name="degree"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.degree}
+                    label="文凭"
+                  >
+                    <MenuItem value="None">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="Junior high school">初中</MenuItem>
+                    <MenuItem value="High school">高中</MenuItem>
+                    <MenuItem value="Undergraduate">本科</MenuItem>
+                    <MenuItem value="Postgraduate">研究生</MenuItem>
+                    <MenuItem value="PhD">博士</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="fieldOfStudy"
+            <Controller
               name="fieldOfStudy"
-              label="专业"
-              placeholder="例如：商科"
-              value={fieldOfStudy}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+                pattern: /\D+/,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  variant="outlined"
+                  label="专业"
+                  placeholder="例如：商科"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.fieldOfStudy}
+                  helperText={errors.fieldOfStudy ? "不符合" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -160,32 +193,45 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
               </Box>
             </LocalizationProvider>
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              fullWidth
-              margin="dense"
-              variant="outlined"
-              id="grade"
+            <Controller
               name="grade"
-              label="分数"
-              type="number"
-              value={grade}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  variant="outlined"
+                  type="float"
+                  label="分数"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.grade}
+                  helperText={errors.grade ? "不符合" : null}
+                />
+              )}
             />
             <div className={classes.splitter} />
-            <TextField
-              //autoFocus
-              margin="dense"
-              variant="outlined"
-              id="description"
+            <Controller
               name="description"
-              label="简介"
-              multiline
-              value={description}
-              fullWidth
-              maxRows={20}
-              minRows={5}
-              onChange={(e) => onChange(e)}
+              control={control}
+              rules={{
+                required: false,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  variant="outlined"
+                  label="简介"
+                  fullWidth
+                  margin="dense"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.description}
+                  helperText={errors.description ? "不符合" : null}
+                />
+              )}
             />
           </DialogContent>
           <DialogActions>
@@ -195,12 +241,16 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
             <Button onClick={handleEditClose} size="large">
               取消
             </Button>
-            <Button onClick={update} variant="contained" size="large">
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              variant="contained"
+              size="large"
+            >
               更新
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </form>
     </div>
   );
 }

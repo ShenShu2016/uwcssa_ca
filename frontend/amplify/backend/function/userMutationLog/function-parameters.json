@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "api": {
+      "uwcssa": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
