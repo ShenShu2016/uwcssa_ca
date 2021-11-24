@@ -11,9 +11,6 @@ import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/reducers/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
-import PastEvent from "../../components/Event/PastEvents";
-import moment from "moment";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
