@@ -15,6 +15,7 @@ import LikeButtonGroup from "../../LikeButtonGroup";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
+import { useTitle } from "../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main({ article }) {
   const classes = useStyles();
+  useTitle(article.title);
   // console.log("Main", article);
   const { content, imgS3Keys, tags, topic, createdAt, user, owner } = article;
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);

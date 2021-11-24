@@ -15,7 +15,6 @@ import CustomAlert from "./components/CustomMUI/CustomAlert";
 import EventRouter from "./containers/Event/EventRouter";
 import ForumRouter from "./containers/forum/ForumRouter";
 import FoundingTeam from "./containers/FoundingTeam";
-import GoogleMapsPlace from "./components/Test/GoogleMapsPlace";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Market from "./containers/market/Market";
@@ -23,6 +22,7 @@ import NoPermission from "./containers/NoPermission";
 import PrivateRoute from "./components/PrivateRoute";
 import ScrollToTop from "./Hooks/ScrollToTop";
 import StaffRouter from "./containers/staff/StaffRouter";
+import TestRouter from "./containers/test/TestRouter";
 import UserFeedBack from "./containers/UserFeedBack";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
@@ -102,11 +102,7 @@ export default function App() {
             <Route path="/career" component={Career} />
             <Route path="/event" component={EventRouter} />
             <Route path="/rating" exact component={UserFeedBack} />
-            <Route
-              path="/test/googleMapsPlace"
-              exact
-              component={GoogleMapsPlace}
-            />
+            <Route path="/test" component={TestRouter} />
             <Route exact path="/NoPermission" component={NoPermission} />
             <Route>404 Not Found!</Route>
           </Switch>
