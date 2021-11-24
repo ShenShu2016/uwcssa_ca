@@ -39,6 +39,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import moment from "moment";
+import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -330,6 +331,8 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
 export default function MarketItemDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+
   useTitle("二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
@@ -341,7 +344,7 @@ export default function MarketItemDetail() {
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const status = useSelector((state) => state.market.selectedMarketItemStatus);
-
+  console.log("happy", marketItem);
   useEffect(() => {
     if (
       marketItem === undefined ||
@@ -355,8 +358,11 @@ export default function MarketItemDetail() {
       } else {
         setStarter(true);
       }
+      if (marketItem.description === "not-found") {
+        history.push("/not-found");
+      }
     }
-  }, [marketItem]);
+  }, [marketItem, history]);
 
   useEffect(() => {
     const getImage = async () => {

@@ -39,6 +39,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
 import moment from "moment";
+import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -339,6 +340,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
 export default function MarketVehicleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   useTitle("二手车辆");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const [starter, setStarter] = useState(false);
@@ -364,7 +366,10 @@ export default function MarketVehicleDetail() {
         setStarter(true);
       }
     }
-  }, [marketItem]);
+    if (marketItem.description === "not-found") {
+      history.push("/not-found");
+    }
+  }, [marketItem, history]);
 
   useEffect(() => {
     const getImage = async () => {
