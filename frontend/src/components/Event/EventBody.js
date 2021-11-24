@@ -203,17 +203,17 @@ export default function EventBody({ event }) {
               >
                 {moment(startDate).format("YYYY") ===
                 moment(endDate).format("YYYY") ? (
-                  <Typography variant="subtitle1" component="div" color="red">
-                    {startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
+                  <Typography variant="subtitle2" gutterBottom>
+                    时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
                     {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
                     {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
                     {endDate.slice(11, 16)}
                   </Typography>
                 ) : (
-                  <Typography variant="subtitle1" component="div" color="red">
-                    {startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
+                  <Typography variant="subtitle2" gutterBottom>
+                    时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
                     {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(0, 4)} 年{endDate.slice(5, 7)}月
+                    {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
                     {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
                   </Typography>
                 )}
