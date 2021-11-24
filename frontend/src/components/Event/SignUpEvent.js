@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 
-import CustomBreadcrumbs from "../CustomMUI/CustomBreadcrumbs";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
@@ -52,13 +51,9 @@ export default function EventSignUp() {
   return (
     <Box className={classes.root}>
       <Container size="lg">
-        <Box>
-          <CustomBreadcrumbs />
-        </Box>
         <Box className={classes.title}>
           <Typography variant="h4">活动报名</Typography>
         </Box>
-
         <Grid container spacing={4} className={classes.boxChoice}>
           <Grid item xs={12} sm={6} md={4}>
             <Paper>

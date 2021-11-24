@@ -2,7 +2,6 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
@@ -117,9 +116,6 @@ export default function Event() {
   return (
     <div>
       <Box className={classes.root}>
-        <Box sx={{ marginLeft: "1rem" }}>
-          <CustomBreadcrumbs />
-        </Box>
         {/* <EventSliderShow /> */}
         <Box className={classes.list}>
           <Typography variant="h3" className={classes.title}>

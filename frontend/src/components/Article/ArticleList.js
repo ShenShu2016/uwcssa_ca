@@ -9,15 +9,6 @@ import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    marginTop: "4rem",
-    maxWidth: "1536px",
-    paddingInline: "3rem",
-    [theme.breakpoints.down("sm")]: {
-      paddingInline: "0.5rem",
-    },
-  },
   main: {
     display: "flex",
     [theme.breakpoints.down("lg")]: {
@@ -65,7 +56,7 @@ export default function ArticleList() {
     );
   });
   return (
-    <Box className={classes.root}>
+    <Box>
       <Typography variant="h3" className={classes.title}>
         近期新闻
       </Typography>

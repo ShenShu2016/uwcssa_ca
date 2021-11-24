@@ -16,16 +16,6 @@ import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    paddingBlock: "3rem",
-    maxWidth: "1536px",
-    paddingInline: "3rem",
-    [theme.breakpoints.down("sm")]: {
-      paddingInline: "0.5rem",
-      paddingBlock: "1rem",
-    },
-  },
   title: {
     textAlign: "center",
     color: "#0D1F48",
@@ -94,7 +84,7 @@ export default function ArticleDetail() {
       {article.active === false ? (
         <Redirect to="/" />
       ) : (
-        <div className={classes.root}>
+        <div>
           <Typography
             variant="h4"
             className={classes.title}

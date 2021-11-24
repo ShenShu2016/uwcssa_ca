@@ -39,7 +39,8 @@ export default function EventDetail() {
 
   return (
     <div className={classes.root}>
-      <Box sx={{ paddingBlock: "1rem", paddingInline: "1rem" }}>
+      <Box sx={{ paddingBlock: "1rem" }}>
+        {/* 试试这个东西不要硬编码 */}
         <IconButton component={Link} to="/event">
           <ArrowBackIcon />
         </IconButton>
