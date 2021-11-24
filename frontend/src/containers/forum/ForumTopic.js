@@ -1,5 +1,5 @@
 import { Box, Grid, Skeleton, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   removeSelectedForumTopic,
   selectedForumTopic,
@@ -7,12 +7,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
-import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
-import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
+// import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
-
+import { useHistory } from "react-router";
 // import {
 //   selectedForumTopic,
 //   removeSelectedForumTopic,
@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ForumTopic() {
+export default function ForumTopic() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { forumTopicID } = useParams();
+  const [starter, setStarter] = useState(false);
   //console.log(forumTopicID);
   useEffect(() => {
     if (forumTopicID && forumTopicID !== "") {
@@ -39,10 +41,31 @@ function ForumTopic() {
   }, [forumTopicID, dispatch]);
   const forumTopic = useSelector((state) => state.forum.selected.forumTopic);
   // console.log(forumTopic);
+  useEffect(() => {
+    if (
+      forumTopic === undefined ||
+      forumTopic === null ||
+      forumTopic.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (forumTopic.forumSubTopics === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+
+      if (forumTopic.description === "not-found") {
+        history.push("/not-found");
+      }
+    }
+  }, [forumTopic, history]);
+  console.log(starter);
+  console.log(forumTopic);
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
-        {Object.keys(forumTopic).length === 0 ? (
+        {starter === false ? (
           <Skeleton variant="rectangular" width={210} height={118} />
         ) : (
           <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
@@ -54,14 +77,9 @@ function ForumTopic() {
           </Grid>
         )}
         <Grid item sm={1} md={2}>
-          <ForumAdSide />
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <OpenIconSpeedDial />
+          <ForumRightSide />
         </Grid>
       </Grid>
     </div>
   );
 }
-
-export default ForumTopic;

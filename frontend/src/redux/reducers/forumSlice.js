@@ -89,7 +89,11 @@ export const selectedForumTopic = createAsyncThunk(
       variables: { id: forumTopicID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
-    return response.data.getForumTopic;
+    if (response.data.getForumTopic === null) {
+      return { id: forumTopicID, description: "not-found" };
+    } else {
+      return response.data.getForumTopic;
+    }
   }
 );
 //forumSubTopic
@@ -111,7 +115,11 @@ export const selectedForumSubTopic = createAsyncThunk(
       variables: { id: forumSubTopicID },
       authMode: "AWS_IAM",
     });
-    return response.data.getForumSubTopic;
+    if (response.data.getForumSubTopic === null) {
+      return { id: forumSubTopicID, description: "not-found" };
+    } else {
+      return response.data.getForumSubTopic;
+    }
   }
 );
 export const selectedForumSubTopicPosts = createAsyncThunk(
@@ -175,7 +183,11 @@ export const selectedForumPost = createAsyncThunk(
       variables: { id: forumPostID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
-    return response.data.getForumPost;
+    if (response.data.getForumPost === null) {
+      return { id: forumPostID, description: "not-found" };
+    } else {
+      return response.data.getForumPost;
+    }
   }
 );
 export const selectedForumPostComments = createAsyncThunk(

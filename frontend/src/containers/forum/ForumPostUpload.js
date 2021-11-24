@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
-import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumPostImageSwipe from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostImageSwipe";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -614,7 +614,7 @@ export default function ForumPostUpload() {
           }
         }
       >
-        <ForumAdSide />
+        <ForumRightSide />
       </Box>
     </Box>
   );

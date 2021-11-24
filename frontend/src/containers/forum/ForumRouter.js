@@ -14,9 +14,9 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
-    marginTop: "4rem",
-    maxWidth: "1536px",
-    paddingInline: "3rem",
+    // marginTop: "4rem",
+    maxWidth: "1820px",
+    paddingInline: "4rem",
     [theme.breakpoints.down("sm")]: {
       paddingInline: "0.5rem",
     },

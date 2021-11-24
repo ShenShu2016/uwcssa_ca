@@ -59,7 +59,7 @@ const itemData = [
     title: "Camera",
   },
 ];
-const ForumRightSide = () => {
+export default function ForumRightSide()  {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -99,4 +99,3 @@ const ForumRightSide = () => {
   );
 };
 
-export default ForumRightSide;
