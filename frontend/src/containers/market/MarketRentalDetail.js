@@ -39,6 +39,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
 import moment from "moment";
+import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -346,6 +347,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
 export default function MarketRentalDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   useTitle("租房信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
@@ -372,7 +374,10 @@ export default function MarketRentalDetail() {
         setStarter(true);
       }
     }
-  }, [marketItem]);
+    if (marketItem.description === "not-found") {
+      history.push("/not-found");
+    }
+  }, [marketItem, history]);
 
   useEffect(() => {
     const getImage = async () => {
