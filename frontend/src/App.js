@@ -1,6 +1,11 @@
 import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Redirect,
+  Route,
+  BrowserRouter as Router,
+  Switch,
+} from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { fetchUserProfile, loadUser } from "./redux/reducers/authSlice";
 
@@ -108,7 +113,7 @@ export default function App() {
               component={GoogleMapsPlace}
             />
             <Route exact path="/NoPermission" component={NoPermission} />
-            <Route>404 Not Found!</Route>
+            <Redirect to="/not-found">404 Not Found!</Redirect>
           </Switch>
           <CustomAlert
             isAlertOpen={isAlertOpen}
