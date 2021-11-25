@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 }));
-const ForumTopicMain = ({ forumTopic }) => {
+export default function ForumTopicMain  ({ forumTopic })  {
   const classes = useStyles();
   //console.log(forumTopic);
   const { name, forumSubTopics } = forumTopic;
@@ -59,5 +59,3 @@ const ForumTopicMain = ({ forumTopic }) => {
     </div>
   );
 };
-
-export default ForumTopicMain;

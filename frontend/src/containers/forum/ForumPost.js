@@ -1,17 +1,17 @@
 import { Box, Grid, Skeleton } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState  } from "react";
 import {
   removeSelectedForumPost,
   selectedForumPost,
 } from "../../redux/reducers/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumPostComments from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostComments";
 import ForumPostMain from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostMain";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
-
+import { useHistory } from "react-router";
 const useStyles = makeStyles({
   root: {
     maxWidth: "960px",
@@ -24,6 +24,8 @@ const useStyles = makeStyles({
 export default function ForumPost() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [starter, setStarter] = useState(false);
   const { forumPostID } = useParams();
   const { forumPost } = useSelector((state) => state.forum.selected);
 
@@ -34,14 +36,31 @@ export default function ForumPost() {
     }
     return () => dispatch(removeSelectedForumPost());
   }, [forumPostID, dispatch]);
-
+  useEffect(() => {
+    if (
+      forumPost === undefined ||
+      forumPost === null ||
+      forumPost.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (forumPost.forumPostComments === undefined || forumPost.forumSubTopic === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+      if (forumPost.description === "not-found") {
+        history.push("/not-found");
+      }
+    }
+  }, [forumPost, history]);
   console.log(forumPost);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
         <Grid item xs={11} sm={10} md={9}>
-          {forumPost.active !== true ? (
+          {starter === false ? (
             <Skeleton variant="rectangular" width={210} height={118} />
           ) : (
             <Box>
@@ -55,7 +74,7 @@ export default function ForumPost() {
           <Box>{"  "}</Box>
         </Grid>
         <Grid item md={2}>
-          <ForumAdSide />
+          <ForumRightSide />
         </Grid>
         {/* <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
           <OpenIconSpeedDial />

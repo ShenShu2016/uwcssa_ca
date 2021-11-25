@@ -15,7 +15,7 @@ export default function ForumPostMain({ forumPost }) {
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);
   const { id, content, imgS3Keys, createdAt, userID, tags, user } = forumPost;
-  console.log("forumPost6666666666666666666", forumPost);
+  // console.log("forumPost6666666666666666666", forumPost);
   return (
     <div>
       <Box>
