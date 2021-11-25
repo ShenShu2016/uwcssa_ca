@@ -17,6 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
 import {
   selectMarketItemById,
   selectedMarketItem,
@@ -33,7 +34,6 @@ import MessageIcon from "@mui/icons-material/Message";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import ShareIcon from "@mui/icons-material/Share";
-import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../components/SwipeViews";
 import UpdateIcon from "@mui/icons-material/Update";
 import { makeStyles } from "@mui/styles";
@@ -42,11 +42,6 @@ import moment from "moment";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
-
-// import {
-//   removeSelectedMarketItem,
-//   selectedMarketItem,
-// } from "../../redux/actions/marketItemActions";
 
 //点太快，selectedMarket来不及删，会产生bug; Solved!
 const useStyles = makeStyles((theme) => ({
@@ -349,6 +344,7 @@ export default function MarketRentalDetail() {
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("租房信息");
+
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
   const [starter, setStarter] = useState(false);
@@ -359,6 +355,7 @@ export default function MarketRentalDetail() {
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const status = useSelector((state) => state.market.selectedMarketItemStatus);
+  const imgKeys = useSelector((state) => selectImageById(state, id));
 
   useEffect(() => {
     if (
@@ -370,38 +367,40 @@ export default function MarketRentalDetail() {
     } else {
       if (marketItem.catFriendly === undefined) {
         setStarter(false);
+      } else if (marketItem.imgS3Keys === undefined) {
+        setStarter(false);
       } else {
         setStarter(true);
+        setImgKeyFromServer(marketItem.imgS3Keys);
       }
-    }
-    if (marketItem.description === "not-found") {
-      history.push("/not-found");
+      if (marketItem.description === "not-found") {
+        history.push("/not-found");
+      }
     }
   }, [marketItem, history]);
 
   useEffect(() => {
-    const getImage = async () => {
-      try {
-        setImgKeyFromServer([]);
-        const imageAccessURL = await Promise.all(
-          Array.from(marketItem.imgS3Keys).map((key) =>
-            Storage.get(key, {
-              level: "public",
-              expires: 120,
-              download: false,
-            })
-          )
-        );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer([]);
-      }
-    };
     if (starter) {
-      getImage();
+      dispatch(getImage({ url: marketItem.imgS3Keys, id }));
     }
-  }, [starter, marketItem]);
+  }, [dispatch, marketItem, starter, id]);
+  console.log("test", imgKeys);
+
+  // useEffect(() => {
+  //   const getImages = async () => {
+  //     try {
+  //       setImgKeyFromServer([]);
+  //       const imageAccessURL = await dispatch(getImage(marketItem.imgS3Keys));
+  //       setImgKeyFromServer((url) => url.concat(imageAccessURL));
+  //     } catch (error) {
+  //       console.error("error accessing the Image from s3", error);
+  //       setImgKeyFromServer([]);
+  //     }
+  //   };
+  //   if (starter) {
+  //     getImages();
+  //   }
+  // }, [starter, marketItem, dispatch]);
 
   return (
     <div className={classes.root}>
@@ -414,6 +413,7 @@ export default function MarketRentalDetail() {
         >
           <Box className={classes.images}>
             <SwipeViews images={imgKeyFromServer} />
+            {/* 需要改！！！ */}
           </Box>
           <Box className={classes.info}>
             <MarketRentalInfo marketItem={marketItem} />

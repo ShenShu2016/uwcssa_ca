@@ -6,6 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import eventReducer from "./reducers/eventSlice";
 import forumReducer from "./reducers/forumSlice";
 import generalReducer from "./reducers/generalSlice";
+import imageReducer from "./reducers/imageSlice";
 // import { generalReducer } from "./reducers/generalReducer";
 import marketReducer from "./reducers/marketSlice";
 import marketUserReducer from "./reducers/marketUserSlice";
@@ -24,6 +25,7 @@ export default configureStore({
     marketUser: marketUserReducer,
     event: eventReducer,
     staff: staffReducer,
+    images: imageReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
