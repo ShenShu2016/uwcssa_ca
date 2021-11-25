@@ -365,9 +365,9 @@ export default function MarketVehicleDetail() {
       } else {
         setStarter(true);
       }
-    }
-    if (marketItem.description === "not-found") {
-      history.push("/not-found");
+      if (marketItem.description === "not-found") {
+        history.push("/not-found");
+      }
     }
   }, [marketItem, history]);
 
