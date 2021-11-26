@@ -17,7 +17,7 @@ import React from "react";
 
 export default function ForumIndexSubTopic({ forumSubTopic }) {
   const forumPost = forumSubTopic.forumPosts.items[0];
-  console.log(forumSubTopic);
+  // console.log(forumSubTopic);
   return (
     <div>
       <Paper
@@ -106,7 +106,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                 <ListItemText
                   primary={
                     <React.Fragment>
-                      <ForumPostTitleToolTip forumPost={forumPost} />
+                      <ForumPostTitleToolTip forumPost={forumPost} forumSubTopic={forumSubTopic} />
                     </React.Fragment>
                   }
                   secondary={

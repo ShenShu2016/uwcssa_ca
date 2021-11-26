@@ -152,7 +152,7 @@ export default function ForumPostUpload() {
   const onSubmit = async (data) => {
     const createForumPostInput = {
       ...data,
-      imgS3Keys: imageKeys,
+      imgS3Keys: Object.keys(imageKeys),
       active: checkActive,
       lastReplyAt: new Date().toISOString(),
       userID: username,

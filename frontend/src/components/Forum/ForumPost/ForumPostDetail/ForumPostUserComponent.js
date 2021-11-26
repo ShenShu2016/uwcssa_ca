@@ -1,12 +1,15 @@
 import { Box } from "@mui/material";
 import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import React from "react";
-
+import ForumPostUserIDComponent from "../ForumPostUserIDComponent";
 export default function ForumPostUserComponent({ user, userID, id }) {
   return (
     <Box
       sx={{
+        width:130,
+        overflow:"hidden",
         m: 1,
+        p: 1,
         maxHeight: { xs: 120, sm: 167 },
         display: "flex",
         flexDirection: { xs: "row", sm: "column" },
@@ -24,7 +27,7 @@ export default function ForumPostUserComponent({ user, userID, id }) {
       </Box>
 
       <Box component="span" sx={{ fontSize: 14, m: 1 }}>
-        {userID}
+        <ForumPostUserIDComponent userID={userID} />
       </Box>
       {id && (
         <Box component="span" sx={{ fontSize: 14, my: 1 }}>
