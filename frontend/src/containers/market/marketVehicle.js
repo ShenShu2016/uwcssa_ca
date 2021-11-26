@@ -33,8 +33,6 @@ export default function MarketVehicle() {
     clickedTag: "",
   });
 
-  // const [images, setImages] = useState();
-
   const marketItems = useSelector(selectAllMarketItems);
   const status = useSelector((state) => state.market.fetchMarketItemsStatus);
   const trueMarketItems = marketItems.filter(
@@ -70,25 +68,6 @@ export default function MarketVehicle() {
     filterList,
     "vehicle"
   );
-  console.log("say something", filteredItems);
-
-  // let urls = [];
-  // marketItems.forEach((item) => {
-  //   item.imgS3Keys.map((subitem) => urls.push(subitem));
-  // });
-  // const preloadImages = () => {
-  //   setImages(
-  //     urls.map((url, urlIdx) => {
-  //       let img = new Image();
-  //       img.onload = () => handleImageLoad(urlIdx);
-  //       img.src = url;
-  //       return { url: url, loaded: false };
-  //     })
-  //   );
-  // };
-  // const handleImageLoad = (index) => {
-  //   setImages((img) => (img.loaded = true));
-  // };
 
   const itemRenderList =
     filteredItems &&
@@ -143,7 +122,7 @@ export default function MarketVehicle() {
       clickedTag: "",
     });
   };
-  console.log("filterList", filterList);
+
   return (
     <Box className={classes.root}>
       {starter === false ? (

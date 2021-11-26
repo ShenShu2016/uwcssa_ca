@@ -14,11 +14,6 @@ import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
-// setMarketItems,
-//   setMarketRental,
-//   setMarketVehicles,
-// } from "../../redux/actions/marketItemActions";
-
 export default function MarketList() {
   useTitle("市场");
   const dispatch = useDispatch();
@@ -64,7 +59,6 @@ export default function MarketList() {
         />
       );
     });
-  console.log("marketVehicles", marketItems);
   return (
     <Box className={classes.root}>
       {starter === false ? (
@@ -78,17 +72,6 @@ export default function MarketList() {
           <Box className={classes.img}>
             <MarketTopBar />
             <Box className={classes.items}>{marketItemRenderList}</Box>
-
-            {/* <Typography variant="h5" className={classes.title}>
-            汽车
-          </Typography>
-          <Box className={classes.items}>{marketVehicleRenderList}</Box>
-          <Divider />
-          <Typography variant="h5" className={classes.title}>
-            房屋
-          </Typography>
-          <Box className={classes.items}>{marketRentalRenderList}</Box>
-          <Divider /> */}
           </Box>
         </Stack>
       )}

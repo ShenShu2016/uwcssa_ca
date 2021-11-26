@@ -24,11 +24,28 @@ export const getImage = createAsyncThunk(
         })
       )
     );
-    console.log(id);
     const response = { imgUrl, id };
     return response;
   }
 );
+
+export const updateImage = createAsyncThunk(
+  "images/updateImage",
+  async ({ url, id, prevUrl }) => {
+    const imgUrl = await Promise.all(
+      Array.from(url).map((key) =>
+        Storage.get(key, {
+          level: "public",
+          expires: 120,
+          download: false,
+        })
+      )
+    );
+    const response = { imgUrl, id, prevUrl };
+    return response;
+  }
+);
+
 const imageSlice = createSlice({
   name: "images",
   initialState,
@@ -41,7 +58,6 @@ const imageSlice = createSlice({
       .addCase(getImage.fulfilled, (state, action) => {
         state.getImageStatus = "succeeded";
         const allUrls = action.meta.arg.url;
-        console.log(action);
         const temp = Object.fromEntries(
           action.payload.imgUrl.map((key, idx) => [allUrls[idx], key])
         );
@@ -49,12 +65,25 @@ const imageSlice = createSlice({
           ["id", action.meta.arg.id],
           ["images", temp],
         ]);
-        console.log("what happened", temp2);
         imageAdapter.addOne(state, temp2);
       })
       .addCase(getImage.rejected, (state, action) => {
         state.getImageStatus = "failed";
         state.getImageError = action.error.message;
+      })
+      .addCase(updateImage.fulfilled, (state, action) => {
+        const allUrls = action.meta.arg.url;
+        const temp = Object.fromEntries(
+          Object.entries(action.payload.prevUrl).concat(
+            action.payload.imgUrl.map((key, idx) => [allUrls[idx], key])
+          )
+        );
+        console.log("check here", temp);
+        const temp2 = Object.fromEntries([
+          ["id", action.meta.arg.id],
+          ["images", temp],
+        ]);
+        imageAdapter.upsertOne(state, temp2);
       });
   },
 });
