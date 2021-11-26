@@ -4,18 +4,19 @@ import {
   Container,
   FormControl,
   FormControlLabel,
-  FormGroup,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
+  Stack,
   Switch,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { fetchTopics, postEvent } from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { GetTags } from "../../components/CustomMUI/CustomTags";
 import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
@@ -29,6 +30,7 @@ import { postSingleImage } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { Controller, useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,31 +60,52 @@ export default function PostEvent() {
   const classes = useStyles();
   useTitle("活动创建");
   const dispatch = useDispatch();
+
   const [backGroundImgS3Key, setBackGroundImgS3Key] = useState("");
   const [qrCodeImgS3Key, setQrCodeImgS3Key] = useState("");
   const [posterImgS3Key, setPosterImgS3Key] = useState("");
-
+  const { username } = useSelector((state) => state.userAuth.user);
   const history = useHistory();
-  const [eventData, setEventData] = useState({
-    title: "",
-    content: "",
-    startDate: null,
-    endDate: null,
-    online: false,
-    group: false,
-    location: "",
-    topicID: "",
-    sponsor: "",
-    tags: "",
-    eventStatus: "ComingSoon",
+  const timer = useRef();
+  // const [eventData, setEventData] = useState({
+  //   title: "",
+  //   content: "",
+  //   startDate: null,
+  //   endDate: null,
+  //   online: false,
+  //   group: false,
+  //   location: "",
+  //   topicID: "",
+  //   sponsor: "",
+  //   tags: "",
+  //   eventStatus: "ComingSoon",
+  // });
+  // console.log(eventData);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: "",
+      content: "",
+      startDate: null,
+      endDate: null,
+      online: false,
+      group: false,
+      location: "",
+      topicID: "",
+      sponsor: "",
+      eventStatus: "",
+    },
   });
-  console.log(eventData);
+
   useEffect(() => {
     dispatch(fetchTopics());
   }, [dispatch]);
 
   const { topics } = useSelector((state) => state.event);
-  const { username } = useSelector((state) => state.userAuth.user);
 
   const uploadEventImg = async (e) => {
     const imageData = e.target.files;
@@ -117,45 +140,27 @@ export default function PostEvent() {
     }
   };
 
-  const uploadEvent = async () => {
-    const {
-      title,
-      content,
-      startDate,
-      endDate,
-      online,
-      group,
-      location,
-      topicID,
-      eventStatus,
-      sponsor,
-      tags,
-    } = eventData;
-
+  const onSubmit = async (data) => {
     const createEventInput = {
-      title,
-      content,
-      startDate,
-      endDate,
-      online,
-      group,
-      location,
-      backGroundImgS3Key,
-      posterImgS3Key,
-      qrCodeImgS3Key,
-      eventStatus,
-      sortKey: "SortKey",
-      topicID: topicID,
+      ...data,
+      backGroundImgS3Key: backGroundImgS3Key,
+      posterImgS3Key: posterImgS3Key,
+      qrCodeImgS3Key: qrCodeImgS3Key,
       active: true,
-      sponsor,
-      tags,
+      sortKey: "SortKey",
       userID: username,
+      tags: GetTags(),
     };
-
     const response = await dispatch(postEvent({ createEventInput }));
 
     if (response.meta.requestStatus === "fulfilled") {
       history.push(`/event/${response.payload.data.createEvent.id}`);
+    } else {
+      timer.current = window.setTimeout(() => {
+        console.log(response.error.message);
+      }, 1000);
+
+      console.log(response.error.message);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
@@ -176,50 +181,75 @@ export default function PostEvent() {
 
   return (
     <div>
-      <Box className={classes.root}>
+      <Box
+        className={classes.root}
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <Typography variant="h3" sx={{ textAlign: "center" }} gutterBottom>
           活动策划
         </Typography>
         <Container maxWidth="sm">
-          <Box className={classes.form} noValidate>
-            <TextField
-              margin="normal"
-              fullWidth
-              required
-              id="title"
-              label="标题"
-              value={eventData.title}
-              onChange={(e) =>
-                setEventData({ ...eventData, title: e.target.value })
-              }
+          <Box className={classes.form}>
+            <Controller
+              name="title"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  required
+                  id="title"
+                  label="标题"
+                  variant="outlined"
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.title}
+                  helperText={errors.title ? "不能为空" : null}
+                />
+              )}
             />
-            <FormControl
-              variant="outlined"
-              sx={{ m: 2, margin: "normal" }}
-              fullWidth
-            >
-              <InputLabel id="demo-simple-select-outlined-label2">
-                Topic
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label2"
-                id="demo-simple-select-outlined2"
-                value={eventData.topicID}
-                onChange={(e) =>
-                  setEventData({ ...eventData, topicID: e.target.value })
-                }
-                label="类别"
-              >
-                {topics.map((topic) => {
-                  return (
-                    <MenuItem value={topic.id} key={topic.id}>
-                      {topic.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-
+            <Controller
+              name="topicID"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="topicID">主题</InputLabel>
+                  <Select
+                    labelId="topicID"
+                    value={value}
+                    onChange={onChange}
+                    label="主题"
+                    error={!!errors.topicID}
+                    // FormHelperHelperText={
+                    //   errors.topicID
+                    //     ? "选择一个主题，没有的话请上传新的类别"
+                    //     : null
+                    // }
+                  >
+                    {topics.map((topic) => {
+                      return (
+                        <MenuItem value={topic.id} key={topic.id}>
+                          {topic.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  {errors.topicID && (
+                    <FormHelperText sx={{ color: "#d32f2f" }}>
+                      请选择一个主题，没有的话请上传新的类别
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
             <TextField
               margin="normal"
               fullWidth
@@ -237,131 +267,206 @@ export default function PostEvent() {
             >
               上传新的类别
             </Button>
-            <TextField
-              margin="normal"
-              fullWidth
-              label="赞助商"
-              value={eventData.sponsor}
-              onChange={(e) =>
-                setEventData({ ...eventData, sponsor: e.target.value })
-              }
-            />
-          </Box>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Box>
-              <div>
-                <DateTimePicker
-                  label="开始时间"
-                  value={eventData.startDate}
-                  id="startDate"
-                  onChange={(e) => {
-                    console.log("e", e);
-                    setEventData({
-                      ...eventData,
-                      startDate: e,
-                    });
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </div>
-              <div>
-                <DateTimePicker
-                  label="结束时间"
-                  value={eventData.endDate}
-                  id="endDate"
-                  onChange={(e) => {
-                    setEventData({ ...eventData, endDate: e });
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </div>
-            </Box>
-          </LocalizationProvider>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={eventData.online}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setEventData({ ...eventData, online: e.target.checked });
-                  }}
-                  name="online"
-                />
-              }
-              label="online"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={eventData.group}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setEventData({ ...eventData, group: e.target.checked });
-                  }}
-                  name="group"
-                />
-              }
-              label="group"
-            />
-          </FormGroup>
 
-          <Box className={classes.form} noValidate>
-            <TextField
-              margin="normal"
-              fullWidth
-              required
-              id="location"
-              label="地址"
-              value={eventData.location}
-              onChange={(e) =>
-                setEventData({ ...eventData, location: e.target.value })
-              }
+            <Controller
+              name="sponsor"
+              control={control}
+              rules={{
+                required: false,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="赞助商"
+                  variant="outlined"
+                  onChange={onChange}
+                  value={value}
+                />
+              )}
+            />
+
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack>
+                <Controller
+                  name="startDate"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <Box sx={{ margin: "1rem 0" }}>
+                      <DateTimePicker
+                        label="开始时间"
+                        value={value}
+                        id="startDate"
+                        error={!!errors.startDate}
+                        onChange={onChange}
+                        minDateTime={new Date()}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                      {errors.startDate && (
+                        <FormHelperText sx={{ color: "#d32f2f" }}>
+                          不能为空
+                        </FormHelperText>
+                      )}
+                    </Box>
+                  )}
+                />
+
+                <Controller
+                  name="endDate"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <div>
+                      <DateTimePicker
+                        label="结束时间"
+                        value={value}
+                        id="endDate"
+                        onChange={onChange}
+                        minDateTime={new Date()}
+                        renderInput={(params) => <TextField {...params} />}
+                        error={!!errors.endDate}
+                      />
+                      {errors.endDate && (
+                        <FormHelperText sx={{ color: "#d32f2f" }}>
+                          不能为空
+                        </FormHelperText>
+                      )}
+                    </div>
+                  )}
+                />
+              </Stack>
+            </LocalizationProvider>
+
+            <Controller
+              name="online"
+              control={control}
+              rules={{
+                required: false,
+              }}
+              render={({ field: { onChange, checked } }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={checked}
+                      onChange={onChange}
+                      name="online"
+                    />
+                  }
+                  label="online"
+                />
+              )}
+            />
+
+            <Controller
+              name="online"
+              control={control}
+              rules={{
+                required: false,
+              }}
+              render={({ field: { onChange, checked } }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={checked}
+                      onChange={onChange}
+                      name="group"
+                    />
+                  }
+                  label="group"
+                />
+              )}
+            />
+            <Controller
+              name="location"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  required
+                  id="location"
+                  label="地址"
+                  value={value}
+                  onChange={onChange}
+                  error={!!errors.location}
+                  helperText={errors.title ? "不能为空" : null}
+                />
+              )}
             />
             <Box className={classes.type}>
               <div className="newType">
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="demo-simple-select-outlined-label">
-                    Condition
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={eventData.eventStatus}
-                    onChange={(e) =>
-                      setEventData({
-                        ...eventData,
-                        eventStatus: e.target.value,
-                      })
-                    }
-                    label="Condition"
-                  >
-                    {eventStatusList.map((eventStatus) => {
-                      return (
-                        <MenuItem
-                          value={eventStatus.value}
-                          key={eventStatus.value}
-                        >
-                          {eventStatus.label}
+                <Controller
+                  name="eventStatus"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <FormControl variant="outlined" fullWidth>
+                      <InputLabel id="eventStatus">活动状态</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="eventStatus"
+                        defaultValue=""
+                        value={value}
+                        onChange={onChange}
+                        label="Event Status"
+                        error={!!errors.eventStatus}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
                         </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
+                        {eventStatusList.map((eventStatus) => {
+                          return (
+                            <MenuItem
+                              value={eventStatus.value}
+                              key={eventStatus.value}
+                            >
+                              {eventStatus.label}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                      {errors.eventStatus && (
+                        <FormHelperText sx={{ color: "#d32f2f" }}>
+                          请选择一个活动状态
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  )}
+                />
               </div>
             </Box>
-
-            <TextField
-              margin="normal"
-              fullWidth
-              required
-              id="content"
-              label="内容"
-              value={eventData.content}
-              onChange={(e) =>
-                setEventData({ ...eventData, content: e.target.value })
-              }
+            <Controller
+              name="content"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="Content"
+                  minRows={20}
+                  variant="outlined"
+                  multiline
+                  onChange={onChange}
+                  value={value}
+                  error={!!errors.content}
+                  helperText={errors.content ? "不能为空" : null}
+                />
+              )}
             />
+
             <Box>
               <label htmlFor="poster">
                 <Input
@@ -410,8 +515,8 @@ export default function PostEvent() {
             </Box>
             <Button
               variant="contained"
+              type="submit"
               endIcon={<PublishIcon />}
-              onClick={uploadEvent}
               color="primary"
             >
               上传活动
