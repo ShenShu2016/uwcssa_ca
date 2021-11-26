@@ -28,7 +28,7 @@ export default function ForumPostUserIDComponent({ userID }) {
           "&: hover": { color: "primary.main" },
         }}
       >
-        {userID},
+        {userID}
       </Typography>
       <Popover
         id="mouse-over-popover"

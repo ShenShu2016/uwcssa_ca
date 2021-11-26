@@ -73,7 +73,7 @@ export default function ForumPostImageSwipe({ images }) {
           top: "0",
           left: "0",
           right: "0",
-          bottom: "40px",
+          bottom: "60px",
           zIndex: "1",
           position: "absolute",
           margin: "auto",
@@ -83,23 +83,27 @@ export default function ForumPostImageSwipe({ images }) {
           component="img"
           src={images[activeStep]}
           maxHeight="100%"
-          maxWidth="100%"
+          maxWidth="120%"
           sx={{
-            position: "absolute",
-            left: "0",
+            position: "relative",
+            top: "50%",
+            left: "50%",
             right: "0",
             margin: "auto",
+            transform: `translate(-50%,-50%)`,
+            width: "auto",
+            height: "auto",
           }}
         />
       </Box>
       <Box
         sx={{
           maxWidth: "100%",
-          height: "20px",
+          height: "40px",
           // bgcolor: "red",
           bottom: 30,
           left: 0,
-          right: 20,
+          right: 10,
           zIndex: "1",
           position: "absolute",
           margin: "auto",

@@ -42,7 +42,7 @@ export default function ForumSubTopic() {
     ) {
       setStarter(false);
     } else {
-      if (forumSubTopic.forumTopic === undefined) {
+      if (forumSubTopic.forumTopic === undefined || forumSubTopicPostsLastReply.items === undefined) {
         setStarter(false);
       } else {
         setStarter(true);
@@ -52,7 +52,7 @@ export default function ForumSubTopic() {
         history.push("/not-found");
       }
     }
-  }, [forumSubTopic, history]);
+  }, [forumSubTopic,forumSubTopicPostsLastReply, history]);
   console.log(forumSubTopicPostsLastReply);
   return (
     <Box
@@ -81,7 +81,7 @@ export default function ForumSubTopic() {
         ) : (
           <ForumSubTopicMain forumSubTopic={forumSubTopic} />
         )}
-        {Object.keys(forumSubTopicPostsLastReply).length === 0 ? (
+        {starter === false  ? (
           <Skeleton
             variant="rectangular"
             width={880}
@@ -89,7 +89,7 @@ export default function ForumSubTopic() {
             sx={{ m: 5 }}
           />
         ) : (
-          <ForumSubTopicPosts posts={forumSubTopicPostsLastReply} />
+          <ForumSubTopicPosts forumSubTopic={forumSubTopic} posts={forumSubTopicPostsLastReply} />
         )}
       </Box>
       <Box

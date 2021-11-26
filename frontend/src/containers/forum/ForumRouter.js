@@ -43,6 +43,11 @@ export default function ForumRouter() {
         />
         <Route
           exact
+          path="/forum/:forumTopicID/:forumSubTopicID"
+          component={ForumSubTopic}
+        />
+        <Route
+          exact
           path="/forum/:forumTopicID/:forumSubTopicID/发布帖子"
           component={ForumPostUpload}
         />
