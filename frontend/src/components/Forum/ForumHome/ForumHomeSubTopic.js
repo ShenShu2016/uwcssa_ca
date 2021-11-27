@@ -15,8 +15,13 @@ import ForumTimeComponent from "../ForumTimeComponent";
 import { Link } from "react-router-dom";
 import React from "react";
 
-export default function ForumIndexSubTopic({ forumSubTopic }) {
+export default function ForumHomeSubTopic({ forumSubTopic }) {
   const forumPost = forumSubTopic.forumPosts.items[0];
+  const forumPostComments = forumSubTopic.forumPosts.items.map(
+    (forumPost) => forumPost.forumPostComments.items.length
+  );
+  let forumPostCommentCount = 0;
+  forumPostComments.map((test) => (forumPostCommentCount += test));
   // console.log(forumSubTopic);
   return (
     <div>
@@ -46,7 +51,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
             <ListItemText
               sx={{
                 display: "flex",
-                width: { sm: 250 },
+                width: { sm: 220 },
                 height: { sm: 68 },
                 // alignContent: "center",
                 justifyContent: "center",
@@ -71,14 +76,26 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
             <ListItemText
               sx={{
                 display: "flex",
-                width: { sm: 250 },
-                height: { sm: 75 },
+                width: { sm: 50 },
+                height: { sm: 68 },
                 alignContent: "center",
                 justifyContent: "center",
                 flexDirection: "column",
               }}
               primary={forumSubTopic.forumPosts.items.length}
               secondary={"总帖数"}
+            />
+            <ListItemText
+              sx={{
+                display: "flex",
+                width: { sm: 50 },
+                height: { sm: 68 },
+                alignContent: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+              primary={forumPostCommentCount}
+              secondary={"总回复数"}
             />
             {forumPost && (
               <Box
@@ -106,7 +123,10 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                 <ListItemText
                   primary={
                     <React.Fragment>
-                      <ForumPostTitleToolTip forumPost={forumPost} forumSubTopic={forumSubTopic} />
+                      <ForumPostTitleToolTip
+                        forumPost={forumPost}
+                        forumSubTopic={forumSubTopic}
+                      />
                     </React.Fragment>
                   }
                   secondary={
@@ -119,6 +139,7 @@ export default function ForumIndexSubTopic({ forumSubTopic }) {
                       >
                         {"由"}
                         <ForumPostUserIDComponent userID={forumPost.userID} />
+                        {" , "}
                         <ForumTimeComponent time={forumPost.createdAt} />
                       </Box>
                     </React.Fragment>

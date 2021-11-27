@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import ForumRightSide from "../../components/Forum/ForumRightSide";
-import ForumIndexMain from "../../components/Forum/ForumIndex/ForumIndexMain";
+import ForumHomeMain from "../../components/Forum/ForumHome/ForumHomeMain";
 // import OpenIconSpeedDial from "../../components/Forum/OpenIconSpeedDial";
 import React from "react";
 import { useTitle } from "../../Hooks/useTitle";
@@ -26,7 +26,7 @@ export default function ForumHome() {
             width: "100%",
           }}
         >
-          <ForumIndexMain />
+          <ForumHomeMain />
         </Box>
         <Box
           sx={{

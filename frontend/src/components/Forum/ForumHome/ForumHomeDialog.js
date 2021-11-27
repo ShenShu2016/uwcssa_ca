@@ -59,7 +59,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function ForumIndexDialog({ forumTopics }) {
+export default function ForumHomeDialog({ forumTopics }) {
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState(false);
   const handleClickOpen = () => {
