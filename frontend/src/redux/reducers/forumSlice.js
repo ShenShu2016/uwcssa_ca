@@ -8,6 +8,7 @@ import {
   forumPostCommentSortByForumPostID,
   forumPostSortByForumPostLastReplyAt,
   forumPostSortByForumSubTopicID,
+  // forumPostSortBySortKey,
   forumPostSubCommentSortByForumPostCommentID,
   getForumPostComment,
   getForumSubTopic,
@@ -16,7 +17,8 @@ import {
 import {
   getForumPost,
   getForumTopic,
-  listForumPosts,
+  // listForumPosts,
+  forumPostSortBySortKey,
   listForumTopics,
 } from "../CustomQuery/ForumQueries";
 
@@ -159,10 +161,16 @@ export const fetchForumPosts = createAsyncThunk(
   "forum/fetchForumPosts",
   async () => {
     const forumPostData = await API.graphql({
-      query: listForumPosts,
+      query: forumPostSortBySortKey,
+      variables: {
+        sortKey:"SortKey",
+        sortDirection: "DESC",
+        filter:{active:{eq:true}},
+        limit:5,
+      },
       authMode: "AWS_IAM",
     });
-    return forumPostData.data.listForumPosts.items;
+    return forumPostData.data.forumPostSortBySortKey.items;
   }
 );
 

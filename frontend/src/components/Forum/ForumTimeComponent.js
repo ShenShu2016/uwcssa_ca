@@ -7,14 +7,16 @@ import moment from "moment";
 
 export default function ForumTimeComponent({ time }) {
   const [createDate, setCreateDate] = useState(false);
+
   useEffect(() => {
+    const today = moment().startOf('day');
     const yesterdayStart = moment().subtract(1, "d").startOf("day");
     const yesterdayEnd = moment().subtract(1, "d").endOf("day");
-    if (moment(time).isBetween(yesterdayStart, yesterdayEnd)) {
+    if (moment(time).isBetween(yesterdayStart, yesterdayEnd) || moment(time).isSame(today,'d')) {
       setCreateDate(true);
     }
   }, [time]);
-  const [anchorElDate, setAnchorElDate] = React.useState(null);
+  const [anchorElDate, setAnchorElDate] = useState(null);
   const handlePopoverOpenDate = (event) => {
     setAnchorElDate(event.currentTarget);
   };

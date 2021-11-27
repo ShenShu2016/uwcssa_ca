@@ -23,12 +23,13 @@ export default function ForumPostImageSwipe({ images }) {
         <Box
           sx={{
             bgcolor: "white",
-            left: "90px",
+            left: {xs:"30px",md:"60px"},
             zIndex: "2",
             position: "absolute",
             top: "50%",
             transform: "translate(-50%, -50%)",
             borderRadius: "25px",
+            opacity:0.6
           }}
         >
           <IconButton
@@ -47,11 +48,12 @@ export default function ForumPostImageSwipe({ images }) {
           sx={{
             bgcolor: "white",
             borderRadius: "25px",
-            right: "40px",
+            right: {xs:"0px",md:"20px"},
             zIndex: "2",
             position: "absolute",
             top: "50%",
             transform: "translate(-50%, -50%)",
+            opacity:0.6
           }}
         >
           <IconButton

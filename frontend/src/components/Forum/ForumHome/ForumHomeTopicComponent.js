@@ -108,7 +108,7 @@ export default function ForumHomeTopicComponent({ forumTopic }) {
         </Box>
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
+        {forumTopic.forumSubTopics.items?.map((forumSubTopic) => {
           return (
             <ForumHomeSubTopic
               forumSubTopic={forumSubTopic}
