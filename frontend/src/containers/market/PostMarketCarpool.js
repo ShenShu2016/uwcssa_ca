@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { drawerBleeding, postStyle } from "../../components/Market/postCss";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
@@ -20,150 +21,18 @@ import { Storage } from "@aws-amplify/storage";
 import SwipeViews from "../../components/SwipeViews";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-// import InputAdornment from "@mui/material/InputAdornment";
-// import MarketForm from "../../components/Market/marketForm";
-import { grey } from "@mui/material/colors";
-import { makeStyles } from "@mui/styles";
-// import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    height: "calc(100vh - 64px)",
-  },
-  titleInput: {
-    marginBlock: "2rem",
-  },
-  content: {},
-  imgKeyFromServer: {
-    width: "100%",
-  },
-  images: {
-    height: "100%",
-    width: "calc(100% - 360px)",
-    // bgcolor="black"
-    position: "relative",
-    overflow: "hidden",
-    float: "left",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "50vh",
-    },
-  },
-  contain: {
-    width: "100%",
-    overflow: "hidden",
-    height: "calc(100vh - 64px)",
-    bgcolor: "black",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      height: "100%",
-    },
-  },
-  info: {
-    width: "360px",
-    height: "100%",
-    float: "left",
-    paddingRight: "5px",
-    overflow: "hidden",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: `calc(100% - ${drawerBleeding}px)`,
-    },
-  },
-  previewImg: {
-    width: "100px",
-    height: "100px",
-    position: "relative",
-    backgroundColor: "rgb(0 0 0 / 20%)",
-    borderRadius: "5px",
-    zIndex: "1",
-  },
-  preview: {
-    width: "calc(100% - 360px)",
-    height: "calc(100vh - 64px)",
-    padding: "2rem",
-    float: "right",
-    [theme.breakpoints.down("lg")]: {
-      display: "block",
-      height: "100%",
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-  previewImgRight: {
-    width: "calc(100% - 350px)",
-    height: "100%",
-    position: "relative",
-    backgroundColor: "rgb(243, 246, 249)",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "40vh",
-    },
-  },
-  previewInfo: {
-    width: "350px",
-    height: "100%",
-    overflowY: "auto",
-    overflowX: "hidden",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "100vh",
-      overflow: "hidden",
-    },
-  },
-  drawer: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      backgroundColor:
-        theme.palette.mode === "light"
-          ? grey[100]
-          : theme.palette.background.default,
-    },
-  },
-  puller: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      width: 30,
-      height: 6,
-      backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
-      borderRadius: 3,
-      position: "absolute",
-      top: 8,
-      left: "calc(50% - 15px)",
-    },
-  },
-  styledBox: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
-    },
-  },
-  icon: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-    },
-  },
-}));
-
 const Input = styled("input")({
   display: "none",
 });
 
-const drawerBleeding = 56;
-
 export default function PostMarketPet() {
-  const classes = useStyles();
+  const classes = postStyle();
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("发布Carpool信息");
