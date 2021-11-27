@@ -14,12 +14,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ForumIndexDialog from "./ForumIndexDialog";
+import ForumHomeDialog from "./ForumHomeDialog";
 // import ForumIndexSportLight from "./ForumIndexSportLight";
-import ForumIndexTopic from "./ForumIndexTopic";
+import ForumHomeTopic from "./ForumHomeTopic";
 import { Link } from "react-router-dom";
 
-export default function ForumIndexMain() {
+export default function ForumHomeMain() {
   const { userAuth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const {
@@ -134,12 +134,12 @@ export default function ForumIndexMain() {
                   mt: 3,
                 }}
               >
-                <ForumIndexDialog forumTopics={forumTopics} />
+                <ForumHomeDialog forumTopics={forumTopics} />
               </Box>
             )}
           </Box>
         )}
-        <ForumIndexTopic forumTopics={forumTopics} />
+        <ForumHomeTopic forumTopics={forumTopics} />
       </Box>
     </div>
   );

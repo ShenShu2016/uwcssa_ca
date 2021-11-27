@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
-import ForumIndexTopicComponent from "./ForumIndexTopicComponent";
+import ForumHomeTopicComponent from "./ForumHomeTopicComponent";
 
-export default function ForumIndexTopic({ forumTopics }) {
+export default function ForumHomeTopic({ forumTopics }) {
   // console.log(forumTopics);
   return (
     <div>
@@ -15,7 +15,7 @@ export default function ForumIndexTopic({ forumTopics }) {
         }}
       >
         {forumTopics.map((forumTopic) => {
-          return <ForumIndexTopicComponent forumTopic={forumTopic} key={forumTopic.id} />;
+          return <ForumHomeTopicComponent forumTopic={forumTopic} key={forumTopic.id} />;
         })}
       </Box>
     </div>

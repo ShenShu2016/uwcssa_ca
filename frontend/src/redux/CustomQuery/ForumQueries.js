@@ -219,6 +219,23 @@ export const listForumTopics = /* GraphQL */ `
                   avatarImgS3Key
                   badges
                 }
+                forumPostComments(filter: { active: { eq: true } }, sortDirection: DESC) {
+                  nextToken
+                  items {
+                    content
+                    createdAt
+                    id
+                    owner
+                    forumPostID
+                    updatedAt
+                    userID
+                    user {
+                      username
+                      avatarImgS3Key
+                      badges
+                    }
+                  }
+                }
                 owner
               }
               nextToken
