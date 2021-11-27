@@ -81,7 +81,7 @@ export default function Event() {
 
     setFilteredEventList(
       [...filtered]
-        .filter((d) => new Date(d.startDate) - new Date() >= 0)
+        .filter((d) => new Date(d.endDate) - new Date() >= 0)
         .sort(
           (a, b) =>
             new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
@@ -104,7 +104,7 @@ export default function Event() {
   });
 
   const pastList = events
-    .filter((d) => new Date(d.startDate) - new Date() < 0)
+    .filter((d) => new Date(d.endDate) - new Date() < 0)
     .sort(
       (a, b) =>
         new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
