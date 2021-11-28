@@ -72,7 +72,7 @@ export default function ForumPostContentComponent({
             style={{
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",
-              color: "grey",
+              // color: "grey",
             }}
           >
             {content}
