@@ -126,4 +126,20 @@ export const postStyle = makeStyles((theme) => ({
       display: "block",
     },
   },
+  leftInfoPaper: {
+    maxWidth: "100%",
+    padding: "1rem",
+    height: "100%",
+    overflowY: "auto",
+    overflowX: "hidden",
+  },
+  imgContainer: {
+    marginY: "1rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "0.25rem",
+    width: "100%",
+    height: "130px",
+  },
 }));
