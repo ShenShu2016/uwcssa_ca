@@ -1,101 +1,176 @@
-import {
-  Box,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Paper, Typography, Divider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import React, { useState, useEffect } from "react";
+import Fab from "@mui/material/Fab";
+import NavigationIcon from "@mui/icons-material/Navigation";
+const Root = styled("div")(({ theme }) => ({
+  padding: theme.spacing(1),
+  width: 420,
+  position: "sticky",
+  top: "8rem",
+  justifyContent: "center",
 
-import React from "react";
-// import { height } from "@mui/system";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    maxWidth: "100%",
-    flexDirection: "column",
-    justifyContent: "center",
-    borderLeft: "1px solid rgba(0, 0, 0, 0.05)",
-    borderRight: "1px solid rgba(0, 0, 0, 0.05)",
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-  title: {
-    fontWeight: 400,
-    marginTop: "3rem",
-    marginBottom: "1rem",
-    textAlign: "center",
-  },
-  adPicture: {
-    marginTop: "8rem",
-    marginBottom: "1rem",
-    textAlign: "center",
-    overflow: "hidden",
-  },
-  pollSection: {
-    marginTop: "6rem",
-    marginBottom: "4rem",
-    marginLeft: "1rem",
-    marginRight: "1rem",
-    textAlign: "center",
-    height: "400px",
-    backgroundColor: "#C4C4C4",
+  [theme.breakpoints.down("lg")]: {
+    display: "none",
   },
 }));
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-];
-export default function ForumRightSide()  {
-  const classes = useStyles();
+
+export default function ForumRightSide() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+  const scrollToTOP = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
+
   return (
-    <div className={classes.root}>
-      <Box className={classes.title}>
-        <Typography variant="h5">Right Side Bar</Typography>
-      </Box>
+    <Root>
+      <Stack direction="column" sx={{ mt: 4 }}>
+        <Box>
+          <Paper sx={{ padding: "1rem" }}>
+            <Stack direction="column" divider={<Divider flexItem />}>
+              <Typography
+                variant="h5"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 500,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                论坛公告
+              </Typography>
+              <Typography
+                variant="h6"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 400,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                文明和谐，共建新社区
+              </Typography>
+            </Stack>
+          </Paper>
+        </Box>
+        <Box sx={{ mt: 3 }}>
+          <Paper sx={{ padding: "1rem" }}>
+            <Stack direction="column" divider={<Divider flexItem />}>
+              <Typography
+                variant="h5"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 500,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                疫情快报
+              </Typography>
+              <Typography
+                variant="h6"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 400,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                今日情况，火速统计中
+              </Typography>
+            </Stack>
+          </Paper>
+        </Box>
+        <Box sx={{ mt: 3 }}>
+          <Paper sx={{ padding: "1rem" }}>
+            <Stack direction="column" divider={<Divider flexItem />}>
+              <Typography
+                variant="h5"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 500,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                论坛广告
+              </Typography>
+              <Typography
+                variant="h6"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 400,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                黄金地段，火热招租中
+              </Typography>
+            </Stack>
+          </Paper>
+        </Box>
 
-      <Box className={classes.adPicture}>
-        <Typography variant="h4">ADS</Typography>
-        <ImageList
-          sx={{ width: "100%", height: "500px" }}
-          cols={2}
-          rowHeight={70}
-        >
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-              />
-
-              <ImageListItemBar
-                title={item.title}
-                //subtitle={<span>by: {item.author}</span>}
-                position="below"
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
-      <Box className={classes.pollSection}>
-        <Typography variant="h4">Polls Section</Typography>
-      </Box>
-    </div>
+        <Box sx={{ mt: 3 }}>
+          <Paper sx={{ padding: "1rem" }}>
+            <Stack direction="column" divider={<Divider flexItem />}>
+              <Typography
+                variant="h5"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 500,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                论坛投票
+              </Typography>
+              <Typography
+                variant="h6"
+                component="span"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  fontWeight: 400,
+                  wordBreak: "break-word",
+                  // color: "grey",
+                }}
+              >
+                快来参与，选出最爱贴
+              </Typography>
+            </Stack>
+          </Paper>
+        </Box>
+        {isVisible && (
+          <Box display="flex" sx={{mt:4}} justifyContent="center" alignItems="center">
+          <Fab variant="circular" onClick={scrollToTOP} color="primary">
+            <NavigationIcon />
+          </Fab>
+          </Box>
+        )}
+      </Stack>
+    </Root>
   );
-};
-
+}

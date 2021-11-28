@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import Storage from "@aws-amplify/storage";
+import grey from "@mui/material/colors/grey";
 // import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import React, { useEffect, useState } from "react";
 import ForumPostImageSwipe from "../../ForumPost/ForumPostDetail/ForumPostImageSwipe";
@@ -72,7 +73,7 @@ export default function ForumPostContentComponent({
             style={{
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",
-              // color: "grey",
+              color: grey[900],
             }}
           >
             {content}
@@ -82,7 +83,11 @@ export default function ForumPostContentComponent({
           <Stack direction="row" spacing={{ sm: 1, md: 3 }}>
             {imgKeyFromServer &&
               imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-                <Tooltip TransitionComponent={Zoom} title="点击放大" placement="top-start">
+                <Tooltip
+                  TransitionComponent={Zoom}
+                  title="点击放大"
+                  placement="top-start"
+                >
                   <Box
                     key={imgKeyIdx}
                     sx={{

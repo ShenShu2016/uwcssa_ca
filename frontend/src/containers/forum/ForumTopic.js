@@ -1,4 +1,4 @@
-import { Box, Grid, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   removeSelectedForumTopic,
@@ -10,24 +10,10 @@ import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
 // import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
-import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
-// import {
-//   selectedForumTopic,
-//   removeSelectedForumTopic,
-// } from "../../redux/actions/forumAction";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    flexDirection: "row",
-  },
-}));
 
 export default function ForumTopic() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const { forumTopicID } = useParams();
@@ -63,23 +49,33 @@ export default function ForumTopic() {
   console.log(starter);
   console.log(forumTopic);
   return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
+    <div>
+      <Box
+        sx={{
+          display: "flex",
+          margin: "auto",
+          maxWidth: "100%",
+          paddingInline: { xs: 0, sm: "1rem" },
+          flexDirection: { xs: "column", sm: "row" },
+          bgcolor: "grey.50",
+        }}
+      >
         {starter === false ? (
           <Skeleton variant="rectangular" width={210} height={118} />
         ) : (
-          <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
+          <Box sx={{ width: { md: 1080 } }}>
             <Box sx={{ padding: "2rem", maxWidth: "100%" }}>
-              <Typography variant="h5">{forumTopic.name}</Typography>
               <CustomBreadcrumbs />
             </Box>
-            <ForumTopicMain forumTopic={forumTopic} />
-          </Grid>
+            <Box sx={{ mt: 1, width: "100%" }}>
+              <ForumTopicMain forumTopic={forumTopic} />
+            </Box>
+          </Box>
         )}
-        <Grid item sm={1} md={2}>
+        <Box>
           <ForumRightSide />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </div>
   );
 }
