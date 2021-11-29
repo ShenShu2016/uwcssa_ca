@@ -8,7 +8,6 @@ import {
   Select,
   TextField,
   Typography,
-  skeletonClasses,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
@@ -25,7 +24,6 @@ import PublishIcon from "@mui/icons-material/Publish";
 import S3Image from "../../../components/S3/S3Image";
 import { Storage } from "@aws-amplify/storage";
 import { createTopic } from "../../../graphql/mutations";
-import { getImage } from "../../../redux/reducers/imageSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
