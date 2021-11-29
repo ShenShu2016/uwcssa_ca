@@ -133,7 +133,7 @@ export default function MarketRental() {
       clickedTag: "",
     });
   };
-  console.log("filterList", filterList);
+  // console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
       {starter === false ? (

@@ -14,18 +14,19 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EventComments from "./EventDetail/Comment/EventComments";
 import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
+import FlagIcon from "@mui/icons-material/Flag";
 import { Link } from "react-router-dom";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
-import { useSelector } from "react-redux";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import FlagIcon from "@mui/icons-material/Flag";
 import TopicIcon from "@mui/icons-material/Topic";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import moment from "moment";
+import { useSelector } from "react-redux";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -145,9 +146,9 @@ export default function EventBody({ event }) {
     <Box>
       {event.startDate ? (
         <div>
-          <Container size="md">
+          <Box>
             <div>
-              <Box>
+              {/* <Box>
                 <CardMedia
                   style={{
                     // maxWidth: "100%",
@@ -185,7 +186,34 @@ export default function EventBody({ event }) {
                   component="img"
                   image={posterURL}
                 />
-              </Card>
+              </Card> */}
+
+              <Box
+                sx={{
+                  opacity: 1, //如果背景要虚的话下面的主要图片也虚了
+                  backgroundImage: `url(${backGroundImgURL})`,
+                  width: "100%",
+                  height: "350px",
+                  objectFit: "cover",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={posterURL}
+                  maxHeight="100%"
+                  maxWidth="100%"
+                  sx={{
+                    opacity: 1,
+                    position: "relative",
+                    top: "50%",
+                    left: "50%",
+                    margin: "auto",
+                    transform: `translate(-50%,-50%)`,
+                    width: "auto",
+                    height: "300px",
+                  }}
+                />
+              </Box>
             </div>
             <Box
               sx={{
@@ -201,12 +229,22 @@ export default function EventBody({ event }) {
                   flexDirection: "column",
                 }}
               >
-                <Typography variant="subtitle1" component="div" color="red">
-                  <b>
-                    {startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-                    {startDate.slice(11, 16)} - {endDate.slice(11, 16)}
-                  </b>
-                </Typography>
+                {moment(startDate).format("YYYY") ===
+                moment(endDate).format("YYYY") ? (
+                  <Typography variant="subtitle2" gutterBottom>
+                    时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
+                    {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
+                    {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
+                    {endDate.slice(11, 16)}
+                  </Typography>
+                ) : (
+                  <Typography variant="subtitle2" gutterBottom>
+                    时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
+                    {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
+                    {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
+                    {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
+                  </Typography>
+                )}
                 <Typography component="div" variant="h5" gutterBottom>
                   {title}
                 </Typography>
@@ -220,7 +258,7 @@ export default function EventBody({ event }) {
                 </Typography>
               </Box>
             </Box>
-          </Container>
+          </Box>
           <div sx={{ width: "100%" }}>
             <Container size="md">
               <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

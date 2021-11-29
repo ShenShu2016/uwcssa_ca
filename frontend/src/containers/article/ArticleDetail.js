@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Redirect, useParams } from "react-router-dom";
 import {
   removeSelectedArticle,
   selectedArticle,
@@ -12,20 +13,9 @@ import { Box } from "@mui/system";
 import Main from "../../components/Article/ArticleDetail/Main";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    paddingBlock: "3rem",
-    maxWidth: "1536px",
-    paddingInline: "3rem",
-    [theme.breakpoints.down("sm")]: {
-      paddingInline: "0.5rem",
-      paddingBlock: "1rem",
-    },
-  },
   title: {
     textAlign: "center",
     color: "#0D1F48",
@@ -62,7 +52,6 @@ export default function ArticleDetail() {
 
   const { article } = useSelector((state) => state.article.selected);
   useTitle(article.title);
-
   // useEffect(() => {
   //   window.onscroll = async (e) => {
   //     const scrollY = window.scrollY; //当前上方高度
@@ -91,24 +80,30 @@ export default function ArticleDetail() {
   // }, [nextToken, articleID, dispatch, canFetch]);
 
   return (
-    <div className={classes.root}>
-      <Typography
-        variant="h4"
-        className={classes.title}
-        sx={{ fontWeight: 700 }}
-      >
-        {article.title}
-      </Typography>
-      <Box className={classes.main}>
-        <Box className={classes.body}>
-          <Main article={article} />
-          <ArticleCommentsPost article={article} />
-          <ArticleComments article={article} />
-        </Box>
-        <Box>
-          <ArticleSideBar />
-        </Box>
-      </Box>
-    </div>
+    <Box>
+      {article.active === false ? (
+        <Redirect to="/" />
+      ) : (
+        <div>
+          <Typography
+            variant="h4"
+            className={classes.title}
+            sx={{ fontWeight: 700 }}
+          >
+            {article.title}
+          </Typography>
+          <Box className={classes.main}>
+            <Box className={classes.body}>
+              <Main article={article} />
+              <ArticleCommentsPost article={article} />
+              <ArticleComments article={article} />
+            </Box>
+            <Box>
+              <ArticleSideBar />
+            </Box>
+          </Box>
+        </div>
+      )}
+    </Box>
   );
 }

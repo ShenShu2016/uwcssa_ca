@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import ForumAdSide from "../../components/Forum/ForumAdSide";
-import ForumIndexMain from "../../components/Forum/ForumIndex/ForumIndexMain";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
+import ForumHomeMain from "../../components/Forum/ForumHome/ForumHomeMain";
 // import OpenIconSpeedDial from "../../components/Forum/OpenIconSpeedDial";
 import React from "react";
 import { useTitle } from "../../Hooks/useTitle";
@@ -21,18 +21,22 @@ export default function ForumHome() {
       >
         <Box
           sx={{
-            maxWidth: "1300px",
-            width: "100%",
+            // maxWidth: "1300px",
+            mt: 4,
+            // width: "100%",
+            width: { md: 1080 },
           }}
         >
-          <ForumIndexMain />
+          <ForumHomeMain />
         </Box>
         <Box
-          sx={{
-            width: 220,
-          }}
+          sx={
+            {
+              // width: 220,
+            }
+          }
         >
-          <ForumAdSide />
+          <ForumRightSide />
         </Box>
         {/* <Box
           sx={{

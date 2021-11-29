@@ -31,7 +31,6 @@ export default function MarketItem() {
     clickedTag: "",
   });
 
-  // const [images, setImages] = useState();
   const marketItems = useSelector(selectAllMarketItems);
   const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
@@ -60,27 +59,8 @@ export default function MarketItem() {
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Item" && item.description !== null
   );
-  console.log("Started", starter);
-  console.log("market Items", marketItems);
-  const filteredItems = marketItemFilter(trueMarketItems, filterList, "item");
 
-  // let urls = [];
-  // marketItems.forEach((item) => {
-  //   item.imgS3Keys.map((subitem) => urls.push(subitem));
-  // });
-  // const preloadImages = () => {
-  //   setImages(
-  //     urls.map((url, urlIdx) => {
-  //       let img = new Image();
-  //       img.onload = () => handleImageLoad(urlIdx);
-  //       img.src = url;
-  //       return { url: url, loaded: false };
-  //     })
-  //   );
-  // };
-  // const handleImageLoad = (index) => {
-  //   setImages((img) => (img.loaded = true));
-  // };
+  const filteredItems = marketItemFilter(trueMarketItems, filterList, "item");
 
   const itemRenderList =
     filteredItems &&
@@ -124,7 +104,7 @@ export default function MarketItem() {
       clickedTag: "",
     });
   };
-  console.log("filterList", filterList);
+
   return (
     <Box className={classes.root}>
       {starter === false ? (

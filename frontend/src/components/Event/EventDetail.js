@@ -1,5 +1,5 @@
-import { Box, IconButton } from "@mui/material";
-import { Link, useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useParams, Redirect } from "react-router-dom";
 import React, { useEffect } from "react";
 // import {
 //   removeSelectedEvent,
@@ -11,10 +11,11 @@ import {
 } from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EventBody from "../Event/EventBody";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
+import { ArrowBack } from "./ArrowBack";
 
 const useStyles = makeStyles({
   root: {
@@ -38,13 +39,21 @@ export default function EventDetail() {
   }, [eventID, dispatch]);
 
   return (
-    <div className={classes.root}>
-      <Box sx={{ paddingBlock: "1rem", paddingInline: "1rem" }}>
-        <IconButton component={Link} to="/event">
-          <ArrowBackIcon />
-        </IconButton>
-      </Box>
-      <EventBody event={event} />
+    <div>
+      {event.active === false ? (
+        <Redirect to="/" />
+      ) : (
+        <div className={classes.root}>
+          <Box sx={{ paddingBlock: "1rem" }}>
+            {/* 试试这个东西不要硬编码 */}
+            {/* <IconButton component={Link} to="/event">
+              <ArrowBackIcon />
+            </IconButton> */}
+            <ArrowBack />
+          </Box>
+          <EventBody event={event} />
+        </div>
+      )}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import ForumIndexSubTopic from "./ForumIndexSubTopic";
+import ForumHomeSubTopic from "./ForumHomeSubTopic";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/system";
 
@@ -40,7 +40,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     height: 32,
   },
 }));
-export default function ForumIndexTopicComponent({ forumTopic }) {
+export default function ForumHomeTopicComponent({ forumTopic }) {
   const [open, setOpen] = useState(true);
   const handleClick = () => {
     setOpen(!open);
@@ -108,9 +108,9 @@ export default function ForumIndexTopicComponent({ forumTopic }) {
         </Box>
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {forumTopic.forumSubTopics.items.map((forumSubTopic) => {
+        {forumTopic.forumSubTopics.items?.map((forumSubTopic) => {
           return (
-            <ForumIndexSubTopic
+            <ForumHomeSubTopic
               forumSubTopic={forumSubTopic}
               key={forumSubTopic.id}
             />

@@ -189,7 +189,11 @@ const articleSlice = createSlice({
       })
       .addCase(selectedArticle.fulfilled, (state, action) => {
         state.selectedArticleStatus = "succeeded";
-        state.selected.article = action.payload;
+        if (action.payload !== null) {
+          state.selected.article = action.payload;
+        } else {
+          state.selected.article = { active: false };
+        }
       })
       .addCase(selectedArticle.rejected, (state, action) => {
         state.selectedArticleStatus = "failed";

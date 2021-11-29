@@ -1,8 +1,10 @@
 import { Box, CardActionArea, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import Storage from "@aws-amplify/storage";
+// import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
 import moment from "moment";
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MarketComponent({ item, type }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState(null);
   const [hoverRef, isHover] = useHover();
   const {
@@ -58,29 +61,27 @@ export default function MarketComponent({ item, type }) {
     // active,
     // ByCreatedAt,
   } = item;
-
+  const imgKeys = useSelector((state) => selectImageById(state, id));
   const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
     marketRentalOptions;
 
   useEffect(() => {
-    const getImage = async () => {
+    const getImages = async () => {
       try {
-        const imageAccessURL = await Storage.get(imgS3Keys[0], {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        //console.log("imageAccessURL", imageAccessURL);
-        setImageURL(imageAccessURL);
+        const firstImage = imgS3Keys[0];
+        const response = await dispatch(getImage({ url: [firstImage], id }));
+        setImageURL(response.payload.imgUrl);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImageURL(null);
       }
     };
-    if (imgS3Keys) {
-      getImage();
+    if (imgS3Keys && imgKeys === undefined) {
+      getImages();
+    } else if (imgS3Keys && imgKeys !== undefined) {
+      setImageURL(Object.values(imgKeys.images)[0]);
     }
-  }, [imgS3Keys]);
+  }, [imgS3Keys, imgKeys, dispatch, id]);
 
   const displayInfo = () => {
     if (type === "item") {

@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Skeleton,
-  Typography,
-} from "@mui/material";
-import React, { useEffect } from "react";
+import { Box, Button, Grid, Paper, Skeleton, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   fetchForumPosts,
   fetchForumTopics,
@@ -14,18 +7,20 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ForumIndexDialog from "./ForumIndexDialog";
+import ForumHomeDialog from "./ForumHomeDialog";
+import ForumHomePostsLastReply from "./ForumHomePostsLastReply";
 // import ForumIndexSportLight from "./ForumIndexSportLight";
-import ForumIndexTopic from "./ForumIndexTopic";
+import ForumHomeTopic from "./ForumHomeTopic";
 import { Link } from "react-router-dom";
 
-export default function ForumIndexMain() {
+export default function ForumHomeMain() {
   const { userAuth } = useSelector((state) => state);
+  const [starter, setStarter] = useState(false);
   const dispatch = useDispatch();
   const {
     forumTopics,
     fetchForumTopicsStatus,
-    // forumPosts,
+    forumPosts,
     fetchForumPostsStatus,
   } = useSelector((state) => state.forum);
 
@@ -39,6 +34,20 @@ export default function ForumIndexMain() {
   }, [dispatch, fetchForumTopicsStatus, fetchForumPostsStatus]);
   // console.log("forumPosts", forumPosts);
   // console.log("forumTopics", forumTopics);
+  useEffect(() => {
+    if (
+      forumTopics === undefined ||
+      forumTopics === null ||
+      forumTopics.length === 0 ||
+      forumPosts === undefined ||
+      forumPosts === null ||
+      forumPosts.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      setStarter(true);
+    }
+  }, [forumTopics, forumPosts]);
   return (
     <div>
       <Box sx={{ p: 1, width: "100%", backgroundColor: "grey" }}>
@@ -77,7 +86,7 @@ export default function ForumIndexMain() {
         </Box>
         {/* <Divider /> */}
         {/* forum type link */}
-        {Object.keys(forumTopics).length === 0 ? (
+        {!starter ? (
           <Skeleton
             sx={{ mt: 2 }}
             variant="text"
@@ -115,7 +124,7 @@ export default function ForumIndexMain() {
           </Paper>
         )}
         {/* <ForumIndexSportLight /> */}
-        {Object.keys(forumTopics).length === 0 ? (
+        {!starter ? (
           <Skeleton
             sx={{ mt: 2 }}
             variant="text"
@@ -134,12 +143,13 @@ export default function ForumIndexMain() {
                   mt: 3,
                 }}
               >
-                <ForumIndexDialog forumTopics={forumTopics} />
+                <ForumHomeDialog forumTopics={forumTopics} />
               </Box>
             )}
           </Box>
         )}
-        <ForumIndexTopic forumTopics={forumTopics} />
+        <ForumHomePostsLastReply forumPosts={forumPosts}/>
+        <ForumHomeTopic forumTopics={forumTopics} />
       </Box>
     </div>
   );

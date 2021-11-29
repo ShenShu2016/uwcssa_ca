@@ -16,8 +16,8 @@ const TitleTooltip = styled(({ className, ...props }) => (
     border: "1px solid grey[50]",
   },
 }));
-export default function ForumPostTitleToolTip({ forumPost }) {
-  console.log(forumPost);
+export default function ForumPostTitleToolTip({ forumPost,forumSubTopic }) {
+  // console.log(forumPost);
   return (
     <div>
       <TitleTooltip
@@ -29,7 +29,7 @@ export default function ForumPostTitleToolTip({ forumPost }) {
       >
         <Typography
           component={Link}
-          to={`/forum/forumPost/${forumPost.id}`}
+          to={`/forum/${forumSubTopic.forumTopicID}/${forumSubTopic.id}/${forumPost.id}`}
           color="text.primary"
           variant="subtitle1"
           noWrap

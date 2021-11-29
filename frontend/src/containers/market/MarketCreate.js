@@ -41,6 +41,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ListCategory = ({ type, icon, location }) => {
+  return (
+    <React.Fragment>
+      <Grid item xs={12} sm={6} md={4}>
+        <Paper>
+          <IconButton
+            style={{
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              height: "200px",
+              borderRadius: "0",
+            }}
+            size="large"
+            component={Link}
+            to={`/market/create/${location}`}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>{icon}</Avatar>
+            <Typography gutterBottom variant="h5">
+              {type}
+            </Typography>
+          </IconButton>
+        </Paper>
+      </Grid>
+    </React.Fragment>
+  );
+};
+
 function MarketCreate() {
   const classes = useStyles();
   return (
@@ -53,121 +81,23 @@ function MarketCreate() {
           <Typography variant="h4">选择你要发布的商品类型</Typography>
         </Box>
         <Grid container spacing={4} className={classes.boxChoice} height="100%">
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper>
-              <IconButton
-                style={{
-                  margin: "0 auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "200px",
-                  borderRadius: "0",
-                }}
-                size="large"
-                component={Link}
-                to="/market/create/item"
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <AddShoppingCartIcon />
-                </Avatar>
-                <Typography gutterBottom variant="h5">
-                  二手用品
-                </Typography>
-              </IconButton>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper>
-              <IconButton
-                style={{
-                  margin: "0 auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "200px",
-                  borderRadius: "0",
-                }}
-                size="large"
-                component={Link}
-                to="/market/create/vehicle"
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <DriveEtaIcon />
-                </Avatar>
-                <Typography gutterBottom variant="h5">
-                  汽车
-                </Typography>
-              </IconButton>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper>
-              <IconButton
-                style={{
-                  margin: "0 auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "200px",
-                  borderRadius: "0",
-                }}
-                size="large"
-                component={Link}
-                to="/market/create/rental"
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <HouseIcon />
-                </Avatar>
-                <Typography gutterBottom variant="h5">
-                  房屋
-                </Typography>
-              </IconButton>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper>
-              <IconButton
-                style={{
-                  margin: "0 auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "200px",
-                  borderRadius: "0",
-                }}
-                size="large"
-                component={Link}
-                to="/market/create/pet"
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <PetsIcon />
-                </Avatar>
-                <Typography gutterBottom variant="h5">
-                  宠物
-                </Typography>
-              </IconButton>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper>
-              <IconButton
-                style={{
-                  margin: "0 auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "200px",
-                  borderRadius: "0",
-                }}
-                size="large"
-                component={Link}
-                to="/market/create/carpool"
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <EmojiTransportationIcon />
-                </Avatar>
-                <Typography gutterBottom variant="h5">
-                  Carpool
-                </Typography>
-              </IconButton>
-            </Paper>
-          </Grid>
+          <ListCategory
+            type="二手用品"
+            icon={<AddShoppingCartIcon />}
+            location="item"
+          />
+          <ListCategory
+            type="汽车"
+            icon={<DriveEtaIcon />}
+            location="vehicle"
+          />
+          <ListCategory type="房屋" icon={<HouseIcon />} location="rental" />
+          <ListCategory type="宠物" icon={<PetsIcon />} location="pet" />
+          <ListCategory
+            type="拼车"
+            icon={<EmojiTransportationIcon />}
+            location="carpool"
+          />
         </Grid>
       </Container>
     </Box>

@@ -99,7 +99,7 @@ export const CategoryIcons = () => {
         <IconList to="/market/pet" label="宠物" icon={<PetsIcon />} />
         <IconList
           to="/market/carpool"
-          label="Carpool"
+          label="拼车"
           icon={<EmojiTransportation />}
         />
         <IconList

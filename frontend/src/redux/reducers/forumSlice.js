@@ -8,6 +8,7 @@ import {
   forumPostCommentSortByForumPostID,
   forumPostSortByForumPostLastReplyAt,
   forumPostSortByForumSubTopicID,
+  // forumPostSortBySortKey,
   forumPostSubCommentSortByForumPostCommentID,
   getForumPostComment,
   getForumSubTopic,
@@ -16,7 +17,8 @@ import {
 import {
   getForumPost,
   getForumTopic,
-  listForumPosts,
+  // listForumPosts,
+  forumPostSortBySortKey,
   listForumTopics,
 } from "../CustomQuery/ForumQueries";
 
@@ -89,7 +91,11 @@ export const selectedForumTopic = createAsyncThunk(
       variables: { id: forumTopicID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
-    return response.data.getForumTopic;
+    if (response.data.getForumTopic === null) {
+      return { id: forumTopicID, description: "not-found" };
+    } else {
+      return response.data.getForumTopic;
+    }
   }
 );
 //forumSubTopic
@@ -111,7 +117,11 @@ export const selectedForumSubTopic = createAsyncThunk(
       variables: { id: forumSubTopicID },
       authMode: "AWS_IAM",
     });
-    return response.data.getForumSubTopic;
+    if (response.data.getForumSubTopic === null) {
+      return { id: forumSubTopicID, description: "not-found" };
+    } else {
+      return response.data.getForumSubTopic;
+    }
   }
 );
 export const selectedForumSubTopicPosts = createAsyncThunk(
@@ -151,10 +161,16 @@ export const fetchForumPosts = createAsyncThunk(
   "forum/fetchForumPosts",
   async () => {
     const forumPostData = await API.graphql({
-      query: listForumPosts,
+      query: forumPostSortBySortKey,
+      variables: {
+        sortKey:"SortKey",
+        sortDirection: "DESC",
+        filter:{active:{eq:true}},
+        limit:5,
+      },
       authMode: "AWS_IAM",
     });
-    return forumPostData.data.listForumPosts.items;
+    return forumPostData.data.forumPostSortBySortKey.items;
   }
 );
 
@@ -175,7 +191,11 @@ export const selectedForumPost = createAsyncThunk(
       variables: { id: forumPostID, filter: { active: { eq: true } } },
       authMode: "AWS_IAM",
     });
-    return response.data.getForumPost;
+    if (response.data.getForumPost === null) {
+      return { id: forumPostID, description: "not-found" };
+    } else {
+      return response.data.getForumPost;
+    }
   }
 );
 export const selectedForumPostComments = createAsyncThunk(

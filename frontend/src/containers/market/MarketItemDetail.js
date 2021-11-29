@@ -1,21 +1,4 @@
-import {
-  Box,
-  Button,
-  CardHeader,
-  Chip,
-  Dialog,
-  DialogTitle,
-  Divider,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Paper, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
@@ -23,33 +6,16 @@ import {
 } from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
-import EmailIcon from "@mui/icons-material/Email";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import { Link } from "react-router-dom";
+import DetailInfo from "../../components/Market/detailInfo";
 import { Loading } from "../../components/Market/loading";
-import MessageIcon from "@mui/icons-material/Message";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import ShareIcon from "@mui/icons-material/Share";
-import Storage from "@aws-amplify/storage";
+import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
-import UpdateIcon from "@mui/icons-material/Update";
+import TitleInfo from "../../components/titleInfo";
 import { makeStyles } from "@mui/styles";
-import { marketItemOptions } from "../../components/Market/marketItemOptions";
-import moment from "moment";
+import useGetImages from "../../components/Market/useGetImages";
 import { useParams } from "react-router-dom";
+import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
-
-// import {
-//   removeSelectedMarketItem,
-//   selectedMarketItem,
-// } from "../../redux/reducers/marketSlice";
-
-// removeSelectedMarketItem,
-//   selectedMarketItem,
-// } from "../../redux/actions/marketItemActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   images: {
     height: "100%",
     width: "calc(100% - 360px)",
-    // bgcolor="black"
     position: "relative",
     overflow: "hidden",
     float: "left",
@@ -91,45 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SimpleDialog(props) {
-  const { open, onClose, contactEmail, contactPhone, contactWeChat } = props;
-
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Seller Contact Infos</DialogTitle>
-      <List sx={{ pt: 0 }}>
-        <ListItem button>
-          <ListItemIcon>
-            <PhoneInTalkIcon />
-          </ListItemIcon>
-          <ListItemText primary={contactPhone} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <EmailIcon />
-          </ListItemIcon>
-          <ListItemText primary={contactEmail} />
-        </ListItem>
-        {contactWeChat ? (
-          <ListItem button>
-            <ListItemIcon>
-              <FacebookIcon />
-            </ListItemIcon>
-            <ListItemText primary={contactWeChat} />
-          </ListItem>
-        ) : null}
-      </List>
-    </Dialog>
-  );
-}
-
 export function MarketItemInfo({ marketItem, mode = "detail" }) {
-  const classes = useStyles();
-  const currentUser = useSelector((state) => state.userAuth.user.username);
-  const {
-    marketItemConditionList: Conditions,
-    marketItemCategoryList: Category,
-  } = marketItemOptions;
   const [open, setOpen] = useState(false);
   const {
     id,
@@ -156,173 +83,33 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
 
   return (
     <Paper sx={{ maxWidth: "100%" }}>
-      <Typography
-        fontWeight="bold"
-        variant="h5"
-        marginLeft="1rem"
-        marginRight="1rem"
-        paddingTop="0.5rem"
-      >
-        {title.length === 0 ? "Title Goes Here" : title}
-      </Typography>
-      <Typography marginX="1rem" marginTop="0.25rem">
-        $ {price.length === 0 ? "Price Goes Here" : price}
-      </Typography>
-      <Typography marginX="1rem" variant="caption" color="gray">
-        更新于: {updatedAt.length === 0 ? "" : moment(updatedAt).fromNow()}
-      </Typography>
-      <Stack
-        justifyContent="center"
-        marginY="0.5rem"
-        direction="row"
-        spacing={1}
-      >
-        {currentUser === owner ? (
-          <Button
-            component={Link}
-            startIcon={<UpdateIcon />}
-            to={
-              mode === "detail"
-                ? `/market/edit/item/${id}`
-                : window.location.pathname
-            }
-            variant="outlined"
-            color="info"
-            // sx={{
-            //   backgroundImage:
-            //     "linear-gradient(to bottom right, rgba(255,0,0,0), rgba(255,0,0,1))",
-            // }}
-          >
-            Edit
-          </Button>
-        ) : (
-          <Button
-            startIcon={<MessageIcon />}
-            onClick={() => setOpen(true)}
-            variant="outlined"
-            color="info"
-          >
-            Contact
-          </Button>
-        )}
-        <SimpleDialog
-          open={open}
-          user={user}
-          contactPhone={contactPhone}
-          contactEmail={contactEmail}
-          contactWeChat={contactWeChat}
-          onClose={() => setOpen(false)}
-        />
-        <Button
-          startIcon={<BookmarksIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="info"
-        >
-          Save
-        </Button>
-        <Button
-          startIcon={<ShareIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="info"
-        >
-          Share
-        </Button>
-      </Stack>
+      <TitleInfo
+        id={id}
+        mode={mode}
+        title={title}
+        price={price}
+        updatedAt={updatedAt}
+        owner={owner}
+        open={open}
+        user={user}
+        contactEmail={contactEmail}
+        contactPhone={contactPhone}
+        contactWeChat={contactWeChat}
+        handleClose={() => setOpen(false)}
+        handleOpen={() => setOpen(true)}
+        type="item"
+      />
       <Divider />
-      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-        Details
-      </Typography>
-      <Grid marginX="0.5rem" container spacing={2}>
-        <Grid item xs={4}>
-          Category
-        </Grid>
-        <Grid item xs={8}>
-          {Category.map((item) => item.value).includes(marketItemCategory)
-            ? Category.filter((item) => item.value === marketItemCategory)[0]
-                .label
-            : ""}
-        </Grid>
-        <Grid item xs={4}>
-          Condition
-        </Grid>
-        <Grid item xs={8}>
-          {Conditions.map((item) => item.value).includes(marketItemCondition)
-            ? Conditions.filter((item) => item.value === marketItemCondition)[0]
-                .label
-            : ""}
-        </Grid>
-      </Grid>
-      {tags && (
-        <Box>
-          <Box>
-            <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-              Tags
-            </Typography>
-          </Box>
-          <Stack
-            direction="row"
-            marginX="1rem"
-            marginBottom="0.5rem"
-            spacing={2}
-          >
-            {tags.map((tag, tagIdx) => {
-              return <Chip key={tagIdx} label={tag} />;
-            })}
-          </Stack>
-        </Box>
-      )}
+      <DetailInfo
+        marketItemCategory={marketItemCategory}
+        marketItemCondition={marketItemCondition}
+        tags={tags}
+        description={description}
+        location={location}
+        type="item"
+      />
       <Divider />
-      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-        Descriptions
-      </Typography>
-      <Typography marginX="1rem" marginY="0.25rem">
-        {description.length === 0 ? "Description Goes Here" : description}
-      </Typography>
-      <Paper
-        sx={{
-          marginX: "1rem",
-          marginY: "0.25rem",
-          height: "250px",
-          backgroundColor: "rgb(243, 246, 249)",
-          marginBottom: "1rem",
-        }}
-      >
-        Google Map
-      </Paper>
-      <Typography margin="1rem" marginY="0.25rem">
-        {location.length === 0 ? "Location Goes Here" : location}
-      </Typography>
-      <Divider />
-      <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
-        Seller Infos
-      </Typography>
-      <Box
-        sx={{
-          margin: "1rem",
-          // bgcolor: "#ff9800",
-        }}
-      >
-        <CardHeader
-          avatar={
-            <CustomAvatar
-              // aria-label="recipe"
-              className={classes.avatar}
-              component={true}
-              user={user}
-              // to={`/account/profile/${owner}`}
-            ></CustomAvatar>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={owner}
-          subheader={`发布日期： ${createdAt.slice(0, 10)} `}
-        />
-      </Box>
+      <SellerInfo user={user} createdAt={createdAt} owner={owner} />
     </Paper>
   );
 }
@@ -331,9 +118,7 @@ export default function MarketItemDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   useTitle("二手商品信息");
-  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { id } = useParams();
-  const [starter, setStarter] = useState(false);
 
   useEffect(() => {
     dispatch(selectedMarketItem(id));
@@ -341,47 +126,10 @@ export default function MarketItemDetail() {
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const status = useSelector((state) => state.market.selectedMarketItemStatus);
+  const starter = useStarter(marketItem);
+  const imgKeyFromServer = useGetImages(marketItem, id);
 
-  useEffect(() => {
-    if (
-      marketItem === undefined ||
-      marketItem === null ||
-      marketItem.length === 0
-    ) {
-      setStarter(false);
-    } else {
-      if (marketItem.marketItemCategory === undefined) {
-        setStarter(false);
-      } else {
-        setStarter(true);
-      }
-    }
-  }, [marketItem]);
-
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        setImgKeyFromServer([]);
-        const imageAccessURL = await Promise.all(
-          Array.from(marketItem.imgS3Keys).map((key) =>
-            Storage.get(key, {
-              level: "public",
-              expires: 120,
-              download: false,
-            })
-          )
-        );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer([]);
-      }
-    };
-    if (starter) {
-      getImage();
-    }
-  }, [starter, marketItem]);
-
+  console.log("starter", starter);
   return (
     <div className={classes.root}>
       {starter === false ? (
@@ -394,10 +142,7 @@ export default function MarketItemDetail() {
           <Box className={classes.images}>
             <SwipeViews images={imgKeyFromServer} />
           </Box>
-          <Box
-            // bgcolor="yellow"
-            className={classes.info}
-          >
+          <Box className={classes.info}>
             <MarketItemInfo marketItem={marketItem} />
           </Box>
         </Stack>

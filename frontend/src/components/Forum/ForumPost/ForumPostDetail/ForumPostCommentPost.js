@@ -11,90 +11,93 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Controller, useForm } from "react-hook-form";
 import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import SignInRequest from "../SignInRequest";
 import { green } from "@mui/material/colors";
-import { makeStyles } from "@mui/styles";
-// import { postForumPostComment } from "../../../../redux/actions/forumAction";
 import { postForumPostComment } from "../../../../redux/reducers/forumSlice";
 
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const useStyles = makeStyles({
-  root: {},
-  subTitle: {
-    paddingBlock: "3rem 1rem",
-  },
-  card: {},
-});
-
 export default function ForumPostCommentPost({ forumPost, isReplying }) {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const { userAuth } = useSelector((state) => state);
-  const [formData, setFormData] = useState({
-    comment: "",
+  const {
+    handleSubmit,
+    control,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      comment: "",
+    },
   });
-  const { comment } = formData;
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const createForumPostCommentInput = {
-    content: comment,
-    active: true,
-    forumPostID: forumPost.id,
-    userID: userAuth.user.username,
-  };
-  // console.log(loading);
-  const postComment = async (e) => {
+  const [loading, setLoading] = useState(false);
+  const { isAuthenticated, user, userProfile } = useSelector(
+    (state) => state.userAuth
+  );
+
+  const onSubmit = async (e) => {
+    const createForumPostCommentInput = {
+      content: getValues("comment"),
+      active: true,
+      forumPostID: forumPost.id,
+      userID: user.username,
+    };
     if (!loading) {
-      setLoading(true);
+      setLoading(true); //开始转圈
       const response = await dispatch(
-        postForumPostComment(createForumPostCommentInput)
+        postForumPostComment( createForumPostCommentInput )
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
-        setFormData({
-          comment: "",
-        });
+        reset();
       } else {
         setLoading(false);
       }
     }
   };
+
   return (
     <div>
-      {userAuth.isAuthenticated ? "" : <SignInRequest />}
+      {isAuthenticated ? "" : <SignInRequest />}
       <div>
         <Collapse in={isReplying}>
-          <Typography className={classes.subTitle}>发布新评论：</Typography>
-          <Box className={classes.main}>
+          <Typography sx={{ paddingBlock: "3rem 1rem" }}>
+            发布新评论：
+          </Typography>
+          <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={0}>
               <Grid item xs={"auto"}>
                 <CardHeader
                   sx={{ px: 0 }}
                   avatar={
-                    <CustomAvatar
-                      user={userAuth.userProfile}
-                      link={userAuth.isAuthenticated}
-                    />
+                    <CustomAvatar user={userProfile} link={isAuthenticated} />
                   }
                 />
               </Grid>
               <Grid item xs>
-                <Box sx={{ my: 1 }}>
-                  <TextField
-                    label="发表公开评论..."
-                    variant="standard"
-                    fullWidth
-                    multiline
-                    disabled={loading || !userAuth.isAuthenticated}
-                    id="comment"
+                <Box sx={{ my: 1 }} >
+                  <Controller
                     name="comment"
-                    value={comment}
-                    onChange={(e) => onChange(e)}
+                    control={control}
+                    rules={{
+                      required: true,
+                      minLength: 1,
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        label="发表公开评论..."
+                        variant="standard"
+                        fullWidth
+                        multiline
+                        disabled={loading || !isAuthenticated}
+                        onChange={onChange}
+                        value={value}
+                        error={!!errors.comment}
+                        helperText={errors.comment ? "不能为空" : null}
+                      />
+                    )}
                   />
                 </Box>
                 <CardActions sx={{ p: 0, justifyContent: "flex-end" }}>
@@ -102,12 +105,8 @@ export default function ForumPostCommentPost({ forumPost, isReplying }) {
                     color="primary"
                     size="large"
                     variant="text"
-                    disabled={loading || !userAuth.isAuthenticated}
-                    onClick={() => {
-                      setFormData({
-                        comment: "",
-                      });
-                    }}
+                    disabled={loading || !isAuthenticated}
+                    onClick={reset}
                   >
                     取消
                   </Button>
@@ -115,8 +114,8 @@ export default function ForumPostCommentPost({ forumPost, isReplying }) {
                     color="primary"
                     size="large"
                     variant="contained"
-                    onClick={postComment}
-                    disabled={loading || !userAuth.isAuthenticated}
+                    type="submit"
+                    disabled={loading || !isAuthenticated}
                   >
                     评论
                     {loading && (

@@ -6,6 +6,7 @@ export const getForumPost = /* GraphQL */ `
       createdAt
       active
       imgS3Keys
+      sortKey
       tags
       title
       lastReplyAt
@@ -157,6 +158,7 @@ export const getForumTopic = /* GraphQL */ `
               title
               content
               imgS3Keys
+              sortKey
               tags
               active
               createdAt
@@ -168,6 +170,26 @@ export const getForumTopic = /* GraphQL */ `
                 username
                 avatarImgS3Key
                 badges
+              }
+              forumPostComments(
+                filter: { active: { eq: true } }
+                sortDirection: DESC
+              ) {
+                nextToken
+                items {
+                  content
+                  createdAt
+                  id
+                  owner
+                  forumPostID
+                  updatedAt
+                  userID
+                  user {
+                    username
+                    avatarImgS3Key
+                    badges
+                  }
+                }
               }
               owner
             }
@@ -208,6 +230,7 @@ export const listForumTopics = /* GraphQL */ `
                 content
                 imgS3Keys
                 tags
+                sortKey
                 active
                 createdAt
                 lastReplyAt
@@ -218,6 +241,26 @@ export const listForumTopics = /* GraphQL */ `
                   username
                   avatarImgS3Key
                   badges
+                }
+                forumPostComments(
+                  filter: { active: { eq: true } }
+                  sortDirection: DESC
+                ) {
+                  nextToken
+                  items {
+                    content
+                    createdAt
+                    id
+                    owner
+                    forumPostID
+                    updatedAt
+                    userID
+                    user {
+                      username
+                      avatarImgS3Key
+                      badges
+                    }
+                  }
                 }
                 owner
               }
@@ -245,6 +288,7 @@ export const listForumPosts = /* GraphQL */ `
         content
         imgS3Keys
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -316,6 +360,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
         title
         content
         imgS3Keys
+        sortKey
         tags
         active
         createdAt
@@ -412,6 +457,96 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
                   }
                 }
               }
+            }
+          }
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+export const forumPostSortBySortKey = /* GraphQL */ `
+  query ForumPostSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelForumPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    forumPostSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        imgS3Keys
+        tags
+        sortKey
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        owner
+        essential
+        forumPostComments(
+          filter: { active: { eq: true } }
+          sortDirection: DESC
+        ) {
+          nextToken
+          items {
+            content
+            createdAt
+            id
+            owner
+            forumPostID
+            updatedAt
+            userID
+            user {
+              username
+              avatarImgS3Key
+              badges
             }
           }
         }

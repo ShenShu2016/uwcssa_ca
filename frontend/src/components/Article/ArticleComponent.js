@@ -7,10 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
-import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 
@@ -34,32 +35,29 @@ const useStyles = makeStyles((theme) => ({
 
 function ArticleComponent({ article }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState(null);
+
   const { id, content, title, imgS3Keys, createdAt, userID, user } = article;
+  const imgKeys = useSelector((state) => selectImageById(state, id));
 
   useEffect(() => {
-    const getImage = async () => {
+    const getImages = async () => {
       try {
-        const imageAccessURL = await Storage.get(imgS3Keys[0], {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        // console.log("imageAccessURL", imageAccessURL);
-        setImageURL(imageAccessURL);
+        const firstImage = imgS3Keys[0];
+        const response = await dispatch(getImage({ url: [firstImage], id }));
+        setImageURL(response.payload.imgUrl);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImageURL(null);
       }
     };
-    if (imgS3Keys) {
-      getImage();
-    } else {
-      setImageURL(
-        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
-      );
+    if (imgS3Keys && imgKeys === undefined) {
+      getImages();
+    } else if (imgS3Keys && imgKeys !== undefined) {
+      setImageURL(Object.values(imgKeys.images)[0]);
     }
-  }, [imgS3Keys]);
+  }, [imgS3Keys, imgKeys, dispatch, id]);
 
   return (
     <div>

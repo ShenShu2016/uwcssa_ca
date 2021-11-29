@@ -13,16 +13,20 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchTopics, postArticle } from "../../../redux/reducers/articleSlice";
+import {
+  postMultipleImages,
+  postSingleImage,
+} from "../../../redux/reducers/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import PublishIcon from "@mui/icons-material/Publish";
+import S3Image from "../../../components/S3/S3Image";
 import { Storage } from "@aws-amplify/storage";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postMultipleImages } from "../../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../../Hooks/useTitle";
@@ -70,6 +74,7 @@ export default function PostArticle() {
   const { username } = useSelector((state) => state.userAuth.user);
   const [tags, setTags] = useState([]);
   const [imageKeys, setImageKeys] = useState();
+  const [qrCodeImgS3Key, setQrCodeImgS3Key] = useState();
   const [loading, setLoading] = useState(false);
   const timer = useRef();
 
@@ -112,6 +117,7 @@ export default function PostArticle() {
       getImage();
     }
   }, [imageKeys]);
+
   console.log("imgKeyFromServer", imgKeyFromServer);
   const { topics } = useSelector((state) => state.article);
 
@@ -129,7 +135,16 @@ export default function PostArticle() {
       setLoading(false);
     }
   };
-
+  const uploadArticleQrCode = async (e) => {
+    const imageData = e.target.files;
+    const imageLocation = "article/qrCode";
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation })
+    );
+    if (response) {
+      setQrCodeImgS3Key(response.payload);
+    }
+  };
   const onSubmit = async (data) => {
     //Upload the article
     setLoading(true);
@@ -138,6 +153,7 @@ export default function PostArticle() {
       imgS3Keys: imageKeys,
       active: true,
       sortKey: "SortKey",
+      qrCodeImgS3Key: qrCodeImgS3Key,
       userID: username,
       tags: GetTags(),
     };
@@ -280,7 +296,7 @@ export default function PostArticle() {
               fullWidth
               disabled={loading}
             >
-              上传图片{" "}
+              上传图片
               {loading && (
                 <CircularProgress
                   size={24}
@@ -308,6 +324,38 @@ export default function PostArticle() {
             style={{ width: "100%" }}
           />
         ))}
+      <label htmlFor="uploadArticleQrCode">
+        <Input
+          accept="image/*"
+          id="uploadArticleQrCode"
+          type="file"
+          onChange={(e) => {
+            uploadArticleQrCode(e);
+          }}
+        />
+        <Button
+          variant="contained"
+          component="span"
+          fullWidth
+          disabled={loading}
+        >
+          上传articleQR code
+          {loading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: green[500],
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                marginTop: "-0.75rem",
+                marginLeft: "-0.75rem",
+              }}
+            />
+          )}
+        </Button>
+      </label>
+      <S3Image S3Key={qrCodeImgS3Key} style={{ width: "100%" }} />
       <Box className={classes.content}>
         <Controller
           name="content"

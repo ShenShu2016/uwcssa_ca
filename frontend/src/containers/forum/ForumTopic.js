@@ -1,5 +1,5 @@
-import { Box, Grid, Skeleton, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import { Box, Skeleton } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   removeSelectedForumTopic,
   selectedForumTopic,
@@ -7,29 +7,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
-import ForumAdSide from "../../components/Forum/ForumAdSide";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
-import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
-import { makeStyles } from "@mui/styles";
+// import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router";
 
-// import {
-//   selectedForumTopic,
-//   removeSelectedForumTopic,
-// } from "../../redux/actions/forumAction";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    flexDirection: "row",
-  },
-}));
-
-function ForumTopic() {
-  const classes = useStyles();
+export default function ForumTopic() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { forumTopicID } = useParams();
+  const [starter, setStarter] = useState(false);
   //console.log(forumTopicID);
   useEffect(() => {
     if (forumTopicID && forumTopicID !== "") {
@@ -39,29 +27,55 @@ function ForumTopic() {
   }, [forumTopicID, dispatch]);
   const forumTopic = useSelector((state) => state.forum.selected.forumTopic);
   // console.log(forumTopic);
+  useEffect(() => {
+    if (
+      forumTopic === undefined ||
+      forumTopic === null ||
+      forumTopic.length === 0
+    ) {
+      setStarter(false);
+    } else {
+      if (forumTopic.forumSubTopics === undefined) {
+        setStarter(false);
+      } else {
+        setStarter(true);
+      }
+
+      if (forumTopic.description === "not-found") {
+        history.push("/not-found");
+      }
+    }
+  }, [forumTopic, history]);
+  console.log(starter);
+  console.log(forumTopic);
   return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
-        {Object.keys(forumTopic).length === 0 ? (
+    <div>
+      <Box
+        sx={{
+          display: "flex",
+          margin: "auto",
+          maxWidth: "100%",
+          paddingInline: { xs: 0, sm: "1rem" },
+          flexDirection: { xs: "column", sm: "row" },
+          bgcolor: "grey.50",
+        }}
+      >
+        {starter === false ? (
           <Skeleton variant="rectangular" width={210} height={118} />
         ) : (
-          <Grid item xs={11} sm={10} md={9} lg={9} xl={9}>
+          <Box sx={{ width: { md: 1080 } }}>
             <Box sx={{ padding: "2rem", maxWidth: "100%" }}>
-              <Typography variant="h5">{forumTopic.name}</Typography>
               <CustomBreadcrumbs />
             </Box>
-            <ForumTopicMain forumTopic={forumTopic} />
-          </Grid>
+            <Box sx={{ mt: 1, width: "100%" }}>
+              <ForumTopicMain forumTopic={forumTopic} />
+            </Box>
+          </Box>
         )}
-        <Grid item sm={1} md={2}>
-          <ForumAdSide />
-        </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-          <OpenIconSpeedDial />
-        </Grid>
-      </Grid>
+        <Box>
+          <ForumRightSide />
+        </Box>
+      </Box>
     </div>
   );
 }
-
-export default ForumTopic;

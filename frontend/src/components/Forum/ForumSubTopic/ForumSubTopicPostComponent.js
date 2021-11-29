@@ -12,7 +12,7 @@ import React from "react";
 import moment from "moment";
 
 export default function ForumSubTopicPostComponent({ forumPost }) {
-  console.log("forumPost", forumPost);
+  // console.log("forumPost", forumPost);
   const {
     id,
     title,
