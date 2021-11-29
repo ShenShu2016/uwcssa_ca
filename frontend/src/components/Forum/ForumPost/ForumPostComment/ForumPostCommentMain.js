@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 // import { Link } from "react-router-dom";
@@ -11,10 +6,11 @@ import React, { useState } from "react";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import ForumPostContentComponent from "../ForumPostDetail/ForumPostContentComponent";
-import ForumPostSubCommentPost from "../ForumPostSubComment/ForumPostSubCommentPost";
+//import ForumPostSubCommentPost from "../ForumPostSubComment/ForumPostSubCommentPost";
 import ForumPostSubComments from "../ForumPostSubComment/ForumPostSubComments";
 import ForumPostUserComponent from "../ForumPostDetail/ForumPostUserComponent";
 import LikeButtonGroup from "../../../LikeButtonGroup";
+
 export default function ForumPostCommentMain({ comment, idx }) {
   const [isReplying, setIsReplying] = useState(false);
   const replySwitch = () => setIsReplying((isReplying) => !isReplying);

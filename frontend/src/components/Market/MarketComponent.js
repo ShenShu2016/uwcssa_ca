@@ -1,15 +1,14 @@
 import { Box, CardActionArea, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 // import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "./marketRentalOptions";
 import moment from "moment";
-import { useDispatch } from "react-redux";
 import useHover from "../../Hooks/useHover";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
