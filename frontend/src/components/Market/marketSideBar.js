@@ -57,7 +57,7 @@ const MarketSideBar = () => {
               <ListItemIcon>
                 <WorkIcon />
               </ListItemIcon>
-              <ListItemText primary="Browse All" />
+              <ListItemText primary="查看全部" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -65,7 +65,7 @@ const MarketSideBar = () => {
               <ListItemIcon>
                 <NotificationsIcon />
               </ListItemIcon>
-              <ListItemText primary="Notifications" />
+              <ListItemText primary="消息" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -77,7 +77,7 @@ const MarketSideBar = () => {
     <Box className={classes.info}>
       <Paper className={classes.paper} elevation={3}>
         <Typography variant="h5" marginBottom="1rem" fontWeight="bold">
-          Market
+          商城
         </Typography>
         <Box width="100%" marginBottom="1rem" overflow="hidden">
           <SearchArea />
@@ -89,19 +89,19 @@ const MarketSideBar = () => {
             component={Link}
             to="/market/create"
           >
-            Add new listing
+            新增商品
           </Button>
           <Divider />
         </Box>
 
         <Box width="100%" overflow="hidden">
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Location Filters
+            位置
           </Typography>
           <MarketFIlterLocation />
         </Box>
         <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-          Categories
+          类别
         </Typography>
         <Box width="100%" maxHeight="500px" overflow="auto">
           <CategoryIcons />

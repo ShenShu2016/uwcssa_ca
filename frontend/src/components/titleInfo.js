@@ -31,7 +31,7 @@ function SimpleDialog(props) {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Seller Contact Infos</DialogTitle>
+      <DialogTitle>卖家信息</DialogTitle>
       <List sx={{ pt: 0 }}>
         <ListItem button>
           <ListItemIcon>
@@ -157,7 +157,7 @@ const TitleInfo = ({
             variant="outlined"
             color="info"
           >
-            Edit
+            编辑
           </Button>
         ) : (
           <Button
@@ -166,7 +166,7 @@ const TitleInfo = ({
             variant="outlined"
             color="info"
           >
-            Contact
+            联系
           </Button>
         )}
         <SimpleDialog
@@ -183,7 +183,7 @@ const TitleInfo = ({
           variant="outlined"
           color="info"
         >
-          Save
+          保存
         </Button>
         <Button
           startIcon={<ShareIcon />}
@@ -191,7 +191,7 @@ const TitleInfo = ({
           variant="outlined"
           color="info"
         >
-          Share
+          分享
         </Button>
       </Stack>
     </React.Fragment>

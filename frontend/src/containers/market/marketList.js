@@ -15,7 +15,7 @@ import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketList() {
-  useTitle("市场");
+  useTitle("商城");
   const dispatch = useDispatch();
   const useStyles = marketItemStyle;
   const classes = useStyles();

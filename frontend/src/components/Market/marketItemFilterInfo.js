@@ -72,14 +72,14 @@ const FilterContent = (props) => {
         className={classes.specialBox}
       >
         <Typography variant="h6" fontWeight="bold" className={classes.special}>
-          Location Filters
+          区域
         </Typography>
         <Typography
           variant="h6"
           fontWeight="bold"
           className={classes.specialNot}
         >
-          Filters
+          过滤器
         </Typography>
 
         <Button
@@ -87,7 +87,7 @@ const FilterContent = (props) => {
           onClick={handleReset}
           sx={{ right: 0, position: "absolute" }}
         >
-          Reset All
+          重置
         </Button>
       </Box>
       <Box className={classes.special}>
@@ -106,7 +106,7 @@ const FilterContent = (props) => {
         marginBottom="1rem"
         fontWeight="bold"
       >
-        Price Range
+        价格
       </Typography>
       <Stack direction="row" spacing={2}>
         <TextField
@@ -143,7 +143,7 @@ const FilterContent = (props) => {
       {type === "item" ? (
         <React.Fragment>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Category
+            类别
           </Typography>
           <MarketForm
             title="Category"
@@ -152,7 +152,7 @@ const FilterContent = (props) => {
             onChange={(e) => handleCategory(e)}
           />
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Condition
+            使用程度
           </Typography>
           <MarketForm
             title="Condition"
@@ -165,7 +165,7 @@ const FilterContent = (props) => {
       {type === "vehicle" ? (
         <React.Fragment>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Vehicle Type
+            车型
           </Typography>
           <MarketForm
             title="Vehicle Type"
@@ -179,7 +179,7 @@ const FilterContent = (props) => {
             marginBottom="1rem"
             fontWeight="bold"
           >
-            Year Range
+            年份
           </Typography>
           <Stack direction="row" spacing={2}>
             <TextField
@@ -204,7 +204,7 @@ const FilterContent = (props) => {
             />
           </Stack>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Make
+            品牌
           </Typography>
           <MarketForm
             title="Make"
@@ -214,7 +214,7 @@ const FilterContent = (props) => {
             onChange={(e) => handleMake(e)}
           />
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Model
+            型号
           </Typography>
           <MarketForm
             title="Model"
@@ -228,7 +228,7 @@ const FilterContent = (props) => {
       {type === "rental" ? (
         <React.Fragment>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Home for Rent or Sale
+            出租/出售
           </Typography>
           <MarketForm
             title="Home for Rent or Sale"
@@ -237,7 +237,7 @@ const FilterContent = (props) => {
             onChange={(e) => handleMarketRentalSaleRent(e)}
           />
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Property Type
+            房源类别
           </Typography>
           <MarketForm
             title="Property Type"
@@ -246,7 +246,7 @@ const FilterContent = (props) => {
             onChange={(e) => handlePropertyType(e)}
           />
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            AC Type
+            空调
           </Typography>
           <MarketForm
             title="AC Type"
@@ -255,7 +255,7 @@ const FilterContent = (props) => {
             onChange={(e) => handleAirConditioningType(e)}
           />
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            Heating Type
+            供暖
           </Typography>
           <MarketForm
             title="Heating Type"
@@ -269,7 +269,7 @@ const FilterContent = (props) => {
 
       <Box width="100%">
         <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-          Categories
+          其他分类
         </Typography>
         <CategoryIcons />
       </Box>
@@ -318,7 +318,7 @@ function ConfirmationDialogRaw(props) {
       open={open}
       {...other}
     >
-      <DialogTitle>Find Your Items</DialogTitle>
+      <DialogTitle>分类</DialogTitle>
       <DialogContent dividers>
         <FilterContent
           type={type}
@@ -394,7 +394,7 @@ export default function FilterInfo({
                   component={Link}
                   to="/market"
                 >
-                  Market
+                  商城
                 </Button>
               </span>
               {type === "item" ? (
@@ -405,7 +405,7 @@ export default function FilterInfo({
                     component={Link}
                     to="/market/item"
                   >
-                    Item
+                    二手商品
                   </Button>
                 </span>
               ) : null}
@@ -417,7 +417,7 @@ export default function FilterInfo({
                     component={Link}
                     to="/market/vehicle"
                   >
-                    Vehicle
+                    汽车
                   </Button>
                 </span>
               ) : null}
@@ -429,7 +429,7 @@ export default function FilterInfo({
                     component={Link}
                     to="/market/rental"
                   >
-                    Rental
+                    租房
                   </Button>
                 </span>
               ) : null}
@@ -441,7 +441,7 @@ export default function FilterInfo({
                     component={Link}
                     to="/market/pet"
                   >
-                    Pet
+                    宠物
                   </Button>
                 </span>
               ) : null}
@@ -453,7 +453,7 @@ export default function FilterInfo({
                     component={Link}
                     to="/market/carpool"
                   >
-                    Carpool
+                    拼车
                   </Button>
                 </span>
               ) : null}
@@ -476,7 +476,7 @@ export default function FilterInfo({
               component={Link}
               to={`/market/create/${type}`}
             >
-              Add new listing
+              新增商品
             </Button>
             <Divider />
           </Box>

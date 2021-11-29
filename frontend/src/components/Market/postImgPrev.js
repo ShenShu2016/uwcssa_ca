@@ -92,12 +92,10 @@ export default function PostImgPreview({
                   )}
                 />
                 <Typography fontSize="15px" fontWeight="lighter">
-                  Upload your images from HERE!
+                  上传照片
                 </Typography>
                 {!!errors.imgS3Keys ? (
-                  <Typography color="error">
-                    * At least ONE image is required!
-                  </Typography>
+                  <Typography color="error">* 至少来一张呀！</Typography>
                 ) : null}
                 <AddPhotoAlternateIcon sx={{ fontSize: 60 }} />
               </Stack>
@@ -110,7 +108,7 @@ export default function PostImgPreview({
               alignItems="center"
             >
               <Typography fontSize="15px" fontWeight="lighter">
-                Loading preview...
+                上传中...
               </Typography>
               <CircularProgress />
             </Stack>
