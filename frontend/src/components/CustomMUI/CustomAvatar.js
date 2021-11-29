@@ -1,8 +1,9 @@
 import { Avatar, Badge } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import Storage from "@aws-amplify/storage";
 import king from "../../static/avatarIcons/king.png";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
@@ -54,26 +55,29 @@ const CrownAvatar = styled(Avatar)(({ theme }) => ({
 }));
 export default function CustomAvatar({ user, variant, sx, link }) {
   const classes = useStyles();
-  const [avatarURL, setAvatarURL] = useState(null);
+  const dispatch = useDispatch();
+  const [imageURL, setImageURL] = useState(null);
+  const id = user.avatarImgS3Key;
+  const imgKeys = useSelector((state) => selectImageById(state, id));
 
   useEffect(() => {
-    const getAvatarImage = async () => {
+    const getImages = async () => {
       try {
-        const imageAccessURL = await Storage.get(user.avatarImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setAvatarURL(imageAccessURL);
+        const response = await dispatch(
+          getImage({ url: [user.avatarImgS3Key], id })
+        );
+        setImageURL(response.payload.imgUrl);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
-        setAvatarURL(null);
+        setImageURL(null);
       }
     };
-    if (user.avatarImgS3Key) {
-      getAvatarImage();
+    if (user.avatarImgS3Key && imgKeys === undefined) {
+      getImages();
+    } else if (user.avatarImgS3Key && imgKeys !== undefined) {
+      setImageURL(Object.values(imgKeys.images));
     }
-  }, [user]);
+  }, [user, imgKeys, dispatch, id]);
 
   return (
     <div>
@@ -97,7 +101,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
                 <Avatar
                   component={link === true ? Link : ""}
                   to={link === true ? `/account/profile/${user.username}` : ""}
-                  src={avatarURL}
+                  src={imageURL}
                   variant={variant}
                   className={classes.avatar}
                   style={sx}
