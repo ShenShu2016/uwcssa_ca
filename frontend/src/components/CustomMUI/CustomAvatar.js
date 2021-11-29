@@ -47,9 +47,9 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   border: `2px solid ${theme.palette.background.paper}`,
 }));
 const SmallAvatarCssaLogo = styled(Avatar)(({ theme }) => ({
-  width: 22,
-  height: 22,
-  // border: `2px solid ${theme.palette.background.paper}`,
+  width: 23,
+  height: 23,
+  border: `2px solid ${theme.palette.background.paper}`,
 }));
 const CrownAvatar = styled(Avatar)(({ theme }) => ({
   width: 30,

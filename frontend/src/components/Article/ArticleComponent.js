@@ -96,8 +96,8 @@ function ArticleComponent({ article }) {
                     avatar={
                       <CustomAvatar
                         link={false}
-                        variant={"square"}
-                        sx={{ width: 25, height: 25 }}
+                        variant={"round"}
+                        // sx={{ width: 25, height: 25 }}
                         user={user}
                       />
                     }
