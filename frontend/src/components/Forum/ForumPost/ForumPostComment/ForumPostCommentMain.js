@@ -115,10 +115,6 @@ export default function ForumPostCommentMain({ comment, idx }) {
                     <ForumPostSubComments
                       comment={comment}
                       isReplying={isReplying}
-                    />
-                    <ForumPostSubCommentPost
-                      comment={comment}
-                      isReplying={isReplying}
                       idx={idx}
                     />
                   </Box>

@@ -1,61 +1,73 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Stack, Paper, Button, Typography } from "@mui/material";
 
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 import React from "react";
-import { makeStyles } from "@mui/styles";
-import { useTitle } from "../../../Hooks/useTitle";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    background: "#fff",
-    display: "flex",
-    flexDirection: "row",
-    //   justifyContent: "center",
-  },
-  forumSubTopic: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-}));
-export default function ForumTopicMain  ({ forumTopic })  {
-  const classes = useStyles();
-  //console.log(forumTopic);
-  const { name, forumSubTopics } = forumTopic;
-  useTitle(name + "-论坛");
-  //   const { forumSubTopicData } = forumSubTopics;
-  //   console.log(forumSubTopics.items);
+import { useTitle } from "../../../Hooks/useTitle";
+import ForumHomeSubTopic from "../ForumHome/ForumHomeSubTopic";
+
+export default function ForumTopicMain({ forumTopic }) {
+  useTitle(forumTopic.name + "-论坛");
+
   return (
-    <div className={classes.root}>
+    <div>
       <Box sx={{ padding: "2rem", maxwidth: "100%" }}>
-        {/* forum type link */}
-        <Box sx={{ marginTop: "4rem" }}>
-          <Grid container spacing={0} className={classes.forumSubTopic}>
-            {forumSubTopics.items.map((forumSubTopic) => {
-              const { id, name } = forumSubTopic;
+        <Stack direction="column">
+          <Paper sx={{ padding: "1rem" }}>
+            <Typography
+              variant="h4"
+              component="span"
+              style={{
+                whiteSpace: "pre-wrap",
+                fontWeight: 500,
+                wordBreak: "break-word",
+                // color: "grey",
+              }}
+            >
+              {forumTopic.name}
+            </Typography>
+          </Paper>
+          <Box sx={{ display: "grid", mt: 2 }}>
+            <Box
+              sx={{
+                boxShadow: 1,
+                backgroundColor: "info.main",
+                p: 1,
+                mx: 1,
+                mt: 3,
+                borderRadius: 1,
+                textAlign: "center",
+                fontSize: "1.2rem",
+                fontWeight: "700",
+                display: "flex",
+                justifyContent: "space-between",
+                opacity: 0.9,
+              }}
+            >
+              <Box>
+                <Button
+                  variant="subtitle2"
+                  sx={{
+                    color: "white",
+                  }}
+                  component={Link}
+                  to={`/forum/${forumTopic.id}`}
+                >
+                  副主题板块
+                </Button>
+              </Box>
+            </Box>
+            {forumTopic.forumSubTopics.items?.map((forumSubTopic) => {
               return (
-                <div key={id}>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle2">
-                      <Button
-                        variant="text"
-                        // target="_top"
-                        component={Link}
-                        color="primary"
-                        to={`/forum/${forumTopic.id}/${id}`}
-                      >
-                        {name}
-                        <ArrowForwardIcon />
-                      </Button>
-                    </Typography>
-                  </Grid>
-                </div>
+                <ForumHomeSubTopic
+                  forumSubTopic={forumSubTopic}
+                  key={forumSubTopic.id}
+                />
               );
             })}
-          </Grid>
-        </Box>
+          </Box>
+        </Stack>
       </Box>
     </div>
   );
-};
+}

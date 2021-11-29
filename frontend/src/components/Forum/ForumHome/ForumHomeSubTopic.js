@@ -21,7 +21,7 @@ export default function ForumHomeSubTopic({ forumSubTopic }) {
     (forumPost) => forumPost.forumPostComments.items.length
   );
   let forumPostCommentCount = 0;
-  forumPostComments.map((test) => (forumPostCommentCount += test));
+  forumPostComments.map((forumPostComment) => (forumPostCommentCount += forumPostComment));
   // console.log(forumSubTopic);
   return (
     <div>

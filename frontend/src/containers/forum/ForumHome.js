@@ -22,16 +22,19 @@ export default function ForumHome() {
         <Box
           sx={{
             // maxWidth: "1300px",
-            mt:4,
-            width: "100%",
+            mt: 4,
+            // width: "100%",
+            width: { md: 1080 },
           }}
         >
           <ForumHomeMain />
         </Box>
         <Box
-          sx={{
-            // width: 220,
-          }}
+          sx={
+            {
+              // width: 220,
+            }
+          }
         >
           <ForumRightSide />
         </Box>
