@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../LikeButtonGroup";
+import QrCodeUwinStudent from "./QrCodeUwinStudent";
 import Storage from "@aws-amplify/storage";
 import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
@@ -45,7 +46,16 @@ export default function Main({ article }) {
   const classes = useStyles();
   useTitle(article.title);
   // console.log("Main", article);
-  const { content, imgS3Keys, tags, topic, createdAt, user, owner } = article;
+  const {
+    content,
+    imgS3Keys,
+    tags,
+    topic,
+    createdAt,
+    user,
+    owner,
+    qrCodeImgS3Key,
+  } = article;
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   console.log("imgS3Keys", imgS3Keys);
   useEffect(() => {
@@ -120,6 +130,8 @@ export default function Main({ article }) {
               {content}
             </Typography>
           </Box>
+          <Divider />
+          <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} />
           <Divider />
           <Box className={classes.buttonGroup}>
             <LikeButtonGroup item={article} />

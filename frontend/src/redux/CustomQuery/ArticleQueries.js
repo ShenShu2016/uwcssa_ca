@@ -6,6 +6,7 @@ export const getArticle = /* GraphQL */ `
       createdAt
       id
       imgS3Keys
+      qrCodeImgS3Key
       tags
       title
       topic {
