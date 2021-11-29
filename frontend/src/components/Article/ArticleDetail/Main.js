@@ -55,6 +55,7 @@ export default function Main({ article }) {
     user,
     owner,
     qrCodeImgS3Key,
+    id,
   } = article;
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   console.log("imgS3Keys", imgS3Keys);
@@ -131,7 +132,7 @@ export default function Main({ article }) {
             </Typography>
           </Box>
           <Divider />
-          <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} />
+          <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} id={id} />
           <Divider />
           <Box className={classes.buttonGroup}>
             <LikeButtonGroup item={article} />
