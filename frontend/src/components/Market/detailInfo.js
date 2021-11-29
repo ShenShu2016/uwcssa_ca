@@ -53,77 +53,71 @@ const DetailInfo = ({
   interiorColor,
   fuelType,
 }) => {
+  console.log("type", type);
   return (
     <React.Fragment>
       <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-        Details
+        详情
       </Typography>
-      {
-        (type = "item" ? (
-          <Grid marginX="0.5rem" container spacing={2}>
-            <Grid item xs={4}>
-              Category
-            </Grid>
-            <Grid item xs={8}>
-              {Category.map((item) => item.value).includes(marketItemCategory)
-                ? Category.filter(
-                    (item) => item.value === marketItemCategory
-                  )[0].label
-                : ""}
-            </Grid>
-            <Grid item xs={4}>
-              Condition
-            </Grid>
-            <Grid item xs={8}>
-              {Conditions.map((item) => item.value).includes(
-                marketItemCondition
-              )
-                ? Conditions.filter(
-                    (item) => item.value === marketItemCondition
-                  )[0].label
-                : ""}
-            </Grid>
+      {type === "item" ? (
+        <Grid marginX="0.5rem" container spacing={2}>
+          <Grid item xs={4}>
+            类别
           </Grid>
-        ) : null)
-      }
-      {
-        (type = "rental" ? (
-          <Grid marginX="0.5rem" container spacing={2}>
-            <Grid item xs={4}>
-              AC Type
-            </Grid>
-            <Grid item xs={8}>
-              {ACType.map((item) => item.value).includes(airConditionType)
-                ? ACType.filter((item) => item.value === airConditionType)[0]
-                    .label
-                : ""}
-            </Grid>
-            <Grid item xs={4}>
-              Heating Type
-            </Grid>
-            <Grid item xs={8}>
-              {HType.map((item) => item.value).includes(heatingType)
-                ? HType.filter((item) => item.value === heatingType)[0].label
-                : ""}
-            </Grid>
-            <Grid item xs={4}>
-              Pet Friendly
-            </Grid>
-            <Grid item xs={8}>
-              {CF.map((item) => item.value).includes(catFriendly) &&
-              DF.map((item) => item.value).includes(dogFriendly)
-                ? catFriendly && dogFriendly
-                  ? "可以养"
-                  : "不可以养"
-                : ""}
-            </Grid>
+          <Grid item xs={8}>
+            {Category.map((item) => item.value).includes(marketItemCategory)
+              ? Category.filter((item) => item.value === marketItemCategory)[0]
+                  .label
+              : ""}
           </Grid>
-        ) : null)
-      }
+          <Grid item xs={4}>
+            新旧程度
+          </Grid>
+          <Grid item xs={8}>
+            {Conditions.map((item) => item.value).includes(marketItemCondition)
+              ? Conditions.filter(
+                  (item) => item.value === marketItemCondition
+                )[0].label
+              : ""}
+          </Grid>
+        </Grid>
+      ) : null}
+      {type === "rental" ? (
+        <Grid marginX="0.5rem" container spacing={2}>
+          <Grid item xs={4}>
+            空调
+          </Grid>
+          <Grid item xs={8}>
+            {ACType.map((item) => item.value).includes(airConditionType)
+              ? ACType.filter((item) => item.value === airConditionType)[0]
+                  .label
+              : ""}
+          </Grid>
+          <Grid item xs={4}>
+            供暖
+          </Grid>
+          <Grid item xs={8}>
+            {HType.map((item) => item.value).includes(heatingType)
+              ? HType.filter((item) => item.value === heatingType)[0].label
+              : ""}
+          </Grid>
+          <Grid item xs={4}>
+            宠物
+          </Grid>
+          <Grid item xs={8}>
+            {CF.map((item) => item.value).includes(catFriendly) &&
+            DF.map((item) => item.value).includes(dogFriendly)
+              ? catFriendly && dogFriendly
+                ? "可以养"
+                : "不可以养"
+              : ""}
+          </Grid>
+        </Grid>
+      ) : null}
       {type === "vehicle" ? (
         <Grid marginX="0.5rem" container spacing={2}>
           <Grid item xs={4}>
-            Vehicle Type
+            车型
           </Grid>
           <Grid item xs={8}>
             {VType.map((item) => item.value).includes(vehicleType)
@@ -131,7 +125,7 @@ const DetailInfo = ({
               : ""}
           </Grid>
           <Grid item xs={4}>
-            Make/Model
+            品牌/型号
           </Grid>
           <Grid item xs={8}>
             {year.length === 0 && make.length === 0 && model.length === 0
@@ -139,7 +133,7 @@ const DetailInfo = ({
               : `${year} ${make} ${model}`}
           </Grid>
           <Grid item xs={4}>
-            Exterior Color
+            车漆颜色
           </Grid>
           <Grid item xs={8}>
             {exteriorColor.length === 0
@@ -147,7 +141,7 @@ const DetailInfo = ({
               : exteriorColor}
           </Grid>
           <Grid item xs={4}>
-            Interior Color
+            内饰颜色
           </Grid>
           <Grid item xs={8}>
             {interiorColor.length === 0
@@ -155,7 +149,7 @@ const DetailInfo = ({
               : interiorColor}
           </Grid>
           <Grid item xs={4}>
-            Furl Type
+            汽油/柴油
           </Grid>
           <Grid item xs={8}>
             {fuelType.length === 0 ? "Fuel Type Color Goes Here" : fuelType}
@@ -166,7 +160,7 @@ const DetailInfo = ({
         <Box>
           <Box>
             <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-              Tags
+              标签
             </Typography>
           </Box>
           <Stack
@@ -183,7 +177,7 @@ const DetailInfo = ({
       )}
       <Divider />
       <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
-        Descriptions
+        详情描述
       </Typography>
       <Typography marginX="1rem" marginY="0.25rem">
         {description.length === 0 ? "Description Goes Here" : description}

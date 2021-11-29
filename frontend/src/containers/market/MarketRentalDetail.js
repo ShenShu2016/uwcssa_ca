@@ -111,7 +111,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
       />
       <Divider />
       <DetailInfo
-        type="reatal"
+        type="rental"
         tags={tags}
         description={description}
         airConditionType={airConditionType}

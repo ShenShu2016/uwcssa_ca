@@ -65,13 +65,13 @@ function ConfirmationDialogRaw(props) {
       open={open}
       {...other}
     >
-      <DialogTitle>Change Location</DialogTitle>
+      <DialogTitle>位置</DialogTitle>
       <DialogContent dividers>
-        <Typography variant="caption">Search by city or ZIP code.</Typography>
+        <Typography variant="caption">根据地址，邮编搜索</Typography>
         <TextField
           sx={{ marginY: "1rem" }}
           id="input-with-icon-textfield"
-          label="Location"
+          label="地址"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -86,7 +86,7 @@ function ConfirmationDialogRaw(props) {
         <TextField
           sx={{ marginBottom: "1rem" }}
           id="input-with-icon-textfield"
-          label="Radius [km]"
+          label="半径 [km]"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -102,9 +102,9 @@ function ConfirmationDialogRaw(props) {
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
-          Close
+          关闭
         </Button>
-        <Button onClick={handleOk}>Okay</Button>
+        <Button onClick={handleOk}>确认</Button>
       </DialogActions>
     </Dialog>
   );
@@ -118,7 +118,7 @@ ConfirmationDialogRaw.propTypes = {
 
 export default function ConfirmationDialog({ type = "plain" }) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("Location");
+  const [value, setValue] = useState("位置");
 
   const handleClickListItem = () => {
     setOpen(true);
@@ -143,7 +143,7 @@ export default function ConfirmationDialog({ type = "plain" }) {
             aria-label="phone ringtone"
             onClick={handleClickListItem}
           >
-            <ListItemText primary="Current Searching Area" secondary={value} />
+            <ListItemText primary="当前搜索区域" secondary={value} />
           </ListItem>
           <ConfirmationDialogRaw
             id="ringtone-menu"

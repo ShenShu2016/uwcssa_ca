@@ -8,7 +8,7 @@ const SellerInfo = ({ user, createdAt, owner }) => {
   return (
     <React.Fragment>
       <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
-        Seller Infos
+        卖家详情
       </Typography>
       <Box margin="1rem">
         <CardHeader

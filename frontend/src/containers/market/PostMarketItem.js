@@ -1,9 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
   IconButton,
   Paper,
   Stack,
@@ -24,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
+import PostUserInfo from "../../components/Market/postUserInfo";
 import PreviewInfo from "./previewInfo";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
@@ -42,6 +40,7 @@ export default function PostMarketItem() {
   const history = useHistory();
   useTitle("发布二手商品信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  const [imageKeys, setImageKeys] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -51,9 +50,10 @@ export default function PostMarketItem() {
     selectMarketUserById(state, username)
   );
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-  const [imageKeys, setImageKeys] = useState("");
+
   const [open, setOpen] = useState(false);
   const [fakeItems, setFakeItems] = useState({
+    type: "item",
     title: "Title",
     price: "Price",
     description: "Descriptions",
@@ -423,105 +423,13 @@ export default function PostMarketItem() {
                   )}
                 />
               </Box>
-              {marketUserInfo === undefined ? (
-                <Typography variant="subtitle1" fontWeight="600">
-                  Fill the Contact Info and Save as default
-                </Typography>
-              ) : (
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        onChange={() => {
-                          setDefaultInfo((prev) => !prev);
-
-                          defaultInfo === true
-                            ? setValue("contactEmail", marketUserInfo.email)
-                            : setValue("contactEmail", "");
-                          defaultInfo === true
-                            ? setValue("contactPhone", marketUserInfo.phone)
-                            : setValue("contactPhone", "");
-                          defaultInfo === true
-                            ? setValue("contactWeChat", marketUserInfo.weChat)
-                            : setValue("contactWeChat", "");
-                        }}
-                      />
-                    }
-                    label="Use default contact information"
-                  />
-                </FormGroup>
-              )}
-              <Box sx={{ marginY: "1rem" }}>
-                <Controller
-                  name="contactPhone"
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      label={`Contact Phone${
-                        !!errors.contactPhone ? " is required!" : ""
-                      }`}
-                      value={value}
-                      variant="outlined"
-                      disabled={defaultInfo === false ? true : false}
-                      error={!!errors.contactPhone}
-                      required
-                      placeholder="eg: (123) 456 789"
-                      fullWidth
-                      onChange={(e) => {
-                        onChange(e);
-                      }}
-                    />
-                  )}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <Controller
-                  name="contactEmail"
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      label={`Contact Email${
-                        !!errors.contactEmail ? " is required!" : ""
-                      }`}
-                      value={value}
-                      variant="outlined"
-                      error={!!errors.contactEmail}
-                      required
-                      disabled={defaultInfo === false ? true : false}
-                      placeholder="wang123456@email.com "
-                      fullWidth
-                      onChange={(e) => {
-                        onChange(e);
-                      }}
-                    />
-                  )}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <Controller
-                  name="contactWeChat"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      label="Contact WeChat"
-                      value={value}
-                      variant="outlined"
-                      placeholder="eg: Wang123"
-                      fullWidth
-                      disabled={defaultInfo === false ? true : false}
-                      onChange={(e) => {
-                        onChange(e);
-                      }}
-                    />
-                  )}
-                />
-              </Box>
+              <PostUserInfo
+                control={control}
+                setValue={setValue}
+                errors={errors}
+                defaultInfo={defaultInfo}
+                setDefaultInfo={setDefaultInfo}
+              />
             </Box>
             <Button
               variant="outlined"

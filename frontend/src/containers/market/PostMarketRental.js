@@ -1,16 +1,13 @@
 import {
   Box,
   Button,
-  Checkbox,
-  CircularProgress,
-  FormControlLabel,
-  FormGroup,
   IconButton,
   Paper,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import {
@@ -22,177 +19,41 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MarketForm from "../../components/Market/marketForm";
-import { MarketRentalInfo } from "./MarketRentalDetail";
+import PostImgPreview from "../../components/Market/postImgPrev";
+import PostUserInfo from "../../components/Market/postUserInfo";
+import PreviewInfo from "./previewInfo";
 import PublishIcon from "@mui/icons-material/Publish";
 import Storage from "@aws-amplify/storage";
-import SwipeViews from "../../components/SwipeViews";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { grey } from "@mui/material/colors";
-import { makeStyles } from "@mui/styles";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
-import { styled } from "@mui/material/styles";
+import { postStyle } from "../../components/Market/postCss";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
-// import { postMarketRental } from "../../redux/actions/marketItemActions";
-
-// import { useTitle } from "../../Hooks/useTitle";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-    height: "calc(100vh - 64px)",
-  },
-  titleInput: {
-    marginBlock: "2rem",
-  },
-  content: {},
-  imgKeyFromServer: {
-    width: "100%",
-  },
-  images: {
-    height: "100%",
-    width: "calc(100% - 360px)",
-    // bgcolor="black"
-    position: "relative",
-    overflow: "hidden",
-    float: "left",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "50vh",
-    },
-  },
-  contain: {
-    width: "100%",
-    overflow: "hidden",
-    height: "calc(100vh - 64px)",
-    bgcolor: "black",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      height: "100%",
-    },
-  },
-  info: {
-    width: "360px",
-    height: "100%",
-    float: "left",
-    paddingRight: "5px",
-    overflow: "hidden",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: `calc(100% - ${drawerBleeding}px)`,
-    },
-  },
-  previewImg: {
-    width: "100px",
-    height: "100px",
-    position: "relative",
-    backgroundColor: "rgb(0 0 0 / 20%)",
-    borderRadius: "5px",
-    zIndex: "1",
-  },
-  preview: {
-    width: "calc(100% - 360px)",
-    height: "calc(100vh - 64px)",
-    padding: "2rem",
-    float: "right",
-    [theme.breakpoints.down("lg")]: {
-      display: "block",
-      height: "100%",
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-  previewImgRight: {
-    width: "calc(100% - 350px)",
-    height: "100%",
-    position: "relative",
-    backgroundColor: "rgb(243, 246, 249)",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "40vh",
-    },
-  },
-  previewInfo: {
-    width: "350px",
-    height: "100%",
-    overflowY: "auto",
-    overflowX: "hidden",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "100vh",
-      overflow: "hidden",
-    },
-  },
-  drawer: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      backgroundColor:
-        theme.palette.mode === "light"
-          ? grey[100]
-          : theme.palette.background.default,
-    },
-  },
-  puller: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      width: 30,
-      height: 6,
-      backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
-      borderRadius: 3,
-      position: "absolute",
-      top: 8,
-      left: "calc(50% - 15px)",
-    },
-  },
-  styledBox: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      backgroundColor: theme.palette.mode === "light" ? "#fff" : grey[800],
-    },
-  },
-  icon: {
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-    },
-  },
-}));
-
-const Input = styled("input")({
-  display: "none",
-});
-
-const drawerBleeding = 56;
-
 export default function PostMarketRental() {
-  const classes = useStyles();
+  const classes = postStyle();
   const dispatch = useDispatch();
+  const history = useHistory();
   useTitle("发布租房信息");
   const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  const [imageKeys, setImageKeys] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
   const user = useSelector((state) => state.userAuth.userProfile);
-  const [imageKeys, setImageKeys] = useState("");
   const [open, setOpen] = useState(false);
   const [defaultInfo, setDefaultInfo] = useState(true);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, username)
   );
+
   const {
     marketRentalSaleRent,
     propertyType,
@@ -202,7 +63,9 @@ export default function PostMarketRental() {
     catFriendly,
     dogFriendly,
   } = marketRentalOptions;
+
   const [fakeItems, setFakeItems] = useState({
+    type: "rental",
     price: "Price",
     description: "Descriptions",
     tags: ["Tags Goes Here"],
@@ -219,48 +82,76 @@ export default function PostMarketRental() {
     catFriendly: true,
     dogFriendly: true,
   });
-  const [error, setError] = useState({
-    imageKeys: false,
-    marketRentalSaleRent: false,
-    propertyType: false,
-    price: false,
-    laundryType: false,
-    airConditionType: false,
-    address: false,
-    heatingType: false,
-    description: false,
-    catFriendly: false,
-    dogFriendly: false,
-    bedroomCounts: false,
-    contactEmail: false,
-    contactPhone: false,
-  });
-  const history = useHistory();
 
-  const [marketRentalData, setMarketRentalData] = useState({
-    marketRentalSaleRent: "",
-    propertyType: "",
-    bedroomCounts: "",
-    bathroomsCounts: "",
-    price: "",
-    address: "",
-    description: "",
-    propertySize: "",
-    dateAvailable: new Date().toISOString().slice(0, 10),
-    laundryType: "",
-    airConditionType: "",
-    heatingType: "",
-    catFriendly: "",
-    dogFriendly: "",
-    contactEmail: "",
-    contactWeChat: "",
-    contactPhone: "",
-    tags: [],
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      imgS3Keys: "",
+      marketRentalSaleRent: "",
+      propertyType: "",
+      bedroomCounts: "",
+      bathroomCounts: "",
+      address: "",
+      propertySize: "",
+      dateAvailable: new Date().toISOString(),
+      laundryType: "",
+      airConditionType: "",
+      heatingType: "",
+      catFriendly: "",
+      dogFriendly: "",
+      price: "",
+      description: "",
+      contactEmail: "",
+      contactWeChat: "",
+      contactPhone: "",
+    },
   });
-  // console.log("marketRentalData", marketRentalData);
+
+  const onSubmit = async (data) => {
+    const createMarketItemInput = {
+      ...data,
+      marketType: "Rental",
+      imgS3Keys: Object.keys(imageKeys),
+      tags: GetTags(),
+      active: true,
+      userID: username,
+      sortKey: "SortKey",
+    };
+    const { contactEmail, contactPhone, contactWeChat } = data;
+    const userInfo = {
+      id: username,
+      phone: contactPhone,
+      weChat: contactWeChat,
+      email: contactEmail,
+      userID: username,
+    };
+    console.log("createMarketItemInput", createMarketItemInput);
+    const response = await dispatch(postMarketItem(createMarketItemInput));
+    if (marketUserInfo === undefined) {
+      await dispatch(postMarketUserInfo(userInfo));
+    } else if (marketUserInfo !== undefined) {
+      if (defaultInfo === true) {
+        await dispatch(updateMarketUserInfoDetail(userInfo));
+      }
+    }
+
+    console.log("Something should be here", response);
+    if (response.meta.requestStatus === "fulfilled") {
+      history.push(`/market/rental/${response.payload.id}`);
+      reset();
+    }
+    console.log("Can upload");
+  };
+
   useEffect(() => {
     dispatch(fetchMarketUserInfo(username));
   }, [username, dispatch]);
+
   const uploadMarketItemImg = async (e) => {
     const imagesData = e.target.files;
     const imageLocation = "market/rental";
@@ -299,6 +190,7 @@ export default function PostMarketRental() {
       getImage();
     }
   }, [imageKeys, trigger]);
+
   useEffect(() => {
     if (
       Object.values(imageKeys).includes("temp") &&
@@ -321,102 +213,6 @@ export default function PostMarketRental() {
     }
   }, [imgKeyFromServer, imageKeys, trigger]);
 
-  const uploadMarketRental = async () => {
-    //Upload the marketRental
-    const {
-      marketRentalSaleRent,
-      propertyType,
-      bedroomCounts,
-      bathroomsCounts,
-      price,
-      address,
-      description,
-      propertySize,
-      dateAvailable,
-      laundryType,
-      airConditionType,
-      heatingType,
-      catFriendly,
-      dogFriendly,
-      contactPhone,
-      contactEmail,
-      contactWeChat,
-    } = marketRentalData;
-
-    const createMarketRentalInput = {
-      marketType: "Rental",
-      marketRentalSaleRent: marketRentalSaleRent,
-      propertyType: propertyType,
-      bedroomCounts: bedroomCounts,
-      bathroomsCounts: bathroomsCounts,
-      price: price,
-      imgS3Keys: Object.keys(imageKeys),
-      address: address,
-      description: description,
-      propertySize: propertySize,
-      dateAvailable: dateAvailable,
-      laundryType: laundryType,
-      airConditionType: airConditionType,
-      heatingType: heatingType,
-      catFriendly: catFriendly,
-      dogFriendly: dogFriendly,
-      contactEmail,
-      contactPhone,
-      contactWeChat,
-      tags: GetTags(),
-      active: true,
-      userID: username,
-      sortKey: "SortKey",
-    };
-    console.log("what happened", createMarketRentalInput);
-    const canSave = {
-      imageKeys,
-      marketRentalSaleRent,
-      propertyType,
-      price,
-      laundryType,
-      address,
-      airConditionType,
-      heatingType,
-      description,
-      catFriendly,
-      dogFriendly,
-      bedroomCounts,
-      contactEmail,
-      contactPhone,
-    };
-    const userInfo = {
-      id: username,
-      phone: contactPhone,
-      weChat: contactWeChat,
-      email: contactEmail,
-      userID: username,
-    };
-    if (Object.values(canSave).every((item) => item !== "")) {
-      const response = await dispatch(postMarketItem(createMarketRentalInput));
-      if (marketUserInfo === undefined) {
-        await dispatch(postMarketUserInfo(userInfo));
-      } else if (marketUserInfo !== undefined) {
-        if (defaultInfo === true) {
-          await dispatch(updateMarketUserInfoDetail(userInfo));
-        }
-      }
-      console.log("Something should be here", response);
-      if (response.meta.requestStatus === "fulfilled") {
-        history.push(`/market/rental/${response.payload.id}`);
-      }
-      console.log("Can upload");
-    } else {
-      const newError = {};
-      Object.keys(canSave).forEach((item) =>
-        canSave[item] === ""
-          ? (newError[item] = true)
-          : (newError[item] = false)
-      );
-      setError(newError);
-    }
-  };
-
   const handleDeleteImg = (imgKey) => {
     const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
     const images = { ...imageKeys };
@@ -437,22 +233,14 @@ export default function PostMarketRental() {
     setFakeItems({ ...fakeItems, tags: newTags });
   };
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
-
   return (
     <div className={classes.root}>
       <Stack className={classes.contain} direction="row">
         <Box className={classes.info}>
           <Paper
+            className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              maxWidth: "100%",
-              padding: "1rem",
-              height: "100%",
-              overflowY: "auto",
-              overflowX: "hidden",
               backgroundColor: "#f9f9f9",
             }}
           >
@@ -463,363 +251,293 @@ export default function PostMarketRental() {
                 component="div"
                 fontWeight="bold"
               >
-                New Rental Listing
+                新增房源
               </Typography>
               <Box className={classes.icon}>
-                <IconButton onClick={toggleDrawer(true)}>
+                <IconButton onClick={() => setOpen(true)}>
                   <VisibilityIcon />
                 </IconButton>
               </Box>
             </Stack>
-            {imgKeyFromServer.length !== 0 ? (
-              <label htmlFor="contained-button-file">
-                <Input
-                  accept="image/*"
-                  id="contained-button-file"
-                  type="file"
-                  required
-                  multiple
-                  onChange={(e) => {
-                    uploadMarketItemImg(e);
-                    setTrigger(true);
-                  }}
-                />
-                <Button variant="outlined" component="span">
-                  Upload More {imgKeyFromServer.length}/5
-                </Button>
-              </label>
-            ) : null}
-            <Paper
-              elevation={1}
-              bgcolor="rgb(243, 246, 249)"
-              sx={{
-                marginY: "1rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "0.25rem",
-                width: "100%",
-                height: "130px",
-                backgroundColor: "rgb(243, 246, 249)",
-              }}
-            >
-              {imgKeyFromServer.length === 0 ? (
-                uploadStatus !== "succeeded" ? (
-                  <label htmlFor="contained-button-file">
-                    <Stack
-                      direction="column"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Input
-                        accept="image/*"
-                        id="contained-button-file"
-                        type="file"
-                        required
-                        multiple
-                        onChange={(e) => {
-                          uploadMarketItemImg(e);
-                          setTrigger(true);
-                          setError({ ...error, imageKeys: false });
-                          setUploadStatus("succeeded");
-                          setTimeout(() => {
-                            setUploadStatus("idle");
-                          }, 2500);
-                        }}
-                      />
-                      <Typography fontSize="15px" fontWeight="lighter">
-                        Upload your images from HERE!
-                      </Typography>
-                      {error.imageKeys ? (
-                        <Typography color="error">
-                          * At least ONE image is required!
-                        </Typography>
-                      ) : null}
-                      <AddPhotoAlternateIcon sx={{ fontSize: 60 }} />
-                    </Stack>
-                  </label>
-                ) : (
-                  <Stack
-                    direction="column"
-                    spacing={1}
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Typography fontSize="15px" fontWeight="lighter">
-                      Loading preview...
-                    </Typography>
-                    <CircularProgress />
-                  </Stack>
-                )
-              ) : (
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  justifyContent="center"
-                  alignItems="center"
-                  width="100%"
-                  height="100%"
-                  color="rgb(243, 246, 249)"
-                  sx={{ overflowX: "auto" }}
-                >
-                  {imgKeyFromServer &&
-                    imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-                      <Box key={imgKeyIdx} className={classes.previewImg}>
-                        <Box
-                          component="img"
-                          src={imgKey}
-                          key={imgKeyIdx}
-                          alt="images"
-                          zIndex="1"
-                          borderRadius="5px"
-                          sx={{
-                            top: "50%",
-                            left: "50%",
-                            position: "absolute",
-                            transform: "translate(-50%,-50%)",
-                            maxHeight: "100px",
-                            maxWidth: "100%",
-                          }}
-                        />
-                        <IconButton
-                          color="inherit"
-                          key={imgKey}
-                          onClick={() => handleDeleteImg(imgKey)}
-                          sx={{
-                            top: 0,
-                            right: 0,
-                            zIndex: "2",
-                            position: "absolute",
-                          }}
-                        >
-                          <HighlightOffIcon />
-                        </IconButton>
-                      </Box>
-                    ))}
-                </Stack>
-              )}
-            </Paper>
+            <PostImgPreview
+              imgKeyFromServer={imgKeyFromServer}
+              uploadStatus={uploadStatus}
+              control={control}
+              errors={errors}
+              uploadMarketItemImg={uploadMarketItemImg}
+              setTrigger={setTrigger}
+              setUploadStatus={setUploadStatus}
+              handleDeleteImg={handleDeleteImg}
+            />
 
             <Box className={classes.content}>
               <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Home for Sale or Rent"
-                  value={marketRentalData.marketRentalSaleRent}
-                  options={marketRentalSaleRent}
-                  required={true}
-                  error={Boolean(error.marketRentalSaleRent)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      marketRentalSaleRent: e.target.value,
-                    });
-                    setError({ ...error, marketRentalSaleRent: false });
-                    setFakeItems({
-                      ...fakeItems,
-                      marketRentalSaleRent: e.target.value,
-                    });
+                <Controller
+                  name="marketRentalSaleRent"
+                  control={control}
+                  rules={{
+                    required: true,
                   }}
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Property Type"
-                  value={marketRentalData.propertyType}
-                  options={propertyType}
-                  required={true}
-                  error={Boolean(error.propertyType)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      propertyType: e.target.value,
-                    });
-                    setError({ ...error, propertyType: false });
-                    setFakeItems({
-                      ...fakeItems,
-                      propertyType: e.target.value,
-                    });
-                  }}
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  fullWidth
-                  label="Bedroom Counts"
-                  value={marketRentalData.bedroomCounts}
-                  variant="outlined"
-                  required
-                  error={Boolean(error.bedroomCounts)}
-                  placeholder="eg. 2"
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      bedroomCounts: e.target.value,
-                    });
-                    setError({ ...error, bedroomCounts: false });
-                    setFakeItems({
-                      ...fakeItems,
-                      bedroomCounts: e.target.value,
-                    });
-                  }}
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  fullWidth
-                  label="Bathroom Counts"
-                  value={marketRentalData.bathroomCounts}
-                  variant="outlined"
-                  placeholder={"eg: 2"}
-                  onChange={(e) =>
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      bathroomsCounts: e.target.value,
-                    })
-                  }
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label="Price"
-                  value={marketRentalData.price}
-                  variant="outlined"
-                  fullWidth
-                  type="number"
-                  required
-                  error={Boolean(error.price)}
-                  placeholder="eg. 25000 (Currency: CAD $)"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">CAD $</InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      price: e.target.value,
-                    });
-                    setError({ ...error, price: false });
-                    setFakeItems({ ...fakeItems, price: e.target.value });
-                  }}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label="Property Size"
-                  value={marketRentalData.propertySize}
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        Squared Meters
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) =>
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      propertySize: e.target.value,
-                    })
-                  }
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label="Address"
-                  value={marketRentalData.address}
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={Boolean(error.address)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      address: e.target.value,
-                    });
-                    setError({ ...error, address: false });
-                    setFakeItems({ ...fakeItems, address: e.target.value });
-                  }}
-                />
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <div>
-                    <DateTimePicker
-                      label="Date Available"
-                      value={marketRentalData.dateAvailable}
-                      id="dateAvailable"
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="出售/出租"
+                      value={value}
+                      options={marketRentalSaleRent}
+                      required={true}
+                      error={!!errors.marketRentalSaleRent}
                       onChange={(e) => {
-                        console.log("e", e);
-                        setMarketRentalData({
-                          ...marketRentalData,
-                          dateAvailable: e,
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          marketRentalSaleRent: e.target.value,
                         });
                       }}
-                      renderInput={(params) => (
-                        <TextField fullWidth {...params} />
-                      )}
                     />
-                  </div>
-                </LocalizationProvider>
-              </Box>
-
-              <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Laundry Type"
-                  value={marketRentalData.laundryType}
-                  options={laundryType}
-                  onChange={(e) =>
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      laundryType: e.target.value,
-                    })
-                  }
+                  )}
                 />
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Air Conditioning Type"
-                  value={marketRentalData.airConditionType}
-                  options={airConditionType}
-                  required={true}
-                  error={Boolean(error.airConditionType)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      airConditionType: e.target.value,
-                    });
-                    setError({ ...error, airConditionType: false });
-                    setFakeItems({
-                      ...fakeItems,
-                      airConditionType: e.target.value,
-                    });
+                <Controller
+                  name="propertyType"
+                  control={control}
+                  rules={{
+                    required: true,
                   }}
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="房型"
+                      value={value}
+                      options={propertyType}
+                      required={true}
+                      error={!!errors.propertyType}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          propertyType: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
                 />
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Heating Type"
-                  value={marketRentalData.heatingType}
-                  options={heatingType}
-                  required={true}
-                  error={Boolean(error.heatingType)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      heatingType: e.target.value,
-                    });
-                    setError({ ...error, heatingType: false });
-                    setFakeItems({ ...fakeItems, heatingType: e.target.value });
+                <Controller
+                  name="bedroomCounts"
+                  control={control}
+                  rules={{
+                    required: true,
                   }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      fullWidth
+                      label="卧室"
+                      value={value}
+                      variant="outlined"
+                      required
+                      error={!!errors.bedroomCounts}
+                      placeholder="eg. 2"
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          bedroomCounts: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="bathroomCounts"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      fullWidth
+                      label="卫浴"
+                      value={value}
+                      variant="outlined"
+                      placeholder={"eg: 2"}
+                      onChange={(e) => onChange(e)}
+                    />
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="price"
+                  control={control}
+                  rules={{
+                    required: true,
+                    pattern: /[0-9]/,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      label={`价格${!!errors.price ? " is required" : ""}`}
+                      value={value}
+                      variant="outlined"
+                      fullWidth
+                      type="number"
+                      required
+                      error={!!errors.price}
+                      placeholder="eg. 25000 (Currency: CAD $)"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            CAD $
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({ ...fakeItems, price: e.target.value });
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="propertySize"
+                  control={control}
+                  rules={{ pattern: /[0-9]/ }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      label="占地面积"
+                      value={value}
+                      variant="outlined"
+                      fullWidth
+                      type="number"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            &#13217;
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(e) => onChange(e)}
+                    />
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="address"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      label={`地址${!!errors.address ? " is required" : ""}`}
+                      value={value}
+                      variant="outlined"
+                      fullWidth
+                      required
+                      error={!!errors.address}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({ ...fakeItems, address: e.target.value });
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="dateAvailable"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <div>
+                        <DateTimePicker
+                          label="起始日期"
+                          value={value}
+                          id="dateAvailable"
+                          onChange={(e) => {
+                            onChange(e);
+                          }}
+                          renderInput={(params) => (
+                            <TextField fullWidth {...params} />
+                          )}
+                        />
+                      </div>
+                    </LocalizationProvider>
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="laundryType"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="洗衣房"
+                      value={value}
+                      options={laundryType}
+                      onChange={(e) => onChange(e)}
+                    />
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="airConditionType"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="空调"
+                      value={value}
+                      options={airConditionType}
+                      required={true}
+                      error={!!errors.airConditionType}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          airConditionType: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+
+              <Box sx={{ marginY: "1rem" }}>
+                <Controller
+                  name="heatingType"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="供暖"
+                      value={value}
+                      options={heatingType}
+                      required={true}
+                      error={!!errors.heatingType}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          heatingType: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
                 />
               </Box>
 
@@ -833,157 +551,100 @@ export default function PostMarketRental() {
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Cat Friendly"
-                  value={marketRentalData.catFriendly}
-                  options={catFriendly}
-                  required={true}
-                  error={Boolean(error.catFriendly)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      catFriendly: e.target.value,
-                    });
-                    setError({ ...error, catFriendly: false });
-                    setFakeItems({ ...fakeItems, catFriendly: e.target.value });
+                <Controller
+                  name="catFriendly"
+                  control={control}
+                  rules={{
+                    required: true,
                   }}
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="养猫"
+                      value={value}
+                      options={catFriendly}
+                      required={true}
+                      error={!!errors.catFriendly}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          catFriendly: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
                 />
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <MarketForm
-                  title="Dog Friendly"
-                  value={marketRentalData.dogFriendly}
-                  options={dogFriendly}
-                  required={true}
-                  error={Boolean(error.dogFriendly)}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      dogFriendly: e.target.value,
-                    });
-                    setError({ ...error, dogFriendly: false });
-                    setFakeItems({ ...fakeItems, dogFriendly: e.target.value });
+                <Controller
+                  name="dogFriendly"
+                  control={control}
+                  rules={{
+                    required: true,
                   }}
+                  render={({ field: { onChange, value } }) => (
+                    <MarketForm
+                      title="养狗"
+                      value={value}
+                      options={dogFriendly}
+                      required={true}
+                      error={!!errors.dogFriendly}
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          dogFriendly: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
                 />
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label="Description"
-                  value={marketRentalData.description}
-                  variant="outlined"
-                  minRows={5}
-                  fullWidth
-                  required
-                  error={Boolean(error.description)}
-                  multiline
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      description: e.target.value,
-                    });
-                    setError({ ...error, description: false });
-                    setFakeItems({ ...fakeItems, description: e.target.value });
+                <Controller
+                  name="详情描述"
+                  control={control}
+                  rules={{
+                    required: true,
                   }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      label={`Description${
+                        !!errors.description ? " is required" : ""
+                      }`}
+                      value={value}
+                      variant="outlined"
+                      minRows={5}
+                      fullWidth
+                      required
+                      error={!!errors.description}
+                      multiline
+                      onChange={(e) => {
+                        onChange(e);
+                        setFakeItems({
+                          ...fakeItems,
+                          description: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
                 />
               </Box>
-              {marketUserInfo === undefined ? (
-                <Typography variant="subtitle1" fontWeight="600">
-                  Fill the Contact Info and Save as default
-                </Typography>
-              ) : (
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        onChange={() => {
-                          setDefaultInfo((prev) => !prev);
-
-                          defaultInfo === true
-                            ? setMarketRentalData({
-                                ...marketRentalData,
-                                contactEmail: marketUserInfo.email,
-                                contactPhone: marketUserInfo.phone,
-                                contactWeChat: marketUserInfo.weChat,
-                              })
-                            : setMarketRentalData({
-                                ...marketRentalData,
-                                contactEmail: "",
-                                contactPhone: "",
-                                contactWeChat: "",
-                              });
-                        }}
-                      />
-                    }
-                    label="Use default contact information"
-                  />
-                </FormGroup>
-              )}
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label={`Contact Phone${
-                    Boolean(error.contactPhone) ? " is required!" : ""
-                  }`}
-                  value={marketRentalData.contactPhone}
-                  variant="outlined"
-                  disabled={defaultInfo === false ? true : false}
-                  error={Boolean(error.contactPhone)}
-                  required
-                  placeholder="eg: (123) 456 789"
-                  fullWidth
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      contactPhone: e.target.value,
-                    });
-                    setError({ ...error, contactPhone: false });
-                  }}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label={`Contact Email${
-                    Boolean(error.contactEmail) ? " is required!" : ""
-                  }`}
-                  value={marketRentalData.contactEmail}
-                  variant="outlined"
-                  error={Boolean(error.contactEmail)}
-                  required
-                  disabled={defaultInfo === false ? true : false}
-                  placeholder="wang123456@email.com "
-                  fullWidth
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      contactEmail: e.target.value,
-                    });
-                    setError({ ...error, contactEmail: false });
-                  }}
-                />
-              </Box>
-              <Box sx={{ marginY: "1rem" }}>
-                <TextField
-                  label="Contact WeChat"
-                  value={marketRentalData.contactWeChat}
-                  variant="outlined"
-                  placeholder="eg: Wang123"
-                  fullWidth
-                  disabled={defaultInfo === false ? true : false}
-                  onChange={(e) => {
-                    setMarketRentalData({
-                      ...marketRentalData,
-                      contactWeChat: e.target.value,
-                    });
-                  }}
-                />
-              </Box>
+              <PostUserInfo
+                control={control}
+                setValue={setValue}
+                errors={errors}
+                defaultInfo={defaultInfo}
+                setDefaultInfo={setDefaultInfo}
+              />
             </Box>
 
             <Button
               variant="outlined"
               endIcon={<PublishIcon />}
-              onClick={uploadMarketRental}
+              onClick={handleSubmit(onSubmit)}
               color="primary"
             >
               上传 MarketHome
@@ -992,102 +653,26 @@ export default function PostMarketRental() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <Stack
-              direction={{ xs: "column", lg: "row" }}
-              width="100%"
-              height="100%"
-            >
-              <Box className={classes.previewImgRight}>
-                {imgKeyFromServer.length !== 0 ? (
-                  <SwipeViews images={imgKeyFromServer} />
-                ) : (
-                  <Box
-                    height="50px"
-                    sx={{
-                      left: "50%",
-                      top: "40%",
-                      position: "absolute",
-                      transform: "translate(-50%,-50%)",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      Your images will go here in the preview mode
-                    </Typography>
-                  </Box>
-                )}
-              </Box>
-              <Box className={classes.previewInfo}>
-                <MarketRentalInfo marketItem={fakeItems} mode="preview" />
-              </Box>
-            </Stack>
+            <PreviewInfo
+              imgKeyFromServer={imgKeyFromServer}
+              fakeItems={fakeItems}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
-          <SwipeableDrawer
-            anchor="bottom"
+          <SwipeableDrawerInfo
+            content={
+              <PreviewInfo
+                imgKeyFromServer={imgKeyFromServer}
+                fakeItems={fakeItems}
+              />
+            }
+            title="Preview"
+            position="bottom"
             open={open}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-            swipeAreaWidth={drawerBleeding}
-            disableSwipeToOpen={false}
-            ModalProps={{
-              keepMounted: true,
-            }}
-            sx={{
-              "& .MuiPaper-root": {
-                height: `calc(80% - ${drawerBleeding}px)`,
-                overflow: "visible",
-              },
-            }}
-          >
-            <Box
-              className={classes.styledBox}
-              sx={{
-                position: "absolute",
-                top: -drawerBleeding,
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-                visibility: "visible",
-                right: 0,
-                left: 0,
-              }}
-            >
-              <Box className={classes.puller} />
-              <Typography sx={{ p: 2, color: "text.secondary" }}>
-                Preview
-              </Typography>
-            </Box>
-            <Box overflow="hidden" height="100%">
-              <Box
-                width="100%"
-                height="100%"
-                sx={{ overflowX: "hidden", overflowY: "auto" }}
-              >
-                <Box className={classes.previewImgRight}>
-                  {imgKeyFromServer.length !== 0 ? (
-                    <SwipeViews images={imgKeyFromServer} />
-                  ) : (
-                    <Box
-                      height="50px"
-                      sx={{
-                        left: "50%",
-                        top: "40%",
-                        position: "absolute",
-                        transform: "translate(-50%,-50%)",
-                      }}
-                    >
-                      <Typography variant="h6">
-                        Your images will go here in the preview mode
-                      </Typography>
-                    </Box>
-                  )}
-                </Box>
-                <Box className={classes.previewInfo}>
-                  <MarketRentalInfo marketItem={fakeItems} mode="preview" />
-                </Box>
-              </Box>
-            </Box>
-          </SwipeableDrawer>
+            setOpen={() => setOpen(true)}
+            setClose={() => setOpen(false)}
+          />
         </Box>
       </Stack>
     </div>

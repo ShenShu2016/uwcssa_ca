@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
 import { MarketItemInfo } from "./MarketItemDetail";
+import { MarketRentalInfo } from "./MarketRentalDetail";
+import { MarketVehicleInfo } from "./MarketVehicleDetail ";
 import React from "react";
 import SwipeViews from "../../components/SwipeViews";
 import { makeStyles } from "@mui/styles";
@@ -57,14 +59,20 @@ export default function PreviewInfo({ imgKeyFromServer, fakeItems }) {
               transform: "translate(-50%,-50%)",
             }}
           >
-            <Typography variant="h6">
-              Your images will go here in the preview mode
-            </Typography>
+            <Typography variant="h6">预览照片</Typography>
           </Box>
         )}
       </Box>
       <Box className={classes.previewInfo}>
-        <MarketItemInfo marketItem={fakeItems} mode="preview" />
+        {fakeItems.type === "item" ? (
+          <MarketItemInfo marketItem={fakeItems} mode="preview" />
+        ) : null}
+        {fakeItems.type === "rental" ? (
+          <MarketRentalInfo marketItem={fakeItems} mode="preview" />
+        ) : null}
+        {fakeItems.type === "vehicle" ? (
+          <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
+        ) : null}
       </Box>
     </Box>
   );
