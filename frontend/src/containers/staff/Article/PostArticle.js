@@ -136,13 +136,15 @@ export default function PostArticle() {
     }
   };
   const uploadArticleQrCode = async (e) => {
+    setLoading(true);
     const imageData = e.target.files;
     const imageLocation = "article/qrCode";
     const response = await dispatch(
       postSingleImage({ imageData, imageLocation })
     );
-    if (response) {
+    if (response.meta.requestStatus === "fulfilled") {
       setQrCodeImgS3Key(response.payload);
+      setLoading(false);
     }
   };
   const onSubmit = async (data) => {
