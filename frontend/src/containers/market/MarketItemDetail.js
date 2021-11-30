@@ -11,50 +11,11 @@ import { Loading } from "../../components/Market/loading";
 import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
 import TitleInfo from "../../components/titleInfo";
-import { makeStyles } from "@mui/styles";
+import { detailStyle } from "../../components/Market/marketDetailCss";
 import useGetImages from "../../components/Market/useGetImages";
 import { useParams } from "react-router-dom";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-  },
-  images: {
-    height: "100%",
-    width: "calc(100% - 360px)",
-    position: "relative",
-    overflow: "hidden",
-    float: "left",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "50vh",
-    },
-  },
-  contain: {
-    width: "100%",
-    overflow: "hidden",
-    height: "calc(100vh - 64px)",
-    bgcolor: "black",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      height: "100%",
-    },
-  },
-
-  info: {
-    width: "360px",
-    height: "100%",
-    float: "left",
-    overflowY: "auto",
-    overflowX: "hidden",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      height: "100%",
-    },
-  },
-}));
 
 export function MarketItemInfo({ marketItem, mode = "detail" }) {
   const [open, setOpen] = useState(false);
@@ -115,7 +76,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
 }
 
 export default function MarketItemDetail() {
-  const classes = useStyles();
+  const classes = detailStyle();
   const dispatch = useDispatch();
   useTitle("二手商品信息");
   const { id } = useParams();

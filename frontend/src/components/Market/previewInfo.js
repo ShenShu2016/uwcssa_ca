@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
-import { MarketItemInfo } from "./MarketItemDetail";
-import { MarketRentalInfo } from "./MarketRentalDetail";
-import { MarketVehicleInfo } from "./MarketVehicleDetail ";
+import { MarketItemInfo } from "../../containers/market/MarketItemDetail";
+import { MarketRentalInfo } from "../../containers/market/MarketRentalDetail";
+import { MarketVehicleInfo } from "../../containers/market/MarketVehicleDetail ";
 import React from "react";
-import SwipeViews from "../../components/SwipeViews";
+import SwipeViews from "../SwipeViews";
 import { makeStyles } from "@mui/styles";
 
 const useStyle = makeStyles((theme) => ({
@@ -64,13 +64,13 @@ export default function PreviewInfo({ imgKeyFromServer, fakeItems }) {
         )}
       </Box>
       <Box className={classes.previewInfo}>
-        {fakeItems.type === "item" ? (
+        {fakeItems.marketType === "Item" ? (
           <MarketItemInfo marketItem={fakeItems} mode="preview" />
         ) : null}
-        {fakeItems.type === "rental" ? (
+        {fakeItems.marketType === "Rental" ? (
           <MarketRentalInfo marketItem={fakeItems} mode="preview" />
         ) : null}
-        {fakeItems.type === "vehicle" ? (
+        {fakeItems.marketType === "Vehicle" ? (
           <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
         ) : null}
       </Box>

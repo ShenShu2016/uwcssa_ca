@@ -22,15 +22,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
 import PostUserInfo from "../../components/Market/postUserInfo";
-import PreviewInfo from "./previewInfo";
+import PreviewInfo from "../../components/Market/previewInfo";
 import PublishIcon from "@mui/icons-material/Publish";
-import Storage from "@aws-amplify/storage";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
+import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -39,7 +39,6 @@ export default function PostMarketVehicle() {
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("发布二手车辆信息");
-  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const [imageKeys, setImageKeys] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -53,7 +52,7 @@ export default function PostMarketVehicle() {
   const { marketVehicleTypeList } = marketVehicleOptions;
 
   const [fakeItems, setFakeItems] = useState({
-    type: "vehicle",
+    marketType: "vehicle",
     price: "Price",
     description: "Descriptions",
     location: "Location",
@@ -151,31 +150,10 @@ export default function PostMarketVehicle() {
     }
   };
 
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        // setImgKeyFromServer([]);
-        const imageAccessURL = await Promise.all(
-          Object.keys(imageKeys).map((key) =>
-            Storage.get(key, {
-              level: "public",
-              expires: 120,
-              download: false,
-            })
-          )
-        );
-        // setImgKeyFromServer((url) => url.concat(imageAccessURL));
-        setImgKeyFromServer(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer([]);
-      }
-    };
-    // console.log("imageKeys", imageKeys);
-    if (imageKeys && trigger === true) {
-      getImage();
-    }
-  }, [imageKeys, trigger]);
+  const imgKeyFromServer = useGetAllImages(
+    Object.keys(imageKeys),
+    imageKeys && trigger === true
+  );
 
   useEffect(() => {
     if (
@@ -200,12 +178,10 @@ export default function PostMarketVehicle() {
   }, [imgKeyFromServer, imageKeys, trigger]);
 
   const handleDeleteImg = (imgKey) => {
-    const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
     const images = { ...imageKeys };
     const newKeys = Object.fromEntries(
       Object.entries(images).filter(([key, value]) => value !== imgKey)
     );
-    setImgKeyFromServer(newImg);
     setImageKeys(newKeys);
   };
 
