@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
-import { MarketItemInfo } from "./MarketItemDetail";
-import { MarketRentalInfo } from "./MarketRentalDetail";
-import { MarketVehicleInfo } from "./MarketVehicleDetail ";
+import { MarketItemInfo } from "../../containers/market/MarketItemDetail";
+import { MarketRentalInfo } from "../../containers/market/MarketRentalDetail";
+import { MarketVehicleInfo } from "../../containers/market/MarketVehicleDetail ";
 import React from "react";
-import SwipeViews from "../../components/SwipeViews";
+import SwipeViews from "../SwipeViews";
 import { makeStyles } from "@mui/styles";
 
 const useStyle = makeStyles((theme) => ({

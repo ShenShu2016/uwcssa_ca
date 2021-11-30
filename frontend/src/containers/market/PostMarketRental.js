@@ -25,15 +25,15 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
 import PostUserInfo from "../../components/Market/postUserInfo";
-import PreviewInfo from "./previewInfo";
+import PreviewInfo from "../../components/Market/previewInfo";
 import PublishIcon from "@mui/icons-material/Publish";
-import Storage from "@aws-amplify/storage";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
+import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -42,7 +42,6 @@ export default function PostMarketRental() {
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("发布租房信息");
-  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const [imageKeys, setImageKeys] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -95,7 +94,7 @@ export default function PostMarketRental() {
       marketRentalSaleRent: "",
       propertyType: "",
       bedroomCounts: "",
-      bathroomCounts: "",
+      bathroomsCounts: "",
       address: "",
       propertySize: "",
       dateAvailable: new Date().toISOString(),
@@ -166,30 +165,10 @@ export default function PostMarketRental() {
     }
   };
 
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        // setImgKeyFromServer([]);
-        const imageAccessURL = await Promise.all(
-          Object.keys(imageKeys).map((key) =>
-            Storage.get(key, {
-              level: "public",
-              expires: 120,
-              download: false,
-            })
-          )
-        );
-        // setImgKeyFromServer((url) => url.concat(imageAccessURL));
-        setImgKeyFromServer(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer([]);
-      }
-    };
-    if (imageKeys && trigger === true) {
-      getImage();
-    }
-  }, [imageKeys, trigger]);
+  const imgKeyFromServer = useGetAllImages(
+    Object.keys(imageKeys),
+    imageKeys && trigger === true
+  );
 
   useEffect(() => {
     if (
@@ -214,12 +193,10 @@ export default function PostMarketRental() {
   }, [imgKeyFromServer, imageKeys, trigger]);
 
   const handleDeleteImg = (imgKey) => {
-    const newImg = [...imgKeyFromServer].filter((key) => key !== imgKey);
     const images = { ...imageKeys };
     const newKeys = Object.fromEntries(
       Object.entries(images).filter(([key, value]) => value !== imgKey)
     );
-    setImgKeyFromServer(newImg);
     setImageKeys(newKeys);
   };
 
@@ -260,7 +237,7 @@ export default function PostMarketRental() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={imgKeyFromServer}
+              imgKeyFromServer={Object.values(imageKeys)}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
@@ -353,7 +330,7 @@ export default function PostMarketRental() {
 
               <Box sx={{ marginY: "1rem" }}>
                 <Controller
-                  name="bathroomCounts"
+                  name="bathroomsCounts"
                   control={control}
                   render={({ field: { onChange, value } }) => (
                     <TextField
@@ -554,16 +531,18 @@ export default function PostMarketRental() {
                 <Controller
                   name="catFriendly"
                   control={control}
-                  rules={{
-                    required: true,
-                  }}
+                  rules={
+                    {
+                      // required: true,
+                    }
+                  }
                   render={({ field: { onChange, value } }) => (
                     <MarketForm
                       title="养猫"
                       value={value}
                       options={catFriendly}
                       required={true}
-                      error={!!errors.catFriendly}
+                      error={errors.catFriendly ? true : false}
                       onChange={(e) => {
                         onChange(e);
                         setFakeItems({
@@ -580,9 +559,11 @@ export default function PostMarketRental() {
                 <Controller
                   name="dogFriendly"
                   control={control}
-                  rules={{
-                    required: true,
-                  }}
+                  rules={
+                    {
+                      // required: true,
+                    }
+                  }
                   render={({ field: { onChange, value } }) => (
                     <MarketForm
                       title="养狗"
@@ -604,14 +585,14 @@ export default function PostMarketRental() {
 
               <Box sx={{ marginY: "1rem" }}>
                 <Controller
-                  name="详情描述"
+                  name="description"
                   control={control}
                   rules={{
                     required: true,
                   }}
                   render={({ field: { onChange, value } }) => (
                     <TextField
-                      label={`Description${
+                      label={`详情描述${
                         !!errors.description ? " is required" : ""
                       }`}
                       value={value}
@@ -654,7 +635,7 @@ export default function PostMarketRental() {
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
             <PreviewInfo
-              imgKeyFromServer={imgKeyFromServer}
+              imgKeyFromServer={Object.values(imageKeys)}
               fakeItems={fakeItems}
             />
           </Paper>
@@ -663,7 +644,7 @@ export default function PostMarketRental() {
           <SwipeableDrawerInfo
             content={
               <PreviewInfo
-                imgKeyFromServer={imgKeyFromServer}
+                imgKeyFromServer={Object.values(imageKeys)}
                 fakeItems={fakeItems}
               />
             }
