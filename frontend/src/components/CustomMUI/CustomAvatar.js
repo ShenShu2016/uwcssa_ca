@@ -46,11 +46,6 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   height: 22,
   border: `2px solid ${theme.palette.background.paper}`,
 }));
-const SmallAvatarCssaLogo = styled(Avatar)(({ theme }) => ({
-  width: 23,
-  height: 23,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
 const CrownAvatar = styled(Avatar)(({ theme }) => ({
   width: 30,
   height: 30,
@@ -90,51 +85,45 @@ export default function CustomAvatar({ user, variant, sx, link }) {
       {user.username ? (
         <div>
           <Badge
-            invisible={!user.badges.includes("staff")}
+            invisible={!user.badges.includes("king")}
             overlap="circular"
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            badgeContent={
-              <SmallAvatarCssaLogo alt="cssa_log" src={uwcssa_logo} />
-            }
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            badgeContent={<CrownAvatar alt="uwindsor_shield" src={king} />}
           >
             <Badge
-              invisible={!user.badges.includes("king")}
+              invisible={!user.badges.includes("uwindsor_shield")}
               overlap="circular"
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-              badgeContent={<CrownAvatar alt="uwindsor_shield" src={king} />}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              badgeContent={
+                <SmallAvatar
+                  alt="uwindsor_shield"
+                  src={
+                    user.badges.includes("staff")
+                      ? uwcssa_logo
+                      : uwindsor_shield
+                  }
+                />
+              }
             >
-              <Badge
-                invisible={!user.badges.includes("uwindsor_shield")}
-                overlap="circular"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                badgeContent={
-                  <SmallAvatar alt="uwindsor_shield" src={uwindsor_shield} />
-                }
-              >
-                {user.avatarImgS3Key ? (
-                  <Avatar
-                    component={link === true ? Link : ""}
-                    to={
-                      link === true ? `/account/profile/${user.username}` : ""
-                    }
-                    src={imageURL}
-                    variant={variant}
-                    className={classes.avatar}
-                    style={sx}
-                  />
-                ) : (
-                  <Avatar
-                    component={link === true ? Link : ""}
-                    to={
-                      link === true ? `/account/profile/${user.username}` : ""
-                    }
-                    variant={variant}
-                    className={classes.avatar}
-                    style={sx}
-                    {...stringAvatar(user.username.toUpperCase())}
-                  />
-                )}
-              </Badge>
+              {user.avatarImgS3Key ? (
+                <Avatar
+                  component={link === true ? Link : ""}
+                  to={link === true ? `/account/profile/${user.username}` : ""}
+                  src={imageURL}
+                  variant={variant}
+                  className={classes.avatar}
+                  style={sx}
+                />
+              ) : (
+                <Avatar
+                  component={link === true ? Link : ""}
+                  to={link === true ? `/account/profile/${user.username}` : ""}
+                  variant={variant}
+                  className={classes.avatar}
+                  style={sx}
+                  {...stringAvatar(user.username.toUpperCase())}
+                />
+              )}
             </Badge>
           </Badge>
         </div>
