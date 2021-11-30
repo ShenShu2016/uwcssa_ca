@@ -5,6 +5,7 @@ import {
 } from "../../redux/reducers/imageSlice";
 import { useEffect, useState } from "react";
 
+import { Storage } from "@aws-amplify/storage";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import useStarter from "./useStarter";
@@ -43,5 +44,46 @@ export default function useGetImages(marketItem, id) {
       }
     }
   }, [dispatch, marketItem, imgKeys, starter, id]);
+  return imgKeyFromServer;
+}
+
+export function useGetAllImages(keys, trigger, options = "all", id = null) {
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getImages = async (url) => {
+      if (id !== null) {
+        const response = await dispatch(getImage({ url: url, id }));
+        setImgKeyFromServer((prev) => prev.concat(response.payload.imgUrl));
+      } else {
+        try {
+          // setImgKeyFromServer([]);
+          const imageAccessURL = await Promise.all(
+            keys.map((key) =>
+              Storage.get(key, {
+                level: "public",
+                expires: 120,
+                download: false,
+              })
+            )
+          );
+          // setImgKeyFromServer((url) => url.concat(imageAccessURL));
+          setImgKeyFromServer(imageAccessURL);
+        } catch (error) {
+          console.error("error accessing the Image from s3", error);
+          setImgKeyFromServer([]);
+        }
+      }
+    };
+    if (trigger) {
+      if (options === "first") {
+        getImages([keys[0]]);
+      } else {
+        getImages(keys);
+      }
+    }
+  }, [keys, trigger, dispatch, id, options]);
+
   return imgKeyFromServer;
 }

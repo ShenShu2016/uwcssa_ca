@@ -23,6 +23,8 @@ export default function PostUserInfo({
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, username)
   );
+  const switcher = defaultInfo === false ? true : false;
+  console.log("what happened here", defaultInfo);
 
   return (
     <React.Fragment>
@@ -48,6 +50,7 @@ export default function PostUserInfo({
                     ? setValue("contactWeChat", marketUserInfo.weChat)
                     : setValue("contactWeChat", "");
                 }}
+                checked={switcher}
               />
             }
             label="默认联系方式"

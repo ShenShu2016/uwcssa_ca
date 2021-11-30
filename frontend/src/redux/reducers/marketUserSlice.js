@@ -98,7 +98,7 @@ const marketUserSlice = createSlice({
       })
       .addCase(updateMarketUserInfoDetail.fulfilled, (state, action) => {
         state.updateMarketUserInfoDetailStatus = "succeeded";
-        marketUserAdapter.updateOne(state, action.payload);
+        marketUserAdapter.setOne(state, action.payload);
       })
       .addCase(updateMarketUserInfoDetail.rejected, (state, action) => {
         state.updateMarketUserInfoDetailStatus = "error";
