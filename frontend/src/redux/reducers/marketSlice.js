@@ -76,7 +76,6 @@ export const updateMarketItemDetail = createAsyncThunk(
     const response = await API.graphql(
       graphqlOperation(updateMarketItem, { input: updateMarketItemDetail })
     );
-    console.log("Plz Check Here!", response);
     return response.data.updateMarketItem;
   }
 );
