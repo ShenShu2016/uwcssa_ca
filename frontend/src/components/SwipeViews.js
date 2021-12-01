@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 export default function SwipeViews({ images }) {
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = images.length;
-  console.log("maxSteps", maxSteps);
+  //console.log("maxSteps", maxSteps);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };

@@ -17,16 +17,24 @@ export default function QrCodeUwinStudent({ qrCodeImgS3Key, id }) {
             <Typography variant="h5" sx={{ my: 1 }}>
               扫描一下二维码：
             </Typography>
-            {[...Array(10)].map((x) => (
-              <ArrowDownwardIcon size="large" sx={{ color: "primary.main" }} />
+            {[...Array(10)].map((x, idx) => (
+              <ArrowDownwardIcon
+                size="large"
+                key={idx}
+                sx={{ color: "primary.main" }}
+              />
             ))}
             <Box></Box>
             <S3Image S3Key={qrCodeImgS3Key} style={{ maxWidth: "300px" }} />
             <Typography variant="h6" color="red">
               口令: {id.slice(0, 3)}-{userAuth.user.username}
             </Typography>
-            {[...Array(10)].map((x) => (
-              <ArrowUpwardIcon size="large" sx={{ color: "primary.main" }} />
+            {[...Array(10)].map((x, idx) => (
+              <ArrowUpwardIcon
+                key={idx}
+                size="large"
+                sx={{ color: "primary.main" }}
+              />
             ))}
           </Box>
         ) : userAuth.isAuthenticated === true ? (

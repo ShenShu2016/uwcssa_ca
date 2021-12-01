@@ -67,7 +67,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
         const response = await dispatch(
           getImage({ url: [user.avatarImgS3Key], id })
         );
-        setImageURL(response.payload.imgUrl);
+        setImageURL(response.payload.imgUrl[0]);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImageURL(null);
@@ -76,7 +76,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
     if (user.avatarImgS3Key && imgKeys === undefined) {
       getImages();
     } else if (user.avatarImgS3Key && imgKeys !== undefined) {
-      setImageURL(Object.values(imgKeys.images));
+      setImageURL(Object.values(imgKeys.images)[0]);
     }
   }, [user, imgKeys, dispatch, id]);
 

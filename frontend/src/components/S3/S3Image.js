@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-import Storage from "@aws-amplify/storage";
-
-function S3Image({ S3Key, style }) {
+export default function S3Image({ S3Key, style }) {
+  // const [imageURL, setImageURL] = useState(null);
+  //console.log("S3Key", S3Key);
+  const id = S3Key;
+  const imgKeys = useSelector((state) => selectImageById(state, id));
+  const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState(null);
 
   useEffect(() => {
-    const getImage = async () => {
+    const getImages = async () => {
       try {
-        const imageAccessURL = await Storage.get(S3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setImageURL(imageAccessURL);
+        const response = await dispatch(getImage({ url: [S3Key], id: S3Key }));
+        setImageURL(response.payload.imgUrl);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setImageURL(null);
       }
     };
-    if (S3Key) {
-      getImage();
+    if (S3Key && imgKeys === undefined) {
+      getImages();
+    } else if (S3Key && imgKeys !== undefined) {
+      setImageURL(Object.values(imgKeys.images)[0]);
+    } else if (S3Key === null) {
+      return;
     }
-  }, [S3Key]);
+  }, [S3Key, imgKeys, dispatch]);
 
   return <img src={imageURL} alt={S3Key} style={style} />;
 }
-
-export default S3Image;

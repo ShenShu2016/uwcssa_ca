@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Redirect, useParams } from "react-router-dom";
+import { Skeleton, Typography } from "@mui/material";
 import {
   removeSelectedArticle,
   selectedArticle,
@@ -11,7 +12,6 @@ import ArticleCommentsPost from "../../components/Article/ArticleDetail/ArticleC
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
 import { Box } from "@mui/system";
 import Main from "../../components/Article/ArticleDetail/Main";
-import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -87,14 +87,23 @@ export default function ArticleDetail() {
         <div>
           <Typography
             variant="h4"
+            component="h1"
             className={classes.title}
             sx={{ fontWeight: 700 }}
           >
-            {article.title}
+            {article.active === true ? article.title : <Skeleton />}
           </Typography>
           <Box className={classes.main}>
             <Box className={classes.body}>
-              <Main article={article} />
+              {article.active === true ? (
+                <Main article={article} />
+              ) : (
+                <Box sx={{ my: 3 }}>
+                  <Skeleton variant="text" />
+                  <Skeleton variant="circular" width={40} height={40} />
+                  <Skeleton variant="rectangular" height={300} />
+                </Box>
+              )}
               <ArticleCommentsPost article={article} />
               <ArticleComments article={article} />
             </Box>

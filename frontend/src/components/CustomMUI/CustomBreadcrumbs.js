@@ -27,7 +27,7 @@ export default function CustomBreadcrumbs() {
     <div>
       <Breadcrumbs aria-label="breadcrumb">
         {pathArray.map((path, idx) => {
-          console.log(path, idx);
+          //console.log(path, idx);
           //console.log(location.pathname);
           if (idx === 0) {
             return (
