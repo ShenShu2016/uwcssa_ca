@@ -485,7 +485,7 @@ export default function PostEvent() {
 
               <label htmlFor="uploadEventImg" sx={{ margin: "normal" }}>
                 <Input
-                  accept="image/*"
+                  accept="eventImg/*"
                   id="uploadEventImg"
                   type="file"
                   onChange={(e) => {
@@ -500,7 +500,7 @@ export default function PostEvent() {
               <S3Image S3Key={backGroundImgS3Key} style={{ width: "100%" }} />
               <label htmlFor="uploadEventQrCode">
                 <Input
-                  accept="poster/*"
+                  accept="eventQrCode/*"
                   id="uploadEventQrCode"
                   type="file"
                   onChange={(e) => {

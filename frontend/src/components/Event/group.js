@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +15,7 @@ import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/reducers/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { Controller, useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -41,67 +42,83 @@ export default function Individual() {
   console.log(useParams, "useParams");
   useTitle(`近期活动 ${eventID} 团体报名`);
   console.log("event.id", eventID);
-  const [eventParticipantData, setEventParticipantData] = useState({
-    name: "",
-    email: "",
-    address: "",
-    phone: undefined,
-    weChat: "",
-    message: "",
-    numberOfPeople: "",
-  });
-  const uploadEventParticipant = async () => {
-    const { name, email, address, phone, weChat, message, numberOfPeople } =
-      eventParticipantData;
+  // const [eventParticipantData, setEventParticipantData] = useState({
+  //   name: "",
+  //   email: "",
+  //   address: "",
+  //   phone: undefined,
+  //   weChat: "",
+  //   message: "",
+  //   numberOfPeople: "",
+  // });
+  // const uploadEventParticipant = async () => {
+  //   const { name, email, address, phone, weChat, message, numberOfPeople } =
+  //     eventParticipantData;
 
+  //   const createEventParticipantInput = {
+  //     id: `${eventID}-${userAuth.user.username}`,
+  //     name,
+  //     email,
+  //     address,
+  //     phone,
+  //     weChat,
+  //     message,
+  //     numberOfPeople,
+  //     eventParticipantStatus: "ArriveOnTime",
+  //     active: true,
+  //     eventID: eventID,
+  //     userID: userAuth.user.username,
+  //   };
+  //   const response = await dispatch(
+  //     postEventParticipant({ createEventParticipantInput })
+  //   );
+  //   console.log("postEventParticipant", response);
+  //   if (response.meta.requestStatus === "fulfilled") {
+  //     history.push(`/event/${eventID}/eventSignUp/success`);
+  //   }
+  // };
+
+  const timer = useRef();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: undefined,
+      address: "",
+      phone: undefined,
+      weChat: "",
+      message: "",
+      numberOfPeople: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
     const createEventParticipantInput = {
+      ...data,
       id: `${eventID}-${userAuth.user.username}`,
-      name,
-      email,
-      address,
-      phone,
-      weChat,
-      message,
-      numberOfPeople,
       eventParticipantStatus: "ArriveOnTime",
       active: true,
       eventID: eventID,
       userID: userAuth.user.username,
+      sortKey: "SortKey",
     };
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput })
     );
-    console.log("postEventParticipant", response);
+
     if (response.meta.requestStatus === "fulfilled") {
       history.push(`/event/${eventID}/eventSignUp/success`);
+    } else {
+      timer.current = window.setTimeout(() => {
+        console.log(response.error.message);
+      }, 1000);
+
+      console.log(response.error.message);
     }
   };
-
-  // const submit = () => {
-  //   console.log(" Submitted");
-  // };
-
-  // const { handleChange, handleSubmit, handleBlur, state, errors } = useForm({
-  //   initState,
-  //   callback: submit,
-  //   validator,
-  // });
-
-  // const isValidForm =
-  //   state.fullName.length > 0 &&
-  //   !errors.fullName &&
-  //   state.email.length > 0 &&
-  //   !errors.email &&
-  //   state.guest.length > 0 &&
-  //   !errors.guest;
-
-  const isValid =
-    eventParticipantData.name.length > 0 &&
-    eventParticipantData.email !== "" &&
-    eventParticipantData.phone !== "" &&
-    eventParticipantData.weChat.length > 0 &&
-    eventParticipantData.numberOfPeople.length > 0 &&
-    eventParticipantData.numberOfPeople.match(/^-?\d+$/);
 
   return (
     <div>
@@ -118,8 +135,13 @@ export default function Individual() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={6} elevation={6} noValidate>
-          <Box className={classes.rightBox}>
+        <Grid item xs={12} sm={8} md={6} elevation={6}>
+          <Box
+            className={classes.rightBox}
+            noValidate
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <GroupIcon />
             </Avatar>
@@ -127,7 +149,7 @@ export default function Individual() {
               团体报名
             </Typography>
             <Box>
-              <TextField
+              {/* <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -235,14 +257,170 @@ export default function Individual() {
                     message: e.target.value,
                   })
                 }
+              /> */}
+              <Controller
+                name="name"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="name"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="姓名"
+                    placeholder="张三"
+                    autoComplete="name"
+                    autoFocus
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.name}
+                    helperText={errors.name ? "姓名无效" : null}
+                  />
+                )}
+              />
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: true,
+                  pattern:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="email"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="邮箱"
+                    placeholder="e.g. xxxx@uwindsor.ca"
+                    autoComplete="email"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.email}
+                    helperText={errors.name ? "邮箱无效" : null}
+                  />
+                )}
+              />
+              <Controller
+                name="phone"
+                control={control}
+                rules={{
+                  required: true,
+                  pattern: /^[0-9\b]+$/,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="phone"
+                    margin="normal"
+                    fullWidth
+                    required
+                    placeholder="e.g. 1234567890"
+                    autoComplete="phone"
+                    label="手机号码"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.phone}
+                    helperText={errors.phone ? "手机号码无效" : null}
+                  />
+                )}
+              />
+              <Controller
+                name="weChat"
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="weChat"
+                    margin="normal"
+                    fullWidth
+                    required
+                    autoComplete="weChat"
+                    label="微信号"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.weChat}
+                    helperText={errors.weChat ? "微信号无效" : null}
+                  />
+                )}
+              />
+              <Controller
+                name="numberOfPeople"
+                control={control}
+                rules={{
+                  required: true,
+                  pattern: /^[0-9\b]+$/,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="numberOfPeople"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="参加总人数（含申请人）"
+                    name="numberOfPeople"
+                    placeholder="e.g. 5"
+                    autoComplete="numberOfPeople"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.numberOfPeople}
+                    helperText={errors.numberOfPeople ? "参加总人数无效" : null}
+                  />
+                )}
+              />
+              <Controller
+                name="address"
+                control={control}
+                rules={{
+                  required: false,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="address"
+                    margin="normal"
+                    fullWidth
+                    label="地址（如需接送）"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
+              <Controller
+                name="message"
+                control={control}
+                rules={{
+                  required: false,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    id="message"
+                    margin="normal"
+                    fullWidth
+                    label="备注"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                disabled={!isValid}
-                onClick={isValid ? uploadEventParticipant : null}
               >
                 提交
               </Button>
