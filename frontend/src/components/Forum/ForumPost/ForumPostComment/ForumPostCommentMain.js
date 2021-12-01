@@ -38,7 +38,7 @@ export default function ForumPostCommentMain({ comment, idx }) {
             <Divider orientation="vertical" flexItem />
             <Box
               sx={{
-                width: { xs: 300, sm: 600 },
+                width:{ xs: 300, sm: 420, md: 880 },
                 minHeight: 220,
                 display: "flex",
                 flexDirection: "column",

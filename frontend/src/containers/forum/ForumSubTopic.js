@@ -42,7 +42,10 @@ export default function ForumSubTopic() {
     ) {
       setStarter(false);
     } else {
-      if (forumSubTopic.forumTopic === undefined || forumSubTopicPostsLastReply.items === undefined) {
+      if (
+        forumSubTopic.forumTopic === undefined ||
+        forumSubTopicPostsLastReply.items === undefined
+      ) {
         setStarter(false);
       } else {
         setStarter(true);
@@ -52,7 +55,7 @@ export default function ForumSubTopic() {
         history.push("/not-found");
       }
     }
-  }, [forumSubTopic,forumSubTopicPostsLastReply, history]);
+  }, [forumSubTopic, forumSubTopicPostsLastReply, history]);
   console.log(forumSubTopicPostsLastReply);
   return (
     <Box
@@ -61,14 +64,13 @@ export default function ForumSubTopic() {
         margin: "auto",
         maxWidth: "100%",
         paddingInline: { xs: 0, sm: "1rem" },
-        flexDirection: { xs: "column", sm: "row" },
+        // flexDirection: { xs: "column", sm: "row" },
         bgcolor: "grey.50",
       }}
     >
       <Box
         sx={{
-          maxWidth: "1300px",
-          width: "100%",
+          width: { md: 1080, lg: 1240 } 
         }}
       >
         {starter === false ? (
@@ -79,9 +81,11 @@ export default function ForumSubTopic() {
             sx={{ m: 4 }}
           />
         ) : (
-          <ForumSubTopicMain forumSubTopic={forumSubTopic} />
+          <Box sx={{}}>
+            <ForumSubTopicMain forumSubTopic={forumSubTopic} />
+          </Box>
         )}
-        {starter === false  ? (
+        {starter === false ? (
           <Skeleton
             variant="rectangular"
             width={880}
@@ -89,7 +93,12 @@ export default function ForumSubTopic() {
             sx={{ m: 5 }}
           />
         ) : (
-          <ForumSubTopicPosts forumSubTopic={forumSubTopic} posts={forumSubTopicPostsLastReply} />
+          <Box sx={{ }}>
+            <ForumSubTopicPosts
+              forumSubTopic={forumSubTopic}
+              posts={forumSubTopicPostsLastReply}
+            />
+          </Box>
         )}
       </Box>
       <Box

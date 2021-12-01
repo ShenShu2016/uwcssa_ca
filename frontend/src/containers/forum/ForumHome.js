@@ -24,7 +24,7 @@ export default function ForumHome() {
             // maxWidth: "1300px",
             mt: 4,
             // width: "100%",
-            width: { md: 1080 },
+            width: { md: 1080,lg:1240 },
           }}
         >
           <ForumHomeMain />

@@ -6,7 +6,7 @@ import {
 } from "../../graphql/mutations";
 import {
   forumPostCommentSortByForumPostID,
-  forumPostSortByForumPostLastReplyAt,
+  // forumPostSortByForumPostLastReplyAt,
   forumPostSortByForumSubTopicID,
   // forumPostSortBySortKey,
   forumPostSubCommentSortByForumPostCommentID,
@@ -19,6 +19,7 @@ import {
   getForumTopic,
   // listForumPosts,
   forumPostSortBySortKey,
+  forumPostSortByForumPostLastReplyAt,
   listForumTopics,
 } from "../CustomQuery/ForumQueries";
 

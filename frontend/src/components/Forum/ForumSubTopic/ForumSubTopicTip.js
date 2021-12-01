@@ -12,8 +12,14 @@ export default function ForumSubTopicTip({ forumSubTopic }) {
       case "测试":
         return <ForumSubTopicGameTip />;
       default:
-        return <h1>none tip</h1>;
+        return <h1>{id}none tip</h1>;
     }
   };
-  return <div>{tip()}</div>;
+  return (
+    <div>
+      {/* {id === "游戏" ? <ForumSubTopicGameTip /> : null}
+      {id === "电影" ? <ForumSubTopicMovieTip /> : null} */}
+      {tip()}
+    </div>
+  );
 }
