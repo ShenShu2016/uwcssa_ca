@@ -4,7 +4,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   CircularProgress,
   Container,
   Grid,
@@ -13,6 +12,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EventComments from "./EventDetail/Comment/EventComments";
@@ -21,11 +22,11 @@ import FlagIcon from "@mui/icons-material/Flag";
 import { Link } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
+import S3Image from "../S3/S3Image";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import TopicIcon from "@mui/icons-material/Topic";
 import moment from "moment";
-import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,13 +61,13 @@ function a11yProps(index) {
 export default function EventBody({ event }) {
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
-
+  const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const userInfo = useSelector((state) => state.userAuth);
   const [posterURL, setPosterURL] = useState(null);
-  const [qrCodeURL, setQrCodeURL] = useState(null);
+  //const [qrCodeURL, setQrCodeURL] = useState(null);
   const [backGroundImgURL, setBackGroundImgURL] = useState(null);
   const {
     title,
@@ -81,47 +82,72 @@ export default function EventBody({ event }) {
     sponsor,
     eventParticipants,
   } = event;
+  const posterImgKeys = useSelector((state) =>
+    selectImageById(state, posterImgS3Key)
+  );
+  // useEffect(() => {
+  //   const getPoster = async () => {
+  //     try {
+  //       const posterAccessURL = await Storage.get(posterImgS3Key, {
+  //         level: "public",
+  //         expires: 120,
+  //         download: false,
+  //       });
+  //       setPosterURL(posterAccessURL);
+  //     } catch (error) {
+  //       console.error("error accessing the Image from s3", error);
+  //       setPosterURL(null);
+  //     }
+  //   };
+  //   if (posterImgS3Key) {
+  //     // console.log(posterImgS3Key);
+  //     getPoster();
+  //   }
+  // }, [posterImgS3Key]);
+  // console.log("posterURL", posterURL);
+  // console.log("event", event);
 
   useEffect(() => {
     const getPoster = async () => {
       try {
-        const posterAccessURL = await Storage.get(posterImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setPosterURL(posterAccessURL);
+        const response = await dispatch(
+          getImage({ url: [posterImgS3Key], id: posterImgS3Key })
+        );
+        setPosterURL(response.payload.imgUrl);
       } catch (error) {
         console.error("error accessing the Image from s3", error);
         setPosterURL(null);
       }
     };
-    if (posterImgS3Key) {
-      // console.log(posterImgS3Key);
+    if (posterImgS3Key && posterImgKeys === undefined) {
       getPoster();
+    } else if (posterImgS3Key && posterImgKeys !== undefined) {
+      setPosterURL(Object.values(posterImgKeys.images)[0]);
+    } else if (posterImgS3Key === null) {
+      setPosterURL(
+        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
+      );
     }
-  }, [posterImgS3Key]);
-  // console.log("posterURL", posterURL);
-  // console.log("event", event);
+  }, [posterImgS3Key, posterImgKeys, dispatch]);
 
-  useEffect(() => {
-    const getQrCode = async () => {
-      try {
-        const qrCodeAccessURL = await Storage.get(qrCodeImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setQrCodeURL(qrCodeAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setQrCodeURL(null);
-      }
-    };
-    if (qrCodeImgS3Key) {
-      getQrCode();
-    }
-  }, [qrCodeImgS3Key]);
+  // useEffect(() => {
+  //   const getQrCode = async () => {
+  //     try {
+  //       const qrCodeAccessURL = await Storage.get(qrCodeImgS3Key, {
+  //         level: "public",
+  //         expires: 120,
+  //         download: false,
+  //       });
+  //       setQrCodeURL(qrCodeAccessURL);
+  //     } catch (error) {
+  //       console.error("error accessing the Image from s3", error);
+  //       setQrCodeURL(null);
+  //     }
+  //   };
+  //   if (qrCodeImgS3Key) {
+  //     getQrCode();
+  //   }
+  // }, [qrCodeImgS3Key]);
 
   useEffect(() => {
     const getQrCode = async () => {
@@ -439,14 +465,21 @@ export default function EventBody({ event }) {
                                   justifyContent: "center",
                                 }}
                               >
-                                {qrCodeURL ? (
-                                  <CardMedia
-                                    component="img"
+                                {qrCodeImgS3Key ? (
+                                  // <CardMedia
+                                  //   component="img"
+                                  //   style={{
+                                  //     width: "auto",
+                                  //     maxHeight: "150px",
+                                  //   }}
+                                  //   image={qrCodeURL}
+                                  // />
+                                  <S3Image
+                                    S3Key={qrCodeImgS3Key}
                                     style={{
                                       width: "auto",
                                       maxHeight: "150px",
                                     }}
-                                    image={qrCodeURL}
                                   />
                                 ) : (
                                   <Box
