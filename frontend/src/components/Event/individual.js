@@ -111,7 +111,6 @@ export default function Individual() {
       active: true,
       eventID: eventID,
       userID: userAuth.user.username,
-      sortKey: "SortKey",
     };
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput })
