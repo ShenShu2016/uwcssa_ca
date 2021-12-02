@@ -91,7 +91,11 @@ export default function ArticleDetail() {
             className={classes.title}
             sx={{ fontWeight: 700 }}
           >
-            {article.active === true ? article.title : <Skeleton />}
+            {article.active === true ? (
+              article.title
+            ) : (
+              <Skeleton sx={{ maxWidth: "250px", margin: "auto" }} />
+            )}
           </Typography>
           <Box className={classes.main}>
             <Box className={classes.body}>

@@ -1,16 +1,27 @@
 import { Box, Button, Typography } from "@mui/material";
 
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+//import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
 import React from "react";
 import S3Image from "../../S3/S3Image";
+import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+    },
+  },
+}));
 export default function QrCodeUwinStudent({ qrCodeImgS3Key, id }) {
+  const classes = useStyles();
   const { userAuth } = useSelector((state) => state);
+
   return (
-    <Box my={2}>
+    <Box my={2} className={classes.root}>
       {qrCodeImgS3Key ? (
         userAuth.userProfile.badges.includes("uwindsor_shield") ? (
           <Box>
@@ -29,13 +40,13 @@ export default function QrCodeUwinStudent({ qrCodeImgS3Key, id }) {
             <Typography variant="h6" color="red">
               口令: {id.slice(0, 3)}-{userAuth.user.username}
             </Typography>
-            {[...Array(10)].map((x, idx) => (
+            {/* {[...Array(10)].map((x, idx) => (
               <ArrowUpwardIcon
                 key={idx}
                 size="large"
                 sx={{ color: "primary.main" }}
               />
-            ))}
+            ))} */}
           </Box>
         ) : userAuth.isAuthenticated === true ? (
           <Typography variant="h5">

@@ -35,7 +35,7 @@ function ArticleSideBar() {
         alt="作者"
         style={{ width: "100%" }}
       /> */}
-      <Typography variant="h1" color="error">
+      <Typography variant="h4" color="error">
         招收实习生！
       </Typography>
       <List>
