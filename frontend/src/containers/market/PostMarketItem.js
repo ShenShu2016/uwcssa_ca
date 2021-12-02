@@ -52,7 +52,7 @@ export default function PostMarketItem() {
 
   const [open, setOpen] = useState(false);
   const [fakeItems, setFakeItems] = useState({
-    marketType: "item",
+    marketType: "Item",
     title: "Title",
     price: "Price",
     description: "Descriptions",
