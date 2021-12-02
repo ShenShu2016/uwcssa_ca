@@ -347,7 +347,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ForumPostSortByForumPostLastReplyAt(
+    forumPostSortByForumPostLastReplyAt(
       forumSubTopicID: $forumSubTopicID
       lastReplyAt: $lastReplyAt
       sortDirection: $sortDirection
@@ -360,8 +360,8 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
         title
         content
         imgS3Keys
-        sortKey
         tags
+        sortKey
         active
         createdAt
         lastReplyAt
@@ -384,7 +384,6 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
           sortKey
           createdAt
           updatedAt
-
           badges
         }
         forumSubTopic {
@@ -396,6 +395,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
           updatedAt
         }
         owner
+        essential
         forumPostComments(
           filter: { active: { eq: true } }
           sortDirection: DESC
@@ -412,51 +412,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
             user {
               username
               avatarImgS3Key
-            }
-            likes(sortDirection: DESC) {
-              nextToken
-              items {
-                id
-                itemID
-                like
-                owner
-                updatedAt
-                userID
-              }
-            }
-            forumPostSubComments(
-              filter: { active: { eq: true } }
-              sortDirection: DESC
-            ) {
-              nextToken
-              items {
-                content
-                createdAt
-                id
-                owner
-                updatedAt
-                replyToUserID
-                replyTo {
-                  username
-                  avatarImgS3Key
-                }
-                userID
-                user {
-                  username
-                  avatarImgS3Key
-                }
-                likes(sortDirection: DESC) {
-                  nextToken
-                  items {
-                    id
-                    itemID
-                    like
-                    owner
-                    updatedAt
-                    userID
-                  }
-                }
-              }
+              badges
             }
           }
         }

@@ -6,7 +6,7 @@ export default function ForumPostUserComponent({ user, userID, id }) {
   return (
     <Box
       sx={{
-        width:{xs:230,md:130},
+        width:{xs:230,sm:130,md:130},
         overflow:"hidden",
         m: 1,
         p: 1,

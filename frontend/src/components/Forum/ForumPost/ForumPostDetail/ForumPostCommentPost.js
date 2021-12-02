@@ -19,7 +19,7 @@ import { postForumPostComment } from "../../../../redux/reducers/forumSlice";
 
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-export default function ForumPostCommentPost({ forumPost, isReplying }) {
+export default function ForumPostCommentPost({ forumPost}) {
   const dispatch = useDispatch();
   const {
     handleSubmit,
@@ -62,7 +62,7 @@ export default function ForumPostCommentPost({ forumPost, isReplying }) {
     <div>
       {isAuthenticated ? "" : <SignInRequest />}
       <div>
-        <Collapse in={isReplying}>
+        <Collapse in={true}>
           <Typography sx={{ paddingBlock: "3rem 1rem" }}>
             发布新评论：
           </Typography>

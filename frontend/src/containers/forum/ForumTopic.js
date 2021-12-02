@@ -61,9 +61,20 @@ export default function ForumTopic() {
         }}
       >
         {starter === false ? (
-          <Skeleton variant="rectangular" width={210} height={118} />
+          <Box>
+            <Skeleton
+              variant="rectangular"
+              height={26}
+              sx={{ mt: 22, width: { md: 1080, lg: 1240 } }}
+            />
+            <Skeleton
+              variant="rectangular"
+              height={26}
+              sx={{ mt: 10, width: { md: 1080, lg: 1240 } }}
+            />
+          </Box>
         ) : (
-          <Box sx={{ width: { md: 1080 } }}>
+          <Box sx={{ width: { md: 1080, lg: 1240 } }}>
             <Box sx={{ padding: "2rem", maxWidth: "100%" }}>
               <CustomBreadcrumbs />
             </Box>
