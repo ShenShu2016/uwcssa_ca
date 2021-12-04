@@ -98,9 +98,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
                 <SmallAvatar
                   alt="uwindsor_shield"
                   src={
-                    user.badges.includes("staff")
-                      ? uwcssa_logo
-                      : uwindsor_shield
+                    user.badges.includes("cssa") ? uwcssa_logo : uwindsor_shield
                   }
                 />
               }
