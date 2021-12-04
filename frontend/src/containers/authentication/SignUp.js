@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
+import { checkEmailExist, signUp } from "../../redux/reducers/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -29,7 +30,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { signUp } from "../../redux/reducers/authSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
@@ -73,7 +73,58 @@ export default function SignUp() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    if (getValues("email").toLowerCase().includes("@uwindsor.ca")) {
+    const responseCheckEmail = await dispatch(
+      checkEmailExist(getValues("email").toLowerCase())
+    );
+    if (
+      responseCheckEmail.meta.requestStatus === "fulfilled" &&
+      responseCheckEmail.payload.length > 0
+    ) {
+      setLoading(false);
+      setAlertContent("邮箱已存在!");
+      setAlert(true);
+      return;
+    } else if (
+      responseCheckEmail.meta.requestStatus === "fulfilled" &&
+      responseCheckEmail.payload.length === 0
+    ) {
+      if (getValues("email").toLowerCase().includes("@uwindsor.ca")) {
+        const response = await dispatch(signUp(data));
+        console.log("onSignUp", response);
+        if (response.meta.requestStatus === "fulfilled") {
+          history.push(`/auth/emailConfirm/${getValues("username")}`);
+        } else {
+          timer.current = window.setTimeout(() => {
+            setLoading(false);
+            setAlertContent(response.error.message);
+            setAlert(true);
+            console.log(response.error.message);
+          }, 1000);
+          console.log(response.error.message);
+        }
+      } else {
+        setOpen(true);
+      }
+    }
+  };
+
+  const onForceSubmit = async (data) => {
+    setLoading(true);
+    const responseCheckEmail = await dispatch(
+      checkEmailExist(getValues("email").toLowerCase())
+    );
+    if (
+      responseCheckEmail.meta.requestStatus === "fulfilled" &&
+      responseCheckEmail.payload.length > 0
+    ) {
+      setLoading(false);
+      setAlertContent("邮箱已存在!");
+      setAlert(true);
+      return;
+    } else if (
+      responseCheckEmail.meta.requestStatus === "fulfilled" &&
+      responseCheckEmail.payload.length === 0
+    ) {
       const response = await dispatch(signUp(data));
       console.log("onSignUp", response);
       if (response.meta.requestStatus === "fulfilled") {
@@ -81,32 +132,13 @@ export default function SignUp() {
       } else {
         timer.current = window.setTimeout(() => {
           setLoading(false);
+          setOpen(false);
           setAlertContent(response.error.message);
           setAlert(true);
           console.log(response.error.message);
         }, 1000);
         console.log(response.error.message);
       }
-    } else {
-      setOpen(true);
-    }
-  };
-
-  const onForceSubmit = async (data) => {
-    setLoading(true);
-    const response = await dispatch(signUp(data));
-    console.log("onSignUp", response);
-    if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/auth/emailConfirm/${getValues("username")}`);
-    } else {
-      timer.current = window.setTimeout(() => {
-        setLoading(false);
-        setOpen(false);
-        setAlertContent(response.error.message);
-        setAlert(true);
-        console.log(response.error.message);
-      }, 1000);
-      console.log(response.error.message);
     }
   };
 
@@ -160,6 +192,8 @@ export default function SignUp() {
                 control={control}
                 rules={{
                   required: true,
+                  minLength: 6,
+                  maxLength: 20,
                 }}
                 render={({ field: { onChange, value } }) => (
                   <TextField
@@ -172,7 +206,7 @@ export default function SignUp() {
                     onChange={onChange}
                     value={value}
                     error={!!errors.username}
-                    helperText={errors.username ? "不能为空" : null}
+                    helperText={errors.username ? "最短6符号,最长15符号" : null}
                   />
                 )}
               />

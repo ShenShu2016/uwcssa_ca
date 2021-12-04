@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "@aws-amplify/api";
 import Auth from "@aws-amplify/auth";
 import { getUser } from "../../graphql/queries";
+import { userSortBySortKey } from "../CustomQuery/generialQueries";
 
 const initialState = {
   isAuthenticated: null,
@@ -19,6 +20,8 @@ const initialState = {
   fetchUserProfileError: null,
   signUpStatus: "idle",
   signUpError: null,
+  checkEmailExistStatus: "idle",
+  checkEmailExistError: null,
   emailConfirmStatus: "idle",
   emailConfirmError: null,
   forgotPasswordStatus: "idle",
@@ -57,12 +60,29 @@ export const fetchUserProfile = createAsyncThunk(
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async ({ username, password, email }) => {
+    const emailLowerCase = email && email.toLowerCase && email.toLowerCase();
     const response = await Auth.signUp({
       username,
       password,
-      attributes: { email },
+      attributes: { email: emailLowerCase },
     });
     return response;
+  }
+);
+
+export const checkEmailExist = createAsyncThunk(
+  "auth/checkEmailExist",
+  async (email) => {
+    const response = await API.graphql({
+      query: userSortBySortKey,
+      variables: {
+        filter: { email: { eq: email } },
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+      },
+      authMode: "AWS_IAM",
+    });
+    return response.data.userSortBySortKey.items;
   }
 );
 
@@ -172,6 +192,17 @@ const authSlice = createSlice({
       .addCase(signUp.rejected, (state, action) => {
         state.signUpStatus = "failed";
         state.signUpError = action.error.message;
+      })
+      // Cases for status of che (checkEmailExist, fulfilled, and rejected)
+      .addCase(checkEmailExist.pending, (state, action) => {
+        state.checkEmailExistStatus = "loading";
+      })
+      .addCase(checkEmailExist.fulfilled, (state, action) => {
+        state.checkEmailExistStatus = "succeeded";
+      })
+      .addCase(checkEmailExist.rejected, (state, action) => {
+        state.checkEmailExistStatus = "failed";
+        state.checkEmailExistError = action.error.message;
       })
       // Cases for status of emailConfirm (pending, fulfilled, and rejected)
       .addCase(emailConfirm.pending, (state, action) => {
