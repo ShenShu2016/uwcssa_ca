@@ -1,21 +1,19 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 import CustomBreadcrumbs from "../../../CustomMUI/CustomBreadcrumbs";
 import ForumPostCommentPost from "./ForumPostCommentPost";
 import ForumPostContentComponent from "./ForumPostContentComponent";
 import ForumPostUserComponent from "./ForumPostUserComponent";
-// import CustomAvatar from "../../../CustomMUI/CustomAvatar";
+import ForumPostComments from "./ForumPostComments";
 import LikeButtonGroup from "../../../LikeButtonGroup";
-// import S3Image from "../../../S3/S3Image";
 import { useTitle } from "../../../../Hooks/useTitle";
 
 export default function ForumPostMain({ forumPost }) {
   useTitle(forumPost.title);
-  const [isReplying, setIsReplying] = useState(false);
-  const replySwitch = () => setIsReplying((isReplying) => !isReplying);
+  const myRef = useRef(null);
+  const executeScroll = () => myRef.current.scrollIntoView({behavior:"smooth"});
   const { id, content, imgS3Keys, createdAt, userID, tags, user } = forumPost;
-  // console.log("forumPost6666666666666666666", forumPost);
   return (
     <div>
       <Box>
@@ -42,7 +40,7 @@ export default function ForumPostMain({ forumPost }) {
           <Divider orientation="vertical" flexItem />
           <Box
             sx={{
-              width: { xs: 300, sm: 600 },
+              width: { xs: 280, sm: 480, md: 880 },
               minHeight: 220,
               display: "flex",
               flexDirection: "column",
@@ -62,28 +60,25 @@ export default function ForumPostMain({ forumPost }) {
               }}
             >
               <LikeButtonGroup item={forumPost} />
-              {!isReplying ? (
-                <Box>
-                  <Typography
-                    variant="caption"
-                    component="span"
-                    style={{ color: "grey" }}
-                  >
-                    {createdAt.slice(0, 10)} {createdAt.slice(11, 16)}
-                  </Typography>
-                  <Button size="small" color="primary" onClick={replySwitch}>
-                    回复 （共{forumPost.forumPostComments.items.length}回复贴）
-                  </Button>
-                </Box>
-              ) : (
-                <Button size="small" color="primary" onClick={replySwitch}>
-                  收起回复 （编辑中）
+              <Box>
+                <Typography
+                  variant="caption"
+                  component="span"
+                  style={{ color: "grey" }}
+                >
+                  {createdAt.slice(0, 10)} {createdAt.slice(11, 16)}
+                </Typography>
+                <Button size="small" color="primary" onClick={executeScroll}>
+                  回复 （共{forumPost.forumPostComments.items.length}回复贴）
                 </Button>
-              )}
+              </Box>
             </Box>
           </Box>
         </Box>
-        <ForumPostCommentPost forumPost={forumPost} isReplying={isReplying} />
+        <ForumPostComments forumPost={forumPost} />
+        <Box ref={myRef}>
+          <ForumPostCommentPost forumPost={forumPost}/>
+        </Box>
       </Box>
     </div>
   );

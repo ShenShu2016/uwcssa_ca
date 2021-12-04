@@ -107,7 +107,7 @@ export default function PostDepartment(props) {
   return (
     <div className={classes.root}>
       <Box>
-        <Typography variant="h5">DEPARTMENT NAME</Typography>
+        <Typography variant="h5">部门名称</Typography>
         <TextField
           label="部门名称"
           variant="outlined"
@@ -123,7 +123,7 @@ export default function PostDepartment(props) {
         />
       </Box>
       <Box>
-        <Typography variant="h5">INTRODUCTION</Typography>
+        <Typography variant="h5">部门简介</Typography>
         <TextField
           label="部门简介"
           variant="outlined"
@@ -154,9 +154,9 @@ export default function PostDepartment(props) {
         />
       </Box>
       <Box>
-        <Typography variant="h5">LEADER</Typography>
+        <Typography variant="h5">部长名称</Typography>
         <TextField
-          label="负责人"
+          label="部长名称"
           variant="outlined"
           fullWidth
           value={departmentData.leader}
@@ -173,7 +173,7 @@ export default function PostDepartment(props) {
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >
-        Upload
+        发布
       </Button>
       <Snackbar
         open={info}

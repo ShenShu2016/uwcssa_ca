@@ -30,10 +30,6 @@ export default function ForumSubTopicMain({ forumSubTopic }) {
         }}
       >
         <ForumSubTopicTip forumSubTopic={forumSubTopic} />
-        {/* <Paper variant="outlined" square elevation={4}>
-          <Typography variant="h5">{forumSubTopic.name}</Typography>
-          <Typography variant="h5">{forumSubTopic.name}</Typography>
-        </Paper> */}
       </Box>
       {userAuth.isAuthenticated && (
         <Box

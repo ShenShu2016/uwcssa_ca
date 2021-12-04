@@ -1,4 +1,11 @@
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Stack,
+  Typography,
+  Tooltip,
+  Fade,
+} from "@mui/material";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import ForumPostUserIDComponent from "../ForumPost/ForumPostUserIDComponent";
@@ -29,11 +36,8 @@ export default function ForumHomePostComponent({ forumPost }) {
         // square
         sx={{
           maxWidth: "100%",
-          // margin: "1rem auto",
           padding: "1rem",
           maxHeight: "255px",
-          // borderRadius: "8px",
-          // border: "1px solid #dfe1e5",
         }}
       >
         <Stack
@@ -74,7 +78,7 @@ export default function ForumHomePostComponent({ forumPost }) {
             </Stack>
           </Stack>
 
-          <Box>
+          <Box sx={{ width: 180 }}>
             {forumPostComment ? (
               <Stack direction="row">
                 <CustomAvatar
@@ -85,8 +89,27 @@ export default function ForumHomePostComponent({ forumPost }) {
                     height: { xs: 24, sm: 36 },
                   }}
                 />
-                <Stack direction="column">
-                  <Typography>{forumPostComment.content}</Typography>
+                <Stack direction="column" sx={{ ml: 2 }}>
+                  <Tooltip
+                    title={
+                      <Typography color="white">{forumPostComment.content}</Typography>
+                    }
+                    placement="top-start"
+                    arrow
+                    TransitionComponent={Fade}
+                    TransitionProps={{ timeout: 600 }}
+                  >
+                    <Typography
+                      noWrap
+                      sx={{
+                        display: "block",
+                        maxWidth: 130,
+                        overflow: "hidden",
+                      }}
+                    >
+                      {forumPostComment.content}
+                    </Typography>
+                  </Tooltip>
                   <ForumTimeComponent time={forumPostComment.createdAt} />
                 </Stack>
               </Stack>

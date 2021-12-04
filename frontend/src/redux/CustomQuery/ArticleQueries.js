@@ -36,7 +36,7 @@ export const getArticle = /* GraphQL */ `
           }
         }
       }
-      articleComments(filter: { active: { eq: true } }, sortDirection: DESC) {
+      articleComments(filter: { active: { eq: true } }, sortDirection: ASC) {
         nextToken
         items {
           content

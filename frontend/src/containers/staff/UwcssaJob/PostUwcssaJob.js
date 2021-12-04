@@ -142,8 +142,11 @@ export default function PostUwcssaJob(props) {
 
   return (
     <div className={classes.root}>
+      <Typography variant="h4" sx={{ my: "2rem", textAlign: "center" }}>
+        发布新职位
+      </Typography>
       <Box>
-        <Typography variant="h5">TITLE</Typography>
+        <Typography variant="h5">职位名称</Typography>
         <TextField
           label="职位名称"
           variant="outlined"
@@ -156,7 +159,7 @@ export default function PostUwcssaJob(props) {
         />
       </Box>
       <Box>
-        <Typography variant="h5">DEPARTMENT NAME</Typography>
+        <Typography variant="h5">所属部门</Typography>
         <Button
           variant="contained"
           component={Link}
@@ -191,7 +194,7 @@ export default function PostUwcssaJob(props) {
         </FormControl>
       </Box>
       <Box>
-        <Typography variant="h5">INTRODUCTION</Typography>
+        <Typography variant="h5">简介</Typography>
         <TextField
           label="简介"
           variant="outlined"
@@ -206,7 +209,7 @@ export default function PostUwcssaJob(props) {
         />
       </Box>
       <Box>
-        <Typography variant="h5">REQUIREMENTS</Typography>
+        <Typography variant="h5">基本要求</Typography>
         <TableContainer className={classes.table}>
           <Table aria-label="simple table">
             <TableBody>
@@ -276,7 +279,74 @@ export default function PostUwcssaJob(props) {
         </TableContainer>
       </Box>
       <Box>
-        <Typography variant="h5">SCHEDULE</Typography>
+        <Typography variant="h5">额外要求(nice to have)</Typography>
+        <TableContainer className={classes.table}>
+          <Table aria-label="simple table">
+            <TableBody>
+              {uwcssaJobData.bonus.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row" width="1%">
+                    {index + 1}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <TextField
+                      variant="standard"
+                      fullWidth
+                      type="text"
+                      value={row}
+                      onChange={(e) => {
+                        const newBonus = uwcssaJobData.bonus;
+                        newBonus[index] = e.target.value;
+                        setUwcssaJobData({ ...uwcssaJobData, bonus: newBonus });
+                        console.log(uwcssaJobData);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Tooltip title="Add New Row">
+                      <IconButton
+                        className={classes.button}
+                        onClick={(e) => {
+                          const newBonus = uwcssaJobData.bonus;
+                          newBonus.push("");
+                          setUwcssaJobData({
+                            ...uwcssaJobData,
+                            bonus: newBonus,
+                          });
+                          console.log(uwcssaJobData);
+                        }}
+                      >
+                        <AddCircleOutlineIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete This Row">
+                      <IconButton
+                        className={classes.button}
+                        onClick={(e) => {
+                          const newBonus = uwcssaJobData.bonus;
+                          console.log(newBonus.length);
+                          if (newBonus.length > 1) {
+                            newBonus.splice(index, 1);
+                          }
+                          setUwcssaJobData({
+                            ...uwcssaJobData,
+                            bonus: newBonus,
+                          });
+                          console.log(uwcssaJobData);
+                        }}
+                      >
+                        <RemoveCircleOutlineIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+      <Box>
+        <Typography variant="h5">工作计划与时间安排</Typography>
         <TableContainer className={classes.table}>
           <Table aria-label="simple table">
             <TableBody>
@@ -415,73 +485,7 @@ export default function PostUwcssaJob(props) {
           </Table>
         </TableContainer>
       </Box>
-      <Box>
-        <Typography variant="h5">BONUS</Typography>
-        <TableContainer className={classes.table}>
-          <Table aria-label="simple table">
-            <TableBody>
-              {uwcssaJobData.bonus.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell component="th" scope="row" width="1%">
-                    {index + 1}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <TextField
-                      variant="standard"
-                      fullWidth
-                      type="text"
-                      value={row}
-                      onChange={(e) => {
-                        const newBonus = uwcssaJobData.bonus;
-                        newBonus[index] = e.target.value;
-                        setUwcssaJobData({ ...uwcssaJobData, bonus: newBonus });
-                        console.log(uwcssaJobData);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <Tooltip title="Add New Row">
-                      <IconButton
-                        className={classes.button}
-                        onClick={(e) => {
-                          const newBonus = uwcssaJobData.bonus;
-                          newBonus.push("");
-                          setUwcssaJobData({
-                            ...uwcssaJobData,
-                            bonus: newBonus,
-                          });
-                          console.log(uwcssaJobData);
-                        }}
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete This Row">
-                      <IconButton
-                        className={classes.button}
-                        onClick={(e) => {
-                          const newBonus = uwcssaJobData.bonus;
-                          console.log(newBonus.length);
-                          if (newBonus.length > 1) {
-                            newBonus.splice(index, 1);
-                          }
-                          setUwcssaJobData({
-                            ...uwcssaJobData,
-                            bonus: newBonus,
-                          });
-                          console.log(uwcssaJobData);
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
+
       <Button
         variant="contained"
         color="primary"
@@ -489,7 +493,7 @@ export default function PostUwcssaJob(props) {
         startIcon={<CloudUploadIcon />}
         onClick={handleSubmit}
       >
-        Upload
+        提交
       </Button>
       <Snackbar
         open={info}

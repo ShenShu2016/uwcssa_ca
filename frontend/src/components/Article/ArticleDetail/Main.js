@@ -135,7 +135,9 @@ export default function Main({ article }) {
             </Typography>
           </Box>
           <Divider />
-          <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} id={id} />
+          <Box>
+            <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} id={id} />
+          </Box>
           <Divider />
           <Box className={classes.buttonGroup}>
             <LikeButtonGroup item={article} />

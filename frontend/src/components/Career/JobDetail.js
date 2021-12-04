@@ -55,7 +55,7 @@ export default function JobDetail(props) {
         {job.introduction}
       </Typography>
       <br />
-      <Typography variant="h6">REQUIREMENTS:</Typography>
+      <Typography variant="h6">基本要求:</Typography>
       <br />
       {job.requirements
         ? job.requirements.map((requirement, index) => {
@@ -67,7 +67,7 @@ export default function JobDetail(props) {
           })
         : ""}
       <br />
-      <Typography variant="h6">BONUS:</Typography>
+      <Typography variant="h6">额外要求(nice to have):</Typography>
       <br />
       {job.bonus
         ? job.bonus.map((bonus, index) => {
@@ -79,7 +79,7 @@ export default function JobDetail(props) {
           })
         : ""}
       <br />
-      <Typography variant="h6">SCHEDULE:</Typography>
+      <Typography variant="h6">工作计划与时间安排:</Typography>
       <br />
       {job.schedule
         ? job.schedule.map((schedule, index) => {

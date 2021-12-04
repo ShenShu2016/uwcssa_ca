@@ -52,7 +52,7 @@ export default function PostMarketVehicle() {
   const { marketVehicleTypeList } = marketVehicleOptions;
 
   const [fakeItems, setFakeItems] = useState({
-    marketType: "vehicle",
+    marketType: "Vehicle",
     price: "Price",
     description: "Descriptions",
     location: "Location",
