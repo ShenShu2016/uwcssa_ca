@@ -149,7 +149,7 @@ export default function EventMain({ event }) {
         <Card className={classes.cardDetails}>
           <Box sx={{ position: "relative" }}>
             <CardMedia component="img" height="194" image={imageURL} />
-            {endDate > moment().format() ? (
+            {startDate > moment().format() && endDate > moment().format() ? (
               <Box
                 sx={{
                   position: "absolute",
