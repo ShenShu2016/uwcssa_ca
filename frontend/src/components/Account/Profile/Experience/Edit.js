@@ -100,6 +100,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -155,6 +156,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -177,6 +179,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -224,6 +227,7 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -248,12 +252,15 @@ export default function Edit({ experience, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 500,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
                   variant="outlined"
                   label="简介"
                   fullWidth
+                  minRows="4"
+                  multiline
                   margin="dense"
                   onChange={onChange}
                   value={value}

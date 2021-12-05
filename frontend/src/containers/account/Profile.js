@@ -1,3 +1,4 @@
+import { Box, CircularProgress } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   getProfile,
@@ -50,7 +51,9 @@ export default function Profile() {
           </div>
         </div>
       ) : (
-        ""
+        <Box sx={{ position: "relative", top: "50%", left: "50%", my: 10 }}>
+          <CircularProgress size={80} />
+        </Box>
       )}
     </div>
   );

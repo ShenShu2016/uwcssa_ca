@@ -99,6 +99,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -152,6 +153,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -198,6 +200,8 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
               control={control}
               rules={{
                 required: true,
+                min: 0,
+                max: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -209,7 +213,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
                   onChange={onChange}
                   value={value}
                   error={!!errors.grade}
-                  helperText={errors.grade ? "不符合" : null}
+                  helperText={errors.grade ? "0~100之间" : null}
                 />
               )}
             />
@@ -219,12 +223,15 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
               control={control}
               rules={{
                 required: false,
+                maxLength: 500,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
                   variant="outlined"
                   label="简介"
                   fullWidth
+                  minRows="4"
+                  multiline
                   margin="dense"
                   onChange={onChange}
                   value={value}
