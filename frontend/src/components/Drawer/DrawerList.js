@@ -1,8 +1,10 @@
 import {
   Box,
+  Collapse,
   Divider,
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
@@ -10,14 +12,12 @@ import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import ArticleIcon from "@mui/icons-material/Article";
-import Collapse from "@mui/material/Collapse";
 import EventIcon from "@mui/icons-material/Event";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ForumIcon from "@mui/icons-material/Forum";
 import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
-import ListItemButton from "@mui/material/ListItemButton";
 import ShopIcon from "@mui/icons-material/Shop";
 import WorkIcon from "@mui/icons-material/Work";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
@@ -166,6 +166,7 @@ const DrawerList = ({ toggleDrawer }) => {
                     component={Link}
                     to="/forumPostList"
                     onClick={toggleDrawer(false)}
+                    disabled
                   >
                     <ListItemText
                       primary="forumPostList"

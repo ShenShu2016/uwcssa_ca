@@ -342,9 +342,9 @@ function ConfirmationDialogRaw(props) {
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
-          Close
+          关闭
         </Button>
-        <Button onClick={handleOk}>Okay</Button>
+        <Button onClick={handleOk}>确认</Button>
       </DialogActions>
     </Dialog>
   );

@@ -50,7 +50,7 @@ function ConfirmationDialogRaw(props) {
       open={open}
       {...other}
     >
-      <DialogTitle>Categories</DialogTitle>
+      <DialogTitle>选择种类</DialogTitle>
       <DialogContent dividers>
         <Box
           width="100%"
@@ -61,7 +61,7 @@ function ConfirmationDialogRaw(props) {
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
-          Close
+          关闭
         </Button>
         <Button onClick={handleOk}>Okay</Button>
       </DialogActions>

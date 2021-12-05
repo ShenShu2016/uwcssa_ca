@@ -111,7 +111,7 @@ function CategoryDialog(props) {
       open={open}
       {...other}
     >
-      <DialogTitle>Categories</DialogTitle>
+      <DialogTitle>选择种类</DialogTitle>
       <DialogContent dividers>
         <Box
           width="100%"
@@ -122,9 +122,9 @@ function CategoryDialog(props) {
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
-          Close
+          关闭
         </Button>
-        <Button onClick={handleOk}>Okay</Button>
+        <Button onClick={handleOk}>确认</Button>
       </DialogActions>
     </Dialog>
   );
@@ -203,8 +203,8 @@ export default function MarketTopBar({
     <React.Fragment>
       {/* ImgTopFIlter for large screen */}
       <Paper elevation={3} className={classes.imgPaper1}>
-        <Typography variant="h6" fontWeight="bold">
-          辐射4
+        <Typography variant="h4" fontWeight="bold">
+          二手商城
         </Typography>
       </Paper>
       {/* ImgTopFilter for medium screen  */}
@@ -219,7 +219,7 @@ export default function MarketTopBar({
           }}
           onClick={handleClickListItem}
         >
-          Market
+          二手商城
         </Button>
         <UtilityDialog
           id="ringtone-menu"
@@ -232,9 +232,9 @@ export default function MarketTopBar({
         <Divider sx={{ marginY: "1rem" }} />
         <Stack spacing={2} direction="row" justifyContent="flex-end">
           <Button startIcon={<AddIcon />} component={Link} to="/market/create">
-            Add
+            发布我的物品
           </Button>
-          <Button onClick={handleClickListItem2}>Categories</Button>
+          <Button onClick={handleClickListItem2}>选择种类</Button>
           <CategoryDialog
             id="ringtone-menu"
             keepMounted
