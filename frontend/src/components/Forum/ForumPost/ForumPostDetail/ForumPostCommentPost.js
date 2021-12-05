@@ -61,9 +61,9 @@ export default function ForumPostCommentPost({ forumPost}) {
   return (
     <div>
       {isAuthenticated ? "" : <SignInRequest />}
-      <div>
+      <Box sx={{width: { xs: 320, sm: 480, md: 880, lg: 1080 },}}>
         <Collapse in={true}>
-          <Typography sx={{ paddingBlock: "3rem 1rem" }}>
+          <Typography sx={{ paddingBlock: " 1rem" }}>
             发布新评论：
           </Typography>
           <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
@@ -137,7 +137,7 @@ export default function ForumPostCommentPost({ forumPost}) {
             </Grid>
           </Box>
         </Collapse>
-      </div>
+      </Box>
     </div>
   );
 }

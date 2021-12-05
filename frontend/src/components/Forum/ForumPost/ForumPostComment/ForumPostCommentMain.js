@@ -1,12 +1,8 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 import React, { useState } from "react";
-
-// import { Link } from "react-router-dom";
-// import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import ForumPostContentComponent from "../ForumPostDetail/ForumPostContentComponent";
-//import ForumPostSubCommentPost from "../ForumPostSubComment/ForumPostSubCommentPost";
 import ForumPostSubComments from "../ForumPostSubComment/ForumPostSubComments";
 import ForumPostUserComponent from "../ForumPostDetail/ForumPostUserComponent";
 import LikeButtonGroup from "../../../LikeButtonGroup";
@@ -27,6 +23,7 @@ export default function ForumPostCommentMain({ comment, idx }) {
               height: "auto",
               flexDirection: { xs: "column", sm: "row" },
               alignItems: { xs: "flex-start", sm: "center" },
+              width: { xs: 320, sm: 480, md: 880, lg: 1080 },
               // height: 220,
               border: (theme) => `1px solid ${theme.palette.divider}`,
               borderRadius: 1,
@@ -38,7 +35,7 @@ export default function ForumPostCommentMain({ comment, idx }) {
             <Divider orientation="vertical" flexItem />
             <Box
               sx={{
-                width:{ xs: 300, sm: 420, md: 880 },
+                width:{ xs: 280, sm: 420, md: 880,lg:1080  },
                 minHeight: 220,
                 display: "flex",
                 flexDirection: "column",

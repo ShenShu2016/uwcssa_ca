@@ -7,6 +7,7 @@ import {
   Collapse,
   Grid,
   TextField,
+  InputAdornment,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,12 @@ import SignInRequest from "../SignInRequest";
 import { green } from "@mui/material/colors";
 import { postForumPostSubComment } from "../../../../redux/reducers/forumSlice";
 
-export default function ForumPostSubComment({ comment, idx, isReplying }) {
+export default function ForumPostSubComment({
+  comment,
+  idx,
+  isReplying,
+  replyToUserID,
+}) {
   const dispatch = useDispatch();
   const {
     handleSubmit,
@@ -29,6 +35,7 @@ export default function ForumPostSubComment({ comment, idx, isReplying }) {
       subComment: "",
     },
   });
+  console.log(replyToUserID);
   const [loading, setLoading] = useState(false);
   const { isAuthenticated, user, userProfile } = useSelector(
     (state) => state.userAuth
@@ -39,7 +46,7 @@ export default function ForumPostSubComment({ comment, idx, isReplying }) {
       active: true,
       forumPostID: comment.forumPostID,
       forumPostCommentID: comment.id,
-      replyToUserID: comment.owner,
+      replyToUserID: replyToUserID,
       userID: user.username,
     };
     if (!loading) {
@@ -94,6 +101,13 @@ export default function ForumPostSubComment({ comment, idx, isReplying }) {
                       value={value}
                       error={!!errors.subComment}
                       helperText={errors.subComment ? "不能为空" : null}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            回复{replyToUserID}：
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   )}
                 />

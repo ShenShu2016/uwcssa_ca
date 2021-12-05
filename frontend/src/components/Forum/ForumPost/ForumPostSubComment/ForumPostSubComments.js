@@ -9,15 +9,10 @@ import {
 import React, { useState } from "react";
 import grey from "@mui/material/colors/grey";
 import ForumPostSubCommentPost from "../ForumPostSubComment/ForumPostSubCommentPost";
-// import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
-// import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import CustomAvatar from "../../../CustomMUI/CustomAvatar";
-// import LikeButtonGroup from "../../../LikeButtonGroup";
 import { Link } from "react-router-dom";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-// import MuiAccordionSummary from "@mui/material/AccordionSummary";
-// import moment from "moment";
 import { styled } from "@mui/material/styles";
 
 const Accordion = styled((props) => (
@@ -38,7 +33,11 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 export default function ForumPostSubComments({ comment, isReplying, idx }) {
   const [expanded, setExpanded] = useState(false);
-
+  const [replyToUserID, setReplyToUserID] = useState(comment.owner);
+ 
+  const replySet = (id) => {
+    setReplyToUserID(id);
+  };
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -62,7 +61,7 @@ export default function ForumPostSubComments({ comment, isReplying, idx }) {
                     createdAt,
                     userID,
                     user,
-                    // replyToUserID,
+                    replyToUserID,
                     // replyTo,
                   } = subComment;
                   return (
@@ -93,7 +92,7 @@ export default function ForumPostSubComments({ comment, isReplying, idx }) {
                             // variant="subtitle2"
                             sx={{ fontSize: "13px", color: grey[900] }}
                           >
-                            {userID}
+                            {userID} 回复 {replyToUserID}
                           </Typography>
                           <Typography
                             variant="caption"
@@ -119,7 +118,7 @@ export default function ForumPostSubComments({ comment, isReplying, idx }) {
                         </Box>
                         <CardActions sx={{ p: 0 }}>
                           {/* <LikeButtonGroup item={subComment} /> */}
-                          <Button size="small" color="primary">
+                          <Button size="small" color="primary" onClick={()=>replySet(userID)}>
                             回复
                           </Button>
                         </CardActions>
@@ -136,6 +135,7 @@ export default function ForumPostSubComments({ comment, isReplying, idx }) {
         <ForumPostSubCommentPost
           comment={comment}
           isReplying={isReplying}
+          replyToUserID ={replyToUserID}
           idx={idx}
         />
       </Box>
