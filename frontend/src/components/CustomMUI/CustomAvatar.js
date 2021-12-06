@@ -8,7 +8,7 @@ import king from "../../static/avatarIcons/king.png";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
-import uwindsor_shield from "../../static/avatarIcons/uwindsor_shield.svg";
+import uwindsor from "../../static/svg icons/uwindsor.svg";
 
 const useStyles = makeStyles({
   avatar: {
@@ -88,7 +88,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
             invisible={!user.badges.includes("king")}
             overlap="circular"
             // anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            badgeContent={<CrownAvatar alt="uwindsor_shield" src={king} />}
+            badgeContent={<CrownAvatar alt="king" src={king} />}
             sx={{
               "& .MuiBadge-anchorOriginTopRightCircular": {
                 transform: "translate(0, -50%)",
@@ -96,15 +96,13 @@ export default function CustomAvatar({ user, variant, sx, link }) {
             }} // 直接找到他所对应的className，修改位置
           >
             <Badge
-              invisible={!user.badges.includes("uwindsor_shield")}
+              invisible={!user.badges.includes("uwindsor")}
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={
                 <SmallAvatar
-                  alt="uwindsor_shield"
-                  src={
-                    user.badges.includes("cssa") ? uwcssa_logo : uwindsor_shield
-                  }
+                  alt="uwindsor"
+                  src={user.badges.includes("cssa") ? uwcssa_logo : uwindsor}
                 />
               }
             >
