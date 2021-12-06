@@ -119,6 +119,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               rules={{
                 required: false,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -140,6 +141,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               rules={{
                 required: false,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -243,6 +245,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               rules={{
                 required: false,
                 pattern: /linkedin.com/i,
+                maxLength: 200,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -253,7 +256,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                   onChange={onChange}
                   value={value}
                   error={!!errors.linkedIn}
-                  helperText={errors.linkedIn ? "不能为空" : null}
+                  helperText={errors.linkedIn ? "格式不对" : null}
                 />
               )}
             />
@@ -264,6 +267,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               rules={{
                 required: false,
                 pattern: /github.com/i,
+                maxLength: 200,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -285,6 +289,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               rules={{
                 required: false,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -307,6 +312,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               rules={{
                 required: false,
                 pattern: /\D+/,
+                maxLength: 500,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -327,7 +333,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleEditClose} size="large">
-              Cancel
+              取消
             </Button>
             <Button
               onClick={handleSubmit(onSubmit)}

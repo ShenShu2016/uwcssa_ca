@@ -18,7 +18,9 @@ import MessageIcon from "@mui/icons-material/Message";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import React from "react";
 import ShareIcon from "@mui/icons-material/Share";
+import { Tooltip } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
+import { Zoom } from "@mui/material";
 import { marketRentalOptions } from "./Market/marketRentalOptions";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -28,30 +30,74 @@ const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
 
 function SimpleDialog(props) {
   const { open, onClose, contactEmail, contactPhone, contactWeChat } = props;
+  const [copyPhone, setCopyPhone] = React.useState(false);
+  const [copyEmail, setCopyEmail] = React.useState(false);
+  const [copyWeChat, setCopyWeChat] = React.useState(false);
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>卖家信息</DialogTitle>
       <List sx={{ pt: 0 }}>
-        <ListItem button>
-          <ListItemIcon>
-            <PhoneInTalkIcon />
-          </ListItemIcon>
-          <ListItemText primary={contactPhone} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <EmailIcon />
-          </ListItemIcon>
-          <ListItemText primary={contactEmail} />
-        </ListItem>
-        {contactWeChat ? (
+        <Tooltip
+          title={`${copyPhone === false ? "Copy Contact Phone" : "Copied!🥳"}`}
+          placement="top-end"
+          TransitionComponent={Zoom}
+          arrow
+        >
           <ListItem button>
             <ListItemIcon>
-              <FacebookIcon />
+              <PhoneInTalkIcon />
             </ListItemIcon>
-            <ListItemText primary={contactWeChat} />
+            <ListItemText
+              primary={contactPhone}
+              onClick={() => {
+                navigator.clipboard.writeText(contactPhone);
+                setCopyPhone(true);
+              }}
+            />
           </ListItem>
+        </Tooltip>
+        <Tooltip
+          title={`${copyEmail === false ? "Copy Contact Email" : "Copied!🥳"}`}
+          placement="top-end"
+          TransitionComponent={Zoom}
+          arrow
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <EmailIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={contactEmail}
+              onClick={() => {
+                navigator.clipboard.writeText(contactEmail);
+                setCopyEmail(true);
+              }}
+            />
+          </ListItem>
+        </Tooltip>
+        {contactWeChat ? (
+          <Tooltip
+            title={`${
+              copyWeChat === false ? "Copy Contact WeChat" : "Copied!🥳"
+            }`}
+            placement="top-end"
+            TransitionComponent={Zoom}
+            arrow
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <FacebookIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={contactWeChat}
+                onClick={() => {
+                  navigator.clipboard.writeText(contactPhone);
+                  setCopyWeChat(true);
+                }}
+              />
+            </ListItem>
+          </Tooltip>
         ) : null}
       </List>
     </Dialog>

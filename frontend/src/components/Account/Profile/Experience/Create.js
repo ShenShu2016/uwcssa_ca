@@ -85,6 +85,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -137,6 +138,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -159,6 +161,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -206,6 +209,7 @@ export default function Create({ createOpen, handleCreateClose, username }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 100,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
@@ -228,11 +232,14 @@ export default function Create({ createOpen, handleCreateClose, username }) {
               rules={{
                 required: true,
                 pattern: /\D+/,
+                maxLength: 500,
               }}
               render={({ field: { onChange, value } }) => (
                 <TextField
                   variant="outlined"
                   label="简介"
+                  minRows="4"
+                  multiline
                   fullWidth
                   margin="dense"
                   onChange={onChange}

@@ -148,8 +148,12 @@ function ArticleComponent({ article }) {
           </Grid>
           <Grid item xs={"auto"}>
             <div>
-              <CardActionArea>
-                <img src={imageURL} alt="" className={classes.s3image} />
+              <CardActionArea component={Link} to={`/article/${id}`}>
+                <img
+                  src={imageURL}
+                  alt={article.title}
+                  className={classes.s3image}
+                />
               </CardActionArea>
             </div>
           </Grid>

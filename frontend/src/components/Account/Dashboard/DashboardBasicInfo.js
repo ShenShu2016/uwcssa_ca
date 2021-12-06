@@ -16,7 +16,7 @@ import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
-import uwindsor_shield from "../../../static/avatarIcons/uwindsor_shield.svg";
+import uwindsor from "../../../static/svg icons/uwindsor.svg";
 
 const useStyles = makeStyles({
   root: {
@@ -92,13 +92,13 @@ export default function DashboardBasicInfo({ userProfile }) {
           <CardContent className={classes.info}>
             <div className={classes.outer}>
               <Badge
-                invisible={!userProfile.badges.includes("uwindsor_shield")}
+                invisible={!userProfile.badges.includes("uwindsor")}
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeContent={
                   <SmallAvatar
-                    alt="uwindsor_shield"
-                    src={uwindsor_shield}
+                    alt="uwindsor"
+                    src={uwindsor}
                     sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
                   />
                 }
