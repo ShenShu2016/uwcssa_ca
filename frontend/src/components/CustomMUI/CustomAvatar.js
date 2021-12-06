@@ -52,7 +52,7 @@ const CrownAvatar = styled(Avatar)(({ theme }) => ({
   // border: `2px solid ${theme.palette.background.paper}`,
   top: "-8px",
   right: "-8px",
-  transform: `rotate(45deg)`,
+  // transform: `rotate(45deg)`,
 }));
 export default function CustomAvatar({ user, variant, sx, link }) {
   const classes = useStyles();
@@ -87,8 +87,13 @@ export default function CustomAvatar({ user, variant, sx, link }) {
           <Badge
             invisible={!user.badges.includes("king")}
             overlap="circular"
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            // anchorOrigin={{ vertical: "top", horizontal: "right" }}
             badgeContent={<CrownAvatar alt="uwindsor_shield" src={king} />}
+            sx={{
+              "& .MuiBadge-anchorOriginTopRightCircular": {
+                transform: "translate(0, -50%)",
+              },
+            }} // 直接找到他所对应的className，修改位置
           >
             <Badge
               invisible={!user.badges.includes("uwindsor_shield")}
