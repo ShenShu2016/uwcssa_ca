@@ -85,8 +85,8 @@ export const CategoryIcons = () => {
     <nav aria-label="main mailbox folders">
       <List
         sx={{
-          // overflow: "auto",
           position: "relative",
+          color: "black",
         }}
       >
         <IconList

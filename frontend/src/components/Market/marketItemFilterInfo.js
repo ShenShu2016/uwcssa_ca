@@ -64,7 +64,7 @@ const FilterContent = (props) => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <Box sx={{ color: "rgb(0,0,0)" }}>
       <Box
         flexDirection="row"
         display="flex"
@@ -273,7 +273,7 @@ const FilterContent = (props) => {
         </Typography>
         <CategoryIcons />
       </Box>
-    </React.Fragment>
+    </Box>
   );
 };
 
@@ -486,16 +486,29 @@ export default function FilterInfo({
             paddingRight="1rem"
             sx={{
               overflowY: "auto",
-              "&::-webkit-scrollbar": {
-                width: "0.4em",
+              color: "rgb(227 169 169)",
+
+              transition: "color 0.3s",
+              "&:hover": {
+                color: "rgb(179 117 117)",
               },
-              "&::-webkit-scrollbar-track": {
-                boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+              "&::-webkit-scrollbar": {
+                width: "14px",
+              },
+
+              "&::-webkit-scrollbar-button": {
+                width: 0,
+                height: 0,
+                display: "none",
               },
               "&::-webkit-scrollbar-thumb": {
-                backgroundColor: "rgba(0,0,0,.1)",
-                outline: "1px solid slategrey",
+                backgroundClip: "content-box",
+                border: "4px solid transparent",
+                borderRadius: "7px",
+                boxShadow: "inset 0 0 0 10px",
+              },
+              "&::-webkit-scrollbar-corner": {
+                backgroundColor: "transparent",
               },
             }}
           >
