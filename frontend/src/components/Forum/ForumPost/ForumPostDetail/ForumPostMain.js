@@ -1,18 +1,19 @@
-import { Box, Button, Divider, Typography, Paper, Stack } from "@mui/material";
+import { Box, Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+
 import CustomBreadcrumbs from "../../../CustomMUI/CustomBreadcrumbs";
-import ForumPostUserIDComponent from "../ForumPostUserIDComponent";
-import ForumTimeComponent from "../../ForumTimeComponent";
 import ForumPostCommentPost from "./ForumPostCommentPost";
+import ForumPostComments from "./ForumPostComments";
 import ForumPostContentComponent from "./ForumPostContentComponent";
 import ForumPostUserComponent from "./ForumPostUserComponent";
-import ForumPostComments from "./ForumPostComments";
+import ForumPostUserIDComponent from "../ForumPostUserIDComponent";
+import ForumTimeComponent from "../../ForumTimeComponent";
 import LikeButtonGroup from "../../../LikeButtonGroup";
+import { Link } from "react-router-dom";
 import { useTitle } from "../../../../Hooks/useTitle";
 
 export default function ForumPostMain({ forumPost }) {
-  useTitle(forumPost.title);
+  useTitle(forumPost.title && forumPost.title);
   const myRef = useRef(null);
   const executeScroll = () =>
     myRef.current.scrollIntoView({ behavior: "smooth" });
@@ -20,9 +21,11 @@ export default function ForumPostMain({ forumPost }) {
   return (
     <div>
       <Box
-        sx={{
-          // width: { xs: 375, sm: 480, md: 880, lg: 1080 },
-        }}
+        sx={
+          {
+            // width: { xs: 375, sm: 480, md: 880, lg: 1080 },
+          }
+        }
       >
         <Box>
           <CustomBreadcrumbs />
@@ -108,7 +111,7 @@ export default function ForumPostMain({ forumPost }) {
           <Divider orientation="vertical" flexItem />
           <Box
             sx={{
-              width: {xs:280, sm: 480, md: 880, lg: 1080 },
+              width: { xs: 280, sm: 480, md: 880, lg: 1080 },
               minHeight: 220,
               display: "flex",
               flexDirection: "column",

@@ -47,7 +47,7 @@ export default function Individual() {
   const { userAuth } = useSelector((state) => state);
   const { eventID } = useParams();
   //const { event } = useSelector((state) => state.event.selected); 思路有问题
-  useTitle(`近期活动 ${eventID} 个人报名`);
+  useTitle(eventID && `近期活动 ${eventID} 个人报名`);
   console.log("event.id", eventID);
   const [loading, setLoading] = useState(false);
   // const [eventParticipantData, setEventParticipantData] = useState({

@@ -1,3 +1,4 @@
+import { Controller, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +16,6 @@ import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/reducers/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import { Controller, useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -40,7 +40,7 @@ export default function Individual() {
   const { userAuth } = useSelector((state) => state);
   const { eventID } = useParams();
   console.log(useParams, "useParams");
-  useTitle(`近期活动 ${eventID} 团体报名`);
+  useTitle(eventID && `近期活动 ${eventID} 团体报名`);
   console.log("event.id", eventID);
   // const [eventParticipantData, setEventParticipantData] = useState({
   //   name: "",

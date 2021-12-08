@@ -23,7 +23,7 @@ export default function QrCodeUwinStudent({ qrCodeImgS3Key, id }) {
   return (
     <Box my={2} className={classes.root}>
       {qrCodeImgS3Key ? (
-        userAuth.userProfile.badges.includes("uwindsor_shield") ? (
+        userAuth.userProfile.badges.includes("uwindsor") ? (
           <Box>
             <Typography
               variant="h5"
