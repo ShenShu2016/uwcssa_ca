@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main({ article }) {
   const classes = useStyles();
-  useTitle(article.title);
+  useTitle(article.title && article.title);
   // console.log("Main", article);
   const {
     content,

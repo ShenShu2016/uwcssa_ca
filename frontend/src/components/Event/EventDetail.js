@@ -1,6 +1,5 @@
-import { Box } from "@mui/material";
-import { useParams, Redirect } from "react-router-dom";
 import React, { useEffect } from "react";
+import { Redirect, useParams } from "react-router-dom";
 // import {
 //   removeSelectedEvent,
 //   selectedEvent,
@@ -11,11 +10,12 @@ import {
 } from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { ArrowBack } from "./ArrowBack";
+import { Box } from "@mui/material";
 // import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EventBody from "../Event/EventBody";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
-import { ArrowBack } from "./ArrowBack";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +29,7 @@ export default function EventDetail() {
   const dispatch = useDispatch();
   const { eventID } = useParams();
   const { event } = useSelector((state) => state.event.selected);
-  useTitle(`近期活动 ${event.title}`);
+  useTitle(event.title && `近期活动 ${event.title}`);
 
   useEffect(() => {
     if (eventID && eventID !== "") {
