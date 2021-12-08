@@ -50,6 +50,30 @@ export const marketItemStyle = makeStyles((theme) => ({
     position: "relative",
     overflowY: "auto",
     float: "left",
+    color: "rgb(227 169 169)",
+
+    transition: "color 0.3s",
+    "&:hover": {
+      color: "rgb(179 117 117)",
+    },
+    "&::-webkit-scrollbar": {
+      width: "14px",
+    },
+
+    "&::-webkit-scrollbar-button": {
+      width: 0,
+      height: 0,
+      display: "none",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundClip: "content-box",
+      border: "4px solid transparent",
+      borderRadius: "7px",
+      boxShadow: "inset 0 0 0 10px",
+    },
+    "&::-webkit-scrollbar-corner": {
+      backgroundColor: "transparent",
+    },
     [theme.breakpoints.down("md")]: {
       padding: "0.5rem",
       width: "100%",

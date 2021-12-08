@@ -27,7 +27,11 @@ export default function PostUserInfo({
   console.log("what happened here", defaultInfo);
 
   return (
-    <React.Fragment>
+    <Box
+      sx={{
+        color: "rgb(0,0,0)",
+      }}
+    >
       {marketUserInfo === undefined ? (
         <Typography variant="subtitle1" fontWeight="600">
           补充联系方式
@@ -124,6 +128,6 @@ export default function PostUserInfo({
           )}
         />
       </Box>
-    </React.Fragment>
+    </Box>
   );
 }

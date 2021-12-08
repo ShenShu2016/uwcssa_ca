@@ -193,9 +193,17 @@ export default function PostMarketItem() {
           <Paper
             className={classes.leftInfoPaper}
             elevation={3}
-            sx={{ backgroundColor: "#f9f9f9" }}
+            sx={{
+              backgroundColor: "#f9f9f9",
+              color: "rgb(227 169 169)",
+              transition: "color 0.3s",
+            }}
           >
-            <Stack direction="row" justifyContent="space-between">
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              sx={{ color: "rgb(0,0,0)" }}
+            >
               <Typography
                 variant="h5"
                 gutterBottom
