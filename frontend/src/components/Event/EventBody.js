@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Card,
+  CardActionArea,
   CardActions,
   CardContent,
   CircularProgress,
@@ -213,33 +214,39 @@ export default function EventBody({ event }) {
                   image={posterURL}
                 />
               </Card> */}
-
-              <Box
-                sx={{
-                  opacity: 1, //如果背景要虚的话下面的主要图片也虚了
-                  backgroundImage: `url(${backGroundImgURL})`,
-                  width: "100%",
-                  height: "350px",
-                  objectFit: "cover",
+              <CardActionArea
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = posterURL;
                 }}
               >
                 <Box
-                  component="img"
-                  src={posterURL}
-                  maxHeight="100%"
-                  maxWidth="100%"
                   sx={{
-                    opacity: 1,
-                    position: "relative",
-                    top: "50%",
-                    left: "50%",
-                    margin: "auto",
-                    transform: `translate(-50%,-50%)`,
-                    width: "auto",
-                    height: "300px",
+                    opacity: 1, //如果背景要虚的话下面的主要图片也虚了
+                    backgroundImage: `url(${backGroundImgURL})`,
+                    width: "100%",
+                    height: "350px",
+                    objectFit: "cover",
                   }}
-                />
-              </Box>
+                >
+                  <Box
+                    component="img"
+                    src={posterURL}
+                    maxHeight="100%"
+                    maxWidth="100%"
+                    sx={{
+                      opacity: 1,
+                      position: "relative",
+                      top: "50%",
+                      left: "50%",
+                      margin: "auto",
+                      transform: `translate(-50%,-50%)`,
+                      width: "auto",
+                      height: "300px",
+                    }}
+                  />
+                </Box>
+              </CardActionArea>
             </div>
             <Box
               sx={{
@@ -366,13 +373,20 @@ export default function EventBody({ event }) {
                                 InProgress
                               </Typography>
                             )}
-                            <Typography
-                              variant="body2"
-                              sx={{ marginTop: "1rem" }}
-                              gutterBottom
-                            >
-                              {content}
-                            </Typography>
+                            <Box sx={{ my: 3 }}>
+                              <Typography
+                                variant="body1"
+                                // sx={{ marginTop: "2rem" }}
+                                component="span"
+                                style={{
+                                  whiteSpace: "pre-wrap",
+                                  wordBreak: "break-word",
+                                }}
+                                gutterBottom
+                              >
+                                {content}
+                              </Typography>
+                            </Box>
                           </CardContent>
                         </Card>
                       </Grid>

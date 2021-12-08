@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   FormControl,
   FormControlLabel,
@@ -13,24 +14,26 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchTopics, postEvent } from "../../redux/reducers/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { GetTags } from "../../components/CustomMUI/CustomTags";
+
 import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import { GetTags } from "../../components/CustomMUI/CustomTags";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import PublishIcon from "@mui/icons-material/Publish";
 import S3Image from "../../components/S3/S3Image";
 import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../redux/reducers/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import { Controller, useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,7 +84,7 @@ export default function PostEvent() {
   //   eventStatus: "ComingSoon",
   // });
   // console.log(eventData);
-
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     control,
@@ -141,6 +144,7 @@ export default function PostEvent() {
   };
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const createEventInput = {
       ...data,
       backGroundImgS3Key: backGroundImgS3Key,
@@ -154,13 +158,15 @@ export default function PostEvent() {
     const response = await dispatch(postEvent({ createEventInput }));
 
     if (response.meta.requestStatus === "fulfilled") {
+      setLoading(false);
       history.push(`/event/${response.payload.data.createEvent.id}`);
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);
+        setLoading(false);
       }, 1000);
 
-      console.log(response.error.message);
+      alert(response.error.message);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
@@ -244,7 +250,7 @@ export default function PostEvent() {
                   </Select>
                   {errors.topicID && (
                     <FormHelperText sx={{ color: "#d32f2f" }}>
-                      请选择一个主题，没有的话请上传新的类别
+                      请选择一个主题，没有的话请上传新的主题
                     </FormHelperText>
                   )}
                 </FormControl>
@@ -253,7 +259,7 @@ export default function PostEvent() {
             <TextField
               margin="normal"
               fullWidth
-              label="类别"
+              label="新的主题"
               value={topicData.name}
               onChange={(e) =>
                 setTopicData({ ...topicData, name: e.target.value })
@@ -265,10 +271,10 @@ export default function PostEvent() {
               onClick={uploadTopic}
               color="primary"
             >
-              上传新的类别
+              上传新的主题
             </Button>
 
-            <Controller
+            {/* <Controller
               name="sponsor"
               control={control}
               rules={{
@@ -284,7 +290,7 @@ export default function PostEvent() {
                   value={value}
                 />
               )}
-            />
+            /> */}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Stack>
@@ -477,7 +483,7 @@ export default function PostEvent() {
                     uploadEventPoster(e);
                   }}
                 />
-                <Button variant="contained" component="span">
+                <Button variant="contained" component="span" disabled={loading}>
                   上传活动海报
                 </Button>
               </label>
@@ -493,7 +499,7 @@ export default function PostEvent() {
                     uploadEventImg(e);
                   }}
                 />
-                <Button variant="contained" component="span">
+                <Button variant="contained" component="span" disabled={loading}>
                   上传背景图片
                 </Button>
               </label>
@@ -507,7 +513,7 @@ export default function PostEvent() {
                     uploadEventQrCode(e);
                   }}
                 />
-                <Button variant="contained" component="span">
+                <Button variant="contained" component="span" disabled={loading}>
                   上传活动QR
                 </Button>
               </label>
@@ -518,8 +524,22 @@ export default function PostEvent() {
               type="submit"
               endIcon={<PublishIcon />}
               color="primary"
+              disabled={loading}
             >
               上传活动
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Box>
         </Container>

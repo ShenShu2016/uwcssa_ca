@@ -259,6 +259,12 @@ export default function MarketComponent({ item, type }) {
         ref={hoverRef}
         component={Link}
         to={`/market/${type}/${id}`}
+        sx={{
+          transition: "background-color 0.7s",
+          "&:hover": {
+            backgroundColor: "#f5f5f5",
+          },
+        }}
       >
         <img src={imageURL} alt="" className={classes.s3image} />
         <Box my={"8px"}>{displayInfo()}</Box>

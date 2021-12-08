@@ -91,6 +91,7 @@ export default function EventSignUp() {
                 size="large"
                 component={Link}
                 to={`/event/${eventID}/eventSignUp/group`}
+                disabled
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <GroupIcon />

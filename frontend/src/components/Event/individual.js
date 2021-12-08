@@ -1,26 +1,28 @@
 import {
+  Avatar,
   Box,
   Button,
+  CircularProgress,
   CssBaseline,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import eventImg from "../../static/event.jpg";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/reducers/eventSlice";
 import { useHistory } from "react-router";
 // import useForm from "./useForm";
 // import { validator } from "./validator";
 import { useTitle } from "../../Hooks/useTitle";
-import { Controller, useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -47,7 +49,7 @@ export default function Individual() {
   //const { event } = useSelector((state) => state.event.selected); 思路有问题
   useTitle(`近期活动 ${eventID} 个人报名`);
   console.log("event.id", eventID);
-
+  const [loading, setLoading] = useState(false);
   // const [eventParticipantData, setEventParticipantData] = useState({
   //   name: "",
   //   email: undefined,
@@ -65,7 +67,7 @@ export default function Individual() {
   } = useForm({
     defaultValues: {
       name: "",
-      email: undefined,
+      // email: undefined,
       address: "",
       phone: undefined,
       weChat: "",
@@ -103,11 +105,13 @@ export default function Individual() {
   // };
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const createEventParticipantInput = {
       ...data,
       id: `${eventID}-${userAuth.user.username}`,
       numberOfPeople: 1,
       eventParticipantStatus: "ArriveOnTime",
+      email: userAuth.user.attributes.email,
       active: true,
       eventID: eventID,
       userID: userAuth.user.username,
@@ -117,13 +121,14 @@ export default function Individual() {
     );
 
     if (response.meta.requestStatus === "fulfilled") {
+      setLoading(false);
       history.push(`/event/${eventID}/eventSignUp/success`);
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);
+        setLoading(false);
       }, 1000);
-
-      console.log(response.error.message);
+      alert(response.error.message);
     }
   };
 
@@ -216,7 +221,7 @@ export default function Individual() {
                   }
                 /> */}
 
-                <Controller
+                {/* <Controller
                   name="email"
                   control={control}
                   rules={{
@@ -240,7 +245,7 @@ export default function Individual() {
                       helperText={errors.name ? "邮箱无效" : null}
                     />
                   )}
-                />
+                /> */}
 
                 {/* <TextField
                   margin="normal"
@@ -264,6 +269,8 @@ export default function Individual() {
                   rules={{
                     required: true,
                     pattern: /^[0-9\b]+$/,
+                    minLength: 10,
+                    maxLength: 10,
                   }}
                   render={({ field: { onChange, value } }) => (
                     <TextField
@@ -278,7 +285,7 @@ export default function Individual() {
                       onChange={onChange}
                       value={value}
                       error={!!errors.phone}
-                      helperText={errors.phone ? "手机号码无效" : null}
+                      helperText={errors.phone ? "手机号码无效, 10位数" : null}
                     />
                   )}
                 />
@@ -301,14 +308,13 @@ export default function Individual() {
                   name="weChat"
                   control={control}
                   rules={{
-                    required: true,
+                    required: false,
                   }}
                   render={({ field: { onChange, value } }) => (
                     <TextField
                       id="weChat"
                       margin="normal"
                       fullWidth
-                      required
                       autoComplete="weChat"
                       label="微信号"
                       variant="outlined"
@@ -391,8 +397,22 @@ export default function Individual() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  disabled={loading}
                 >
                   提交
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
                 </Button>
                 <Grid item>
                   <Button component={Link} to="/event" variant="body2">

@@ -87,6 +87,7 @@ export const CategoryIcons = () => {
         sx={{
           // overflow: "auto",
           position: "relative",
+          color: "black",
         }}
       >
         <IconList
