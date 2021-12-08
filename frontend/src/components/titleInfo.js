@@ -52,6 +52,8 @@ function SimpleDialog(props) {
               primary={contactPhone}
               onClick={() => {
                 navigator.clipboard.writeText(contactPhone);
+                setCopyEmail(false);
+                setCopyWeChat(false);
                 setCopyPhone(true);
               }}
             />
@@ -72,6 +74,8 @@ function SimpleDialog(props) {
               onClick={() => {
                 navigator.clipboard.writeText(contactEmail);
                 setCopyEmail(true);
+                setCopyWeChat(false);
+                setCopyPhone(false);
               }}
             />
           </ListItem>
@@ -92,8 +96,10 @@ function SimpleDialog(props) {
               <ListItemText
                 primary={contactWeChat}
                 onClick={() => {
-                  navigator.clipboard.writeText(contactPhone);
+                  navigator.clipboard.writeText(contactWeChat);
+                  setCopyEmail(false);
                   setCopyWeChat(true);
+                  setCopyPhone(false);
                 }}
               />
             </ListItem>
