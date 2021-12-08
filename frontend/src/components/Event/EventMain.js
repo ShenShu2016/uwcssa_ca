@@ -203,13 +203,20 @@ export default function EventMain({ event }) {
               </Box>
 
               {location ? (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  地址： {location}
-                </Typography>
+                <Box sx={{ overflow: "hidden", height: "30px" }}>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <Grid item xs zeroMinWidth>
+                      <Typography
+                        variant="subtitle2"
+                        color="textSecondary"
+                        gutterBottom
+                        noWrap
+                      >
+                        地址： {location}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
               ) : (
                 <Typography
                   variant="subtitle2"

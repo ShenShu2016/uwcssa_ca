@@ -1,12 +1,14 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
   CardActionArea,
-  CardActions,
+  // CardActions,
   CardContent,
   CircularProgress,
   Container,
+  // Divider,
   Grid,
   Tab,
   Tabs,
@@ -15,6 +17,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
 import { useDispatch, useSelector } from "react-redux";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EventComments from "./EventDetail/Comment/EventComments";
@@ -28,7 +31,28 @@ import SignUpRequest from "../Auth/SignUpRequireDialog";
 import Storage from "@aws-amplify/storage";
 import TopicIcon from "@mui/icons-material/Topic";
 import moment from "moment";
-
+import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles((theme) => ({
+  action: {
+    display: "flex",
+    justifyContent: "space-around",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "auto",
+    },
+  },
+  join: {
+    background: "linear-gradient(to top, #638ef0, #82e7fe)",
+    "& > *": {
+      textTransform: "none !important",
+    },
+  },
+  alert: {
+    width: "500px",
+    [theme.breakpoints.down("sm")]: {
+      width: "330px",
+    },
+  },
+}));
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -60,6 +84,7 @@ function a11yProps(index) {
 }
 
 export default function EventBody({ event }) {
+  const classes = useStyles();
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -264,14 +289,14 @@ export default function EventBody({ event }) {
               >
                 {moment(startDate).format("YYYY") ===
                 moment(endDate).format("YYYY") ? (
-                  <Typography variant="subtitle2" gutterBottom>
+                  <Typography variant="h6" gutterBottom>
                     时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
                     {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
                     {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
                     {endDate.slice(11, 16)}
                   </Typography>
                 ) : (
-                  <Typography variant="subtitle2" gutterBottom>
+                  <Typography variant="subtitle1" gutterBottom>
                     时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
                     {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
                     {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
@@ -279,10 +304,10 @@ export default function EventBody({ event }) {
                   </Typography>
                 )}
                 <Typography component="div" variant="h5" gutterBottom>
-                  {title}
+                  <b>{title}</b>
                 </Typography>
                 <Typography
-                  variant="subtitle1"
+                  variant="h6"
                   color="text.secondary"
                   component="div"
                   gutterBottom
@@ -293,8 +318,16 @@ export default function EventBody({ event }) {
             </Box>
           </Box>
           <div sx={{ width: "100%" }}>
-            <Container size="md">
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Container
+              size="md"
+              sx={{ display: "flex", flexWrap: "wrap-reverse" }}
+            >
+              <Box
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                }}
+              >
                 <Tabs
                   value={value}
                   onChange={handleChange}
@@ -303,6 +336,44 @@ export default function EventBody({ event }) {
                   <Tab label="活动详情" {...a11yProps(0)} />
                   <Tab label="活动讨论" {...a11yProps(1)} />
                 </Tabs>
+              </Box>
+              <Box className={classes.action}>
+                {endDate > moment().format() ? (
+                  <div>
+                    {userInfo.isAuthenticated ? (
+                      <div>
+                        {event.eventParticipants.items.some(
+                          (item) => item.userID === userAuth.user.username
+                        ) === false ? (
+                          <Button
+                            size="large"
+                            // variant="outlined"
+                            sx={{ borderRadius: "20rem" }}
+                            className={classes.join}
+                            variant={"contained"}
+                            color={"primary"}
+                            disableRipple
+                            component={Link}
+                            to={`/event/${event.id}/eventSignUp`}
+                            startIcon={<AppRegistrationIcon />}
+                          >
+                            报名
+                          </Button>
+                        ) : (
+                          <Box className={classes.alert}>
+                            <Alert severity="success">你已经报过名啦~🥳</Alert>
+                          </Box>
+                        )}
+                      </div>
+                    ) : (
+                      <SignUpRequest />
+                    )}
+                  </div>
+                ) : (
+                  <Box className={classes.alert}>
+                    <Alert severity="info">报名结束啦~🥳</Alert>
+                  </Box>
+                )}
               </Box>
             </Container>
 
@@ -424,6 +495,9 @@ export default function EventBody({ event }) {
                                 Going
                               </Typography>
                             )}
+                          </CardContent>
+                          {/* <Divider variant="middle" />
+                          <CardActions className={classes.action}>
                             {endDate > moment().format() ? (
                               <div>
                                 {userInfo.isAuthenticated ? (
@@ -432,15 +506,20 @@ export default function EventBody({ event }) {
                                       (item) =>
                                         item.userID === userAuth.user.username
                                     ) === false ? (
-                                      <CardActions>
-                                        <Button
-                                          size="small"
-                                          component={Link}
-                                          to={`/event/${event.id}/eventSignUp`}
-                                        >
-                                          报名
-                                        </Button>
-                                      </CardActions>
+                                      <Button
+                                        size="large"
+                                        // variant="outlined"
+                                        sx={{ borderRadius: "20rem" }}
+                                        className={classes.join}
+                                        variant={"contained"}
+                                        color={"primary"}
+                                        disableRipple
+                                        component={Link}
+                                        to={`/event/${event.id}/eventSignUp`}
+                                        startIcon={<AppRegistrationIcon />}
+                                      >
+                                        报名
+                                      </Button>
                                     ) : (
                                       <Typography variant="subtitle1">
                                         你已经报过名啦~🥳
@@ -456,7 +535,7 @@ export default function EventBody({ event }) {
                                 报名结束啦~🥳
                               </Typography>
                             )}
-                          </CardContent>
+                          </CardActions> */}
                         </Card>
                       </Grid>
                       <Grid item xs={6} sm={8} md={8}>

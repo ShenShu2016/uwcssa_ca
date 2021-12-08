@@ -14,13 +14,14 @@ import {
 import { Link, Redirect } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 // import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import amazonLogo from "../../static/svg icons/amazon.svg";
-import appleLogo from "../../static/svg icons/apple.svg";
+// import amazonLogo from "../../static/svg icons/amazon.svg";
+// import appleLogo from "../../static/svg icons/apple.svg";
 // import facebookLogo from "../../static/svg icons/facebook.svg";
 // import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
@@ -84,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
 
     marginTop: "2rem",
+  },
+  join: {
+    background: "linear-gradient(to top, #638ef0, #82e7fe)",
+    "& > *": {
+      textTransform: "none !important",
+    },
   },
 }));
 
@@ -157,7 +164,17 @@ export default function AlertDialog() {
 
   return (
     <div>
-      <Button size="small" onClick={handleClickOpen}>
+      <Button
+        size="large"
+        // variant="outlined"
+        className={classes.join}
+        sx={{ borderRadius: "20rem" }}
+        variant={"contained"}
+        color={"primary"}
+        disableRipple
+        onClick={handleClickOpen}
+        startIcon={<AppRegistrationIcon />}
+      >
         报名
       </Button>
       <Dialog
@@ -321,7 +338,7 @@ export default function AlertDialog() {
             </Grid> */}
 
             {/* 之后增加点按转入网站的功能 */}
-            <Box className={classes.more_third_party}>
+            {/* <Box className={classes.more_third_party}>
               <img
                 src={appleLogo}
                 alt="appleLogo"
@@ -333,7 +350,7 @@ export default function AlertDialog() {
                 alt="amazonLogo"
                 className={classes.other_third_party}
               />
-            </Box>
+            </Box> */}
           </Box>
         </DialogContent>
         <Divider />
