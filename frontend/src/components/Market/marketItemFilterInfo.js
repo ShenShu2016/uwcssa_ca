@@ -486,11 +486,11 @@ export default function FilterInfo({
             paddingRight="1rem"
             sx={{
               overflowY: "auto",
-              color: "rgb(227 169 169)",
+              color: "#c1c1c1",
 
               transition: "color 0.3s",
               "&:hover": {
-                color: "rgb(179 117 117)",
+                color: "#a9a9a9",
               },
               "&::-webkit-scrollbar": {
                 width: "14px",

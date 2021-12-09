@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogTitle,
@@ -192,34 +193,54 @@ const TitleInfo = ({
         更新于: {updatedAt.length === 0 ? "" : moment(updatedAt).fromNow()}
       </Typography>
       <Stack
-        justifyContent="center"
+        justifyContent="flex-start"
+        marginX="1rem"
         marginY="0.5rem"
         direction="row"
         spacing={1}
+        // sx={{ color: "rgb(116 116 116 / 65%)" }}
       >
         {currentUser === owner ? (
-          <Button
-            component={Link}
-            startIcon={<UpdateIcon />}
-            to={
-              mode === "detail"
-                ? `/market/edit/${type}/${id}`
-                : window.location.pathname
-            }
-            variant="outlined"
-            color="info"
+          <Box
+            sx={{
+              color: "rgb(116 116 116 / 65%)",
+              "&:hover": {
+                color: "rgba(0,0,0,0.85)",
+              },
+            }}
           >
-            编辑
-          </Button>
+            <Button
+              component={Link}
+              startIcon={<UpdateIcon />}
+              to={
+                mode === "detail"
+                  ? `/market/edit/${type}/${id}`
+                  : window.location.pathname
+              }
+              variant="outlined"
+              color="inherit"
+            >
+              编辑
+            </Button>
+          </Box>
         ) : (
-          <Button
-            startIcon={<MessageIcon />}
-            onClick={handleOpen}
-            variant="outlined"
-            color="info"
+          <Box
+            sx={{
+              color: "rgb(116 116 116 / 65%)",
+              "&:hover": {
+                color: "rgba(0,0,0,0.85)",
+              },
+            }}
           >
-            联系
-          </Button>
+            <Button
+              startIcon={<MessageIcon />}
+              onClick={handleOpen}
+              variant="outlined"
+              color="inherit"
+            >
+              联系
+            </Button>
+          </Box>
         )}
         <SimpleDialog
           open={open}
@@ -229,22 +250,40 @@ const TitleInfo = ({
           contactWeChat={contactWeChat}
           onClose={handleClose}
         />
-        <Button
-          startIcon={<BookmarksIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="info"
+        <Box
+          sx={{
+            color: "rgb(116 116 116 / 65%)",
+            "&:hover": {
+              color: "rgba(0,0,0,0.85)",
+            },
+          }}
         >
-          保存
-        </Button>
-        <Button
-          startIcon={<ShareIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="info"
+          <Button
+            startIcon={<BookmarksIcon />}
+            onClick={() => console.log("clicked!")}
+            variant="outlined"
+            color="inherit"
+          >
+            保存
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            color: "rgb(116 116 116 / 65%)",
+            "&:hover": {
+              color: "rgba(0,0,0,0.85)",
+            },
+          }}
         >
-          分享
-        </Button>
+          <Button
+            startIcon={<ShareIcon />}
+            onClick={() => console.log("clicked!")}
+            variant="outlined"
+            color="inherit"
+          >
+            分享
+          </Button>
+        </Box>
       </Stack>
     </React.Fragment>
   );

@@ -203,7 +203,11 @@ export default function EditMarketItemDetail() {
           <Paper
             className={classes.leftInfoPaper}
             elevation={3}
-            sx={{ backgroundColor: "#f9f9f9" }}
+            sx={{
+              backgroundColor: "#f9f9f9",
+              color: "#c1c1c1",
+              transition: "color 0.3s",
+            }}
           >
             <Stack direction="row" justifyContent="space-between">
               <Typography
@@ -211,6 +215,7 @@ export default function EditMarketItemDetail() {
                 gutterBottom
                 component="div"
                 fontWeight="bold"
+                sx={{ color: "rgb(0,0,0)" }}
               >
                 New Item Listing
               </Typography>
@@ -282,7 +287,6 @@ export default function EditMarketItemDetail() {
                         ),
                       }}
                       value={value}
-                      className={classes.titleInput}
                       onChange={(e) => {
                         onChange(e);
                         setFakeItems({ ...fakeItems, price: e.target.value });

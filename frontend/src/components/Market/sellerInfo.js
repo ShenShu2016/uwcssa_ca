@@ -1,4 +1,4 @@
-import { Box, CardHeader, IconButton, Typography } from "@mui/material";
+import { Box, CardHeader, IconButton } from "@mui/material";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -7,11 +7,9 @@ import React from "react";
 const SellerInfo = ({ user, createdAt, owner }) => {
   return (
     <React.Fragment>
-      <Typography margin="1rem" marginY="0.25rem" fontWeight="600">
-        卖家详情
-      </Typography>
-      <Box margin="1rem">
+      <Box marginY="0.5rem">
         <CardHeader
+          sx={{ paddingTop: "0.5rem", paddingBottom: "1.5rem" }}
           avatar={<CustomAvatar component={true} user={user}></CustomAvatar>}
           action={
             <IconButton aria-label="settings">
