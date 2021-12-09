@@ -71,7 +71,7 @@ export default function Staff() {
                   }}
                   selected={liveComponent === "EventTable"}
                 >
-                  <ListItemText primary="UWCSSA 活动" />
+                  <ListItemText primary="活动" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ textAlign: "center", marginTop: 2, color: "steelblue" }}
