@@ -86,11 +86,14 @@ const useStyles = makeStyles((theme) => ({
 
     marginTop: "2rem",
   },
-  join: {
-    background: "linear-gradient(to top, #638ef0, #82e7fe)",
-    "& > *": {
-      textTransform: "none !important",
+  signUpButton: {
+    [theme.breakpoints.up("sm")]: {
+      width: "150px",
     },
+  },
+  join: {
+    height: 45,
+    margin: 8,
   },
 }));
 
@@ -164,19 +167,31 @@ export default function AlertDialog() {
 
   return (
     <div>
-      <Button
-        size="large"
-        // variant="outlined"
-        className={classes.join}
-        sx={{ borderRadius: "20rem" }}
-        variant={"contained"}
-        color={"primary"}
-        disableRipple
-        onClick={handleClickOpen}
-        startIcon={<AppRegistrationIcon />}
-      >
-        报名
-      </Button>
+      <Box className={classes.signUpButton}>
+        <Button
+          size="large"
+          fullWidth
+          className={classes.join}
+          sx={{
+            background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+            "& > *": {
+              textTransform: "none !important",
+            },
+            border: 0,
+            boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+            color: "white",
+            padding: "0 30px",
+            borderRadius: "20rem",
+          }}
+          variant={"contained"}
+          color={"primary"}
+          disableRipple
+          onClick={handleClickOpen}
+          startIcon={<AppRegistrationIcon />}
+        >
+          报名
+        </Button>
+      </Box>
       <Dialog
         open={open}
         onClose={handleClose}

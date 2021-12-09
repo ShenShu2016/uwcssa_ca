@@ -350,7 +350,7 @@ export default function Individual() {
                       id="address"
                       margin="normal"
                       fullWidth
-                      label="地址（如需接送）"
+                      label="地址"
                       variant="outlined"
                       onChange={onChange}
                       value={value}

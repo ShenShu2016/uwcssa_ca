@@ -41,15 +41,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   join: {
-    background: "linear-gradient(to top, #638ef0, #82e7fe)",
-    "& > *": {
-      textTransform: "none !important",
-    },
+    height: 45,
+    margin: 8,
   },
   alert: {
     width: "500px",
     [theme.breakpoints.down("sm")]: {
       width: "330px",
+    },
+  },
+  button: {
+    [theme.breakpoints.up("sm")]: {
+      width: "150px",
     },
   },
 }));
@@ -289,14 +292,14 @@ export default function EventBody({ event }) {
               >
                 {moment(startDate).format("YYYY") ===
                 moment(endDate).format("YYYY") ? (
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" color="primary" gutterBottom>
                     时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
                     {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
                     {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
                     {endDate.slice(11, 16)}
                   </Typography>
                 ) : (
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="h6" color="primary" gutterBottom>
                     时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
                     {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
                     {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
@@ -345,20 +348,35 @@ export default function EventBody({ event }) {
                         {event.eventParticipants.items.some(
                           (item) => item.userID === userAuth.user.username
                         ) === false ? (
-                          <Button
-                            size="large"
-                            // variant="outlined"
-                            sx={{ borderRadius: "20rem" }}
-                            className={classes.join}
-                            variant={"contained"}
-                            color={"primary"}
-                            disableRipple
-                            component={Link}
-                            to={`/event/${event.id}/eventSignUp`}
-                            startIcon={<AppRegistrationIcon />}
-                          >
-                            报名
-                          </Button>
+                          <Box className={classes.button}>
+                            <Button
+                              size="large"
+                              // variant="outlined"
+                              fullWidth
+                              sx={{
+                                background:
+                                  "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                                "& > *": {
+                                  textTransform: "none !important",
+                                },
+                                border: 0,
+                                boxShadow:
+                                  "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                                color: "white",
+                                padding: "0 30px",
+                                borderRadius: "20rem",
+                              }}
+                              className={classes.join}
+                              variant={"contained"}
+                              color={"primary"}
+                              disableRipple
+                              component={Link}
+                              to={`/event/${event.id}/eventSignUp`}
+                              startIcon={<AppRegistrationIcon />}
+                            >
+                              报名
+                            </Button>
+                          </Box>
                         ) : (
                           <Box className={classes.alert}>
                             <Alert severity="success">你已经报过名啦~🥳</Alert>
@@ -371,7 +389,7 @@ export default function EventBody({ event }) {
                   </div>
                 ) : (
                   <Box className={classes.alert}>
-                    <Alert severity="info">报名结束啦~🥳</Alert>
+                    <Alert severity="info">活动结束啦~🥳</Alert>
                   </Box>
                 )}
               </Box>
@@ -395,7 +413,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>Details</b>
+                              <b>详情</b>
                             </Typography>
                             {sponsor ? (
                               <Typography variant="body2" gutterBottom>
@@ -403,7 +421,7 @@ export default function EventBody({ event }) {
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                Sponsored by {sponsor}
+                                主办方/赞助方： {sponsor}
                               </Typography>
                             ) : null}
                             {location ? (
@@ -469,7 +487,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>Participants</b>
+                              <b>参与者</b>
                             </Typography>
                             {eventParticipants.items.length === 0 ? (
                               <Typography
@@ -477,7 +495,7 @@ export default function EventBody({ event }) {
                                 sx={{ textAlign: "center" }}
                                 gutterBottom
                               >
-                                0 Going
+                                已有0人报名
                               </Typography>
                             ) : (
                               <Typography
@@ -485,14 +503,15 @@ export default function EventBody({ event }) {
                                 sx={{ textAlign: "center" }}
                                 gutterBottom
                               >
+                                已有
                                 {eventParticipants.items.reduce(function (
                                   sum,
                                   items
                                 ) {
                                   return sum + items.numberOfPeople;
                                 },
-                                0)}{" "}
-                                Going
+                                0)}
+                                人报名
                               </Typography>
                             )}
                           </CardContent>
@@ -546,7 +565,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>Contact</b>
+                              <b>联系方式</b>
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
                               如果你对此活动有任何疑问可以扫描以下二维码
@@ -598,7 +617,7 @@ export default function EventBody({ event }) {
                                   variant="subtitle1"
                                   sx={{ marginBottom: "3rem" }}
                                 >
-                                  需要登入才能扫描哦
+                                  需要登入才能扫描哦 ~
                                 </Typography>
                               </Box>
                             )}
