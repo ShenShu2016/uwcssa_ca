@@ -40,6 +40,7 @@ export default function MarketComponent({ item, type }) {
   const dispatch = useDispatch();
   const [imageURL, setImageURL] = useState(null);
   const [hoverRef, isHover] = useHover();
+
   const {
     id,
     title,
@@ -62,6 +63,7 @@ export default function MarketComponent({ item, type }) {
     // ByCreatedAt,
   } = item;
   const imgKeys = useSelector((state) => selectImageById(state, id));
+  const status = useSelector((state) => state.images.getImageStatus);
   const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
     marketRentalOptions;
 
@@ -83,6 +85,7 @@ export default function MarketComponent({ item, type }) {
     }
   }, [imgS3Keys, imgKeys, dispatch, id]);
 
+  console.log(status);
   const displayInfo = () => {
     if (type === "item") {
       return (

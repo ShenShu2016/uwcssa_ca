@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, Stack } from "@mui/material";
+import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
@@ -65,7 +65,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         make={make}
         model={model}
       />
-      <Divider />
+      <Divider variant="middle" />
       <DetailInfo
         type="vehicle"
         tags={tags}
@@ -79,7 +79,9 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         interiorColor={interiorColor}
         fuelType={fuelType}
       />
-      <Divider />
+      <Divider variant="middle">
+        <Typography fontWeight="600">卖家详情</Typography>
+      </Divider>
       <SellerInfo user={user} createdAt={createdAt} owner={owner} />
     </Paper>
   );

@@ -56,11 +56,11 @@ const DetailInfo = ({
   console.log("type", type);
   return (
     <React.Fragment>
-      <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+      <Typography marginX="1rem" marginY="0.5rem" fontWeight="600">
         详情
       </Typography>
       {type === "item" ? (
-        <Grid marginX="0.5rem" container spacing={2}>
+        <Grid marginX="0rem" container spacing={2}>
           <Grid item xs={4}>
             类别
           </Grid>
@@ -83,7 +83,7 @@ const DetailInfo = ({
         </Grid>
       ) : null}
       {type === "rental" ? (
-        <Grid marginX="0.5rem" container spacing={2}>
+        <Grid marginX="0rem" container spacing={2}>
           <Grid item xs={4}>
             空调
           </Grid>
@@ -115,7 +115,7 @@ const DetailInfo = ({
         </Grid>
       ) : null}
       {type === "vehicle" ? (
-        <Grid marginX="0.5rem" container spacing={2}>
+        <Grid marginX="0rem" container spacing={2}>
           <Grid item xs={4}>
             车型
           </Grid>
@@ -159,7 +159,7 @@ const DetailInfo = ({
       {tags && (
         <Box>
           <Box>
-            <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
+            <Typography marginX="1rem" marginY="0.5rem" fontWeight="600">
               标签
             </Typography>
           </Box>
@@ -169,17 +169,21 @@ const DetailInfo = ({
             marginBottom="0.5rem"
             spacing={2}
           >
-            {tags.map((tag, tagIdx) => {
-              return <Chip key={tagIdx} label={tag} />;
-            })}
+            {tags.length !== 0 ? (
+              tags.map((tag, tagIdx) => {
+                return <Chip key={tagIdx} label={tag} />;
+              })
+            ) : (
+              <Chip label={"无"} />
+            )}
           </Stack>
         </Box>
       )}
-      <Divider />
+      <Divider variant="middle" />
       <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
         详情描述
       </Typography>
-      <Typography marginX="1rem" marginY="0.25rem">
+      <Typography marginX="1rem" marginY="0.25rem" fontWeight="350">
         {description.length === 0 ? "Description Goes Here" : description}
       </Typography>
       <Paper
@@ -188,18 +192,18 @@ const DetailInfo = ({
           marginY: "0.25rem",
           height: "250px",
           backgroundColor: "rgb(243, 246, 249)",
-          marginBottom: "1rem",
+          color: "rgb(161 161 161 / 87%)",
         }}
       >
-        Google Map
+        Google Map Currently Unavailable
       </Paper>
       {type === "item" || type === "vehicle" ? (
-        <Typography margin="1rem" marginY="0.25rem">
+        <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
           {location.length === 0 ? "Location Goes Here" : location}
         </Typography>
       ) : null}
       {type === "rental" ? (
-        <Typography margin="1rem" marginY="0.25rem">
+        <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
           {address.length === 0 ? "Address Goes Here" : address}
         </Typography>
       ) : null}
