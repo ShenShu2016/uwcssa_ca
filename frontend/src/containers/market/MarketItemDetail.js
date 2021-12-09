@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, Stack } from "@mui/material";
+import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
@@ -60,7 +60,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
         handleOpen={() => setOpen(true)}
         type="item"
       />
-      <Divider />
+      <Divider variant="middle" />
       <DetailInfo
         marketItemCategory={marketItemCategory}
         marketItemCondition={marketItemCondition}
@@ -69,7 +69,9 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
         location={location}
         type="item"
       />
-      <Divider />
+      <Divider variant="middle">
+        <Typography fontWeight="600">卖家详情</Typography>
+      </Divider>
       <SellerInfo user={user} createdAt={createdAt} owner={owner} />
     </Paper>
   );

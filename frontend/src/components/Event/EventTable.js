@@ -1,6 +1,6 @@
 import {
-  Button,
   Box,
+  Button,
   IconButton,
   Paper,
   Table,
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginBottom: "3rem",
   },
-  content: {
-    margin: "3rem",
-    padding: "3rem",
-  },
+  // content: {
+  //   margin: "3rem",
+  //   padding: "3rem",
+  // },
 
   table: {
     minWidth: 650,
@@ -181,7 +181,7 @@ export default function SimpleTable() {
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox" />
-                <TableCell sx={{ width: 150 }}>ID</TableCell>
+                {/* <TableCell sx={{ width: 150 }}>ID</TableCell> */}
                 <TableCell sx={{ width: 110 }}>Title</TableCell>
                 <TableCell sx={{ width: 110 }}>Topic</TableCell>
                 <TableCell sx={{ width: 150 }}>Location</TableCell>
@@ -201,18 +201,18 @@ export default function SimpleTable() {
                       >
                         <Box margin={1}>
                           <Typography variant="h6" gutterBottom component="div">
-                            Participants
+                            报名者
                           </Typography>
                           <Table size="small" aria-label="purchases">
                             <TableHead>
                               <TableRow>
-                                <TableCell>Username</TableCell>
-                                <TableCell>email</TableCell>
-                                <TableCell>weChat</TableCell>
-                                <TableCell>phone</TableCell>
-                                <TableCell>number of people</TableCell>
-                                <TableCell>address</TableCell>
-                                <TableCell>message</TableCell>
+                                <TableCell>用户名</TableCell>
+                                <TableCell>Email</TableCell>
+                                <TableCell>微信</TableCell>
+                                <TableCell>电话</TableCell>
+                                <TableCell>人数</TableCell>
+                                <TableCell>地址</TableCell>
+                                <TableCell>备注</TableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
@@ -249,9 +249,9 @@ export default function SimpleTable() {
                       </TableCell>
                     }
                   >
-                    <TableCell component="th" scope="row">
+                    {/* <TableCell component="th" scope="row">
                       {row.id}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell component="th" scope="row">
                       {row.title}
                     </TableCell>

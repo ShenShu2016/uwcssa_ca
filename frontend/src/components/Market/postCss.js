@@ -133,11 +133,9 @@ export const postStyle = makeStyles((theme) => ({
     height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
-    // color: "rgb(227 169 169)",
 
-    // transition: "color 0.3s",
     "&:hover": {
-      color: "rgb(179 117 117)",
+      color: "#a9a9a9",
     },
     "&::-webkit-scrollbar": {
       width: "14px",

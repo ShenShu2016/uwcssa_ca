@@ -316,7 +316,7 @@ export default function Individual() {
                       margin="normal"
                       fullWidth
                       autoComplete="weChat"
-                      label="微信号"
+                      label="微信号(可以不填)"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
@@ -350,10 +350,11 @@ export default function Individual() {
                       id="address"
                       margin="normal"
                       fullWidth
-                      label="地址（如需接送）"
+                      label="地址"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
+                      helperText={"送货地址或者接送地址"}
                     />
                   )}
                 />

@@ -324,7 +324,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>Details</b>
+                              <b>详细信息</b>
                             </Typography>
                             {sponsor ? (
                               <Typography variant="body2" gutterBottom>
@@ -370,7 +370,7 @@ export default function EventBody({ event }) {
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                InProgress
+                                正在进行中
                               </Typography>
                             )}
                             <Box sx={{ my: 3 }}>
@@ -398,7 +398,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>Participants</b>
+                              <b>参与人数</b>
                             </Typography>
                             {eventParticipants.items.length === 0 ? (
                               <Typography
@@ -421,7 +421,7 @@ export default function EventBody({ event }) {
                                   return sum + items.numberOfPeople;
                                 },
                                 0)}{" "}
-                                Going
+                                人报名
                               </Typography>
                             )}
                             {endDate > moment().format() ? (
@@ -467,7 +467,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>Contact</b>
+                              <b>联系方式</b>
                             </Typography>
                             <Typography variant="subtitle1" gutterBottom>
                               如果你对此活动有任何疑问可以扫描以下二维码
