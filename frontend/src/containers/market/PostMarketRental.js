@@ -219,7 +219,7 @@ export default function PostMarketRental() {
             elevation={3}
             sx={{
               backgroundColor: "#f9f9f9",
-              color: "rgb(227 169 169)",
+              color: "#c1c1c1",
               transition: "color 0.3s",
             }}
           >

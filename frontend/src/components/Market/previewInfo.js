@@ -15,6 +15,29 @@ const useStyle = makeStyles((theme) => ({
     overflowY: "auto",
     display: "flex",
     flexDirection: "row",
+    color: "#c1c1c1",
+    transition: "color 0.3s",
+    "&:hover": {
+      color: "#a9a9a9",
+    },
+    "&::-webkit-scrollbar": {
+      width: "14px",
+    },
+
+    "&::-webkit-scrollbar-button": {
+      width: 0,
+      height: 0,
+      display: "none",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundClip: "content-box",
+      border: "4px solid transparent",
+      borderRadius: "7px",
+      boxShadow: "inset 0 0 0 10px",
+    },
+    "&::-webkit-scrollbar-corner": {
+      backgroundColor: "transparent",
+    },
     [theme.breakpoints.down("lg")]: {
       display: "block",
     },
@@ -34,6 +57,7 @@ const useStyle = makeStyles((theme) => ({
     height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
+
     [theme.breakpoints.down("lg")]: {
       width: "100%",
       height: "100vh",

@@ -428,7 +428,7 @@ export default function EventBody({ event }) {
                               component="div"
                               gutterBottom
                             >
-                              <b>详情</b>
+                              <b>详细信息</b>
                             </Typography>
                             {sponsor ? (
                               <Typography variant="body2" gutterBottom>
@@ -474,7 +474,7 @@ export default function EventBody({ event }) {
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                InProgress
+                                正在进行中
                               </Typography>
                             )}
                             <Box sx={{ my: 3 }}>
