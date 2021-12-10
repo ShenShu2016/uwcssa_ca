@@ -19,7 +19,6 @@ import { useTitle } from "../../Hooks/useTitle";
 
 export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
   const [open, setOpen] = useState(false);
-
   const {
     id,
     // name,
@@ -46,7 +45,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
     owner,
   } = marketItem;
   return (
-    <Paper sx={{ maxWidth: "100%" }}>
+    <Paper>
       <TitleInfo
         id={id}
         mode={mode}
@@ -114,10 +113,7 @@ export default function MarketVehicleDetail() {
           <Box className={classes.images}>
             <SwipeViews images={imgKeyFromServer} />
           </Box>
-          <Box
-            // bgcolor="yellow"
-            className={classes.info}
-          >
+          <Box className={classes.info}>
             <MarketVehicleInfo marketItem={marketItem} />
           </Box>
         </Stack>

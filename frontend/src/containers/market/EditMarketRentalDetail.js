@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -69,6 +70,7 @@ export default function EditMarketRentalDetail() {
     contactPhone,
   } = marketItem;
   const [uploadStatus, setUploadStatus] = useState("idle");
+  const [loading, setLoading] = useState(false);
   const [trigger, setTrigger] = useState(true);
   let temp = [];
   imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
@@ -182,7 +184,8 @@ export default function EditMarketRentalDetail() {
       email: contactEmail,
       userID: marketUserInfo.userID,
     };
-    console.log("createMarketItemInput", createMarketItemInput);
+    // console.log("createMarketItemInput", createMarketItemInput);
+    setLoading(true);
     const response = await dispatch(
       updateMarketItemDetail(createMarketItemInput)
     );
@@ -642,6 +645,18 @@ export default function EditMarketRentalDetail() {
               color="primary"
             >
               上传 MarketHome
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Paper>
         </Box>

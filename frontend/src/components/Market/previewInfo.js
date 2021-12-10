@@ -15,6 +15,25 @@ const useStyle = makeStyles((theme) => ({
     overflowY: "auto",
     display: "flex",
     flexDirection: "row",
+    [theme.breakpoints.down("lg")]: {
+      display: "block",
+    },
+  },
+  previewImgRight: {
+    width: "calc(100% - 350px)",
+    height: "100%",
+    position: "relative",
+    backgroundColor: "rgb(243, 246, 249)",
+    [theme.breakpoints.down("lg")]: {
+      width: "100%",
+      height: "40vh",
+    },
+  },
+  previewInfo: {
+    width: "350px",
+    height: "100%",
+    overflowY: "auto",
+    overflowX: "hidden",
     color: "#c1c1c1",
     transition: "color 0.3s",
     "&:hover": {
@@ -38,26 +57,6 @@ const useStyle = makeStyles((theme) => ({
     "&::-webkit-scrollbar-corner": {
       backgroundColor: "transparent",
     },
-    [theme.breakpoints.down("lg")]: {
-      display: "block",
-    },
-  },
-  previewImgRight: {
-    width: "calc(100% - 350px)",
-    height: "100%",
-    position: "relative",
-    backgroundColor: "rgb(243, 246, 249)",
-    [theme.breakpoints.down("lg")]: {
-      width: "100%",
-      height: "40vh",
-    },
-  },
-  previewInfo: {
-    width: "350px",
-    height: "100%",
-    overflowY: "auto",
-    overflowX: "hidden",
-
     [theme.breakpoints.down("lg")]: {
       width: "100%",
       height: "100vh",
