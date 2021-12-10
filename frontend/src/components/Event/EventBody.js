@@ -8,8 +8,6 @@ import {
   CardContent,
   CircularProgress,
   Container,
-  Divider,
-  // Divider,
   Grid,
   Stack,
   Tab,
@@ -53,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   alert: {
     width: "500px",
     [theme.breakpoints.down("sm")]: {
-      width: "330px",
+      width: "auto",
     },
   },
   button: {
