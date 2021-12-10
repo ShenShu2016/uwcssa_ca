@@ -8,8 +8,10 @@ import {
   CardContent,
   CircularProgress,
   Container,
+  Divider,
   // Divider,
   Grid,
+  Stack,
   Tab,
   Tabs,
   Typography,
@@ -32,6 +34,10 @@ import Storage from "@aws-amplify/storage";
 import TopicIcon from "@mui/icons-material/Topic";
 import moment from "moment";
 import { makeStyles } from "@mui/styles";
+import ForumIcon from "@mui/icons-material/Forum";
+import EventIcon from "@mui/icons-material/Event";
+import Share from "./EventDetail/Share";
+
 const useStyles = makeStyles((theme) => ({
   action: {
     display: "flex",
@@ -331,67 +337,76 @@ export default function EventBody({ event }) {
                   borderColor: "divider",
                 }}
               >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
-                >
-                  <Tab label="活动详情" {...a11yProps(0)} />
-                  <Tab label="活动讨论" {...a11yProps(1)} />
+                <Tabs value={value} onChange={handleChange}>
+                  <Tab
+                    icon={<EventIcon />}
+                    label="活动详情"
+                    {...a11yProps(0)}
+                  />
+                  <Tab
+                    icon={<ForumIcon />}
+                    label="活动讨论"
+                    {...a11yProps(1)}
+                  />
                 </Tabs>
               </Box>
               <Box className={classes.action}>
-                {endDate > moment().format() ? (
-                  <div>
-                    {userInfo.isAuthenticated ? (
-                      <div>
-                        {event.eventParticipants.items.some(
-                          (item) => item.userID === userAuth.user.username
-                        ) === false ? (
-                          <Box className={classes.button}>
-                            <Button
-                              size="large"
-                              // variant="outlined"
-                              fullWidth
-                              sx={{
-                                background:
-                                  "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                                "& > *": {
-                                  textTransform: "none !important",
-                                },
-                                border: 0,
-                                boxShadow:
-                                  "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                                color: "white",
-                                padding: "0 30px",
-                                borderRadius: "20rem",
-                              }}
-                              className={classes.join}
-                              variant={"contained"}
-                              color={"primary"}
-                              disableRipple
-                              component={Link}
-                              to={`/event/${event.id}/eventSignUp`}
-                              startIcon={<AppRegistrationIcon />}
-                            >
-                              报名
-                            </Button>
-                          </Box>
-                        ) : (
-                          <Box className={classes.alert}>
-                            <Alert severity="success">你已经报过名啦~🥳</Alert>
-                          </Box>
-                        )}
-                      </div>
-                    ) : (
-                      <SignUpRequest />
-                    )}
-                  </div>
-                ) : (
-                  <Box className={classes.alert}>
-                    <Alert severity="info">活动结束啦~🥳</Alert>
-                  </Box>
-                )}
+                <Stack direction="row" spacing={2}>
+                  {endDate > moment().format() ? (
+                    <div>
+                      {userInfo.isAuthenticated ? (
+                        <div>
+                          {event.eventParticipants.items.some(
+                            (item) => item.userID === userAuth.user.username
+                          ) === false ? (
+                            <Box className={classes.button}>
+                              <Button
+                                size="large"
+                                // variant="outlined"
+                                fullWidth
+                                sx={{
+                                  background:
+                                    "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                                  "& > *": {
+                                    textTransform: "none !important",
+                                  },
+                                  border: 0,
+                                  boxShadow:
+                                    "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                                  color: "white",
+                                  padding: "0 30px",
+                                  borderRadius: "20rem",
+                                }}
+                                className={classes.join}
+                                variant={"contained"}
+                                color={"primary"}
+                                disableRipple
+                                component={Link}
+                                to={`/event/${event.id}/eventSignUp`}
+                                startIcon={<AppRegistrationIcon />}
+                              >
+                                报名
+                              </Button>
+                            </Box>
+                          ) : (
+                            <Box className={classes.alert}>
+                              <Alert severity="success">
+                                你已经报过名啦~🥳
+                              </Alert>
+                            </Box>
+                          )}
+                        </div>
+                      ) : (
+                        <SignUpRequest />
+                      )}
+                    </div>
+                  ) : (
+                    <Box className={classes.alert}>
+                      <Alert severity="info">活动结束啦~🥳</Alert>
+                    </Box>
+                  )}
+                  <Share label={title} />
+                </Stack>
               </Box>
             </Container>
 
