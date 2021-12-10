@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -46,6 +47,7 @@ export default function EditMarketItemDetail() {
   useTitle("更新二手商品信息");
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const [fakeItems, setFakeItems] = useState(marketItem);
+  const [loading, setLoading] = useState(false);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, marketItem.userID)
   );
@@ -158,7 +160,8 @@ export default function EditMarketItemDetail() {
       email: contactEmail,
       userID: marketUserInfo.userID,
     };
-    console.log("createMarketItemInput", createMarketItemInput);
+    // console.log("createMarketItemInput", createMarketItemInput);
+    setLoading(true);
     const response = await dispatch(
       updateMarketItemDetail(createMarketItemInput)
     );
@@ -429,7 +432,19 @@ export default function EditMarketItemDetail() {
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传MarketItem
+              上传MarketItem{" "}
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Paper>
         </Box>

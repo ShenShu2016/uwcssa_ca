@@ -183,9 +183,16 @@ const DetailInfo = ({
       <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
         详情描述
       </Typography>
-      <Typography marginX="1rem" marginY="0.25rem" fontWeight="350">
+      <Typography
+        marginX="1rem"
+        marginY="0.25rem"
+        fontWeight="350"
+        component="div"
+        style={{ wordBreak: "break-word" }}
+      >
         {description.length === 0 ? "Description Goes Here" : description}
       </Typography>
+
       <Paper
         sx={{
           marginX: "1rem",
