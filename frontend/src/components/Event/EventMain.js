@@ -4,6 +4,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Chip,
   Grid,
   Typography,
 } from "@mui/material";
@@ -15,7 +16,8 @@ import { Link } from "react-router-dom";
 // import SignUpRequest from "../Auth/SignUpRequireDialog";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 // import { useSelector } from "react-redux";
 
 // import LinesEllipsis from "react-lines-ellipsis";
@@ -73,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     padding: "8px 16px",
     // margin: spacing(0.5),
+  },
+  locationIcon: {
+    marginRight: 4,
+    fontSize: 18,
   },
 }));
 
@@ -173,68 +179,122 @@ export default function EventMain({ event }) {
               </Box>
             )}
             <CardContent>
-              {moment(startDate).format("YYYY") ===
-              moment(endDate).format("YYYY") ? (
-                <Typography variant="subtitle2" gutterBottom>
-                  时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
-                  {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                  {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
-                  {endDate.slice(11, 16)}
-                </Typography>
-              ) : (
-                <Typography variant="subtitle2" gutterBottom>
-                  时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
-                  {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                  {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
-                  {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
-                </Typography>
-              )}
-              <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
+              <Box
+                style={{
+                  maxHeight: "30px",
+                  overflow: "hidden",
+                  marginBottom: "1rem",
+                }}
+              >
                 <Typography
                   variant="subtitle1"
                   style={{
                     wordBreak: "break-word",
                     overflow: "hidden",
                   }}
-                  gutterBottom
                 >
                   <b>{title}</b>
                 </Typography>
               </Box>
 
-              {location ? (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
+              {moment(startDate).format("YYYY") ===
+              moment(endDate).format("YYYY") ? (
+                <Box
+                  color={"grey.700"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
                 >
-                  地址： {location}
-                </Typography>
+                  <CalendarTodayIcon className={classes.locationIcon} />
+                  <Typography variant="subtitle2">
+                    {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                    {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                    {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
+                    {endDate.slice(11, 16)}
+                  </Typography>
+                </Box>
               ) : (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
+                <Box
+                  color={"grey.700"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
                 >
-                  地址： 无
-                </Typography>
+                  <CalendarTodayIcon className={classes.locationIcon} />
+                  <Typography variant="subtitle2">
+                    {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                    {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                    {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
+                    {endDate.slice(8, 10)} {endDate.slice(11, 16)}
+                  </Typography>
+                </Box>
               )}
-              {topic.name ? (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
+
+              {location ? (
+                <Box
+                  sx={{ overflow: "hidden", height: "30px" }}
+                  color={"grey.700"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
                 >
-                  类别： {topic.name}
-                </Typography>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <LocationOnIcon className={classes.locationIcon} />
+                    <Grid item xs zeroMinWidth>
+                      <Typography
+                        variant="subtitle2"
+                        color="textSecondary"
+                        noWrap
+                      >
+                        {location}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
               ) : (
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  gutterBottom
+                <Box
+                  sx={{ overflow: "hidden", height: "30px" }}
+                  color={"grey.700"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
                 >
-                  类别： 无
-                </Typography>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <LocationOnIcon className={classes.locationIcon} />
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="subtitle2" color="textSecondary">
+                        无
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              )}
+              <Box
+                sx={{
+                  overflow: "hidden",
+                  height: "30px",
+                  marginBottom: "1rem",
+                }}
+              >
+                <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="body2" color="text.secondary" noWrap>
+                      {content}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+              {topic.name ? (
+                <Chip label={topic.name} sx={{ color: "#757de8" }} />
+              ) : (
+                // <Typography
+                //   variant="subtitle2"
+                //   color="textSecondary"
+                //   gutterBottom
+                // >
+                //   类别： {topic.name}
+                // </Typography>
+                <Chip label="无" sx={{ color: "#757de8" }} />
               )}
 
               {/* 
@@ -255,16 +315,6 @@ export default function EventMain({ event }) {
                 {content}
               </Typography>
             </Box> */}
-
-              <Box sx={{ overflow: "hidden", height: "30px" }}>
-                <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                  <Grid item xs zeroMinWidth>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {content}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
             </CardContent>
             {/* <CardActions>
           {userInfo.isAuthenticated ? (
