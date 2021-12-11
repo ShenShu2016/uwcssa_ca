@@ -31,7 +31,7 @@ function ArticleSideBar() {
   return (
     <Paper variant="outlined" className={classes.root}>
       {/* <img
-        src="https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
+        src="https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
         alt="作者"
         style={{ width: "100%" }}
       /> */}

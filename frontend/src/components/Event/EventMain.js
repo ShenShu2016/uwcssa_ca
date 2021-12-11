@@ -8,19 +8,13 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
-import { useDispatch, useSelector } from "react-redux";
 
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { Link } from "react-router-dom";
-// import SignUpRequest from "../Auth/SignUpRequireDialog";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React from "react";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-// import { useSelector } from "react-redux";
-
-// import LinesEllipsis from "react-lines-ellipsis";
 
 const useStyles = makeStyles((theme) => ({
   actionArea: {
@@ -94,50 +88,18 @@ const EventTag = ({ label }) => {
 
 export default function EventMain({ event }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [imageURL, setImageURL] = useState(null);
 
-  // console.log("event", event);
   const {
     id,
     content,
     title,
-    posterImgS3Key,
+    posterImgURL,
     location,
     startDate,
     endDate,
     topic,
   } = event;
 
-  const imgKeys = useSelector((state) =>
-    selectImageById(state, posterImgS3Key)
-  );
-
-  useEffect(() => {
-    const getImages = async () => {
-      try {
-        const response = await dispatch(
-          getImage({ url: [posterImgS3Key], id: posterImgS3Key })
-        );
-        setImageURL(response.payload.imgUrl);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImageURL(null);
-      }
-    };
-    if (posterImgS3Key && imgKeys === undefined) {
-      getImages();
-    } else if (posterImgS3Key && imgKeys !== undefined) {
-      setImageURL(Object.values(imgKeys.images)[0]);
-    } else if (posterImgS3Key === "") {
-      setImageURL(
-        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
-      );
-    }
-  }, [posterImgS3Key, imgKeys, dispatch]);
-
-  // const userInfo = useSelector((state) => state.userAuth);
-  //console.log("imageURL,imgKeys", imageURL, imgKeys);
   return (
     <Grid
       item
@@ -154,7 +116,15 @@ export default function EventMain({ event }) {
       >
         <Card className={classes.cardDetails}>
           <Box sx={{ position: "relative" }}>
-            <CardMedia component="img" height="194" image={imageURL} />
+            <CardMedia
+              component="img"
+              height="194"
+              image={
+                posterImgURL
+                  ? posterImgURL
+                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+              }
+            />
             {startDate > moment().format() && endDate > moment().format() ? (
               <Box
                 sx={{

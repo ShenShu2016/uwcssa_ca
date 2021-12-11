@@ -10,6 +10,9 @@ export const getEvent = /* GraphQL */ `
       backGroundImgS3Key
       qrCodeImgS3Key
       posterImgS3Key
+      posterImgURL
+      qrCodeImgURL
+      backGroundImgURL
       content
       location
       sponsor
