@@ -60,7 +60,11 @@ export default function BasicInfo({ user, ownerID }) {
         <Card elevation={0} className={classes.header}>
           <CardActionArea onClick={isPermit ? handleEditClickOpen : undefined}>
             <img
-              src={user.backGroundImgURL}
+              src={
+                user.backGroundImgURL
+                  ? user.backGroundImgURL
+                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+              }
               alt="backGroundImgURL"
               style={{
                 width: "100%",

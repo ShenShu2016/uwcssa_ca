@@ -15,7 +15,6 @@ import QrCodeUwinStudent from "./QrCodeUwinStudent";
 import React from "react";
 import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
-import useGetImages from "../../useGetImages";
 import { useTitle } from "../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,26 +47,25 @@ export default function Main({ article }) {
   // console.log("Main", article);
   const {
     content,
-    imgS3Keys,
+    imgURLs,
     tags,
     topic,
     createdAt,
     user,
     owner,
     qrCodeImgURL,
+
     id,
   } = article;
-
-  const imgKeyFromServer = useGetImages(article, id);
 
   return (
     <div className={classes.root}>
       {article.active === true ? (
         <Box className={classes.main}>
-          {imgS3Keys ? (
-            imgKeyFromServer[0] ? (
+          {imgURLs ? (
+            imgURLs[0] ? (
               <Box className={classes.swipeViews}>
-                <SwipeViews images={imgKeyFromServer} />
+                <SwipeViews images={imgURLs} />
               </Box>
             ) : (
               <Box sx={{ my: 3 }}>
