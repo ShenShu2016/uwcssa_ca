@@ -25,7 +25,9 @@ export const getUwcssaJobResume = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -302,7 +304,9 @@ export const getUwcssaJobResume = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -358,7 +362,9 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -412,7 +418,9 @@ export const getUserMutationLog = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -695,7 +703,9 @@ export const listUserMutationLogs = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -747,7 +757,9 @@ export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -816,7 +828,9 @@ export const userMutationLogSortByUserID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -867,7 +881,9 @@ export const userMutationLogSortBySortKey = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -918,7 +934,9 @@ export const userMutationLogSortBy__typename = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -958,7 +976,9 @@ export const userSortBySortKey = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -1222,7 +1242,9 @@ export const getUser = /* GraphQL */ `
       intro
       major
       avatarImgS3Key
+      avatarImgURL
       backGroundImgS3Key
+      backGroundImgURL
       linkedIn
       github
       sortKey
@@ -1244,7 +1266,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1262,7 +1286,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1402,7 +1428,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1440,7 +1468,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1480,7 +1510,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1541,7 +1573,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1591,7 +1625,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1642,7 +1678,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1683,7 +1721,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1724,7 +1764,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1767,7 +1809,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1796,7 +1840,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1833,7 +1879,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1885,7 +1933,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1903,7 +1953,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -1991,7 +2043,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -2022,7 +2076,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -2052,7 +2108,9 @@ export const getUser = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -2175,7 +2233,9 @@ export const listUsers = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -2451,7 +2511,9 @@ export const getUserEducation = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -2732,7 +2794,9 @@ export const listUserEducations = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -2771,7 +2835,9 @@ export const getUserExperience = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -3053,7 +3119,9 @@ export const listUserExperiences = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -3085,7 +3153,9 @@ export const getTopic = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -3401,7 +3471,9 @@ export const listTopics = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -3445,7 +3517,9 @@ export const getArticle = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -3709,7 +3783,9 @@ export const getArticle = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -3782,7 +3858,9 @@ export const listArticles = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -3848,7 +3926,9 @@ export const articleSortBySortKey = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -3894,7 +3974,9 @@ export const getArticleComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -4165,7 +4247,9 @@ export const getArticleComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -4241,7 +4325,9 @@ export const listArticleComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -4310,7 +4396,9 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -4364,7 +4452,9 @@ export const getArticleSubComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -4630,7 +4720,9 @@ export const getArticleSubComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -4705,7 +4797,9 @@ export const listArticleSubComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -4767,7 +4861,9 @@ export const articleSubCommentSortByArticleCommentID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -4827,7 +4923,9 @@ export const getEvent = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -5091,7 +5189,9 @@ export const getEvent = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -5192,7 +5292,9 @@ export const listEvents = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -5269,7 +5371,9 @@ export const eventSortBySortKey = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -5318,7 +5422,9 @@ export const getEventComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -5597,7 +5703,9 @@ export const getEventComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -5676,7 +5784,9 @@ export const listEventComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -5753,7 +5863,9 @@ export const eventCommentSortByEventID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -5815,7 +5927,9 @@ export const getEventSubComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -6081,7 +6195,9 @@ export const getEventSubComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -6164,7 +6280,9 @@ export const listEventSubComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -6226,7 +6344,9 @@ export const eventSubCommentSortByEventCommentID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -6280,7 +6400,9 @@ export const getEventParticipant = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -6559,7 +6681,9 @@ export const getEventParticipant = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -6624,7 +6748,9 @@ export const listEventParticipants = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -6702,7 +6828,9 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -6759,7 +6887,9 @@ export const getDepartment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -7056,7 +7186,9 @@ export const listDepartments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -7117,7 +7249,9 @@ export const getUwcssaJob = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -7384,7 +7518,9 @@ export const getUwcssaJob = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -7435,7 +7571,9 @@ export const listUwcssaJobs = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -7504,7 +7642,9 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -7545,7 +7685,9 @@ export const getForumTopic = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -7830,7 +7972,9 @@ export const listForumTopics = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -7865,7 +8009,9 @@ export const getForumSubTopic = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -8129,7 +8275,9 @@ export const getForumSubTopic = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8187,7 +8335,9 @@ export const listForumSubTopics = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8250,7 +8400,9 @@ export const forumPostSortBySortKey = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8322,7 +8474,9 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8394,7 +8548,9 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8451,7 +8607,9 @@ export const getForumPost = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -8716,7 +8874,9 @@ export const getForumPost = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8810,7 +8970,9 @@ export const listForumPosts = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -8862,7 +9024,9 @@ export const getForumPostComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -9133,7 +9297,9 @@ export const getForumPostComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -9221,7 +9387,9 @@ export const listForumPostComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -9292,7 +9460,9 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -9350,7 +9520,9 @@ export const getForumPostSubComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -9608,7 +9780,9 @@ export const getForumPostSubComment = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -9879,7 +10053,9 @@ export const getForumPostSubComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -9925,7 +10101,9 @@ export const getForumPostSubComment = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10004,7 +10182,9 @@ export const listForumPostSubComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10022,7 +10202,9 @@ export const listForumPostSubComments = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10102,7 +10284,9 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10120,7 +10304,9 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10183,7 +10369,9 @@ export const getMarketUserInfo = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -10460,7 +10648,9 @@ export const listMarketUserInfos = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10525,7 +10715,9 @@ export const getMarketItem = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -10833,7 +11025,9 @@ export const listMarketItems = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10913,7 +11107,9 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -10993,7 +11189,9 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -11073,7 +11271,9 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -11153,7 +11353,9 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -11190,7 +11392,9 @@ export const getFoundingMember = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -11469,7 +11673,9 @@ export const listFoundingMembers = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -11501,7 +11707,9 @@ export const getLike = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -11759,7 +11967,9 @@ export const getLike = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -12030,7 +12240,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12070,7 +12282,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12118,7 +12332,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12172,7 +12388,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12215,7 +12433,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12271,7 +12491,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12317,7 +12539,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12363,7 +12587,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12415,7 +12641,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12433,7 +12661,9 @@ export const getLike = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12500,7 +12730,9 @@ export const listLikes = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12518,7 +12750,9 @@ export const listLikes = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -12666,7 +12900,9 @@ export const getWebFeedBack = /* GraphQL */ `
         intro
         major
         avatarImgS3Key
+        avatarImgURL
         backGroundImgS3Key
+        backGroundImgURL
         linkedIn
         github
         sortKey
@@ -12943,7 +13179,9 @@ export const listWebFeedBacks = /* GraphQL */ `
           intro
           major
           avatarImgS3Key
+          avatarImgURL
           backGroundImgS3Key
+          backGroundImgURL
           linkedIn
           github
           sortKey
