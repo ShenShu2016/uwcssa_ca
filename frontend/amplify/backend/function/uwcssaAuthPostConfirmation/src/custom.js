@@ -20,7 +20,9 @@ exports.handler = async (event) => {
         intro: { S: "" },
         major: { S: "" },
         avatarImgS3Key: { S: "" },
+        avatarImgURL: { S: "" },
         backGroundImgS3Key: { S: "" },
+        backGroundImgURL: { S: "" },
         linkedIn: { S: "" },
         github: { S: "" },
         badges: {
