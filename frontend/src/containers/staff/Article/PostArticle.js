@@ -21,8 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import PublishIcon from "@mui/icons-material/Publish";
-import S3Image from "../../../components/S3/S3Image";
-import { Storage } from "@aws-amplify/storage";
+import SwipeViews from "../../../components/SwipeViews";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
@@ -41,6 +40,14 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(2, 0),
     minWidth: 300,
+  },
+  swipeViews: {
+    width: "100%",
+    height: "750px",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      height: "50vh",
+    },
   },
   imgPreview: {
     minHeight: "300px",
@@ -68,13 +75,12 @@ const Input = styled("input")({
 export default function PostArticle() {
   const classes = useStyles();
   useTitle("发布新闻");
-  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
   const [tags, setTags] = useState([]);
-  const [imageKeys, setImageKeys] = useState();
-  const [qrCodeImgS3Key, setQrCodeImgS3Key] = useState();
+  const [imgURLs, setImgURLs] = useState([]);
+  const [qrCodeImgURL, setQrCodeImgURL] = useState();
   const [loading, setLoading] = useState(false);
   const timer = useRef();
 
@@ -93,32 +99,6 @@ export default function PostArticle() {
     dispatch(fetchTopics());
   }, [dispatch]);
 
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        setImgKeyFromServer([]);
-        const imageAccessURL = await Promise.all(
-          Array.from(imageKeys).map((key) =>
-            Storage.get(key, {
-              level: "public",
-              expires: 120,
-              download: false,
-            })
-          )
-        );
-        setImgKeyFromServer((url) => url.concat(imageAccessURL));
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImgKeyFromServer([]);
-      }
-    };
-    console.log("imageKeys", imageKeys);
-    if (imageKeys) {
-      getImage();
-    }
-  }, [imageKeys]);
-
-  console.log("imgKeyFromServer", imgKeyFromServer);
   const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
@@ -132,7 +112,7 @@ export default function PostArticle() {
     console.log("我是function 返回值 response", response);
     if (response.meta.requestStatus === "fulfilled") {
       console.log("response", response);
-      setImageKeys(response.payload);
+      setImgURLs(response.payload);
       setLoading(false);
     }
   };
@@ -144,7 +124,7 @@ export default function PostArticle() {
       postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      setQrCodeImgS3Key(response.payload);
+      setQrCodeImgURL(response.payload);
       setLoading(false);
     }
   };
@@ -153,10 +133,12 @@ export default function PostArticle() {
     setLoading(true);
     const createArticleInput = {
       ...data,
-      imgS3Keys: imageKeys,
+      // imgS3Keys: imageKeys,
+      imgURLs: imgURLs,
       active: true,
       sortKey: "SortKey",
-      qrCodeImgS3Key: qrCodeImgS3Key,
+      //qrCodeImgS3Key: qrCodeImgS3Key,
+      qrCodeImgURL: qrCodeImgURL,
       userID: username,
       tags: GetTags(),
     };
@@ -280,6 +262,9 @@ export default function PostArticle() {
         onKeyDown={(e) => handleKeyDown(e)}
         onDelete={(e) => handleDelete(e)}
       />
+      <Box className={classes.swipeViews}>
+        <SwipeViews images={imgURLs} />
+      </Box>
       <Box>
         <label htmlFor="contained-button-file">
           <Input
@@ -292,6 +277,7 @@ export default function PostArticle() {
               uploadArticleImg(e);
             }}
           />
+
           <Box sx={{ my: 2 }}>
             <Button
               variant="contained"
@@ -317,16 +303,7 @@ export default function PostArticle() {
           </Box>
         </label>
       </Box>
-      {imgKeyFromServer &&
-        imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-          <img
-            className={classes.imgKeyFromServer}
-            src={imgKey}
-            key={imgKeyIdx}
-            alt="images"
-            style={{ width: "100%" }}
-          />
-        ))}
+      <img src={qrCodeImgURL} alt="qrCodeImgURL" style={{ width: "100%" }} />
       <label htmlFor="uploadArticleQrCode">
         <Input
           accept="image/*"
@@ -358,7 +335,7 @@ export default function PostArticle() {
           )}
         </Button>
       </label>
-      <S3Image S3Key={qrCodeImgS3Key} style={{ width: "100%" }} />
+
       <Box className={classes.content}>
         <Controller
           name="content"

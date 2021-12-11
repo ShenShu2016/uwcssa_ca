@@ -7,17 +7,16 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
-import { useDispatch, useSelector } from "react-redux";
 
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import InsideLeftLineTag from "./tag";
 import { Link } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React from "react";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+
 const useStyles = makeStyles((theme) => ({
   actionArea: {
     maxWidth: 300,
@@ -86,41 +85,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PastEvent({ event }) {
   const classes = useStyles();
-  const [imageURL, setImageURL] = useState(null);
-  const dispatch = useDispatch();
-  // console.log("event", event);
-  const { id, title, startDate, endDate, location, content, posterImgS3Key } =
+  const { id, title, startDate, endDate, location, content, posterImgURL } =
     event;
-
-  const imgKeys = useSelector((state) =>
-    selectImageById(state, posterImgS3Key)
-  );
-
-  useEffect(() => {
-    const getImages = async () => {
-      try {
-        const response = await dispatch(
-          getImage({ url: [posterImgS3Key], id: posterImgS3Key })
-        );
-        setImageURL(response.payload.imgUrl);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImageURL(null);
-      }
-    };
-    if (posterImgS3Key && imgKeys === undefined) {
-      getImages();
-    } else if (posterImgS3Key && imgKeys !== undefined) {
-      setImageURL(Object.values(imgKeys.images)[0]);
-    } else if (posterImgS3Key === "") {
-      setImageURL(
-        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
-      );
-    }
-  }, [posterImgS3Key, imgKeys, dispatch]);
-
-  //console.log("imageURL", title, imageURL);
-  // const userInfo = useSelector((state) => state.userAuth);
 
   return (
     <Grid
@@ -141,7 +107,11 @@ export default function PastEvent({ event }) {
             <CardMedia
               component="img"
               height="194"
-              image={imageURL}
+              image={
+                posterImgURL
+                  ? posterImgURL
+                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+              }
               style={{ objectFit: "cover", opacity: 0.9 }}
             />
             <Box

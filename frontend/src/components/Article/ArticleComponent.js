@@ -6,12 +6,10 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
+import React from "react";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 
@@ -35,33 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ArticleComponent({ article }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [imageURL, setImageURL] = useState(null);
-
-  const { id, content, title, imgS3Keys, createdAt, userID, user } = article;
-  const imgKeys = useSelector((state) => selectImageById(state, id));
-
-  useEffect(() => {
-    const getImages = async () => {
-      try {
-        const firstImage = imgS3Keys[0];
-        const response = await dispatch(getImage({ url: [firstImage], id }));
-        setImageURL(response.payload.imgUrl);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImageURL(null);
-      }
-    };
-    if (imgS3Keys && imgKeys === undefined) {
-      getImages();
-    } else if (imgS3Keys && imgKeys !== undefined) {
-      setImageURL(Object.values(imgKeys.images)[0]);
-    } else if (imgS3Keys === null) {
-      setImageURL(
-        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
-      );
-    }
-  }, [imgS3Keys, imgKeys, dispatch, id]);
+  const { id, content, title, imgURLs, createdAt, userID, user } = article;
 
   return (
     <div>
@@ -150,7 +122,11 @@ function ArticleComponent({ article }) {
             <div>
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <img
-                  src={imageURL}
+                  src={
+                    imgURLs
+                      ? imgURLs[0]
+                      : "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
+                  }
                   alt={article.title}
                   className={classes.s3image}
                 />

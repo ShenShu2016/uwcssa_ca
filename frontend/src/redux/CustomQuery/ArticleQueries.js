@@ -5,8 +5,8 @@ export const getArticle = /* GraphQL */ `
       content
       createdAt
       id
-      imgS3Keys
-      qrCodeImgS3Key
+      imgURLs
+      qrCodeImgURL
       tags
       title
       topic {
@@ -18,7 +18,7 @@ export const getArticle = /* GraphQL */ `
       userID
       user {
         username
-        avatarImgS3Key
+        avatarImgURL
         badges
       }
       likes(sortDirection: DESC) {
@@ -31,7 +31,7 @@ export const getArticle = /* GraphQL */ `
           owner
           user {
             username
-            avatarImgS3Key
+            avatarImgURL
             badges
           }
         }
@@ -47,7 +47,7 @@ export const getArticle = /* GraphQL */ `
           userID
           user {
             username
-            avatarImgS3Key
+            avatarImgURL
             badges
           }
           likes(sortDirection: DESC) {
@@ -75,7 +75,7 @@ export const getArticle = /* GraphQL */ `
               userID
               user {
                 username
-                avatarImgS3Key
+                avatarImgURL
                 badges
               }
               likes(sortDirection: DESC) {

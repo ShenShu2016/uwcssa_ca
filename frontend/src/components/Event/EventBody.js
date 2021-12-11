@@ -4,8 +4,8 @@ import {
   Button,
   Card,
   CardActionArea,
-  // CardActions,
   CardContent,
+  CardMedia,
   CircularProgress,
   Container,
   Grid,
@@ -14,27 +14,24 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
-import { useDispatch, useSelector } from "react-redux";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import React, { useState } from "react";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import EventComments from "./EventDetail/Comment/EventComments";
 import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
+import EventIcon from "@mui/icons-material/Event";
 import FlagIcon from "@mui/icons-material/Flag";
+import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
-import S3Image from "../S3/S3Image";
-import SignUpRequest from "../Auth/SignUpRequireDialog";
-import Storage from "@aws-amplify/storage";
-import TopicIcon from "@mui/icons-material/Topic";
-import moment from "moment";
-import { makeStyles } from "@mui/styles";
-import ForumIcon from "@mui/icons-material/Forum";
-import EventIcon from "@mui/icons-material/Event";
 import Share from "./EventDetail/Share";
+import SignUpRequest from "../Auth/SignUpRequireDialog";
+import TopicIcon from "@mui/icons-material/Topic";
+import { makeStyles } from "@mui/styles";
+import moment from "moment";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -94,112 +91,25 @@ export default function EventBody({ event }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
-  const dispatch = useDispatch();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const userInfo = useSelector((state) => state.userAuth);
-  const [posterURL, setPosterURL] = useState(null);
-  //const [qrCodeURL, setQrCodeURL] = useState(null);
-  const [backGroundImgURL, setBackGroundImgURL] = useState(null);
+
   const {
     title,
     startDate,
     endDate,
     location,
     content,
-    backGroundImgS3Key,
-    posterImgS3Key,
-    qrCodeImgS3Key,
+    backGroundImgURL,
+    posterImgURL,
+    qrCodeImgURL,
     topic,
     sponsor,
     eventParticipants,
   } = event;
-  const posterImgKeys = useSelector((state) =>
-    selectImageById(state, posterImgS3Key)
-  );
-  // useEffect(() => {
-  //   const getPoster = async () => {
-  //     try {
-  //       const posterAccessURL = await Storage.get(posterImgS3Key, {
-  //         level: "public",
-  //         expires: 120,
-  //         download: false,
-  //       });
-  //       setPosterURL(posterAccessURL);
-  //     } catch (error) {
-  //       console.error("error accessing the Image from s3", error);
-  //       setPosterURL(null);
-  //     }
-  //   };
-  //   if (posterImgS3Key) {
-  //     // console.log(posterImgS3Key);
-  //     getPoster();
-  //   }
-  // }, [posterImgS3Key]);
-  // console.log("posterURL", posterURL);
-  // console.log("event", event);
-
-  useEffect(() => {
-    const getPoster = async () => {
-      try {
-        const response = await dispatch(
-          getImage({ url: [posterImgS3Key], id: posterImgS3Key })
-        );
-        setPosterURL(response.payload.imgUrl);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setPosterURL(null);
-      }
-    };
-    if (posterImgS3Key && posterImgKeys === undefined) {
-      getPoster();
-    } else if (posterImgS3Key && posterImgKeys !== undefined) {
-      setPosterURL(Object.values(posterImgKeys.images)[0]);
-    } else if (posterImgS3Key === null) {
-      setPosterURL(
-        "https://media-exp1.licdn.com/dms/image/C5603AQHwt3NgA8rYHw/profile-displayphoto-shrink_200_200/0/1616353723146?e=1640822400&v=beta&t=wzrF9eUlq7YnsTg-1cpH4LrYXm2oCCOHHHp0ac1hmgM"
-      );
-    }
-  }, [posterImgS3Key, posterImgKeys, dispatch]);
-
-  // useEffect(() => {
-  //   const getQrCode = async () => {
-  //     try {
-  //       const qrCodeAccessURL = await Storage.get(qrCodeImgS3Key, {
-  //         level: "public",
-  //         expires: 120,
-  //         download: false,
-  //       });
-  //       setQrCodeURL(qrCodeAccessURL);
-  //     } catch (error) {
-  //       console.error("error accessing the Image from s3", error);
-  //       setQrCodeURL(null);
-  //     }
-  //   };
-  //   if (qrCodeImgS3Key) {
-  //     getQrCode();
-  //   }
-  // }, [qrCodeImgS3Key]);
-
-  useEffect(() => {
-    const getQrCode = async () => {
-      try {
-        const backGroundImgURL = await Storage.get(backGroundImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setBackGroundImgURL(backGroundImgURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setBackGroundImgURL(null);
-      }
-    };
-    if (backGroundImgS3Key) {
-      getQrCode();
-    }
-  }, [backGroundImgS3Key]);
 
   return (
     <Box>
@@ -207,55 +117,20 @@ export default function EventBody({ event }) {
         <div>
           <Box>
             <div>
-              {/* <Box>
-                <CardMedia
-                  style={{
-                    // maxWidth: "100%",
-                    opacity: 0.4,
-                    height: "350px",
-                    objectFit: "cover",
-                    // background: `url(${backGroundImgURL})`,
-                    // blurRadius: 1,
-                    // backgroundSize: "contained",
-                    // borderStyle: "outset",
-                    // "linear-gradient(to top, rgba(255,0,0,0) 0 70%, rgba(63, 81, 181, 1) )",
-                  }}
-                  component="img"
-                  image={backGroundImgURL}
-                />
-              </Box>
-              <Card
-                sx={{
-                  maxWidth: 600,
-                  minWidth: 300,
-                  position: "absolute",
-                  top: "310px",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  zIndex: "2",
-                  borderRadius: "10px",
-                }}
-              >
-                <CardMedia
-                  sx={{
-                    display: "flex",
-                    objectFit: "cover",
-                    height: "300px",
-                  }}
-                  component="img"
-                  image={posterURL}
-                />
-              </Card> */}
               <CardActionArea
                 onClick={(e) => {
                   e.preventDefault();
-                  window.location.href = posterURL;
+                  window.location.href = posterImgURL;
                 }}
               >
                 <Box
                   sx={{
                     opacity: 1, //如果背景要虚的话下面的主要图片也虚了
-                    backgroundImage: `url(${backGroundImgURL})`,
+                    backgroundImage: `url(${
+                      backGroundImgURL
+                        ? backGroundImgURL
+                        : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+                    })`,
                     width: "100%",
                     height: "350px",
                     objectFit: "cover",
@@ -263,7 +138,11 @@ export default function EventBody({ event }) {
                 >
                   <Box
                     component="img"
-                    src={posterURL}
+                    src={
+                      posterImgURL
+                        ? posterImgURL
+                        : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+                    }
                     maxHeight="100%"
                     maxWidth="100%"
                     sx={{
@@ -348,6 +227,7 @@ export default function EventBody({ event }) {
                   />
                 </Tabs>
               </Box>
+              {/* 这里有红字，需要改一下 */}
               <Box className={classes.action}>
                 <Stack direction="row" spacing={2}>
                   {endDate > moment().format() ? (
@@ -528,46 +408,6 @@ export default function EventBody({ event }) {
                               </Typography>
                             )}
                           </CardContent>
-                          {/* <Divider variant="middle" />
-                          <CardActions className={classes.action}>
-                            {endDate > moment().format() ? (
-                              <div>
-                                {userInfo.isAuthenticated ? (
-                                  <div>
-                                    {event.eventParticipants.items.some(
-                                      (item) =>
-                                        item.userID === userAuth.user.username
-                                    ) === false ? (
-                                      <Button
-                                        size="large"
-                                        // variant="outlined"
-                                        sx={{ borderRadius: "20rem" }}
-                                        className={classes.join}
-                                        variant={"contained"}
-                                        color={"primary"}
-                                        disableRipple
-                                        component={Link}
-                                        to={`/event/${event.id}/eventSignUp`}
-                                        startIcon={<AppRegistrationIcon />}
-                                      >
-                                        报名
-                                      </Button>
-                                    ) : (
-                                      <Typography variant="subtitle1">
-                                        你已经报过名啦~🥳
-                                      </Typography>
-                                    )}
-                                  </div>
-                                ) : (
-                                  <SignUpRequest />
-                                )}
-                              </div>
-                            ) : (
-                              <Typography variant="subtitle1">
-                                报名结束啦~🥳
-                              </Typography>
-                            )}
-                          </CardActions> */}
                         </Card>
                       </Grid>
                       <Grid item xs={6} sm={8} md={8}>
@@ -590,21 +430,14 @@ export default function EventBody({ event }) {
                                   justifyContent: "center",
                                 }}
                               >
-                                {qrCodeImgS3Key ? (
-                                  // <CardMedia
-                                  //   component="img"
-                                  //   style={{
-                                  //     width: "auto",
-                                  //     maxHeight: "150px",
-                                  //   }}
-                                  //   image={qrCodeURL}
-                                  // />
-                                  <S3Image
-                                    S3Key={qrCodeImgS3Key}
+                                {qrCodeImgURL ? (
+                                  <CardMedia
+                                    component="img"
                                     style={{
                                       width: "auto",
                                       maxHeight: "150px",
                                     }}
+                                    image={qrCodeImgURL}
                                   />
                                 ) : (
                                   <Box
@@ -639,85 +472,7 @@ export default function EventBody({ event }) {
                       </Grid>
                     </Grid>
                   </Box>
-
-                  {/* <Typography
-                    variant="subtitle1"
-                    sx={{ marginTop: "3rem" }}
-                    gutterBottom
-                  >
-                    <b>如果你对此活动有任何疑问可以扫描以下二维码</b>
-                  </Typography>
-
-                  {userInfo.isAuthenticated ? (
-                    <div>
-                      {qrCodeURL ? (
-                        <CardMedia
-                          component="img"
-                          style={{
-                            width: "auto",
-                            maxHeight: "150px",
-                            marginBottom: "3rem",
-                          }}
-                          image={qrCodeURL}
-                        />
-                      ) : (
-                        <Typography
-                          variant="subtitle1"
-                          sx={{ marginBottom: "3rem" }}
-                        >
-                          暂无二维码
-                        </Typography>
-                      )}
-                      <CardActions>
-                        <Button
-                          size="small"
-                          component={Link}
-                          to={`/event/${event.id}/eventSignUp`}
-                        >
-                          报名
-                        </Button>
-                      </CardActions>
-                    </div>
-                  ) : (
-                    <div>
-                      <Typography
-                        variant="subtitle1"
-                        sx={{ marginBottom: "3rem" }}
-                      >
-                        需要登入才能扫描哦
-                      </Typography>
-                      <CardActions>
-                        <SignUpRequest />
-                      </CardActions>
-                    </div>
-                  )} */}
-
-                  {/* <CardActions>
-                  {userInfo.isAuthenticated ? (
-                    <Button
-                      size="small"
-                      component={Link}
-                      to={`/event/${event.id}/eventSignUp`}
-                    >
-                      报名
-                    </Button>
-                  ) : (
-                    <SignUpRequest />
-                  )}
-                </CardActions> */}
                 </Container>
-                {/* {content}
-              {userInfo.isAuthenticated ? (
-                <Button
-                  size="small"
-                  component={Link}
-                  to={`/event/${event.id}/eventSignUp`}
-                >
-                  报名
-                </Button>
-              ) : (
-                <SignUpRequest />
-              )} */}
               </TabPanel>
               <TabPanel value={value} index={1} component={"div"}>
                 <Card>

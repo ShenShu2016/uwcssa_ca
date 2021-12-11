@@ -25,7 +25,6 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import { GetTags } from "../../components/CustomMUI/CustomTags";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import PublishIcon from "@mui/icons-material/Publish";
-import S3Image from "../../components/S3/S3Image";
 import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
@@ -64,9 +63,9 @@ export default function PostEvent() {
   useTitle("活动创建");
   const dispatch = useDispatch();
 
-  const [backGroundImgS3Key, setBackGroundImgS3Key] = useState("");
-  const [qrCodeImgS3Key, setQrCodeImgS3Key] = useState("");
-  const [posterImgS3Key, setPosterImgS3Key] = useState("");
+  const [backGroundImgURL, setBackGroundImgURL] = useState("");
+  const [qrCodeImgURL, setQrCodeImgURL] = useState("");
+  const [posterImgURL, setPosterImgURL] = useState("");
   const { username } = useSelector((state) => state.userAuth.user);
   const history = useHistory();
   const timer = useRef();
@@ -117,7 +116,7 @@ export default function PostEvent() {
       postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      setBackGroundImgS3Key(response.payload);
+      setBackGroundImgURL(response.payload);
     }
   };
 
@@ -128,7 +127,7 @@ export default function PostEvent() {
       postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      setPosterImgS3Key(response.payload);
+      setPosterImgURL(response.payload);
     }
   };
 
@@ -139,7 +138,7 @@ export default function PostEvent() {
       postSingleImage({ imageData, imageLocation })
     );
     if (response) {
-      setQrCodeImgS3Key(response.payload);
+      setQrCodeImgURL(response.payload);
     }
   };
 
@@ -147,9 +146,9 @@ export default function PostEvent() {
     setLoading(true);
     const createEventInput = {
       ...data,
-      backGroundImgS3Key: backGroundImgS3Key,
-      posterImgS3Key: posterImgS3Key,
-      qrCodeImgS3Key: qrCodeImgS3Key,
+      backGroundImgURL: backGroundImgURL,
+      posterImgURL: posterImgURL,
+      qrCodeImgURL: qrCodeImgURL,
       active: true,
       sortKey: "SortKey",
       userID: username,
@@ -487,8 +486,11 @@ export default function PostEvent() {
                   上传活动海报
                 </Button>
               </label>
-              <S3Image S3Key={posterImgS3Key} style={{ width: "100%" }} />
-
+              <img
+                src={posterImgURL}
+                alt="posterImgURL"
+                style={{ width: "100%" }}
+              />
               <label htmlFor="uploadEventImg" sx={{ margin: "normal" }}>
                 <Input
                   accept="eventImg/*"
@@ -503,7 +505,11 @@ export default function PostEvent() {
                   上传背景图片
                 </Button>
               </label>
-              <S3Image S3Key={backGroundImgS3Key} style={{ width: "100%" }} />
+              <img
+                src={backGroundImgURL}
+                alt="backGroundImgURL"
+                style={{ width: "100%" }}
+              />
               <label htmlFor="uploadEventQrCode">
                 <Input
                   accept="eventQrCode/*"
@@ -517,7 +523,11 @@ export default function PostEvent() {
                   上传活动QR
                 </Button>
               </label>
-              <S3Image S3Key={qrCodeImgS3Key} style={{ width: "100%" }} />
+              <img
+                src={qrCodeImgURL}
+                alt="qrCodeImgURL"
+                style={{ width: "100%" }}
+              />
             </Box>
             <Button
               variant="contained"

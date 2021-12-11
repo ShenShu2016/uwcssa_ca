@@ -15,7 +15,6 @@ import QrCodeUwinStudent from "./QrCodeUwinStudent";
 import React from "react";
 import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
-import useGetImages from "../../useGetImages";
 import { useTitle } from "../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,53 +47,25 @@ export default function Main({ article }) {
   // console.log("Main", article);
   const {
     content,
-    imgS3Keys,
+    imgURLs,
     tags,
     topic,
     createdAt,
     user,
     owner,
-    qrCodeImgS3Key,
+    qrCodeImgURL,
+
     id,
   } = article;
-  //const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
-  //console.log("imgS3Keys", imgS3Keys);
-  // useEffect(() => {
-  //   const getImage = async () => {
-  //     try {
-  //       setImgKeyFromServer([]);
-  //       console.log("我炮击哪里了");
-  //       const imageAccessURL = await Promise.all(
-  //         Array.from(imgS3Keys).map((key) =>
-  //           Storage.get(key, {
-  //             level: "public",
-  //             expires: 120,
-  //             download: false,
-  //           })
-  //         )
-  //       );
-  //       setImgKeyFromServer((url) => url.concat(imageAccessURL));
-  //     } catch (error) {
-  //       console.error("error accessing the Image from s3", error);
-  //       setImgKeyFromServer([]);
-  //     }
-  //   };
-  //   if (imgS3Keys) {
-  //     getImage();
-  //   }
-  // }, [imgS3Keys]);
-  //const imgKeyFromServer = useSelector((state) => selectImageById(state, id));
 
-  //console.log("imgKeyFromServer[0]", imgKeyFromServer[0]);
-  const imgKeyFromServer = useGetImages(article, id);
   return (
     <div className={classes.root}>
       {article.active === true ? (
         <Box className={classes.main}>
-          {imgS3Keys ? (
-            imgKeyFromServer[0] ? (
+          {imgURLs ? (
+            imgURLs[0] ? (
               <Box className={classes.swipeViews}>
-                <SwipeViews images={imgKeyFromServer} />
+                <SwipeViews images={imgURLs} />
               </Box>
             ) : (
               <Box sx={{ my: 3 }}>
@@ -136,7 +107,7 @@ export default function Main({ article }) {
           </Box>
           <Divider />
           <Box>
-            <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} id={id} />
+            <QrCodeUwinStudent qrCodeImgURL={qrCodeImgURL} id={id} />
           </Box>
           <Divider />
           <Box className={classes.buttonGroup}>
