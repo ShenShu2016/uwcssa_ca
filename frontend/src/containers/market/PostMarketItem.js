@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -45,6 +46,7 @@ export default function PostMarketItem() {
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [trigger, setTrigger] = useState(true);
   const [defaultInfo, setDefaultInfo] = useState(true);
+  const [loading, setLoading] = useState(false);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, username)
   );
@@ -105,7 +107,8 @@ export default function PostMarketItem() {
       email: contactEmail,
       userID: username,
     };
-    console.log("createMarketItemInput", createMarketItemInput);
+    // console.log("createMarketItemInput", createMarketItemInput);
+    setLoading(true);
     const response = await dispatch(postMarketItem(createMarketItemInput));
     if (marketUserInfo === undefined) {
       await dispatch(postMarketUserInfo(userInfo));
@@ -422,7 +425,19 @@ export default function PostMarketItem() {
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传MarketItem
+              上传MarketItem{" "}
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Paper>
         </Box>

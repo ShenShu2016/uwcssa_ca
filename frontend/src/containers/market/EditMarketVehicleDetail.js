@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -44,6 +45,7 @@ export default function EditMarketVehicleDetail() {
   const history = useHistory();
   useTitle("更新二手车辆信息");
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const {
     imgS3Keys,
@@ -163,7 +165,8 @@ export default function EditMarketVehicleDetail() {
       email: contactEmail,
       userID: marketUserInfo.userID,
     };
-    console.log("createMarketItemInput", createMarketItemInput);
+    // console.log("createMarketItemInput", createMarketItemInput);
+    setLoading(false);
     const response = await dispatch(
       updateMarketItemDetail(createMarketItemInput)
     );
@@ -549,7 +552,19 @@ export default function EditMarketVehicleDetail() {
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传MarketItem
+              上传MarketItem{" "}
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-0.75rem",
+                    marginLeft: "-0.75rem",
+                  }}
+                />
+              )}
             </Button>
           </Paper>
         </Box>

@@ -8,6 +8,7 @@ import {
 import API from "@aws-amplify/api";
 import Compressor from "compressorjs";
 import Storage from "@aws-amplify/storage";
+import awsmobile from "../../aws-exports";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
@@ -133,8 +134,9 @@ export const removeLike = createAsyncThunk(
 export const postSingleImage = createAsyncThunk(
   "general/postSingleImage",
   async ({ imageData, imageLocation, maxPixel }) => {
+    const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } =
+      awsmobile;
     console.log(imageData, imageLocation, maxPixel);
-
     const tempUuid = uuid();
     const file = imageData[0];
     let keyName = "";
@@ -159,13 +161,15 @@ export const postSingleImage = createAsyncThunk(
         },
       });
     });
-    return keyName;
+    return `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/public/${keyName}`;
   }
 );
 
 export const postMultipleImages = createAsyncThunk(
   "general/postMultipleImages",
   async ({ imagesData, imageLocation, maxPixel }) => {
+    const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } =
+      awsmobile;
     let imgS3Keys = [];
     await new Promise(async function (resolve) {
       let numProcessedImages = 0;
@@ -187,7 +191,9 @@ export const postMultipleImages = createAsyncThunk(
                 { contentType: "image/*" }
               ).then((e) => {
                 console.log("response 上传成功了", e);
-                imgS3Keys.push(e.key);
+                imgS3Keys.push(
+                  `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/public/${e.key}`
+                );
                 resolve();
               });
             },

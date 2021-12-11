@@ -37,6 +37,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         active
         createdAt
         userID
+        description
         updatedAt
         user {
           id

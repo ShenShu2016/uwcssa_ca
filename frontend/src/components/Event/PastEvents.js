@@ -13,10 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import InsideLeftLineTag from "./tag";
 import { Link } from "react-router-dom";
-import LocationOn from "@mui/icons-material/LocationOn";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-
+import moment from "moment";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 const useStyles = makeStyles((theme) => ({
   actionArea: {
     maxWidth: 300,
@@ -155,60 +156,92 @@ export default function PastEvent({ event }) {
             </Box>
 
             <CardContent className={classes.content}>
-              <Typography variant="subtitle2" gutterBottom>
-                时间：{startDate.slice(5, 7)}月{startDate.slice(8, 10)}号{" "}
-                {startDate.slice(11, 16)} -{endDate.slice(5, 7)}月
-                {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
+              <Typography
+                variant="subtitle1"
+                style={{
+                  wordBreak: "break-word",
+                  overflow: "hidden",
+                }}
+                gutterBottom
+              >
+                <b>{title}</b>
               </Typography>
+              {moment(startDate).format("YYYY") ===
+              moment(endDate).format("YYYY") ? (
+                <Box
+                  color={"grey.700"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
+                >
+                  <CalendarTodayIcon className={classes.locationIcon} />
+                  <Typography variant="subtitle2">
+                    {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                    {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                    {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
+                    {endDate.slice(11, 16)}
+                  </Typography>
+                </Box>
+              ) : (
+                <Box
+                  color={"grey.700"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  mb={1}
+                >
+                  <CalendarTodayIcon className={classes.locationIcon} />
+                  <Typography variant="subtitle2">
+                    {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                    {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                    {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
+                    {endDate.slice(8, 10)} {endDate.slice(11, 16)}
+                  </Typography>
+                </Box>
+              )}
               <Typography
                 variant="subtitle2"
                 color="primary"
                 gutterBottom
               ></Typography>
-              <Box style={{ maxHeight: "30px", overflow: "hidden" }}>
-                <Typography
-                  variant="subtitle1"
-                  style={{
-                    wordBreak: "break-word",
-                    overflow: "hidden",
-                  }}
-                  gutterBottom
-                >
-                  <b>{title}</b>
-                </Typography>
-              </Box>
+              <Box style={{ maxHeight: "30px", overflow: "hidden" }}></Box>
 
               {location ? (
                 <Box
-                  color={"grey.500"}
+                  sx={{ overflow: "hidden", height: "30px" }}
+                  color={"grey.700"}
                   display={"flex"}
                   alignItems={"center"}
                   mb={1}
                 >
-                  <LocationOn />
-                  <Typography
-                    variant="subtitle2"
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    {location}
-                  </Typography>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <LocationOnIcon className={classes.locationIcon} />
+                    <Grid item xs zeroMinWidth>
+                      <Typography
+                        variant="subtitle2"
+                        color="textSecondary"
+                        noWrap
+                      >
+                        {location}
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </Box>
               ) : (
                 <Box
-                  color={"grey.500"}
+                  sx={{ overflow: "hidden", height: "30px" }}
+                  color={"grey.700"}
                   display={"flex"}
                   alignItems={"center"}
                   mb={1}
                 >
-                  <LocationOn />
-                  <Typography
-                    variant="subtitle2"
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    无
-                  </Typography>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <LocationOnIcon className={classes.locationIcon} />
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="subtitle2" color="textSecondary">
+                        无
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </Box>
               )}
               {/* {topic.name ? (

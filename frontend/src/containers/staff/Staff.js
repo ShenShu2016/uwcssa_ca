@@ -39,7 +39,7 @@ export default function Staff() {
   return (
     <div>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{ maxWidth: 200 }}>
           <Box role="presentation">
             <List sx={{ marginTop: 3 }}>
               <div>

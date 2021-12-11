@@ -16,10 +16,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import DownloadIcon from "@mui/icons-material/Download";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import XLSX from "xlsx";
 import { alpha } from "@mui/material/styles";
 import { fetchEvents_Staff } from "../../redux/reducers/staffSlice";
 import { makeStyles } from "@mui/styles";
@@ -155,9 +157,24 @@ export default function SimpleTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const downloadExcel = (dataset, title) => {
+    const newData = dataset.map((row) => {
+      delete row.tableData;
+      return row;
+    });
+    const workSheet = XLSX.utils.json_to_sheet(newData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "students");
+    //Buffer
+    //let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
+    //Binary string
+    XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
+    //Download
+    XLSX.writeFile(workBook, `${title}.xlsx`);
+  };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ paddingBlock: "2rem" }}>
       <Box className={classes.content}>
         <div className={classes.toolbar}>
           <Typography variant="h4" component="h2" color="primary">
@@ -200,13 +217,33 @@ export default function SimpleTable() {
                         colSpan={6}
                       >
                         <Box margin={1}>
-                          <Typography variant="h6" gutterBottom component="div">
+                          <Typography
+                            variant="h6"
+                            sx={{ flex: "1 1 100%" }}
+                            component="div"
+                          >
                             报名者
+                            <Button
+                              color="primary"
+                              aria-label="download csv"
+                              sx={{ float: "right" }}
+                              onClick={() =>
+                                downloadExcel(
+                                  row.eventParticipants.items,
+                                  row.title
+                                )
+                              }
+                            >
+                              下载csv
+                              <DownloadIcon />
+                            </Button>
                           </Typography>
+
                           <Table size="small" aria-label="purchases">
                             <TableHead>
                               <TableRow>
                                 <TableCell>用户名</TableCell>
+                                <TableCell>姓名</TableCell>
                                 <TableCell>Email</TableCell>
                                 <TableCell>微信</TableCell>
                                 <TableCell>电话</TableCell>
@@ -221,6 +258,9 @@ export default function SimpleTable() {
                                   <TableRow key={eventParticipant.name}>
                                     <TableCell component="th" scope="row">
                                       {eventParticipant.owner}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                      {eventParticipant.name}
                                     </TableCell>
                                     <TableCell>
                                       {eventParticipant.email}
@@ -278,6 +318,6 @@ export default function SimpleTable() {
           />
         </TableContainer>
       </Box>
-    </div>
+    </Box>
   );
 }

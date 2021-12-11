@@ -131,6 +131,7 @@ export default function PostArticle() {
     );
     console.log("我是function 返回值 response", response);
     if (response.meta.requestStatus === "fulfilled") {
+      console.log("response", response);
       setImageKeys(response.payload);
       setLoading(false);
     }
