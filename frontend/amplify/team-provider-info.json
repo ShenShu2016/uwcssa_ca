@@ -73,7 +73,7 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-4b582b707a3443486266-build.zip",
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-634e592b6c4d36724b38-build.zip",
           "GROUP": "anyone"
         },
         "updateLastReplyAt": {
