@@ -102,6 +102,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     );
     if (response.meta.requestStatus === "fulfilled") {
       setBackGroundImgKey(response.payload);
+      console.log("response", response);
       setLoading(false);
     }
   };

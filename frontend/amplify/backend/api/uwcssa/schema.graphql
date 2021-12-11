@@ -26,9 +26,11 @@ type User
   intro: String
   major: String
   avatarImgS3Key: String
+  avatarImgURL: AWSURL
   backGroundImgS3Key: String
-  linkedIn: String
-  github: String
+  backGroundImgURL: AWSURL
+  linkedIn: AWSURL
+  github: AWSURL
   sortKey: SortKey!
   createdAt: AWSDateTime!
   badges: [String]
