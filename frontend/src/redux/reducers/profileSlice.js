@@ -23,8 +23,8 @@ const initialState = {
     lastName: "",
     intro: "",
     major: "",
-    avatarImgS3Key: "",
-    backGroundImgS3Key: "",
+    avatarImgURL: "",
+    backGroundImgURL: "",
     linkedIn: "",
     github: "",
     createdAt: "",
@@ -165,8 +165,8 @@ const profileSlice = createSlice({
         lastName: "",
         intro: "",
         major: "",
-        avatarImgS3Key: "",
-        backGroundImgS3Key: "",
+        avatarImgURL: "",
+        backGroundImgURL: "",
         linkedIn: "",
         github: "",
         createdAt: "",
@@ -200,8 +200,8 @@ const profileSlice = createSlice({
         state.user.firstName = action.payload.firstName;
         state.user.lastName = action.payload.lastName;
         state.user.major = action.payload.major;
-        state.user.avatarImgS3Key = action.payload.avatarImgS3Key;
-        state.user.backGroundImgS3Key = action.payload.backGroundImgS3Key;
+        state.user.avatarImgURL = action.payload.avatarImgURL;
+        state.user.backGroundImgURL = action.payload.backGroundImgURL;
         state.user.linkedIn = action.payload.linkedIn;
         state.user.github = action.payload.github;
         state.user.intro = action.payload.intro;

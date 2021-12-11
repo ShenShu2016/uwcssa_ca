@@ -10,9 +10,8 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import S3Image from "../../../S3/S3Image";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/reducers/generalSlice";
@@ -38,15 +37,10 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [avatarImgKey, setAvatarImgKey] = useState(user.avatarImgS3Key);
-  const [backGroundImgKey, setBackGroundImgKey] = useState(
-    user.backGroundImgKey
+  const [avatarImgURL, setAvatarImgURL] = useState(user.avatarImgURL);
+  const [backGroundImgURL, setBackGroundImgURL] = useState(
+    user.backGroundImgURL
   );
-
-  useEffect(() => {
-    setAvatarImgKey(user.avatarImgS3Key);
-    setBackGroundImgKey(user.backGroundImgS3Key);
-  }, [user]);
 
   const {
     handleSubmit,
@@ -67,8 +61,8 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const onSubmit = async (data) => {
     const updateUserInput = {
       ...data,
-      avatarImgS3Key: avatarImgKey,
-      backGroundImgS3Key: backGroundImgKey,
+      avatarImgURL: avatarImgURL,
+      backGroundImgURL: backGroundImgURL,
     };
     setLoading(true);
     const response = await dispatch(putUserProfile({ updateUserInput }));
@@ -88,7 +82,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     );
     if (response.meta.requestStatus === "fulfilled") {
       console.log("response", response);
-      setAvatarImgKey(response.payload);
+      setAvatarImgURL(response.payload);
       setLoading(false);
     }
   };
@@ -101,7 +95,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
       postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      setBackGroundImgKey(response.payload);
+      setBackGroundImgURL(response.payload);
       console.log("response", response);
       setLoading(false);
     }
@@ -160,8 +154,9 @@ export default function Edit({ user, editOpen, handleEditClose }) {
             />
             <div className={classes.splitter} />
             <Box sx={{ textAlign: "center" }}>
-              <S3Image
-                S3Key={avatarImgKey}
+              <img
+                src={avatarImgURL}
+                alt="avatarImgURL"
                 style={{
                   width: 150,
                   height: 150,
@@ -203,8 +198,11 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 </Button>
               </label>
             </Box>
-
-            <S3Image S3Key={backGroundImgKey} style={{ width: "100%" }} />
+            <img
+              src={backGroundImgURL}
+              alt={"background"}
+              style={{ width: "100%" }}
+            />
             <Box my={"2rem"}>
               <label htmlFor="uploadBackGroundImgImg">
                 <Input

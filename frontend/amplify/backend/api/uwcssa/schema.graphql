@@ -153,7 +153,9 @@ type Article
   title: String!
   content: String!
   imgS3Keys: [String]
+  imgURLs: [AWSURL]
   qrCodeImgS3Key: String
+  qrCodeImgURL: AWSURL
   likes: [Like] @connection(keyName: "byArticle", fields: ["id"])
   tags: [String]
   sortKey: SortKey! #用来当第二索引的
@@ -246,8 +248,12 @@ type Event
   online: Boolean! #代表线上线下
   group: Boolean!
   backGroundImgS3Key: String
+  backGroundImgURL: AWSURL
   qrCodeImgS3Key: String
+  qrCodeImgURL: AWSURL
   posterImgS3Key: String
+  posterImgURL: AWSURL
+  imgURLs: [AWSURL]
   content: String
   location: String
   sponsor: [String]
@@ -409,6 +415,7 @@ type UwcssaJob
   requirements: [String]!
   bonus: [String]!
   imgS3Key: String
+  imgURLs: [AWSURL]
   benefits: [String]!
   schedule: [String]!
   like: [String]!
@@ -526,6 +533,7 @@ type ForumPost
   title: String!
   content: String!
   imgS3Keys: [String]
+  imgURLs: [AWSURL]
   tags: [String]
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
   sortKey: SortKey!
@@ -547,7 +555,6 @@ type ForumPost
     @connection(keyName: "byForumPost", fields: ["id"])
   forumPostSubComments: [ForumPostSubComment]!
     @connection(keyName: "byForumPost", fields: ["id"])
-
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -570,6 +577,7 @@ type ForumPostComment
   @key(name: "byForumPost", fields: ["forumPostID", "createdAt"]) {
   id: ID!
   content: String!
+  imgURLs: [AWSURL]
   likes: [Like] @connection(keyName: "byForumPostComment", fields: ["id"])
   createdAt: AWSDateTime!
   active: Boolean!
@@ -666,6 +674,7 @@ type MarketItem
   id: ID!
   name: String
   imgS3Keys: [String]
+  imgURLs: [AWSURL]
   title: String
   price: Int
   marketType: MarketType!
@@ -816,6 +825,7 @@ type FoundingMember
   moreBrief: String
   mainPart: [String]
   imgS3Key: [String]
+  imgURLs: [AWSURL]
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }

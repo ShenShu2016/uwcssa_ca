@@ -7,16 +7,14 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Edit from "./Info/Edit";
 import EditIcon from "@mui/icons-material/Edit";
-import S3Image from "../../S3/S3Image";
-import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { usePermit } from "../../../Hooks/usePermit";
-import uwindsor_shield from "../../../static/avatarIcons/uwindsor_shield.svg";
+import uwindsor from "../../../static/svg icons/uwindsor.svg";
 
 const useStyles = makeStyles({
   root: {
@@ -55,34 +53,15 @@ export default function BasicInfo({ user, ownerID }) {
   const handleEditClose = () => {
     setEditOpen(false);
   };
-  const [avatarURL, setAvatarURL] = useState(null);
-
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        const imageAccessURL = await Storage.get(user.avatarImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setAvatarURL(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setAvatarURL(null);
-      }
-    };
-    if (user.avatarImgS3Key) {
-      getImage();
-    }
-  }, [user]);
 
   return (
     <div>
       <div className={classes.root}>
         <Card elevation={0} className={classes.header}>
           <CardActionArea onClick={isPermit ? handleEditClickOpen : undefined}>
-            <S3Image
-              S3Key={user.backGroundImgS3Key}
+            <img
+              src={user.backGroundImgURL}
+              alt="backGroundImgURL"
               style={{
                 width: "100%",
                 height: "250px",
@@ -94,20 +73,20 @@ export default function BasicInfo({ user, ownerID }) {
           <CardContent className={classes.info}>
             <div className={classes.outer}>
               <Badge
-                invisible={!user.badges.includes("uwindsor_shield")}
+                invisible={!user.badges.includes("uwindsor")}
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeContent={
                   <SmallAvatar
-                    alt="uwindsor_shield"
-                    src={uwindsor_shield}
+                    alt="uwindsor"
+                    src={uwindsor}
                     sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
                   />
                 }
               >
                 <Avatar
                   alt="avatar"
-                  src={avatarURL}
+                  src={user.avatarImgURL}
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
                   onClick={isPermit ? handleEditClickOpen : undefined}
