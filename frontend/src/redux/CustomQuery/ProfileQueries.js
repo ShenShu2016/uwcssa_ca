@@ -7,8 +7,8 @@ export const updateUser = /* GraphQL */ `
       firstName
       lastName
       major
-      avatarImgS3Key
-      backGroundImgS3Key
+      avatarImgURL
+      backGroundImgURL
       linkedIn
       github
       intro

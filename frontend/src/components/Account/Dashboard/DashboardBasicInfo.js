@@ -6,13 +6,11 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 
 import Avatar from "@mui/material/Avatar";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
-import S3Image from "../../S3/S3Image";
-import Storage from "@aws-amplify/storage";
+import React from "react";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
@@ -49,26 +47,6 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 export default function DashboardBasicInfo({ userProfile }) {
   const classes = useStyles();
   const history = useHistory();
-  const [avatarURL, setAvatarURL] = useState(null);
-
-  useEffect(() => {
-    const getImage = async () => {
-      try {
-        const imageAccessURL = await Storage.get(userProfile.avatarImgS3Key, {
-          level: "public",
-          expires: 120,
-          download: false,
-        });
-        setAvatarURL(imageAccessURL);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setAvatarURL(null);
-      }
-    };
-    if (userProfile.avatarImgS3Key) {
-      getImage();
-    }
-  }, [userProfile]);
 
   return (
     <div>
@@ -79,8 +57,9 @@ export default function DashboardBasicInfo({ userProfile }) {
               history.push(`/account/profile/${userProfile.username}`);
             }}
           >
-            <S3Image
-              S3Key={userProfile.backGroundImgS3Key}
+            <img
+              src={userProfile.backGroundImgURL}
+              alt="backGroundImgURL"
               style={{
                 width: "100%",
                 height: "250px",
@@ -108,7 +87,7 @@ export default function DashboardBasicInfo({ userProfile }) {
                     history.push(`/account/profile/${userProfile.username}`);
                   }}
                   alt="avatar"
-                  src={avatarURL}
+                  src={userProfile.avatarImgURL}
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
                 />
