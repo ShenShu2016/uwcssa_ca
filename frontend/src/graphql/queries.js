@@ -53,7 +53,9 @@ export const getUwcssaJobResume = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -80,8 +82,12 @@ export const getUwcssaJobResume = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -128,6 +134,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -170,6 +177,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -193,6 +201,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -238,6 +247,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -282,6 +292,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         requirements
         bonus
         imgS3Key
+        imgURLs
         benefits
         schedule
         like
@@ -379,6 +390,7 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -446,7 +458,9 @@ export const getUserMutationLog = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -473,8 +487,12 @@ export const getUserMutationLog = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -521,6 +539,7 @@ export const getUserMutationLog = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -563,6 +582,7 @@ export const getUserMutationLog = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -586,6 +606,7 @@ export const getUserMutationLog = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -631,6 +652,7 @@ export const getUserMutationLog = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -774,6 +796,7 @@ export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -1004,7 +1027,9 @@ export const userSortBySortKey = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -1031,8 +1056,12 @@ export const userSortBySortKey = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -1079,6 +1108,7 @@ export const userSortBySortKey = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -1121,6 +1151,7 @@ export const userSortBySortKey = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -1144,6 +1175,7 @@ export const userSortBySortKey = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -1189,6 +1221,7 @@ export const userSortBySortKey = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -1301,7 +1334,9 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -1338,8 +1373,12 @@ export const getUser = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -1377,6 +1416,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -1391,6 +1431,7 @@ export const getUser = /* GraphQL */ `
         forumPostComment {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -1450,7 +1491,9 @@ export const getUser = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         qrCodeImgS3Key
+        qrCodeImgURL
         tags
         sortKey
         active
@@ -1525,7 +1568,9 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -1550,8 +1595,12 @@ export const getUser = /* GraphQL */ `
         online
         group
         backGroundImgS3Key
+        backGroundImgURL
         qrCodeImgS3Key
+        qrCodeImgURL
         posterImgS3Key
+        posterImgURL
+        imgURLs
         content
         location
         sponsor
@@ -1643,8 +1692,12 @@ export const getUser = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -1699,6 +1752,7 @@ export const getUser = /* GraphQL */ `
         requirements
         bonus
         imgS3Key
+        imgURLs
         benefits
         schedule
         like
@@ -1781,6 +1835,7 @@ export const getUser = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -1864,6 +1919,7 @@ export const getUser = /* GraphQL */ `
       forumPostComments {
         id
         content
+        imgURLs
         createdAt
         active
         forumPostID
@@ -1894,6 +1950,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -1968,6 +2025,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -1982,6 +2040,7 @@ export const getUser = /* GraphQL */ `
         forumPostComment {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -1998,6 +2057,7 @@ export const getUser = /* GraphQL */ `
         id
         name
         imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -2063,6 +2123,7 @@ export const getUser = /* GraphQL */ `
         moreBrief
         mainPart
         imgS3Key
+        imgURLs
         userID
         createdAt
         updatedAt
@@ -2162,6 +2223,7 @@ export const getUser = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -2261,7 +2323,9 @@ export const listUsers = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -2288,8 +2352,12 @@ export const listUsers = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -2336,6 +2404,7 @@ export const listUsers = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -2378,6 +2447,7 @@ export const listUsers = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -2401,6 +2471,7 @@ export const listUsers = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -2446,6 +2517,7 @@ export const listUsers = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -2539,7 +2611,9 @@ export const getUserEducation = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -2566,8 +2640,12 @@ export const getUserEducation = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -2614,6 +2692,7 @@ export const getUserEducation = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -2656,6 +2735,7 @@ export const getUserEducation = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -2679,6 +2759,7 @@ export const getUserEducation = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -2724,6 +2805,7 @@ export const getUserEducation = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -2863,7 +2945,9 @@ export const getUserExperience = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -2890,8 +2974,12 @@ export const getUserExperience = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -2938,6 +3026,7 @@ export const getUserExperience = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -2980,6 +3069,7 @@ export const getUserExperience = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -3003,6 +3093,7 @@ export const getUserExperience = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -3048,6 +3139,7 @@ export const getUserExperience = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -3181,7 +3273,9 @@ export const getTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -3208,8 +3302,12 @@ export const getTopic = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -3256,6 +3354,7 @@ export const getTopic = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -3298,6 +3397,7 @@ export const getTopic = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -3321,6 +3421,7 @@ export const getTopic = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -3366,6 +3467,7 @@ export const getTopic = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -3409,7 +3511,9 @@ export const getTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -3429,8 +3533,12 @@ export const getTopic = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -3499,7 +3607,9 @@ export const getArticle = /* GraphQL */ `
       title
       content
       imgS3Keys
+      imgURLs
       qrCodeImgS3Key
+      qrCodeImgURL
       tags
       sortKey
       active
@@ -3545,7 +3655,9 @@ export const getArticle = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -3572,8 +3684,12 @@ export const getArticle = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -3620,6 +3736,7 @@ export const getArticle = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -3662,6 +3779,7 @@ export const getArticle = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -3685,6 +3803,7 @@ export const getArticle = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -3730,6 +3849,7 @@ export const getArticle = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -3840,7 +3960,9 @@ export const listArticles = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         qrCodeImgS3Key
+        qrCodeImgURL
         tags
         sortKey
         active
@@ -3908,7 +4030,9 @@ export const articleSortBySortKey = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         qrCodeImgS3Key
+        qrCodeImgURL
         tags
         sortKey
         active
@@ -4002,7 +4126,9 @@ export const getArticleComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -4029,8 +4155,12 @@ export const getArticleComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -4077,6 +4207,7 @@ export const getArticleComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -4119,6 +4250,7 @@ export const getArticleComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -4142,6 +4274,7 @@ export const getArticleComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -4187,6 +4320,7 @@ export const getArticleComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -4229,7 +4363,9 @@ export const getArticleComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         qrCodeImgS3Key
+        qrCodeImgURL
         tags
         sortKey
         active
@@ -4340,7 +4476,9 @@ export const listArticleComments = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -4411,7 +4549,9 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -4480,7 +4620,9 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -4507,8 +4649,12 @@ export const getArticleSubComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -4555,6 +4701,7 @@ export const getArticleSubComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -4597,6 +4744,7 @@ export const getArticleSubComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -4620,6 +4768,7 @@ export const getArticleSubComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -4665,6 +4814,7 @@ export const getArticleSubComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -4735,7 +4885,9 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -4900,8 +5052,12 @@ export const getEvent = /* GraphQL */ `
       online
       group
       backGroundImgS3Key
+      backGroundImgURL
       qrCodeImgS3Key
+      qrCodeImgURL
       posterImgS3Key
+      posterImgURL
+      imgURLs
       content
       location
       sponsor
@@ -4951,7 +5107,9 @@ export const getEvent = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -4978,8 +5136,12 @@ export const getEvent = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -5026,6 +5188,7 @@ export const getEvent = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -5068,6 +5231,7 @@ export const getEvent = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -5091,6 +5255,7 @@ export const getEvent = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -5136,6 +5301,7 @@ export const getEvent = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -5269,8 +5435,12 @@ export const listEvents = /* GraphQL */ `
         online
         group
         backGroundImgS3Key
+        backGroundImgURL
         qrCodeImgS3Key
+        qrCodeImgURL
         posterImgS3Key
+        posterImgURL
+        imgURLs
         content
         location
         sponsor
@@ -5348,8 +5518,12 @@ export const eventSortBySortKey = /* GraphQL */ `
         online
         group
         backGroundImgS3Key
+        backGroundImgURL
         qrCodeImgS3Key
+        qrCodeImgURL
         posterImgS3Key
+        posterImgURL
+        imgURLs
         content
         location
         sponsor
@@ -5450,7 +5624,9 @@ export const getEventComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -5477,8 +5653,12 @@ export const getEventComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -5525,6 +5705,7 @@ export const getEventComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -5567,6 +5748,7 @@ export const getEventComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -5590,6 +5772,7 @@ export const getEventComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -5635,6 +5818,7 @@ export const getEventComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -5680,8 +5864,12 @@ export const getEventComment = /* GraphQL */ `
         online
         group
         backGroundImgS3Key
+        backGroundImgURL
         qrCodeImgS3Key
+        qrCodeImgURL
         posterImgS3Key
+        posterImgURL
+        imgURLs
         content
         location
         sponsor
@@ -5802,8 +5990,12 @@ export const listEventComments = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -5881,8 +6073,12 @@ export const eventCommentSortByEventID = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -5955,7 +6151,9 @@ export const getEventSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -5982,8 +6180,12 @@ export const getEventSubComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -6030,6 +6232,7 @@ export const getEventSubComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -6072,6 +6275,7 @@ export const getEventSubComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -6095,6 +6299,7 @@ export const getEventSubComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -6140,6 +6345,7 @@ export const getEventSubComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -6213,8 +6419,12 @@ export const getEventSubComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -6428,7 +6638,9 @@ export const getEventParticipant = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -6455,8 +6667,12 @@ export const getEventParticipant = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -6503,6 +6719,7 @@ export const getEventParticipant = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -6545,6 +6762,7 @@ export const getEventParticipant = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -6568,6 +6786,7 @@ export const getEventParticipant = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -6613,6 +6832,7 @@ export const getEventParticipant = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -6658,8 +6878,12 @@ export const getEventParticipant = /* GraphQL */ `
         online
         group
         backGroundImgS3Key
+        backGroundImgURL
         qrCodeImgS3Key
+        qrCodeImgURL
         posterImgS3Key
+        posterImgURL
+        imgURLs
         content
         location
         sponsor
@@ -6766,8 +6990,12 @@ export const listEventParticipants = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -6846,8 +7074,12 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -6915,7 +7147,9 @@ export const getDepartment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -6942,8 +7176,12 @@ export const getDepartment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -6990,6 +7228,7 @@ export const getDepartment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -7032,6 +7271,7 @@ export const getDepartment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -7055,6 +7295,7 @@ export const getDepartment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -7100,6 +7341,7 @@ export const getDepartment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -7145,6 +7387,7 @@ export const getDepartment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -7213,6 +7456,7 @@ export const getUwcssaJob = /* GraphQL */ `
       requirements
       bonus
       imgS3Key
+      imgURLs
       benefits
       schedule
       like
@@ -7277,7 +7521,9 @@ export const getUwcssaJob = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -7304,8 +7550,12 @@ export const getUwcssaJob = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -7352,6 +7602,7 @@ export const getUwcssaJob = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -7394,6 +7645,7 @@ export const getUwcssaJob = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -7417,6 +7669,7 @@ export const getUwcssaJob = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -7462,6 +7715,7 @@ export const getUwcssaJob = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -7549,6 +7803,7 @@ export const listUwcssaJobs = /* GraphQL */ `
         requirements
         bonus
         imgS3Key
+        imgURLs
         benefits
         schedule
         like
@@ -7620,6 +7875,7 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
         requirements
         bonus
         imgS3Key
+        imgURLs
         benefits
         schedule
         like
@@ -7713,7 +7969,9 @@ export const getForumTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -7740,8 +7998,12 @@ export const getForumTopic = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -7788,6 +8050,7 @@ export const getForumTopic = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -7830,6 +8093,7 @@ export const getForumTopic = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -7853,6 +8117,7 @@ export const getForumTopic = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -7898,6 +8163,7 @@ export const getForumTopic = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -8037,7 +8303,9 @@ export const getForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -8064,8 +8332,12 @@ export const getForumSubTopic = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -8112,6 +8384,7 @@ export const getForumSubTopic = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -8154,6 +8427,7 @@ export const getForumSubTopic = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -8177,6 +8451,7 @@ export const getForumSubTopic = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -8222,6 +8497,7 @@ export const getForumSubTopic = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -8295,6 +8571,7 @@ export const getForumSubTopic = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -8382,6 +8659,7 @@ export const forumPostSortBySortKey = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -8456,6 +8734,7 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -8530,6 +8809,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -8589,6 +8869,7 @@ export const getForumPost = /* GraphQL */ `
       title
       content
       imgS3Keys
+      imgURLs
       tags
       sortKey
       active
@@ -8635,7 +8916,9 @@ export const getForumPost = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -8662,8 +8945,12 @@ export const getForumPost = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -8710,6 +8997,7 @@ export const getForumPost = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -8752,6 +9040,7 @@ export const getForumPost = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -8775,6 +9064,7 @@ export const getForumPost = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -8820,6 +9110,7 @@ export const getForumPost = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -8901,6 +9192,7 @@ export const getForumPost = /* GraphQL */ `
         items {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -8952,6 +9244,7 @@ export const listForumPosts = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -9009,6 +9302,7 @@ export const getForumPostComment = /* GraphQL */ `
     getForumPostComment(id: $id) {
       id
       content
+      imgURLs
       createdAt
       active
       forumPostID
@@ -9052,7 +9346,9 @@ export const getForumPostComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -9079,8 +9375,12 @@ export const getForumPostComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -9127,6 +9427,7 @@ export const getForumPostComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -9169,6 +9470,7 @@ export const getForumPostComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -9192,6 +9494,7 @@ export const getForumPostComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -9237,6 +9540,7 @@ export const getForumPostComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -9279,6 +9583,7 @@ export const getForumPostComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -9372,6 +9677,7 @@ export const listForumPostComments = /* GraphQL */ `
       items {
         id
         content
+        imgURLs
         createdAt
         active
         forumPostID
@@ -9402,6 +9708,7 @@ export const listForumPostComments = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -9445,6 +9752,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
       items {
         id
         content
+        imgURLs
         createdAt
         active
         forumPostID
@@ -9475,6 +9783,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -9548,7 +9857,9 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -9575,8 +9886,12 @@ export const getForumPostSubComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -9623,6 +9938,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -9665,6 +9981,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -9688,6 +10005,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -9733,6 +10051,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -9808,7 +10127,9 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -9835,8 +10156,12 @@ export const getForumPostSubComment = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -9883,6 +10208,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -9925,6 +10251,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -9948,6 +10275,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -9993,6 +10321,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -10035,6 +10364,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -10086,6 +10416,7 @@ export const getForumPostSubComment = /* GraphQL */ `
       forumPostComment {
         id
         content
+        imgURLs
         createdAt
         active
         forumPostID
@@ -10116,6 +10447,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -10217,6 +10549,7 @@ export const listForumPostSubComments = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -10231,6 +10564,7 @@ export const listForumPostSubComments = /* GraphQL */ `
         forumPostComment {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -10319,6 +10653,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -10333,6 +10668,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
         forumPostComment {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -10397,7 +10733,9 @@ export const getMarketUserInfo = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -10424,8 +10762,12 @@ export const getMarketUserInfo = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -10472,6 +10814,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -10514,6 +10857,7 @@ export const getMarketUserInfo = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -10537,6 +10881,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -10582,6 +10927,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -10670,6 +11016,7 @@ export const getMarketItem = /* GraphQL */ `
       id
       name
       imgS3Keys
+      imgURLs
       title
       price
       marketType
@@ -10743,7 +11090,9 @@ export const getMarketItem = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -10770,8 +11119,12 @@ export const getMarketItem = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -10818,6 +11171,7 @@ export const getMarketItem = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -10860,6 +11214,7 @@ export const getMarketItem = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -10883,6 +11238,7 @@ export const getMarketItem = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -10928,6 +11284,7 @@ export const getMarketItem = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -10980,6 +11337,7 @@ export const listMarketItems = /* GraphQL */ `
         id
         name
         imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -11062,6 +11420,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         id
         name
         imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -11144,6 +11503,7 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
         id
         name
         imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -11226,6 +11586,7 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
         id
         name
         imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -11308,6 +11669,7 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
         id
         name
         imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -11379,6 +11741,7 @@ export const getFoundingMember = /* GraphQL */ `
       moreBrief
       mainPart
       imgS3Key
+      imgURLs
       userID
       createdAt
       updatedAt
@@ -11420,7 +11783,9 @@ export const getFoundingMember = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -11447,8 +11812,12 @@ export const getFoundingMember = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -11495,6 +11864,7 @@ export const getFoundingMember = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -11537,6 +11907,7 @@ export const getFoundingMember = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -11560,6 +11931,7 @@ export const getFoundingMember = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -11605,6 +11977,7 @@ export const getFoundingMember = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -11660,6 +12033,7 @@ export const listFoundingMembers = /* GraphQL */ `
         moreBrief
         mainPart
         imgS3Key
+        imgURLs
         userID
         createdAt
         updatedAt
@@ -11735,7 +12109,9 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -11762,8 +12138,12 @@ export const getLike = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -11810,6 +12190,7 @@ export const getLike = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -11852,6 +12233,7 @@ export const getLike = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -11875,6 +12257,7 @@ export const getLike = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -11920,6 +12303,7 @@ export const getLike = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -11995,7 +12379,9 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -12022,8 +12408,12 @@ export const getLike = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -12070,6 +12460,7 @@ export const getLike = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -12112,6 +12503,7 @@ export const getLike = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -12135,6 +12527,7 @@ export const getLike = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -12180,6 +12573,7 @@ export const getLike = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt
@@ -12222,7 +12616,9 @@ export const getLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         qrCodeImgS3Key
+        qrCodeImgURL
         tags
         sortKey
         active
@@ -12297,7 +12693,9 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -12365,8 +12763,12 @@ export const getLike = /* GraphQL */ `
         online
         group
         backGroundImgS3Key
+        backGroundImgURL
         qrCodeImgS3Key
+        qrCodeImgURL
         posterImgS3Key
+        posterImgURL
+        imgURLs
         content
         location
         sponsor
@@ -12451,8 +12853,12 @@ export const getLike = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -12521,6 +12927,7 @@ export const getLike = /* GraphQL */ `
         title
         content
         imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -12572,6 +12979,7 @@ export const getLike = /* GraphQL */ `
       forumPostComment {
         id
         content
+        imgURLs
         createdAt
         active
         forumPostID
@@ -12602,6 +13010,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -12676,6 +13085,7 @@ export const getLike = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -12690,6 +13100,7 @@ export const getLike = /* GraphQL */ `
         forumPostComment {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -12765,7 +13176,9 @@ export const listLikes = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -12802,8 +13215,12 @@ export const listLikes = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -12841,6 +13258,7 @@ export const listLikes = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           tags
           sortKey
           active
@@ -12855,6 +13273,7 @@ export const listLikes = /* GraphQL */ `
         forumPostComment {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -12928,7 +13347,9 @@ export const getWebFeedBack = /* GraphQL */ `
           title
           content
           imgS3Keys
+          imgURLs
           qrCodeImgS3Key
+          qrCodeImgURL
           tags
           sortKey
           active
@@ -12955,8 +13376,12 @@ export const getWebFeedBack = /* GraphQL */ `
           online
           group
           backGroundImgS3Key
+          backGroundImgURL
           qrCodeImgS3Key
+          qrCodeImgURL
           posterImgS3Key
+          posterImgURL
+          imgURLs
           content
           location
           sponsor
@@ -13003,6 +13428,7 @@ export const getWebFeedBack = /* GraphQL */ `
           requirements
           bonus
           imgS3Key
+          imgURLs
           benefits
           schedule
           like
@@ -13045,6 +13471,7 @@ export const getWebFeedBack = /* GraphQL */ `
         forumPostComments {
           id
           content
+          imgURLs
           createdAt
           active
           forumPostID
@@ -13068,6 +13495,7 @@ export const getWebFeedBack = /* GraphQL */ `
           id
           name
           imgS3Keys
+          imgURLs
           title
           price
           marketType
@@ -13113,6 +13541,7 @@ export const getWebFeedBack = /* GraphQL */ `
           moreBrief
           mainPart
           imgS3Key
+          imgURLs
           userID
           createdAt
           updatedAt

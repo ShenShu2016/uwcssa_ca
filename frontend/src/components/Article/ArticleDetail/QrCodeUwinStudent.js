@@ -1,10 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 
-//import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-//import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
 import React from "react";
-import S3Image from "../../S3/S3Image";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 
@@ -16,13 +13,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function QrCodeUwinStudent({ qrCodeImgS3Key, id }) {
+export default function QrCodeUwinStudent({ qrCodeImgURL, id }) {
   const classes = useStyles();
   const { userAuth } = useSelector((state) => state);
 
   return (
     <Box my={2} className={classes.root}>
-      {qrCodeImgS3Key ? (
+      {qrCodeImgURL ? (
         userAuth.userProfile.badges.includes("uwindsor") ? (
           <Box>
             <Typography
@@ -32,16 +29,12 @@ export default function QrCodeUwinStudent({ qrCodeImgS3Key, id }) {
             >
               添加小助手验证时提供专属口令或直接发送口令给小助手，即可直接入群！
             </Typography>
-
-            {/* {[...Array(10)].map((x, idx) => (
-              <ArrowDownwardIcon
-                size="large"
-                key={idx}
-                sx={{ color: "primary.main" }}
-              />
-            ))} */}
             <Box></Box>
-            <S3Image S3Key={qrCodeImgS3Key} style={{ maxWidth: "300px" }} />
+            <img
+              src={qrCodeImgURL}
+              style={{ maxWidth: "300px" }}
+              alt="qrCodeImgURL"
+            />
             <Typography variant="h6" color="red">
               专属口令: {id.slice(0, 3)}-{userAuth.user.username}-
               {userAuth.user.username.length + 3}

@@ -54,39 +54,12 @@ export default function Main({ article }) {
     createdAt,
     user,
     owner,
-    qrCodeImgS3Key,
+    qrCodeImgURL,
     id,
   } = article;
-  //const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
-  //console.log("imgS3Keys", imgS3Keys);
-  // useEffect(() => {
-  //   const getImage = async () => {
-  //     try {
-  //       setImgKeyFromServer([]);
-  //       console.log("我炮击哪里了");
-  //       const imageAccessURL = await Promise.all(
-  //         Array.from(imgS3Keys).map((key) =>
-  //           Storage.get(key, {
-  //             level: "public",
-  //             expires: 120,
-  //             download: false,
-  //           })
-  //         )
-  //       );
-  //       setImgKeyFromServer((url) => url.concat(imageAccessURL));
-  //     } catch (error) {
-  //       console.error("error accessing the Image from s3", error);
-  //       setImgKeyFromServer([]);
-  //     }
-  //   };
-  //   if (imgS3Keys) {
-  //     getImage();
-  //   }
-  // }, [imgS3Keys]);
-  //const imgKeyFromServer = useSelector((state) => selectImageById(state, id));
 
-  //console.log("imgKeyFromServer[0]", imgKeyFromServer[0]);
   const imgKeyFromServer = useGetImages(article, id);
+
   return (
     <div className={classes.root}>
       {article.active === true ? (
@@ -136,7 +109,7 @@ export default function Main({ article }) {
           </Box>
           <Divider />
           <Box>
-            <QrCodeUwinStudent qrCodeImgS3Key={qrCodeImgS3Key} id={id} />
+            <QrCodeUwinStudent qrCodeImgURL={qrCodeImgURL} id={id} />
           </Box>
           <Divider />
           <Box className={classes.buttonGroup}>

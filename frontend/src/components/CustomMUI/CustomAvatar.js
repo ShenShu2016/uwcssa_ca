@@ -81,7 +81,7 @@ export default function CustomAvatar({ user, variant, sx, link }) {
                 />
               }
             >
-              {user.avatarImgS3Key ? (
+              {user.avatarImgURL ? (
                 <Avatar
                   component={link === true ? Link : ""}
                   to={link === true ? `/account/profile/${user.username}` : ""}
