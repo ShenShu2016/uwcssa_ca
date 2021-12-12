@@ -100,6 +100,7 @@ export default function PostMarketVehicle() {
   const onSubmit = async (data) => {
     const createMarketItemInput = {
       ...data,
+      name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
       imgS3Keys: Object.keys(imageKeys),
       tags: GetTags(),
@@ -128,7 +129,7 @@ export default function PostMarketVehicle() {
 
     console.log("Something should be here", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/market/vehicle/${response.payload.id}`);
+      history.replace(`/market/vehicle/${response.payload.id}`);
       reset();
     }
     console.log("Can upload");

@@ -120,7 +120,7 @@ export default function PostMarketItem() {
 
     console.log("Something should be here", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/market/item/${response.payload.id}`);
+      history.replace(`/market/item/${response.payload.id}`);
       reset();
     }
     console.log("Can upload");
