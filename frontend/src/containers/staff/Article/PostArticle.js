@@ -71,7 +71,7 @@ export default function PostArticle() {
   const [tags, setTags] = useState([]);
   const [imgURLs, setImgURLs] = useState();
   const [qrCodeImgURL, setQrCodeImgURL] = useState();
-  const [content, setContent] = useState();
+  const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
   const timer = useRef();
 
@@ -81,8 +81,8 @@ export default function PostArticle() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: undefined,
-      summary: undefined,
+      title: "",
+      summary: "",
       topicID: "",
     },
   });
@@ -121,6 +121,10 @@ export default function PostArticle() {
   };
   const onSubmit = async (data) => {
     //Upload the article
+    if (!content) {
+      alert("内容里面右上角忘记按保存了！");
+      return;
+    }
     setLoading(true);
     const createArticleInput = {
       ...data,
