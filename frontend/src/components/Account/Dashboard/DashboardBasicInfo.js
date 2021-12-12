@@ -58,7 +58,11 @@ export default function DashboardBasicInfo({ userProfile }) {
             }}
           >
             <img
-              src={userProfile.backGroundImgURL}
+              src={
+                userProfile.backGroundImgURL
+                  ? userProfile.backGroundImgURL
+                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+              }
               alt="backGroundImgURL"
               style={{
                 width: "100%",
@@ -87,7 +91,11 @@ export default function DashboardBasicInfo({ userProfile }) {
                     history.push(`/account/profile/${userProfile.username}`);
                   }}
                   alt="avatar"
-                  src={userProfile.avatarImgURL}
+                  src={
+                    userProfile.avatarImgURL
+                      ? userProfile.avatarImgURL
+                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+                  }
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
                 />

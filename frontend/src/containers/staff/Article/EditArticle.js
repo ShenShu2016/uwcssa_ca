@@ -31,6 +31,7 @@ import API from "@aws-amplify/api";
 import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
+import { convertToRaw } from "draft-js";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
@@ -86,35 +87,28 @@ export default function EditArticle() {
   const [tags, setTags] = useState(article.tags);
   const [imgURLs, setImgURLs] = useState(article.imgURLs);
   const [qrCodeImgURL, setQrCodeImgURL] = useState(article.qrCodeImgURL);
-  const [content, setContent] = useState(article.content);
+  const [content, setContent] = useState();
+  const [content2, setContent2] = useState();
   const [loading, setLoading] = useState(false);
   const timer = useRef();
 
   const {
     handleSubmit,
     control,
-    setValue,
     formState: { errors },
-  } = useForm({
-    // defaultValues: {
-    //   title: article.title,
-    //   summary: article.summary,
-    //   topicID: article.topicID,
-    // },
-  });
+  } = useForm();
   useEffect(() => {
     dispatch(fetchTopics());
   }, [dispatch]);
 
   useEffect(() => {
-    setTags(article.tags);
     setImgURLs(article.imgURLs);
     setQrCodeImgURL(article.qrCodeImgURL);
     setContent(article.content);
-  }, [article, setValue]);
+  }, [article]);
 
   const { topics } = useSelector((state) => state.article);
-  console.log("article", article);
+
   const uploadArticleImg = async (e) => {
     setLoading(true);
     const imagesData = e.target.files;
@@ -149,7 +143,7 @@ export default function EditArticle() {
       ...data,
       id: article.id,
       imgURLs: imgURLs,
-      content: content,
+      content: content2,
       active: true,
       qrCodeImgURL: qrCodeImgURL,
       tags: GetTags(),
@@ -193,10 +187,11 @@ export default function EditArticle() {
     setTags(newTags);
   };
 
-  const handleOnSave = (data) => {
-    setContent(data);
-    console.log(data);
+  const handleOnChange = (prop) => (event) => {
+    const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
+    setContent2(tempContent);
   };
+  // console.log("content", content);
   return (
     <div>
       {article.active === true ? (
@@ -405,14 +400,30 @@ export default function EditArticle() {
             </label>
           </Box>
           <Typography variant="h4" sx={{ my: 2 }}>
-            输入内容（结束后记得保存）:
+            输入内容:
           </Typography>
           <Paper className={classes.content}>
             <MUIRichTextEditor
-              defaultValue={article.content}
               label="Type something here..."
-              onSave={handleOnSave}
-              inlineToolbar={true}
+              value={content}
+              onChange={handleOnChange()}
+              controls={[
+                "title",
+                "bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "highlight",
+                "undo",
+                "redo",
+                "link",
+                "media",
+                "numberList",
+                "bulletList",
+                "quote",
+                "code",
+                "clear",
+              ]}
             />
           </Paper>
           <Button
@@ -424,7 +435,7 @@ export default function EditArticle() {
             disabled={loading}
             sx={{ my: 4 }}
           >
-            上传 Article
+            更新 Article
             {loading && (
               <CircularProgress
                 size={24}

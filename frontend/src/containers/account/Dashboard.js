@@ -1,7 +1,7 @@
 import DashboardBasicInfo from "../../components/Account/Dashboard/DashboardBasicInfo";
-import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
-import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
-import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
+// import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
+// import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
+// import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
 import MyMarketPosts from "../../components/Account/Dashboard/MyMarketPosts";
 import React from "react";
 import { makeStyles } from "@mui/styles";
@@ -33,10 +33,10 @@ export default function Dashboard() {
       <DashboardBasicInfo userProfile={userProfile} />
       <div className={classes.root}>
         <div className={classes.infoCards}>
-          <FavoriteTopic />
-          <MyEssencePosts />
+          {/* <FavoriteTopic />
+          <MyEssencePosts /> */}
         </div>
-        <MyForumPosts />
+        {/* <MyForumPosts /> */}
         <MyMarketPosts />
       </div>
     </div>

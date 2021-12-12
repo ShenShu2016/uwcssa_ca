@@ -24,6 +24,7 @@ import API from "@aws-amplify/api";
 import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
+import { convertToRaw } from "draft-js";
 import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   swipeViews: {
     width: "100%",
-    height: "750px",
+    height: "300px",
     [theme.breakpoints.down("md")]: {
       width: "100%",
       height: "50vh",
@@ -174,9 +175,9 @@ export default function PostArticle() {
     setTags(newTags);
   };
 
-  const handleOnSave = (data) => {
-    setContent(data);
-    console.log(data);
+  const handleOnChange = (prop) => (event) => {
+    const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
+    setContent(tempContent);
   };
   return (
     <Box
@@ -376,13 +377,30 @@ export default function PostArticle() {
         </label>
       </Box>
       <Typography variant="h4" sx={{ my: 2 }}>
-        输入内容（结束后记得保存）:
+        输入内容:
       </Typography>
       <Paper className={classes.content}>
         <MUIRichTextEditor
           label="Type something here..."
-          onSave={handleOnSave}
+          onChange={handleOnChange()}
           inlineToolbar={true}
+          controls={[
+            "title",
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "highlight",
+            "undo",
+            "redo",
+            "link",
+            "media",
+            "numberList",
+            "bulletList",
+            "quote",
+            "code",
+            "clear",
+          ]}
         />
       </Paper>
       <Button
