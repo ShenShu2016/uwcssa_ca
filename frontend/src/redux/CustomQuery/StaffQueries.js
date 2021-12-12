@@ -22,9 +22,6 @@ export const eventSortBySortKey = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
-        qrCodeImgS3Key
-        posterImgS3Key
         content
         location
         sponsor
@@ -45,8 +42,6 @@ export const eventSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
           linkedIn
           github
           sortKey

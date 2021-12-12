@@ -170,7 +170,7 @@ export const postMultipleImages = createAsyncThunk(
   async ({ imagesData, imageLocation, maxPixel }) => {
     const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } =
       awsmobile;
-    let imgS3Keys = [];
+    let imgURLs = [];
     await new Promise(async function (resolve) {
       let numProcessedImages = 0;
       let numImagesToProcess = imagesData.length;
@@ -191,7 +191,7 @@ export const postMultipleImages = createAsyncThunk(
                 { contentType: "image/*" }
               ).then((e) => {
                 console.log("response 上传成功了", e);
-                imgS3Keys.push(
+                imgURLs.push(
                   `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/public/${e.key}`
                 );
                 resolve();
@@ -206,7 +206,7 @@ export const postMultipleImages = createAsyncThunk(
         resolve();
       }
     });
-    return imgS3Keys;
+    return imgURLs;
   }
 );
 

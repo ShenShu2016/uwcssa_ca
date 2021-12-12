@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
   Container,
   FormControl,
@@ -63,9 +64,10 @@ export default function PostEvent() {
   useTitle("活动创建");
   const dispatch = useDispatch();
 
-  const [backGroundImgURL, setBackGroundImgURL] = useState("");
-  const [qrCodeImgURL, setQrCodeImgURL] = useState("");
-  const [posterImgURL, setPosterImgURL] = useState("");
+  const [backGroundImgURL, setBackGroundImgURL] = useState(undefined);
+  const [qrCodeImgURL, setQrCodeImgURL] = useState(undefined);
+  const [posterImgURL, setPosterImgURL] = useState(undefined);
+  const [isTitleAsURL, setIsTitleAsURL] = useState(false);
   const { username } = useSelector((state) => state.userAuth.user);
   const history = useHistory();
   const timer = useRef();
@@ -87,6 +89,7 @@ export default function PostEvent() {
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -146,6 +149,7 @@ export default function PostEvent() {
     setLoading(true);
     const createEventInput = {
       ...data,
+      id: isTitleAsURL ? getValues("title") : undefined,
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
@@ -217,6 +221,15 @@ export default function PostEvent() {
                   helperText={errors.title ? "不能为空" : null}
                 />
               )}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isTitleAsURL}
+                  onChange={(event) => setIsTitleAsURL(event.target.checked)}
+                />
+              }
+              label="用标题作为URL，一旦发出不能更改，除非删掉，并且有唯一性"
             />
             <Controller
               name="topicID"
