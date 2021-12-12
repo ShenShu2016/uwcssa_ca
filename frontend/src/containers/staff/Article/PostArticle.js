@@ -5,6 +5,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
   TextField,
   Typography,
@@ -20,6 +21,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
+import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
 import { createTopic } from "../../../graphql/mutations";
@@ -59,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     marginBlock: "2rem",
+    minHeight: "300px",
+    paddingInline: "1rem",
   },
   type: {
     marginBlock: "2rem",
@@ -79,8 +83,9 @@ export default function PostArticle() {
   const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
   const [tags, setTags] = useState([]);
-  const [imgURLs, setImgURLs] = useState([]);
+  const [imgURLs, setImgURLs] = useState();
   const [qrCodeImgURL, setQrCodeImgURL] = useState();
+  const [content, setContent] = useState();
   const [loading, setLoading] = useState(false);
   const timer = useRef();
 
@@ -91,7 +96,7 @@ export default function PostArticle() {
   } = useForm({
     defaultValues: {
       title: "",
-      content: "",
+      // content: "",
       topicID: "",
     },
   });
@@ -133,11 +138,10 @@ export default function PostArticle() {
     setLoading(true);
     const createArticleInput = {
       ...data,
-      // imgS3Keys: imageKeys,
       imgURLs: imgURLs,
+      content: content,
       active: true,
       sortKey: "SortKey",
-      //qrCodeImgS3Key: qrCodeImgS3Key,
       qrCodeImgURL: qrCodeImgURL,
       userID: username,
       tags: GetTags(),
@@ -153,7 +157,7 @@ export default function PostArticle() {
         console.log(response.error.message);
       }, 1000);
 
-      console.log(response.error.message);
+      console.log(response);
     }
   };
   const [topicData, setTopicData] = useState({ name: "" });
@@ -178,6 +182,11 @@ export default function PostArticle() {
   const handleDelete = (e) => {
     const newTags = tags.filter((tag) => tag !== e);
     setTags(newTags);
+  };
+
+  const handleOnSave = (data) => {
+    setContent(data);
+    console.log(data);
   };
   return (
     <Box
@@ -263,7 +272,7 @@ export default function PostArticle() {
         onDelete={(e) => handleDelete(e)}
       />
       <Box className={classes.swipeViews}>
-        <SwipeViews images={imgURLs} />
+        {imgURLs ? <SwipeViews images={imgURLs} /> : ""}
       </Box>
       <Box>
         <label htmlFor="contained-button-file">
@@ -335,30 +344,16 @@ export default function PostArticle() {
           )}
         </Button>
       </label>
-
-      <Box className={classes.content}>
-        <Controller
-          name="content"
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, value } }) => (
-            <TextField
-              required
-              label="Content"
-              minRows={20}
-              variant="outlined"
-              fullWidth
-              multiline
-              onChange={onChange}
-              value={value}
-              error={!!errors.content}
-              helperText={errors.content ? "不能为空" : null}
-            />
-          )}
+      <Typography variant="h4" sx={{ my: 2 }}>
+        输入内容（结束后记得保存）:
+      </Typography>
+      <Paper className={classes.content}>
+        <MUIRichTextEditor
+          label="Type something here..."
+          onSave={handleOnSave}
+          inlineToolbar={true}
         />
-      </Box>
+      </Paper>
       <Button
         variant="contained"
         endIcon={<PublishIcon />}

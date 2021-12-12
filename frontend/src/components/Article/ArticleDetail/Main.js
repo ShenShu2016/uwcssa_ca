@@ -6,11 +6,11 @@ import {
   Chip,
   Divider,
   Skeleton,
-  Typography,
 } from "@mui/material";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import LikeButtonGroup from "../../LikeButtonGroup";
+import MUIRichTextEditor from "mui-rte";
 import QrCodeUwinStudent from "./QrCodeUwinStudent";
 import React from "react";
 import SwipeViews from "../../SwipeViews";
@@ -96,14 +96,11 @@ export default function Main({ article }) {
           })}
           <Divider sx={{ my: 2 }} />
           <Box sx={{ my: 2 }}>
-            <Typography
-              variant="body1"
-              className={classes.content}
-              component="span"
-              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-            >
-              {content}
-            </Typography>
+            <MUIRichTextEditor
+              defaultValue={content}
+              readOnly={true}
+              toolbar={false}
+            />
           </Box>
           <Divider />
           <Box>
