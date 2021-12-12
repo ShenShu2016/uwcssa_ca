@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 
 import ArticlesPreview from "./Article/ArticlesPreview";
 import { Box } from "@mui/system";
+import EditArticle from "./Article/EditArticle";
 import Footer from "../Footer";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
@@ -22,6 +23,11 @@ export default function StaffRouter() {
           exact
           path="/staff/article/postArticle"
           component={PostArticle}
+        />
+        <Route
+          exact
+          path="/staff/article/editArticle/:articleID"
+          component={EditArticle}
         />
         <Route
           exact

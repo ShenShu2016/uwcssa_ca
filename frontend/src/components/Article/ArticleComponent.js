@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ArticleComponent({ article }) {
   const classes = useStyles();
-  const { id, content, title, imgURLs, createdAt, userID, user } = article;
+  const { id, summary, title, imgURLs, createdAt, userID, user } = article;
 
   return (
     <div>
@@ -105,11 +105,12 @@ function ArticleComponent({ article }) {
                         overflow: "hidden",
                       }}
                     >
-                      {content}
+                      {summary
+                        ? summary
+                        : "这人很懒，忘记写summary了。 你还是自己点进去看看吧！"}
                     </Typography>
                   </Box>
                 </Grid>
-
                 <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
                   <Typography variant="overline" color="textSecondary">
                     {moment(createdAt).fromNow()}

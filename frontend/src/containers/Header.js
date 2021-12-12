@@ -228,11 +228,12 @@ export default function Header() {
         onClick={handleMenuClose}
         component={Link}
         to="/account/myAccount"
+        disabled
       >
         <ManageAccountsIcon />
         我的账户
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleMenuClose} disabled>
         <SettingsIcon />
         设置
       </MenuItem>

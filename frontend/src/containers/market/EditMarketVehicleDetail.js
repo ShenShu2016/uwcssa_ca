@@ -150,6 +150,7 @@ export default function EditMarketVehicleDetail() {
     const createMarketItemInput = {
       ...data,
       id: id,
+      name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
       imgS3Keys: Object.keys(imageKeys),
       tags: GetTags(),
@@ -180,7 +181,7 @@ export default function EditMarketVehicleDetail() {
 
     console.log("Something should be here", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/market/vehicle/${response.payload.id}`);
+      history.replace(`/market/vehicle/${response.payload.id}`);
       reset();
     }
     console.log("Can upload");

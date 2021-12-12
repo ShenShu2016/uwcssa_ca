@@ -5,16 +5,20 @@ import {
   CardHeader,
   Chip,
   Divider,
+  IconButton,
   Skeleton,
-  Typography,
 } from "@mui/material";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import EditIcon from "@mui/icons-material/Edit";
 import LikeButtonGroup from "../../LikeButtonGroup";
+import MUIRichTextEditor from "mui-rte";
 import QrCodeUwinStudent from "./QrCodeUwinStudent";
 import React from "react";
 import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
+import { useHistory } from "react-router";
+import { usePermit } from "../../../Hooks/usePermit";
 import { useTitle } from "../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main({ article }) {
   const classes = useStyles();
+  const history = useHistory();
   useTitle(article.title && article.title);
+
   // console.log("Main", article);
   const {
     content,
@@ -54,10 +60,15 @@ export default function Main({ article }) {
     user,
     owner,
     qrCodeImgURL,
-
     id,
   } = article;
 
+  const isPermit = usePermit(owner, "admin");
+  console.log("isPermit", isPermit);
+
+  const handleEdit = () => {
+    history.push(`/staff/article/editArticle/${id}`);
+  };
   return (
     <div className={classes.root}>
       {article.active === true ? (
@@ -90,20 +101,26 @@ export default function Main({ article }) {
               11,
               19
             )}`}
+            action={
+              <IconButton
+                aria-label="edit"
+                disabled={!isPermit}
+                onClick={() => handleEdit()}
+              >
+                <EditIcon />
+              </IconButton>
+            }
           />
           {tags.map((data) => {
             return <Chip key={data} label={data} />;
           })}
           <Divider sx={{ my: 2 }} />
           <Box sx={{ my: 2 }}>
-            <Typography
-              variant="body1"
-              className={classes.content}
-              component="span"
-              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-            >
-              {content}
-            </Typography>
+            <MUIRichTextEditor
+              defaultValue={content}
+              readOnly={true}
+              toolbar={false}
+            />
           </Box>
           <Divider />
           <Box>

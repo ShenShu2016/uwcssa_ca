@@ -37,6 +37,72 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         active
         createdAt
         userID
+
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgS3Key
+          backGroundImgS3Key
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+
+          badges
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const marketItemSortBySortKeyPosts = /* GraphQL */ `
+  query MarketItemSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMarketItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    marketItemSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        imgS3Keys
+        title
+        price
+        marketType
+        location
+        year
+        make
+        model
+        marketRentalSaleRent
+        propertyType
+        bedroomCounts
+        address
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
         description
         updatedAt
         user {
@@ -64,7 +130,6 @@ export const marketItemSortBySortKey = /* GraphQL */ `
     }
   }
 `;
-
 export const marketItemSortBySortKeyItem = /* GraphQL */ `
   query MarketItemSortBySortKeyItem(
     $sortKey: SortKey

@@ -7,6 +7,7 @@ export const getArticle = /* GraphQL */ `
       id
       imgURLs
       qrCodeImgURL
+      summary
       tags
       title
       topic {

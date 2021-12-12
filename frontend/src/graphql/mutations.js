@@ -73,6 +73,7 @@ export const createUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -230,6 +231,7 @@ export const createUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -307,6 +309,7 @@ export const createUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1091,6 +1094,7 @@ export const updateUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1248,6 +1252,7 @@ export const updateUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -1325,6 +1330,7 @@ export const updateUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2109,6 +2115,7 @@ export const deleteUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2266,6 +2273,7 @@ export const deleteUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -2343,6 +2351,7 @@ export const deleteUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3108,6 +3117,7 @@ export const createUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3399,6 +3409,7 @@ export const updateUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3690,6 +3701,7 @@ export const deleteUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3982,6 +3994,7 @@ export const createUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4274,6 +4287,7 @@ export const updateUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4566,6 +4580,7 @@ export const deleteUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4851,6 +4866,7 @@ export const createTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5089,6 +5105,7 @@ export const createTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5183,6 +5200,7 @@ export const updateTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5421,6 +5439,7 @@ export const updateTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5515,6 +5534,7 @@ export const deleteTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5753,6 +5773,7 @@ export const deleteTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5808,6 +5829,7 @@ export const createArticle = /* GraphQL */ `
     createArticle(input: $input, condition: $condition) {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -5856,6 +5878,7 @@ export const createArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6159,6 +6182,7 @@ export const updateArticle = /* GraphQL */ `
     updateArticle(input: $input, condition: $condition) {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -6207,6 +6231,7 @@ export const updateArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6510,6 +6535,7 @@ export const deleteArticle = /* GraphQL */ `
     deleteArticle(input: $input, condition: $condition) {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -6558,6 +6584,7 @@ export const deleteArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6902,6 +6929,7 @@ export const createArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7139,6 +7167,7 @@ export const createArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -7263,6 +7292,7 @@ export const updateArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7500,6 +7530,7 @@ export const updateArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -7624,6 +7655,7 @@ export const deleteArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7861,6 +7893,7 @@ export const deleteArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -7985,6 +8018,7 @@ export const createArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8250,6 +8284,7 @@ export const createArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8336,6 +8371,7 @@ export const updateArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8601,6 +8637,7 @@ export const updateArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8687,6 +8724,7 @@ export const deleteArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8952,6 +8990,7 @@ export const deleteArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9055,6 +9094,7 @@ export const createEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9436,6 +9476,7 @@ export const updateEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9817,6 +9858,7 @@ export const deleteEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10181,6 +10223,7 @@ export const createEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10555,6 +10598,7 @@ export const updateEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10929,6 +10973,7 @@ export const deleteEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11303,6 +11348,7 @@ export const createEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11664,6 +11710,7 @@ export const updateEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12025,6 +12072,7 @@ export const deleteEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12393,6 +12441,7 @@ export const createEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12749,6 +12798,7 @@ export const updateEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13105,6 +13155,7 @@ export const deleteEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13455,6 +13506,7 @@ export const createDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13763,6 +13815,7 @@ export const updateDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -14071,6 +14124,7 @@ export const deleteDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -14404,6 +14458,7 @@ export const createUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -14749,6 +14804,7 @@ export const updateUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -15094,6 +15150,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -15417,6 +15474,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -15759,6 +15817,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -16101,6 +16160,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -16437,6 +16497,7 @@ export const createForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -16732,6 +16793,7 @@ export const updateForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17027,6 +17089,7 @@ export const deleteForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17323,6 +17386,7 @@ export const createForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17658,6 +17722,7 @@ export const updateForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17993,6 +18058,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -18335,6 +18401,7 @@ export const createForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -18708,6 +18775,7 @@ export const updateForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -19081,6 +19149,7 @@ export const deleteForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -19449,6 +19518,7 @@ export const createForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -19818,6 +19888,7 @@ export const updateForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -20187,6 +20258,7 @@ export const deleteForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -20557,6 +20629,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -20827,6 +20900,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -21236,6 +21310,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -21506,6 +21581,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -21915,6 +21991,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -22185,6 +22262,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -22592,6 +22670,7 @@ export const createMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -22879,6 +22958,7 @@ export const updateMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -23166,6 +23246,7 @@ export const deleteMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -23485,6 +23566,7 @@ export const createMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -23804,6 +23886,7 @@ export const updateMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24123,6 +24206,7 @@ export const deleteMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24414,6 +24498,7 @@ export const createFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24704,6 +24789,7 @@ export const updateFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24994,6 +25080,7 @@ export const deleteFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25279,6 +25366,7 @@ export const createLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25549,6 +25637,7 @@ export const createLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25786,6 +25875,7 @@ export const createLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -25863,6 +25953,7 @@ export const createLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -26337,6 +26428,7 @@ export const updateLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -26607,6 +26699,7 @@ export const updateLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -26844,6 +26937,7 @@ export const updateLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -26921,6 +27015,7 @@ export const updateLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -27395,6 +27490,7 @@ export const deleteLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -27665,6 +27761,7 @@ export const deleteLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -27902,6 +27999,7 @@ export const deleteLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -27979,6 +28077,7 @@ export const deleteLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -28454,6 +28553,7 @@ export const createWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -28741,6 +28841,7 @@ export const updateWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29028,6 +29129,7 @@ export const deleteWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29318,6 +29420,7 @@ export const createUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29607,6 +29710,7 @@ export const updateUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29896,6 +30000,7 @@ export const deleteUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs

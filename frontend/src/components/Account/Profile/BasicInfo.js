@@ -90,7 +90,11 @@ export default function BasicInfo({ user, ownerID }) {
               >
                 <Avatar
                   alt="avatar"
-                  src={user.avatarImgURL}
+                  src={
+                    user.avatarImgURL
+                      ? user.avatarImgURL
+                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+                  }
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
                   onClick={isPermit ? handleEditClickOpen : undefined}
