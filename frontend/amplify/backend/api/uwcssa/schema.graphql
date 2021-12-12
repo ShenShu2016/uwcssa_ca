@@ -151,6 +151,7 @@ type Article
   @key(name: "byTopic", fields: ["topicID"]) {
   id: ID!
   title: String!
+  summary: String
   content: String!
   imgS3Keys: [String]
   imgURLs: [AWSURL]

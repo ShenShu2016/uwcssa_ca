@@ -9,6 +9,7 @@ import {
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
+import MUIRichTextEditor from "mui-rte";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
@@ -96,17 +97,21 @@ function ArticleComponent({ article }) {
                   </div>
                 </Grid>
                 <Grid item xs>
-                  <Box style={{ maxHeight: "80px", overflow: "hidden" }}>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
+                  <Box
+                    style={{
+                      maxHeight: "80px",
+                      overflow: "hidden",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    <MUIRichTextEditor
+                      defaultValue={content}
+                      readOnly={true}
+                      toolbar={false}
                       style={{
-                        wordBreak: "break-word",
                         overflow: "hidden",
                       }}
-                    >
-                      {content}
-                    </Typography>
+                    />
                   </Box>
                 </Grid>
 
