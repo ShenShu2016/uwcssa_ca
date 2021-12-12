@@ -168,6 +168,7 @@ export default function EditMarketRentalDetail() {
   const onSubmit = async (data) => {
     const createMarketItemInput = {
       ...data,
+      name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
       id: id,
       marketType: "Rental",
       imgS3Keys: Object.keys(imageKeys),
@@ -199,7 +200,7 @@ export default function EditMarketRentalDetail() {
 
     console.log("Something should be here", response);
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/market/rental/${response.payload.id}`);
+      history.replace(`/market/rental/${response.payload.id}`);
       reset();
     }
     console.log("Can upload");

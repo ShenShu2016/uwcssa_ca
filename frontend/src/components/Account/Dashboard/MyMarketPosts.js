@@ -26,7 +26,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
-import { marketItemSortBySortKey } from "../../Market/marketQueries";
+import { marketItemSortBySortKeyPosts } from "../../Market/marketQueries";
 import { useSelector } from "react-redux";
 import { visuallyHidden } from "@mui/utils";
 
@@ -230,7 +230,7 @@ export default function EnhancedTable() {
   React.useEffect(() => {
     const getUserMarket = async () => {
       const MarketItemsData = await API.graphql({
-        query: marketItemSortBySortKey,
+        query: marketItemSortBySortKeyPosts,
         variables: {
           sortKey: "SortKey",
           sortDirection: "DESC",
