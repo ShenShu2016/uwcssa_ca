@@ -51,24 +51,10 @@ const useStyles = makeStyles((theme) => ({
       height: "50vh",
     },
   },
-  imgPreview: {
-    minHeight: "300px",
-    backgroundColor: "#f4f4f4",
-    textAlign: "center",
-  },
-  titleInput: {
-    marginBlock: "2rem",
-  },
   content: {
     marginBlock: "2rem",
     minHeight: "300px",
     paddingInline: "1rem",
-  },
-  type: {
-    marginBlock: "2rem",
-  },
-  topic: {
-    marginBlock: "2rem",
   },
 }));
 
@@ -95,8 +81,8 @@ export default function PostArticle() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: "",
-      // content: "",
+      title: undefined,
+      summary: undefined,
       topicID: "",
     },
   });
@@ -198,7 +184,7 @@ export default function PostArticle() {
       <Typography variant="h4" sx={{ textAlign: "center", mb: 2 }}>
         发布文章
       </Typography>
-      <Box className={classes.title}>
+      <Box sx={{ my: "2rem" }}>
         <Controller
           name="title"
           control={control}
@@ -219,7 +205,32 @@ export default function PostArticle() {
           )}
         />
       </Box>
-      <Box className={classes.topic}>
+      <Box sx={{ my: "2rem" }}>
+        <Controller
+          name="summary"
+          control={control}
+          rules={{
+            required: true,
+            minLength: 20,
+            maxLength: 300,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              required
+              label="简要概述"
+              variant="outlined"
+              fullWidth
+              multiline={true}
+              rows={4}
+              onChange={onChange}
+              value={value}
+              error={!!errors.summary}
+              helperText={errors.summary ? "不符合标准" : null}
+            />
+          )}
+        />
+      </Box>
+      <Box sx={{ my: "2rem" }}>
         <Box className="newTopic">
           <Controller
             name="topicID"
@@ -250,7 +261,7 @@ export default function PostArticle() {
           />
         </Box>
       </Box>
-      <Box>
+      <Box sx={{ my: "2rem" }}>
         <TextField
           label="Topic"
           value={topicData.name}
@@ -265,16 +276,22 @@ export default function PostArticle() {
           上传新的Topic
         </Button>
       </Box>
-      <CustomTags
-        placeholder="新装修， 独立卫浴..."
-        initial={tags}
-        onKeyDown={(e) => handleKeyDown(e)}
-        onDelete={(e) => handleDelete(e)}
-      />
-      <Box className={classes.swipeViews}>
-        {imgURLs ? <SwipeViews images={imgURLs} /> : ""}
+      <Box sx={{ my: "2rem" }}>
+        <CustomTags
+          placeholder="新装修， 独立卫浴..."
+          initial={tags}
+          onKeyDown={(e) => handleKeyDown(e)}
+          onDelete={(e) => handleDelete(e)}
+        />
       </Box>
-      <Box>
+      <Box className={classes.swipeViews}>
+        {imgURLs ? (
+          <SwipeViews images={imgURLs} />
+        ) : (
+          <Typography variant="h4">上传图片预览：</Typography>
+        )}
+      </Box>
+      <Box sx={{ my: "1rem" }}>
         <label htmlFor="contained-button-file">
           <Input
             accept="image/*"
@@ -312,38 +329,48 @@ export default function PostArticle() {
           </Box>
         </label>
       </Box>
-      <img src={qrCodeImgURL} alt="qrCodeImgURL" style={{ width: "100%" }} />
-      <label htmlFor="uploadArticleQrCode">
-        <Input
-          accept="image/*"
-          id="uploadArticleQrCode"
-          type="file"
-          onChange={(e) => {
-            uploadArticleQrCode(e);
-          }}
-        />
-        <Button
-          variant="contained"
-          component="span"
-          fullWidth
-          disabled={loading}
-        >
-          上传articleQR code
-          {loading && (
-            <CircularProgress
-              size={24}
-              sx={{
-                color: green[500],
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-0.75rem",
-                marginLeft: "-0.75rem",
-              }}
-            />
-          )}
-        </Button>
-      </label>
+      <Box sx={{ my: "2rem" }}>
+        {qrCodeImgURL ? (
+          <img
+            src={qrCodeImgURL}
+            alt="qrCodeImgURL"
+            style={{ width: "100%" }}
+          />
+        ) : (
+          <Typography variant="h4">上传QRCODE预览</Typography>
+        )}
+        <label htmlFor="uploadArticleQrCode">
+          <Input
+            accept="image/*"
+            id="uploadArticleQrCode"
+            type="file"
+            onChange={(e) => {
+              uploadArticleQrCode(e);
+            }}
+          />
+          <Button
+            variant="contained"
+            component="span"
+            fullWidth
+            disabled={loading}
+          >
+            上传articleQR code
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: green[500],
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-0.75rem",
+                  marginLeft: "-0.75rem",
+                }}
+              />
+            )}
+          </Button>
+        </label>
+      </Box>
       <Typography variant="h4" sx={{ my: 2 }}>
         输入内容（结束后记得保存）:
       </Typography>

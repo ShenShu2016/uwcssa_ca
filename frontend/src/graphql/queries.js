@@ -51,6 +51,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -456,6 +457,7 @@ export const getUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1025,6 +1027,7 @@ export const userSortBySortKey = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1332,6 +1335,7 @@ export const getUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1489,6 +1493,7 @@ export const getUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -1566,6 +1571,7 @@ export const getUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2321,6 +2327,7 @@ export const listUsers = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2609,6 +2616,7 @@ export const getUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2943,6 +2951,7 @@ export const getUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3271,6 +3280,7 @@ export const getTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3509,6 +3519,7 @@ export const getTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3605,6 +3616,7 @@ export const getArticle = /* GraphQL */ `
     getArticle(id: $id) {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -3653,6 +3665,7 @@ export const getArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3958,6 +3971,7 @@ export const listArticles = /* GraphQL */ `
       items {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -4028,6 +4042,7 @@ export const articleSortBySortKey = /* GraphQL */ `
       items {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -4124,6 +4139,7 @@ export const getArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4361,6 +4377,7 @@ export const getArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -4474,6 +4491,7 @@ export const listArticleComments = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4547,6 +4565,7 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4618,6 +4637,7 @@ export const getArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4883,6 +4903,7 @@ export const getArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5105,6 +5126,7 @@ export const getEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5622,6 +5644,7 @@ export const getEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6149,6 +6172,7 @@ export const getEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6636,6 +6660,7 @@ export const getEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7145,6 +7170,7 @@ export const getDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7519,6 +7545,7 @@ export const getUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7967,6 +7994,7 @@ export const getForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8301,6 +8329,7 @@ export const getForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8914,6 +8943,7 @@ export const getForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9344,6 +9374,7 @@ export const getForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9855,6 +9886,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10125,6 +10157,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10731,6 +10764,7 @@ export const getMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11088,6 +11122,7 @@ export const getMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11781,6 +11816,7 @@ export const getFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12107,6 +12143,7 @@ export const getLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12377,6 +12414,7 @@ export const getLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12614,6 +12652,7 @@ export const getLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -12691,6 +12730,7 @@ export const getLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13174,6 +13214,7 @@ export const listLikes = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13345,6 +13386,7 @@ export const getWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs

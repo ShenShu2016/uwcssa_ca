@@ -7,6 +7,7 @@ import {
   createArticle,
   createArticleComment,
   createArticleSubComment,
+  updateArticle,
 } from "../../graphql/mutations";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -23,7 +24,7 @@ const initialState = {
   },
   mutation: {
     postArticle: {},
-    updateArticle: [],
+    updateArticle: {},
     deleteArticle: [],
   },
   //  Status: "idle",
@@ -46,6 +47,8 @@ const initialState = {
   fetchTopicsError: null,
   postArticleStatus: "idle",
   postArticleError: null,
+  modifyArticleStatus: "idle",
+  modifyArticleError: null,
 };
 
 export const fetchArticles = createAsyncThunk(
@@ -159,6 +162,15 @@ export const postArticle = createAsyncThunk(
   }
 );
 
+export const modifyArticle = createAsyncThunk(
+  "article/modifyArticle",
+  async ({ updateArticleInput }) => {
+    const response = await API.graphql(
+      graphqlOperation(updateArticle, { input: updateArticleInput })
+    );
+    return response;
+  }
+);
 const articleSlice = createSlice({
   name: "article",
   initialState,
@@ -276,6 +288,18 @@ const articleSlice = createSlice({
       .addCase(postArticle.rejected, (state, action) => {
         state.postArticleStatus = "failed";
         state.postArticleCommentError = action.error.message;
+      })
+      // Cases for status of updateArticle (pending, fulfilled, and rejected)
+      .addCase(modifyArticle.pending, (state, action) => {
+        state.modifyArticleStatus = "loading";
+      })
+      .addCase(modifyArticle.fulfilled, (state, action) => {
+        state.modifyArticleStatus = "succeeded";
+        state.mutation.updateArticle = action.payload;
+      })
+      .addCase(modifyArticle.rejected, (state, action) => {
+        state.modifyArticleStatus = "failed";
+        state.modifyArticleError = action.error.message;
       });
   },
 });

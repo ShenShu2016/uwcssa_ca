@@ -9,7 +9,6 @@ import {
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
-import MUIRichTextEditor from "mui-rte";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ArticleComponent({ article }) {
   const classes = useStyles();
-  const { id, content, title, imgURLs, createdAt, userID, user } = article;
+  const { id, summary, title, imgURLs, createdAt, userID, user } = article;
 
   return (
     <div>
@@ -97,24 +96,21 @@ function ArticleComponent({ article }) {
                   </div>
                 </Grid>
                 <Grid item xs>
-                  <Box
-                    style={{
-                      maxHeight: "80px",
-                      overflow: "hidden",
-                      maxWidth: "100%",
-                    }}
-                  >
-                    <MUIRichTextEditor
-                      defaultValue={content}
-                      readOnly={true}
-                      toolbar={false}
+                  <Box style={{ maxHeight: "80px", overflow: "hidden" }}>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
                       style={{
+                        wordBreak: "break-word",
                         overflow: "hidden",
                       }}
-                    />
+                    >
+                      {summary
+                        ? summary
+                        : "这人很懒，忘记写summary了。 你还是自己点进去看看吧！"}
+                    </Typography>
                   </Box>
                 </Grid>
-
                 <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
                   <Typography variant="overline" color="textSecondary">
                     {moment(createdAt).fromNow()}

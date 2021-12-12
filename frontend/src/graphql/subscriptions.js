@@ -51,6 +51,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -390,6 +391,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -729,6 +731,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1067,6 +1070,7 @@ export const onCreateUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1353,6 +1357,7 @@ export const onUpdateUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1639,6 +1644,7 @@ export const onDeleteUserMutationLog = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -1945,6 +1951,7 @@ export const onCreateUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2102,6 +2109,7 @@ export const onCreateUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -2179,6 +2187,7 @@ export const onCreateUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -2960,6 +2969,7 @@ export const onUpdateUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3117,6 +3127,7 @@ export const onUpdateUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -3194,6 +3205,7 @@ export const onUpdateUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -3975,6 +3987,7 @@ export const onDeleteUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4132,6 +4145,7 @@ export const onDeleteUser = /* GraphQL */ `
       articles {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -4209,6 +4223,7 @@ export const onDeleteUser = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -4971,6 +4986,7 @@ export const onCreateUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5259,6 +5275,7 @@ export const onUpdateUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5547,6 +5564,7 @@ export const onDeleteUserEducation = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -5836,6 +5854,7 @@ export const onCreateUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6125,6 +6144,7 @@ export const onUpdateUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6414,6 +6434,7 @@ export const onDeleteUserExperience = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6696,6 +6717,7 @@ export const onCreateTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -6934,6 +6956,7 @@ export const onCreateTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7025,6 +7048,7 @@ export const onUpdateTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7263,6 +7287,7 @@ export const onUpdateTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7354,6 +7379,7 @@ export const onDeleteTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7592,6 +7618,7 @@ export const onDeleteTopic = /* GraphQL */ `
         items {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7644,6 +7671,7 @@ export const onCreateArticle = /* GraphQL */ `
     onCreateArticle {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -7692,6 +7720,7 @@ export const onCreateArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -7992,6 +8021,7 @@ export const onUpdateArticle = /* GraphQL */ `
     onUpdateArticle {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -8040,6 +8070,7 @@ export const onUpdateArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8340,6 +8371,7 @@ export const onDeleteArticle = /* GraphQL */ `
     onDeleteArticle {
       id
       title
+      summary
       content
       imgS3Keys
       imgURLs
@@ -8388,6 +8420,7 @@ export const onDeleteArticle = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8729,6 +8762,7 @@ export const onCreateArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -8966,6 +9000,7 @@ export const onCreateArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -9087,6 +9122,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9324,6 +9360,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -9445,6 +9482,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -9682,6 +9720,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -9803,6 +9842,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10068,6 +10108,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10151,6 +10192,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10416,6 +10458,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10499,6 +10542,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10764,6 +10808,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -10864,6 +10909,7 @@ export const onCreateEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11242,6 +11288,7 @@ export const onUpdateEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11620,6 +11667,7 @@ export const onDeleteEvent = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -11981,6 +12029,7 @@ export const onCreateEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12352,6 +12401,7 @@ export const onUpdateEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -12723,6 +12773,7 @@ export const onDeleteEventComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13094,6 +13145,7 @@ export const onCreateEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13452,6 +13504,7 @@ export const onUpdateEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -13810,6 +13863,7 @@ export const onDeleteEventSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -14175,6 +14229,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -14528,6 +14583,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -14881,6 +14937,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -15228,6 +15285,7 @@ export const onCreateDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -15533,6 +15591,7 @@ export const onUpdateDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -15838,6 +15897,7 @@ export const onDeleteDepartment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -16168,6 +16228,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -16510,6 +16571,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -16852,6 +16914,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17166,6 +17229,7 @@ export const onCreateForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17458,6 +17522,7 @@ export const onUpdateForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -17750,6 +17815,7 @@ export const onDeleteForumTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -18043,6 +18109,7 @@ export const onCreateForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -18375,6 +18442,7 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -18707,6 +18775,7 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -19046,6 +19115,7 @@ export const onCreateForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -19416,6 +19486,7 @@ export const onUpdateForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -19786,6 +19857,7 @@ export const onDeleteForumPost = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -20151,6 +20223,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -20517,6 +20590,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -20883,6 +20957,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -21250,6 +21325,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -21520,6 +21596,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -21926,6 +22003,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -22196,6 +22274,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -22602,6 +22681,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -22872,6 +22952,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -23276,6 +23357,7 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -23560,6 +23642,7 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -23844,6 +23927,7 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24160,6 +24244,7 @@ export const onCreateMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24476,6 +24561,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -24792,6 +24878,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25080,6 +25167,7 @@ export const onCreateFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25367,6 +25455,7 @@ export const onUpdateFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25654,6 +25743,7 @@ export const onDeleteFoundingMember = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -25936,6 +26026,7 @@ export const onCreateLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -26206,6 +26297,7 @@ export const onCreateLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -26443,6 +26535,7 @@ export const onCreateLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -26520,6 +26613,7 @@ export const onCreateLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -26991,6 +27085,7 @@ export const onUpdateLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -27261,6 +27356,7 @@ export const onUpdateLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -27498,6 +27594,7 @@ export const onUpdateLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -27575,6 +27672,7 @@ export const onUpdateLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -28046,6 +28144,7 @@ export const onDeleteLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -28316,6 +28415,7 @@ export const onDeleteLike = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -28553,6 +28653,7 @@ export const onDeleteLike = /* GraphQL */ `
       article {
         id
         title
+        summary
         content
         imgS3Keys
         imgURLs
@@ -28630,6 +28731,7 @@ export const onDeleteLike = /* GraphQL */ `
         article {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29102,6 +29204,7 @@ export const onCreateWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29386,6 +29489,7 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
@@ -29670,6 +29774,7 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
         articles {
           id
           title
+          summary
           content
           imgS3Keys
           imgURLs
