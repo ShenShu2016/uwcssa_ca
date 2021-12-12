@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "2rem",
     minHeight: "300px",
     paddingInline: "1rem",
+    overflow: "auto",
   },
 }));
 
@@ -216,7 +217,7 @@ export default function PostArticle() {
           control={control}
           rules={{
             required: true,
-            minLength: 20,
+            minLength: 3,
             maxLength: 300,
           }}
           render={({ field: { onChange, value } }) => (
@@ -230,7 +231,7 @@ export default function PostArticle() {
               onChange={onChange}
               value={value}
               error={!!errors.summary}
-              helperText={errors.summary ? "不符合标准" : null}
+              helperText={errors.summary ? "不符合标准，3~300字" : null}
             />
           )}
         />
@@ -339,7 +340,7 @@ export default function PostArticle() {
           <img
             src={qrCodeImgURL}
             alt="qrCodeImgURL"
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "300px" }}
           />
         ) : (
           <Typography variant="h4">上传QRCODE预览</Typography>
