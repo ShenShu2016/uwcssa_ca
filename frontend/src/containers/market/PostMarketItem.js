@@ -67,7 +67,7 @@ export default function PostMarketItem() {
     user: user,
     owner: username,
   });
-
+  console.log("check", marketUserInfo);
   const {
     handleSubmit,
     setValue,
