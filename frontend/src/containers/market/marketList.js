@@ -16,7 +16,7 @@ import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketList() {
-  useTitle("商城");
+  useTitle("UWCSSA商城");
   const dispatch = useDispatch();
   const useStyles = marketItemStyle;
   const classes = useStyles();

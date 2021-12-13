@@ -198,7 +198,7 @@ export default function EditMarketItemDetail() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={imgKeyFromServer}
+              imgURLs={imgKeyFromServer}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
@@ -419,19 +419,13 @@ export default function EditMarketItemDetail() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo
-              imgKeyFromServer={imgKeyFromServer}
-              fakeItems={fakeItems}
-            />
+            <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
             content={
-              <PreviewInfo
-                imgKeyFromServer={imgKeyFromServer}
-                fakeItems={fakeItems}
-              />
+              <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
             }
             title="Preview"
             position="bottom"

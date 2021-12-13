@@ -7,6 +7,7 @@ export const getEvent = /* GraphQL */ `
       endDate
       online
       group
+      summary
       posterImgURL
       qrCodeImgURL
       backGroundImgURL

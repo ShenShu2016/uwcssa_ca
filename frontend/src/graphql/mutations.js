@@ -109,6 +109,7 @@ export const createUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -333,6 +334,7 @@ export const createUser = /* GraphQL */ `
       }
       events {
         id
+        summary
         title
         startDate
         endDate
@@ -430,6 +432,7 @@ export const createUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -1130,6 +1133,7 @@ export const updateUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -1354,6 +1358,7 @@ export const updateUser = /* GraphQL */ `
       }
       events {
         id
+        summary
         title
         startDate
         endDate
@@ -1451,6 +1456,7 @@ export const updateUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -2151,6 +2157,7 @@ export const deleteUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -2375,6 +2382,7 @@ export const deleteUser = /* GraphQL */ `
       }
       events {
         id
+        summary
         title
         startDate
         endDate
@@ -2472,6 +2480,7 @@ export const deleteUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -3143,6 +3152,7 @@ export const createUserEducation = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -3435,6 +3445,7 @@ export const updateUserEducation = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -3727,6 +3738,7 @@ export const deleteUserEducation = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -4020,6 +4032,7 @@ export const createUserExperience = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -4313,6 +4326,7 @@ export const updateUserExperience = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -4606,6 +4620,7 @@ export const deleteUserExperience = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -4892,6 +4907,7 @@ export const createTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -5124,6 +5140,7 @@ export const createTopic = /* GraphQL */ `
       events {
         items {
           id
+          summary
           title
           startDate
           endDate
@@ -5226,6 +5243,7 @@ export const updateTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -5458,6 +5476,7 @@ export const updateTopic = /* GraphQL */ `
       events {
         items {
           id
+          summary
           title
           startDate
           endDate
@@ -5560,6 +5579,7 @@ export const deleteTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -5792,6 +5812,7 @@ export const deleteTopic = /* GraphQL */ `
       events {
         items {
           id
+          summary
           title
           startDate
           endDate
@@ -5904,6 +5925,7 @@ export const createArticle = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -6257,6 +6279,7 @@ export const updateArticle = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -6610,6 +6633,7 @@ export const deleteArticle = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -6955,6 +6979,7 @@ export const createArticleComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -7318,6 +7343,7 @@ export const updateArticleComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -7681,6 +7707,7 @@ export const deleteArticleComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -8044,6 +8071,7 @@ export const createArticleSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -8397,6 +8425,7 @@ export const updateArticleSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -8750,6 +8779,7 @@ export const deleteArticleSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -9035,6 +9065,7 @@ export const createEvent = /* GraphQL */ `
   ) {
     createEvent(input: $input, condition: $condition) {
       id
+      summary
       title
       startDate
       endDate
@@ -9120,6 +9151,7 @@ export const createEvent = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -9417,6 +9449,7 @@ export const updateEvent = /* GraphQL */ `
   ) {
     updateEvent(input: $input, condition: $condition) {
       id
+      summary
       title
       startDate
       endDate
@@ -9502,6 +9535,7 @@ export const updateEvent = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -9799,6 +9833,7 @@ export const deleteEvent = /* GraphQL */ `
   ) {
     deleteEvent(input: $input, condition: $condition) {
       id
+      summary
       title
       startDate
       endDate
@@ -9884,6 +9919,7 @@ export const deleteEvent = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -10249,6 +10285,7 @@ export const createEventComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -10460,6 +10497,7 @@ export const createEventComment = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -10624,6 +10662,7 @@ export const updateEventComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -10835,6 +10874,7 @@ export const updateEventComment = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -10999,6 +11039,7 @@ export const deleteEventComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -11210,6 +11251,7 @@ export const deleteEventComment = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -11374,6 +11416,7 @@ export const createEventSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -11613,6 +11656,7 @@ export const createEventSubComment = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -11736,6 +11780,7 @@ export const updateEventSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -11975,6 +12020,7 @@ export const updateEventSubComment = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -12098,6 +12144,7 @@ export const deleteEventSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -12337,6 +12384,7 @@ export const deleteEventSubComment = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -12467,6 +12515,7 @@ export const createEventParticipant = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -12678,6 +12727,7 @@ export const createEventParticipant = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -12824,6 +12874,7 @@ export const updateEventParticipant = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -13035,6 +13086,7 @@ export const updateEventParticipant = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -13181,6 +13233,7 @@ export const deleteEventParticipant = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -13392,6 +13445,7 @@ export const deleteEventParticipant = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -13532,6 +13586,7 @@ export const createDepartment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -13841,6 +13896,7 @@ export const updateDepartment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -14150,6 +14206,7 @@ export const deleteDepartment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -14484,6 +14541,7 @@ export const createUwcssaJob = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -14830,6 +14888,7 @@ export const updateUwcssaJob = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -15176,6 +15235,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -15500,6 +15560,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -15843,6 +15904,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -16186,6 +16248,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -16523,6 +16586,7 @@ export const createForumTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -16819,6 +16883,7 @@ export const updateForumTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -17115,6 +17180,7 @@ export const deleteForumTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -17412,6 +17478,7 @@ export const createForumSubTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -17748,6 +17815,7 @@ export const updateForumSubTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -18084,6 +18152,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -18427,6 +18496,7 @@ export const createForumPost = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -18801,6 +18871,7 @@ export const updateForumPost = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -19175,6 +19246,7 @@ export const deleteForumPost = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -19544,6 +19616,7 @@ export const createForumPostComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -19914,6 +19987,7 @@ export const updateForumPostComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -20284,6 +20358,7 @@ export const deleteForumPostComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -20655,6 +20730,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -20926,6 +21002,7 @@ export const createForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -21336,6 +21413,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -21607,6 +21685,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -22017,6 +22096,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -22288,6 +22368,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -22696,6 +22777,7 @@ export const createMarketUserInfo = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -22984,6 +23066,7 @@ export const updateMarketUserInfo = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -23272,6 +23355,7 @@ export const deleteMarketUserInfo = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -23592,6 +23676,7 @@ export const createMarketItem = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -23912,6 +23997,7 @@ export const updateMarketItem = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -24232,6 +24318,7 @@ export const deleteMarketItem = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -24524,6 +24611,7 @@ export const createFoundingMember = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -24815,6 +24903,7 @@ export const updateFoundingMember = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -25106,6 +25195,7 @@ export const deleteFoundingMember = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -25392,6 +25482,7 @@ export const createLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -25663,6 +25754,7 @@ export const createLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -26020,6 +26112,7 @@ export const createLike = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -26110,6 +26203,7 @@ export const createLike = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -26454,6 +26548,7 @@ export const updateLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -26725,6 +26820,7 @@ export const updateLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -27082,6 +27178,7 @@ export const updateLike = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -27172,6 +27269,7 @@ export const updateLike = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -27516,6 +27614,7 @@ export const deleteLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -27787,6 +27886,7 @@ export const deleteLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -28144,6 +28244,7 @@ export const deleteLike = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -28234,6 +28335,7 @@ export const deleteLike = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -28579,6 +28681,7 @@ export const createWebFeedBack = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -28867,6 +28970,7 @@ export const updateWebFeedBack = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -29155,6 +29259,7 @@ export const deleteWebFeedBack = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -29446,6 +29551,7 @@ export const createUserMutationLog = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -29736,6 +29842,7 @@ export const updateUserMutationLog = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -30026,6 +30133,7 @@ export const deleteUserMutationLog = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate

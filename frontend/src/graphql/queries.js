@@ -77,6 +77,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -483,6 +484,7 @@ export const getUserMutationLog = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -1053,6 +1055,7 @@ export const userSortBySortKey = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -1371,6 +1374,7 @@ export const getUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -1595,6 +1599,7 @@ export const getUser = /* GraphQL */ `
       }
       events {
         id
+        summary
         title
         startDate
         endDate
@@ -1692,6 +1697,7 @@ export const getUser = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -2353,6 +2359,7 @@ export const listUsers = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -2642,6 +2649,7 @@ export const getUserEducation = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -2977,6 +2985,7 @@ export const getUserExperience = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -3306,6 +3315,7 @@ export const getTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -3538,6 +3548,7 @@ export const getTopic = /* GraphQL */ `
       events {
         items {
           id
+          summary
           title
           startDate
           endDate
@@ -3691,6 +3702,7 @@ export const getArticle = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -4165,6 +4177,7 @@ export const getArticleComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -4663,6 +4676,7 @@ export const getArticleSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -5067,6 +5081,7 @@ export const getEvent = /* GraphQL */ `
   query GetEvent($id: ID!) {
     getEvent(id: $id) {
       id
+      summary
       title
       startDate
       endDate
@@ -5152,6 +5167,7 @@ export const getEvent = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -5451,6 +5467,7 @@ export const listEvents = /* GraphQL */ `
     listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        summary
         title
         startDate
         endDate
@@ -5534,6 +5551,7 @@ export const eventSortBySortKey = /* GraphQL */ `
     ) {
       items {
         id
+        summary
         title
         startDate
         endDate
@@ -5670,6 +5688,7 @@ export const getEventComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -5881,6 +5900,7 @@ export const getEventComment = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -6007,6 +6027,7 @@ export const listEventComments = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -6090,6 +6111,7 @@ export const eventCommentSortByEventID = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -6198,6 +6220,7 @@ export const getEventSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -6437,6 +6460,7 @@ export const getEventSubComment = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -6686,6 +6710,7 @@ export const getEventParticipant = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -6897,6 +6922,7 @@ export const getEventParticipant = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -7009,6 +7035,7 @@ export const listEventParticipants = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -7093,6 +7120,7 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -7196,6 +7224,7 @@ export const getDepartment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -7571,6 +7600,7 @@ export const getUwcssaJob = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -8020,6 +8050,7 @@ export const getForumTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -8355,6 +8386,7 @@ export const getForumSubTopic = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -8969,6 +9001,7 @@ export const getForumPost = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -9400,6 +9433,7 @@ export const getForumPostComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -9912,6 +9946,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -10183,6 +10218,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -10790,6 +10826,7 @@ export const getMarketUserInfo = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -11148,6 +11185,7 @@ export const getMarketItem = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -11842,6 +11880,7 @@ export const getFoundingMember = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -12169,6 +12208,7 @@ export const getLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -12440,6 +12480,7 @@ export const getLike = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate
@@ -12797,6 +12838,7 @@ export const getLike = /* GraphQL */ `
       }
       event {
         id
+        summary
         title
         startDate
         endDate
@@ -12887,6 +12929,7 @@ export const getLike = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -13250,6 +13293,7 @@ export const listLikes = /* GraphQL */ `
         }
         event {
           id
+          summary
           title
           startDate
           endDate
@@ -13412,6 +13456,7 @@ export const getWebFeedBack = /* GraphQL */ `
         }
         events {
           id
+          summary
           title
           startDate
           endDate

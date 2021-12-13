@@ -40,7 +40,7 @@ export default function PostMarketItem() {
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("发布二手商品信息");
-  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+  const [imgURLs, setImgURLs] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
@@ -93,7 +93,7 @@ export default function PostMarketItem() {
       ...data,
       name: data.title,
       marketType: "Item",
-      imgURLs: imgKeyFromServer,
+      imgURLs: imgURLs,
       tags: GetTags(),
       active: true,
       userID: username,
@@ -139,7 +139,7 @@ export default function PostMarketItem() {
     );
     console.log(response);
     if (response.meta.requestStatus === "fulfilled") {
-      setImgKeyFromServer((prev) => prev.concat(response.payload));
+      setImgURLs((prev) => prev.concat(response.payload));
       // setTrigger(false);
     }
   };
@@ -172,9 +172,9 @@ export default function PostMarketItem() {
   // }, [imgKeyFromServer, imageKeys, trigger]);
 
   const handleDeleteImg = (imgKey) => {
-    const images = [...imgKeyFromServer];
+    const images = [...imgURLs];
     const newKeys = images.filter((key) => key !== imgKey);
-    setImgKeyFromServer(newKeys);
+    setImgURLs(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -220,7 +220,7 @@ export default function PostMarketItem() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={imgKeyFromServer}
+              imgURLs={imgURLs}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
@@ -441,20 +441,12 @@ export default function PostMarketItem() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo
-              imgKeyFromServer={imgKeyFromServer}
-              fakeItems={fakeItems}
-            />
+            <PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={
-              <PreviewInfo
-                imgKeyFromServer={imgKeyFromServer}
-                fakeItems={fakeItems}
-              />
-            }
+            content={<PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />}
             title="Preview"
             position="bottom"
             open={open}

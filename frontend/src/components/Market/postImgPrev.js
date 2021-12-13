@@ -20,7 +20,7 @@ const Input = styled("input")({
 });
 
 export default function PostImgPreview({
-  imgKeyFromServer,
+  imgURLs,
   uploadStatus,
   control,
   errors,
@@ -32,7 +32,7 @@ export default function PostImgPreview({
   const classes = postStyle();
   return (
     <React.Fragment>
-      {imgKeyFromServer.length !== 0 ? (
+      {imgURLs.length !== 0 ? (
         <label htmlFor="contained-button-file">
           <Input
             accept="image/*"
@@ -46,7 +46,7 @@ export default function PostImgPreview({
             }}
           />
           <Button variant="outlined" component="span">
-            Upload More {imgKeyFromServer.length}/5
+            上传更多 {imgURLs.length}/5
           </Button>
         </label>
       ) : null}
@@ -58,7 +58,7 @@ export default function PostImgPreview({
           backgroundColor: "rgb(243, 246, 249)",
         }}
       >
-        {imgKeyFromServer.length === 0 ? (
+        {imgURLs.length === 0 ? (
           uploadStatus !== "succeeded" ? (
             <label htmlFor="contained-button-file">
               <Stack
@@ -124,13 +124,13 @@ export default function PostImgPreview({
             color="rgb(243, 246, 249)"
             sx={{ overflowX: "auto" }}
           >
-            {imgKeyFromServer &&
-              imgKeyFromServer.map((imgKey, imgKeyIdx) => (
-                <Box key={imgKeyIdx} className={classes.previewImg}>
+            {imgURLs &&
+              imgURLs.map((imgURL, imgURLIdx) => (
+                <Box key={imgURLIdx} className={classes.previewImg}>
                   <Box
                     component="img"
-                    src={imgKey}
-                    key={imgKeyIdx}
+                    src={imgURL}
+                    key={imgURLIdx}
                     alt="images"
                     zIndex="1"
                     borderRadius="5px"
@@ -145,8 +145,8 @@ export default function PostImgPreview({
                   />
                   <IconButton
                     color="inherit"
-                    key={imgKey}
-                    onClick={() => handleDeleteImg(imgKey)}
+                    key={imgURL}
+                    onClick={() => handleDeleteImg(imgURL)}
                     sx={{
                       top: 0,
                       right: 0,
