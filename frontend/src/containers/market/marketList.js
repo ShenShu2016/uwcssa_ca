@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   fetchMarketItems,
   selectAllMarketItems,
@@ -12,6 +12,7 @@ import MarketSideBar from "../../components/Market/marketSideBar";
 import MarketTopBar from "../../components/Market/marketTopBar";
 import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketList() {
@@ -19,34 +20,16 @@ export default function MarketList() {
   const dispatch = useDispatch();
   const useStyles = marketItemStyle;
   const classes = useStyles();
-  const [starter, setStarter] = useState(false);
 
   const marketItems = useSelector(selectAllMarketItems);
+  const starter = useStarter(marketItems);
+  console.log(starter);
+  console.log(marketItems);
   const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   useEffect(() => {
     dispatch(fetchMarketItems(marketItemSortBySortKey));
   }, [dispatch]);
-
-  useEffect(() => {
-    if (
-      marketItems === undefined ||
-      marketItems === null ||
-      marketItems.length === 0
-    ) {
-      setStarter(false);
-    } else {
-      if (
-        marketItems[0].title === undefined ||
-        marketItems[0].model === undefined ||
-        marketItems[0].propertyType === undefined
-      ) {
-        setStarter(false);
-      } else {
-        setStarter(true);
-      }
-    }
-  }, [marketItems]);
 
   const marketItemRenderList =
     marketItems &&

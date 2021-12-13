@@ -25,7 +25,7 @@ export default function PostImgPreview({
   control,
   errors,
   uploadMarketItemImg,
-  setTrigger,
+  // setTrigger,
   setUploadStatus,
   handleDeleteImg,
 }) {
@@ -42,7 +42,7 @@ export default function PostImgPreview({
             multiple
             onChange={(e) => {
               uploadMarketItemImg(e);
-              setTrigger(true);
+              // setTrigger(true);
             }}
           />
           <Button variant="outlined" component="span">
@@ -67,7 +67,7 @@ export default function PostImgPreview({
                 alignItems="center"
               >
                 <Controller
-                  name="imgS3Keys"
+                  name="imgURLs"
                   control={control}
                   rules={{
                     required: true,
@@ -82,7 +82,7 @@ export default function PostImgPreview({
                       onChange={(e) => {
                         uploadMarketItemImg(e);
                         onChange(e);
-                        setTrigger(true);
+                        // setTrigger(true);
                         setUploadStatus("succeeded");
                         setTimeout(() => {
                           setUploadStatus("idle");

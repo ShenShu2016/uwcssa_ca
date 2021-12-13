@@ -43,7 +43,6 @@ const DetailInfo = ({
   heatingType,
   catFriendly,
   dogFriendly,
-  address,
   // vehicle
   year,
   make,
@@ -204,16 +203,9 @@ const DetailInfo = ({
       >
         Google Map Currently Unavailable
       </Paper>
-      {type === "item" || type === "vehicle" ? (
-        <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
-          {location.length === 0 ? "Location Goes Here" : location}
-        </Typography>
-      ) : null}
-      {type === "rental" ? (
-        <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
-          {address.length === 0 ? "Address Goes Here" : address}
-        </Typography>
-      ) : null}
+      <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
+        {location.length === 0 ? "Location Goes Here" : location}
+      </Typography>
     </React.Fragment>
   );
 };

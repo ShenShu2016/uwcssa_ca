@@ -34,7 +34,7 @@ import { marketRentalOptions } from "../../components/Market/marketRentalOptions
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-import { useGetAllImages } from "../../components/Market/useGetImages";
+// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -43,10 +43,10 @@ export default function PostMarketRental() {
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("发布租房信息");
-  const [imageKeys, setImageKeys] = useState("");
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
-  const [trigger, setTrigger] = useState(true);
+  // const [trigger, setTrigger] = useState(true);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ export default function PostMarketRental() {
     marketRentalSaleRent: "Rent",
     propertyType: "House",
     bedroomCounts: "2",
-    address: "UK London NW1 1RW",
+    location: "UK London NW1 1RW",
     user: user,
     airConditionType: "CentralAC",
     heatingType: "CentralHeating",
@@ -92,12 +92,12 @@ export default function PostMarketRental() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      imgS3Keys: "",
+      imgURLs: "",
       marketRentalSaleRent: "",
       propertyType: "",
       bedroomCounts: "",
       bathroomsCounts: "",
-      address: "",
+      location: "",
       propertySize: "",
       dateAvailable: new Date().toISOString(),
       laundryType: "",
@@ -118,7 +118,7 @@ export default function PostMarketRental() {
       ...data,
       name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
       marketType: "Rental",
-      imgS3Keys: Object.keys(imageKeys),
+      imgURLs: imgKeyFromServer,
       tags: GetTags(),
       active: true,
       userID: username,
@@ -163,45 +163,14 @@ export default function PostMarketRental() {
       postMultipleImages({ imagesData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      const newImg = response.payload.map((key) => [key, "temp"]);
-      const temp = Object.entries(imageKeys).concat(newImg);
-      setImageKeys(Object.fromEntries(temp));
+      setImgKeyFromServer((prev) => prev.concat(response.payload));
     }
   };
 
-  const imgKeyFromServer = useGetAllImages(
-    Object.keys(imageKeys),
-    imageKeys && trigger === true
-  );
-
-  useEffect(() => {
-    if (
-      Object.values(imageKeys).includes("temp") &&
-      Object.values(imageKeys).length === imgKeyFromServer.length &&
-      trigger
-    ) {
-      const images = Object.entries(imageKeys);
-      console.log("Bug here!", images);
-      if (Object.values(imageKeys).length === 1) {
-        let temp = {};
-        temp[images[0][0]] = imgKeyFromServer[0];
-        console.log("almost", temp);
-        setImageKeys(temp);
-      } else {
-        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
-        console.log("almost", images);
-        setImageKeys(Object.fromEntries(images));
-      }
-      setTrigger(false);
-    }
-  }, [imgKeyFromServer, imageKeys, trigger]);
-
   const handleDeleteImg = (imgKey) => {
-    const images = { ...imageKeys };
-    const newKeys = Object.fromEntries(
-      Object.entries(images).filter(([key, value]) => value !== imgKey)
-    );
-    setImageKeys(newKeys);
+    const images = [...imgKeyFromServer];
+    const newKeys = images.filter((key) => key !== imgKey);
+    setImgKeyFromServer(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -247,12 +216,12 @@ export default function PostMarketRental() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={Object.values(imageKeys)}
+              imgKeyFromServer={imgKeyFromServer}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
               uploadMarketItemImg={uploadMarketItemImg}
-              setTrigger={setTrigger}
+              // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
             />
@@ -415,22 +384,25 @@ export default function PostMarketRental() {
 
               <Box sx={{ marginY: "1rem" }}>
                 <Controller
-                  name="address"
+                  name="location"
                   control={control}
                   rules={{
                     required: true,
                   }}
                   render={({ field: { onChange, value } }) => (
                     <TextField
-                      label={`地址${!!errors.address ? " is required" : ""}`}
+                      label={`地址${!!errors.location ? " is required" : ""}`}
                       value={value}
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!errors.address}
+                      error={!!errors.location}
                       onChange={(e) => {
                         onChange(e);
-                        setFakeItems({ ...fakeItems, address: e.target.value });
+                        setFakeItems({
+                          ...fakeItems,
+                          location: e.target.value,
+                        });
                       }}
                     />
                   )}
@@ -657,7 +629,7 @@ export default function PostMarketRental() {
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
             <PreviewInfo
-              imgKeyFromServer={Object.values(imageKeys)}
+              imgKeyFromServer={imgKeyFromServer}
               fakeItems={fakeItems}
             />
           </Paper>
@@ -666,7 +638,7 @@ export default function PostMarketRental() {
           <SwipeableDrawerInfo
             content={
               <PreviewInfo
-                imgKeyFromServer={Object.values(imageKeys)}
+                imgKeyFromServer={imgKeyFromServer}
                 fakeItems={fakeItems}
               />
             }

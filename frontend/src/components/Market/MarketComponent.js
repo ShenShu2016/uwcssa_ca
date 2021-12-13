@@ -1,13 +1,12 @@
 import { Box, CardActionArea, Paper, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
+import React from "react";
 // import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
-import { marketRentalOptions } from "./marketRentalOptions";
 import moment from "moment";
+// import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+// import { useDispatch } from "react-redux";
 import useHover from "../../Hooks/useHover";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,146 +36,83 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MarketComponent({ item, type }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [imageURL, setImageURL] = useState(null);
+  // const dispatch = useDispatch();
+  // const [imageURL, setImageURL] = useState(null);
   const [hoverRef, isHover] = useHover();
 
   const {
     id,
-    title,
+    name,
     // description,
     price,
-    imgS3Keys,
+    imgURLs,
+    // imgS3Keys,
     // marketItemCategory,
     // marketItemCondition,
     location,
-    year,
-    make,
-    model,
-    address,
-    marketRentalSaleRent,
-    bedroomCounts,
-    propertyType,
     createdAt,
     // tags,
     // active,
     // ByCreatedAt,
   } = item;
-  const imgKeys = useSelector((state) => selectImageById(state, id));
-  const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
-    marketRentalOptions;
+  // const imgKeys = useSelector((state) => selectImageById(state, id));
 
-  useEffect(() => {
-    const getImages = async () => {
-      try {
-        const firstImage = imgS3Keys[0];
-        const response = await dispatch(getImage({ url: [firstImage], id }));
-        setImageURL(response.payload.imgUrl);
-      } catch (error) {
-        console.error("error accessing the Image from s3", error);
-        setImageURL(null);
-      }
-    };
-    if (imgS3Keys && imgKeys === undefined) {
-      getImages();
-    } else if (imgS3Keys && imgKeys !== undefined) {
-      setImageURL(Object.values(imgKeys.images)[0]);
-    }
-  }, [imgS3Keys, imgKeys, dispatch, id]);
+  // useEffect(() => {
+  //   const getImages = async () => {
+  //     try {
+  //       const firstImage = imgS3Keys[0];
+  //       const response = await dispatch(getImage({ url: [firstImage], id }));
+  //       setImageURL(response.payload.imgUrl);
+  //     } catch (error) {
+  //       console.error("error accessing the Image from s3", error);
+  //       setImageURL(null);
+  //     }
+  //   };
+  //   if (imgS3Keys && imgKeys === undefined) {
+  //     getImages();
+  //   } else if (imgS3Keys && imgKeys !== undefined) {
+  //     setImageURL(Object.values(imgKeys.images)[0]);
+  //   }
+  // }, [imgS3Keys, imgKeys, dispatch, id]);
 
   const displayInfo = () => {
-    if (type === "item") {
-      return (
-        <React.Fragment>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "600",
-                lineHeight: "1.3333",
-              }}
-            >
-              ${price} {isHover ? "🥳" : "😩"}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "400",
-                lineHeight: "1.33333",
-              }}
-            >
-              {title}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "13px",
-                color: "#65676B",
-                fontWeight: "400",
-                lineHeight: "1.2308",
-              }}
-            >
-              {location}
-            </Typography>
-            <Box my={"4px"}>
-              <Typography
-                sx={{
-                  fontSize: "13px",
-                  color: "#65676B",
-                  fontWeight: "400",
-                  lineHeight: "1.2308",
-                }}
-              >
-                {moment(createdAt).fromNow()}
-              </Typography>
-            </Box>
-          </Box>
-        </React.Fragment>
-      );
-    } else if (type === "vehicle") {
-      return (
-        <React.Fragment>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "600",
-                lineHeight: "1.3333",
-              }}
-            >
-              ${price} {isHover ? "🥳" : "😩"}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "400",
-                lineHeight: "1.3333",
-              }}
-            >
-              {year} {make} {model}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "13px",
-                color: "#65676B",
-                fontWeight: "400",
-                lineHeight: "1.2308",
-              }}
-            >
-              {location}
-            </Typography>
-          </Box>
+    return (
+      <React.Fragment>
+        <Box my={"4px"}>
+          <Typography
+            sx={{
+              fontSize: "17px",
+              color: "#505050",
+              fontWeight: "600",
+              lineHeight: "1.3333",
+            }}
+          >
+            ${price} {isHover ? "🥳" : "😩"}
+          </Typography>
+        </Box>
+        <Box my={"4px"}>
+          <Typography
+            sx={{
+              fontSize: "17px",
+              color: "#505050",
+              fontWeight: "400",
+              lineHeight: "1.33333",
+            }}
+          >
+            {name}
+          </Typography>
+        </Box>
+        <Box my={"4px"}>
+          <Typography
+            sx={{
+              fontSize: "13px",
+              color: "#65676B",
+              fontWeight: "400",
+              lineHeight: "1.2308",
+            }}
+          >
+            {location}
+          </Typography>
           <Box my={"4px"}>
             <Typography
               sx={{
@@ -189,69 +125,9 @@ export default function MarketComponent({ item, type }) {
               {moment(createdAt).fromNow()}
             </Typography>
           </Box>
-        </React.Fragment>
-      );
-    } else if (type === "rental") {
-      return (
-        <React.Fragment>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "600",
-                lineHeight: "1.3333",
-              }}
-            >
-              ${price} {isHover ? "🥳" : "😩"}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "17px",
-                color: "#505050",
-                fontWeight: "400",
-                lineHeight: "1.33333",
-              }}
-            >
-              {PType.filter((item) => item.value === propertyType)[0].label},
-              {bedroomCounts} bedrooms,
-              {
-                RentOrSale.filter(
-                  (item) => item.value === marketRentalSaleRent
-                )[0].label
-              }
-            </Typography>
-          </Box>
-
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "13px",
-                color: "#65676B",
-                fontWeight: "400",
-                lineHeight: "1.2308",
-              }}
-            >
-              {address}
-            </Typography>
-          </Box>
-          <Box my={"4px"}>
-            <Typography
-              sx={{
-                fontSize: "13px",
-                color: "#65676B",
-                fontWeight: "400",
-                lineHeight: "1.2308",
-              }}
-            >
-              {moment(createdAt).fromNow()}
-            </Typography>
-          </Box>
-        </React.Fragment>
-      );
-    }
+        </Box>
+      </React.Fragment>
+    );
   };
 
   return (
@@ -267,7 +143,7 @@ export default function MarketComponent({ item, type }) {
           },
         }}
       >
-        <img src={imageURL} alt="" className={classes.s3image} />
+        <img src={imgURLs[0]} alt="" className={classes.s3image} />
         <Box my={"8px"}>{displayInfo()}</Box>
       </CardActionArea>
     </Paper>
