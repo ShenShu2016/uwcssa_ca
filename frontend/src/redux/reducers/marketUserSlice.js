@@ -26,7 +26,12 @@ export const fetchMarketUserInfo = createAsyncThunk(
       },
       authMode: "AWS_IAM",
     });
-    return MarketUserInfoData.data.getMarketUserInfo;
+    console.log(MarketUserInfoData);
+    if (MarketUserInfoData.data.getMarketUserInfo === null) {
+      return { id: null };
+    } else {
+      return MarketUserInfoData.data.getMarketUserInfo;
+    }
   }
 );
 
