@@ -115,7 +115,7 @@ export default function Main({ article }) {
             return <Chip key={data} label={data} />;
           })}
           <Divider sx={{ my: 2 }} />
-          <Box sx={{ my: 2 }}>
+          <Box sx={{ my: 2, overflow: "auto" }}>
             <MUIRichTextEditor
               defaultValue={content}
               readOnly={true}

@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "2rem",
     minHeight: "300px",
     paddingInline: "1rem",
+    overflow: "auto",
   },
 }));
 
@@ -166,6 +167,10 @@ export default function EditArticle() {
   const [topicData, setTopicData] = useState({ name: "" });
 
   const uploadTopic = async () => {
+    if (!!!topicData.name) {
+      alert("空的你上传啥呢？");
+      return;
+    }
     const createTopicInput = {
       id: topicData.name,
       name: topicData.name,
@@ -234,7 +239,7 @@ export default function EditArticle() {
               control={control}
               rules={{
                 required: true,
-                minLength: 20,
+                minLength: 3,
                 maxLength: 300,
               }}
               render={({ field: { onChange, value } }) => (
@@ -249,7 +254,7 @@ export default function EditArticle() {
                   value={value}
                   error={!!errors.summary}
                   autoFocus={!!errors.summary}
-                  helperText={errors.summary ? "不符合标准" : null}
+                  helperText={errors.summary ? "不符合标准，3~300字" : null}
                 />
               )}
             />
@@ -289,8 +294,9 @@ export default function EditArticle() {
           </Box>
           <Box sx={{ my: "2rem" }}>
             <TextField
-              label="Topic"
+              label="新的主题"
               value={topicData.name}
+              helperText={"上面主题里面没有的话再到这里输入并按上传"}
               onChange={(e) =>
                 setTopicData({ ...topicData, name: e.target.value })
               }
@@ -362,7 +368,7 @@ export default function EditArticle() {
               <img
                 src={qrCodeImgURL}
                 alt="qrCodeImgURL"
-                style={{ width: "100%" }}
+                style={{ maxHeight: "250px" }}
               />
             ) : (
               <Typography variant="h4">上传QRCODE预览</Typography>

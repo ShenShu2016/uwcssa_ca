@@ -7,9 +7,6 @@ export const getEvent = /* GraphQL */ `
       endDate
       online
       group
-      backGroundImgS3Key
-      qrCodeImgS3Key
-      posterImgS3Key
       posterImgURL
       qrCodeImgURL
       backGroundImgURL
@@ -33,8 +30,7 @@ export const getEvent = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
-        backGroundImgS3Key
+        avatarImgURL
         linkedIn
         github
         sortKey
@@ -64,7 +60,7 @@ export const getEvent = /* GraphQL */ `
                 id
                 username
                 owner
-                avatarImgS3Key
+                avatarImgURL
                 badges
               }
             }
@@ -74,7 +70,7 @@ export const getEvent = /* GraphQL */ `
             id
             username
             owner
-            avatarImgS3Key
+            avatarImgURL
             badges
           }
           eventSubComments {
@@ -100,7 +96,7 @@ export const getEvent = /* GraphQL */ `
                     id
                     username
                     owner
-                    avatarImgS3Key
+                    avatarImgURL
                     badges
                   }
                 }
@@ -110,7 +106,7 @@ export const getEvent = /* GraphQL */ `
                 id
                 username
                 owner
-                avatarImgS3Key
+                avatarImgURL
                 badges
               }
             }
@@ -152,7 +148,7 @@ export const getEvent = /* GraphQL */ `
             id
             username
             owner
-            avatarImgS3Key
+            avatarImgURL
             badges
           }
         }
@@ -173,8 +169,7 @@ export const getEvent = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
           linkedIn
           github
           sortKey

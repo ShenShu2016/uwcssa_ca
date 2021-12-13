@@ -243,6 +243,7 @@ type Event
   )
   @key(name: "byTopic", fields: ["topicID"]) {
   id: ID!
+  summary: String
   title: String!
   startDate: AWSDateTime!
   endDate: AWSDateTime!

@@ -1,8 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
   FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   Paper,
@@ -56,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "2rem",
     minHeight: "300px",
     paddingInline: "1rem",
+    overflow: "auto",
   },
 }));
 
@@ -74,11 +77,13 @@ export default function PostArticle() {
   const [qrCodeImgURL, setQrCodeImgURL] = useState();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isTitleAsURL, setIsTitleAsURL] = useState(false);
   const timer = useRef();
-
+  console.log(isTitleAsURL);
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -129,6 +134,7 @@ export default function PostArticle() {
     setLoading(true);
     const createArticleInput = {
       ...data,
+      id: isTitleAsURL ? getValues("title") : undefined,
       imgURLs: imgURLs,
       content: content,
       active: true,
@@ -209,6 +215,15 @@ export default function PostArticle() {
             />
           )}
         />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={isTitleAsURL}
+              onChange={(event) => setIsTitleAsURL(event.target.checked)}
+            />
+          }
+          label="用标题作为URL，一旦发出不能更改，除非删掉，并且有唯一性"
+        />
       </Box>
       <Box sx={{ my: "2rem" }}>
         <Controller
@@ -216,7 +231,7 @@ export default function PostArticle() {
           control={control}
           rules={{
             required: true,
-            minLength: 20,
+            minLength: 3,
             maxLength: 300,
           }}
           render={({ field: { onChange, value } }) => (
@@ -230,7 +245,7 @@ export default function PostArticle() {
               onChange={onChange}
               value={value}
               error={!!errors.summary}
-              helperText={errors.summary ? "不符合标准" : null}
+              helperText={errors.summary ? "不符合标准，3~300字" : null}
             />
           )}
         />
@@ -339,7 +354,7 @@ export default function PostArticle() {
           <img
             src={qrCodeImgURL}
             alt="qrCodeImgURL"
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "300px" }}
           />
         ) : (
           <Typography variant="h4">上传QRCODE预览</Typography>
