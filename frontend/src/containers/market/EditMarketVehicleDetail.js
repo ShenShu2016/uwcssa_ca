@@ -34,7 +34,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-import { useGetAllImages } from "../../components/Market/useGetImages";
+// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
@@ -48,7 +48,7 @@ export default function EditMarketVehicleDetail() {
   const [loading, setLoading] = useState(false);
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const {
-    imgS3Keys,
+    imgURLs,
     vehicleType,
     location,
     year,
@@ -63,18 +63,17 @@ export default function EditMarketVehicleDetail() {
     contactWeChat,
     contactEmail,
   } = marketItem;
-  let temp = [];
-  imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
-  const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
+
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, marketItem.userID)
   );
-  const [trigger, setTrigger] = useState(true);
+  // const [trigger, setTrigger] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const { marketVehicleTypeList } = marketVehicleOptions;
   const [open, setOpen] = useState(false);
   const [defaultInfo, setDefaultInfo] = useState(false);
   const [fakeItems, setFakeItems] = useState(marketItem);
+  const [imgKeyFromServer, setImgKeyFromServer] = useState(imgURLs);
 
   const {
     handleSubmit,
@@ -84,7 +83,7 @@ export default function EditMarketVehicleDetail() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      imgS3Keys: imgS3Keys,
+      imgURLs: imgKeyFromServer,
       vehicleType: vehicleType,
       location: location,
       year: year,
@@ -109,9 +108,7 @@ export default function EditMarketVehicleDetail() {
       postMultipleImages({ imagesData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      const newImg = response.payload.map((key) => [key, "temp"]);
-      const temp = Object.entries(imageKeys).concat(newImg);
-      setImageKeys(Object.fromEntries(temp));
+      setImgKeyFromServer((prev) => prev.concat(response.payload));
     }
   };
 
@@ -119,40 +116,13 @@ export default function EditMarketVehicleDetail() {
     dispatch(fetchMarketUserInfo(marketItem.userID));
   }, [marketItem.userID, dispatch]);
 
-  const imgKeyFromServer = useGetAllImages(
-    Object.keys(imageKeys),
-    imageKeys && trigger === true
-  );
-
-  useEffect(() => {
-    if (
-      Object.values(imageKeys).includes("temp") &&
-      Object.values(imageKeys).length === imgKeyFromServer.length &&
-      trigger
-    ) {
-      const images = Object.entries(imageKeys);
-      console.log("Bug here!", images);
-      if (Object.values(imageKeys).length === 1) {
-        let temp = {};
-        temp[images[0][0]] = imgKeyFromServer[0];
-        console.log("almost", temp);
-        setImageKeys(temp);
-      } else {
-        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
-        console.log("almost", images);
-        setImageKeys(Object.fromEntries(images));
-      }
-      setTrigger(false);
-    }
-  }, [imgKeyFromServer, imageKeys, trigger]);
-
   const onSubmit = async (data) => {
     const createMarketItemInput = {
       ...data,
       id: id,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
-      imgS3Keys: Object.keys(imageKeys),
+      imgURLs: imgKeyFromServer,
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
@@ -188,12 +158,9 @@ export default function EditMarketVehicleDetail() {
   };
 
   const handleDeleteImg = (imgKey) => {
-    const images = { ...imageKeys };
-    const newKeys = Object.fromEntries(
-      Object.entries(images).filter(([key, value]) => value !== imgKey)
-    );
-
-    setImageKeys(newKeys);
+    const images = [...imgKeyFromServer];
+    const newKeys = images.filter((key) => key !== imgKey);
+    setImgKeyFromServer(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -236,12 +203,12 @@ export default function EditMarketVehicleDetail() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={imgKeyFromServer}
+              imgURLs={imgKeyFromServer}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
               uploadMarketItemImg={uploadMarketItemImg}
-              setTrigger={setTrigger}
+              // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
             />
@@ -571,19 +538,13 @@ export default function EditMarketVehicleDetail() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo
-              imgKeyFromServer={imgKeyFromServer}
-              fakeItems={fakeItems}
-            />
+            <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
             content={
-              <PreviewInfo
-                imgKeyFromServer={imgKeyFromServer}
-                fakeItems={fakeItems}
-              />
+              <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
             }
             title="Preview"
             position="bottom"

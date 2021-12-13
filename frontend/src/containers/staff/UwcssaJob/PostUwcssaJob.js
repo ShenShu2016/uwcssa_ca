@@ -74,28 +74,9 @@ export default function PostUwcssaJob(props) {
   // let departmentList = [];
 
   const handleSubmit = async () => {
-    // if (
-    //   !uwcssaJobData.title ||
-    //   !uwcssaJobData.departmentName ||
-    //   !uwcssaJobData.requirements.filter((e) => e !== "")
-    // ) {
-    //   setInfo(true);
-    //   return;
-    // }
-    // let targetDepartment = await API.graphql({
-    //   query: listDepartments,
-    //   variables: { filter: { name: { eq: uwcssaJobData.departmentName } } },
-    //   authMode: "AWS_IAM",
-    // });
-    // if (targetDepartment.data.listDepartments.items.length === 0) {
-    //   setDepart(true);
-    //   return;
-    // }
-    // const departmentID = targetDepartment.data.listDepartments.items[0].id;
-    // console.log("departmentID: ", departmentID);
-    // console.log(uwcssaJobData);
     try {
       const createUwcssaJobInput = {
+        id: uwcssaJobData.title,
         title: uwcssaJobData.title,
         introduction: uwcssaJobData.introduction,
         requirements: uwcssaJobData.requirements.filter((e) => e !== ""),
@@ -108,10 +89,13 @@ export default function PostUwcssaJob(props) {
         departmentID: uwcssaJobData.departmentName,
         userID: uwcssaJobData.userID,
       };
+
       const newUwcssaJob = await API.graphql(
         graphqlOperation(createUwcssaJob, { input: createUwcssaJobInput })
       );
+
       console.log("newUwcssaJob:", newUwcssaJob.data.createUwcssaJob);
+
       if (newUwcssaJob) {
         setSubmitSuccess(true);
         history.push(

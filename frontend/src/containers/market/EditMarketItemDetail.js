@@ -34,7 +34,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-import { useGetAllImages } from "../../components/Market/useGetImages";
+// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
@@ -52,9 +52,8 @@ export default function EditMarketItemDetail() {
     selectMarketUserById(state, marketItem.userID)
   );
   const {
-    imgS3Keys,
+    imgURLs,
     title,
-    name,
     price,
     description,
     marketItemCategory,
@@ -66,12 +65,12 @@ export default function EditMarketItemDetail() {
   } = marketItem;
 
   const [uploadStatus, setUploadStatus] = useState("idle");
-  const [trigger, setTrigger] = useState(true);
+  // const [trigger, setTrigger] = useState(true);
   const [defaultInfo, setDefaultInfo] = useState(false);
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-  let temp = [];
-  imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
-  const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
+  // let temp = [];
+  // imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
+  const [imgKeyFromServer, setImgKeyFromServer] = useState(imgURLs);
 
   const [open, setOpen] = useState(false);
 
@@ -83,9 +82,8 @@ export default function EditMarketItemDetail() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      imgS3Keys: imgS3Keys,
+      imgURLs: imgKeyFromServer,
       title: title,
-      name: name,
       price: price,
       description: description,
       marketItemCategory: marketItemCategory,
@@ -105,48 +103,21 @@ export default function EditMarketItemDetail() {
       postMultipleImages({ imagesData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      const newImg = response.payload.map((key) => [key, "temp"]);
-      const temp = Object.entries(imageKeys).concat(newImg);
-      setImageKeys(Object.fromEntries(temp));
+      setImgKeyFromServer((prev) => prev.concat(response.payload));
     }
   };
-
-  const imgKeyFromServer = useGetAllImages(
-    Object.keys(imageKeys),
-    imageKeys && trigger === true
-  );
 
   useEffect(() => {
     dispatch(fetchMarketUserInfo(marketItem.userID));
   }, [marketItem.userID, dispatch]);
-  useEffect(() => {
-    if (
-      Object.values(imageKeys).includes("temp") &&
-      Object.values(imageKeys).length === imgKeyFromServer.length &&
-      trigger
-    ) {
-      const images = Object.entries(imageKeys);
-      console.log("Bug here!", images);
-      if (Object.values(imageKeys).length === 1) {
-        let temp = {};
-        temp[images[0][0]] = imgKeyFromServer[0];
-        console.log("almost", temp);
-        setImageKeys(temp);
-      } else {
-        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
-        console.log("almost", images);
-        setImageKeys(Object.fromEntries(images));
-      }
-      setTrigger(false);
-    }
-  }, [imgKeyFromServer, imageKeys, trigger]);
 
   const onSubmit = async (data) => {
     const createMarketItemInput = {
       ...data,
       id: id,
+      name: data.title,
       marketType: "Item",
-      imgS3Keys: Object.keys(imageKeys),
+      imgURLs: imgKeyFromServer,
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
@@ -180,13 +151,11 @@ export default function EditMarketItemDetail() {
     }
     console.log("Can upload");
   };
-
+  console.log(imgKeyFromServer);
   const handleDeleteImg = (imgKey) => {
-    const images = { ...imageKeys };
-    const newKeys = Object.fromEntries(
-      Object.entries(images).filter(([key, value]) => value !== imgKey)
-    );
-    setImageKeys(newKeys);
+    const images = [...imgKeyFromServer];
+    const newKeys = images.filter((key) => key !== imgKey);
+    setImgKeyFromServer(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -229,12 +198,12 @@ export default function EditMarketItemDetail() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={imgKeyFromServer}
+              imgURLs={imgKeyFromServer}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
               uploadMarketItemImg={uploadMarketItemImg}
-              setTrigger={setTrigger}
+              // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
             />
@@ -450,19 +419,13 @@ export default function EditMarketItemDetail() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo
-              imgKeyFromServer={imgKeyFromServer}
-              fakeItems={fakeItems}
-            />
+            <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
             content={
-              <PreviewInfo
-                imgKeyFromServer={imgKeyFromServer}
-                fakeItems={fakeItems}
-              />
+              <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
             }
             title="Preview"
             position="bottom"

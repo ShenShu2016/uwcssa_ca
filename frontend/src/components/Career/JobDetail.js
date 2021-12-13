@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
 import { listUwcssaJobs } from "../../redux/CustomQuery/CareerQueries";
 import { makeStyles } from "@mui/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,25 +28,25 @@ export default function JobDetail(props) {
   const classes = useStyles();
   const { id } = props.match.params;
   const [job, setJob] = useState([]);
+  useTitle(`开放职位 ${id}`);
 
   useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const jobData = await API.graphql({
+          query: listUwcssaJobs,
+          variables: { filter: { id: { eq: id } } },
+          authMode: "AWS_IAM",
+        });
+        const job = jobData.data.listUwcssaJobs.items[0];
+        console.log("jobData", jobData);
+        setJob(job);
+      } catch (error) {
+        console.log("error on fetching Job", error);
+      }
+    };
     fetchJob();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const fetchJob = async () => {
-    try {
-      const jobData = await API.graphql({
-        query: listUwcssaJobs,
-        variables: { filter: { id: { eq: id } } },
-        authMode: "AWS_IAM",
-      });
-      const job = jobData.data.listUwcssaJobs.items[0];
-      console.log("jobData", jobData);
-      setJob(job);
-    } catch (error) {
-      console.log("error on fetching Job", error);
-    }
-  };
+  }, [id]);
 
   return (
     <div className={classes.root}>

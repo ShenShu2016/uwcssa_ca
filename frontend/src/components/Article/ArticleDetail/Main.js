@@ -19,7 +19,6 @@ import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
 import { usePermit } from "../../../Hooks/usePermit";
-import { useTitle } from "../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,9 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Main({ article }) {
   const classes = useStyles();
   const history = useHistory();
-  useTitle(article.title && article.title);
 
-  // console.log("Main", article);
   const {
     content,
     imgURLs,
@@ -64,11 +61,11 @@ export default function Main({ article }) {
   } = article;
 
   const isPermit = usePermit(owner, "admin");
-  console.log("isPermit", isPermit);
 
   const handleEdit = () => {
     history.push(`/staff/article/editArticle/${id}`);
   };
+
   return (
     <div className={classes.root}>
       {article.active === true ? (

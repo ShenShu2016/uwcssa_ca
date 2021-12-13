@@ -42,7 +42,7 @@ export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { articleID } = useParams();
-
+  useTitle(`近期新闻 ${articleID}`);
   useEffect(() => {
     if (articleID && articleID !== "") {
       dispatch(selectedArticle({ articleID }));
@@ -51,7 +51,7 @@ export default function ArticleDetail() {
   }, [articleID, dispatch]);
 
   const { article } = useSelector((state) => state.article.selected);
-  useTitle(article.title);
+
   // useEffect(() => {
   //   window.onscroll = async (e) => {
   //     const scrollY = window.scrollY; //当前上方高度

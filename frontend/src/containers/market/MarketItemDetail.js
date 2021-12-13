@@ -12,7 +12,7 @@ import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
 import TitleInfo from "../../components/titleInfo";
 import { detailStyle } from "../../components/Market/marketDetailCss";
-import useGetImages from "../../components/Market/useGetImages";
+// import useGetImages from "../../components/Market/useGetImages";
 import { useParams } from "react-router-dom";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
@@ -89,8 +89,9 @@ export default function MarketItemDetail() {
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const status = useSelector((state) => state.market.selectedMarketItemStatus);
-  const starter = useStarter(marketItem);
-  const imgKeyFromServer = useGetImages(marketItem, id);
+  const starter = useStarter(marketItem, "item");
+  // const imgKeyFromServer = useGetImages(marketItem, id);
+  // const imgKeyFromServer = marketItem.imgURLs;
 
   console.log("starter", starter);
   return (
@@ -103,7 +104,7 @@ export default function MarketItemDetail() {
           className={classes.contain}
         >
           <Box className={classes.images}>
-            <SwipeViews images={imgKeyFromServer} />
+            <SwipeViews images={marketItem.imgURLs} />
           </Box>
           <Box className={classes.info}>
             <MarketItemInfo marketItem={marketItem} />

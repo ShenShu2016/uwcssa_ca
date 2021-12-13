@@ -94,6 +94,7 @@ export default function PostEvent() {
   } = useForm({
     defaultValues: {
       title: "",
+      summary: "",
       content: "",
       startDate: null,
       endDate: null,
@@ -231,6 +232,31 @@ export default function PostEvent() {
               }
               label="用标题作为URL，一旦发出不能更改，除非删掉，并且有唯一性"
             />
+            <Box sx={{ my: "1rem" }}>
+              <Controller
+                name="summary"
+                control={control}
+                rules={{
+                  required: true,
+                  minLength: 3,
+                  maxLength: 300,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    required
+                    label="简要概述"
+                    variant="outlined"
+                    fullWidth
+                    multiline={true}
+                    rows={4}
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.summary}
+                    helperText={errors.summary ? "不符合标准，3~300字" : null}
+                  />
+                )}
+              />
+            </Box>
             <Controller
               name="topicID"
               control={control}

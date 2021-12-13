@@ -65,13 +65,13 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function PreviewInfo({ imgKeyFromServer, fakeItems }) {
+export default function PreviewInfo({ imgURLs, fakeItems }) {
   const classes = useStyle();
   return (
     <Box className={classes.root}>
       <Box className={classes.previewImgRight}>
-        {imgKeyFromServer.length !== 0 ? (
-          <SwipeViews images={imgKeyFromServer} />
+        {imgURLs.length !== 0 ? (
+          <SwipeViews images={imgURLs} />
         ) : (
           <Box
             height="50px"

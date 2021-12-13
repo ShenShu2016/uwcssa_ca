@@ -102,6 +102,8 @@ export default function MarketImgTopFilter({
   const [value, setValue] = useState("Filter");
 
   let tags = [];
+  console.log(trueMarketItems);
+
   trueMarketItems
     .filter((a) => a.tags !== null)
     .forEach((item) => {
