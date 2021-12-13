@@ -13,6 +13,7 @@ import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
 import marketItemFilter from "../../components/Market/marketItemFilter";
 import { marketItemSortBySortKeyVehicle } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketVehicle() {
@@ -20,7 +21,6 @@ export default function MarketVehicle() {
   useTitle("Vehicle");
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [starter, setStarter] = useState(false);
   const [filterList, setFilterList] = useState({
     sortKey: "original",
     min: "",
@@ -34,6 +34,7 @@ export default function MarketVehicle() {
   });
 
   const marketItems = useSelector(selectAllMarketItems);
+  const starter = useStarter(marketItems, "all");
   const status = useSelector((state) => state.market.fetchMarketItemsStatus);
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Vehicle" && item.description !== null
@@ -44,25 +45,6 @@ export default function MarketVehicle() {
     dispatch(fetchMarketItems(marketItemSortBySortKeyVehicle));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (
-      marketItems === undefined ||
-      marketItems === null ||
-      marketItems.length === 0
-    ) {
-      setStarter(false);
-    } else {
-      if (marketItems[0].fuelType === undefined) {
-        setStarter(false);
-      } else if (marketItems[0].tags === undefined) {
-        setStarter(false);
-      } else {
-        setStarter(true);
-      }
-    }
-  }, [marketItems]);
-
-  console.log("Started!", starter);
   const filteredItems = marketItemFilter(
     trueMarketItems,
     filterList,

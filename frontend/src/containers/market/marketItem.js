@@ -13,6 +13,7 @@ import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
 import marketItemFilter from "../../components/Market/marketItemFilter";
 import { marketItemSortBySortKeyItem } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketItem() {
@@ -20,8 +21,6 @@ export default function MarketItem() {
   useTitle("Item");
   const dispatch = useDispatch();
   const classes = useStyles();
-
-  const [starter, setStarter] = useState(false);
   const [filterList, setFilterList] = useState({
     sortKey: "original",
     min: "",
@@ -32,29 +31,12 @@ export default function MarketItem() {
   });
 
   const marketItems = useSelector(selectAllMarketItems);
+  const starter = useStarter(marketItems, "all");
   const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   useEffect(() => {
     dispatch(fetchMarketItems(marketItemSortBySortKeyItem));
   }, [dispatch]);
-
-  useEffect(() => {
-    if (
-      marketItems === undefined ||
-      marketItems === null ||
-      marketItems.length === 0
-    ) {
-      setStarter(false);
-    } else {
-      if (marketItems[0].marketItemCategory === undefined) {
-        setStarter(false);
-      } else if (marketItems[0].tags === undefined) {
-        setStarter(false);
-      } else {
-        setStarter(true);
-      }
-    }
-  }, [marketItems]);
 
   const trueMarketItems = marketItems.filter(
     (item) => item.marketType === "Item" && item.description !== null

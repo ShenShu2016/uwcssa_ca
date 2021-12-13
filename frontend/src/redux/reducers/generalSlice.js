@@ -167,7 +167,7 @@ export const postSingleImage = createAsyncThunk(
 
 export const postMultipleImages = createAsyncThunk(
   "general/postMultipleImages",
-  async ({ imagesData, imageLocation, maxPixel }) => {
+  async ({ imagesData, imageLocation, maxPixel = 1280 }) => {
     const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } =
       awsmobile;
     let imgURLs = [];

@@ -37,7 +37,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-import { useGetAllImages } from "../../components/Market/useGetImages";
+// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useParams } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
@@ -50,12 +50,12 @@ export default function EditMarketRentalDetail() {
   useTitle("更新租房信息");
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const {
-    imgS3Keys,
+    imgURLs,
     marketRentalSaleRent,
     propertyType,
     bedroomCounts,
     bathroomsCounts,
-    address,
+    location,
     propertySize,
     dateAvailable,
     laundryType,
@@ -71,13 +71,13 @@ export default function EditMarketRentalDetail() {
   } = marketItem;
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [loading, setLoading] = useState(false);
-  const [trigger, setTrigger] = useState(true);
-  let temp = [];
-  imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
-  const [imageKeys, setImageKeys] = useState(Object.fromEntries(temp));
+  // const [trigger, setTrigger] = useState(true);
+
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, marketItem.userID)
   );
+  const [imgKeyFromServer, setImgKeyFromServer] = useState(imgURLs);
+
   const [defaultInfo, setDefaultInfo] = useState(false);
   const [open, setOpen] = useState(false);
   const {
@@ -99,12 +99,12 @@ export default function EditMarketRentalDetail() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      imgS3Keys: imgS3Keys,
+      imgURLs: imgKeyFromServer,
       marketRentalSaleRent: marketRentalSaleRent,
       propertyType: propertyType,
       bedroomCounts: bedroomCounts,
       bathroomsCounts: bathroomsCounts,
-      address: address,
+      location: location,
       propertySize: propertySize,
       dateAvailable: dateAvailable,
       laundryType: laundryType,
@@ -128,9 +128,7 @@ export default function EditMarketRentalDetail() {
       postMultipleImages({ imagesData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      const newImg = response.payload.map((key) => [key, "temp"]);
-      const temp = Object.entries(imageKeys).concat(newImg);
-      setImageKeys(Object.fromEntries(temp));
+      setImgKeyFromServer((prev) => prev.concat(response.payload));
     }
   };
 
@@ -138,40 +136,13 @@ export default function EditMarketRentalDetail() {
     dispatch(fetchMarketUserInfo(marketItem.userID));
   }, [marketItem.userID, dispatch]);
 
-  const imgKeyFromServer = useGetAllImages(
-    Object.keys(imageKeys),
-    imageKeys && trigger === true
-  );
-
-  useEffect(() => {
-    if (
-      Object.values(imageKeys).includes("temp") &&
-      Object.values(imageKeys).length === imgKeyFromServer.length &&
-      trigger
-    ) {
-      const images = Object.entries(imageKeys);
-      console.log("Bug here!", images);
-      if (Object.values(imageKeys).length === 1) {
-        let temp = {};
-        temp[images[0][0]] = imgKeyFromServer[0];
-        console.log("almost", temp);
-        setImageKeys(temp);
-      } else {
-        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
-        console.log("almost", images);
-        setImageKeys(Object.fromEntries(images));
-      }
-      setTrigger(false);
-    }
-  }, [imgKeyFromServer, imageKeys, trigger]);
-
   const onSubmit = async (data) => {
     const createMarketItemInput = {
       ...data,
       name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
       id: id,
       marketType: "Rental",
-      imgS3Keys: Object.keys(imageKeys),
+      imgURLs: imgKeyFromServer,
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
@@ -207,11 +178,9 @@ export default function EditMarketRentalDetail() {
   };
 
   const handleDeleteImg = (imgKey) => {
-    const images = { ...imageKeys };
-    const newKeys = Object.fromEntries(
-      Object.entries(images).filter(([key, value]) => value !== imgKey)
-    );
-    setImageKeys(newKeys);
+    const images = [...imgKeyFromServer];
+    const newKeys = images.filter((key) => key !== imgKey);
+    setImgKeyFromServer(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -254,12 +223,12 @@ export default function EditMarketRentalDetail() {
               </Box>
             </Stack>
             <PostImgPreview
-              imgKeyFromServer={Object.values(imageKeys)}
+              imgKeyFromServer={imgKeyFromServer}
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
               uploadMarketItemImg={uploadMarketItemImg}
-              setTrigger={setTrigger}
+              // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
             />
@@ -422,22 +391,25 @@ export default function EditMarketRentalDetail() {
 
               <Box sx={{ marginY: "1rem" }}>
                 <Controller
-                  name="address"
+                  name="location"
                   control={control}
                   rules={{
                     required: true,
                   }}
                   render={({ field: { onChange, value } }) => (
                     <TextField
-                      label={`地址${!!errors.address ? " is required" : ""}`}
+                      label={`地址${!!errors.location ? " is required" : ""}`}
                       value={value}
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!errors.address}
+                      error={!!errors.location}
                       onChange={(e) => {
                         onChange(e);
-                        setFakeItems({ ...fakeItems, address: e.target.value });
+                        setFakeItems({
+                          ...fakeItems,
+                          location: e.target.value,
+                        });
                       }}
                     />
                   )}
@@ -664,7 +636,7 @@ export default function EditMarketRentalDetail() {
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
             <PreviewInfo
-              imgKeyFromServer={Object.values(imageKeys)}
+              imgKeyFromServer={imgKeyFromServer}
               fakeItems={fakeItems}
             />
           </Paper>
@@ -673,7 +645,7 @@ export default function EditMarketRentalDetail() {
           <SwipeableDrawerInfo
             content={
               <PreviewInfo
-                imgKeyFromServer={Object.values(imageKeys)}
+                imgKeyFromServer={imgKeyFromServer}
                 fakeItems={fakeItems}
               />
             }

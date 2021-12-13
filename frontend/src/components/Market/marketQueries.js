@@ -18,12 +18,13 @@ export const marketItemSortBySortKey = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
+        imgURLs
         title
         price
         marketType
         location
         year
+        tags
         make
         model
         marketRentalSaleRent
@@ -37,7 +38,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         active
         createdAt
         userID
-
+        description
         updatedAt
         user {
           id
@@ -84,7 +85,7 @@ export const marketItemSortBySortKeyPosts = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -150,7 +151,7 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
+        imgURLs
         title
         price
         marketType
@@ -208,7 +209,7 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
+        imgURLs
         price
         marketType
         description
@@ -270,7 +271,7 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
+        imgURLs
         price
         marketType
         description

@@ -12,7 +12,7 @@ import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
 import TitleInfo from "../../components/titleInfo";
 import { detailStyle } from "../../components/Market/marketDetailCss";
-import useGetImages from "../../components/Market/useGetImages";
+// import useGetImages from "../../components/Market/useGetImages";
 import { useParams } from "react-router-dom";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
@@ -38,7 +38,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
     propertyType,
     bedroomCounts,
     // bathroomsCounts,
-    address,
+    location,
     // propertySize,
     // dateAvailable,
     // laundryType,
@@ -81,7 +81,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
         heatingType={heatingType}
         catFriendly={catFriendly}
         dogFriendly={dogFriendly}
-        address={address}
+        location={location}
       />
       <Divider variant="middle">
         <Typography fontWeight="600">卖家详情</Typography>
@@ -103,8 +103,8 @@ export default function MarketRentalDetail() {
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const status = useSelector((state) => state.market.selectedMarketItemStatus);
-  const starter = useStarter(marketItem);
-  const imgKeyFromServer = useGetImages(marketItem, id);
+  const starter = useStarter(marketItem, "rental");
+  // const imgKeyFromServer = useGetImages(marketItem, id);
 
   return (
     <div className={classes.root}>
@@ -116,7 +116,7 @@ export default function MarketRentalDetail() {
           className={classes.contain}
         >
           <Box className={classes.images}>
-            <SwipeViews images={imgKeyFromServer} />
+            <SwipeViews images={marketItem.imgURLs} />
           </Box>
           <Box className={classes.info}>
             <MarketRentalInfo marketItem={marketItem} />

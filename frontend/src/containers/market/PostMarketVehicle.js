@@ -31,7 +31,7 @@ import { marketVehicleOptions } from "../../components/Market/marketVehicleOptio
 import { postMarketItem } from "../../redux/reducers/marketSlice";
 import { postMultipleImages } from "../../redux/reducers/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-import { useGetAllImages } from "../../components/Market/useGetImages";
+// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -40,10 +40,10 @@ export default function PostMarketVehicle() {
   const dispatch = useDispatch();
   const history = useHistory();
   useTitle("发布二手车辆信息");
-  const [imageKeys, setImageKeys] = useState("");
+  const [imgKeyFromServer, setImgKeyFromServer] = useState([]);
+
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
-  const [trigger, setTrigger] = useState(true);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [open, setOpen] = useState(false);
   const [defaultInfo, setDefaultInfo] = useState(true);
@@ -80,7 +80,7 @@ export default function PostMarketVehicle() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      imgS3Keys: "",
+      imgURLs: "",
       vehicleType: "",
       location: "",
       year: "",
@@ -102,7 +102,7 @@ export default function PostMarketVehicle() {
       ...data,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
-      imgS3Keys: Object.keys(imageKeys),
+      imgURLs: imgKeyFromServer,
       tags: GetTags(),
       active: true,
       userID: username,
@@ -148,45 +148,14 @@ export default function PostMarketVehicle() {
     );
     // console.log("response!!!", response);
     if (response.meta.requestStatus === "fulfilled") {
-      const newImg = response.payload.map((key) => [key, "temp"]);
-      const temp = Object.entries(imageKeys).concat(newImg);
-      setImageKeys(Object.fromEntries(temp));
+      setImgKeyFromServer((prev) => prev.concat(response.payload));
     }
   };
 
-  const imgKeyFromServer = useGetAllImages(
-    Object.keys(imageKeys),
-    imageKeys && trigger === true
-  );
-
-  useEffect(() => {
-    if (
-      Object.values(imageKeys).includes("temp") &&
-      Object.values(imageKeys).length === imgKeyFromServer.length &&
-      trigger
-    ) {
-      const images = Object.entries(imageKeys);
-      console.log("Bug here!", images);
-      if (Object.values(imageKeys).length === 1) {
-        let temp = {};
-        temp[images[0][0]] = imgKeyFromServer[0];
-        console.log("almost", temp);
-        setImageKeys(temp);
-      } else {
-        imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
-        console.log("almost", images);
-        setImageKeys(Object.fromEntries(images));
-      }
-      setTrigger(false);
-    }
-  }, [imgKeyFromServer, imageKeys, trigger]);
-
   const handleDeleteImg = (imgKey) => {
-    const images = { ...imageKeys };
-    const newKeys = Object.fromEntries(
-      Object.entries(images).filter(([key, value]) => value !== imgKey)
-    );
-    setImageKeys(newKeys);
+    const images = [...imgKeyFromServer];
+    const newKeys = images.filter((key) => key !== imgKey);
+    setImgKeyFromServer(newKeys);
   };
 
   const handleKeyDown = (e) => {
@@ -237,7 +206,6 @@ export default function PostMarketVehicle() {
               control={control}
               errors={errors}
               uploadMarketItemImg={uploadMarketItemImg}
-              setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
             />
