@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ArticleList() {
-  useTitle("近期新闻");
+  useTitle("UWCSSA近期新闻");
   const dispatch = useDispatch();
   const classes = useStyles();
   const { articles, fetchArticlesStatus } = useSelector(

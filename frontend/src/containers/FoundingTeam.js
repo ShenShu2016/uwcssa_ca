@@ -51,7 +51,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function FoundingTeam() {
-  useTitle("创始团队以及贡献者");
+  useTitle("UWCSSA.CA-创始团队以及贡献者");
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 

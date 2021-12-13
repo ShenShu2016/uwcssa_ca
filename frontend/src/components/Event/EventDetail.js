@@ -29,7 +29,7 @@ export default function EventDetail() {
   const dispatch = useDispatch();
   const { eventID } = useParams();
   const { event } = useSelector((state) => state.event.selected);
-  useTitle(`活动 ${eventID}`);
+  useTitle(`活动-${eventID}`);
 
   useEffect(() => {
     if (eventID && eventID !== "") {

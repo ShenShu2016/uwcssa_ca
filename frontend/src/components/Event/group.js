@@ -40,7 +40,7 @@ export default function Individual() {
   const { userAuth } = useSelector((state) => state);
   const { eventID } = useParams();
   console.log(useParams, "useParams");
-  useTitle(eventID && `近期活动 ${eventID} 团体报名`);
+  useTitle(`近期活动-${eventID}-团体报名`);
   console.log("event.id", eventID);
   // const [eventParticipantData, setEventParticipantData] = useState({
   //   name: "",

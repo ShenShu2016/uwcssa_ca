@@ -14,13 +14,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
-// import {
-//   removeSelectedEvent,
-//   selectedEvent,
-// } from "../../redux/actions/eventActions";
-
-// import { useTitle } from "../../Hooks/useTitle";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",

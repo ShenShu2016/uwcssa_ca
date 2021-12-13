@@ -42,7 +42,7 @@ export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { articleID } = useParams();
-  useTitle(`近期新闻 ${articleID}`);
+  useTitle(`近期新闻-${articleID}`);
   useEffect(() => {
     if (articleID && articleID !== "") {
       dispatch(selectedArticle({ articleID }));
