@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import XLSX from "xlsx";
 import { alpha } from "@mui/material/styles";
-import { fetchEvents_Staff } from "../../redux/reducers/staffSlice";
+import { fetchEvents_Staff } from "../../redux/slice/staffSlice";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({

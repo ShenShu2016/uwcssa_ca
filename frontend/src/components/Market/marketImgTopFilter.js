@@ -141,7 +141,6 @@ export default function MarketImgTopFilter({
         <Typography variant="h6" fontWeight="bold">
           Shop by trend
         </Typography>
-
         <Stack
           spacing={1}
           direction="row"

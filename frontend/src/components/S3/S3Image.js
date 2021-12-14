@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+import { getImage, selectImageById } from "../../redux/slice/imageSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function S3Image({ S3Key, style }) {

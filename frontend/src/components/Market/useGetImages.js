@@ -2,7 +2,7 @@ import {
   getImage,
   selectImageById,
   updateImage,
-} from "../../redux/reducers/imageSlice";
+} from "../../redux/slice/imageSlice";
 import { useEffect, useState } from "react";
 
 import { Storage } from "@aws-amplify/storage";

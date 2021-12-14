@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import {
   removeSelectedForumTopic,
   selectedForumTopic,
-} from "../../redux/reducers/forumSlice";
+} from "../../redux/slice/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumTopicMain from "../../components/Forum/ForumTopic/ForumTopicMain";
+import { useHistory } from "react-router";
 // import OpenIconSpeedDial from "../../components//Forum/OpenIconSpeedDial";
 import { useParams } from "react-router-dom";
-import { useHistory } from "react-router";
 
 export default function ForumTopic() {
   const dispatch = useDispatch();

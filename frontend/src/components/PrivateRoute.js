@@ -4,7 +4,7 @@ import { CircularProgress } from "@mui/material";
 import React from "react";
 import { Redirect } from "react-router";
 import { Route } from "react-router";
-import { setURLFrom } from "../redux/reducers/generalSlice";
+import { setURLFrom } from "../redux/slice/generalSlice";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 

@@ -15,7 +15,7 @@ import React, { useEffect } from "react";
 import {
   fetchForumPostCounts,
   fetchUsers,
-} from "../../redux/reducers/generalSlice";
+} from "../../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import GitHubButton from "react-github-btn";

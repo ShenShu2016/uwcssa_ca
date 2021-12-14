@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
   selectedMarketItem,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
@@ -35,7 +35,7 @@ import { useTitle } from "../../Hooks/useTitle";
 // import {
 //   removeSelectedMarketItem,
 //   selectedMarketItem,
-// } from "../../redux/reducers/marketSlice";
+// } from "../../redux/slice/marketSlice";
 
 // removeSelectedMarketItem,
 //   selectedMarketItem,

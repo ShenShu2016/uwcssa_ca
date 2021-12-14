@@ -18,7 +18,7 @@ import React, { useRef, useState } from "react";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { forgotPassWordSubmit } from "../../redux/reducers/authSlice";
+import { forgotPassWordSubmit } from "../../redux/slice/authSlice";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";

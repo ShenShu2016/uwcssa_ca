@@ -13,7 +13,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import eventImg from "../../static/event.jpg";
 import { makeStyles } from "@mui/styles";
-import { postEventParticipant } from "../../redux/reducers/eventSlice";
+import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -40,7 +40,7 @@ export default function Individual() {
   const { userAuth } = useSelector((state) => state);
   const { eventID } = useParams();
   console.log(useParams, "useParams");
-  useTitle(eventID && `近期活动 ${eventID} 团体报名`);
+  useTitle(`近期活动-${eventID}-团体报名`);
   console.log("event.id", eventID);
   // const [eventParticipantData, setEventParticipantData] = useState({
   //   name: "",

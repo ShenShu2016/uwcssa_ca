@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
-// import wechatQrCode from "../../static/wechatQrCode.png";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
@@ -92,15 +90,6 @@ export default function ContactUs() {
           </Button>
         </Box>
         <Divider />
-        {/* <Box className={classes.cards}>
-          <Typography variant="h5" className={classes.title}>
-            支持我们
-          </Typography>
-          <Typography variant="body1" className={classes.content}>
-            如果你喜欢我们的网站，可以扫描下方二维码进行捐款，帮助我们建立一个更好的网站！
-          </Typography>
-          <img src={wechatQrCode} alt="QrCode" className={classes.qrCode} />
-        </Box> */}
       </Box>
     </div>
   );

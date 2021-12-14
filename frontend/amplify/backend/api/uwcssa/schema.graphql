@@ -826,7 +826,7 @@ type FoundingMember
   brief: String
   moreBrief: String
   mainPart: [String]
-  imgS3Key: [String]
+  # imgS3Key: [String]
   imgURLs: [AWSURL]
   userID: ID!
   user: User! @connection(fields: ["userID"])

@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 import {
   putUserExperience,
   removeUserExperience,
-} from "../../../../redux/reducers/profileSlice";
+} from "../../../../redux/slice/profileSlice";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";

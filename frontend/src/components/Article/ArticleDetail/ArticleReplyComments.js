@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import { green } from "@mui/material/colors";
-import { postArticleSubComment } from "../../../redux/reducers/articleSlice";
+import { postArticleSubComment } from "../../../redux/slice/articleSlice";
 
 export default function ArticleReplyComments({
   isReplyOpen,

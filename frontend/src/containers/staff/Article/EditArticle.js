@@ -19,11 +19,11 @@ import {
   modifyArticle,
   removeSelectedArticle,
   selectedArticle,
-} from "../../../redux/reducers/articleSlice";
+} from "../../../redux/slice/articleSlice";
 import {
   postMultipleImages,
   postSingleImage,
-} from "../../../redux/reducers/generalSlice";
+} from "../../../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 

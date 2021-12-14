@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import API from "@aws-amplify/api";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createDepartment } from "../../../graphql/mutations";
-import { fetchDepartments } from "../../../redux/reducers/careerSlice";
+import { fetchDepartments } from "../../../redux/slice/careerSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 

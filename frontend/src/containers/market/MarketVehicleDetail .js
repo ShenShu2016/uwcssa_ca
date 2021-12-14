@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
   selectedMarketItem,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import DetailInfo from "../../components/Market/detailInfo";
-import { Loading } from "../../components/Market/loading";
+// import { Loading } from "../../components/Market/loading";
 import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
 import TitleInfo from "../../components/titleInfo";
@@ -97,15 +97,13 @@ export default function MarketVehicleDetail() {
   }, [id, dispatch]);
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
-  const status = useSelector((state) => state.market.selectedMarketItemStatus);
+  // const status = useSelector((state) => state.market.selectedMarketItemStatus);
   const starter = useStarter(marketItem, "vehicle");
   // const imgKeyFromServer = useGetImages(marketItem, id);
 
   return (
     <div className={classes.root}>
-      {starter === false ? (
-        <Loading status={status} />
-      ) : (
+      {starter === false ? null : ( // <Loading status={status} />
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}

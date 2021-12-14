@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import {
   fetchMarketItems,
   selectAllMarketItems,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
-import { Loading } from "../../components/Market/loading";
+// import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
 import marketItemFilter from "../../components/Market/marketItemFilter";
@@ -32,7 +32,7 @@ export default function MarketItem() {
 
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems, "all");
-  const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+  // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   useEffect(() => {
     dispatch(fetchMarketItems(marketItemSortBySortKeyItem));
@@ -89,9 +89,7 @@ export default function MarketItem() {
 
   return (
     <Box className={classes.root}>
-      {starter === false ? (
-        <Loading status={status} />
-      ) : (
+      {starter === false ? null : ( // <Loading status={status} />
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}

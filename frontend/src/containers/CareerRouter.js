@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Career() {
+export default function CareerRouter() {
   const classes = useStyles();
 
   return (

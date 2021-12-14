@@ -26,7 +26,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Link } from "react-router-dom";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { createUwcssaJob } from "../../../graphql/mutations";
-import { fetchDepartments } from "../../../redux/reducers/careerSlice";
+import { fetchDepartments } from "../../../redux/slice/careerSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";

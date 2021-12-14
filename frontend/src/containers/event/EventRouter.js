@@ -38,21 +38,11 @@ export default function EventRouter() {
           path="/event/:eventID/eventSignUp"
           component={EventSignUp}
         />
-        {/* <Route
-          exact
-          path="/event/:eventID/eventSignUp/individual"
-          component={Individual}
-        /> */}
         <PrivateRoute
           allowRoles="anyone"
           path="/event/:eventID/eventSignUp/individual"
           component={Individual}
         />
-        {/* <Route
-          exact
-          path="/event/:eventID/eventSignUp/group"
-          component={Group}
-        /> */}
         <PrivateRoute
           allowRoles="anyone"
           path="/event/:eventID/eventSignUp/group"

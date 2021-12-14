@@ -1,6 +1,5 @@
 import { List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 
-import ArticleSideBarAD from "../AdSense/ArticleSideBarAD";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ArticleSideBar() {
+export default function ArticleSideBar() {
   const classes = useStyles();
   return (
     <Paper variant="outlined" className={classes.root}>
@@ -90,9 +89,6 @@ function ArticleSideBar() {
           />
         </ListItem>
       </List>
-      <ArticleSideBarAD />
     </Paper>
   );
 }
-
-export default ArticleSideBar;

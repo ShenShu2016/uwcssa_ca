@@ -1,6 +1,6 @@
 import { Box, Button, Zoom } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { postLike, putLike, removeLike } from "../redux/reducers/generalSlice";
+import { postLike, putLike, removeLike } from "../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";

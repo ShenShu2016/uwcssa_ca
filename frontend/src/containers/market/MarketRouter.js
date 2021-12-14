@@ -25,7 +25,7 @@ import PostMarketVehicle from "./PostMarketVehicle";
 import PrivateRoute from "../../components/PrivateRoute";
 import React from "react";
 
-export default function Market() {
+export default function MarketRouter() {
   return (
     <Box>
       <Switch>

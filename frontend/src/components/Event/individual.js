@@ -18,10 +18,8 @@ import SignUpRequest from "../Auth/SignUpRequireDialog";
 import eventImg from "../../static/event.jpg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postEventParticipant } from "../../redux/reducers/eventSlice";
+import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
-// import useForm from "./useForm";
-// import { validator } from "./validator";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,22 +42,12 @@ export default function Individual() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { userAuth } = useSelector((state) => state);
   const { eventID } = useParams();
-  //const { event } = useSelector((state) => state.event.selected); 思路有问题
-  useTitle(eventID && `近期活动 ${eventID} 个人报名`);
-  console.log("event.id", eventID);
+  useTitle(`近期活动-${eventID}-个人报名`);
+  const { userAuth } = useSelector((state) => state);
   const [loading, setLoading] = useState(false);
-  // const [eventParticipantData, setEventParticipantData] = useState({
-  //   name: "",
-  //   email: undefined,
-  //   address: "",
-  //   phone: undefined,
-  //   weChat: "",
-  //   message: "",
-  //   numberOfPeople: "",
-  // });
   const timer = useRef();
+
   const {
     handleSubmit,
     control,
@@ -67,42 +55,13 @@ export default function Individual() {
   } = useForm({
     defaultValues: {
       name: "",
-      // email: undefined,
       address: "",
-      phone: undefined,
+      phone: "",
       weChat: "",
       message: "",
       numberOfPeople: "",
     },
   });
-  // const uploadEventParticipant = async () => {
-  //   console.log("????");
-  //   const { name, email, address, phone, weChat, message } =
-  //     eventParticipantData;
-
-  //   const createEventParticipantInput = {
-  //     id: `${eventID}-${userAuth.user.username}`, //这样的话她智能报名一次了
-  //     name,
-  //     email,
-  //     address,
-  //     phone,
-  //     weChat,
-  //     message,
-  //     numberOfPeople: 1,
-  //     eventParticipantStatus: "ArriveOnTime",
-  //     active: true,
-  //     eventID: eventID,
-  //     userID: userAuth.user.username,
-  //   };
-
-  //   const response = await dispatch(
-  //     postEventParticipant({ createEventParticipantInput })
-  //   );
-  //   console.log("postEventParticipant", response);
-  //   if (response.meta.requestStatus === "fulfilled") {
-  //     history.push(`/event/${eventID}/eventSignUp/success`);
-  //   }
-  // };
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -116,6 +75,7 @@ export default function Individual() {
       eventID: eventID,
       userID: userAuth.user.username,
     };
+    console.log("createEventParticipantInput", createEventParticipantInput);
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput })
     );
@@ -163,23 +123,6 @@ export default function Individual() {
                 个人报名
               </Typography>
               <Box>
-                {/* <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="姓名"
-                  name="name"
-                  placeholder="张三"
-                  autoComplete="name"
-                  autoFocus
-                  value={eventParticipantData.name}
-                  onChange={(e) =>
-                    setEventParticipantData({
-                      ...eventParticipantData,
-                      name: e.target.value,
-                    })
-                  }
-                /> */}
                 <Controller
                   name="name"
                   control={control}
@@ -204,65 +147,6 @@ export default function Individual() {
                     />
                   )}
                 />
-                {/* <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="邮箱"
-                  name="email"
-                  placeholder="e.g. xxxx@uwindsor.ca"
-                  autoComplete="email"
-                  value={eventParticipantData.email}
-                  onChange={(e) =>
-                    setEventParticipantData({
-                      ...eventParticipantData,
-                      email: e.target.value,
-                    })
-                  }
-                /> */}
-
-                {/* <Controller
-                  name="email"
-                  control={control}
-                  rules={{
-                    required: true,
-                    pattern:
-                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      id="email"
-                      margin="normal"
-                      required
-                      fullWidth
-                      label="邮箱"
-                      placeholder="e.g. xxxx@uwindsor.ca"
-                      autoComplete="email"
-                      variant="outlined"
-                      onChange={onChange}
-                      value={value}
-                      error={!!errors.email}
-                      helperText={errors.name ? "邮箱无效" : null}
-                    />
-                  )}
-                /> */}
-
-                {/* <TextField
-                  margin="normal"
-                  fullWidth
-                  required
-                  name="phone"
-                  placeholder="e.g. 1234567890"
-                  autoComplete="phone"
-                  label="手机号码"
-                  value={eventParticipantData.phone}
-                  onChange={(e) =>
-                    setEventParticipantData({
-                      ...eventParticipantData,
-                      phone: e.target.value,
-                    })
-                  }
-                /> */}
                 <Controller
                   name="phone"
                   control={control}
@@ -289,21 +173,6 @@ export default function Individual() {
                     />
                   )}
                 />
-                {/* <TextField
-                  margin="normal"
-                  fullWidth
-                  required
-                  name="weChat"
-                  autoComplete="weChat"
-                  label="微信号"
-                  value={eventParticipantData.weChat}
-                  onChange={(e) =>
-                    setEventParticipantData({
-                      ...eventParticipantData,
-                      weChat: e.target.value,
-                    })
-                  }
-                /> */}
                 <Controller
                   name="weChat"
                   control={control}
@@ -325,20 +194,6 @@ export default function Individual() {
                     />
                   )}
                 />
-                {/* <TextField
-                  margin="normal"
-                  fullWidth
-                  name="address"
-                  autoComplete="address"
-                  label="地址（如需接送）"
-                  value={eventParticipantData.address}
-                  onChange={(e) =>
-                    setEventParticipantData({
-                      ...eventParticipantData,
-                      address: e.target.value,
-                    })
-                  }
-                /> */}
                 <Controller
                   name="address"
                   control={control}
@@ -358,21 +213,6 @@ export default function Individual() {
                     />
                   )}
                 />
-                {/* <TextField
-                  margin="normal"
-                  fullWidth
-                  label="备注"
-                  name="message"
-                  multiline
-                  rows={4}
-                  value={eventParticipantData.message}
-                  onChange={(e) =>
-                    setEventParticipantData({
-                      ...eventParticipantData,
-                      message: e.target.value,
-                    })
-                  }
-                /> */}
                 <Controller
                   name="message"
                   control={control}

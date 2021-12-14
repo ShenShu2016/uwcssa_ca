@@ -9,7 +9,7 @@ import {
 
 import { Controller } from "react-hook-form";
 import React from "react";
-import { selectMarketUserById } from "../../redux/reducers/marketUserSlice";
+import { selectMarketUserById } from "../../redux/slice/marketUserSlice";
 import { useSelector } from "react-redux";
 
 export default function PostUserInfo({

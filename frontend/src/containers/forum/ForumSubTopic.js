@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import {
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
-  // selectedForumSubTopicPosts,
   selectedForumSubTopicPostsLastReply,
-} from "../../redux/reducers/forumSlice";
+} from "../../redux/slice/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+
 import { Box } from "@mui/system";
 import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumSubTopicMain from "../../components/Forum/ForumSubTopic/ForumSubTopicMain";
 import ForumSubTopicPosts from "../../components/Forum/ForumSubTopic/ForumSubTopicPosts";
 import { Skeleton } from "@mui/material";
+import { useHistory } from "react-router";
 // import OpenIconSpeedDial from "../OpenIconSpeedDial";
 import { useParams } from "react-router-dom";
 
@@ -70,7 +70,7 @@ export default function ForumSubTopic() {
     >
       <Box
         sx={{
-          width: { md: 1080, lg: 1240 } 
+          width: { md: 1080, lg: 1240 },
         }}
       >
         {starter === false ? (
@@ -93,7 +93,7 @@ export default function ForumSubTopic() {
             sx={{ m: 5 }}
           />
         ) : (
-          <Box sx={{ }}>
+          <Box sx={{}}>
             <ForumSubTopicPosts
               forumSubTopic={forumSubTopic}
               posts={forumSubTopicPostsLastReply}

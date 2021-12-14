@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
   postMarketUserInfo,
   selectMarketUserById,
   updateMarketUserInfoDetail,
-} from "../../redux/reducers/marketUserSlice";
+} from "../../redux/slice/marketUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -31,14 +31,15 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketRentalOptions } from "../../components/Market/marketRentalOptions";
-import { postMarketItem } from "../../redux/reducers/marketSlice";
-import { postMultipleImages } from "../../redux/reducers/generalSlice";
+import { postMarketItem } from "../../redux/slice/marketSlice";
+import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
 // import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function PostMarketRental() {
+  const imgRef = useRef(null);
   const classes = postStyle();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -152,6 +153,12 @@ export default function PostMarketRental() {
   };
 
   useEffect(() => {
+    if (errors) {
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
+
+  useEffect(() => {
     dispatch(fetchMarketUserInfo(username));
   }, [username, dispatch]);
 
@@ -199,6 +206,7 @@ export default function PostMarketRental() {
             <Stack
               direction="row"
               justifyContent="space-between"
+              ref={imgRef}
               sx={{ color: "rgb(0,0,0)" }}
             >
               <Typography

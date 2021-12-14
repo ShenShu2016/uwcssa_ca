@@ -6,7 +6,7 @@ import EventMain from "../../components/Event/EventMain";
 // import EventSliderShow from "../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
 import PastEvent from "../../components/Event/PastEvents";
-import { fetchEvents } from "../../redux/reducers/eventSlice";
+import { fetchEvents } from "../../redux/slice/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
 

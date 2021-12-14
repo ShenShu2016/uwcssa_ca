@@ -94,7 +94,7 @@ export default function PostImgPreview({
                 <Typography fontSize="15px" fontWeight="lighter">
                   上传照片
                 </Typography>
-                {!!errors.imgS3Keys ? (
+                {!!errors.imgURLs ? (
                   <Typography color="error">* 至少来一张呀！</Typography>
                 ) : null}
                 <AddPhotoAlternateIcon sx={{ fontSize: 60 }} />

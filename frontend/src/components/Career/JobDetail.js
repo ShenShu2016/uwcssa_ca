@@ -28,7 +28,7 @@ export default function JobDetail(props) {
   const classes = useStyles();
   const { id } = props.match.params;
   const [job, setJob] = useState([]);
-  useTitle(`开放职位 ${id}`);
+  useTitle(`开放职位-${id}`);
 
   useEffect(() => {
     const fetchJob = async () => {

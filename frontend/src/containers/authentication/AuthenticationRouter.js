@@ -9,7 +9,7 @@ import ResetPassword from "./ResetPassword";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
-export default function AuthRouter() {
+export default function AuthenticationRouter() {
   return (
     <Box>
       <Switch>

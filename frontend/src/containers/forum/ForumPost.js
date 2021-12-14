@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import {
   removeSelectedForumPost,
   selectedForumPost,
-} from "../../redux/reducers/forumSlice";
+} from "../../redux/slice/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumPostMain from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostMain";
-import { useParams } from "react-router-dom";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
 import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
 
 export default function ForumPost() {
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ export default function ForumPost() {
     >
       <Box
         sx={{
-          mx:2,
+          mx: 2,
           width: { md: 1080, lg: 1240 },
         }}
       >

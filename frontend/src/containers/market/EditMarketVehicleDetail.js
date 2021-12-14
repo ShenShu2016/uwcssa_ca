@@ -10,17 +10,17 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
   postMarketUserInfo,
   selectMarketUserById,
   updateMarketUserInfoDetail,
-} from "../../redux/reducers/marketUserSlice";
+} from "../../redux/slice/marketUserSlice";
 import {
   selectMarketItemById,
   updateMarketItemDetail,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import InputAdornment from "@mui/material/InputAdornment";
@@ -32,7 +32,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
-import { postMultipleImages } from "../../redux/reducers/generalSlice";
+import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
 // import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
@@ -40,6 +40,7 @@ import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function EditMarketVehicleDetail() {
+  const imgRef = useRef(null);
   const classes = postStyle();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -111,6 +112,12 @@ export default function EditMarketVehicleDetail() {
       setImgKeyFromServer((prev) => prev.concat(response.payload));
     }
   };
+
+  useEffect(() => {
+    if (errors) {
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
 
   useEffect(() => {
     dispatch(fetchMarketUserInfo(marketItem.userID));
@@ -186,7 +193,7 @@ export default function EditMarketVehicleDetail() {
               transition: "color 0.3s",
             }}
           >
-            <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" justifyContent="space-between" ref={imgRef}>
               <Typography
                 variant="h5"
                 gutterBottom
