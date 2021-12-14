@@ -6,7 +6,7 @@ import {
 } from "../../redux/reducers/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loading } from "../../components/Market/loading";
+// import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
 import MarketTopBar from "../../components/Market/marketTopBar";
@@ -25,7 +25,7 @@ export default function MarketList() {
   const starter = useStarter(marketItems);
   console.log(starter);
   console.log(marketItems);
-  const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+  // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   useEffect(() => {
     dispatch(fetchMarketItems(marketItemSortBySortKey));
@@ -44,9 +44,7 @@ export default function MarketList() {
     });
   return (
     <Box className={classes.root}>
-      {starter === false ? (
-        <Loading status={status} />
-      ) : (
+      {starter === false ? null : ( // <Loading status={status} />
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
