@@ -869,7 +869,6 @@ export const createUser = /* GraphQL */ `
         brief
         moreBrief
         mainPart
-        imgS3Key
         imgURLs
         userID
         createdAt
@@ -1893,7 +1892,6 @@ export const updateUser = /* GraphQL */ `
         brief
         moreBrief
         mainPart
-        imgS3Key
         imgURLs
         userID
         createdAt
@@ -2917,7 +2915,6 @@ export const deleteUser = /* GraphQL */ `
         brief
         moreBrief
         mainPart
-        imgS3Key
         imgURLs
         userID
         createdAt
@@ -3323,7 +3320,6 @@ export const createUserEducation = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -3616,7 +3612,6 @@ export const updateUserEducation = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -3909,7 +3904,6 @@ export const deleteUserEducation = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -4203,7 +4197,6 @@ export const createUserExperience = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -4497,7 +4490,6 @@ export const updateUserExperience = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -4791,7 +4783,6 @@ export const deleteUserExperience = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -5078,7 +5069,6 @@ export const createTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -5414,7 +5404,6 @@ export const updateTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -5750,7 +5739,6 @@ export const deleteTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -6096,7 +6084,6 @@ export const createArticle = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -6450,7 +6437,6 @@ export const updateArticle = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -6804,7 +6790,6 @@ export const deleteArticle = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -7150,7 +7135,6 @@ export const createArticleComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -7514,7 +7498,6 @@ export const updateArticleComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -7878,7 +7861,6 @@ export const deleteArticleComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -8242,7 +8224,6 @@ export const createArticleSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -8596,7 +8577,6 @@ export const updateArticleSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -8950,7 +8930,6 @@ export const deleteArticleSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -9322,7 +9301,6 @@ export const createEvent = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -9706,7 +9684,6 @@ export const updateEvent = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -10090,7 +10067,6 @@ export const deleteEvent = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -10456,7 +10432,6 @@ export const createEventComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -10833,7 +10808,6 @@ export const updateEventComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -11210,7 +11184,6 @@ export const deleteEventComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -11587,7 +11560,6 @@ export const createEventSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -11951,7 +11923,6 @@ export const updateEventSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -12315,7 +12286,6 @@ export const deleteEventSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -12686,7 +12656,6 @@ export const createEventParticipant = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -13045,7 +13014,6 @@ export const updateEventParticipant = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -13404,7 +13372,6 @@ export const deleteEventParticipant = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -13757,7 +13724,6 @@ export const createDepartment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -14067,7 +14033,6 @@ export const updateDepartment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -14377,7 +14342,6 @@ export const deleteDepartment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -14712,7 +14676,6 @@ export const createUwcssaJob = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -15059,7 +15022,6 @@ export const updateUwcssaJob = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -15406,7 +15368,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -15731,7 +15692,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -16075,7 +16035,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -16419,7 +16378,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -16757,7 +16715,6 @@ export const createForumTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -17054,7 +17011,6 @@ export const updateForumTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -17351,7 +17307,6 @@ export const deleteForumTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -17649,7 +17604,6 @@ export const createForumSubTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -17986,7 +17940,6 @@ export const updateForumSubTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -18323,7 +18276,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -18667,7 +18619,6 @@ export const createForumPost = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -19042,7 +18993,6 @@ export const updateForumPost = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -19417,7 +19367,6 @@ export const deleteForumPost = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -19787,7 +19736,6 @@ export const createForumPostComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -20158,7 +20106,6 @@ export const updateForumPostComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -20529,7 +20476,6 @@ export const deleteForumPostComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -20901,7 +20847,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -21173,7 +21118,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -21584,7 +21528,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -21856,7 +21799,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -22267,7 +22209,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -22539,7 +22480,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -22948,7 +22888,6 @@ export const createMarketUserInfo = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -23237,7 +23176,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -23526,7 +23464,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -23847,7 +23784,6 @@ export const createMarketItem = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -24168,7 +24104,6 @@ export const updateMarketItem = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -24489,7 +24424,6 @@ export const deleteMarketItem = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -24544,7 +24478,6 @@ export const createFoundingMember = /* GraphQL */ `
       brief
       moreBrief
       mainPart
-      imgS3Key
       imgURLs
       userID
       createdAt
@@ -24782,7 +24715,6 @@ export const createFoundingMember = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -24836,7 +24768,6 @@ export const updateFoundingMember = /* GraphQL */ `
       brief
       moreBrief
       mainPart
-      imgS3Key
       imgURLs
       userID
       createdAt
@@ -25074,7 +25005,6 @@ export const updateFoundingMember = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -25128,7 +25058,6 @@ export const deleteFoundingMember = /* GraphQL */ `
       brief
       moreBrief
       mainPart
-      imgS3Key
       imgURLs
       userID
       createdAt
@@ -25366,7 +25295,6 @@ export const deleteFoundingMember = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -25653,7 +25581,6 @@ export const createLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -25925,7 +25852,6 @@ export const createLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -26719,7 +26645,6 @@ export const updateLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -26991,7 +26916,6 @@ export const updateLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -27785,7 +27709,6 @@ export const deleteLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -28057,7 +27980,6 @@ export const deleteLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -28852,7 +28774,6 @@ export const createWebFeedBack = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -29141,7 +29062,6 @@ export const updateWebFeedBack = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -29430,7 +29350,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -29722,7 +29641,6 @@ export const createUserMutationLog = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -30013,7 +29931,6 @@ export const updateUserMutationLog = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -30304,7 +30221,6 @@ export const deleteUserMutationLog = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt

@@ -248,7 +248,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -655,7 +654,6 @@ export const getUserMutationLog = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -1226,7 +1224,6 @@ export const userSortBySortKey = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -2134,7 +2131,6 @@ export const getUser = /* GraphQL */ `
         brief
         moreBrief
         mainPart
-        imgS3Key
         imgURLs
         userID
         createdAt
@@ -2530,7 +2526,6 @@ export const listUsers = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -2820,7 +2815,6 @@ export const getUserEducation = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -3156,7 +3150,6 @@ export const getUserExperience = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -3486,7 +3479,6 @@ export const getTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -3873,7 +3865,6 @@ export const getArticle = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -4348,7 +4339,6 @@ export const getArticleComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -4847,7 +4837,6 @@ export const getArticleSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -5338,7 +5327,6 @@ export const getEvent = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -5859,7 +5847,6 @@ export const getEventComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -6391,7 +6378,6 @@ export const getEventSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -6881,7 +6867,6 @@ export const getEventParticipant = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -7395,7 +7380,6 @@ export const getDepartment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -7771,7 +7755,6 @@ export const getUwcssaJob = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -8221,7 +8204,6 @@ export const getForumTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -8557,7 +8539,6 @@ export const getForumSubTopic = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -9172,7 +9153,6 @@ export const getForumPost = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -9604,7 +9584,6 @@ export const getForumPostComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -10117,7 +10096,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -10389,7 +10367,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -10997,7 +10974,6 @@ export const getMarketUserInfo = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -11356,7 +11332,6 @@ export const getMarketItem = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -11813,7 +11788,6 @@ export const getFoundingMember = /* GraphQL */ `
       brief
       moreBrief
       mainPart
-      imgS3Key
       imgURLs
       userID
       createdAt
@@ -12051,7 +12025,6 @@ export const getFoundingMember = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -12107,7 +12080,6 @@ export const listFoundingMembers = /* GraphQL */ `
         brief
         moreBrief
         mainPart
-        imgS3Key
         imgURLs
         userID
         createdAt
@@ -12379,7 +12351,6 @@ export const getLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -12651,7 +12622,6 @@ export const getLike = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
@@ -13627,7 +13597,6 @@ export const getWebFeedBack = /* GraphQL */ `
           brief
           moreBrief
           mainPart
-          imgS3Key
           imgURLs
           userID
           createdAt
