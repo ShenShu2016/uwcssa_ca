@@ -22,9 +22,8 @@ import ShopIcon from "@mui/icons-material/Shop";
 import WorkIcon from "@mui/icons-material/Work";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
-const DrawerList = ({ toggleDrawer }) => {
+export default function DrawerList({ toggleDrawer }) {
   const [openStaff, setOpenStaff] = useState(false);
-
   const [openMarket, setOpenMarket] = useState(false);
   const [openForum, setOpenForum] = useState(false);
   const handleClick = () => {
@@ -470,5 +469,4 @@ const DrawerList = ({ toggleDrawer }) => {
       </Box>
     </div>
   );
-};
-export default DrawerList;
+}
