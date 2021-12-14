@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComponent from "../../components/Article/ArticleComponent";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
-import { fetchArticles } from "../../redux/reducers/articleSlice";
+import { fetchArticles } from "../../redux/slice/articleSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
 

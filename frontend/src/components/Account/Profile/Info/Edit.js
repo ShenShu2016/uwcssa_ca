@@ -14,8 +14,8 @@ import React, { useState } from "react";
 
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postSingleImage } from "../../../../redux/reducers/generalSlice";
-import { putUserProfile } from "../../../../redux/reducers/profileSlice";
+import { postSingleImage } from "../../../../redux/slice/generalSlice";
+import { putUserProfile } from "../../../../redux/slice/profileSlice";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 

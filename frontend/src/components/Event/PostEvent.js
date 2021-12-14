@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchTopics, postEvent } from "../../redux/reducers/eventSlice";
+import { fetchTopics, postEvent } from "../../redux/slice/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -30,7 +30,7 @@ import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postSingleImage } from "../../redux/reducers/generalSlice";
+import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";

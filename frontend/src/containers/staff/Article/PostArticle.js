@@ -15,11 +15,11 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchTopics, postArticle } from "../../../redux/reducers/articleSlice";
+import { fetchTopics, postArticle } from "../../../redux/slice/articleSlice";
 import {
   postMultipleImages,
   postSingleImage,
-} from "../../../redux/reducers/generalSlice";
+} from "../../../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";

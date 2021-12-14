@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
   selectedMarketItem,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import DetailInfo from "../../components/Market/detailInfo";
@@ -103,8 +103,7 @@ export default function MarketVehicleDetail() {
 
   return (
     <div className={classes.root}>
-      {starter === false ? // <Loading status={status} />
-      null : (
+      {starter === false ? null : ( // <Loading status={status} />
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}

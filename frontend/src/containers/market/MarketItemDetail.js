@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   selectMarketItemById,
   selectedMarketItem,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import DetailInfo from "../../components/Market/detailInfo";

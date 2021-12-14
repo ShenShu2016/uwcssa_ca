@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function Article() {
+export default function ArticleRouter() {
   const classes = useStyles();
   return (
     <Box className={classes.root}>

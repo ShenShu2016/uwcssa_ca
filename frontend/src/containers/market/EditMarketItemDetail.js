@@ -16,11 +16,11 @@ import {
   postMarketUserInfo,
   selectMarketUserById,
   updateMarketUserInfoDetail,
-} from "../../redux/reducers/marketUserSlice";
+} from "../../redux/slice/marketUserSlice";
 import {
   selectMarketItemById,
   updateMarketItemDetail,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import InputAdornment from "@mui/material/InputAdornment";
@@ -32,7 +32,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
-import { postMultipleImages } from "../../redux/reducers/generalSlice";
+import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
 // import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";

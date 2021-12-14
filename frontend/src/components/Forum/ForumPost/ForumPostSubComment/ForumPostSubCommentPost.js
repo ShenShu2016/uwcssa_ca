@@ -6,16 +6,17 @@ import {
   CircularProgress,
   Collapse,
   Grid,
-  TextField,
   InputAdornment,
+  TextField,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Controller, useForm } from "react-hook-form";
+
 import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import SignInRequest from "../SignInRequest";
 import { green } from "@mui/material/colors";
-import { postForumPostSubComment } from "../../../../redux/reducers/forumSlice";
+import { postForumPostSubComment } from "../../../../redux/slice/forumSlice";
 
 export default function ForumPostSubComment({
   comment,

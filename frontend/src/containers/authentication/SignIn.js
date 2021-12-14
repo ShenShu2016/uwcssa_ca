@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
-import { fetchUserProfile, signIn } from "../../redux/reducers/authSlice";
+import { fetchUserProfile, signIn } from "../../redux/slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { removeURLFrom } from "../../redux/reducers/generalSlice";
+import { removeURLFrom } from "../../redux/slice/generalSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";

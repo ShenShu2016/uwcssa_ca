@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import {
   getProfile,
   removeSelectedProfile,
-} from "../../redux/reducers/profileSlice";
+} from "../../redux/slice/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AboutMe from "../../components/Account/Profile/AboutMe";

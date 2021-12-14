@@ -19,20 +19,20 @@ import {
   postForumPost,
   removeSelectedForumSubTopic,
   selectedForumSubTopic,
-} from "../../redux/reducers/forumSlice";
+} from "../../redux/slice/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CustomAvatar from "../../components/CustomMUI/CustomAvatar";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
-import ForumRightSide from "../../components/Forum/ForumRightSide";
 import ForumPostImageSwipe from "../../components/Forum/ForumPost/ForumPostDetail/ForumPostImageSwipe";
+import ForumRightSide from "../../components/Forum/ForumRightSide";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import PublishIcon from "@mui/icons-material/Publish";
 import { Storage } from "@aws-amplify/storage";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { indigo } from "@mui/material/colors";
-import { postMultipleImages } from "../../redux/reducers/generalSlice";
+import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";

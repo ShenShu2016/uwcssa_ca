@@ -12,7 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
 
 import { Box } from "@mui/system";
-import { emailConfirm } from "../../redux/reducers/authSlice";
+import { emailConfirm } from "../../redux/slice/authSlice";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";

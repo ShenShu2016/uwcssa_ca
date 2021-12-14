@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
-import { fetchArticles } from "../../../redux/reducers/articleSlice";
+import { fetchArticles } from "../../../redux/slice/articleSlice";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({

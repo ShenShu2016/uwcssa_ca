@@ -14,8 +14,8 @@ import {
 import { Link, Redirect } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 // import Auth from "@aws-amplify/auth";
 import { CircularProgress } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
@@ -26,7 +26,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 // import googleLogo from "../../static/svg icons/google.svg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { signIn } from "../../redux/reducers/authSlice";
+import { signIn } from "../../redux/slice/authSlice";
 
 const useStyles = makeStyles((theme) => ({
   text: {

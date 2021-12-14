@@ -7,22 +7,22 @@ import {
   Switch,
 } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { fetchUserProfile, loadUser } from "./redux/reducers/authSlice";
+import { fetchUserProfile, loadUser } from "./redux/slice/authSlice";
 
-import Account from "./containers/account/Account";
+import Account from "./containers/account/AccountRouter";
 import Amplify from "aws-amplify";
-import Article from "./containers/article/Article";
-import AuthRouter from "./containers/authentication/AuthRouter";
+import ArticleRouter from "./containers/article/ArticleRouter";
+import AuthRouter from "./containers/authentication/AuthenticationRouter";
 import { Box } from "@mui/system";
-import Career from "./containers/Career";
+import Career from "./containers/CareerRouter";
 import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
-import EventRouter from "./containers/Event/EventRouter";
+import EventRouter from "./containers/event/EventRouter";
 import ForumRouter from "./containers/forum/ForumRouter";
 import FoundingTeam from "./containers/FoundingTeam";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Market from "./containers/market/Market";
+import Market from "./containers/market/MarketRouter";
 import NoPermission from "./containers/NoPermission";
 import PrivateRoute from "./components/PrivateRoute";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -99,7 +99,7 @@ export default function App() {
               path="/staff"
               component={StaffRouter}
             />
-            <Route path="/article" component={Article} />
+            <Route path="/article" component={ArticleRouter} />
             <Route path="/market" component={Market} /> 
             <Route path="/forum" component={ForumRouter} />
             <Route path="/foundingTeam" exact component={FoundingTeam} />

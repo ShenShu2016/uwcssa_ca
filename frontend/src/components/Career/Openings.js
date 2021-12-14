@@ -3,7 +3,7 @@ import { React, useEffect } from "react";
 import {
   fetchDepartments,
   fetchUwcssaJobs,
-} from "../../redux/reducers/careerSlice";
+} from "../../redux/slice/careerSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";

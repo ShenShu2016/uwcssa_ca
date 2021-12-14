@@ -32,7 +32,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ShopIcon from "@mui/icons-material/Shop";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
-import { signOut } from "../redux/reducers/authSlice";
+import { signOut } from "../redux/slice/authSlice";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
 const StyledAppBar = styled((props) => <AppBar {...props} />)(({ theme }) => ({

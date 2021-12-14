@@ -16,7 +16,7 @@ import SignInRequest from "../../SignInRequest";
 // import SignInRequest from "../SignInRequest";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postEventComment } from "../../../../redux/reducers/eventSlice";
+import { postEventComment } from "../../../../redux/slice/eventSlice";
 
 const useStyles = makeStyles({
   root: {},

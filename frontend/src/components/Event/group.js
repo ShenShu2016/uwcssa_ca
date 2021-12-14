@@ -13,7 +13,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import eventImg from "../../static/event.jpg";
 import { makeStyles } from "@mui/styles";
-import { postEventParticipant } from "../../redux/reducers/eventSlice";
+import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 

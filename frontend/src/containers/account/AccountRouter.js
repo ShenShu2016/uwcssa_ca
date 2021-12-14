@@ -7,7 +7,7 @@ import MyAccount from "./MyAccount";
 import Profile from "./Profile";
 import React from "react";
 
-export default function Account() {
+export default function AccountRouter() {
   return (
     <Box>
       <Switch>

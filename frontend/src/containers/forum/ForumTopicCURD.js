@@ -19,7 +19,7 @@ import {
 import {
   fetchForumSubTopics,
   fetchForumTopics,
-} from "../../redux/reducers/forumSlice";
+} from "../../redux/slice/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";

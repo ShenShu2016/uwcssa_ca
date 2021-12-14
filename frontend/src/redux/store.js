@@ -1,17 +1,15 @@
-import articleReducer from "./reducers/articleSlice";
-// import { authReducer } from "./reducers/authReducer";
-import authReducer from "./reducers/authSlice";
-import careerSlice from "./reducers/careerSlice";
+import articleReducer from "./slice/articleSlice";
+import authReducer from "./slice/authSlice";
+import careerSlice from "./slice/careerSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import eventReducer from "./reducers/eventSlice";
-import forumReducer from "./reducers/forumSlice";
-import generalReducer from "./reducers/generalSlice";
-import imageReducer from "./reducers/imageSlice";
-// import { generalReducer } from "./reducers/generalReducer";
-import marketReducer from "./reducers/marketSlice";
-import marketUserReducer from "./reducers/marketUserSlice";
-import profileReducer from "./reducers/profileSlice";
-import staffReducer from "./reducers/staffSlice";
+import eventReducer from "./slice/eventSlice";
+import forumReducer from "./slice/forumSlice";
+import generalReducer from "./slice/generalSlice";
+import imageReducer from "./slice/imageSlice";
+import marketReducer from "./slice/marketSlice";
+import marketUserReducer from "./slice/marketUserSlice";
+import profileReducer from "./slice/profileSlice";
+import staffReducer from "./slice/staffSlice";
 
 export default configureStore({
   reducer: {

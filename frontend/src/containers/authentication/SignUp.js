@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
-import { checkEmailExist, signUp } from "../../redux/reducers/authSlice";
+import { checkEmailExist, signUp } from "../../redux/slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";

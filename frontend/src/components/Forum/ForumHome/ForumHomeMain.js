@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   fetchForumPosts,
   fetchForumTopics,
-} from "../../../redux/reducers/forumSlice";
+} from "../../../redux/slice/forumSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -148,7 +148,7 @@ export default function ForumHomeMain() {
             )}
           </Box>
         )}
-        <ForumHomePostsLastReply forumPosts={forumPosts}/>
+        <ForumHomePostsLastReply forumPosts={forumPosts} />
         <ForumHomeTopic forumTopics={forumTopics} />
       </Box>
     </div>

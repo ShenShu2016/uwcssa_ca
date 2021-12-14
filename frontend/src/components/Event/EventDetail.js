@@ -7,7 +7,7 @@ import { Redirect, useParams } from "react-router-dom";
 import {
   removeSelectedEvent,
   selectedEvent,
-} from "../../redux/reducers/eventSlice";
+} from "../../redux/slice/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ArrowBack } from "./ArrowBack";

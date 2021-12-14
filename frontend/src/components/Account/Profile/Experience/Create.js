@@ -19,7 +19,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { makeStyles } from "@mui/styles";
-import { postUserExperience } from "../../../../redux/reducers/profileSlice";
+import { postUserExperience } from "../../../../redux/slice/profileSlice";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({

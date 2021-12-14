@@ -9,17 +9,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Controller, useForm } from "react-hook-form";
+
 import CustomAvatar from "../../../CustomMUI/CustomAvatar";
 import SignInRequest from "../SignInRequest";
 import { green } from "@mui/material/colors";
-import { postForumPostComment } from "../../../../redux/reducers/forumSlice";
+import { postForumPostComment } from "../../../../redux/slice/forumSlice";
 
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-export default function ForumPostCommentPost({ forumPost}) {
+export default function ForumPostCommentPost({ forumPost }) {
   const dispatch = useDispatch();
   const {
     handleSubmit,
@@ -47,7 +48,7 @@ export default function ForumPostCommentPost({ forumPost}) {
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
-        postForumPostComment( createForumPostCommentInput )
+        postForumPostComment(createForumPostCommentInput)
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
@@ -61,11 +62,9 @@ export default function ForumPostCommentPost({ forumPost}) {
   return (
     <div>
       {isAuthenticated ? "" : <SignInRequest />}
-      <Box sx={{width: { xs: 320, sm: 480, md: 880, lg: 1080 },}}>
+      <Box sx={{ width: { xs: 320, sm: 480, md: 880, lg: 1080 } }}>
         <Collapse in={true}>
-          <Typography sx={{ paddingBlock: " 1rem" }}>
-            发布新评论：
-          </Typography>
+          <Typography sx={{ paddingBlock: " 1rem" }}>发布新评论：</Typography>
           <Box component={"form"} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={0}>
               <Grid item xs={"auto"}>
@@ -77,7 +76,7 @@ export default function ForumPostCommentPost({ forumPost}) {
                 />
               </Grid>
               <Grid item xs>
-                <Box sx={{ my: 1 }} >
+                <Box sx={{ my: 1 }}>
                   <Controller
                     name="comment"
                     control={control}

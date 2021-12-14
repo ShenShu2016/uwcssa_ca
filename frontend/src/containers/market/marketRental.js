@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   fetchMarketItems,
   selectAllMarketItems,
-} from "../../redux/reducers/marketSlice";
+} from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
@@ -119,8 +119,7 @@ export default function MarketRental() {
   // console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
-      {starter === false ? // <Loading status={status} />
-      null : (
+      {starter === false ? null : ( // <Loading status={status} />
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}

@@ -6,7 +6,7 @@ import UWinBadge from "./uwinBadge";
 // import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-// import { getImage, selectImageById } from "../../redux/reducers/imageSlice";
+// import { getImage, selectImageById } from "../../redux/slice/imageSlice";
 // import { useDispatch } from "react-redux";
 import useHover from "../../Hooks/useHover";
 
