@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
   postMarketUserInfo,
@@ -43,6 +43,7 @@ import { useParams } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function EditMarketRentalDetail() {
+  const imgRef = useRef(null);
   const classes = postStyle();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -133,6 +134,12 @@ export default function EditMarketRentalDetail() {
   };
 
   useEffect(() => {
+    if (errors) {
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
+
+  useEffect(() => {
     dispatch(fetchMarketUserInfo(marketItem.userID));
   }, [marketItem.userID, dispatch]);
 
@@ -206,7 +213,7 @@ export default function EditMarketRentalDetail() {
               transition: "color 0.3s",
             }}
           >
-            <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" justifyContent="space-between" ref={imgRef}>
               <Typography
                 variant="h5"
                 gutterBottom

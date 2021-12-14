@@ -2,6 +2,7 @@ import { Box, CardActionArea, Paper, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import React from "react";
+import UWinBadge from "./uwinBadge";
 // import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
@@ -51,29 +52,13 @@ export default function MarketComponent({ item, type }) {
     // marketItemCondition,
     location,
     createdAt,
+    user,
     // tags,
     // active,
     // ByCreatedAt,
   } = item;
-  // const imgKeys = useSelector((state) => selectImageById(state, id));
-
-  // useEffect(() => {
-  //   const getImages = async () => {
-  //     try {
-  //       const firstImage = imgS3Keys[0];
-  //       const response = await dispatch(getImage({ url: [firstImage], id }));
-  //       setImageURL(response.payload.imgUrl);
-  //     } catch (error) {
-  //       console.error("error accessing the Image from s3", error);
-  //       setImageURL(null);
-  //     }
-  //   };
-  //   if (imgS3Keys && imgKeys === undefined) {
-  //     getImages();
-  //   } else if (imgS3Keys && imgKeys !== undefined) {
-  //     setImageURL(Object.values(imgKeys.images)[0]);
-  //   }
-  // }, [imgS3Keys, imgKeys, dispatch, id]);
+  const isUWin =
+    user.email.includes("uwindsor") || user.badges.includes("uwindsor");
 
   const displayInfo = () => {
     return (
@@ -125,6 +110,7 @@ export default function MarketComponent({ item, type }) {
               {moment(createdAt).fromNow()}
             </Typography>
           </Box>
+          <UWinBadge onHover={isHover} isUWin={isUWin} />
         </Box>
       </React.Fragment>
     );

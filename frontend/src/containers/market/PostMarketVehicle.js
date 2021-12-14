@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
   postMarketUserInfo,
@@ -36,6 +36,7 @@ import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function PostMarketVehicle() {
+  const imgRef = useRef(null);
   const classes = postStyle();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -96,6 +97,12 @@ export default function PostMarketVehicle() {
       contactPhone: "",
     },
   });
+
+  useEffect(() => {
+    if (errors) {
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
 
   const onSubmit = async (data) => {
     const createMarketItemInput = {
@@ -184,6 +191,7 @@ export default function PostMarketVehicle() {
             <Stack
               direction="row"
               justifyContent="space-between"
+              ref={imgRef}
               sx={{ color: "rgb(0,0,0)" }}
             >
               <Typography

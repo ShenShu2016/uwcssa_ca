@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
   postMarketUserInfo,
@@ -39,6 +39,7 @@ import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function PostMarketRental() {
+  const imgRef = useRef(null);
   const classes = postStyle();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -152,6 +153,12 @@ export default function PostMarketRental() {
   };
 
   useEffect(() => {
+    if (errors) {
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [errors]);
+
+  useEffect(() => {
     dispatch(fetchMarketUserInfo(username));
   }, [username, dispatch]);
 
@@ -199,6 +206,7 @@ export default function PostMarketRental() {
             <Stack
               direction="row"
               justifyContent="space-between"
+              ref={imgRef}
               sx={{ color: "rgb(0,0,0)" }}
             >
               <Typography
