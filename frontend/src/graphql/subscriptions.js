@@ -2115,7 +2115,7 @@ export const onCreateUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -2171,7 +2171,7 @@ export const onCreateUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         phone
@@ -2576,7 +2576,7 @@ export const onCreateUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -3093,7 +3093,7 @@ export const onUpdateUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -3149,7 +3149,7 @@ export const onUpdateUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         phone
@@ -3554,7 +3554,7 @@ export const onUpdateUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -4071,7 +4071,7 @@ export const onDeleteUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -4127,7 +4127,7 @@ export const onDeleteUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         phone
@@ -4532,7 +4532,7 @@ export const onDeleteUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -10371,7 +10371,7 @@ export const onCreateEvent = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       sponsor
@@ -10739,7 +10739,7 @@ export const onUpdateEvent = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       sponsor
@@ -11107,7 +11107,7 @@ export const onDeleteEvent = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       sponsor
@@ -11741,7 +11741,7 @@ export const onCreateEventComment = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -12103,7 +12103,7 @@ export const onUpdateEventComment = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -12465,7 +12465,7 @@ export const onDeleteEventComment = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -13575,7 +13575,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       phone
@@ -13864,7 +13864,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -13926,7 +13926,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       phone
@@ -14215,7 +14215,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -14277,7 +14277,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       phone
@@ -14566,7 +14566,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -23167,7 +23167,7 @@ export const onCreateMarketItem = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       propertySize
@@ -23477,7 +23477,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       propertySize
@@ -23787,7 +23787,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       propertySize
@@ -25568,7 +25568,7 @@ export const onCreateLike = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -26576,7 +26576,7 @@ export const onUpdateLike = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -27584,7 +27584,7 @@ export const onDeleteLike = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor

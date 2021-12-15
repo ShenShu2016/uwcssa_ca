@@ -30,7 +30,11 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         propertyType
         bedroomCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         contactPhone
@@ -97,7 +101,11 @@ export const marketItemSortBySortKeyPosts = /* GraphQL */ `
         propertyType
         bedroomCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         contactPhone
@@ -279,7 +287,11 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize

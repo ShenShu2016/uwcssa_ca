@@ -38,15 +38,19 @@ export default function GoogleMaps() {
 
   useEffect(() => {
     address = {
-      googleMapPlace: value,
+      description: value && value.description,
+      place_id: value && value.place_id,
+      reference: value && value.reference,
+      terms: value && value.terms,
+      types: value && value.types,
       apartmentNumbers: apartmentNumbers,
     };
-    console.log(value.description);
-    console.log(value.place_id);
-    console.log(value.reference);
-    console.log(value.structured_formatting);
-    console.log(value.terms);
-    console.log(value.types);
+    // console.log(value.description);
+    // console.log(value.place_id);
+    // console.log(value.reference);
+    // console.log(value.structured_formatting);
+    // console.log(value.terms);
+    // console.log(value.types);
   });
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {

@@ -13,7 +13,11 @@ export const getEvent = /* GraphQL */ `
       backGroundImgURL
       content
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       sponsor
@@ -125,7 +129,11 @@ export const getEvent = /* GraphQL */ `
           name
           email
           address {
-            googleMapPlace
+            description
+            place_id
+            reference
+            terms
+            types
             apartmentNumbers
           }
           phone

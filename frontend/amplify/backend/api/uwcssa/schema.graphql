@@ -7,7 +7,7 @@ type Address {
   place_id: String
   reference: String
   terms: [String]
-  type: [String]
+  types: [String]
   apartmentNumbers: String
 }
 

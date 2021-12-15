@@ -1528,7 +1528,7 @@ export const getUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -1584,7 +1584,7 @@ export const getUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         phone
@@ -1989,7 +1989,7 @@ export const getUser = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -4848,7 +4848,7 @@ export const getEvent = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       sponsor
@@ -5221,7 +5221,7 @@ export const listEvents = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -5307,7 +5307,7 @@ export const eventSortBySortKey = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -5644,7 +5644,7 @@ export const getEventComment = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -6336,7 +6336,7 @@ export const getEventParticipant = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       phone
@@ -6625,7 +6625,7 @@ export const getEventParticipant = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor
@@ -6696,7 +6696,7 @@ export const listEventParticipants = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         phone
@@ -6782,7 +6782,7 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         phone
@@ -10615,7 +10615,7 @@ export const getMarketItem = /* GraphQL */ `
         place_id
         reference
         terms
-        type
+        types
         apartmentNumbers
       }
       propertySize
@@ -10930,7 +10930,7 @@ export const listMarketItems = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -11017,7 +11017,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -11104,7 +11104,7 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -11191,7 +11191,7 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -11278,7 +11278,7 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         propertySize
@@ -12314,7 +12314,7 @@ export const getLike = /* GraphQL */ `
           place_id
           reference
           terms
-          type
+          types
           apartmentNumbers
         }
         sponsor

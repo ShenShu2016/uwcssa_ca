@@ -110,8 +110,8 @@ export default function EventBody({ event }) {
     sponsor,
     eventParticipants,
   } = event;
-  //console.log(address && address.googleMapPlace.reference);
-  console.log(address && JSON.parse(address.googleMapPlace).reference);
+  //console.log(address && address.googleMapPlace);
+
   return (
     <Box>
       {event.startDate ? (
@@ -199,7 +199,7 @@ export default function EventBody({ event }) {
                   component="div"
                   gutterBottom
                 >
-                  {address.googleMapPlace}
+                  {address}
                 </Typography>
               </Box>
             </Box>
@@ -318,13 +318,13 @@ export default function EventBody({ event }) {
                                 主办方/赞助方： {sponsor}
                               </Typography>
                             ) : null}
-                            {address.googleMapPlace ? (
+                            {address ? (
                               <Typography variant="body2" gutterBottom>
                                 <LocationOnIcon
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                {address.googleMapPlace}
+                                {address}
                               </Typography>
                             ) : null}
                             {topic.name ? (
