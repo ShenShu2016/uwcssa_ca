@@ -146,6 +146,7 @@ export default function PostEvent() {
       active: true,
       sortKey: "SortKey",
       userID: username,
+
       tags: GetTags(),
     };
     console.log(createEventInput);
@@ -416,6 +417,9 @@ export default function PostEvent() {
               )}
             />
             <GoogleMapsPlace />
+            {/* <Typography variant="h3">
+              {GetAddress().googleMapPlace}45646
+            </Typography> */}
             <Box className={classes.type}>
               <div className="newType">
                 <Controller

@@ -35,10 +35,10 @@ export default function GoogleMaps() {
   const [apartmentNumbers, setApartmentNumbers] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
-  console.log(address);
+
   useEffect(() => {
     address = {
-      googleMapPlace: value,
+      googleMapPlace: JSON.stringify(value),
       apartmentNumbers: apartmentNumbers,
     };
   });

@@ -847,7 +847,6 @@ export const createUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -1817,7 +1816,6 @@ export const updateUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -2787,7 +2785,6 @@ export const deleteUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -3157,7 +3154,6 @@ export const createUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -3437,7 +3433,6 @@ export const updateUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -3717,7 +3712,6 @@ export const deleteUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -3998,7 +3992,6 @@ export const createUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -4279,7 +4272,6 @@ export const updateUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -4560,7 +4552,6 @@ export const deleteUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -4834,7 +4825,6 @@ export const createTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5151,7 +5141,6 @@ export const updateTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5468,7 +5457,6 @@ export const deleteTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5793,7 +5781,6 @@ export const createArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6130,7 +6117,6 @@ export const updateArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6467,7 +6453,6 @@ export const deleteArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6798,7 +6783,6 @@ export const createArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7145,7 +7129,6 @@ export const updateArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7492,7 +7475,6 @@ export const deleteArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7839,7 +7821,6 @@ export const createArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8176,7 +8157,6 @@ export const updateArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8513,7 +8493,6 @@ export const deleteArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8868,7 +8847,6 @@ export const createEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9236,7 +9214,6 @@ export const updateEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9604,7 +9581,6 @@ export const deleteEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9954,7 +9930,6 @@ export const createEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10316,7 +10291,6 @@ export const updateEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10678,7 +10652,6 @@ export const deleteEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11040,7 +11013,6 @@ export const createEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11385,7 +11357,6 @@ export const updateEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11730,7 +11701,6 @@ export const deleteEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12085,7 +12055,6 @@ export const createEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12432,7 +12401,6 @@ export const updateEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12779,7 +12747,6 @@ export const deleteEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13117,7 +13084,6 @@ export const createDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13413,7 +13379,6 @@ export const updateDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13709,7 +13674,6 @@ export const deleteDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -14029,7 +13993,6 @@ export const createUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -14360,7 +14323,6 @@ export const updateUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -14691,7 +14653,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15001,7 +14962,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15329,7 +15289,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15657,7 +15616,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15979,7 +15937,6 @@ export const createForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16263,7 +16220,6 @@ export const updateForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16547,7 +16503,6 @@ export const deleteForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16832,7 +16787,6 @@ export const createForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -17153,7 +17107,6 @@ export const updateForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -17474,7 +17427,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -17801,7 +17753,6 @@ export const createForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -18160,7 +18111,6 @@ export const updateForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -18519,7 +18469,6 @@ export const deleteForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -18874,7 +18823,6 @@ export const createForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -19229,7 +19177,6 @@ export const updateForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -19584,7 +19531,6 @@ export const deleteForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -19940,7 +19886,6 @@ export const createForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -20199,7 +20144,6 @@ export const createForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -20591,7 +20535,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -20850,7 +20793,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -21242,7 +21184,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -21501,7 +21442,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -21891,7 +21831,6 @@ export const createMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -22167,7 +22106,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -22443,7 +22381,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -22753,7 +22690,6 @@ export const createMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23063,7 +22999,6 @@ export const updateMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23373,7 +23308,6 @@ export const deleteMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23652,7 +23586,6 @@ export const createFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23930,7 +23863,6 @@ export const updateFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -24208,7 +24140,6 @@ export const deleteFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -24482,7 +24413,6 @@ export const createLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -24741,7 +24671,6 @@ export const createLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -25491,7 +25420,6 @@ export const updateLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -25750,7 +25678,6 @@ export const updateLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -26500,7 +26427,6 @@ export const deleteLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -26759,7 +26685,6 @@ export const deleteLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -27510,7 +27435,6 @@ export const createWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -27786,7 +27710,6 @@ export const updateWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -28062,7 +27985,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -28104,7 +28026,6 @@ export const createUserMutationLog = /* GraphQL */ `
     createUserMutationLog(input: $input, condition: $condition) {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -28341,7 +28262,6 @@ export const createUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -28382,7 +28302,6 @@ export const updateUserMutationLog = /* GraphQL */ `
     updateUserMutationLog(input: $input, condition: $condition) {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -28619,7 +28538,6 @@ export const updateUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -28660,7 +28578,6 @@ export const deleteUserMutationLog = /* GraphQL */ `
     deleteUserMutationLog(input: $input, condition: $condition) {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -28897,7 +28814,6 @@ export const deleteUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
