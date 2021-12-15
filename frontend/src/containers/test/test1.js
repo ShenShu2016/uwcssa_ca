@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 
 import API from "@aws-amplify/api";
+import { Link } from "react-router-dom";
 import React from "react";
 import { getArticle } from "../../graphql/queries";
 
@@ -26,6 +27,9 @@ export default function test1() {
       <Typography variant="h4">Test 1</Typography>
       <Button variant="contained" onClick={(e) => GetArticle("xczfsdfdsf")}>
         click me
+      </Button>
+      <Button component={Link} to="/test/googleMapsPlace">
+        googleMapsPlace
       </Button>
     </div>
   );

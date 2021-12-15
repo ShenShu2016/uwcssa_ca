@@ -24,9 +24,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -53,9 +51,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -83,15 +79,11 @@ export const getUwcssaJobResume = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -106,7 +98,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -135,7 +126,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -202,7 +192,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -223,7 +212,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -292,7 +280,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         title
         requirements
         bonus
-        imgS3Key
         imgURLs
         benefits
         schedule
@@ -315,9 +302,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -373,9 +358,7 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -390,7 +373,6 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -430,9 +412,7 @@ export const getUserMutationLog = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -459,9 +439,7 @@ export const getUserMutationLog = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -489,15 +467,11 @@ export const getUserMutationLog = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -512,7 +486,6 @@ export const getUserMutationLog = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -541,7 +514,6 @@ export const getUserMutationLog = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -608,7 +580,6 @@ export const getUserMutationLog = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -629,7 +600,6 @@ export const getUserMutationLog = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -726,9 +696,7 @@ export const listUserMutationLogs = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -780,9 +748,7 @@ export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -797,7 +763,6 @@ export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -852,9 +817,7 @@ export const userMutationLogSortByUserID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -905,9 +868,7 @@ export const userMutationLogSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -958,9 +919,7 @@ export const userMutationLogSortBy__typename = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1000,9 +959,7 @@ export const userSortBySortKey = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -1029,9 +986,7 @@ export const userSortBySortKey = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -1059,15 +1014,11 @@ export const userSortBySortKey = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -1082,7 +1033,6 @@ export const userSortBySortKey = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -1111,7 +1061,6 @@ export const userSortBySortKey = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -1178,7 +1127,6 @@ export const userSortBySortKey = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -1199,7 +1147,6 @@ export const userSortBySortKey = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -1277,9 +1224,7 @@ export const getUser = /* GraphQL */ `
       lastName
       intro
       major
-      avatarImgS3Key
       avatarImgURL
-      backGroundImgS3Key
       backGroundImgURL
       linkedIn
       github
@@ -1301,9 +1246,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1321,9 +1264,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1337,9 +1278,7 @@ export const getUser = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -1377,15 +1316,11 @@ export const getUser = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -1420,7 +1355,6 @@ export const getUser = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -1473,9 +1407,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1496,9 +1428,7 @@ export const getUser = /* GraphQL */ `
         title
         summary
         content
-        imgS3Keys
         imgURLs
-        qrCodeImgS3Key
         qrCodeImgURL
         tags
         sortKey
@@ -1516,9 +1446,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1558,9 +1486,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1574,9 +1500,7 @@ export const getUser = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -1602,15 +1526,15 @@ export const getUser = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
         backGroundImgURL
-        qrCodeImgS3Key
         qrCodeImgURL
-        posterImgS3Key
         posterImgURL
         imgURLs
         content
-        location
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         sponsor
         tags
         eventStatus
@@ -1629,9 +1553,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1661,7 +1583,10 @@ export const getUser = /* GraphQL */ `
         id
         name
         email
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         phone
         weChat
         message
@@ -1681,9 +1606,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1700,15 +1623,11 @@ export const getUser = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -1739,9 +1658,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1760,7 +1677,6 @@ export const getUser = /* GraphQL */ `
         title
         requirements
         bonus
-        imgS3Key
         imgURLs
         benefits
         schedule
@@ -1783,9 +1699,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1826,9 +1740,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1843,7 +1755,6 @@ export const getUser = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -1872,9 +1783,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1903,9 +1812,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1943,9 +1850,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -1958,7 +1863,6 @@ export const getUser = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -1998,9 +1902,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -2018,9 +1920,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -2033,7 +1933,6 @@ export const getUser = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -2065,7 +1964,6 @@ export const getUser = /* GraphQL */ `
       marketItems {
         id
         name
-        imgS3Keys
         imgURLs
         title
         price
@@ -2086,7 +1984,10 @@ export const getUser = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -2111,9 +2012,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -2144,9 +2043,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -2176,9 +2073,7 @@ export const getUser = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -2230,7 +2125,6 @@ export const getUser = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -2302,9 +2196,7 @@ export const listUsers = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -2331,9 +2223,7 @@ export const listUsers = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -2361,15 +2251,11 @@ export const listUsers = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -2384,7 +2270,6 @@ export const listUsers = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -2413,7 +2298,6 @@ export const listUsers = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -2480,7 +2364,6 @@ export const listUsers = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -2501,7 +2384,6 @@ export const listUsers = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -2591,9 +2473,7 @@ export const getUserEducation = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -2620,9 +2500,7 @@ export const getUserEducation = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -2650,15 +2528,11 @@ export const getUserEducation = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -2673,7 +2547,6 @@ export const getUserEducation = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -2702,7 +2575,6 @@ export const getUserEducation = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -2769,7 +2641,6 @@ export const getUserEducation = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -2790,7 +2661,6 @@ export const getUserEducation = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -2885,9 +2755,7 @@ export const listUserEducations = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -2926,9 +2794,7 @@ export const getUserExperience = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -2955,9 +2821,7 @@ export const getUserExperience = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -2985,15 +2849,11 @@ export const getUserExperience = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -3008,7 +2868,6 @@ export const getUserExperience = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -3037,7 +2896,6 @@ export const getUserExperience = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -3104,7 +2962,6 @@ export const getUserExperience = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -3125,7 +2982,6 @@ export const getUserExperience = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -3221,9 +3077,7 @@ export const listUserExperiences = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -3255,9 +3109,7 @@ export const getTopic = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -3284,9 +3136,7 @@ export const getTopic = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -3314,15 +3164,11 @@ export const getTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -3337,7 +3183,6 @@ export const getTopic = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -3366,7 +3211,6 @@ export const getTopic = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -3433,7 +3277,6 @@ export const getTopic = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -3454,7 +3297,6 @@ export const getTopic = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -3523,9 +3365,7 @@ export const getTopic = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -3546,15 +3386,11 @@ export const getTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -3592,9 +3428,7 @@ export const listTopics = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -3621,9 +3455,7 @@ export const getArticle = /* GraphQL */ `
       title
       summary
       content
-      imgS3Keys
       imgURLs
-      qrCodeImgS3Key
       qrCodeImgURL
       tags
       sortKey
@@ -3641,9 +3473,7 @@ export const getArticle = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -3670,9 +3500,7 @@ export const getArticle = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -3700,15 +3528,11 @@ export const getArticle = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -3723,7 +3547,6 @@ export const getArticle = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -3752,7 +3575,6 @@ export const getArticle = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -3819,7 +3641,6 @@ export const getArticle = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -3840,7 +3661,6 @@ export const getArticle = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -3918,9 +3738,7 @@ export const getArticle = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -3976,9 +3794,7 @@ export const listArticles = /* GraphQL */ `
         title
         summary
         content
-        imgS3Keys
         imgURLs
-        qrCodeImgS3Key
         qrCodeImgURL
         tags
         sortKey
@@ -3996,9 +3812,7 @@ export const listArticles = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -4047,9 +3861,7 @@ export const articleSortBySortKey = /* GraphQL */ `
         title
         summary
         content
-        imgS3Keys
         imgURLs
-        qrCodeImgS3Key
         qrCodeImgURL
         tags
         sortKey
@@ -4067,9 +3879,7 @@ export const articleSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -4115,9 +3925,7 @@ export const getArticleComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -4144,9 +3952,7 @@ export const getArticleComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -4174,15 +3980,11 @@ export const getArticleComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -4197,7 +3999,6 @@ export const getArticleComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -4226,7 +4027,6 @@ export const getArticleComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -4293,7 +4093,6 @@ export const getArticleComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -4314,7 +4113,6 @@ export const getArticleComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -4382,9 +4180,7 @@ export const getArticleComment = /* GraphQL */ `
         title
         summary
         content
-        imgS3Keys
         imgURLs
-        qrCodeImgS3Key
         qrCodeImgURL
         tags
         sortKey
@@ -4402,9 +4198,7 @@ export const getArticleComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -4480,9 +4274,7 @@ export const listArticleComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -4496,9 +4288,7 @@ export const listArticleComments = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -4554,9 +4344,7 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -4570,9 +4358,7 @@ export const articleCommentSortByArticleID = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -4613,9 +4399,7 @@ export const getArticleSubComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -4642,9 +4426,7 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -4672,15 +4454,11 @@ export const getArticleSubComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -4695,7 +4473,6 @@ export const getArticleSubComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -4724,7 +4501,6 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -4791,7 +4567,6 @@ export const getArticleSubComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -4812,7 +4587,6 @@ export const getArticleSubComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -4892,9 +4666,7 @@ export const getArticleSubComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -4908,9 +4680,7 @@ export const getArticleSubComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -4972,9 +4742,7 @@ export const listArticleSubComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -5036,9 +4804,7 @@ export const articleSubCommentSortByArticleCommentID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -5076,15 +4842,15 @@ export const getEvent = /* GraphQL */ `
       endDate
       online
       group
-      backGroundImgS3Key
       backGroundImgURL
-      qrCodeImgS3Key
       qrCodeImgURL
-      posterImgS3Key
       posterImgURL
       imgURLs
       content
-      location
+      address {
+        googleMapPlace
+        apartmentNumbers
+      }
       sponsor
       tags
       eventStatus
@@ -5103,9 +4869,7 @@ export const getEvent = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -5132,9 +4896,7 @@ export const getEvent = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -5162,15 +4924,11 @@ export const getEvent = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -5185,7 +4943,6 @@ export const getEvent = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -5214,7 +4971,6 @@ export const getEvent = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -5281,7 +5037,6 @@ export const getEvent = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -5302,7 +5057,6 @@ export const getEvent = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -5380,9 +5134,7 @@ export const getEvent = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -5416,7 +5168,6 @@ export const getEvent = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -5461,15 +5212,15 @@ export const listEvents = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
         backGroundImgURL
-        qrCodeImgS3Key
         qrCodeImgURL
-        posterImgS3Key
         posterImgURL
         imgURLs
         content
-        location
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         sponsor
         tags
         eventStatus
@@ -5488,9 +5239,7 @@ export const listEvents = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -5545,15 +5294,15 @@ export const eventSortBySortKey = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
         backGroundImgURL
-        qrCodeImgS3Key
         qrCodeImgURL
-        posterImgS3Key
         posterImgURL
         imgURLs
         content
-        location
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         sponsor
         tags
         eventStatus
@@ -5572,9 +5321,7 @@ export const eventSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -5623,9 +5370,7 @@ export const getEventComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -5652,9 +5397,7 @@ export const getEventComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -5682,15 +5425,11 @@ export const getEventComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -5705,7 +5444,6 @@ export const getEventComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -5734,7 +5472,6 @@ export const getEventComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -5801,7 +5538,6 @@ export const getEventComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -5822,7 +5558,6 @@ export const getEventComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -5893,15 +5628,15 @@ export const getEventComment = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
         backGroundImgURL
-        qrCodeImgS3Key
         qrCodeImgURL
-        posterImgS3Key
         posterImgURL
         imgURLs
         content
-        location
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         sponsor
         tags
         eventStatus
@@ -5920,9 +5655,7 @@ export const getEventComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6001,9 +5734,7 @@ export const listEventComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6020,15 +5751,11 @@ export const listEventComments = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -6085,9 +5812,7 @@ export const eventCommentSortByEventID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6104,15 +5829,11 @@ export const eventCommentSortByEventID = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -6154,9 +5875,7 @@ export const getEventSubComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -6183,9 +5902,7 @@ export const getEventSubComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -6213,15 +5930,11 @@ export const getEventSubComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -6236,7 +5949,6 @@ export const getEventSubComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -6265,7 +5977,6 @@ export const getEventSubComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -6332,7 +6043,6 @@ export const getEventSubComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -6353,7 +6063,6 @@ export const getEventSubComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -6433,9 +6142,7 @@ export const getEventSubComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6452,15 +6159,11 @@ export const getEventSubComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -6523,9 +6226,7 @@ export const listEventSubComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6587,9 +6288,7 @@ export const eventSubCommentSortByEventCommentID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6623,7 +6322,10 @@ export const getEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address
+      address {
+        googleMapPlace
+        apartmentNumbers
+      }
       phone
       weChat
       message
@@ -6643,9 +6345,7 @@ export const getEventParticipant = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -6672,9 +6372,7 @@ export const getEventParticipant = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -6702,15 +6400,11 @@ export const getEventParticipant = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -6725,7 +6419,6 @@ export const getEventParticipant = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -6754,7 +6447,6 @@ export const getEventParticipant = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -6821,7 +6513,6 @@ export const getEventParticipant = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -6842,7 +6533,6 @@ export const getEventParticipant = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -6913,15 +6603,15 @@ export const getEventParticipant = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
         backGroundImgURL
-        qrCodeImgS3Key
         qrCodeImgURL
-        posterImgS3Key
         posterImgURL
         imgURLs
         content
-        location
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         sponsor
         tags
         eventStatus
@@ -6940,9 +6630,7 @@ export const getEventParticipant = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -6987,7 +6675,10 @@ export const listEventParticipants = /* GraphQL */ `
         id
         name
         email
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         phone
         weChat
         message
@@ -7007,9 +6698,7 @@ export const listEventParticipants = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -7026,15 +6715,11 @@ export const listEventParticipants = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -7072,7 +6757,10 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
         id
         name
         email
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         phone
         weChat
         message
@@ -7092,9 +6780,7 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -7111,15 +6797,11 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -7156,9 +6838,7 @@ export const getDepartment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -7185,9 +6865,7 @@ export const getDepartment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -7215,15 +6893,11 @@ export const getDepartment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -7238,7 +6912,6 @@ export const getDepartment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -7267,7 +6940,6 @@ export const getDepartment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -7334,7 +7006,6 @@ export const getDepartment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -7355,7 +7026,6 @@ export const getDepartment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -7425,7 +7095,6 @@ export const getDepartment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -7467,9 +7136,7 @@ export const listDepartments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -7494,7 +7161,6 @@ export const getUwcssaJob = /* GraphQL */ `
       title
       requirements
       bonus
-      imgS3Key
       imgURLs
       benefits
       schedule
@@ -7531,9 +7197,7 @@ export const getUwcssaJob = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -7560,9 +7224,7 @@ export const getUwcssaJob = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -7590,15 +7252,11 @@ export const getUwcssaJob = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -7613,7 +7271,6 @@ export const getUwcssaJob = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -7642,7 +7299,6 @@ export const getUwcssaJob = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -7709,7 +7365,6 @@ export const getUwcssaJob = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -7730,7 +7385,6 @@ export const getUwcssaJob = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -7811,9 +7465,7 @@ export const getUwcssaJob = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -7842,7 +7494,6 @@ export const listUwcssaJobs = /* GraphQL */ `
         title
         requirements
         bonus
-        imgS3Key
         imgURLs
         benefits
         schedule
@@ -7865,9 +7516,7 @@ export const listUwcssaJobs = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -7914,7 +7563,6 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
         title
         requirements
         bonus
-        imgS3Key
         imgURLs
         benefits
         schedule
@@ -7937,9 +7585,7 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -7980,9 +7626,7 @@ export const getForumTopic = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -8009,9 +7653,7 @@ export const getForumTopic = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -8039,15 +7681,11 @@ export const getForumTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -8062,7 +7700,6 @@ export const getForumTopic = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -8091,7 +7728,6 @@ export const getForumTopic = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -8158,7 +7794,6 @@ export const getForumTopic = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -8179,7 +7814,6 @@ export const getForumTopic = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -8278,9 +7912,7 @@ export const listForumTopics = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -8315,9 +7947,7 @@ export const getForumSubTopic = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -8344,9 +7974,7 @@ export const getForumSubTopic = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -8374,15 +8002,11 @@ export const getForumSubTopic = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -8397,7 +8021,6 @@ export const getForumSubTopic = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -8426,7 +8049,6 @@ export const getForumSubTopic = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -8493,7 +8115,6 @@ export const getForumSubTopic = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -8514,7 +8135,6 @@ export const getForumSubTopic = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -8592,9 +8212,7 @@ export const getForumSubTopic = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -8612,7 +8230,6 @@ export const getForumSubTopic = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -8653,9 +8270,7 @@ export const listForumSubTopics = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -8700,7 +8315,6 @@ export const forumPostSortBySortKey = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -8719,9 +8333,7 @@ export const forumPostSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -8775,7 +8387,6 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -8794,9 +8405,7 @@ export const forumPostSortByForumSubTopicID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -8850,7 +8459,6 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -8869,9 +8477,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -8910,7 +8516,6 @@ export const getForumPost = /* GraphQL */ `
       id
       title
       content
-      imgS3Keys
       imgURLs
       tags
       sortKey
@@ -8929,9 +8534,7 @@ export const getForumPost = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -8958,9 +8561,7 @@ export const getForumPost = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -8988,15 +8589,11 @@ export const getForumPost = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -9011,7 +8608,6 @@ export const getForumPost = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -9040,7 +8636,6 @@ export const getForumPost = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -9107,7 +8702,6 @@ export const getForumPost = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -9128,7 +8722,6 @@ export const getForumPost = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -9207,9 +8800,7 @@ export const getForumPost = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -9286,7 +8877,6 @@ export const listForumPosts = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -9305,9 +8895,7 @@ export const listForumPosts = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -9360,9 +8948,7 @@ export const getForumPostComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -9389,9 +8975,7 @@ export const getForumPostComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -9419,15 +9003,11 @@ export const getForumPostComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -9442,7 +9022,6 @@ export const getForumPostComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -9471,7 +9050,6 @@ export const getForumPostComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -9538,7 +9116,6 @@ export const getForumPostComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -9559,7 +9136,6 @@ export const getForumPostComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -9626,7 +9202,6 @@ export const getForumPostComment = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -9645,9 +9220,7 @@ export const getForumPostComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -9736,9 +9309,7 @@ export const listForumPostComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -9751,7 +9322,6 @@ export const listForumPostComments = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -9811,9 +9381,7 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -9826,7 +9394,6 @@ export const forumPostCommentSortByForumPostID = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -9872,9 +9439,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -9901,9 +9466,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -9931,15 +9494,11 @@ export const getForumPostSubComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -9954,7 +9513,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -9983,7 +9541,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -10050,7 +9607,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -10071,7 +9627,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -10143,9 +9698,7 @@ export const getForumPostSubComment = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -10172,9 +9725,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -10202,15 +9753,11 @@ export const getForumPostSubComment = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -10225,7 +9772,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -10254,7 +9800,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -10321,7 +9866,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -10342,7 +9886,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -10409,7 +9952,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -10428,9 +9970,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -10477,9 +10017,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -10492,7 +10030,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -10559,9 +10096,7 @@ export const listForumPostSubComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -10579,9 +10114,7 @@ export const listForumPostSubComments = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -10594,7 +10127,6 @@ export const listForumPostSubComments = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -10663,9 +10195,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -10683,9 +10213,7 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -10698,7 +10226,6 @@ export const forumPostSubCommentSortByForumPostCommentID = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -10750,9 +10277,7 @@ export const getMarketUserInfo = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -10779,9 +10304,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -10809,15 +10332,11 @@ export const getMarketUserInfo = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -10832,7 +10351,6 @@ export const getMarketUserInfo = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -10861,7 +10379,6 @@ export const getMarketUserInfo = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -10928,7 +10445,6 @@ export const getMarketUserInfo = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -10949,7 +10465,6 @@ export const getMarketUserInfo = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -11040,9 +10555,7 @@ export const listMarketUserInfos = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -11062,7 +10575,6 @@ export const getMarketItem = /* GraphQL */ `
     getMarketItem(id: $id) {
       id
       name
-      imgS3Keys
       imgURLs
       title
       price
@@ -11083,7 +10595,10 @@ export const getMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address
+      address {
+        googleMapPlace
+        apartmentNumbers
+      }
       propertySize
       dateAvailable
       laundryType
@@ -11108,9 +10623,7 @@ export const getMarketItem = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -11137,9 +10650,7 @@ export const getMarketItem = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -11167,15 +10678,11 @@ export const getMarketItem = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -11190,7 +10697,6 @@ export const getMarketItem = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -11219,7 +10725,6 @@ export const getMarketItem = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -11286,7 +10791,6 @@ export const getMarketItem = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -11307,7 +10811,6 @@ export const getMarketItem = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -11384,7 +10887,6 @@ export const listMarketItems = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
         imgURLs
         title
         price
@@ -11405,7 +10907,10 @@ export const listMarketItems = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -11430,9 +10935,7 @@ export const listMarketItems = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -11467,7 +10970,6 @@ export const marketItemSortBySortKey = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
         imgURLs
         title
         price
@@ -11488,7 +10990,10 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -11513,9 +11018,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -11550,7 +11053,6 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
         imgURLs
         title
         price
@@ -11571,7 +11073,10 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -11596,9 +11101,7 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -11633,7 +11136,6 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
         imgURLs
         title
         price
@@ -11654,7 +11156,10 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -11679,9 +11184,7 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -11716,7 +11219,6 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
       items {
         id
         name
-        imgS3Keys
         imgURLs
         title
         price
@@ -11737,7 +11239,10 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -11762,9 +11267,7 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -11801,9 +11304,7 @@ export const getFoundingMember = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -11830,9 +11331,7 @@ export const getFoundingMember = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -11860,15 +11359,11 @@ export const getFoundingMember = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -11883,7 +11378,6 @@ export const getFoundingMember = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -11912,7 +11406,6 @@ export const getFoundingMember = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -11979,7 +11472,6 @@ export const getFoundingMember = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -12000,7 +11492,6 @@ export const getFoundingMember = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -12093,9 +11584,7 @@ export const listFoundingMembers = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12127,9 +11616,7 @@ export const getLike = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -12156,9 +11643,7 @@ export const getLike = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -12186,15 +11671,11 @@ export const getLike = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -12209,7 +11690,6 @@ export const getLike = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -12238,7 +11718,6 @@ export const getLike = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -12305,7 +11784,6 @@ export const getLike = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -12326,7 +11804,6 @@ export const getLike = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -12398,9 +11875,7 @@ export const getLike = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -12427,9 +11902,7 @@ export const getLike = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -12457,15 +11930,11 @@ export const getLike = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -12480,7 +11949,6 @@ export const getLike = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -12509,7 +11977,6 @@ export const getLike = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -12576,7 +12043,6 @@ export const getLike = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -12597,7 +12063,6 @@ export const getLike = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -12665,9 +12130,7 @@ export const getLike = /* GraphQL */ `
         title
         summary
         content
-        imgS3Keys
         imgURLs
-        qrCodeImgS3Key
         qrCodeImgURL
         tags
         sortKey
@@ -12685,9 +12148,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12727,9 +12188,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12743,9 +12202,7 @@ export const getLike = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -12780,9 +12237,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12814,15 +12269,15 @@ export const getLike = /* GraphQL */ `
         endDate
         online
         group
-        backGroundImgS3Key
         backGroundImgURL
-        qrCodeImgS3Key
         qrCodeImgURL
-        posterImgS3Key
         posterImgURL
         imgURLs
         content
-        location
+        address {
+          googleMapPlace
+          apartmentNumbers
+        }
         sponsor
         tags
         eventStatus
@@ -12841,9 +12296,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12886,9 +12339,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12905,15 +12356,11 @@ export const getLike = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -12949,9 +12396,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -12979,7 +12424,6 @@ export const getLike = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
         imgURLs
         tags
         sortKey
@@ -12998,9 +12442,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -13047,9 +12489,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -13062,7 +12502,6 @@ export const getLike = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -13102,9 +12541,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -13122,9 +12559,7 @@ export const getLike = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -13137,7 +12572,6 @@ export const getLike = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -13193,9 +12627,7 @@ export const listLikes = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -13213,9 +12645,7 @@ export const listLikes = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
@@ -13229,9 +12659,7 @@ export const listLikes = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -13269,15 +12697,11 @@ export const listLikes = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -13312,7 +12736,6 @@ export const listLikes = /* GraphQL */ `
           id
           title
           content
-          imgS3Keys
           imgURLs
           tags
           sortKey
@@ -13373,9 +12796,7 @@ export const getWebFeedBack = /* GraphQL */ `
         lastName
         intro
         major
-        avatarImgS3Key
         avatarImgURL
-        backGroundImgS3Key
         backGroundImgURL
         linkedIn
         github
@@ -13402,9 +12823,7 @@ export const getWebFeedBack = /* GraphQL */ `
           title
           summary
           content
-          imgS3Keys
           imgURLs
-          qrCodeImgS3Key
           qrCodeImgURL
           tags
           sortKey
@@ -13432,15 +12851,11 @@ export const getWebFeedBack = /* GraphQL */ `
           endDate
           online
           group
-          backGroundImgS3Key
           backGroundImgURL
-          qrCodeImgS3Key
           qrCodeImgURL
-          posterImgS3Key
           posterImgURL
           imgURLs
           content
-          location
           sponsor
           tags
           eventStatus
@@ -13455,7 +12870,6 @@ export const getWebFeedBack = /* GraphQL */ `
           id
           name
           email
-          address
           phone
           weChat
           message
@@ -13484,7 +12898,6 @@ export const getWebFeedBack = /* GraphQL */ `
           title
           requirements
           bonus
-          imgS3Key
           imgURLs
           benefits
           schedule
@@ -13551,7 +12964,6 @@ export const getWebFeedBack = /* GraphQL */ `
         marketItems {
           id
           name
-          imgS3Keys
           imgURLs
           title
           price
@@ -13572,7 +12984,6 @@ export const getWebFeedBack = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
-          address
           propertySize
           dateAvailable
           laundryType
@@ -13663,9 +13074,7 @@ export const listWebFeedBacks = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
           avatarImgURL
-          backGroundImgS3Key
           backGroundImgURL
           linkedIn
           github
