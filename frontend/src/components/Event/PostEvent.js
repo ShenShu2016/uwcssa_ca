@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchTopics, postEvent } from "../../redux/slice/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,21 +72,9 @@ export default function PostEvent() {
   const { username } = useSelector((state) => state.userAuth.user);
   const history = useHistory();
   const timer = useRef();
-  // const [eventData, setEventData] = useState({
-  //   title: "",
-  //   content: "",
-  //   startDate: null,
-  //   endDate: null,
-  //   online: false,
-  //   group: false,
-  //   location: "",
-  //   topicID: "",
-  //   sponsor: "",
-  //   tags: "",
-  //   eventStatus: "ComingSoon",
-  // });
-  // console.log(eventData);
+
   const [loading, setLoading] = useState(false);
+
   const {
     handleSubmit,
     control,
@@ -100,7 +89,6 @@ export default function PostEvent() {
       endDate: null,
       online: false,
       group: false,
-      location: "",
       topicID: "",
       sponsor: "",
       eventStatus: "",
@@ -154,11 +142,13 @@ export default function PostEvent() {
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
+      address: GetAddress(),
       active: true,
       sortKey: "SortKey",
       userID: username,
       tags: GetTags(),
     };
+    console.log(createEventInput);
     const response = await dispatch(postEvent({ createEventInput }));
 
     if (response.meta.requestStatus === "fulfilled") {
@@ -425,26 +415,7 @@ export default function PostEvent() {
                 />
               )}
             />
-            <Controller
-              name="location"
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  required
-                  id="location"
-                  label="地址"
-                  value={value}
-                  onChange={onChange}
-                  error={!!errors.location}
-                  helperText={errors.title ? "不能为空" : null}
-                />
-              )}
-            />
+            <GoogleMapsPlace />
             <Box className={classes.type}>
               <div className="newType">
                 <Controller

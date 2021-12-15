@@ -221,10 +221,14 @@ export const fetchTopics = createAsyncThunk("event/fetchTopics", async () => {
 export const postEvent = createAsyncThunk(
   "event/postEvent",
   async ({ createEventInput }) => {
-    const response = await API.graphql(
-      graphqlOperation(createEvent, { input: createEventInput })
-    );
-    return response;
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createEvent, { input: createEventInput })
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
