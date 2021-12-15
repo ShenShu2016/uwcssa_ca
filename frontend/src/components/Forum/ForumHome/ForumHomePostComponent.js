@@ -1,16 +1,9 @@
-import {
-  Box,
-  Paper,
-  Stack,
-  Typography,
-  Tooltip,
-  Fade,
-} from "@mui/material";
+import { Box, Fade, Paper, Stack, Tooltip, Typography } from "@mui/material";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
+import ForumPostTitleToolTip from "../ForumPost/ForumPostTitleToolTip";
 import ForumPostUserIDComponent from "../ForumPost/ForumPostUserIDComponent";
 import ForumTimeComponent from "../ForumTimeComponent";
-import ForumPostTitleToolTip from "../ForumPost/ForumPostTitleToolTip";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -20,7 +13,6 @@ export default function ForumHomePostComponent({ forumPost }) {
     // id,
     // title,
     // content,
-    // imgS3Keys,
     createdAt,
     userID,
     // user,
@@ -92,7 +84,9 @@ export default function ForumHomePostComponent({ forumPost }) {
                 <Stack direction="column" sx={{ ml: 2 }}>
                   <Tooltip
                     title={
-                      <Typography color="white">{forumPostComment.content}</Typography>
+                      <Typography color="white">
+                        {forumPostComment.content}
+                      </Typography>
                     }
                     placement="top-start"
                     arrow

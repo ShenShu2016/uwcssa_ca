@@ -70,7 +70,6 @@ export default function EditMarketItemDetail() {
   const [defaultInfo, setDefaultInfo] = useState(false);
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   // let temp = [];
-  // imgS3Keys.map((img, idx) => (temp[idx] = [img, "temp"]));
   const [imgKeyFromServer, setImgKeyFromServer] = useState(imgURLs);
 
   const [open, setOpen] = useState(false);

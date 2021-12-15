@@ -22,7 +22,6 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
   const {
     id,
     // name,
-    // imgS3Keys,
     price,
     description,
     location,

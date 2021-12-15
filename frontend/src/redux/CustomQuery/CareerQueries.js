@@ -14,7 +14,7 @@ export const listDepartments = `query ListDepartments {
             title
             requirements
             bonus
-            imgS3Key
+            imgURLs
             benefits
             schedule
             like
@@ -37,7 +37,7 @@ export const listUwcssaJobs = `query ListUwcssaJobs($filter: ModelUwcssaJobFilte
           title
           requirements
           bonus
-          imgS3Key
+          imgURLs
           benefits
           schedule
           like

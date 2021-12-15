@@ -9,6 +9,12 @@ import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 
+let address = null;
+
+export function GetAddress() {
+  return address;
+}
+
 function loadScript(src, position, id) {
   if (!position) {
     return;
@@ -26,10 +32,26 @@ const autocompleteService = { current: null };
 export default function GoogleMaps() {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
+  const [apartmentNumbers, setApartmentNumbers] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
-  console.log(value);
 
+  useEffect(() => {
+    address = {
+      description: value && value.description,
+      place_id: value && value.place_id,
+      reference: value && value.reference,
+      terms: value && value.terms,
+      types: value && value.types,
+      apartmentNumbers: apartmentNumbers,
+    };
+    // console.log(value.description);
+    // console.log(value.place_id);
+    // console.log(value.reference);
+    // console.log(value.structured_formatting);
+    // console.log(value.terms);
+    // console.log(value.types);
+  });
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
@@ -88,10 +110,20 @@ export default function GoogleMaps() {
   }, [value, inputValue, fetch]);
 
   return (
-    <div>
+    <Box sx={{ my: "2rem" }}>
+      <TextField
+        id="setApartmentNumbers"
+        label="公寓房间号"
+        helperText="住公寓的可以填，house不需要"
+        value={apartmentNumbers}
+        onChange={(event) => {
+          setApartmentNumbers(event.target.value);
+        }}
+        fullWidth
+        sx={{ my: 1 }}
+      />
       <Autocomplete
         id="google-map-demo"
-        sx={{ width: 300 }}
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.description
         }
@@ -118,7 +150,7 @@ export default function GoogleMaps() {
             option.structured_formatting.main_text,
             matches.map((match) => [match.offset, match.offset + match.length])
           );
-
+          console.log(option.place_id);
           return (
             <div>
               <li {...props}>
@@ -131,16 +163,17 @@ export default function GoogleMaps() {
                   </Grid>
                   <Grid item xs>
                     {parts.map((part, index) => (
-                      <span
-                        key={index}
-                        style={{
-                          fontWeight: part.highlight ? 700 : 400,
-                        }}
-                      >
-                        {part.text}
-                      </span>
+                      <div>
+                        <span
+                          key={index}
+                          style={{
+                            fontWeight: part.highlight ? 700 : 400,
+                          }}
+                        >
+                          {part.text}
+                        </span>
+                      </div>
                     ))}
-
                     <Typography variant="body2" color="text.secondary">
                       {option.structured_formatting.secondary_text}
                     </Typography>
@@ -158,6 +191,6 @@ export default function GoogleMaps() {
           style={{ float: "right" }}
         />
       </Box>
-    </div>
+    </Box>
   );
 }

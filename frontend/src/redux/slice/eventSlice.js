@@ -75,14 +75,18 @@ export const fetchEvents = createAsyncThunk("event/fetchEvents", async () => {
 
 export const selectedEvent = createAsyncThunk(
   "event/selected/event",
-  async ({ eventID }) => {
-    const response = await API.graphql({
-      query: getEvent,
-      variables: { id: eventID, filter: { active: { eq: true } } },
-      authMode: "AWS_IAM",
-    });
 
-    return response.data.getEvent;
+  async ({ eventID }) => {
+    try {
+      const response = await API.graphql({
+        query: getEvent,
+        variables: { id: eventID, filter: { active: { eq: true } } },
+        authMode: "AWS_IAM",
+      });
+      return response.data.getEvent;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -217,10 +221,14 @@ export const fetchTopics = createAsyncThunk("event/fetchTopics", async () => {
 export const postEvent = createAsyncThunk(
   "event/postEvent",
   async ({ createEventInput }) => {
-    const response = await API.graphql(
-      graphqlOperation(createEvent, { input: createEventInput })
-    );
-    return response;
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createEvent, { input: createEventInput })
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

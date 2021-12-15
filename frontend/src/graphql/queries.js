@@ -244,7 +244,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -395,7 +394,6 @@ export const getUserMutationLog = /* GraphQL */ `
     getUserMutationLog(id: $id) {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -632,7 +630,6 @@ export const getUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -679,7 +676,6 @@ export const listUserMutationLogs = /* GraphQL */ `
       items {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -800,7 +796,6 @@ export const userMutationLogSortByUserID = /* GraphQL */ `
       items {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -851,7 +846,6 @@ export const userMutationLogSortBySortKey = /* GraphQL */ `
       items {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -902,7 +896,6 @@ export const userMutationLogSortBy__typename = /* GraphQL */ `
       items {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -1179,7 +1172,6 @@ export const userSortBySortKey = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -1532,7 +1524,11 @@ export const getUser = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -1584,7 +1580,11 @@ export const getUser = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         phone
@@ -1985,7 +1985,11 @@ export const getUser = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -2056,7 +2060,6 @@ export const getUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -2416,7 +2419,6 @@ export const listUsers = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -2693,7 +2695,6 @@ export const getUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -3014,7 +3015,6 @@ export const getUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -3329,7 +3329,6 @@ export const getTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -3693,7 +3692,6 @@ export const getArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -4145,7 +4143,6 @@ export const getArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -4619,7 +4616,6 @@ export const getArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -4848,7 +4844,11 @@ export const getEvent = /* GraphQL */ `
       imgURLs
       content
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       sponsor
@@ -5089,7 +5089,6 @@ export const getEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5218,7 +5217,11 @@ export const listEvents = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -5300,7 +5303,11 @@ export const eventSortBySortKey = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -5590,7 +5597,6 @@ export const getEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5634,7 +5640,11 @@ export const getEventComment = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -6095,7 +6105,6 @@ export const getEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6323,7 +6332,11 @@ export const getEventParticipant = /* GraphQL */ `
       name
       email
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       phone
@@ -6565,7 +6578,6 @@ export const getEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6609,7 +6621,11 @@ export const getEventParticipant = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -6676,7 +6692,11 @@ export const listEventParticipants = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         phone
@@ -6758,7 +6778,11 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         phone
@@ -7058,7 +7082,6 @@ export const getDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7417,7 +7440,6 @@ export const getUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7846,7 +7868,6 @@ export const getForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8167,7 +8188,6 @@ export const getForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8754,7 +8774,6 @@ export const getForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9168,7 +9187,6 @@ export const getForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9659,7 +9677,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9918,7 +9935,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10497,7 +10513,6 @@ export const getMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10596,7 +10611,11 @@ export const getMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       propertySize
@@ -10843,7 +10862,6 @@ export const getMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10908,7 +10926,11 @@ export const listMarketItems = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -10991,7 +11013,11 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -11074,7 +11100,11 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -11157,7 +11187,11 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -11240,7 +11274,11 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -11524,7 +11562,6 @@ export const getFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11836,7 +11873,6 @@ export const getLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12095,7 +12131,6 @@ export const getLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12275,7 +12310,11 @@ export const getLike = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -13016,7 +13055,6 @@ export const getWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record

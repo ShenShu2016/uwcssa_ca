@@ -244,7 +244,6 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -569,7 +568,6 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -894,7 +892,6 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -981,7 +978,6 @@ export const onCreateUserMutationLog = /* GraphQL */ `
     onCreateUserMutationLog {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -1218,7 +1214,6 @@ export const onCreateUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -1256,7 +1251,6 @@ export const onUpdateUserMutationLog = /* GraphQL */ `
     onUpdateUserMutationLog {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -1493,7 +1487,6 @@ export const onUpdateUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -1531,7 +1524,6 @@ export const onDeleteUserMutationLog = /* GraphQL */ `
     onDeleteUserMutationLog {
       id
       eventName
-      eventID
       typename
       eventSourceARN
       record
@@ -1768,7 +1760,6 @@ export const onDeleteUserMutationLog = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -2120,7 +2111,11 @@ export const onCreateUser = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -2172,7 +2167,11 @@ export const onCreateUser = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         phone
@@ -2573,7 +2572,11 @@ export const onCreateUser = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -2644,7 +2647,6 @@ export const onCreateUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -3087,7 +3089,11 @@ export const onUpdateUser = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -3139,7 +3145,11 @@ export const onUpdateUser = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         phone
@@ -3540,7 +3550,11 @@ export const onUpdateUser = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -3611,7 +3625,6 @@ export const onUpdateUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -4054,7 +4067,11 @@ export const onDeleteUser = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -4106,7 +4123,11 @@ export const onDeleteUser = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         phone
@@ -4507,7 +4528,11 @@ export const onDeleteUser = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         propertySize
@@ -4578,7 +4603,6 @@ export const onDeleteUser = /* GraphQL */ `
       userMutationLog {
         id
         eventName
-        eventID
         typename
         eventSourceARN
         record
@@ -4945,7 +4969,6 @@ export const onCreateUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5222,7 +5245,6 @@ export const onUpdateUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5499,7 +5521,6 @@ export const onDeleteUserEducation = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -5777,7 +5798,6 @@ export const onCreateUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6055,7 +6075,6 @@ export const onUpdateUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6333,7 +6352,6 @@ export const onDeleteUserExperience = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6604,7 +6622,6 @@ export const onCreateTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -6918,7 +6935,6 @@ export const onUpdateTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7232,7 +7248,6 @@ export const onDeleteTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7554,7 +7569,6 @@ export const onCreateArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -7888,7 +7902,6 @@ export const onUpdateArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8222,7 +8235,6 @@ export const onDeleteArticle = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8550,7 +8562,6 @@ export const onCreateArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -8894,7 +8905,6 @@ export const onUpdateArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9238,7 +9248,6 @@ export const onDeleteArticleComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9582,7 +9591,6 @@ export const onCreateArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -9916,7 +9924,6 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10250,7 +10257,6 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10361,7 +10367,11 @@ export const onCreateEvent = /* GraphQL */ `
       imgURLs
       content
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       sponsor
@@ -10602,7 +10612,6 @@ export const onCreateEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -10726,7 +10735,11 @@ export const onUpdateEvent = /* GraphQL */ `
       imgURLs
       content
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       sponsor
@@ -10967,7 +10980,6 @@ export const onUpdateEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11091,7 +11103,11 @@ export const onDeleteEvent = /* GraphQL */ `
       imgURLs
       content
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       sponsor
@@ -11332,7 +11348,6 @@ export const onDeleteEvent = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11679,7 +11694,6 @@ export const onCreateEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -11723,7 +11737,11 @@ export const onCreateEventComment = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -12038,7 +12056,6 @@ export const onUpdateEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12082,7 +12099,11 @@ export const onUpdateEventComment = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -12397,7 +12418,6 @@ export const onDeleteEventComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -12441,7 +12461,11 @@ export const onDeleteEventComment = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -12756,7 +12780,6 @@ export const onCreateEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13098,7 +13121,6 @@ export const onUpdateEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13440,7 +13462,6 @@ export const onDeleteEventSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13550,7 +13571,11 @@ export const onCreateEventParticipant = /* GraphQL */ `
       name
       email
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       phone
@@ -13792,7 +13817,6 @@ export const onCreateEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -13836,7 +13860,11 @@ export const onCreateEventParticipant = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -13894,7 +13922,11 @@ export const onUpdateEventParticipant = /* GraphQL */ `
       name
       email
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       phone
@@ -14136,7 +14168,6 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -14180,7 +14211,11 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -14238,7 +14273,11 @@ export const onDeleteEventParticipant = /* GraphQL */ `
       name
       email
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       phone
@@ -14480,7 +14519,6 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -14524,7 +14562,11 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -14815,7 +14857,6 @@ export const onCreateDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15108,7 +15149,6 @@ export const onUpdateDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15401,7 +15441,6 @@ export const onDeleteDepartment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -15718,7 +15757,6 @@ export const onCreateUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16046,7 +16084,6 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16374,7 +16411,6 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16675,7 +16711,6 @@ export const onCreateForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -16956,7 +16991,6 @@ export const onUpdateForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -17237,7 +17271,6 @@ export const onDeleteForumTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -17519,7 +17552,6 @@ export const onCreateForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -17837,7 +17869,6 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -18155,7 +18186,6 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -18479,7 +18509,6 @@ export const onCreateForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -18835,7 +18864,6 @@ export const onUpdateForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -19191,7 +19219,6 @@ export const onDeleteForumPost = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -19543,7 +19570,6 @@ export const onCreateForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -19895,7 +19921,6 @@ export const onUpdateForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -20247,7 +20272,6 @@ export const onDeleteForumPostComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -20600,7 +20624,6 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -20859,7 +20882,6 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -21248,7 +21270,6 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -21507,7 +21528,6 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -21896,7 +21916,6 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -22155,7 +22174,6 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -22542,7 +22560,6 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -22815,7 +22832,6 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23088,7 +23104,6 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23148,7 +23163,11 @@ export const onCreateMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       propertySize
@@ -23395,7 +23414,6 @@ export const onCreateMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23455,7 +23473,11 @@ export const onUpdateMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       propertySize
@@ -23702,7 +23724,6 @@ export const onUpdateMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -23762,7 +23783,11 @@ export const onDeleteMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        types
         apartmentNumbers
       }
       propertySize
@@ -24009,7 +24034,6 @@ export const onDeleteMarketItem = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -24285,7 +24309,6 @@ export const onCreateFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -24560,7 +24583,6 @@ export const onUpdateFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -24835,7 +24857,6 @@ export const onDeleteFoundingMember = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -25106,7 +25127,6 @@ export const onCreateLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -25365,7 +25385,6 @@ export const onCreateLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -25545,7 +25564,11 @@ export const onCreateLike = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -26112,7 +26135,6 @@ export const onUpdateLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -26371,7 +26393,6 @@ export const onUpdateLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -26551,7 +26572,11 @@ export const onUpdateLike = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -27118,7 +27143,6 @@ export const onDeleteLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -27377,7 +27401,6 @@ export const onDeleteLike = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -27557,7 +27580,11 @@ export const onDeleteLike = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          types
           apartmentNumbers
         }
         sponsor
@@ -28125,7 +28152,6 @@ export const onCreateWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -28398,7 +28424,6 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record
@@ -28671,7 +28696,6 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
         userMutationLog {
           id
           eventName
-          eventID
           typename
           eventSourceARN
           record

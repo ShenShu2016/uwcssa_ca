@@ -24,7 +24,6 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
   const {
     id,
     // name,
-    // imgS3Keys,
     // title,
     price,
     description,

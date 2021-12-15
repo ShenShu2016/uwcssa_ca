@@ -22,7 +22,6 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         title
         price
         marketType
-        location
         year
         tags
         make
@@ -30,7 +29,14 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         marketRentalSaleRent
         propertyType
         bedroomCounts
-        address
+        address {
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+        }
         contactPhone
         contactWeChat
         contactEmail
@@ -49,14 +55,13 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           linkedIn
           github
           sortKey
           createdAt
           updatedAt
-
           badges
         }
         owner
@@ -89,14 +94,20 @@ export const marketItemSortBySortKeyPosts = /* GraphQL */ `
         title
         price
         marketType
-        location
         year
         make
         model
         marketRentalSaleRent
         propertyType
         bedroomCounts
-        address
+        address {
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+        }
         contactPhone
         contactWeChat
         contactEmail
@@ -115,14 +126,13 @@ export const marketItemSortBySortKeyPosts = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           linkedIn
           github
           sortKey
           createdAt
           updatedAt
-
           badges
         }
         owner
@@ -156,7 +166,6 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
         price
         marketType
         description
-        location
         marketItemCondition
         marketItemCategory
         tags
@@ -175,11 +184,10 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
           owner
           firstName
           lastName
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           createdAt
           updatedAt
-
           badges
         }
         owner
@@ -213,7 +221,6 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
         price
         marketType
         description
-        location
         tags
         vehicleType
         year
@@ -237,11 +244,10 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
           owner
           firstName
           lastName
-          avatarImgS3Key
+          avatarImgURL
           sortKey
           createdAt
           updatedAt
-
           badges
         }
         owner
@@ -280,7 +286,14 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
         propertyType
         bedroomCounts
         bathroomsCounts
-        address
+        address {
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+        }
         propertySize
         dateAvailable
         laundryType
@@ -303,11 +316,10 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
           owner
           firstName
           lastName
-          avatarImgS3Key
+          avatarImgURL
           sortKey
           createdAt
           updatedAt
-
           badges
         }
         owner

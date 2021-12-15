@@ -92,7 +92,6 @@ export function MarketPetInfo({ marketItem, mode = "detail" }) {
   const {
     // id,
     // name,
-    // imgS3Keys,
     title,
     price,
     description,
