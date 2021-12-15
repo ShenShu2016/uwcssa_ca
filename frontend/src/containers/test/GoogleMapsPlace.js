@@ -23,18 +23,17 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-export default function GoogleMapsPlace() {
+export default function GoogleMaps() {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
   console.log(value);
-  // console.log(options);
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
-        "https://maps.googleapis.com/maps/api/js?key=Your_API_KEY&libraries=places",
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4&libraries=places",
         document.querySelector("head"),
         "google-maps"
       );
@@ -89,13 +88,10 @@ export default function GoogleMapsPlace() {
   }, [value, inputValue, fetch]);
 
   return (
-    <Box
-      sx={{
-        width: 300,
-      }}
-    >
+    <div>
       <Autocomplete
         id="google-map-demo"
+        sx={{ width: 300 }}
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.description
         }
@@ -113,7 +109,7 @@ export default function GoogleMapsPlace() {
           setInputValue(newInputValue);
         }}
         renderInput={(params) => (
-          <TextField {...params} label="地址" fullWidth />
+          <TextField {...params} label="添加地址" fullWidth />
         )}
         renderOption={(props, option) => {
           const matches =
@@ -144,6 +140,7 @@ export default function GoogleMapsPlace() {
                         {part.text}
                       </span>
                     ))}
+
                     <Typography variant="body2" color="text.secondary">
                       {option.structured_formatting.secondary_text}
                     </Typography>
@@ -161,6 +158,6 @@ export default function GoogleMapsPlace() {
           style={{ float: "right" }}
         />
       </Box>
-    </Box>
+    </div>
   );
 }

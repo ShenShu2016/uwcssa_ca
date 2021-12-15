@@ -1,4 +1,3 @@
-import { Provider, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
   Redirect,
@@ -8,6 +7,7 @@ import {
 } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { fetchUserProfile, loadUser } from "./redux/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import Account from "./containers/account/AccountRouter";
 import Amplify from "aws-amplify";
@@ -31,7 +31,6 @@ import TestRouter from "./containers/test/TestRouter";
 import UserFeedBack from "./containers/UserFeedBack";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
-import store from "./redux/store";
 
 Amplify.configure(awsconfig);
 
@@ -79,46 +78,42 @@ export default function App() {
   }, [isAuthenticated]);
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <ScrollToTop />
-          {/* <div className={classes.headerBody}> */}
-          <Header />
-          <Box className={classes.headerBox} />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/auth" component={AuthRouter} />
-            <PrivateRoute
-              allowRoles="anyone"
-              path="/account"
-              component={Account}
-            />
-            <PrivateRoute
-              allowRoles="staff"
-              path="/staff"
-              component={StaffRouter}
-            />
-            <Route path="/article" component={ArticleRouter} />
-            <Route path="/market" component={Market} /> 
-            <Route path="/forum" component={ForumRouter} />
-            <Route path="/foundingTeam" exact component={FoundingTeam} />
-            <Route path="/contactUs" exact component={ContactUs} />
-            <Route path="/career" component={Career} />
-            <Route path="/event" component={EventRouter} />
-            <Route path="/rating" exact component={UserFeedBack} />
-            <Route path="/test" component={TestRouter} />
-            <Route exact path="/NoPermission" component={NoPermission} />
-            <Redirect to="/not-found">404 Not Found!</Redirect>
-          </Switch>
-          <CustomAlert
-            isAlertOpen={isAlertOpen}
-            handleAlertClose={handleAlertClose}
-            message={"登錄成功"}
+    <ThemeProvider theme={theme}>
+      <Router>
+        <ScrollToTop />
+        <Header />
+        <Box className={classes.headerBox} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/auth" component={AuthRouter} />
+          <PrivateRoute
+            allowRoles="anyone"
+            path="/account"
+            component={Account}
           />
-          {/* </div> */}
-        </Router>
-      </ThemeProvider>
-    </Provider>
+          <PrivateRoute
+            allowRoles="staff"
+            path="/staff"
+            component={StaffRouter}
+          />
+          <Route path="/article" component={ArticleRouter} />
+          <Route path="/market" component={Market} /> 
+          <Route path="/forum" component={ForumRouter} />
+          <Route path="/foundingTeam" exact component={FoundingTeam} />
+          <Route path="/contactUs" exact component={ContactUs} />
+          <Route path="/career" component={Career} />
+          <Route path="/event" component={EventRouter} />
+          <Route path="/rating" exact component={UserFeedBack} />
+          <Route path="/test" component={TestRouter} />
+          <Route exact path="/NoPermission" component={NoPermission} />
+          <Redirect to="/not-found">404 Not Found!</Redirect>
+        </Switch>
+        <CustomAlert
+          isAlertOpen={isAlertOpen}
+          handleAlertClose={handleAlertClose}
+          message={"登錄成功"}
+        />
+      </Router>
+    </ThemeProvider>
   );
 }
