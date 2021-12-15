@@ -12,7 +12,10 @@ export const getEvent = /* GraphQL */ `
       qrCodeImgURL
       backGroundImgURL
       content
-      location
+      address {
+        googleMapPlace
+        apartmentNumbers
+      }
       sponsor
       tags
       eventStatus
@@ -121,7 +124,10 @@ export const getEvent = /* GraphQL */ `
           id
           name
           email
-          address
+          address {
+            googleMapPlace
+            apartmentNumbers
+          }
           phone
           weChat
           message

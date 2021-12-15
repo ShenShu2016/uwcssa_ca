@@ -288,7 +288,7 @@ export default function PostMarketPet() {
       name: title,
       description: description,
       price: price,
-      imgS3Keys: Object.keys(imageKeys),
+      //imgS3Keys: Object.keys(imageKeys),
       marketItemCategory: marketItemCategory,
       marketItemCondition: marketItemCondition,
       location: location,

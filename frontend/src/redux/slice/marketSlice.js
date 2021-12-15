@@ -30,17 +30,21 @@ const initialState = marketAdapter.getInitialState({
 export const fetchMarketItems = createAsyncThunk(
   "market/fetchMarketItems",
   async (query) => {
-    const MarketItemsData = await API.graphql({
-      query: query,
-      variables: {
-        sortKey: "SortKey",
-        sortDirection: "DESC",
-        filter: { active: { eq: true } },
-      },
-      authMode: "AWS_IAM",
-    });
+    try {
+      const MarketItemsData = await API.graphql({
+        query: query,
+        variables: {
+          sortKey: "SortKey",
+          sortDirection: "DESC",
+          filter: { active: { eq: true } },
+        },
+        authMode: "AWS_IAM",
+      });
 
-    return MarketItemsData.data.marketItemSortBySortKey.items;
+      return MarketItemsData.data.marketItemSortBySortKey.items;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

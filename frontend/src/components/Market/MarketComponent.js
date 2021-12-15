@@ -47,7 +47,6 @@ export default function MarketComponent({ item, type }) {
     // description,
     price,
     imgURLs,
-    // imgS3Keys,
     // marketItemCategory,
     // marketItemCondition,
     location,

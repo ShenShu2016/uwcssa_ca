@@ -5,7 +5,7 @@ export const getForumPost = /* GraphQL */ `
       content
       createdAt
       active
-      imgS3Keys
+      imgURLs
       sortKey
       tags
       title
@@ -27,8 +27,8 @@ export const getForumPost = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -52,7 +52,7 @@ export const getForumPost = /* GraphQL */ `
       userID
       user {
         username
-        avatarImgS3Key
+        avatarImgURL
         badges
       }
       likes(sortDirection: DESC) {
@@ -65,7 +65,7 @@ export const getForumPost = /* GraphQL */ `
           owner
           user {
             username
-            avatarImgS3Key
+            avatarImgURL
           }
         }
       }
@@ -81,7 +81,7 @@ export const getForumPost = /* GraphQL */ `
           userID
           user {
             username
-            avatarImgS3Key
+            avatarImgURL
             badges
           }
           likes(sortDirection: DESC) {
@@ -109,12 +109,12 @@ export const getForumPost = /* GraphQL */ `
               replyToUserID
               replyTo {
                 username
-                avatarImgS3Key
+                avatarImgURL
               }
               userID
               user {
                 username
-                avatarImgS3Key
+                avatarImgURL
                 badges
               }
               likes(sortDirection: DESC) {
@@ -157,7 +157,7 @@ export const getForumTopic = /* GraphQL */ `
               id
               title
               content
-              imgS3Keys
+              imgURLs
               sortKey
               tags
               active
@@ -168,7 +168,7 @@ export const getForumTopic = /* GraphQL */ `
               updatedAt
               user {
                 username
-                avatarImgS3Key
+                avatarImgURL
                 badges
               }
               forumPostComments(
@@ -186,7 +186,7 @@ export const getForumTopic = /* GraphQL */ `
                   userID
                   user {
                     username
-                    avatarImgS3Key
+                    avatarImgURL
                     badges
                   }
                 }
@@ -228,7 +228,7 @@ export const listForumTopics = /* GraphQL */ `
                 id
                 title
                 content
-                imgS3Keys
+                imgURLs
                 tags
                 sortKey
                 active
@@ -239,7 +239,7 @@ export const listForumTopics = /* GraphQL */ `
                 updatedAt
                 user {
                   username
-                  avatarImgS3Key
+                  avatarImgURL
                   badges
                 }
                 forumPostComments(
@@ -257,7 +257,7 @@ export const listForumTopics = /* GraphQL */ `
                     userID
                     user {
                       username
-                      avatarImgS3Key
+                      avatarImgURL
                       badges
                     }
                   }
@@ -286,7 +286,7 @@ export const listForumPosts = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -304,8 +304,8 @@ export const listForumPosts = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -359,7 +359,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -377,8 +377,8 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -411,7 +411,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
             userID
             user {
               username
-              avatarImgS3Key
+              avatarImgURL
               badges
             }
           }
@@ -449,7 +449,7 @@ export const forumPostSortBySortKey = /* GraphQL */ `
         id
         title
         content
-        imgS3Keys
+        imgURLs
         tags
         sortKey
         active
@@ -467,8 +467,8 @@ export const forumPostSortBySortKey = /* GraphQL */ `
           lastName
           intro
           major
-          avatarImgS3Key
-          backGroundImgS3Key
+          avatarImgURL
+          backGroundImgURL
           linkedIn
           github
           sortKey
@@ -501,7 +501,7 @@ export const forumPostSortBySortKey = /* GraphQL */ `
             userID
             user {
               username
-              avatarImgS3Key
+              avatarImgURL
               badges
             }
           }
