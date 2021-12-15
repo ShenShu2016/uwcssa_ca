@@ -146,7 +146,6 @@ export default function PostEvent() {
       active: true,
       sortKey: "SortKey",
       userID: username,
-
       tags: GetTags(),
     };
     console.log(createEventInput);

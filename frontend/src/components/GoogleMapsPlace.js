@@ -38,9 +38,15 @@ export default function GoogleMaps() {
 
   useEffect(() => {
     address = {
-      googleMapPlace: JSON.stringify(value),
+      googleMapPlace: value,
       apartmentNumbers: apartmentNumbers,
     };
+    console.log(value.description);
+    console.log(value.place_id);
+    console.log(value.reference);
+    console.log(value.structured_formatting);
+    console.log(value.terms);
+    console.log(value.types);
   });
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {

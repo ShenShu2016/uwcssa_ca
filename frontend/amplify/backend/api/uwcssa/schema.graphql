@@ -3,7 +3,11 @@ enum SortKey {
 }
 
 type Address {
-  googleMapPlace: AWSJSON
+  description: String
+  place_id: String
+  reference: String
+  terms: [String]
+  type: [String]
   apartmentNumbers: String
 }
 

@@ -1524,7 +1524,11 @@ export const getUser = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         sponsor
@@ -1576,7 +1580,11 @@ export const getUser = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         phone
@@ -1977,7 +1985,11 @@ export const getUser = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         propertySize
@@ -4832,7 +4844,11 @@ export const getEvent = /* GraphQL */ `
       imgURLs
       content
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        type
         apartmentNumbers
       }
       sponsor
@@ -5201,7 +5217,11 @@ export const listEvents = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         sponsor
@@ -5283,7 +5303,11 @@ export const eventSortBySortKey = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         sponsor
@@ -5616,7 +5640,11 @@ export const getEventComment = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         sponsor
@@ -6304,7 +6332,11 @@ export const getEventParticipant = /* GraphQL */ `
       name
       email
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        type
         apartmentNumbers
       }
       phone
@@ -6589,7 +6621,11 @@ export const getEventParticipant = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         sponsor
@@ -6656,7 +6692,11 @@ export const listEventParticipants = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         phone
@@ -6738,7 +6778,11 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
         name
         email
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         phone
@@ -10567,7 +10611,11 @@ export const getMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       address {
-        googleMapPlace
+        description
+        place_id
+        reference
+        terms
+        type
         apartmentNumbers
       }
       propertySize
@@ -10878,7 +10926,11 @@ export const listMarketItems = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         propertySize
@@ -10961,7 +11013,11 @@ export const marketItemSortBySortKey = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         propertySize
@@ -11044,7 +11100,11 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         propertySize
@@ -11127,7 +11187,11 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         propertySize
@@ -11210,7 +11274,11 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         propertySize
@@ -12242,7 +12310,11 @@ export const getLike = /* GraphQL */ `
         imgURLs
         content
         address {
-          googleMapPlace
+          description
+          place_id
+          reference
+          terms
+          type
           apartmentNumbers
         }
         sponsor

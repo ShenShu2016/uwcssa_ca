@@ -110,7 +110,8 @@ export default function EventBody({ event }) {
     sponsor,
     eventParticipants,
   } = event;
-  console.log(address && JSON.parse(address.googleMapPlace));
+  //console.log(address && address.googleMapPlace.reference);
+  console.log(address && JSON.parse(address.googleMapPlace).reference);
   return (
     <Box>
       {event.startDate ? (
