@@ -28,6 +28,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
 import API from "@aws-amplify/api";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DatePicker from "@mui/lab/DatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
@@ -91,6 +94,7 @@ export default function EditArticle() {
   const [content, setContent] = useState();
   const [content2, setContent2] = useState();
   const [loading, setLoading] = useState(false);
+  const [createdAt, setCreatedAt] = useState(article.createdAt);
   const timer = useRef();
 
   const {
@@ -106,6 +110,7 @@ export default function EditArticle() {
     setImgURLs(article.imgURLs);
     setQrCodeImgURL(article.qrCodeImgURL);
     setContent(article.content);
+    setCreatedAt(article.createdAt);
   }, [article]);
 
   const { topics } = useSelector((state) => state.article);
@@ -147,6 +152,7 @@ export default function EditArticle() {
       content: content2,
       active: true,
       qrCodeImgURL: qrCodeImgURL,
+      createdAt: createdAt,
       tags: GetTags(),
     };
     const response = await dispatch(modifyArticle({ updateArticleInput }));
@@ -405,6 +411,28 @@ export default function EditArticle() {
               </Button>
             </label>
           </Box>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Box className={classes.starEndDate}>
+              <div>
+                <DatePicker
+                  label="创建日期"
+                  value={createdAt}
+                  helperText="不填的话以现在时间为准"
+                  onChange={(e) => {
+                    setCreatedAt(e);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </div>
+            </Box>
+            <Button
+              onClick={() => {
+                setCreatedAt(null);
+              }}
+            >
+              点击清零日期
+            </Button>
+          </LocalizationProvider>
           <Typography variant="h4" sx={{ my: 2 }}>
             输入内容:
           </Typography>

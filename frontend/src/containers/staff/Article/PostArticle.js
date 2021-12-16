@@ -23,6 +23,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DatePicker from "@mui/lab/DatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
@@ -78,6 +81,7 @@ export default function PostArticle() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isTitleAsURL, setIsTitleAsURL] = useState(false);
+  const [createdAt, setCreatedAt] = useState(null);
   const timer = useRef();
   console.log(isTitleAsURL);
   const {
@@ -141,6 +145,7 @@ export default function PostArticle() {
       sortKey: "SortKey",
       qrCodeImgURL: qrCodeImgURL,
       userID: username,
+      createdAt: createdAt ? createdAt : undefined,
       tags: GetTags(),
     };
     const response = await dispatch(postArticle({ createArticleInput }));
@@ -418,6 +423,28 @@ export default function PostArticle() {
           ]}
         />
       </Paper>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Box className={classes.starEndDate}>
+          <div>
+            <DatePicker
+              label="创建日期"
+              value={createdAt}
+              helperText="不填的话以现在时间为准"
+              onChange={(e) => {
+                setCreatedAt(e);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </div>
+        </Box>
+        <Button
+          onClick={() => {
+            setCreatedAt(null);
+          }}
+        >
+          点击清零日期
+        </Button>
+      </LocalizationProvider>
       <Button
         variant="contained"
         endIcon={<PublishIcon />}
