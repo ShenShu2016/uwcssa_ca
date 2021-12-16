@@ -54,6 +54,7 @@ export default function App() {
   const dispatch = useDispatch();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   // console.log("isAlertOpen", isAlertOpen);
+
   const { isAuthenticated } = useSelector((state) => state.userAuth);
   const handleAlertClose = (reason) => {
     if (reason === "clickaway") {
