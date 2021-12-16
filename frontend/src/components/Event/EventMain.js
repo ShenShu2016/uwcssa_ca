@@ -94,7 +94,7 @@ export default function EventMain({ event }) {
     content,
     title,
     posterImgURL,
-    location,
+    address,
     startDate,
     endDate,
     topic,
@@ -200,7 +200,7 @@ export default function EventMain({ event }) {
                 </Box>
               )}
 
-              {location ? (
+              {address.description ? (
                 <Box
                   sx={{ overflow: "hidden", height: "30px" }}
                   color={"grey.700"}
@@ -216,7 +216,7 @@ export default function EventMain({ event }) {
                         color="textSecondary"
                         noWrap
                       >
-                        {location}
+                        {address.description}
                       </Typography>
                     </Grid>
                   </Grid>
