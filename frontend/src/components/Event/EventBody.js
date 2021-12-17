@@ -32,6 +32,7 @@ import TopicIcon from "@mui/icons-material/Topic";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import SeeMore from "./SeeMore";
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -356,7 +357,7 @@ export default function EventBody({ event }) {
                               </Typography>
                             )}
                             <Box sx={{ my: 3 }}>
-                              <Typography
+                              {/* <Typography
                                 variant="body1"
                                 // sx={{ marginTop: "2rem" }}
                                 component="span"
@@ -367,7 +368,8 @@ export default function EventBody({ event }) {
                                 gutterBottom
                               >
                                 {content}
-                              </Typography>
+                              </Typography> */}
+                              <SeeMore content={content} />
                             </Box>
                           </CardContent>
                         </Card>

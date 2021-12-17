@@ -99,7 +99,7 @@ export default function EventMain({ event }) {
     endDate,
     topic,
   } = event;
-
+  const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
       item
@@ -249,7 +249,7 @@ export default function EventMain({ event }) {
                 <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
                   <Grid item xs zeroMinWidth>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {content}
+                      {newContent}
                     </Typography>
                   </Grid>
                 </Grid>

@@ -35,7 +35,11 @@ import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-
+import MUIRichTextEditor from "mui-rte";
+import { convertToRaw } from "draft-js";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import WallpaperIcon from "@mui/icons-material/Wallpaper";
+import QrCodeIcon from "@mui/icons-material/QrCode";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -46,6 +50,43 @@ const useStyles = makeStyles((theme) => ({
   form: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  content: {
+    marginBlock: "2rem",
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+    border: "1px solid",
+    borderColor: "#cfd8dc",
+    borderRadius: 5,
+  },
+  picture: {
+    marginBlock: "2rem",
+    Height: "300px",
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+    border: "1px dashed",
+    borderColor: "#cfd8dc",
+    borderRadius: 5,
+  },
+  container: {
+    marginBlock: "2rem",
+    Height: "300px",
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+    border: "1px dashed",
+    borderColor: "#cfd8dc",
+    borderRadius: 5,
+    position: "relative",
+  },
+  child: {
+    textAlign: "center",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   },
 }));
 
@@ -74,7 +115,7 @@ export default function PostEvent() {
   const timer = useRef();
 
   const [loading, setLoading] = useState(false);
-
+  const [content, setContent] = useState(null);
   const {
     handleSubmit,
     control,
@@ -84,11 +125,11 @@ export default function PostEvent() {
     defaultValues: {
       title: "",
       summary: "",
-      content: "",
       startDate: null,
       endDate: null,
       online: false,
       group: false,
+      content: "",
       topicID: "",
       sponsor: "",
       eventStatus: "",
@@ -143,6 +184,7 @@ export default function PostEvent() {
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
       address: GetAddress(),
+      content: content,
       active: true,
       sortKey: "SortKey",
       userID: username,
@@ -178,7 +220,10 @@ export default function PostEvent() {
     dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
-
+  const handleOnChange = (prop) => (event) => {
+    const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
+    setContent(tempContent);
+  };
   return (
     <div>
       <Box
@@ -227,7 +272,7 @@ export default function PostEvent() {
                 name="summary"
                 control={control}
                 rules={{
-                  required: true,
+                  required: false,
                   minLength: 3,
                   maxLength: 300,
                 }}
@@ -463,91 +508,261 @@ export default function PostEvent() {
                 />
               </div>
             </Box>
-            <Controller
+            {/* <Controller
               name="content"
               control={control}
               rules={{
                 required: true,
               }}
               render={({ field: { onChange, value } }) => (
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  label="Content"
-                  minRows={20}
-                  variant="outlined"
-                  multiline
-                  onChange={onChange}
-                  value={value}
-                  error={!!errors.content}
-                  helperText={errors.content ? "不能为空" : null}
-                />
+                
+                // <TextField
+                //   margin="normal"
+                //   fullWidth
+                //   label="Content"
+                //   minRows={20}
+                //   variant="outlined"
+                //   multiline
+                //   onChange={onChange}
+                //   value={value}
+                //   error={!!errors.content}
+                //   helperText={errors.content ? "不能为空" : null}
+                // />
               )}
-            />
-
-            <Box>
-              <label htmlFor="poster">
-                <Input
-                  accept="poster/*"
-                  id="poster"
-                  type="file"
-                  onChange={(e) => {
-                    uploadEventPoster(e);
-                  }}
-                />
-                <Button variant="contained" component="span" disabled={loading}>
-                  上传活动海报
-                </Button>
-              </label>
-              <img
-                src={posterImgURL}
-                alt="posterImgURL"
-                style={{ width: "100%" }}
-              />
-              <label htmlFor="uploadEventImg" sx={{ margin: "normal" }}>
-                <Input
-                  accept="eventImg/*"
-                  id="uploadEventImg"
-                  type="file"
-                  onChange={(e) => {
-                    // setImgData();
-                    uploadEventImg(e);
-                  }}
-                />
-                <Button variant="contained" component="span" disabled={loading}>
-                  上传背景图片
-                </Button>
-              </label>
-              <img
-                src={backGroundImgURL}
-                alt="backGroundImgURL"
-                style={{ width: "100%" }}
-              />
-              <label htmlFor="uploadEventQrCode">
-                <Input
-                  accept="eventQrCode/*"
-                  id="uploadEventQrCode"
-                  type="file"
-                  onChange={(e) => {
-                    uploadEventQrCode(e);
-                  }}
-                />
-                <Button variant="contained" component="span" disabled={loading}>
-                  上传活动QR
-                </Button>
-              </label>
-              <img
-                src={qrCodeImgURL}
-                alt="qrCodeImgURL"
-                style={{ width: "100%" }}
+            /> */}
+            <Box className={classes.content}>
+              <MUIRichTextEditor
+                label="活动详情"
+                onChange={handleOnChange()}
+                inlineToolbar={true}
+                controls={[
+                  "title",
+                  "bold",
+                  "italic",
+                  "underline",
+                  "strikethrough",
+                  "highlight",
+                  "undo",
+                  "redo",
+                  "link",
+                  "media",
+                  "numberList",
+                  "bulletList",
+                  "quote",
+                  "code",
+                  "clear",
+                ]}
               />
             </Box>
+            <Box>
+              <div>
+                {posterImgURL ? (
+                  <Box className={classes.picture}>
+                    <img
+                      src={posterImgURL}
+                      alt="posterImgURL"
+                      style={{
+                        display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        width: "100%",
+                        height: "300px",
+                      }}
+                    />
+                  </Box>
+                ) : (
+                  <Box className={classes.container}>
+                    <Box className={classes.child} color={"grey.700"}>
+                      <InsertPhotoIcon
+                        style={{
+                          display: "block",
+                          margin: "auto",
+                          width: "100%",
+                          height: "100px",
+                          verticalAlign: "middle",
+                          lineHeight: "300px",
+                        }}
+                      />
+                      <Typography gutterBottom variant="h5">
+                        上传活动海报预览
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+                <label htmlFor="poster">
+                  <Input
+                    accept="poster/*"
+                    id="poster"
+                    type="file"
+                    onChange={(e) => {
+                      uploadEventPoster(e);
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    component="span"
+                    disabled={loading}
+                  >
+                    上传活动海报
+                  </Button>
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </label>
+              </div>
+              <div>
+                {backGroundImgURL ? (
+                  <Box className={classes.picture}>
+                    <img
+                      src={backGroundImgURL}
+                      alt="backGroundImgURL"
+                      style={{
+                        display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        width: "100%",
+                        height: "300px",
+                      }}
+                    />
+                  </Box>
+                ) : (
+                  <Box className={classes.container}>
+                    <Box className={classes.child} color={"grey.700"}>
+                      <WallpaperIcon
+                        style={{
+                          display: "block",
+                          margin: "auto",
+                          width: "100%",
+                          height: "100px",
+                          verticalAlign: "middle",
+                          lineHeight: "300px",
+                        }}
+                      />
+                      <Typography gutterBottom variant="h5">
+                        上传背景图片预览
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+                <label htmlFor="uploadEventImg" sx={{ margin: "normal" }}>
+                  <Input
+                    accept="eventImg/*"
+                    id="uploadEventImg"
+                    type="file"
+                    onChange={(e) => {
+                      // setImgData();
+                      uploadEventImg(e);
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    component="span"
+                    disabled={loading}
+                  >
+                    上传背景图片
+                  </Button>
+
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </label>
+              </div>
+
+              <div>
+                {qrCodeImgURL ? (
+                  <Box className={classes.picture}>
+                    <img
+                      src={qrCodeImgURL}
+                      alt="qrCodeImgURL"
+                      style={{
+                        display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        width: "100%",
+                        height: "300px",
+                      }}
+                    />
+                  </Box>
+                ) : (
+                  <Box className={classes.container}>
+                    <Box className={classes.child} color={"grey.700"}>
+                      <QrCodeIcon
+                        style={{
+                          display: "block",
+                          margin: "auto",
+                          width: "100%",
+                          height: "100px",
+                          verticalAlign: "middle",
+                          lineHeight: "300px",
+                        }}
+                      />
+                      <Typography gutterBottom variant="h5">
+                        上传QrCode预览
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+                <label htmlFor="uploadEventQrCode">
+                  <Input
+                    accept="eventQrCode/*"
+                    id="uploadEventQrCode"
+                    type="file"
+                    onChange={(e) => {
+                      uploadEventQrCode(e);
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    component="span"
+                    disabled={loading}
+                  >
+                    上传活动QR
+                  </Button>
+
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </label>
+              </div>
+            </Box>
+
             <Button
               variant="contained"
               type="submit"
               endIcon={<PublishIcon />}
               color="primary"
               disabled={loading}
+              sx={{ marginBlock: "2rem" }}
             >
               上传活动
               {loading && (
