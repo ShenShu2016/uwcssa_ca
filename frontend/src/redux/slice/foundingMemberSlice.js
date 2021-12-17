@@ -3,9 +3,12 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
+import {
+  createFoundingMember,
+  updateFoundingMember,
+} from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
-import { createFoundingMember } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listFoundingMembers } from "../../graphql/queries";
 
@@ -17,6 +20,8 @@ const initialState = fundingMemberAdapter.getInitialState({
   fetchFoundingMembersError: null,
   postFoundingMemberStatus: "idle",
   postFoundingMemberError: null,
+  updateFoundingMemberDetailStatus: "idle",
+  updateFoundingMemberDetailError: null,
 });
 
 export const fetchFoundingMembers = createAsyncThunk(
@@ -49,6 +54,21 @@ export const postFoundingMember = createAsyncThunk(
   }
 );
 
+export const updateFoundingMemberDetail = createAsyncThunk(
+  "fundingMember/updateFoundingMemberDetail",
+  async ({ updateFoundingMemberInput }) => {
+    try {
+      const response = await API.graphql(
+        graphqlOperation(updateFoundingMember, {
+          input: updateFoundingMemberInput,
+        })
+      );
+      return response.data.updateFoundingMember;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 const foundingMemberSlice = createSlice({
   name: "foundingMember",
   initialState,
@@ -67,6 +87,18 @@ const foundingMemberSlice = createSlice({
       .addCase(fetchFoundingMembers.rejected, (state, action) => {
         state.fetchFoundingMembersStatus = "failed";
         state.fetchFoundingMembersError = action.error.message;
+      })
+      // Cases for status of updateMarketItem (pending, fulfilled, and rejected)
+      .addCase(updateFoundingMemberDetail.pending, (state, action) => {
+        state.updateFoundingMemberDetailStatus = "loading";
+      })
+      .addCase(updateFoundingMemberDetail.fulfilled, (state, action) => {
+        state.updateFoundingMemberDetailStatus = "succeeded";
+        fundingMemberAdapter.upsertOne(state, action.payload);
+      })
+      .addCase(updateFoundingMemberDetail.rejected, (state, action) => {
+        state.updateFoundingMemberDetailStatus = "failed";
+        state.updateFoundingMemberDetailError = action.error.message;
       });
   },
 });

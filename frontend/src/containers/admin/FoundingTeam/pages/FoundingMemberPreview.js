@@ -12,7 +12,7 @@ export default function FoundingTeamPreview() {
       <Button
         variant="contained"
         component={Link}
-        to="/admin/foundingTeam/create"
+        to="/admin/foundingMember/create"
       >
         添加成员
       </Button>

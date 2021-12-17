@@ -20,7 +20,7 @@ import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
 import EventRouter from "./containers/event/EventRouter";
 import ForumRouter from "./containers/forum/ForumRouter";
-import FoundingTeam from "./containers/FoundingTeam";
+import FoundingMember from "./containers/FoundingMember";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
 import Market from "./containers/market/MarketRouter";
@@ -106,7 +106,7 @@ export default function App() {
           <Route path="/article" component={ArticleRouter} />
           <Route path="/market" component={Market} /> 
           <Route path="/forum" component={ForumRouter} />
-          <Route path="/foundingTeam" exact component={FoundingTeam} />
+          <Route path="/foundingMember" exact component={FoundingMember} />
           <Route path="/contactUs" exact component={ContactUs} />
           <Route path="/career" component={Career} />
           <Route path="/event" component={EventRouter} />

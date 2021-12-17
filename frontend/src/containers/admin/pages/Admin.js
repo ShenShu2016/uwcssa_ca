@@ -10,7 +10,7 @@ export default function Admin() {
       <Button
         variant="contained"
         component={Link}
-        to="/admin/foundingTeam/create"
+        to="/admin/foundingMember/create"
       >
         添加初始团队
       </Button>

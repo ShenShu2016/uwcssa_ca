@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const Input = styled("input")({
   display: "none",
 });
-export default function PostFoundingTeamMember() {
+export default function PostFoundingMember() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -99,7 +99,7 @@ export default function PostFoundingTeamMember() {
 
   const uploadFoundingTeamMemberImg = async (e) => {
     const imageData = e.target.files;
-    const imageLocation = "foundingTeam";
+    const imageLocation = "foundingMember";
     const response = await dispatch(
       postSingleImage({ imageData, imageLocation })
     );
@@ -126,7 +126,7 @@ export default function PostFoundingTeamMember() {
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);
-      history.push("/foundingTeam");
+      history.push("/foundingMember");
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);

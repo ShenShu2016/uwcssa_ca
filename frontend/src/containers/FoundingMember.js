@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoundingTeam() {
+export default function FoundingMember() {
   useTitle("UWCSSA.CA-创始团队以及贡献者");
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ export default function FoundingTeam() {
             icon={<AddIcon />}
             tooltipTitle={"添加成员"}
             component={Link}
-            to="/admin/foundingTeam/create"
+            to="/admin/foundingMember/create"
           />
         </SpeedDial>
       </Box>

@@ -77,7 +77,7 @@ export default function StickyFooter() {
                     color="primary"
                     variant="text"
                     component={Link}
-                    to="/foundingTeam"
+                    to="/foundingMember"
                     style={{ color: "#000000" }}
                   >
                     我们的团队

@@ -6,10 +6,6 @@ import {
   CardHeader,
   CardMedia,
   Collapse,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Menu,
   MenuItem,
   Typography,
@@ -17,6 +13,7 @@ import {
 import React, { useState } from "react";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
+import Edit from "./Edit";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -25,6 +22,7 @@ import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import { makeStyles } from "@mui/styles";
+import { usePermit } from "../../Hooks/usePermit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,8 +58,17 @@ export default function InfoCard({ item }) {
   const [expanded, setExpanded] = useState(false);
   const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
   const isSettingMenuOpen = Boolean(settingMoreAnchorEl);
-  const { title, summary, content, mainParts, imgURL, user } = item;
+  const { title, summary, content, imgURL, user, owner } = item;
+  const isPermit = usePermit(owner, "admin");
 
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleEditClickOpen = () => {
+    setEditOpen(true);
+  };
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -81,10 +88,10 @@ export default function InfoCard({ item }) {
       onClose={handleSettingMenuClose}
     >
       <MenuItem>
-        <IconButton>
+        <IconButton onClick={handleEditClickOpen}>
           <EditIcon />
+          编辑
         </IconButton>
-        <p>编辑</p>
       </MenuItem>
     </Menu>
   );
@@ -99,12 +106,13 @@ export default function InfoCard({ item }) {
               aria-haspopup="true"
               onClick={handleSettingMenuOpen}
               color="inherit"
+              disabled={!isPermit}
             >
               <MoreVertIcon />
             </IconButton>
           }
           title={title}
-          subheader="September 14, 2016"
+          subheader={item.id}
         />
         <CardMedia
           component="img"
@@ -133,9 +141,14 @@ export default function InfoCard({ item }) {
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse
+          in={expanded}
+          timeout="auto"
+          unmountOnExit
+          sx={{ textAlign: "left" }}
+        >
           <CardContent>
-            <Typography paragraph>主要负责部分:</Typography>
+            {/* <Typography paragraph>主要负责部分:</Typography>
             <List>
               {mainParts.map((part, partIdx) => {
                 return (
@@ -146,7 +159,7 @@ export default function InfoCard({ item }) {
                   </ListItem>
                 );
               })}
-            </List>
+            </List> */}
             <Box sx={{ my: 2, overflow: "auto" }}>
               <MUIRichTextEditor
                 defaultValue={content}
@@ -158,6 +171,7 @@ export default function InfoCard({ item }) {
         </Collapse>
       </Card>
       {renderSettingMenu}
+      <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
     </div>
   );
 }
