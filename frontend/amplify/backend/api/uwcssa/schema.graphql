@@ -816,6 +816,7 @@ type FoundingMember
   @model
   @auth(
     rules: [
+      { allow: owner, operations: [read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -828,6 +829,7 @@ type FoundingMember
   content: String
   mainParts: [String]
   imgURL: AWSURL
+  owner: String
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }

@@ -830,10 +830,11 @@ export const createUser = /* GraphQL */ `
         id
         active
         title
-        brief
-        moreBrief
-        mainPart
-        imgURLs
+        summary
+        content
+        mainParts
+        imgURL
+        owner
         userID
         createdAt
         updatedAt
@@ -1811,10 +1812,11 @@ export const updateUser = /* GraphQL */ `
         id
         active
         title
-        brief
-        moreBrief
-        mainPart
-        imgURLs
+        summary
+        content
+        mainParts
+        imgURL
+        owner
         userID
         createdAt
         updatedAt
@@ -2792,10 +2794,11 @@ export const deleteUser = /* GraphQL */ `
         id
         active
         title
-        brief
-        moreBrief
-        mainPart
-        imgURLs
+        summary
+        content
+        mainParts
+        imgURL
+        owner
         userID
         createdAt
         updatedAt
@@ -3179,10 +3182,11 @@ export const createUserEducation = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -3458,10 +3462,11 @@ export const updateUserEducation = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -3737,10 +3742,11 @@ export const deleteUserEducation = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -4017,10 +4023,11 @@ export const createUserExperience = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -4297,10 +4304,11 @@ export const updateUserExperience = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -4577,10 +4585,11 @@ export const deleteUserExperience = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -4850,10 +4859,11 @@ export const createTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -5166,10 +5176,11 @@ export const updateTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -5482,10 +5493,11 @@ export const deleteTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -5806,10 +5818,11 @@ export const createArticle = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -6142,10 +6155,11 @@ export const updateArticle = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -6478,10 +6492,11 @@ export const deleteArticle = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -6808,10 +6823,11 @@ export const createArticleComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -7154,10 +7170,11 @@ export const updateArticleComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -7500,10 +7517,11 @@ export const deleteArticleComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -7846,10 +7864,11 @@ export const createArticleSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -8182,10 +8201,11 @@ export const updateArticleSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -8518,10 +8538,11 @@ export const deleteArticleSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -8876,10 +8897,11 @@ export const createEvent = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -9247,10 +9269,11 @@ export const updateEvent = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -9618,10 +9641,11 @@ export const deleteEvent = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -9967,10 +9991,11 @@ export const createEventComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -10332,10 +10357,11 @@ export const updateEventComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -10697,10 +10723,11 @@ export const deleteEventComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -11062,10 +11089,11 @@ export const createEventSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -11406,10 +11434,11 @@ export const updateEventSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -11750,10 +11779,11 @@ export const deleteEventSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -12108,10 +12138,11 @@ export const createEventParticipant = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -12462,10 +12493,11 @@ export const updateEventParticipant = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -12816,10 +12848,11 @@ export const deleteEventParticipant = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -13157,10 +13190,11 @@ export const createDepartment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -13452,10 +13486,11 @@ export const updateDepartment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -13747,10 +13782,11 @@ export const deleteDepartment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -14066,10 +14102,11 @@ export const createUwcssaJob = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -14396,10 +14433,11 @@ export const updateUwcssaJob = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -14726,10 +14764,11 @@ export const deleteUwcssaJob = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -15035,10 +15074,11 @@ export const createUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -15362,10 +15402,11 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -15689,10 +15730,11 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -16010,10 +16052,11 @@ export const createForumTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -16293,10 +16336,11 @@ export const updateForumTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -16576,10 +16620,11 @@ export const deleteForumTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -16860,10 +16905,11 @@ export const createForumSubTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -17180,10 +17226,11 @@ export const updateForumSubTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -17500,10 +17547,11 @@ export const deleteForumSubTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -17826,10 +17874,11 @@ export const createForumPost = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -18184,10 +18233,11 @@ export const updateForumPost = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -18542,10 +18592,11 @@ export const deleteForumPost = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -18896,10 +18947,11 @@ export const createForumPostComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -19250,10 +19302,11 @@ export const updateForumPostComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -19604,10 +19657,11 @@ export const deleteForumPostComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -19959,10 +20013,11 @@ export const createForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -20217,10 +20272,11 @@ export const createForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -20608,10 +20664,11 @@ export const updateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -20866,10 +20923,11 @@ export const updateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -21257,10 +21315,11 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -21515,10 +21574,11 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -21904,10 +21964,11 @@ export const createMarketUserInfo = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -22179,10 +22240,11 @@ export const updateMarketUserInfo = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -22454,10 +22516,11 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -22767,10 +22830,11 @@ export const createMarketItem = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -23080,10 +23144,11 @@ export const updateMarketItem = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -23393,10 +23458,11 @@ export const deleteMarketItem = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -23446,10 +23512,11 @@ export const createFoundingMember = /* GraphQL */ `
       id
       active
       title
-      brief
-      moreBrief
-      mainPart
-      imgURLs
+      summary
+      content
+      mainParts
+      imgURL
+      owner
       userID
       createdAt
       updatedAt
@@ -23671,10 +23738,11 @@ export const createFoundingMember = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -23723,10 +23791,11 @@ export const updateFoundingMember = /* GraphQL */ `
       id
       active
       title
-      brief
-      moreBrief
-      mainPart
-      imgURLs
+      summary
+      content
+      mainParts
+      imgURL
+      owner
       userID
       createdAt
       updatedAt
@@ -23948,10 +24017,11 @@ export const updateFoundingMember = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -24000,10 +24070,11 @@ export const deleteFoundingMember = /* GraphQL */ `
       id
       active
       title
-      brief
-      moreBrief
-      mainPart
-      imgURLs
+      summary
+      content
+      mainParts
+      imgURL
+      owner
       userID
       createdAt
       updatedAt
@@ -24225,10 +24296,11 @@ export const deleteFoundingMember = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -24498,10 +24570,11 @@ export const createLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -24756,10 +24829,11 @@ export const createLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -25509,10 +25583,11 @@ export const updateLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -25767,10 +25842,11 @@ export const updateLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -26520,10 +26596,11 @@ export const deleteLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -26778,10 +26855,11 @@ export const deleteLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -27532,10 +27610,11 @@ export const createWebFeedBack = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -27807,10 +27886,11 @@ export const updateWebFeedBack = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -28082,10 +28162,11 @@ export const deleteWebFeedBack = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -28359,10 +28440,11 @@ export const createUserMutationLog = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -28635,10 +28717,11 @@ export const updateUserMutationLog = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -28911,10 +28994,11 @@ export const deleteUserMutationLog = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt

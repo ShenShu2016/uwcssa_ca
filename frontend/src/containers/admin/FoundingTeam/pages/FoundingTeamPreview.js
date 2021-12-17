@@ -9,7 +9,11 @@ export default function FoundingTeamPreview() {
       <Typography variant="h3" sx={{ textAlign: "center" }}>
         Founding Team Preview
       </Typography>
-      <Button variant="contained" component={Link} to="/admin/foundingTeam/add">
+      <Button
+        variant="contained"
+        component={Link}
+        to="/admin/foundingTeam/create"
+      >
         添加成员
       </Button>
     </div>

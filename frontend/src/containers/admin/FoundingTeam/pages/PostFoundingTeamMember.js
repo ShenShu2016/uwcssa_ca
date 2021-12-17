@@ -13,6 +13,7 @@ import React, { useRef, useState } from "react";
 
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import MUIRichTextEditor from "mui-rte";
+import PublishIcon from "@mui/icons-material/Publish";
 import { convertToRaw } from "draft-js";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const Input = styled("input")({
   display: "none",
 });
-export default function PostEditFoundingTeamMember() {
+export default function PostFoundingTeamMember() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -74,7 +75,13 @@ export default function PostEditFoundingTeamMember() {
     control,
     getValues,
     formState: { errors },
-  } = useForm({});
+  } = useForm({
+    defaultValues: {
+      title: "",
+      summary: "",
+      userID: "",
+    },
+  });
 
   const handleOnChange = (prop) => (e) => {
     const tempContent = JSON.stringify(convertToRaw(e.getCurrentContent()));
@@ -103,17 +110,18 @@ export default function PostEditFoundingTeamMember() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const createFoundingTeamInput = {
+    const createFoundingMemberInput = {
       ...data,
       id: getValues("userID"),
       active: true,
       content: content,
-      mainPart: GetTags(),
+      mainParts: GetTags(),
       imgURL: imgURL,
+      owner: getValues("userID"),
     };
-    console.log(createFoundingTeamInput);
+    console.log(createFoundingMemberInput);
     const response = await dispatch(
-      postFoundingMember({ createFoundingTeamInput })
+      postFoundingMember({ createFoundingMemberInput })
     );
 
     if (response.meta.requestStatus === "fulfilled") {
@@ -154,7 +162,7 @@ export default function PostEditFoundingTeamMember() {
           )}
         />
         <Controller
-          name="brief"
+          name="summary"
           control={control}
           rules={{
             required: true,
@@ -164,13 +172,13 @@ export default function PostEditFoundingTeamMember() {
               margin="normal"
               fullWidth
               required
-              id="brief"
+              id="summary"
               label="简短描述"
               variant="outlined"
               onChange={onChange}
               value={value}
-              error={!!errors.brief}
-              helperText={errors.brief ? "不能为空" : null}
+              error={!!errors.summary}
+              helperText={errors.summary ? "不能为空" : null}
             />
           )}
         />
@@ -286,6 +294,30 @@ export default function PostEditFoundingTeamMember() {
             ]}
           />
         </Box>
+        <Button
+          variant="contained"
+          endIcon={<PublishIcon />}
+          type="submit"
+          color="primary"
+          fullWidth
+          disabled={loading}
+          sx={{ my: 4 }}
+        >
+          上传 Article
+          {loading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: green[500],
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                marginTop: "-0.75rem",
+                marginLeft: "-0.75rem",
+              }}
+            />
+          )}
+        </Button>
       </Box>
     </Box>
   );

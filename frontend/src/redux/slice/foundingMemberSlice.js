@@ -35,7 +35,7 @@ export const fetchFoundingMembers = createAsyncThunk(
 
 export const postFoundingMember = createAsyncThunk(
   "fundingMember/postFoundingMember",
-  async (createFoundingMemberInput) => {
+  async ({ createFoundingMemberInput }) => {
     try {
       const response = await API.graphql(
         graphqlOperation(createFoundingMember, {

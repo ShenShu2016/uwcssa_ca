@@ -70,7 +70,7 @@ export default function FoundingTeam() {
             icon={<AddIcon />}
             tooltipTitle={"添加成员"}
             component={Link}
-            to="/"
+            to="/admin/foundingTeam/create"
           />
         </SpeedDial>
       </Box>

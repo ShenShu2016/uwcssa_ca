@@ -1,9 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 
 import { Box } from "@mui/system";
-import Footer from "../../Footer";
 import FoundingTeamPreview from "./pages/FoundingTeamPreview";
-import PostEditFoundingTeamMember from "./pages/PostEditFoundingTeamMember";
+import PostEditFoundingTeamMember from "./pages/PostFoundingTeamMember";
 import React from "react";
 
 export default function FoundingTeamRouter() {
@@ -17,11 +16,10 @@ export default function FoundingTeamRouter() {
         />
         <Route
           exact
-          path="/admin/foundingTeam/add"
+          path="/admin/foundingTeam/create"
           component={PostEditFoundingTeamMember}
         />
       </Switch>
-      <Footer />
     </Box>
   );
 }

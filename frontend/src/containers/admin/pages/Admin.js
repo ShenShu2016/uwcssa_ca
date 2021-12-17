@@ -7,7 +7,11 @@ export default function Admin() {
   return (
     <div>
       <Typography variant="h3">我是Admin 页面</Typography>
-      <Button variant="contained" component={Link} to="/admin/FoundingTeam/add">
+      <Button
+        variant="contained"
+        component={Link}
+        to="/admin/foundingTeam/create"
+      >
         添加初始团队
       </Button>
     </div>

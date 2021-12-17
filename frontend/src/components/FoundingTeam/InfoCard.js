@@ -1,3 +1,4 @@
+import { Box, styled } from "@mui/system";
 import {
   Card,
   CardActions,
@@ -9,18 +10,21 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Menu,
+  MenuItem,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
+import EditIcon from "@mui/icons-material/Edit";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,17 +58,48 @@ const ExpandMore = styled((props) => {
 export default function InfoCard({ item }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const { title, brief, moreBrief, mainPart, imgURLs } = item;
+  const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
+  const isSettingMenuOpen = Boolean(settingMoreAnchorEl);
+  const { title, summary, content, mainParts, imgURL, user } = item;
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleSettingMenuClose = () => {
+    setSettingMoreAnchorEl(null);
+  };
+  const handleSettingMenuOpen = (event) => {
+    setSettingMoreAnchorEl(event.currentTarget);
+  };
+  const renderSettingMenu = (
+    <Menu
+      anchorEl={settingMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isSettingMenuOpen}
+      onClose={handleSettingMenuClose}
+    >
+      <MenuItem>
+        <IconButton>
+          <EditIcon />
+        </IconButton>
+        <p>编辑</p>
+      </MenuItem>
+    </Menu>
+  );
   return (
     <div>
       <Card sx={{ width: 310 }} className={classes.card}>
         <CardHeader
-          avatar={<CustomAvatar link={true} user={item.user} />}
+          avatar={<CustomAvatar link={true} user={user} />}
           action={
-            <IconButton aria-label="settings">
+            <IconButton
+              aria-label="settings"
+              aria-haspopup="true"
+              onClick={handleSettingMenuOpen}
+              color="inherit"
+            >
               <MoreVertIcon />
             </IconButton>
           }
@@ -74,12 +109,12 @@ export default function InfoCard({ item }) {
         <CardMedia
           component="img"
           height="194"
-          image={imgURLs && imgURLs[0]}
+          image={imgURL}
           alt="imgURLs[0]"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {brief}
+            {summary}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -102,7 +137,7 @@ export default function InfoCard({ item }) {
           <CardContent>
             <Typography paragraph>主要负责部分:</Typography>
             <List>
-              {mainPart.map((part, partIdx) => {
+              {mainParts.map((part, partIdx) => {
                 return (
                   <ListItem disablePadding key={partIdx}>
                     <ListItemButton>
@@ -112,10 +147,17 @@ export default function InfoCard({ item }) {
                 );
               })}
             </List>
-            <Typography paragraph>{moreBrief}</Typography>
+            <Box sx={{ my: 2, overflow: "auto" }}>
+              <MUIRichTextEditor
+                defaultValue={content}
+                readOnly={true}
+                toolbar={false}
+              />
+            </Box>
           </CardContent>
         </Collapse>
       </Card>
+      {renderSettingMenu}
     </div>
   );
 }
