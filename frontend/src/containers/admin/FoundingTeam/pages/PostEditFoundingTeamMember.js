@@ -1,54 +1,94 @@
 import {
   Box,
   Button,
-  Checkbox,
   CircularProgress,
-  Container,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  Switch,
   TextField,
   Typography,
 } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import CustomTags, {
+  GetTags,
+} from "../../../../components/CustomMUI/CustomTags";
 import React, { useRef, useState } from "react";
 
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import MUIRichTextEditor from "mui-rte";
+import { convertToRaw } from "draft-js";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postFoundingMember } from "../../../../redux/slice/foundingMemberSlice";
 import { postSingleImage } from "../../../../redux/slice/generalSlice";
+import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { useTitle } from "../../../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    maxWidth: "960px",
+    margin: "auto",
+    paddingTop: "5rem",
+    paddingInline: "1rem",
+  },
+  content: {
+    border: "3px",
+    marginBlock: "2rem",
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+  },
+  container: {
+    marginBlock: "2rem",
+    Height: "300px",
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+    border: "1px dashed",
+    borderColor: "#cfd8dc",
+    borderRadius: 5,
+    position: "relative",
+  },
+  child: {
     textAlign: "center",
-    display: "block",
-    marginBottom: "2rem",
-    marginTop: "3rem",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   },
 }));
-
+const Input = styled("input")({
+  display: "none",
+});
 export default function PostEditFoundingTeamMember() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const timer = useRef();
   useTitle("添加创作者");
-  const [imgURLs, setImgURLs] = useState(null);
+  const [imgURL, setImgURL] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [content, setContent] = useState(null);
+  const [tags, setTags] = useState([]);
   const {
     handleSubmit,
     control,
     getValues,
     formState: { errors },
   } = useForm({});
+
+  const handleOnChange = (prop) => (e) => {
+    const tempContent = JSON.stringify(convertToRaw(e.getCurrentContent()));
+    setContent(tempContent);
+  };
+  const handleKeyDown = (e) => {
+    const newTags = [...tags, e];
+    setTags(newTags);
+  };
+
+  const handleDelete = (e) => {
+    const newTags = tags.filter((tag) => tag !== e);
+    setTags(newTags);
+  };
 
   const uploadFoundingTeamMemberImg = async (e) => {
     const imageData = e.target.files;
@@ -57,7 +97,7 @@ export default function PostEditFoundingTeamMember() {
       postSingleImage({ imageData, imageLocation })
     );
     if (response.meta.requestStatus === "fulfilled") {
-      setImgURLs(response.payload);
+      setImgURL(response.payload);
     }
   };
 
@@ -65,14 +105,11 @@ export default function PostEditFoundingTeamMember() {
     setLoading(true);
     const createFoundingTeamInput = {
       ...data,
-      // id: ID!
-      // active: Boolean!
-      // title: String
-      // brief: String
-      // content: String
-      // mainPart: [String]
-      // imgURLs: AWSURL
-      // userID: ID!
+      id: getValues("userID"),
+      active: true,
+      content: content,
+      mainPart: GetTags(),
+      imgURL: imgURL,
     };
     console.log(createFoundingTeamInput);
     const response = await dispatch(
@@ -94,6 +131,162 @@ export default function PostEditFoundingTeamMember() {
   return (
     <Box className={classes.root}>
       <Typography variant="h3">添加创作者 </Typography>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Controller
+          name="title"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="title"
+              label="职称"
+              variant="outlined"
+              onChange={onChange}
+              value={value}
+              error={!!errors.title}
+              helperText={errors.title ? "不能为空" : null}
+            />
+          )}
+        />
+        <Controller
+          name="brief"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="brief"
+              label="简短描述"
+              variant="outlined"
+              onChange={onChange}
+              value={value}
+              error={!!errors.brief}
+              helperText={errors.brief ? "不能为空" : null}
+            />
+          )}
+        />
+        <Controller
+          name="userID"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="userID"
+              label="用户名"
+              variant="outlined"
+              onChange={onChange}
+              value={value}
+              error={!!errors.userID}
+              helperText={errors.userID ? "不能为空" : null}
+            />
+          )}
+        />
+        <CustomTags
+          placeholder="负责哪几个部分"
+          initial={tags}
+          onKeyDown={(e) => handleKeyDown(e)}
+          onDelete={(e) => handleDelete(e)}
+        />
+        <div>
+          {imgURL ? (
+            <Box className={classes.picture}>
+              <img
+                src={imgURL}
+                alt="imgURL"
+                style={{
+                  display: "block",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  width: "100%",
+                  height: "300px",
+                }}
+              />
+            </Box>
+          ) : (
+            <Box className={classes.container}>
+              <Box className={classes.child} color={"grey.700"}>
+                <InsertPhotoIcon
+                  style={{
+                    display: "block",
+                    margin: "auto",
+                    width: "100%",
+                    height: "100px",
+                    verticalAlign: "middle",
+                    lineHeight: "300px",
+                  }}
+                />
+                <Typography gutterBottom variant="h5">
+                  上传个人照片
+                </Typography>
+              </Box>
+            </Box>
+          )}
+          <label htmlFor="poster">
+            <Input
+              accept="poster/*"
+              id="poster"
+              type="file"
+              onChange={(e) => {
+                uploadFoundingTeamMemberImg(e);
+              }}
+            />
+            <Button variant="contained" component="span" disabled={loading}>
+              上传个人照片
+            </Button>
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: green[500],
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-0.75rem",
+                  marginLeft: "-0.75rem",
+                }}
+              />
+            )}
+          </label>
+        </div>
+        <Box className={classes.content}>
+          <MUIRichTextEditor
+            label="活动详情"
+            onChange={handleOnChange()}
+            inlineToolbar={true}
+            controls={[
+              "title",
+              "bold",
+              "italic",
+              "underline",
+              "strikethrough",
+              "highlight",
+              "undo",
+              "redo",
+              "link",
+              "media",
+              "numberList",
+              "bulletList",
+              "quote",
+              "code",
+              "clear",
+            ]}
+          />
+        </Box>
+      </Box>
     </Box>
   );
 }
