@@ -125,11 +125,11 @@ export default function PostEvent() {
     defaultValues: {
       title: "",
       summary: "",
-      content: "",
       startDate: null,
       endDate: null,
       online: false,
       group: false,
+      content: "",
       topicID: "",
       sponsor: "",
       eventStatus: "",
@@ -220,8 +220,8 @@ export default function PostEvent() {
     dispatch(fetchTopics());
     setTopicData({ name: "" });
   };
-  const handleOnChange = (prop) => (e) => {
-    const tempContent = JSON.stringify(convertToRaw(e.getCurrentContent()));
+  const handleOnChange = (prop) => (event) => {
+    const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
     setContent(tempContent);
   };
   return (
@@ -272,7 +272,7 @@ export default function PostEvent() {
                 name="summary"
                 control={control}
                 rules={{
-                  required: true,
+                  required: false,
                   minLength: 3,
                   maxLength: 300,
                 }}

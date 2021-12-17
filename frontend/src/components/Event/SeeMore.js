@@ -20,13 +20,15 @@ const useStyles = makeStyles((theme) => ({
     WebkitBoxOrient: "vertical",
   },
 }));
+
 export default function SeeMore({ content }) {
   const classes = useStyles();
   const [showMore, setShowMore] = useState(false);
+  const newContent = content.substring(34, content.length - 98);
 
   return (
     <div>
-      {content.length < 250 ? (
+      {newContent.length < 250 ? (
         <Typography
           variant="body1"
           // sx={{ marginTop: "2rem" }}
@@ -37,7 +39,7 @@ export default function SeeMore({ content }) {
           }}
           gutterBottom
         >
-          {content}
+          {newContent}
         </Typography>
       ) : (
         <div>
@@ -52,7 +54,7 @@ export default function SeeMore({ content }) {
               }}
               gutterBottom
             >
-              {content}
+              {newContent}
             </Typography>
           ) : (
             <Typography
@@ -61,7 +63,7 @@ export default function SeeMore({ content }) {
               className={classes.text}
               gutterBottom
             >
-              {content}
+              {newContent}
             </Typography>
           )}
 
