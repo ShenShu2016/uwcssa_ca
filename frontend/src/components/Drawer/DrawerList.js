@@ -207,7 +207,6 @@ export default function DrawerList({ toggleDrawer }) {
                 />
                 {openMarket ? <ExpandMore /> : <ExpandLess />}
               </ListItemButton>
-
               <Collapse in={openMarket} timeout="auto">
                 <ListItem>
                   <ListItemButton

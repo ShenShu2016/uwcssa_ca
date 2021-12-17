@@ -833,9 +833,9 @@ type FoundingMember
   active: Boolean!
   title: String
   brief: String
-  moreBrief: String
+  content: String
   mainPart: [String]
-  imgURLs: [AWSURL]
+  imgURLs: AWSURL
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }

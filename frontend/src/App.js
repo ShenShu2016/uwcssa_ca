@@ -10,6 +10,7 @@ import { fetchUserProfile, loadUser } from "./redux/slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Account from "./containers/account/AccountRouter";
+import AdminRouter from "./containers/admin/AdminRouter";
 import Amplify from "aws-amplify";
 import ArticleRouter from "./containers/article/ArticleRouter";
 import AuthRouter from "./containers/authentication/AuthenticationRouter";
@@ -86,6 +87,11 @@ export default function App() {
         <Box className={classes.headerBox} />
         <Switch>
           <Route path="/" exact component={Home} />
+          <PrivateRoute
+            allowRoles="admin"
+            path="/admin"
+            component={AdminRouter}
+          />
           <Route path="/auth" component={AuthRouter} />
           <PrivateRoute
             allowRoles="anyone"

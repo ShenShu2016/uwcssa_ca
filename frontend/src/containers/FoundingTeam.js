@@ -1,12 +1,21 @@
 import React, { useEffect } from "react";
 import {
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  Typography,
+} from "@mui/material";
+import {
   fetchFoundingMembers,
   selectAllFoundingMembers,
 } from "../redux/slice/foundingMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import AddIcon from "@mui/icons-material/Add";
+import { Box } from "@mui/system";
+import EditIcon from "@mui/icons-material/Edit";
 import InfoCard from "../components/FoundingTeam/InfoCard";
-import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../Hooks/useTitle";
 
@@ -51,6 +60,20 @@ export default function FoundingTeam() {
           return <InfoCard item={member} key={memberIdx} />;
         })}
       </div>
+      <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
+        <SpeedDial
+          ariaLabel="SpeedDial openIcon example"
+          sx={{ position: "absolute", bottom: 16, right: 16 }}
+          icon={<SpeedDialIcon openIcon={<EditIcon />} />}
+        >
+          <SpeedDialAction
+            icon={<AddIcon />}
+            tooltipTitle={"添加成员"}
+            component={Link}
+            to="/"
+          />
+        </SpeedDial>
+      </Box>
     </div>
   );
 }
