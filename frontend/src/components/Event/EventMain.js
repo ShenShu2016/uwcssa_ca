@@ -15,7 +15,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-import MUIRichTextEditor from "mui-rte";
 
 const useStyles = makeStyles((theme) => ({
   actionArea: {
