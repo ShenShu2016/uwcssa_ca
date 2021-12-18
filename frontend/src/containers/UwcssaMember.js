@@ -6,15 +6,15 @@ import {
   Typography,
 } from "@mui/material";
 import {
-  fetchFoundingMembers,
-  selectAllFoundingMembers,
-} from "../redux/slice/foundingMemberSlice";
+  fetchUwcssaMembers,
+  selectAllUwcssaMembers,
+} from "../redux/slice/uwcssaMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/system";
 import EditIcon from "@mui/icons-material/Edit";
-import InfoCard from "../components/FoundingMember/InfoCard";
+import InfoCard from "../components/UwcssaMember/InfoCard";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../Hooks/useTitle";
@@ -38,25 +38,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoundingMember() {
-  useTitle("UWCSSA.CA-创始团队以及贡献者");
+export default function UwcssaMember() {
+  useTitle("UWCSSA学生会成员");
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const foundingMembers = useSelector(selectAllFoundingMembers);
-  console.log(foundingMembers);
+  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
+  console.log(uwcssaMembers);
 
   useEffect(() => {
-    dispatch(fetchFoundingMembers());
+    dispatch(fetchUwcssaMembers());
   }, [dispatch]);
 
   return (
     <div className={classes.root}>
       <Typography variant="h3" className={classes.title}>
-        创始团队以及贡献者
+        UWCSSA 学生会成员
       </Typography>
       <div className={classes.cards}>
-        {foundingMembers.map((member, memberIdx) => {
+        {uwcssaMembers.map((member, memberIdx) => {
           return <InfoCard item={member} key={memberIdx} />;
         })}
       </div>
@@ -70,7 +70,7 @@ export default function FoundingMember() {
             icon={<AddIcon />}
             tooltipTitle={"添加成员"}
             component={Link}
-            to="/admin/foundingMember/create"
+            to="/admin/uwcssaMember/create"
           />
         </SpeedDial>
       </Box>

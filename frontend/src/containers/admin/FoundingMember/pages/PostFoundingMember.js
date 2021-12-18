@@ -97,7 +97,7 @@ export default function PostFoundingMember() {
     setTags(newTags);
   };
 
-  const uploadFoundingTeamMemberImg = async (e) => {
+  const uploadFoundingMemberMemberImg = async (e) => {
     const imageData = e.target.files;
     const imageLocation = "foundingMember";
     const response = await dispatch(
@@ -249,7 +249,7 @@ export default function PostFoundingMember() {
               id="poster"
               type="file"
               onChange={(e) => {
-                uploadFoundingTeamMemberImg(e);
+                uploadFoundingMemberMemberImg(e);
               }}
             />
             <Button variant="contained" component="span" disabled={loading}>
