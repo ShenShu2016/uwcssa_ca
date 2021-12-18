@@ -23,7 +23,7 @@ import ForumRouter from "./containers/forum/ForumRouter";
 import FoundingMember from "./containers/FoundingMember";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Market from "./containers/market/MarketRouter";
+import MarketRouter from "./containers/market/MarketRouter";
 import NoPermission from "./containers/NoPermission";
 import PrivateRoute from "./components/PrivateRoute";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -104,7 +104,7 @@ export default function App() {
             component={StaffRouter}
           />
           <Route path="/article" component={ArticleRouter} />
-          <Route path="/market" component={Market} /> 
+          <Route path="/market" component={MarketRouter} /> 
           <Route path="/forum" component={ForumRouter} />
           <Route path="/foundingMember" exact component={FoundingMember} />
           <Route path="/contactUs" exact component={ContactUs} />
