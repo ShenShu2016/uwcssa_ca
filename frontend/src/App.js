@@ -30,6 +30,7 @@ import ScrollToTop from "./Hooks/ScrollToTop";
 import StaffRouter from "./containers/staff/StaffRouter";
 import TestRouter from "./containers/test/TestRouter";
 import UserFeedBack from "./containers/UserFeedBack";
+import UwcssaMember from "./containers/UwcssaMember";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
 
@@ -107,6 +108,7 @@ export default function App() {
           <Route path="/market" component={MarketRouter} /> 
           <Route path="/forum" component={ForumRouter} />
           <Route path="/foundingMember" exact component={FoundingMember} />
+          <Route path="/uwcssaMember" exact component={UwcssaMember} />
           <Route path="/contactUs" exact component={ContactUs} />
           <Route path="/career" component={Career} />
           <Route path="/event" component={EventRouter} />

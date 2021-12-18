@@ -448,6 +448,27 @@ export default function DrawerList({ toggleDrawer }) {
           <div>
             <ListItemButton
               component={Link}
+              to="/uwcssaMember"
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemIcon>
+                <img
+                  src={uwcssa_logo}
+                  alt="uwcssaLogo"
+                  style={{ height: "24px" }}
+                />
+              </ListItemIcon>
+              <ListItemText
+                primary="学生会成员"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
               to="/foundingMember"
               onClick={toggleDrawer(false)}
             >

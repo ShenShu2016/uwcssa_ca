@@ -3,15 +3,17 @@ import { Route, Switch } from "react-router-dom";
 import Admin from "./pages/Admin";
 import { Box } from "@mui/system";
 import Footer from "../Footer";
-import FoundingTeamRouter from "./FoundingTeam/FoundingMemberRouter";
+import FoundingMemberRouter from "./FoundingMember/FoundingMemberRouter";
 import React from "react";
+import UwcssaMemberRouter from "./UwcssaMember/UwcssaMemberRouter";
 
 export default function AdminRouter() {
   return (
     <Box>
       <Switch>
         <Route exact path="/admin" component={Admin} />
-        <Route path="/admin/foundingMember" component={FoundingTeamRouter} />
+        <Route path="/admin/foundingMember" component={FoundingMemberRouter} />
+        <Route path="/admin/uwcssaMember" component={UwcssaMemberRouter} />
         {/* <Route exact path="/staff" component={Staff} />
         <Route exact path="/staff/article" component={ArticlesPreview} />
         <Route exact path="/staff/uwcssaJob" component={UwcssaJobsPreview} />
