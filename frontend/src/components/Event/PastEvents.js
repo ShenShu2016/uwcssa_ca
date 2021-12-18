@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     color: "transparent",
     boxShadow: "none",
     overflow: "initial",
-    height: 300,
+    height: 335,
     "&:hover": {
       boxShadow: "0 6px 12px 0 #757ce8",
     },
@@ -87,7 +87,7 @@ export default function PastEvent({ event }) {
   const classes = useStyles();
   const { id, title, startDate, endDate, location, content, posterImgURL } =
     event;
-
+  const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
       item
@@ -236,7 +236,7 @@ export default function PastEvent({ event }) {
                 <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
                   <Grid item xs zeroMinWidth>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {content}
+                      {newContent}
                     </Typography>
                   </Grid>
                 </Grid>
