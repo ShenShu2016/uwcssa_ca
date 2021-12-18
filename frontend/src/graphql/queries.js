@@ -233,10 +233,11 @@ export const getUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -619,10 +620,11 @@ export const getUserMutationLog = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -1161,10 +1163,11 @@ export const userSortBySortKey = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -2031,10 +2034,11 @@ export const getUser = /* GraphQL */ `
         id
         active
         title
-        brief
-        moreBrief
-        mainPart
-        imgURLs
+        summary
+        content
+        mainParts
+        imgURL
+        owner
         userID
         createdAt
         updatedAt
@@ -2408,10 +2412,11 @@ export const listUsers = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -2684,10 +2689,11 @@ export const getUserEducation = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -3004,10 +3010,11 @@ export const getUserExperience = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -3318,10 +3325,11 @@ export const getTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -3681,10 +3689,11 @@ export const getArticle = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -4132,10 +4141,11 @@ export const getArticleComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -4605,10 +4615,11 @@ export const getArticleSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -5078,10 +5089,11 @@ export const getEvent = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -5586,10 +5598,11 @@ export const getEventComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -6094,10 +6107,11 @@ export const getEventSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -6567,10 +6581,11 @@ export const getEventParticipant = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -7071,10 +7086,11 @@ export const getDepartment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -7429,10 +7445,11 @@ export const getUwcssaJob = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -7857,10 +7874,11 @@ export const getForumTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -8177,10 +8195,11 @@ export const getForumSubTopic = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -8763,10 +8782,11 @@ export const getForumPost = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -9176,10 +9196,11 @@ export const getForumPostComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -9666,10 +9687,11 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -9924,10 +9946,11 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -10502,10 +10525,11 @@ export const getMarketUserInfo = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -10851,10 +10875,11 @@ export const getMarketItem = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -11326,10 +11351,11 @@ export const getFoundingMember = /* GraphQL */ `
       id
       active
       title
-      brief
-      moreBrief
-      mainPart
-      imgURLs
+      summary
+      content
+      mainParts
+      imgURL
+      owner
       userID
       createdAt
       updatedAt
@@ -11551,10 +11577,11 @@ export const getFoundingMember = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -11605,10 +11632,11 @@ export const listFoundingMembers = /* GraphQL */ `
         id
         active
         title
-        brief
-        moreBrief
-        mainPart
-        imgURLs
+        summary
+        content
+        mainParts
+        imgURL
+        owner
         userID
         createdAt
         updatedAt
@@ -11862,10 +11890,11 @@ export const getLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -12120,10 +12149,11 @@ export const getLike = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt
@@ -13044,10 +13074,11 @@ export const getWebFeedBack = /* GraphQL */ `
           id
           active
           title
-          brief
-          moreBrief
-          mainPart
-          imgURLs
+          summary
+          content
+          mainParts
+          imgURL
+          owner
           userID
           createdAt
           updatedAt

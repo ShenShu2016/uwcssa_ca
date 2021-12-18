@@ -34,9 +34,7 @@ type User
   lastName: String
   intro: String
   major: String
-  #avatarImgS3Key: String
   avatarImgURL: AWSURL
-  #backGroundImgS3Key: String
   backGroundImgURL: AWSURL
   linkedIn: String
   github: String
@@ -258,11 +256,8 @@ type Event
   endDate: AWSDateTime!
   online: Boolean! #代表线上线下
   group: Boolean!
-  # backGroundImgS3Key: String
   backGroundImgURL: AWSURL
-  # qrCodeImgS3Key: String
   qrCodeImgURL: AWSURL
-  # posterImgS3Key: String
   posterImgURL: AWSURL
   imgURLs: [AWSURL]
   content: String
@@ -425,7 +420,6 @@ type UwcssaJob
   title: String!
   requirements: [String]!
   bonus: [String]!
-  #imgS3Key: String
   imgURLs: [AWSURL]
   benefits: [String]!
   schedule: [String]!
@@ -543,7 +537,6 @@ type ForumPost
   id: ID!
   title: String!
   content: String!
-  #imgS3Keys: [String]
   imgURLs: [AWSURL]
   tags: [String]
   likes: [Like] @connection(keyName: "byForumPost", fields: ["id"])
@@ -684,7 +677,6 @@ type MarketItem
   ) {
   id: ID!
   name: String
-  #imgS3Keys: [String]
   imgURLs: [AWSURL]
   title: String
   price: Int
@@ -824,6 +816,7 @@ type FoundingMember
   @model
   @auth(
     rules: [
+      { allow: owner, operations: [read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
@@ -832,10 +825,11 @@ type FoundingMember
   id: ID!
   active: Boolean!
   title: String
-  brief: String
-  moreBrief: String
-  mainPart: [String]
-  imgURLs: [AWSURL]
+  summary: String
+  content: String
+  mainParts: [String]
+  imgURL: AWSURL
+  owner: String
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }

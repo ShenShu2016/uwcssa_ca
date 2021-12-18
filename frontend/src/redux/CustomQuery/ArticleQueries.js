@@ -10,6 +10,7 @@ export const getArticle = /* GraphQL */ `
       summary
       tags
       title
+      #owner
       topic {
         id
         name

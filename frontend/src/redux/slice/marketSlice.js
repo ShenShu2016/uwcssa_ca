@@ -56,7 +56,7 @@ export const selectedMarketItem = createAsyncThunk(
       variables: { id: id },
       authMode: "AWS_IAM",
     });
-    // console.log("what?", response);
+    console.log("what?", response);
     if (response.data.getMarketItem === null) {
       return { id: id, description: "not-found" };
     }
@@ -141,7 +141,7 @@ const marketSlice = createSlice({
       .addCase(updateMarketItemDetail.fulfilled, (state, action) => {
         state.updateMarketItemDetailStatus = "succeeded";
         // state.marketItems.unshift(action.payload.data.createMarketItem);
-        marketAdapter.updateOne(state, action.payload);
+        marketAdapter.upsertOne(state, action.payload);
         // state.updateMarketItemStatus = "idle";
       })
       .addCase(updateMarketItemDetail.rejected, (state, action) => {

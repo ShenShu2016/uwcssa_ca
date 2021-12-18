@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
-import GoogleMaps from "../GoogleMapsPlace";
 import LinearProgress from "@mui/material/LinearProgress";
 import loadingFile from "./loading.gif";
 import { red } from "@mui/material/colors";
@@ -38,7 +37,6 @@ export const Loading = (status = null) => {
       clearInterval(timer);
     };
   }, []);
-
   return (
     <Box
       sx={{
@@ -130,7 +128,6 @@ export const Loading = (status = null) => {
           valueBuffer={buffer}
         />
       </Box>
-      <GoogleMaps />
     </Box>
   );
 };

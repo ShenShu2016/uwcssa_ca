@@ -8,10 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 
+import GoogleMap from "../GoogleMap/GoogleMap";
+import Marker from "../GoogleMap/Marker";
 import React from "react";
 import { marketItemOptions } from "./marketItemOptions";
 import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
+import placeses from "../../places.json";
 
 const {
   airConditionType: ACType,
@@ -53,6 +56,12 @@ const DetailInfo = ({
   fuelType,
 }) => {
   console.log("type", type);
+  const [clicked, setClicked] = React.useState(null);
+
+  let places = placeses.results;
+  places.forEach((result) => {
+    result.show = false;
+  });
   return (
     <React.Fragment>
       <Typography marginX="1rem" marginY="0.5rem" fontWeight="600">
@@ -201,7 +210,35 @@ const DetailInfo = ({
           color: "rgb(161 161 161 / 87%)",
         }}
       >
-        Google Map Currently Unavailable
+        <GoogleMap
+          defaultZoom={10}
+          defaultCenter={[
+            places[0].geometry.location.lat,
+            places[0].geometry.location.lng,
+          ]}
+          // onChildClick={onChildClickCallback}
+          center={
+            clicked && [
+              clicked.geometry.location.lat,
+              clicked.geometry.location.lng,
+            ]
+          }
+        >
+          {places.map((place) => (
+            <Marker
+              key={place.id}
+              text={place.name}
+              lat={place.geometry.location.lat}
+              lng={place.geometry.location.lng}
+              // open={open}
+              place={place}
+              onClick={() => {
+                setClicked(place);
+                // setOpen((prev) => !prev);
+              }}
+            />
+          ))}
+        </GoogleMap>
       </Paper>
       <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
         {location.length === 0 ? "Location Goes Here" : location}

@@ -207,7 +207,6 @@ export default function DrawerList({ toggleDrawer }) {
                 />
                 {openMarket ? <ExpandMore /> : <ExpandLess />}
               </ListItemButton>
-
               <Collapse in={openMarket} timeout="auto">
                 <ListItem>
                   <ListItemButton
@@ -449,7 +448,7 @@ export default function DrawerList({ toggleDrawer }) {
           <div>
             <ListItemButton
               component={Link}
-              to="/foundingTeam"
+              to="/foundingMember"
               onClick={toggleDrawer(false)}
             >
               <ListItemIcon>

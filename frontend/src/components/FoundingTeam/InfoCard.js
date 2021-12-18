@@ -1,3 +1,4 @@
+import { Box, styled } from "@mui/system";
 import {
   Card,
   CardActions,
@@ -5,22 +6,23 @@ import {
   CardHeader,
   CardMedia,
   Collapse,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
+  Menu,
+  MenuItem,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
+import Edit from "./Edit";
+import EditIcon from "@mui/icons-material/Edit";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/system";
+import { usePermit } from "../../Hooks/usePermit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,32 +56,73 @@ const ExpandMore = styled((props) => {
 export default function InfoCard({ item }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const { title, brief, moreBrief, mainPart, imgURLs } = item;
+  const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
+  const isSettingMenuOpen = Boolean(settingMoreAnchorEl);
+  const { title, summary, content, imgURL, user, owner } = item;
+  const isPermit = usePermit(owner, "admin");
+
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleEditClickOpen = () => {
+    setEditOpen(true);
+  };
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleSettingMenuClose = () => {
+    setSettingMoreAnchorEl(null);
+  };
+  const handleSettingMenuOpen = (event) => {
+    setSettingMoreAnchorEl(event.currentTarget);
+  };
+  const renderSettingMenu = (
+    <Menu
+      anchorEl={settingMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isSettingMenuOpen}
+      onClose={handleSettingMenuClose}
+    >
+      <MenuItem>
+        <IconButton onClick={handleEditClickOpen}>
+          <EditIcon />
+          编辑
+        </IconButton>
+      </MenuItem>
+    </Menu>
+  );
   return (
     <div>
       <Card sx={{ width: 310 }} className={classes.card}>
         <CardHeader
-          avatar={<CustomAvatar link={true} user={item.user} />}
+          avatar={<CustomAvatar link={true} user={user} />}
           action={
-            <IconButton aria-label="settings">
+            <IconButton
+              aria-label="settings"
+              aria-haspopup="true"
+              onClick={handleSettingMenuOpen}
+              color="inherit"
+              disabled={!isPermit}
+            >
               <MoreVertIcon />
             </IconButton>
           }
           title={title}
-          subheader="September 14, 2016"
+          subheader={item.id}
         />
         <CardMedia
           component="img"
           height="194"
-          image={imgURLs && imgURLs[0]}
+          image={imgURL}
           alt="imgURLs[0]"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {brief}
+            {summary}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -98,11 +141,16 @@ export default function InfoCard({ item }) {
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse
+          in={expanded}
+          timeout="auto"
+          unmountOnExit
+          sx={{ textAlign: "left" }}
+        >
           <CardContent>
-            <Typography paragraph>主要负责部分:</Typography>
+            {/* <Typography paragraph>主要负责部分:</Typography>
             <List>
-              {mainPart.map((part, partIdx) => {
+              {mainParts.map((part, partIdx) => {
                 return (
                   <ListItem disablePadding key={partIdx}>
                     <ListItemButton>
@@ -111,11 +159,19 @@ export default function InfoCard({ item }) {
                   </ListItem>
                 );
               })}
-            </List>
-            <Typography paragraph>{moreBrief}</Typography>
+            </List> */}
+            <Box sx={{ my: 2, overflow: "auto" }}>
+              <MUIRichTextEditor
+                defaultValue={content}
+                readOnly={true}
+                toolbar={false}
+              />
+            </Box>
           </CardContent>
         </Collapse>
       </Card>
+      {renderSettingMenu}
+      <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
     </div>
   );
 }

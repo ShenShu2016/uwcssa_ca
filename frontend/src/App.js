@@ -10,6 +10,7 @@ import { fetchUserProfile, loadUser } from "./redux/slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Account from "./containers/account/AccountRouter";
+import AdminRouter from "./containers/admin/AdminRouter";
 import Amplify from "aws-amplify";
 import ArticleRouter from "./containers/article/ArticleRouter";
 import AuthRouter from "./containers/authentication/AuthenticationRouter";
@@ -19,10 +20,10 @@ import ContactUs from "./containers/ContactUs";
 import CustomAlert from "./components/CustomMUI/CustomAlert";
 import EventRouter from "./containers/event/EventRouter";
 import ForumRouter from "./containers/forum/ForumRouter";
-import FoundingTeam from "./containers/FoundingTeam";
+import FoundingMember from "./containers/FoundingMember";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Market from "./containers/market/MarketRouter";
+import MarketRouter from "./containers/market/MarketRouter";
 import NoPermission from "./containers/NoPermission";
 import PrivateRoute from "./components/PrivateRoute";
 import ScrollToTop from "./Hooks/ScrollToTop";
@@ -86,6 +87,11 @@ export default function App() {
         <Box className={classes.headerBox} />
         <Switch>
           <Route path="/" exact component={Home} />
+          <PrivateRoute
+            allowRoles="admin"
+            path="/admin"
+            component={AdminRouter}
+          />
           <Route path="/auth" component={AuthRouter} />
           <PrivateRoute
             allowRoles="anyone"
@@ -98,9 +104,9 @@ export default function App() {
             component={StaffRouter}
           />
           <Route path="/article" component={ArticleRouter} />
-          <Route path="/market" component={Market} /> 
+          <Route path="/market" component={MarketRouter} /> 
           <Route path="/forum" component={ForumRouter} />
-          <Route path="/foundingTeam" exact component={FoundingTeam} />
+          <Route path="/foundingMember" exact component={FoundingMember} />
           <Route path="/contactUs" exact component={ContactUs} />
           <Route path="/career" component={Career} />
           <Route path="/event" component={EventRouter} />
