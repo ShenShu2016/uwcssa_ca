@@ -416,7 +416,7 @@ const StyledInputElement = styled("input")`
   // padding: 6px 10px;
   //color: #20262d;
   transition: width 300ms ease;
-  width: 560px;
+
   &:hover {
     background: #eaeef3;
     border-color: #e5e8ec;
