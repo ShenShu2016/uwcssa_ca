@@ -233,6 +233,7 @@ export const getUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -620,6 +621,7 @@ export const getUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -1163,6 +1165,7 @@ export const userSortBySortKey = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -1670,6 +1673,9 @@ export const getUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -2034,6 +2040,7 @@ export const getUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -2412,6 +2419,7 @@ export const listUsers = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -2689,6 +2697,7 @@ export const getUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -3010,6 +3019,7 @@ export const getUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -3325,6 +3335,7 @@ export const getTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -3689,6 +3700,7 @@ export const getArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -4141,6 +4153,7 @@ export const getArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -4615,6 +4628,7 @@ export const getArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5089,6 +5103,7 @@ export const getEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5598,6 +5613,7 @@ export const getEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6107,6 +6123,7 @@ export const getEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6581,6 +6598,7 @@ export const getEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7086,6 +7104,7 @@ export const getDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7126,6 +7145,25 @@ export const getDepartment = /* GraphQL */ `
         webFeedBack {
           nextToken
         }
+      }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
       }
       uwcssaJobs {
         items {
@@ -7184,8 +7222,380 @@ export const listDepartments = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaMember = /* GraphQL */ `
+  query GetUwcssaMember($id: ID!) {
+    getUwcssaMember(id: $id) {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listUwcssaMembers = /* GraphQL */ `
+  query ListUwcssaMembers(
+    $filter: ModelUwcssaMemberFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        active
+        title
+        subTitle
+        summary
+        content
+        imgURL
+        startDate
+        endDate
+        createdAt
+        departmentID
+        owner
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
         }
       }
       nextToken
@@ -7445,6 +7855,7 @@ export const getUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7512,6 +7923,9 @@ export const getUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -7584,7 +7998,7 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
     $departmentID: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelUwcssaJobFilterInput
+    $filter: ModelUwcssaMemberFilterInput
     $limit: Int
     $nextToken: String
   ) {
@@ -7598,21 +8012,17 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
     ) {
       items {
         id
-        introduction
-        title
-        requirements
-        bonus
-        imgURLs
-        benefits
-        schedule
-        like
-        unlike
         active
+        title
+        subTitle
+        summary
+        content
+        imgURL
+        startDate
+        endDate
         createdAt
         departmentID
-        uwcssaJobResumes {
-          nextToken
-        }
+        owner
         userID
         updatedAt
         user {
@@ -7874,6 +8284,7 @@ export const getForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8195,6 +8606,7 @@ export const getForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8782,6 +9194,7 @@ export const getForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9196,6 +9609,7 @@ export const getForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9687,6 +10101,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9946,6 +10361,7 @@ export const getForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10525,6 +10941,7 @@ export const getMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10875,6 +11292,7 @@ export const getMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11351,6 +11769,7 @@ export const getFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -11577,6 +11996,7 @@ export const getFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11632,6 +12052,7 @@ export const listFoundingMembers = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -11890,6 +12311,7 @@ export const getLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12149,6 +12571,7 @@ export const getLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13074,6 +13497,7 @@ export const getWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts

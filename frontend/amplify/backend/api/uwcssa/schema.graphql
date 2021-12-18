@@ -396,6 +396,41 @@ type Department
   email: AWSEmail
   leader: String
   uwcssaJobs: [UwcssaJob] @connection(keyName: "byDepartment", fields: ["id"])
+  uwcssaMembers: [UwcssaMember]
+    @connection(keyName: "byDepartment", fields: ["id"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type UwcssaMember
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(
+    name: "uwcssaMemberSortByDepartmentID"
+    fields: ["departmentID", "createdAt"]
+    queryField: "uwcssaJobSortByDepartmentID"
+  )
+  @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
+  id: ID!
+  active: Boolean!
+  title: String
+  subTitle: String
+  summary: String
+  content: String
+  imgURL: AWSURL
+  startDate: AWSDateTime
+  endDate: AWSDateTime
+  createdAt: AWSDateTime!
+  departmentID: ID!
+  department: Department @connection(fields: ["departmentID"])
+  owner: ID!
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -825,6 +860,7 @@ type FoundingMember
   id: ID!
   active: Boolean!
   title: String
+  subTitle: String
   summary: String
   content: String
   mainParts: [String]

@@ -233,6 +233,7 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -558,6 +559,7 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -883,6 +885,7 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -1206,6 +1209,7 @@ export const onCreateUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -1480,6 +1484,7 @@ export const onUpdateUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -1754,6 +1759,7 @@ export const onDeleteUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -2260,6 +2266,9 @@ export const onCreateUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -2624,6 +2633,7 @@ export const onCreateUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -3239,6 +3249,9 @@ export const onUpdateUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -3603,6 +3616,7 @@ export const onUpdateUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -4218,6 +4232,9 @@ export const onDeleteUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -4582,6 +4599,7 @@ export const onDeleteUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -4967,6 +4985,7 @@ export const onCreateUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5244,6 +5263,7 @@ export const onUpdateUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5521,6 +5541,7 @@ export const onDeleteUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5799,6 +5820,7 @@ export const onCreateUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6077,6 +6099,7 @@ export const onUpdateUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6355,6 +6378,7 @@ export const onDeleteUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6626,6 +6650,7 @@ export const onCreateTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6940,6 +6965,7 @@ export const onUpdateTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7254,6 +7280,7 @@ export const onDeleteTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7576,6 +7603,7 @@ export const onCreateArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7910,6 +7938,7 @@ export const onUpdateArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8244,6 +8273,7 @@ export const onDeleteArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8572,6 +8602,7 @@ export const onCreateArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8916,6 +8947,7 @@ export const onUpdateArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9260,6 +9292,7 @@ export const onDeleteArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9604,6 +9637,7 @@ export const onCreateArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9938,6 +9972,7 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10272,6 +10307,7 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10628,6 +10664,7 @@ export const onCreateEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10997,6 +11034,7 @@ export const onUpdateEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11366,6 +11404,7 @@ export const onDeleteEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11713,6 +11752,7 @@ export const onCreateEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12076,6 +12116,7 @@ export const onUpdateEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12439,6 +12480,7 @@ export const onDeleteEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12802,6 +12844,7 @@ export const onCreateEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13144,6 +13187,7 @@ export const onUpdateEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13486,6 +13530,7 @@ export const onDeleteEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13842,6 +13887,7 @@ export const onCreateEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14194,6 +14240,7 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14546,6 +14593,7 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14885,6 +14933,7 @@ export const onCreateDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14925,6 +14974,25 @@ export const onCreateDepartment = /* GraphQL */ `
         webFeedBack {
           nextToken
         }
+      }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
       }
       uwcssaJobs {
         items {
@@ -15178,6 +15246,7 @@ export const onUpdateDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -15218,6 +15287,25 @@ export const onUpdateDepartment = /* GraphQL */ `
         webFeedBack {
           nextToken
         }
+      }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
       }
       uwcssaJobs {
         items {
@@ -15471,6 +15559,7 @@ export const onDeleteDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -15512,6 +15601,25 @@ export const onDeleteDepartment = /* GraphQL */ `
           nextToken
         }
       }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
+      }
       uwcssaJobs {
         items {
           id
@@ -15531,6 +15639,948 @@ export const onDeleteDepartment = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+    }
+  }
+`;
+export const onCreateUwcssaMember = /* GraphQL */ `
+  subscription OnCreateUwcssaMember {
+    onCreateUwcssaMember {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateUwcssaMember = /* GraphQL */ `
+  subscription OnUpdateUwcssaMember {
+    onUpdateUwcssaMember {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteUwcssaMember = /* GraphQL */ `
+  subscription OnDeleteUwcssaMember {
+    onDeleteUwcssaMember {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
       }
     }
   }
@@ -15788,6 +16838,7 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -15855,6 +16906,9 @@ export const onCreateUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -16116,6 +17170,7 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -16183,6 +17238,9 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -16444,6 +17502,7 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -16511,6 +17570,9 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -16745,6 +17807,7 @@ export const onCreateForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17026,6 +18089,7 @@ export const onUpdateForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17307,6 +18371,7 @@ export const onDeleteForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17589,6 +18654,7 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17907,6 +18973,7 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -18225,6 +19292,7 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -18549,6 +19617,7 @@ export const onCreateForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -18905,6 +19974,7 @@ export const onUpdateForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -19261,6 +20331,7 @@ export const onDeleteForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -19613,6 +20684,7 @@ export const onCreateForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -19965,6 +21037,7 @@ export const onUpdateForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20317,6 +21390,7 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20670,6 +21744,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20929,6 +22004,7 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -21318,6 +22394,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -21577,6 +22654,7 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -21966,6 +23044,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -22225,6 +23304,7 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -22612,6 +23692,7 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -22885,6 +23966,7 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23158,6 +24240,7 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23469,6 +24552,7 @@ export const onCreateMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23780,6 +24864,7 @@ export const onUpdateMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24091,6 +25176,7 @@ export const onDeleteMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24142,6 +25228,7 @@ export const onCreateFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -24368,6 +25455,7 @@ export const onCreateFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24418,6 +25506,7 @@ export const onUpdateFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -24644,6 +25733,7 @@ export const onUpdateFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24694,6 +25784,7 @@ export const onDeleteFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -24920,6 +26011,7 @@ export const onDeleteFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -25191,6 +26283,7 @@ export const onCreateLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -25450,6 +26543,7 @@ export const onCreateLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -26201,6 +27295,7 @@ export const onUpdateLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -26460,6 +27555,7 @@ export const onUpdateLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -27211,6 +28307,7 @@ export const onDeleteLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -27470,6 +28567,7 @@ export const onDeleteLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28222,6 +29320,7 @@ export const onCreateWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28495,6 +29594,7 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28768,6 +29868,7 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts

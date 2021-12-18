@@ -8,6 +8,7 @@ import {
   CardMedia,
   CircularProgress,
   Container,
+  Divider,
   Grid,
   Stack,
   Tab,
@@ -20,7 +21,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import EventComments from "./EventDetail/Comment/EventComments";
 import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
-import EventIcon from "@mui/icons-material/Event";
+// import EventIcon from "@mui/icons-material/Event";
 import FlagIcon from "@mui/icons-material/Flag";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
@@ -33,7 +34,7 @@ import { makeStyles } from "@mui/styles";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import SeeMore from "./SeeMore";
-
+import InfoIcon from "@mui/icons-material/Info";
 const useStyles = makeStyles((theme) => ({
   action: {
     display: "flex",
@@ -204,6 +205,7 @@ export default function EventBody({ event }) {
               </Box>
             </Box>
           </Box>
+          <Divider sx={{ margin: "0.5rem" }} />
           <div sx={{ width: "100%" }}>
             <Container
               size="md"
@@ -217,13 +219,14 @@ export default function EventBody({ event }) {
               >
                 <Tabs value={value} onChange={handleChange}>
                   <Tab
-                    icon={<EventIcon />}
-                    label="活动详情"
+                    //icon={<EventIcon />}
+                    icon={<InfoIcon />}
+                    arial-label="活动详情"
                     {...a11yProps(0)}
                   />
                   <Tab
                     icon={<ForumIcon />}
-                    label="活动讨论"
+                    arial-label="活动讨论"
                     {...a11yProps(1)}
                   />
                 </Tabs>
