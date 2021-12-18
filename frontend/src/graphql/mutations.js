@@ -466,6 +466,9 @@ export const createUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -830,6 +833,7 @@ export const createUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -1448,6 +1452,9 @@ export const updateUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -1812,6 +1819,7 @@ export const updateUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -2430,6 +2438,9 @@ export const deleteUser = /* GraphQL */ `
           updatedAt
           badges
         }
+        uwcssaMembers {
+          nextToken
+        }
         uwcssaJobs {
           nextToken
         }
@@ -2794,6 +2805,7 @@ export const deleteUser = /* GraphQL */ `
         id
         active
         title
+        subTitle
         summary
         content
         mainParts
@@ -3182,6 +3194,7 @@ export const createUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -3462,6 +3475,7 @@ export const updateUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -3742,6 +3756,7 @@ export const deleteUserEducation = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -4023,6 +4038,7 @@ export const createUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -4304,6 +4320,7 @@ export const updateUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -4585,6 +4602,7 @@ export const deleteUserExperience = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -4859,6 +4877,7 @@ export const createTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5176,6 +5195,7 @@ export const updateTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5493,6 +5513,7 @@ export const deleteTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -5818,6 +5839,7 @@ export const createArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6155,6 +6177,7 @@ export const updateArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6492,6 +6515,7 @@ export const deleteArticle = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -6823,6 +6847,7 @@ export const createArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7170,6 +7195,7 @@ export const updateArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7517,6 +7543,7 @@ export const deleteArticleComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -7864,6 +7891,7 @@ export const createArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8201,6 +8229,7 @@ export const updateArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8538,6 +8567,7 @@ export const deleteArticleSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -8897,6 +8927,7 @@ export const createEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9269,6 +9300,7 @@ export const updateEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9641,6 +9673,7 @@ export const deleteEvent = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -9991,6 +10024,7 @@ export const createEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10357,6 +10391,7 @@ export const updateEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -10723,6 +10758,7 @@ export const deleteEventComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11089,6 +11125,7 @@ export const createEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11434,6 +11471,7 @@ export const updateEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -11779,6 +11817,7 @@ export const deleteEventSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12138,6 +12177,7 @@ export const createEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12493,6 +12533,7 @@ export const updateEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -12848,6 +12889,7 @@ export const deleteEventParticipant = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13190,6 +13232,7 @@ export const createDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13230,6 +13273,25 @@ export const createDepartment = /* GraphQL */ `
         webFeedBack {
           nextToken
         }
+      }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
       }
       uwcssaJobs {
         items {
@@ -13486,6 +13548,7 @@ export const updateDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13526,6 +13589,25 @@ export const updateDepartment = /* GraphQL */ `
         webFeedBack {
           nextToken
         }
+      }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
       }
       uwcssaJobs {
         items {
@@ -13782,6 +13864,7 @@ export const deleteDepartment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -13823,6 +13906,25 @@ export const deleteDepartment = /* GraphQL */ `
           nextToken
         }
       }
+      uwcssaMembers {
+        items {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          imgURL
+          startDate
+          endDate
+          createdAt
+          departmentID
+          owner
+          userID
+          updatedAt
+        }
+        nextToken
+      }
       uwcssaJobs {
         items {
           id
@@ -13842,6 +13944,957 @@ export const deleteDepartment = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+    }
+  }
+`;
+export const createUwcssaMember = /* GraphQL */ `
+  mutation CreateUwcssaMember(
+    $input: CreateUwcssaMemberInput!
+    $condition: ModelUwcssaMemberConditionInput
+  ) {
+    createUwcssaMember(input: $input, condition: $condition) {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateUwcssaMember = /* GraphQL */ `
+  mutation UpdateUwcssaMember(
+    $input: UpdateUwcssaMemberInput!
+    $condition: ModelUwcssaMemberConditionInput
+  ) {
+    updateUwcssaMember(input: $input, condition: $condition) {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteUwcssaMember = /* GraphQL */ `
+  mutation DeleteUwcssaMember(
+    $input: DeleteUwcssaMemberInput!
+    $condition: ModelUwcssaMemberConditionInput
+  ) {
+    deleteUwcssaMember(input: $input, condition: $condition) {
+      id
+      active
+      title
+      subTitle
+      summary
+      content
+      imgURL
+      startDate
+      endDate
+      createdAt
+      departmentID
+      owner
+      userID
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        likes {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        topics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articles {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        articleComments {
+          id
+          content
+          active
+          articleID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        events {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipants {
+          id
+          name
+          email
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        departments {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        uwcssaJobs {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
+        }
+        uwcssaJobResumes {
+          id
+          name
+          email
+          resumeFileS3Key
+          phone
+          message
+          uwcssaJobResumeStatus
+          createdAt
+          uwcssaJobID
+          userID
+          updatedAt
+          owner
+        }
+        forumTopics {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumSubTopics {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          id
+          content
+          active
+          createdAt
+          replyToUserID
+          forumPostID
+          forumPostCommentID
+          userID
+          updatedAt
+          owner
+        }
+        marketItems {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        foundingMember {
+          id
+          active
+          title
+          subTitle
+          summary
+          content
+          mainParts
+          imgURL
+          owner
+          userID
+          createdAt
+          updatedAt
+        }
+        userMutationLog {
+          id
+          eventName
+          typename
+          eventSourceARN
+          record
+          createdAt
+          sortKey
+          userID
+          updatedAt
+        }
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        webFeedBack {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
       }
     }
   }
@@ -14102,6 +15155,7 @@ export const createUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14169,6 +15223,9 @@ export const createUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -14433,6 +15490,7 @@ export const updateUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14500,6 +15558,9 @@ export const updateUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -14764,6 +15825,7 @@ export const deleteUwcssaJob = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -14831,6 +15893,9 @@ export const deleteUwcssaJob = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        uwcssaMembers {
+          nextToken
         }
         uwcssaJobs {
           nextToken
@@ -15074,6 +16139,7 @@ export const createUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -15402,6 +16468,7 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -15730,6 +16797,7 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -16052,6 +17120,7 @@ export const createForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -16336,6 +17405,7 @@ export const updateForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -16620,6 +17690,7 @@ export const deleteForumTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -16905,6 +17976,7 @@ export const createForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17226,6 +18298,7 @@ export const updateForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17547,6 +18620,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -17874,6 +18948,7 @@ export const createForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -18233,6 +19308,7 @@ export const updateForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -18592,6 +19668,7 @@ export const deleteForumPost = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -18947,6 +20024,7 @@ export const createForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -19302,6 +20380,7 @@ export const updateForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -19657,6 +20736,7 @@ export const deleteForumPostComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20013,6 +21093,7 @@ export const createForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20272,6 +21353,7 @@ export const createForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20664,6 +21746,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -20923,6 +22006,7 @@ export const updateForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -21315,6 +22399,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -21574,6 +22659,7 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -21964,6 +23050,7 @@ export const createMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -22240,6 +23327,7 @@ export const updateMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -22516,6 +23604,7 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -22830,6 +23919,7 @@ export const createMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23144,6 +24234,7 @@ export const updateMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23458,6 +24549,7 @@ export const deleteMarketItem = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23512,6 +24604,7 @@ export const createFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -23738,6 +24831,7 @@ export const createFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -23791,6 +24885,7 @@ export const updateFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -24017,6 +25112,7 @@ export const updateFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24070,6 +25166,7 @@ export const deleteFoundingMember = /* GraphQL */ `
       id
       active
       title
+      subTitle
       summary
       content
       mainParts
@@ -24296,6 +25393,7 @@ export const deleteFoundingMember = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24570,6 +25668,7 @@ export const createLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -24829,6 +25928,7 @@ export const createLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -25583,6 +26683,7 @@ export const updateLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -25842,6 +26943,7 @@ export const updateLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -26596,6 +27698,7 @@ export const deleteLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -26855,6 +27958,7 @@ export const deleteLike = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -27610,6 +28714,7 @@ export const createWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -27886,6 +28991,7 @@ export const updateWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28162,6 +29268,7 @@ export const deleteWebFeedBack = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28440,6 +29547,7 @@ export const createUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28717,6 +29825,7 @@ export const updateUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
@@ -28994,6 +30103,7 @@ export const deleteUserMutationLog = /* GraphQL */ `
           id
           active
           title
+          subTitle
           summary
           content
           mainParts
