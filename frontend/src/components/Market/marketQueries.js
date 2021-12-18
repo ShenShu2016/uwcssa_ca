@@ -169,6 +169,7 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
         marketItemCondition
         marketItemCategory
         tags
+        location
         contactPhone
         contactWeChat
         contactEmail

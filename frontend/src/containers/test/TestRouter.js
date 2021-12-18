@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import { Box } from "@mui/material";
-import GoogleMapsPlace from "../../components/GoogleMapsPlace";
+import GoogleMapsPlace from "../../components/GoogleMap/GoogleMapsPlace";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import test1 from "./test1";

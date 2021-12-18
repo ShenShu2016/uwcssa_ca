@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
+import GoogleMaps, {
+  GetAddress,
+} from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
@@ -59,7 +62,6 @@ export default function EditMarketItemDetail() {
     description,
     marketItemCategory,
     marketItemCondition,
-    location,
     contactEmail,
     contactPhone,
     contactWeChat,
@@ -88,7 +90,6 @@ export default function EditMarketItemDetail() {
       description: description,
       marketItemCategory: marketItemCategory,
       marketItemCondition: marketItemCondition,
-      location: location,
       contactEmail: contactEmail,
       contactWeChat: contactWeChat,
       contactPhone: contactPhone,
@@ -120,6 +121,7 @@ export default function EditMarketItemDetail() {
   const onSubmit = async (data) => {
     const createMarketItemInput = {
       ...data,
+      location: GetAddress().description,
       id: id,
       name: data.title,
       marketType: "Item",
@@ -335,7 +337,7 @@ export default function EditMarketItemDetail() {
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <Controller
+                {/* <Controller
                   name="location"
                   control={control}
                   rules={{
@@ -360,7 +362,8 @@ export default function EditMarketItemDetail() {
                       }}
                     />
                   )}
-                />
+                /> */}
+                <GoogleMaps />
               </Box>
               <Box sx={{ marginY: "1rem" }}>
                 <Controller

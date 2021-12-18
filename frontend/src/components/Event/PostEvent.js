@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import GoogleMapsPlace, { GetAddress } from "../GoogleMapsPlace";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchTopics, postEvent } from "../../redux/slice/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
