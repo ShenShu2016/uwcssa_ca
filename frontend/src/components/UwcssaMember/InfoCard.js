@@ -123,7 +123,8 @@ export default function InfoCard({ item }) {
         />
         <CardContent sx={{ textAlign: "left" }}>
           <Typography variant="subtitle1">
-            在职时间: {startDate.slice(0, 10)} - {endDate.slice(0, 10)}
+            在职时间: {startDate && startDate.slice(0, 10)} -{" "}
+            {endDate && endDate.slice(0, 10)}
           </Typography>
           <Typography variant="body1" color="text.secondary">
             {summary}
