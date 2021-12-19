@@ -1,5 +1,7 @@
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/system";
+import MUIRichTextEditor from "mui-rte";
 import React, { useState } from "react";
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -15,9 +17,10 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     textOverflow: "ellipsis",
     display: "-webkit-box",
-    WebkitLineClamp: "2",
-    lineClamp: 2,
+    WebkitLineClamp: 1,
+    lineClamp: 1,
     WebkitBoxOrient: "vertical",
+    height: "37px",
   },
 }));
 
@@ -28,43 +31,28 @@ export default function SeeMore({ content }) {
 
   return (
     <div>
-      {newContent.length < 250 ? (
-        <Typography
-          variant="body1"
-          // sx={{ marginTop: "2rem" }}
-          component="span"
-          style={{
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-          }}
-          gutterBottom
-        >
-          {newContent}
-        </Typography>
+      {newContent.length < 40 ? (
+        <MUIRichTextEditor
+          defaultValue={content}
+          readOnly={true}
+          toolbar={false}
+        />
       ) : (
         <div>
           {showMore ? (
-            <Typography
-              variant="body1"
-              // sx={{ marginTop: "2rem" }}
-              component="span"
-              style={{
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-word",
-              }}
-              gutterBottom
-            >
-              {newContent}
-            </Typography>
+            <MUIRichTextEditor
+              defaultValue={content}
+              readOnly={true}
+              toolbar={false}
+            />
           ) : (
-            <Typography
-              variant="body1"
-              component="span"
-              className={classes.text}
-              gutterBottom
-            >
-              {newContent}
-            </Typography>
+            <Box className={classes.text}>
+              <MUIRichTextEditor
+                defaultValue={content}
+                readOnly={true}
+                toolbar={false}
+              />
+            </Box>
           )}
 
           <Button size="small" onClick={() => setShowMore(!showMore)}>
