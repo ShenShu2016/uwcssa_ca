@@ -78,7 +78,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     }
   };
 
-  const uploadAvatarImg = async (e) => {
+  const uploadImg = async (e) => {
     setLoading(true);
     const imageData = e.target.files;
     const imageLocation = "uwcssaMember";
@@ -156,14 +156,14 @@ export default function Edit({ editOpen, handleEditClose, item }) {
               />
             </Box>
             <Box my={"2rem"}>
-              <label htmlFor="uploadAvatarImg">
+              <label htmlFor="uploadImg">
                 <Input
                   accept="image/*"
-                  id="uploadAvatarImg"
+                  id="uploadImg"
                   type="file"
                   onChange={(e) => {
                     // setImgData();
-                    uploadAvatarImg(e);
+                    uploadImg(e);
                   }}
                 />
                 <Button

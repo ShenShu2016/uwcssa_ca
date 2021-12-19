@@ -70,7 +70,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     }
   };
 
-  const uploadAvatarImg = async (e) => {
+  const uploadImg = async (e) => {
     setLoading(true);
     const imageData = e.target.files;
     const imageLocation = "foundingMember";
@@ -143,20 +143,19 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                 src={imgURL}
                 alt="avatarImgURL"
                 style={{
-                  width: 300,
-                  height: 250,
+                  width: "100%",
                 }}
               />
             </Box>
             <Box my={"2rem"}>
-              <label htmlFor="uploadAvatarImg">
+              <label htmlFor="uploadImg">
                 <Input
                   accept="image/*"
-                  id="uploadAvatarImg"
+                  id="uploadImg"
                   type="file"
                   onChange={(e) => {
                     // setImgData();
-                    uploadAvatarImg(e);
+                    uploadImg(e);
                   }}
                 />
                 <Button

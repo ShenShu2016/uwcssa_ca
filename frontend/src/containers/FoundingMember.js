@@ -1,22 +1,18 @@
+import { Button, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import {
-  SpeedDial,
-  SpeedDialAction,
-  SpeedDialIcon,
-  Typography,
-} from "@mui/material";
 import {
   fetchFoundingMembers,
   selectAllFoundingMembers,
 } from "../redux/slice/foundingMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Box } from "@mui/system";
-import EditIcon from "@mui/icons-material/Edit";
+import Footer from "./Footer";
 import InfoCard from "../components/FoundingMember/InfoCard";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import { usePermit } from "../Hooks/usePermit";
 import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +38,7 @@ export default function FoundingMember() {
   useTitle("UWCSSA.CA-创始团队以及贡献者");
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const isPermit = usePermit(null, "admin");
   const foundingMembers = useSelector(selectAllFoundingMembers);
   console.log(foundingMembers);
 
@@ -51,29 +47,30 @@ export default function FoundingMember() {
   }, [dispatch]);
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h3" className={classes.title}>
-        创始团队以及贡献者
-      </Typography>
-      <div className={classes.cards}>
-        {foundingMembers.map((member, memberIdx) => {
-          return <InfoCard item={member} key={memberIdx} />;
-        })}
-      </div>
-      <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
-        <SpeedDial
-          ariaLabel="SpeedDial openIcon example"
-          sx={{ position: "absolute", bottom: 16, right: 16 }}
-          icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-        >
-          <SpeedDialAction
-            icon={<AddIcon />}
-            tooltipTitle={"添加成员"}
+    <Box>
+      <div className={classes.root}>
+        <Typography variant="h3" className={classes.title}>
+          创始团队以及贡献者
+        </Typography>
+        {isPermit && (
+          <Button
+            variant="contained"
             component={Link}
             to="/admin/foundingMember/create"
-          />
-        </SpeedDial>
-      </Box>
-    </div>
+            sx={{ my: "1rem", borderRadius: "10px" }}
+            size="large"
+            startIcon={<AddCircleOutlineIcon />}
+          >
+            添加新成员
+          </Button>
+        )}
+        <div className={classes.cards}>
+          {foundingMembers.map((member, memberIdx) => {
+            return <InfoCard item={member} key={memberIdx} />;
+          })}
+        </div>
+      </div>
+      <Footer />
+    </Box>
   );
 }
