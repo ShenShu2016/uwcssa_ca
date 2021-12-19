@@ -60,29 +60,29 @@ export default function GoogleMaps() {
     // console.log(value.types);
   });
 
-  useEffect(() => {
-    const init = () => {
-      const geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode(
-        { placeId: address.place_id },
-        function (results, status) {
-          if (status === window.google.maps.GeocoderStatus.OK) {
-            const lat = results[0].geometry.location.lat();
-            const lng = results[0].geometry.location.lng();
-            locationWithLatLng = [lat, lng];
-            console.log(locationWithLatLng);
-          } else {
-            console.log(
-              "Geocode was not successful for the following reason: " + status
-            );
-          }
-        }
-      );
-    };
-    if (address) {
-      init();
-    }
-  }, [address]);
+  // useEffect(() => {
+  //   const init = () => {
+  //     const geocoder = new window.google.maps.Geocoder();
+  //     geocoder.geocode(
+  //       { placeId: address.place_id },
+  //       function (results, status) {
+  //         if (status === window.google.maps.GeocoderStatus.OK) {
+  //           const lat = results[0].geometry.location.lat();
+  //           const lng = results[0].geometry.location.lng();
+  //           locationWithLatLng = [lat, lng];
+  //           console.log(locationWithLatLng);
+  //         } else {
+  //           console.log(
+  //             "Geocode was not successful for the following reason: " + status
+  //           );
+  //         }
+  //       }
+  //     );
+  //   };
+  //   if (address) {
+  //     init();
+  //   }
+  // }, [address]);
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
