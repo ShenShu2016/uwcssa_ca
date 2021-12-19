@@ -1,10 +1,8 @@
 import {
   Box,
   Button,
-  Checkbox,
   CircularProgress,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
   Paper,
@@ -80,14 +78,13 @@ export default function PostArticle() {
   const [qrCodeImgURL, setQrCodeImgURL] = useState();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isTitleAsURL, setIsTitleAsURL] = useState(false);
+  const [id, setId] = useState(null);
   const [createdAt, setCreatedAt] = useState(null);
   const timer = useRef();
-  console.log(isTitleAsURL);
+
   const {
     handleSubmit,
     control,
-    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -138,7 +135,7 @@ export default function PostArticle() {
     setLoading(true);
     const createArticleInput = {
       ...data,
-      id: isTitleAsURL ? getValues("title") : undefined,
+      id: id ? id : undefined,
       imgURLs: imgURLs,
       content: content,
       active: true,
@@ -220,15 +217,32 @@ export default function PostArticle() {
             />
           )}
         />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isTitleAsURL}
-              onChange={(event) => setIsTitleAsURL(event.target.checked)}
-            />
-          }
-          label="用标题作为URL，一旦发出不能更改，除非删掉，并且有唯一性"
-        />
+        <Box sx={{ my: "2rem" }}>
+          <TextField
+            required
+            label="id"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+            helperText={"不能有空格不能有中文，不能有标点符号"}
+          />
+        </Box>
+        <Typography variant="body1" color="HighlightText">
+          最后的URL为:https://uwcssa.ca/article/{id}
+          {id
+            ? `最后的URL为:https://uwcssa.ca/article/${id}`
+            : "不明白就不要瞎点了"}
+        </Typography>
+        <Button
+          variant="contained"
+          onClick={() => {
+            setId(null);
+          }}
+        >
+          清零url id
+        </Button>
       </Box>
       <Box sx={{ my: "2rem" }}>
         <Controller

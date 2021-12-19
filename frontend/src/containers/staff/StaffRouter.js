@@ -11,6 +11,7 @@ import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import React from "react";
 import Staff from "./Staff";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
+import EditEvent from "../../components/Event/EditEvent";
 
 export default function StaffRouter() {
   return (
@@ -28,6 +29,11 @@ export default function StaffRouter() {
           exact
           path="/staff/article/editArticle/:articleID"
           component={EditArticle}
+        />
+        <Route
+          exact
+          path="/staff/event/editEvent/:eventID"
+          component={EditEvent}
         />
         <Route
           exact

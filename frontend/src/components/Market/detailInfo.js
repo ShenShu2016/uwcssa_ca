@@ -35,6 +35,7 @@ const DetailInfo = ({
   type,
   tags,
   description,
+  mode = "detail",
   // specific inputs
   // item & vehicle
   location,
@@ -55,7 +56,7 @@ const DetailInfo = ({
   interiorColor,
   fuelType,
 }) => {
-  console.log("type", type);
+  // console.log("type", type);
   const [clicked, setClicked] = React.useState(null);
 
   let places = placeses.results;
@@ -210,35 +211,39 @@ const DetailInfo = ({
           color: "rgb(161 161 161 / 87%)",
         }}
       >
-        <GoogleMap
-          defaultZoom={10}
-          defaultCenter={[
-            places[0].geometry.location.lat,
-            places[0].geometry.location.lng,
-          ]}
-          // onChildClick={onChildClickCallback}
-          center={
-            clicked && [
-              clicked.geometry.location.lat,
-              clicked.geometry.location.lng,
-            ]
-          }
-        >
-          {places.map((place) => (
-            <Marker
-              key={place.id}
-              text={place.name}
-              lat={place.geometry.location.lat}
-              lng={place.geometry.location.lng}
-              // open={open}
-              place={place}
-              onClick={() => {
-                setClicked(place);
-                // setOpen((prev) => !prev);
-              }}
-            />
-          ))}
-        </GoogleMap>
+        {mode === "detail" ? (
+          <GoogleMap
+            defaultZoom={10}
+            defaultCenter={[
+              places[0].geometry.location.lat,
+              places[0].geometry.location.lng,
+            ]}
+            // onChildClick={onChildClickCallback}
+            center={
+              clicked && [
+                clicked.geometry.location.lat,
+                clicked.geometry.location.lng,
+              ]
+            }
+          >
+            {places.map((place) => (
+              <Marker
+                key={place.id}
+                text={place.name}
+                lat={place.geometry.location.lat}
+                lng={place.geometry.location.lng}
+                // open={open}
+                place={place}
+                onClick={() => {
+                  setClicked(place);
+                  // setOpen((prev) => !prev);
+                }}
+              />
+            ))}
+          </GoogleMap>
+        ) : (
+          "Google Map Currently Unavailable (Location will be available after posted.)"
+        )}
       </Paper>
       <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
         {location.length === 0 ? "Location Goes Here" : location}

@@ -30,230 +30,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -268,10 +44,13 @@ export const getUwcssaJobResume = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -418,230 +197,6 @@ export const getUserMutationLog = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -656,10 +211,13 @@ export const getUserMutationLog = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -962,230 +520,6 @@ export const userSortBySortKey = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -1200,10 +534,13 @@ export const userSortBySortKey = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -1228,875 +565,6 @@ export const getUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      likes {
-        id
-        like
-        itemID
-        userID
-        createdAt
-        updatedAt
-        userBeingLiked {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        articleSubComment {
-          id
-          content
-          active
-          articleCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        event {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventComment {
-          id
-          content
-          active
-          eventID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        eventSubComment {
-          id
-          content
-          active
-          eventCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        forumPostComment {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComment {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        owner
-      }
-      topics {
-        id
-        name
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        articles {
-          nextToken
-        }
-        events {
-          nextToken
-        }
-      }
-      articles {
-        id
-        title
-        summary
-        content
-        imgURLs
-        qrCodeImgURL
-        tags
-        sortKey
-        active
-        createdAt
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articleComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
-      articleComments {
-        id
-        content
-        active
-        articleID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        owner
-        articleSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
-      events {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-        }
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
-      eventParticipants {
-        id
-        name
-        email
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-        }
-        phone
-        weChat
-        message
-        numberOfPeople
-        active
-        createdAt
-        eventParticipantStatus
-        eventID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        event {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        owner
-      }
-      departments {
-        id
-        name
-        introduction
-        email
-        leader
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-      }
-      uwcssaJobs {
-        id
-        introduction
-        title
-        requirements
-        bonus
-        imgURLs
-        benefits
-        schedule
-        like
-        unlike
-        active
-        createdAt
-        departmentID
-        uwcssaJobResumes {
-          nextToken
-        }
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-      }
-      uwcssaJobResumes {
-        id
-        name
-        email
-        resumeFileS3Key
-        phone
-        message
-        uwcssaJobResumeStatus
-        createdAt
-        uwcssaJobID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        uwcssaJob {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        owner
-      }
-      forumTopics {
-        id
-        name
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumSubTopics {
-          nextToken
-        }
-      }
-      forumSubTopics {
-        id
-        name
-        createdAt
-        forumTopicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumTopic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumPosts {
-          nextToken
-        }
-      }
-      forumPostComments {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        owner
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
-      forumPostSubComments {
-        id
-        content
-        active
-        createdAt
-        replyToUserID
-        forumPostID
-        forumPostCommentID
-        userID
-        updatedAt
-        replyTo {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        forumPostComment {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        owner
-        likes {
-          nextToken
-        }
-      }
-      marketItems {
-        id
-        name
-        imgURLs
-        title
-        price
-        marketType
-        description
-        location
-        marketItemCondition
-        marketItemCategory
-        tags
-        vehicleType
-        year
-        make
-        model
-        exteriorColor
-        interiorColor
-        fuelType
-        marketRentalSaleRent
-        propertyType
-        bedroomCounts
-        bathroomsCounts
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-        }
-        propertySize
-        dateAvailable
-        laundryType
-        airConditionType
-        heatingType
-        catFriendly
-        dogFriendly
-        contactPhone
-        contactWeChat
-        contactEmail
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        owner
-      }
-      foundingMember {
-        id
-        active
-        title
-        subTitle
-        summary
-        content
-        mainParts
-        imgURL
-        owner
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-      }
-      userMutationLog {
-        id
-        eventName
-        typename
-        eventSourceARN
-        record
-        createdAt
-        sortKey
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-      }
       updatedAt
       badges
       userEducations {
@@ -2166,216 +634,8 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
+      marketItems {
         items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      webFeedBack {
-        items {
-          id
-          rate
-          reason
-          improvement
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
           id
           name
           imgURLs
@@ -2415,31 +675,62 @@ export const listUsers = /* GraphQL */ `
           updatedAt
           owner
         }
-        foundingMember {
+        nextToken
+      }
+      beingLiked {
+        items {
           id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
           owner
-          userID
-          createdAt
-          updatedAt
         }
-        userMutationLog {
+        nextToken
+      }
+      kanban {
+        items {
           id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
+          content
+          kanbanStatus
+          deadLine
+          tags
+          points
+          assigneeID
+          departmentID
           userID
+          createdAt
           updatedAt
+          owner
         }
+        nextToken
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
         updatedAt
         badges
         userEducations {
@@ -2454,10 +745,13 @@ export const listUsers = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -2494,230 +788,6 @@ export const getUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -2732,10 +802,13 @@ export const getUserEducation = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -2816,230 +889,6 @@ export const getUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -3054,10 +903,13 @@ export const getUserExperience = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -3132,230 +984,6 @@ export const getTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -3370,10 +998,13 @@ export const getTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -3497,230 +1128,6 @@ export const getArticle = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -3735,10 +1142,13 @@ export const getArticle = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -3950,230 +1360,6 @@ export const getArticleComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -4188,10 +1374,13 @@ export const getArticleComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -4425,230 +1614,6 @@ export const getArticleSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -4663,10 +1628,13 @@ export const getArticleSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -4900,230 +1868,6 @@ export const getEvent = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -5138,10 +1882,13 @@ export const getEvent = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -5410,230 +2157,6 @@ export const getEventComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -5648,10 +2171,13 @@ export const getEventComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -5920,230 +2446,6 @@ export const getEventSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -6158,10 +2460,13 @@ export const getEventSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -6395,230 +2700,6 @@ export const getEventParticipant = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -6633,10 +2714,13 @@ export const getEventParticipant = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -6901,230 +2985,6 @@ export const getDepartment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -7139,10 +2999,13 @@ export const getDepartment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -7182,6 +3045,23 @@ export const getDepartment = /* GraphQL */ `
           departmentID
           userID
           updatedAt
+        }
+        nextToken
+      }
+      kanbans {
+        items {
+          id
+          content
+          kanbanStatus
+          deadLine
+          tags
+          points
+          assigneeID
+          departmentID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
@@ -7228,6 +3108,9 @@ export const listDepartments = /* GraphQL */ `
         uwcssaJobs {
           nextToken
         }
+        kanbans {
+          nextToken
+        }
       }
       nextToken
     }
@@ -7265,230 +3148,6 @@ export const getUwcssaMember = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -7503,10 +3162,13 @@ export const getUwcssaMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -7541,6 +3203,9 @@ export const getUwcssaMember = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        kanbans {
           nextToken
         }
       }
@@ -7652,230 +3317,6 @@ export const getUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -7890,10 +3331,13 @@ export const getUwcssaJob = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -7928,6 +3372,9 @@ export const getUwcssaJob = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
+          nextToken
+        }
+        kanbans {
           nextToken
         }
       }
@@ -8081,230 +3528,6 @@ export const getForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -8319,10 +3542,13 @@ export const getForumTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -8403,230 +3629,6 @@ export const getForumSubTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -8641,10 +3643,13 @@ export const getForumSubTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -8991,230 +3996,6 @@ export const getForumPost = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -9229,10 +4010,13 @@ export const getForumPost = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -9406,230 +4190,6 @@ export const getForumPostComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -9644,10 +4204,13 @@ export const getForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -9898,230 +4461,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -10136,10 +4475,13 @@ export const getForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -10158,230 +4500,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -10396,10 +4514,13 @@ export const getForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -10738,230 +4859,6 @@ export const getMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -10976,10 +4873,13 @@ export const getMarketUserInfo = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -11089,230 +4989,6 @@ export const getMarketItem = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -11327,10 +5003,13 @@ export const getMarketItem = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -11793,230 +5472,6 @@ export const getFoundingMember = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -12031,10 +5486,13 @@ export const getFoundingMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -12108,230 +5566,6 @@ export const getLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -12346,10 +5580,13 @@ export const getLike = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -12368,230 +5605,6 @@ export const getLike = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -12606,10 +5619,13 @@ export const getLike = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -13294,230 +6310,6 @@ export const getWebFeedBack = /* GraphQL */ `
         github
         sortKey
         createdAt
-        likes {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        topics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        articles {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        articleComments {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        events {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipants {
-          id
-          name
-          email
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        departments {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-        }
-        uwcssaJobs {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
-          userID
-          updatedAt
-        }
-        uwcssaJobResumes {
-          id
-          name
-          email
-          resumeFileS3Key
-          phone
-          message
-          uwcssaJobResumeStatus
-          createdAt
-          uwcssaJobID
-          userID
-          updatedAt
-          owner
-        }
-        forumTopics {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        forumSubTopics {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        forumPostComments {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
-        forumPostSubComments {
-          id
-          content
-          active
-          createdAt
-          replyToUserID
-          forumPostID
-          forumPostCommentID
-          userID
-          updatedAt
-          owner
-        }
-        marketItems {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        foundingMember {
-          id
-          active
-          title
-          subTitle
-          summary
-          content
-          mainParts
-          imgURL
-          owner
-          userID
-          createdAt
-          updatedAt
-        }
-        userMutationLog {
-          id
-          eventName
-          typename
-          eventSourceARN
-          record
-          createdAt
-          sortKey
-          userID
-          updatedAt
-        }
         updatedAt
         badges
         userEducations {
@@ -13532,10 +6324,13 @@ export const getWebFeedBack = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
+        marketItems {
+          nextToken
+        }
         beingLiked {
           nextToken
         }
-        webFeedBack {
+        kanban {
           nextToken
         }
       }
@@ -13575,6 +6370,210 @@ export const listWebFeedBacks = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getKanban = /* GraphQL */ `
+  query GetKanban($id: ID!) {
+    getKanban(id: $id) {
+      id
+      content
+      kanbanStatus
+      deadLine
+      tags
+      points
+      assigneeID
+      departmentID
+      userID
+      createdAt
+      updatedAt
+      assignee {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanban {
+          nextToken
+        }
+      }
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanban {
+          nextToken
+        }
+      }
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        uwcssaJobs {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listKanbans = /* GraphQL */ `
+  query ListKanbans(
+    $filter: ModelKanbanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listKanbans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        content
+        kanbanStatus
+        deadLine
+        tags
+        points
+        assigneeID
+        departmentID
+        userID
+        createdAt
+        updatedAt
+        assignee {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
         }
         owner
       }
