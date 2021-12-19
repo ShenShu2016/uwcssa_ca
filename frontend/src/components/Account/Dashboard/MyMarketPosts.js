@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Box,
   Checkbox,
@@ -19,14 +17,13 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
-import API from "@aws-amplify/api";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
-import { marketItemSortBySortKeyPosts } from "../../Market/marketQueries";
 import { useSelector } from "react-redux";
 import { visuallyHidden } from "@mui/utils";
 
@@ -218,43 +215,27 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const currentUser = useSelector((state) => state.userAuth.user.username);
-  const [userMarket, setUserMarket] = React.useState([]);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("calories");
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  React.useEffect(() => {
-    const getUserMarket = async () => {
-      const MarketItemsData = await API.graphql({
-        query: marketItemSortBySortKeyPosts,
-        variables: {
-          sortKey: "SortKey",
-          sortDirection: "DESC",
-          filter: { userID: { eq: currentUser } },
-        },
-        authMode: "AWS_IAM",
-      });
-      setUserMarket(MarketItemsData.data.marketItemSortBySortKey.items);
-      console.log("check", MarketItemsData.data.marketItemSortBySortKey.items);
-    };
-    if (currentUser) {
-      getUserMarket();
-    }
-  }, [currentUser, setUserMarket]);
+  const { marketItems } = useSelector((state) => state.userAuth.userProfile);
 
-  const rows = userMarket.map((item) =>
-    createData(
-      item.description,
-      item.marketType,
-      item.active.toString(),
-      item.updatedAt,
-      item.id
-    )
-  );
+  const rows =
+    marketItems &&
+    marketItems.items &&
+    marketItems.items.map((item) =>
+      createData(
+        item.description,
+        item.marketType,
+        item.active.toString(),
+        item.updatedAt,
+        item.id
+      )
+    );
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -310,104 +291,108 @@ export default function EnhancedTable() {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+    <Box>
+      {rows && (
+        <Box sx={{ width: "100%" }}>
+          <Paper sx={{ width: "100%", mb: 2 }}>
+            <EnhancedTableToolbar numSelected={selected.length} />
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 750 }}
+                aria-labelledby="tableTitle"
+                size={dense ? "small" : "medium"}
+              >
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={rows.length}
+                />
+                <TableBody>
+                  {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+               rows.slice().sort(getComparator(order, orderBy)) */}
+                  {stableSort(rows, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => {
+                      const isItemSelected = isSelected(row.name);
+                      const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            "aria-labelledby": labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        <Box
-                          component={Link}
-                          to={`/market/${row.type}/${row.id}`}
+                      return (
+                        <TableRow
+                          hover
+                          onClick={(event) => handleClick(event, row.name)}
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={row.id}
+                          selected={isItemSelected}
                         >
-                          {`${row.name.slice(0, 20)}${
-                            row.name.length > 20 ? "..." : ""
-                          }`}
-                        </Box>
-                      </TableCell>
-                      <TableCell style={{ width: 160 }} align="right">
-                        {row.type}
-                      </TableCell>
-                      <TableCell style={{ width: 160 }} align="right">
-                        {row.active === "true" ? "在线" : "离线"}
-                      </TableCell>
-                      <TableCell style={{ width: 160 }} align="right">
-                        {row.updatedAt.slice(0, 10)}
-                      </TableCell>
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              color="primary"
+                              checked={isItemSelected}
+                              inputProps={{
+                                "aria-labelledby": labelId,
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell
+                            component="th"
+                            id={labelId}
+                            scope="row"
+                            padding="none"
+                          >
+                            <Box
+                              component={Link}
+                              to={`/market/${row.type}/${row.id}`}
+                            >
+                              {`${row.name.slice(0, 20)}${
+                                row.name.length > 20 ? "..." : ""
+                              }`}
+                            </Box>
+                          </TableCell>
+                          <TableCell style={{ width: 160 }} align="right">
+                            {row.type}
+                          </TableCell>
+                          <TableCell style={{ width: 160 }} align="right">
+                            {row.active === "true" ? "在线" : "离线"}
+                          </TableCell>
+                          <TableCell style={{ width: 160 }} align="right">
+                            {row.updatedAt.slice(0, 10)}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={6} />
                     </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+          <FormControlLabel
+            control={<Switch checked={dense} onChange={handleChangeDense} />}
+            label="Dense padding"
+          />
+        </Box>
+      )}
     </Box>
   );
 }

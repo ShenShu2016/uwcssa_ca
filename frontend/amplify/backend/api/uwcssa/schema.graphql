@@ -54,25 +54,10 @@ type User
     @connection(keyName: "byUser", fields: ["id"])
   marketUserInfo: [MarketUserInfo]
     @connection(keyName: "byUser", fields: ["id"])
-  likes: [Like]
   beingLiked: [Like] @connection(keyName: "byUserBeingLiked", fields: ["id"])
-  topics: [Topic]
-  articles: [Article]
-  articleComments: [ArticleComment]
-  events: [Event]
-  eventParticipants: [EventParticipant]
-  departments: [Department]
-  uwcssaJobs: [UwcssaJob]
-  uwcssaJobResumes: [UwcssaJobResume]
-  forumTopics: [ForumTopic]
-  forumSubTopics: [ForumSubTopic]
   forumPosts: [ForumPost] @connection(keyName: "byUser", fields: ["id"])
-  forumPostComments: [ForumPostComment]
-  forumPostSubComments: [ForumPostSubComment]
-  marketItems: [MarketItem]
-  foundingMember: [FoundingMember]
-  webFeedBack: [WebFeedBack] @connection(keyName: "byUser", fields: ["id"])
-  userMutationLog: [UserMutationLog]
+  marketItems: [MarketItem] @connection(keyName: "byUser", fields: ["id"])
+  kanban: [Kanban] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type UserEducation
@@ -398,6 +383,7 @@ type Department
   uwcssaJobs: [UwcssaJob] @connection(keyName: "byDepartment", fields: ["id"])
   uwcssaMembers: [UwcssaMember]
     @connection(keyName: "byDepartment", fields: ["id"])
+  kanbans: [Kanban] @connection(keyName: "byDepartment", fields: ["id"])
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
@@ -709,7 +695,8 @@ type MarketItem
     name: "marketRentalSortByMarketRentalSaleRent"
     fields: ["marketRentalSaleRent", "createdAt"]
     queryField: "marketRentalSortByMarketRentalSaleRent"
-  ) {
+  )
+  @key(name: "byUser", fields: ["userID", "createdAt"]) {
   id: ID!
   name: String
   imgURLs: [AWSURL]
@@ -955,4 +942,41 @@ type UserMutationLog
   sortKey: SortKey!
   userID: ID!
   user: User! @connection(fields: ["userID"])
+}
+
+type Kanban
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      {
+        allow: groups
+        groups: ["admin", "staff"]
+        operations: [create, read, update]
+      }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(name: "byUser", fields: ["userID", "createdAt"])
+  @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
+  id: ID!
+  content: String
+  kanbanStatus: KanbanStatus
+  deadLine: AWSDateTime
+  tags: [String]
+  points: Int
+  assigneeID: ID
+  assignee: User! @connection(fields: ["assigneeID"])
+  departmentID: ID
+  department: Department @connection(fields: ["departmentID"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+  createdAt: AWSDateTime!
+}
+
+enum KanbanStatus {
+  TODO
+  INPROGRESS
+  DONE
 }
