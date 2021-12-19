@@ -408,6 +408,7 @@ type UwcssaMember
   @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
   id: ID!
   active: Boolean!
+  leader: Boolean
   title: String
   subTitle: String
   summary: String
