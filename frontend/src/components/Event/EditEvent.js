@@ -13,7 +13,6 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  Input,
   InputLabel,
   LinearProgress,
   MenuItem,
@@ -50,6 +49,7 @@ import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import WallpaperIcon from "@mui/icons-material/Wallpaper";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import MUIRichTextEditor from "mui-rte";
+import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,12 +109,17 @@ const eventStatusList = [
   { value: "Canceled", label: "取消" },
 ];
 
+const Input = styled("input")({
+  display: "none",
+});
+
 export default function EditEvent() {
   const classes = useStyles();
-  useTitle("活动编辑");
   const { eventID } = useParams();
+  useTitle(`活动编辑-${eventID}`);
   const dispatch = useDispatch();
   const history = useHistory();
+
   useEffect(() => {
     if (eventID && eventID !== "") {
       dispatch(selectedEvent({ eventID }));
@@ -130,7 +135,7 @@ export default function EditEvent() {
   //const [isTitleAsURL, setIsTitleAsURL] = useState(false);
 
   const [content, setContent] = useState();
-  const [content2, setContent2] = useState();
+  const [updatedContent, setUpdatedContent] = useState();
   const [loading, setLoading] = useState(false);
   const timer = useRef();
 
@@ -194,7 +199,7 @@ export default function EditEvent() {
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
       address: GetAddress(),
-      content: content2,
+      content: updatedContent,
       active: true,
       userID: username,
       tags: GetTags(),
@@ -235,7 +240,7 @@ export default function EditEvent() {
   };
   const handleOnChange = (prop) => (event) => {
     const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
-    setContent2(tempContent);
+    setUpdatedContent(tempContent);
   };
 
   return (
