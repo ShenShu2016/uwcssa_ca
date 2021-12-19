@@ -347,7 +347,7 @@ export default function EditEvent() {
                   <TextField
                     margin="normal"
                     fullWidth
-                    label="赞助商/主办方"
+                    label="主办方/赞助商"
                     variant="outlined"
                     onChange={onChange}
                     value={value}

@@ -119,6 +119,7 @@ export default function EventBody({ event }) {
     eventParticipants,
     owner,
     id,
+    online,
   } = event;
 
   const isPermit = usePermit(owner, "admin");
@@ -207,14 +208,38 @@ export default function EventBody({ event }) {
                 <Typography component="div" variant="h5" gutterBottom>
                   <b>{title}</b>
                 </Typography>
-                <Typography
-                  variant="h6"
-                  color="text.secondary"
-                  component="div"
-                  gutterBottom
-                >
-                  {address.description}
-                </Typography>
+                {online === true ? (
+                  <Typography
+                    variant="h6"
+                    color="text.secondary"
+                    component="div"
+                    gutterBottom
+                  >
+                    线上
+                  </Typography>
+                ) : (
+                  <div>
+                    {address.description ? (
+                      <Typography
+                        variant="h6"
+                        color="text.secondary"
+                        component="div"
+                        gutterBottom
+                      >
+                        {address.description}
+                      </Typography>
+                    ) : (
+                      <Typography
+                        variant="h6"
+                        color="text.secondary"
+                        component="div"
+                        gutterBottom
+                      >
+                        暂无
+                      </Typography>
+                    )}
+                  </div>
+                )}
               </Box>
             </Box>
           </Box>
@@ -339,15 +364,35 @@ export default function EventBody({ event }) {
                                 主办方/赞助方： {sponsor}
                               </Typography>
                             ) : null}
-                            {address.description ? (
+
+                            {online === true ? (
                               <Typography variant="body2" gutterBottom>
                                 <LocationOnIcon
                                   color="action"
-                                  sx={{ float: "left", marginRight: "10px" }}
+                                  sx={{
+                                    float: "left",
+                                    marginRight: "10px",
+                                  }}
                                 />
-                                {address.description}
+                                线上
                               </Typography>
-                            ) : null}
+                            ) : (
+                              <div>
+                                {address.description ? (
+                                  <Typography variant="body2" gutterBottom>
+                                    <LocationOnIcon
+                                      color="action"
+                                      sx={{
+                                        float: "left",
+                                        marginRight: "10px",
+                                      }}
+                                    />
+                                    {address.description}
+                                  </Typography>
+                                ) : null}
+                              </div>
+                            )}
+
                             {topic.name ? (
                               <Typography variant="body2" gutterBottom>
                                 <TopicIcon

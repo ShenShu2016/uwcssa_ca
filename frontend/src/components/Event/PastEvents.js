@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
     color: "transparent",
     boxShadow: "none",
     overflow: "initial",
+    maxHeight: 360,
     height: 335,
+
     "&:hover": {
       boxShadow: "0 6px 12px 0 #757ce8",
     },
@@ -85,8 +87,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PastEvent({ event }) {
   const classes = useStyles();
-  const { id, title, startDate, endDate, location, content, posterImgURL } =
-    event;
+  const {
+    id,
+    title,
+    startDate,
+    endDate,
+    address,
+    content,
+    posterImgURL,
+    online,
+  } = event;
   const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
@@ -175,7 +185,7 @@ export default function PastEvent({ event }) {
               ></Typography>
               <Box style={{ maxHeight: "30px", overflow: "hidden" }}></Box>
 
-              {location ? (
+              {online === true ? (
                 <Box
                   sx={{ overflow: "hidden", height: "30px" }}
                   color={"grey.700"}
@@ -191,28 +201,53 @@ export default function PastEvent({ event }) {
                         color="textSecondary"
                         noWrap
                       >
-                        {location}
+                        线上
                       </Typography>
                     </Grid>
                   </Grid>
                 </Box>
               ) : (
-                <Box
-                  sx={{ overflow: "hidden", height: "30px" }}
-                  color={"grey.700"}
-                  display={"flex"}
-                  alignItems={"center"}
-                  mb={1}
-                >
-                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                    <LocationOnIcon className={classes.locationIcon} />
-                    <Grid item xs zeroMinWidth>
-                      <Typography variant="subtitle2" color="textSecondary">
-                        无
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
+                <div>
+                  {address.description ? (
+                    <Box
+                      sx={{ overflow: "hidden", height: "30px" }}
+                      color={"grey.700"}
+                      display={"flex"}
+                      alignItems={"center"}
+                      mb={1}
+                    >
+                      <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                        <LocationOnIcon className={classes.locationIcon} />
+                        <Grid item xs zeroMinWidth>
+                          <Typography
+                            variant="subtitle2"
+                            color="textSecondary"
+                            noWrap
+                          >
+                            {address.description}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  ) : (
+                    <Box
+                      sx={{ overflow: "hidden", height: "30px" }}
+                      color={"grey.700"}
+                      display={"flex"}
+                      alignItems={"center"}
+                      mb={1}
+                    >
+                      <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                        <LocationOnIcon className={classes.locationIcon} />
+                        <Grid item xs zeroMinWidth>
+                          <Typography variant="subtitle2" color="textSecondary">
+                            无
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  )}
+                </div>
               )}
               {/* {topic.name ? (
               <Typography
