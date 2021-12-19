@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "@aws-amplify/api";
 import Auth from "@aws-amplify/auth";
 import { getUser } from "../../graphql/queries";
-import { userSortBySortKey } from "../CustomQuery/generialQueries";
+import { userSortBySortKey } from "../CustomQuery/GenerialQueries";
 
 const initialState = {
   isAuthenticated: null,

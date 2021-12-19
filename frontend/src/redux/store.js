@@ -2,6 +2,7 @@ import articleReducer from "./slice/articleSlice";
 import authReducer from "./slice/authSlice";
 import careerSlice from "./slice/careerSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import departmentReducer from "./slice/departmentSlice";
 import eventReducer from "./slice/eventSlice";
 import forumReducer from "./slice/forumSlice";
 import foundingMemberReducer from "./slice/foundingMemberSlice";
@@ -12,7 +13,6 @@ import marketUserReducer from "./slice/marketUserSlice";
 import profileReducer from "./slice/profileSlice";
 import staffReducer from "./slice/staffSlice";
 import uwcssaMemberReducer from "./slice/uwcssaMemberSlice";
-
 export default configureStore({
   reducer: {
     general: generalReducer,
@@ -28,6 +28,7 @@ export default configureStore({
     images: imageReducer,
     foundingMember: foundingMemberReducer,
     uwcssaMember: uwcssaMemberReducer,
+    department: departmentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

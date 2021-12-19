@@ -3,7 +3,7 @@ import { createLike, deleteLike, updateLike } from "../../graphql/mutations";
 import {
   listForumPosts,
   userSortBySortKey,
-} from "../CustomQuery/generialQueries";
+} from "../CustomQuery/GenerialQueries";
 
 import API from "@aws-amplify/api";
 import Compressor from "compressorjs";

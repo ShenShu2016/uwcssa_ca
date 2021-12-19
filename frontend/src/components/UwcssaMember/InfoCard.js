@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     // backgroundColor: "#F3F2EF",
     textAlign: "center",
-    margin: "4rem auto",
+    margin: "2rem auto",
     maxWidth: "960px",
     color: "#0D1F48",
   },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    paddingBlock: "2rem",
+    paddingBlock: "1rem",
   },
   card: {
     marginBlock: "1rem",
@@ -58,8 +58,17 @@ export default function InfoCard({ item }) {
   const [expanded, setExpanded] = useState(false);
   const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
   const isSettingMenuOpen = Boolean(settingMoreAnchorEl);
-  const { title, startDate, endDate, summary, content, imgURL, user, owner } =
-    item;
+  const {
+    title,
+    startDate,
+    endDate,
+    summary,
+    content,
+    imgURL,
+    user,
+    owner,
+    leader,
+  } = item;
   const isPermit = usePermit(owner, "admin");
 
   const [editOpen, setEditOpen] = useState(false);
@@ -127,11 +136,11 @@ export default function InfoCard({ item }) {
         />
         <CardContent sx={{ textAlign: "left" }}>
           <Typography variant="subtitle1">
-            在职时间: {startDate && startDate.slice(0, 10)} -{" "}
-            {endDate && endDate.slice(0, 10)}
+            在职时间: {startDate ? startDate.slice(0, 10) : "yyyy-mm-dd"} -{" "}
+            {endDate ? endDate.slice(0, 10) : "yyyy-mm-dd"}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            {summary}
+            {summary ? summary : "请编辑..."}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -159,25 +168,17 @@ export default function InfoCard({ item }) {
           sx={{ textAlign: "left" }}
         >
           <CardContent>
-            {/* <Typography paragraph>主要负责部分:</Typography>
-            <List>
-              {mainParts.map((part, partIdx) => {
-                return (
-                  <ListItem disablePadding key={partIdx}>
-                    <ListItemButton>
-                      <ListItemText primary={part} />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-            </List> */}
-            <Box sx={{ my: 2, overflow: "auto" }}>
-              <MUIRichTextEditor
-                defaultValue={content}
-                readOnly={true}
-                toolbar={false}
-              />
-            </Box>
+            {content ? (
+              <Box sx={{ my: 2, overflow: "auto" }}>
+                <MUIRichTextEditor
+                  defaultValue={content}
+                  readOnly={true}
+                  toolbar={false}
+                />
+              </Box>
+            ) : (
+              "请编辑..."
+            )}
           </CardContent>
         </Collapse>
       </Card>
