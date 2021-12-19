@@ -13,7 +13,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listFoundingMembers } from "../../graphql/queries";
 
 const fundingMemberAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
+  sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
 });
 const initialState = fundingMemberAdapter.getInitialState({
   fetchFoundingMembersStatus: "idle",

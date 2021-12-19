@@ -15,8 +15,8 @@ import React, { useState } from "react";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditIcon from "@mui/icons-material/Edit";
+import EmailIcon from "@mui/icons-material/Email";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -117,7 +117,11 @@ export default function InfoCard({ item }) {
         <CardMedia
           component="img"
           height="194"
-          image={imgURL}
+          image={
+            imgURL
+              ? imgURL
+              : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+          }
           alt="imgURLs[0]"
         />
         <CardContent>
@@ -126,8 +130,8 @@ export default function InfoCard({ item }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+          <IconButton aria-label="Send Me Email">
+            <EmailIcon />
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
@@ -137,7 +141,9 @@ export default function InfoCard({ item }) {
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
+            sx={{ fontSize: "16px" }}
           >
+            查看更多信息
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
@@ -148,18 +154,6 @@ export default function InfoCard({ item }) {
           sx={{ textAlign: "left" }}
         >
           <CardContent>
-            {/* <Typography paragraph>主要负责部分:</Typography>
-            <List>
-              {mainParts.map((part, partIdx) => {
-                return (
-                  <ListItem disablePadding key={partIdx}>
-                    <ListItemButton>
-                      <ListItemText primary={part} />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-            </List> */}
             <Box sx={{ my: 2, overflow: "auto" }}>
               <MUIRichTextEditor
                 defaultValue={content}
