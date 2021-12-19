@@ -4,6 +4,7 @@ import {
   createEventComment,
   createEventParticipant,
   createEventSubComment,
+  updateEvent,
 } from "../../graphql/mutations";
 import {
   eventCommentSortByEventID,
@@ -28,7 +29,7 @@ const initialState = {
   },
   mutation: {
     postEvent: {},
-    updateEvent: [],
+    updateEvent: {},
     deleteEvent: [],
   },
   //  Status: "idle",
@@ -37,8 +38,8 @@ const initialState = {
   fetchEventsError: null,
   selectedEventStatus: "idle",
   selectedEventsError: null,
-  // selectedEventCommentsStatus: "idle",
-  // selectedEventCommentsError: null,
+  //selectedEventCommentsStatus: "idle",
+  //selectedEventCommentsError: null,
   // selectedEventParticipantsStatus: "idle",
   // selectedEventParticipantsError: null,
   loadMoreEventCommentsStatus: "idle",
@@ -57,6 +58,8 @@ const initialState = {
   fetchTopicsError: null,
   postEventStatus: "idle",
   postEventError: null,
+  modifyEventStatus: "idle",
+  modifyEventError: null,
 };
 
 export const fetchEvents = createAsyncThunk("event/fetchEvents", async () => {
@@ -232,6 +235,16 @@ export const postEvent = createAsyncThunk(
   }
 );
 
+export const modifyEvent = createAsyncThunk(
+  "event/modifyEvent",
+  async ({ updateEventInput }) => {
+    const response = await API.graphql(
+      graphqlOperation(updateEvent, { input: updateEventInput })
+    );
+    return response;
+  }
+);
+
 const eventSlice = createSlice({
   name: "event",
   initialState,
@@ -383,6 +396,18 @@ const eventSlice = createSlice({
         state.postEventStatus = "failed";
         state.postEventCommentError = action.error.message;
         state.postEventParticipantError = action.error.message;
+      })
+      // Cases for status of updateEvent (pending, fulfilled, and rejected)
+      .addCase(modifyEvent.pending, (state, action) => {
+        state.modifyEventStatus = "loading";
+      })
+      .addCase(modifyEvent.fulfilled, (state, action) => {
+        state.modifyEventStatus = "succeeded";
+        state.mutation.updateEvent = action.payload;
+      })
+      .addCase(modifyEvent.rejected, (state, action) => {
+        state.modifyEventStatus = "failed";
+        state.modifyEventError = action.error.message;
       });
   },
 });

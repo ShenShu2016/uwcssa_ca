@@ -98,6 +98,7 @@ export default function EventMain({ event }) {
     startDate,
     endDate,
     topic,
+    online,
   } = event;
   const newContent = content.substring(34, content.length - 98);
   return (
@@ -199,8 +200,7 @@ export default function EventMain({ event }) {
                   </Typography>
                 </Box>
               )}
-
-              {address.description ? (
+              {online === true ? (
                 <Box
                   sx={{ overflow: "hidden", height: "30px" }}
                   color={"grey.700"}
@@ -216,29 +216,55 @@ export default function EventMain({ event }) {
                         color="textSecondary"
                         noWrap
                       >
-                        {address.description}
+                        线上
                       </Typography>
                     </Grid>
                   </Grid>
                 </Box>
               ) : (
-                <Box
-                  sx={{ overflow: "hidden", height: "30px" }}
-                  color={"grey.700"}
-                  display={"flex"}
-                  alignItems={"center"}
-                  mb={1}
-                >
-                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                    <LocationOnIcon className={classes.locationIcon} />
-                    <Grid item xs zeroMinWidth>
-                      <Typography variant="subtitle2" color="textSecondary">
-                        无
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
+                <div>
+                  {address.description ? (
+                    <Box
+                      sx={{ overflow: "hidden", height: "30px" }}
+                      color={"grey.700"}
+                      display={"flex"}
+                      alignItems={"center"}
+                      mb={1}
+                    >
+                      <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                        <LocationOnIcon className={classes.locationIcon} />
+                        <Grid item xs zeroMinWidth>
+                          <Typography
+                            variant="subtitle2"
+                            color="textSecondary"
+                            noWrap
+                          >
+                            {address.description}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  ) : (
+                    <Box
+                      sx={{ overflow: "hidden", height: "30px" }}
+                      color={"grey.700"}
+                      display={"flex"}
+                      alignItems={"center"}
+                      mb={1}
+                    >
+                      <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                        <LocationOnIcon className={classes.locationIcon} />
+                        <Grid item xs zeroMinWidth>
+                          <Typography variant="subtitle2" color="textSecondary">
+                            无
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  )}
+                </div>
               )}
+
               <Box
                 sx={{
                   overflow: "hidden",
