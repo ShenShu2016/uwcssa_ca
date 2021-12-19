@@ -64,6 +64,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
         marketItemCategory={marketItemCategory}
         marketItemCondition={marketItemCondition}
         tags={tags}
+        mode={mode}
         description={description}
         location={location}
         type="item"

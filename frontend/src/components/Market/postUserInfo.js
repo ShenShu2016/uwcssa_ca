@@ -24,7 +24,7 @@ export default function PostUserInfo({
     selectMarketUserById(state, username)
   );
   const switcher = defaultInfo === false ? true : false;
-  console.log("what happened here", defaultInfo);
+  // console.log("what happened here", defaultInfo);
 
   return (
     <Box

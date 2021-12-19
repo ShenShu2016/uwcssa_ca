@@ -10,9 +10,16 @@ import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 
 let address = null;
+let locationWithLatLng;
 
 export function GetAddress() {
   return address;
+}
+
+export function GetLatLng(placeId) {
+  console.log("////???", placeId);
+
+  return locationWithLatLng;
 }
 
 function loadScript(src, position, id) {
@@ -52,6 +59,31 @@ export default function GoogleMaps() {
     // console.log(value.terms);
     // console.log(value.types);
   });
+
+  useEffect(() => {
+    const init = () => {
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode(
+        { placeId: address.place_id },
+        function (results, status) {
+          if (status === window.google.maps.GeocoderStatus.OK) {
+            const lat = results[0].geometry.location.lat();
+            const lng = results[0].geometry.location.lng();
+            locationWithLatLng = [lat, lng];
+            console.log(locationWithLatLng);
+          } else {
+            console.log(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
+        }
+      );
+    };
+    if (address) {
+      init();
+    }
+  }, [address]);
+
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
@@ -71,7 +103,6 @@ export default function GoogleMaps() {
       }, 200),
     []
   );
-
   useEffect(() => {
     let active = true;
 
@@ -99,7 +130,6 @@ export default function GoogleMaps() {
         if (results) {
           newOptions = [...newOptions, ...results];
         }
-
         setOptions(newOptions);
       }
     });
@@ -108,6 +138,7 @@ export default function GoogleMaps() {
       active = false;
     };
   }, [value, inputValue, fetch]);
+
   return (
     <Box
     // sx={{ my: "2rem" }}
@@ -151,9 +182,9 @@ export default function GoogleMaps() {
             option.structured_formatting.main_text,
             matches.map((match) => [match.offset, match.offset + match.length])
           );
-          console.log(option);
+          // console.log(option);
           return (
-            <div>
+            <div key={option.place_id}>
               <li {...props}>
                 <Grid container alignItems="center">
                   <Grid item>
@@ -164,10 +195,10 @@ export default function GoogleMaps() {
                   </Grid>
                   <Grid item xs>
                     {parts.map((part, index) => (
-                      <div>
+                      <div key={index}>
                         <span
-                          key={index}
                           style={{
+                            color: "green",
                             fontWeight: part.highlight ? 700 : 400,
                           }}
                         >
