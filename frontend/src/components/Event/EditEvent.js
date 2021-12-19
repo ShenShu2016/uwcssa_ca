@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     marginBottom: "2rem",
-    marginTop: "6rem",
+    marginTop: "2rem",
   },
 
   form: {
