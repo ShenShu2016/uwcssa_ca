@@ -3075,6 +3075,7 @@ export const getDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -3183,6 +3184,7 @@ export const getUwcssaMember = /* GraphQL */ `
     getUwcssaMember(id: $id) {
       id
       active
+      leader
       title
       subTitle
       summary
@@ -3287,6 +3289,7 @@ export const listUwcssaMembers = /* GraphQL */ `
       items {
         id
         active
+        leader
         title
         subTitle
         summary
@@ -3528,6 +3531,7 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
       items {
         id
         active
+        leader
         title
         subTitle
         summary

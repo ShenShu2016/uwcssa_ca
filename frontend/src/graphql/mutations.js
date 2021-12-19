@@ -4105,6 +4105,7 @@ export const createDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -4220,6 +4221,7 @@ export const updateDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -4335,6 +4337,7 @@ export const deleteDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -4398,6 +4401,7 @@ export const createUwcssaMember = /* GraphQL */ `
     createUwcssaMember(input: $input, condition: $condition) {
       id
       active
+      leader
       title
       subTitle
       summary
@@ -4500,6 +4504,7 @@ export const updateUwcssaMember = /* GraphQL */ `
     updateUwcssaMember(input: $input, condition: $condition) {
       id
       active
+      leader
       title
       subTitle
       summary
@@ -4602,6 +4607,7 @@ export const deleteUwcssaMember = /* GraphQL */ `
     deleteUwcssaMember(input: $input, condition: $condition) {
       id
       active
+      leader
       title
       subTitle
       summary

@@ -109,6 +109,7 @@ export default function InfoCard({ item }) {
     <div>
       <Card sx={{ width: 310 }} className={classes.card}>
         <CardHeader
+          sx={{ bgcolor: leader && "primary.main" }}
           avatar={<CustomAvatar link={true} user={user} />}
           action={
             <IconButton

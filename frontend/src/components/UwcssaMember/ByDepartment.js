@@ -37,15 +37,23 @@ const ExpandMore = styled((props) => {
 
 export default function ByDepartment({ department, uwcssaMembers }) {
   const classes = useStyles();
-  const membersByDepartment = uwcssaMembers.filter(
+  let membersByDepartment = uwcssaMembers.filter(
     (x) => x.departmentID === department.id
   );
+
+  membersByDepartment = membersByDepartment.find((x) => x.leader === true)
+    ? [
+        membersByDepartment.find((x) => x.leader === true),
+        ...membersByDepartment.filter((x) => x.leader !== true),
+      ]
+    : membersByDepartment;
+
   const [expanded, setExpanded] = useState(true);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log("department", department);
+  //   console.log("department", department);
   console.log("membersByDepartment", membersByDepartment);
   return (
     <Box sx={{ my: "1rem" }}>

@@ -186,6 +186,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                 label="Type something here..."
                 defaultValue={item.content}
                 onChange={handleOnChange()}
+                inlineToolbar={true}
                 controls={[
                   "title",
                   "bold",

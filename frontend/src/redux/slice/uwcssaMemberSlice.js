@@ -29,9 +29,6 @@ export const fetchUwcssaMembers = createAsyncThunk(
   async () => {
     const response = await API.graphql({
       query: listUwcssaMembers,
-      variables: {
-        filter: { active: { eq: true } },
-      },
       authMode: "AWS_IAM",
     });
     return response.data.listUwcssaMembers.items;

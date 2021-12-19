@@ -7,6 +7,8 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  FormControlLabel,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -24,6 +26,7 @@ import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { updateUwcssaMemberDetail } from "../../redux/slice/uwcssaMemberSlice";
 import { useDispatch } from "react-redux";
+import { usePermit } from "../../Hooks/usePermit";
 
 const Input = styled("input")({
   display: "none",
@@ -42,6 +45,7 @@ const useStyles = makeStyles({
 export default function Edit({ editOpen, handleEditClose, item }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const isPermit = usePermit(null, "admin");
   const [loading, setLoading] = useState(false);
   const [imgURL, setImgURL] = useState(item.imgURL);
   const [newContent, setNewContent] = useState(item.content);
@@ -55,6 +59,8 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     defaultValues: {
       title: item.title,
       summary: item.summary,
+      leader: item.leader,
+      active: item.active,
     },
   });
 
@@ -102,6 +108,48 @@ export default function Edit({ editOpen, handleEditClose, item }) {
           <DialogTitle>编辑 我的信息</DialogTitle>
           <Divider light />
           <DialogContent>
+            {isPermit && (
+              <Box>
+                <Controller
+                  name="leader"
+                  control={control}
+                  rules={{
+                    required: false,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={value}
+                          onChange={onChange}
+                          name="leader"
+                        />
+                      }
+                      label="leader"
+                    />
+                  )}
+                />
+                <Controller
+                  name="active"
+                  control={control}
+                  rules={{
+                    required: false,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={value}
+                          onChange={onChange}
+                          name="active"
+                        />
+                      }
+                      label="active"
+                    />
+                  )}
+                />
+              </Box>
+            )}
             <Controller
               name="title"
               control={control}
@@ -218,6 +266,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
               <MUIRichTextEditor
                 label="Type something here..."
                 defaultValue={item.content}
+                inlineToolbar={true}
                 onChange={handleOnChange()}
                 controls={[
                   "title",

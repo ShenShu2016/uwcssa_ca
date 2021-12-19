@@ -4498,6 +4498,7 @@ export const onCreateDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -4610,6 +4611,7 @@ export const onUpdateDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -4722,6 +4724,7 @@ export const onDeleteDepartment = /* GraphQL */ `
         items {
           id
           active
+          leader
           title
           subTitle
           summary
@@ -4782,6 +4785,7 @@ export const onCreateUwcssaMember = /* GraphQL */ `
     onCreateUwcssaMember {
       id
       active
+      leader
       title
       subTitle
       summary
@@ -4881,6 +4885,7 @@ export const onUpdateUwcssaMember = /* GraphQL */ `
     onUpdateUwcssaMember {
       id
       active
+      leader
       title
       subTitle
       summary
@@ -4980,6 +4985,7 @@ export const onDeleteUwcssaMember = /* GraphQL */ `
     onDeleteUwcssaMember {
       id
       active
+      leader
       title
       subTitle
       summary
