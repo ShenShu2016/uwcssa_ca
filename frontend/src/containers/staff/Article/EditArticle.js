@@ -441,6 +441,7 @@ export default function EditArticle() {
               label="Type something here..."
               value={content}
               onChange={handleOnChange()}
+              inlineToolbar={true}
               controls={[
                 "title",
                 "bold",
