@@ -58,6 +58,8 @@ type User
   forumPosts: [ForumPost] @connection(keyName: "byUser", fields: ["id"])
   marketItems: [MarketItem] @connection(keyName: "byUser", fields: ["id"])
   kanban: [Kanban] @connection(keyName: "byUser", fields: ["id"])
+  kanbanAssignee: [Kanban]
+    @connection(keyName: "byUserAssignee", fields: ["id"])
 }
 
 type UserEducation
@@ -959,6 +961,7 @@ type Kanban
     ]
   )
   @key(name: "byUser", fields: ["userID", "createdAt"])
+  @key(name: "byUserAssignee", fields: ["assigneeID", "createdAt"])
   @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
   id: ID!
   content: String
@@ -976,6 +979,7 @@ type Kanban
 }
 
 enum KanbanStatus {
+  IDEA
   TODO
   INPROGRESS
   DONE

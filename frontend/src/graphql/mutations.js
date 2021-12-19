@@ -162,6 +162,23 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      kanbanAssignee {
+        items {
+          id
+          content
+          kanbanStatus
+          deadLine
+          tags
+          points
+          assigneeID
+          departmentID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -310,6 +327,23 @@ export const updateUser = /* GraphQL */ `
         nextToken
       }
       kanban {
+        items {
+          id
+          content
+          kanbanStatus
+          deadLine
+          tags
+          points
+          assigneeID
+          departmentID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      kanbanAssignee {
         items {
           id
           content
@@ -490,6 +524,23 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      kanbanAssignee {
+        items {
+          id
+          content
+          kanbanStatus
+          deadLine
+          tags
+          points
+          assigneeID
+          departmentID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -546,6 +597,9 @@ export const createUserEducation = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -608,6 +662,9 @@ export const updateUserEducation = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -666,6 +723,9 @@ export const deleteUserEducation = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -729,6 +789,9 @@ export const createUserExperience = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -788,6 +851,9 @@ export const updateUserExperience = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -851,6 +917,9 @@ export const deleteUserExperience = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -903,6 +972,9 @@ export const createTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1002,6 +1074,9 @@ export const updateTopic = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       articles {
         items {
@@ -1097,6 +1172,9 @@ export const deleteTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1202,6 +1280,9 @@ export const createArticle = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1321,6 +1402,9 @@ export const updateArticle = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       topic {
         id
@@ -1438,6 +1522,9 @@ export const deleteArticle = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       topic {
         id
@@ -1547,6 +1634,9 @@ export const createArticleComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1676,6 +1766,9 @@ export const updateArticleComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       article {
         id
@@ -1801,6 +1894,9 @@ export const deleteArticleComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1930,6 +2026,9 @@ export const createArticleSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       articleComment {
         id
@@ -2047,6 +2146,9 @@ export const updateArticleSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       articleComment {
         id
@@ -2162,6 +2264,9 @@ export const deleteArticleSubComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -2301,6 +2406,9 @@ export const createEvent = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -2455,6 +2563,9 @@ export const updateEvent = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       topic {
         id
@@ -2607,6 +2718,9 @@ export const deleteEvent = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       topic {
         id
@@ -2735,6 +2849,9 @@ export const createEventComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -2883,6 +3000,9 @@ export const updateEventComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       event {
         id
@@ -3027,6 +3147,9 @@ export const deleteEventComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -3175,6 +3298,9 @@ export const createEventSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       eventComment {
         id
@@ -3300,6 +3426,9 @@ export const updateEventSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       eventComment {
         id
@@ -3423,6 +3552,9 @@ export const deleteEventSubComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -3564,6 +3696,9 @@ export const createEventParticipant = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       event {
         id
@@ -3697,6 +3832,9 @@ export const updateEventParticipant = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -3834,6 +3972,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       event {
         id
@@ -3956,6 +4097,9 @@ export const createDepartment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       uwcssaMembers {
         items {
@@ -4068,6 +4212,9 @@ export const updateDepartment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       uwcssaMembers {
         items {
@@ -4178,6 +4325,9 @@ export const deleteDepartment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -4298,6 +4448,9 @@ export const createUwcssaMember = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       department {
         id
@@ -4397,6 +4550,9 @@ export const updateUwcssaMember = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       department {
         id
@@ -4494,6 +4650,9 @@ export const deleteUwcssaMember = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -4613,6 +4772,9 @@ export const createUwcssaJob = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       department {
         id
@@ -4728,6 +4890,9 @@ export const updateUwcssaJob = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -4847,6 +5012,9 @@ export const deleteUwcssaJob = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       department {
         id
@@ -4941,6 +5109,9 @@ export const createUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -5051,6 +5222,9 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       uwcssaJob {
         id
@@ -5159,6 +5333,9 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       uwcssaJob {
         id
@@ -5261,6 +5438,9 @@ export const createForumTopic = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumSubTopics {
         items {
@@ -5323,6 +5503,9 @@ export const updateForumTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -5389,6 +5572,9 @@ export const deleteForumTopic = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumSubTopics {
         items {
@@ -5452,6 +5638,9 @@ export const createForumSubTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -5555,6 +5744,9 @@ export const updateForumSubTopic = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumTopic {
         id
@@ -5654,6 +5846,9 @@ export const deleteForumSubTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -5761,6 +5956,9 @@ export const createForumPost = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -5902,6 +6100,9 @@ export const updateForumPost = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumSubTopic {
         id
@@ -6041,6 +6242,9 @@ export const deleteForumPost = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumSubTopic {
         id
@@ -6174,6 +6378,9 @@ export const createForumPostComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -6311,6 +6518,9 @@ export const updateForumPostComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumPost {
         id
@@ -6444,6 +6654,9 @@ export const deleteForumPostComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -6582,6 +6795,9 @@ export const createForumPostSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -6619,6 +6835,9 @@ export const createForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -6793,6 +7012,9 @@ export const updateForumPostSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -6830,6 +7052,9 @@ export const updateForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -7004,6 +7229,9 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -7041,6 +7269,9 @@ export const deleteForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -7213,6 +7444,9 @@ export const createMarketUserInfo = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -7269,6 +7503,9 @@ export const updateMarketUserInfo = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -7323,6 +7560,9 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -7419,6 +7659,9 @@ export const createMarketItem = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -7511,6 +7754,9 @@ export const updateMarketItem = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -7607,6 +7853,9 @@ export const deleteMarketItem = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -7666,6 +7915,9 @@ export const createFoundingMember = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -7728,6 +7980,9 @@ export const updateFoundingMember = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
     }
   }
@@ -7788,6 +8043,9 @@ export const deleteFoundingMember = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
     }
   }
@@ -7842,6 +8100,9 @@ export const createLike = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -7879,6 +8140,9 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -8415,6 +8679,9 @@ export const updateLike = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -8452,6 +8719,9 @@ export const updateLike = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -8988,6 +9258,9 @@ export const deleteLike = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -9025,6 +9298,9 @@ export const deleteLike = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -9562,6 +9838,9 @@ export const createWebFeedBack = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -9618,6 +9897,9 @@ export const updateWebFeedBack = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -9672,6 +9954,9 @@ export const deleteWebFeedBack = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -9732,6 +10017,9 @@ export const createUserMutationLog = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
     }
   }
@@ -9789,6 +10077,9 @@ export const updateUserMutationLog = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
     }
   }
@@ -9844,6 +10135,9 @@ export const deleteUserMutationLog = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -9905,6 +10199,9 @@ export const createKanban = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -9942,6 +10239,9 @@ export const createKanban = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -10041,6 +10341,9 @@ export const updateKanban = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -10078,6 +10381,9 @@ export const updateKanban = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -10177,6 +10483,9 @@ export const deleteKanban = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -10214,6 +10523,9 @@ export const deleteKanban = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
