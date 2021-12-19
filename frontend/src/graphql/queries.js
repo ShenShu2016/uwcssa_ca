@@ -53,6 +53,9 @@ export const getUwcssaJobResume = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       uwcssaJob {
         id
@@ -218,6 +221,9 @@ export const getUserMutationLog = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -543,6 +549,9 @@ export const userSortBySortKey = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       nextToken
     }
@@ -706,6 +715,23 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      kanbanAssignee {
+        items {
+          id
+          content
+          kanbanStatus
+          deadLine
+          tags
+          points
+          assigneeID
+          departmentID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -752,6 +778,9 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -809,6 +838,9 @@ export const getUserEducation = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -912,6 +944,9 @@ export const getUserExperience = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -1005,6 +1040,9 @@ export const getTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1149,6 +1187,9 @@ export const getArticle = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1381,6 +1422,9 @@ export const getArticleComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -1637,6 +1681,9 @@ export const getArticleSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       articleComment {
         id
@@ -1889,6 +1936,9 @@ export const getEvent = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -2180,6 +2230,9 @@ export const getEventComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       event {
         id
@@ -2469,6 +2522,9 @@ export const getEventSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       eventComment {
         id
@@ -2721,6 +2777,9 @@ export const getEventParticipant = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -3008,6 +3067,9 @@ export const getDepartment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       uwcssaMembers {
         items {
@@ -3169,6 +3231,9 @@ export const getUwcssaMember = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -3338,6 +3403,9 @@ export const getUwcssaJob = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -3551,6 +3619,9 @@ export const getForumTopic = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumSubTopics {
         items {
@@ -3650,6 +3721,9 @@ export const getForumSubTopic = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -4019,6 +4093,9 @@ export const getForumPost = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       forumSubTopic {
         id
@@ -4211,6 +4288,9 @@ export const getForumPostComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -4484,6 +4564,9 @@ export const getForumPostSubComment = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -4521,6 +4604,9 @@ export const getForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -4882,6 +4968,9 @@ export const getMarketUserInfo = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -5010,6 +5099,9 @@ export const getMarketItem = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -5495,6 +5587,9 @@ export const getFoundingMember = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
     }
   }
@@ -5589,6 +5684,9 @@ export const getLike = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -5626,6 +5724,9 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
@@ -6333,6 +6434,9 @@ export const getWebFeedBack = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       owner
     }
@@ -6429,6 +6533,9 @@ export const getKanban = /* GraphQL */ `
         kanban {
           nextToken
         }
+        kanbanAssignee {
+          nextToken
+        }
       }
       user {
         id
@@ -6466,6 +6573,9 @@ export const getKanban = /* GraphQL */ `
           nextToken
         }
         kanban {
+          nextToken
+        }
+        kanbanAssignee {
           nextToken
         }
       }
