@@ -10,6 +10,7 @@ import {
   Container,
   Divider,
   Grid,
+  IconButton,
   Stack,
   Tab,
   Tabs,
@@ -24,7 +25,7 @@ import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
 // import EventIcon from "@mui/icons-material/Event";
 import FlagIcon from "@mui/icons-material/Flag";
 import ForumIcon from "@mui/icons-material/Forum";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
 import Share from "./EventDetail/Share";
@@ -35,6 +36,10 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import SeeMore from "./SeeMore";
 import InfoIcon from "@mui/icons-material/Info";
+//import EditEvent from "./EditEvent";
+import { usePermit } from "../../Hooks/usePermit";
+import EditIcon from "@mui/icons-material/Edit";
+
 const useStyles = makeStyles((theme) => ({
   action: {
     display: "flex",
@@ -93,6 +98,7 @@ export default function EventBody({ event }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
+  const history = useHistory();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -111,8 +117,15 @@ export default function EventBody({ event }) {
     topic,
     sponsor,
     eventParticipants,
+    owner,
+    id,
   } = event;
 
+  const isPermit = usePermit(owner, "admin");
+  const handleClickOpen = () => {
+    //setOpen(true);
+    history.push(`/staff/event/editEvent/${id}`);
+  };
   return (
     <Box>
       {event.startDate ? (
@@ -288,6 +301,11 @@ export default function EventBody({ event }) {
                     </Box>
                   )}
                   <Share label={title} />
+                  {isPermit ? (
+                    <IconButton variant="outlined" onClick={handleClickOpen}>
+                      <EditIcon />
+                    </IconButton>
+                  ) : null}
                 </Stack>
               </Box>
             </Container>

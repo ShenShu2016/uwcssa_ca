@@ -267,7 +267,7 @@ export default function PostEvent() {
               }
               label="用标题作为URL，一旦发出不能更改，除非删掉，并且有唯一性"
             />
-            <Box sx={{ my: "1rem" }}>
+            {/* <Box sx={{ my: "1rem" }}>
               <Controller
                 name="summary"
                 control={control}
@@ -291,7 +291,7 @@ export default function PostEvent() {
                   />
                 )}
               />
-            </Box>
+            </Box> */}
             <Controller
               name="topicID"
               control={control}
@@ -347,7 +347,7 @@ export default function PostEvent() {
               上传新的主题
             </Button>
 
-            {/* <Controller
+            <Controller
               name="sponsor"
               control={control}
               rules={{
@@ -357,13 +357,13 @@ export default function PostEvent() {
                 <TextField
                   margin="normal"
                   fullWidth
-                  label="赞助商"
+                  label="赞助商/主办方"
                   variant="outlined"
                   onChange={onChange}
                   value={value}
                 />
               )}
-            /> */}
+            />
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Stack>
@@ -442,7 +442,7 @@ export default function PostEvent() {
             />
 
             <Controller
-              name="online"
+              name="group"
               control={control}
               rules={{
                 required: false,
