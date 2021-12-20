@@ -21,6 +21,7 @@ import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -55,7 +56,6 @@ export default function Individual() {
   } = useForm({
     defaultValues: {
       name: "",
-      address: "",
       phone: "",
       weChat: "",
       message: "",
@@ -74,6 +74,7 @@ export default function Individual() {
       active: true,
       eventID: eventID,
       userID: userAuth.user.username,
+      address: GetAddress(),
     };
     console.log("createEventParticipantInput", createEventParticipantInput);
     const response = await dispatch(
@@ -194,7 +195,7 @@ export default function Individual() {
                     />
                   )}
                 />
-                <Controller
+                {/* <Controller
                   name="address"
                   control={control}
                   rules={{
@@ -212,7 +213,8 @@ export default function Individual() {
                       helperText={"送货地址或者接送地址"}
                     />
                   )}
-                />
+                /> */}
+                <GoogleMapsPlace />
                 <Controller
                   name="message"
                   control={control}
