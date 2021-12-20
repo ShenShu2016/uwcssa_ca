@@ -1890,6 +1890,9 @@ export const getEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -2047,6 +2050,9 @@ export const listEvents = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2133,6 +2139,9 @@ export const eventSortBySortKey = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2254,6 +2263,9 @@ export const getEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2730,6 +2742,9 @@ export const getEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -2803,6 +2818,9 @@ export const getEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2874,6 +2892,9 @@ export const listEventParticipants = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         phone
         weChat
@@ -2960,6 +2981,9 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         phone
         weChat
@@ -5051,6 +5075,9 @@ export const getMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -5150,6 +5177,9 @@ export const listMarketItems = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5237,6 +5267,9 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5324,6 +5357,9 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5411,6 +5447,9 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5498,6 +5537,9 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5890,6 +5932,9 @@ export const getLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags

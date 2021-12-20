@@ -2789,6 +2789,9 @@ export const onCreateEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -2941,6 +2944,9 @@ export const onUpdateEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -3093,6 +3099,9 @@ export const onDeleteEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -3295,6 +3304,9 @@ export const onCreateEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3441,6 +3453,9 @@ export const onUpdateEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3587,6 +3602,9 @@ export const onDeleteEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -4049,6 +4067,9 @@ export const onCreateEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -4122,6 +4143,9 @@ export const onCreateEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -4184,6 +4208,9 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -4257,6 +4284,9 @@ export const onUpdateEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -4319,6 +4349,9 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -4392,6 +4425,9 @@ export const onDeleteEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -7590,6 +7626,9 @@ export const onCreateMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -7684,6 +7723,9 @@ export const onUpdateMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -7778,6 +7820,9 @@ export const onDeleteMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -8269,6 +8314,9 @@ export const onCreateLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -8845,6 +8893,9 @@ export const onUpdateLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -9421,6 +9472,9 @@ export const onDeleteLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags

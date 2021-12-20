@@ -1,3 +1,4 @@
+# sudo amplify api gql-compile && amplify codegen
 enum SortKey {
   SortKey
 }
@@ -9,6 +10,9 @@ type Address {
   terms: [String]
   types: [String]
   apartmentNumbers: String
+  geocodingResult: String
+  lat: Float
+  lng: Float
 }
 
 type User
