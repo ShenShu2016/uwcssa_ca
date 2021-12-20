@@ -18,7 +18,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DownloadIcon from "@mui/icons-material/Download";
-import { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
@@ -280,7 +279,7 @@ export default function SimpleTable() {
                                         {eventParticipant.numberOfPeople}
                                       </TableCell>
                                       <TableCell>
-                                        {eventParticipant.address}
+                                        {eventParticipant.address.description}
                                       </TableCell>
                                       <TableCell>
                                         {eventParticipant.message}
