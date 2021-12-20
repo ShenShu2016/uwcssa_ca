@@ -68,13 +68,13 @@ export default function Individual() {
     const createEventParticipantInput = {
       ...data,
       id: `${eventID}-${userAuth.user.username}`,
+      address: GetAddress(),
       numberOfPeople: 1,
       eventParticipantStatus: "ArriveOnTime",
       email: userAuth.user.attributes.email,
       active: true,
       eventID: eventID,
       userID: userAuth.user.username,
-      address: GetAddress(),
     };
     console.log("createEventParticipantInput", createEventParticipantInput);
     const response = await dispatch(
