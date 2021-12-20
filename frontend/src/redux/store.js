@@ -12,6 +12,7 @@ import marketReducer from "./slice/marketSlice";
 import marketUserReducer from "./slice/marketUserSlice";
 import profileReducer from "./slice/profileSlice";
 import staffReducer from "./slice/staffSlice";
+import uwcssaJobReducer from "./slice/uwcssaJobSlice";
 import uwcssaMemberReducer from "./slice/uwcssaMemberSlice";
 export default configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export default configureStore({
     images: imageReducer,
     foundingMember: foundingMemberReducer,
     uwcssaMember: uwcssaMemberReducer,
+    uwcssaJob: uwcssaJobReducer,
     department: departmentReducer,
   },
   middleware: (getDefaultMiddleware) =>
