@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DownloadIcon from "@mui/icons-material/Download";
+import { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
@@ -26,7 +27,6 @@ import XLSX from "xlsx";
 import { alpha } from "@mui/material/styles";
 import { fetchEvents_Staff } from "../../redux/slice/staffSlice";
 import { makeStyles } from "@mui/styles";
-import { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -132,13 +132,14 @@ export default function SimpleTable() {
       eventStatus,
       topic,
       online,
+      address,
       eventParticipants,
     } = event;
 
     return {
       id: id,
       title: title,
-      address: GetAddress(),
+      address: address.description,
       startDate: startDate,
       topic: topic.name,
       online: online,
