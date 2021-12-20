@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     marginBottom: "2rem",
     marginTop: "3rem",
+    position: "relative",
   },
 
   form: {

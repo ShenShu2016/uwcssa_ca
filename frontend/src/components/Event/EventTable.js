@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Container,
+  // Container,
   IconButton,
   Paper,
   Table,
@@ -177,7 +177,7 @@ export default function SimpleTable() {
   };
 
   return (
-    <Container maxWidth="xl">
+    <div>
       <Box sx={{ paddingBlock: "2rem" }}>
         <Box className={classes.content}>
           <div className={classes.toolbar}>
@@ -335,6 +335,6 @@ export default function SimpleTable() {
           </TableContainer>
         </Box>
       </Box>
-    </Container>
+    </div>
   );
 }
