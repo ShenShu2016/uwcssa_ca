@@ -169,7 +169,14 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
         marketItemCondition
         marketItemCategory
         tags
-        location
+        address {
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+        }
         contactPhone
         contactWeChat
         contactEmail
@@ -224,6 +231,14 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
         description
         tags
         vehicleType
+        address {
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+        }
         year
         make
         model

@@ -25,7 +25,8 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
     title,
     price,
     description,
-    location,
+    // location,
+    address,
     marketItemCondition,
     marketItemCategory,
     tags,
@@ -66,7 +67,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
         tags={tags}
         mode={mode}
         description={description}
-        location={location}
+        address={address}
         type="item"
       />
       <Divider variant="middle">
