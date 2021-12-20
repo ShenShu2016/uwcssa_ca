@@ -3,6 +3,7 @@ import {
   Button,
   CircularProgress,
   IconButton,
+  InputAdornment,
   Paper,
   Stack,
   TextField,
@@ -22,7 +23,6 @@ import {
 } from "../../redux/slice/marketUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
 import PostUserInfo from "../../components/Market/postUserInfo";
@@ -34,7 +34,6 @@ import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMarketItem } from "../../redux/slice/marketSlice";
 import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 

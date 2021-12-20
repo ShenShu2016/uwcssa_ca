@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import { Link, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +22,6 @@ import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -65,10 +65,11 @@ export default function Individual() {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    const address = await GetAddress();
     const createEventParticipantInput = {
       ...data,
       id: `${eventID}-${userAuth.user.username}`,
-      address: GetAddress(),
+      address: address,
       numberOfPeople: 1,
       eventParticipantStatus: "ArriveOnTime",
       email: userAuth.user.attributes.email,
