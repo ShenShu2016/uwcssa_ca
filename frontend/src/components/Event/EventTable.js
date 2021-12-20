@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Container,
+  // Container,
   IconButton,
   Paper,
   Table,
@@ -18,7 +18,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DownloadIcon from "@mui/icons-material/Download";
-import { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
@@ -178,7 +177,7 @@ export default function SimpleTable() {
   };
 
   return (
-    <Container maxWidth="xl">
+    <div>
       <Box sx={{ paddingBlock: "2rem" }}>
         <Box className={classes.content}>
           <div className={classes.toolbar}>
@@ -336,6 +335,6 @@ export default function SimpleTable() {
           </TableContainer>
         </Box>
       </Box>
-    </Container>
+    </div>
   );
 }
