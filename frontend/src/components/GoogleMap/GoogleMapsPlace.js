@@ -10,7 +10,7 @@ import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 
 let address = null;
-let locationWithLatLng;
+let locationWithLatLng = null;
 
 export function GetAddress() {
   return address;
@@ -33,7 +33,7 @@ function loadScript(src, position, id) {
   script.src = src;
   position.appendChild(script);
 }
-
+console.log("ee");
 const autocompleteService = { current: null };
 
 export default function GoogleMaps() {
@@ -42,16 +42,25 @@ export default function GoogleMaps() {
   const [apartmentNumbers, setApartmentNumbers] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
-
+  // console.log(address);
   useEffect(() => {
-    address = {
-      description: value && value.description,
-      place_id: value && value.place_id,
-      reference: value && value.reference,
-      terms: value && value.terms,
-      types: value && value.types,
-      apartmentNumbers: apartmentNumbers,
-    };
+    if (locationWithLatLng !== null) {
+      let newType = null;
+      if (value !== null) {
+        const lat = locationWithLatLng[0];
+        const lng = locationWithLatLng[1];
+        newType = [...value.types, lat, lng];
+      }
+      console.log(newType);
+      address = {
+        description: value && value.description,
+        place_id: value && value.place_id,
+        reference: value && value.reference,
+        terms: value && value.terms,
+        types: value && newType,
+        apartmentNumbers: apartmentNumbers,
+      };
+    }
     // console.log(value.description);
     // console.log(value.place_id);
     // console.log(value.reference);
@@ -60,29 +69,26 @@ export default function GoogleMaps() {
     // console.log(value.types);
   });
 
-  // useEffect(() => {
-  //   const init = () => {
-  //     const geocoder = new window.google.maps.Geocoder();
-  //     geocoder.geocode(
-  //       { placeId: address.place_id },
-  //       function (results, status) {
-  //         if (status === window.google.maps.GeocoderStatus.OK) {
-  //           const lat = results[0].geometry.location.lat();
-  //           const lng = results[0].geometry.location.lng();
-  //           locationWithLatLng = [lat, lng];
-  //           console.log(locationWithLatLng);
-  //         } else {
-  //           console.log(
-  //             "Geocode was not successful for the following reason: " + status
-  //           );
-  //         }
-  //       }
-  //     );
-  //   };
-  //   if (address) {
-  //     init();
-  //   }
-  // }, [address]);
+  useEffect(() => {
+    const init = () => {
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ placeId: value.place_id }, function (results, status) {
+        if (status === window.google.maps.GeocoderStatus.OK) {
+          const lat = results[0].geometry.location.lat();
+          const lng = results[0].geometry.location.lng();
+          locationWithLatLng = [lat, lng];
+          console.log(locationWithLatLng);
+        } else {
+          console.log(
+            "Geocode was not successful for the following reason: " + status
+          );
+        }
+      });
+    };
+    if (value) {
+      init();
+    }
+  }, [value]);
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
@@ -103,6 +109,7 @@ export default function GoogleMaps() {
       }, 200),
     []
   );
+  console.log("ee");
   useEffect(() => {
     let active = true;
 

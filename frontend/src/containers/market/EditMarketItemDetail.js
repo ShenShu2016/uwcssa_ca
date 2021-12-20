@@ -12,7 +12,6 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import GoogleMaps, {
   GetAddress,
-  GetLatLng,
 } from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -119,16 +118,16 @@ export default function EditMarketItemDetail() {
     dispatch(fetchMarketUserInfo(marketItem.userID));
   }, [marketItem.userID, dispatch]);
 
-  console.log("??", GetAddress().description);
+  // console.log("??", GetAddress().description);
 
   const onSubmit = async (data) => {
-    const address = GetLatLng();
-    console.log(address);
+    // const address = GetLatLng();
+    // console.log(address);
     const createMarketItemInput = {
       ...data,
-      location: GetAddress().description,
+      // location: GetAddress().description,
       id: id,
-      address: GetLatLng(),
+      address: GetAddress(),
       name: data.title,
       marketType: "Item",
       imgURLs: imgKeyFromServer,

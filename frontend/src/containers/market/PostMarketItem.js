@@ -12,7 +12,6 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import GoogleMaps, {
   GetAddress,
-  GetLatLng,
 } from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -63,7 +62,7 @@ export default function PostMarketItem() {
     title: "Title",
     price: "Price",
     description: "Descriptions",
-    location: "Location",
+    address: { description: "Location" },
     marketItemCondition: "New",
     marketItemCategory: "Tools",
     tags: ["Tags Goes Here"],
@@ -95,12 +94,12 @@ export default function PostMarketItem() {
   });
 
   const onSubmit = async (data) => {
-    const address = GetLatLng(GetAddress().place_id);
-    console.log(GetAddress().place_id);
+    // const address = GetLatLng(GetAddress().place_id);
+    // console.log(GetAddress().place_id);
     const createMarketItemInput = {
       ...data,
-      location: GetAddress().description,
-      address: address,
+      // location: GetAddress().description,
+      address: GetAddress(),
       name: data.title,
       marketType: "Item",
       imgURLs: imgURLs,

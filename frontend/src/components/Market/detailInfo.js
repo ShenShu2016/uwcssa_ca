@@ -14,7 +14,6 @@ import React from "react";
 import { marketItemOptions } from "./marketItemOptions";
 import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
-import placeses from "../../places.json";
 
 const {
   airConditionType: ACType,
@@ -38,7 +37,8 @@ const DetailInfo = ({
   mode = "detail",
   // specific inputs
   // item & vehicle
-  location,
+  // location,
+  address,
   // item
   marketItemCategory,
   marketItemCondition,
@@ -56,13 +56,8 @@ const DetailInfo = ({
   interiorColor,
   fuelType,
 }) => {
-  // console.log("type", type);
-  const [clicked, setClicked] = React.useState(null);
+  // console.log("???", typeof address.types[2]);
 
-  let places = placeses.results;
-  places.forEach((result) => {
-    result.show = false;
-  });
   return (
     <React.Fragment>
       <Typography marginX="1rem" marginY="0.5rem" fontWeight="600">
@@ -213,40 +208,24 @@ const DetailInfo = ({
       >
         {mode === "detail" ? (
           <GoogleMap
-            defaultZoom={10}
-            defaultCenter={[
-              places[0].geometry.location.lat,
-              places[0].geometry.location.lng,
-            ]}
-            // onChildClick={onChildClickCallback}
-            center={
-              clicked && [
-                clicked.geometry.location.lat,
-                clicked.geometry.location.lng,
-              ]
-            }
+            defaultZoom={15}
+            defaultCenter={[Number(address.types[2]), Number(address.types[3])]}
           >
-            {places.map((place) => (
-              <Marker
-                key={place.id}
-                text={place.name}
-                lat={place.geometry.location.lat}
-                lng={place.geometry.location.lng}
-                // open={open}
-                place={place}
-                onClick={() => {
-                  setClicked(place);
-                  // setOpen((prev) => !prev);
-                }}
-              />
-            ))}
+            <Marker
+              text={address.description}
+              lat={address.types[2]}
+              lng={address.types[3]}
+              place={address}
+            />
           </GoogleMap>
         ) : (
           "Google Map Currently Unavailable (Location will be available after posted.)"
         )}
       </Paper>
       <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
-        {location.length === 0 ? "Location Goes Here" : location}
+        {address.description.length === 0
+          ? "Location Goes Here"
+          : address.description}
       </Typography>
     </React.Fragment>
   );

@@ -33,6 +33,7 @@ function ConfirmationDialogRaw(props) {
   places.forEach((result) => {
     result.show = false;
   });
+  // console.log(typeof places[0].geometry.location.lat);
   useEffect(() => {
     if (!open) {
       setNewLocationInfo(valueProp);
