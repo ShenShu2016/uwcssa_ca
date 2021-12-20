@@ -94,7 +94,7 @@ export default function MarketItemDetail() {
   // const imgKeyFromServer = useGetImages(marketItem, id);
   // const imgKeyFromServer = marketItem.imgURLs;
 
-  console.log("starter", starter);
+  // console.log("starter", starter);
   return (
     <div className={classes.root}>
       {starter === false ? null : ( // <Loading status={status} />

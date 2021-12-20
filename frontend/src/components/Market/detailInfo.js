@@ -207,14 +207,11 @@ const DetailInfo = ({
         }}
       >
         {mode === "detail" ? (
-          <GoogleMap
-            defaultZoom={15}
-            defaultCenter={[Number(address.types[2]), Number(address.types[3])]}
-          >
+          <GoogleMap defaultZoom={15} center={[address.lat, address.lng]}>
             <Marker
               text={address.description}
-              lat={address.types[2]}
-              lng={address.types[3]}
+              lat={address.lat}
+              lng={address.lng}
               place={address}
             />
           </GoogleMap>

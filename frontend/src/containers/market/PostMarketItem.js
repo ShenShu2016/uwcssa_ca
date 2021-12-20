@@ -71,7 +71,7 @@ export default function PostMarketItem() {
     user: user,
     owner: username,
   });
-  console.log("check", marketUserInfo);
+  // console.log("check", marketUserInfo);
   const {
     handleSubmit,
     setValue,
@@ -94,12 +94,11 @@ export default function PostMarketItem() {
   });
 
   const onSubmit = async (data) => {
-    // const address = GetLatLng(GetAddress().place_id);
-    // console.log(GetAddress().place_id);
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
       // location: GetAddress().description,
-      address: GetAddress(),
+      address: address,
       name: data.title,
       marketType: "Item",
       imgURLs: imgURLs,
@@ -158,8 +157,6 @@ export default function PostMarketItem() {
       // setTrigger(false);
     }
   };
-
-  console.log("errors", GetAddress());
 
   // const imgKeyFromServer = useGetAllImages(
   //   Object.keys(imageKeys),

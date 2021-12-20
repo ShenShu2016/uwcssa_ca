@@ -24,7 +24,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
     // name,
     price,
     description,
-    location,
+    address,
     vehicleType,
     make,
     year,
@@ -68,7 +68,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         type="vehicle"
         tags={tags}
         description={description}
-        location={location}
+        address={address}
         year={year}
         make={make}
         model={model}

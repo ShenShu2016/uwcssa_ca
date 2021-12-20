@@ -59,6 +59,7 @@ export default function EditMarketItemDetail() {
     imgURLs,
     title,
     price,
+    // address,
     description,
     marketItemCategory,
     marketItemCondition,
@@ -66,7 +67,6 @@ export default function EditMarketItemDetail() {
     contactPhone,
     contactWeChat,
   } = marketItem;
-
   const [uploadStatus, setUploadStatus] = useState("idle");
   // const [trigger, setTrigger] = useState(true);
   const [defaultInfo, setDefaultInfo] = useState(false);
@@ -121,13 +121,12 @@ export default function EditMarketItemDetail() {
   // console.log("??", GetAddress().description);
 
   const onSubmit = async (data) => {
-    // const address = GetLatLng();
-    // console.log(address);
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
       // location: GetAddress().description,
       id: id,
-      address: GetAddress(),
+      address: address,
       name: data.title,
       marketType: "Item",
       imgURLs: imgKeyFromServer,
@@ -164,7 +163,7 @@ export default function EditMarketItemDetail() {
     }
     console.log("Can upload");
   };
-  console.log(imgKeyFromServer);
+
   const handleDeleteImg = (imgKey) => {
     const images = [...imgKeyFromServer];
     const newKeys = images.filter((key) => key !== imgKey);

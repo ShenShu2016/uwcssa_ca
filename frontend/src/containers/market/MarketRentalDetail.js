@@ -37,7 +37,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
     propertyType,
     bedroomCounts,
     // bathroomsCounts,
-    location,
+    address,
     // propertySize,
     // dateAvailable,
     // laundryType,
@@ -80,7 +80,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
         heatingType={heatingType}
         catFriendly={catFriendly}
         dogFriendly={dogFriendly}
-        location={location}
+        address={address}
       />
       <Divider variant="middle">
         <Typography fontWeight="600">卖家详情</Typography>
