@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
+import GoogleMaps, {
+  GetAddress,
+} from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
@@ -51,7 +54,7 @@ export default function EditMarketVehicleDetail() {
   const {
     imgURLs,
     vehicleType,
-    location,
+    // address,
     year,
     model,
     make,
@@ -86,7 +89,6 @@ export default function EditMarketVehicleDetail() {
     defaultValues: {
       imgURLs: imgKeyFromServer,
       vehicleType: vehicleType,
-      location: location,
       year: year,
       model: model,
       make: make,
@@ -124,9 +126,11 @@ export default function EditMarketVehicleDetail() {
   }, [marketItem.userID, dispatch]);
 
   const onSubmit = async (data) => {
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
       id: id,
+      address: address,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
       imgURLs: imgKeyFromServer,
@@ -296,7 +300,7 @@ export default function EditMarketVehicleDetail() {
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <Controller
+                {/* <Controller
                   name="location"
                   control={control}
                   rules={{
@@ -321,7 +325,8 @@ export default function EditMarketVehicleDetail() {
                       }}
                     />
                   )}
-                />
+                /> */}
+                <GoogleMaps></GoogleMaps>
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>

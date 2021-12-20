@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
+import GoogleMaps, {
+  GetAddress,
+} from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
@@ -77,7 +80,7 @@ export default function PostMarketRental() {
     marketRentalSaleRent: "Rent",
     propertyType: "House",
     bedroomCounts: "2",
-    location: "UK London NW1 1RW",
+    address: { description: "Location" },
     user: user,
     airConditionType: "CentralAC",
     heatingType: "CentralHeating",
@@ -98,7 +101,7 @@ export default function PostMarketRental() {
       propertyType: "",
       bedroomCounts: "",
       bathroomsCounts: "",
-      location: "",
+      // location: "",
       propertySize: "",
       dateAvailable: new Date().toISOString(),
       laundryType: "",
@@ -115,10 +118,12 @@ export default function PostMarketRental() {
   });
 
   const onSubmit = async (data) => {
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
       name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
       marketType: "Rental",
+      address: address,
       imgURLs: imgURLs,
       tags: GetTags(),
       active: true,
@@ -391,7 +396,7 @@ export default function PostMarketRental() {
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <Controller
+                {/* <Controller
                   name="location"
                   control={control}
                   rules={{
@@ -414,7 +419,8 @@ export default function PostMarketRental() {
                       }}
                     />
                   )}
-                />
+                /> */}
+                <GoogleMaps></GoogleMaps>
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
