@@ -171,33 +171,43 @@ export default function EventMain({ event }) {
               {moment(startDate).format("YYYY") ===
               moment(endDate).format("YYYY") ? (
                 <Box
+                  sx={{ overflow: "hidden", height: "30px" }}
                   color={"grey.700"}
                   display={"flex"}
                   alignItems={"center"}
                   mb={1}
                 >
-                  <CalendarTodayIcon className={classes.locationIcon} />
-                  <Typography variant="subtitle2">
-                    {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
-                    {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
-                    {endDate.slice(11, 16)}
-                  </Typography>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <CalendarTodayIcon className={classes.locationIcon} />
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="subtitle2" noWrap>
+                        {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                        {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                        {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
+                        {endDate.slice(11, 16)}
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </Box>
               ) : (
                 <Box
+                  sx={{ overflow: "hidden", height: "30px" }}
                   color={"grey.700"}
                   display={"flex"}
                   alignItems={"center"}
                   mb={1}
                 >
-                  <CalendarTodayIcon className={classes.locationIcon} />
-                  <Typography variant="subtitle2">
-                    {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
-                    {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
-                    {endDate.slice(8, 10)} {endDate.slice(11, 16)}
-                  </Typography>
+                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                    <CalendarTodayIcon className={classes.locationIcon} />
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="subtitle2" noWrap>
+                        {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                        {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                        {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
+                        {endDate.slice(8, 10)} {endDate.slice(11, 16)}
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </Box>
               )}
               {online === true ? (

@@ -5,6 +5,8 @@ import { eventSortBySortKey } from "../CustomQuery/StaffQueries";
 
 const initialState = {
   events: [],
+  topics: [],
+  types: [],
   //  Status: "idle",
   //  Error: null,
   fetchEvents_StaffStatus: "idle",
@@ -45,7 +47,7 @@ export const fetchEvents_Staff = createAsyncThunk(
 );
 
 const staffSlice = createSlice({
-  name: "article",
+  name: "staff",
   initialState,
   reducers: {
     //有API call 的不能放这里
