@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   actionArea: {
     maxWidth: 300,
     minWidth: 256,
-    borderRadius: 16,
+    // borderRadius: 16,
     transition: "0.2s",
     "&:hover": {
       transform: "scale(1.1)",
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   cardDetails: {
     maxWidth: 300,
     minWidth: 256,
-    borderRadius: 16,
+    // borderRadius: 16,
     boxShadow: "none",
     "&:hover": {
       boxShadow: "0 6px 12px 0 #757ce8",
@@ -91,7 +91,7 @@ export default function EventMain({ event }) {
 
   const {
     id,
-    content,
+    // content,
     title,
     posterImgURL,
     address,
@@ -100,7 +100,7 @@ export default function EventMain({ event }) {
     topic,
     online,
   } = event;
-  const newContent = content.substring(34, content.length - 98);
+  // const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
       item
@@ -112,10 +112,11 @@ export default function EventMain({ event }) {
     >
       <CardActionArea
         className={classes.actionArea}
+        sx={{ borderRadius: 3 }}
         component={Link}
         to={`/event/${id}`}
       >
-        <Card className={classes.cardDetails}>
+        <Card className={classes.cardDetails} sx={{ borderRadius: 3 }}>
           <Box sx={{ position: "relative" }}>
             <CardMedia
               component="img"
@@ -275,7 +276,7 @@ export default function EventMain({ event }) {
                 </div>
               )}
 
-              <Box
+              {/* <Box
                 sx={{
                   overflow: "hidden",
                   height: "30px",
@@ -289,7 +290,7 @@ export default function EventMain({ event }) {
                     </Typography>
                   </Grid>
                 </Grid>
-              </Box>
+              </Box> */}
               {topic.name ? (
                 <Chip label={topic.name} sx={{ color: "#757de8" }} />
               ) : (

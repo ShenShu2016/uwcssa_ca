@@ -23,11 +23,10 @@ function useStarter(marketItem, mode = "all") {
         }
       } else if (mode === "item") {
         if (marketItem.description === undefined) {
-          console.log("des");
+          // console.log("des");
           setStarter(false);
         } else if (marketItem.marketItemCondition === undefined) {
-          console.log("cond");
-
+          // console.log("cond");
           setStarter(false);
         } else {
           setStarter(true);

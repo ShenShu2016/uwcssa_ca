@@ -54,10 +54,9 @@ const CrownAvatar = styled(Avatar)(({ theme }) => ({
 }));
 export default function CustomAvatar({ user, variant, sx, link }) {
   const classes = useStyles();
-
   return (
     <div>
-      {user.username ? (
+      {user && user.username ? (
         <div>
           <Badge
             invisible={!user.badges.includes("king")}

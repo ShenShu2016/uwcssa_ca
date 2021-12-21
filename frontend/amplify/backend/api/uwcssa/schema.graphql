@@ -972,6 +972,7 @@ type Kanban
     queryField: "kanbanSortBySortKey"
   ) {
   id: ID!
+  title: String!
   content: String
   kanbanStatus: KanbanStatus
   deadLine: AWSDateTime

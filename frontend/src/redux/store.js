@@ -13,6 +13,7 @@ import marketReducer from "./slice/marketSlice";
 import marketUserReducer from "./slice/marketUserSlice";
 import profileReducer from "./slice/profileSlice";
 import staffReducer from "./slice/staffSlice";
+import userReducer from "./slice/userSlice";
 import uwcssaJobReducer from "./slice/uwcssaJobSlice";
 import uwcssaMemberReducer from "./slice/uwcssaMemberSlice";
 export default configureStore({
@@ -33,6 +34,7 @@ export default configureStore({
     uwcssaJob: uwcssaJobReducer,
     department: departmentReducer,
     kanban: kanbanReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

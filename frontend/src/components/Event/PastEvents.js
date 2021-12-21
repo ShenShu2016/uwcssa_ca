@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   cardDetails: {
     maxWidth: 300,
     minWidth: 256,
-    borderRadius: 16,
+    // borderRadius: 16,
     color: "transparent",
     boxShadow: "none",
     overflow: "initial",
@@ -93,11 +93,11 @@ export default function PastEvent({ event }) {
     startDate,
     endDate,
     address,
-    content,
+    // content,
     posterImgURL,
     online,
   } = event;
-  const newContent = content.substring(34, content.length - 98);
+  // const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
       item
@@ -109,10 +109,15 @@ export default function PastEvent({ event }) {
     >
       <CardActionArea
         className={classes.actionArea}
+        sx={{ borderRadius: 3 }}
         component={Link}
         to={`/event/${id}`}
       >
-        <Card className={classes.cardDetails} elevation={0}>
+        <Card
+          className={classes.cardDetails}
+          sx={{ borderRadius: 3 }}
+          elevation={0}
+        >
           <Box sx={{ position: "relative" }}>
             <CardMedia
               component="img"
@@ -267,7 +272,7 @@ export default function PastEvent({ event }) {
               </Typography>
             )} */}
 
-              <Box sx={{ overflow: "hidden", height: "30px" }}>
+              {/* <Box sx={{ overflow: "hidden", height: "30px" }}>
                 <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
                   <Grid item xs zeroMinWidth>
                     <Typography variant="body2" color="text.secondary" noWrap>
@@ -275,7 +280,7 @@ export default function PastEvent({ event }) {
                     </Typography>
                   </Grid>
                 </Grid>
-              </Box>
+              </Box> */}
             </CardContent>
           </Box>
         </Card>
