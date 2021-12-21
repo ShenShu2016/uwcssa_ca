@@ -153,6 +153,7 @@ export const createUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -170,6 +171,7 @@ export const createUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -334,6 +336,7 @@ export const updateUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -351,6 +354,7 @@ export const updateUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -515,6 +519,7 @@ export const deleteUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -532,6 +537,7 @@ export const deleteUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4185,6 +4191,7 @@ export const createDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4301,6 +4308,7 @@ export const updateDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4417,6 +4425,7 @@ export const deleteDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -10216,6 +10225,7 @@ export const createKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -10358,6 +10368,7 @@ export const updateKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -10500,6 +10511,7 @@ export const deleteKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID

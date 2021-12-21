@@ -320,9 +320,14 @@ export default function DrawerList({ toggleDrawer }) {
                 </ListItemButton>
               </ListItem>
               <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
+                <ListItemButton
+                  sx={{ pl: 7 }}
+                  component={Link}
+                  to="/kanban"
+                  onClick={toggleDrawer(false)}
+                >
                   <ListItemText
-                    primary="成员"
+                    primary="看板"
                     primaryTypographyProps={{
                       fontSize: 18,
                       fontWeight: "medium",

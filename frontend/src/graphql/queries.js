@@ -706,6 +706,7 @@ export const getUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -723,6 +724,7 @@ export const getUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -3143,6 +3145,7 @@ export const getDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -6539,6 +6542,7 @@ export const getKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -6683,6 +6687,89 @@ export const listKanbans = /* GraphQL */ `
         deadLine
         tags
         points
+        sortKey
+        assigneeID
+        departmentID
+        userID
+        createdAt
+        updatedAt
+        assignee {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const kanbanSortBySortKey = /* GraphQL */ `
+  query KanbanSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelKanbanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    kanbanSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        kanbanStatus
+        deadLine
+        tags
+        points
+        sortKey
         assigneeID
         departmentID
         userID
