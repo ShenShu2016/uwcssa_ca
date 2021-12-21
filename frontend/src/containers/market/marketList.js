@@ -23,8 +23,8 @@ export default function MarketList() {
 
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems);
-  console.log(starter);
-  console.log(marketItems);
+  // console.log(starter);
+  // console.log(marketItems);
   // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   useEffect(() => {

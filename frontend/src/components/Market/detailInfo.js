@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 
 import GoogleMap from "../GoogleMap/GoogleMap";
-import Marker from "../GoogleMap/Marker";
 import React from "react";
 import { marketItemOptions } from "./marketItemOptions";
 import { marketRentalOptions } from "./marketRentalOptions";
@@ -207,14 +206,11 @@ const DetailInfo = ({
         }}
       >
         {mode === "detail" ? (
-          <GoogleMap defaultZoom={15} center={[address.lat, address.lng]}>
-            <Marker
-              text={address.description}
-              lat={address.lat}
-              lng={address.lng}
-              place={address}
-            />
-          </GoogleMap>
+          <GoogleMap
+            defaultZoom={13.5}
+            address={address}
+            center={[address.lat, address.lng]}
+          />
         ) : (
           "Google Map Currently Unavailable (Location will be available after posted.)"
         )}

@@ -79,6 +79,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
         airConditionType={airConditionType}
         heatingType={heatingType}
         catFriendly={catFriendly}
+        mode={mode}
         dogFriendly={dogFriendly}
         address={address}
       />

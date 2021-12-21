@@ -72,6 +72,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         year={year}
         make={make}
         model={model}
+        mode={mode}
         vehicleType={vehicleType}
         exteriorColor={exteriorColor}
         interiorColor={interiorColor}
