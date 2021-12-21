@@ -181,7 +181,7 @@ export default function SimpleTable() {
       <Box sx={{ paddingBlock: "2rem" }}>
         <Box className={classes.content}>
           <div className={classes.toolbar}>
-            <Typography variant="h4" component="h2" color="primary">
+            <Typography variant="h4" component="h2">
               活动数据
             </Typography>
             <Button

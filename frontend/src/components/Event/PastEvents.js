@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   cardDetails: {
     maxWidth: 300,
     minWidth: 256,
-    borderRadius: 16,
+    // borderRadius: 16,
     color: "transparent",
     boxShadow: "none",
     overflow: "initial",
@@ -109,10 +109,15 @@ export default function PastEvent({ event }) {
     >
       <CardActionArea
         className={classes.actionArea}
+        sx={{ borderRadius: 3 }}
         component={Link}
         to={`/event/${id}`}
       >
-        <Card className={classes.cardDetails} elevation={0}>
+        <Card
+          className={classes.cardDetails}
+          sx={{ borderRadius: 3 }}
+          elevation={0}
+        >
           <Box sx={{ position: "relative" }}>
             <CardMedia
               component="img"

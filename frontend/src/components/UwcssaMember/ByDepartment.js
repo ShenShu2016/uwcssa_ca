@@ -1,8 +1,9 @@
 import {
   CardActions,
   Collapse,
+  Divider,
   IconButton,
-  Paper,
+  // Paper,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -35,6 +36,14 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const Root = styled("div")(({ theme }) => ({
+  width: "100%",
+  ...theme.typography.body2,
+  "& > :not(style) + :not(style)": {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 export default function ByDepartment({ department, uwcssaMembers }) {
   const classes = useStyles();
   let membersByDepartment = uwcssaMembers.filter(
@@ -56,14 +65,16 @@ export default function ByDepartment({ department, uwcssaMembers }) {
   //   console.log("department", department);
   console.log("membersByDepartment", membersByDepartment);
   return (
-    <Box sx={{ my: "1rem" }}>
-      <Paper elevation={10}>
+    <Box
+      sx={{
+        my: "1rem",
+        // borderStyle: "none none dashed none",
+        // borderWidth: "1px",
+      }}
+    >
+      {/* <Box elevation={10}> */}
+      <Root>
         <CardActions disableSpacing>
-          <Box sx={{ ml: "1rem" }}>
-            <Typography variant="h6" color="primary">
-              {department.id}
-            </Typography>
-          </Box>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -73,6 +84,12 @@ export default function ByDepartment({ department, uwcssaMembers }) {
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
+        <Divider variant={"middle"}>
+          <Typography variant="h6" color="primary">
+            {department.id}
+          </Typography>
+        </Divider>
+
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <div className={classes.cards}>
             {membersByDepartment.map((member, memberIdx) => {
@@ -80,7 +97,9 @@ export default function ByDepartment({ department, uwcssaMembers }) {
             })}
           </div>
         </Collapse>
-      </Paper>
+        <Divider sx={{ backgroundColor: "#d9e2ee", margin: "0 20px" }} />
+      </Root>
+      {/* </Box> */}
     </Box>
   );
 }

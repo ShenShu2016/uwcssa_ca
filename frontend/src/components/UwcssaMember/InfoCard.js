@@ -3,16 +3,17 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
-  CardMedia,
+  // CardHeader,
+  // CardMedia,
   Collapse,
+  Divider,
   Menu,
   MenuItem,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 
-import CustomAvatar from "../CustomMUI/CustomAvatar";
+//import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditIcon from "@mui/icons-material/Edit";
 import EmailIcon from "@mui/icons-material/Email";
@@ -23,8 +24,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
+import { grey } from "@mui/material/colors";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((palette) => ({
   root: {
     // backgroundColor: "#F3F2EF",
     textAlign: "center",
@@ -39,7 +41,61 @@ const useStyles = makeStyles((theme) => ({
     paddingBlock: "1rem",
   },
   card: {
+    position: "relative",
     marginBlock: "1rem",
+
+    maxWidth: 260,
+    width: 260,
+    // height: 260,
+    // maxHeight: 260,
+    border: "1px solid",
+    borderColor: "#cfd8dc",
+
+    "&:hover": {
+      boxShadow: "none",
+    },
+    "&:focus": {
+      boxShadow: "none",
+    },
+  },
+  avatar: {
+    width: 90,
+    height: 90,
+    margin: "auto",
+    borderRadius: 12,
+    size: 48,
+    objectFit: "cover",
+  },
+  heading: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: "0.5px",
+    marginTop: 8,
+    marginBottom: 0,
+  },
+  subheader: {
+    fontSize: 14,
+    color: grey[500],
+    marginBottom: "2rem",
+  },
+  edit: {
+    float: "right",
+  },
+  tagRoot: {
+    maxWidth: "100px",
+    minWidth: "90px",
+  },
+  tag: {
+    display: "inline-block",
+    backgroundColor: "#448aff",
+    color: "#fff",
+    marginBottom: "0.5rem",
+    borderRadius: "0 3px 3px 0",
+    background: "#FFFFFF",
+    // borderLeft: `3px solid #f44336`,
+    fontWeight: "bold",
+    padding: "6px 12px",
+    // margin: spacing(0.5),
   },
 }));
 const ExpandMore = styled((props) => {
@@ -65,9 +121,9 @@ export default function InfoCard({ item }) {
     summary,
     content,
     imgURL,
-    user,
+    //user,
     owner,
-    leader,
+    // leader,
   } = item;
   const isPermit = usePermit(owner, "admin");
 
@@ -107,8 +163,11 @@ export default function InfoCard({ item }) {
   );
   return (
     <div>
-      <Card sx={{ width: 310 }} className={classes.card}>
-        <CardHeader
+      <Card
+        className={classes.card}
+        sx={{ borderRadius: 3, boxShadow: "none" }}
+      >
+        {/* <CardHeader
           sx={{ bgcolor: leader && "primary.main" }}
           avatar={<CustomAvatar link={true} user={user} />}
           action={
@@ -124,8 +183,59 @@ export default function InfoCard({ item }) {
           }
           title={title}
           subheader={item.id}
-        />
-        <CardMedia
+        /> */}
+        <CardContent>
+          {/* {leader ? (
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                width: "100%",
+              }}
+            >
+              <div className={classes.tagRoot}>
+                <Box className={classes.tag}>部长</Box>
+              </div>
+            </Box>
+          ) : null} */}
+          <IconButton
+            aria-label="settings"
+            aria-haspopup="true"
+            onClick={handleSettingMenuOpen}
+            color="inherit"
+            disabled={!isPermit}
+            className={classes.edit}
+          >
+            <MoreVertIcon />
+          </IconButton>
+
+          <img
+            src={
+              imgURL
+                ? imgURL
+                : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+            }
+            alt="imgURLs[0]"
+            className={classes.avatar}
+          />
+
+          <Typography variant="subtitle1" className={classes.heading}>
+            {item.id}
+          </Typography>
+          <Typography variant="subtitle2" className={classes.subheader}>
+            {title ? title : "暂无，请编辑..."}
+          </Typography>
+          <Typography variant="caption">
+            在职时间: {startDate ? startDate.slice(0, 10) : "yyyy-mm-dd"} -{" "}
+            {endDate ? endDate.slice(0, 10) : "yyyy-mm-dd"}
+          </Typography>
+          <Divider light sx={{ margin: "1rem 0" }} />
+          <Typography variant="body2" color="text.secondary">
+            {summary ? summary : "请编辑..."}
+          </Typography>
+        </CardContent>
+        {/* <CardMedia
           component="img"
           height="194"
           image={
@@ -134,8 +244,8 @@ export default function InfoCard({ item }) {
               : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
           }
           alt="imgURLs[0]"
-        />
-        <CardContent sx={{ textAlign: "left" }}>
+        /> */}
+        {/* <CardContent sx={{ textAlign: "left" }}>
           <Typography variant="subtitle1">
             在职时间: {startDate ? startDate.slice(0, 10) : "yyyy-mm-dd"} -{" "}
             {endDate ? endDate.slice(0, 10) : "yyyy-mm-dd"}
@@ -143,7 +253,7 @@ export default function InfoCard({ item }) {
           <Typography variant="body1" color="text.secondary">
             {summary ? summary : "请编辑..."}
           </Typography>
-        </CardContent>
+        </CardContent> */}
         <CardActions disableSpacing>
           <IconButton aria-label="Send Me Email">
             <EmailIcon />
@@ -158,7 +268,7 @@ export default function InfoCard({ item }) {
             aria-label="show more"
             sx={{ fontSize: "16px" }}
           >
-            查看更多信息
+            查看简介
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
