@@ -15,7 +15,8 @@ let geocoder;
 export async function GetAddress() {
   console.log("我正在找经纬度");
   let newAddress;
-  console.log("getAddress");
+  // console.log("getAddress");
+  console.log(address);
   if (address.place_id) {
     await new Promise((resolve) => {
       geocoder.geocode(
@@ -58,7 +59,8 @@ function loadScript(src, position, id) {
   position.appendChild(script);
 }
 const autocompleteService = { current: null };
-console.log("autocompleteService", autocompleteService);
+
+// console.log("autocompleteService", autocompleteService);
 export default function GoogleMaps() {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
@@ -79,11 +81,11 @@ export default function GoogleMaps() {
   });
 
   if (typeof window !== "undefined" && !loaded.current) {
-    console.log(
-      'typeof window !== "undefined" && !loaded.current',
-      typeof window !== "undefined",
-      !loaded.current
-    );
+    // console.log(
+    //   'typeof window !== "undefined" && !loaded.current',
+    //   typeof window !== "undefined",
+    //   !loaded.current
+    // );
     if (!document.querySelector("#google-maps")) {
       loadScript(
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4&libraries=places",
@@ -105,11 +107,18 @@ export default function GoogleMaps() {
   useEffect(() => {
     let active = true;
 
-    if (!autocompleteService.current && window.google) {
-      console.log(!autocompleteService.current, window.google);
-      autocompleteService.current =
-        new window.google.maps.places.AutocompleteService();
-    }
+    const initial = async () => {
+      if (!autocompleteService.current && window.google) {
+        // console.log(!autocompleteService.current, window.google.maps.places);
+        // console.log(autocompleteService.current);
+        autocompleteService.current =
+          await new window.google.maps.places.AutocompleteService();
+        geocoder = await new window.google.maps.Geocoder();
+      }
+    };
+
+    initial();
+
     if (!autocompleteService.current) {
       return undefined;
     }

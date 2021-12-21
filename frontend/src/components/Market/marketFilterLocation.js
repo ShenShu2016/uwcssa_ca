@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-//import GoogleMap from "../GoogleMap/GoogleMap";
+import GoogleMap from "../GoogleMap/GoogleMap";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 //import Marker from "../GoogleMap/Marker";
@@ -26,9 +26,9 @@ import { styled } from "@mui/material/styles";
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, ...other } = props;
   const [newLocationInfo, setNewLocationInfo] = useState("");
-  const [newLocationRadius, setNewLocationRadius] = useState("");
+  const [newLocationRadius, setNewLocationRadius] = useState(5);
   //const [clicked, setClicked] = React.useState(null);
-
+  const windsor = [42.2732, -83.0014];
   let places = placeses.results;
   places.forEach((result) => {
     result.show = false;
@@ -108,36 +108,11 @@ function ConfirmationDialogRaw(props) {
           variant="outlined"
         />
         <Item>
-          {/* <GoogleMap
-            defaultZoom={10}
-            defaultCenter={[
-              places[0].geometry.location.lat,
-              places[0].geometry.location.lng,
-            ]}
-            // onChildClick={onChildClickCallback}
-            center={
-              clicked && [
-                clicked.geometry.location.lat,
-                clicked.geometry.location.lng,
-              ]
-            }
-          >
-            {places.map((place) => (
-              <Marker
-                key={place.id}
-                text={place.name}
-                lat={place.geometry.location.lat}
-                lng={place.geometry.location.lng}
-                // open={open}
-                place={place}
-                onClick={() => {
-                  setClicked(place);
-                  // setOpen((prev) => !prev);
-                }}
-              />
-            ))}
-          </GoogleMap> */}
-          {/* 这个是奔溃原因，注释掉就没问题了，但是就是很奇怪我不清楚 */}
+          <GoogleMap
+            defaultZoom={11}
+            center={windsor}
+            circleRadius={newLocationRadius * 1000}
+          />
         </Item>
       </DialogContent>
       <DialogActions>
