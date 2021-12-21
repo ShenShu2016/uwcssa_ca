@@ -8,7 +8,7 @@ import {
   // ListItemText,
   Tab,
   Tabs,
-  Typography,
+  // Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
@@ -50,11 +50,7 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -117,12 +113,9 @@ export default function Staff() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Box>
-            <ArticlesPreview />
-          </Box>
-          <Box>
-            <UwcssaJobsPreview />
-          </Box>
+          <ArticlesPreview />
+
+          <UwcssaJobsPreview />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <Box>

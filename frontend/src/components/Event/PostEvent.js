@@ -3,7 +3,7 @@ import {
   Button,
   Checkbox,
   CircularProgress,
-  Container,
+  // Container,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -42,10 +42,10 @@ import WallpaperIcon from "@mui/icons-material/Wallpaper";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "block",
+    margin: "auto",
     marginBottom: "2rem",
     marginTop: "3rem",
-    position: "relative",
+    maxWidth: "960px",
   },
 
   form: {
@@ -233,10 +233,10 @@ export default function PostEvent() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <Typography variant="h3" sx={{ textAlign: "center" }} gutterBottom>
+        <Typography variant="h4" sx={{ textAlign: "center" }} gutterBottom>
           活动策划
         </Typography>
-        <Container maxWidth="sm">
+        <Box>
           <Box className={classes.form}>
             <Controller
               name="title"
@@ -781,7 +781,7 @@ export default function PostEvent() {
               )}
             </Button>
           </Box>
-        </Container>
+        </Box>
       </Box>
     </div>
   );
