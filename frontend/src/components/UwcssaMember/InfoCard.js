@@ -200,16 +200,18 @@ export default function InfoCard({ item }) {
               </div>
             </Box>
           ) : null} */}
-          <IconButton
-            aria-label="settings"
-            aria-haspopup="true"
-            onClick={handleSettingMenuOpen}
-            color="inherit"
-            disabled={!isPermit}
-            className={classes.edit}
-          >
-            <MoreVertIcon />
-          </IconButton>
+          {isPermit ? (
+            <IconButton
+              aria-label="settings"
+              aria-haspopup="true"
+              onClick={handleSettingMenuOpen}
+              color="inherit"
+              // disabled={!isPermit}
+              className={classes.edit}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          ) : null}
 
           <img
             src={

@@ -18,12 +18,12 @@ import {
 } from "../../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import GitHubButton from "react-github-btn";
+// import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
-import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+// import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@mui/styles";
-import { red } from "@mui/material/colors";
+// import { red } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -234,81 +234,8 @@ export default function UwcssaIntro() {
                     <Box className={classes.buttonBox}>
                       {isAuthenticated ? authButton() : guestButton()}
                     </Box>
-
-                    <Grid container spacing={1} className={classes.repoInfo}>
-                      <Grid item xs={12} align="center">
-                        <Typography variant="h6" gutterBottom>
-                          此网站 UWCSSA.CA - 为 GitHub 开源项目
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <CircularProgress
-                          size={37}
-                          sx={{
-                            color: red[500],
-                            position: "absolute",
-                            //left: "-50px",
-                            marginLeft: "15px",
-                            marginTop: "-10px",
-                          }}
-                        />
-                        <GitHubButton
-                          href="https://github.com/ShenShu2016/uwcssa_ca"
-                          data-icon="octicon-star"
-                          data-show-count="true"
-                          aria-label="Star ntkme/github-buttons on GitHub"
-                        >
-                          Star
-                        </GitHubButton>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <GitHubButton
-                          href="https://github.com/ShenShu2016/uwcssa_ca/fork"
-                          data-icon="octicon-repo-forked"
-                          data-show-count="true"
-                          aria-label="Fork ShenShu2016/uwcssa_ca on GitHub"
-                        >
-                          Fork
-                        </GitHubButton>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <GitHubButton
-                          href="https://github.com/ShenShu2016/uwcssa_ca/issues"
-                          data-icon="octicon-issue-opened"
-                          data-show-count="true"
-                          aria-label="Issue ShenShu2016/uwcssa_ca on GitHub"
-                        >
-                          Issue
-                        </GitHubButton>
-                      </Grid>
-                      <Grid item xs={6} sm={3}>
-                        <GitHubButton
-                          href="https://github.com/ShenShu2016/uwcssa_ca/subscription"
-                          data-icon="octicon-eye"
-                          data-show-count="true"
-                          aria-label="Watch ShenShu2016/uwcssa_ca on GitHub"
-                        >
-                          Watch
-                        </GitHubButton>
-                      </Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        align="center"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          flexWrap: "wrap",
-                          justifyContent: "center",
-                        }}
-                      >
-                        如果你喜欢我们的项目记得点
-                        <StarBorderRoundedIcon />
-                        哦~
-                      </Grid>
-                    </Grid>
                     <Box className={classes.relateWeb}>
-                      <Typography variant="h5">相关页面</Typography>
+                      <Typography variant="h6">网页导航</Typography>
                       <ButtonGroup
                         color="primary"
                         aria-label="text primary button group"

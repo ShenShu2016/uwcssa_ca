@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  // CircularProgress,
   Divider,
   Grid,
   IconButton,
@@ -19,6 +20,9 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/system";
 //import footerBanner from "../static/FooterBanner.png";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
+import GitHubButton from "react-github-btn";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+// import { red } from "@mui/material/colors";
 
 function Copyright() {
   return (
@@ -109,6 +113,14 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 343,
     fontSize: "0.875rem",
   },
+  repoInfo: {
+    display: "flex",
+    flexDirection: "row",
+    alignContent: "space-between",
+    width: "80%",
+    margin: "auto",
+    marginTop: "3rem",
+  },
 }));
 
 export default function StickyFooter() {
@@ -172,6 +184,76 @@ export default function StickyFooter() {
                   />
                 </IconButton>
               </Box>
+              <Grid container spacing={1} className={classes.repoInfo}>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    此网站 UWCSSA.CA - 为 GitHub 开源项目
+                  </Typography>
+                </Grid>
+                <Grid item xs={4} sm={2}>
+                  {/* <CircularProgress
+                    size={37}
+                    sx={{
+                      color: red[500],
+                      position: "absolute",
+                      //left: "-50px",
+                      marginLeft: "15px",
+                      marginTop: "-10px",
+                    }}
+                  /> */}
+                  <GitHubButton
+                    href="https://github.com/ShenShu2016/uwcssa_ca"
+                    data-icon="octicon-star"
+                    data-show-count="true"
+                    aria-label="Star ntkme/github-buttons on GitHub"
+                  >
+                    Star
+                  </GitHubButton>
+                </Grid>
+                <Grid item xs={4} sm={2}>
+                  <GitHubButton
+                    href="https://github.com/ShenShu2016/uwcssa_ca/fork"
+                    data-icon="octicon-repo-forked"
+                    data-show-count="true"
+                    aria-label="Fork ShenShu2016/uwcssa_ca on GitHub"
+                  >
+                    Fork
+                  </GitHubButton>
+                </Grid>
+                <Grid item xs={4} sm={2}>
+                  <GitHubButton
+                    href="https://github.com/ShenShu2016/uwcssa_ca/issues"
+                    data-icon="octicon-issue-opened"
+                    data-show-count="true"
+                    aria-label="Issue ShenShu2016/uwcssa_ca on GitHub"
+                  >
+                    Issue
+                  </GitHubButton>
+                </Grid>
+                <Grid item xs={4} sm={2}>
+                  <GitHubButton
+                    href="https://github.com/ShenShu2016/uwcssa_ca/subscription"
+                    data-icon="octicon-eye"
+                    data-show-count="true"
+                    aria-label="Watch ShenShu2016/uwcssa_ca on GitHub"
+                  >
+                    Watch
+                  </GitHubButton>
+                </Grid>
+                <Grid
+                  item
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
+                >
+                  如果你喜欢我们的项目记得点
+                  <StarBorderRoundedIcon />
+                  哦~
+                </Grid>
+              </Grid>
             </Grid>
             <Grid item xs={12} md={8} lg={5}>
               <Grid container spacing={2}>
