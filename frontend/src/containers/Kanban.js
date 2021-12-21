@@ -1,16 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchKanbans, selectAllKanbans } from "../redux/slice/kanbanSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Create from "../components/Kanban/Create";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import Ticket from "../components/Kanban/Ticket";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../Hooks/usePermit";
 import { useTitle } from "../Hooks/useTitle";
@@ -30,6 +18,15 @@ const useStyles = makeStyles((theme) => ({
     margin: "4rem auto",
     maxWidth: "1536px",
     color: "#0D1F48",
+  },
+  tickets: {
+    marginBlock: "2rem",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "auto",
+    },
   },
 }));
 
@@ -65,9 +62,14 @@ export default function Kanban() {
                 setCreateOpen(!createOpen);
               }}
             >
-              添加新成员
+              添加Kanban
             </Button>
           )}
+          <div className={classes.tickets}>
+            {kanbans.map((ticket, idx) => {
+              return <Ticket item={ticket} key={idx} />;
+            })}
+          </div>
         </div>
         <Footer />
       </Box>

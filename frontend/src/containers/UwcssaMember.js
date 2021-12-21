@@ -32,15 +32,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
   },
-  cards: {
-    marginBlock: "2rem",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "auto",
-    },
-  },
 }));
 
 export default function UwcssaMember() {
