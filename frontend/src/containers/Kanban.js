@@ -37,9 +37,14 @@ export default function Kanban() {
   const [createOpen, setCreateOpen] = useState(false);
   const isPermit = usePermit(null, "admin");
   const kanbans = useSelector(selectAllKanbans);
+
+  const { fetchKanbansStatus } = useSelector((state) => state.kanban);
+
   useEffect(() => {
-    dispatch(fetchKanbans());
-  }, [dispatch]);
+    if (fetchKanbansStatus === "idle" || undefined) {
+      dispatch(fetchKanbans());
+    }
+  }, [dispatch, fetchKanbansStatus]);
 
   const handleCreateClose = () => {
     setCreateOpen(false);

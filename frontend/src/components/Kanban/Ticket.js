@@ -7,13 +7,14 @@ import IconButton from "@mui/material/IconButton";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
+import { Typography } from "@mui/material";
 
 export default function Ticket({ item }) {
-  const { content, assignee, title, deadLine } = item;
+  const { content, assignee, assigneeID, title, deadLine } = item;
 
   return (
-    <Box>
-      <Card sx={{ width: 250, height: "350px" }}>
+    <Box sx={{ my: "1rem" }}>
+      <Card sx={{ width: 250 }}>
         <CardHeader
           avatar={<CustomAvatar user={assignee} link={true} />}
           action={
@@ -22,17 +23,24 @@ export default function Ticket({ item }) {
             </IconButton>
           }
           title={title}
-          subheader={deadLine && `Due date: ${deadLine}`}
+          subheader={
+            assigneeID.length > 14
+              ? `${assigneeID.slice(0, 14)}...`
+              : assigneeID
+          }
         />
-        <CardContent>
+        <CardContent sx={{ textAlign: "left" }}>
+          <Typography variant="h6">
+            {deadLine ? `Due: ${deadLine.slice(0, 10)}` : "Due: 未定"}
+          </Typography>
           {content ? (
-            <Box sx={{ my: 2, overflow: "auto", textAlign: "left" }}>
+            <div sx={{ overflow: "auto" }}>
               <MUIRichTextEditor
                 defaultValue={content}
                 readOnly={true}
                 toolbar={false}
               />
-            </Box>
+            </div>
           ) : (
             "这人很懒什么都没写"
           )}

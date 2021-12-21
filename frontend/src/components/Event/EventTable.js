@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  // Container,
   IconButton,
   Paper,
   Table,
@@ -114,13 +113,15 @@ export default function SimpleTable() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const { events, fetchEvents_StaffStatus } = useSelector(
+    (state) => state.staff
+  );
+
   useEffect(() => {
-    dispatch(fetchEvents_Staff());
-  }, [dispatch]);
-
-  const { events } = useSelector((state) => state.staff);
-
-  // console.log("events", events);
+    if (fetchEvents_StaffStatus === "idle" || undefined) {
+      dispatch(fetchEvents_Staff());
+    }
+  }, [dispatch, fetchEvents_StaffStatus]);
 
   const rows = events.map((event) => {
     console.log("event", event);

@@ -56,6 +56,7 @@ export default function Create({ createOpen, handleCreateClose }) {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(false);
   const [tags, setTags] = useState([]);
+
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
       dispatch(fetchDepartments());

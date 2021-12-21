@@ -640,6 +640,7 @@ export const onCreateUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -658,6 +659,7 @@ export const onCreateUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -820,6 +822,7 @@ export const onUpdateUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -838,6 +841,7 @@ export const onUpdateUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -1000,6 +1004,7 @@ export const onDeleteUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -1018,6 +1023,7 @@ export const onDeleteUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -4579,6 +4585,7 @@ export const onCreateDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -4693,6 +4700,7 @@ export const onUpdateDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -4807,6 +4815,7 @@ export const onDeleteDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -9983,6 +9992,7 @@ export const onCreateKanban = /* GraphQL */ `
   subscription OnCreateKanban {
     onCreateKanban {
       id
+      title
       content
       kanbanStatus
       deadLine
@@ -10123,6 +10133,7 @@ export const onUpdateKanban = /* GraphQL */ `
   subscription OnUpdateKanban {
     onUpdateKanban {
       id
+      title
       content
       kanbanStatus
       deadLine
@@ -10263,6 +10274,7 @@ export const onDeleteKanban = /* GraphQL */ `
   subscription OnDeleteKanban {
     onDeleteKanban {
       id
+      title
       content
       kanbanStatus
       deadLine
