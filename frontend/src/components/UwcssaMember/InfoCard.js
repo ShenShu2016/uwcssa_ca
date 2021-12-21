@@ -25,6 +25,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
 import { grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((palette) => ({
   root: {
@@ -121,7 +122,7 @@ export default function InfoCard({ item }) {
     summary,
     content,
     imgURL,
-    //user,
+    user,
     owner,
     // leader,
   } = item;
@@ -220,8 +221,23 @@ export default function InfoCard({ item }) {
             className={classes.avatar}
           />
 
-          <Typography variant="subtitle1" className={classes.heading}>
-            {item.id}
+          {user.lastName && user.firstName ? (
+            <Typography variant="subtitle1" className={classes.heading}>
+              {item.user.lastName}, {item.user.firstName}
+            </Typography>
+          ) : (
+            <Typography variant="subtitle1" className={classes.heading}>
+              LastName, FirstName
+            </Typography>
+          )}
+          <Typography
+            variant="caption"
+            gutterBottom
+            component={Link}
+            to={`/account/profile/${user.username}`}
+            sx={{ textDecoration: "none", color: "text.secondary" }}
+          >
+            @{item.id}
           </Typography>
           <Typography variant="subtitle2" className={classes.subheader}>
             {title ? title : "暂无，请编辑..."}
