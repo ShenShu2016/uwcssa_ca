@@ -976,6 +976,7 @@ type Kanban
   content: String
   kanbanStatus: KanbanStatus
   deadLine: AWSDateTime
+  priority: Priority
   tags: [String]
   points: Int
   sortKey: SortKey!
@@ -988,6 +989,12 @@ type Kanban
   createdAt: AWSDateTime!
 }
 
+enum Priority {
+  Critical
+  High
+  Average
+  Low
+}
 enum KanbanStatus {
   IDEA
   TODO
