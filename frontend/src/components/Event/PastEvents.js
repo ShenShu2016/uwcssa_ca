@@ -93,11 +93,11 @@ export default function PastEvent({ event }) {
     startDate,
     endDate,
     address,
-    content,
+    // content,
     posterImgURL,
     online,
   } = event;
-  const newContent = content.substring(34, content.length - 98);
+  // const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
       item
@@ -272,7 +272,7 @@ export default function PastEvent({ event }) {
               </Typography>
             )} */}
 
-              <Box sx={{ overflow: "hidden", height: "30px" }}>
+              {/* <Box sx={{ overflow: "hidden", height: "30px" }}>
                 <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
                   <Grid item xs zeroMinWidth>
                     <Typography variant="body2" color="text.secondary" noWrap>
@@ -280,7 +280,7 @@ export default function PastEvent({ event }) {
                     </Typography>
                   </Grid>
                 </Grid>
-              </Box>
+              </Box> */}
             </CardContent>
           </Box>
         </Card>

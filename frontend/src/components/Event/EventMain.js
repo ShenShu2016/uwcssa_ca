@@ -91,7 +91,7 @@ export default function EventMain({ event }) {
 
   const {
     id,
-    content,
+    // content,
     title,
     posterImgURL,
     address,
@@ -100,7 +100,7 @@ export default function EventMain({ event }) {
     topic,
     online,
   } = event;
-  const newContent = content.substring(34, content.length - 98);
+  // const newContent = content.substring(34, content.length - 98);
   return (
     <Grid
       item
@@ -276,7 +276,7 @@ export default function EventMain({ event }) {
                 </div>
               )}
 
-              <Box
+              {/* <Box
                 sx={{
                   overflow: "hidden",
                   height: "30px",
@@ -290,7 +290,7 @@ export default function EventMain({ event }) {
                     </Typography>
                   </Grid>
                 </Grid>
-              </Box>
+              </Box> */}
               {topic.name ? (
                 <Chip label={topic.name} sx={{ color: "#757de8" }} />
               ) : (
