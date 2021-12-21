@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  // Container,
   IconButton,
   Paper,
   Table,
@@ -126,19 +127,21 @@ export default function SimpleTable() {
     const {
       id,
       title,
-      location,
       startDate,
       eventStatus,
       topic,
+      online,
+      address,
       eventParticipants,
     } = event;
 
     return {
       id: id,
       title: title,
-      location: location,
+      address: address.description,
       startDate: startDate,
       topic: topic.name,
+      online: online,
       eventParticipants: eventParticipants,
       eventStatus: eventStatus,
     };
@@ -174,150 +177,164 @@ export default function SimpleTable() {
   };
 
   return (
-    <Box sx={{ paddingBlock: "2rem" }}>
-      <Box className={classes.content}>
-        <div className={classes.toolbar}>
-          <Typography variant="h4" component="h2" color="primary">
-            Event Data
-          </Typography>
-          <Button
-            variant="outlined"
-            color="secondary"
-            component={Link}
-            to="/staff/event/postEvent"
-          >
-            New Event
-          </Button>
-        </div>
-        <TableContainer component={Paper}>
-          <Table
-            className={classes.table}
-            aria-label="simple table"
-            // rowsPerPageOptions={[5]}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox" />
-                {/* <TableCell sx={{ width: 150 }}>ID</TableCell> */}
-                <TableCell sx={{ width: 110 }}>Title</TableCell>
-                <TableCell sx={{ width: 110 }}>Topic</TableCell>
-                <TableCell sx={{ width: 150 }}>Location</TableCell>
-                <TableCell sx={{ width: 200 }}>Event Status</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <ExpandableTableRow
-                    key={row.id}
-                    expandComponent={
-                      <TableCell
-                        style={{ paddingBottom: 0, paddingTop: 0 }}
-                        colSpan={6}
-                      >
-                        <Box margin={1}>
-                          <Typography
-                            variant="h6"
-                            sx={{ flex: "1 1 100%" }}
-                            component="div"
-                          >
-                            报名者
-                            <Button
-                              color="primary"
-                              aria-label="download csv"
-                              sx={{ float: "right" }}
-                              onClick={() =>
-                                downloadExcel(
-                                  row.eventParticipants.items,
-                                  row.title
-                                )
-                              }
+    <div>
+      <Box sx={{ paddingBlock: "2rem" }}>
+        <Box className={classes.content}>
+          <div className={classes.toolbar}>
+            <Typography variant="h4" component="h2" color="primary">
+              活动数据
+            </Typography>
+            <Button
+              variant="outlined"
+              color="secondary"
+              component={Link}
+              to="/staff/event/postEvent"
+            >
+              添加新活动
+            </Button>
+          </div>
+          <TableContainer component={Paper}>
+            <Table
+              className={classes.table}
+              aria-label="simple table"
+              // rowsPerPageOptions={[5]}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell padding="checkbox" />
+                  {/* <TableCell sx={{ width: 150 }}>ID</TableCell> */}
+                  <TableCell sx={{ width: 110 }}>标题</TableCell>
+                  <TableCell sx={{ width: 110 }}>主题</TableCell>
+                  <TableCell sx={{ width: 150 }}>地点</TableCell>
+                  <TableCell sx={{ width: 200 }}>状态</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <ExpandableTableRow
+                      key={row.id}
+                      expandComponent={
+                        <TableCell
+                          style={{ paddingBottom: 0, paddingTop: 0 }}
+                          colSpan={6}
+                        >
+                          <Box margin={1}>
+                            <Typography
+                              variant="h6"
+                              sx={{ flex: "1 1 100%" }}
+                              component="div"
                             >
-                              下载csv
-                              <DownloadIcon />
-                            </Button>
-                          </Typography>
+                              报名者
+                              <Button
+                                color="primary"
+                                aria-label="download csv"
+                                sx={{ float: "right" }}
+                                onClick={() =>
+                                  downloadExcel(
+                                    row.eventParticipants.items,
+                                    row.title
+                                  )
+                                }
+                              >
+                                下载csv
+                                <DownloadIcon />
+                              </Button>
+                            </Typography>
 
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow>
-                                <TableCell>用户名</TableCell>
-                                <TableCell>姓名</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>微信</TableCell>
-                                <TableCell>电话</TableCell>
-                                <TableCell>人数</TableCell>
-                                <TableCell>地址</TableCell>
-                                <TableCell>备注</TableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              {row.eventParticipants.items.map(
-                                (eventParticipant) => (
-                                  <TableRow key={eventParticipant.name}>
-                                    <TableCell component="th" scope="row">
-                                      {eventParticipant.owner}
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                      {eventParticipant.name}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.email}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.weChat}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.phone}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.numberOfPeople}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.address}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.message}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              )}
-                            </TableBody>
-                          </Table>
-                        </Box>
-                      </TableCell>
-                    }
-                  >
-                    {/* <TableCell component="th" scope="row">
+                            <Table size="small" aria-label="purchases">
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell>用户名</TableCell>
+                                  <TableCell>姓名</TableCell>
+                                  <TableCell>Email</TableCell>
+                                  <TableCell>微信</TableCell>
+                                  <TableCell>电话</TableCell>
+                                  <TableCell>人数</TableCell>
+                                  <TableCell>地址</TableCell>
+                                  <TableCell>备注</TableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {row.eventParticipants.items.map(
+                                  (eventParticipant) => (
+                                    <TableRow key={eventParticipant.name}>
+                                      <TableCell component="th" scope="row">
+                                        {eventParticipant.owner}
+                                      </TableCell>
+                                      <TableCell component="th" scope="row">
+                                        {eventParticipant.name}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.email}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.weChat}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.phone}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.numberOfPeople}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.address.description}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.message}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                )}
+                              </TableBody>
+                            </Table>
+                          </Box>
+                        </TableCell>
+                      }
+                    >
+                      {/* <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell> */}
-                    <TableCell component="th" scope="row">
-                      {row.title}
-                    </TableCell>
-                    <TableCell>{row.location}</TableCell>
-                    <TableCell>{row.topic}</TableCell>
-                    <TableCell>{row.eventStatus}</TableCell>
-                  </ExpandableTableRow>
-                ))}
-              {emptyRows > 0 && (
-                <TableRow>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </TableContainer>
+                      <TableCell component="th" scope="row">
+                        {row.title}
+                      </TableCell>
+                      <TableCell>{row.topic}</TableCell>
+                      {row.online === true ? (
+                        <TableCell>
+                          <Typography>线上</Typography>
+                        </TableCell>
+                      ) : (
+                        <TableCell>
+                          {row.address ? (
+                            <Typography>{row.address}</Typography>
+                          ) : (
+                            <Typography>暂无</Typography>
+                          )}
+                        </TableCell>
+                      )}
+                      <TableCell>{row.eventStatus}</TableCell>
+                    </ExpandableTableRow>
+                  ))}
+                {emptyRows > 0 && (
+                  <TableRow>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 }

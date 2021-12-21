@@ -706,6 +706,7 @@ export const getUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -723,6 +724,7 @@ export const getUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -1890,6 +1892,9 @@ export const getEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -2047,6 +2052,9 @@ export const listEvents = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2133,6 +2141,9 @@ export const eventSortBySortKey = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2254,6 +2265,9 @@ export const getEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2730,6 +2744,9 @@ export const getEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -2803,6 +2820,9 @@ export const getEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -2874,6 +2894,9 @@ export const listEventParticipants = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         phone
         weChat
@@ -2960,6 +2983,9 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         phone
         weChat
@@ -3119,6 +3145,7 @@ export const getDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -5051,6 +5078,9 @@ export const getMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -5150,6 +5180,9 @@ export const listMarketItems = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5237,6 +5270,9 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5324,6 +5360,9 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5411,6 +5450,9 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5498,6 +5540,9 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
@@ -5890,6 +5935,9 @@ export const getLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -6494,6 +6542,7 @@ export const getKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -6638,6 +6687,89 @@ export const listKanbans = /* GraphQL */ `
         deadLine
         tags
         points
+        sortKey
+        assigneeID
+        departmentID
+        userID
+        createdAt
+        updatedAt
+        assignee {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const kanbanSortBySortKey = /* GraphQL */ `
+  query KanbanSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelKanbanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    kanbanSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        kanbanStatus
+        deadLine
+        tags
+        points
+        sortKey
         assigneeID
         departmentID
         userID

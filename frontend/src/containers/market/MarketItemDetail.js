@@ -25,7 +25,8 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
     title,
     price,
     description,
-    location,
+    // location,
+    address,
     marketItemCondition,
     marketItemCategory,
     tags,
@@ -66,7 +67,7 @@ export function MarketItemInfo({ marketItem, mode = "detail" }) {
         tags={tags}
         mode={mode}
         description={description}
-        location={location}
+        address={address}
         type="item"
       />
       <Divider variant="middle">
@@ -93,7 +94,7 @@ export default function MarketItemDetail() {
   // const imgKeyFromServer = useGetImages(marketItem, id);
   // const imgKeyFromServer = marketItem.imgURLs;
 
-  console.log("starter", starter);
+  // console.log("starter", starter);
   return (
     <div className={classes.root}>
       {starter === false ? null : ( // <Loading status={status} />

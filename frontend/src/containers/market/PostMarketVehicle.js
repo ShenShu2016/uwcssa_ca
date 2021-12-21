@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
+import GoogleMaps, {
+  GetAddress,
+} from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchMarketUserInfo,
@@ -58,7 +61,7 @@ export default function PostMarketVehicle() {
     marketType: "Vehicle",
     price: "Price",
     description: "Descriptions",
-    location: "Location",
+    address: { description: "Location" },
     make: "Toyota",
     model: "GR86",
     year: "2022",
@@ -83,7 +86,7 @@ export default function PostMarketVehicle() {
     defaultValues: {
       imgURLs: "",
       vehicleType: "",
-      location: "",
+      // location: "",
       year: "",
       model: "",
       make: "",
@@ -105,11 +108,13 @@ export default function PostMarketVehicle() {
   }, [errors]);
 
   const onSubmit = async (data) => {
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
       imgURLs: imgURLs,
+      address: address,
       tags: GetTags(),
       active: true,
       userID: username,
@@ -294,7 +299,7 @@ export default function PostMarketVehicle() {
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                <Controller
+                {/* <Controller
                   name="location"
                   control={control}
                   rules={{
@@ -319,7 +324,8 @@ export default function PostMarketVehicle() {
                       }}
                     />
                   )}
-                />
+                /> */}
+                <GoogleMaps></GoogleMaps>
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>

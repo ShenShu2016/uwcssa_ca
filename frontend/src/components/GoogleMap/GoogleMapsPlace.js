@@ -10,19 +10,43 @@ import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 
 let address = null;
-let locationWithLatLng;
+let geocoder;
 
-export function GetAddress() {
-  return address;
-}
-
-export function GetLatLng(placeId) {
-  console.log("////???", placeId);
-
-  return locationWithLatLng;
+export async function GetAddress() {
+  console.log("我正在找经纬度");
+  let newAddress;
+  console.log("getAddress");
+  if (address.place_id) {
+    await new Promise((resolve) => {
+      geocoder.geocode(
+        { placeId: address.place_id },
+        function (results, status) {
+          if (status === window.google.maps.GeocoderStatus.OK) {
+            const lat = results[0].geometry.location.lat();
+            const lng = results[0].geometry.location.lng();
+            newAddress = {
+              ...address,
+              lat: Number(lat),
+              lng: Number(lng),
+              geocodingResult: results,
+            };
+            resolve();
+          } else {
+            console.log(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
+        }
+      );
+    });
+    return newAddress;
+  } else {
+    return undefined;
+  }
 }
 
 function loadScript(src, position, id) {
+  console.log("我正在loadScript");
   if (!position) {
     return;
   }
@@ -33,9 +57,8 @@ function loadScript(src, position, id) {
   script.src = src;
   position.appendChild(script);
 }
-
 const autocompleteService = { current: null };
-
+console.log("autocompleteService", autocompleteService);
 export default function GoogleMaps() {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
@@ -43,6 +66,7 @@ export default function GoogleMaps() {
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
 
+  // console.log(address);
   useEffect(() => {
     address = {
       description: value && value.description,
@@ -52,39 +76,14 @@ export default function GoogleMaps() {
       types: value && value.types,
       apartmentNumbers: apartmentNumbers,
     };
-    // console.log(value.description);
-    // console.log(value.place_id);
-    // console.log(value.reference);
-    // console.log(value.structured_formatting);
-    // console.log(value.terms);
-    // console.log(value.types);
   });
 
-  // useEffect(() => {
-  //   const init = () => {
-  //     const geocoder = new window.google.maps.Geocoder();
-  //     geocoder.geocode(
-  //       { placeId: address.place_id },
-  //       function (results, status) {
-  //         if (status === window.google.maps.GeocoderStatus.OK) {
-  //           const lat = results[0].geometry.location.lat();
-  //           const lng = results[0].geometry.location.lng();
-  //           locationWithLatLng = [lat, lng];
-  //           console.log(locationWithLatLng);
-  //         } else {
-  //           console.log(
-  //             "Geocode was not successful for the following reason: " + status
-  //           );
-  //         }
-  //       }
-  //     );
-  //   };
-  //   if (address) {
-  //     init();
-  //   }
-  // }, [address]);
-
   if (typeof window !== "undefined" && !loaded.current) {
+    console.log(
+      'typeof window !== "undefined" && !loaded.current',
+      typeof window !== "undefined",
+      !loaded.current
+    );
     if (!document.querySelector("#google-maps")) {
       loadScript(
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4&libraries=places",
@@ -107,6 +106,7 @@ export default function GoogleMaps() {
     let active = true;
 
     if (!autocompleteService.current && window.google) {
+      console.log(!autocompleteService.current, window.google);
       autocompleteService.current =
         new window.google.maps.places.AutocompleteService();
     }
@@ -118,7 +118,6 @@ export default function GoogleMaps() {
       setOptions(value ? [value] : []);
       return undefined;
     }
-
     fetch({ input: inputValue }, (results) => {
       if (active) {
         let newOptions = [];

@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import { Link, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,7 +56,6 @@ export default function Individual() {
   } = useForm({
     defaultValues: {
       name: "",
-      address: "",
       phone: "",
       weChat: "",
       message: "",
@@ -65,9 +65,11 @@ export default function Individual() {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    const address = await GetAddress();
     const createEventParticipantInput = {
       ...data,
       id: `${eventID}-${userAuth.user.username}`,
+      address: address,
       numberOfPeople: 1,
       eventParticipantStatus: "ArriveOnTime",
       email: userAuth.user.attributes.email,
@@ -194,7 +196,7 @@ export default function Individual() {
                     />
                   )}
                 />
-                <Controller
+                {/* <Controller
                   name="address"
                   control={control}
                   rules={{
@@ -212,7 +214,8 @@ export default function Individual() {
                       helperText={"送货地址或者接送地址"}
                     />
                   )}
-                />
+                /> */}
+                <GoogleMapsPlace />
                 <Controller
                   name="message"
                   control={control}

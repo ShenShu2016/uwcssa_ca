@@ -3,6 +3,7 @@ import {
   Button,
   CircularProgress,
   IconButton,
+  InputAdornment,
   Paper,
   Stack,
   TextField,
@@ -12,7 +13,6 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import GoogleMaps, {
   GetAddress,
-  GetLatLng,
 } from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -23,7 +23,6 @@ import {
 } from "../../redux/slice/marketUserSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
 import PostUserInfo from "../../components/Market/postUserInfo";
@@ -35,7 +34,6 @@ import { marketItemOptions } from "../../components/Market/marketItemOptions";
 import { postMarketItem } from "../../redux/slice/marketSlice";
 import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
-// import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -63,7 +61,7 @@ export default function PostMarketItem() {
     title: "Title",
     price: "Price",
     description: "Descriptions",
-    location: "Location",
+    address: { description: "Location" },
     marketItemCondition: "New",
     marketItemCategory: "Tools",
     tags: ["Tags Goes Here"],
@@ -72,7 +70,7 @@ export default function PostMarketItem() {
     user: user,
     owner: username,
   });
-  console.log("check", marketUserInfo);
+  // console.log("check", marketUserInfo);
   const {
     handleSubmit,
     setValue,
@@ -95,11 +93,10 @@ export default function PostMarketItem() {
   });
 
   const onSubmit = async (data) => {
-    const address = GetLatLng(GetAddress().place_id);
-    console.log(GetAddress().place_id);
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
-      location: GetAddress().description,
+      // location: GetAddress().description,
       address: address,
       name: data.title,
       marketType: "Item",
@@ -159,8 +156,6 @@ export default function PostMarketItem() {
       // setTrigger(false);
     }
   };
-
-  console.log("errors", GetAddress());
 
   // const imgKeyFromServer = useGetAllImages(
   //   Object.keys(imageKeys),

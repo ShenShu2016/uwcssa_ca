@@ -12,7 +12,6 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../components/CustomMUI/CustomTags";
 import GoogleMaps, {
   GetAddress,
-  GetLatLng,
 } from "../../components/GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -60,6 +59,7 @@ export default function EditMarketItemDetail() {
     imgURLs,
     title,
     price,
+    // address,
     description,
     marketItemCategory,
     marketItemCondition,
@@ -67,7 +67,6 @@ export default function EditMarketItemDetail() {
     contactPhone,
     contactWeChat,
   } = marketItem;
-
   const [uploadStatus, setUploadStatus] = useState("idle");
   // const [trigger, setTrigger] = useState(true);
   const [defaultInfo, setDefaultInfo] = useState(false);
@@ -119,16 +118,15 @@ export default function EditMarketItemDetail() {
     dispatch(fetchMarketUserInfo(marketItem.userID));
   }, [marketItem.userID, dispatch]);
 
-  console.log("??", GetAddress().description);
+  // console.log("??", GetAddress().description);
 
   const onSubmit = async (data) => {
-    const address = GetLatLng();
-    console.log(address);
+    const address = await GetAddress();
     const createMarketItemInput = {
       ...data,
-      location: GetAddress().description,
+      // location: GetAddress().description,
       id: id,
-      address: GetLatLng(),
+      address: address,
       name: data.title,
       marketType: "Item",
       imgURLs: imgKeyFromServer,
@@ -165,7 +163,7 @@ export default function EditMarketItemDetail() {
     }
     console.log("Can upload");
   };
-  console.log(imgKeyFromServer);
+
   const handleDeleteImg = (imgKey) => {
     const images = [...imgKeyFromServer];
     const newKeys = images.filter((key) => key !== imgKey);

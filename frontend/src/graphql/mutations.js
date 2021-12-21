@@ -153,6 +153,7 @@ export const createUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -170,6 +171,7 @@ export const createUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -334,6 +336,7 @@ export const updateUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -351,6 +354,7 @@ export const updateUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -515,6 +519,7 @@ export const deleteUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -532,6 +537,7 @@ export const deleteUser = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -2360,6 +2366,9 @@ export const createEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -2515,6 +2524,9 @@ export const updateEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -2670,6 +2682,9 @@ export const deleteEvent = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       sponsor
       tags
@@ -2875,6 +2890,9 @@ export const createEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3024,6 +3042,9 @@ export const updateEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3173,6 +3194,9 @@ export const deleteEventComment = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3647,6 +3671,9 @@ export const createEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -3720,6 +3747,9 @@ export const createEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3785,6 +3815,9 @@ export const updateEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -3858,6 +3891,9 @@ export const updateEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -3923,6 +3959,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       phone
       weChat
@@ -3996,6 +4035,9 @@ export const deleteEventParticipant = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -4149,6 +4191,7 @@ export const createDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4265,6 +4308,7 @@ export const updateDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4381,6 +4425,7 @@ export const deleteDepartment = /* GraphQL */ `
           deadLine
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -7611,6 +7656,9 @@ export const createMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -7708,6 +7756,9 @@ export const updateMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -7805,6 +7856,9 @@ export const deleteMarketItem = /* GraphQL */ `
         terms
         types
         apartmentNumbers
+        geocodingResult
+        lat
+        lng
       }
       propertySize
       dateAvailable
@@ -8308,6 +8362,9 @@ export const createLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -8887,6 +8944,9 @@ export const updateLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -9466,6 +9526,9 @@ export const deleteLike = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          geocodingResult
+          lat
+          lng
         }
         sponsor
         tags
@@ -10162,6 +10225,7 @@ export const createKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -10304,6 +10368,7 @@ export const updateKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -10446,6 +10511,7 @@ export const deleteKanban = /* GraphQL */ `
       deadLine
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID

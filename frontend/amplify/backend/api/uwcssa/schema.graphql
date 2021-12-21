@@ -1,3 +1,4 @@
+# sudo amplify api gql-compile && amplify codegen
 enum SortKey {
   SortKey
 }
@@ -9,6 +10,9 @@ type Address {
   terms: [String]
   types: [String]
   apartmentNumbers: String
+  geocodingResult: String
+  lat: Float
+  lng: Float
 }
 
 type User
@@ -147,9 +151,7 @@ type Article
   title: String!
   summary: String
   content: String!
-  #imgS3Keys: [String]
   imgURLs: [AWSURL]
-  #qrCodeImgS3Key: String
   qrCodeImgURL: AWSURL
   likes: [Like] @connection(keyName: "byArticle", fields: ["id"])
   tags: [String]
@@ -963,15 +965,21 @@ type Kanban
   )
   @key(name: "byUser", fields: ["userID", "createdAt"])
   @key(name: "byUserAssignee", fields: ["assigneeID", "createdAt"])
-  @key(name: "byDepartment", fields: ["departmentID", "createdAt"]) {
+  @key(name: "byDepartment", fields: ["departmentID", "createdAt"])
+  @key(
+    name: "kanbanSortBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "kanbanSortBySortKey"
+  ) {
   id: ID!
   content: String
   kanbanStatus: KanbanStatus
   deadLine: AWSDateTime
   tags: [String]
   points: Int
+  sortKey: SortKey!
   assigneeID: ID
-  assignee: User! @connection(fields: ["assigneeID"])
+  assignee: User @connection(fields: ["assigneeID"])
   departmentID: ID
   department: Department @connection(fields: ["departmentID"])
   userID: ID!

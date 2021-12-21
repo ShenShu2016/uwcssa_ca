@@ -8,10 +8,12 @@ import forumReducer from "./slice/forumSlice";
 import foundingMemberReducer from "./slice/foundingMemberSlice";
 import generalReducer from "./slice/generalSlice";
 import imageReducer from "./slice/imageSlice";
+import kanbanReducer from "./slice/kanbanSlice";
 import marketReducer from "./slice/marketSlice";
 import marketUserReducer from "./slice/marketUserSlice";
 import profileReducer from "./slice/profileSlice";
 import staffReducer from "./slice/staffSlice";
+import uwcssaJobReducer from "./slice/uwcssaJobSlice";
 import uwcssaMemberReducer from "./slice/uwcssaMemberSlice";
 export default configureStore({
   reducer: {
@@ -28,7 +30,9 @@ export default configureStore({
     images: imageReducer,
     foundingMember: foundingMemberReducer,
     uwcssaMember: uwcssaMemberReducer,
+    uwcssaJob: uwcssaJobReducer,
     department: departmentReducer,
+    kanban: kanbanReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

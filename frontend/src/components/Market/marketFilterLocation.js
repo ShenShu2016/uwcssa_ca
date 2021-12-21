@@ -15,10 +15,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import GoogleMap from "../GoogleMap/GoogleMap";
+//import GoogleMap from "../GoogleMap/GoogleMap";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import Marker from "../GoogleMap/Marker";
+//import Marker from "../GoogleMap/Marker";
 import PropTypes from "prop-types";
 import placeses from "../../places.json";
 import { styled } from "@mui/material/styles";
@@ -27,12 +27,13 @@ function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, ...other } = props;
   const [newLocationInfo, setNewLocationInfo] = useState("");
   const [newLocationRadius, setNewLocationRadius] = useState("");
-  const [clicked, setClicked] = React.useState(null);
+  //const [clicked, setClicked] = React.useState(null);
 
   let places = placeses.results;
   places.forEach((result) => {
     result.show = false;
   });
+  // console.log(typeof places[0].geometry.location.lat);
   useEffect(() => {
     if (!open) {
       setNewLocationInfo(valueProp);
@@ -107,8 +108,7 @@ function ConfirmationDialogRaw(props) {
           variant="outlined"
         />
         <Item>
-          {" "}
-          <GoogleMap
+          {/* <GoogleMap
             defaultZoom={10}
             defaultCenter={[
               places[0].geometry.location.lat,
@@ -136,7 +136,8 @@ function ConfirmationDialogRaw(props) {
                 }}
               />
             ))}
-          </GoogleMap>
+          </GoogleMap> */}
+          {/* 这个是奔溃原因，注释掉就没问题了，但是就是很奇怪我不清楚 */}
         </Item>
       </DialogContent>
       <DialogActions>

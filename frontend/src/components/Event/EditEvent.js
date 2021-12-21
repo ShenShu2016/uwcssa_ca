@@ -1,11 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
-import Button from "@mui/material/Button";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import CloseIcon from "@mui/icons-material/Close";
-
 import {
   Box,
   CircularProgress,
@@ -21,35 +13,43 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
-import { useTitle } from "../../Hooks/useTitle";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchTopics,
   modifyEvent,
   removeSelectedEvent,
   selectedEvent,
 } from "../../redux/slice/eventSlice";
-import { green } from "@mui/material/colors";
-import UpdateIcon from "@mui/icons-material/Update";
-import { Controller, useForm } from "react-hook-form";
-import { postSingleImage } from "../../redux/slice/generalSlice";
-import { GetTags } from "../CustomMUI/CustomTags";
-import { createTopic } from "../../graphql/mutations";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+
 import API from "@aws-amplify/api";
-import { convertToRaw } from "draft-js";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { makeStyles } from "@mui/styles";
-import PublishIcon from "@mui/icons-material/Publish";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import { GetTags } from "../CustomMUI/CustomTags";
+import IconButton from "@mui/material/IconButton";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import WallpaperIcon from "@mui/icons-material/Wallpaper";
-import QrCodeIcon from "@mui/icons-material/QrCode";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MUIRichTextEditor from "mui-rte";
+import PublishIcon from "@mui/icons-material/Publish";
+import QrCodeIcon from "@mui/icons-material/QrCode";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import UpdateIcon from "@mui/icons-material/Update";
+import WallpaperIcon from "@mui/icons-material/Wallpaper";
+import { convertToRaw } from "draft-js";
+import { createTopic } from "../../graphql/mutations";
+import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { green } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
+import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -192,13 +192,14 @@ export default function EditEvent() {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    const address = await GetAddress();
     const updateEventInput = {
       ...data,
       id: event.id,
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
-      address: GetAddress(),
+      address: address,
       content: updatedContent,
       active: true,
       userID: username,

@@ -215,7 +215,7 @@ export default function EventBody({ event }) {
                     component="div"
                     gutterBottom
                   >
-                    线上
+                    地点：线上
                   </Typography>
                 ) : (
                   <div>
@@ -226,7 +226,7 @@ export default function EventBody({ event }) {
                         component="div"
                         gutterBottom
                       >
-                        {address.description}
+                        地点：{address.description}
                       </Typography>
                     ) : (
                       <Typography
@@ -235,7 +235,7 @@ export default function EventBody({ event }) {
                         component="div"
                         gutterBottom
                       >
-                        暂无
+                        地点：暂无
                       </Typography>
                     )}
                   </div>
