@@ -644,6 +644,7 @@ export const onCreateUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -663,6 +664,7 @@ export const onCreateUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -826,6 +828,7 @@ export const onUpdateUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -845,6 +848,7 @@ export const onUpdateUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -1008,6 +1012,7 @@ export const onDeleteUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -1027,6 +1032,7 @@ export const onDeleteUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -4589,6 +4595,7 @@ export const onCreateDepartment = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -4704,6 +4711,7 @@ export const onUpdateDepartment = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -4819,6 +4827,7 @@ export const onDeleteDepartment = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -9996,6 +10005,7 @@ export const onCreateKanban = /* GraphQL */ `
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
       sortKey
@@ -10137,6 +10147,7 @@ export const onUpdateKanban = /* GraphQL */ `
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
       sortKey
@@ -10278,6 +10289,7 @@ export const onDeleteKanban = /* GraphQL */ `
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
       sortKey

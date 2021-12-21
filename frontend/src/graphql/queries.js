@@ -705,6 +705,7 @@ export const getUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -724,6 +725,7 @@ export const getUser = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -3146,6 +3148,7 @@ export const getDepartment = /* GraphQL */ `
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
           sortKey
@@ -6544,6 +6547,7 @@ export const getKanban = /* GraphQL */ `
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
       sortKey
@@ -6690,6 +6694,7 @@ export const listKanbans = /* GraphQL */ `
         content
         kanbanStatus
         deadLine
+        priority
         tags
         points
         sortKey
@@ -6773,6 +6778,7 @@ export const kanbanSortBySortKey = /* GraphQL */ `
         content
         kanbanStatus
         deadLine
+        priority
         tags
         points
         sortKey
