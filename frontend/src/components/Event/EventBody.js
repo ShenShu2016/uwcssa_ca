@@ -1,5 +1,6 @@
 import {
   Alert,
+  Backdrop,
   Box,
   Button,
   Card,
@@ -16,29 +17,29 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
+import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import EditIcon from "@mui/icons-material/Edit";
 import EventComments from "./EventDetail/Comment/EventComments";
 import EventCommentsPost from "./EventDetail/Comment/EventCommentsPost";
 // import EventIcon from "@mui/icons-material/Event";
 import FlagIcon from "@mui/icons-material/Flag";
 import ForumIcon from "@mui/icons-material/Forum";
-import { Link, useHistory } from "react-router-dom";
+import InfoIcon from "@mui/icons-material/Info";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
+import SeeMore from "./SeeMore";
 import Share from "./EventDetail/Share";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import TopicIcon from "@mui/icons-material/Topic";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-import { useSelector } from "react-redux";
-import SeeMore from "./SeeMore";
-import InfoIcon from "@mui/icons-material/Info";
 //import EditEvent from "./EditEvent";
 import { usePermit } from "../../Hooks/usePermit";
-import EditIcon from "@mui/icons-material/Edit";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -555,7 +556,12 @@ export default function EventBody({ event }) {
         </div>
       ) : (
         <div>
-          <CircularProgress />
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       )}
     </Box>

@@ -50,15 +50,19 @@ export default function PostUwcssaJob(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userAuth);
-  const { departments } = useSelector((state) => state.career);
+  const { departments, fetchDepartmentsStatus } = useSelector(
+    (state) => state.career
+  );
   const [info, setInfo] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailure, setSubmitFailure] = useState(false);
   const [depart, setDepart] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchDepartments());
-  }, [dispatch]);
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, fetchDepartmentsStatus]);
 
   const [uwcssaJobData, setUwcssaJobData] = useState({
     introduction: "",

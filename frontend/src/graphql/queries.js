@@ -701,6 +701,7 @@ export const getUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -719,6 +720,7 @@ export const getUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -3140,6 +3142,7 @@ export const getDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
@@ -6537,6 +6540,7 @@ export const getKanban = /* GraphQL */ `
   query GetKanban($id: ID!) {
     getKanban(id: $id) {
       id
+      title
       content
       kanbanStatus
       deadLine
@@ -6682,6 +6686,7 @@ export const listKanbans = /* GraphQL */ `
     listKanbans(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        title
         content
         kanbanStatus
         deadLine
@@ -6764,6 +6769,7 @@ export const kanbanSortBySortKey = /* GraphQL */ `
     ) {
       items {
         id
+        title
         content
         kanbanStatus
         deadLine
