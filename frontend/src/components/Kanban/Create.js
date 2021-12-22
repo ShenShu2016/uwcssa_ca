@@ -80,6 +80,7 @@ export default function Create({ createOpen, handleCreateClose }) {
       sortKey: "SortKey",
       departmentID: "主席团",
       assigneeID: "shushen2013",
+      priority: "Low",
     },
   });
   const handleOnChange = () => (event) => {
@@ -237,6 +238,39 @@ export default function Create({ createOpen, handleCreateClose }) {
                       </MenuItem>
                       <MenuItem value={"DONE"} key={"DONE"}>
                         {"DONE"}
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                )}
+              />
+              <Controller
+                name="priority"
+                control={control}
+                rules={{
+                  required: false,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="priority">priority</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-outlined-label"
+                      id="priority"
+                      value={value}
+                      onChange={onChange}
+                      label="priority"
+                      error={!!errors.priority}
+                    >
+                      <MenuItem value={"Low"} key={"Low"}>
+                        {"Low"}
+                      </MenuItem>
+                      <MenuItem value={"Average"} key={"Average"}>
+                        {"Average"}
+                      </MenuItem>
+                      <MenuItem value={"High"} key={"High"}>
+                        {"High"}
+                      </MenuItem>
+                      <MenuItem value="Critical" key={"Critical"}>
+                        {"Critical"}
                       </MenuItem>
                     </Select>
                   </FormControl>

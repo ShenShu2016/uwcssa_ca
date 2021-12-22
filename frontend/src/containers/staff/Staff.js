@@ -1,28 +1,17 @@
-import {
-  // AppBar,
-  Box,
-  Container,
-  // Grid,
-  // List,
-  // ListItemButton,
-  // ListItemText,
-  Tab,
-  Tabs,
-  // Typography,
-} from "@mui/material";
+import { Box, Container, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
+
 import ArticlesPreview from "./Article/ArticlesPreview";
 // import EventGrid from "../../components/Event/EventDataGrid";
 import EventTable from "../../components/Event/EventTable";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
+import PostEvent from "../../components/Event/PostEvent";
 // import PostEvent from "../../components/Event/PostEvent";
 import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import PropTypes from "prop-types";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
 import { useTheme } from "@emotion/react";
-import PostEvent from "../../components/Event/PostEvent";
 
 // function TabPanel(props) {
 //   const { children, value, index } = props;
@@ -83,9 +72,9 @@ export default function Staff() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  // const handleChangeIndex = (index) => {
+  //   setValue(index);
+  // };
   return (
     <Container maxWidth="xl">
       {/* <Box sx={{ bgcolor: 'background.paper', width: 500 }}> */}
@@ -107,42 +96,42 @@ export default function Staff() {
         <Tab label="新闻发布" {...a11yProps(5)} />
       </Tabs>
 
-      <SwipeableViews
+      {/* <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <ArticlesPreview />
+      > */}
+      <TabPanel value={value} index={0} dir={theme.direction}>
+        <ArticlesPreview />
 
-          <UwcssaJobsPreview />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <Box>
-            <EventTable />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <Box>
-            <PostEvent />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-          <Box>
-            <PostUwcssaJob />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={4} dir={theme.direction}>
-          <Box>
-            <PostDepartment />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={5} dir={theme.direction}>
-          <Box>
-            <PostArticle />
-          </Box>
-        </TabPanel>
-      </SwipeableViews>
+        <UwcssaJobsPreview />
+      </TabPanel>
+      <TabPanel value={value} index={1} dir={theme.direction}>
+        <Box>
+          <EventTable />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={2} dir={theme.direction}>
+        <Box>
+          <PostEvent />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={3} dir={theme.direction}>
+        <Box>
+          <PostUwcssaJob />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={4} dir={theme.direction}>
+        <Box>
+          <PostDepartment />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={5} dir={theme.direction}>
+        <Box>
+          <PostArticle />
+        </Box>
+      </TabPanel>
+      {/* </SwipeableViews> */}
       {/* </Box> */}
     </Container>
 

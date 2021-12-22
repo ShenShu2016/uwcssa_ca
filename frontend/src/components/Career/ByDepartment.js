@@ -70,7 +70,7 @@ export default function ByDepartment({ department, uwcssaJobs }) {
           <List sx={{ mx: "1rem" }}>
             {jobsByDepartment.map((job, idx) => {
               return (
-                <Paper sx={{ my: "0.5rem" }}>
+                <Paper sx={{ my: "0.5rem" }} key={idx}>
                   <CardActionArea
                     component={Link}
                     to={`/career/jobDetail/${job.id}`}

@@ -73,6 +73,7 @@ export default function ByDepartment({ department, uwcssaMembers }) {
       }}
     >
       {/* <Box elevation={10}> */}
+
       <Root>
         <CardActions disableSpacing>
           <ExpandMore
@@ -84,11 +85,21 @@ export default function ByDepartment({ department, uwcssaMembers }) {
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Divider variant={"middle"}>
-          <Typography variant="h6" color="primary">
-            {department.id}
-          </Typography>
-        </Divider>
+        {department.id.length < 10 ? (
+          <Divider variant={"middle"}>
+            <Box sx={{ overflowWrap: "break-word" }}>
+              <Typography variant="h6" color="primary">
+                {department.id}
+              </Typography>
+            </Box>
+          </Divider>
+        ) : (
+          <Box sx={{ overflowWrap: "break-word", textAlign: "center" }}>
+            <Typography variant="h6" color="primary">
+              {department.id}
+            </Typography>
+          </Box>
+        )}
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <div className={classes.cards}>

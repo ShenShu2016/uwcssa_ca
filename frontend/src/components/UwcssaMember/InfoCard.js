@@ -3,8 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  // CardHeader,
-  // CardMedia,
   Collapse,
   Divider,
   Menu,
@@ -19,12 +17,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import EmailIcon from "@mui/icons-material/Email";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
+import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
-import { grey } from "@mui/material/colors";
 
 const useStyles = makeStyles((palette) => ({
   root: {
@@ -59,8 +58,8 @@ const useStyles = makeStyles((palette) => ({
     },
   },
   avatar: {
-    width: 90,
-    height: 90,
+    width: 120,
+    height: 120,
     margin: "auto",
     borderRadius: 12,
     size: 48,
@@ -121,7 +120,7 @@ export default function InfoCard({ item }) {
     summary,
     content,
     imgURL,
-    //user,
+    user,
     owner,
     // leader,
   } = item;
@@ -148,6 +147,7 @@ export default function InfoCard({ item }) {
   const renderSettingMenu = (
     <Menu
       anchorEl={settingMoreAnchorEl}
+      disableScrollLock={true}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isSettingMenuOpen}
@@ -199,16 +199,18 @@ export default function InfoCard({ item }) {
               </div>
             </Box>
           ) : null} */}
-          <IconButton
-            aria-label="settings"
-            aria-haspopup="true"
-            onClick={handleSettingMenuOpen}
-            color="inherit"
-            disabled={!isPermit}
-            className={classes.edit}
-          >
-            <MoreVertIcon />
-          </IconButton>
+          {isPermit ? (
+            <IconButton
+              aria-label="settings"
+              aria-haspopup="true"
+              onClick={handleSettingMenuOpen}
+              color="inherit"
+              // disabled={!isPermit}
+              className={classes.edit}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          ) : null}
 
           <img
             src={
@@ -220,8 +222,23 @@ export default function InfoCard({ item }) {
             className={classes.avatar}
           />
 
-          <Typography variant="subtitle1" className={classes.heading}>
-            {item.id}
+          {user.lastName && user.firstName ? (
+            <Typography variant="subtitle1" className={classes.heading}>
+              {item.user.lastName}, {item.user.firstName}
+            </Typography>
+          ) : (
+            <Typography variant="subtitle1" className={classes.heading}>
+              LastName, FirstName
+            </Typography>
+          )}
+          <Typography
+            variant="caption"
+            gutterBottom
+            component={Link}
+            to={`/account/profile/${user.username}`}
+            sx={{ textDecoration: "none", color: "text.secondary" }}
+          >
+            @{item.id}
           </Typography>
           <Typography variant="subtitle2" className={classes.subheader}>
             {title ? title : "暂无，请编辑..."}
