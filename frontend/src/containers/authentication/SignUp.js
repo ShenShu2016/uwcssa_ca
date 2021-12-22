@@ -192,7 +192,7 @@ export default function SignUp() {
                 control={control}
                 rules={{
                   required: true,
-                  minLength: 6,
+                  minLength: 8,
                   maxLength: 20,
                 }}
                 render={({ field: { onChange, value } }) => (
@@ -200,13 +200,13 @@ export default function SignUp() {
                     required
                     label="用户名"
                     variant="outlined"
-                    placeholder="注册后不能修改,为主要昵称"
+                    placeholder="注册后不能修改,为主要昵称,不要填写邮箱"
                     fullWidth
                     autoComplete="username"
                     onChange={onChange}
                     value={value}
                     error={!!errors.username}
-                    helperText={errors.username ? "最短6符号,最长15符号" : null}
+                    helperText={errors.username ? "最短8符号,最长20符号" : null}
                   />
                 )}
               />

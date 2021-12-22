@@ -1,28 +1,19 @@
-import {
-  // AppBar,
-  Box,
-  Container,
-  // Grid,
-  // List,
-  // ListItemButton,
-  // ListItemText,
-  Tab,
-  Tabs,
-  // Typography,
-} from "@mui/material";
+import { Box, Container, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
+
 // import SwipeableViews from "react-swipeable-views";
+
 import ArticlesPreview from "./Article/ArticlesPreview";
 // import EventGrid from "../../components/Event/EventDataGrid";
 import EventTable from "../../components/Event/EventTable";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
+import PostEvent from "../../components/Event/PostEvent";
 // import PostEvent from "../../components/Event/PostEvent";
 import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import PropTypes from "prop-types";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
 import { useTheme } from "@emotion/react";
-import PostEvent from "../../components/Event/PostEvent";
 
 // function TabPanel(props) {
 //   const { children, value, index } = props;

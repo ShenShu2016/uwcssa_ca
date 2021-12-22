@@ -44,7 +44,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
     owner,
   } = marketItem;
   return (
-    <Paper>
+    <Paper sx={{ backgroundColor: "transparent" }}>
       <TitleInfo
         id={id}
         mode={mode}
@@ -72,6 +72,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         year={year}
         make={make}
         model={model}
+        mode={mode}
         vehicleType={vehicleType}
         exteriorColor={exteriorColor}
         interiorColor={interiorColor}

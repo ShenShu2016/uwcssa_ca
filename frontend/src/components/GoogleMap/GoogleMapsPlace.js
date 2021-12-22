@@ -15,7 +15,8 @@ let geocoder;
 export async function GetAddress() {
   console.log("我正在找经纬度");
   let newAddress;
-  console.log("getAddress");
+  // console.log("getAddress");
+  console.log(address);
   if (address.place_id) {
     await new Promise((resolve) => {
       geocoder.geocode(
@@ -58,11 +59,12 @@ function loadScript(src, position, id) {
   position.appendChild(script);
 }
 const autocompleteService = { current: null };
-console.log("autocompleteService", autocompleteService);
-export default function GoogleMaps() {
+
+// console.log("autocompleteService", autocompleteService);
+export default function GoogleMaps({ ...rest }) {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
-  const [apartmentNumbers, setApartmentNumbers] = useState("");
+  // const [apartmentNumbers, setApartmentNumbers] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
 
@@ -74,16 +76,16 @@ export default function GoogleMaps() {
       reference: value && value.reference,
       terms: value && value.terms,
       types: value && value.types,
-      apartmentNumbers: apartmentNumbers,
+      // apartmentNumbers: apartmentNumbers,
     };
   });
 
   if (typeof window !== "undefined" && !loaded.current) {
-    console.log(
-      'typeof window !== "undefined" && !loaded.current',
-      typeof window !== "undefined",
-      !loaded.current
-    );
+    // console.log(
+    //   'typeof window !== "undefined" && !loaded.current',
+    //   typeof window !== "undefined",
+    //   !loaded.current
+    // );
     if (!document.querySelector("#google-maps")) {
       loadScript(
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyCKR_7S6WE5ETziYlastsHnmKuvELeFTW4&libraries=places",
@@ -105,11 +107,18 @@ export default function GoogleMaps() {
   useEffect(() => {
     let active = true;
 
-    if (!autocompleteService.current && window.google) {
-      console.log(!autocompleteService.current, window.google);
-      autocompleteService.current =
-        new window.google.maps.places.AutocompleteService();
-    }
+    const initial = async () => {
+      if (!autocompleteService.current && window.google) {
+        // console.log(!autocompleteService.current, window.google.maps.places);
+        // console.log(autocompleteService.current);
+        autocompleteService.current =
+          await new window.google.maps.places.AutocompleteService();
+        geocoder = await new window.google.maps.Geocoder();
+      }
+    };
+
+    initial();
+
     if (!autocompleteService.current) {
       return undefined;
     }
@@ -139,10 +148,8 @@ export default function GoogleMaps() {
   }, [value, inputValue, fetch]);
 
   return (
-    <Box
-    // sx={{ my: "2rem" }}
-    >
-      <TextField
+    <Box>
+      {/* <TextField
         id="setApartmentNumbers"
         label="公寓房间号"
         helperText="住公寓的可以填，house不需要"
@@ -152,14 +159,16 @@ export default function GoogleMaps() {
         }}
         fullWidth
         sx={{ my: 1 }}
-      />
+      /> */}
       <Autocomplete
         id="google-map-demo"
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.description
         }
         filterOptions={(x) => x}
+        // {...rest}
         options={options}
+        {...rest}
         autoComplete
         includeInputInList
         filterSelectedOptions
@@ -171,9 +180,7 @@ export default function GoogleMaps() {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
-        renderInput={(params) => (
-          <TextField {...params} label="添加地址" fullWidth />
-        )}
+        renderInput={(params) => <TextField {...params} label="添加地址" />}
         renderOption={(props, option) => {
           const matches =
             option.structured_formatting.main_text_matched_substrings;
@@ -215,11 +222,11 @@ export default function GoogleMaps() {
           );
         }}
       />
-      <Box sx={{ my: 1 }}>
+      <Box sx={{ my: 1, height: "15px" }}>
         <img
           src="https://developers.google.com/maps/documentation/images/powered_by_google_on_white.png"
           alt="Powered by Google"
-          style={{ float: "right" }}
+          style={{ float: "right", height: "100%" }}
         />
       </Box>
     </Box>

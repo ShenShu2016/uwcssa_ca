@@ -20,16 +20,46 @@ export default function MarketList() {
   const dispatch = useDispatch();
   const useStyles = marketItemStyle;
   const classes = useStyles();
-
+  const [addressInfo, setAddressInfo] = React.useState("");
+  const [searchRadius, setSearchRadius] = React.useState(0);
+  console.log(addressInfo);
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems);
-  console.log(starter);
-  console.log(marketItems);
+  // console.log(starter);
+  // console.log(marketItems);
   // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
+  //conversion: Latitude: 1 deg = 110.574 km
+  // Longitude: 1 deg = 111.320*cos(latitude) km
   useEffect(() => {
-    dispatch(fetchMarketItems(marketItemSortBySortKey));
-  }, [dispatch]);
+    // const filter =
+    //   addressInfo === ""
+    //     ? { active: { eq: true } }
+    //     : {
+    //         and: [
+    //           {
+    //             address: {
+    //               lat: {
+    //                 between: [
+    //                   addressInfo.lat - searchRadius / 110.574,
+    //                   addressInfo.lat + searchRadius / 110.574,
+    //                 ],
+    //               },
+    //             },
+    //             lng: {
+    //               between: [
+    //                 addressInfo.lng -
+    //                   searchRadius / (111.32 * Math.cos(searchRadius.lat)),
+    //                 addressInfo.lng +
+    //                   searchRadius / (111.32 * Math.cos(searchRadius.lat)),
+    //               ],
+    //             },
+    //           },
+    //         ],
+    //       };
+
+    dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+  }, [dispatch, addressInfo, searchRadius]);
 
   const marketItemRenderList =
     marketItems &&
@@ -49,7 +79,10 @@ export default function MarketList() {
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
         >
-          <MarketSideBar />
+          <MarketSideBar
+            setAddressInfo={setAddressInfo}
+            setSearchRadius={setSearchRadius}
+          />
           <Box className={classes.img}>
             <MarketTopBar />
             <Box className={classes.items}>{marketItemRenderList}</Box>

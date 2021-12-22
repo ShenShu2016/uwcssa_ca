@@ -2,19 +2,16 @@ import {
   Alert,
   Box,
   Button,
-  Checkbox,
   CircularProgress,
   Container,
   CssBaseline,
   FormControl,
-  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
@@ -166,7 +163,6 @@ export default function SignIn() {
                   id="password"
                   type={isShowPassword ? "text" : "password"}
                   onChange={onChange}
-                  autoFocus
                   error={!!errors.password}
                   value={value}
                   endAdornment={
@@ -185,12 +181,12 @@ export default function SignIn() {
               </FormControl>
             )}
           />
-          <Tooltip title={`这个东西装饰用的，按不按都一样`} arrow>
+          {/* <Tooltip title={`这个东西装饰用的，按不按都一样`} arrow>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="记住密码"
             />
-          </Tooltip>
+          </Tooltip> */}
           <Button
             type="submit"
             fullWidth

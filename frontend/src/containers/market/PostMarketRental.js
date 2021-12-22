@@ -119,42 +119,44 @@ export default function PostMarketRental() {
 
   const onSubmit = async (data) => {
     const address = await GetAddress();
-    const createMarketItemInput = {
-      ...data,
-      name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
-      marketType: "Rental",
-      address: address,
-      imgURLs: imgURLs,
-      tags: GetTags(),
-      active: true,
-      userID: username,
-      sortKey: "SortKey",
-    };
-    const { contactEmail, contactPhone, contactWeChat } = data;
-    const userInfo = {
-      id: username,
-      phone: contactPhone,
-      weChat: contactWeChat,
-      email: contactEmail,
-      userID: username,
-    };
-    // console.log("createMarketItemInput", createMarketItemInput);
-    setLoading(true);
-    const response = await dispatch(postMarketItem(createMarketItemInput));
-    if (marketUserInfo === undefined) {
-      await dispatch(postMarketUserInfo(userInfo));
-    } else if (marketUserInfo !== undefined) {
-      if (defaultInfo === true) {
-        await dispatch(updateMarketUserInfoDetail(userInfo));
+    if (address !== undefined) {
+      const createMarketItemInput = {
+        ...data,
+        name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
+        marketType: "Rental",
+        address: address,
+        imgURLs: imgURLs,
+        tags: GetTags(),
+        active: true,
+        userID: username,
+        sortKey: "SortKey",
+      };
+      const { contactEmail, contactPhone, contactWeChat } = data;
+      const userInfo = {
+        id: username,
+        phone: contactPhone,
+        weChat: contactWeChat,
+        email: contactEmail,
+        userID: username,
+      };
+      // console.log("createMarketItemInput", createMarketItemInput);
+      setLoading(true);
+      const response = await dispatch(postMarketItem(createMarketItemInput));
+      if (marketUserInfo === undefined) {
+        await dispatch(postMarketUserInfo(userInfo));
+      } else if (marketUserInfo !== undefined) {
+        if (defaultInfo === true) {
+          await dispatch(updateMarketUserInfoDetail(userInfo));
+        }
       }
-    }
 
-    console.log("Something should be here", response);
-    if (response.meta.requestStatus === "fulfilled") {
-      history.replace(`/market/rental/${response.payload.id}`);
-      reset();
+      console.log("Something should be here", response);
+      if (response.meta.requestStatus === "fulfilled") {
+        history.replace(`/market/rental/${response.payload.id}`);
+        reset();
+      }
+      console.log("Can upload");
     }
-    console.log("Can upload");
   };
 
   useEffect(() => {
@@ -420,7 +422,7 @@ export default function PostMarketRental() {
                     />
                   )}
                 /> */}
-                <GoogleMaps></GoogleMaps>
+                <GoogleMaps />
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>

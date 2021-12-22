@@ -23,6 +23,7 @@ import ForumRouter from "./containers/forum/ForumRouter";
 import FoundingMember from "./containers/FoundingMember";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
+import Kanban from "./containers/Kanban";
 import MarketRouter from "./containers/market/MarketRouter";
 import NoPermission from "./containers/NoPermission";
 import PrivateRoute from "./components/PrivateRoute";
@@ -104,6 +105,7 @@ export default function App() {
             path="/staff"
             component={StaffRouter}
           />
+          <Route path="/kanban" component={Kanban} />
           <Route path="/article" component={ArticleRouter} />
           <Route path="/market" component={MarketRouter} /> 
           <Route path="/forum" component={ForumRouter} />

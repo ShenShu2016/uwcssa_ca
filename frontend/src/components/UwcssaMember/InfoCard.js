@@ -3,8 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  // CardHeader,
-  // CardMedia,
   Collapse,
   Divider,
   Menu,
@@ -19,13 +17,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import EmailIcon from "@mui/icons-material/Email";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
+import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
-import { grey } from "@mui/material/colors";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((palette) => ({
   root: {
@@ -149,6 +147,7 @@ export default function InfoCard({ item }) {
   const renderSettingMenu = (
     <Menu
       anchorEl={settingMoreAnchorEl}
+      disableScrollLock={true}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isSettingMenuOpen}

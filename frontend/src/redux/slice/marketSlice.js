@@ -29,14 +29,14 @@ const initialState = marketAdapter.getInitialState({
 
 export const fetchMarketItems = createAsyncThunk(
   "market/fetchMarketItems",
-  async (query) => {
+  async ({ query, filter = { active: { eq: true } } }) => {
     try {
       const MarketItemsData = await API.graphql({
         query: query,
         variables: {
           sortKey: "SortKey",
           sortDirection: "DESC",
-          filter: { active: { eq: true } },
+          filter: filter,
         },
         authMode: "AWS_IAM",
       });

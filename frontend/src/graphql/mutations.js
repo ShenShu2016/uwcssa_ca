@@ -148,11 +148,14 @@ export const createUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -165,11 +168,14 @@ export const createUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -329,11 +335,14 @@ export const updateUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -346,11 +355,14 @@ export const updateUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -510,11 +522,14 @@ export const deleteUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -527,11 +542,14 @@ export const deleteUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4180,11 +4198,14 @@ export const createDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4296,11 +4317,14 @@ export const updateDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -4412,11 +4436,14 @@ export const deleteDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -10211,11 +10238,14 @@ export const createKanban = /* GraphQL */ `
   ) {
     createKanban(input: $input, condition: $condition) {
       id
+      title
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -10353,11 +10383,14 @@ export const updateKanban = /* GraphQL */ `
   ) {
     updateKanban(input: $input, condition: $condition) {
       id
+      title
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -10495,11 +10528,14 @@ export const deleteKanban = /* GraphQL */ `
   ) {
     deleteKanban(input: $input, condition: $condition) {
       id
+      title
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID

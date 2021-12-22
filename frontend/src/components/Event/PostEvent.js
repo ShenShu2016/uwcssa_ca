@@ -3,7 +3,6 @@ import {
   Button,
   Checkbox,
   CircularProgress,
-  // Container,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -25,8 +24,13 @@ import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { GetTags } from "../../components/CustomMUI/CustomTags";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
+import QrCodeIcon from "@mui/icons-material/QrCode";
+import WallpaperIcon from "@mui/icons-material/Wallpaper";
+import { convertToRaw } from "draft-js";
 import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
@@ -35,11 +39,7 @@ import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import MUIRichTextEditor from "mui-rte";
-import { convertToRaw } from "draft-js";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import WallpaperIcon from "@mui/icons-material/Wallpaper";
-import QrCodeIcon from "@mui/icons-material/QrCode";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -137,11 +137,13 @@ export default function PostEvent() {
     },
   });
 
-  useEffect(() => {
-    dispatch(fetchTopics());
-  }, [dispatch]);
+  const { topics, fetchTopicsStatus } = useSelector((state) => state.event);
 
-  const { topics } = useSelector((state) => state.event);
+  useEffect(() => {
+    if (fetchTopicsStatus === "idle" || undefined) {
+      dispatch(fetchTopics());
+    }
+  }, [dispatch, fetchTopicsStatus]);
 
   const uploadEventImg = async (e) => {
     const imageData = e.target.files;

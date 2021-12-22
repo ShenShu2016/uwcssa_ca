@@ -52,7 +52,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
   } = marketItem;
 
   return (
-    <Paper sx={{ maxWidth: "100%" }}>
+    <Paper sx={{ maxWidth: "100%", backgroundColor: "transparent" }}>
       <TitleInfo
         type="rental"
         price={price}
@@ -79,6 +79,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
         airConditionType={airConditionType}
         heatingType={heatingType}
         catFriendly={catFriendly}
+        mode={mode}
         dogFriendly={dogFriendly}
         address={address}
       />

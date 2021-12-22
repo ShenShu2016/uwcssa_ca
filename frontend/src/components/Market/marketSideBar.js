@@ -20,7 +20,7 @@ import React from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 
-const MarketSideBar = () => {
+const MarketSideBar = ({ setAddressInfo, setSearchRadius }) => {
   const useStyles = makeStyles((theme) => ({
     info: {
       width: "360px",
@@ -98,7 +98,10 @@ const MarketSideBar = () => {
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             位置
           </Typography>
-          <MarketFIlterLocation />
+          <MarketFIlterLocation
+            setAddressInfo={setAddressInfo}
+            setSearchRadius={setSearchRadius}
+          />
         </Box>
         <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
           类别

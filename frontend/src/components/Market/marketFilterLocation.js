@@ -13,27 +13,30 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import GoogleMaps, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import React, { useEffect, useState } from "react";
 
-//import GoogleMap from "../GoogleMap/GoogleMap";
+import GoogleMap from "../GoogleMap/GoogleMap";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 //import Marker from "../GoogleMap/Marker";
 import PropTypes from "prop-types";
-import placeses from "../../places.json";
 import { styled } from "@mui/material/styles";
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const {
+    onClose,
+    value: valueProp,
+    open,
+    setAddressInfo,
+    setSearchRadius,
+    ...other
+  } = props;
   const [newLocationInfo, setNewLocationInfo] = useState("");
-  const [newLocationRadius, setNewLocationRadius] = useState("");
+  const [newLocationRadius, setNewLocationRadius] = useState(5);
   //const [clicked, setClicked] = React.useState(null);
-
-  let places = placeses.results;
-  places.forEach((result) => {
-    result.show = false;
-  });
-  // console.log(typeof places[0].geometry.location.lat);
+  const windsor = [42.2732, -83.0014];
+  console.log(newLocationInfo);
   useEffect(() => {
     if (!open) {
       setNewLocationInfo(valueProp);
@@ -54,13 +57,18 @@ function ConfirmationDialogRaw(props) {
     onClose();
   };
 
-  const handleOk = () => {
-    onClose(`${newLocationInfo} within ${newLocationRadius}km`);
+  const handleOk = async () => {
+    const address = await GetAddress();
+    setAddressInfo(address);
+    setSearchRadius(newLocationRadius);
+    if (address !== undefined) {
+      onClose(`${address.description} within ${newLocationRadius}km`);
+    }
   };
 
-  const handleLocationChange = (e) => {
-    setNewLocationInfo(e.target.value);
-  };
+  // const handleLocationChange = (e) => {
+  //   setNewLocationInfo(e.target.value);
+  // };
 
   const handleRadiusChange = (e) => {
     setNewLocationRadius(e.target.value);
@@ -76,8 +84,11 @@ function ConfirmationDialogRaw(props) {
     >
       <DialogTitle>位置</DialogTitle>
       <DialogContent dividers>
-        <Typography variant="caption">根据地址，邮编搜索</Typography>
-        <TextField
+        <Box sx={{ marginBottom: "1rem" }}>
+          <Typography variant="caption">根据地址，邮编搜索</Typography>
+        </Box>
+
+        {/* <TextField
           sx={{ marginY: "1rem" }}
           id="input-with-icon-textfield"
           label="地址"
@@ -91,7 +102,8 @@ function ConfirmationDialogRaw(props) {
           fullWidth
           onChange={handleLocationChange}
           variant="outlined"
-        />
+        /> */}
+        <GoogleMaps />
         <TextField
           sx={{ marginBottom: "1rem" }}
           id="input-with-icon-textfield"
@@ -108,36 +120,11 @@ function ConfirmationDialogRaw(props) {
           variant="outlined"
         />
         <Item>
-          {/* <GoogleMap
-            defaultZoom={10}
-            defaultCenter={[
-              places[0].geometry.location.lat,
-              places[0].geometry.location.lng,
-            ]}
-            // onChildClick={onChildClickCallback}
-            center={
-              clicked && [
-                clicked.geometry.location.lat,
-                clicked.geometry.location.lng,
-              ]
-            }
-          >
-            {places.map((place) => (
-              <Marker
-                key={place.id}
-                text={place.name}
-                lat={place.geometry.location.lat}
-                lng={place.geometry.location.lng}
-                // open={open}
-                place={place}
-                onClick={() => {
-                  setClicked(place);
-                  // setOpen((prev) => !prev);
-                }}
-              />
-            ))}
-          </GoogleMap> */}
-          {/* 这个是奔溃原因，注释掉就没问题了，但是就是很奇怪我不清楚 */}
+          <GoogleMap
+            defaultZoom={11}
+            center={windsor}
+            circleRadius={newLocationRadius * 1000}
+          />
         </Item>
       </DialogContent>
       <DialogActions>
@@ -156,7 +143,11 @@ ConfirmationDialogRaw.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ConfirmationDialog({ type = "plain" }) {
+export default function ConfirmationDialog({
+  setAddressInfo,
+  setSearchRadius,
+  type = "plain",
+}) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("位置");
 
@@ -186,6 +177,8 @@ export default function ConfirmationDialog({ type = "plain" }) {
             <ListItemText primary="当前搜索区域" secondary={value} />
           </ListItem>
           <ConfirmationDialogRaw
+            setAddressInfo={setAddressInfo}
+            setSearchRadius={setSearchRadius}
             id="ringtone-menu"
             keepMounted
             open={open}
@@ -206,6 +199,8 @@ export default function ConfirmationDialog({ type = "plain" }) {
           {value}
         </Button>
         <ConfirmationDialogRaw
+          setAddressInfo={setAddressInfo}
+          setSearchRadius={setSearchRadius}
           id="ringtone-menu"
           keepMounted
           open={open}

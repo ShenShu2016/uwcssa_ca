@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  // CircularProgress,
   Divider,
   Grid,
   IconButton,
@@ -11,17 +10,18 @@ import {
 
 // import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubButton from "react-github-btn";
 // import InputUnstyled from "@mui/base/InputUnstyled";
 import { Link } from "react-router-dom";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { makeStyles } from "@mui/styles";
 //import { styled } from "@mui/system";
 //import footerBanner from "../static/FooterBanner.png";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
-import GitHubButton from "react-github-btn";
-import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+
 // import { red } from "@mui/material/colors";
 
 function Copyright() {

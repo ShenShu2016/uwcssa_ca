@@ -701,11 +701,14 @@ export const getUser = /* GraphQL */ `
       kanban {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -718,11 +721,14 @@ export const getUser = /* GraphQL */ `
       kanbanAssignee {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -3138,11 +3144,14 @@ export const getDepartment = /* GraphQL */ `
       kanbans {
         items {
           id
+          title
           content
           kanbanStatus
           deadLine
+          priority
           tags
           points
+          sortKey
           assigneeID
           departmentID
           userID
@@ -6534,11 +6543,14 @@ export const getKanban = /* GraphQL */ `
   query GetKanban($id: ID!) {
     getKanban(id: $id) {
       id
+      title
       content
       kanbanStatus
       deadLine
+      priority
       tags
       points
+      sortKey
       assigneeID
       departmentID
       userID
@@ -6678,11 +6690,98 @@ export const listKanbans = /* GraphQL */ `
     listKanbans(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        title
         content
         kanbanStatus
         deadLine
+        priority
         tags
         points
+        sortKey
+        assigneeID
+        departmentID
+        userID
+        createdAt
+        updatedAt
+        assignee {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const kanbanSortBySortKey = /* GraphQL */ `
+  query KanbanSortBySortKey(
+    $sortKey: SortKey
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelKanbanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    kanbanSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        content
+        kanbanStatus
+        deadLine
+        priority
+        tags
+        points
+        sortKey
         assigneeID
         departmentID
         userID

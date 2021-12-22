@@ -20,7 +20,8 @@ console.log(
   | |_| | \\ V  V /| |___ ___) |__) / ___ \\ 
    \\___/   \\_/\\_/  \\____|____/____/_/   \\_\\     
                                            
-   A Student Community like No Other
+   A Student Community like No Other.
+   任何一个傻瓜都会写能够让机器理解的代码，只有好的程序员才能写出人类可以理解的代码。——Martin Fowler
 `,
   `font-family: monospace`
 );
