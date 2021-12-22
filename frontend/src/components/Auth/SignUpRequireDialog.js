@@ -221,7 +221,6 @@ export default function AlertDialog() {
                   name="username"
                   fullWidth
                   autoComplete="username"
-                  autoFocus
                   value={username}
                   error={errorMessage ? true : false}
                   helperText={errorMessage}
@@ -376,7 +375,6 @@ export default function AlertDialog() {
           <Button
             size="large"
             onClick={handleClose}
-            autoFocus
             component={Link}
             to="/auth/signUp"
           >

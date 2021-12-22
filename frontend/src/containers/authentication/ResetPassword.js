@@ -151,7 +151,6 @@ export default function ResetPassword() {
                   id="new_password"
                   type={isShowPassword ? "text" : "password"}
                   onChange={onChange}
-                  autoFocus
                   error={!!errors.new_password}
                   value={value}
                   endAdornment={
