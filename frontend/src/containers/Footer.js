@@ -11,7 +11,7 @@ import {
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import InputUnstyled from "@mui/base/InputUnstyled";
+// import InputUnstyled from "@mui/base/InputUnstyled";
 import { Link } from "react-router-dom";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
@@ -350,7 +350,7 @@ export default function StickyFooter() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={8} lg={4} style={{ marginLeft: "auto" }}>
+            {/* <Grid item xs={12} md={8} lg={4} style={{ marginLeft: "auto" }}>
               <Typography
                 variant="h6"
                 //className={classes.newsletterText}
@@ -360,7 +360,7 @@ export default function StickyFooter() {
                 订阅
               </Typography>
               <UnstyledInput />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
         {/* <Container maxWidth="md"> */}
@@ -511,39 +511,39 @@ const StyledInputElement = styled("input")`
   }
 `;
 
-const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-  return (
-    <InputUnstyled
-      components={{ Input: StyledInputElement }}
-      {...props}
-      ref={ref}
-    />
-  );
-});
+// const CustomInput = React.forwardRef(function CustomInput(props, ref) {
+//   return (
+//     <InputUnstyled
+//       components={{ Input: StyledInputElement }}
+//       {...props}
+//       ref={ref}
+//     />
+//   );
+// });
 
-function UnstyledInput() {
-  return (
-    <Stack
-      direction={"row"}
-      sx={{
-        width: "auto",
-        background: "rgb(243, 246, 249)",
-        //border: "1px solid #e5e8ec",
-        borderRadius: "10px",
-      }}
-    >
-      <CustomInput sx={{ marginRight: "auto" }} placeholder="输入你的邮箱..." />
-      <Button
-        variant="contained"
-        sx={{
-          marginLeft: "auto",
-          borderRadius: "10px",
-        }}
-        color="success"
-        disabled
-      >
-        <ArrowForwardIcon />
-      </Button>
-    </Stack>
-  );
-}
+// function UnstyledInput() {
+//   return (
+//     <Stack
+//       direction={"row"}
+//       sx={{
+//         width: "auto",
+//         background: "rgb(243, 246, 249)",
+//         //border: "1px solid #e5e8ec",
+//         borderRadius: "10px",
+//       }}
+//     >
+//       <CustomInput sx={{ marginRight: "auto" }} placeholder="输入你的邮箱..." />
+//       <Button
+//         variant="contained"
+//         sx={{
+//           marginLeft: "auto",
+//           borderRadius: "10px",
+//         }}
+//         color="success"
+//         disabled
+//       >
+//         <ArrowForwardIcon />
+//       </Button>
+//     </Stack>
+//   );
+// }

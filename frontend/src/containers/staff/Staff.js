@@ -107,42 +107,42 @@ export default function Staff() {
         <Tab label="新闻发布" {...a11yProps(5)} />
       </Tabs>
 
-      <SwipeableViews
+      {/* <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <ArticlesPreview />
+      > */}
+      <TabPanel value={value} index={0} dir={theme.direction}>
+        <ArticlesPreview />
 
-          <UwcssaJobsPreview />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <Box>
-            <EventTable />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <Box>
-            <PostEvent />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-          <Box>
-            <PostUwcssaJob />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={4} dir={theme.direction}>
-          <Box>
-            <PostDepartment />
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={5} dir={theme.direction}>
-          <Box>
-            <PostArticle />
-          </Box>
-        </TabPanel>
-      </SwipeableViews>
+        <UwcssaJobsPreview />
+      </TabPanel>
+      <TabPanel value={value} index={1} dir={theme.direction}>
+        <Box>
+          <EventTable />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={2} dir={theme.direction}>
+        <Box>
+          <PostEvent />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={3} dir={theme.direction}>
+        <Box>
+          <PostUwcssaJob />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={4} dir={theme.direction}>
+        <Box>
+          <PostDepartment />
+        </Box>
+      </TabPanel>
+      <TabPanel value={value} index={5} dir={theme.direction}>
+        <Box>
+          <PostArticle />
+        </Box>
+      </TabPanel>
+      {/* </SwipeableViews> */}
       {/* </Box> */}
     </Container>
 
