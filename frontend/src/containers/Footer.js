@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FacebookIcon from "@mui/icons-material/Facebook";
 // import InputUnstyled from "@mui/base/InputUnstyled";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/system";
+//import { styled } from "@mui/system";
 //import footerBanner from "../static/FooterBanner.png";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 import GitHubButton from "react-github-btn";

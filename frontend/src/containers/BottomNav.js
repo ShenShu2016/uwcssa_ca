@@ -20,11 +20,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
-    action: {
-      "&:selected": {
-        color: "primary",
-      },
-    },
   },
 }));
 
@@ -49,7 +44,6 @@ export default function BottomNav() {
         elevation={3}
       >
         <BottomNavigation
-          className={classes.action}
           showLabels
           value={value}
           onChange={(event, newValue) => {

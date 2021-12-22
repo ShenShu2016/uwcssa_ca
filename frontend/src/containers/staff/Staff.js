@@ -11,7 +11,7 @@ import {
   // Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
+// import SwipeableViews from "react-swipeable-views";
 import ArticlesPreview from "./Article/ArticlesPreview";
 // import EventGrid from "../../components/Event/EventDataGrid";
 import EventTable from "../../components/Event/EventTable";
@@ -83,9 +83,9 @@ export default function Staff() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  // const handleChangeIndex = (index) => {
+  //   setValue(index);
+  // };
   return (
     <Container maxWidth="xl">
       {/* <Box sx={{ bgcolor: 'background.paper', width: 500 }}> */}
