@@ -82,6 +82,7 @@ export default function InfoCard({ item }) {
   const renderSettingMenu = (
     <Menu
       anchorEl={settingMoreAnchorEl}
+      disableScrollLock={true}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isSettingMenuOpen}

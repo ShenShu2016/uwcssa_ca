@@ -54,6 +54,7 @@ const StyledToolBar = styled((props) => <Toolbar {...props} />)(
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
+    disableScrollLock={true}
     anchorOrigin={{
       vertical: "bottom",
       horizontal: "right",

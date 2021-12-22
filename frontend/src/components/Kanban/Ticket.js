@@ -1,20 +1,36 @@
-import { Card, Divider } from "@mui/material";
-import React, { Fragment } from "react";
+import {
+  Card,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from "@mui/material";
+import React, { Fragment, useState } from "react";
 
 import { Box } from "@mui/system";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import IconButton from "@mui/material/IconButton";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import NoticeIcons from "./NoticeIcons";
 import { Typography } from "@mui/material";
 
 export default function Ticket({ item }) {
-  const { content, assignee, assigneeID, title, deadLine } = item;
+  const { content, assignee, assigneeID, title, deadLine, userID } = item;
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box sx={{ my: "1rem" }}>
       <Card sx={{ width: 250 }}>
@@ -30,7 +46,7 @@ export default function Ticket({ item }) {
             </Fragment>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label="settings" onClick={handleClick}>
               <MoreVertIcon />
             </IconButton>
           }
@@ -54,13 +70,11 @@ export default function Ticket({ item }) {
           }
         />
         <Divider variant="light" />
-        <Box>
-          <CardContent sx={{ textAlign: "left", p: 0 }}>
-            <ReportProblemIcon />
-          </CardContent>
+        <Box sx={{ textAlign: "left", px: "8px" }}>
+          <NoticeIcons item={item} />
         </Box>
         <Divider variant="light" />
-        <CardContent sx={{ textAlign: "left" }}>
+        <Box sx={{ textAlign: "left", px: "8px" }}>
           <Typography variant="h6">
             {deadLine ? `Due: ${deadLine.slice(0, 10)}` : "Due: 未定"}
           </Typography>
@@ -75,8 +89,33 @@ export default function Ticket({ item }) {
           ) : (
             "这人很懒什么都没写"
           )}
-        </CardContent>
+        </Box>
+        <Divider variant="light" />
+        <Box sx={{ textAlign: "left", px: "8px" }}>发布者: {userID}</Box>
       </Card>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        disableScrollLock={true}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+        sx={{ width: 320, maxWidth: "100%" }}
+      >
+        <MenuList>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <EditRoundedIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Cut</ListItemText>
+            <Typography variant="body2" color="text.secondary">
+              ⌘X
+            </Typography>
+          </MenuItem>
+        </MenuList>
+      </Menu>
     </Box>
   );
 }
