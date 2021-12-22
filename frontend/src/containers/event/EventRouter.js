@@ -12,6 +12,7 @@ import PrivateRoute from "../../components/PrivateRoute";
 import React from "react";
 import Success from "../../components/Event/Success";
 import { makeStyles } from "@mui/styles";
+import BottomNav from "../BottomNav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventRouter() {
   const classes = useStyles();
+
   return (
     <Box className={classes.root}>
       <CustomBreadcrumbs />
@@ -54,7 +56,10 @@ export default function EventRouter() {
           component={Success}
         />
       </Switch>
+
       <Footer />
+
+      <BottomNav />
     </Box>
   );
 }

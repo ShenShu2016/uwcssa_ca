@@ -8,6 +8,7 @@ import React from "react";
 import ResetPassword from "./ResetPassword";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import BottomNav from "../BottomNav";
 
 export default function AuthenticationRouter() {
   return (
@@ -28,6 +29,7 @@ export default function AuthenticationRouter() {
         />
       </Switch>
       <Footer />
+      <BottomNav />
     </Box>
   );
 }
