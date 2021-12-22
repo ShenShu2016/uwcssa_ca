@@ -61,10 +61,10 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 // console.log("autocompleteService", autocompleteService);
-export default function GoogleMaps() {
+export default function GoogleMaps({ ...rest }) {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
-  const [apartmentNumbers, setApartmentNumbers] = useState("");
+  // const [apartmentNumbers, setApartmentNumbers] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
 
@@ -76,7 +76,7 @@ export default function GoogleMaps() {
       reference: value && value.reference,
       terms: value && value.terms,
       types: value && value.types,
-      apartmentNumbers: apartmentNumbers,
+      // apartmentNumbers: apartmentNumbers,
     };
   });
 
@@ -148,10 +148,8 @@ export default function GoogleMaps() {
   }, [value, inputValue, fetch]);
 
   return (
-    <Box
-    // sx={{ my: "2rem" }}
-    >
-      <TextField
+    <Box>
+      {/* <TextField
         id="setApartmentNumbers"
         label="公寓房间号"
         helperText="住公寓的可以填，house不需要"
@@ -161,14 +159,16 @@ export default function GoogleMaps() {
         }}
         fullWidth
         sx={{ my: 1 }}
-      />
+      /> */}
       <Autocomplete
         id="google-map-demo"
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.description
         }
         filterOptions={(x) => x}
+        // {...rest}
         options={options}
+        {...rest}
         autoComplete
         includeInputInList
         filterSelectedOptions
@@ -180,9 +180,7 @@ export default function GoogleMaps() {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
-        renderInput={(params) => (
-          <TextField {...params} label="添加地址" fullWidth />
-        )}
+        renderInput={(params) => <TextField {...params} label="添加地址" />}
         renderOption={(props, option) => {
           const matches =
             option.structured_formatting.main_text_matched_substrings;
@@ -224,11 +222,11 @@ export default function GoogleMaps() {
           );
         }}
       />
-      <Box sx={{ my: 1 }}>
+      <Box sx={{ my: 1, height: "15px" }}>
         <img
           src="https://developers.google.com/maps/documentation/images/powered_by_google_on_white.png"
           alt="Powered by Google"
-          style={{ float: "right" }}
+          style={{ float: "right", height: "100%" }}
         />
       </Box>
     </Box>

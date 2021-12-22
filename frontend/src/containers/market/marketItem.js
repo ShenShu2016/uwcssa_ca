@@ -35,7 +35,7 @@ export default function MarketItem() {
   // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   useEffect(() => {
-    dispatch(fetchMarketItems(marketItemSortBySortKeyItem));
+    dispatch(fetchMarketItems({ query: marketItemSortBySortKeyItem }));
   }, [dispatch]);
 
   const trueMarketItems = marketItems.filter(

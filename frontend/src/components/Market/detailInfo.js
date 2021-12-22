@@ -201,7 +201,8 @@ const DetailInfo = ({
           marginX: "1rem",
           marginY: "0.25rem",
           height: "250px",
-          backgroundColor: "rgb(243, 246, 249)",
+          // backgroundColor: "rgb(243, 246, 249)",
+          backgroundColor: "transparent",
           color: "rgb(161 161 161 / 87%)",
         }}
       >

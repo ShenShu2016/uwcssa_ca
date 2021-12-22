@@ -391,7 +391,7 @@ export default function PostMarketItem() {
                     />
                   )}
                 /> */}
-                <GoogleMaps />
+                <GoogleMaps getLimitTagsText fullWidth />
               </Box>
               <Box sx={{ marginY: "1rem" }}>
                 <Controller
