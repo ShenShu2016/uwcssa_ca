@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import FoundingMemberRouter from "./FoundingMember/FoundingMemberRouter";
 import React from "react";
 import UwcssaMemberRouter from "./UwcssaMember/UwcssaMemberRouter";
+import BottomNav from "../BottomNav";
 
 export default function AdminRouter() {
   return (
@@ -40,6 +41,7 @@ export default function AdminRouter() {
         /> */}
       </Switch>
       <Footer />
+      <BottomNav />
     </Box>
   );
 }

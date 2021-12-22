@@ -7,6 +7,7 @@ import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import Footer from "../Footer";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import BottomNav from "../BottomNav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,7 @@ export default function ArticleRouter() {
         <Route path="/article/:articleID" component={ArticleDetail} />
       </Switch>
       <Footer />
+      <BottomNav />
     </Box>
   );
 }
