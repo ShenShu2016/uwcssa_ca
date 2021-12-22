@@ -3,7 +3,17 @@ enum SortKey {
   SortKey
 }
 
-type Address {
+type Address
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
   description: String
   place_id: String
   reference: String
@@ -250,7 +260,8 @@ type Event
   posterImgURL: AWSURL
   imgURLs: [AWSURL]
   content: String
-  address: Address
+  addressID: ID
+  address: Address @connection(fields: ["addressID"])
   sponsor: [String]
   tags: [String]
   eventStatus: EventStatus!
@@ -350,7 +361,8 @@ type EventParticipant
   id: ID!
   name: String!
   email: AWSEmail!
-  address: Address
+  addressID: ID
+  address: Address @connection(fields: ["addressID"])
   phone: AWSPhone
   weChat: String
   message: String
@@ -724,7 +736,8 @@ type MarketItem
   propertyType: PropertyType
   bedroomCounts: Int
   bathroomsCounts: Int
-  address: Address
+  addressID: ID
+  address: Address @connection(fields: ["addressID"])
   propertySize: Int
   dateAvailable: AWSDateTime
   laundryType: LaundryType

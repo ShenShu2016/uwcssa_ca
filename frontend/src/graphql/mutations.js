@@ -1,6 +1,72 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createAddress = /* GraphQL */ `
+  mutation CreateAddress(
+    $input: CreateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    createAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateAddress = /* GraphQL */ `
+  mutation UpdateAddress(
+    $input: UpdateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    updateAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteAddress = /* GraphQL */ `
+  mutation DeleteAddress(
+    $input: DeleteAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    deleteAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -114,6 +180,7 @@ export const createUser = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
+          addressID
           propertySize
           dateAvailable
           laundryType
@@ -301,6 +368,7 @@ export const updateUser = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
+          addressID
           propertySize
           dateAvailable
           laundryType
@@ -488,6 +556,7 @@ export const deleteUser = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
+          addressID
           propertySize
           dateAvailable
           laundryType
@@ -1028,6 +1097,7 @@ export const createTopic = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -1128,6 +1198,7 @@ export const updateTopic = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -1228,6 +1299,7 @@ export const deleteTopic = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -2371,17 +2443,7 @@ export const createEvent = /* GraphQL */ `
       posterImgURL
       imgURLs
       content
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       sponsor
       tags
       eventStatus
@@ -2391,6 +2453,21 @@ export const createEvent = /* GraphQL */ `
       topicID
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -2482,6 +2559,7 @@ export const createEvent = /* GraphQL */ `
           id
           name
           email
+          addressID
           phone
           weChat
           message
@@ -2529,17 +2607,7 @@ export const updateEvent = /* GraphQL */ `
       posterImgURL
       imgURLs
       content
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       sponsor
       tags
       eventStatus
@@ -2549,6 +2617,21 @@ export const updateEvent = /* GraphQL */ `
       topicID
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -2640,6 +2723,7 @@ export const updateEvent = /* GraphQL */ `
           id
           name
           email
+          addressID
           phone
           weChat
           message
@@ -2687,17 +2771,7 @@ export const deleteEvent = /* GraphQL */ `
       posterImgURL
       imgURLs
       content
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       sponsor
       tags
       eventStatus
@@ -2707,6 +2781,21 @@ export const deleteEvent = /* GraphQL */ `
       topicID
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -2798,6 +2887,7 @@ export const deleteEvent = /* GraphQL */ `
           id
           name
           email
+          addressID
           phone
           weChat
           message
@@ -2895,17 +2985,7 @@ export const createEventComment = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -2915,6 +2995,21 @@ export const createEventComment = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -3047,17 +3142,7 @@ export const updateEventComment = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3067,6 +3152,21 @@ export const updateEventComment = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -3199,17 +3299,7 @@ export const deleteEventComment = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3219,6 +3309,21 @@ export const deleteEventComment = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -3377,6 +3482,7 @@ export const createEventSubComment = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -3505,6 +3611,7 @@ export const updateEventSubComment = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -3633,6 +3740,7 @@ export const deleteEventSubComment = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -3676,17 +3784,7 @@ export const createEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       phone
       weChat
       message
@@ -3697,6 +3795,21 @@ export const createEventParticipant = /* GraphQL */ `
       eventID
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -3752,17 +3865,7 @@ export const createEventParticipant = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3772,6 +3875,21 @@ export const createEventParticipant = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -3820,17 +3938,7 @@ export const updateEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       phone
       weChat
       message
@@ -3841,6 +3949,21 @@ export const updateEventParticipant = /* GraphQL */ `
       eventID
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -3896,17 +4019,7 @@ export const updateEventParticipant = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3916,6 +4029,21 @@ export const updateEventParticipant = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -3964,17 +4092,7 @@ export const deleteEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       phone
       weChat
       message
@@ -3985,6 +4103,21 @@ export const deleteEventParticipant = /* GraphQL */ `
       eventID
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -4040,17 +4173,7 @@ export const deleteEventParticipant = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -4060,6 +4183,21 @@ export const deleteEventParticipant = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -7667,17 +7805,7 @@ export const createMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       propertySize
       dateAvailable
       laundryType
@@ -7693,6 +7821,21 @@ export const createMarketItem = /* GraphQL */ `
       createdAt
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -7767,17 +7910,7 @@ export const updateMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       propertySize
       dateAvailable
       laundryType
@@ -7793,6 +7926,21 @@ export const updateMarketItem = /* GraphQL */ `
       createdAt
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -7867,17 +8015,7 @@ export const deleteMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       propertySize
       dateAvailable
       laundryType
@@ -7893,6 +8031,21 @@ export const deleteMarketItem = /* GraphQL */ `
       createdAt
       userID
       updatedAt
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         username
@@ -8373,17 +8526,7 @@ export const createLike = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -8393,6 +8536,21 @@ export const createLike = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -8467,6 +8625,7 @@ export const createLike = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -8955,17 +9114,7 @@ export const updateLike = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -8975,6 +9124,21 @@ export const updateLike = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -9049,6 +9213,7 @@ export const updateLike = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -9537,17 +9702,7 @@ export const deleteLike = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -9557,6 +9712,21 @@ export const deleteLike = /* GraphQL */ `
         topicID
         userID
         updatedAt
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          createdAt
+          updatedAt
+          owner
+        }
         user {
           id
           username
@@ -9631,6 +9801,7 @@ export const deleteLike = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
