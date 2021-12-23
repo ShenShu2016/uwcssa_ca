@@ -213,7 +213,7 @@ export default function PastEvent({ event }) {
                 </Box>
               ) : (
                 <div>
-                  {address.description ? (
+                  {address ? (
                     <Box
                       sx={{ overflow: "hidden", height: "30px" }}
                       color={"grey.700"}

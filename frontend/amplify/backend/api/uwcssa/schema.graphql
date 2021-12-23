@@ -3,28 +3,6 @@ enum SortKey {
   SortKey
 }
 
-type Address
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read], provider: iam }
-    ]
-  ) {
-  id: ID!
-  description: String
-  place_id: String
-  reference: String
-  terms: [String]
-  types: [String]
-  apartmentNumbers: String
-  geocodingResult: String
-  lat: Float
-  lng: Float
-}
-
 type User
   @model
   @auth(
@@ -755,6 +733,32 @@ type MarketItem
   user: User! @connection(fields: ["userID"])
 }
 
+type Address
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(name: "byMarketItem", fields: ["marketItemID"]) {
+  id: ID!
+  description: String
+  place_id: String
+  reference: String
+  terms: [String]
+  types: [String]
+  apartmentNumbers: String
+  geocodingResult: String
+  lat: Float
+  lng: Float
+  marketItemID: ID!
+  marketItem: MarketItem @connection(fields: ["marketItemID"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
 enum MarketType {
   Item
   Vehicle

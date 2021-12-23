@@ -3,13 +3,13 @@ import {
   Collapse,
   IconButton,
   Paper,
+  Stack,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 
 import { Box } from "@mui/system";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import InfoCard from "./InfoCard";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 
@@ -35,18 +35,20 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ByDepartment({ department, uwcssaMembers }) {
+const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE"];
+
+export default function ByDepartment({ department, kanbans }) {
   const classes = useStyles();
-  let membersByDepartment = uwcssaMembers.filter(
+  let kanbansByDepartment = kanbans.filter(
     (x) => x.departmentID === department.id
   );
 
-  membersByDepartment = membersByDepartment.find((x) => x.leader === true)
+  kanbansByDepartment = kanbansByDepartment.find((x) => x.leader === true)
     ? [
-        membersByDepartment.find((x) => x.leader === true),
-        ...membersByDepartment.filter((x) => x.leader !== true),
+        kanbansByDepartment.find((x) => x.leader === true),
+        ...kanbansByDepartment.filter((x) => x.leader !== true),
       ]
-    : membersByDepartment;
+    : kanbansByDepartment;
 
   const [expanded, setExpanded] = useState(true);
 
@@ -54,7 +56,7 @@ export default function ByDepartment({ department, uwcssaMembers }) {
     setExpanded(!expanded);
   };
   //   console.log("department", department);
-  console.log("membersByDepartment", membersByDepartment);
+  console.log("kanbansByDepartment", kanbansByDepartment);
   return (
     <Box sx={{ my: "1rem" }}>
       <Paper elevation={10}>
@@ -74,11 +76,26 @@ export default function ByDepartment({ department, uwcssaMembers }) {
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <div className={classes.cards}>
-            {membersByDepartment.map((member, memberIdx) => {
-              return <InfoCard item={member} key={memberIdx} />;
+          <Box>
+            <Stack
+              direction={"row"}
+              spacing={{ xs: 1, sm: 2, md: 4 }}
+              justifyContent="space-between"
+            >
+              {KanbanStatus.map((status, idx) => {
+                return (
+                  <Box sx={{ hight: "600px" }} key={idx}>
+                    {status}
+                  </Box>
+                );
+              })}
+            </Stack>
+          </Box>
+          {/* <div className={classes.cards}>
+            {kanbansByDepartment.map((ticket, idx) => {
+              return <Ticket item={ticket} key={idx} />;
             })}
-          </div>
+          </div> */}
         </Collapse>
       </Paper>
     </Box>

@@ -1,12 +1,16 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  fetchDepartments,
+  selectAllDepartments,
+} from "../redux/slice/departmentSlice";
 import { fetchKanbans, selectAllKanbans } from "../redux/slice/kanbanSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import ByDepartment from "../components/Kanban/ByDepartment";
 import Create from "../components/Kanban/Create";
 import Footer from "./Footer";
-import Ticket from "../components/Kanban/Ticket";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../Hooks/usePermit";
 import { useTitle } from "../Hooks/useTitle";
@@ -14,10 +18,11 @@ import { useTitle } from "../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     // backgroundColor: "#F3F2EF",
-    textAlign: "center",
     margin: "4rem auto",
-    maxWidth: "1536px",
-    color: "#0D1F48",
+    paddingInline: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingInline: "0",
+    },
   },
   tickets: {
     marginBlock: "2rem",
@@ -39,12 +44,17 @@ export default function Kanban() {
   const kanbans = useSelector(selectAllKanbans);
 
   const { fetchKanbansStatus } = useSelector((state) => state.kanban);
+  const departments = useSelector(selectAllDepartments);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
 
   useEffect(() => {
     if (fetchKanbansStatus === "idle" || undefined) {
       dispatch(fetchKanbans());
     }
-  }, [dispatch, fetchKanbansStatus]);
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, fetchKanbansStatus, fetchDepartmentsStatus]);
 
   const handleCreateClose = () => {
     setCreateOpen(false);
@@ -70,11 +80,15 @@ export default function Kanban() {
               添加Kanban
             </Button>
           )}
-          <div className={classes.tickets}>
-            {kanbans.map((ticket, idx) => {
-              return <Ticket item={ticket} key={idx} />;
-            })}
-          </div>
+          {departments.map((department, departmentIdx) => {
+            return (
+              <ByDepartment
+                department={department}
+                kanbans={kanbans}
+                key={departmentIdx}
+              />
+            );
+          })}
         </div>
         <Footer />
       </Box>
