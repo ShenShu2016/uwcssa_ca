@@ -49,6 +49,7 @@ const GoogleMap = (props) => {
           lng: center[1],
         },
         zoom: defaultZoom,
+        disableDefaultUI: true,
       });
 
       new window.google.maps.Circle({
@@ -86,7 +87,7 @@ const GoogleMap = (props) => {
   }, [center, defaultZoom, circleRadius]);
 
   // console.log(window.google);
-  return <div id="map" style={{ height: "100%", zIndex: -1 }}></div>;
+  return <div id="map" style={{ height: "100%" }}></div>;
 };
 
 export default GoogleMap;

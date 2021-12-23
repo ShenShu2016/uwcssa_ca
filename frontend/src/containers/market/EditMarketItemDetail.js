@@ -22,6 +22,7 @@ import {
 } from "../../redux/slice/marketUserSlice";
 import {
   selectMarketItemById,
+  updateAddressDetail,
   updateMarketItemDetail,
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +60,7 @@ export default function EditMarketItemDetail() {
     imgURLs,
     title,
     price,
-    // address,
+    addressID,
     description,
     marketItemCategory,
     marketItemCondition,
@@ -122,12 +123,42 @@ export default function EditMarketItemDetail() {
 
   const onSubmit = async (data) => {
     const address = await GetAddress();
+    const {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+    } = address;
+    const createAddressInput = {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+      marketItemID: id,
+      userID: marketUserInfo.userID,
+      id: addressID,
+    };
+    const addressResponse = await dispatch(
+      updateAddressDetail(createAddressInput)
+    );
+    console.log(addressResponse);
     const createMarketItemInput = {
       ...data,
       // location: GetAddress().description,
       id: id,
-      address: address,
+      // address: address,
       name: data.title,
+      addressID: addressID,
       marketType: "Item",
       imgURLs: imgKeyFromServer,
       tags: GetTags(),

@@ -1,3 +1,4 @@
+import { Controller, useForm } from "react-hook-form";
 import {
   InputBase,
   List,
@@ -6,6 +7,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import {
+  marketItemSortBySortKey,
+  marketItemSortBySortKeyItem,
+  marketItemSortBySortKeyRental,
+  marketItemSortBySortKeyVehicle,
+} from "./marketQueries";
 
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -16,9 +23,11 @@ import { Link } from "react-router-dom";
 import PetsIcon from "@mui/icons-material/Pets";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { fetchMarketItems } from "../../redux/slice/marketSlice";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
 
-export const SearchArea = () => {
+export const SearchArea = ({ type = "all" }) => {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -55,15 +64,62 @@ export const SearchArea = () => {
     },
   }));
 
+  const dispatch = useDispatch();
+
+  const {
+    control,
+    reset,
+    getValues,
+    // formState: { errors },
+  } = useForm({
+    defaultValues: {
+      searchInfo: "",
+    },
+  });
+
+  const onKeyDownHandler = () => {
+    const searchInfos = getValues("searchInfo");
+    console.log("searchInfo:", searchInfos);
+
+    const filter = {
+      name: { contains: searchInfos },
+      // description: { contains: { searchInfo } },
+    };
+    if (type === "all") {
+      dispatch(
+        fetchMarketItems({ query: marketItemSortBySortKey, filter: filter })
+      );
+    } else if (type === "item") {
+      dispatch(fetchMarketItems({ query: marketItemSortBySortKeyItem }));
+    } else if (type === "vehicle") {
+      dispatch(fetchMarketItems({ query: marketItemSortBySortKeyVehicle }));
+    } else if (type === "rental") {
+      dispatch(fetchMarketItems({ query: marketItemSortBySortKeyRental }));
+    }
+
+    reset();
+  };
+
   return (
     <Search>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
-        disabled
+      <Controller
+        name="searchInfo"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+            value={value}
+            onChange={(e) => onChange(e)}
+            onKeyDown={(e) =>
+              e.key.toLowerCase() === "enter" ? onKeyDownHandler() : null
+            }
+            // disabled
+          />
+        )}
       />
     </Search>
   );

@@ -22,7 +22,7 @@ export default function MarketList() {
   const classes = useStyles();
   const [addressInfo, setAddressInfo] = React.useState("");
   const [searchRadius, setSearchRadius] = React.useState(0);
-  console.log(addressInfo);
+  // console.log(addressInfo);
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems);
   // console.log(starter);
@@ -61,6 +61,10 @@ export default function MarketList() {
     dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
   }, [dispatch, addressInfo, searchRadius]);
 
+  const clickHandler = () => {
+    dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+  };
+
   const marketItemRenderList =
     marketItems &&
     marketItems.map((marketItem, marketItemIdx) => {
@@ -82,6 +86,7 @@ export default function MarketList() {
           <MarketSideBar
             setAddressInfo={setAddressInfo}
             setSearchRadius={setSearchRadius}
+            clickHandler={clickHandler}
           />
           <Box className={classes.img}>
             <MarketTopBar />

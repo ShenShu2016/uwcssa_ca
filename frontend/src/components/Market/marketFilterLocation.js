@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import GoogleMaps, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import GoogleMap from "../GoogleMap/GoogleMap";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -32,16 +32,16 @@ function ConfirmationDialogRaw(props) {
     setSearchRadius,
     ...other
   } = props;
-  const [newLocationInfo, setNewLocationInfo] = useState("");
+  // const [newLocationInfo, setNewLocationInfo] = useState("");
   const [newLocationRadius, setNewLocationRadius] = useState(5);
   //const [clicked, setClicked] = React.useState(null);
   const windsor = [42.2732, -83.0014];
-  console.log(newLocationInfo);
-  useEffect(() => {
-    if (!open) {
-      setNewLocationInfo(valueProp);
-    }
-  }, [valueProp, open]);
+  // console.log(newLocationInfo);
+  // React.useEffect(() => {
+  //   if (!open) {
+  //     setNewLocationInfo(valueProp);
+  //   }
+  // }, [valueProp, open]);
 
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -65,10 +65,6 @@ function ConfirmationDialogRaw(props) {
       onClose(`${address.description} within ${newLocationRadius}km`);
     }
   };
-
-  // const handleLocationChange = (e) => {
-  //   setNewLocationInfo(e.target.value);
-  // };
 
   const handleRadiusChange = (e) => {
     setNewLocationRadius(e.target.value);
