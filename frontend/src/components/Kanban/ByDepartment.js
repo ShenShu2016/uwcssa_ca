@@ -3,25 +3,27 @@ import {
   Collapse,
   IconButton,
   Paper,
-  Stack,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 
 import { Box } from "@mui/system";
+import ByStatus from "./ByStatus";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
-  cards: {
+  root: {
+    minWidth: "1120px",
+    maxWidth: "1536px",
     marginBlock: "1rem",
+    marginInline: "auto",
+  },
+  kanbanStatus: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "auto",
-    },
+    flexWrap: "noWrap",
+    justifyContent: "space-between",
   },
 }));
 const ExpandMore = styled((props) => {
@@ -50,15 +52,16 @@ export default function ByDepartment({ department, kanbans }) {
       ]
     : kanbansByDepartment;
 
-  const [expanded, setExpanded] = useState(true);
+  const canExpanded = kanbansByDepartment.length > 0 ? true : false;
+  const [expanded, setExpanded] = useState(canExpanded);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   //   console.log("department", department);
-  console.log("kanbansByDepartment", kanbansByDepartment);
+  //console.log("kanbansByDepartment", kanbansByDepartment);
   return (
-    <Box sx={{ my: "1rem" }}>
+    <Box className={classes.root}>
       <Paper elevation={10}>
         <CardActions disableSpacing>
           <Box sx={{ ml: "1rem" }}>
@@ -76,20 +79,17 @@ export default function ByDepartment({ department, kanbans }) {
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Box>
-            <Stack
-              direction={"row"}
-              spacing={{ xs: 1, sm: 2, md: 4 }}
-              justifyContent="space-between"
-            >
-              {KanbanStatus.map((status, idx) => {
-                return (
-                  <Box sx={{ hight: "600px" }} key={idx}>
-                    {status}
-                  </Box>
-                );
-              })}
-            </Stack>
+          <Box className={classes.kanbanStatus}>
+            {KanbanStatus.map((status, idx) => {
+              return (
+                <Box key={idx} sx={{ width: "100%", hight: "100%" }}>
+                  <ByStatus
+                    status={status}
+                    kanbansByDepartment={kanbansByDepartment}
+                  />
+                </Box>
+              );
+            })}
           </Box>
           {/* <div className={classes.cards}>
             {kanbansByDepartment.map((ticket, idx) => {

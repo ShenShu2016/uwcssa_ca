@@ -17,13 +17,13 @@ import { useTitle } from "../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // backgroundColor: "#F3F2EF",
-    margin: "4rem auto",
-    paddingInline: "1rem",
+    margin: "auto",
+
     [theme.breakpoints.down("sm")]: {
       paddingInline: "0",
     },
   },
+  title: { textAlign: "center" },
   tickets: {
     marginBlock: "2rem",
     display: "flex",
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: "auto",
     },
+  },
+  main: {
+    overflow: "scroll",
   },
 }));
 
@@ -66,29 +69,31 @@ export default function Kanban() {
         <div className={classes.root}>
           <Typography variant="h3" className={classes.title}>
             Kanban
+            {isPermit && (
+              <Button
+                variant="contained"
+                sx={{ my: "1rem", borderRadius: "10px" }}
+                size="large"
+                startIcon={<AddCircleOutlineIcon />}
+                onClick={() => {
+                  setCreateOpen(!createOpen);
+                }}
+              >
+                添加Kanban
+              </Button>
+            )}
           </Typography>
-          {isPermit && (
-            <Button
-              variant="contained"
-              sx={{ my: "1rem", borderRadius: "10px" }}
-              size="large"
-              startIcon={<AddCircleOutlineIcon />}
-              onClick={() => {
-                setCreateOpen(!createOpen);
-              }}
-            >
-              添加Kanban
-            </Button>
-          )}
-          {departments.map((department, departmentIdx) => {
-            return (
-              <ByDepartment
-                department={department}
-                kanbans={kanbans}
-                key={departmentIdx}
-              />
-            );
-          })}
+          <Box className={classes.main}>
+            {departments.map((department, departmentIdx) => {
+              return (
+                <ByDepartment
+                  department={department}
+                  kanbans={kanbans}
+                  key={departmentIdx}
+                />
+              );
+            })}
+          </Box>
         </div>
         <Footer />
       </Box>

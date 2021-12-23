@@ -46,8 +46,6 @@ export default function UwcssaMember() {
     (state) => state.uwcssaMembers
   );
 
-  console.log("departments", departments);
-
   useEffect(() => {
     if (fetchUwcssaMembersStatus === "idle" || undefined) {
       dispatch(fetchUwcssaMembers());
