@@ -22,6 +22,7 @@ import {
 } from "../../redux/slice/marketUserSlice";
 import {
   selectMarketItemById,
+  updateAddressDetail,
   updateMarketItemDetail,
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,7 +55,7 @@ export default function EditMarketVehicleDetail() {
   const {
     imgURLs,
     vehicleType,
-    // address,
+    addressID,
     year,
     model,
     make,
@@ -127,12 +128,42 @@ export default function EditMarketVehicleDetail() {
 
   const onSubmit = async (data) => {
     const address = await GetAddress();
+    const {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+    } = address;
+    const createAddressInput = {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+      marketItemID: id,
+      userID: marketUserInfo.userID,
+      id: addressID,
+    };
+    const addressResponse = await dispatch(
+      updateAddressDetail(createAddressInput)
+    );
+    console.log(addressResponse);
     const createMarketItemInput = {
       ...data,
       id: id,
-      address: address,
+      // address: address,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
+      addressID: addressID,
       imgURLs: imgKeyFromServer,
       tags: GetTags(),
       active: true,

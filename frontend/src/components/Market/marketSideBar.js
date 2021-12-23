@@ -20,7 +20,7 @@ import React from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 
-const MarketSideBar = ({ setAddressInfo, setSearchRadius }) => {
+const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
   const useStyles = makeStyles((theme) => ({
     info: {
       width: "360px",
@@ -53,7 +53,7 @@ const MarketSideBar = ({ setAddressInfo, setSearchRadius }) => {
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/market">
+            <ListItemButton component={Button} onClick={clickHandler}>
               <ListItemIcon>
                 <WorkIcon />
               </ListItemIcon>

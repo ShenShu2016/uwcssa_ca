@@ -44,7 +44,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
     owner,
   } = marketItem;
   return (
-    <Paper sx={{ backgroundColor: "transparent" }}>
+    <Paper>
       <TitleInfo
         id={id}
         mode={mode}
