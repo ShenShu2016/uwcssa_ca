@@ -12,17 +12,30 @@ import React, { Fragment, useState } from "react";
 import { Box } from "@mui/system";
 import CardHeader from "@mui/material/CardHeader";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
+import Edit from "./Edit";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import IconButton from "@mui/material/IconButton";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoticeIcons from "./NoticeIcons";
 import { Typography } from "@mui/material";
+import moment from "moment";
+import { usePermit } from "../../Hooks/usePermit";
 
 export default function Ticket({ item }) {
-  const { content, assignee, assigneeID, title, deadLine, userID } = item;
+  const { content, assignee, assigneeID, title, userID, createdAt } = item;
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const isPermit = usePermit(null, "admin");
+
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleEditClickOpen = () => {
+    setEditOpen(true);
+  };
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -46,7 +59,11 @@ export default function Ticket({ item }) {
             </Fragment>
           }
           action={
-            <IconButton aria-label="settings" onClick={handleClick}>
+            <IconButton
+              aria-label="settings"
+              onClick={handleClick}
+              disabled={!isPermit}
+            >
               <MoreVertIcon />
             </IconButton>
           }
@@ -63,8 +80,8 @@ export default function Ticket({ item }) {
           }
           avatar={
             <Fragment>
-              <Box sx={{ width: "178px", textAlign: "left" }}>
-                <Typography variant="subtitle1">{title}</Typography>
+              <Box sx={{ width: "150px", textAlign: "left" }}>
+                <Typography variant="body1">{title}</Typography>
               </Box>
             </Fragment>
           }
@@ -74,10 +91,7 @@ export default function Ticket({ item }) {
           <NoticeIcons item={item} />
         </Box>
         <Divider variant="light" />
-        <Box sx={{ textAlign: "left", px: "8px" }}>
-          <Typography variant="h6">
-            {deadLine ? `Due: ${deadLine.slice(0, 10)}` : "Due: 未定"}
-          </Typography>
+        <Box sx={{ textAlign: "left", px: "8px", minHeight: "80px" }}>
           {content ? (
             <div sx={{ overflow: "auto" }}>
               <MUIRichTextEditor
@@ -92,6 +106,10 @@ export default function Ticket({ item }) {
         </Box>
         <Divider variant="light" />
         <Box sx={{ textAlign: "left", px: "8px" }}>发布者: {userID}</Box>
+        <Divider variant="light" />
+        <Box sx={{ textAlign: "left", px: "8px" }}>
+          发布时间: {moment(createdAt).format("MMM Do YY").slice(0, 6)}
+        </Box>
       </Card>
       <Menu
         id="basic-menu"
@@ -106,16 +124,14 @@ export default function Ticket({ item }) {
       >
         <MenuList>
           <MenuItem onClick={handleClose}>
-            <ListItemIcon>
+            <ListItemIcon onClick={handleEditClickOpen}>
               <EditRoundedIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText>Cut</ListItemText>
-            <Typography variant="body2" color="text.secondary">
-              ⌘X
-            </Typography>
+            <ListItemText>编辑</ListItemText>
           </MenuItem>
         </MenuList>
       </Menu>
+      <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
     </Box>
   );
 }

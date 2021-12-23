@@ -49,14 +49,13 @@ export default function Create({ createOpen, handleCreateClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.userAuth.user);
+  const [content, setContent] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [tags, setTags] = useState([]);
   const users = useSelector(selectAllUsers);
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const { fetchUsersStatus } = useSelector((state) => state.user);
-  const [content, setContent] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [tags, setTags] = useState([]);
-
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
       dispatch(fetchDepartments());

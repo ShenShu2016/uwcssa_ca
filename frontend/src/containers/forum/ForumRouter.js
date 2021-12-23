@@ -10,6 +10,7 @@ import ForumTopic from "./ForumTopic";
 import ForumTopicCURD from "./ForumTopicCURD";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import BottomNav from "../BottomNav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +60,7 @@ export default function ForumRouter() {
         />
       </Switch>
       <Footer />
+      <BottomNav />
     </Box>
   );
 }

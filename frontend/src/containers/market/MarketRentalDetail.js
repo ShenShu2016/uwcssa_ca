@@ -52,7 +52,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
   } = marketItem;
 
   return (
-    <Paper sx={{ maxWidth: "100%" }}>
+    <Paper>
       <TitleInfo
         type="rental"
         price={price}

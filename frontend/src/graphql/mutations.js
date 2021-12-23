@@ -114,6 +114,7 @@ export const createUser = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
+          addressID
           propertySize
           dateAvailable
           laundryType
@@ -301,6 +302,7 @@ export const updateUser = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
+          addressID
           propertySize
           dateAvailable
           laundryType
@@ -488,6 +490,7 @@ export const deleteUser = /* GraphQL */ `
           propertyType
           bedroomCounts
           bathroomsCounts
+          addressID
           propertySize
           dateAvailable
           laundryType
@@ -1028,6 +1031,7 @@ export const createTopic = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -1128,6 +1132,7 @@ export const updateTopic = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -1228,6 +1233,7 @@ export const deleteTopic = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -2371,17 +2377,7 @@ export const createEvent = /* GraphQL */ `
       posterImgURL
       imgURLs
       content
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       sponsor
       tags
       eventStatus
@@ -2482,6 +2478,7 @@ export const createEvent = /* GraphQL */ `
           id
           name
           email
+          addressID
           phone
           weChat
           message
@@ -2495,6 +2492,82 @@ export const createEvent = /* GraphQL */ `
           owner
         }
         nextToken
+      }
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
       }
       likes {
         items {
@@ -2529,17 +2602,7 @@ export const updateEvent = /* GraphQL */ `
       posterImgURL
       imgURLs
       content
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       sponsor
       tags
       eventStatus
@@ -2640,6 +2703,7 @@ export const updateEvent = /* GraphQL */ `
           id
           name
           email
+          addressID
           phone
           weChat
           message
@@ -2653,6 +2717,82 @@ export const updateEvent = /* GraphQL */ `
           owner
         }
         nextToken
+      }
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
       }
       likes {
         items {
@@ -2687,17 +2827,7 @@ export const deleteEvent = /* GraphQL */ `
       posterImgURL
       imgURLs
       content
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       sponsor
       tags
       eventStatus
@@ -2798,6 +2928,7 @@ export const deleteEvent = /* GraphQL */ `
           id
           name
           email
+          addressID
           phone
           weChat
           message
@@ -2811,6 +2942,82 @@ export const deleteEvent = /* GraphQL */ `
           owner
         }
         nextToken
+      }
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
       }
       likes {
         items {
@@ -2895,17 +3102,7 @@ export const createEventComment = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -2945,6 +3142,23 @@ export const createEventComment = /* GraphQL */ `
         }
         eventParticipants {
           nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         likes {
           nextToken
@@ -3047,17 +3261,7 @@ export const updateEventComment = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3097,6 +3301,23 @@ export const updateEventComment = /* GraphQL */ `
         }
         eventParticipants {
           nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         likes {
           nextToken
@@ -3199,17 +3420,7 @@ export const deleteEventComment = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3249,6 +3460,23 @@ export const deleteEventComment = /* GraphQL */ `
         }
         eventParticipants {
           nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         likes {
           nextToken
@@ -3377,6 +3605,7 @@ export const createEventSubComment = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -3505,6 +3734,7 @@ export const updateEventSubComment = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -3633,6 +3863,7 @@ export const deleteEventSubComment = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -3676,17 +3907,7 @@ export const createEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       phone
       weChat
       message
@@ -3752,17 +3973,7 @@ export const createEventParticipant = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3803,11 +4014,104 @@ export const createEventParticipant = /* GraphQL */ `
         eventParticipants {
           nextToken
         }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
         likes {
           nextToken
         }
       }
       owner
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
     }
   }
 `;
@@ -3820,17 +4124,7 @@ export const updateEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       phone
       weChat
       message
@@ -3896,17 +4190,7 @@ export const updateEventParticipant = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -3947,11 +4231,104 @@ export const updateEventParticipant = /* GraphQL */ `
         eventParticipants {
           nextToken
         }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
         likes {
           nextToken
         }
       }
       owner
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
     }
   }
 `;
@@ -3964,17 +4341,7 @@ export const deleteEventParticipant = /* GraphQL */ `
       id
       name
       email
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       phone
       weChat
       message
@@ -4040,17 +4407,7 @@ export const deleteEventParticipant = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -4091,11 +4448,104 @@ export const deleteEventParticipant = /* GraphQL */ `
         eventParticipants {
           nextToken
         }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
         likes {
           nextToken
         }
       }
       owner
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
     }
   }
 `;
@@ -7667,17 +8117,7 @@ export const createMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       propertySize
       dateAvailable
       laundryType
@@ -7736,6 +8176,82 @@ export const createMarketItem = /* GraphQL */ `
         }
       }
       owner
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
     }
   }
 `;
@@ -7767,17 +8283,7 @@ export const updateMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       propertySize
       dateAvailable
       laundryType
@@ -7836,6 +8342,82 @@ export const updateMarketItem = /* GraphQL */ `
         }
       }
       owner
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
     }
   }
 `;
@@ -7867,17 +8449,7 @@ export const deleteMarketItem = /* GraphQL */ `
       propertyType
       bedroomCounts
       bathroomsCounts
-      address {
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-      }
+      addressID
       propertySize
       dateAvailable
       laundryType
@@ -7933,6 +8505,508 @@ export const deleteMarketItem = /* GraphQL */ `
         }
         kanbanAssignee {
           nextToken
+        }
+      }
+      owner
+      address {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        marketItemID
+        userID
+        createdAt
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const createAddress = /* GraphQL */ `
+  mutation CreateAddress(
+    $input: CreateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    createAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      marketItemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanban {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
+      marketItem {
+        id
+        name
+        imgURLs
+        title
+        price
+        marketType
+        description
+        location
+        marketItemCondition
+        marketItemCategory
+        tags
+        vehicleType
+        year
+        make
+        model
+        exteriorColor
+        interiorColor
+        fuelType
+        marketRentalSaleRent
+        propertyType
+        bedroomCounts
+        bathroomsCounts
+        addressID
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        owner
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateAddress = /* GraphQL */ `
+  mutation UpdateAddress(
+    $input: UpdateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    updateAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      marketItemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanban {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
+      marketItem {
+        id
+        name
+        imgURLs
+        title
+        price
+        marketType
+        description
+        location
+        marketItemCondition
+        marketItemCategory
+        tags
+        vehicleType
+        year
+        make
+        model
+        exteriorColor
+        interiorColor
+        fuelType
+        marketRentalSaleRent
+        propertyType
+        bedroomCounts
+        bathroomsCounts
+        addressID
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        owner
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteAddress = /* GraphQL */ `
+  mutation DeleteAddress(
+    $input: DeleteAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    deleteAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      marketItemID
+      userID
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanban {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
+      marketItem {
+        id
+        name
+        imgURLs
+        title
+        price
+        marketType
+        description
+        location
+        marketItemCondition
+        marketItemCategory
+        tags
+        vehicleType
+        year
+        make
+        model
+        exteriorColor
+        interiorColor
+        fuelType
+        marketRentalSaleRent
+        propertyType
+        bedroomCounts
+        bathroomsCounts
+        addressID
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        owner
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
       }
       owner
@@ -8373,17 +9447,7 @@ export const createLike = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -8423,6 +9487,23 @@ export const createLike = /* GraphQL */ `
         }
         eventParticipants {
           nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         likes {
           nextToken
@@ -8467,6 +9548,7 @@ export const createLike = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -8955,17 +10037,7 @@ export const updateLike = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -9005,6 +10077,23 @@ export const updateLike = /* GraphQL */ `
         }
         eventParticipants {
           nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         likes {
           nextToken
@@ -9049,6 +10138,7 @@ export const updateLike = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus
@@ -9537,17 +10627,7 @@ export const deleteLike = /* GraphQL */ `
         posterImgURL
         imgURLs
         content
-        address {
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-        }
+        addressID
         sponsor
         tags
         eventStatus
@@ -9587,6 +10667,23 @@ export const deleteLike = /* GraphQL */ `
         }
         eventParticipants {
           nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          marketItemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
         likes {
           nextToken
@@ -9631,6 +10728,7 @@ export const deleteLike = /* GraphQL */ `
           posterImgURL
           imgURLs
           content
+          addressID
           sponsor
           tags
           eventStatus

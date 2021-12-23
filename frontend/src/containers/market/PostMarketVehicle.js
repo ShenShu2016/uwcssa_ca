@@ -20,6 +20,7 @@ import {
   selectMarketUserById,
   updateMarketUserInfoDetail,
 } from "../../redux/slice/marketUserSlice";
+import { postAddress, postMarketItem } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import InputAdornment from "@mui/material/InputAdornment";
@@ -31,12 +32,12 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketVehicleOptions } from "../../components/Market/marketVehicleOptions";
-import { postMarketItem } from "../../redux/slice/marketSlice";
 import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
 // import { useGetAllImages } from "../../components/Market/useGetImages";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { v4 as uuid } from "uuid";
 
 export default function PostMarketVehicle() {
   const imgRef = useRef(null);
@@ -109,12 +110,42 @@ export default function PostMarketVehicle() {
 
   const onSubmit = async (data) => {
     const address = await GetAddress();
+    const addressID = uuid();
+    const marketID = uuid();
+    const {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+    } = address;
+    const createAddressInput = {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+      marketItemID: marketID,
+      userID: username,
+      id: addressID,
+    };
+    const addressResponse = await dispatch(postAddress(createAddressInput));
+    console.log(addressResponse);
+
     const createMarketItemInput = {
       ...data,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
       imgURLs: imgURLs,
-      address: address,
+      addressID: addressID,
       tags: GetTags(),
       active: true,
       userID: username,

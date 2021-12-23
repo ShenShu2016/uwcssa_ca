@@ -1,0 +1,104 @@
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  CssBaseline,
+  Paper,
+} from "@mui/material";
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useSelector } from "react-redux";
+import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
+import EventRoundedIcon from "@mui/icons-material/EventRounded";
+import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
+import ShopRoundedIcon from "@mui/icons-material/ShopRounded";
+import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+}));
+
+export default function BottomNav() {
+  const pathname = window.location.pathname;
+  const [value, setValue] = useState(pathname);
+  const ref = useRef(null);
+  const classes = useStyles();
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
+  return (
+    <Box sx={{ pb: 7 }} ref={ref} className={classes.root}>
+      <CssBaseline />
+      <Paper
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1,
+        }}
+        elevation={3}
+      >
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction
+            label="新闻"
+            value="/article"
+            icon={<ArticleRoundedIcon />}
+            component={Link}
+            to="/article"
+          />
+          <BottomNavigationAction
+            label="活动"
+            value="/event"
+            icon={<EventRoundedIcon />}
+            component={Link}
+            to="/event"
+          />
+          <BottomNavigationAction
+            label="论坛"
+            value="/forum"
+            icon={<ForumRoundedIcon />}
+            component={Link}
+            to="/forum"
+          />
+          <BottomNavigationAction
+            label="商城"
+            value="/market"
+            icon={<ShopRoundedIcon />}
+            component={Link}
+            to="/market"
+          />
+          {isAuthenticated ? (
+            <BottomNavigationAction
+              label="个人中心"
+              value="/account/dashboard"
+              icon={<AccountCircle />}
+              component={Link}
+              to="/account/dashboard"
+            />
+          ) : (
+            <BottomNavigationAction
+              label="登入"
+              value="/auth/signIn"
+              icon={<LoginRoundedIcon />}
+              component={Link}
+              to="/auth/signIn"
+            />
+          )}
+        </BottomNavigation>
+      </Paper>
+    </Box>
+  );
+}

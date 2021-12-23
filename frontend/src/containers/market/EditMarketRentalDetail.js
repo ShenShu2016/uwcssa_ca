@@ -22,6 +22,7 @@ import {
 } from "../../redux/slice/marketUserSlice";
 import {
   selectMarketItemById,
+  updateAddressDetail,
   updateMarketItemDetail,
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +60,7 @@ export default function EditMarketRentalDetail() {
     propertyType,
     bedroomCounts,
     bathroomsCounts,
-    // address,
+    addressID,
     propertySize,
     dateAvailable,
     laundryType,
@@ -147,11 +148,41 @@ export default function EditMarketRentalDetail() {
 
   const onSubmit = async (data) => {
     const address = await GetAddress();
+    const {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+    } = address;
+    const createAddressInput = {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+      marketItemID: id,
+      userID: marketUserInfo.userID,
+      id: addressID,
+    };
+    const addressResponse = await dispatch(
+      updateAddressDetail(createAddressInput)
+    );
+    console.log(addressResponse);
     const createMarketItemInput = {
       ...data,
       name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
       id: id,
-      address: address,
+      // address: address,
+      addressID: addressID,
       marketType: "Rental",
       imgURLs: imgKeyFromServer,
       tags: GetTags(),
@@ -167,7 +198,6 @@ export default function EditMarketRentalDetail() {
       email: contactEmail,
       userID: marketUserInfo.userID,
     };
-    // console.log("createMarketItemInput", createMarketItemInput);
     setLoading(true);
     const response = await dispatch(
       updateMarketItemDetail(createMarketItemInput)

@@ -44,7 +44,7 @@ export default function MarketRental() {
   );
 
   useEffect(() => {
-    dispatch(fetchMarketItems(marketItemSortBySortKeyRental));
+    dispatch(fetchMarketItems({ query: marketItemSortBySortKeyRental }));
   }, [dispatch]);
 
   const filteredItems = marketItemFilter(trueMarketItems, filterList, "rental");

@@ -8,20 +8,22 @@ import {
 import React, { useState } from "react";
 
 import { Box } from "@mui/system";
+import ByStatus from "./ByStatus";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import InfoCard from "./InfoCard";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
-  cards: {
+  root: {
+    minWidth: "1120px",
+    maxWidth: "1536px",
     marginBlock: "1rem",
+    marginInline: "auto",
+  },
+  kanbanStatus: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "auto",
-    },
+    flexWrap: "noWrap",
+    justifyContent: "space-between",
   },
 }));
 const ExpandMore = styled((props) => {
@@ -35,28 +37,31 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ByDepartment({ department, uwcssaMembers }) {
+const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE"];
+
+export default function ByDepartment({ department, kanbans }) {
   const classes = useStyles();
-  let membersByDepartment = uwcssaMembers.filter(
+  let kanbansByDepartment = kanbans.filter(
     (x) => x.departmentID === department.id
   );
 
-  membersByDepartment = membersByDepartment.find((x) => x.leader === true)
+  kanbansByDepartment = kanbansByDepartment.find((x) => x.leader === true)
     ? [
-        membersByDepartment.find((x) => x.leader === true),
-        ...membersByDepartment.filter((x) => x.leader !== true),
+        kanbansByDepartment.find((x) => x.leader === true),
+        ...kanbansByDepartment.filter((x) => x.leader !== true),
       ]
-    : membersByDepartment;
+    : kanbansByDepartment;
 
-  const [expanded, setExpanded] = useState(true);
+  const canExpanded = kanbansByDepartment.length > 0 ? true : false;
+  const [expanded, setExpanded] = useState(canExpanded);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   //   console.log("department", department);
-  console.log("membersByDepartment", membersByDepartment);
+  //console.log("kanbansByDepartment", kanbansByDepartment);
   return (
-    <Box sx={{ my: "1rem" }}>
+    <Box className={classes.root}>
       <Paper elevation={10}>
         <CardActions disableSpacing>
           <Box sx={{ ml: "1rem" }}>
@@ -74,11 +79,23 @@ export default function ByDepartment({ department, uwcssaMembers }) {
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <div className={classes.cards}>
-            {membersByDepartment.map((member, memberIdx) => {
-              return <InfoCard item={member} key={memberIdx} />;
+          <Box className={classes.kanbanStatus}>
+            {KanbanStatus.map((status, idx) => {
+              return (
+                <Box key={idx} sx={{ width: "100%", hight: "100%" }}>
+                  <ByStatus
+                    status={status}
+                    kanbansByDepartment={kanbansByDepartment}
+                  />
+                </Box>
+              );
             })}
-          </div>
+          </Box>
+          {/* <div className={classes.cards}>
+            {kanbansByDepartment.map((ticket, idx) => {
+              return <Ticket item={ticket} key={idx} />;
+            })}
+          </div> */}
         </Collapse>
       </Paper>
     </Box>

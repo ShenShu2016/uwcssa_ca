@@ -1,9 +1,14 @@
 import {
+  createAddress,
+  createMarketItem,
+  updateAddress,
+  updateMarketItem,
+} from "../../graphql/mutations";
+import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { createMarketItem, updateMarketItem } from "../../graphql/mutations";
 
 import API from "@aws-amplify/api";
 import { getMarketItem } from "../../graphql/queries";
@@ -29,14 +34,15 @@ const initialState = marketAdapter.getInitialState({
 
 export const fetchMarketItems = createAsyncThunk(
   "market/fetchMarketItems",
-  async (query) => {
+  async ({ query, filter = { active: { eq: true } } }) => {
     try {
+      // console.log("filter", filter);
       const MarketItemsData = await API.graphql({
         query: query,
         variables: {
           sortKey: "SortKey",
           sortDirection: "DESC",
-          filter: { active: { eq: true } },
+          filter: filter,
         },
         authMode: "AWS_IAM",
       });
@@ -71,6 +77,26 @@ export const postMarketItem = createAsyncThunk(
       graphqlOperation(createMarketItem, { input: createMarketItemInput })
     );
     return response.data.createMarketItem;
+  }
+);
+
+export const postAddress = createAsyncThunk(
+  "market/postAddress",
+  async (createAddressInput) => {
+    const response = await API.graphql(
+      graphqlOperation(createAddress, { input: createAddressInput })
+    );
+    return response.data.createAddress;
+  }
+);
+
+export const updateAddressDetail = createAsyncThunk(
+  "market/updateAddressDetail",
+  async (updateAddressDetail) => {
+    const response = await API.graphql(
+      graphqlOperation(updateAddress, { input: updateAddressDetail })
+    );
+    return response.data.updateAddress;
   }
 );
 

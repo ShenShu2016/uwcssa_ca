@@ -1,6 +1,8 @@
 import { Box, Container, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 
+// import SwipeableViews from "react-swipeable-views";
+
 import ArticlesPreview from "./Article/ArticlesPreview";
 // import EventGrid from "../../components/Event/EventDataGrid";
 import EventTable from "../../components/Event/EventTable";

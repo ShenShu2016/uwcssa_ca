@@ -20,7 +20,7 @@ import React from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 
-const MarketSideBar = () => {
+const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
   const useStyles = makeStyles((theme) => ({
     info: {
       width: "360px",
@@ -53,7 +53,7 @@ const MarketSideBar = () => {
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/market">
+            <ListItemButton component={Button} onClick={clickHandler}>
               <ListItemIcon>
                 <WorkIcon />
               </ListItemIcon>
@@ -98,7 +98,10 @@ const MarketSideBar = () => {
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             位置
           </Typography>
-          <MarketFIlterLocation />
+          <MarketFIlterLocation
+            setAddressInfo={setAddressInfo}
+            setSearchRadius={setSearchRadius}
+          />
         </Box>
         <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
           类别

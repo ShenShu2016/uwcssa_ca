@@ -3,18 +3,6 @@ enum SortKey {
   SortKey
 }
 
-type Address {
-  description: String
-  place_id: String
-  reference: String
-  terms: [String]
-  types: [String]
-  apartmentNumbers: String
-  geocodingResult: String
-  lat: Float
-  lng: Float
-}
-
 type User
   @model
   @auth(
@@ -250,7 +238,8 @@ type Event
   posterImgURL: AWSURL
   imgURLs: [AWSURL]
   content: String
-  address: Address
+  addressID: ID
+  address: Address @connection(fields: ["addressID"])
   sponsor: [String]
   tags: [String]
   eventStatus: EventStatus!
@@ -350,7 +339,8 @@ type EventParticipant
   id: ID!
   name: String!
   email: AWSEmail!
-  address: Address
+  addressID: ID
+  address: Address @connection(fields: ["addressID"])
   phone: AWSPhone
   weChat: String
   message: String
@@ -724,7 +714,8 @@ type MarketItem
   propertyType: PropertyType
   bedroomCounts: Int
   bathroomsCounts: Int
-  address: Address
+  addressID: ID
+  address: Address @connection(fields: ["addressID"])
   propertySize: Int
   dateAvailable: AWSDateTime
   laundryType: LaundryType
@@ -742,6 +733,32 @@ type MarketItem
   user: User! @connection(fields: ["userID"])
 }
 
+type Address
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  )
+  @key(name: "byMarketItem", fields: ["marketItemID"]) {
+  id: ID!
+  description: String
+  place_id: String
+  reference: String
+  terms: [String]
+  types: [String]
+  apartmentNumbers: String
+  geocodingResult: String
+  lat: Float
+  lng: Float
+  marketItemID: ID!
+  marketItem: MarketItem @connection(fields: ["marketItemID"])
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
 enum MarketType {
   Item
   Vehicle

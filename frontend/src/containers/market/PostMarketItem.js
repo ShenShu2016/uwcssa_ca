@@ -21,6 +21,7 @@ import {
   selectMarketUserById,
   updateMarketUserInfoDetail,
 } from "../../redux/slice/marketUserSlice";
+import { postAddress, postMarketItem } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import MarketForm from "../../components/Market/marketForm";
@@ -31,11 +32,11 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
-import { postMarketItem } from "../../redux/slice/marketSlice";
 import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { v4 as uuid } from "uuid";
 
 export default function PostMarketItem() {
   const imgRef = useRef(null);
@@ -94,10 +95,40 @@ export default function PostMarketItem() {
 
   const onSubmit = async (data) => {
     const address = await GetAddress();
+    const addressID = uuid();
+    const marketID = uuid();
+    const {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+    } = address;
+    const createAddressInput = {
+      description,
+      place_id,
+      reference,
+      terms,
+      types,
+      apartmentNumber,
+      geocodingResult,
+      lat,
+      lng,
+      marketItemID: marketID,
+      userID: username,
+      id: addressID,
+    };
+    const addressResponse = await dispatch(postAddress(createAddressInput));
+    console.log(addressResponse);
     const createMarketItemInput = {
       ...data,
       // location: GetAddress().description,
-      address: address,
+      id: marketID,
+      addressID: addressID,
       name: data.title,
       marketType: "Item",
       imgURLs: imgURLs,
@@ -391,7 +422,7 @@ export default function PostMarketItem() {
                     />
                   )}
                 /> */}
-                <GoogleMaps />
+                <GoogleMaps fullWidth />
               </Box>
               <Box sx={{ marginY: "1rem" }}>
                 <Controller

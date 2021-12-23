@@ -41,7 +41,7 @@ export default function MarketVehicle() {
   );
 
   useEffect(() => {
-    dispatch(fetchMarketItems(marketItemSortBySortKeyVehicle));
+    dispatch(fetchMarketItems({ query: marketItemSortBySortKeyVehicle }));
   }, [dispatch]);
 
   const filteredItems = marketItemFilter(

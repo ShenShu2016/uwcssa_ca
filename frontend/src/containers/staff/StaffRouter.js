@@ -12,6 +12,7 @@ import React from "react";
 import Staff from "./Staff";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
 import EditEvent from "../../components/Event/EditEvent";
+import BottomNav from "../BottomNav";
 
 export default function StaffRouter() {
   return (
@@ -48,6 +49,7 @@ export default function StaffRouter() {
         />
       </Switch>
       <Footer />
+      <BottomNav />
     </Box>
   );
 }

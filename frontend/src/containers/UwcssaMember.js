@@ -41,14 +41,20 @@ export default function UwcssaMember() {
   const isPermit = usePermit(null, "admin");
   const uwcssaMembers = useSelector(selectAllUwcssaMembers);
   const departments = useSelector(selectAllDepartments);
-  console.log("departments", departments);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
+  const { fetchUwcssaMembersStatus } = useSelector(
+    (state) => state.uwcssaMembers
+  );
 
   useEffect(() => {
-    dispatch(fetchUwcssaMembers());
-    dispatch(fetchDepartments());
-  }, [dispatch]);
+    if (fetchUwcssaMembersStatus === "idle" || undefined) {
+      dispatch(fetchUwcssaMembers());
+    }
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus]);
 
-  // const
   return (
     <Box>
       <div className={classes.root}>

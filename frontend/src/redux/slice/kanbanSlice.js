@@ -79,11 +79,16 @@ export const postKanban = createAsyncThunk(
 
 export const updateKanbanDetail = createAsyncThunk(
   "kanban/updateKanbanDetail",
-  async (updateKanbanDetail) => {
-    const response = await API.graphql(
-      graphqlOperation(updateKanban, { input: updateKanbanDetail })
-    );
-    return response.data.updateKanban;
+  async ({ updateKanbanInput }) => {
+    try {
+      console.log("updateKanbanDetail", updateKanbanInput);
+      const response = await API.graphql(
+        graphqlOperation(updateKanban, { input: updateKanbanInput })
+      );
+      return response.data.updateKanban;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
+// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubButton from "react-github-btn";
 // import InputUnstyled from "@mui/base/InputUnstyled";
@@ -17,6 +18,7 @@ import { SocialIcon } from "react-social-icons";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { makeStyles } from "@mui/styles";
+//import { styled } from "@mui/system";
 //import footerBanner from "../static/FooterBanner.png";
 import uwcssaLogo from "../static/uwcssa_logo.svg";
 
@@ -69,7 +71,11 @@ const useStyles = makeStyles((theme) => ({
   },
   copyright: {
     marginTop: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      height: "150px",
+    },
   },
+
   icons: {
     marginTop: "0.25rem",
     display: "flex",
@@ -125,7 +131,7 @@ export default function StickyFooter() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.main}>
       {/* <Box px={2} py={6} className={classes.top} position={"relative"}>
         <div className={classes.overlay}>
           <img src={footerBanner} alt={""} />
@@ -479,6 +485,7 @@ export default function StickyFooter() {
         <Box className={classes.copyright}>
           <Copyright />
         </Box>
+
         {/* </Container> */}
       </Box>
     </div>

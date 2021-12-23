@@ -49,6 +49,7 @@ const GoogleMap = (props) => {
           lng: center[1],
         },
         zoom: defaultZoom,
+        disableDefaultUI: true,
       });
 
       new window.google.maps.Circle({
