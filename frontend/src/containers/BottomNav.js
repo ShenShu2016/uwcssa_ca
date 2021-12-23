@@ -7,13 +7,14 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import ArticleIcon from "@mui/icons-material/Article";
-import EventIcon from "@mui/icons-material/Event";
-import ForumIcon from "@mui/icons-material/Forum";
-import ShopIcon from "@mui/icons-material/Shop";
 import { makeStyles } from "@mui/styles";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useSelector } from "react-redux";
+import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
+import EventRoundedIcon from "@mui/icons-material/EventRounded";
+import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
+import ShopRoundedIcon from "@mui/icons-material/ShopRounded";
+import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BottomNav() {
-  const [value, setValue] = useState(0);
+  const pathname = window.location.pathname;
+  const [value, setValue] = useState(pathname);
   const ref = useRef(null);
   const classes = useStyles();
   const isAuthenticated = useSelector(
@@ -52,36 +54,36 @@ export default function BottomNav() {
         >
           <BottomNavigationAction
             label="新闻"
-            value="article"
-            icon={<ArticleIcon />}
+            value="/article"
+            icon={<ArticleRoundedIcon />}
             component={Link}
             to="/article"
           />
           <BottomNavigationAction
             label="活动"
-            value="event"
-            icon={<EventIcon />}
+            value="/event"
+            icon={<EventRoundedIcon />}
             component={Link}
             to="/event"
           />
           <BottomNavigationAction
             label="论坛"
-            value="forum"
-            icon={<ForumIcon />}
+            value="/forum"
+            icon={<ForumRoundedIcon />}
             component={Link}
             to="/forum"
           />
           <BottomNavigationAction
             label="商城"
-            value="market"
-            icon={<ShopIcon />}
+            value="/market"
+            icon={<ShopRoundedIcon />}
             component={Link}
             to="/market"
           />
           {isAuthenticated ? (
             <BottomNavigationAction
               label="个人中心"
-              value="dashboard"
+              value="/account/dashboard"
               icon={<AccountCircle />}
               component={Link}
               to="/account/dashboard"
@@ -89,8 +91,8 @@ export default function BottomNav() {
           ) : (
             <BottomNavigationAction
               label="登入"
-              value="signIn"
-              icon={<AccountCircle />}
+              value="/auth/signIn"
+              icon={<LoginRoundedIcon />}
               component={Link}
               to="/auth/signIn"
             />
