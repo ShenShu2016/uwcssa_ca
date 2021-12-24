@@ -205,7 +205,7 @@ const DetailInfo = ({
           color: "rgb(161 161 161 / 87%)",
         }}
       >
-        {mode === "detail" ? (
+        {mode === "detail" && address ? (
           <GoogleMap
             defaultZoom={13.5}
             address={address}
@@ -216,9 +216,11 @@ const DetailInfo = ({
         )}
       </Paper>
       <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
-        {address.description.length === 0
-          ? "Location Goes Here"
-          : address.description}
+        {address
+          ? address.description.length === 0
+            ? "Location Goes Here"
+            : address.description
+          : ""}
       </Typography>
     </React.Fragment>
   );
