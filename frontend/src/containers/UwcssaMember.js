@@ -43,7 +43,7 @@ export default function UwcssaMember() {
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const { fetchUwcssaMembersStatus } = useSelector(
-    (state) => state.uwcssaMembers
+    (state) => state.uwcssaMember
   );
 
   useEffect(() => {
