@@ -123,8 +123,13 @@ export default function Ticket({ item }) {
         sx={{ width: 320, maxWidth: "100%" }}
       >
         <MenuList>
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon onClick={handleEditClickOpen}>
+          <MenuItem
+            onClick={() => {
+              handleEditClickOpen();
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
               <EditRoundedIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>编辑</ListItemText>

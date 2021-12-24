@@ -5,7 +5,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Box } from "@mui/system";
 import ByStatus from "./ByStatus";
@@ -37,7 +37,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE"];
+const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
 
 export default function ByDepartment({ department, kanbans }) {
   const classes = useStyles();
@@ -52,9 +52,12 @@ export default function ByDepartment({ department, kanbans }) {
       ]
     : kanbansByDepartment;
 
-  const canExpanded = kanbansByDepartment.length > 0 ? true : false;
-  const [expanded, setExpanded] = useState(canExpanded);
+  const [expanded, setExpanded] = useState(null);
 
+  useEffect(() => {
+    setExpanded(kanbansByDepartment.length > 0 ? true : false);
+  }, [kanbansByDepartment.length]);
+  //console.log("kanbansByDepartment", kanbansByDepartment);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -62,10 +65,10 @@ export default function ByDepartment({ department, kanbans }) {
   //console.log("kanbansByDepartment", kanbansByDepartment);
   return (
     <Box className={classes.root}>
-      <Paper elevation={10}>
+      <Paper elevation={0} variant="outlined">
         <CardActions disableSpacing>
           <Box sx={{ ml: "1rem" }}>
-            <Typography variant="h6" color="primary">
+            <Typography variant="h6" color="primary" sx={{}}>
               {department.id}
             </Typography>
           </Box>
