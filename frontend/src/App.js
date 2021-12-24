@@ -37,24 +37,28 @@ import { makeStyles } from "@mui/styles";
 
 Amplify.configure(awsconfig);
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Noto Sans SC",
-  },
-});
-
-const useStyles = makeStyles({
-  headerBox: {
-    paddingBottom: "64px",
-    [theme.breakpoints.down("sm")]: {
-      paddingBottom: "56px",
-    },
-  },
-});
-
 export default function App() {
-  const classes = useStyles();
   const dispatch = useDispatch();
+  const { lightTheme } = useSelector((state) => state.general);
+  const theme = createTheme({
+    typography: {
+      fontFamily: "Noto Sans SC",
+    },
+    palette: {
+      mode: lightTheme ? "light" : "dark",
+    },
+  });
+
+  const useStyles = makeStyles({
+    headerBox: {
+      paddingBottom: "64px",
+      [theme.breakpoints.down("sm")]: {
+        paddingBottom: "56px",
+      },
+    },
+  });
+  const classes = useStyles();
+
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   // console.log("isAlertOpen", isAlertOpen);
 

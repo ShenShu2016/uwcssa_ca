@@ -95,9 +95,9 @@ export default function Kanban() {
             })}
           </Box>
         </div>
-        <Footer />
       </Box>
       <Create createOpen={createOpen} handleCreateClose={handleCreateClose} />
+      <Footer />
     </div>
   );
 }

@@ -18,7 +18,6 @@ import { useTitle } from "../../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
-    color: "#0D1F48",
     paddingBottom: "3rem",
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "1rem",
@@ -62,7 +61,7 @@ export default function ArticleDetail() {
             variant="h4"
             component="h1"
             className={classes.title}
-            sx={{ fontWeight: 700 }}
+            sx={{ fontWeight: 700, color: "info.light" }}
           >
             {article.active === true ? (
               article.title

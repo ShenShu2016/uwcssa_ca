@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
-    color: "#0D1F48",
+    // color: "#0D1F48",
     paddingBottom: "3rem",
   },
 }));

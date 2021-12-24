@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     height: "220px",
-    backgroundColor: "#FDFEFE ",
+    // backgroundColor: "#FDFEFE ",
     [theme.breakpoints.down("sm")]: {
       height: "350px",
     },
@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     display: "flex",
     flexDirection: "column",
+    color: "primary.light",
   },
   copyright: {
     marginTop: "1rem",
@@ -272,7 +273,7 @@ export default function StickyFooter() {
                         variant="text"
                         component={Link}
                         to="/foundingMember"
-                        style={{ color: "#000000" }}
+                        sx={{ color: "primary.light" }}
                       >
                         我们的团队
                       </Button>
@@ -283,7 +284,7 @@ export default function StickyFooter() {
                         variant="text"
                         component={Link}
                         to="/contactUs"
-                        style={{ color: "#000000" }}
+                        sx={{ color: "primary.light" }}
                       >
                         联系我们
                       </Button>
@@ -293,7 +294,7 @@ export default function StickyFooter() {
                         color="primary"
                         variant="text"
                         href="mailto:uwincssa.it@gmail.com"
-                        style={{ color: "#000000", textTransform: "none" }}
+                        sx={{ color: "primary.light", textTransform: "none" }}
                       >
                         邮箱: uwincssa.it@gmail.com
                       </Button>
@@ -311,7 +312,7 @@ export default function StickyFooter() {
                         variant="text"
                         component={Link}
                         to="/article"
-                        style={{ color: "#000000" }}
+                        sx={{ color: "primary.light" }}
                       >
                         uwcssa新闻
                       </Button>
@@ -322,7 +323,7 @@ export default function StickyFooter() {
                         variant="text"
                         component={Link}
                         to="/event"
-                        style={{ color: "#000000" }}
+                        sx={{ color: "primary.light" }}
                       >
                         uwcssa活动
                       </Button>
@@ -332,11 +333,19 @@ export default function StickyFooter() {
 
                 <Grid item xs={6} sm={4}>
                   <Box className={classes.text}>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ color: "primary.light" }}
+                    >
                       职位
                     </Typography>
 
-                    <Typography variant="caption" gutterBottom>
+                    <Typography
+                      variant="caption"
+                      gutterBottom
+                      sx={{ color: "primary.light" }}
+                    >
                       来和我们一起工作吧!
                       我们一直在寻找优秀的人才加入我们的团队。
                     </Typography>
@@ -346,7 +355,7 @@ export default function StickyFooter() {
                       color="primary"
                       component={Link}
                       to="/career"
-                      style={{ borderColor: "#000000", color: "#000000" }}
+                      sx={{ color: "primary.light" }}
                     >
                       查看职位
                     </Button>

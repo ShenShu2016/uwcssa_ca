@@ -181,7 +181,7 @@ export default function EventBody({ event }) {
                 display: "flex",
                 justifyContent: "left",
                 marginBottom: "1rem",
-                bgcolor: "#FFFF",
+                // bgcolor: "#FFFF",
               }}
             >
               <Box
@@ -336,7 +336,7 @@ export default function EventBody({ event }) {
               </Box>
             </Container>
 
-            <Box sx={{ width: "100%", bgcolor: "#F9F9F9" }}>
+            <Box sx={{ width: "100%", bgcolor: "" }}>
               <TabPanel value={value} index={0}>
                 {/* 这里问题挺多的，为什么在tabpanel里面不能加box？？ */}
                 <Container size="md">

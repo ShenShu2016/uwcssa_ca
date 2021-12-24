@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
     margin: "4rem",
     maxWidth: "960px",
-    color: "#0D1F48",
+    // color: "#0D1F48",
     [theme.breakpoints.down("sm")]: {
       margin: "0rem",
     },
   },
   jobLink: {
     textDecoration: "none",
-    color: "#30A2EC",
+    // color: "#30A2EC",
   },
 }));
 
