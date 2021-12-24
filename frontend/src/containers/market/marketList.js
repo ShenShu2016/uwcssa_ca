@@ -1,6 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import {
+  addressFilteredMarketItem,
   fetchMarketItems,
   selectAllMarketItems,
 } from "../../redux/slice/marketSlice";
@@ -31,34 +32,32 @@ export default function MarketList() {
 
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
+  console.log("addressInfo", addressInfo);
   useEffect(() => {
-    // const filter =
-    //   addressInfo === ""
-    //     ? { active: { eq: true } }
-    //     : {
-    //         and: [
-    //           {
-    //             address: {
-    //               lat: {
-    //                 between: [
-    //                   addressInfo.lat - searchRadius / 110.574,
-    //                   addressInfo.lat + searchRadius / 110.574,
-    //                 ],
-    //               },
-    //             },
-    //             lng: {
-    //               between: [
-    //                 addressInfo.lng -
-    //                   searchRadius / (111.32 * Math.cos(searchRadius.lat)),
-    //                 addressInfo.lng +
-    //                   searchRadius / (111.32 * Math.cos(searchRadius.lat)),
-    //               ],
-    //             },
-    //           },
-    //         ],
-    //       };
-
-    dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+    const filter =
+      addressInfo === ""
+        ? dispatch(fetchMarketItems({ query: marketItemSortBySortKey }))
+        : {
+            // {and: {lat: {between: [50, 52]}, lng: {between: [-2, 0]}}}
+            and: {
+              lat: {
+                between: [
+                  addressInfo.lat - searchRadius / 110.574,
+                  addressInfo.lat + searchRadius / 110.574,
+                ],
+              },
+              lng: {
+                between: [
+                  addressInfo.lng -
+                    searchRadius / (111.32 * Math.cos(addressInfo.lat)),
+                  addressInfo.lng +
+                    searchRadius / (111.32 * Math.cos(addressInfo.lat)),
+                ],
+              },
+            },
+          };
+    console.log("filter", filter);
+    dispatch(addressFilteredMarketItem({ filter: filter }));
   }, [dispatch, addressInfo, searchRadius]);
 
   const clickHandler = () => {
