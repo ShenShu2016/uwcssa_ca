@@ -14,6 +14,7 @@ import { v4 as uuid } from "uuid";
 
 const initialState = {
   users: null,
+  lightTheme: true,
   forumPostCounts: "",
   urlFrom: null,
   imageKey: {},
@@ -219,6 +220,10 @@ const generalSlice = createSlice({
       state.urlFrom = {};
       console.log("remove selected removeURLFrom successfully!");
     },
+    switchTheme(state, action) {
+      state.lightTheme = !state.lightTheme;
+      console.log("switch theme!");
+    },
   },
   extraReducers(builder) {
     builder
@@ -332,5 +337,5 @@ const generalSlice = createSlice({
       });
   },
 });
-
+export const { switchTheme } = generalSlice.actions;
 export default generalSlice.reducer;
