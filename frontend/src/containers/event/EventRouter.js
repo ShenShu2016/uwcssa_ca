@@ -1,5 +1,7 @@
+import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
+import BottomNav from "../BottomNav";
 import { Box } from "@mui/system";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import Event from "./Event";
@@ -9,10 +11,8 @@ import Footer from "../Footer.js";
 import Group from "../../components/Event/group";
 import Individual from "../../components/Event/individual";
 import PrivateRoute from "../../components/PrivateRoute";
-import React from "react";
 import Success from "../../components/Event/Success";
 import { makeStyles } from "@mui/styles";
-import BottomNav from "../BottomNav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,36 +30,36 @@ export default function EventRouter() {
   const classes = useStyles();
 
   return (
-    <Box className={classes.root}>
-      <CustomBreadcrumbs />
-      <Switch>
-        <Route exact path="/event" component={Event} />
-        <Route exact path="/event/:eventID" component={EventDetail} />
-        <Route
-          exact
-          path="/event/:eventID/eventSignUp"
-          component={EventSignUp}
-        />
-        <PrivateRoute
-          allowRoles="anyone"
-          path="/event/:eventID/eventSignUp/individual"
-          component={Individual}
-        />
-        <PrivateRoute
-          allowRoles="anyone"
-          path="/event/:eventID/eventSignUp/group"
-          component={Group}
-        />
-        <Route
-          exact
-          path="/event/:eventID/eventSignUp/success"
-          component={Success}
-        />
-      </Switch>
-
+    <Fragment>
+      <Box className={classes.root}>
+        <CustomBreadcrumbs />
+        <Switch>
+          <Route exact path="/event" component={Event} />
+          <Route exact path="/event/:eventID" component={EventDetail} />
+          <Route
+            exact
+            path="/event/:eventID/eventSignUp"
+            component={EventSignUp}
+          />
+          <PrivateRoute
+            allowRoles="anyone"
+            path="/event/:eventID/eventSignUp/individual"
+            component={Individual}
+          />
+          <PrivateRoute
+            allowRoles="anyone"
+            path="/event/:eventID/eventSignUp/group"
+            component={Group}
+          />
+          <Route
+            exact
+            path="/event/:eventID/eventSignUp/success"
+            component={Success}
+          />
+        </Switch>
+      </Box>
       <Footer />
-
       <BottomNav />
-    </Box>
+    </Fragment>
   );
 }

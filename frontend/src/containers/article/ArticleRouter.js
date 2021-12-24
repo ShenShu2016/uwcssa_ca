@@ -1,13 +1,13 @@
+import React, { Fragment } from "react";
 import { Route, Switch } from "react-router";
 
 import ArticleDetail from "./ArticleDetail";
 import ArticleList from "../../components/Article/ArticleList";
+import BottomNav from "../BottomNav";
 import { Box } from "@mui/material";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import Footer from "../Footer";
-import React from "react";
 import { makeStyles } from "@mui/styles";
-import BottomNav from "../BottomNav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,14 +23,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ArticleRouter() {
   const classes = useStyles();
   return (
-    <Box className={classes.root}>
-      <CustomBreadcrumbs />
-      <Switch>
-        <Route exact path="/article" component={ArticleList} />
-        <Route path="/article/:articleID" component={ArticleDetail} />
-      </Switch>
+    <Fragment>
+      <Box className={classes.root}>
+        <CustomBreadcrumbs />
+        <Switch>
+          <Route exact path="/article" component={ArticleList} />
+          <Route path="/article/:articleID" component={ArticleDetail} />
+        </Switch>
+      </Box>
       <Footer />
       <BottomNav />
-    </Box>
+    </Fragment>
   );
 }

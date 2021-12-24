@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArticleIcon from "@mui/icons-material/Article";
+import { Box } from "@mui/system";
 import CustomAvatar from "../components/CustomMUI/CustomAvatar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DrawerList from "../components/Drawer/DrawerList";
@@ -336,13 +337,15 @@ export default function Header() {
         <ManageAccountsIcon />
         我的账户
       </MenuItem>
-      <MenuItem>
-        <MUISwitch onChange={handleChangeTheme} />
-      </MenuItem>
       <MenuItem onClick={handleMenuClose} disabled>
         <SettingsIcon />
         设置
       </MenuItem>
+      <Box className={classes.title}>
+        <MenuItem sx={{ justifyContent: "center" }}>
+          <MUISwitch onChange={handleChangeTheme} />
+        </MenuItem>
+      </Box>
       <MenuItem onClick={signOut_user}>
         <LogoutIcon />
         注销
@@ -368,6 +371,11 @@ export default function Header() {
         </IconButton>
         <p>左上角有功能键哦</p>
       </MenuItem>
+      <Box className={classes.title2}>
+        <MenuItem sx={{ justifyContent: "center" }}>
+          <MUISwitch onChange={handleChangeTheme} />
+        </MenuItem>
+      </Box>
       {isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton

@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React from "react";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   root: {

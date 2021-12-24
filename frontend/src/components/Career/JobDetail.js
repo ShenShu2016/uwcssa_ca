@@ -16,16 +16,11 @@ import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles(() => ({
   root: {
-    // backgroundColor: "#F3F2EF",
     textAlign: "left",
     margin: "4rem 1rem",
-    color: "#1472CE",
   },
-  intro: {
-    color: "#0D1F48",
-  },
+  intro: {},
   body: {
-    color: "#0D1F48",
     paddingLeft: "1.5rem",
   },
 }));

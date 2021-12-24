@@ -134,7 +134,7 @@ export default function Event() {
         </Box>
 
         <div>
-          <Box sx={{ bgcolor: "#F9F9F9", paddingBottom: "3rem" }}>
+          <Box sx={{ bgcolor: "", paddingBottom: "3rem" }}>
             <Container>
               <Grid
                 container
@@ -161,7 +161,7 @@ export default function Event() {
         </Box>
 
         <div>
-          <Box sx={{ bgcolor: "#F9F9F9", paddingBottom: "3rem" }}>
+          <Box sx={{ bgcolor: "", paddingBottom: "3rem" }}>
             <Container>
               <Grid
                 container

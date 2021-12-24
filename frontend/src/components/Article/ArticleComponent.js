@@ -46,7 +46,7 @@ function ArticleComponent({ article }) {
           padding: "1rem",
           maxHeight: "255px",
           borderRadius: "8px",
-          border: "1px solid #dfe1e5",
+          // border: "1px solid #dfe1e5",
         }}
       >
         <Grid container spacing={1} sx={{ height: "100%" }}>
@@ -88,7 +88,7 @@ function ArticleComponent({ article }) {
                         whiteSpace: "pre-wrap",
                         wordBreak: "break-word",
                         lineHeight: "1.3em",
-                        color: "#202124",
+                        // color: "#202124",
                       }}
                     >
                       {title}

@@ -13,7 +13,7 @@ import {
   createTheme,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import React, { forwardRef, useState } from "react";
+import React, { Fragment, forwardRef, useState } from "react";
 
 import API from "@aws-amplify/api";
 import AssignmentIcon from "@mui/icons-material/Assignment";
@@ -108,150 +108,151 @@ export default function UserFeedBack() {
   };
 
   return (
-    <div className={classes.root}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box sx={{ height: "2vh" }} />
-        <Container maxWidth="sm">
-          <Box mt={3} />
-          <Box border={3} sx={{ bgcolor: "white" }} borderRadius={15}>
-            <Stack
-              mt={3}
-              mx={5}
-              direction="row"
-              spacing={2}
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Avatar
-                sx={{ width: 50, height: 50, bgcolor: colors.green[500] }}
+    <Fragment>
+      <div className={classes.root}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box sx={{ height: "2vh" }} />
+          <Container maxWidth="sm">
+            <Box mt={3} />
+            <Box border={3} sx={{ bgcolor: "white" }} borderRadius={15}>
+              <Stack
+                mt={3}
+                mx={5}
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
               >
-                <AssignmentIcon />
-              </Avatar>
-              <Typography variant="h5">意见箱</Typography>
-            </Stack>
-            <Box mt={4} mx={5}>
-              <ThemeProvider theme={theme}>
-                <Typography variant="h5">
-                  你觉得我们的网站使用起来是否方便？
-                </Typography>
-              </ThemeProvider>
-            </Box>
-
-            <Box mt={3} mx={5}>
-              <Controller
-                name="rate"
-                control={control}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, value },
-                  fieldState: { error },
-                }) => (
-                  <Rating
-                    precision={1}
-                    max={5}
-                    size="large"
-                    onChange={onChange}
-                    value={Number(value)}
-                    onChangeActive={(event, newHover) => {
-                      setHover(newHover);
-                    }}
-                  />
-                )}
-              />
-              {getValues("rate") !== null && (
-                <Box ml={0}>
-                  {labels[hover !== -1 ? hover : getValues("rate")]}
-                </Box>
-              )}
-            </Box>
-            <Box mt={5} mx={5}>
-              <Box m="auto" alignItems="center" mt={2}>
-                <Controller
-                  name="reason"
-                  control={control}
-                  rules={{
-                    required: true,
-                    minLength: 10,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      className={classes.TextField}
-                      multiline={true}
-                      label={"您给我们这个分数的主要原因是什么？"}
-                      variant="outlined"
-                      minRows={3}
-                      onChange={onChange}
-                      value={value}
-                      error={!!errors.reason}
-                      helperText={
-                        errors.reason ? "请简短的告诉我们原因， 10个字" : null
-                      }
-                    />
-                  )}
-                />
-              </Box>
-            </Box>
-            <Box mt={5} mx={5}>
-              <Box m="auto" alignItems="center" mt={2}>
-                <Controller
-                  name="improvement"
-                  control={control}
-                  rules={{
-                    required: true,
-                    minLength: 10,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      className={classes.TextField}
-                      multiline={true}
-                      label="我们可以做些什么来改善网站上的体验？"
-                      variant="outlined"
-                      minRows={3}
-                      onChange={onChange}
-                      value={value}
-                      error={!!errors.improvement}
-                      helperText={
-                        errors.improvement
-                          ? "请简短的告诉我们原因, 10个字"
-                          : null
-                      }
-                    />
-                  )}
-                />
-              </Box>
-              <Box mt={3} mb={3}>
-                <Button
-                  color="primary"
-                  size="large"
-                  variant="contained"
-                  // sx={{ borderRadius: 50 }}
-                  type="submit"
+                <Avatar
+                  sx={{ width: 50, height: 50, bgcolor: colors.green[500] }}
                 >
-                  提交
-                </Button>
+                  <AssignmentIcon />
+                </Avatar>
+                <Typography variant="h5">意见箱</Typography>
+              </Stack>
+              <Box mt={4} mx={5}>
+                <ThemeProvider theme={theme}>
+                  <Typography variant="h5">
+                    你觉得我们的网站使用起来是否方便？
+                  </Typography>
+                </ThemeProvider>
               </Box>
-            </Box>
 
-            <Snackbar
-              open={open}
-              autoHideDuration={3000}
-              onClose={handleClose}
-              message="Thank you!"
-            >
-              <Alert
+              <Box mt={3} mx={5}>
+                <Controller
+                  name="rate"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => (
+                    <Rating
+                      precision={1}
+                      max={5}
+                      size="large"
+                      onChange={onChange}
+                      value={Number(value)}
+                      onChangeActive={(event, newHover) => {
+                        setHover(newHover);
+                      }}
+                    />
+                  )}
+                />
+                {getValues("rate") !== null && (
+                  <Box ml={0}>
+                    {labels[hover !== -1 ? hover : getValues("rate")]}
+                  </Box>
+                )}
+              </Box>
+              <Box mt={5} mx={5}>
+                <Box m="auto" alignItems="center" mt={2}>
+                  <Controller
+                    name="reason"
+                    control={control}
+                    rules={{
+                      required: true,
+                      minLength: 10,
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        className={classes.TextField}
+                        multiline={true}
+                        label={"您给我们这个分数的主要原因是什么？"}
+                        variant="outlined"
+                        minRows={3}
+                        onChange={onChange}
+                        value={value}
+                        error={!!errors.reason}
+                        helperText={
+                          errors.reason ? "请简短的告诉我们原因， 10个字" : null
+                        }
+                      />
+                    )}
+                  />
+                </Box>
+              </Box>
+              <Box mt={5} mx={5}>
+                <Box m="auto" alignItems="center" mt={2}>
+                  <Controller
+                    name="improvement"
+                    control={control}
+                    rules={{
+                      required: true,
+                      minLength: 10,
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        className={classes.TextField}
+                        multiline={true}
+                        label="我们可以做些什么来改善网站上的体验？"
+                        variant="outlined"
+                        minRows={3}
+                        onChange={onChange}
+                        value={value}
+                        error={!!errors.improvement}
+                        helperText={
+                          errors.improvement
+                            ? "请简短的告诉我们原因, 10个字"
+                            : null
+                        }
+                      />
+                    )}
+                  />
+                </Box>
+                <Box mt={3} mb={3}>
+                  <Button
+                    color="primary"
+                    size="large"
+                    variant="contained"
+                    // sx={{ borderRadius: 50 }}
+                    type="submit"
+                  >
+                    提交
+                  </Button>
+                </Box>
+              </Box>
+
+              <Snackbar
+                open={open}
+                autoHideDuration={3000}
                 onClose={handleClose}
-                severity="success"
-                sx={{ width: "100%" }}
+                message="Thank you!"
               >
-                提交成功！感谢您的建议！
-              </Alert>
-            </Snackbar>
-          </Box>
-        </Container>
-        <Box mt={3} sx={{ height: "2vh" }} />
-      </form>
-
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  提交成功！感谢您的建议！
+                </Alert>
+              </Snackbar>
+            </Box>
+          </Container>
+          <Box mt={3} sx={{ height: "2vh" }} />
+        </form>
+      </div>
       <Footer />
-    </div>
+    </Fragment>
   );
 }

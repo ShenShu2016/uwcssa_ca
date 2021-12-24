@@ -18,17 +18,13 @@ import {
 } from "../../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-// import GitHubButton from "react-github-btn";
 import { Link } from "react-router-dom";
-// import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import cssalogo from "../../static/cssa-logo.png";
 import { makeStyles } from "@mui/styles";
-// import { red } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
-    backgroundColor: "#fff",
     paddingBottom: "2rem",
     backgroundImage: `url(${cssalogo})`,
     backgroundSize: "cover",
