@@ -280,7 +280,8 @@ export default function SimpleTable() {
                                         {eventParticipant.numberOfPeople}
                                       </TableCell>
                                       <TableCell>
-                                        {eventParticipant.address.description}
+                                        {eventParticipant.address &&
+                                          eventParticipant.address.description}
                                       </TableCell>
                                       <TableCell>
                                         {eventParticipant.message}
