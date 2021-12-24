@@ -2018,7 +2018,7 @@ export const getEvent = /* GraphQL */ `
         geocodingResult
         lat
         lng
-        marketItemID
+        itemID
         userID
         createdAt
         updatedAt
@@ -2039,6 +2039,47 @@ export const getEvent = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipant {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
         }
         marketItem {
           id
@@ -2170,7 +2211,7 @@ export const listEvents = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -2266,7 +2307,7 @@ export const eventSortBySortKey = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -2397,7 +2438,7 @@ export const getEventComment = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -2952,7 +2993,7 @@ export const getEventParticipant = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -2974,7 +3015,7 @@ export const getEventParticipant = /* GraphQL */ `
         geocodingResult
         lat
         lng
-        marketItemID
+        itemID
         userID
         createdAt
         updatedAt
@@ -2995,6 +3036,47 @@ export const getEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipant {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
         }
         marketItem {
           id
@@ -3122,7 +3204,7 @@ export const listEventParticipants = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -3219,7 +3301,7 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -5329,7 +5411,7 @@ export const getMarketItem = /* GraphQL */ `
         geocodingResult
         lat
         lng
-        marketItemID
+        itemID
         userID
         createdAt
         updatedAt
@@ -5350,6 +5432,47 @@ export const getMarketItem = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipant {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
         }
         marketItem {
           id
@@ -5473,7 +5596,7 @@ export const listMarketItems = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -5570,7 +5693,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -5667,7 +5790,7 @@ export const marketItemSortByMarketItemCategory = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -5764,7 +5887,7 @@ export const marketVehicleSortByVehicleType = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -5861,7 +5984,7 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -5885,7 +6008,7 @@ export const getAddress = /* GraphQL */ `
       geocodingResult
       lat
       lng
-      marketItemID
+      itemID
       userID
       createdAt
       updatedAt
@@ -5929,6 +6052,157 @@ export const getAddress = /* GraphQL */ `
         }
         kanbanAssignee {
           nextToken
+        }
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        likes {
+          nextToken
+        }
+      }
+      eventParticipant {
+        id
+        name
+        email
+        addressID
+        phone
+        weChat
+        message
+        numberOfPeople
+        active
+        createdAt
+        eventParticipantStatus
+        eventID
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        owner
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
         }
       }
       marketItem {
@@ -6000,7 +6274,7 @@ export const getAddress = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt
@@ -6029,7 +6303,7 @@ export const listAddresss = /* GraphQL */ `
         geocodingResult
         lat
         lng
-        marketItemID
+        itemID
         userID
         createdAt
         updatedAt
@@ -6050,6 +6324,47 @@ export const listAddresss = /* GraphQL */ `
           createdAt
           updatedAt
           badges
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        eventParticipant {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
         }
         marketItem {
           id
@@ -6495,7 +6810,7 @@ export const getLike = /* GraphQL */ `
           geocodingResult
           lat
           lng
-          marketItemID
+          itemID
           userID
           createdAt
           updatedAt

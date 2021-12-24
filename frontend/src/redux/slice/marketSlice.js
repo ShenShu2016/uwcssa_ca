@@ -9,9 +9,9 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
+import { getMarketItem, listAddresss } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
-import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const marketAdapter = createEntityAdapter({
@@ -30,6 +30,8 @@ const initialState = marketAdapter.getInitialState({
   postMarketItemImgError: null,
   updateMarketItemDetailStatus: "idle",
   updateMarketItemDetailError: null,
+  addressFilteredMarketItemStatus: "idle",
+  addressFilteredMarketItemError: null,
 });
 
 export const fetchMarketItems = createAsyncThunk(
@@ -67,6 +69,19 @@ export const selectedMarketItem = createAsyncThunk(
       return { id: id, description: "not-found" };
     }
     return response.data.getMarketItem;
+  }
+);
+
+export const addressFilteredMarketItem = createAsyncThunk(
+  "market/addressFilteredMarketItem",
+  async ({ filter }) => {
+    const response = await API.graphql({
+      query: listAddresss,
+      variables: { filter: filter },
+      authMode: "AWS_IAM",
+    });
+    console.log("res:", response);
+    return response.data.listAddresss.items;
   }
 );
 
@@ -173,6 +188,18 @@ const marketSlice = createSlice({
       .addCase(updateMarketItemDetail.rejected, (state, action) => {
         state.updateMarketItemDetailStatus = "failed";
         state.updateMarketItemDetailError = action.error.message;
+      })
+      // Cases for status of addressFilteredMarketItem (pending, fulfilled, and rejected)
+      .addCase(addressFilteredMarketItem.pending, (state, action) => {
+        state.addressFilteredMarketItemStatus = "loading";
+      })
+      .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
+        state.addressFilteredMarketItemStatus = "succeeded";
+        marketAdapter.removeAll(state);
+        marketAdapter.upsertMany(state, action.payload);
+      })
+      .addCase(addressFilteredMarketItem.rejected, (state, action) => {
+        state.addressFilteredMarketItemStatus = "failed";
       });
   },
 });
