@@ -19,7 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import cssalogo from "../../static/cssa-logo.png";
+import cssalogo from "../../static/cssa-logo1.png";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({

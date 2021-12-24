@@ -22,7 +22,10 @@ import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../redux/slice/departmentSlice";
-import { fetchUsers, selectAllUsers } from "../../redux/slice/userSlice";
+import {
+  fetchUwcssaMembers,
+  selectAllUwcssaMembers,
+} from "../../redux/slice/uwcssaMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -48,18 +51,22 @@ const useStyles = makeStyles({
 export default function Edit({ editOpen, handleEditClose, item }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const users = useSelector(selectAllUsers);
+  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  const { fetchUsersStatus } = useSelector((state) => state.user);
+  const { fetchUwcssaMembersStatus } = useSelector(
+    (state) => state.uwcssaMember
+  );
+
   useEffect(() => {
+    if (fetchUwcssaMembersStatus === "idle" || undefined) {
+      dispatch(fetchUwcssaMembers());
+    }
     if (fetchDepartmentsStatus === "idle" || undefined) {
       dispatch(fetchDepartments());
     }
-    if (fetchUsersStatus === "idle" || undefined) {
-      dispatch(fetchUsers());
-    }
-  }, [dispatch, fetchDepartmentsStatus, fetchUsersStatus]);
+  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus]);
+
   const {
     id,
     points,
@@ -198,10 +205,10 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                       label="任务接受者"
                       error={!!errors.assigneeID}
                     >
-                      {users.map((user) => {
+                      {uwcssaMembers.map((member) => {
                         return (
-                          <MenuItem value={user.id} key={user.id}>
-                            {user.id}
+                          <MenuItem value={member.id} key={member.id}>
+                            {`${member.departmentID}: ${member.id}`}
                           </MenuItem>
                         );
                       })}
@@ -237,6 +244,10 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                       </MenuItem>
                       <MenuItem value={"DONE"} key={"DONE"}>
                         {"DONE"}
+                      </MenuItem>
+                      {"WASTED"}
+                      <MenuItem value={"WASTED"} key={"WASTED"}>
+                        {"WASTED"}
                       </MenuItem>
                     </Select>
                   </FormControl>

@@ -7,8 +7,6 @@ import uwcssabbs from "../../static/uwcssabbs.gif";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "black",
-    color: "#fff",
     textAlign: "center",
   },
   inner: {
@@ -40,7 +38,11 @@ export default function FeatureIntro() {
 
   return (
     <div>
-      <Box className={classes.root} width="100%">
+      <Box
+        className={classes.root}
+        width="100%"
+        sx={{ backgroundColor: "#121212", color: "#fff" }}
+      >
         <Box className={classes.inner} width="100%">
           <Container size="lg">
             <Typography variant="h4" className={classes.title}>

@@ -1018,4 +1018,5 @@ enum KanbanStatus {
   TODO
   INPROGRESS
   DONE
+  WASTED
 }
