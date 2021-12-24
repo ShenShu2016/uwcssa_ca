@@ -742,8 +742,7 @@ type Address
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
-  )
-  @key(name: "byMarketItem", fields: ["marketItemID"]) {
+  ) {
   id: ID!
   description: String
   place_id: String
@@ -754,8 +753,10 @@ type Address
   geocodingResult: String
   lat: Float
   lng: Float
-  marketItemID: ID!
-  marketItem: MarketItem @connection(fields: ["marketItemID"])
+  itemID: ID!
+  eventParticipant: EventParticipant @connection(fields: ["itemID"])
+  event: Event @connection(fields: ["itemID"])
+  marketItem: MarketItem @connection(fields: ["itemID"])
   userID: ID!
   user: User! @connection(fields: ["userID"])
 }
