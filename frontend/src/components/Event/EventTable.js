@@ -139,7 +139,7 @@ export default function SimpleTable() {
     return {
       id: id,
       title: title,
-      address: address.description,
+      address: address && address.description,
       startDate: startDate,
       topic: topic.name,
       online: online,

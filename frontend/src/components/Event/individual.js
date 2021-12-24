@@ -19,9 +19,11 @@ import SignUpRequest from "../Auth/SignUpRequireDialog";
 import eventImg from "../../static/event.jpg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { postAddress } from "../../redux/slice/addressSlice";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { v4 as uuid } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -66,10 +68,45 @@ export default function Individual() {
   const onSubmit = async (data) => {
     setLoading(true);
     const address = await GetAddress();
+    const addressID = uuid();
+    const itemID = `${eventID}-${userAuth.user.username}`;
+    if (address) {
+      const {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+      } = address;
+      const createAddressInput = {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+        itemID: itemID,
+        userID: userAuth.user.username,
+        id: addressID,
+      };
+      console.log(createAddressInput);
+      const addressResponse = await dispatch(
+        postAddress({ createAddressInput })
+      );
+      console.log(addressResponse);
+    }
+
     const createEventParticipantInput = {
       ...data,
-      id: `${eventID}-${userAuth.user.username}`,
-      address: address,
+      id: itemID,
+      addressID: address && addressID,
       numberOfPeople: 1,
       eventParticipantStatus: "ArriveOnTime",
       email: userAuth.user.attributes.email,

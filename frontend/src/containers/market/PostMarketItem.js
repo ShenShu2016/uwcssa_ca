@@ -21,7 +21,6 @@ import {
   selectMarketUserById,
   updateMarketUserInfoDetail,
 } from "../../redux/slice/marketUserSlice";
-import { postAddress, postMarketItem } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import MarketForm from "../../components/Market/marketForm";
@@ -32,6 +31,8 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeableDrawerInfo from "../../components/Market/swipeableDrawer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { marketItemOptions } from "../../components/Market/marketItemOptions";
+import { postAddress } from "../../redux/slice/addressSlice";
+import { postMarketItem } from "../../redux/slice/marketSlice";
 import { postMultipleImages } from "../../redux/slice/generalSlice";
 import { postStyle } from "../../components/Market/postCss";
 import { useHistory } from "react-router";
@@ -96,39 +97,44 @@ export default function PostMarketItem() {
   const onSubmit = async (data) => {
     const address = await GetAddress();
     const addressID = uuid();
-    const marketID = uuid();
-    const {
-      description,
-      place_id,
-      reference,
-      terms,
-      types,
-      apartmentNumber,
-      geocodingResult,
-      lat,
-      lng,
-    } = address;
-    const createAddressInput = {
-      description,
-      place_id,
-      reference,
-      terms,
-      types,
-      apartmentNumber,
-      geocodingResult,
-      lat,
-      lng,
-      marketItemID: marketID,
-      userID: username,
-      id: addressID,
-    };
-    const addressResponse = await dispatch(postAddress(createAddressInput));
-    console.log(addressResponse);
+    const itemID = uuid();
+    if (address) {
+      const {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+      } = address;
+      const createAddressInput = {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+        itemID: itemID,
+        userID: username,
+        id: addressID,
+      };
+      console.log(createAddressInput);
+      const addressResponse = await dispatch(
+        postAddress({ createAddressInput })
+      );
+      console.log(addressResponse);
+    }
     const createMarketItemInput = {
       ...data,
       // location: GetAddress().description,
-      id: marketID,
-      addressID: addressID,
+      id: itemID,
+      addressID: address && addressID,
       name: data.title,
       marketType: "Item",
       imgURLs: imgURLs,

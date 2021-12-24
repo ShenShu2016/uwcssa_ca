@@ -1,3 +1,4 @@
+import addressReducer from "./slice/addressSlice";
 import articleReducer from "./slice/articleSlice";
 import authReducer from "./slice/authSlice";
 import careerSlice from "./slice/careerSlice";
@@ -39,6 +40,7 @@ export default configureStore({
     kanban: kanbanReducer,
     user: userReducer,
     like: likeReducer,
+    address: addressReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

@@ -91,7 +91,7 @@ export default function ForumHomeMain() {
             sx={{ mt: 2 }}
             variant="text"
             animation="wave"
-            width={1080}
+            width={"300px"}
             height={28}
           />
         ) : (
@@ -129,7 +129,7 @@ export default function ForumHomeMain() {
             sx={{ mt: 2 }}
             variant="text"
             animation="wave"
-            width={1080}
+            width={"300px"}
             height={28}
           />
         ) : (
