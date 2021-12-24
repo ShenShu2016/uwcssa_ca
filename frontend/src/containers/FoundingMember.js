@@ -18,7 +18,7 @@ import { useTitle } from "../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     // backgroundColor: "#F3F2EF",
-    textAlign: "center",
+
     margin: "4rem auto",
     maxWidth: "1536px",
     color: "#0D1F48",
@@ -49,21 +49,24 @@ export default function FoundingMember() {
   return (
     <Box>
       <div className={classes.root}>
-        <Typography variant="h3" className={classes.title}>
-          创始团队以及贡献者
-        </Typography>
-        {isPermit && (
-          <Button
-            variant="contained"
-            component={Link}
-            to="/admin/foundingMember/create"
-            sx={{ my: "1rem", borderRadius: "10px" }}
-            size="large"
-            startIcon={<AddCircleOutlineIcon />}
-          >
-            添加新成员
-          </Button>
-        )}
+        <Box sx={{ textAlign: "center" }}>
+          <Typography variant="h3" className={classes.title}>
+            创始团队以及贡献者
+          </Typography>
+
+          {isPermit && (
+            <Button
+              variant="contained"
+              component={Link}
+              to="/admin/foundingMember/create"
+              sx={{ my: "1rem", borderRadius: "10px" }}
+              size="large"
+              startIcon={<AddCircleOutlineIcon />}
+            >
+              添加新成员
+            </Button>
+          )}
+        </Box>
         <div className={classes.cards}>
           {foundingMembers.map((member, memberIdx) => {
             return <InfoCard item={member} key={memberIdx} />;
