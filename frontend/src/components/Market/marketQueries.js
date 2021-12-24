@@ -36,6 +36,10 @@ export const marketItemSortBySortKey = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          id
+          geocodingResult
+          lat
+          lng
         }
         contactPhone
         contactWeChat
