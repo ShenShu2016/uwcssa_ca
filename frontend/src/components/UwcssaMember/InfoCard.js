@@ -58,8 +58,8 @@ const useStyles = makeStyles((palette) => ({
     },
   },
   avatar: {
-    width: 120,
-    height: 120,
+    width: 125,
+    height: 125,
     margin: "auto",
     borderRadius: 12,
     size: 48,
