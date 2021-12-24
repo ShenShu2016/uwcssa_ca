@@ -220,7 +220,7 @@ export default function EventBody({ event }) {
                   </Typography>
                 ) : (
                   <div>
-                    {address.description ? (
+                    {address ? (
                       <Typography
                         variant="h6"
                         color="text.secondary"
@@ -379,7 +379,7 @@ export default function EventBody({ event }) {
                               </Typography>
                             ) : (
                               <div>
-                                {address.description ? (
+                                {address ? (
                                   <Typography variant="body2" gutterBottom>
                                     <LocationOnIcon
                                       color="action"

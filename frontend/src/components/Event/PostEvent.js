@@ -35,10 +35,12 @@ import { createTopic } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { postAddress } from "../../redux/slice/addressSlice";
 import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { v4 as uuid } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,7 +122,6 @@ export default function PostEvent() {
   const {
     handleSubmit,
     control,
-    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -180,13 +181,48 @@ export default function PostEvent() {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    const address = await GetAddress();
+    const addressID = uuid();
+    const itemID = uuid();
+    if (address) {
+      const {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+      } = address;
+      const createAddressInput = {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+        itemID: itemID,
+        userID: username,
+        id: addressID,
+      };
+      console.log(createAddressInput);
+      const addressResponse = await dispatch(
+        postAddress({ createAddressInput })
+      );
+      console.log(addressResponse);
+    }
     const createEventInput = {
       ...data,
-      id: isTitleAsURL ? getValues("title") : undefined,
+      id: itemID,
+      addressID: address && addressID,
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
-      address: GetAddress(),
       content: content,
       active: true,
       sortKey: "SortKey",
@@ -194,11 +230,12 @@ export default function PostEvent() {
       tags: GetTags(),
     };
     console.log(createEventInput);
+
     const response = await dispatch(postEvent({ createEventInput }));
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);
-      history.push(`/event/${response.payload.data.createEvent.id}`);
+      history.replace(`/event/${response.payload.data.createEvent.id}`);
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);
