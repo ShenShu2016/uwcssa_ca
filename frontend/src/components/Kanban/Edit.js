@@ -8,7 +8,6 @@ import {
   DialogTitle,
   Divider,
   FormControl,
-  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -18,10 +17,6 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
-import {
-  fetchDepartments,
-  selectAllDepartments,
-} from "../../redux/slice/departmentSlice";
 import {
   fetchUwcssaMembers,
   selectAllUwcssaMembers,
@@ -46,14 +41,20 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
+  content: {
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+    border: "1px solid",
+    borderColor: "#cfd8dc",
+    borderRadius: 5,
+  },
 });
 
 export default function Edit({ editOpen, handleEditClose, item }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const uwcssaMembers = useSelector(selectAllUwcssaMembers);
-  const departments = useSelector(selectAllDepartments);
-  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const { fetchUwcssaMembersStatus } = useSelector(
     (state) => state.uwcssaMember
   );
@@ -62,10 +63,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     if (fetchUwcssaMembersStatus === "idle" || undefined) {
       dispatch(fetchUwcssaMembers());
     }
-    if (fetchDepartmentsStatus === "idle" || undefined) {
-      dispatch(fetchDepartments());
-    }
-  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus]);
+  }, [dispatch, fetchUwcssaMembersStatus]);
 
   const {
     id,
@@ -73,7 +71,6 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     content,
     priority,
     kanbanStatus,
-    departmentID,
     assigneeID,
     title,
     deadLine,
@@ -84,6 +81,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -91,7 +89,6 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       kanbanStatus: kanbanStatus,
       deadLine: deadLine,
       points: points,
-      departmentID: departmentID,
       assigneeID: assigneeID,
       priority: priority,
     },
@@ -105,17 +102,21 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     const newTags = tags.filter((tag) => tag !== e);
     setTags(newTags);
   };
+
   const onSubmit = async (data) => {
     const updateKanbanInput = {
       ...data,
       id: id,
+      departmentID: uwcssaMembers.filter(
+        (x) => x.id === getValues("assigneeID")
+      )[0].departmentID,
       content: newContent,
       tags: GetTags(),
     };
     setLoading(true);
     console.log("updateKanbanInput", updateKanbanInput);
-    const response = await dispatch(updateKanbanDetail({ updateKanbanInput }));
     handleEditClose();
+    const response = await dispatch(updateKanbanDetail({ updateKanbanInput }));
     if (response) {
       console.log(response);
       setLoading(false);
@@ -129,33 +130,70 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   return (
     <div className={classes.root}>
       <form>
-        <Dialog open={editOpen} onClose={handleEditClose}>
+        <Dialog
+          fullWidth={true}
+          maxWidth={"lg"}
+          open={editOpen}
+          onClose={handleEditClose}
+        >
           <DialogTitle>编辑 ticket</DialogTitle>
           <Divider light />
           <DialogContent>
-            <Stack spacing={2}>
-              <Controller
-                name="title"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    required
-                    id="title"
-                    label="标题"
-                    variant="outlined"
-                    onChange={onChange}
-                    value={value}
-                    error={!!errors.title}
-                    helperText={errors.title ? "不能为空" : null}
-                  />
-                )}
-              />
-              <Controller
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+              }}
+            >
+              <Box className={classes.content}>
+                <MUIRichTextEditor
+                  label="活动详情"
+                  defaultValue={content}
+                  onChange={handleOnChange()}
+                  inlineToolbar={true}
+                  controls={[
+                    "title",
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strikethrough",
+                    "highlight",
+                    "undo",
+                    "redo",
+                    "link",
+                    "media",
+                    "numberList",
+                    "bulletList",
+                    "quote",
+                    "code",
+                    "clear",
+                  ]}
+                />
+              </Box>
+              <Stack spacing={2}>
+                <Controller
+                  name="title"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      required
+                      id="title"
+                      label="标题"
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.title}
+                      helperText={errors.title ? "不能为空" : null}
+                    />
+                  )}
+                />
+                {/* <Controller
                 name="departmentID"
                 control={control}
                 rules={{
@@ -187,187 +225,164 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                     )}
                   </FormControl>
                 )}
-              />
-              <Controller
-                name="assigneeID"
-                control={control}
-                rules={{
-                  required: false,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="assigneeID">任务接受者</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-outlined-label"
-                      id="assigneeID"
-                      value={value}
-                      onChange={onChange}
-                      label="任务接受者"
-                      error={!!errors.assigneeID}
-                    >
-                      {uwcssaMembers.map((member) => {
-                        return (
-                          <MenuItem value={member.id} key={member.id}>
-                            {`${member.departmentID}: ${member.id}`}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                )}
-              />
-              <Controller
-                name="kanbanStatus"
-                control={control}
-                rules={{
-                  required: false,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="kanbanStatus">kanbanStatus</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-outlined-label"
-                      id="kanbanStatus"
-                      value={value}
-                      onChange={onChange}
-                      label="kanbanStatus"
-                      error={!!errors.kanbanStatus}
-                    >
-                      <MenuItem value="IDEA" key={"IDEA"}>
-                        {"IDEA"}
-                      </MenuItem>
-                      <MenuItem value={"TODO"} key={"TODO"}>
-                        {"TODO"}
-                      </MenuItem>
-                      <MenuItem value={"INPROGRESS"} key={"INPROGRESS"}>
-                        {"INPROGRESS"}
-                      </MenuItem>
-                      <MenuItem value={"DONE"} key={"DONE"}>
-                        {"DONE"}
-                      </MenuItem>
-                      {"WASTED"}
-                      <MenuItem value={"WASTED"} key={"WASTED"}>
-                        {"WASTED"}
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-              <Controller
-                name="priority"
-                control={control}
-                rules={{
-                  required: false,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="priority">priority</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-outlined-label"
-                      id="priority"
-                      value={value}
-                      onChange={onChange}
-                      label="priority"
-                      error={!!errors.priority}
-                    >
-                      <MenuItem value={"Low"} key={"Low"}>
-                        {"Low"}
-                      </MenuItem>
-                      <MenuItem value={"Average"} key={"Average"}>
-                        {"Average"}
-                      </MenuItem>
-                      <MenuItem value={"High"} key={"High"}>
-                        {"High"}
-                      </MenuItem>
-                      <MenuItem value="Critical" key={"Critical"}>
-                        {"Critical"}
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-              <CustomTags
-                placeholder="新装修， 独立卫浴..."
-                initial={tags}
-                onKeyDown={(e) => handleKeyDown(e)}
-                onDelete={(e) => handleDelete(e)}
-              />
-
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              /> */}
                 <Controller
-                  name="deadLine"
+                  name="assigneeID"
                   control={control}
                   rules={{
                     required: false,
-                    defaultValues: content,
                   }}
                   render={({ field: { onChange, value } }) => (
-                    <Box sx={{ margin: "1rem 0" }}>
-                      <MobileDatePicker
-                        label="Due Date"
+                    <FormControl variant="outlined" fullWidth>
+                      <InputLabel id="assigneeID">任务接受者</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="assigneeID"
                         value={value}
-                        id="deadLine"
-                        error={!!errors.deadLine}
                         onChange={onChange}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                    </Box>
+                        label="任务接受者"
+                        error={!!errors.assigneeID}
+                      >
+                        {uwcssaMembers.map((member) => {
+                          return (
+                            <MenuItem value={member.id} key={member.id}>
+                              {`${member.departmentID}: ${member.id}`}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
                   )}
                 />
-              </LocalizationProvider>
-              <Box className={classes.content}>
-                <MUIRichTextEditor
-                  label="活动详情"
-                  onChange={handleOnChange()}
-                  inlineToolbar={true}
-                  controls={[
-                    "title",
-                    "bold",
-                    "italic",
-                    "underline",
-                    "strikethrough",
-                    "highlight",
-                    "undo",
-                    "redo",
-                    "link",
-                    "media",
-                    "numberList",
-                    "bulletList",
-                    "quote",
-                    "code",
-                    "clear",
-                  ]}
-                />
-              </Box>
-            </Stack>
-          </DialogContent>
-
-          <DialogActions>
-            <Button onClick={handleEditClose} size="large">
-              取消
-            </Button>
-            <Button
-              onClick={handleSubmit(onSubmit)}
-              variant="contained"
-              size="large"
-              disabled={loading}
-            >
-              更新
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: green[500],
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
+                <Controller
+                  name="kanbanStatus"
+                  control={control}
+                  rules={{
+                    required: false,
                   }}
+                  render={({ field: { onChange, value } }) => (
+                    <FormControl variant="outlined" fullWidth>
+                      <InputLabel id="kanbanStatus">kanbanStatus</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="kanbanStatus"
+                        value={value}
+                        onChange={onChange}
+                        label="kanbanStatus"
+                        error={!!errors.kanbanStatus}
+                      >
+                        <MenuItem value="IDEA" key={"IDEA"}>
+                          {"IDEA"}
+                        </MenuItem>
+                        <MenuItem value={"TODO"} key={"TODO"}>
+                          {"TODO"}
+                        </MenuItem>
+                        <MenuItem value={"INPROGRESS"} key={"INPROGRESS"}>
+                          {"INPROGRESS"}
+                        </MenuItem>
+                        <MenuItem value={"DONE"} key={"DONE"}>
+                          {"DONE"}
+                        </MenuItem>
+                        {"WASTED"}
+                        <MenuItem value={"WASTED"} key={"WASTED"}>
+                          {"WASTED"}
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  )}
                 />
-              )}
-            </Button>
-          </DialogActions>
+                <Controller
+                  name="priority"
+                  control={control}
+                  rules={{
+                    required: false,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <FormControl variant="outlined" fullWidth>
+                      <InputLabel id="priority">priority</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="priority"
+                        value={value}
+                        onChange={onChange}
+                        label="priority"
+                        error={!!errors.priority}
+                      >
+                        <MenuItem value={"Low"} key={"Low"}>
+                          {"Low"}
+                        </MenuItem>
+                        <MenuItem value={"Average"} key={"Average"}>
+                          {"Average"}
+                        </MenuItem>
+                        <MenuItem value={"High"} key={"High"}>
+                          {"High"}
+                        </MenuItem>
+                        <MenuItem value="Critical" key={"Critical"}>
+                          {"Critical"}
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  )}
+                />
+                <CustomTags
+                  placeholder="新装修， 独立卫浴..."
+                  initial={tags}
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  onDelete={(e) => handleDelete(e)}
+                />
+
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <Controller
+                    name="deadLine"
+                    control={control}
+                    rules={{
+                      required: false,
+                      defaultValues: content,
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <Box sx={{ margin: "1rem 0" }}>
+                        <MobileDatePicker
+                          label="Due Date"
+                          value={value}
+                          id="deadLine"
+                          error={!!errors.deadLine}
+                          onChange={onChange}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Box>
+                    )}
+                  />
+                </LocalizationProvider>
+
+                <DialogActions>
+                  <Button onClick={handleEditClose} size="large">
+                    取消
+                  </Button>
+                  <Button
+                    onClick={handleSubmit(onSubmit)}
+                    variant="contained"
+                    size="large"
+                    disabled={loading}
+                  >
+                    更新
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
+                </DialogActions>
+              </Stack>
+            </Box>
+          </DialogContent>
         </Dialog>
       </form>
     </div>

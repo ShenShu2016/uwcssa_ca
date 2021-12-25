@@ -1,5 +1,7 @@
 import {
+  Backdrop,
   Card,
+  CircularProgress,
   Divider,
   ListItemIcon,
   ListItemText,
@@ -11,22 +13,39 @@ import React, { Fragment, useState } from "react";
 
 import { Box } from "@mui/system";
 import CardHeader from "@mui/material/CardHeader";
+import CircleIcon from "@mui/icons-material/Circle";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { GetStatusColor } from "./ByStatus";
 import IconButton from "@mui/material/IconButton";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoticeIcons from "./NoticeIcons";
 import { Typography } from "@mui/material";
 import moment from "moment";
+import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
+import { useDispatch } from "react-redux";
 import { usePermit } from "../../Hooks/usePermit";
 
+const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
+
 export default function Ticket({ item }) {
-  const { content, assignee, assigneeID, title, userID, createdAt } = item;
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const {
+    id,
+    content,
+    assignee,
+    assigneeID,
+    title,
+    userID,
+    createdAt,
+    kanbanStatus,
+  } = item;
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const isPermit = usePermit(null, "admin");
+  const isPermit = usePermit(null, "staff");
 
   const [editOpen, setEditOpen] = useState(false);
 
@@ -43,6 +62,16 @@ export default function Ticket({ item }) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleChangeStatus = async (status) => {
+    setLoading(true);
+    const updateKanbanInput = {
+      id: id,
+      kanbanStatus: status,
+    };
+    console.log("updateKanbanInput", updateKanbanInput);
+
+    await dispatch(updateKanbanDetail({ updateKanbanInput }));
   };
   return (
     <Box sx={{ my: "1rem" }}>
@@ -130,13 +159,41 @@ export default function Ticket({ item }) {
             }}
           >
             <ListItemIcon>
-              <EditRoundedIcon fontSize="small" />
+              <EditRoundedIcon />
             </ListItemIcon>
             <ListItemText>编辑</ListItemText>
           </MenuItem>
+
+          {KanbanStatus.map((status, idx) => {
+            return (
+              <Box key={idx}>
+                {kanbanStatus !== status && (
+                  <MenuItem
+                    onClick={() => {
+                      handleChangeStatus(status);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <CircleIcon
+                        fontSize="small"
+                        sx={{ color: GetStatusColor(status) }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText>移到: {status}</ListItemText>
+                  </MenuItem>
+                )}
+              </Box>
+            );
+          })}
         </MenuList>
       </Menu>
       <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Box>
   );
 }

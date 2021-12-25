@@ -111,7 +111,7 @@ export default function PostMarketVehicle() {
   const onSubmit = async (data) => {
     const address = await GetAddress();
     const addressID = uuid();
-    const marketID = uuid();
+    const itemID = uuid();
     const {
       description,
       place_id,
@@ -133,7 +133,7 @@ export default function PostMarketVehicle() {
       geocodingResult,
       lat,
       lng,
-      marketItemID: marketID,
+      itemID: itemID,
       userID: username,
       id: addressID,
     };
@@ -142,6 +142,7 @@ export default function PostMarketVehicle() {
 
     const createMarketItemInput = {
       ...data,
+      id: itemID,
       name: `${data.year} ${data.make} ${data.model}`,
       marketType: "Vehicle",
       imgURLs: imgURLs,

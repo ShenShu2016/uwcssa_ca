@@ -55,8 +55,6 @@ const DetailInfo = ({
   interiorColor,
   fuelType,
 }) => {
-  // console.log("???", typeof address.types[2]);
-
   return (
     <React.Fragment>
       <Typography marginX="1rem" marginY="0.5rem" fontWeight="600">
@@ -216,11 +214,14 @@ const DetailInfo = ({
         )}
       </Paper>
       <Typography margin="1rem" marginY="0.25rem" fontWeight="250">
-        {address
-          ? address.description.length === 0
-            ? "Location Goes Here"
-            : address.description
-          : ""}
+        {mode === "detail" && address
+          ? address.terms[address.terms.length - 1]
+              .split(",")[1]
+              .split("=")[1]
+              .split("}")[0]
+          : address.description.length === 0
+          ? "Location Goes Here"
+          : address.description + " (exact location will not be shown)"}
       </Typography>
     </React.Fragment>
   );

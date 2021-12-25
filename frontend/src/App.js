@@ -34,18 +34,19 @@ import UserFeedBack from "./containers/UserFeedBack";
 import UwcssaMember from "./containers/UwcssaMember";
 import awsconfig from "./aws-exports";
 import { makeStyles } from "@mui/styles";
+import { switchTheme } from "./redux/slice/generalSlice";
 
 Amplify.configure(awsconfig);
 
 export default function App() {
   const dispatch = useDispatch();
-  const { lightTheme } = useSelector((state) => state.general);
+  const { darkTheme } = useSelector((state) => state.general);
   const theme = createTheme({
     typography: {
       fontFamily: "Noto Sans SC",
     },
     palette: {
-      mode: lightTheme ? "light" : "dark",
+      mode: darkTheme ? "dark" : "light",
     },
   });
 
@@ -57,11 +58,30 @@ export default function App() {
       },
     },
   });
-  const classes = useStyles();
+  useEffect(() => {
+    // Add listener to update styles  onSelectMode(e.matches ? 'dark' : 'light')
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) =>
+        dispatch(switchTheme(e.matches ? true : false))
+      );
 
+    // Setup dark/light mode for the first time
+    dispatch(
+      switchTheme(
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false
+      )
+    );
+    // Remove listener
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", () => {});
+    };
+  }, [dispatch]);
+  const classes = useStyles();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   // console.log("isAlertOpen", isAlertOpen);
-
   const { isAuthenticated } = useSelector((state) => state.userAuth);
   const handleAlertClose = (reason) => {
     if (reason === "clickaway") {

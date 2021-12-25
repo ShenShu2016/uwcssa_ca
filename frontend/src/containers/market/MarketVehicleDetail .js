@@ -19,6 +19,7 @@ import { useTitle } from "../../Hooks/useTitle";
 
 export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
   const [open, setOpen] = useState(false);
+  console.log(mode);
   const {
     id,
     // name,
