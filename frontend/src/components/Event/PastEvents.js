@@ -17,11 +17,13 @@ import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ breakpoints, palette }) => ({
   actionArea: {
     maxWidth: 300,
     minWidth: 256,
     borderRadius: 16,
+    maxHeight: 360,
+    height: 335,
     transition: "0.2s",
     "&:hover": {
       transform: "scale(1.1)",
@@ -31,11 +33,14 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 300,
     minWidth: 256,
     // borderRadius: 16,
-    color: "transparent",
+    // color: "transparent",
     boxShadow: "none",
     overflow: "initial",
     maxHeight: 360,
     height: 335,
+    position: "relative",
+    border: palette.mode === "dark" ? null : "1px solid",
+    borderColor: "#cfd8dc",
 
     "&:hover": {
       boxShadow: "0 6px 12px 0 #757ce8",
@@ -46,7 +51,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: " auto",
     width: "50%",
-    position: "relative",
+    position: "absolute",
+    top: 0,
+    left: 0,
   },
 
   s3image: {
@@ -54,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     height: "162px",
     borderRadius: "8px",
     objectFit: "cover",
-    [theme.breakpoints.down("sm")]: {
+    [breakpoints.down("sm")]: {
       width: "112px",
       height: "112px",
       marginTop: "2.5rem",
@@ -75,13 +82,24 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     padding: 24,
     margin: "-24% 9px 0",
-    backgroundColor: "#fff",
+    backgroundColor: palette.mode === "dark" ? "#212121" : "#fff",
     borderRadius: 4,
-    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+    boxShadow:
+      palette.mode === "dark"
+        ? "0 1px 2px 0 rgb(128,128,128)"
+        : "0 4px 8px 0 rgba(0,0,0,0.2)",
   },
   locationIcon: {
     marginRight: 4,
     fontSize: 18,
+  },
+  bottom: {
+    maxWidth: 300,
+    minWidth: 256,
+    maxHeight: 360,
+    height: 335,
+    position: "absolute",
+    backgroundColor: palette.mode === "dark" ? "#212121" : "#ffff",
   },
 }));
 
@@ -139,6 +157,7 @@ export default function PastEvent({ event }) {
             >
               <InsideLeftLineTag />
             </Box>
+            <Box className={classes.bottom} sx={{ boxShadow: 1 }} />
 
             <CardContent className={classes.content}>
               <Typography
@@ -188,7 +207,7 @@ export default function PastEvent({ event }) {
                 color="primary"
                 gutterBottom
               ></Typography>
-              <Box style={{ maxHeight: "30px", overflow: "hidden" }}></Box>
+              {/* <Box style={{ maxHeight: "30px", overflow: "hidden" }}></Box> */}
 
               {online === true ? (
                 <Box
@@ -203,7 +222,7 @@ export default function PastEvent({ event }) {
                     <Grid item xs zeroMinWidth>
                       <Typography
                         variant="subtitle2"
-                        color="textSecondary"
+                        color="text.Secondary"
                         noWrap
                       >
                         线上
@@ -226,7 +245,7 @@ export default function PastEvent({ event }) {
                         <Grid item xs zeroMinWidth>
                           <Typography
                             variant="subtitle2"
-                            color="textSecondary"
+                            color="text.Secondary"
                             noWrap
                           >
                             {address.description}
@@ -245,7 +264,10 @@ export default function PastEvent({ event }) {
                       <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
                         <LocationOnIcon className={classes.locationIcon} />
                         <Grid item xs zeroMinWidth>
-                          <Typography variant="subtitle2" color="textSecondary">
+                          <Typography
+                            variant="subtitle2"
+                            color="text.Secondary"
+                          >
                             无
                           </Typography>
                         </Grid>
