@@ -32,7 +32,7 @@ import Edit from "./Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import MUIRichTextEditor from "mui-rte";
 
-const useStyles = makeStyles(({ breakpoints, spacing }) => ({
+const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
   box: {
     boxShadow: "0 3px 12px 0 #8888",
     "&:hover": {
@@ -114,6 +114,9 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
     [breakpoints.up("sm")]: {
       padding: "0 2rem",
     },
+  },
+  appBar: {
+    backgroundColor: palette.mode === "dark" ? "#616161" : "#ffff",
   },
 }));
 
@@ -258,7 +261,7 @@ export default function PersonalCard({
               onClick={handleClickOpen}
               sx={{
                 marginLeft: "5rem",
-                "&.MuiButton-text": { color: "#616161" },
+                // "&.MuiButton-text": { color: "#616161" },
               }}
             >
               查看简介
@@ -270,7 +273,11 @@ export default function PersonalCard({
             onClose={handleClose}
             TransitionComponent={Transition}
           >
-            <AppBar sx={{ position: "relative", backgroundColor: "#ffff" }}>
+            <AppBar
+              sx={{
+                position: "relative",
+              }}
+            >
               <Toolbar>
                 <IconButton
                   edge="start"
