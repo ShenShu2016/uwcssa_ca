@@ -258,8 +258,8 @@ export default function Header() {
   // const [lightOrDark, setLightOrDark] = useState(true);
 
   const handleChangeTheme = (event) => {
-    console.log("switchTheme");
-    dispatch(switchTheme());
+    console.log("switchTheme", event.target.value);
+    dispatch(switchTheme(event.target.checked));
   };
   const toggleDrawer = (open) => (event) => {
     if (
@@ -343,7 +343,10 @@ export default function Header() {
       </MenuItem>
       <Box className={classes.title}>
         <MenuItem sx={{ justifyContent: "center" }}>
-          <MUISwitch onChange={handleChangeTheme} />
+          <MUISwitch
+            onChange={(event) => handleChangeTheme(event)}
+            // checked={darkTheme}
+          />
         </MenuItem>
       </Box>
       <MenuItem onClick={signOut_user}>

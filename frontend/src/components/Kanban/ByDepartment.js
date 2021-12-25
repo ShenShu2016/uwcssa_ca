@@ -15,7 +15,7 @@ import { styled } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: "1120px",
+    minWidth: "1400px",
     maxWidth: "1536px",
     marginBlock: "1rem",
     marginInline: "auto",

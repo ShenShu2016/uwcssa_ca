@@ -10,7 +10,7 @@ import {
 import React from "react";
 import Ticket from "./Ticket";
 
-const HeaderColor = (status) => {
+export const GetStatusColor = (status) => {
   if (status === "IDEA") {
     return "primary.light";
   } else if (status === "TODO") {
@@ -19,6 +19,8 @@ const HeaderColor = (status) => {
     return "error.light";
   } else if (status === "DONE") {
     return "success.light";
+  } else if (status === "WASTED") {
+    return "secondary.light";
   }
 };
 
@@ -28,8 +30,8 @@ export default function ByStatus({ status, kanbansByDepartment }) {
   );
   //console.log("kanbansByStatus", kanbansByStatus);
   return (
-    <Card sx={{ height: "100%" }}>
-      <CardHeader sx={{ bgcolor: HeaderColor(status), py: "3px" }} />
+    <Card sx={{ height: "100%", width: "100%" }}>
+      <CardHeader sx={{ bgcolor: GetStatusColor(status), py: "3px" }} />
       <Paper sx={{ textAlign: "center", py: "0.5rem" }}>
         <Typography variant="h6">{status}</Typography>
       </Paper>

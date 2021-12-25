@@ -14,7 +14,7 @@ import { v4 as uuid } from "uuid";
 
 const initialState = {
   users: null,
-  lightTheme: true,
+  darkTheme: false,
   forumPostCounts: "",
   urlFrom: null,
   imageKey: {},
@@ -221,7 +221,8 @@ const generalSlice = createSlice({
       console.log("remove selected removeURLFrom successfully!");
     },
     switchTheme(state, action) {
-      state.lightTheme = !state.lightTheme;
+      console.log("data", action);
+      state.darkTheme = action.payload;
       console.log("switch theme!");
     },
   },
