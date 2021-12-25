@@ -95,7 +95,7 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
   },
   bottom: {
     maxWidth: 300,
-    minWidth: 256,
+    width: 300,
     maxHeight: 360,
     height: 335,
     position: "absolute",
