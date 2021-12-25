@@ -149,7 +149,7 @@ export default function EditMarketVehicleDetail() {
       geocodingResult,
       lat,
       lng,
-      marketItemID: id,
+      itemID: id,
       userID: marketUserInfo.userID,
       id: addressID,
     };
