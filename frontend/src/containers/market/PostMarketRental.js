@@ -121,7 +121,7 @@ export default function PostMarketRental() {
   const onSubmit = async (data) => {
     const address = await GetAddress();
     const addressID = uuid();
-    const marketID = uuid();
+    const itemID = uuid();
     const {
       description,
       place_id,
@@ -143,7 +143,7 @@ export default function PostMarketRental() {
       geocodingResult,
       lat,
       lng,
-      marketItemID: marketID,
+      itemID: itemID,
       userID: username,
       id: addressID,
     };
@@ -154,6 +154,7 @@ export default function PostMarketRental() {
       ...data,
       name: `${data.propertyType}, ${data.bedroomCounts} bedrooms, ${data.marketRentalSaleRent}`,
       marketType: "Rental",
+      id: itemID,
       addressID: addressID,
       imgURLs: imgURLs,
       tags: GetTags(),

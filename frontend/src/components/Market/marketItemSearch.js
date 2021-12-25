@@ -117,7 +117,6 @@ export const SearchArea = ({ type = "all" }) => {
             onKeyDown={(e) =>
               e.key.toLowerCase() === "enter" ? onKeyDownHandler() : null
             }
-            // disabled
           />
         )}
       />

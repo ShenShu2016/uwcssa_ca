@@ -144,7 +144,7 @@ export default function EditMarketItemDetail() {
       geocodingResult,
       lat,
       lng,
-      marketItemID: id,
+      itemID: id,
       userID: marketUserInfo.userID,
       id: addressID,
     };
