@@ -19,7 +19,7 @@ import { useTitle } from "../../Hooks/useTitle";
 
 //点太快，selectedMarket来不及删，会产生bug; Solved!
 
-export function MarketRentalInfo({ marketItem, mode = "detail" }) {
+export function MarketRentalInfo({ marketItem, mode = "detail", darkTheme }) {
   const [open, setOpen] = useState(false);
   const {
     id,
@@ -70,6 +70,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
         propertyType={propertyType}
         bedroomCounts={bedroomCounts}
         marketRentalSaleRent={marketRentalSaleRent}
+        darkTheme={darkTheme}
       />
       <Divider variant="middle" />
       <DetailInfo
@@ -82,11 +83,17 @@ export function MarketRentalInfo({ marketItem, mode = "detail" }) {
         mode={mode}
         dogFriendly={dogFriendly}
         address={address}
+        darkTheme={darkTheme}
       />
       <Divider variant="middle">
         <Typography fontWeight="600">卖家详情</Typography>
       </Divider>
-      <SellerInfo user={user} createdAt={createdAt} owner={owner} />
+      <SellerInfo
+        user={user}
+        createdAt={createdAt}
+        owner={owner}
+        darkTheme={darkTheme}
+      />
     </Paper>
   );
 }
@@ -102,6 +109,7 @@ export default function MarketRentalDetail() {
   }, [id, dispatch]);
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const { darkTheme } = useSelector((state) => state.general);
   // const status = useSelector((state) => state.market.selectedMarketItemStatus);
   const starter = useStarter(marketItem, "rental");
   // const imgKeyFromServer = useGetImages(marketItem, id);
@@ -117,7 +125,7 @@ export default function MarketRentalDetail() {
             <SwipeViews images={marketItem.imgURLs} />
           </Box>
           <Box className={classes.info}>
-            <MarketRentalInfo marketItem={marketItem} />
+            <MarketRentalInfo marketItem={marketItem} darkTheme={darkTheme} />
           </Box>
         </Stack>
       )}

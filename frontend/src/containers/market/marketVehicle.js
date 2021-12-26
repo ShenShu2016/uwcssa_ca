@@ -33,6 +33,7 @@ export default function MarketVehicle() {
     clickedTag: "",
   });
 
+  const { darkTheme } = useSelector((state) => state.general);
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems, "all");
   // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
@@ -55,6 +56,7 @@ export default function MarketVehicle() {
     filteredItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
           key={marketItemIdx}
@@ -112,6 +114,7 @@ export default function MarketVehicle() {
           className={classes.contain}
         >
           <FilterInfo
+            darkTheme={darkTheme}
             form="plain"
             type="vehicle"
             filterList={filterList}
@@ -127,6 +130,7 @@ export default function MarketVehicle() {
           />
           <Box className={classes.img}>
             <MarketImgTopFilter
+              darkTheme={darkTheme}
               type="vehicle"
               trueMarketItems={trueMarketItems}
               handleClick={handleClick}

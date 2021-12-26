@@ -52,10 +52,7 @@ function ConfirmationDialogRaw(props) {
     >
       <DialogTitle>选择种类</DialogTitle>
       <DialogContent dividers>
-        <Box
-          width="100%"
-          // maxHeight="400px" overflow="auto"
-        >
+        <Box width="100%">
           <CategoryIcons />
         </Box>
       </DialogContent>
@@ -76,6 +73,7 @@ ConfirmationDialogRaw.propTypes = {
 };
 
 export default function MarketImgTopFilter({
+  darkTheme,
   type,
   trueMarketItems,
   handleClick,
@@ -138,7 +136,11 @@ export default function MarketImgTopFilter({
     <React.Fragment>
       {/* ImgTopFIlter for large screen */}
       <Paper elevation={3} className={classes.imgPaper1}>
-        <Typography variant="h6" fontWeight="bold">
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          color={`${darkTheme ? "#787878" : "#fffff"}`}
+        >
           Shop by trend
         </Typography>
         <Stack
@@ -281,7 +283,7 @@ export default function MarketImgTopFilter({
             );
           })}
         </Grid>
-        <SearchArea />
+        <SearchArea darkTheme={darkTheme} />
         <Divider sx={{ marginY: "1rem" }} />
         <Stack spacing={2} direction="row" justifyContent="flex-end">
           <Button
@@ -293,6 +295,7 @@ export default function MarketImgTopFilter({
           </Button>
           <MarketFIlterLocation type="button" />
           <FilterInfo
+            darkTheme={darkTheme}
             form="button"
             type={type}
             filterList={filterList}

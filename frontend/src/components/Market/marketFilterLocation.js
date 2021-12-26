@@ -161,7 +161,7 @@ export default function ConfirmationDialog({
 
   if (type === "plain") {
     return (
-      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
         <List component="div" role="group">
           <ListItem
             button

@@ -30,6 +30,7 @@ const { marketVehicleTypeList: VType } = marketVehicleOptions;
 
 const DetailInfo = ({
   // general inputs
+  darkTheme,
   type,
   tags,
   description,
@@ -199,7 +200,7 @@ const DetailInfo = ({
           marginX: "1rem",
           marginY: "0.25rem",
           height: "250px",
-          backgroundColor: "rgb(243, 246, 249)",
+          backgroundColor: darkTheme ? "black" : "rgb(243, 246, 249)",
           color: "rgb(161 161 161 / 87%)",
         }}
       >

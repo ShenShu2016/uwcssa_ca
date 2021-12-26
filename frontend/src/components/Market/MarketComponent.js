@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MarketComponent({ item, type }) {
+export default function MarketComponent({ item, type, darkTheme }) {
   const classes = useStyles();
   // const dispatch = useDispatch();
   // const [imageURL, setImageURL] = useState(null);
@@ -124,7 +124,7 @@ export default function MarketComponent({ item, type }) {
         sx={{
           transition: "background-color 0.7s",
           "&:hover": {
-            backgroundColor: "#f5f5f5",
+            backgroundColor: darkTheme ? "#121212" : "#f5f5f5",
           },
         }}
       >
