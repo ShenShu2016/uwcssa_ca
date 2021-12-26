@@ -95,13 +95,15 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     fontSize: 18,
   },
   bottom: {
-    maxWidth: 300,
-    minWidth: 256,
+    width: 256,
     height: 141,
     position: "absolute",
     backgroundColor: palette.mode === "dark" ? "#212121" : "#ffff",
     top: 194,
     left: 0,
+    [breakpoints.up("xs")]: {
+      width: 300,
+    },
   },
 }));
 
