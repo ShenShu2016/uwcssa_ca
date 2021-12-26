@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
-export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
+export function MarketVehicleInfo({ marketItem, mode = "detail", darkTheme }) {
   const [open, setOpen] = useState(false);
   console.log(mode);
   const {
@@ -63,6 +63,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         year={year}
         make={make}
         model={model}
+        darkTheme={darkTheme}
       />
       <Divider variant="middle" />
       <DetailInfo
@@ -78,11 +79,17 @@ export function MarketVehicleInfo({ marketItem, mode = "detail" }) {
         exteriorColor={exteriorColor}
         interiorColor={interiorColor}
         fuelType={fuelType}
+        darkTheme={darkTheme}
       />
       <Divider variant="middle">
         <Typography fontWeight="600">卖家详情</Typography>
       </Divider>
-      <SellerInfo user={user} createdAt={createdAt} owner={owner} />
+      <SellerInfo
+        user={user}
+        createdAt={createdAt}
+        owner={owner}
+        darkTheme={darkTheme}
+      />
     </Paper>
   );
 }
@@ -98,6 +105,7 @@ export default function MarketVehicleDetail() {
   }, [id, dispatch]);
 
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const { darkTheme } = useSelector((state) => state.general);
   // const status = useSelector((state) => state.market.selectedMarketItemStatus);
   const starter = useStarter(marketItem, "vehicle");
   // const imgKeyFromServer = useGetImages(marketItem, id);
@@ -113,7 +121,7 @@ export default function MarketVehicleDetail() {
             <SwipeViews images={marketItem.imgURLs} />
           </Box>
           <Box className={classes.info}>
-            <MarketVehicleInfo marketItem={marketItem} />
+            <MarketVehicleInfo marketItem={marketItem} darkTheme={darkTheme} />
           </Box>
         </Stack>
       )}

@@ -137,6 +137,7 @@ CategoryDialog.propTypes = {
 };
 
 export default function MarketTopBar({
+  darkTheme,
   type,
   trueMarketItems,
   handleClick,
@@ -203,7 +204,11 @@ export default function MarketTopBar({
     <React.Fragment>
       {/* ImgTopFIlter for large screen */}
       <Paper elevation={3} className={classes.imgPaper1}>
-        <Typography variant="h4" fontWeight="bold">
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          color={`${darkTheme ? "#787878" : "#fffff"}`}
+        >
           二手商城
         </Typography>
       </Paper>
@@ -228,7 +233,7 @@ export default function MarketTopBar({
           onClose={handleClose}
           value={value}
         />
-        <SearchArea />
+        <SearchArea darkTheme={darkTheme} />
         <Divider sx={{ marginY: "1rem" }} />
         <Stack spacing={2} direction="row" justifyContent="flex-end">
           <Button startIcon={<AddIcon />} component={Link} to="/market/create">

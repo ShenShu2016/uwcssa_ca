@@ -25,6 +25,7 @@ export default function PostImgPreview({
   control,
   errors,
   uploadMarketItemImg,
+  darkTheme,
   // setTrigger,
   setUploadStatus,
   handleDeleteImg,
@@ -53,9 +54,8 @@ export default function PostImgPreview({
       <Paper
         className={classes.imgContainer}
         elevation={1}
-        bgcolor="rgb(243, 246, 249)"
         sx={{
-          backgroundColor: "rgb(243, 246, 249)",
+          backgroundColor: darkTheme ? "#2a2a2a" : "rgb(243, 246, 249)",
         }}
       >
         {imgURLs.length === 0 ? (

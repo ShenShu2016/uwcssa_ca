@@ -13,6 +13,7 @@ import { selectMarketUserById } from "../../redux/slice/marketUserSlice";
 import { useSelector } from "react-redux";
 
 export default function PostUserInfo({
+  darkTheme,
   control,
   setValue,
   errors,
@@ -27,11 +28,7 @@ export default function PostUserInfo({
   // console.log("what happened here", defaultInfo);
 
   return (
-    <Box
-      sx={{
-        color: "rgb(0,0,0)",
-      }}
-    >
+    <Box sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}>
       {marketUserInfo === undefined ? (
         <Typography variant="subtitle1" fontWeight="600">
           补充联系方式

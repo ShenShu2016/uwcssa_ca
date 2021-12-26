@@ -56,7 +56,7 @@ export default function PostMarketItem() {
     selectMarketUserById(state, username)
   );
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-
+  const { darkTheme } = useSelector((state) => state.general);
   const [open, setOpen] = useState(false);
   const [fakeItems, setFakeItems] = useState({
     marketType: "Item",
@@ -245,7 +245,7 @@ export default function PostMarketItem() {
             className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              backgroundColor: "#f9f9f9",
+              backgroundColor: darkTheme ? "#101010" : "#f9f9f9",
               color: "#c1c1c1",
               transition: "color 0.3s",
             }}
@@ -254,7 +254,7 @@ export default function PostMarketItem() {
               direction="row"
               justifyContent="space-between"
               ref={imgRef}
-              sx={{ color: "rgb(0,0,0)" }}
+              sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
             >
               <Typography
                 variant="h5"
@@ -275,6 +275,7 @@ export default function PostMarketItem() {
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
+              darkTheme={darkTheme}
               uploadMarketItemImg={uploadMarketItemImg}
               // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
@@ -465,6 +466,7 @@ export default function PostMarketItem() {
                 control={control}
                 setValue={setValue}
                 errors={errors}
+                darkTheme={darkTheme}
                 defaultInfo={defaultInfo}
                 setDefaultInfo={setDefaultInfo}
               />
@@ -493,12 +495,22 @@ export default function PostMarketItem() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />
+            <PreviewInfo
+              imgURLs={imgURLs}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={<PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />}
+            content={
+              <PreviewInfo
+                imgURLs={imgURLs}
+                fakeItems={fakeItems}
+                darkTheme={darkTheme}
+              />
+            }
             title="Preview"
             position="bottom"
             open={open}

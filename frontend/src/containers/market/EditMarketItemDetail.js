@@ -51,6 +51,7 @@ export default function EditMarketItemDetail() {
   const history = useHistory();
   useTitle("更新二手商品信息");
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const { darkTheme } = useSelector((state) => state.general);
   const [fakeItems, setFakeItems] = useState(marketItem);
   const [loading, setLoading] = useState(false);
   const marketUserInfo = useSelector((state) =>
@@ -219,7 +220,7 @@ export default function EditMarketItemDetail() {
             className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              backgroundColor: "#f9f9f9",
+              backgroundColor: darkTheme ? "#101010" : "#f9f9f9",
               color: "#c1c1c1",
               transition: "color 0.3s",
             }}
@@ -230,9 +231,9 @@ export default function EditMarketItemDetail() {
                 gutterBottom
                 component="div"
                 fontWeight="bold"
-                sx={{ color: "rgb(0,0,0)" }}
+                sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
               >
-                New Item Listing
+                Edit Item Listing
               </Typography>
               <Box className={classes.icon}>
                 <IconButton onClick={() => setOpen(true)}>
@@ -245,6 +246,7 @@ export default function EditMarketItemDetail() {
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
+              darkTheme={darkTheme}
               uploadMarketItemImg={uploadMarketItemImg}
               // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
@@ -435,6 +437,7 @@ export default function EditMarketItemDetail() {
                 control={control}
                 setValue={setValue}
                 errors={errors}
+                darkTheme={darkTheme}
                 defaultInfo={defaultInfo}
                 setDefaultInfo={setDefaultInfo}
               />
@@ -463,13 +466,21 @@ export default function EditMarketItemDetail() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
+            <PreviewInfo
+              imgURLs={imgKeyFromServer}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
             content={
-              <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
+              <PreviewInfo
+                imgURLs={imgKeyFromServer}
+                fakeItems={fakeItems}
+                darkTheme={darkTheme}
+              />
             }
             title="Preview"
             position="bottom"

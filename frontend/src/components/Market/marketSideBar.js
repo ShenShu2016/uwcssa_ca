@@ -20,7 +20,12 @@ import React from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 
-const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
+const MarketSideBar = ({
+  setAddressInfo,
+  setSearchRadius,
+  clickHandler,
+  darkTheme,
+}) => {
   const useStyles = makeStyles((theme) => ({
     info: {
       width: "360px",
@@ -50,7 +55,7 @@ const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
 
   const UtilityIcons = () => {
     return (
-      <nav aria-label="main mailbox folders">
+      <Box color={`${darkTheme ? "#787878" : "#fffff"}`}>
         <List>
           <ListItem disablePadding>
             <ListItemButton component={Button} onClick={clickHandler}>
@@ -69,18 +74,23 @@ const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
             </ListItemButton>
           </ListItem>
         </List>
-      </nav>
+      </Box>
     );
   };
 
   return (
     <Box className={classes.info}>
       <Paper className={classes.paper} elevation={3}>
-        <Typography variant="h5" marginBottom="1rem" fontWeight="bold">
+        <Typography
+          variant="h5"
+          marginBottom="1rem"
+          fontWeight="bold"
+          color={`${darkTheme ? "#787878" : "#fffff"}`}
+        >
           商城
         </Typography>
         <Box width="100%" marginBottom="1rem" overflow="hidden">
-          <SearchArea />
+          <SearchArea darkTheme={darkTheme} />
           <UtilityIcons />
           <Button
             variant="outlined"
@@ -94,8 +104,12 @@ const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
           <Divider />
         </Box>
 
-        <Box width="100%" overflow="hidden">
-          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+        <Box
+          width="100%"
+          overflow="hidden"
+          color={`${darkTheme ? "#787878" : "#fffff"}`}
+        >
+          <Typography variant="h6" fontWeight="bold">
             位置
           </Typography>
           <MarketFIlterLocation
@@ -103,7 +117,12 @@ const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
             setSearchRadius={setSearchRadius}
           />
         </Box>
-        <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+        <Typography
+          variant="h6"
+          marginBottom="1rem"
+          fontWeight="bold"
+          color={`${darkTheme ? "#787878" : "#fffff"}`}
+        >
           类别
         </Typography>
         <Box
@@ -137,7 +156,7 @@ const MarketSideBar = ({ setAddressInfo, setSearchRadius, clickHandler }) => {
             },
           }}
         >
-          <CategoryIcons />
+          <CategoryIcons darkTheme={darkTheme} />
         </Box>
       </Paper>
     </Box>

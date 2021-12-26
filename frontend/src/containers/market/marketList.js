@@ -25,6 +25,7 @@ export default function MarketList() {
   const [searchRadius, setSearchRadius] = React.useState(0);
   // console.log(addressInfo);
   const marketItems = useSelector(selectAllMarketItems);
+  const { darkTheme } = useSelector((state) => state.general);
   const starter = useStarter(marketItems);
   // console.log(starter);
   // console.log(marketItems);
@@ -69,6 +70,7 @@ export default function MarketList() {
     marketItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
           key={marketItemIdx}
@@ -83,12 +85,13 @@ export default function MarketList() {
           className={classes.contain}
         >
           <MarketSideBar
+            darkTheme={darkTheme}
             setAddressInfo={setAddressInfo}
             setSearchRadius={setSearchRadius}
             clickHandler={clickHandler}
           />
           <Box className={classes.img}>
-            <MarketTopBar />
+            <MarketTopBar darkTheme={darkTheme} />
             <Box className={classes.items}>{marketItemRenderList}</Box>
           </Box>
         </Stack>

@@ -27,11 +27,10 @@ import { fetchMarketItems } from "../../redux/slice/marketSlice";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
-export const SearchArea = ({ type = "all" }) => {
+export const SearchArea = ({ type = "all", darkTheme }) => {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: "rgb(243, 246, 249)",
     marginRight: theme.spacing(2),
     width: "100%",
     // [theme.breakpoints.down("sm")]: {
@@ -101,7 +100,9 @@ export const SearchArea = ({ type = "all" }) => {
   };
 
   return (
-    <Search>
+    <Search
+      sx={{ backgroundColor: darkTheme ? "#121212" : "rgb(243, 246, 249)" }}
+    >
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
@@ -124,10 +125,13 @@ export const SearchArea = ({ type = "all" }) => {
   );
 };
 
-export const CategoryIcons = () => {
+export const CategoryIcons = ({ darkTheme }) => {
   const IconList = ({ to, label, icon }) => {
     return (
-      <ListItem disablePadding>
+      <ListItem
+        disablePadding
+        sx={{ color: darkTheme ? "#787878" : "#ffffff" }}
+      >
         <ListItemButton component={Link} to={to}>
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText primary={label} />
