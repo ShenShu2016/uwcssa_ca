@@ -54,6 +54,7 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     position: "absolute",
     top: 0,
     left: 0,
+    zIndex: 2,
   },
 
   s3image: {
@@ -94,12 +95,15 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     fontSize: 18,
   },
   bottom: {
-    maxWidth: 300,
-    width: 300,
-    maxHeight: 360,
-    height: 335,
+    width: 256,
+    height: 141,
     position: "absolute",
     backgroundColor: palette.mode === "dark" ? "#212121" : "#ffff",
+    top: 194,
+    left: 0,
+    [breakpoints.up("xs")]: {
+      width: 300,
+    },
   },
 }));
 
@@ -145,7 +149,11 @@ export default function PastEvent({ event }) {
                   ? posterImgURL
                   : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
               }
-              style={{ objectFit: "cover", opacity: 0.9 }}
+              style={{
+                objectFit: "cover",
+                opacity: 0.9,
+                borderRadius: "16px 16px 0 0",
+              }}
             />
             <Box
               sx={{
@@ -157,8 +165,10 @@ export default function PastEvent({ event }) {
             >
               <InsideLeftLineTag />
             </Box>
-            <Box className={classes.bottom} sx={{ boxShadow: 1 }} />
-
+            <Box
+              className={classes.bottom}
+              sx={{ borderRadius: "0 0 16px 16px" }}
+            />
             <CardContent className={classes.content}>
               <Typography
                 variant="subtitle1"

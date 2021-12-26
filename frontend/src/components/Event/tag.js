@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#3f50b5",
     color: "#fff",
     marginBottom: "0.5rem",
-    borderRadius: "0 3px 3px 0",
+    borderRadius: "16px 0 0 0",
     background: "#FFFFFF",
     // borderLeft: `3px solid #f44336`,
     fontWeight: "bold",
@@ -27,7 +27,9 @@ const InsideLeftLineTag = () => {
 
   return (
     <div className={classes.root}>
-      <Box className={classes.tag}>Finished</Box>
+      <Box className={classes.tag} sx={{}}>
+        Finished
+      </Box>
     </div>
   );
 };
