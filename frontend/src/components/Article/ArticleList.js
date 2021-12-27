@@ -1,4 +1,4 @@
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
   },
-  body: {
-    width: "1100px",
-    [theme.breakpoints.down("lg")]: {
-      maxWidth: "100%",
-    },
-  },
+  // body: {
+  //   width: "1100px",
+  //   [theme.breakpoints.down("lg")]: {
+  //     maxWidth: "100%",
+  //   },
+  // },
   title: {
     textAlign: "center",
     // color: "#0D1F48",
@@ -45,16 +45,7 @@ export default function ArticleList() {
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;
   });
-  // console.log("renderList", renderList);
-  const skeletonList = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
-    return (
-      <Box key={num}>
-        <Skeleton variant="text" />
-        <Skeleton variant="circular" width={40} height={40} />
-        <Skeleton variant="rectangular" height={100} sx={{ my: 1 }} />
-      </Box>
-    );
-  });
+
   return (
     <Box>
       <Typography variant="h3" className={classes.title}>
@@ -62,7 +53,16 @@ export default function ArticleList() {
       </Typography>
       <Box className={classes.main}>
         <Box className={classes.body}>
-          {articles.length > 0 ? renderList : skeletonList}
+          {articles.length > 0 ? (
+            renderList
+          ) : (
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={true}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          )}
         </Box>
         <Box>
           <ArticleSideBar />

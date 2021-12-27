@@ -13,16 +13,16 @@ import ByDepartment from "../../components/Career/ByDepartment";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // backgroundColor: "#F3F2EF",
-    textAlign: "left",
-    margin: "4rem",
-    maxWidth: "960px",
-    // color: "#0D1F48",
-    [theme.breakpoints.down("sm")]: {
-      margin: "0rem",
-    },
-  },
+  // root: {
+  //   // backgroundColor: "#F3F2EF",
+  //   textAlign: "left",
+  //   margin: "4rem",
+  //   maxWidth: "960px",
+  //   // color: "#0D1F48",
+  //   [theme.breakpoints.down("sm")]: {
+  //     margin: "0rem",
+  //   },
+  // },
   jobLink: {
     textDecoration: "none",
     // color: "#30A2EC",
