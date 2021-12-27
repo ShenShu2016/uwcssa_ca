@@ -34,7 +34,7 @@ export default function MarketRental() {
   });
 
   // const [images, setImages] = useState();
-
+  const { darkTheme } = useSelector((state) => state.general);
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems, "all");
   // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
@@ -54,6 +54,7 @@ export default function MarketRental() {
     filteredItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
           key={marketItemIdx}
@@ -107,6 +108,7 @@ export default function MarketRental() {
           className={classes.contain}
         >
           <FilterInfo
+            darkTheme={darkTheme}
             form="plain"
             type="rental"
             filterList={filterList}
@@ -121,6 +123,7 @@ export default function MarketRental() {
           />
           <Box className={classes.img}>
             <MarketImgTopFilter
+              darkTheme={darkTheme}
               type="rental"
               trueMarketItems={trueMarketItems}
               handleClick={handleClick}

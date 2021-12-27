@@ -51,6 +51,7 @@ export default function PostMarketRental() {
   const [imgURLs, setImgURLs] = useState([]);
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
+  const { darkTheme } = useSelector((state) => state.general);
   // const [trigger, setTrigger] = useState(true);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [open, setOpen] = useState(false);
@@ -74,7 +75,7 @@ export default function PostMarketRental() {
     marketType: "Rental",
     price: "Price",
     description: "Descriptions",
-    tags: ["Tags Goes Here"],
+    tags: ["Tags Go Here"],
     createdAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
     owner: username,
@@ -235,7 +236,7 @@ export default function PostMarketRental() {
             className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              backgroundColor: "#f9f9f9",
+              backgroundColor: darkTheme ? "#101010" : "#f9f9f9",
               color: "#c1c1c1",
               transition: "color 0.3s",
             }}
@@ -244,7 +245,7 @@ export default function PostMarketRental() {
               direction="row"
               justifyContent="space-between"
               ref={imgRef}
-              sx={{ color: "rgb(0,0,0)" }}
+              sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
             >
               <Typography
                 variant="h5"
@@ -265,6 +266,7 @@ export default function PostMarketRental() {
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
+              darkTheme={darkTheme}
               uploadMarketItemImg={uploadMarketItemImg}
               // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
@@ -644,6 +646,7 @@ export default function PostMarketRental() {
               <PostUserInfo
                 control={control}
                 setValue={setValue}
+                darkTheme={darkTheme}
                 errors={errors}
                 defaultInfo={defaultInfo}
                 setDefaultInfo={setDefaultInfo}
@@ -674,12 +677,22 @@ export default function PostMarketRental() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />
+            <PreviewInfo
+              imgURLs={imgURLs}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={<PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />}
+            content={
+              <PreviewInfo
+                imgURLs={imgURLs}
+                fakeItems={fakeItems}
+                darkTheme={darkTheme}
+              />
+            }
             title="Preview"
             position="bottom"
             open={open}

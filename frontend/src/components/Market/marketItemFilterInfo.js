@@ -36,6 +36,7 @@ import { sortOptions } from "./marketItemFilter";
 
 const FilterContent = (props) => {
   const {
+    darkTheme,
     type,
     filterList,
     handleSortKey,
@@ -64,7 +65,7 @@ const FilterContent = (props) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ color: "rgb(0,0,0)" }}>
+    <Box sx={{ color: darkTheme ? "#787878" : "rgb(0,0,0)" }}>
       <Box
         flexDirection="row"
         display="flex"
@@ -108,7 +109,7 @@ const FilterContent = (props) => {
       >
         价格
       </Typography>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2} mb="0.5rem">
         <TextField
           sx={{ maxWidth: "100%" }}
           label="Min Price"
@@ -142,24 +143,28 @@ const FilterContent = (props) => {
       </Stack>
       {type === "item" ? (
         <React.Fragment>
-          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            类别
-          </Typography>
-          <MarketForm
-            title="Category"
-            value={filterList.category}
-            options={marketItemCategoryList}
-            onChange={(e) => handleCategory(e)}
-          />
-          <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
-            使用程度
-          </Typography>
-          <MarketForm
-            title="Condition"
-            value={filterList.condition}
-            options={marketItemConditionList}
-            onChange={(e) => handleCondition(e)}
-          />
+          <Box mb="1rem">
+            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+              类别
+            </Typography>
+            <MarketForm
+              title="Category"
+              value={filterList.category}
+              options={marketItemCategoryList}
+              onChange={(e) => handleCategory(e)}
+            />
+          </Box>
+          <Box mb="1rem">
+            <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+              使用程度
+            </Typography>
+            <MarketForm
+              title="Condition"
+              value={filterList.condition}
+              options={marketItemConditionList}
+              onChange={(e) => handleCondition(e)}
+            />
+          </Box>
         </React.Fragment>
       ) : null}
       {type === "vehicle" ? (
@@ -181,7 +186,7 @@ const FilterContent = (props) => {
           >
             年份
           </Typography>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} mb="1rem">
             <TextField
               sx={{ maxWidth: "100%" }}
               label="Min Year"
@@ -206,23 +211,28 @@ const FilterContent = (props) => {
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             品牌
           </Typography>
-          <MarketForm
-            title="Make"
-            disabled={true}
-            value={filterList.vehicleType} // Need to generate corresponding list
-            options={marketVehicleTypeList} //
-            onChange={(e) => handleMake(e)}
-          />
+          <Box mb="1rem">
+            <MarketForm
+              title="Make"
+              disabled={true}
+              value={filterList.vehicleType} // Need to generate corresponding list
+              options={marketVehicleTypeList} //
+              onChange={(e) => handleMake(e)}
+            />
+          </Box>
+
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             型号
           </Typography>
-          <MarketForm
-            title="Model"
-            disabled={true}
-            value={filterList.vehicleType} // Need to generate corresponding list
-            options={marketVehicleTypeList} //
-            onChange={(e) => handleModel(e)}
-          />
+          <Box mb="1rem">
+            <MarketForm
+              title="Model"
+              disabled={true}
+              value={filterList.vehicleType} // Need to generate corresponding list
+              options={marketVehicleTypeList} //
+              onChange={(e) => handleModel(e)}
+            />
+          </Box>
         </React.Fragment>
       ) : null}
       {type === "rental" ? (
@@ -230,48 +240,57 @@ const FilterContent = (props) => {
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             出租/出售
           </Typography>
-          <MarketForm
-            title="Home for Rent or Sale"
-            value={filterList.marketRentalSaleRent}
-            options={marketRentalSaleRent}
-            onChange={(e) => handleMarketRentalSaleRent(e)}
-          />
+          <Box mb="1rem">
+            <MarketForm
+              title="Home for Rent or Sale"
+              value={filterList.marketRentalSaleRent}
+              options={marketRentalSaleRent}
+              onChange={(e) => handleMarketRentalSaleRent(e)}
+            />
+          </Box>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             房源类别
           </Typography>
-          <MarketForm
-            title="Property Type"
-            value={filterList.propertyType}
-            options={propertyType}
-            onChange={(e) => handlePropertyType(e)}
-          />
+          <Box mb="1rem">
+            {" "}
+            <MarketForm
+              title="Property Type"
+              value={filterList.propertyType}
+              options={propertyType}
+              onChange={(e) => handlePropertyType(e)}
+            />
+          </Box>
+
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             空调
           </Typography>
-          <MarketForm
-            title="AC Type"
-            value={filterList.airConditioningType}
-            options={airConditionType}
-            onChange={(e) => handleAirConditioningType(e)}
-          />
+          <Box mb="1rem">
+            <MarketForm
+              title="AC Type"
+              value={filterList.airConditioningType}
+              options={airConditionType}
+              onChange={(e) => handleAirConditioningType(e)}
+            />
+          </Box>
+
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             供暖
           </Typography>
-          <MarketForm
-            title="Heating Type"
-            value={filterList.heatingType}
-            options={heatingType}
-            onChange={(e) => handleHeatingType(e)}
-          />
+          <Box mb="1rem">
+            <MarketForm
+              title="Heating Type"
+              value={filterList.heatingType}
+              options={heatingType}
+              onChange={(e) => handleHeatingType(e)}
+            />
+          </Box>
         </React.Fragment>
       ) : null}
-      <Divider />
-
-      <Box width="100%">
-        <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
+      <Box width="100%" marginTop="1rem">
+        <Typography variant="h6" fontWeight="bold">
           其他分类
         </Typography>
-        <CategoryIcons />
+        <CategoryIcons darkTheme={darkTheme} />
       </Box>
     </Box>
   );
@@ -279,6 +298,7 @@ const FilterContent = (props) => {
 
 function ConfirmationDialogRaw(props) {
   const {
+    darkTheme,
     onClose,
     value: valueProp,
     open,
@@ -314,6 +334,7 @@ function ConfirmationDialogRaw(props) {
     <Dialog
       sx={{ "& .MuiDialog-paper": { width: "100%", maxHeight: 600 } }}
       maxWidth="xs"
+      onClose={() => onClose()}
       // TransitionProps={{ onEntering: handleEntering }}
       open={open}
       {...other}
@@ -321,6 +342,7 @@ function ConfirmationDialogRaw(props) {
       <DialogTitle>分类</DialogTitle>
       <DialogContent dividers>
         <FilterContent
+          darkTheme={darkTheme}
           type={type}
           filterList={filterList}
           handleMinYear={handleMinYear}
@@ -357,6 +379,7 @@ ConfirmationDialogRaw.propTypes = {
 };
 
 export default function FilterInfo({
+  darkTheme,
   type,
   form = "plain",
   filterList,
@@ -386,7 +409,10 @@ export default function FilterInfo({
       <Box className={classes.info}>
         <Paper className={classes.paper} elevation={3}>
           <Box>
-            <Breadcrumbs aria-label="breadcrumb">
+            <Breadcrumbs
+              aria-label="breadcrumb"
+              color={`${darkTheme ? "#787878" : "#fffff"}`}
+            >
               <span style={{ cursor: "not-allowed" }}>
                 <Button
                   startIcon={<HomeIcon />}
@@ -459,7 +485,12 @@ export default function FilterInfo({
               ) : null}
             </Breadcrumbs>
           </Box>
-          <Typography variant="h5" marginBottom="1rem" fontWeight="bold">
+          <Typography
+            variant="h5"
+            marginBottom="1rem"
+            fontWeight="bold"
+            color={`${darkTheme ? "#787878" : "#fffff"}`}
+          >
             {type.toUpperCase()}
           </Typography>
           <Box
@@ -468,7 +499,7 @@ export default function FilterInfo({
             overflow="hidden"
             paddingRight="1rem"
           >
-            <SearchArea />
+            <SearchArea darkTheme={darkTheme} />
             <Button
               variant="outlined"
               sx={{ margin: "1rem" }}
@@ -512,6 +543,7 @@ export default function FilterInfo({
             }}
           >
             <FilterContent
+              darkTheme={darkTheme}
               type={type}
               filterList={filterList}
               handleMinYear={handleMinYear}
@@ -556,6 +588,7 @@ export default function FilterInfo({
           {value}
         </Button>
         <ConfirmationDialogRaw
+          darkTheme={darkTheme}
           id="ringtone-menu"
           keepMounted
           open={open}

@@ -46,7 +46,7 @@ export default function PostMarketVehicle() {
   const history = useHistory();
   useTitle("发布二手车辆信息");
   const [imgURLs, setImgURLs] = useState([]);
-
+  const { darkTheme } = useSelector((state) => state.general);
   const { username } = useSelector((state) => state.userAuth.user);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const user = useSelector((state) => state.userAuth.userProfile);
@@ -70,7 +70,7 @@ export default function PostMarketVehicle() {
     exteriorColor: "Black",
     interiorColor: "Red",
     fuelType: "Gasoline",
-    tags: ["Tags Goes Here"],
+    tags: ["Tags Go Here"],
     createdAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
     user: user,
@@ -220,7 +220,7 @@ export default function PostMarketVehicle() {
             className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              backgroundColor: "#f9f9f9",
+              backgroundColor: darkTheme ? "#101010" : "#f9f9f9",
               color: "#c1c1c1",
               transition: "color 0.3s",
             }}
@@ -229,7 +229,7 @@ export default function PostMarketVehicle() {
               direction="row"
               justifyContent="space-between"
               ref={imgRef}
-              sx={{ color: "rgb(0,0,0)" }}
+              sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
             >
               <Typography
                 variant="h5"
@@ -250,6 +250,7 @@ export default function PostMarketVehicle() {
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
+              darkTheme={darkTheme}
               uploadMarketItemImg={uploadMarketItemImg}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
@@ -552,6 +553,7 @@ export default function PostMarketVehicle() {
                 control={control}
                 setValue={setValue}
                 errors={errors}
+                darkTheme={darkTheme}
                 defaultInfo={defaultInfo}
                 setDefaultInfo={setDefaultInfo}
               />
@@ -582,12 +584,22 @@ export default function PostMarketVehicle() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />
+            <PreviewInfo
+              imgURLs={imgURLs}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={<PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />}
+            content={
+              <PreviewInfo
+                imgURLs={imgURLs}
+                fakeItems={fakeItems}
+                darkTheme={darkTheme}
+              />
+            }
             title="Preview"
             position="bottom"
             open={open}

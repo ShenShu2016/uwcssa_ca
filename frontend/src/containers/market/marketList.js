@@ -25,6 +25,7 @@ export default function MarketList() {
   const [searchRadius, setSearchRadius] = React.useState(0);
   // console.log(addressInfo);
   const marketItems = useSelector(selectAllMarketItems);
+  const { darkTheme } = useSelector((state) => state.general);
   const starter = useStarter(marketItems);
   // console.log(starter);
   // console.log(marketItems);
@@ -32,7 +33,7 @@ export default function MarketList() {
 
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
-  console.log("addressInfo", addressInfo);
+  // console.log("addressInfo", addressInfo);
   useEffect(() => {
     const filter =
       addressInfo === ""
@@ -56,7 +57,7 @@ export default function MarketList() {
               },
             },
           };
-    console.log("filter", filter);
+    // console.log("filter", filter);
     dispatch(addressFilteredMarketItem({ filter: filter }));
   }, [dispatch, addressInfo, searchRadius]);
 
@@ -69,6 +70,7 @@ export default function MarketList() {
     marketItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
           key={marketItemIdx}
@@ -83,12 +85,13 @@ export default function MarketList() {
           className={classes.contain}
         >
           <MarketSideBar
+            darkTheme={darkTheme}
             setAddressInfo={setAddressInfo}
             setSearchRadius={setSearchRadius}
             clickHandler={clickHandler}
           />
           <Box className={classes.img}>
-            <MarketTopBar />
+            <MarketTopBar darkTheme={darkTheme} />
             <Box className={classes.items}>{marketItemRenderList}</Box>
           </Box>
         </Stack>

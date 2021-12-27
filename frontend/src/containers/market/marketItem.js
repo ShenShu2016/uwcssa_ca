@@ -29,7 +29,7 @@ export default function MarketItem() {
     condition: "",
     clickedTag: "",
   });
-
+  const { darkTheme } = useSelector((state) => state.general);
   const marketItems = useSelector(selectAllMarketItems);
   const starter = useStarter(marketItems, "all");
   // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
@@ -49,6 +49,7 @@ export default function MarketItem() {
     filteredItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
           key={marketItemIdx}
@@ -95,6 +96,7 @@ export default function MarketItem() {
           className={classes.contain}
         >
           <FilterInfo
+            darkTheme={darkTheme}
             form="plain"
             type="item"
             filterList={filterList}
@@ -107,6 +109,7 @@ export default function MarketItem() {
           />
           <Box className={classes.img}>
             <MarketImgTopFilter
+              darkTheme={darkTheme}
               type="item"
               trueMarketItems={trueMarketItems}
               handleClick={handleClick}

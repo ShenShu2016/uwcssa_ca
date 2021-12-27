@@ -23,7 +23,6 @@ const useStyle = makeStyles((theme) => ({
     width: "calc(100% - 350px)",
     height: "100%",
     position: "relative",
-    backgroundColor: "rgb(243, 246, 249)",
     [theme.breakpoints.down("lg")]: {
       width: "100%",
       height: "40vh",
@@ -65,11 +64,14 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function PreviewInfo({ imgURLs, fakeItems }) {
+export default function PreviewInfo({ imgURLs, fakeItems, darkTheme }) {
   const classes = useStyle();
   return (
     <Box className={classes.root}>
-      <Box className={classes.previewImgRight}>
+      <Box
+        className={classes.previewImgRight}
+        sx={{ backgroundColor: darkTheme ? "#2a2a2a" : "rgb(243, 246, 249)" }}
+      >
         {imgURLs.length !== 0 ? (
           <SwipeViews images={imgURLs} />
         ) : (
@@ -88,13 +90,25 @@ export default function PreviewInfo({ imgURLs, fakeItems }) {
       </Box>
       <Box className={classes.previewInfo}>
         {fakeItems.marketType === "Item" ? (
-          <MarketItemInfo marketItem={fakeItems} mode="preview" />
+          <MarketItemInfo
+            marketItem={fakeItems}
+            mode="preview"
+            darkTheme={darkTheme}
+          />
         ) : null}
         {fakeItems.marketType === "Rental" ? (
-          <MarketRentalInfo marketItem={fakeItems} mode="preview" />
+          <MarketRentalInfo
+            marketItem={fakeItems}
+            mode="preview"
+            darkTheme={darkTheme}
+          />
         ) : null}
         {fakeItems.marketType === "Vehicle" ? (
-          <MarketVehicleInfo marketItem={fakeItems} mode="preview" />
+          <MarketVehicleInfo
+            marketItem={fakeItems}
+            mode="preview"
+            darkTheme={darkTheme}
+          />
         ) : null}
       </Box>
     </Box>

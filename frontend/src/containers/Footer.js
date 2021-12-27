@@ -51,28 +51,28 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ spacing, breakpoints, palette }) => ({
   main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    marginTop: spacing(8),
+    marginBottom: spacing(2),
   },
 
   footer: {
-    padding: theme.spacing(3, 2),
+    padding: spacing(3, 2),
     height: "220px",
     // backgroundColor: "#FDFEFE ",
-    [theme.breakpoints.down("sm")]: {
+    [breakpoints.down("sm")]: {
       height: "350px",
     },
   },
   text: {
     display: "flex",
     flexDirection: "column",
-    color: "primary.light",
+    color: { palette: { text: { hint: "rgba(0, 0, 0, 0.38)" } } },
   },
   copyright: {
     marginTop: "1rem",
-    [theme.breakpoints.down("sm")]: {
+    [breakpoints.down("sm")]: {
       height: "150px",
     },
   },
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     overflowWrap: "break-word",
   },
   top: {
-    padding: theme.spacing(3, 2),
+    padding: spacing(3, 2),
     marginTop: "1rem",
     backgroundSize: "contained",
     overflow: "hidden",
@@ -195,7 +195,7 @@ export default function StickyFooter() {
                     此网站 UWCSSA.CA - 为 GitHub 开源项目
                   </Typography>
                 </Grid>
-                <Grid item xs={4} sm={2}>
+                <Grid item xs={4} sm={4}>
                   {/* <CircularProgress
                     size={37}
                     sx={{
@@ -215,7 +215,7 @@ export default function StickyFooter() {
                     Star
                   </GitHubButton>
                 </Grid>
-                <Grid item xs={4} sm={2}>
+                <Grid item xs={4} sm={4}>
                   <GitHubButton
                     href="https://github.com/ShenShu2016/uwcssa_ca/fork"
                     data-icon="octicon-repo-forked"
@@ -225,7 +225,7 @@ export default function StickyFooter() {
                     Fork
                   </GitHubButton>
                 </Grid>
-                <Grid item xs={4} sm={2}>
+                <Grid item xs={4} sm={4}>
                   <GitHubButton
                     href="https://github.com/ShenShu2016/uwcssa_ca/issues"
                     data-icon="octicon-issue-opened"
@@ -235,7 +235,7 @@ export default function StickyFooter() {
                     Issue
                   </GitHubButton>
                 </Grid>
-                <Grid item xs={4} sm={2}>
+                <Grid item xs={4} sm={4}>
                   <GitHubButton
                     href="https://github.com/ShenShu2016/uwcssa_ca/subscription"
                     data-icon="octicon-eye"
@@ -273,7 +273,9 @@ export default function StickyFooter() {
                         variant="text"
                         component={Link}
                         to="/foundingMember"
-                        sx={{ color: "primary.light" }}
+                        sx={{
+                          "&.MuiButton-text": { color: "#838A8A" },
+                        }}
                       >
                         我们的团队
                       </Button>
@@ -284,7 +286,7 @@ export default function StickyFooter() {
                         variant="text"
                         component={Link}
                         to="/contactUs"
-                        sx={{ color: "primary.light" }}
+                        sx={{ "&.MuiButton-text": { color: "#838A8A" } }}
                       >
                         联系我们
                       </Button>
@@ -294,7 +296,10 @@ export default function StickyFooter() {
                         color="primary"
                         variant="text"
                         href="mailto:uwincssa.it@gmail.com"
-                        sx={{ color: "primary.light", textTransform: "none" }}
+                        sx={{
+                          "&.MuiButton-text": { color: "#838A8A" },
+                          textTransform: "none",
+                        }}
                       >
                         邮箱: uwincssa.it@gmail.com
                       </Button>
@@ -308,22 +313,21 @@ export default function StickyFooter() {
                     </Typography>
                     <span>
                       <Button
-                        color="primary"
+                        className={classes.button}
                         variant="text"
                         component={Link}
                         to="/article"
-                        sx={{ color: "primary.light" }}
+                        sx={{ color: "#838A8A" }}
                       >
                         uwcssa新闻
                       </Button>
                     </span>
                     <span>
                       <Button
-                        color="primary"
                         variant="text"
                         component={Link}
                         to="/event"
-                        sx={{ color: "primary.light" }}
+                        sx={{ color: "#838A8A" }}
                       >
                         uwcssa活动
                       </Button>
@@ -336,7 +340,7 @@ export default function StickyFooter() {
                     <Typography
                       variant="h6"
                       gutterBottom
-                      sx={{ color: "primary.light" }}
+                      //sx={{ color: "#838A8A" }}
                     >
                       职位
                     </Typography>
@@ -344,7 +348,7 @@ export default function StickyFooter() {
                     <Typography
                       variant="caption"
                       gutterBottom
-                      sx={{ color: "primary.light" }}
+                      // sx={{ color: "primary.light" }}
                     >
                       来和我们一起工作吧!
                       我们一直在寻找优秀的人才加入我们的团队。
@@ -355,7 +359,7 @@ export default function StickyFooter() {
                       color="primary"
                       component={Link}
                       to="/career"
-                      sx={{ color: "primary.light" }}
+                      //sx={{ color: "primary.grey" }}
                     >
                       查看职位
                     </Button>

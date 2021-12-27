@@ -32,7 +32,7 @@ import PropTypes from "prop-types";
 import { marketItemStyle } from "./marketItemCss";
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const { onClose, value: valueProp, open, darkTheme, ...other } = props;
 
   const handleCancel = () => {
     onClose();
@@ -48,15 +48,13 @@ function ConfirmationDialogRaw(props) {
       maxWidth="xs"
       // TransitionProps={{ onEntering: handleEntering }}
       open={open}
+      onClose={() => onClose()}
       {...other}
     >
       <DialogTitle>选择种类</DialogTitle>
       <DialogContent dividers>
-        <Box
-          width="100%"
-          // maxHeight="400px" overflow="auto"
-        >
-          <CategoryIcons />
+        <Box width="100%">
+          <CategoryIcons darkTheme={darkTheme} />
         </Box>
       </DialogContent>
       <DialogActions>
@@ -76,6 +74,7 @@ ConfirmationDialogRaw.propTypes = {
 };
 
 export default function MarketImgTopFilter({
+  darkTheme,
   type,
   trueMarketItems,
   handleClick,
@@ -138,7 +137,11 @@ export default function MarketImgTopFilter({
     <React.Fragment>
       {/* ImgTopFIlter for large screen */}
       <Paper elevation={3} className={classes.imgPaper1}>
-        <Typography variant="h6" fontWeight="bold">
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          color={`${darkTheme ? "#787878" : "#fffff"}`}
+        >
           Shop by trend
         </Typography>
         <Stack
@@ -240,7 +243,7 @@ export default function MarketImgTopFilter({
           endIcon={<MoreVertIcon />}
           sx={{
             fontWeight: "bold",
-            color: "rgba(0, 0, 0, 0.54)",
+            color: `${darkTheme ? "#787878" : "rgba(0, 0, 0, 0.54)"}`,
             fontSize: "1.25rem",
             marginLeft: "5px",
             marginBottom: "0.5rem",
@@ -253,6 +256,7 @@ export default function MarketImgTopFilter({
         <ConfirmationDialogRaw
           id="ringtone-menu"
           keepMounted
+          darkTheme={darkTheme}
           open={open}
           onClose={handleClose}
           value={value}
@@ -281,18 +285,21 @@ export default function MarketImgTopFilter({
             );
           })}
         </Grid>
-        <SearchArea />
+
         <Divider sx={{ marginY: "1rem" }} />
-        <Stack spacing={2} direction="row" justifyContent="flex-end">
+        <Stack spacing={0.5} direction="row" justifyContent="flex-end">
+          <SearchArea darkTheme={darkTheme} mode="button" />
           <Button
             startIcon={<AddIcon />}
             component={Link}
+            variant="outlined"
             to={`/market/create/${type}`}
           >
             Add
           </Button>
           <MarketFIlterLocation type="button" />
           <FilterInfo
+            darkTheme={darkTheme}
             form="button"
             type={type}
             filterList={filterList}

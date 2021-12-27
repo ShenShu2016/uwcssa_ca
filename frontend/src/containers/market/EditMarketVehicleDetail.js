@@ -52,6 +52,7 @@ export default function EditMarketVehicleDetail() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
+  const { darkTheme } = useSelector((state) => state.general);
   const {
     imgURLs,
     vehicleType,
@@ -223,7 +224,7 @@ export default function EditMarketVehicleDetail() {
             className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              backgroundColor: "#f9f9f9",
+              backgroundColor: darkTheme ? "#101010" : "#f9f9f9",
               color: "#c1c1c1",
               transition: "color 0.3s",
             }}
@@ -234,7 +235,7 @@ export default function EditMarketVehicleDetail() {
                 gutterBottom
                 component="div"
                 fontWeight="bold"
-                sx={{ color: "rgb(0,0,0)" }}
+                sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
               >
                 New Vehicle Listing
               </Typography>
@@ -249,6 +250,7 @@ export default function EditMarketVehicleDetail() {
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
+              darkTheme={darkTheme}
               uploadMarketItemImg={uploadMarketItemImg}
               // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
@@ -553,6 +555,7 @@ export default function EditMarketVehicleDetail() {
                 setValue={setValue}
                 errors={errors}
                 defaultInfo={defaultInfo}
+                darkTheme={darkTheme}
                 setDefaultInfo={setDefaultInfo}
               />
             </Box>
@@ -581,13 +584,21 @@ export default function EditMarketVehicleDetail() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
+            <PreviewInfo
+              imgURLs={imgKeyFromServer}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
             content={
-              <PreviewInfo imgURLs={imgKeyFromServer} fakeItems={fakeItems} />
+              <PreviewInfo
+                imgURLs={imgKeyFromServer}
+                fakeItems={fakeItems}
+                darkTheme={darkTheme}
+              />
             }
             title="Preview"
             position="bottom"

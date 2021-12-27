@@ -49,14 +49,13 @@ export default function PostMarketItem() {
   const { username } = useSelector((state) => state.userAuth.user);
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
-  // const [trigger, setTrigger] = useState(true);
   const [defaultInfo, setDefaultInfo] = useState(true);
   const [loading, setLoading] = useState(false);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, username)
   );
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
-
+  const { darkTheme } = useSelector((state) => state.general);
   const [open, setOpen] = useState(false);
   const [fakeItems, setFakeItems] = useState({
     marketType: "Item",
@@ -66,13 +65,12 @@ export default function PostMarketItem() {
     address: { description: "Location" },
     marketItemCondition: "New",
     marketItemCategory: "Tools",
-    tags: ["Tags Goes Here"],
+    tags: ["Tags Go Here"],
     createdAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
     user: user,
     owner: username,
   });
-  // console.log("check", marketUserInfo);
   const {
     handleSubmit,
     setValue,
@@ -87,7 +85,6 @@ export default function PostMarketItem() {
       description: "",
       marketItemCategory: "",
       marketItemCondition: "",
-      // location: "",
       contactEmail: "",
       contactWeChat: "",
       contactPhone: "",
@@ -132,7 +129,6 @@ export default function PostMarketItem() {
     }
     const createMarketItemInput = {
       ...data,
-      // location: GetAddress().description,
       id: itemID,
       addressID: address && addressID,
       name: data.title,
@@ -190,36 +186,8 @@ export default function PostMarketItem() {
     console.log(response);
     if (response.meta.requestStatus === "fulfilled") {
       setImgURLs((prev) => prev.concat(response.payload));
-      // setTrigger(false);
     }
   };
-
-  // const imgKeyFromServer = useGetAllImages(
-  //   Object.keys(imageKeys),
-  //   imageKeys && trigger === true
-  // );
-
-  // useEffect(() => {
-  //   if (
-  //     Object.values(imageKeys).includes("temp") &&
-  //     Object.values(imageKeys).length === imgKeyFromServer.length &&
-  //     trigger
-  //   ) {
-  //     const images = Object.entries(imageKeys);
-  //     console.log("Bug here!", images);
-  //     if (Object.values(imageKeys).length === 1) {
-  //       let temp = {};
-  //       temp[images[0][0]] = imgKeyFromServer[0];
-  //       console.log("almost", temp);
-  //       setImageKeys(temp);
-  //     } else {
-  //       imgKeyFromServer.map((url, idx) => (images[idx][1] = url));
-  //       console.log("almost", images);
-  //       setImageKeys(Object.fromEntries(images));
-  //     }
-  //     setTrigger(false);
-  //   }
-  // }, [imgKeyFromServer, imageKeys, trigger]);
 
   const handleDeleteImg = (imgKey) => {
     const images = [...imgURLs];
@@ -245,7 +213,7 @@ export default function PostMarketItem() {
             className={classes.leftInfoPaper}
             elevation={3}
             sx={{
-              backgroundColor: "#f9f9f9",
+              backgroundColor: darkTheme ? "#101010" : "#f9f9f9",
               color: "#c1c1c1",
               transition: "color 0.3s",
             }}
@@ -254,7 +222,7 @@ export default function PostMarketItem() {
               direction="row"
               justifyContent="space-between"
               ref={imgRef}
-              sx={{ color: "rgb(0,0,0)" }}
+              sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
             >
               <Typography
                 variant="h5"
@@ -275,8 +243,8 @@ export default function PostMarketItem() {
               uploadStatus={uploadStatus}
               control={control}
               errors={errors}
+              darkTheme={darkTheme}
               uploadMarketItemImg={uploadMarketItemImg}
-              // setTrigger={setTrigger}
               setUploadStatus={setUploadStatus}
               handleDeleteImg={handleDeleteImg}
             />
@@ -402,32 +370,6 @@ export default function PostMarketItem() {
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
-                {/* <Controller
-                  name="location"
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, value } }) => (
-                    <TextField
-                      label={`Location${
-                        !!errors.location ? " is required!" : ""
-                      }`}
-                      value={value}
-                      variant="outlined"
-                      fullWidth
-                      error={!!errors.location}
-                      required
-                      onChange={(e) => {
-                        onChange(e);
-                        setFakeItems({
-                          ...fakeItems,
-                          location: e.target.value,
-                        });
-                      }}
-                    />
-                  )}
-                /> */}
                 <GoogleMaps fullWidth />
               </Box>
               <Box sx={{ marginY: "1rem" }}>
@@ -465,6 +407,7 @@ export default function PostMarketItem() {
                 control={control}
                 setValue={setValue}
                 errors={errors}
+                darkTheme={darkTheme}
                 defaultInfo={defaultInfo}
                 setDefaultInfo={setDefaultInfo}
               />
@@ -493,12 +436,22 @@ export default function PostMarketItem() {
         </Box>
         <Box className={classes.preview}>
           <Paper elevation={3} sx={{ height: "100%", width: "100%" }}>
-            <PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />
+            <PreviewInfo
+              imgURLs={imgURLs}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
           </Paper>
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={<PreviewInfo imgURLs={imgURLs} fakeItems={fakeItems} />}
+            content={
+              <PreviewInfo
+                imgURLs={imgURLs}
+                fakeItems={fakeItems}
+                darkTheme={darkTheme}
+              />
+            }
             title="Preview"
             position="bottom"
             open={open}

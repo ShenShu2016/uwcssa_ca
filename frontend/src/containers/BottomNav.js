@@ -3,6 +3,7 @@ import {
   BottomNavigationAction,
   Box,
   CssBaseline,
+  Drawer,
   Paper,
 } from "@mui/material";
 import React, { useRef, useState } from "react";
@@ -15,6 +16,8 @@ import EventRoundedIcon from "@mui/icons-material/EventRounded";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
 import ShopRoundedIcon from "@mui/icons-material/ShopRounded";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import DrawerList from "../components/Drawer/DrawerList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +35,17 @@ export default function BottomNav() {
   const isAuthenticated = useSelector(
     (state) => state.userAuth.isAuthenticated
   );
+  const [drawer, setDrawer] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setDrawer(open);
+  };
   return (
     <Box sx={{ pb: 7 }} ref={ref} className={classes.root}>
       <CssBaseline />
@@ -66,13 +80,13 @@ export default function BottomNav() {
             component={Link}
             to="/event"
           />
-          <BottomNavigationAction
+          {/* <BottomNavigationAction
             label="论坛"
             value="/forum"
             icon={<ForumRoundedIcon />}
             component={Link}
             to="/forum"
-          />
+          /> */}
           <BottomNavigationAction
             label="商城"
             value="/market"
@@ -97,7 +111,16 @@ export default function BottomNav() {
               to="/auth/signIn"
             />
           )}
+          <BottomNavigationAction
+            label="更多"
+            value="more"
+            icon={<MoreHorizIcon />}
+            onClick={toggleDrawer(true)}
+          />
         </BottomNavigation>
+        <Drawer open={drawer} onClose={toggleDrawer(false)}>
+          <DrawerList toggleDrawer={toggleDrawer} />
+        </Drawer>
       </Paper>
     </Box>
   );

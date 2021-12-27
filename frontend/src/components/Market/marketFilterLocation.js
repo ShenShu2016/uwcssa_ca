@@ -19,7 +19,6 @@ import React, { useState } from "react";
 import GoogleMap from "../GoogleMap/GoogleMap";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-//import Marker from "../GoogleMap/Marker";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 
@@ -32,16 +31,8 @@ function ConfirmationDialogRaw(props) {
     setSearchRadius,
     ...other
   } = props;
-  // const [newLocationInfo, setNewLocationInfo] = useState("");
   const [newLocationRadius, setNewLocationRadius] = useState(5);
-  //const [clicked, setClicked] = React.useState(null);
   const windsor = [42.2732, -83.0014];
-  // console.log(newLocationInfo);
-  // React.useEffect(() => {
-  //   if (!open) {
-  //     setNewLocationInfo(valueProp);
-  //   }
-  // }, [valueProp, open]);
 
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -49,7 +40,7 @@ function ConfirmationDialogRaw(props) {
     textAlign: "center",
     color: theme.palette.text.secondary,
     height: "250px",
-    backgroundColor: "rgb(243, 246, 249)",
+    backgroundColor: "#787878",
     marginBottom: "1rem",
   }));
 
@@ -72,10 +63,15 @@ function ConfirmationDialogRaw(props) {
 
   return (
     <Dialog
-      sx={{ "& .MuiDialog-paper": { width: "100%", maxHeight: 650 } }}
+      sx={{
+        "& .MuiDialog-paper": {
+          width: "100%",
+          maxHeight: 650,
+        },
+      }}
       maxWidth="xs"
-      // TransitionProps={{ onEntering: handleEntering }}
       open={open}
+      onClose={() => onClose()}
       {...other}
     >
       <DialogTitle>位置</DialogTitle>
@@ -83,22 +79,6 @@ function ConfirmationDialogRaw(props) {
         <Box sx={{ marginBottom: "1rem" }}>
           <Typography variant="caption">根据地址，邮编搜索</Typography>
         </Box>
-
-        {/* <TextField
-          sx={{ marginY: "1rem" }}
-          id="input-with-icon-textfield"
-          label="地址"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LocationOnIcon />
-              </InputAdornment>
-            ),
-          }}
-          fullWidth
-          onChange={handleLocationChange}
-          variant="outlined"
-        /> */}
         <GoogleMaps />
         <TextField
           sx={{ marginBottom: "1rem" }}
@@ -161,7 +141,7 @@ export default function ConfirmationDialog({
 
   if (type === "plain") {
     return (
-      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
         <List component="div" role="group">
           <ListItem
             button
