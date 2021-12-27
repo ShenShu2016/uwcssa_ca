@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Dialog,
   DialogTitle,
@@ -201,46 +200,28 @@ const TitleInfo = ({
         // sx={{ color: "rgb(116 116 116 / 65%)" }}
       >
         {currentUser === owner ? (
-          <Box
-            sx={{
-              color: "rgb(116 116 116 / 65%)",
-              "&:hover": {
-                color: "rgba(0,0,0,0.85)",
-              },
-            }}
+          <Button
+            component={Link}
+            startIcon={<UpdateIcon />}
+            to={
+              mode === "detail"
+                ? `/market/edit/${type}/${id}`
+                : window.location.pathname
+            }
+            variant="outlined"
+            color="primary"
           >
-            <Button
-              component={Link}
-              startIcon={<UpdateIcon />}
-              to={
-                mode === "detail"
-                  ? `/market/edit/${type}/${id}`
-                  : window.location.pathname
-              }
-              variant="outlined"
-              color="inherit"
-            >
-              编辑
-            </Button>
-          </Box>
+            编辑
+          </Button>
         ) : (
-          <Box
-            sx={{
-              color: "rgb(116 116 116 / 65%)",
-              "&:hover": {
-                color: "rgba(0,0,0,0.85)",
-              },
-            }}
+          <Button
+            startIcon={<MessageIcon />}
+            onClick={handleOpen}
+            variant="outlined"
+            color="primary"
           >
-            <Button
-              startIcon={<MessageIcon />}
-              onClick={handleOpen}
-              variant="outlined"
-              color="inherit"
-            >
-              联系
-            </Button>
-          </Box>
+            联系
+          </Button>
         )}
         <SimpleDialog
           open={open}
@@ -250,40 +231,24 @@ const TitleInfo = ({
           contactWeChat={contactWeChat}
           onClose={handleClose}
         />
-        <Box
-          sx={{
-            color: "rgb(116 116 116 / 65%)",
-            "&:hover": {
-              color: "rgba(0,0,0,0.85)",
-            },
-          }}
+
+        <Button
+          startIcon={<BookmarksIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="primary"
         >
-          <Button
-            startIcon={<BookmarksIcon />}
-            onClick={() => console.log("clicked!")}
-            variant="outlined"
-            color="inherit"
-          >
-            保存
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            color: "rgb(116 116 116 / 65%)",
-            "&:hover": {
-              color: "rgba(0,0,0,0.85)",
-            },
-          }}
+          保存
+        </Button>
+
+        <Button
+          startIcon={<ShareIcon />}
+          onClick={() => console.log("clicked!")}
+          variant="outlined"
+          color="primary"
         >
-          <Button
-            startIcon={<ShareIcon />}
-            onClick={() => console.log("clicked!")}
-            variant="outlined"
-            color="inherit"
-          >
-            分享
-          </Button>
-        </Box>
+          分享
+        </Button>
       </Stack>
     </React.Fragment>
   );

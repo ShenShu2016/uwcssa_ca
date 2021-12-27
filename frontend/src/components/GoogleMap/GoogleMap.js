@@ -51,7 +51,6 @@ const GoogleMap = (props) => {
         zoom: defaultZoom,
         disableDefaultUI: true,
       });
-      console.log("what happened");
       new window.google.maps.Circle({
         strokeColor: "#808080",
         strokeOpacity: 0.8,

@@ -28,7 +28,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import { marketItemStyle } from "./marketItemCss";
 
 function UtilityDialog(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const { onClose, value: valueProp, open, darkTheme, ...other } = props;
 
   const handleCancel = () => {
     onClose();
@@ -42,6 +42,7 @@ function UtilityDialog(props) {
     <Dialog
       sx={{ "& .MuiDialog-paper": { width: "100%", maxHeight: 600 } }}
       maxWidth="xs"
+      onClose={() => onClose()}
       // TransitionProps={{ onEntering: handleEntering }}
       open={open}
       {...other}
@@ -50,7 +51,7 @@ function UtilityDialog(props) {
       <DialogContent dividers>
         <Box
           width="100%"
-          // maxHeight="400px" overflow="auto"
+          color={`${darkTheme ? "#787878" : "rgba(0, 0, 0, 0.54)"}`}
         >
           <nav aria-label="main mailbox folders">
             <List>
@@ -73,7 +74,7 @@ function UtilityDialog(props) {
             </List>
           </nav>
           <Divider />
-          <CategoryIcons />
+          <CategoryIcons darkTheme={darkTheme} />
         </Box>
       </DialogContent>
       <DialogActions>
@@ -93,7 +94,7 @@ UtilityDialog.propTypes = {
 };
 
 function CategoryDialog(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const { onClose, value: valueProp, open, darkTheme, ...other } = props;
 
   const handleCancel = () => {
     onClose();
@@ -109,6 +110,7 @@ function CategoryDialog(props) {
       maxWidth="xs"
       // TransitionProps={{ onEntering: handleEntering }}
       open={open}
+      onClose={() => onClose()}
       {...other}
     >
       <DialogTitle>选择种类</DialogTitle>
@@ -117,7 +119,7 @@ function CategoryDialog(props) {
           width="100%"
           // maxHeight="400px" overflow="auto"
         >
-          <CategoryIcons />
+          <CategoryIcons darkTheme={darkTheme} />
         </Box>
       </DialogContent>
       <DialogActions>
@@ -218,7 +220,7 @@ export default function MarketTopBar({
           endIcon={<MoreVertIcon />}
           sx={{
             fontWeight: "bold",
-            color: "rgba(0, 0, 0, 1)",
+            color: `${darkTheme ? "#787878" : "rgba(0, 0, 0, 1)"}`,
             fontSize: "1.25rem",
             padding: 0,
           }}
@@ -230,11 +232,12 @@ export default function MarketTopBar({
           id="ringtone-menu"
           keepMounted
           open={open}
+          darkTheme={darkTheme}
           onClose={handleClose}
           value={value}
         />
         <SearchArea darkTheme={darkTheme} />
-        <Divider sx={{ marginY: "1rem" }} />
+        <Divider sx={{ marginY: "0.5rem" }} />
         <Stack spacing={2} direction="row" justifyContent="flex-end">
           <Button startIcon={<AddIcon />} component={Link} to="/market/create">
             发布我的物品
@@ -243,6 +246,7 @@ export default function MarketTopBar({
           <CategoryDialog
             id="ringtone-menu"
             keepMounted
+            darkTheme={darkTheme}
             open={open2}
             onClose={handleClose2}
             value={value}

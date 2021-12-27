@@ -32,7 +32,7 @@ import PropTypes from "prop-types";
 import { marketItemStyle } from "./marketItemCss";
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const { onClose, value: valueProp, open, darkTheme, ...other } = props;
 
   const handleCancel = () => {
     onClose();
@@ -48,12 +48,13 @@ function ConfirmationDialogRaw(props) {
       maxWidth="xs"
       // TransitionProps={{ onEntering: handleEntering }}
       open={open}
+      onClose={() => onClose()}
       {...other}
     >
       <DialogTitle>选择种类</DialogTitle>
       <DialogContent dividers>
         <Box width="100%">
-          <CategoryIcons />
+          <CategoryIcons darkTheme={darkTheme} />
         </Box>
       </DialogContent>
       <DialogActions>
@@ -242,7 +243,7 @@ export default function MarketImgTopFilter({
           endIcon={<MoreVertIcon />}
           sx={{
             fontWeight: "bold",
-            color: "rgba(0, 0, 0, 0.54)",
+            color: `${darkTheme ? "#787878" : "rgba(0, 0, 0, 0.54)"}`,
             fontSize: "1.25rem",
             marginLeft: "5px",
             marginBottom: "0.5rem",
@@ -255,6 +256,7 @@ export default function MarketImgTopFilter({
         <ConfirmationDialogRaw
           id="ringtone-menu"
           keepMounted
+          darkTheme={darkTheme}
           open={open}
           onClose={handleClose}
           value={value}
@@ -283,12 +285,14 @@ export default function MarketImgTopFilter({
             );
           })}
         </Grid>
-        <SearchArea darkTheme={darkTheme} />
+
         <Divider sx={{ marginY: "1rem" }} />
-        <Stack spacing={2} direction="row" justifyContent="flex-end">
+        <Stack spacing={0.5} direction="row" justifyContent="flex-end">
+          <SearchArea darkTheme={darkTheme} mode="button" />
           <Button
             startIcon={<AddIcon />}
             component={Link}
+            variant="outlined"
             to={`/market/create/${type}`}
           >
             Add

@@ -51,7 +51,7 @@ export default function PostMarketPet() {
     location: "Location",
     marketItemCondition: "New",
     marketItemCategory: "Tools",
-    tags: ["Tags Goes Here"],
+    tags: ["Tags Go Here"],
     createdAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
     user: user,
