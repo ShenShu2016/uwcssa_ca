@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import EmailConfirm from "./EmailConfirm";
 import Footer from "../Footer";
 import ForgotPassword from "./ForgotPassword";
@@ -8,7 +8,6 @@ import React from "react";
 import ResetPassword from "./ResetPassword";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import BottomNav from "../BottomNav";
 
 export default function AuthenticationRouter() {
   return (
@@ -29,7 +28,6 @@ export default function AuthenticationRouter() {
         />
       </Switch>
       <Footer />
-      <BottomNav />
     </Box>
   );
 }

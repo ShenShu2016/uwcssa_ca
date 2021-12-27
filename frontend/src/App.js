@@ -14,6 +14,7 @@ import AdminRouter from "./containers/admin/AdminRouter";
 import Amplify from "aws-amplify";
 import ArticleRouter from "./containers/article/ArticleRouter";
 import AuthRouter from "./containers/authentication/AuthenticationRouter";
+import BottomNav from "./containers/BottomNav";
 import { Box } from "@mui/system";
 import Career from "./containers/CareerRouter";
 import ContactUs from "./containers/ContactUs";
@@ -143,6 +144,7 @@ export default function App() {
           <Route exact path="/NoPermission" component={NoPermission} />
           <Redirect to="/not-found">404 Not Found!</Redirect>
         </Switch>
+        <BottomNav />
         <CustomAlert
           isAlertOpen={isAlertOpen}
           handleAlertClose={handleAlertClose}

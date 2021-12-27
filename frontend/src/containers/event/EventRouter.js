@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import BottomNav from "../BottomNav";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import Event from "./Event";
 import EventDetail from "../../components/Event/EventDetail";
@@ -59,7 +58,6 @@ export default function EventRouter() {
         </Switch>
       </Box>
       <Footer />
-      <BottomNav />
     </Fragment>
   );
 }

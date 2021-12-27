@@ -24,7 +24,6 @@ import PostMarketRental from "./PostMarketRental";
 import PostMarketVehicle from "./PostMarketVehicle";
 import PrivateRoute from "../../components/PrivateRoute";
 import React from "react";
-import BottomNav from "../BottomNav";
 
 export default function MarketRouter() {
   return (
@@ -75,7 +74,6 @@ export default function MarketRouter() {
         <Route path="/market/carpool/" component={MarketCarpool} />
         <Route path="/market/loading/" component={Loading} />
       </Switch>
-      <BottomNav />
     </Box>
   );
 }

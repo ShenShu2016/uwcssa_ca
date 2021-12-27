@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import ArticlesPreview from "./Article/ArticlesPreview";
 import { Box } from "@mui/system";
 import EditArticle from "./Article/EditArticle";
+import EditEvent from "../../components/Event/EditEvent";
 import Footer from "../Footer";
 import PostArticle from "./Article/PostArticle";
 import PostDepartment from "./UwcssaJob/PostDepartment";
@@ -11,8 +12,6 @@ import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import React from "react";
 import Staff from "./Staff";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
-import EditEvent from "../../components/Event/EditEvent";
-import BottomNav from "../BottomNav";
 
 export default function StaffRouter() {
   return (
@@ -49,7 +48,6 @@ export default function StaffRouter() {
         />
       </Switch>
       <Footer />
-      <BottomNav />
     </Box>
   );
 }

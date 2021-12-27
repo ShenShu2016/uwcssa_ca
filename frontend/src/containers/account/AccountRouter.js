@@ -6,7 +6,6 @@ import Footer from "../Footer";
 import MyAccount from "./MyAccount";
 import Profile from "./Profile";
 import React from "react";
-import BottomNav from "../BottomNav";
 
 export default function AccountRouter() {
   return (
@@ -17,7 +16,6 @@ export default function AccountRouter() {
         <Route path="/account/myAccount" component={MyAccount} />
       </Switch>
       <Footer />
-      <BottomNav />
     </Box>
   );
 }
