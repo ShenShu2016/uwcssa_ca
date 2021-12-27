@@ -33,7 +33,7 @@ export default function MarketList() {
 
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
-  console.log("addressInfo", addressInfo);
+  // console.log("addressInfo", addressInfo);
   useEffect(() => {
     const filter =
       addressInfo === ""
@@ -57,7 +57,7 @@ export default function MarketList() {
               },
             },
           };
-    console.log("filter", filter);
+    // console.log("filter", filter);
     dispatch(addressFilteredMarketItem({ filter: filter }));
   }, [dispatch, addressInfo, searchRadius]);
 

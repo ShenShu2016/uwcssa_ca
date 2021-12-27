@@ -75,7 +75,7 @@ export default function PostMarketRental() {
     marketType: "Rental",
     price: "Price",
     description: "Descriptions",
-    tags: ["Tags Goes Here"],
+    tags: ["Tags Go Here"],
     createdAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
     owner: username,
