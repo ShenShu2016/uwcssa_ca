@@ -23,6 +23,7 @@ import { useDispatch } from "react-redux";
 import getCroppedImg, { generateDownload } from "./canvasUtils";
 import Cropper from "react-easy-crop";
 import { dataURLtoFile } from "./dataURLtoFile";
+import { v4 as uuid } from "uuid";
 
 const Input = styled("input")({
   display: "none",
@@ -101,11 +102,12 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const [backGroundImgURL, setBackGroundImgURL] = useState(
     user.backGroundImgURL
   );
-
+  const inputAvatarRef = useRef();
   const inputRef = useRef();
+  const triggerAvatarFileSelectPopup = () => inputAvatarRef.current.click();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
-
+  const [avatarImageSrc, setAvatarImageSrc] = useState(null);
   const [backgroundImageSrc, setBackgroundImageSrc] = useState(null);
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -142,23 +144,6 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     }
   };
 
-  const uploadAvatarImg = async (e) => {
-    setLoading(true);
-    const imageData = e.target.files;
-    console.log(imageData, "image");
-
-    const imageLocation = "user/Avatar";
-    const maxPixel = 300;
-    const response = await dispatch(
-      postSingleImage({ imageData, imageLocation, maxPixel })
-    );
-    if (response.meta.requestStatus === "fulfilled") {
-      console.log("response", response);
-      setAvatarImgURL(response.payload);
-      setLoading(false);
-    }
-  };
-
   // const uploadBackGroundImgImg = async (e) => {
   //   setLoading(true);
   //   const imageData = e.target.file;
@@ -178,7 +163,23 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     setCroppedArea(croppedAreaPixels);
   };
 
-  const onFileChange = async (e) => {
+  const onAvatarImgFileChange = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      let imageDataUrl = await readFile(file);
+      setAvatarImageSrc(imageDataUrl);
+    }
+  };
+
+  const onAvatarImgClear = () => {
+    setAvatarImageSrc(null);
+  };
+
+  const onAvatarImgDownload = () => {
+    generateDownload(avatarImageSrc, croppedArea);
+  };
+
+  const onBackgroundImgFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
@@ -186,12 +187,55 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     }
   };
 
-  const onClear = () => {
+  const onBackgroundImgClear = () => {
     setBackgroundImageSrc(null);
   };
 
-  const onDownload = () => {
+  const onBackgroundImgDownload = () => {
     generateDownload(backgroundImageSrc, croppedArea);
+  };
+
+  const uploadAvatarImg = async (e) => {
+    // setLoading(true);
+    // const imageData = e.target.files;
+    // console.log(imageData, "image");
+
+    // const imageLocation = "user/Avatar";
+    // const maxPixel = 300;
+    // const response = await dispatch(
+    //   postSingleImage({ imageData, imageLocation, maxPixel })
+    // );
+    // if (response.meta.requestStatus === "fulfilled") {
+    //   console.log("response", response);
+    //   setAvatarImgURL(response.payload);
+    //   setLoading(false);
+    // }
+    const canvas = await getCroppedImg(avatarImageSrc, croppedArea);
+
+    const canvasDataUrl = canvas.toDataURL("image/jpeg");
+    // console.log(canvasDataUrl);
+
+    const convertedUrlToFile = dataURLtoFile(
+      canvasDataUrl,
+      `croppedAvatarImg${uuid()}.jpeg`
+    );
+    // console.log(convertedUrlToFile);
+
+    const files = [convertedUrlToFile];
+    const fileInputFiles = new FileListItems(files);
+    console.log(fileInputFiles);
+
+    const imageData = fileInputFiles;
+    const imageLocation = "user/Avatar";
+    const maxPixel = 300;
+    const response = await dispatch(
+      postSingleImage({ imageData, imageLocation, maxPixel })
+    );
+    if (response.meta.requestStatus === "fulfilled") {
+      console.log("response", response);
+      setAvatarImgURL(response.payload);
+      setLoading(false);
+    }
   };
 
   const uploadBackGroundImgImg = async (e) => {
@@ -201,7 +245,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     // console.log(canvasDataUrl);
     const convertedUrlToFile = dataURLtoFile(
       canvasDataUrl,
-      `croppedImage${Date.now()}.jpeg`
+      `croppedImage${uuid()}.jpeg`
     );
     // console.log(convertedUrlToFile);
 
@@ -274,8 +318,8 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               )}
             />
             <div className={classes.splitter} />
-            <Box sx={{ textAlign: "center" }}>
-              <img
+            {/* <Box sx={{ textAlign: "center" }}>
+         <img
                 src={avatarImgURL}
                 alt="avatarImgURL"
                 style={{
@@ -283,9 +327,22 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                   height: 150,
                   borderRadius: "50%",
                 }}
+              /> 
+            </Box> */}
+            <Box className={classes.cropContainer}>
+              <Cropper
+                image={avatarImageSrc}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                cropShape="round"
+                showGrid={false}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
               />
             </Box>
-            <Box my={"2rem"}>
+            {/* <Box my={"2rem"}>
               <label htmlFor="uploadAvatarImg">
                 <Input
                   accept="image/*"
@@ -318,6 +375,78 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                   )}
                 </Button>
               </label>
+            </Box> */}
+            <Box className={classes.controls}>
+              <Box className={classes.sliderContainer}>
+                <Typography variant="overline" className={classes.sliderLabel}>
+                  缩放
+                </Typography>
+                <Slider
+                  value={zoom}
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  aria-labelledby="Zoom"
+                  className={classes.slider}
+                  onChange={(e, zoom) => setZoom(zoom)}
+                />
+              </Box>
+              <input
+                type="file"
+                accept="image/*"
+                ref={inputAvatarRef}
+                onChange={onAvatarImgFileChange}
+                style={{ display: "none" }}
+              />
+              <Button
+                variant="contained"
+                component="span"
+                onClick={triggerAvatarFileSelectPopup}
+                disabled={loading}
+                sx={{ margin: "1rem 0 1rem 1rem" }}
+              >
+                上传
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: green[500],
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-0.75rem",
+                      marginLeft: "-0.75rem",
+                    }}
+                  />
+                )}
+              </Button>
+              <Button
+                onClick={onAvatarImgClear}
+                variant="contained"
+                color="primary"
+                sx={{ margin: "1rem 0 1rem 1rem" }}
+                disabled={!avatarImageSrc}
+              >
+                清除
+              </Button>
+              <Button
+                onClick={onAvatarImgDownload}
+                variant="contained"
+                color="primary"
+                sx={{ margin: "1rem 1rem" }}
+                disabled={!avatarImageSrc}
+              >
+                下载
+              </Button>
+              <Button
+                onClick={uploadAvatarImg}
+                variant="contained"
+                color="primary"
+                sx={{ margin: "1rem 0" }}
+                disabled={!avatarImageSrc}
+              >
+                确认
+              </Button>
             </Box>
             {/* <img
               src={backGroundImgURL}
@@ -335,7 +464,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 onZoomChange={setZoom}
               />
             </Box>
-            <Box my={"2rem"}></Box>
+
             <Box className={classes.controls}>
               <Box className={classes.sliderContainer}>
                 <Typography variant="overline" className={classes.sliderLabel}>
@@ -355,7 +484,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 type="file"
                 accept="image/*"
                 ref={inputRef}
-                onChange={onFileChange}
+                onChange={onBackgroundImgFileChange}
                 style={{ display: "none" }}
               />
               <Button
@@ -381,7 +510,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 )}
               </Button>
               <Button
-                onClick={onClear}
+                onClick={onBackgroundImgClear}
                 variant="contained"
                 color="primary"
                 sx={{ margin: "1rem 0 1rem 1rem" }}
@@ -390,7 +519,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 清除
               </Button>
               <Button
-                onClick={onDownload}
+                onClick={onBackgroundImgDownload}
                 variant="contained"
                 color="primary"
                 sx={{ margin: "1rem 1rem" }}
