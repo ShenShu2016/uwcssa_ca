@@ -7,7 +7,6 @@ import {
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
 import MarketTopBar from "../../components/Market/marketTopBar";
@@ -23,17 +22,12 @@ export default function MarketList() {
   const classes = useStyles();
   const [addressInfo, setAddressInfo] = React.useState("");
   const [searchRadius, setSearchRadius] = React.useState(0);
-  // console.log(addressInfo);
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
   const starter = useStarter(marketItems);
-  // console.log(starter);
-  // console.log(marketItems);
-  // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
 
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
-  // console.log("addressInfo", addressInfo);
   useEffect(() => {
     const filter =
       addressInfo === ""
@@ -57,7 +51,6 @@ export default function MarketList() {
               },
             },
           };
-    // console.log("filter", filter);
     dispatch(addressFilteredMarketItem({ filter: filter }));
   }, [dispatch, addressInfo, searchRadius]);
 
@@ -79,23 +72,23 @@ export default function MarketList() {
     });
   return (
     <Box className={classes.root}>
-      {starter === false ? null : ( // <Loading status={status} />
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          className={classes.contain}
-        >
-          <MarketSideBar
-            darkTheme={darkTheme}
-            setAddressInfo={setAddressInfo}
-            setSearchRadius={setSearchRadius}
-            clickHandler={clickHandler}
-          />
-          <Box className={classes.img}>
-            <MarketTopBar darkTheme={darkTheme} />
-            <Box className={classes.items}>{marketItemRenderList}</Box>
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        className={classes.contain}
+      >
+        <MarketSideBar
+          darkTheme={darkTheme}
+          setAddressInfo={setAddressInfo}
+          setSearchRadius={setSearchRadius}
+          clickHandler={clickHandler}
+        />
+        <Box className={classes.img}>
+          <MarketTopBar darkTheme={darkTheme} />
+          <Box className={classes.items}>
+            {starter === false ? null : marketItemRenderList}
           </Box>
-        </Stack>
-      )}
+        </Box>
+      </Stack>
     </Box>
   );
 }

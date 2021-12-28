@@ -19,6 +19,7 @@ let map;
 
 const GoogleMap = (props) => {
   const { center, defaultZoom, circleRadius = 750 } = props; // circleRadius: unit in [m]
+  // console.log("center:", center);
   const loaded = useRef(false);
   useEffect(() => {
     if (typeof window !== "undefined" && !loaded.current) {

@@ -155,7 +155,12 @@ export const postSingleImage = createAsyncThunk(
             .pop()}`;
           console.log("result", result);
           console.log("压缩后结果", result.size / 1000000, "MB");
-          Storage.put(keyName, result, { contentType: "image/*" }).then((e) => {
+          Storage.put(keyName, result, {
+            contentType: "image/*",
+            progressCallback(progress) {
+              console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+            },
+          }).then((e) => {
             console.log("response", e);
             resolve();
           });
@@ -189,7 +194,15 @@ export const postMultipleImages = createAsyncThunk(
               Storage.put(
                 `${imageLocation}/${uuid()}.${result.name.split(".").pop()}`,
                 result,
-                { contentType: "image/*" }
+                {
+                  contentType: "image/*",
+                  resumable: true,
+                  progressCallback(progress) {
+                    console.log(
+                      `Uploaded: ${progress.loaded}/${progress.total}`
+                    );
+                  },
+                }
               ).then((e) => {
                 console.log("response 上传成功了", e);
                 imgURLs.push(
