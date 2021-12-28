@@ -18,16 +18,16 @@ import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/slice/generalSlice";
 import { putUserProfile } from "../../../../redux/slice/profileSlice";
-import { styled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import getCroppedImg, { generateDownload } from "./canvasUtils";
 import Cropper from "react-easy-crop";
 import { dataURLtoFile } from "./dataURLtoFile";
 import { v4 as uuid } from "uuid";
 
-const Input = styled("input")({
-  display: "none",
-});
+// const Input = styled("input")({
+//   display: "none",
+// });
 const useStyles = makeStyles((theme) => ({
   root: {},
   splitter: {
