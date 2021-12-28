@@ -1,8 +1,6 @@
 import { Box, Container, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 
-// import SwipeableViews from "react-swipeable-views";
-
 import ArticlesPreview from "./Article/ArticlesPreview";
 // import EventGrid from "../../components/Event/EventDataGrid";
 import EventTable from "../../components/Event/EventTable";
@@ -14,6 +12,8 @@ import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import PropTypes from "prop-types";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
 import { useTheme } from "@emotion/react";
+
+// import SwipeableViews from "react-swipeable-views";
 
 // function TabPanel(props) {
 //   const { children, value, index } = props;
@@ -41,7 +41,7 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -78,7 +78,7 @@ export default function Staff() {
   //   setValue(index);
   // };
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ p: 0 }}>
       {/* <Box sx={{ bgcolor: 'background.paper', width: 500 }}> */}
 
       <Tabs
@@ -105,7 +105,6 @@ export default function Staff() {
       > */}
       <TabPanel value={value} index={0} dir={theme.direction}>
         <ArticlesPreview />
-
         <UwcssaJobsPreview />
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>

@@ -12,6 +12,7 @@ import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import ArticleIcon from "@mui/icons-material/Article";
+import CloseIcon from "@mui/icons-material/Close";
 import EventIcon from "@mui/icons-material/Event";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -39,7 +40,7 @@ export default function DrawerList({ toggleDrawer }) {
   return (
     <div>
       <Box
-        sx={{ width: 300 }}
+        // sx={{ width: 300 }}
         role="presentation"
         onKeyDown={toggleDrawer(false)}
       >
@@ -482,6 +483,22 @@ export default function DrawerList({ toggleDrawer }) {
               </ListItemIcon>
               <ListItemText
                 primary="创始团队以及贡献者"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
+            </ListItemButton>
+            <ListItemButton
+              onClick={toggleDrawer(false)}
+              sx={{ float: "right" }}
+            >
+              <ListItemIcon>
+                <CloseIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary="关闭"
                 primaryTypographyProps={{
                   fontSize: 18,
                   fontWeight: "medium",

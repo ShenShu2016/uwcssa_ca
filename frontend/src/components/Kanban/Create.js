@@ -33,9 +33,10 @@ import { makeStyles } from "@mui/styles";
 import { postKanban } from "../../redux/slice/kanbanSlice";
 
 const useStyles = makeStyles({
-  root: {},
   content: {
+    marginTop: "1rem",
     minHeight: "300px",
+    maxWidth: "780px",
     paddingInline: "1rem",
     overflow: "auto",
     border: "1px solid",
@@ -71,13 +72,12 @@ export default function Create({ createOpen, handleCreateClose }) {
   } = useForm({
     defaultValues: {
       title: "",
-
       kanbanStatus: "IDEA",
       deadLine: undefined,
       points: 10,
       sortKey: "SortKey",
       assigneeID: "shushen2013",
-      priority: "Low",
+      priority: "Average",
     },
   });
   const handleOnChange = () => (event) => {
@@ -158,7 +158,11 @@ export default function Create({ createOpen, handleCreateClose }) {
                   ]}
                 />
               </Box>
-              <Stack spacing={2} sx={{ maxWidth: "300px", width: "100%" }}>
+              <Stack
+                spacing={2}
+                sx={{ maxWidth: "300px", width: "100%" }}
+                justifyContent="space-between"
+              >
                 <Controller
                   name="title"
                   control={control}
@@ -307,7 +311,13 @@ export default function Create({ createOpen, handleCreateClose }) {
                   />
                 </LocalizationProvider>
                 <DialogActions>
-                  <Button onClick={handleCreateClose} size="large">
+                  <Button
+                    onClick={(e) => {
+                      reset();
+                      handleCreateClose();
+                    }}
+                    size="large"
+                  >
                     取消
                   </Button>
                   <Button

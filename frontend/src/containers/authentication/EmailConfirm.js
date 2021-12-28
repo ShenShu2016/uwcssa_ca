@@ -72,11 +72,10 @@ export default function EmailConfirm() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

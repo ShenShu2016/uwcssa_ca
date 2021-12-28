@@ -1,5 +1,6 @@
 import { Breadcrumbs, Button } from "@mui/material";
 
+import { Box } from "@mui/system";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -27,7 +28,7 @@ export default function CustomBreadcrumbs() {
   //console.log("pathArray", pathArray);
 
   return (
-    <div>
+    <Box sx={{ my: "1rem" }}>
       <Breadcrumbs aria-label="breadcrumb">
         {pathArray.map((path, idx) => {
           //console.log(path, idx);
@@ -66,6 +67,6 @@ export default function CustomBreadcrumbs() {
           }
         })}
       </Breadcrumbs>
-    </div>
+    </Box>
   );
 }

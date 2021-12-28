@@ -6,6 +6,7 @@ import ArticleComponent from "../../components/Article/ArticleComponent";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
 import { fetchArticles } from "../../redux/slice/articleSlice";
 import { makeStyles } from "@mui/styles";
+import { useTheme } from "@emotion/react";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,21 +16,15 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
   },
-  // body: {
-  //   width: "1100px",
-  //   [theme.breakpoints.down("lg")]: {
-  //     maxWidth: "100%",
-  //   },
-  // },
   title: {
     textAlign: "center",
-    // color: "#0D1F48",
-    paddingBottom: "3rem",
+    paddingBottom: "1rem",
   },
 }));
 
 export default function ArticleList() {
   useTitle("UWCSSA近期新闻");
+  const theme = useTheme();
   const dispatch = useDispatch();
   const classes = useStyles();
   const { articles, fetchArticlesStatus } = useSelector(
@@ -48,7 +43,15 @@ export default function ArticleList() {
 
   return (
     <Box>
-      <Typography variant="h3" className={classes.title}>
+      <Typography
+        variant="h3"
+        className={classes.title}
+        sx={{
+          [theme.breakpoints.down("sm")]: {
+            fontSize: "30px",
+          },
+        }}
+      >
         近期新闻
       </Typography>
       <Box className={classes.main}>
