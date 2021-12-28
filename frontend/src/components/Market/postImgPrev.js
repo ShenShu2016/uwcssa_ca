@@ -86,7 +86,7 @@ export default function PostImgPreview({
                         setUploadStatus("succeeded");
                         setTimeout(() => {
                           setUploadStatus("idle");
-                        }, 2500);
+                        }, 1000);
                       }}
                     />
                   )}
@@ -95,7 +95,7 @@ export default function PostImgPreview({
                   上传照片
                 </Typography>
                 {!!errors.imgURLs ? (
-                  <Typography color="error">* 至少来一张呀！</Typography>
+                  <Typography color="error">* 至少来一张呀!</Typography>
                 ) : null}
                 <AddPhotoAlternateIcon sx={{ fontSize: 60 }} />
               </Stack>

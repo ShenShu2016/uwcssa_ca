@@ -20,6 +20,7 @@ export const detailStyle = makeStyles((theme) => ({
     overflow: "hidden",
     height: "calc(100vh - 64px)",
     bgcolor: "black",
+    position: "relative",
     [theme.breakpoints.down("md")]: {
       display: "block",
       height: "100%",
