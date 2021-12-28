@@ -102,15 +102,30 @@ export default function MarketRental() {
   // console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
-      {starter === false ? null : ( // <Loading status={status} />
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          className={classes.contain}
-        >
-          <FilterInfo
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        className={classes.contain}
+      >
+        <FilterInfo
+          darkTheme={darkTheme}
+          form="plain"
+          type="rental"
+          filterList={filterList}
+          handleSortKey={handleSortKey}
+          handleMin={handleMin}
+          handleMax={handleMax}
+          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
+          handlePropertyType={handlePropertyType}
+          handleAirConditioningType={handleAirConditioningType}
+          handleHeatingType={handleHeatingType}
+          handleReset={handleReset}
+        />
+        <Box className={classes.img}>
+          <MarketImgTopFilter
             darkTheme={darkTheme}
-            form="plain"
             type="rental"
+            trueMarketItems={trueMarketItems}
+            handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
@@ -121,26 +136,11 @@ export default function MarketRental() {
             handleHeatingType={handleHeatingType}
             handleReset={handleReset}
           />
-          <Box className={classes.img}>
-            <MarketImgTopFilter
-              darkTheme={darkTheme}
-              type="rental"
-              trueMarketItems={trueMarketItems}
-              handleClick={handleClick}
-              filterList={filterList}
-              handleSortKey={handleSortKey}
-              handleMin={handleMin}
-              handleMax={handleMax}
-              handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-              handlePropertyType={handlePropertyType}
-              handleAirConditioningType={handleAirConditioningType}
-              handleHeatingType={handleHeatingType}
-              handleReset={handleReset}
-            />
-            <Box className={classes.items}>{itemRenderList}</Box>
+          <Box className={classes.items}>
+            {starter === false ? null : itemRenderList}
           </Box>
-        </Stack>
-      )}
+        </Box>
+      </Stack>
     </Box>
   );
 }
