@@ -77,9 +77,9 @@ export default function SignIn() {
             if (urlFrom) {
               reset();
               dispatch(removeURLFrom());
-              history.push(urlFrom);
+              history.replace(urlFrom);
             } else {
-              history.push("/account/dashboard");
+              history.replace("/account/dashboard");
             }
           }, 1000);
         }
