@@ -106,7 +106,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
 
   const triggerFileSelectPopup = () => inputRef.current.click();
 
-  const [imageSrc, setImageSrc] = useState(null);
+  const [backgroundImageSrc, setBackgroundImageSrc] = useState(null);
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -182,20 +182,20 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
-      setImageSrc(imageDataUrl);
+      setBackgroundImageSrc(imageDataUrl);
     }
   };
 
   const onClear = () => {
-    setImageSrc(null);
+    setBackgroundImageSrc(null);
   };
 
   const onDownload = () => {
-    generateDownload(imageSrc, croppedArea);
+    generateDownload(backgroundImageSrc, croppedArea);
   };
 
   const uploadBackGroundImgImg = async (e) => {
-    const canvas = await getCroppedImg(imageSrc, croppedArea);
+    const canvas = await getCroppedImg(backgroundImageSrc, croppedArea);
 
     const canvasDataUrl = canvas.toDataURL("image/jpeg");
     // console.log(canvasDataUrl);
@@ -326,7 +326,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
             /> */}
             <Box className={classes.cropContainer}>
               <Cropper
-                image={imageSrc}
+                image={backgroundImageSrc}
                 crop={crop}
                 zoom={zoom}
                 aspect={960 / 250}
@@ -385,7 +385,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 variant="contained"
                 color="primary"
                 sx={{ margin: "1rem 0 1rem 1rem" }}
-                disabled={!imageSrc}
+                disabled={!backgroundImageSrc}
               >
                 清除
               </Button>
@@ -394,7 +394,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 variant="contained"
                 color="primary"
                 sx={{ margin: "1rem 1rem" }}
-                disabled={!imageSrc}
+                disabled={!backgroundImageSrc}
               >
                 下载
               </Button>
@@ -415,7 +415,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 variant="contained"
                 color="primary"
                 sx={{ margin: "1rem 0" }}
-                disabled={!imageSrc}
+                disabled={!backgroundImageSrc}
               >
                 确认
               </Button>
