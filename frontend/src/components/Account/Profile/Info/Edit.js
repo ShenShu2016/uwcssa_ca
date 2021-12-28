@@ -7,10 +7,12 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  Slider,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
@@ -18,11 +20,14 @@ import { postSingleImage } from "../../../../redux/slice/generalSlice";
 import { putUserProfile } from "../../../../redux/slice/profileSlice";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
+import getCroppedImg, { generateDownload } from "./canvasUtils";
+import Cropper from "react-easy-crop";
+import { dataURLtoFile } from "./dataURLtoFile";
 
 const Input = styled("input")({
   display: "none",
 });
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {},
   splitter: {
     marginBlock: "2.5rem",
@@ -31,7 +36,62 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
-});
+  cropContainer: {
+    position: "relative",
+    width: "100%",
+    height: 200,
+    background: "#333",
+    [theme.breakpoints.up("sm")]: {
+      height: 400,
+    },
+  },
+  cropButton: {
+    flexShrink: 0,
+  },
+  //   controls: {
+  //     padding: 16,
+  //     display: "flex",
+
+  //     flexDirection: "row",
+  //     alignItems: "center",
+  //   },
+  sliderContainer: {
+    display: "flex",
+    flex: "1",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: { flexDirection: "column" },
+    margin: "1rem 0",
+  },
+  sliderLabel: {
+    minWidth: 25,
+
+    [theme.breakpoints.down("xs")]: {
+      minWidth: 65,
+    },
+  },
+  slider: {
+    padding: "22px 0px",
+    marginLeft: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    margin: "0 16px",
+    minWidth: "500px",
+
+    [theme.breakpoints.down("sm")]: { minWidth: "200px" },
+  },
+  imgContainer: {
+    position: "relative",
+    flex: 1,
+    padding: 16,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  img: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+}));
 
 export default function Edit({ user, editOpen, handleEditClose }) {
   const classes = useStyles();
@@ -41,6 +101,16 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const [backGroundImgURL, setBackGroundImgURL] = useState(
     user.backGroundImgURL
   );
+
+  const inputRef = useRef();
+
+  const triggerFileSelectPopup = () => inputRef.current.click();
+
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedArea, setCroppedArea] = useState(null);
 
   const {
     handleSubmit,
@@ -75,6 +145,8 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const uploadAvatarImg = async (e) => {
     setLoading(true);
     const imageData = e.target.files;
+    console.log(imageData, "image");
+
     const imageLocation = "user/Avatar";
     const maxPixel = 300;
     const response = await dispatch(
@@ -87,9 +159,58 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     }
   };
 
+  // const uploadBackGroundImgImg = async (e) => {
+  //   setLoading(true);
+  //   const imageData = e.target.file;
+  //   const imageLocation = "user/BackGround";
+  //   const response = await dispatch(
+  //     postSingleImage({ imageData, imageLocation })
+  //   );
+  //   if (response.meta.requestStatus === "fulfilled") {
+  //     setBackGroundImgURL(response.payload);
+  //     console.log("response", response);
+  //     setLoading(false);
+  //   }
+  //   console.log(imageData);
+  // };
+
+  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+    setCroppedArea(croppedAreaPixels);
+  };
+
+  const onFileChange = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      let imageDataUrl = await readFile(file);
+      setImageSrc(imageDataUrl);
+    }
+  };
+
+  const onClear = () => {
+    setImageSrc(null);
+  };
+
+  const onDownload = () => {
+    generateDownload(imageSrc, croppedArea);
+  };
+
   const uploadBackGroundImgImg = async (e) => {
-    setLoading(true);
-    const imageData = e.target.files;
+    const canvas = await getCroppedImg(imageSrc, croppedArea);
+
+    const canvasDataUrl = canvas.toDataURL("image/jpeg");
+    // console.log(canvasDataUrl);
+    const convertedUrlToFile = dataURLtoFile(
+      canvasDataUrl,
+      `croppedImage${Date.now()}.jpeg`
+    );
+    // console.log(convertedUrlToFile);
+
+    const files = [convertedUrlToFile];
+    const fileInputFiles = new FileListItems(files);
+    console.log(fileInputFiles);
+
+    const imageData = fileInputFiles;
+
     const imageLocation = "user/BackGround";
     const response = await dispatch(
       postSingleImage({ imageData, imageLocation })
@@ -198,44 +319,110 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 </Button>
               </label>
             </Box>
-            <img
+            {/* <img
               src={backGroundImgURL}
               alt={"background"}
               style={{ width: "100%" }}
-            />
-            <Box my={"2rem"}>
-              <label htmlFor="uploadBackGroundImgImg">
+            /> */}
+            <Box className={classes.cropContainer}>
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                zoom={zoom}
+                aspect={960 / 250}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
+              />
+            </Box>
+            <Box my={"2rem"}></Box>
+            <Box className={classes.controls}>
+              <Box className={classes.sliderContainer}>
+                <Typography variant="overline" className={classes.sliderLabel}>
+                  缩放
+                </Typography>
+                <Slider
+                  value={zoom}
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  aria-labelledby="Zoom"
+                  className={classes.slider}
+                  onChange={(e, zoom) => setZoom(zoom)}
+                />
+              </Box>
+              <input
+                type="file"
+                accept="image/*"
+                ref={inputRef}
+                onChange={onFileChange}
+                style={{ display: "none" }}
+              />
+              <Button
+                variant="contained"
+                component="span"
+                onClick={triggerFileSelectPopup}
+                disabled={loading}
+                sx={{ margin: "1rem 0 1rem 1rem" }}
+              >
+                上传
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: green[500],
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-0.75rem",
+                      marginLeft: "-0.75rem",
+                    }}
+                  />
+                )}
+              </Button>
+              <Button
+                onClick={onClear}
+                variant="contained"
+                color="primary"
+                sx={{ margin: "1rem 0 1rem 1rem" }}
+                disabled={!imageSrc}
+              >
+                清除
+              </Button>
+              <Button
+                onClick={onDownload}
+                variant="contained"
+                color="primary"
+                sx={{ margin: "1rem 1rem" }}
+                disabled={!imageSrc}
+              >
+                下载
+              </Button>
+
+              {/* <label htmlFor="uploadAvatarImg">
                 <Input
                   accept="image/*"
                   id="uploadBackGroundImgImg"
                   type="file"
-                  onChange={(e) => {
-                    // setImgData();
-                    uploadBackGroundImgImg(e);
-                  }}
-                />
-                <Button
-                  variant="contained"
-                  component="span"
-                  fullWidth
-                  disabled={loading}
-                >
-                  上传背景
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      sx={{
-                        color: green[500],
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        marginTop: "-0.75rem",
-                        marginLeft: "-0.75rem",
-                      }}
-                    />
-                  )}
-                </Button>
-              </label>
+                  // onChange={(e) => {
+                  //   // setImgData();
+                  //   uploadBackGroundImgImg(e);
+                  // }}
+                /> */}
+
+              <Button
+                onClick={uploadBackGroundImgImg}
+                variant="contained"
+                color="primary"
+                sx={{ margin: "1rem 0" }}
+                disabled={!imageSrc}
+              >
+                确认
+              </Button>
+              {/* </label> */}
+              {/* <Box className={classes.imgContainer}>
+                <img src={croppedImage} alt="Cropped" className={classes.img} />
+              </Box> */}
             </Box>
 
             <Controller
@@ -360,4 +547,18 @@ export default function Edit({ user, editOpen, handleEditClose }) {
       </form>
     </div>
   );
+}
+
+function readFile(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result), false);
+    reader.readAsDataURL(file);
+  });
+}
+
+function FileListItems(files) {
+  var b = new ClipboardEvent("").clipboardData || new DataTransfer();
+  for (var i = 0, len = files.length; i < len; i++) b.items.add(files[i]);
+  return b.files;
 }
