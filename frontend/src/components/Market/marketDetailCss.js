@@ -37,4 +37,16 @@ export const detailStyle = makeStyles((theme) => ({
       height: "100%",
     },
   },
+  fabBox: {
+    margin: "8px",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    zIndex: 100,
+    [theme.breakpoints.down("md")]: {
+      position: "fixed",
+      left: 0,
+      top: "64px",
+    },
+  },
 }));

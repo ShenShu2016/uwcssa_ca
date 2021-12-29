@@ -126,4 +126,13 @@ export const marketItemStyle = makeStyles((theme) => ({
       marginBottom: "1rem",
     },
   },
+  fabBox: {
+    display: "none",
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+      position: "fixed",
+      right: 10,
+      bottom: 70,
+    },
+  },
 }));
