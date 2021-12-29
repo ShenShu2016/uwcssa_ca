@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router";
 
 import ArticleDetail from "./ArticleDetail";
 import ArticleList from "../../components/Article/ArticleList";
-import BottomNav from "../BottomNav";
 import { Box } from "@mui/material";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import Footer from "../Footer";
@@ -12,7 +11,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
-    marginTop: "4rem",
+    marginTop: "1rem",
     maxWidth: "1536px",
     paddingInline: "3rem",
     [theme.breakpoints.down("sm")]: {
@@ -20,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 export default function ArticleRouter() {
   const classes = useStyles();
   return (
@@ -32,7 +32,6 @@ export default function ArticleRouter() {
         </Switch>
       </Box>
       <Footer />
-      <BottomNav />
     </Fragment>
   );
 }

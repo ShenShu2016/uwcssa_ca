@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     marginBlock: "1rem",
   },
   card: {
-    paddingInline: "1rem",
+    // paddingInline: "1rem",
     paddingTop: "1rem",
   },
   title: {

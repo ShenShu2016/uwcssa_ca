@@ -108,15 +108,31 @@ export default function MarketVehicle() {
 
   return (
     <Box className={classes.root}>
-      {starter === false ? null : ( // <Loading status={status} />
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          className={classes.contain}
-        >
-          <FilterInfo
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        className={classes.contain}
+      >
+        <FilterInfo
+          darkTheme={darkTheme}
+          form="plain"
+          type="vehicle"
+          filterList={filterList}
+          handleSortKey={handleSortKey}
+          handleMin={handleMin}
+          handleMax={handleMax}
+          handleVehicleType={handleVehicleType}
+          handleMinYear={handleMinYear}
+          handleMaxYear={handleMaxYear}
+          handleMake={handleMake}
+          handleModel={handleModel}
+          handleReset={handleReset}
+        />
+        <Box className={classes.img}>
+          <MarketImgTopFilter
             darkTheme={darkTheme}
-            form="plain"
             type="vehicle"
+            trueMarketItems={trueMarketItems}
+            handleClick={handleClick}
             filterList={filterList}
             handleSortKey={handleSortKey}
             handleMin={handleMin}
@@ -128,27 +144,11 @@ export default function MarketVehicle() {
             handleModel={handleModel}
             handleReset={handleReset}
           />
-          <Box className={classes.img}>
-            <MarketImgTopFilter
-              darkTheme={darkTheme}
-              type="vehicle"
-              trueMarketItems={trueMarketItems}
-              handleClick={handleClick}
-              filterList={filterList}
-              handleSortKey={handleSortKey}
-              handleMin={handleMin}
-              handleMax={handleMax}
-              handleVehicleType={handleVehicleType}
-              handleMinYear={handleMinYear}
-              handleMaxYear={handleMaxYear}
-              handleMake={handleMake}
-              handleModel={handleModel}
-              handleReset={handleReset}
-            />
-            <Box className={classes.items}>{itemRenderList}</Box>
+          <Box className={classes.items}>
+            {starter === false ? null : itemRenderList}
           </Box>
-        </Stack>
-      )}
+        </Box>
+      </Stack>
     </Box>
   );
 }

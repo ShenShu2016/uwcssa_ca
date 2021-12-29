@@ -77,9 +77,9 @@ export default function SignIn() {
             if (urlFrom) {
               reset();
               dispatch(removeURLFrom());
-              history.push(urlFrom);
+              history.replace(urlFrom);
             } else {
-              history.push("/account/dashboard");
+              history.replace("/account/dashboard");
             }
           }, 1000);
         }
@@ -96,11 +96,10 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ mb: "2rem" }}>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

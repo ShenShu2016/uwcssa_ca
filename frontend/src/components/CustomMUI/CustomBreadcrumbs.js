@@ -1,5 +1,7 @@
 import { Breadcrumbs, Button } from "@mui/material";
 
+import { Box } from "@mui/system";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Link } from "react-router-dom";
 import React from "react";
 import { useLocation } from "react-router-dom";
@@ -7,6 +9,8 @@ import { useLocation } from "react-router-dom";
 const GetChineseName = (path) => {
   if (path === "article") {
     return "文章";
+  } else if (path === "market") {
+    return "商城";
   } else if (path === "event") {
     return "活动";
   } else if (path === "eventSignUp") {
@@ -24,7 +28,7 @@ export default function CustomBreadcrumbs() {
   //console.log("pathArray", pathArray);
 
   return (
-    <div>
+    <Box sx={{ my: "1rem" }}>
       <Breadcrumbs aria-label="breadcrumb">
         {pathArray.map((path, idx) => {
           //console.log(path, idx);
@@ -32,7 +36,12 @@ export default function CustomBreadcrumbs() {
           if (idx === 0) {
             return (
               <span style={{}} key={idx}>
-                <Button color="inherit" component={Link} to={`/`}>
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to={`/`}
+                  startIcon={<HomeRoundedIcon />}
+                >
                   主页
                 </Button>
               </span>
@@ -58,6 +67,6 @@ export default function CustomBreadcrumbs() {
           }
         })}
       </Breadcrumbs>
-    </div>
+    </Box>
   );
 }

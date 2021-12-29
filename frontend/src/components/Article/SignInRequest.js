@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   content: {
     paddingBlock: "3rem",
     textAlign: "center",
-    backgroundColor: "#f4f4f4",
+    // backgroundColor: "#f4f4f4",
   },
   button: {
     marginTop: "3rem",

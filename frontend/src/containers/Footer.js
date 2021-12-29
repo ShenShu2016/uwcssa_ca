@@ -11,6 +11,7 @@ import {
 // import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubButton from "react-github-btn";
+import GitHubIcon from "@mui/icons-material/GitHub";
 // import InputUnstyled from "@mui/base/InputUnstyled";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -53,7 +54,7 @@ function Copyright() {
 
 const useStyles = makeStyles(({ spacing, breakpoints, palette }) => ({
   main: {
-    marginTop: spacing(8),
+    // marginTop: spacing(2),
     marginBottom: spacing(2),
   },
 
@@ -165,7 +166,7 @@ export default function StickyFooter() {
         px={{ xs: 2, sm: 3, lg: 4 }}
       >
         <Box pt={6} pb={{ md: 6 }}>
-          <Grid container spacing={4}>
+          <Grid container spacing={4} justifyContent="center">
             <Grid item xs={12} md={4} lg={3}>
               <Box
                 component={"img"}
@@ -192,7 +193,8 @@ export default function StickyFooter() {
               <Grid container spacing={1} className={classes.repoInfo}>
                 <Grid item xs={12}>
                   <Typography variant="subtitle2" gutterBottom>
-                    此网站 UWCSSA.CA - 为 GitHub 开源项目
+                    此网站 UWCSSA.CA - 为 <GitHubIcon fontSize="large" />
+                    GitHub 开源项目
                   </Typography>
                 </Grid>
                 <Grid item xs={4} sm={4}>
@@ -277,7 +279,20 @@ export default function StickyFooter() {
                           "&.MuiButton-text": { color: "#838A8A" },
                         }}
                       >
-                        我们的团队
+                        网页开发团队
+                      </Button>
+                    </span>
+                    <span>
+                      <Button
+                        color="primary"
+                        variant="text"
+                        component={Link}
+                        to="/uwcssaMember"
+                        sx={{
+                          "&.MuiButton-text": { color: "#838A8A" },
+                        }}
+                      >
+                        学生会成员
                       </Button>
                     </span>
                     <span>
@@ -347,7 +362,7 @@ export default function StickyFooter() {
 
                     <Typography
                       variant="caption"
-                      gutterBottom
+                      sx={{ padding: "6px 8px", color: "#838A8A" }}
                       // sx={{ color: "primary.light" }}
                     >
                       来和我们一起工作吧!

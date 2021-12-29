@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import DashboardBasicInfo from "../../components/Account/Dashboard/DashboardBasicInfo";
 // import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
 // import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
@@ -13,15 +14,15 @@ const useStyles = makeStyles({
     marginTop: "1rem",
     margin: "auto",
     maxWidth: "960px",
-    paddingInline: "1rem",
+    // paddingInline: "1rem",
   },
-  infoCards: {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "100%",
-    marginBlock: "1rem",
-    justifyContent: "space-between",
-  },
+  // infoCards: {
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  //   width: "100%",
+  //   marginBlock: "1rem",
+  //   justifyContent: "space-between",
+  // },
 });
 
 export default function Dashboard() {
@@ -37,7 +38,9 @@ export default function Dashboard() {
           <MyEssencePosts /> */}
         </div>
         {/* <MyForumPosts /> */}
-        <MyMarketPosts />
+        <Box sx={{ overflow: "auto" }}>
+          <MyMarketPosts />
+        </Box>
       </div>
     </div>
   );

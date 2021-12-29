@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import BottomNav from "../BottomNav";
 import { Box } from "@mui/material";
 import Footer from "../Footer";
 import ForumHome from "./ForumHome";
@@ -62,7 +61,6 @@ export default function ForumRouter() {
         </Switch>
       </Box>
       <Footer />
-      <BottomNav />
     </Fragment>
   );
 }

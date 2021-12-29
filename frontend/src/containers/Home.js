@@ -1,4 +1,3 @@
-import BottomNav from "./BottomNav";
 import ContactUs from "../components/Home/ContactUs";
 import { Divider } from "@mui/material";
 import FeatureIntro from "../components/Home/FeatureIntro";
@@ -13,7 +12,6 @@ const Home = () => (
     <Divider />
     <ContactUs />
     <Footer />
-    <BottomNav />
   </div>
 );
 

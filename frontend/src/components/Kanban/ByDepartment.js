@@ -66,7 +66,7 @@ export default function ByDepartment({ department, kanbans }) {
   return (
     <Box className={classes.root}>
       <Paper elevation={0} variant="outlined">
-        <CardActions disableSpacing>
+        <CardActions onClick={handleExpandClick}>
           <Box sx={{ ml: "1rem" }}>
             <Typography variant="h6" color="primary" sx={{}}>
               {department.id}
@@ -74,7 +74,6 @@ export default function ByDepartment({ department, kanbans }) {
           </Box>
           <ExpandMore
             expand={expanded}
-            onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
           >

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     marginTop: "1rem",
     maxWidth: "960px",
     margin: "auto",
-    paddingInline: "1rem",
+    // paddingInline: "1rem",
   },
 });
 

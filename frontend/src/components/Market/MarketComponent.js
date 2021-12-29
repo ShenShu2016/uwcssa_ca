@@ -37,10 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MarketComponent({ item, type, darkTheme }) {
   const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const [imageURL, setImageURL] = useState(null);
   const [hoverRef, isHover] = useHover();
-
   const {
     id,
     name,

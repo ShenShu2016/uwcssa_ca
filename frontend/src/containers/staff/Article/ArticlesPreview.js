@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Box } from "@mui/system";
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
 import { fetchArticles } from "../../../redux/slice/articleSlice";
@@ -93,7 +94,7 @@ export default function ArticlesPreview() {
       <Typography variant="h4" component="h2" sx={{ margin: 3 }}>
         新闻数据
       </Typography>
-      <div style={{ height: 400, width: "100%" }}>
+      <Box style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -102,7 +103,7 @@ export default function ArticlesPreview() {
           checkboxSelection
           disableSelectionOnClick
         />
-      </div>
+      </Box>
     </div>
   );
 }

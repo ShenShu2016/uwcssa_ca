@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import BottomNav from "../BottomNav";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import CustomBreadcrumbs from "../../components/CustomMUI/CustomBreadcrumbs";
 import Event from "./Event";
 import EventDetail from "../../components/Event/EventDetail";
@@ -17,7 +16,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
-    marginTop: "2rem",
+    marginTop: "1rem",
     maxWidth: "1536px",
     paddingInline: "3rem",
     [theme.breakpoints.down("sm")]: {
@@ -59,7 +58,6 @@ export default function EventRouter() {
         </Switch>
       </Box>
       <Footer />
-      <BottomNav />
     </Fragment>
   );
 }

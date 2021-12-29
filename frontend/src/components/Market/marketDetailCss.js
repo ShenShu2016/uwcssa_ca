@@ -20,6 +20,7 @@ export const detailStyle = makeStyles((theme) => ({
     overflow: "hidden",
     height: "calc(100vh - 64px)",
     bgcolor: "black",
+    position: "relative",
     [theme.breakpoints.down("md")]: {
       display: "block",
       height: "100%",
@@ -34,6 +35,18 @@ export const detailStyle = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "100%",
       height: "100%",
+    },
+  },
+  fabBox: {
+    margin: "8px",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    zIndex: 100,
+    [theme.breakpoints.down("md")]: {
+      position: "fixed",
+      left: 0,
+      top: "64px",
     },
   },
 }));

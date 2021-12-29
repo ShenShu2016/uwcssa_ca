@@ -134,18 +134,18 @@ function MUISwitch(props) {
   );
 }
 const StyledAppBar = styled((props) => <AppBar {...props} />)(({ theme }) => ({
-  // "& .MuiPaper-root": {
-  //   "& .MuiAppBar-root": {
-  //     boxShadow: "none",
-  //   },
-  // },
+  "& .MuiPaper-root": {
+    "& .MuiAppBar-root": {
+      boxShadow: "none",
+    },
+  },
 }));
 
 const StyledToolBar = styled((props) => <Toolbar {...props} />)(
   ({ theme }) => ({
-    // "& .MuiToolbar-root": {
-    //   height: "56px",
-    // },
+    "& .MuiToolbar-root": {
+      height: "56px",
+    },
   })
 );
 
