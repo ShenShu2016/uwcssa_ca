@@ -98,6 +98,8 @@ export default function InfoCard({ item }) {
         content={content}
         owner={owner}
         item={item}
+        linkedIn={user.linkedIn}
+        github={user.github}
       />
 
       {/* <Card sx={{ width: 310 }} className={classes.card}>

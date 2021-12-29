@@ -31,6 +31,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import Edit from "./Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import MUIRichTextEditor from "mui-rte";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
   box: {
@@ -135,6 +137,9 @@ export default function PersonalCard({
   content,
   owner,
   item,
+  linkedIn,
+  github,
+  email,
 }) {
   const classes = useStyles();
   const isPermit = usePermit(owner, "admin");
@@ -239,12 +244,19 @@ export default function PersonalCard({
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="Send Me Email">
+            <IconButton>
               <EmailIcon />
             </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
+            {linkedIn ? (
+              <IconButton href={linkedIn}>
+                <LinkedInIcon />
+              </IconButton>
+            ) : null}
+            {github ? (
+              <IconButton href={github}>
+                <GitHubIcon />
+              </IconButton>
+            ) : null}
             {isPermit ? (
               <IconButton
                 aria-label="settings"
@@ -260,7 +272,7 @@ export default function PersonalCard({
               variant="text"
               onClick={handleClickOpen}
               sx={{
-                marginLeft: "5rem",
+                marginLeft: "auto",
                 // "&.MuiButton-text": { color: "#616161" },
               }}
             >
