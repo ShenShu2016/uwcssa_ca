@@ -117,15 +117,7 @@ export default function MarketItemDetail() {
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
         >
-          <Box
-            sx={{
-              "& > :not(style)": { m: 1 },
-              position: "absolute",
-              left: 0,
-              top: 0,
-              zIndex: 100,
-            }}
-          >
+          <Box className={classes.fabBox}>
             <Fab color="primary" onClick={() => closeHandler()}>
               <CloseIcon />
             </Fab>

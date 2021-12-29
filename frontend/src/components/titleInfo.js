@@ -138,7 +138,8 @@ const TitleInfo = ({
   model,
 }) => {
   const currentUser = useSelector((state) => state.userAuth.user.username);
-
+  const [share, setShare] = React.useState(false);
+  const [save, setSave] = React.useState(false);
   return (
     <React.Fragment>
       {type === "item" ? (
@@ -231,24 +232,43 @@ const TitleInfo = ({
           contactWeChat={contactWeChat}
           onClose={handleClose}
         />
-
-        <Button
-          startIcon={<BookmarksIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="primary"
+        <Tooltip
+          title={`${save === false ? "Save Item!" : "Saved!🥳"}`}
+          placement="top-end"
+          TransitionComponent={Zoom}
+          arrow
         >
-          保存
-        </Button>
+          <Button
+            startIcon={<BookmarksIcon />}
+            onClick={() => {
+              console.log("clicked!");
+              setSave((prev) => !prev);
+            }}
+            variant="outlined"
+            color="primary"
+          >
+            保存
+          </Button>
+        </Tooltip>
 
-        <Button
-          startIcon={<ShareIcon />}
-          onClick={() => console.log("clicked!")}
-          variant="outlined"
-          color="primary"
+        <Tooltip
+          title={`${share === false ? "Copy Shared Link!" : "Copied Link!🥳"}`}
+          placement="top-end"
+          TransitionComponent={Zoom}
+          arrow
         >
-          分享
-        </Button>
+          <Button
+            startIcon={<ShareIcon />}
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              setShare(true);
+            }}
+            variant="outlined"
+            color="primary"
+          >
+            分享
+          </Button>
+        </Tooltip>
       </Stack>
     </React.Fragment>
   );

@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 export default function MarketComponent({ item, type, darkTheme }) {
   const classes = useStyles();
   const [hoverRef, isHover] = useHover();
-  console.log("item:", item);
   const {
     id,
     name,
