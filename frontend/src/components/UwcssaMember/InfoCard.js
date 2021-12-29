@@ -20,10 +20,12 @@ import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import ShareIcon from "@mui/icons-material/Share";
+// import ShareIcon from "@mui/icons-material/Share";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const useStyles = makeStyles((palette) => ({
   root: {
@@ -275,9 +277,16 @@ export default function InfoCard({ item }) {
           <IconButton aria-label="Send Me Email">
             <EmailIcon />
           </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          {user.linkedIn ? (
+            <IconButton href={user.linkedIn}>
+              <LinkedInIcon />
+            </IconButton>
+          ) : null}
+          {user.github ? (
+            <IconButton href={user.github}>
+              <GitHubIcon />
+            </IconButton>
+          ) : null}
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}

@@ -2,11 +2,14 @@ import {
   Box,
   Button,
   CircularProgress,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
+  Paper,
+  Slide,
   Slider,
   TextField,
   Typography,
@@ -93,6 +96,10 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "100%",
   },
 }));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function Edit({ user, editOpen, handleEditClose }) {
   const classes = useStyles();
@@ -269,56 +276,62 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   return (
     <div className={classes.root}>
       <form>
-        <Dialog open={editOpen} onClose={handleEditClose}>
+        <Dialog
+          fullScreen
+          open={editOpen}
+          onClose={handleEditClose}
+          TransitionComponent={Transition}
+        >
           <DialogTitle>编辑 个人信息</DialogTitle>
           <Divider light />
-          <DialogContent>
-            <Controller
-              name="firstName"
-              control={control}
-              rules={{
-                required: false,
-                pattern: /\D+/,
-                maxLength: 100,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  label="名"
-                  variant="outlined"
-                  placeholder="张三的三"
-                  fullWidth
-                  margin="dense"
-                  onChange={onChange}
-                  value={value}
-                  error={!!errors.firstName}
-                  helperText={errors.firstName ? "不符合" : null}
-                />
-              )}
-            />
-            <Controller
-              name="lastName"
-              control={control}
-              rules={{
-                required: false,
-                pattern: /\D+/,
-                maxLength: 100,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  label="姓"
-                  variant="outlined"
-                  placeholder="张三的张"
-                  fullWidth
-                  margin="dense"
-                  onChange={onChange}
-                  value={value}
-                  error={!!errors.lastName}
-                  helperText={errors.lastName ? "不符合" : null}
-                />
-              )}
-            />
-            <div className={classes.splitter} />
-            {/* <Box sx={{ textAlign: "center" }}>
+          <Container maxWidth="md">
+            <DialogContent>
+              <Controller
+                name="firstName"
+                control={control}
+                rules={{
+                  required: false,
+                  pattern: /\D+/,
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="名"
+                    variant="outlined"
+                    placeholder="张三的三"
+                    fullWidth
+                    margin="dense"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.firstName}
+                    helperText={errors.firstName ? "不符合" : null}
+                  />
+                )}
+              />
+              <Controller
+                name="lastName"
+                control={control}
+                rules={{
+                  required: false,
+                  pattern: /\D+/,
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="姓"
+                    variant="outlined"
+                    placeholder="张三的张"
+                    fullWidth
+                    margin="dense"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.lastName}
+                    helperText={errors.lastName ? "不符合" : null}
+                  />
+                )}
+              />
+              <div className={classes.splitter} />
+              {/* <Box sx={{ textAlign: "center" }}>
          <img
                 src={avatarImgURL}
                 alt="avatarImgURL"
@@ -329,20 +342,20 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 }}
               /> 
             </Box> */}
-            <Box className={classes.cropContainer}>
-              <Cropper
-                image={avatarImageSrc}
-                crop={crop}
-                zoom={zoom}
-                aspect={1}
-                cropShape="round"
-                showGrid={false}
-                onCropChange={setCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={setZoom}
-              />
-            </Box>
-            {/* <Box my={"2rem"}>
+              <Box className={classes.cropContainer}>
+                <Cropper
+                  image={avatarImageSrc}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1}
+                  cropShape="round"
+                  showGrid={false}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </Box>
+              {/* <Box my={"2rem"}>
               <label htmlFor="uploadAvatarImg">
                 <Input
                   accept="image/*"
@@ -376,159 +389,165 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 </Button>
               </label>
             </Box> */}
-            <Box className={classes.controls}>
-              <Box className={classes.sliderContainer}>
-                <Typography variant="overline" className={classes.sliderLabel}>
-                  缩放
-                </Typography>
-                <Slider
-                  value={zoom}
-                  min={1}
-                  max={3}
-                  step={0.1}
-                  aria-labelledby="Zoom"
-                  className={classes.slider}
-                  onChange={(e, zoom) => setZoom(zoom)}
-                />
-              </Box>
-              <input
-                type="file"
-                accept="image/*"
-                ref={inputAvatarRef}
-                onChange={onAvatarImgFileChange}
-                style={{ display: "none" }}
-              />
-              <Button
-                variant="contained"
-                component="span"
-                onClick={triggerAvatarFileSelectPopup}
-                disabled={loading}
-                sx={{ margin: "1rem 0 1rem 1rem" }}
-              >
-                上传
-                {loading && (
-                  <CircularProgress
-                    size={24}
-                    sx={{
-                      color: green[500],
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      marginTop: "-0.75rem",
-                      marginLeft: "-0.75rem",
-                    }}
+              <Box className={classes.controls}>
+                <Box className={classes.sliderContainer}>
+                  <Typography
+                    variant="overline"
+                    className={classes.sliderLabel}
+                  >
+                    缩放
+                  </Typography>
+                  <Slider
+                    value={zoom}
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    aria-labelledby="Zoom"
+                    className={classes.slider}
+                    onChange={(e, zoom) => setZoom(zoom)}
                   />
-                )}
-              </Button>
-              <Button
-                onClick={onAvatarImgClear}
-                variant="contained"
-                color="primary"
-                sx={{ margin: "1rem 0 1rem 1rem" }}
-                disabled={!avatarImageSrc}
-              >
-                清除
-              </Button>
-              <Button
-                onClick={onAvatarImgDownload}
-                variant="contained"
-                color="primary"
-                sx={{ margin: "1rem 1rem" }}
-                disabled={!avatarImageSrc}
-              >
-                下载
-              </Button>
-              <Button
-                onClick={uploadAvatarImg}
-                variant="contained"
-                color="primary"
-                sx={{ margin: "1rem 0" }}
-                disabled={!avatarImageSrc}
-              >
-                确认
-              </Button>
-            </Box>
-            {/* <img
+                </Box>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={inputAvatarRef}
+                  onChange={onAvatarImgFileChange}
+                  style={{ display: "none" }}
+                />
+                <Button
+                  variant="outlined"
+                  component="span"
+                  onClick={triggerAvatarFileSelectPopup}
+                  disabled={loading}
+                  sx={{ margin: "1rem 0 1rem 1rem" }}
+                >
+                  上传头像
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </Button>
+                <Button
+                  onClick={onAvatarImgClear}
+                  variant="outlined"
+                  color="error"
+                  sx={{ margin: "1rem 0 1rem 1rem" }}
+                  disabled={!avatarImageSrc}
+                >
+                  清除头像
+                </Button>
+                <Button
+                  onClick={onAvatarImgDownload}
+                  variant="outlined"
+                  color="primary"
+                  sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                  disabled={!avatarImageSrc}
+                >
+                  下载头像
+                </Button>
+                <Button
+                  onClick={uploadAvatarImg}
+                  variant="outlined"
+                  color="success"
+                  sx={{ margin: "1rem" }}
+                  disabled={!avatarImageSrc}
+                >
+                  确认头像
+                </Button>
+              </Box>
+              {/* <img
               src={backGroundImgURL}
               alt={"background"}
               style={{ width: "100%" }}
             /> */}
-            <Box className={classes.cropContainer}>
-              <Cropper
-                image={backgroundImageSrc}
-                crop={crop}
-                zoom={zoom}
-                aspect={960 / 250}
-                onCropChange={setCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={setZoom}
-              />
-            </Box>
-
-            <Box className={classes.controls}>
-              <Box className={classes.sliderContainer}>
-                <Typography variant="overline" className={classes.sliderLabel}>
-                  缩放
-                </Typography>
-                <Slider
-                  value={zoom}
-                  min={1}
-                  max={3}
-                  step={0.1}
-                  aria-labelledby="Zoom"
-                  className={classes.slider}
-                  onChange={(e, zoom) => setZoom(zoom)}
+              <Box className={classes.cropContainer}>
+                <Cropper
+                  image={backgroundImageSrc}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={960 / 250}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
                 />
               </Box>
-              <input
-                type="file"
-                accept="image/*"
-                ref={inputRef}
-                onChange={onBackgroundImgFileChange}
-                style={{ display: "none" }}
-              />
-              <Button
-                variant="contained"
-                component="span"
-                onClick={triggerFileSelectPopup}
-                disabled={loading}
-                sx={{ margin: "1rem 0 1rem 1rem" }}
-              >
-                上传
-                {loading && (
-                  <CircularProgress
-                    size={24}
-                    sx={{
-                      color: green[500],
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      marginTop: "-0.75rem",
-                      marginLeft: "-0.75rem",
-                    }}
-                  />
-                )}
-              </Button>
-              <Button
-                onClick={onBackgroundImgClear}
-                variant="contained"
-                color="primary"
-                sx={{ margin: "1rem 0 1rem 1rem" }}
-                disabled={!backgroundImageSrc}
-              >
-                清除
-              </Button>
-              <Button
-                onClick={onBackgroundImgDownload}
-                variant="contained"
-                color="primary"
-                sx={{ margin: "1rem 1rem" }}
-                disabled={!backgroundImageSrc}
-              >
-                下载
-              </Button>
 
-              {/* <label htmlFor="uploadAvatarImg">
+              <Box className={classes.controls}>
+                <Box className={classes.sliderContainer}>
+                  <Typography
+                    variant="overline"
+                    className={classes.sliderLabel}
+                  >
+                    缩放
+                  </Typography>
+                  <Slider
+                    value={zoom}
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    aria-labelledby="Zoom"
+                    className={classes.slider}
+                    onChange={(e, zoom) => setZoom(zoom)}
+                  />
+                </Box>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={inputRef}
+                  onChange={onBackgroundImgFileChange}
+                  style={{ display: "none" }}
+                />
+                <Button
+                  variant="outlined"
+                  component="span"
+                  onClick={triggerFileSelectPopup}
+                  disabled={loading}
+                  sx={{ margin: "1rem 0 1rem 1rem" }}
+                >
+                  上传背景
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </Button>
+                <Button
+                  onClick={onBackgroundImgClear}
+                  variant="outlined"
+                  color="error"
+                  sx={{ margin: "1rem 0 1rem 1rem" }}
+                  disabled={!backgroundImageSrc}
+                >
+                  清除背景
+                </Button>
+                <Button
+                  onClick={onBackgroundImgDownload}
+                  variant="outlined"
+                  color="primary"
+                  sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                  disabled={!backgroundImageSrc}
+                >
+                  下载背景
+                </Button>
+
+                {/* <label htmlFor="uploadAvatarImg">
                 <Input
                   accept="image/*"
                   id="uploadBackGroundImgImg"
@@ -539,139 +558,150 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                   // }}
                 /> */}
 
-              <Button
-                onClick={uploadBackGroundImgImg}
-                variant="contained"
-                color="primary"
-                sx={{ margin: "1rem 0" }}
-                disabled={!backgroundImageSrc}
-              >
-                确认
-              </Button>
-              {/* </label> */}
-              {/* <Box className={classes.imgContainer}>
+                <Button
+                  onClick={uploadBackGroundImgImg}
+                  variant="outlined"
+                  color="success"
+                  sx={{ margin: "1rem" }}
+                  disabled={!backgroundImageSrc}
+                >
+                  确认背景
+                </Button>
+                {/* </label> */}
+                {/* <Box className={classes.imgContainer}>
                 <img src={croppedImage} alt="Cropped" className={classes.img} />
               </Box> */}
-            </Box>
+              </Box>
 
-            <Controller
-              name="linkedIn"
-              control={control}
-              rules={{
-                required: false,
-                pattern: /linkedin.com/i,
-                maxLength: 200,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  label="LinkedIn 网址"
-                  variant="outlined"
-                  fullWidth
-                  margin="dense"
-                  onChange={onChange}
-                  value={value}
-                  error={!!errors.linkedIn}
-                  helperText={errors.linkedIn ? "格式不对" : null}
-                />
-              )}
-            />
-            <div className={classes.splitter} />
-            <Controller
-              name="github"
-              control={control}
-              rules={{
-                required: false,
-                pattern: /github.com/i,
-                maxLength: 200,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  label="GitHub 网址"
-                  variant="outlined"
-                  fullWidth
-                  margin="dense"
-                  onChange={onChange}
-                  value={value}
-                  error={!!errors.github}
-                  helperText={errors.github ? "格式不对" : null}
-                />
-              )}
-            />
-            <div className={classes.splitter} />
-            <Controller
-              name="major"
-              control={control}
-              rules={{
-                required: false,
-                pattern: /\D+/,
-                maxLength: 100,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  label="专业"
-                  variant="outlined"
-                  placeholder="例如：机械工程"
-                  fullWidth
-                  margin="dense"
-                  onChange={onChange}
-                  value={value}
-                  error={!!errors.major}
-                  helperText={errors.major ? "不能为空" : null}
-                />
-              )}
-            />
-            <div className={classes.splitter} />
-            <Controller
-              name="intro"
-              control={control}
-              rules={{
-                required: false,
-                pattern: /\D+/,
-                maxLength: 500,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <TextField
-                  label="自我介绍"
-                  variant="outlined"
-                  fullWidth
-                  margin="dense"
-                  multiline
-                  onChange={onChange}
-                  value={value}
-                  maxRows={20}
-                  minRows={5}
-                  error={!!errors.intro}
-                  helperText={errors.intro ? "不能为空" : null}
-                />
-              )}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleEditClose} size="large">
-              取消
-            </Button>
-            <Button
-              onClick={handleSubmit(onSubmit)}
-              variant="contained"
-              size="large"
-              disabled={loading}
-            >
-              更新
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: green[500],
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
-            </Button>
-          </DialogActions>
+              <Controller
+                name="linkedIn"
+                control={control}
+                rules={{
+                  required: false,
+                  pattern: /linkedin.com/i,
+                  maxLength: 200,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="LinkedIn 网址"
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.linkedIn}
+                    helperText={errors.linkedIn ? "格式不对" : null}
+                  />
+                )}
+              />
+              <div className={classes.splitter} />
+              <Controller
+                name="github"
+                control={control}
+                rules={{
+                  required: false,
+                  pattern: /github.com/i,
+                  maxLength: 200,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="GitHub 网址"
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.github}
+                    helperText={errors.github ? "格式不对" : null}
+                  />
+                )}
+              />
+              <div className={classes.splitter} />
+              <Controller
+                name="major"
+                control={control}
+                rules={{
+                  required: false,
+                  pattern: /\D+/,
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="专业"
+                    variant="outlined"
+                    placeholder="例如：机械工程"
+                    fullWidth
+                    margin="dense"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.major}
+                    helperText={errors.major ? "不能为空" : null}
+                  />
+                )}
+              />
+              <div className={classes.splitter} />
+              <Controller
+                name="intro"
+                control={control}
+                rules={{
+                  required: false,
+                  pattern: /\D+/,
+                  maxLength: 500,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="自我介绍"
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"
+                    multiline
+                    onChange={onChange}
+                    value={value}
+                    maxRows={20}
+                    minRows={5}
+                    error={!!errors.intro}
+                    helperText={errors.intro ? "不能为空" : null}
+                  />
+                )}
+              />
+            </DialogContent>
+          </Container>
+          <Paper
+            sx={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 1 }}
+            elevation={3}
+          >
+            <DialogActions>
+              <Button
+                onClick={handleEditClose}
+                size="large"
+                variant="outlined"
+                color="error"
+              >
+                取消
+              </Button>
+              <Button
+                onClick={handleSubmit(onSubmit)}
+                variant="contained"
+                size="large"
+                disabled={loading}
+              >
+                更新
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: green[500],
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-0.75rem",
+                      marginLeft: "-0.75rem",
+                    }}
+                  />
+                )}
+              </Button>
+            </DialogActions>
+          </Paper>
         </Dialog>
       </form>
     </div>
