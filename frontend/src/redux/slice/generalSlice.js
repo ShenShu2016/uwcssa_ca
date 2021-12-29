@@ -234,9 +234,7 @@ const generalSlice = createSlice({
       console.log("remove selected removeURLFrom successfully!");
     },
     switchTheme(state, action) {
-      console.log("data", action);
       state.darkTheme = action.payload;
-      console.log("switch theme!");
     },
   },
   extraReducers(builder) {

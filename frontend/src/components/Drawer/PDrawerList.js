@@ -271,26 +271,25 @@ export const PDrawerList = () => {
       <Divider />
       <List>
         <div>
-          <ListItem>
-            <ListItemButton onClick={handleClick}>
-              <ListItemIcon>
-                <img
-                  src={uwcssa_logo}
-                  alt="uwcssaLogo"
-                  style={{ height: "24px" }}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primary="学生会管理系统"
-                primaryTypographyProps={{
-                  fontSize: 18,
-                  fontWeight: "medium",
-                  color: "primary",
-                }}
+          <ListItemButton onClick={handleClick}>
+            <ListItemIcon>
+              <img
+                src={uwcssa_logo}
+                alt="uwcssaLogo"
+                style={{ height: "24px" }}
               />
-              {openStaff ? <ExpandMore /> : <ExpandLess />}
-            </ListItemButton>
-          </ListItem>
+            </ListItemIcon>
+            <ListItemText
+              primary="学生会管理系统"
+              primaryTypographyProps={{
+                fontSize: 18,
+                fontWeight: "medium",
+                color: "primary",
+              }}
+            />
+            {openStaff ? <ExpandMore /> : <ExpandLess />}
+          </ListItemButton>
+
           <Collapse in={openStaff} timeout="auto">
             <ListItem>
               <ListItemButton sx={{ pl: 7 }} component={Link} to="/staff">

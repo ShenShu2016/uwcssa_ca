@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "none",
     marginInline: "1rem",
-    [theme.breakpoints.up("1300")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "flex",
     },
   },
@@ -167,17 +167,14 @@ export default function PersistentDrawerLeft(props) {
   const matches = useMediaQuery(theme.breakpoints.down("600"));
   const history = useHistory();
   const [open, setOpen] = useState(true);
-  const isAuthenticated = useSelector(
-    (state) => state.userAuth.isAuthenticated
-  );
-  const userAuth = useSelector((state) => state.userAuth);
+  const { userAuth } = useSelector((state) => state);
+  const { darkTheme } = useSelector((state) => state.general);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleChangeTheme = (event) => {
-    console.log("switchTheme", event.target.value);
     dispatch(switchTheme(event.target.checked));
   };
   const menuId = "primary-search-account-menu";
@@ -262,7 +259,7 @@ export default function PersistentDrawerLeft(props) {
       onClose={handleMobileMenuClose}
       sx={{ maxWidth: "300px" }}
     >
-      {isAuthenticated ? (
+      {userAuth.isAuthenticated ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             aria-label="account of current user"
@@ -352,9 +349,12 @@ export default function PersistentDrawerLeft(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Button>
-              <LightDarkSwitch onChange={(event) => handleChangeTheme(event)} />
+              <LightDarkSwitch
+                onChange={(event) => handleChangeTheme(event)}
+                checked={darkTheme}
+              />
             </Button>
-            {isAuthenticated ? (
+            {userAuth.isAuthenticated ? (
               <IconButton
                 edge="end"
                 aria-label="account of current user"

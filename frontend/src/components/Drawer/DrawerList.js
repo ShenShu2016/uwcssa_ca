@@ -280,175 +280,7 @@ export default function DrawerList({ toggleDrawer }) {
         </List>
 
         <Divider />
-        <List>
-          <div>
-            <ListItem>
-              <ListItemButton onClick={handleClick}>
-                <ListItemIcon>
-                  <img
-                    src={uwcssa_logo}
-                    alt="uwcssaLogo"
-                    style={{ height: "24px" }}
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  primary="学生会"
-                  primaryTypographyProps={{
-                    fontSize: 18,
-                    fontWeight: "medium",
-                    color: "primary",
-                  }}
-                />
-                {openStaff ? <ExpandMore /> : <ExpandLess />}
-              </ListItemButton>
-            </ListItem>
-            <Collapse in={openStaff} timeout="auto">
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  component={Link}
-                  to="/staff"
-                  onClick={toggleDrawer(false)}
-                >
-                  <ListItemText
-                    primary="学生会管理系统首页"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  component={Link}
-                  to="/kanban"
-                  onClick={toggleDrawer(false)}
-                >
-                  <ListItemText
-                    primary="看板"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText
-                    primary="财务"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  component={Link}
-                  to="/staff/event/postEvent"
-                  onClick={toggleDrawer(false)}
-                >
-                  <ListItemText
-                    primary="活动策划"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  onClick={toggleDrawer(false)}
-                  component={Link}
-                  to="/staff/uwcssaJob/postUwcssaJob"
-                >
-                  <ListItemText
-                    primary="职位招聘"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  onClick={toggleDrawer(false)}
-                  component={Link}
-                  to="/staff/uwcssaJob/postDepartment"
-                >
-                  <ListItemText
-                    primary="部门管理"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  onClick={toggleDrawer(false)}
-                  component={Link}
-                  to="/staff/article/postArticle"
-                >
-                  <ListItemText
-                    primary="新闻发布"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton
-                  sx={{ pl: 7 }}
-                  onClick={toggleDrawer(false)}
-                  component={Link}
-                  to="/forum/admin/forumTopicCURD"
-                >
-                  <ListItemText
-                    primary="论坛管理"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton sx={{ pl: 4 }} disabled>
-                  <ListItemText
-                    primary="举报审核"
-                    primaryTypographyProps={{
-                      fontSize: 18,
-                      fontWeight: "medium",
-                      color: "primary",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </Collapse>
-          </div>
-        </List>
+        <List></List>
         <Divider />
         <List>
           <div>
@@ -490,24 +322,187 @@ export default function DrawerList({ toggleDrawer }) {
                 }}
               />
             </ListItemButton>
-            <ListItemButton
-              onClick={toggleDrawer(false)}
-              sx={{ float: "right" }}
-            >
-              <ListItemIcon>
-                <CloseIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText
-                primary="关闭"
-                primaryTypographyProps={{
-                  fontSize: 18,
-                  fontWeight: "medium",
-                  color: "primary",
-                }}
-              />
-            </ListItemButton>
           </div>
         </List>
+        <div>
+          <ListItemButton onClick={handleClick}>
+            <ListItemIcon>
+              <img
+                src={uwcssa_logo}
+                alt="uwcssaLogo"
+                style={{ height: "24px" }}
+              />
+            </ListItemIcon>
+            <ListItemText
+              primary="学生会管理系统"
+              primaryTypographyProps={{
+                fontSize: 18,
+                fontWeight: "medium",
+                color: "primary",
+              }}
+            />
+            {openStaff ? <ExpandMore /> : <ExpandLess />}
+          </ListItemButton>
+
+          <Collapse in={openStaff} timeout="auto">
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                component={Link}
+                to="/staff"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText
+                  primary="学生会管理系统首页"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                component={Link}
+                to="/kanban"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText
+                  primary="看板"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton sx={{ pl: 4 }} disabled>
+                <ListItemText
+                  primary="财务"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                component={Link}
+                to="/staff/event/postEvent"
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText
+                  primary="活动策划"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                onClick={toggleDrawer(false)}
+                component={Link}
+                to="/staff/uwcssaJob/postUwcssaJob"
+              >
+                <ListItemText
+                  primary="职位招聘"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                onClick={toggleDrawer(false)}
+                component={Link}
+                to="/staff/uwcssaJob/postDepartment"
+              >
+                <ListItemText
+                  primary="部门管理"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                onClick={toggleDrawer(false)}
+                component={Link}
+                to="/staff/article/postArticle"
+              >
+                <ListItemText
+                  primary="新闻发布"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton
+                sx={{ pl: 7 }}
+                onClick={toggleDrawer(false)}
+                component={Link}
+                to="/forum/admin/forumTopicCURD"
+              >
+                <ListItemText
+                  primary="论坛管理"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton sx={{ pl: 4 }} disabled>
+                <ListItemText
+                  primary="举报审核"
+                  primaryTypographyProps={{
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    color: "primary",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Collapse>
+        </div>
+        <ListItemButton onClick={toggleDrawer(false)} sx={{ float: "right" }}>
+          <ListItemIcon>
+            <CloseIcon color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary="关闭"
+            primaryTypographyProps={{
+              fontSize: 18,
+              fontWeight: "medium",
+              color: "primary",
+            }}
+          />
+        </ListItemButton>
       </Box>
     </div>
   );

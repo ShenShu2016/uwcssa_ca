@@ -18,14 +18,14 @@ import { useTitle } from "../Hooks/useTitle";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
-
-    [theme.breakpoints.down("sm")]: {
-      paddingInline: "0",
-    },
+    marginTop: "1rem",
   },
   title: { textAlign: "center" },
   main: {
-    overflow: "auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100vw",
+      overflow: "auto",
+    },
   },
 }));
 
