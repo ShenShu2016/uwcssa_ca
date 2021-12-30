@@ -2,6 +2,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress";
+import QRCode from "../QRCode";
 import loadingFile from "./loading.gif";
 import { red } from "@mui/material/colors";
 
@@ -118,7 +119,7 @@ export const Loading = (status = null) => {
       >
         Loading...
       </Typography>
-      <Box sx={{ color: red[200] }}>
+      <Box sx={{ color: red[200], mb: "10rem" }}>
         <LinearProgress
           sx={{ bottom: "-150px" }}
           color="inherit"
@@ -127,6 +128,14 @@ export const Loading = (status = null) => {
           valueBuffer={buffer}
         />
       </Box>
+      <QRCode
+        size={200}
+        url="https://google.com"
+        bgColor="white"
+        imgSrc="default"
+        fgColor="black"
+        imgSizeRatio={0.2}
+      />
     </Box>
   );
 };
