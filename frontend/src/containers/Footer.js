@@ -59,8 +59,11 @@ const useStyles = makeStyles(({ spacing, breakpoints, palette }) => ({
   },
 
   footer: {
+    clear: "both",
+    position: "relative",
     padding: spacing(3, 2),
     height: "220px",
+    marginTop: "120px",
     // backgroundColor: "#FDFEFE ",
     [breakpoints.down("sm")]: {
       height: "350px",
