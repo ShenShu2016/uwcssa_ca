@@ -203,7 +203,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const uploadAvatarImg = async (e) => {
-    // setLoading(true);
+    setLoading(true);
     // const imageData = e.target.files;
     // console.log(imageData, "image");
 
@@ -246,6 +246,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const uploadBackGroundImgImg = async (e) => {
+    setLoading(true);
     const canvas = await getCroppedImg(backgroundImageSrc, croppedArea);
 
     const canvasDataUrl = canvas.toDataURL("image/jpeg");
@@ -402,6 +403,19 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                       disabled={!avatarImageSrc}
                     >
                       清除头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
                     </Button>
                     <Button
                       onClick={onAvatarImgDownload}
@@ -411,15 +425,41 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                       disabled={!avatarImageSrc}
                     >
                       下载头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
                     </Button>
                     <Button
                       onClick={uploadAvatarImg}
-                      variant="outlined"
+                      variant="contained"
                       color="success"
                       sx={{ margin: "1rem" }}
                       disabled={!avatarImageSrc}
                     >
                       确认头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
                     </Button>
                   </Box>
                 </React.Fragment>
@@ -578,6 +618,19 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                       disabled={!backgroundImageSrc}
                     >
                       清除背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
                     </Button>
                     <Button
                       onClick={onBackgroundImgDownload}
@@ -587,16 +640,42 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                       disabled={!backgroundImageSrc}
                     >
                       下载背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
                     </Button>
 
                     <Button
                       onClick={uploadBackGroundImgImg}
-                      variant="outlined"
+                      variant="contained"
                       color="success"
                       sx={{ margin: "1rem" }}
                       disabled={!backgroundImageSrc}
                     >
                       确认背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
                     </Button>
                   </Box>
                 </React.Fragment>
