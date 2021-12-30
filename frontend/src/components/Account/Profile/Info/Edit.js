@@ -12,6 +12,7 @@ import {
   Slide,
   Slider,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
@@ -417,50 +418,54 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                         />
                       )}
                     </Button>
-                    <Button
-                      onClick={onAvatarImgDownload}
-                      variant="outlined"
-                      color="primary"
-                      sx={{ margin: "1rem 0rem 1rem 1rem" }}
-                      disabled={!avatarImageSrc}
-                    >
-                      下载头像
-                      {loading && (
-                        <CircularProgress
-                          size={24}
-                          sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
-                          }}
-                        />
-                      )}
-                    </Button>
-                    <Button
-                      onClick={uploadAvatarImg}
-                      variant="contained"
-                      color="success"
-                      sx={{ margin: "1rem" }}
-                      disabled={!avatarImageSrc}
-                    >
-                      确认头像
-                      {loading && (
-                        <CircularProgress
-                          size={24}
-                          sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
-                          }}
-                        />
-                      )}
-                    </Button>
+                    <Tooltip title="点击下载剪裁好的头像" placement="top">
+                      <Button
+                        onClick={onAvatarImgDownload}
+                        variant="outlined"
+                        color="warning"
+                        sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                        disabled={!avatarImageSrc}
+                      >
+                        下载头像
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              color: green[500],
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-0.75rem",
+                              marginLeft: "-0.75rem",
+                            }}
+                          />
+                        )}
+                      </Button>
+                    </Tooltip>
+                    <Tooltip title="点击完成裁剪" placement="top">
+                      <Button
+                        onClick={uploadAvatarImg}
+                        variant="contained"
+                        color="success"
+                        sx={{ margin: "1rem" }}
+                        disabled={!avatarImageSrc}
+                      >
+                        确认头像
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              color: green[500],
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-0.75rem",
+                              marginLeft: "-0.75rem",
+                            }}
+                          />
+                        )}
+                      </Button>
+                    </Tooltip>
                   </Box>
                 </React.Fragment>
               ) : (
@@ -632,51 +637,55 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                         />
                       )}
                     </Button>
-                    <Button
-                      onClick={onBackgroundImgDownload}
-                      variant="outlined"
-                      color="primary"
-                      sx={{ margin: "1rem 0rem 1rem 1rem" }}
-                      disabled={!backgroundImageSrc}
-                    >
-                      下载背景
-                      {loading && (
-                        <CircularProgress
-                          size={24}
-                          sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
-                          }}
-                        />
-                      )}
-                    </Button>
+                    <Tooltip title="点击下载剪裁好的背景" placement="top">
+                      <Button
+                        onClick={onBackgroundImgDownload}
+                        variant="outlined"
+                        color="warning"
+                        sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                        disabled={!backgroundImageSrc}
+                      >
+                        下载背景
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              color: green[500],
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-0.75rem",
+                              marginLeft: "-0.75rem",
+                            }}
+                          />
+                        )}
+                      </Button>
+                    </Tooltip>
 
-                    <Button
-                      onClick={uploadBackGroundImgImg}
-                      variant="contained"
-                      color="success"
-                      sx={{ margin: "1rem" }}
-                      disabled={!backgroundImageSrc}
-                    >
-                      确认背景
-                      {loading && (
-                        <CircularProgress
-                          size={24}
-                          sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
-                          }}
-                        />
-                      )}
-                    </Button>
+                    <Tooltip title="点击完成裁剪" placement="top">
+                      <Button
+                        onClick={uploadBackGroundImgImg}
+                        variant="contained"
+                        color="success"
+                        sx={{ margin: "1rem" }}
+                        disabled={!backgroundImageSrc}
+                      >
+                        确认背景
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              color: green[500],
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-0.75rem",
+                              marginLeft: "-0.75rem",
+                            }}
+                          />
+                        )}
+                      </Button>
+                    </Tooltip>
                   </Box>
                 </React.Fragment>
               ) : (

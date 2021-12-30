@@ -7,6 +7,7 @@ import {
   // //   DialogContentText,
   // DialogTitle,
   IconButton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -116,16 +117,16 @@ const Share = ({ label }) => {
     setInstructions("");
   }
 
-  function showInstruction() {
-    if (copySuccessMessage) {
-      return;
-    }
-    setInstructions(`点击分享活动链接`);
-  }
+  // function showInstruction() {
+  //   if (copySuccessMessage) {
+  //     return;
+  //   }
+  //   setInstructions(`点击分享活动链接`);
+  // }
 
-  function hideInstruction() {
-    setInstructions("");
-  }
+  // function hideInstruction() {
+  //   setInstructions("");
+  // }
 
   return (
     <div className={classes.share}>
@@ -137,26 +138,28 @@ const Share = ({ label }) => {
           {instructions}
         </Typography>
       </div>
-      <IconButton
-        color="primary"
-        onClick={copyText}
-        onMouseOver={showInstruction}
-        onMouseOut={hideInstruction}
-        className={classes.aTag}
-        sx={{
-          background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-          "& > *": {
-            textTransform: "none !important",
-          },
-          border: 0,
-          boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
-          color: "white",
-          padding: "0 30px",
-          borderRadius: "20rem",
-        }}
-      >
-        <ShareIcon />
-      </IconButton>
+      <Tooltip title="点击分享活动链接" placement="top">
+        <IconButton
+          color="primary"
+          onClick={copyText}
+          // onMouseOver={showInstruction}
+          // onMouseOut={hideInstruction}
+          className={classes.aTag}
+          sx={{
+            background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+            "& > *": {
+              textTransform: "none !important",
+            },
+            border: 0,
+            boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+            color: "white",
+            padding: "0 30px",
+            borderRadius: "20rem",
+          }}
+        >
+          <ShareIcon />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 };

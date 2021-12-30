@@ -14,6 +14,7 @@ import {
   Slider,
   Switch,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
@@ -426,38 +427,54 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                         />
                       )}
                     </Button>
-                    <Button
-                      onClick={onImgDownload}
-                      variant="outlined"
-                      color="primary"
-                      sx={{ margin: "1rem 0rem 1rem 1rem" }}
-                      disabled={!imageSrc}
-                    >
-                      下载头像
-                      {loading && (
-                        <CircularProgress
-                          size={24}
-                          sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
-                          }}
-                        />
-                      )}
-                    </Button>
-
-                    <Button
-                      onClick={uploadImg}
-                      variant="contained"
-                      color="success"
-                      sx={{ margin: "1rem" }}
-                      disabled={!imageSrc}
-                    >
-                      确认头像
-                    </Button>
+                    <Tooltip title="点击下载剪裁好的头像" placement="top">
+                      <Button
+                        onClick={onImgDownload}
+                        variant="outlined"
+                        color="warning"
+                        sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                        disabled={!imageSrc}
+                      >
+                        下载头像
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              color: green[500],
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-0.75rem",
+                              marginLeft: "-0.75rem",
+                            }}
+                          />
+                        )}
+                      </Button>
+                    </Tooltip>
+                    <Tooltip title="点击完成裁剪" placement="top">
+                      <Button
+                        onClick={uploadImg}
+                        variant="contained"
+                        color="success"
+                        sx={{ margin: "1rem" }}
+                        disabled={!imageSrc}
+                      >
+                        确认头像
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              color: green[500],
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-0.75rem",
+                              marginLeft: "-0.75rem",
+                            }}
+                          />
+                        )}
+                      </Button>
+                    </Tooltip>
                   </Box>
                 </React.Fragment>
               ) : (
