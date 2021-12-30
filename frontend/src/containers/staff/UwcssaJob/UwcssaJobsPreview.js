@@ -61,12 +61,8 @@ const columns = [
 export default function UwcssaJobsPreview() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const {
-    departments,
-    uwcssaJobs,
-    fetchUwcssaJobsStatus,
-    fetchDepartmentsStatus,
-  } = useSelector((state) => state.career);
+  const { uwcssaJobs, fetchUwcssaJobsStatus, fetchDepartmentsStatus } =
+    useSelector((state) => state.career);
 
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
@@ -77,7 +73,7 @@ export default function UwcssaJobsPreview() {
     }
   }, [dispatch, fetchUwcssaJobsStatus, fetchDepartmentsStatus]);
 
-  console.log("departments, uwcssaJobs", departments, uwcssaJobs);
+  //console.log("departments, uwcssaJobs", departments, uwcssaJobs);
 
   const rows = uwcssaJobs.map((uwcssaJob) => {
     const { id, title, department, like, unlike, active, uwcssaJobResumes } =

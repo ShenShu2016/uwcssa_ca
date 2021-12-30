@@ -40,7 +40,7 @@ export default function FoundingMember() {
   const dispatch = useDispatch();
   const isPermit = usePermit(null, "admin");
   const foundingMembers = useSelector(selectAllFoundingMembers);
-  console.log(foundingMembers);
+  //console.log(foundingMembers);
 
   useEffect(() => {
     dispatch(fetchFoundingMembers());

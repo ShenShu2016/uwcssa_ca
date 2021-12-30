@@ -1,8 +1,10 @@
 import {
   Box,
   CardActionArea,
+  CardActions,
   CardHeader,
   Grid,
+  IconButton,
   Paper,
   Typography,
 } from "@mui/material";
@@ -10,8 +12,10 @@ import {
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
 import React from "react";
+import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
+import { useTheme } from "@emotion/react";
 
 const useStyles = makeStyles((theme) => ({
   paper: {},
@@ -26,13 +30,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "112px",
       height: "112px",
-      marginTop: "2.5rem",
+      // marginTop: "2.5rem",
     },
   },
 }));
 
 function ArticleComponent({ article }) {
   const classes = useStyles();
+  const theme = useTheme();
   const { id, summary, title, imgURLs, createdAt, userID, user } = article;
 
   return (
@@ -46,7 +51,10 @@ function ArticleComponent({ article }) {
           padding: "1rem",
           maxHeight: "255px",
           borderRadius: "8px",
-          // border: "1px solid #dfe1e5",
+          [theme.breakpoints.down("sm")]: {
+            margin: "0.5rem auto",
+            padding: "0.5rem",
+          },
         }}
       >
         <Grid container spacing={1} sx={{ height: "100%" }}>
@@ -132,6 +140,11 @@ function ArticleComponent({ article }) {
                   className={classes.s3image}
                 />
               </CardActionArea>
+              <CardActions sx={{ p: 0, float: "right" }}>
+                <IconButton aria-label="add to favorites">
+                  <ShareRoundedIcon />
+                </IconButton>
+              </CardActions>
             </div>
           </Grid>
         </Grid>
