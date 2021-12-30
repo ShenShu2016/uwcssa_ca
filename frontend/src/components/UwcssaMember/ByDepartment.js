@@ -3,7 +3,6 @@ import {
   Collapse,
   Divider,
   IconButton,
-  // Paper,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -63,7 +62,7 @@ export default function ByDepartment({ department, uwcssaMembers }) {
     setExpanded(!expanded);
   };
   //   console.log("department", department);
-  console.log("membersByDepartment", membersByDepartment);
+  //console.log("membersByDepartment", membersByDepartment);
   return (
     <Box
       sx={{

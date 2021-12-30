@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   main: {
+    width: "100%",
     display: "flex",
     [theme.breakpoints.down("lg")]: {
       display: "block",
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "1100px",
     width: "100%",
     [theme.breakpoints.down("lg")]: {
-      maxWidth: "100%",
+      width: "100%",
     },
   },
 }));

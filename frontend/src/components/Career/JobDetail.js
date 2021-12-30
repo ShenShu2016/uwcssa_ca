@@ -29,7 +29,7 @@ export default function JobDetail(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
   useTitle(`开放职位-${id}`);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function JobDetail(props) {
   }, [id, dispatch]);
 
   const job = useSelector((state) => selectUwcssaJobById(state, id));
-  console.log(job);
+  //console.log(job);
   return (
     <div className={classes.root}>
       {job ? (

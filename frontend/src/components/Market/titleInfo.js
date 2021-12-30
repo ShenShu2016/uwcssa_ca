@@ -2,7 +2,6 @@ import {
   Button,
   Dialog,
   DialogTitle,
-  Divider,
   List,
   ListItem,
   ListItemIcon,
@@ -12,15 +11,14 @@ import {
 } from "@mui/material";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 import MessageIcon from "@mui/icons-material/Message";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import QRCode from "../QRCode";
 import React from "react";
 import ShareIcon from "@mui/icons-material/Share";
+import { ShareInfoDialog } from "../ShareInfo";
 import { Tooltip } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
 import { Zoom } from "@mui/material";
@@ -108,73 +106,6 @@ function SimpleDialog(props) {
             </ListItem>
           </Tooltip>
         ) : null}
-      </List>
-    </Dialog>
-  );
-}
-
-function SimpleDialogShare(props) {
-  const { open, onClose } = props;
-  const [copy, setCopy] = React.useState(false);
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>分享</DialogTitle>
-      <Divider />
-      <List sx={{ p: 5 }}>
-        <ListItemText
-          primary="复制链接或者二维码"
-          primaryTypographyProps={{
-            fontSize: "12px",
-            fontWeight: "light",
-          }}
-          inset={true}
-        />
-        <Tooltip
-          title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
-          placement="top-end"
-          TransitionComponent={Zoom}
-          arrow
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <ContentCopyIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="点我复制链接！"
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                setCopy(true);
-              }}
-            />
-          </ListItem>
-        </Tooltip>
-        <ListItem>
-          <QRCode
-            size={200}
-            url={window.location.href}
-            bgColor="white"
-            imgSrc="default"
-            fgColor="black"
-            imgSizeRatio={0.2}
-          />
-        </ListItem>
-        <label htmlFor="contained-button-file">
-          <input
-            accept="image/*"
-            id="contained-button-file"
-            type="file"
-            required
-            style={{ display: "none" }}
-            multiple
-            onChange={(e) => {
-              console.log("et");
-              // setTrigger(true);
-            }}
-          />
-          <Button variant="outlined" component="span" disabled>
-            自定义二维码
-          </Button>
-        </label>
       </List>
     </Dialog>
   );
@@ -341,10 +272,7 @@ const TitleInfo = ({
             分享
           </Button>
         </Tooltip>
-        <SimpleDialogShare
-          open={shareOpen}
-          onClose={() => setShareOpen(false)}
-        />
+        <ShareInfoDialog open={shareOpen} onClose={() => setShareOpen(false)} />
       </Stack>
     </React.Fragment>
   );
