@@ -398,6 +398,24 @@ export default function PersistentDrawerLeft(props) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            "&::-webkit-scrollbar": {
+              width: "14px",
+            },
+
+            "&::-webkit-scrollbar-button": {
+              width: 0,
+              height: 0,
+              display: "none",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundClip: "content-box",
+              border: "4px solid transparent",
+              borderRadius: "7px",
+              boxShadow: "inset 0 0 0 10px",
+            },
+            "&::-webkit-scrollbar-corner": {
+              backgroundColor: "transparent",
+            },
           },
         }}
         variant="persistent"
