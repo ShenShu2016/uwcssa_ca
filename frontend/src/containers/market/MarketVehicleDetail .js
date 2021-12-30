@@ -11,7 +11,7 @@ import DetailInfo from "../../components/Market/detailInfo";
 // import { Loading } from "../../components/Market/loading";
 import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
-import TitleInfo from "../../components/titleInfo";
+import TitleInfo from "../../components/Market/titleInfo";
 import { detailStyle } from "../../components/Market/marketDetailCss";
 import { useHistory } from "react-router";
 // import useGetImages from "../../components/Market/useGetImages";

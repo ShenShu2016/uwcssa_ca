@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close"; // import { Loading } from ".
 import DetailInfo from "../../components/Market/detailInfo";
 import SellerInfo from "../../components/Market/sellerInfo";
 import SwipeViews from "../../components/SwipeViews";
-import TitleInfo from "../../components/titleInfo";
+import TitleInfo from "../../components/Market/titleInfo";
 import { detailStyle } from "../../components/Market/marketDetailCss";
 import { useHistory } from "react-router-dom";
 // import useGetImages from "../../components/Market/useGetImages";
