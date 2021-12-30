@@ -111,6 +111,10 @@ export const marketItemSortBySortKeyPosts = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          id
+          geocodingResult
+          lat
+          lng
         }
         contactPhone
         contactWeChat
@@ -180,6 +184,10 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          id
+          geocodingResult
+          lat
+          lng
         }
         contactPhone
         contactWeChat
@@ -242,6 +250,10 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          id
+          geocodingResult
+          lat
+          lng
         }
         year
         make
@@ -313,6 +325,10 @@ export const marketItemSortBySortKeyRental = /* GraphQL */ `
           terms
           types
           apartmentNumbers
+          id
+          geocodingResult
+          lat
+          lng
         }
         propertySize
         dateAvailable
