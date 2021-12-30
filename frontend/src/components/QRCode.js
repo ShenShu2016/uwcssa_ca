@@ -13,6 +13,7 @@ export default function QRCode({
   return (
     <div>
       <QRcode
+        renderAs="svg"
         id="qrCode"
         size={size}
         value={url}
