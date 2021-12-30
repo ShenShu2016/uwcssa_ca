@@ -17,22 +17,24 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React, { forwardRef, useState } from "react";
-import { Link } from "react-router-dom";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { usePermit } from "../../Hooks/usePermit";
-import { grey } from "@mui/material/colors";
-import EmailIcon from "@mui/icons-material/Email";
 
-import EditIcon from "@mui/icons-material/Edit";
 
 // import ShareIcon from "@mui/icons-material/Share";
 import Edit from "./Edit";
+
 import CloseIcon from "@mui/icons-material/Close";
-import MUIRichTextEditor from "mui-rte";
+import Edit from "./Edit";
+import EditIcon from "@mui/icons-material/Edit";
+import EmailIcon from "@mui/icons-material/Email";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { Link } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import MUIRichTextEditor from "mui-rte";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { grey } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
+import { usePermit } from "../../Hooks/usePermit";
 
 const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
   box: {
