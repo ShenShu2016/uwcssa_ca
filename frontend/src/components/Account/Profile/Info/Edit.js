@@ -203,7 +203,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const uploadAvatarImg = async (e) => {
-    // setLoading(true);
+    setLoading(true);
     // const imageData = e.target.files;
     // console.log(imageData, "image");
 
@@ -246,6 +246,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   };
 
   const uploadBackGroundImgImg = async (e) => {
+    setLoading(true);
     const canvas = await getCroppedImg(backgroundImageSrc, croppedArea);
 
     const canvasDataUrl = canvas.toDataURL("image/jpeg");
@@ -331,30 +332,183 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 )}
               />
               <div className={classes.splitter} />
-              {/* <Box sx={{ textAlign: "center" }}>
-         <img
-                src={avatarImgURL}
-                alt="avatarImgURL"
-                style={{
-                  width: 150,
-                  height: 150,
-                  borderRadius: "50%",
-                }}
-              /> 
-            </Box> */}
-              <Box className={classes.cropContainer}>
-                <Cropper
-                  image={avatarImageSrc}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={1}
-                  cropShape="round"
-                  showGrid={false}
-                  onCropChange={setCrop}
-                  onCropComplete={onCropComplete}
-                  onZoomChange={setZoom}
-                />
-              </Box>
+
+              {avatarImageSrc ? (
+                <React.Fragment>
+                  <Box className={classes.cropContainer}>
+                    <Cropper
+                      image={avatarImageSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      cropShape="round"
+                      showGrid={false}
+                      onCropChange={setCrop}
+                      onCropComplete={onCropComplete}
+                      onZoomChange={setZoom}
+                    />
+                  </Box>
+                  <Box className={classes.controls}>
+                    <Box className={classes.sliderContainer}>
+                      <Typography
+                        variant="overline"
+                        className={classes.sliderLabel}
+                      >
+                        缩放
+                      </Typography>
+                      <Slider
+                        value={zoom}
+                        min={1}
+                        max={3}
+                        step={0.1}
+                        aria-labelledby="Zoom"
+                        className={classes.slider}
+                        onChange={(e, zoom) => setZoom(zoom)}
+                      />
+                    </Box>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={inputAvatarRef}
+                      onChange={onAvatarImgFileChange}
+                      style={{ display: "none" }}
+                    />
+                    <Button
+                      variant="outlined"
+                      component="span"
+                      onClick={triggerAvatarFileSelectPopup}
+                      disabled={loading}
+                      sx={{ margin: "1rem 0 1rem 1rem" }}
+                    >
+                      上传头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                    <Button
+                      onClick={onAvatarImgClear}
+                      variant="outlined"
+                      color="error"
+                      sx={{ margin: "1rem 0 1rem 1rem" }}
+                      disabled={!avatarImageSrc}
+                    >
+                      清除头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                    <Button
+                      onClick={onAvatarImgDownload}
+                      variant="outlined"
+                      color="primary"
+                      sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                      disabled={!avatarImageSrc}
+                    >
+                      下载头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                    <Button
+                      onClick={uploadAvatarImg}
+                      variant="contained"
+                      color="success"
+                      sx={{ margin: "1rem" }}
+                      disabled={!avatarImageSrc}
+                    >
+                      确认头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                  </Box>
+                </React.Fragment>
+              ) : (
+                <div>
+                  <Box sx={{ textAlign: "center" }}>
+                    <img
+                      src={avatarImgURL}
+                      alt="avatarImgURL"
+                      style={{
+                        width: 150,
+                        height: 150,
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </Box>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={inputAvatarRef}
+                    onChange={onAvatarImgFileChange}
+                    style={{ display: "none" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    component="span"
+                    onClick={triggerAvatarFileSelectPopup}
+                    disabled={loading}
+                    fullWidth
+                    sx={{ margin: "1rem 0rem 2rem 0rem" }}
+                  >
+                    上传头像
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
+                </div>
+              )}
+
               {/* <Box my={"2rem"}>
               <label htmlFor="uploadAvatarImg">
                 <Input
@@ -389,165 +543,183 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                 </Button>
               </label>
             </Box> */}
-              <Box className={classes.controls}>
-                <Box className={classes.sliderContainer}>
-                  <Typography
-                    variant="overline"
-                    className={classes.sliderLabel}
-                  >
-                    缩放
-                  </Typography>
-                  <Slider
-                    value={zoom}
-                    min={1}
-                    max={3}
-                    step={0.1}
-                    aria-labelledby="Zoom"
-                    className={classes.slider}
-                    onChange={(e, zoom) => setZoom(zoom)}
-                  />
-                </Box>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={inputAvatarRef}
-                  onChange={onAvatarImgFileChange}
-                  style={{ display: "none" }}
-                />
-                <Button
-                  variant="outlined"
-                  component="span"
-                  onClick={triggerAvatarFileSelectPopup}
-                  disabled={loading}
-                  sx={{ margin: "1rem 0 1rem 1rem" }}
-                >
-                  上传头像
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      sx={{
-                        color: green[500],
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        marginTop: "-0.75rem",
-                        marginLeft: "-0.75rem",
-                      }}
-                    />
-                  )}
-                </Button>
-                <Button
-                  onClick={onAvatarImgClear}
-                  variant="outlined"
-                  color="error"
-                  sx={{ margin: "1rem 0 1rem 1rem" }}
-                  disabled={!avatarImageSrc}
-                >
-                  清除头像
-                </Button>
-                <Button
-                  onClick={onAvatarImgDownload}
-                  variant="outlined"
-                  color="primary"
-                  sx={{ margin: "1rem 0rem 1rem 1rem" }}
-                  disabled={!avatarImageSrc}
-                >
-                  下载头像
-                </Button>
-                <Button
-                  onClick={uploadAvatarImg}
-                  variant="outlined"
-                  color="success"
-                  sx={{ margin: "1rem" }}
-                  disabled={!avatarImageSrc}
-                >
-                  确认头像
-                </Button>
-              </Box>
+
               {/* <img
               src={backGroundImgURL}
               alt={"background"}
               style={{ width: "100%" }}
             /> */}
-              <Box className={classes.cropContainer}>
-                <Cropper
-                  image={backgroundImageSrc}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={960 / 250}
-                  onCropChange={setCrop}
-                  onCropComplete={onCropComplete}
-                  onZoomChange={setZoom}
-                />
-              </Box>
-
-              <Box className={classes.controls}>
-                <Box className={classes.sliderContainer}>
-                  <Typography
-                    variant="overline"
-                    className={classes.sliderLabel}
-                  >
-                    缩放
-                  </Typography>
-                  <Slider
-                    value={zoom}
-                    min={1}
-                    max={3}
-                    step={0.1}
-                    aria-labelledby="Zoom"
-                    className={classes.slider}
-                    onChange={(e, zoom) => setZoom(zoom)}
-                  />
-                </Box>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={inputRef}
-                  onChange={onBackgroundImgFileChange}
-                  style={{ display: "none" }}
-                />
-                <Button
-                  variant="outlined"
-                  component="span"
-                  onClick={triggerFileSelectPopup}
-                  disabled={loading}
-                  sx={{ margin: "1rem 0 1rem 1rem" }}
-                >
-                  上传背景
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      sx={{
-                        color: green[500],
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        marginTop: "-0.75rem",
-                        marginLeft: "-0.75rem",
-                      }}
+              {backgroundImageSrc ? (
+                <React.Fragment>
+                  <Box className={classes.cropContainer}>
+                    <Cropper
+                      image={backgroundImageSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={960 / 250}
+                      onCropChange={setCrop}
+                      onCropComplete={onCropComplete}
+                      onZoomChange={setZoom}
                     />
-                  )}
-                </Button>
-                <Button
-                  onClick={onBackgroundImgClear}
-                  variant="outlined"
-                  color="error"
-                  sx={{ margin: "1rem 0 1rem 1rem" }}
-                  disabled={!backgroundImageSrc}
-                >
-                  清除背景
-                </Button>
-                <Button
-                  onClick={onBackgroundImgDownload}
-                  variant="outlined"
-                  color="primary"
-                  sx={{ margin: "1rem 0rem 1rem 1rem" }}
-                  disabled={!backgroundImageSrc}
-                >
-                  下载背景
-                </Button>
+                  </Box>
 
-                {/* <label htmlFor="uploadAvatarImg">
+                  <Box className={classes.controls}>
+                    <Box className={classes.sliderContainer}>
+                      <Typography
+                        variant="overline"
+                        className={classes.sliderLabel}
+                      >
+                        缩放
+                      </Typography>
+                      <Slider
+                        value={zoom}
+                        min={1}
+                        max={3}
+                        step={0.1}
+                        aria-labelledby="Zoom"
+                        className={classes.slider}
+                        onChange={(e, zoom) => setZoom(zoom)}
+                      />
+                    </Box>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={inputRef}
+                      onChange={onBackgroundImgFileChange}
+                      style={{ display: "none" }}
+                    />
+                    <Button
+                      variant="outlined"
+                      component="span"
+                      onClick={triggerFileSelectPopup}
+                      disabled={loading}
+                      sx={{ margin: "1rem 0 1rem 1rem" }}
+                    >
+                      上传背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                    <Button
+                      onClick={onBackgroundImgClear}
+                      variant="outlined"
+                      color="error"
+                      sx={{ margin: "1rem 0 1rem 1rem" }}
+                      disabled={!backgroundImageSrc}
+                    >
+                      清除背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                    <Button
+                      onClick={onBackgroundImgDownload}
+                      variant="outlined"
+                      color="primary"
+                      sx={{ margin: "1rem 0rem 1rem 1rem" }}
+                      disabled={!backgroundImageSrc}
+                    >
+                      下载背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+
+                    <Button
+                      onClick={uploadBackGroundImgImg}
+                      variant="contained"
+                      color="success"
+                      sx={{ margin: "1rem" }}
+                      disabled={!backgroundImageSrc}
+                    >
+                      确认背景
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                  </Box>
+                </React.Fragment>
+              ) : (
+                <div>
+                  <img
+                    src={backGroundImgURL}
+                    alt={"background"}
+                    style={{ width: "100%" }}
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={inputRef}
+                    onChange={onBackgroundImgFileChange}
+                    style={{ display: "none" }}
+                  />
+                  <Button
+                    variant="outlined"
+                    component="span"
+                    onClick={triggerFileSelectPopup}
+                    disabled={loading}
+                    fullWidth
+                    sx={{ margin: "1rem 0rem 2rem 0rem" }}
+                  >
+                    上传背景
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
+                </div>
+              )}
+
+              {/* <label htmlFor="uploadAvatarImg">
                 <Input
                   accept="image/*"
                   id="uploadBackGroundImgImg"
@@ -558,20 +730,10 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                   // }}
                 /> */}
 
-                <Button
-                  onClick={uploadBackGroundImgImg}
-                  variant="outlined"
-                  color="success"
-                  sx={{ margin: "1rem" }}
-                  disabled={!backgroundImageSrc}
-                >
-                  确认背景
-                </Button>
-                {/* </label> */}
-                {/* <Box className={classes.imgContainer}>
+              {/* </label> */}
+              {/* <Box className={classes.imgContainer}>
                 <img src={croppedImage} alt="Cropped" className={classes.img} />
               </Box> */}
-              </Box>
 
               <Controller
                 name="linkedIn"

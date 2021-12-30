@@ -19,6 +19,10 @@ import {
 } from "@mui/material";
 import React, { forwardRef, useState } from "react";
 
+
+// import ShareIcon from "@mui/icons-material/Share";
+import Edit from "./Edit";
+
 import CloseIcon from "@mui/icons-material/Close";
 import Edit from "./Edit";
 import EditIcon from "@mui/icons-material/Edit";
@@ -97,19 +101,18 @@ const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
     },
   },
   image: {
-    marginLeft: "40rem",
+    marginLeft: "15rem",
     marginTop: "-8rem",
-    [breakpoints.down("md")]: {
-      marginLeft: "20rem",
+    [breakpoints.down("lg")]: {
+      marginLeft: "2rem",
       marginTop: "-8rem",
     },
     [breakpoints.down("sm")]: {
-      margin: "0 1.45rem",
+      // margin: "0 1.45rem",
+      margin: "0 auto",
     },
   },
-  size: {
-    maxWidth: "md",
-  },
+
   pad: {
     [breakpoints.up("sm")]: {
       padding: "0 2rem",
@@ -117,6 +120,18 @@ const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
   },
   appBar: {
     backgroundColor: palette.mode === "dark" ? "#616161" : "#ffff",
+  },
+  information: {
+    minWidth: 200,
+    maxWidth: 500,
+    [breakpoints.down("md")]: {
+      minWidth: 200,
+      maxWidth: 340,
+    },
+    [breakpoints.down("sm")]: {
+      minWidth: 200,
+      maxWidth: 300,
+    },
   },
 }));
 
@@ -137,7 +152,8 @@ export default function PersonalCard({
   item,
   linkedIn,
   github,
-  email,
+  startDate,
+  endDate,
 }) {
   const classes = useStyles();
   const isPermit = usePermit(owner, "admin");
@@ -236,6 +252,12 @@ export default function PersonalCard({
             <Typography variant="subtitle2" className={classes.subheader}>
               {title ? title : "暂无，请编辑..."}
             </Typography>
+            {startDate && endDate ? (
+              <Typography variant="caption">
+                在职时间: {startDate ? startDate.slice(0, 10) : "yyyy-mm-dd"} -{" "}
+                {endDate ? endDate.slice(0, 10) : "yyyy-mm-dd"}
+              </Typography>
+            ) : null}
             <Divider light sx={{ margin: "1rem 0" }} />
             <Typography variant="body2" color="text.secondary">
               {summary ? summary : "请编辑..."}
@@ -299,7 +321,7 @@ export default function PersonalCard({
               </Toolbar>
             </AppBar>
 
-            <Container>
+            <Container maxWidth="md">
               <Box className={classes.pad}>
                 <Typography
                   variant="h4"
@@ -317,7 +339,7 @@ export default function PersonalCard({
                 >
                   <b>{title ? title : "暂无，请编辑..."}</b>
                 </Typography>
-                <Box className={classes.container} sx={{ float: "left" }}>
+                <Box className={classes.container}>
                   <img
                     src={imgURL}
                     alt="Avatar"
@@ -330,7 +352,13 @@ export default function PersonalCard({
                     className={classes.image}
                   />
 
-                  <Box sx={{ my: 2, overflow: "auto" }}>
+                  <Box
+                    sx={{
+                      my: 2,
+                      overflow: "auto",
+                    }}
+                    className={classes.information}
+                  >
                     <MUIRichTextEditor
                       defaultValue={content}
                       readOnly={true}
