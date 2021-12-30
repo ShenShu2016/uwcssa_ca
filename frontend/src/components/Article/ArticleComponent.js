@@ -6,12 +6,14 @@ import {
   Grid,
   IconButton,
   Paper,
+  Stack,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
-import React from "react";
+import { ShareInfoDialog } from "../ShareInfo";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 function ArticleComponent({ article }) {
   const classes = useStyles();
   const theme = useTheme();
+  const [shareOpen, setShareOpen] = useState(false);
   const { id, summary, title, imgURLs, createdAt, userID, user } = article;
 
   return (
@@ -128,7 +131,12 @@ function ArticleComponent({ article }) {
             </Grid>
           </Grid>
           <Grid item xs={"auto"}>
-            <div>
+            <Stack
+              direction="column"
+              justifyContent="space-around"
+              alignItems="flex-end"
+              spacing={1}
+            >
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <img
                   src={
@@ -140,15 +148,27 @@ function ArticleComponent({ article }) {
                   className={classes.s3image}
                 />
               </CardActionArea>
-              <CardActions sx={{ p: 0, float: "right" }}>
-                <IconButton aria-label="add to favorites">
+              <CardActions sx={{ p: 0 }}>
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    setShareOpen(true);
+                  }}
+                >
                   <ShareRoundedIcon />
                 </IconButton>
               </CardActions>
-            </div>
+            </Stack>
           </Grid>
         </Grid>
       </Paper>
+      <ShareInfoDialog
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        url={`article/${id}`}
+        title={article.title}
+      />
     </div>
   );
 }

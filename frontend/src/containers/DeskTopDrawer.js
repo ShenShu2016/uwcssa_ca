@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("1300")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none",
     },
   },

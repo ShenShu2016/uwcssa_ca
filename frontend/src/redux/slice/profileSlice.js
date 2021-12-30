@@ -184,7 +184,7 @@ const profileSlice = createSlice({
       })
       .addCase(getProfile.fulfilled, (state, action) => {
         state.getProfileStatus = "succeeded";
-        console.log(action);
+        //console.log(action);
         state.user = action.payload;
       })
       .addCase(getProfile.rejected, (state, action) => {

@@ -50,7 +50,10 @@ export default function FoundingMember() {
     <Box>
       <div className={classes.root}>
         <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h3" className={classes.title}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 700, color: "info.light" }}
+          >
             创始团队以及贡献者
           </Typography>
 

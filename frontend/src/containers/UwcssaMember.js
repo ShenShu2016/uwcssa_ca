@@ -59,7 +59,12 @@ export default function UwcssaMember() {
     <Box>
       <div className={classes.root}>
         <Box className={classes.title}>
-          <Typography variant="h3">学生会成员</Typography>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 700, color: "info.light" }}
+          >
+            学生会成员
+          </Typography>
           {isPermit && (
             <Button
               variant="contained"

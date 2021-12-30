@@ -278,9 +278,6 @@ export default function DrawerList({ toggleDrawer }) {
             </div>
           </div>
         </List>
-
-        <Divider />
-        <List></List>
         <Divider />
         <List>
           <div>
@@ -324,6 +321,8 @@ export default function DrawerList({ toggleDrawer }) {
             </ListItemButton>
           </div>
         </List>
+
+        <Divider />
         <div>
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
