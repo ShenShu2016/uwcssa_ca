@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogTitle,
   Divider,
@@ -9,34 +8,42 @@ import {
   ListItemText,
   Tooltip,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import QRCode from "./QRCode";
-import React from "react";
 import { Zoom } from "@mui/material";
-import { postMultipleImages } from "../redux/slice/generalSlice";
 
-export function ShareInfoDialog(props) {
-  const { open, onClose } = props;
-  const dispatch = useDispatch();
-  const [copy, setCopy] = React.useState(false);
-  const username = useSelector((state) => state.userAuth.user.username);
-  const [shareImg, setShareImg] = React.useState("");
-  const uploadMarketItemImg = async (e) => {
-    const imagesData = e.target.files;
-    const imageLocation = `${username}/`;
-
-    const response = await dispatch(
-      postMultipleImages({ imagesData, imageLocation })
-    );
-    console.log(response);
-    if (response.meta.requestStatus === "fulfilled") {
-      setShareImg((prev) => prev.concat(response.payload));
-    }
+export const ShareInfoDialog = forwardRef((props, ref) => {
+  const [open, setOpen] = useState(false);
+  const [copy, setCopy] = useState(false);
+  const [download, setDownload] = useState(false);
+  const qrRef = useRef(null);
+  const innerRef = useRef();
+  const handleCLose = () => {
+    setOpen(false);
+  };
+  useImperativeHandle(ref, () => ({
+    openDialog: () => setOpen(true),
+    closeDialog: () => setOpen(false),
+  }));
+  const handleDownload = () => {
+    let canvas = qrRef.current.querySelector("canvas");
+    let image = canvas.toDataURL("image/png");
+    let anchor = document.createElement("a");
+    anchor.href = image;
+    anchor.download = "uwcssa-market-qr-code.png";
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
   };
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} ref={innerRef} onClose={handleCLose}>
       <DialogTitle>分享</DialogTitle>
       <Divider />
       <List sx={{ p: 5 }}>
@@ -48,6 +55,7 @@ export function ShareInfoDialog(props) {
           }}
           inset={true}
         />
+
         <Tooltip
           title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
           placement="top-end"
@@ -67,40 +75,36 @@ export function ShareInfoDialog(props) {
             />
           </ListItem>
         </Tooltip>
-        <ListItem>
+        <ListItem ref={qrRef}>
           <QRCode
             size={200}
             url={window.location.href}
             bgColor="white"
             fgColor="black"
             imgSizeRatio={0.2}
-            imgSrc={shareImg.length === 0 ? "default" : shareImg}
+            imgSrc="default"
           />
         </ListItem>
-
         <Tooltip
-          title="上传照片自定义二维码中心图片"
-          placement="bottom-end"
+          title={`${download === false ? "Download QR-Code" : "Downloaded!🥳"}`}
+          placement="top-end"
           TransitionComponent={Zoom}
           arrow
         >
-          <label htmlFor="contained-button-file">
-            <input
-              accept="image/*"
-              id="contained-button-file"
-              type="file"
-              required
-              style={{ display: "none" }}
-              onChange={(e) => {
-                uploadMarketItemImg(e);
+          <ListItem button>
+            <ListItemIcon>
+              <ContentCopyIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="点我下载二维码!"
+              onClick={() => {
+                handleDownload();
+                setDownload(true);
               }}
             />
-            <Button variant="outlined" component="span">
-              自定义二维码
-            </Button>
-          </label>
+          </ListItem>
         </Tooltip>
       </List>
     </Dialog>
   );
-}
+});
