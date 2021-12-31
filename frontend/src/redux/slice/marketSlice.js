@@ -64,7 +64,7 @@ export const selectedMarketItem = createAsyncThunk(
       variables: { id: id },
       authMode: "AWS_IAM",
     });
-    // console.log("what?", response);
+    console.log("what?", response);
     if (response.data.getMarketItem === null) {
       return { id: id, description: "not-found" };
     }

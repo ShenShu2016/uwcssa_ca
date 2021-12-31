@@ -1,14 +1,32 @@
-import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
+import { Backdrop, Box, CircularProgress } from "@mui/material";
 
 import React from "react";
+import { makeStyles } from "@mui/styles";
 import { red } from "@mui/material/colors";
 import uwcssa from "../static/uwcssa_logo.svg";
 
-export default function BackdropLoading() {
+const useStyles = makeStyles((theme) => ({
+  typo: {
+    fontSize: "2.125rem",
+    position: "absolute",
+    top: "70%",
+    left: "50%",
+    transform: `translate(-50%,0)`,
+    [theme.breakpoints.down("md")]: {
+      width: "56%",
+      top: "65%",
+      fontSize: "1rem",
+    },
+  },
+}));
+
+export default function BackdropLoading({ open = true }) {
+  const classes = useStyles();
+
   return (
     <Backdrop
       sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={true}
+      open={open}
     >
       <Box
         sx={{
@@ -42,16 +60,7 @@ export default function BackdropLoading() {
           }}
         />
       </Box>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "70%",
-          left: "50%",
-          transform: `translate(-50%,0)`,
-        }}
-      >
-        <Typography variant="h4">温莎大学中国学生学者联谊会</Typography>
-      </Box>
+      <Box className={classes.typo}>温莎大学中国学生学者联谊会</Box>
     </Backdrop>
   );
 }

@@ -24,7 +24,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail", darkTheme }) {
   console.log(mode);
   const {
     id,
-    // name,
+    name,
     price,
     description,
     address,
@@ -49,6 +49,7 @@ export function MarketVehicleInfo({ marketItem, mode = "detail", darkTheme }) {
   return (
     <Paper>
       <TitleInfo
+        name={name}
         id={id}
         mode={mode}
         price={price}

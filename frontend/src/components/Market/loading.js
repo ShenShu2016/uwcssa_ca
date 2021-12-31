@@ -138,8 +138,8 @@ export const Loading = (status = null) => {
           fgColor="black"
           imgSizeRatio={0.2}
         />
-        <BackdropLoading />
       </Box>
+      <BackdropLoading />
     </>
   );
 };
