@@ -33,7 +33,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PropTypes from "prop-types";
 import SeeMore from "./SeeMore";
-import Share from "./EventDetail/Share";
+// import Share from "./EventDetail/Share";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import TopicIcon from "@mui/icons-material/Topic";
 import { makeStyles } from "@mui/styles";
@@ -41,6 +41,8 @@ import moment from "moment";
 //import EditEvent from "./EditEvent";
 import { usePermit } from "../../Hooks/usePermit";
 import { useSelector } from "react-redux";
+import ShareIcon from "@mui/icons-material/Share";
+import { ShareInfoDialog } from "../ShareInfo";
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -64,6 +66,39 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: "150px",
     },
+  },
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    letterSpacing: "1px",
+    wordWrap: "break-word",
+    margin: "1rem",
+  },
+  codeSnippet: {
+    width: "300px",
+    background: "#afb3b8",
+    padding: "0.1rem",
+  },
+  codeSection: {
+    position: "relative",
+    width: "100%",
+  },
+  share: {
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "row",
+    // marginTop: "6rem",
+  },
+  aTag: {
+    padding: "1rem",
+    borderRadius: "6px",
+    textDecoration: "none",
+    color: "#6e6e6e",
+    background: "transparent",
+    fontWeight: "400",
+    height: 45,
+    margin: 8,
   },
 }));
 function TabPanel(props) {
@@ -101,6 +136,7 @@ export default function EventBody({ event }) {
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
   const history = useHistory();
+  const [shareOpen, setShareOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -329,7 +365,39 @@ export default function EventBody({ event }) {
                       <Alert severity="info">活动结束啦~🥳</Alert>
                     </Box>
                   )}
-                  <Share label={title} />
+
+                  <div className={classes.share}>
+                    <Tooltip title="点击分享活动链接" placement="top">
+                      <IconButton
+                        color="primary"
+                        onClick={() => {
+                          navigator.clipboard.writeText(window.location.href);
+                          setShareOpen(true);
+                        }}
+                        className={classes.aTag}
+                        sx={{
+                          background:
+                            "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                          "& > *": {
+                            textTransform: "none !important",
+                          },
+                          border: 0,
+                          boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                          color: "white",
+                          padding: "0 30px",
+                          borderRadius: "20rem",
+                        }}
+                      >
+                        <ShareIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                  <ShareInfoDialog
+                    open={shareOpen}
+                    onClose={() => setShareOpen(false)}
+                    url={`event/${id}`}
+                    title={event.title}
+                  />
                   {isPermit ? (
                     <Tooltip title="点击编辑此活动" placement="top">
                       <IconButton variant="outlined" onClick={handleClickOpen}>
