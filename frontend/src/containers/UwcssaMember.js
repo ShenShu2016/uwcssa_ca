@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   fetchDepartments,
@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Box } from "@mui/system";
+import BackdropLoading from "../components/BackdropLoading";
 import ByDepartment from "../components/UwcssaMember/ByDepartment";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -89,12 +89,7 @@ export default function UwcssaMember() {
             );
           })
         ) : (
-          <Backdrop
-            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={true}
-          >
-            <CircularProgress color="inherit" />
-          </Backdrop>
+          <BackdropLoading />
         )}
       </div>
       <Footer />

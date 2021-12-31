@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   selectUwcssaJobById,
@@ -6,7 +6,7 @@ import {
 } from "../../redux/slice/uwcssaJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Box } from "@mui/system";
+import BackdropLoading from "../BackdropLoading";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router";
@@ -106,12 +106,7 @@ export default function JobDetail(props) {
           </Button>
         </Box>
       ) : (
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={true}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <BackdropLoading />
       )}
     </div>
   );
