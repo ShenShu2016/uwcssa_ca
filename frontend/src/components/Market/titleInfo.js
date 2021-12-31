@@ -19,6 +19,7 @@ const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
 
 const TitleInfo = ({
   // general inputs
+  name,
   type,
   price,
   updatedAt,
@@ -178,7 +179,7 @@ const TitleInfo = ({
             分享
           </Button>
         </Tooltip>
-        <ShareInfoDialog ref={shareRef} />
+        <ShareInfoDialog ref={shareRef} title={name} />
       </Stack>
     </React.Fragment>
   );

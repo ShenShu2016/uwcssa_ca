@@ -23,7 +23,7 @@ import { useTitle } from "../../Hooks/useTitle";
 export function MarketRentalInfo({ marketItem, mode = "detail", darkTheme }) {
   const {
     id,
-    // name,
+    name,
     // title,
     price,
     description,
@@ -54,6 +54,7 @@ export function MarketRentalInfo({ marketItem, mode = "detail", darkTheme }) {
   return (
     <Paper>
       <TitleInfo
+        name={name}
         type="rental"
         price={price}
         updatedAt={updatedAt}
