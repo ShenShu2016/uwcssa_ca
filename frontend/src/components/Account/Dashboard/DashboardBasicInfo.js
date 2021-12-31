@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 
 import Avatar from "@mui/material/Avatar";
-import EditIcon from "@mui/icons-material/Edit";
+import InfoIcon from "@mui/icons-material/Info";
 import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@mui/styles";
@@ -102,7 +102,7 @@ export default function DashboardBasicInfo({ userProfile }) {
               </Badge>
               <Button
                 variant="contained"
-                endIcon={<EditIcon />}
+                endIcon={<InfoIcon />}
                 color="primary"
                 className={classes.edit}
                 component={Link}

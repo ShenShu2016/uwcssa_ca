@@ -1,17 +1,23 @@
 import {
   Box,
   CardActionArea,
+  CardActions,
   CardHeader,
   Grid,
+  IconButton,
   Paper,
+  Stack,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
-import React from "react";
+import { ShareInfoDialog } from "../ShareInfo";
+import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
+import { useTheme } from "@emotion/react";
 
 const useStyles = makeStyles((theme) => ({
   paper: {},
@@ -26,13 +32,15 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "112px",
       height: "112px",
-      marginTop: "2.5rem",
+      // marginTop: "2.5rem",
     },
   },
 }));
 
 function ArticleComponent({ article }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const [shareOpen, setShareOpen] = useState(false);
   const { id, summary, title, imgURLs, createdAt, userID, user } = article;
 
   return (
@@ -46,7 +54,10 @@ function ArticleComponent({ article }) {
           padding: "1rem",
           maxHeight: "255px",
           borderRadius: "8px",
-          // border: "1px solid #dfe1e5",
+          [theme.breakpoints.down("sm")]: {
+            margin: "0.5rem auto",
+            padding: "0.5rem",
+          },
         }}
       >
         <Grid container spacing={1} sx={{ height: "100%" }}>
@@ -120,7 +131,12 @@ function ArticleComponent({ article }) {
             </Grid>
           </Grid>
           <Grid item xs={"auto"}>
-            <div>
+            <Stack
+              direction="column"
+              justifyContent="space-around"
+              alignItems="flex-end"
+              spacing={1}
+            >
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <img
                   src={
@@ -132,10 +148,27 @@ function ArticleComponent({ article }) {
                   className={classes.s3image}
                 />
               </CardActionArea>
-            </div>
+              <CardActions sx={{ p: 0 }}>
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    setShareOpen(true);
+                  }}
+                >
+                  <ShareRoundedIcon />
+                </IconButton>
+              </CardActions>
+            </Stack>
           </Grid>
         </Grid>
       </Paper>
+      <ShareInfoDialog
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        url={`article/${id}`}
+        title={article.title}
+      />
     </div>
   );
 }

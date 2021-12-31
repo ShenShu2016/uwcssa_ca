@@ -38,7 +38,6 @@ const GoogleMap = (props) => {
       loaded.current = true;
     }
   }, []);
-
   // const content = `<p style=color:blue;font-weight:bold>${address.description} 暂时先这样</p>`;
 
   useEffect(() => {

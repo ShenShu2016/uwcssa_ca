@@ -124,7 +124,7 @@ export default function SimpleTable() {
   }, [dispatch, fetchEvents_StaffStatus]);
 
   const rows = events.map((event) => {
-    console.log("event", event);
+    //console.log("event", event);
     const {
       id,
       title,
