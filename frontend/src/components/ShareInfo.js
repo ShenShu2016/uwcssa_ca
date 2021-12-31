@@ -19,8 +19,8 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import QRCode from "./QRCode";
 import { Zoom } from "@mui/material";
 
-
 export const ShareInfoDialog = forwardRef((props, ref) => {
+  const { title, url } = props;
   const [open, setOpen] = useState(false);
   const [copy, setCopy] = useState(false);
   const [download, setDownload] = useState(false);
@@ -81,7 +81,11 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
             <ListItemText
               primary="点我复制链接!"
               onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
+                navigator.clipboard.writeText(
+                  url
+                    ? `${window.location.origin}/${url}`
+                    : window.location.href
+                );
                 setCopy(true);
               }}
             />

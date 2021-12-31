@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import { Link } from "react-router-dom";
@@ -40,8 +40,11 @@ const useStyles = makeStyles((theme) => ({
 function ArticleComponent({ article }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [shareOpen, setShareOpen] = useState(false);
   const { id, summary, title, imgURLs, createdAt, userID, user } = article;
+  const shareRef = useRef();
+  const handleShareOpen = () => {
+    shareRef.current.openDialog();
+  };
 
   return (
     <div>
@@ -152,8 +155,7 @@ function ArticleComponent({ article }) {
                 <IconButton
                   aria-label="add to favorites"
                   onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    setShareOpen(true);
+                    handleShareOpen();
                   }}
                 >
                   <ShareRoundedIcon />
@@ -164,10 +166,9 @@ function ArticleComponent({ article }) {
         </Grid>
       </Paper>
       <ShareInfoDialog
-        open={shareOpen}
-        onClose={() => setShareOpen(false)}
         url={`article/${id}`}
         title={article.title}
+        ref={shareRef}
       />
     </div>
   );
