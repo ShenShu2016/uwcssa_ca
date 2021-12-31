@@ -1,24 +1,12 @@
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
+import React, { useRef } from "react";
 
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import EmailIcon from "@mui/icons-material/Email";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 import MessageIcon from "@mui/icons-material/Message";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import React from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import { ShareInfoDialog } from "../ShareInfo";
+import { SimpleDialog } from "./SimpleDialog";
 import { Tooltip } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
 import { Zoom } from "@mui/material";
@@ -29,101 +17,16 @@ import { useSelector } from "react-redux";
 const { marketRentalSaleRent: RentOrSale, propertyType: PType } =
   marketRentalOptions;
 
-function SimpleDialog(props) {
-  const { open, onClose, contactEmail, contactPhone, contactWeChat } = props;
-  const [copyPhone, setCopyPhone] = React.useState(false);
-  const [copyEmail, setCopyEmail] = React.useState(false);
-  const [copyWeChat, setCopyWeChat] = React.useState(false);
-
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>卖家信息</DialogTitle>
-      <List sx={{ pt: 0 }}>
-        <Tooltip
-          title={`${copyPhone === false ? "Copy Contact Phone" : "Copied!🥳"}`}
-          placement="top-end"
-          TransitionComponent={Zoom}
-          arrow
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <PhoneInTalkIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={contactPhone}
-              onClick={() => {
-                navigator.clipboard.writeText(contactPhone);
-                setCopyEmail(false);
-                setCopyWeChat(false);
-                setCopyPhone(true);
-              }}
-            />
-          </ListItem>
-        </Tooltip>
-        <Tooltip
-          title={`${copyEmail === false ? "Copy Contact Email" : "Copied!🥳"}`}
-          placement="top-end"
-          TransitionComponent={Zoom}
-          arrow
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <EmailIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={contactEmail}
-              onClick={() => {
-                navigator.clipboard.writeText(contactEmail);
-                setCopyEmail(true);
-                setCopyWeChat(false);
-                setCopyPhone(false);
-              }}
-            />
-          </ListItem>
-        </Tooltip>
-        {contactWeChat ? (
-          <Tooltip
-            title={`${
-              copyWeChat === false ? "Copy Contact WeChat" : "Copied!🥳"
-            }`}
-            placement="top-end"
-            TransitionComponent={Zoom}
-            arrow
-          >
-            <ListItem button>
-              <ListItemIcon>
-                <FacebookIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary={contactWeChat}
-                onClick={() => {
-                  navigator.clipboard.writeText(contactWeChat);
-                  setCopyEmail(false);
-                  setCopyWeChat(true);
-                  setCopyPhone(false);
-                }}
-              />
-            </ListItem>
-          </Tooltip>
-        ) : null}
-      </List>
-    </Dialog>
-  );
-}
-
 const TitleInfo = ({
   // general inputs
   type,
   price,
   updatedAt,
   owner,
-  open,
   user,
   contactPhone,
   contactEmail,
   contactWeChat,
-  handleClose,
-  handleOpen,
   id,
   // specific inputs
   mode,
@@ -139,9 +42,15 @@ const TitleInfo = ({
   model,
 }) => {
   const currentUser = useSelector((state) => state.userAuth.user.username);
-  const [share, setShare] = React.useState(false);
   const [save, setSave] = React.useState(false);
-  const [shareOpen, setShareOpen] = React.useState(false);
+  const dialogRef = useRef();
+  const shareRef = useRef();
+  const handleShareOpen = () => {
+    shareRef.current.openDialog();
+  };
+  const handleOpen = () => {
+    dialogRef.current.openDialog();
+  };
   return (
     <React.Fragment>
       {type === "item" ? (
@@ -200,7 +109,6 @@ const TitleInfo = ({
         marginY="0.5rem"
         direction="row"
         spacing={1}
-        // sx={{ color: "rgb(116 116 116 / 65%)" }}
       >
         {currentUser === owner ? (
           <Button
@@ -219,20 +127,20 @@ const TitleInfo = ({
         ) : (
           <Button
             startIcon={<MessageIcon />}
-            onClick={handleOpen}
+            onClick={() => handleOpen()}
             variant="outlined"
             color="primary"
           >
             联系
           </Button>
         )}
+
         <SimpleDialog
-          open={open}
+          ref={dialogRef}
           user={user}
           contactPhone={contactPhone}
           contactEmail={contactEmail}
           contactWeChat={contactWeChat}
-          onClose={handleClose}
         />
         <Tooltip
           title={`${save === false ? "Save Item!" : "Saved!🥳"}`}
@@ -254,17 +162,15 @@ const TitleInfo = ({
         </Tooltip>
 
         <Tooltip
-          title={`${share === false ? "Copy Shared Link!" : "Copied Link!🥳"}`}
-          placement="top-end"
+          title="Share Link!"
+          placement="bottom-end"
           TransitionComponent={Zoom}
           arrow
         >
           <Button
             startIcon={<ShareIcon />}
             onClick={() => {
-              navigator.clipboard.writeText(window.location.href);
-              setShare(true);
-              setShareOpen(true);
+              handleShareOpen();
             }}
             variant="outlined"
             color="primary"
@@ -272,7 +178,7 @@ const TitleInfo = ({
             分享
           </Button>
         </Tooltip>
-        <ShareInfoDialog open={shareOpen} onClose={() => setShareOpen(false)} />
+        <ShareInfoDialog ref={shareRef} />
       </Stack>
     </React.Fragment>
   );

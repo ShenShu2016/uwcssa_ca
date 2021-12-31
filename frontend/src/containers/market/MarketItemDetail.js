@@ -1,11 +1,12 @@
 import { Box, Divider, Fab, Paper, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import BackdropLoading from "../../components/BackdropLoading";
 import CloseIcon from "@mui/icons-material/Close"; // import { Loading } from "../../components/Market/loading";
 import DetailInfo from "../../components/Market/detailInfo";
 import SellerInfo from "../../components/Market/sellerInfo";
@@ -19,7 +20,6 @@ import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export function MarketItemInfo({ marketItem, mode = "detail", darkTheme }) {
-  const [open, setOpen] = useState(false);
   const {
     id,
     // name,
@@ -52,13 +52,10 @@ export function MarketItemInfo({ marketItem, mode = "detail", darkTheme }) {
         price={price}
         updatedAt={updatedAt}
         owner={owner}
-        open={open}
         user={user}
         contactEmail={contactEmail}
         contactPhone={contactPhone}
         contactWeChat={contactWeChat}
-        handleClose={() => setOpen(false)}
-        handleOpen={() => setOpen(true)}
         type="item"
         darkTheme={darkTheme}
       />
@@ -103,11 +100,14 @@ export default function MarketItemDetail() {
   const closeHandler = () => {
     const currentURL = window.location.href;
     const goURL = currentURL.split("/");
-    history.push(`/market/${goURL[goURL.length - 2]}`);
+    const type = goURL.indexOf("market") + 1;
+    history.push(`/market/${goURL[type]}`);
   };
   return (
     <div className={classes.root}>
-      {starter === false ? null : (
+      {starter === false ? (
+        <BackdropLoading />
+      ) : (
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}

@@ -1,11 +1,12 @@
 import { Box, Divider, Fab, Paper, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   selectMarketItemById,
   selectedMarketItem,
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import BackdropLoading from "../../components/BackdropLoading";
 import CloseIcon from "@mui/icons-material/Close"; // import { Loading } from "../../components/Market/loading";
 import DetailInfo from "../../components/Market/detailInfo";
 // import { Loading } from "../../components/Market/loading";
@@ -20,7 +21,6 @@ import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export function MarketRentalInfo({ marketItem, mode = "detail", darkTheme }) {
-  const [open, setOpen] = useState(false);
   const {
     id,
     // name,
@@ -58,13 +58,10 @@ export function MarketRentalInfo({ marketItem, mode = "detail", darkTheme }) {
         price={price}
         updatedAt={updatedAt}
         owner={owner}
-        open={open}
         user={user}
         contactEmail={contactEmail}
         contactWeChat={contactWeChat}
         contactPhone={contactPhone}
-        handleOpen={() => setOpen(true)}
-        handleClose={() => setOpen(false)}
         id={id}
         mode={mode}
         propertyType={propertyType}
@@ -119,7 +116,9 @@ export default function MarketRentalDetail() {
   };
   return (
     <div className={classes.root}>
-      {starter === false ? null : (
+      {starter === false ? (
+        <BackdropLoading />
+      ) : (
         <Stack
           direction={{ xs: "column", md: "row" }}
           className={classes.contain}
