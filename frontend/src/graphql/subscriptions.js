@@ -50,9 +50,6 @@ export const onCreateUwcssaJobResume = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -156,9 +153,6 @@ export const onUpdateUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -266,9 +260,6 @@ export const onDeleteUwcssaJobResume = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -372,9 +363,6 @@ export const onCreateUserMutationLog = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -429,9 +417,6 @@ export const onUpdateUserMutationLog = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -484,9 +469,6 @@ export const onDeleteUserMutationLog = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -631,26 +613,6 @@ export const onCreateUser = /* GraphQL */ `
           id
           like
           itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      kanban {
-        items {
-          id
-          title
-          content
-          kanbanStatus
-          deadLine
-          priority
-          tags
-          points
-          sortKey
-          assigneeID
-          departmentID
           userID
           createdAt
           updatedAt
@@ -823,26 +785,6 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
-      kanban {
-        items {
-          id
-          title
-          content
-          kanbanStatus
-          deadLine
-          priority
-          tags
-          points
-          sortKey
-          assigneeID
-          departmentID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       kanbanAssignee {
         items {
           id
@@ -1008,26 +950,6 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      kanban {
-        items {
-          id
-          title
-          content
-          kanbanStatus
-          deadLine
-          priority
-          tags
-          points
-          sortKey
-          assigneeID
-          departmentID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       kanbanAssignee {
         items {
           id
@@ -1100,9 +1022,6 @@ export const onCreateUserEducation = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -1160,9 +1079,6 @@ export const onUpdateUserEducation = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -1218,9 +1134,6 @@ export const onDeleteUserEducation = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -1281,9 +1194,6 @@ export const onCreateUserExperience = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -1340,9 +1250,6 @@ export const onUpdateUserExperience = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -1403,9 +1310,6 @@ export const onDeleteUserExperience = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -1455,9 +1359,6 @@ export const onCreateTopic = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -1555,9 +1456,6 @@ export const onUpdateTopic = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -1651,9 +1549,6 @@ export const onDeleteTopic = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -1757,9 +1652,6 @@ export const onCreateArticle = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -1876,9 +1768,6 @@ export const onUpdateArticle = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -1993,9 +1882,6 @@ export const onDeleteArticle = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -2102,9 +1988,6 @@ export const onCreateArticleComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -2231,9 +2114,6 @@ export const onUpdateArticleComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -2356,9 +2236,6 @@ export const onDeleteArticleComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -2485,9 +2362,6 @@ export const onCreateArticleSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -2602,9 +2476,6 @@ export const onUpdateArticleSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -2717,9 +2588,6 @@ export const onDeleteArticleSubComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -2849,9 +2717,6 @@ export const onCreateEvent = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -3114,9 +2979,6 @@ export const onUpdateEvent = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -3377,9 +3239,6 @@ export const onDeleteEvent = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -3625,9 +3484,6 @@ export const onCreateEventComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -3779,9 +3635,6 @@ export const onUpdateEventComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -3937,9 +3790,6 @@ export const onDeleteEventComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -4093,9 +3943,6 @@ export const onCreateEventSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -4219,9 +4066,6 @@ export const onUpdateEventSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -4343,9 +4187,6 @@ export const onDeleteEventSubComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -4476,9 +4317,6 @@ export const onCreateEventParticipant = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -4733,9 +4571,6 @@ export const onUpdateEventParticipant = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -4988,9 +4823,6 @@ export const onDeleteEventParticipant = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -5237,9 +5069,6 @@ export const onCreateDepartment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -5353,9 +5182,6 @@ export const onUpdateDepartment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -5467,9 +5293,6 @@ export const onDeleteDepartment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -5592,9 +5415,6 @@ export const onCreateUwcssaMember = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -5692,9 +5512,6 @@ export const onUpdateUwcssaMember = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -5790,9 +5607,6 @@ export const onDeleteUwcssaMember = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -5909,9 +5723,6 @@ export const onCreateUwcssaJob = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -6024,9 +5835,6 @@ export const onUpdateUwcssaJob = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -6143,9 +5951,6 @@ export const onDeleteUwcssaJob = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -6233,9 +6038,6 @@ export const onCreateForumTopic = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -6295,9 +6097,6 @@ export const onUpdateForumTopic = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -6361,9 +6160,6 @@ export const onDeleteForumTopic = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -6424,9 +6220,6 @@ export const onCreateForumSubTopic = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -6527,9 +6320,6 @@ export const onUpdateForumSubTopic = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -6626,9 +6416,6 @@ export const onDeleteForumSubTopic = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -6733,9 +6520,6 @@ export const onCreateForumPost = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -6874,9 +6658,6 @@ export const onUpdateForumPost = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -7013,9 +6794,6 @@ export const onDeleteForumPost = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -7146,9 +6924,6 @@ export const onCreateForumPostComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -7283,9 +7058,6 @@ export const onUpdateForumPostComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -7416,9 +7188,6 @@ export const onDeleteForumPostComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -7554,9 +7323,6 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -7594,9 +7360,6 @@ export const onCreateForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -7768,9 +7531,6 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -7808,9 +7568,6 @@ export const onUpdateForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -7982,9 +7739,6 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -8022,9 +7776,6 @@ export const onDeleteForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -8194,9 +7945,6 @@ export const onCreateMarketUserInfo = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -8250,9 +7998,6 @@ export const onUpdateMarketUserInfo = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -8304,9 +8049,6 @@ export const onDeleteMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -8391,9 +8133,6 @@ export const onCreateMarketItem = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -8597,9 +8336,6 @@ export const onUpdateMarketItem = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -8801,9 +8537,6 @@ export const onDeleteMarketItem = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -8979,9 +8712,6 @@ export const onCreateAddress = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -9271,9 +9001,6 @@ export const onUpdateAddress = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -9561,9 +9288,6 @@ export const onDeleteAddress = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -9849,9 +9573,6 @@ export const onCreateFoundingMember = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -9907,9 +9628,6 @@ export const onUpdateFoundingMember = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -9969,9 +9687,6 @@ export const onDeleteFoundingMember = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -10023,9 +9738,6 @@ export const onCreateLike = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -10063,9 +9775,6 @@ export const onCreateLike = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -10610,9 +10319,6 @@ export const onUpdateLike = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -10650,9 +10356,6 @@ export const onUpdateLike = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -11197,9 +10900,6 @@ export const onDeleteLike = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -11237,9 +10937,6 @@ export const onDeleteLike = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -11785,9 +11482,6 @@ export const onCreateWebFeedBack = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -11841,9 +11535,6 @@ export const onUpdateWebFeedBack = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -11895,9 +11586,6 @@ export const onDeleteWebFeedBack = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -11960,9 +11648,6 @@ export const onCreateKanban = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -12000,9 +11685,6 @@ export const onCreateKanban = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -12102,9 +11784,6 @@ export const onUpdateKanban = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -12142,9 +11821,6 @@ export const onUpdateKanban = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {
@@ -12244,9 +11920,6 @@ export const onDeleteKanban = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -12284,9 +11957,6 @@ export const onDeleteKanban = /* GraphQL */ `
           nextToken
         }
         beingLiked {
-          nextToken
-        }
-        kanban {
           nextToken
         }
         kanbanAssignee {

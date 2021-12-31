@@ -1,12 +1,10 @@
 import {
   Box,
   CardActionArea,
-  CardActions,
   CardHeader,
   Grid,
   IconButton,
   Paper,
-  Stack,
   Typography,
 } from "@mui/material";
 import React, { useRef } from "react";
@@ -69,7 +67,7 @@ function ArticleComponent({ article }) {
               container
               direction="column"
               justifyContent="space-between"
-              alignItems="flex-start"
+              alignItems="stretch"
               sx={{ height: "100%" }}
             >
               <Grid item xs={"auto"} sx={{ paddingBottom: "0.5rem" }}>
@@ -93,8 +91,8 @@ function ArticleComponent({ article }) {
               </Grid>
 
               <CardActionArea component={Link} to={`/article/${id}`}>
-                <Grid item xs={"auto"} sx={{ marginBottom: "0.5rem" }}>
-                  <div style={{ maxHeight: "48px", overflow: "hidden" }}>
+                <Grid item xs>
+                  <div style={{ overflow: "hidden", paddingBottom: "4px" }}>
                     <Typography
                       variant="subtitle1"
                       style={{
@@ -125,21 +123,30 @@ function ArticleComponent({ article }) {
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
-                  <Typography variant="overline" color="textSecondary">
-                    {moment(createdAt).fromNow()}
-                  </Typography>
-                </Grid>
               </CardActionArea>
+              <Grid item xs={"auto"} sx={{ marginTop: "0.5rem" }}>
+                <Typography variant="overline" color="textSecondary">
+                  {moment(createdAt).fromNow()}
+                </Typography>
+                <Box sx={{ float: "right" }}>
+                  <IconButton
+                    aria-label="share"
+                    onClick={() => {
+                      handleShareOpen();
+                    }}
+                    sx={{ padding: 0, mr: "2rem" }}
+                  >
+                    <ShareRoundedIcon
+                      fontSize="small"
+                      sx={{ color: "info.main" }}
+                    />
+                  </IconButton>
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
           <Grid item xs={"auto"}>
-            <Stack
-              direction="column"
-              justifyContent="space-around"
-              alignItems="flex-end"
-              spacing={1}
-            >
+            <Box sx={{ paddingTop: "1rem" }}>
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <img
                   src={
@@ -151,17 +158,7 @@ function ArticleComponent({ article }) {
                   className={classes.s3image}
                 />
               </CardActionArea>
-              <CardActions sx={{ p: 0 }}>
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={() => {
-                    handleShareOpen();
-                  }}
-                >
-                  <ShareRoundedIcon />
-                </IconButton>
-              </CardActions>
-            </Stack>
+            </Box>
           </Grid>
         </Grid>
       </Paper>
