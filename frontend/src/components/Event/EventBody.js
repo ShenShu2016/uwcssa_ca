@@ -15,6 +15,7 @@ import {
   Stack,
   Tab,
   Tabs,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
@@ -281,33 +282,35 @@ export default function EventBody({ event }) {
                             (item) => item.userID === userAuth.user.username
                           ) === false ? (
                             <Box className={classes.button}>
-                              <Button
-                                size="large"
-                                // variant="outlined"
-                                fullWidth
-                                sx={{
-                                  background:
-                                    "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                                  "& > *": {
-                                    textTransform: "none !important",
-                                  },
-                                  border: 0,
-                                  boxShadow:
-                                    "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                                  color: "white",
-                                  padding: "0 30px",
-                                  borderRadius: "20rem",
-                                }}
-                                className={classes.join}
-                                variant={"contained"}
-                                color={"primary"}
-                                disableRipple
-                                component={Link}
-                                to={`/event/${event.id}/eventSignUp`}
-                                startIcon={<AppRegistrationIcon />}
-                              >
-                                报名
-                              </Button>
+                              <Tooltip title="点击报名此活动" placement="top">
+                                <Button
+                                  size="large"
+                                  // variant="outlined"
+                                  fullWidth
+                                  sx={{
+                                    background:
+                                      "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                                    "& > *": {
+                                      textTransform: "none !important",
+                                    },
+                                    border: 0,
+                                    boxShadow:
+                                      "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                                    color: "white",
+                                    padding: "0 30px",
+                                    borderRadius: "20rem",
+                                  }}
+                                  className={classes.join}
+                                  variant={"contained"}
+                                  color={"primary"}
+                                  disableRipple
+                                  component={Link}
+                                  to={`/event/${event.id}/eventSignUp`}
+                                  startIcon={<AppRegistrationIcon />}
+                                >
+                                  报名
+                                </Button>
+                              </Tooltip>
                             </Box>
                           ) : (
                             <Box className={classes.alert}>
@@ -328,9 +331,11 @@ export default function EventBody({ event }) {
                   )}
                   <Share label={title} />
                   {isPermit ? (
-                    <IconButton variant="outlined" onClick={handleClickOpen}>
-                      <EditIcon />
-                    </IconButton>
+                    <Tooltip title="点击编辑此活动" placement="top">
+                      <IconButton variant="outlined" onClick={handleClickOpen}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
                   ) : null}
                 </Stack>
               </Box>

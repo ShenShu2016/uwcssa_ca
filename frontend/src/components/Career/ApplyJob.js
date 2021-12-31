@@ -65,7 +65,7 @@ export default function ApplyJob(props) {
 
   useEffect(() => {
     fetchJob();
-    console.log("applyData", applyData);
+    //console.log("applyData", applyData);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchJob = async () => {
@@ -76,7 +76,7 @@ export default function ApplyJob(props) {
         authMode: "AWS_IAM",
       });
       const job = jobData.data.listUwcssaJobs.items[0];
-      console.log("jobTitle: ", job.title);
+      //console.log("jobTitle: ", job.title);
       setApplyData({ ...applyData, job: job });
     } catch (error) {
       console.log("error on fetching Job", error);

@@ -19,6 +19,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import QRCode from "./QRCode";
 import { Zoom } from "@mui/material";
 
+
 export const ShareInfoDialog = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const [copy, setCopy] = useState(false);
@@ -42,11 +43,22 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
     anchor.click();
     document.body.removeChild(anchor);
   };
+
   return (
     <Dialog open={open} ref={innerRef} onClose={handleCLose}>
       <DialogTitle>分享</DialogTitle>
       <Divider />
       <List sx={{ p: 5 }}>
+        {title && (
+          <ListItemText
+            primary={title}
+            primaryTypographyProps={{
+              // fontSize: "12px",
+              fontWeight: "700",
+              textAlign: "center",
+            }}
+          />
+        )}
         <ListItemText
           primary="复制链接/截图分享二维码"
           primaryTypographyProps={{
@@ -78,7 +90,9 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
         <ListItem ref={qrRef}>
           <QRCode
             size={200}
-            url={window.location.href}
+            url={
+              url ? `${window.location.origin}/${url}` : window.location.href
+            }
             bgColor="white"
             fgColor="black"
             imgSizeRatio={0.2}

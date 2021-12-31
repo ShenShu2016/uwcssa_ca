@@ -36,7 +36,7 @@ export default function Openings() {
   const uwcssaJobs = useSelector(selectAllUwcssaJobs);
   const { fetchUwcssaJobsStatus } = useSelector((state) => state.uwcssaJob);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  console.log("departments", departments);
+  //console.log("departments", departments);
 
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {

@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("1300")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none",
     },
   },
@@ -164,9 +164,9 @@ export default function PersistentDrawerLeft(props) {
   const theme = useTheme();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const matches = useMediaQuery(theme.breakpoints.down("600"));
+  const matches = useMediaQuery(theme.breakpoints.up("600"));
   const history = useHistory();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const { userAuth } = useSelector((state) => state);
   const { darkTheme } = useSelector((state) => state.general);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -295,9 +295,9 @@ export default function PersistentDrawerLeft(props) {
   };
   useEffect(() => {
     if (matches) {
-      setOpen(false);
-    } else {
       setOpen(true);
+    } else {
+      setOpen(false);
     }
   }, [matches]);
 
@@ -313,7 +313,7 @@ export default function PersistentDrawerLeft(props) {
             edge="start"
             sx={{
               mr: 2,
-              ...((open || matches) && { display: "none" }),
+              ...((open || !matches) && { display: "none" }),
             }}
           >
             <MenuIcon />
