@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
 import DashboardBasicInfo from "../../components/Account/Dashboard/DashboardBasicInfo";
+import MyKanbans from "../../components/Account/Dashboard/MyKanbans";
 // import FavoriteTopic from "../../components/Account/Dashboard/FavoriteTopic";
 // import MyEssencePosts from "../../components/Account/Dashboard/MyEssencePosts";
 // import MyForumPosts from "../../components/Account/Dashboard/MyForumPosts";
@@ -38,6 +39,7 @@ export default function Dashboard() {
           <MyEssencePosts /> */}
         </div>
         {/* <MyForumPosts /> */}
+        <MyKanbans />
         <Box sx={{ overflow: "auto" }}>
           <MyMarketPosts />
         </Box>

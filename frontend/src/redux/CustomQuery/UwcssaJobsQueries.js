@@ -97,9 +97,6 @@ export const getUwcssaJob = /* GraphQL */ `
         beingLiked {
           nextToken
         }
-        kanban {
-          nextToken
-        }
         kanbanAssignee {
           nextToken
         }
@@ -135,9 +132,6 @@ export const getUwcssaJob = /* GraphQL */ `
           nextToken
         }
         uwcssaJobs {
-          nextToken
-        }
-        kanbans {
           nextToken
         }
       }

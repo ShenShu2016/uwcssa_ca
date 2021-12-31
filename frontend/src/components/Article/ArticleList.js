@@ -1,9 +1,10 @@
-import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComponent from "../../components/Article/ArticleComponent";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
+import BackdropLoading from "../BackdropLoading";
 import { fetchArticles } from "../../redux/slice/articleSlice";
 import { makeStyles } from "@mui/styles";
 import { useTheme } from "@emotion/react";
@@ -56,16 +57,7 @@ export default function ArticleList() {
       </Typography>
       <Box className={classes.main}>
         <Box className={classes.body}>
-          {articles.length > 0 ? (
-            renderList
-          ) : (
-            <Backdrop
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={true}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
-          )}
+          {articles.length > 0 ? renderList : <BackdropLoading />}
         </Box>
         <Box>
           <ArticleSideBar />

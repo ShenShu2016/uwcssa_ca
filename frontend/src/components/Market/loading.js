@@ -1,6 +1,7 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
+import BackdropLoading from "../BackdropLoading";
 import LinearProgress from "@mui/material/LinearProgress";
 import QRCode from "../QRCode";
 import loadingFile from "./loading.gif";
@@ -39,103 +40,106 @@ export const Loading = (status = null) => {
     };
   }, []);
   return (
-    <Box
-      sx={{
-        height: "500px",
-        width: "700px",
-        top: "50%",
-        left: "50%",
-        position: "absolute",
-        transform: "translate(-50%,-50%)",
-      }}
-    >
+    <>
       <Box
-        position="relative"
-        height="250px"
-        width="250px"
         sx={{
-          marginBottom: "5rem",
+          height: "500px",
+          width: "700px",
           top: "50%",
           left: "50%",
+          position: "absolute",
           transform: "translate(-50%,-50%)",
         }}
       >
         <Box
-          component="img"
-          src={loadingFile}
-          alt="Loading"
+          position="relative"
+          height="250px"
+          width="250px"
+          sx={{
+            marginBottom: "5rem",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          <Box
+            component="img"
+            src={loadingFile}
+            alt="Loading"
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              display: "inline-flex",
+              bottom: 0,
+              right: 0,
+            }}
+          >
+            <CircularProgress
+              size={50}
+              sx={{
+                color: red[100],
+              }}
+            />
+            <Box
+              sx={{
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                variant="caption"
+                component="div"
+                color="text.secondary"
+              >
+                {`${Math.round(progress)}%`}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+        <Typography
+          variant="h4"
+          fontWeight="bold"
           sx={{
             position: "absolute",
-            top: "50%",
+            top: "85%",
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}
-        />
-        <Box
-          sx={{
-            position: "absolute",
-            display: "inline-flex",
-            bottom: 0,
-            right: 0,
-          }}
         >
-          <CircularProgress
-            size={50}
-            sx={{
-              color: red[100],
-            }}
-          />{" "}
-          <Box
-            sx={{
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0,
-              position: "absolute",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              variant="caption"
-              component="div"
-              color="text.secondary"
-            >
-              {`${Math.round(progress)}%`}
-            </Typography>
-          </Box>
+          Loading...
+        </Typography>
+        <Box sx={{ color: red[200], mb: "10rem" }}>
+          <LinearProgress
+            sx={{ bottom: "-150px" }}
+            color="inherit"
+            variant="buffer"
+            value={progress}
+            valueBuffer={buffer}
+          />
         </Box>
-      </Box>
-      <Typography
-        variant="h4"
-        fontWeight="bold"
-        sx={{
-          position: "absolute",
-          top: "85%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        Loading...
-      </Typography>
-      <Box sx={{ color: red[200], mb: "10rem" }}>
-        <LinearProgress
-          sx={{ bottom: "-150px" }}
-          color="inherit"
-          variant="buffer"
-          value={progress}
-          valueBuffer={buffer}
+        <QRCode
+          size={200}
+          url="https://google.com"
+          bgColor="white"
+          imgSrc="default"
+          fgColor="black"
+          imgSizeRatio={0.2}
         />
       </Box>
-      <QRCode
-        size={200}
-        url="https://google.com"
-        bgColor="white"
-        imgSrc="default"
-        fgColor="black"
-        imgSizeRatio={0.2}
-      />
-    </Box>
+      <BackdropLoading />
+    </>
   );
 };

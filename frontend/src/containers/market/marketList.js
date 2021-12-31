@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AppsIcon from "@mui/icons-material/Apps";
+import BackdropLoading from "../../components/BackdropLoading";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
@@ -93,7 +94,7 @@ export default function MarketList() {
         <Box className={classes.img}>
           <MarketTopBar darkTheme={darkTheme} />
           <Box className={classes.items}>
-            {starter === false ? null : marketItemRenderList}
+            {starter === false ? <BackdropLoading /> : marketItemRenderList}
           </Box>
           <Box className={classes.fabBox}>
             <Backdrop open={open} />

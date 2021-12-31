@@ -1,5 +1,7 @@
+import * as html2canvas from "html2canvas";
+
 import {
-  Button,
+  Box,
   Dialog,
   DialogTitle,
   Divider,
@@ -9,38 +11,106 @@ import {
   ListItemText,
   Tooltip,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import QRCode from "./QRCode";
-import React from "react";
 import { Zoom } from "@mui/material";
-import { postMultipleImages } from "../redux/slice/generalSlice";
 
-export function ShareInfoDialog(props) {
-  const { open, onClose, url, title } = props;
-  const dispatch = useDispatch();
-  const [copy, setCopy] = React.useState(false);
-  const username = useSelector((state) => state.userAuth.user.username);
-  const [shareImg, setShareImg] = React.useState("");
-  const uploadMarketItemImg = async (e) => {
-    const imagesData = e.target.files;
-    const imageLocation = `${username}/`;
+export const ShareInfoDialog = forwardRef((props, ref) => {
+  const { title, url } = props;
+  const [open, setOpen] = useState(false);
+  const [copy, setCopy] = useState(false);
+  const [download, setDownload] = useState(false);
+  const innerRef = useRef();
+  const handleCLose = () => {
+    setOpen(false);
+  };
+  useImperativeHandle(ref, () => ({
+    openDialog: () => setOpen(true),
+    closeDialog: () => setOpen(false),
+  }));
+  const handleDownload = () => {
+    let delete1 = document.getElementById("delete1");
+    let delete2 = document.getElementById("delete2");
+    let delete3 = document.getElementById("delete3");
+    delete1.parentNode.removeChild(delete1);
+    delete2.parentNode.removeChild(delete2);
+    delete3.parentNode.removeChild(delete3);
+    const captureElement = document.querySelector("#qr-code");
 
-    const response = await dispatch(
-      postMultipleImages({ imagesData, imageLocation })
-    );
-    console.log(response);
-    if (response.meta.requestStatus === "fulfilled") {
-      setShareImg((prev) => prev.concat(response.payload));
-    }
+    html2canvas(captureElement)
+      .then((canvas) => {
+        canvas.style.display = "none";
+        document.body.appendChild(canvas);
+        return canvas;
+      })
+      .then((canvas) => {
+        const image = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        const a = document.createElement("a");
+        a.setAttribute("download", "uwcssa-qr-code.png");
+        a.setAttribute("href", image);
+        a.click();
+        canvas.remove();
+      });
+
+    const parent1 = document.getElementById("parent1");
+    const parent2 = document.getElementById("parent2");
+    const parent3 = document.getElementById("parent3");
+    parent1.appendChild(delete1);
+    parent2.appendChild(delete2);
+    parent3.appendChild(delete3);
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} ref={innerRef} onClose={handleCLose} id="qr-code">
       <DialogTitle>分享</DialogTitle>
       <Divider />
-      <List sx={{ p: 5 }}>
+      <List sx={{ p: 5 }} id="parent">
+        <Box id="parent1">
+          <ListItemText
+            id="delete1"
+            primary="复制链接/截图分享二维码"
+            primaryTypographyProps={{
+              fontSize: "12px",
+              fontWeight: "light",
+            }}
+            inset={true}
+          />
+        </Box>
+        <Box id="parent2">
+          <Tooltip
+            title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
+            placement="top-end"
+            TransitionComponent={Zoom}
+            arrow
+          >
+            <ListItem button id="delete2">
+              <ListItemIcon>
+                <ContentCopyIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="点我复制链接!"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    url
+                      ? `${window.location.origin}/${url}`
+                      : window.location.href
+                  );
+                  setCopy(true);
+                }}
+              />
+            </ListItem>
+          </Tooltip>
+        </Box>
+
         {title && (
           <ListItemText
             primary={title}
@@ -51,33 +121,6 @@ export function ShareInfoDialog(props) {
             }}
           />
         )}
-        <ListItemText
-          primary="复制链接/截图分享二维码"
-          primaryTypographyProps={{
-            fontSize: "12px",
-            fontWeight: "light",
-          }}
-          inset={true}
-        />
-        <Tooltip
-          title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
-          placement="top-end"
-          TransitionComponent={Zoom}
-          arrow
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <ContentCopyIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="点我复制链接!"
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                setCopy(true);
-              }}
-            />
-          </ListItem>
-        </Tooltip>
         <ListItem>
           <QRCode
             size={200}
@@ -87,33 +130,34 @@ export function ShareInfoDialog(props) {
             bgColor="white"
             fgColor="black"
             imgSizeRatio={0.2}
-            imgSrc={shareImg.length === 0 ? "default" : shareImg}
+            imgSrc="default"
           />
         </ListItem>
-
-        <Tooltip
-          title="上传照片自定义二维码中心图片"
-          placement="bottom-end"
-          TransitionComponent={Zoom}
-          arrow
-        >
-          <label htmlFor="contained-button-file">
-            <input
-              accept="image/*"
-              id="contained-button-file"
-              type="file"
-              required
-              style={{ display: "none" }}
-              onChange={(e) => {
-                uploadMarketItemImg(e);
-              }}
-            />
-            <Button variant="outlined" component="span">
-              自定义二维码
-            </Button>
-          </label>
-        </Tooltip>
+        <Box id="parent3">
+          <Tooltip
+            title={`${
+              download === false ? "Download QR-Code" : "Downloaded!🥳"
+            }`}
+            placement="top-end"
+            TransitionComponent={Zoom}
+            arrow
+            id="parent3"
+          >
+            <ListItem button id="delete3">
+              <ListItemIcon>
+                <ContentCopyIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="点我下载二维码!"
+                onClick={() => {
+                  handleDownload();
+                  setDownload(true);
+                }}
+              />
+            </ListItem>
+          </Tooltip>
+        </Box>
       </List>
     </Dialog>
   );
-}
+});

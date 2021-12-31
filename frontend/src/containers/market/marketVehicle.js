@@ -6,6 +6,7 @@ import {
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
 // import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
@@ -145,7 +146,7 @@ export default function MarketVehicle() {
             handleReset={handleReset}
           />
           <Box className={classes.items}>
-            {starter === false ? null : itemRenderList}
+            {starter === false ? <BackdropLoading /> : itemRenderList}
           </Box>
         </Box>
       </Stack>
