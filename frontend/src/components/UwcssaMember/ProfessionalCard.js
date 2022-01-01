@@ -165,6 +165,7 @@ export default function ProfessionalCard({
   github,
   startDate,
   endDate,
+  email,
 }) {
   const classes = useStyles();
   const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
@@ -310,15 +311,23 @@ export default function ProfessionalCard({
 
         <CardActions disableSpacing>
           <IconButton aria-label="Send Me Email">
-            <EmailIcon />
+            <EmailIcon onClick={() => window.open(`mailto:${email}`)} />
           </IconButton>
           {linkedIn ? (
-            <IconButton href={linkedIn}>
+            <IconButton
+              onClick={() => {
+                window.location.href = `${linkedIn}`;
+              }}
+            >
               <LinkedInIcon />
             </IconButton>
           ) : null}
           {github ? (
-            <IconButton href={github}>
+            <IconButton
+              onClick={() => {
+                window.location.href = `${github}`;
+              }}
+            >
               <GitHubIcon />
             </IconButton>
           ) : null}
