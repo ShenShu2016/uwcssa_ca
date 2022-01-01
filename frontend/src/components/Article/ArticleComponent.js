@@ -146,7 +146,13 @@ function ArticleComponent({ article }) {
             </Grid>
           </Grid>
           <Grid item xs={"auto"}>
-            <Box sx={{ paddingTop: "1rem" }}>
+            <Box
+              sx={{
+                position: "relative",
+                top: "50%",
+                transform: "translate(0, -50%)",
+              }}
+            >
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <img
                   src={

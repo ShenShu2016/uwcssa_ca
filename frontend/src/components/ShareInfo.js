@@ -5,10 +5,10 @@ import {
   Dialog,
   DialogTitle,
   Divider,
-  List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Stack,
   Tooltip,
 } from "@mui/material";
 import React, {
@@ -70,34 +70,32 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
   };
 
   return (
-    <Dialog open={open} ref={innerRef} onClose={handleCLose} id="qr-code">
-      <DialogTitle>分享</DialogTitle>
-      <Divider />
-      <List sx={{ p: 5 }} id="parent">
-        <Box id="parent1">
-          <ListItemText
-            id="delete1"
-            primary="复制链接/截图分享二维码"
-            primaryTypographyProps={{
-              fontSize: "12px",
-              fontWeight: "light",
-            }}
-            inset={true}
-          />
-        </Box>
-        <Box id="parent2">
-          <Tooltip
-            title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
-            placement="top-end"
-            TransitionComponent={Zoom}
-            arrow
-          >
-            <ListItem button id="delete2">
-              <ListItemIcon>
-                <ContentCopyIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="点我复制链接!"
+    <Dialog open={open} ref={innerRef} onClose={handleCLose}>
+      <Box id="qr-code">
+        <DialogTitle>分享</DialogTitle>
+        <Divider />
+        <Stack sx={{ px: 5, pt: 2, pb: 5 }} id="parent">
+          <Box id="parent1">
+            <ListItemText
+              id="delete1"
+              primary="复制链接/截图分享二维码"
+              primaryTypographyProps={{
+                fontSize: "12px",
+                fontWeight: "light",
+              }}
+              inset={true}
+            />
+          </Box>
+          <Box id="parent2">
+            <Tooltip
+              title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
+              placement="top-end"
+              TransitionComponent={Zoom}
+              arrow
+            >
+              <ListItem
+                button
+                id="delete2"
                 onClick={() => {
                   navigator.clipboard.writeText(
                     url
@@ -106,58 +104,65 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
                   );
                   setCopy(true);
                 }}
-              />
-            </ListItem>
-          </Tooltip>
-        </Box>
-
-        {title && (
-          <ListItemText
-            primary={title}
-            primaryTypographyProps={{
-              // fontSize: "12px",
-              fontWeight: "700",
-              textAlign: "center",
-            }}
-          />
-        )}
-        <ListItem>
-          <QRCode
-            size={200}
-            url={
-              url ? `${window.location.origin}/${url}` : window.location.href
-            }
-            bgColor="white"
-            fgColor="black"
-            imgSizeRatio={0.2}
-            imgSrc="default"
-          />
-        </ListItem>
-        <Box id="parent3">
-          <Tooltip
-            title={`${
-              download === false ? "Download QR-Code" : "Downloaded!🥳"
-            }`}
-            placement="top-end"
-            TransitionComponent={Zoom}
-            arrow
-            id="parent3"
-          >
-            <ListItem button id="delete3">
-              <ListItemIcon>
-                <ContentCopyIcon />
-              </ListItemIcon>
+              >
+                <ListItemIcon>
+                  <ContentCopyIcon />
+                </ListItemIcon>
+                <ListItemText primary="点我复制链接!" />
+              </ListItem>
+            </Tooltip>
+          </Box>
+          <ListItem sx={{ maxWidth: "270px" }}>
+            {title && (
               <ListItemText
-                primary="点我下载二维码!"
+                primary={title}
+                primaryTypographyProps={{
+                  // fontSize: "12px",
+                  fontWeight: "700",
+                  textAlign: "center",
+                }}
+              />
+            )}
+          </ListItem>
+          <ListItem>
+            <QRCode
+              size={200}
+              url={
+                url ? `${window.location.origin}/${url}` : window.location.href
+              }
+              bgColor="white"
+              fgColor="black"
+              imgSizeRatio={0.2}
+              imgSrc="default"
+            />
+          </ListItem>
+          <Box id="parent3">
+            <Tooltip
+              title={`${
+                download === false ? "Download QR-Code" : "Downloaded!🥳"
+              }`}
+              placement="top-end"
+              TransitionComponent={Zoom}
+              arrow
+              id="parent3"
+            >
+              <ListItem
+                button
+                id="delete3"
                 onClick={() => {
                   handleDownload();
                   setDownload(true);
                 }}
-              />
-            </ListItem>
-          </Tooltip>
-        </Box>
-      </List>
+              >
+                <ListItemIcon>
+                  <ContentCopyIcon />
+                </ListItemIcon>
+                <ListItemText primary="点我下载二维码!" />
+              </ListItem>
+            </Tooltip>
+          </Box>
+        </Stack>
+      </Box>
     </Dialog>
   );
 });
