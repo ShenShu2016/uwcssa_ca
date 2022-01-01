@@ -40,12 +40,15 @@ export default function FoundingMember() {
   const dispatch = useDispatch();
   const isPermit = usePermit(null, "admin");
   const foundingMembers = useSelector(selectAllFoundingMembers);
-  //console.log(foundingMembers);
+  const { fetchFoundingMembersStatus } = useSelector(
+    (state) => state.foundingMember
+  );
 
   useEffect(() => {
-    dispatch(fetchFoundingMembers());
-  }, [dispatch]);
-
+    if (fetchFoundingMembersStatus === "idle" || undefined) {
+      dispatch(fetchFoundingMembers());
+    }
+  }, [dispatch, fetchFoundingMembersStatus]);
   return (
     <Box>
       <div className={classes.root}>

@@ -262,8 +262,8 @@ export default function PersonalCard({
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton>
-              <EmailIcon onClick={() => window.open(`mailto:${email}`)} />
+            <IconButton onClick={() => window.open(`mailto:${email}`)}>
+              <EmailIcon />
             </IconButton>
             {linkedIn ? (
               <IconButton

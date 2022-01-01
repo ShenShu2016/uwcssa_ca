@@ -11,7 +11,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import BackdropLoading from "../components/BackdropLoading";
 import ByDepartment from "../components/UwcssaMember/ByDepartment";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -78,19 +77,15 @@ export default function UwcssaMember() {
             </Button>
           )}
         </Box>
-        {departments && uwcssaMembers ? (
-          departments.map((department, departmentIdx) => {
-            return (
-              <ByDepartment
-                department={department}
-                uwcssaMembers={uwcssaMembers}
-                key={departmentIdx}
-              />
-            );
-          })
-        ) : (
-          <BackdropLoading />
-        )}
+        {departments.map((department, departmentIdx) => {
+          return (
+            <ByDepartment
+              department={department}
+              uwcssaMembers={uwcssaMembers}
+              key={departmentIdx}
+            />
+          );
+        })}
       </div>
       <Footer />
     </Box>
