@@ -100,6 +100,7 @@ export default function InfoCard({ item }) {
         item={item}
         linkedIn={user.linkedIn}
         github={user.github}
+        email={user.email}
       />
 
       {/* <Card sx={{ width: 310 }} className={classes.card}>

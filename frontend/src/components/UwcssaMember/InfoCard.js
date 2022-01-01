@@ -171,6 +171,7 @@ export default function InfoCard({ item }) {
         github={user.github}
         startDate={startDate}
         endDate={endDate}
+        email={user.email}
       />
     </div>
   );

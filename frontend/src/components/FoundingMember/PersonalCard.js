@@ -151,6 +151,7 @@ export default function PersonalCard({
   github,
   startDate,
   endDate,
+  email,
 }) {
   const classes = useStyles();
   const isPermit = usePermit(owner, "admin");
@@ -262,15 +263,23 @@ export default function PersonalCard({
           </CardContent>
           <CardActions disableSpacing>
             <IconButton>
-              <EmailIcon />
+              <EmailIcon onClick={() => window.open(`mailto:${email}`)} />
             </IconButton>
             {linkedIn ? (
-              <IconButton href={linkedIn}>
+              <IconButton
+                onClick={() => {
+                  window.location.href = `${linkedIn}`;
+                }}
+              >
                 <LinkedInIcon />
               </IconButton>
             ) : null}
             {github ? (
-              <IconButton href={github}>
+              <IconButton
+                onClick={() => {
+                  window.location.href = `${github}`;
+                }}
+              >
                 <GitHubIcon />
               </IconButton>
             ) : null}
