@@ -8,20 +8,19 @@ export default function QRCode({
   url,
   bgColor,
   fgColor,
-  imgSrc,
   imgSizeRatio = 0.1,
 }) {
   return (
     <Box sx={{ marginInline: "auto" }}>
       <QRcode
-        renderAs="svg"
+        // renderAs="svg"
         id="qrCode"
         size={size}
         value={url}
         bgColor={bgColor}
         fgColor={fgColor}
         imageSettings={{
-          src: imgSrc === "default" ? uwcssa : imgSrc,
+          src: uwcssa,
           excavate: true,
           width: imgSizeRatio * size,
           height: imgSizeRatio * size,

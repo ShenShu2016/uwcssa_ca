@@ -74,7 +74,7 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
       <Box id="qr-code">
         <DialogTitle>分享</DialogTitle>
         <Divider />
-        <Stack sx={{ px: 5, pt: 2, pb: 5 }} id="parent">
+        <Stack sx={{ px: 5, pt: 2, pb: 5 }} >
           <Box id="parent1">
             <ListItemText
               id="delete1"
@@ -158,7 +158,6 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
               bgColor="white"
               fgColor="black"
               imgSizeRatio={0.2}
-              imgSrc="default"
             />
           </ListItem>
           <Box sx={{ maxWidth: "270px" }}>{children}</Box>
