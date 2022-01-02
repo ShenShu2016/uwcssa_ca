@@ -706,7 +706,6 @@ export const getUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -3356,7 +3355,6 @@ export const getDepartment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -7394,7 +7392,6 @@ export const getKanban = /* GraphQL */ `
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -7466,7 +7463,6 @@ export const listKanbans = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        owner
       }
       nextToken
     }
@@ -7550,7 +7546,6 @@ export const kanbanSortBySortKey = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        owner
       }
       nextToken
     }

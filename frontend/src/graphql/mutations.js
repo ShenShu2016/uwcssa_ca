@@ -162,7 +162,6 @@ export const createUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -330,7 +329,6 @@ export const updateUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -498,7 +496,6 @@ export const deleteUser = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4754,7 +4751,6 @@ export const createDepartment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4870,7 +4866,6 @@ export const updateDepartment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -4986,7 +4981,6 @@ export const deleteDepartment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -11974,7 +11968,6 @@ export const createKanban = /* GraphQL */ `
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -12113,7 +12106,6 @@ export const updateKanban = /* GraphQL */ `
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -12252,7 +12244,6 @@ export const deleteKanban = /* GraphQL */ `
           nextToken
         }
       }
-      owner
     }
   }
 `;
