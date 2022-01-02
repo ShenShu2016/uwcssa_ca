@@ -241,10 +241,10 @@ export default function UwcssaIntro() {
                         className={classes.relateButton}
                       >
                         <Button component={Link} to="/article">
-                          UWCSSA新闻
+                          近期新闻
                         </Button>
                         <Button component={Link} to="/event">
-                          UWCSSA活动
+                          活动
                         </Button>
                         <Button
                           variant="outlined"
@@ -254,7 +254,7 @@ export default function UwcssaIntro() {
                           component={Link}
                           to="/forum"
                         >
-                          UWCSSA论坛（建设中）
+                          论坛（建设中）
                         </Button>
                       </ButtonGroup>
                     </Box>

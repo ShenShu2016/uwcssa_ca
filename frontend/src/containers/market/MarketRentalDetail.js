@@ -113,7 +113,8 @@ export default function MarketRentalDetail() {
   const closeHandler = () => {
     const currentURL = window.location.href;
     const goURL = currentURL.split("/");
-    history.push(`/market/${goURL[goURL.length - 2]}`);
+    const type = goURL.indexOf("market") + 1;
+    history.push(`/market/${goURL[type]}`);
   };
   return (
     <div className={classes.root}>

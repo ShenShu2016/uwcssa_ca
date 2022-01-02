@@ -1,16 +1,3 @@
-// import { Box, styled } from "@mui/system";
-// import {
-//   Card,
-//   CardActions,
-//   CardContent,
-//   Collapse,
-//   Divider,
-//   Menu,
-//   MenuItem,
-//   Typography,
-// } from "@mui/material";
-import React from "react";
-
 //import CustomAvatar from "../CustomMUI/CustomAvatar";
 // import Edit from "./Edit";
 // import EditIcon from "@mui/icons-material/Edit";
@@ -27,6 +14,18 @@ import React from "react";
 // import GitHubIcon from "@mui/icons-material/GitHub";
 // import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ProfessionalCard from "./ProfessionalCard";
+// import { Box, styled } from "@mui/system";
+// import {
+//   Card,
+//   CardActions,
+//   CardContent,
+//   Collapse,
+//   Divider,
+//   Menu,
+//   MenuItem,
+//   Typography,
+// } from "@mui/material";
+import React from "react";
 
 // const useStyles = makeStyles((palette) => ({
 //   root: {
@@ -171,6 +170,7 @@ export default function InfoCard({ item }) {
         github={user.github}
         startDate={startDate}
         endDate={endDate}
+        email={user.email}
       />
     </div>
   );

@@ -160,7 +160,7 @@ const StyledMenu = styled((props) => (
     },
   },
 }));
-export default function PersistentDrawerLeft(props) {
+export default function DeskTopDrawer(props) {
   const theme = useTheme();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -193,10 +193,8 @@ export default function PersistentDrawerLeft(props) {
   const signOut_user = async () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    const response = await dispatch(signOut());
-    if (response.meta.requestStatus === "fulfilled") {
-      history.push("/");
-    }
+    history.replace("/");
+    dispatch(signOut());
   };
   const renderMenu = (
     <StyledMenu

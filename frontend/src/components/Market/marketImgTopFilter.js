@@ -99,6 +99,7 @@ export default function MarketImgTopFilter({
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
+  const [clickedTags, setClickedTags] = useState([]);
 
   let tags = [];
   // console.log(trueMarketItems);
@@ -155,8 +156,14 @@ export default function MarketImgTopFilter({
                 key={tagIdx}
                 avatar={<Avatar>{occurrence[tag]}</Avatar>}
                 label={tag}
+                color={clickedTags.includes(tag) ? "primary" : "default"}
                 onClick={() => {
-                  handleClick(tag);
+                  if (clickedTags.includes(tag)) {
+                    setClickedTags((prev) => prev.filter((t) => t !== tag));
+                  } else {
+                    setClickedTags((prev) => prev.concat(tag));
+                    handleClick(tag);
+                  }
                 }}
               />
             );

@@ -1,6 +1,6 @@
 import {
-  Box,
   AppBar,
+  Box,
   Button,
   Card,
   CardActions,
@@ -17,22 +17,22 @@ import {
 } from "@mui/material";
 import React, { forwardRef, useState } from "react";
 
+import CloseIcon from "@mui/icons-material/Close";
 //import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditIcon from "@mui/icons-material/Edit";
 import EmailIcon from "@mui/icons-material/Email";
+import GitHubIcon from "@mui/icons-material/GitHub";
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 // import ShareIcon from "@mui/icons-material/Share";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   root: {
@@ -165,6 +165,7 @@ export default function ProfessionalCard({
   github,
   startDate,
   endDate,
+  email,
 }) {
   const classes = useStyles();
   const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
@@ -309,16 +310,27 @@ export default function ProfessionalCard({
         </CardContent>
 
         <CardActions disableSpacing>
-          <IconButton aria-label="Send Me Email">
+          <IconButton
+            aria-label="Send Me Email"
+            onClick={() => window.open(`mailto:${email}`)}
+          >
             <EmailIcon />
           </IconButton>
           {linkedIn ? (
-            <IconButton href={linkedIn}>
+            <IconButton
+              onClick={() => {
+                window.location.href = `${linkedIn}`;
+              }}
+            >
               <LinkedInIcon />
             </IconButton>
           ) : null}
           {github ? (
-            <IconButton href={github}>
+            <IconButton
+              onClick={() => {
+                window.location.href = `${github}`;
+              }}
+            >
               <GitHubIcon />
             </IconButton>
           ) : null}

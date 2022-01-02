@@ -68,7 +68,7 @@ export default function MarketComponent({ item, type, darkTheme }) {
               lineHeight: "1.3333",
             }}
           >
-            ${price} {isHover ? "🥳" : "😩"}
+            ${price}
           </Typography>
         </Box>
         <Box my={"4px"}>

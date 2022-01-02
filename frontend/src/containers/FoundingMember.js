@@ -40,11 +40,22 @@ export default function FoundingMember() {
   const dispatch = useDispatch();
   const isPermit = usePermit(null, "admin");
   const foundingMembers = useSelector(selectAllFoundingMembers);
-  //console.log(foundingMembers);
+  const { fetchFoundingMembersStatus } = useSelector(
+    (state) => state.foundingMember
+  );
 
   useEffect(() => {
-    dispatch(fetchFoundingMembers());
-  }, [dispatch]);
+    if (fetchFoundingMembersStatus === "idle" || undefined) {
+      dispatch(fetchFoundingMembers());
+    }
+  }, [dispatch, fetchFoundingMembersStatus]);
+
+  const delay = 600;
+
+  const duration = 1000;
+
+  const animStr = (memberIdx) =>
+    `fadeIn ${duration}ms ease-out ${delay * (memberIdx + 1)}ms backwards`;
 
   return (
     <Box>
@@ -72,7 +83,11 @@ export default function FoundingMember() {
         </Box>
         <div className={classes.cards}>
           {foundingMembers.map((member, memberIdx) => {
-            return <InfoCard item={member} key={memberIdx} />;
+            return (
+              <div key={memberIdx} style={{ animation: animStr(memberIdx) }}>
+                <InfoCard item={member} />
+              </div>
+            );
           })}
         </div>
       </div>

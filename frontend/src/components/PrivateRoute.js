@@ -1,11 +1,10 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { CircularProgress } from "@mui/material";
-import React from "react";
 import { Redirect } from "react-router";
 import { Route } from "react-router";
 import { setURLFrom } from "../redux/slice/generalSlice";
-import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 
 export default function PrivateRoute({
@@ -14,15 +13,16 @@ export default function PrivateRoute({
   ...rest
 }) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
   const { isAuthenticated, cognitoGroup } = useSelector(
     (state) => state.userAuth
   );
-  const handleNotSignInRedirect = () => {
-    dispatch(setURLFrom({ location }));
-    history.push("/auth/signIn");
-  };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      dispatch(setURLFrom({ location }));
+    }
+  }, [dispatch, location, isAuthenticated]);
   return (
     <div>
       {cognitoGroup.includes(null) ? (
@@ -36,7 +36,7 @@ export default function PrivateRoute({
             ) : isAuthenticated ? (
               <Redirect to="/noPermission" />
             ) : (
-              handleNotSignInRedirect()
+              <Redirect to="/auth/signIn" />
             )
           }
         />

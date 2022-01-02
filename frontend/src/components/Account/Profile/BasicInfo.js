@@ -63,7 +63,7 @@ export default function BasicInfo({ user, ownerID }) {
               src={
                 user.backGroundImgURL
                   ? user.backGroundImgURL
-                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/profile_Background.png"
               }
               alt="backGroundImgURL"
               style={{
@@ -93,7 +93,7 @@ export default function BasicInfo({ user, ownerID }) {
                   src={
                     user.avatarImgURL
                       ? user.avatarImgURL
-                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
                   }
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}
