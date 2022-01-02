@@ -102,181 +102,175 @@ export default function EventMain({ event }) {
   } = event;
   // const newContent = content.substring(34, content.length - 98);
   return (
-    <Grid
-      item
-      xs={2}
-      sm={4}
-      md={4}
+    // <Grid item xs={2} sm={4} md={4} sx={{ marginBottom: "1rem" }}>
+    <CardActionArea
+      className={classes.actionArea}
+      sx={{ borderRadius: 3 }}
       key={event.title}
-      sx={{ marginBottom: "1rem" }}
+      component={Link}
+      to={`/event/${id}`}
     >
-      <CardActionArea
-        className={classes.actionArea}
-        sx={{ borderRadius: 3 }}
-        component={Link}
-        to={`/event/${id}`}
-      >
-        <Card className={classes.cardDetails} sx={{ borderRadius: 3 }}>
-          <Box sx={{ position: "relative" }}>
-            <CardMedia
-              component="img"
-              height="194"
-              image={
-                posterImgURL
-                  ? posterImgURL
-                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
-              }
-            />
-            {startDate > moment().format() && endDate > moment().format() ? (
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
+      <Card className={classes.cardDetails} sx={{ borderRadius: 3 }}>
+        <Box sx={{ position: "relative" }}>
+          <CardMedia
+            component="img"
+            height="194"
+            image={
+              posterImgURL
+                ? posterImgURL
+                : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+            }
+          />
+          {startDate > moment().format() && endDate > moment().format() ? (
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+              }}
+            >
+              <EventTag label={"ComingSoon"} />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+              }}
+            >
+              <EventTag label={"InProgress"} />
+            </Box>
+          )}
+          <CardContent>
+            <Box
+              style={{
+                maxHeight: "30px",
+                overflow: "hidden",
+                marginBottom: "1rem",
+              }}
+            >
+              <Typography
+                variant="subtitle1"
+                style={{
+                  wordBreak: "break-word",
+                  overflow: "hidden",
                 }}
               >
-                <EventTag label={"ComingSoon"} />
+                <b>{title}</b>
+              </Typography>
+            </Box>
+
+            {moment(startDate).format("YYYY") ===
+            moment(endDate).format("YYYY") ? (
+              <Box
+                sx={{ overflow: "hidden", height: "30px" }}
+                color={"grey.700"}
+                display={"flex"}
+                alignItems={"center"}
+                mb={1}
+              >
+                <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                  <CalendarTodayIcon className={classes.locationIcon} />
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="subtitle2" noWrap>
+                      {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                      {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                      {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
+                      {endDate.slice(11, 16)}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Box>
             ) : (
               <Box
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                }}
+                sx={{ overflow: "hidden", height: "30px" }}
+                color={"grey.700"}
+                display={"flex"}
+                alignItems={"center"}
+                mb={1}
               >
-                <EventTag label={"InProgress"} />
+                <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                  <CalendarTodayIcon className={classes.locationIcon} />
+                  <Grid item xs zeroMinWidth>
+                    <Typography variant="subtitle2" noWrap>
+                      {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
+                      {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
+                      {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
+                      {endDate.slice(8, 10)} {endDate.slice(11, 16)}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Box>
             )}
-            <CardContent>
+            {online === true ? (
               <Box
-                style={{
-                  maxHeight: "30px",
-                  overflow: "hidden",
-                  marginBottom: "1rem",
-                }}
+                sx={{ overflow: "hidden", height: "30px" }}
+                color={"grey.700"}
+                display={"flex"}
+                alignItems={"center"}
+                mb={1}
               >
-                <Typography
-                  variant="subtitle1"
-                  style={{
-                    wordBreak: "break-word",
-                    overflow: "hidden",
-                  }}
-                >
-                  <b>{title}</b>
-                </Typography>
+                <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                  <LocationOnIcon className={classes.locationIcon} />
+                  <Grid item xs zeroMinWidth>
+                    <Typography
+                      variant="subtitle2"
+                      color="textSecondary"
+                      noWrap
+                    >
+                      线上
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Box>
-
-              {moment(startDate).format("YYYY") ===
-              moment(endDate).format("YYYY") ? (
-                <Box
-                  sx={{ overflow: "hidden", height: "30px" }}
-                  color={"grey.700"}
-                  display={"flex"}
-                  alignItems={"center"}
-                  mb={1}
-                >
-                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                    <CalendarTodayIcon className={classes.locationIcon} />
-                    <Grid item xs zeroMinWidth>
-                      <Typography variant="subtitle2" noWrap>
-                        {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
-                        {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
-                        {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
-                        {endDate.slice(11, 16)}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
-              ) : (
-                <Box
-                  sx={{ overflow: "hidden", height: "30px" }}
-                  color={"grey.700"}
-                  display={"flex"}
-                  alignItems={"center"}
-                  mb={1}
-                >
-                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                    <CalendarTodayIcon className={classes.locationIcon} />
-                    <Grid item xs zeroMinWidth>
-                      <Typography variant="subtitle2" noWrap>
-                        {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
-                        {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
-                        {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
-                        {endDate.slice(8, 10)} {endDate.slice(11, 16)}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
-              )}
-              {online === true ? (
-                <Box
-                  sx={{ overflow: "hidden", height: "30px" }}
-                  color={"grey.700"}
-                  display={"flex"}
-                  alignItems={"center"}
-                  mb={1}
-                >
-                  <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                    <LocationOnIcon className={classes.locationIcon} />
-                    <Grid item xs zeroMinWidth>
-                      <Typography
-                        variant="subtitle2"
-                        color="textSecondary"
-                        noWrap
-                      >
-                        线上
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
-              ) : (
-                <div>
-                  {address ? (
-                    <Box
-                      sx={{ overflow: "hidden", height: "30px" }}
-                      color={"grey.700"}
-                      display={"flex"}
-                      alignItems={"center"}
-                      mb={1}
-                    >
-                      <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                        <LocationOnIcon className={classes.locationIcon} />
-                        <Grid item xs zeroMinWidth>
-                          <Typography
-                            variant="subtitle2"
-                            color="textSecondary"
-                            noWrap
-                          >
-                            {address.description}
-                          </Typography>
-                        </Grid>
+            ) : (
+              <div>
+                {address ? (
+                  <Box
+                    sx={{ overflow: "hidden", height: "30px" }}
+                    color={"grey.700"}
+                    display={"flex"}
+                    alignItems={"center"}
+                    mb={1}
+                  >
+                    <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                      <LocationOnIcon className={classes.locationIcon} />
+                      <Grid item xs zeroMinWidth>
+                        <Typography
+                          variant="subtitle2"
+                          color="textSecondary"
+                          noWrap
+                        >
+                          {address.description}
+                        </Typography>
                       </Grid>
-                    </Box>
-                  ) : (
-                    <Box
-                      sx={{ overflow: "hidden", height: "30px" }}
-                      color={"grey.700"}
-                      display={"flex"}
-                      alignItems={"center"}
-                      mb={1}
-                    >
-                      <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
-                        <LocationOnIcon className={classes.locationIcon} />
-                        <Grid item xs zeroMinWidth>
-                          <Typography variant="subtitle2" color="textSecondary">
-                            无
-                          </Typography>
-                        </Grid>
+                    </Grid>
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{ overflow: "hidden", height: "30px" }}
+                    color={"grey.700"}
+                    display={"flex"}
+                    alignItems={"center"}
+                    mb={1}
+                  >
+                    <Grid container wrap="nowrap" sx={{ my: 1, mx: "auto" }}>
+                      <LocationOnIcon className={classes.locationIcon} />
+                      <Grid item xs zeroMinWidth>
+                        <Typography variant="subtitle2" color="textSecondary">
+                          无
+                        </Typography>
                       </Grid>
-                    </Box>
-                  )}
-                </div>
-              )}
+                    </Grid>
+                  </Box>
+                )}
+              </div>
+            )}
 
-              {/* <Box
+            {/* <Box
                 sx={{
                   overflow: "hidden",
                   height: "30px",
@@ -291,20 +285,20 @@ export default function EventMain({ event }) {
                   </Grid>
                 </Grid>
               </Box> */}
-              {topic.name ? (
-                <Chip label={topic.name} sx={{ color: "#757de8" }} />
-              ) : (
-                // <Typography
-                //   variant="subtitle2"
-                //   color="textSecondary"
-                //   gutterBottom
-                // >
-                //   类别： {topic.name}
-                // </Typography>
-                <Chip label="无" sx={{ color: "#757de8" }} />
-              )}
+            {topic.name ? (
+              <Chip label={topic.name} sx={{ color: "#757de8" }} />
+            ) : (
+              // <Typography
+              //   variant="subtitle2"
+              //   color="textSecondary"
+              //   gutterBottom
+              // >
+              //   类别： {topic.name}
+              // </Typography>
+              <Chip label="无" sx={{ color: "#757de8" }} />
+            )}
 
-              {/* 
+            {/* 
             <Box
               style={{
                 height: "40px",
@@ -322,8 +316,8 @@ export default function EventMain({ event }) {
                 {content}
               </Typography>
             </Box> */}
-            </CardContent>
-            {/* <CardActions>
+          </CardContent>
+          {/* <CardActions>
           {userInfo.isAuthenticated ? (
             <Button
               size="small"
@@ -336,9 +330,9 @@ export default function EventMain({ event }) {
             <SignUpRequest />
           )}
         </CardActions> */}
-          </Box>
-        </Card>
-      </CardActionArea>
-    </Grid>
+        </Box>
+      </Card>
+    </CardActionArea>
+    // </Grid>
   );
 }

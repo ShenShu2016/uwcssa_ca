@@ -12,7 +12,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoCard from "./InfoCard";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
-
+import "./styles.css";
 const useStyles = makeStyles((theme) => ({
   cards: {
     marginBlock: "1rem",
@@ -63,6 +63,12 @@ export default function ByDepartment({ department, uwcssaMembers }) {
   };
   //   console.log("department", department);
   //console.log("membersByDepartment", membersByDepartment);
+  const delay = 600;
+
+  const duration = 1000;
+
+  const animStr = (memberIdx) =>
+    `fadeIn ${duration}ms ease-out ${delay * (memberIdx + 1)}ms backwards`;
   return (
     <Box
       sx={{
@@ -103,7 +109,11 @@ export default function ByDepartment({ department, uwcssaMembers }) {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <div className={classes.cards}>
             {membersByDepartment.map((member, memberIdx) => {
-              return <InfoCard item={member} key={memberIdx} />;
+              return (
+                <div key={memberIdx} style={{ animation: animStr(memberIdx) }}>
+                  <InfoCard item={member} />
+                </div>
+              );
             })}
           </div>
         </Collapse>
