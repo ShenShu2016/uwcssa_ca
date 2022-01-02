@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -136,7 +136,10 @@ export default function EventBody({ event }) {
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
   const history = useHistory();
-  const [shareOpen, setShareOpen] = useState(false);
+  const shareRef = useRef();
+  const handleShareOpen = () => {
+    shareRef.current.openDialog();
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -371,8 +374,7 @@ export default function EventBody({ event }) {
                       <IconButton
                         color="primary"
                         onClick={() => {
-                          navigator.clipboard.writeText(window.location.href);
-                          setShareOpen(true);
+                          handleShareOpen();
                         }}
                         className={classes.aTag}
                         sx={{
@@ -393,10 +395,9 @@ export default function EventBody({ event }) {
                     </Tooltip>
                   </div>
                   <ShareInfoDialog
-                    open={shareOpen}
-                    onClose={() => setShareOpen(false)}
                     url={`event/${id}`}
                     title={event.title}
+                    ref={shareRef}
                   />
                   {isPermit ? (
                     <Tooltip title="点击编辑此活动" placement="top">
