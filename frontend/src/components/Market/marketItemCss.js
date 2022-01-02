@@ -110,7 +110,7 @@ export const marketItemStyle = makeStyles((theme) => ({
   },
   special: {
     display: "block",
-    marginBottom: "0.5rem",
+    // marginBottom: "0.5rem",
     [theme.breakpoints.down("md")]: {
       display: "none",
     },

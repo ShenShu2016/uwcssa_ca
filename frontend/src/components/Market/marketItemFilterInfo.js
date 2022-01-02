@@ -18,6 +18,7 @@ import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { Controller } from "react-hook-form";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 import EmojiTransportation from "@mui/icons-material/EmojiTransportation";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -39,23 +40,24 @@ const FilterContent = (props) => {
     darkTheme,
     type,
     filterList,
-    handleSortKey,
-    handleMin,
-    handleMax,
+    control,
+    handleSearch,
+    // handleSortKey,
+    // handleMin,
+    // handleMax,
     handleVehicleType,
     handleMinYear,
     handleMaxYear,
     handleMake,
     handleModel,
-    handleCategory,
-    handleCondition,
+    // handleCategory,
+    // handleCondition,
     handleMarketRentalSaleRent,
     handlePropertyType,
     handleAirConditioningType,
     handleHeatingType,
     handleReset,
   } = props;
-
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const { marketVehicleTypeList } = marketVehicleOptions;
   const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
@@ -72,34 +74,43 @@ const FilterContent = (props) => {
         position="relative"
         className={classes.specialBox}
       >
-        <Typography variant="h6" fontWeight="bold" className={classes.special}>
-          区域
-        </Typography>
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          className={classes.specialNot}
-        >
+        <Typography variant="h6" fontWeight="bold">
           过滤器
         </Typography>
-
-        <Button
-          variant="outlined"
-          onClick={handleReset}
-          sx={{ right: 0, position: "absolute" }}
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ position: "absolute", right: 0 }}
         >
-          重置
-        </Button>
+          <Box className={classes.special}>
+            <Button variant="outlined" onClick={handleSearch}>
+              搜索
+            </Button>
+          </Box>
+
+          <Button
+            variant="outlined"
+            onClick={handleReset}
+            // sx={{ right: 0, position: "absolute" }}
+          >
+            重置
+          </Button>
+        </Stack>
       </Box>
       <Box className={classes.special}>
         <MarketFIlterLocation />
       </Box>
-      <MarketForm
-        title="Sort by"
-        value={filterList.sortKey}
-        options={sortOptions}
-        required={false}
-        onChange={(e) => handleSortKey(e)}
+      <Controller
+        name="sortKey"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <MarketForm
+            title="Sort by"
+            value={value}
+            options={sortOptions}
+            onChange={(e) => onChange(e)}
+          />
+        )}
       />
       <Typography
         marginTop="1rem"
@@ -110,35 +121,47 @@ const FilterContent = (props) => {
         价格
       </Typography>
       <Stack direction="row" spacing={2} mb="0.5rem">
-        <TextField
-          sx={{ maxWidth: "100%" }}
-          label="Min Price"
-          variant="outlined"
-          type="number"
-          helperText="eg. 1000 CAD $"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">CAD $</InputAdornment>
-            ),
-          }}
-          value={filterList.min}
-          className={classes.titleInput}
-          onChange={(e) => handleMin(e)}
+        <Controller
+          name="min"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ maxWidth: "100%" }}
+              label="Min Price"
+              variant="outlined"
+              type="number"
+              helperText="eg. 1000 CAD $"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
+              value={value}
+              className={classes.titleInput}
+              onChange={(e) => onChange(e)}
+            />
+          )}
         />
-        <TextField
-          sx={{ maxWidth: "100%" }}
-          label="Max Price"
-          variant="outlined"
-          type="number"
-          helperText="eg. 25000 CAD $"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">CAD $</InputAdornment>
-            ),
-          }}
-          value={filterList.max}
-          className={classes.titleInput}
-          onChange={(e) => handleMax(e)}
+        <Controller
+          name="max"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextField
+              sx={{ maxWidth: "100%" }}
+              label="Max Price"
+              variant="outlined"
+              type="number"
+              helperText="eg. 25000 CAD $"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">CAD $</InputAdornment>
+                ),
+              }}
+              value={value}
+              className={classes.titleInput}
+              onChange={(e) => onChange(e)}
+            />
+          )}
         />
       </Stack>
       {type === "item" ? (
@@ -147,22 +170,34 @@ const FilterContent = (props) => {
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
               类别
             </Typography>
-            <MarketForm
-              title="Category"
-              value={filterList.category}
-              options={marketItemCategoryList}
-              onChange={(e) => handleCategory(e)}
+            <Controller
+              name="category"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Category"
+                  value={value}
+                  options={marketItemCategoryList}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
           <Box mb="1rem">
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
               使用程度
             </Typography>
-            <MarketForm
-              title="Condition"
-              value={filterList.condition}
-              options={marketItemConditionList}
-              onChange={(e) => handleCondition(e)}
+            <Controller
+              name="condition"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Condition"
+                  value={value}
+                  options={marketItemConditionList}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
         </React.Fragment>
@@ -303,7 +338,9 @@ function ConfirmationDialogRaw(props) {
     value: valueProp,
     open,
     type,
+    control,
     filterList,
+    handleSearch,
     handleSortKey,
     handleMin,
     handleMax,
@@ -344,7 +381,9 @@ function ConfirmationDialogRaw(props) {
         <FilterContent
           darkTheme={darkTheme}
           type={type}
+          control={control}
           filterList={filterList}
+          handleSearch={handleSearch}
           handleMinYear={handleMinYear}
           handleMaxYear={handleMaxYear}
           handleSortKey={handleSortKey}
@@ -380,9 +419,11 @@ ConfirmationDialogRaw.propTypes = {
 
 export default function FilterInfo({
   darkTheme,
+  control,
   type,
   form = "plain",
   filterList,
+  handleSearch,
   handleSortKey,
   handleMin,
   handleMax,
@@ -545,7 +586,9 @@ export default function FilterInfo({
             <FilterContent
               darkTheme={darkTheme}
               type={type}
+              control={control}
               filterList={filterList}
+              handleSearch={handleSearch}
               handleMinYear={handleMinYear}
               handleMaxYear={handleMaxYear}
               handleSortKey={handleSortKey}
@@ -589,6 +632,7 @@ export default function FilterInfo({
         </Button>
         <ConfirmationDialogRaw
           darkTheme={darkTheme}
+          control={control}
           id="ringtone-menu"
           keepMounted
           open={open}
@@ -596,6 +640,7 @@ export default function FilterInfo({
           value={value}
           type={type}
           filterList={filterList}
+          handleSearch={handleSearch}
           handleMinYear={handleMinYear}
           handleMaxYear={handleMaxYear}
           handleSortKey={handleSortKey}

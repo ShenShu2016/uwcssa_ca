@@ -73,7 +73,7 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
     <Dialog open={open} ref={innerRef} onClose={handleCLose} id="qr-code">
       <DialogTitle>分享</DialogTitle>
       <Divider />
-      <List sx={{ p: 5 }} id="parent">
+      <List sx={{ p: 5 }}>
         <Box id="parent1">
           <ListItemText
             id="delete1"
@@ -130,7 +130,6 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
             bgColor="white"
             fgColor="black"
             imgSizeRatio={0.2}
-            imgSrc="default"
           />
         </ListItem>
         <Box id="parent3">
