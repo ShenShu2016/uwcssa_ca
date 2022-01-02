@@ -49,6 +49,14 @@ export default function FoundingMember() {
       dispatch(fetchFoundingMembers());
     }
   }, [dispatch, fetchFoundingMembersStatus]);
+
+  const delay = 600;
+
+  const duration = 1000;
+
+  const animStr = (memberIdx) =>
+    `fadeIn ${duration}ms ease-out ${delay * (memberIdx + 1)}ms backwards`;
+
   return (
     <Box>
       <div className={classes.root}>
@@ -75,7 +83,11 @@ export default function FoundingMember() {
         </Box>
         <div className={classes.cards}>
           {foundingMembers.map((member, memberIdx) => {
-            return <InfoCard item={member} key={memberIdx} />;
+            return (
+              <div key={memberIdx} style={{ animation: animStr(memberIdx) }}>
+                <InfoCard item={member} />
+              </div>
+            );
           })}
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import QRcode from "qrcode.react";
 import React from "react";
 import uwcssa from "../static/uwcssa_logo.svg";
@@ -10,7 +11,7 @@ export default function QRCode({
   imgSizeRatio = 0.1,
 }) {
   return (
-    <div>
+    <Box sx={{ marginInline: "auto" }}>
       <QRcode
         // renderAs="svg"
         id="qrCode"
@@ -25,6 +26,6 @@ export default function QRCode({
           height: imgSizeRatio * size,
         }}
       />
-    </div>
+    </Box>
   );
 }

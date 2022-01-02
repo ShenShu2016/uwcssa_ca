@@ -8,13 +8,15 @@ import {
   IconButton,
   Skeleton,
 } from "@mui/material";
+import React, { useRef } from "react";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import EditIcon from "@mui/icons-material/Edit";
 import LikeButtonGroup from "../../LikeButtonGroup";
 import MUIRichTextEditor from "mui-rte";
 import QrCodeUwinStudent from "./QrCodeUwinStudent";
-import React from "react";
+import { ShareInfoDialog } from "../../ShareInfo";
+import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import SwipeViews from "../../SwipeViews";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonGroup: {
     marginBlock: "2rem",
+    display: "flex",
   },
   swipeViews: {
     width: "100%",
@@ -65,7 +68,10 @@ export default function Main({ article }) {
   const handleEdit = () => {
     history.push(`/staff/article/editArticle/${id}`);
   };
-
+  const shareRef = useRef();
+  const handleShareOpen = () => {
+    shareRef.current.openDialog();
+  };
   return (
     <div className={classes.root}>
       {article.active === true ? (
@@ -126,6 +132,19 @@ export default function Main({ article }) {
           <Divider />
           <Box className={classes.buttonGroup}>
             <LikeButtonGroup item={article} />
+            <Box sx={{ float: "right" }}>
+              <Button
+                variant="text"
+                size="small"
+                endIcon={<ShareRoundedIcon />}
+                aria-label="share"
+                onClick={() => {
+                  handleShareOpen();
+                }}
+              >
+                分享
+              </Button>
+            </Box>
           </Box>
         </Box>
       ) : (
@@ -135,6 +154,7 @@ export default function Main({ article }) {
           <Skeleton variant="rectangular" height={300} />
         </Box>
       )}
+      <ShareInfoDialog title={article.title} ref={shareRef} />
     </div>
   );
 }

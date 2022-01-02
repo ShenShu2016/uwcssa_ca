@@ -61,7 +61,7 @@ export default function DashboardBasicInfo({ userProfile }) {
               src={
                 userProfile.backGroundImgURL
                   ? userProfile.backGroundImgURL
-                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+                  : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/profile_Background.png"
               }
               alt="backGroundImgURL"
               style={{
@@ -94,7 +94,7 @@ export default function DashboardBasicInfo({ userProfile }) {
                   src={
                     userProfile.avatarImgURL
                       ? userProfile.avatarImgURL
-                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user_backGround.png"
+                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
                   }
                   sx={{ width: 150, height: 150, cursor: "pointer" }}
                   className={classes.avatar}

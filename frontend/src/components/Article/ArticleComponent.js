@@ -2,6 +2,7 @@ import {
   Box,
   CardActionArea,
   CardHeader,
+  CardMedia,
   Grid,
   IconButton,
   Paper,
@@ -92,7 +93,14 @@ function ArticleComponent({ article }) {
 
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <Grid item xs>
-                  <div style={{ overflow: "hidden", paddingBottom: "4px" }}>
+                  <Box
+                    sx={{
+                      overflow: "hidden",
+                      paddingBottom: "4px",
+                      maxHeight: "49px",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
                     <Typography
                       variant="subtitle1"
                       style={{
@@ -105,7 +113,7 @@ function ArticleComponent({ article }) {
                     >
                       {title}
                     </Typography>
-                  </div>
+                  </Box>
                 </Grid>
                 <Grid item xs>
                   <Box style={{ maxHeight: "80px", overflow: "hidden" }}>
@@ -146,7 +154,13 @@ function ArticleComponent({ article }) {
             </Grid>
           </Grid>
           <Grid item xs={"auto"}>
-            <Box sx={{ paddingTop: "1rem" }}>
+            <Box
+              sx={{
+                position: "relative",
+                top: "50%",
+                transform: "translate(0, -50%)",
+              }}
+            >
               <CardActionArea component={Link} to={`/article/${id}`}>
                 <img
                   src={
@@ -166,7 +180,20 @@ function ArticleComponent({ article }) {
         url={`article/${id}`}
         title={article.title}
         ref={shareRef}
-      />
+      >
+        {imgURLs &&
+          imgURLs.map((img, idx) => {
+            return (
+              <CardMedia
+                component="img"
+                width="100%"
+                image={img}
+                alt="Paella dish"
+                key={idx}
+              />
+            );
+          })}
+      </ShareInfoDialog>
     </div>
   );
 }
