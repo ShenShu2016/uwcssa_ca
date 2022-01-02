@@ -9,6 +9,7 @@ import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/slice/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
+import "./styles.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,6 +90,13 @@ export default function Event() {
     );
   }, [selectedTopic, sortBy, eventList, events]);
 
+  const delay = 600;
+
+  const duration = 1000;
+
+  const animStr = (idx) =>
+    `fadeIn ${duration}ms ease-out ${delay * (idx + 1)}ms backwards`;
+
   // const currentEvent = filteredEventList.filter(
   //   (d) => new Date(d.startDate) - new Date() >= 0
   // );
@@ -100,7 +108,18 @@ export default function Event() {
   // console.log("pastEvent", pastEvent);
 
   const renderList = filteredEventList.map((event, idx) => {
-    return <EventMain key={idx} event={event} />;
+    return (
+      <Grid
+        item
+        xs={2}
+        sm={4}
+        md={4}
+        key={idx}
+        style={{ animation: animStr(idx), marginBottom: "1rem" }}
+      >
+        <EventMain key={idx} event={event} />
+      </Grid>
+    );
   });
 
   const pastList = events
@@ -110,7 +129,18 @@ export default function Event() {
         new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     )
     .map((event, idx) => {
-      return <PastEvent key={idx} event={event} />;
+      return (
+        <Grid
+          item
+          xs={2}
+          sm={4}
+          md={4}
+          key={idx}
+          style={{ animation: animStr(idx), marginBottom: "1rem" }}
+        >
+          <PastEvent event={event} />
+        </Grid>
+      );
     });
 
   return (
