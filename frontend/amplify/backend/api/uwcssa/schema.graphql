@@ -970,7 +970,7 @@ type Kanban
   @model
   @auth(
     rules: [
-      { allow: owner }
+      # { allow: owner }
       {
         allow: groups
         groups: ["admin", "staff"]

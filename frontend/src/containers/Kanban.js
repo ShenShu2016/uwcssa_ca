@@ -34,7 +34,7 @@ export default function Kanban() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [createOpen, setCreateOpen] = useState(false);
-  const isPermit = usePermit(null, "admin");
+  const isPermit = usePermit(null, "staff");
   const kanbans = useSelector(selectAllKanbans);
 
   const { fetchKanbansStatus } = useSelector((state) => state.kanban);
