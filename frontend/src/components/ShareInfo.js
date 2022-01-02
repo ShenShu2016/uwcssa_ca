@@ -23,7 +23,7 @@ import QRCode from "./QRCode";
 import { Zoom } from "@mui/material";
 
 export const ShareInfoDialog = forwardRef((props, ref) => {
-  const { title, url } = props;
+  const { title, url, children } = props;
   const [open, setOpen] = useState(false);
   const [copy, setCopy] = useState(false);
   const [download, setDownload] = useState(false);
@@ -111,6 +111,31 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
                 <ListItemText primary="点我复制链接!" />
               </ListItem>
             </Tooltip>
+            <Box id="parent3">
+              <Tooltip
+                title={`${
+                  download === false ? "Download QR-Code" : "Downloaded!🥳"
+                }`}
+                placement="top-end"
+                TransitionComponent={Zoom}
+                arrow
+                id="parent3"
+              >
+                <ListItem
+                  button
+                  id="delete3"
+                  onClick={() => {
+                    handleDownload();
+                    setDownload(true);
+                  }}
+                >
+                  <ListItemIcon>
+                    <ContentCopyIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="点我下载二维码!" />
+                </ListItem>
+              </Tooltip>
+            </Box>
           </Box>
           <ListItem sx={{ maxWidth: "270px" }}>
             {title && (
@@ -136,31 +161,7 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
               imgSrc="default"
             />
           </ListItem>
-          <Box id="parent3">
-            <Tooltip
-              title={`${
-                download === false ? "Download QR-Code" : "Downloaded!🥳"
-              }`}
-              placement="top-end"
-              TransitionComponent={Zoom}
-              arrow
-              id="parent3"
-            >
-              <ListItem
-                button
-                id="delete3"
-                onClick={() => {
-                  handleDownload();
-                  setDownload(true);
-                }}
-              >
-                <ListItemIcon>
-                  <ContentCopyIcon />
-                </ListItemIcon>
-                <ListItemText primary="点我下载二维码!" />
-              </ListItem>
-            </Tooltip>
-          </Box>
+          <Box sx={{ maxWidth: "270px" }}>{children}</Box>
         </Stack>
       </Box>
     </Dialog>
