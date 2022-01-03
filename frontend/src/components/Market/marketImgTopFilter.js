@@ -75,6 +75,7 @@ ConfirmationDialogRaw.propTypes = {
 
 export default function MarketImgTopFilter({
   darkTheme,
+  control,
   type,
   trueMarketItems,
   handleClick,
@@ -307,6 +308,7 @@ export default function MarketImgTopFilter({
           <MarketFIlterLocation type="button" />
           <FilterInfo
             darkTheme={darkTheme}
+            control={control}
             form="button"
             type={type}
             filterList={filterList}

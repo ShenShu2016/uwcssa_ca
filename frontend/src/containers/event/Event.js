@@ -1,9 +1,9 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Fade, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import EventMain from "../../components/Event/EventMain";
-// import EventSliderShow from "../components/Event/SliderShow";
+// import EventSliderShow from "../../components/Event/SliderShow";
 import Filter from "../../components/Event/Filter";
 import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/slice/eventSlice";
@@ -90,12 +90,12 @@ export default function Event() {
     );
   }, [selectedTopic, sortBy, eventList, events]);
 
-  const delay = 600;
+  const delay = 500;
 
-  const duration = 1000;
+  const duration = 750;
 
   const animStr = (idx) =>
-    `fadeIn ${duration}ms ease-out ${delay * (idx + 1)}ms backwards`;
+    `glowIn ${duration}ms ease-out ${delay * (idx + 1)}ms backwards`;
 
   // const currentEvent = filteredEventList.filter(
   //   (d) => new Date(d.startDate) - new Date() >= 0
@@ -146,21 +146,23 @@ export default function Event() {
   return (
     <div>
       <Box className={classes.root}>
-        {/* <EventSliderShow /> */}
+        {/* <EventSliderShow events={events} /> */}
         <Box className={classes.list}>
           <Typography variant="h3" className={classes.title}>
             近期活动
           </Typography>
-          <Box className={classes.timeTag}>
-            <Filter
-              handleSort={setSortBy}
-              handleTopicChange={setSelectedTopic}
-              selectedTopic={selectedTopic}
-              // sortBy={sortBy}
-            />
+          <Fade in={true}>
+            <Box className={classes.timeTag}>
+              <Filter
+                handleSort={setSortBy}
+                handleTopicChange={setSelectedTopic}
+                selectedTopic={selectedTopic}
+                // sortBy={sortBy}
+              />
 
-            {/* <h2>活动: {filteredEventList.length}</h2> */}
-          </Box>
+              {/* <h2>活动: {filteredEventList.length}</h2> */}
+            </Box>
+          </Fade>
         </Box>
 
         <div>
@@ -187,6 +189,7 @@ export default function Event() {
           <Typography variant="h3" className={classes.title}>
             往期活动
           </Typography>
+
           <Box className={classes.timeTag}></Box>
         </Box>
 

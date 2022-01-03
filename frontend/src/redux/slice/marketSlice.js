@@ -48,7 +48,6 @@ export const fetchMarketItems = createAsyncThunk(
         },
         authMode: "AWS_IAM",
       });
-
       return MarketItemsData.data.marketItemSortBySortKey.items;
     } catch (error) {
       console.log(error);

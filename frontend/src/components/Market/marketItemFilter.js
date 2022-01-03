@@ -67,7 +67,7 @@ export default function marketItemFilter(marketItems, filterList, type) {
     { clickedTag },
     secondStageFilteredMarketItems
   ) => {
-    if (clickedTag !== "") {
+    if (clickedTag.length !== 0) {
       const temp1 = secondStageFilteredMarketItems.filter(
         (item) => item.tags !== null
       );
