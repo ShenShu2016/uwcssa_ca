@@ -37,7 +37,7 @@ import SeeMore from "./SeeMore";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import TopicIcon from "@mui/icons-material/Topic";
 import { makeStyles } from "@mui/styles";
-import moment from "moment";
+// import moment from "moment";
 //import EditEvent from "./EditEvent";
 import { usePermit } from "../../Hooks/usePermit";
 import { useSelector } from "react-redux";
@@ -168,6 +168,16 @@ export default function EventBody({ event }) {
     //setOpen(true);
     history.push(`/staff/event/editEvent/${id}`);
   };
+  const moment = require("moment-timezone");
+
+  const localStartDate = moment(startDate)
+    .tz("America/New_York")
+    .format("YYYY-MM-DD HH:mm:ss.SSS");
+
+  const localEndDate = moment(endDate)
+    .tz("America/New_York")
+    .format("YYYY-MM-DD HH:mm:ss.SSS");
+
   return (
     <Box>
       {event.startDate ? (
@@ -230,44 +240,47 @@ export default function EventBody({ event }) {
                   flexDirection: "column",
                 }}
               >
-                {moment(startDate).format("YYYY") ===
-                moment(endDate).format("YYYY") ? (
+                {moment(localStartDate).format("YYYY") ===
+                moment(localEndDate).format("YYYY") ? (
                   <Typography variant="h6" color="primary" gutterBottom>
-                    时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
-                    {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
-                    {endDate.slice(11, 16)}
+                    时间：{localStartDate.slice(0, 4)}年
+                    {localStartDate.slice(5, 7)}月{localStartDate.slice(8, 10)}
+                    号 {localStartDate.slice(11, 16)} -{" "}
+                    {localEndDate.slice(5, 7)}月{localEndDate.slice(8, 10)}号{" "}
+                    {localEndDate.slice(11, 16)}
                   </Typography>
                 ) : (
                   <Typography variant="h6" color="primary" gutterBottom>
-                    时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
-                    {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
-                    {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
+                    时间：{localStartDate.slice(0, 4)} 年
+                    {localStartDate.slice(5, 7)}月{localStartDate.slice(8, 10)}
+                    号 {localStartDate.slice(11, 16)} -{" "}
+                    {localEndDate.slice(0, 4)}年{localEndDate.slice(5, 7)}月
+                    {localEndDate.slice(8, 10)}号 {localEndDate.slice(11, 16)}
                   </Typography>
                 )}
                 <Typography component="div" variant="h5" gutterBottom>
                   <b>{title}</b>
                 </Typography>
-                {online === true ? (
+
+                {address ? (
                   <Typography
                     variant="h6"
                     color="text.secondary"
                     component="div"
                     gutterBottom
                   >
-                    地点：线上
+                    地点：{address.description}
                   </Typography>
                 ) : (
                   <div>
-                    {address ? (
+                    {online === true ? (
                       <Typography
                         variant="h6"
                         color="text.secondary"
                         component="div"
                         gutterBottom
                       >
-                        地点：{address.description}
+                        地点：线上
                       </Typography>
                     ) : (
                       <Typography
@@ -313,7 +326,7 @@ export default function EventBody({ event }) {
               {/* 这里有红字，需要改一下 */}
               <Box className={classes.action}>
                 <Stack direction="row" spacing={2}>
-                  {endDate > moment().format() ? (
+                  {localEndDate > moment().format() ? (
                     <div>
                       {userInfo.isAuthenticated ? (
                         <div>

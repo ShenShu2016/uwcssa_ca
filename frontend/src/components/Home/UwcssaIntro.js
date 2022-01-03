@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${cssalogo})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    [theme.breakpoints.between(1660, 1920)]: {
+    [theme.breakpoints.between(1690, 1921)]: {
       height: "800px",
-      backgroundSize: "85% 100%",
+      backgroundSize: "90% 100%",
       backgroundRepeat: "no-repeat",
     },
-    [theme.breakpoints.up(1920)]: {
+    [theme.breakpoints.up(1921)]: {
       height: "800px",
       backgroundSize: "80% 100%",
       backgroundRepeat: "no-repeat",

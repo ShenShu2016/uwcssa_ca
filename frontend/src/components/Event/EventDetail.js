@@ -10,7 +10,7 @@ import {
 } from "../../redux/slice/eventSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ArrowBack } from "./ArrowBack";
+// import { ArrowBack } from "./ArrowBack";
 import { Box } from "@mui/material";
 // import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EventBody from "../Event/EventBody";
@@ -49,7 +49,7 @@ export default function EventDetail() {
             {/* <IconButton component={Link} to="/event">
               <ArrowBackIcon />
             </IconButton> */}
-            <ArrowBack />
+            {/* <ArrowBack /> */}
           </Box>
           <EventBody event={event} />
         </div>
