@@ -158,7 +158,9 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
               imgSrc="default"
             />
           </ListItem>
-          <Box sx={{ maxWidth: "270px" }}>{children}</Box>
+          <Box sx={{ maxWidth: "270px" }} id="children">
+            {children}
+          </Box>
         </Stack>
       </Box>
     </Dialog>
