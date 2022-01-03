@@ -78,22 +78,8 @@ export default function MarketImgTopFilter({
   control,
   type,
   trueMarketItems,
-  handleClick,
+  handleSearch,
   filterList,
-  handleSortKey,
-  handleMin,
-  handleMax,
-  handleCategory,
-  handleCondition,
-  handleVehicleType,
-  handleMinYear,
-  handleMaxYear,
-  handleMake,
-  handleModel,
-  handleMarketRentalSaleRent,
-  handlePropertyType,
-  handleAirConditioningType,
-  handleHeatingType,
   handleReset,
 }) {
   const useStyles = marketItemStyle;
@@ -103,7 +89,6 @@ export default function MarketImgTopFilter({
   const [clickedTags, setClickedTags] = useState([]);
 
   let tags = [];
-  // console.log(trueMarketItems);
 
   trueMarketItems
     .filter((a) => a.tags !== null)
@@ -146,6 +131,7 @@ export default function MarketImgTopFilter({
         >
           Shop by trend
         </Typography>
+        {/* Not Finished Yet */}
         <Stack
           spacing={1}
           direction="row"
@@ -163,7 +149,6 @@ export default function MarketImgTopFilter({
                     setClickedTags((prev) => prev.filter((t) => t !== tag));
                   } else {
                     setClickedTags((prev) => prev.concat(tag));
-                    handleClick(tag);
                   }
                 }}
               />
@@ -286,7 +271,11 @@ export default function MarketImgTopFilter({
                   avatar={<Avatar>{occurrence[tag]}</Avatar>}
                   label={tag}
                   onClick={() => {
-                    handleClick(tag);
+                    if (clickedTags.includes(tag)) {
+                      setClickedTags((prev) => prev.filter((t) => t !== tag));
+                    } else {
+                      setClickedTags((prev) => prev.concat(tag));
+                    }
                   }}
                 />
               </Grid>
@@ -311,22 +300,9 @@ export default function MarketImgTopFilter({
             control={control}
             form="button"
             type={type}
+            handleSearch={handleSearch}
             filterList={filterList}
-            handleSortKey={handleSortKey}
-            handleMin={handleMin}
-            handleMax={handleMax}
-            handleCategory={handleCategory}
-            handleCondition={handleCondition}
             handleReset={handleReset}
-            handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-            handlePropertyType={handlePropertyType}
-            handleAirConditioningType={handleAirConditioningType}
-            handleHeatingType={handleHeatingType}
-            handleVehicleType={handleVehicleType}
-            handleMinYear={handleMinYear}
-            handleMaxYear={handleMaxYear}
-            handleMake={handleMake}
-            handleModel={handleModel}
           />
         </Stack>
       </Paper>

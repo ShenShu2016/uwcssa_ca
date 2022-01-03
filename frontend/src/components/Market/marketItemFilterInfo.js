@@ -36,28 +36,7 @@ import { marketVehicleOptions } from "./marketVehicleOptions";
 import { sortOptions } from "./marketItemFilter";
 
 const FilterContent = (props) => {
-  const {
-    darkTheme,
-    type,
-    filterList,
-    control,
-    handleSearch,
-    // handleSortKey,
-    // handleMin,
-    // handleMax,
-    handleVehicleType,
-    handleMinYear,
-    handleMaxYear,
-    handleMake,
-    handleModel,
-    // handleCategory,
-    // handleCondition,
-    handleMarketRentalSaleRent,
-    handlePropertyType,
-    handleAirConditioningType,
-    handleHeatingType,
-    handleReset,
-  } = props;
+  const { darkTheme, type, control, handleSearch, handleReset } = props;
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   const { marketVehicleTypeList } = marketVehicleOptions;
   const { marketRentalSaleRent, propertyType, airConditionType, heatingType } =
@@ -88,11 +67,7 @@ const FilterContent = (props) => {
             </Button>
           </Box>
 
-          <Button
-            variant="outlined"
-            onClick={handleReset}
-            // sx={{ right: 0, position: "absolute" }}
-          >
+          <Button variant="outlined" onClick={handleReset}>
             重置
           </Button>
         </Stack>
@@ -207,11 +182,17 @@ const FilterContent = (props) => {
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             车型
           </Typography>
-          <MarketForm
-            title="Vehicle Type"
-            value={filterList.vehicleType}
-            options={marketVehicleTypeList}
-            onChange={(e) => handleVehicleType(e)}
+          <Controller
+            name="vehicleType"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <MarketForm
+                title="Vehicle Type"
+                value={value}
+                options={marketVehicleTypeList}
+                onChange={(e) => onChange(e)}
+              />
+            )}
           />
           <Typography
             marginTop="1rem"
@@ -221,38 +202,57 @@ const FilterContent = (props) => {
           >
             年份
           </Typography>
+
           <Stack direction="row" spacing={2} mb="1rem">
-            <TextField
-              sx={{ maxWidth: "100%" }}
-              label="Min Year"
-              variant="outlined"
-              type="number"
-              helperText="eg. 2012"
-              value={filterList.minYear}
-              className={classes.titleInput}
-              onChange={(e) => handleMinYear(e)}
+            <Controller
+              name="minYear"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  sx={{ maxWidth: "100%" }}
+                  label="Min Year"
+                  variant="outlined"
+                  type="number"
+                  helperText="eg. 2012"
+                  value={value}
+                  className={classes.titleInput}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
-            <TextField
-              sx={{ maxWidth: "100%" }}
-              label="Max Year"
-              variant="outlined"
-              type="number"
-              helperText="eg. 2021"
-              value={filterList.maxYear}
-              className={classes.titleInput}
-              onChange={(e) => handleMaxYear(e)}
+            <Controller
+              name="maxYear"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  sx={{ maxWidth: "100%" }}
+                  label="Max Year"
+                  variant="outlined"
+                  type="number"
+                  helperText="eg. 2021"
+                  value={value}
+                  className={classes.titleInput}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Stack>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             品牌
           </Typography>
           <Box mb="1rem">
-            <MarketForm
-              title="Make"
-              disabled={true}
-              value={filterList.vehicleType} // Need to generate corresponding list
-              options={marketVehicleTypeList} //
-              onChange={(e) => handleMake(e)}
+            <Controller
+              name="make"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Make"
+                  disabled={true}
+                  value={value} // Need to generate corresponding list
+                  options={marketVehicleTypeList} //
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
 
@@ -260,12 +260,18 @@ const FilterContent = (props) => {
             型号
           </Typography>
           <Box mb="1rem">
-            <MarketForm
-              title="Model"
-              disabled={true}
-              value={filterList.vehicleType} // Need to generate corresponding list
-              options={marketVehicleTypeList} //
-              onChange={(e) => handleModel(e)}
+            <Controller
+              name="model"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Model"
+                  disabled={true}
+                  value={value} // Need to generate corresponding list
+                  options={marketVehicleTypeList} //
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
         </React.Fragment>
@@ -276,23 +282,34 @@ const FilterContent = (props) => {
             出租/出售
           </Typography>
           <Box mb="1rem">
-            <MarketForm
-              title="Home for Rent or Sale"
-              value={filterList.marketRentalSaleRent}
-              options={marketRentalSaleRent}
-              onChange={(e) => handleMarketRentalSaleRent(e)}
+            <Controller
+              name="marketRentalSaleRent"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Home for Rent or Sale"
+                  value={value}
+                  options={marketRentalSaleRent}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             房源类别
           </Typography>
           <Box mb="1rem">
-            {" "}
-            <MarketForm
-              title="Property Type"
-              value={filterList.propertyType}
-              options={propertyType}
-              onChange={(e) => handlePropertyType(e)}
+            <Controller
+              name="propertyType"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Property Type"
+                  value={value}
+                  options={propertyType}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
 
@@ -300,11 +317,17 @@ const FilterContent = (props) => {
             空调
           </Typography>
           <Box mb="1rem">
-            <MarketForm
-              title="AC Type"
-              value={filterList.airConditioningType}
-              options={airConditionType}
-              onChange={(e) => handleAirConditioningType(e)}
+            <Controller
+              name="airConditioningType"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="AC Type"
+                  value={value}
+                  options={airConditionType}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
 
@@ -312,11 +335,17 @@ const FilterContent = (props) => {
             供暖
           </Typography>
           <Box mb="1rem">
-            <MarketForm
-              title="Heating Type"
-              value={filterList.heatingType}
-              options={heatingType}
-              onChange={(e) => handleHeatingType(e)}
+            <Controller
+              name="heatingType"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <MarketForm
+                  title="Heating Type"
+                  value={value}
+                  options={heatingType}
+                  onChange={(e) => onChange(e)}
+                />
+              )}
             />
           </Box>
         </React.Fragment>
@@ -341,20 +370,6 @@ function ConfirmationDialogRaw(props) {
     control,
     filterList,
     handleSearch,
-    handleSortKey,
-    handleMin,
-    handleMax,
-    handleVehicleType,
-    handleMinYear,
-    handleMaxYear,
-    handleMake,
-    handleModel,
-    handleCategory,
-    handleCondition,
-    handleMarketRentalSaleRent,
-    handlePropertyType,
-    handleAirConditioningType,
-    handleHeatingType,
     handleReset,
     ...other
   } = props;
@@ -372,7 +387,6 @@ function ConfirmationDialogRaw(props) {
       sx={{ "& .MuiDialog-paper": { width: "100%", maxHeight: 600 } }}
       maxWidth="xs"
       onClose={() => onClose()}
-      // TransitionProps={{ onEntering: handleEntering }}
       open={open}
       {...other}
     >
@@ -384,20 +398,6 @@ function ConfirmationDialogRaw(props) {
           control={control}
           filterList={filterList}
           handleSearch={handleSearch}
-          handleMinYear={handleMinYear}
-          handleMaxYear={handleMaxYear}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleCategory={handleCategory}
-          handleVehicleType={handleVehicleType}
-          handleMake={handleMake}
-          handleModel={handleModel}
-          handleCondition={handleCondition}
-          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-          handlePropertyType={handlePropertyType}
-          handleAirConditioningType={handleAirConditioningType}
-          handleHeatingType={handleHeatingType}
           handleReset={handleReset}
         />
       </DialogContent>
@@ -424,21 +424,7 @@ export default function FilterInfo({
   form = "plain",
   filterList,
   handleSearch,
-  handleSortKey,
-  handleMin,
-  handleMax,
-  handleVehicleType,
-  handleMinYear,
-  handleMaxYear,
-  handleMake,
-  handleModel,
-  handleCategory,
-  handleCondition,
   handleReset,
-  handleMarketRentalSaleRent,
-  handlePropertyType,
-  handleAirConditioningType,
-  handleHeatingType,
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
@@ -589,20 +575,6 @@ export default function FilterInfo({
               control={control}
               filterList={filterList}
               handleSearch={handleSearch}
-              handleMinYear={handleMinYear}
-              handleMaxYear={handleMaxYear}
-              handleSortKey={handleSortKey}
-              handleMin={handleMin}
-              handleMax={handleMax}
-              handleCategory={handleCategory}
-              handleVehicleType={handleVehicleType}
-              handleMake={handleMake}
-              handleModel={handleModel}
-              handleCondition={handleCondition}
-              handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-              handlePropertyType={handlePropertyType}
-              handleAirConditioningType={handleAirConditioningType}
-              handleHeatingType={handleHeatingType}
               handleReset={handleReset}
             />
           </Box>
@@ -641,20 +613,6 @@ export default function FilterInfo({
           type={type}
           filterList={filterList}
           handleSearch={handleSearch}
-          handleMinYear={handleMinYear}
-          handleMaxYear={handleMaxYear}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleCategory={handleCategory}
-          handleVehicleType={handleVehicleType}
-          handleMake={handleMake}
-          handleModel={handleModel}
-          handleCondition={handleCondition}
-          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-          handlePropertyType={handlePropertyType}
-          handleAirConditioningType={handleAirConditioningType}
-          handleHeatingType={handleHeatingType}
           handleReset={handleReset}
         />
       </React.Fragment>

@@ -17,32 +17,31 @@ export default function MarketItem() {
   const useStyles = marketItemStyle;
   useTitle("Item");
   const classes = useStyles();
+
   const [filterList, setFilterList] = useState({
-    type: "item",
+    type: "Item",
     sortKey: "original",
     min: "",
     max: "",
     category: "",
     condition: "",
-    clickedTag: [],
   });
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
-      type: "item",
+      type: "Item",
       sortKey: "original",
       min: "",
       max: "",
       category: "",
       condition: "",
-      clickedTag: [],
     },
   });
 
   const handleSearch = handleSubmit((data) => {
     setFilterList(data);
   });
-  console.log(filterList);
+
   const isFiltering = useMarketItemFilter(filterList);
   const { darkTheme } = useSelector((state) => state.general);
   const filteredItems = useSelector(selectAllMarketItems);
@@ -62,40 +61,17 @@ export default function MarketItem() {
       );
     });
 
-  // const handleSortKey = (e) => {
-  //   setFilterList({ ...filterList, sortKey: e.target.value });
-  // };
-  // const handleMax = (e) => {
-  //   setFilterList({ ...filterList, max: e.target.value });
-  // };
-  // const handleMin = (e) => {
-  //   setFilterList({ ...filterList, min: e.target.value });
-  // };
-  // const handleCategory = (e) => {
-  //   setFilterList({ ...filterList, category: e.target.value });
-  // };
-  // const handleCondition = (e) => {
-  //   setFilterList({ ...filterList, condition: e.target.value });
-  // };
-  // const handleClick = (tag) => {
-  //   const { clickedTag } = { ...filterList };
-  //   const newTags = clickedTag.includes(tag)
-  //     ? clickedTag.filter((t) => t !== tag)
-  //     : clickedTag.concat(tag);
-  //   setFilterList({ ...filterList, clickedTag: newTags });
-  // };
-
   const handleReset = () => {
     reset({
-      type: "item",
+      type: "Item",
       sortKey: "original",
       min: "",
       max: "",
       category: "",
       condition: "",
-      clickedTag: [],
     });
   };
+
   return (
     <Box className={classes.root}>
       <Stack
@@ -109,11 +85,6 @@ export default function MarketItem() {
           filterList={filterList}
           control={control}
           handleSearch={handleSearch}
-          // handleSortKey={handleSortKey}
-          // handleMin={handleMin}
-          // handleMax={handleMax}
-          // handleCategory={handleCategory}
-          // handleCondition={handleCondition}
           handleReset={handleReset}
         />
         <Box className={classes.img}>
@@ -124,18 +95,12 @@ export default function MarketItem() {
             trueMarketItems={filteredItems}
             filterList={filterList}
             handleSearch={handleSearch}
-            // handleClick={handleClick}
-            // handleSortKey={handleSortKey}
-            // handleMin={handleMin}
-            // handleMax={handleMax}
-            // handleCategory={handleCategory}
-            // handleCondition={handleCondition}
             handleReset={handleReset}
           />
           <Box className={classes.items}>
             {isFiltering && (
-              <Box width="100%" margin="0.5rem" color="black" fontSize="14px">
-                is filtering...
+              <Box width="100%" margin="0.5rem" color="#6c6c6c" fontSize="14px">
+                Found {filteredItems.length} related results...
               </Box>
             )}
             {starter === false ? <BackdropLoading /> : itemRenderList}
