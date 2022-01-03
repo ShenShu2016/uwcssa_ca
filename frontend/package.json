@@ -21,6 +21,7 @@
     "compressorjs": "^1.1.1",
     "date-fns": "^2.25.0",
     "html2canvas": "^1.3.4",
+    "html2canvas-proxy": "^1.0.1",
     "moment": "^2.29.1",
     "mui-rte": "^2.0.1",
     "qrcode.react": "^1.0.1",

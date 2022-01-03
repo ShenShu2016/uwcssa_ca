@@ -40,8 +40,10 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
     const captureElement = document.querySelector("#qr-code");
     window.scrollTo(0, 0);
     html2canvas(captureElement, {
-      useCORS: true,
+      logging: true,
+      letterRendering: 1,
       allowTaint: true,
+      useCORS: true,
       height: window.outerHeight + window.innerHeight,
       windowHeight: window.outerHeight + window.innerHeight,
       ignoreElements: (element) => {
