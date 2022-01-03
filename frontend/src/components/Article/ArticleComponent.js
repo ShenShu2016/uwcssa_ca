@@ -185,9 +185,10 @@ function ArticleComponent({ article }) {
           imgURLs.map((img, idx) => {
             return (
               <CardMedia
+                crossOrigin="anonymous"
                 component="img"
                 width="100%"
-                image={img}
+                image={img + "?" + new Date().getTime()}
                 alt="Paella dish"
                 key={idx}
               />
