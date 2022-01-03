@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import moment from "moment";
+// import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   actionArea: {
@@ -101,6 +101,16 @@ export default function EventMain({ event }) {
     online,
   } = event;
   // const newContent = content.substring(34, content.length - 98);
+
+  const moment = require("moment-timezone");
+
+  const localStartDate = moment(startDate)
+    .tz("America/New_York")
+    .format("YYYY-MM-DD HH:mm:ss.SSS");
+
+  const localEndDate = moment(endDate)
+    .tz("America/New_York")
+    .format("YYYY-MM-DD HH:mm:ss.SSS");
   return (
     // <Grid item xs={2} sm={4} md={4} sx={{ marginBottom: "1rem" }}>
     <CardActionArea
@@ -121,7 +131,8 @@ export default function EventMain({ event }) {
                 : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
             }
           />
-          {startDate > moment().format() && endDate > moment().format() ? (
+          {localStartDate > moment().format() &&
+          localEndDate > moment().format() ? (
             <Box
               sx={{
                 position: "absolute",
@@ -163,8 +174,8 @@ export default function EventMain({ event }) {
               </Typography>
             </Box>
 
-            {moment(startDate).format("YYYY") ===
-            moment(endDate).format("YYYY") ? (
+            {moment(localStartDate).format("YYYY") ===
+            moment(localEndDate).format("YYYY") ? (
               <Box
                 sx={{ overflow: "hidden", height: "30px" }}
                 color={"grey.700"}
@@ -176,10 +187,11 @@ export default function EventMain({ event }) {
                   <CalendarTodayIcon className={classes.locationIcon} />
                   <Grid item xs zeroMinWidth>
                     <Typography variant="subtitle2" noWrap>
-                      {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
-                      {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
-                      {endDate.slice(5, 7)}/{endDate.slice(8, 10)}{" "}
-                      {endDate.slice(11, 16)}
+                      {localStartDate.slice(0, 4)}/{localStartDate.slice(5, 7)}/
+                      {localStartDate.slice(8, 10)}{" "}
+                      {localStartDate.slice(11, 16)} -{" "}
+                      {localEndDate.slice(5, 7)}/{localEndDate.slice(8, 10)}{" "}
+                      {localEndDate.slice(11, 16)}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -196,16 +208,18 @@ export default function EventMain({ event }) {
                   <CalendarTodayIcon className={classes.locationIcon} />
                   <Grid item xs zeroMinWidth>
                     <Typography variant="subtitle2" noWrap>
-                      {startDate.slice(0, 4)}/{startDate.slice(5, 7)}/
-                      {startDate.slice(8, 10)} {startDate.slice(11, 16)} -{" "}
-                      {endDate.slice(0, 4)}/{endDate.slice(5, 7)}/
-                      {endDate.slice(8, 10)} {endDate.slice(11, 16)}
+                      {localStartDate.slice(0, 4)}/{localStartDate.slice(5, 7)}/
+                      {localStartDate.slice(8, 10)}{" "}
+                      {localStartDate.slice(11, 16)} -{" "}
+                      {localEndDate.slice(0, 4)}/{localEndDate.slice(5, 7)}/
+                      {localEndDate.slice(8, 10)} {localEndDate.slice(11, 16)}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
             )}
-            {online === true ? (
+
+            {address ? (
               <Box
                 sx={{ overflow: "hidden", height: "30px" }}
                 color={"grey.700"}
@@ -221,14 +235,14 @@ export default function EventMain({ event }) {
                       color="textSecondary"
                       noWrap
                     >
-                      线上
+                      {address.description}
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
             ) : (
               <div>
-                {address ? (
+                {online === true ? (
                   <Box
                     sx={{ overflow: "hidden", height: "30px" }}
                     color={"grey.700"}
@@ -244,7 +258,7 @@ export default function EventMain({ event }) {
                           color="textSecondary"
                           noWrap
                         >
-                          {address.description}
+                          线上
                         </Typography>
                       </Grid>
                     </Grid>
