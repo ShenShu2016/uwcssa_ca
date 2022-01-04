@@ -3,9 +3,11 @@ import {
   Button,
   Checkbox,
   CircularProgress,
+  Divider,
   FormControl,
   FormControlLabel,
   FormHelperText,
+  FormLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -45,12 +47,12 @@ import { v4 as uuid } from "uuid";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
-    marginBottom: "2rem",
     marginTop: "3rem",
     maxWidth: "960px",
   },
 
   form: {
+    margin: "auto 1rem",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -119,6 +121,17 @@ export default function PostEvent() {
 
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState(null);
+  const [state, setState] = useState({
+    online: false,
+    group: false,
+  });
+
+  const handleChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
+    });
+  };
   const {
     handleSubmit,
     control,
@@ -129,8 +142,6 @@ export default function PostEvent() {
       summary: "",
       startDate: null,
       endDate: null,
-      online: false,
-      group: false,
       content: "",
       topicID: "",
       sponsor: "",
@@ -224,6 +235,8 @@ export default function PostEvent() {
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
       content: content,
+      online: state.online,
+      group: state.group,
       active: true,
       sortKey: "SortKey",
       userID: username,
@@ -264,6 +277,17 @@ export default function PostEvent() {
     const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
     setContent(tempContent);
   };
+
+  const onPosterClear = () => {
+    setPosterImgURL(null);
+  };
+  const onBackgroundImgClear = () => {
+    setBackGroundImgURL(null);
+  };
+  const onQrCodeClear = () => {
+    setQrCodeImgURL(null);
+  };
+
   return (
     <div>
       <Box
@@ -461,7 +485,7 @@ export default function PostEvent() {
               </Stack>
             </LocalizationProvider>
 
-            <Controller
+            {/* <Controller
               name="online"
               control={control}
               rules={{
@@ -479,28 +503,45 @@ export default function PostEvent() {
                   label="online"
                 />
               )}
-            />
-
-            <Controller
-              name="group"
-              control={control}
-              rules={{
-                required: false,
-              }}
-              render={({ field: { onChange, checked } }) => (
+            /> */}
+            <div style={{ margin: "1rem  0.5rem" }}>
+              <FormLabel component="legend">Online Event?</FormLabel>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography>No</Typography>
                 <FormControlLabel
                   control={
                     <Switch
-                      checked={checked}
-                      onChange={onChange}
+                      checked={state.online}
+                      onChange={handleChange}
+                      name="online"
+                    />
+                  }
+                  label=""
+                />
+                <Typography>Yes</Typography>
+              </Stack>
+            </div>
+
+            {state.online ? null : <GoogleMapsPlace />}
+
+            <div style={{ margin: "0 0.5rem 1rem 0.5rem" }}>
+              <FormLabel component="legend">Group?</FormLabel>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography>No</Typography>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={state.group}
+                      onChange={handleChange}
                       name="group"
                     />
                   }
-                  label="group"
+                  label=""
                 />
-              )}
-            />
-            <GoogleMapsPlace />
+                <Typography>Yes</Typography>
+              </Stack>
+            </div>
+
             {/* <Typography variant="h3">
               {GetAddress().googleMapPlace}45646
             </Typography> */}
@@ -595,7 +636,7 @@ export default function PostEvent() {
               />
             </Box>
             <Box>
-              <div>
+              <div style={{ marginBottom: "1rem" }}>
                 {posterImgURL ? (
                   <Box className={classes.picture}>
                     <img
@@ -659,8 +700,30 @@ export default function PostEvent() {
                     />
                   )}
                 </label>
+                <Button
+                  onClick={onPosterClear}
+                  variant="outlined"
+                  color="error"
+                  sx={{ margin: " 0 1rem" }}
+                >
+                  清除活动海报
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </Button>
               </div>
-              <div>
+              <Divider />
+              <div style={{ marginBottom: "1rem" }}>
                 {backGroundImgURL ? (
                   <Box className={classes.picture}>
                     <img
@@ -726,9 +789,30 @@ export default function PostEvent() {
                     />
                   )}
                 </label>
+                <Button
+                  onClick={onBackgroundImgClear}
+                  variant="outlined"
+                  color="error"
+                  sx={{ margin: "0 1rem" }}
+                >
+                  清除背景图片
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </Button>
               </div>
-
-              <div>
+              <Divider />
+              <div style={{ marginBottom: "1rem" }}>
                 {qrCodeImgURL ? (
                   <Box className={classes.picture}>
                     <img
@@ -793,9 +877,30 @@ export default function PostEvent() {
                     />
                   )}
                 </label>
+                <Button
+                  onClick={onQrCodeClear}
+                  variant="outlined"
+                  color="error"
+                  sx={{ margin: "0 1rem" }}
+                >
+                  清除活动QR
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-0.75rem",
+                        marginLeft: "-0.75rem",
+                      }}
+                    />
+                  )}
+                </Button>
               </div>
             </Box>
-
+            <Divider />
             <Button
               variant="contained"
               type="submit"
