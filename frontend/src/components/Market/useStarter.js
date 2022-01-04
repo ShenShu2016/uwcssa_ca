@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useHistory } from "react-router";
 
-function useStarter(marketItem, mode = "all", isFiltering) {
+function useStarter(marketItem, mode = "all", isFiltering = false) {
   const history = useHistory();
   const [starter, setStarter] = useState(false);
   useEffect(() => {
@@ -54,11 +54,9 @@ function useStarter(marketItem, mode = "all", isFiltering) {
           } else {
             setStarter(true);
           }
+        } else if (marketItem.description === "not-found") {
+          history.push("/not-found");
         }
-      }
-
-      if (marketItem.description === "not-found") {
-        history.push("/not-found");
       }
     }
   }, [marketItem, history, mode, isFiltering]);
