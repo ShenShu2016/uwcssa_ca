@@ -163,6 +163,8 @@ export default function EventBody({ event }) {
     online,
   } = event;
 
+  // console.log(online);
+
   const isPermit = usePermit(owner, "admin");
   const handleClickOpen = () => {
     //setOpen(true);
@@ -262,25 +264,25 @@ export default function EventBody({ event }) {
                   <b>{title}</b>
                 </Typography>
 
-                {address ? (
+                {online === true ? (
                   <Typography
                     variant="h6"
                     color="text.secondary"
                     component="div"
                     gutterBottom
                   >
-                    地点：{address.description}
+                    地点：线上
                   </Typography>
                 ) : (
                   <div>
-                    {online === true ? (
+                    {address ? (
                       <Typography
                         variant="h6"
                         color="text.secondary"
                         component="div"
                         gutterBottom
                       >
-                        地点：线上
+                        地点：{address.description}
                       </Typography>
                     ) : (
                       <Typography

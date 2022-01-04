@@ -111,6 +111,7 @@ export default function EventMain({ event }) {
   const localEndDate = moment(endDate)
     .tz("America/New_York")
     .format("YYYY-MM-DD HH:mm:ss.SSS");
+
   return (
     // <Grid item xs={2} sm={4} md={4} sx={{ marginBottom: "1rem" }}>
     <CardActionArea
@@ -131,30 +132,24 @@ export default function EventMain({ event }) {
                 : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
             }
           />
-          {localStartDate > moment().format() &&
-          localEndDate > moment().format() ? (
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-              }}
-            >
-              <EventTag label={"ComingSoon"} />
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-              }}
-            >
-              <EventTag label={"InProgress"} />
-            </Box>
-          )}
+
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+            }}
+          >
+            <EventTag
+              label={
+                moment().isBetween(localStartDate, localEndDate)
+                  ? "InProgress"
+                  : "ComingSoon"
+              }
+            />
+          </Box>
+
           <CardContent>
             <Box
               style={{
@@ -219,7 +214,7 @@ export default function EventMain({ event }) {
               </Box>
             )}
 
-            {address ? (
+            {online === true ? (
               <Box
                 sx={{ overflow: "hidden", height: "30px" }}
                 color={"grey.700"}
@@ -235,14 +230,14 @@ export default function EventMain({ event }) {
                       color="textSecondary"
                       noWrap
                     >
-                      {address.description}
+                      线上
                     </Typography>
                   </Grid>
                 </Grid>
               </Box>
             ) : (
               <div>
-                {online === true ? (
+                {address ? (
                   <Box
                     sx={{ overflow: "hidden", height: "30px" }}
                     color={"grey.700"}
@@ -258,7 +253,7 @@ export default function EventMain({ event }) {
                           color="textSecondary"
                           noWrap
                         >
-                          线上
+                          {address.description}
                         </Typography>
                       </Grid>
                     </Grid>

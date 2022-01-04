@@ -2,9 +2,11 @@ import {
   Box,
   CircularProgress,
   Container,
+  Divider,
   FormControl,
   FormControlLabel,
   FormHelperText,
+  FormLabel,
   InputLabel,
   LinearProgress,
   MenuItem,
@@ -50,6 +52,8 @@ import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../redux/slice/generalSlice";
 import { styled } from "@mui/material/styles";
 import { useTitle } from "../../Hooks/useTitle";
+import { v4 as uuid } from "uuid";
+import { postAddress } from "../../redux/slice/addressSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -138,6 +142,17 @@ export default function EditEvent() {
   const [updatedContent, setUpdatedContent] = useState();
   const [loading, setLoading] = useState(false);
   const timer = useRef();
+  const [state, setState] = useState({
+    online: event.online,
+    group: event.group,
+  });
+
+  const handleChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
+    });
+  };
 
   const {
     handleSubmit,
@@ -192,15 +207,52 @@ export default function EditEvent() {
 
   const onSubmit = async (data) => {
     setLoading(true);
+
     const address = await GetAddress();
+    const addressID = uuid();
+    const itemID = uuid();
+    if (address) {
+      const {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+      } = address;
+      const createAddressInput = {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+        itemID: itemID,
+        userID: username,
+        id: addressID,
+      };
+      console.log(createAddressInput);
+      const addressResponse = await dispatch(
+        postAddress({ createAddressInput })
+      );
+      console.log(addressResponse);
+    }
     const updateEventInput = {
       ...data,
       id: event.id,
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
-      address: address,
+      addressID: address && addressID,
       content: updatedContent,
+      online: state.online,
+      group: state.group,
       active: true,
       userID: username,
       tags: GetTags(),
@@ -242,6 +294,16 @@ export default function EditEvent() {
   const handleOnChange = (prop) => (event) => {
     const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
     setUpdatedContent(tempContent);
+  };
+
+  const onPosterClear = () => {
+    setPosterImgURL(null);
+  };
+  const onBackgroundImgClear = () => {
+    setBackGroundImgURL(null);
+  };
+  const onQrCodeClear = () => {
+    setQrCodeImgURL(null);
   };
 
   return (
@@ -417,7 +479,7 @@ export default function EditEvent() {
                   />
                 </Stack>
               </LocalizationProvider>
-              <Controller
+              {/* <Controller
                 name="online"
                 control={control}
                 rules={{
@@ -455,8 +517,44 @@ export default function EditEvent() {
                     label="group"
                   />
                 )}
-              />
-              <GoogleMapsPlace />
+              /> */}
+              <div style={{ margin: "1rem 0.5rem" }}>
+                <FormLabel component="legend">Online Event?</FormLabel>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography>No</Typography>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={state.online}
+                        onChange={handleChange}
+                        name="online"
+                      />
+                    }
+                    label=""
+                  />
+                  <Typography>Yes</Typography>
+                </Stack>
+              </div>
+              {state.online ? null : <GoogleMapsPlace />}
+
+              <div style={{ margin: "0 0.5rem 1rem 0.5rem" }}>
+                <FormLabel component="legend">Group?</FormLabel>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography>No</Typography>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={state.group}
+                        onChange={handleChange}
+                        name="group"
+                      />
+                    }
+                    label=""
+                  />
+                  <Typography>Yes</Typography>
+                </Stack>
+              </div>
+
               <Box className={classes.type}>
                 <div className="newType">
                   <Controller
@@ -528,7 +626,7 @@ export default function EditEvent() {
                 />
               </Box>
               <Box>
-                <div>
+                <div style={{ marginBottom: "1rem" }}>
                   {posterImgURL ? (
                     <Box className={classes.picture}>
                       <img
@@ -592,8 +690,29 @@ export default function EditEvent() {
                       />
                     )}
                   </label>
+                  <Button
+                    onClick={onPosterClear}
+                    variant="outlined"
+                    color="error"
+                    sx={{ margin: " 0 1rem" }}
+                  >
+                    清除活动海报
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
                 </div>
-                <div>
+                <div style={{ marginBottom: "1rem" }}>
                   {backGroundImgURL ? (
                     <Box className={classes.picture}>
                       <img
@@ -659,9 +778,30 @@ export default function EditEvent() {
                       />
                     )}
                   </label>
+                  <Button
+                    onClick={onBackgroundImgClear}
+                    variant="outlined"
+                    color="error"
+                    sx={{ margin: "0 1rem" }}
+                  >
+                    清除背景图片
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
                 </div>
-
-                <div>
+                <Divider />
+                <div style={{ marginBottom: "1rem" }}>
                   {qrCodeImgURL ? (
                     <Box className={classes.picture}>
                       <img
@@ -725,8 +865,30 @@ export default function EditEvent() {
                       />
                     )}
                   </label>
+                  <Button
+                    onClick={onQrCodeClear}
+                    variant="outlined"
+                    color="error"
+                    sx={{ margin: "0 1rem" }}
+                  >
+                    清除活动QR
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: green[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-0.75rem",
+                          marginLeft: "-0.75rem",
+                        }}
+                      />
+                    )}
+                  </Button>
                 </div>
               </Box>
+              <Divider />
               <Button
                 variant="contained"
                 type="submit"
