@@ -155,7 +155,6 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
               bgColor="white"
               fgColor="black"
               imgSizeRatio={0.2}
-              imgSrc="default"
             />
           </ListItem>
           <Box sx={{ maxWidth: "270px" }} id="children">
