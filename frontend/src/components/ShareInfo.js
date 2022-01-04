@@ -1,15 +1,16 @@
 import * as html2canvas from "html2canvas";
 
 import {
+  Backdrop,
   Box,
+  Button,
+  CircularProgress,
   Dialog,
   DialogTitle,
   Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Stack,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import React, {
   forwardRef,
@@ -19,6 +20,7 @@ import React, {
 } from "react";
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import QRCode from "./QRCode";
 import { Zoom } from "@mui/material";
 
@@ -27,6 +29,7 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const [copy, setCopy] = useState(false);
   const [download, setDownload] = useState(false);
+  const [loading, setLoading] = useState(false); //logging state
   const innerRef = useRef();
   const handleCLose = () => {
     setOpen(false);
@@ -37,15 +40,18 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
   }));
   const handleDownload = (e) => {
     e.preventDefault();
-    const captureElement = document.querySelector("#qr-code");
+    setLoading(true);
+    const captureElement = document.querySelector("#ShareImg");
     window.scrollTo(0, 0);
+    //console.log(captureElement.offsetHeight);
+
     html2canvas(captureElement, {
       logging: true,
       letterRendering: 1,
       allowTaint: true,
       useCORS: true,
-      height: window.outerHeight + window.innerHeight,
-      windowHeight: window.outerHeight + window.innerHeight,
+      // height: window.outerHeight + window.innerHeight,
+      // windowHeight: window.outerHeight + window.innerHeight,
       ignoreElements: (element) => {
         if (
           element.id === "delete1" ||
@@ -62,6 +68,10 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
         return canvas;
       })
       .then((canvas) => {
+        const d = canvas.toDataURL("image/png");
+        const w = window.open("about:blank", "image from canvas");
+        w.document.write("<h1>如果没有下载成功 请长按保存以下图片</h1>");
+        w.document.write("<img src='" + d + "' alt='from canvas'/>");
         const image = canvas
           .toDataURL("image/png")
           .replace("image/png", "image/octet-stream");
@@ -70,32 +80,25 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
         a.setAttribute("href", image);
         a.click();
         canvas.remove();
+        setLoading(false);
       });
   };
 
   return (
-    <Dialog open={open} ref={innerRef} onClose={handleCLose} id="qr-code">
-      <Box>
+    <Dialog open={open} ref={innerRef} onClose={handleCLose}>
+      <Box id="ShareImg">
         <DialogTitle>分享</DialogTitle>
         <Divider />
-        <Stack sx={{ px: 5, pt: 2, pb: 5 }}>
-          <ListItemText
-            id="delete1"
-            primary="复制链接/截图分享二维码"
-            primaryTypographyProps={{
-              fontSize: "12px",
-              fontWeight: "light",
-            }}
-            inset={true}
-          />
+        <Stack sx={{ px: 2, pt: 2, pb: 2 }} spacing={2}>
           <Tooltip
             title={`${copy === false ? "Copy Link" : "Copied!🥳"}`}
             placement="top-end"
             TransitionComponent={Zoom}
             arrow
           >
-            <ListItem
-              button
+            <Button
+              variant="contained"
+              startIcon={<ContentCopyIcon />}
               id="delete2"
               onClick={() => {
                 navigator.clipboard.writeText(
@@ -106,11 +109,8 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
                 setCopy(true);
               }}
             >
-              <ListItemIcon>
-                <ContentCopyIcon />
-              </ListItemIcon>
-              <ListItemText primary="点我复制链接!" />
-            </ListItem>
+              点我复制链接
+            </Button>
           </Tooltip>
           <Tooltip
             title={`${
@@ -120,35 +120,31 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
             TransitionComponent={Zoom}
             arrow
           >
-            <ListItem
-              button
+            <Button
+              variant="contained"
+              startIcon={<DownloadRoundedIcon />}
               id="delete3"
               onClick={(e) => {
                 handleDownload(e);
                 setDownload(true);
               }}
             >
-              <ListItemIcon>
-                <ContentCopyIcon />
-              </ListItemIcon>
-              <ListItemText primary="点我下载二维码!" />
-            </ListItem>
+              点我下载分享图片
+            </Button>
           </Tooltip>
-          <ListItem sx={{ maxWidth: "270px" }}>
+          <Box sx={{ maxWidth: "330px" }}>
             {title && (
-              <ListItemText
-                primary={title}
-                primaryTypographyProps={{
-                  // fontSize: "12px",
-                  fontWeight: "700",
-                  textAlign: "center",
-                }}
-              />
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: "700", textAlign: "center" }}
+              >
+                {title}
+              </Typography>
             )}
-          </ListItem>
-          <ListItem>
+          </Box>
+          <Box sx={{ width: "100%", textAlign: "center" }}>
             <QRCode
-              size={200}
+              size={270}
               url={
                 url ? `${window.location.origin}/${url}` : window.location.href
               }
@@ -156,12 +152,18 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
               fgColor="black"
               imgSizeRatio={0.2}
             />
-          </ListItem>
-          <Box sx={{ maxWidth: "270px" }} id="children">
+          </Box>
+          <Box sx={{ maxWidth: "330px" }} id="children">
             {children}
           </Box>
         </Stack>
       </Box>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Dialog>
   );
 });
