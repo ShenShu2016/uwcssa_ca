@@ -61,7 +61,7 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 // console.log("autocompleteService", autocompleteService);
-export default function GoogleMaps({ ...rest }) {
+export default function GoogleMaps({ label="添加地址",...rest }) {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
   // const [apartmentNumbers, setApartmentNumbers] = useState("");
@@ -180,7 +180,7 @@ export default function GoogleMaps({ ...rest }) {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
-        renderInput={(params) => <TextField {...params} label="添加地址" />}
+        renderInput={(params) => <TextField {...params} label={label}  />}
         renderOption={(props, option) => {
           const matches =
             option.structured_formatting.main_text_matched_substrings;

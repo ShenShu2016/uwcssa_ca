@@ -21,7 +21,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 
 const MarketSideBar = ({
-  setAddressInfo,
+  // setAddressInfo,
   setSearchRadius,
   clickHandler,
   darkTheme,
@@ -113,7 +113,7 @@ const MarketSideBar = ({
             位置
           </Typography>
           <MarketFIlterLocation
-            setAddressInfo={setAddressInfo}
+            // setAddressInfo={setAddressInfo}
             setSearchRadius={setSearchRadius}
           />
         </Box>
