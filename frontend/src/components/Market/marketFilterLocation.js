@@ -9,52 +9,48 @@ import {
   List,
   ListItem,
   ListItemText,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import GoogleMaps, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import React, { useState } from "react";
 
-import GoogleMap from "../GoogleMap/GoogleMap";
+import GoogleMaps from "../GoogleMap/GoogleMapsPlace";
+// import GoogleMap from "../GoogleMap/GoogleMap";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import PropTypes from "prop-types";
-import { styled } from "@mui/material/styles";
+
+// import { styled } from "@mui/material/styles";
 
 function ConfirmationDialogRaw(props) {
   const {
     onClose,
     value: valueProp,
     open,
-    setAddressInfo,
+    // setAddressInfo,
     setSearchRadius,
     ...other
   } = props;
   const [newLocationRadius, setNewLocationRadius] = useState(5);
-  const windsor = [42.2732, -83.0014];
-
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    height: "250px",
-    backgroundColor: "#787878",
-    marginBottom: "1rem",
-  }));
+  // const Item = styled(Paper)(({ theme }) => ({
+  //   ...theme.typography.body2,
+  //   padding: theme.spacing(1),
+  //   textAlign: "center",
+  //   color: theme.palette.text.secondary,
+  //   height: "250px",
+  //   backgroundColor: "#787878",
+  //   marginBottom: "1rem",
+  // }));
 
   const handleCancel = () => {
     onClose();
   };
 
-  const handleOk = async () => {
-    const address = await GetAddress();
-    setAddressInfo(address);
+  const handleOk = () => {
+    // const windsor = { lat: 42.2732, lng: -83.0014 };
+    // setAddressInfo(windsor);
     setSearchRadius(newLocationRadius);
-    if (address !== undefined) {
-      onClose(`${address.description} within ${newLocationRadius}km`);
-    }
+    onClose(`距离温莎大学 ${newLocationRadius}km`);
   };
 
   const handleRadiusChange = (e) => {
@@ -77,9 +73,9 @@ function ConfirmationDialogRaw(props) {
       <DialogTitle>位置</DialogTitle>
       <DialogContent dividers>
         <Box sx={{ marginBottom: "1rem" }}>
-          <Typography variant="caption">根据地址，邮编搜索</Typography>
+          <Typography variant="caption">以温莎大学为中心</Typography>
         </Box>
-        <GoogleMaps />
+        <GoogleMaps label="温莎大学" disabled />
         <TextField
           sx={{ marginBottom: "1rem" }}
           id="input-with-icon-textfield"
@@ -95,19 +91,19 @@ function ConfirmationDialogRaw(props) {
           onChange={handleRadiusChange}
           variant="outlined"
         />
-        <Item>
+        {/* <Item>
           <GoogleMap
             defaultZoom={11}
             center={windsor}
             circleRadius={newLocationRadius * 1000}
           />
-        </Item>
+        </Item> */}
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
           关闭
         </Button>
-        <Button onClick={handleOk}>确认</Button>
+        <Button onClick={() => handleOk()}>确认</Button>
       </DialogActions>
     </Dialog>
   );
@@ -120,7 +116,7 @@ ConfirmationDialogRaw.propTypes = {
 };
 
 export default function ConfirmationDialog({
-  setAddressInfo,
+  // setAddressInfo,
   setSearchRadius,
   type = "plain",
 }) {
@@ -153,7 +149,7 @@ export default function ConfirmationDialog({
             <ListItemText primary="当前搜索区域" secondary={value} />
           </ListItem>
           <ConfirmationDialogRaw
-            setAddressInfo={setAddressInfo}
+            // setAddressInfo={setAddressInfo}
             setSearchRadius={setSearchRadius}
             id="ringtone-menu"
             keepMounted
@@ -175,7 +171,7 @@ export default function ConfirmationDialog({
           {value}
         </Button>
         <ConfirmationDialogRaw
-          setAddressInfo={setAddressInfo}
+          // setAddressInfo={setAddressInfo}
           setSearchRadius={setSearchRadius}
           id="ringtone-menu"
           keepMounted

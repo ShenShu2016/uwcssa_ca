@@ -27,7 +27,7 @@ export default function MarketList() {
   const dispatch = useDispatch();
   const useStyles = marketItemStyle;
   const classes = useStyles();
-  const [addressInfo, setAddressInfo] = React.useState("");
+  // const [addressInfo, setAddressInfo] = React.useState({});
   const [searchRadius, setSearchRadius] = React.useState(0);
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
@@ -38,30 +38,35 @@ export default function MarketList() {
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
   useEffect(() => {
-    const filter =
-      addressInfo === ""
-        ? dispatch(fetchMarketItems({ query: marketItemSortBySortKey }))
-        : {
-            // {and: {lat: {between: [50, 52]}, lng: {between: [-2, 0]}}}
-            and: {
-              lat: {
-                between: [
-                  addressInfo.lat - searchRadius / 110.574,
-                  addressInfo.lat + searchRadius / 110.574,
-                ],
-              },
-              lng: {
-                between: [
-                  addressInfo.lng -
-                    searchRadius / (111.32 * Math.cos(addressInfo.lat)),
-                  addressInfo.lng +
-                    searchRadius / (111.32 * Math.cos(addressInfo.lat)),
-                ],
-              },
-            },
-          };
-    dispatch(addressFilteredMarketItem({ filter: filter }));
-  }, [dispatch, addressInfo, searchRadius]);
+    const addressInfo = { lat: 42.2732, lng: -83.0014 };
+
+    // console.log("filter:", filter);
+    if (searchRadius === 0) {
+      dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+    } else {
+      const filter = {
+        // and: { lat: { between: [50, 52] }, lng: { between: [-2, 0] } },
+        and: {
+          lat: {
+            between: [
+              addressInfo.lat - searchRadius / 110.574,
+              addressInfo.lat + searchRadius / 110.574,
+            ],
+          },
+          lng: {
+            between: [
+              addressInfo.lng -
+                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+              addressInfo.lng +
+                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+            ],
+          },
+        },
+      };
+      console.log(filter);
+      dispatch(addressFilteredMarketItem({ filter: filter }));
+    }
+  }, [dispatch, searchRadius]);
 
   const clickHandler = () => {
     dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
@@ -87,12 +92,15 @@ export default function MarketList() {
       >
         <MarketSideBar
           darkTheme={darkTheme}
-          setAddressInfo={setAddressInfo}
+          // setAddressInfo={setAddressInfo}
           setSearchRadius={setSearchRadius}
           clickHandler={clickHandler}
         />
         <Box className={classes.img}>
-          <MarketTopBar darkTheme={darkTheme} />
+          <MarketTopBar
+            darkTheme={darkTheme}
+            setSearchRadius={setSearchRadius}
+          />
           <Box className={classes.items}>
             {starter === false ? <BackdropLoading /> : marketItemRenderList}
           </Box>

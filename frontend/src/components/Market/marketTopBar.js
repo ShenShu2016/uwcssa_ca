@@ -140,25 +140,26 @@ CategoryDialog.propTypes = {
 
 export default function MarketTopBar({
   darkTheme,
-  type,
-  trueMarketItems,
-  handleClick,
-  filterList,
-  handleSortKey,
-  handleMin,
-  handleMax,
-  handleCategory,
-  handleCondition,
-  handleVehicleType,
-  handleMinYear,
-  handleMaxYear,
-  handleMake,
-  handleModel,
-  handleMarketRentalSaleRent,
-  handlePropertyType,
-  handleAirConditioningType,
-  handleHeatingType,
-  handleReset,
+  setSearchRadius,
+  // type,
+  // trueMarketItems,
+  // handleClick,
+  // filterList,
+  // handleSortKey,
+  // handleMin,
+  // handleMax,
+  // handleCategory,
+  // handleCondition,
+  // handleVehicleType,
+  // handleMinYear,
+  // handleMaxYear,
+  // handleMake,
+  // handleModel,
+  // handleMarketRentalSaleRent,
+  // handlePropertyType,
+  // handleAirConditioningType,
+  // handleHeatingType,
+  // handleReset,
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
@@ -251,7 +252,10 @@ export default function MarketTopBar({
             onClose={handleClose2}
             value={value}
           />
-          <MarketFIlterLocation type="button" />
+          <MarketFIlterLocation
+            type="button"
+            setSearchRadius={setSearchRadius}
+          />
 
           {/* <FilterInfo
             form="button"
