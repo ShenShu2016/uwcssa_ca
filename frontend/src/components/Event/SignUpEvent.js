@@ -13,6 +13,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import PersonIcon from "@mui/icons-material/Person";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +41,8 @@ export default function EventSignUp() {
   const classes = useStyles();
   const { eventID } = useParams();
   // const { event } = useSelector((state) => state.event.selected); //这种方法不可取，如果人家直接分享了链接的话，你是不是在select里面就没有event了？
+
+  const { group } = useSelector((state) => state.event.selected);
 
   return (
     <Box className={classes.root}>
@@ -71,30 +74,31 @@ export default function EventSignUp() {
               </IconButton>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper>
-              <IconButton
-                style={{
-                  margin: "0 auto",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "200px",
-                  borderRadius: "0",
-                }}
-                size="large"
-                component={Link}
-                to={`/event/${eventID}/eventSignUp/group`}
-                disabled
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <GroupIcon />
-                </Avatar>
-                <Typography gutterBottom variant="h5">
-                  团体
-                </Typography>
-              </IconButton>
-            </Paper>
-          </Grid>
+          {group ? (
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper>
+                <IconButton
+                  style={{
+                    margin: "0 auto",
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "200px",
+                    borderRadius: "0",
+                  }}
+                  size="large"
+                  component={Link}
+                  to={`/event/${eventID}/eventSignUp/group`}
+                >
+                  <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                    <GroupIcon />
+                  </Avatar>
+                  <Typography gutterBottom variant="h5">
+                    团体
+                  </Typography>
+                </IconButton>
+              </Paper>
+            </Grid>
+          ) : null}
         </Grid>
       </Container>
     </Box>

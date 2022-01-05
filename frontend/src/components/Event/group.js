@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
@@ -16,6 +16,11 @@ import { makeStyles } from "@mui/styles";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { v4 as uuid } from "uuid";
+import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
+import { postAddress } from "../../redux/slice/addressSlice";
+import { CircularProgress } from "@mui/material";
+import { green } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -42,41 +47,7 @@ export default function Individual() {
   console.log(useParams, "useParams");
   useTitle(`近期活动-${eventID}-团体报名`);
   console.log("event.id", eventID);
-  // const [eventParticipantData, setEventParticipantData] = useState({
-  //   name: "",
-  //   email: "",
-  //   address: "",
-  //   phone: undefined,
-  //   weChat: "",
-  //   message: "",
-  //   numberOfPeople: "",
-  // });
-  // const uploadEventParticipant = async () => {
-  //   const { name, email, address, phone, weChat, message, numberOfPeople } =
-  //     eventParticipantData;
-
-  //   const createEventParticipantInput = {
-  //     id: `${eventID}-${userAuth.user.username}`,
-  //     name,
-  //     email,
-  //     address,
-  //     phone,
-  //     weChat,
-  //     message,
-  //     numberOfPeople,
-  //     eventParticipantStatus: "ArriveOnTime",
-  //     active: true,
-  //     eventID: eventID,
-  //     userID: userAuth.user.username,
-  //   };
-  //   const response = await dispatch(
-  //     postEventParticipant({ createEventParticipantInput })
-  //   );
-  //   console.log("postEventParticipant", response);
-  //   if (response.meta.requestStatus === "fulfilled") {
-  //     history.push(`/event/${eventID}/eventSignUp/success`);
-  //   }
-  // };
+  const [loading, setLoading] = useState(false);
 
   const timer = useRef();
   const {
@@ -86,9 +57,7 @@ export default function Individual() {
   } = useForm({
     defaultValues: {
       name: "",
-      email: undefined,
-      address: "",
-      phone: undefined,
+      phone: "",
       weChat: "",
       message: "",
       numberOfPeople: "",
@@ -96,27 +65,67 @@ export default function Individual() {
   });
 
   const onSubmit = async (data) => {
+    setLoading(true);
+    const address = await GetAddress();
+    const addressID = uuid();
+    const itemID = `${eventID}-${userAuth.user.username}`;
+    if (address) {
+      const {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+      } = address;
+      const createAddressInput = {
+        description,
+        place_id,
+        reference,
+        terms,
+        types,
+        apartmentNumber,
+        geocodingResult,
+        lat,
+        lng,
+        itemID: itemID,
+        userID: userAuth.user.username,
+        id: addressID,
+      };
+      console.log(createAddressInput);
+      const addressResponse = await dispatch(
+        postAddress({ createAddressInput })
+      );
+      console.log(addressResponse);
+    }
+
     const createEventParticipantInput = {
       ...data,
-      id: `${eventID}-${userAuth.user.username}`,
+      id: itemID,
+      addressID: address && addressID,
       eventParticipantStatus: "ArriveOnTime",
+      email: userAuth.user.attributes.email,
       active: true,
       eventID: eventID,
       userID: userAuth.user.username,
-      sortKey: "SortKey",
     };
+    console.log("createEventParticipantInput", createEventParticipantInput);
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput })
     );
 
     if (response.meta.requestStatus === "fulfilled") {
+      setLoading(false);
       history.push(`/event/${eventID}/eventSignUp/success`);
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);
+        setLoading(false);
       }, 1000);
-
-      console.log(response.error.message);
+      alert(response.error.message);
     }
   };
 
@@ -149,115 +158,6 @@ export default function Individual() {
               团体报名
             </Typography>
             <Box>
-              {/* <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="申请人姓名"
-                placeholder="张三"
-                name="name"
-                autoComplete="name"
-                autoFocus
-                value={eventParticipantData.name}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    name: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="申请人邮箱"
-                name="email"
-                placeholder="e.g. xxxx@uwindsor.ca"
-                autoComplete="email"
-                value={eventParticipantData.email}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    email: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                required
-                name="weChat"
-                autoComplete="weChat"
-                label="申请人微信号"
-                value={eventParticipantData.weChat}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    weChat: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                required
-                name="phone"
-                placeholder="e.g. 1234567890"
-                autoComplete="phone"
-                label="申请人手机号码"
-                value={eventParticipantData.phone}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    phone: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                label="地址（如需接送）"
-                name="address"
-                autoComplete="address"
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    address: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label="参加总人数（含申请人）"
-                name="numberOfPeople"
-                placeholder="e.g. 5"
-                autoComplete="numberOfPeople"
-                value={eventParticipantData.numberOfPeople}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    numberOfPeople: e.target.value,
-                  })
-                }
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                label="备注"
-                name="message"
-                autoComplete="message"
-                multiline
-                rows={4}
-                value={eventParticipantData.message}
-                onChange={(e) =>
-                  setEventParticipantData({
-                    ...eventParticipantData,
-                    message: e.target.value,
-                  })
-                }
-              /> */}
               <Controller
                 name="name"
                 control={control}
@@ -283,36 +183,13 @@ export default function Individual() {
                 )}
               />
               <Controller
-                name="email"
-                control={control}
-                rules={{
-                  required: true,
-                  pattern:
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <TextField
-                    id="email"
-                    margin="normal"
-                    required
-                    fullWidth
-                    label="邮箱"
-                    placeholder="e.g. xxxx@uwindsor.ca"
-                    autoComplete="email"
-                    variant="outlined"
-                    onChange={onChange}
-                    value={value}
-                    error={!!errors.email}
-                    helperText={errors.name ? "邮箱无效" : null}
-                  />
-                )}
-              />
-              <Controller
                 name="phone"
                 control={control}
                 rules={{
                   required: true,
                   pattern: /^[0-9\b]+$/,
+                  minLength: 10,
+                  maxLength: 10,
                 }}
                 render={({ field: { onChange, value } }) => (
                   <TextField
@@ -327,7 +204,7 @@ export default function Individual() {
                     onChange={onChange}
                     value={value}
                     error={!!errors.phone}
-                    helperText={errors.phone ? "手机号码无效" : null}
+                    helperText={errors.phone ? "手机号码无效, 10位数" : null}
                   />
                 )}
               />
@@ -335,14 +212,13 @@ export default function Individual() {
                 name="weChat"
                 control={control}
                 rules={{
-                  required: true,
+                  required: false,
                 }}
                 render={({ field: { onChange, value } }) => (
                   <TextField
                     id="weChat"
                     margin="normal"
                     fullWidth
-                    required
                     autoComplete="weChat"
                     label="微信号(可以不填)"
                     variant="outlined"
@@ -378,25 +254,8 @@ export default function Individual() {
                   />
                 )}
               />
-              <Controller
-                name="address"
-                control={control}
-                rules={{
-                  required: false,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <TextField
-                    id="address"
-                    margin="normal"
-                    fullWidth
-                    label="地址"
-                    variant="outlined"
-                    onChange={onChange}
-                    value={value}
-                    helperText={"送货地址或者接送地址"}
-                  />
-                )}
-              />
+              <GoogleMapsPlace />
+
               <Controller
                 name="message"
                 control={control}
@@ -422,8 +281,22 @@ export default function Individual() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={loading}
               >
                 提交
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: green[500],
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-0.75rem",
+                      marginLeft: "-0.75rem",
+                    }}
+                  />
+                )}
               </Button>
 
               <Grid item>
