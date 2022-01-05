@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import EventMain from "../../components/Event/EventMain";
-// import EventSliderShow from "../components/Event/SliderShow";
-import Filter from "../../components/Event/Filter";
+// import EventSliderShow from "../../components/Event/SliderShow";
+// import Filter from "../../components/Event/Filter";
 import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/slice/eventSlice";
 import { makeStyles } from "@mui/styles";
@@ -57,8 +57,8 @@ export default function Event() {
 
   const [eventList, setEventList] = useState([]);
   const [filteredEventList, setFilteredEventList] = useState([]);
-  const [sortBy, setSortBy] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState("");
+  const [sortBy] = useState("");
+  const [selectedTopic] = useState("");
   const dispatch = useDispatch();
   const { events, fetchEventsStatus } = useSelector((state) => state.event);
 
@@ -67,6 +67,7 @@ export default function Event() {
       dispatch(fetchEvents());
     }
   }, [dispatch, fetchEventsStatus]);
+  const moment = require("moment-timezone");
 
   useEffect(() => {
     setEventList(events);
@@ -82,20 +83,29 @@ export default function Event() {
 
     setFilteredEventList(
       [...filtered]
-        .filter((d) => new Date(d.endDate) - new Date() >= 0)
+        .filter(
+          (d) =>
+            new Date(
+              moment(d.endDate)
+                .tz("America/New_York")
+                .format("YYYY-MM-DD HH:mm:ss.SSS")
+            ) -
+              new Date() >=
+            0
+        )
         .sort(
           (a, b) =>
             new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
         )
     );
-  }, [selectedTopic, sortBy, eventList, events]);
+  }, [selectedTopic, sortBy, eventList, events, moment]);
 
-  const delay = 600;
+  const delay = 500;
 
-  const duration = 1000;
+  const duration = 750;
 
   const animStr = (idx) =>
-    `fadeIn ${duration}ms ease-out ${delay * (idx + 1)}ms backwards`;
+    `glowIn ${duration}ms ease-out ${delay * (idx + 1)}ms backwards`;
 
   // const currentEvent = filteredEventList.filter(
   //   (d) => new Date(d.startDate) - new Date() >= 0
@@ -106,7 +116,6 @@ export default function Event() {
   //   (d) => new Date(d.startDate) - new Date() < 0
   // );
   // console.log("pastEvent", pastEvent);
-
   const renderList = filteredEventList.map((event, idx) => {
     return (
       <Grid
@@ -123,7 +132,16 @@ export default function Event() {
   });
 
   const pastList = events
-    .filter((d) => new Date(d.endDate) - new Date() < 0)
+    .filter(
+      (d) =>
+        new Date(
+          moment(d.endDate)
+            .tz("America/New_York")
+            .format("YYYY-MM-DD HH:mm:ss.SSS")
+        ) -
+          new Date() <
+        0
+    )
     .sort(
       (a, b) =>
         new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
@@ -146,21 +164,23 @@ export default function Event() {
   return (
     <div>
       <Box className={classes.root}>
-        {/* <EventSliderShow /> */}
+        {/* <EventSliderShow events={events} /> */}
         <Box className={classes.list}>
           <Typography variant="h3" className={classes.title}>
             近期活动
           </Typography>
-          <Box className={classes.timeTag}>
-            <Filter
-              handleSort={setSortBy}
-              handleTopicChange={setSelectedTopic}
-              selectedTopic={selectedTopic}
-              // sortBy={sortBy}
-            />
+          {/* <Fade in={true}>
+            <Box className={classes.timeTag}>
+              <Filter
+                handleSort={setSortBy}
+                handleTopicChange={setSelectedTopic}
+                selectedTopic={selectedTopic}
+                // sortBy={sortBy}
+              /> */}
 
-            {/* <h2>活动: {filteredEventList.length}</h2> */}
-          </Box>
+          {/* <h2>活动: {filteredEventList.length}</h2> */}
+          {/* </Box>
+          </Fade> */}
         </Box>
 
         <div>
@@ -187,6 +207,7 @@ export default function Event() {
           <Typography variant="h3" className={classes.title}>
             往期活动
           </Typography>
+
           <Box className={classes.timeTag}></Box>
         </Box>
 

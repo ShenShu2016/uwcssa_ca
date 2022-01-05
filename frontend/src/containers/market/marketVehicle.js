@@ -1,28 +1,24 @@
 import { Box, Stack } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import {
-  fetchMarketItems,
-  selectAllMarketItems,
-} from "../../redux/slice/marketSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
-// import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
-import marketItemFilter from "../../components/Market/marketItemFilter";
-import { marketItemSortBySortKeyVehicle } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import { selectAllMarketItems } from "../../redux/slice/marketSlice";
+import { useForm } from "react-hook-form";
+import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
+import { useSelector } from "react-redux";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketVehicle() {
   const useStyles = marketItemStyle;
   useTitle("Vehicle");
-  const dispatch = useDispatch();
   const classes = useStyles();
   const [filterList, setFilterList] = useState({
+    type: "Vehicle",
     sortKey: "original",
     min: "",
     max: "",
@@ -31,26 +27,31 @@ export default function MarketVehicle() {
     maxYear: "",
     make: "",
     model: "",
-    clickedTag: "",
   });
 
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      type: "Vehicle",
+      sortKey: "original",
+      min: "",
+      max: "",
+      vehicleType: "",
+      minYear: "",
+      maxYear: "",
+      make: "",
+      model: "",
+    },
+  });
+
+  const handleSearch = handleSubmit((data) => {
+    setFilterList(data);
+  });
+
+  const isFiltering = useMarketItemFilter(filterList);
   const { darkTheme } = useSelector((state) => state.general);
-  const marketItems = useSelector(selectAllMarketItems);
-  const starter = useStarter(marketItems, "all");
-  // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
-  const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Vehicle" && item.description !== null
-  );
+  const filteredItems = useSelector(selectAllMarketItems);
 
-  useEffect(() => {
-    dispatch(fetchMarketItems({ query: marketItemSortBySortKeyVehicle }));
-  }, [dispatch]);
-
-  const filteredItems = marketItemFilter(
-    trueMarketItems,
-    filterList,
-    "vehicle"
-  );
+  const starter = useStarter(filteredItems, "all", isFiltering);
 
   const itemRenderList =
     filteredItems &&
@@ -65,36 +66,9 @@ export default function MarketVehicle() {
       );
     });
 
-  const handleSortKey = (e) => {
-    setFilterList({ ...filterList, sortKey: e.target.value });
-  };
-  const handleMax = (e) => {
-    setFilterList({ ...filterList, max: e.target.value });
-  };
-  const handleMin = (e) => {
-    setFilterList({ ...filterList, min: e.target.value });
-  };
-  const handleVehicleType = (e) => {
-    setFilterList({ ...filterList, vehicleType: e.target.value });
-  };
-  const handleMinYear = (e) => {
-    setFilterList({ ...filterList, minYear: e.target.value });
-  };
-  const handleMaxYear = (e) => {
-    setFilterList({ ...filterList, maxYear: e.target.value });
-  };
-  const handleModel = (e) => {
-    setFilterList({ ...filterList, model: e.target.value });
-  };
-  const handleMake = (e) => {
-    setFilterList({ ...filterList, make: e.target.value });
-  };
-  const handleClick = (tag) => {
-    setFilterList({ ...filterList, clickedTag: tag });
-  };
-
   const handleReset = () => {
-    setFilterList({
+    reset({
+      type: "Vehicle",
       sortKey: "original",
       min: "",
       max: "",
@@ -103,7 +77,6 @@ export default function MarketVehicle() {
       maxYear: "",
       make: "",
       model: "",
-      clickedTag: "",
     });
   };
 
@@ -118,34 +91,26 @@ export default function MarketVehicle() {
           form="plain"
           type="vehicle"
           filterList={filterList}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleVehicleType={handleVehicleType}
-          handleMinYear={handleMinYear}
-          handleMaxYear={handleMaxYear}
-          handleMake={handleMake}
-          handleModel={handleModel}
+          control={control}
+          handleSearch={handleSearch}
           handleReset={handleReset}
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
             darkTheme={darkTheme}
+            control={control}
             type="vehicle"
-            trueMarketItems={trueMarketItems}
-            handleClick={handleClick}
+            trueMarketItems={filteredItems}
             filterList={filterList}
-            handleSortKey={handleSortKey}
-            handleMin={handleMin}
-            handleMax={handleMax}
-            handleVehicleType={handleVehicleType}
-            handleMinYear={handleMinYear}
-            handleMaxYear={handleMaxYear}
-            handleMake={handleMake}
-            handleModel={handleModel}
+            handleSearch={handleSearch}
             handleReset={handleReset}
           />
           <Box className={classes.items}>
+            {isFiltering && (
+              <Box width="100%" margin="0.5rem" color="#6c6c6c" fontSize="14px">
+                Found {filteredItems.length} related results...
+              </Box>
+            )}
             {starter === false ? <BackdropLoading /> : itemRenderList}
           </Box>
         </Box>

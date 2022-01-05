@@ -48,7 +48,6 @@ export const fetchMarketItems = createAsyncThunk(
         },
         authMode: "AWS_IAM",
       });
-
       return MarketItemsData.data.marketItemSortBySortKey.items;
     } catch (error) {
       console.log(error);
@@ -75,13 +74,17 @@ export const selectedMarketItem = createAsyncThunk(
 export const addressFilteredMarketItem = createAsyncThunk(
   "market/addressFilteredMarketItem",
   async ({ filter }) => {
-    const response = await API.graphql({
-      query: listAddresss,
-      variables: { filter: filter },
-      authMode: "AWS_IAM",
-    });
-    console.log("res:", response);
-    return response.data.listAddresss.items;
+    try {
+      const response = await API.graphql({
+        query: listAddresss,
+        variables: { filter: filter },
+        authMode: "AWS_IAM",
+      });
+      console.log("res:", response);
+      return response.data.listAddresss.items;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -196,7 +199,9 @@ const marketSlice = createSlice({
       .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
         state.addressFilteredMarketItemStatus = "succeeded";
         marketAdapter.removeAll(state);
-        marketAdapter.upsertMany(state, action.payload);
+        let marketItems = action.payload;
+        let marketItem = marketItems.map((item) => item.marketItem);
+        marketAdapter.upsertMany(state, marketItem);
       })
       .addCase(addressFilteredMarketItem.rejected, (state, action) => {
         state.addressFilteredMarketItemStatus = "failed";

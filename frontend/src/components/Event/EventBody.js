@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -37,7 +37,7 @@ import SeeMore from "./SeeMore";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import TopicIcon from "@mui/icons-material/Topic";
 import { makeStyles } from "@mui/styles";
-import moment from "moment";
+// import moment from "moment";
 //import EditEvent from "./EditEvent";
 import { usePermit } from "../../Hooks/usePermit";
 import { useSelector } from "react-redux";
@@ -136,7 +136,10 @@ export default function EventBody({ event }) {
   const [value, setValue] = useState(0);
   const { userAuth } = useSelector((state) => state);
   const history = useHistory();
-  const [shareOpen, setShareOpen] = useState(false);
+  const shareRef = useRef();
+  const handleShareOpen = () => {
+    shareRef.current.openDialog();
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -158,13 +161,26 @@ export default function EventBody({ event }) {
     owner,
     id,
     online,
+    eventStatus,
   } = event;
+
+  // console.log(online);
 
   const isPermit = usePermit(owner, "admin");
   const handleClickOpen = () => {
     //setOpen(true);
     history.push(`/staff/event/editEvent/${id}`);
   };
+  const moment = require("moment-timezone");
+
+  const localStartDate = moment(startDate)
+    .tz("America/New_York")
+    .format("YYYY-MM-DD HH:mm:ss.SSS");
+
+  const localEndDate = moment(endDate)
+    .tz("America/New_York")
+    .format("YYYY-MM-DD HH:mm:ss.SSS");
+
   return (
     <Box>
       {event.startDate ? (
@@ -227,25 +243,28 @@ export default function EventBody({ event }) {
                   flexDirection: "column",
                 }}
               >
-                {moment(startDate).format("YYYY") ===
-                moment(endDate).format("YYYY") ? (
+                {moment(localStartDate).format("YYYY") ===
+                moment(localEndDate).format("YYYY") ? (
                   <Typography variant="h6" color="primary" gutterBottom>
-                    时间：{startDate.slice(0, 4)}年{startDate.slice(5, 7)}月
-                    {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(5, 7)}月{endDate.slice(8, 10)}号{" "}
-                    {endDate.slice(11, 16)}
+                    时间：{localStartDate.slice(0, 4)}年
+                    {localStartDate.slice(5, 7)}月{localStartDate.slice(8, 10)}
+                    号 {localStartDate.slice(11, 16)} -{" "}
+                    {localEndDate.slice(5, 7)}月{localEndDate.slice(8, 10)}号{" "}
+                    {localEndDate.slice(11, 16)}
                   </Typography>
                 ) : (
                   <Typography variant="h6" color="primary" gutterBottom>
-                    时间：{startDate.slice(0, 4)} 年{startDate.slice(5, 7)}月
-                    {startDate.slice(8, 10)}号 {startDate.slice(11, 16)} -{" "}
-                    {endDate.slice(0, 4)}年{endDate.slice(5, 7)}月
-                    {endDate.slice(8, 10)}号 {endDate.slice(11, 16)}
+                    时间：{localStartDate.slice(0, 4)} 年
+                    {localStartDate.slice(5, 7)}月{localStartDate.slice(8, 10)}
+                    号 {localStartDate.slice(11, 16)} -{" "}
+                    {localEndDate.slice(0, 4)}年{localEndDate.slice(5, 7)}月
+                    {localEndDate.slice(8, 10)}号 {localEndDate.slice(11, 16)}
                   </Typography>
                 )}
                 <Typography component="div" variant="h5" gutterBottom>
                   <b>{title}</b>
                 </Typography>
+
                 {online === true ? (
                   <Typography
                     variant="h6"
@@ -310,50 +329,61 @@ export default function EventBody({ event }) {
               {/* 这里有红字，需要改一下 */}
               <Box className={classes.action}>
                 <Stack direction="row" spacing={2}>
-                  {endDate > moment().format() ? (
+                  {new Date(localEndDate) - new Date() > 0 ? (
                     <div>
                       {userInfo.isAuthenticated ? (
                         <div>
-                          {event.eventParticipants.items.some(
-                            (item) => item.userID === userAuth.user.username
-                          ) === false ? (
-                            <Box className={classes.button}>
-                              <Tooltip title="点击报名此活动" placement="top">
-                                <Button
-                                  size="large"
-                                  // variant="outlined"
-                                  fullWidth
-                                  sx={{
-                                    background:
-                                      "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                                    "& > *": {
-                                      textTransform: "none !important",
-                                    },
-                                    border: 0,
-                                    boxShadow:
-                                      "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                                    color: "white",
-                                    padding: "0 30px",
-                                    borderRadius: "20rem",
-                                  }}
-                                  className={classes.join}
-                                  variant={"contained"}
-                                  color={"primary"}
-                                  disableRipple
-                                  component={Link}
-                                  to={`/event/${event.id}/eventSignUp`}
-                                  startIcon={<AppRegistrationIcon />}
-                                >
-                                  报名
-                                </Button>
-                              </Tooltip>
+                          {eventStatus === "SignUpClosed" ? (
+                            <Box className={classes.alert}>
+                              <Alert severity="info">报名通道关闭啦~🥳</Alert>
                             </Box>
                           ) : (
-                            <Box className={classes.alert}>
-                              <Alert severity="success">
-                                你已经报过名啦~🥳
-                              </Alert>
-                            </Box>
+                            <div>
+                              {event.eventParticipants.items.some(
+                                (item) => item.userID === userAuth.user.username
+                              ) === false ? (
+                                <Box className={classes.button}>
+                                  <Tooltip
+                                    title="点击报名此活动"
+                                    placement="top"
+                                  >
+                                    <Button
+                                      size="large"
+                                      // variant="outlined"
+                                      fullWidth
+                                      sx={{
+                                        background:
+                                          "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                                        "& > *": {
+                                          textTransform: "none !important",
+                                        },
+                                        border: 0,
+                                        boxShadow:
+                                          "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                                        color: "white",
+                                        padding: "0 30px",
+                                        borderRadius: "20rem",
+                                      }}
+                                      className={classes.join}
+                                      variant={"contained"}
+                                      color={"primary"}
+                                      disableRipple
+                                      component={Link}
+                                      to={`/event/${event.id}/eventSignUp`}
+                                      startIcon={<AppRegistrationIcon />}
+                                    >
+                                      报名
+                                    </Button>
+                                  </Tooltip>
+                                </Box>
+                              ) : (
+                                <Box className={classes.alert}>
+                                  <Alert severity="success">
+                                    你已经报过名啦~🥳
+                                  </Alert>
+                                </Box>
+                              )}
+                            </div>
                           )}
                         </div>
                       ) : (
@@ -371,8 +401,7 @@ export default function EventBody({ event }) {
                       <IconButton
                         color="primary"
                         onClick={() => {
-                          navigator.clipboard.writeText(window.location.href);
-                          setShareOpen(true);
+                          handleShareOpen();
                         }}
                         className={classes.aTag}
                         sx={{
@@ -393,10 +422,9 @@ export default function EventBody({ event }) {
                     </Tooltip>
                   </div>
                   <ShareInfoDialog
-                    open={shareOpen}
-                    onClose={() => setShareOpen(false)}
                     url={`event/${id}`}
                     title={event.title}
+                    ref={shareRef}
                   />
                   {isPermit ? (
                     <Tooltip title="点击编辑此活动" placement="top">
@@ -479,22 +507,45 @@ export default function EventBody({ event }) {
                                 {topic.name}
                               </Typography>
                             ) : null}
-                            {endDate > moment().format() ? (
+                            {localStartDate > moment().format() ? (
                               <Typography variant="body2" gutterBottom>
                                 <AccessTimeIcon
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                ComingSoon
+                                即将来临
                               </Typography>
                             ) : (
-                              <Typography variant="body2" gutterBottom>
-                                <AccessTimeIcon
-                                  color="action"
-                                  sx={{ float: "left", marginRight: "10px" }}
-                                />
-                                正在进行中
-                              </Typography>
+                              <div>
+                                {moment().isBetween(
+                                  localStartDate,
+                                  localEndDate
+                                ) ? (
+                                  <Typography variant="body2" gutterBottom>
+                                    <AccessTimeIcon
+                                      color="action"
+                                      sx={{
+                                        float: "left",
+                                        marginRight: "10px",
+                                      }}
+                                    />
+                                    进行中
+                                  </Typography>
+                                ) : (
+                                  <Typography variant="body2" gutterBottom>
+                                    <AccessTimeIcon
+                                      color="action"
+                                      sx={{
+                                        float: "left",
+                                        marginRight: "10px",
+                                      }}
+                                    />
+                                    {localEndDate < moment().format()
+                                      ? "完成"
+                                      : `${eventStatus}`}
+                                  </Typography>
+                                )}
+                              </div>
                             )}
                             <Box sx={{ my: 3 }}>
                               {/* <Typography

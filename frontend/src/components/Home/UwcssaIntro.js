@@ -4,7 +4,6 @@ import {
   ButtonGroup,
   CircularProgress,
   Container,
-  CssBaseline,
   Grid,
   Paper,
   Tooltip,
@@ -21,24 +20,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import cssalogo from "../../static/cssa-logo1.png";
 import { makeStyles } from "@mui/styles";
+import "./styles.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
+    width: "100%",
+    height: "100%",
     paddingBottom: "2rem",
     backgroundImage: `url(${cssalogo})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    [theme.breakpoints.only("lg")]: {
-      height: "835px",
+    [theme.breakpoints.up("lg")]: {
+      height: "800px",
+      backgroundSize: "auto 100%",
+      backgroundRepeat: "no-repeat",
     },
   },
   webIntro: {
+    display: "flex",
     minWidth: "40%",
     maxWidth: "100%",
     textAlign: "center",
     paddingBottom: "auto",
     marginBottom: "auto",
+    alignItems: "center",
+    [theme.breakpoints.up("xl")]: {
+      paddingTop: "5rem",
+    },
   },
   titleBox: {
     height: "100%",
@@ -48,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "5rem",
     marginBottom: "2rem",
     lineHeight: "130%",
+
     [theme.breakpoints.only("sm")]: {
       width: "calc(100% - 190px)",
       marginLeft: "190px",
@@ -55,6 +65,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.only("md")]: {
       width: "calc(100% - 260px)",
       marginLeft: "260px",
+    },
+    [theme.breakpoints.between("lg", "xl")]: {
+      width: "calc(100% - 330px)",
+    },
+    [theme.breakpoints.up("xl")]: {
+      width: "calc(100% - 30px)",
     },
   },
   title: {
@@ -161,110 +177,117 @@ export default function UwcssaIntro() {
     </div>
   );
   return (
-    <Box>
-      <CssBaseline />
-      <div>
-        <div className={classes.root}>
-          <Box className={classes.webIntro}>
-            <Container size="lg">
-              <Grid item sm>
-                <Box className={classes.titleBox}>
-                  <Grid item xs={12} sm={8} md={7}>
-                    <Typography variant="h6" className={classes.title}>
-                      UWCSSA.CA - 温莎最大的在线华人学生学者社交网络社区
-                    </Typography>
-                    <Typography variant="h4" className={classes.slogan}>
-                      <b>A Student Community like No Other</b>
-                    </Typography>
-                    <Box className={classes.webData}>
-                      <Grid container spacing={3}>
-                        <Grid item xs={6}>
-                          <Tooltip
-                            title={`${
-                              users &&
-                              users
-                                .map((x) => x.id)
-                                .join()
-                                .slice(0, 100)
-                            }...`}
-                            TransitionComponent={Zoom}
-                            arrow
-                            leaveDelay={200}
-                          >
-                            <Paper elevation={4}>
-                              <Typography variant="h5">
-                                {users ? (
-                                  users.length
-                                ) : (
-                                  <CircularProgress
-                                    style={{ height: "26px", width: "26px" }}
-                                  />
-                                )}
-                              </Typography>
-                              <Typography variant="h5">用户</Typography>
-                            </Paper>
-                          </Tooltip>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={6}
-                          component={Link}
-                          to="/forum"
-                          sx={{ textDecoration: "none" }}
-                        >
-                          <Paper elevation={4}>
-                            <Typography variant="h5">
-                              {forumPostCounts ? (
-                                forumPostCounts
-                              ) : (
-                                <CircularProgress
-                                  style={{ height: "26px", width: "26px" }}
-                                />
-                              )}
-                            </Typography>
-                            <Typography variant="h5">帖子</Typography>
-                          </Paper>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                    <Box className={classes.buttonBox}>
-                      {isAuthenticated ? authButton() : guestButton()}
-                    </Box>
-                    <Box className={classes.relateWeb}>
-                      <Typography variant="h6">网页导航</Typography>
-                      <ButtonGroup
-                        color="primary"
-                        aria-label="text primary button group"
+    <div
+      className={classes.root}
+      xs={12}
+      sx={{ height: "100%", width: "100%" }}
+    >
+      <Box className={classes.webIntro}>
+        <Container maxWidth="xl">
+          <Grid item sm>
+            <Box className={classes.titleBox}>
+              <Grid item xs={12} sm={8} md={7}>
+                <div className="animate pop">
+                  <Typography variant="h6" className={classes.title}>
+                    UWCSSA.CA - 温莎最大的在线华人学生学者社交网络社区
+                  </Typography>
+                </div>
+                <div className="animate pop delay-1">
+                  <Typography variant="h4" className={classes.slogan}>
+                    <b>A Student Community like No Other</b>
+                  </Typography>
+                </div>
+                <Box className={classes.webData}>
+                  <Grid container spacing={3} className="animate pop delay-2">
+                    <Grid item xs={6}>
+                      <Tooltip
+                        title={`${
+                          users &&
+                          users
+                            .map((x) => x.id)
+                            .join()
+                            .slice(0, 100)
+                        }...`}
+                        TransitionComponent={Zoom}
+                        arrow
+                        leaveDelay={200}
+                      >
+                        <Paper elevation={4}>
+                          <Typography variant="h5">
+                            {users ? (
+                              users.length
+                            ) : (
+                              <CircularProgress
+                                style={{ height: "26px", width: "26px" }}
+                              />
+                            )}
+                          </Typography>
+                          <Typography variant="h5">用户</Typography>
+                        </Paper>
+                      </Tooltip>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      component={Link}
+                      to="/forum"
+                      sx={{ textDecoration: "none" }}
+                    >
+                      <Paper elevation={4}>
+                        <Typography variant="h5">
+                          {forumPostCounts ? (
+                            forumPostCounts
+                          ) : (
+                            <CircularProgress
+                              style={{ height: "26px", width: "26px" }}
+                            />
+                          )}
+                        </Typography>
+                        <Typography variant="h5">帖子</Typography>
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <div className="animate pop delay-3">
+                  <Box className={classes.buttonBox}>
+                    {isAuthenticated ? authButton() : guestButton()}
+                  </Box>
+                </div>
+                <div className="animate pop delay-4">
+                  <Box className={classes.relateWeb}>
+                    <Typography variant="h6">网页导航</Typography>
+                    <ButtonGroup
+                      color="primary"
+                      aria-label="text primary button group"
+                      variant="outlined"
+                      size="medium"
+                      content="textOnly"
+                      className={classes.relateButton}
+                    >
+                      <Button component={Link} to="/article">
+                        近期新闻
+                      </Button>
+                      <Button component={Link} to="/event">
+                        活动
+                      </Button>
+                      <Button
                         variant="outlined"
                         size="medium"
                         content="textOnly"
-                        className={classes.relateButton}
+                        color="primary"
+                        component={Link}
+                        to="/forum"
                       >
-                        <Button component={Link} to="/article">
-                          近期新闻
-                        </Button>
-                        <Button component={Link} to="/event">
-                          活动
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          size="medium"
-                          content="textOnly"
-                          color="primary"
-                          component={Link}
-                          to="/forum"
-                        >
-                          论坛（建设中）
-                        </Button>
-                      </ButtonGroup>
-                    </Box>
-                  </Grid>
-                </Box>
+                        论坛（建设中）
+                      </Button>
+                    </ButtonGroup>
+                  </Box>
+                </div>
               </Grid>
-            </Container>
-          </Box>
-        </div>
-      </div>
-    </Box>
+            </Box>
+          </Grid>
+        </Container>
+      </Box>
+    </div>
   );
 }

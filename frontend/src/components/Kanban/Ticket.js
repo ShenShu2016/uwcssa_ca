@@ -120,24 +120,31 @@ export default function Ticket({ item }) {
           <NoticeIcons item={item} />
         </Box>
         <Divider variant="light" />
-        <Box sx={{ textAlign: "left", px: "8px", minHeight: "80px" }}>
-          {content ? (
-            <div sx={{ overflow: "auto" }}>
-              <MUIRichTextEditor
-                defaultValue={content}
-                readOnly={true}
-                toolbar={false}
-              />
-            </div>
-          ) : (
-            "这人很懒什么都没写"
-          )}
-        </Box>
-        <Divider variant="light" />
-        <Box sx={{ textAlign: "left", px: "8px" }}>发布者: {userID}</Box>
-        <Divider variant="light" />
-        <Box sx={{ textAlign: "left", px: "8px" }}>
-          发布时间: {moment(createdAt).format("MMM Do YY").slice(0, 6)}
+        <Box
+          sx={{
+            display:
+              (kanbanStatus === "WASTED" || kanbanStatus === "DONE") && "none",
+          }}
+        >
+          <Box sx={{ textAlign: "left", px: "8px", minHeight: "80px" }}>
+            {content ? (
+              <div sx={{ overflow: "auto" }}>
+                <MUIRichTextEditor
+                  defaultValue={content}
+                  readOnly={true}
+                  toolbar={false}
+                />
+              </div>
+            ) : (
+              "这人很懒什么都没写"
+            )}
+          </Box>
+          <Divider variant="light" />
+          <Box sx={{ textAlign: "left", px: "8px" }}>发布者: {userID}</Box>
+          <Divider variant="light" />
+          <Box sx={{ textAlign: "left", px: "8px" }}>
+            发布时间: {moment(createdAt).format("MMM Do YY").slice(0, 6)}
+          </Box>
         </Box>
       </Card>
       <Menu

@@ -1,49 +1,52 @@
 import { Box, Stack } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import {
-  fetchMarketItems,
-  selectAllMarketItems,
-} from "../../redux/slice/marketSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
-// import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
-import marketItemFilter from "../../components/Market/marketItemFilter";
-import { marketItemSortBySortKeyItem } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import { selectAllMarketItems } from "../../redux/slice/marketSlice";
+import { useForm } from "react-hook-form";
+import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
+import { useSelector } from "react-redux";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketItem() {
   const useStyles = marketItemStyle;
   useTitle("Item");
-  const dispatch = useDispatch();
   const classes = useStyles();
+
   const [filterList, setFilterList] = useState({
+    type: "Item",
     sortKey: "original",
     min: "",
     max: "",
     category: "",
     condition: "",
-    clickedTag: "",
   });
+
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      type: "Item",
+      sortKey: "original",
+      min: "",
+      max: "",
+      category: "",
+      condition: "",
+    },
+  });
+
+  const handleSearch = handleSubmit((data) => {
+    setFilterList(data);
+  });
+
+  const isFiltering = useMarketItemFilter(filterList);
   const { darkTheme } = useSelector((state) => state.general);
-  const marketItems = useSelector(selectAllMarketItems);
-  const starter = useStarter(marketItems, "all");
-  // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+  const filteredItems = useSelector(selectAllMarketItems);
 
-  useEffect(() => {
-    dispatch(fetchMarketItems({ query: marketItemSortBySortKeyItem }));
-  }, [dispatch]);
-
-  const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Item" && item.description !== null
-  );
-
-  const filteredItems = marketItemFilter(trueMarketItems, filterList, "item");
+  const starter = useStarter(filteredItems, "all", isFiltering);
 
   const itemRenderList =
     filteredItems &&
@@ -58,34 +61,14 @@ export default function MarketItem() {
       );
     });
 
-  const handleSortKey = (e) => {
-    setFilterList({ ...filterList, sortKey: e.target.value });
-  };
-  const handleMax = (e) => {
-    setFilterList({ ...filterList, max: e.target.value });
-  };
-  const handleMin = (e) => {
-    setFilterList({ ...filterList, min: e.target.value });
-  };
-  const handleCategory = (e) => {
-    setFilterList({ ...filterList, category: e.target.value });
-  };
-  const handleCondition = (e) => {
-    setFilterList({ ...filterList, condition: e.target.value });
-  };
-  const handleClick = (tag) => {
-    setFilterList({ ...filterList, clickedTag: tag });
-  };
-
   const handleReset = () => {
-    setFilterList({
-      ...filterList,
+    reset({
+      type: "Item",
       sortKey: "original",
       min: "",
       max: "",
       category: "",
       condition: "",
-      clickedTag: "",
     });
   };
 
@@ -100,28 +83,26 @@ export default function MarketItem() {
           form="plain"
           type="item"
           filterList={filterList}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleCategory={handleCategory}
-          handleCondition={handleCondition}
+          control={control}
+          handleSearch={handleSearch}
           handleReset={handleReset}
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
             darkTheme={darkTheme}
+            control={control}
             type="item"
-            trueMarketItems={trueMarketItems}
-            handleClick={handleClick}
+            trueMarketItems={filteredItems}
             filterList={filterList}
-            handleSortKey={handleSortKey}
-            handleMin={handleMin}
-            handleMax={handleMax}
-            handleCategory={handleCategory}
-            handleCondition={handleCondition}
+            handleSearch={handleSearch}
             handleReset={handleReset}
           />
           <Box className={classes.items}>
+            {isFiltering && (
+              <Box width="100%" margin="0.5rem" color="#6c6c6c" fontSize="14px">
+                Found {filteredItems.length} related results...
+              </Box>
+            )}
             {starter === false ? <BackdropLoading /> : itemRenderList}
           </Box>
         </Box>

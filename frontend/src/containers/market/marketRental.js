@@ -1,29 +1,25 @@
 import { Box, Stack } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import {
-  fetchMarketItems,
-  selectAllMarketItems,
-} from "../../redux/slice/marketSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
-// import { Loading } from "../../components/Market/loading";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
-import marketItemFilter from "../../components/Market/marketItemFilter";
-import { marketItemSortBySortKeyRental } from "../../components/Market//marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import { selectAllMarketItems } from "../../redux/slice/marketSlice";
+import { useForm } from "react-hook-form";
+import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
+import { useSelector } from "react-redux";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketRental() {
   const useStyles = marketItemStyle;
   useTitle("Rental");
-  const dispatch = useDispatch();
   const classes = useStyles();
 
   const [filterList, setFilterList] = useState({
+    type: "Rental",
     sortKey: "original",
     min: "",
     max: "",
@@ -31,24 +27,29 @@ export default function MarketRental() {
     propertyType: "",
     airConditioningType: "",
     heatingType: "",
-    clickedTag: "",
   });
 
-  // const [images, setImages] = useState();
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      type: "Rental",
+      sortKey: "original",
+      min: "",
+      max: "",
+      marketRentalSaleRent: "",
+      propertyType: "",
+      airConditioningType: "",
+      heatingType: "",
+    },
+  });
+  const handleSearch = handleSubmit((data) => {
+    setFilterList(data);
+  });
+
+  const isFiltering = useMarketItemFilter(filterList);
   const { darkTheme } = useSelector((state) => state.general);
-  const marketItems = useSelector(selectAllMarketItems);
-  const starter = useStarter(marketItems, "all");
-  // const status = useSelector((state) => state.market.fetchMarketItemsStatus);
+  const filteredItems = useSelector(selectAllMarketItems);
 
-  const trueMarketItems = marketItems.filter(
-    (item) => item.marketType === "Rental" && item.description !== null
-  );
-
-  useEffect(() => {
-    dispatch(fetchMarketItems({ query: marketItemSortBySortKeyRental }));
-  }, [dispatch]);
-
-  const filteredItems = marketItemFilter(trueMarketItems, filterList, "rental");
+  const starter = useStarter(filteredItems, "all", isFiltering);
 
   const itemRenderList =
     filteredItems &&
@@ -63,33 +64,9 @@ export default function MarketRental() {
       );
     });
 
-  const handleSortKey = (e) => {
-    setFilterList({ ...filterList, sortKey: e.target.value });
-  };
-  const handleMax = (e) => {
-    setFilterList({ ...filterList, max: e.target.value });
-  };
-  const handleMin = (e) => {
-    setFilterList({ ...filterList, min: e.target.value });
-  };
-  const handleMarketRentalSaleRent = (e) => {
-    setFilterList({ ...filterList, marketRentalSaleRent: e.target.value });
-  };
-  const handlePropertyType = (e) => {
-    setFilterList({ ...filterList, propertyType: e.target.value });
-  };
-  const handleAirConditioningType = (e) => {
-    setFilterList({ ...filterList, airConditioningType: e.target.value });
-  };
-  const handleHeatingType = (e) => {
-    setFilterList({ ...filterList, heatingType: e.target.value });
-  };
-  const handleClick = (tag) => {
-    setFilterList({ ...filterList, clickedTag: tag });
-  };
-
   const handleReset = () => {
-    setFilterList({
+    reset({
+      type: "Rental",
       sortKey: "original",
       min: "",
       max: "",
@@ -97,10 +74,8 @@ export default function MarketRental() {
       propertyType: "",
       airConditioningType: "",
       heatingType: "",
-      clickedTag: "",
     });
   };
-  // console.log("filterList", filterList);
   return (
     <Box className={classes.root}>
       <Stack
@@ -112,32 +87,26 @@ export default function MarketRental() {
           form="plain"
           type="rental"
           filterList={filterList}
-          handleSortKey={handleSortKey}
-          handleMin={handleMin}
-          handleMax={handleMax}
-          handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-          handlePropertyType={handlePropertyType}
-          handleAirConditioningType={handleAirConditioningType}
-          handleHeatingType={handleHeatingType}
+          control={control}
+          handleSearch={handleSearch}
           handleReset={handleReset}
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
             darkTheme={darkTheme}
+            control={control}
             type="rental"
-            trueMarketItems={trueMarketItems}
-            handleClick={handleClick}
+            trueMarketItems={filteredItems}
             filterList={filterList}
-            handleSortKey={handleSortKey}
-            handleMin={handleMin}
-            handleMax={handleMax}
-            handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-            handlePropertyType={handlePropertyType}
-            handleAirConditioningType={handleAirConditioningType}
-            handleHeatingType={handleHeatingType}
+            handleSearch={handleSearch}
             handleReset={handleReset}
           />
           <Box className={classes.items}>
+            {isFiltering && (
+              <Box width="100%" margin="0.5rem" color="#6c6c6c" fontSize="14px">
+                Found {filteredItems.length} related results...
+              </Box>
+            )}
             {starter === false ? <BackdropLoading /> : itemRenderList}
           </Box>
         </Box>
