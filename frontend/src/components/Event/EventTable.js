@@ -3,14 +3,17 @@ import {
   Button,
   IconButton,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TablePagination,
   TableRow,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -19,12 +22,15 @@ import { useDispatch, useSelector } from "react-redux";
 import DownloadIcon from "@mui/icons-material/Download";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import XLSX from "xlsx";
 import { alpha } from "@mui/material/styles";
 import { fetchEvents_Staff } from "../../redux/slice/staffSlice";
 import { makeStyles } from "@mui/styles";
+import EditIcon from "@mui/icons-material/Edit";
+import moment from "moment";
+import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -37,14 +43,24 @@ const useStyles = makeStyles((theme) => ({
   //   padding: "3rem",
   // },
 
-  table: {
-    minWidth: 650,
-  },
+  // table: {
+  //   minWidth: 650,
+  // },
 }));
 
-const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
+const ExpandableTableRow = ({
+  id,
+  children,
+  expandComponent,
+  ...otherProps
+}) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const history = useHistory();
 
+  const handleClickOpen = () => {
+    //setOpen(true);
+    history.push(`/staff/event/editEvent/${id}`);
+  };
   return (
     <>
       <TableRow {...otherProps}>
@@ -54,6 +70,13 @@ const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
           </IconButton>
         </TableCell>
         {children}
+        <TableCell padding="checkbox">
+          <Tooltip title="点击编辑此活动" placement="top">
+            <IconButton variant="outlined" onClick={handleClickOpen}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
       </TableRow>
       {isExpanded && (
         <TableRow>
@@ -129,6 +152,7 @@ export default function SimpleTable() {
       id,
       title,
       startDate,
+      endDate,
       eventStatus,
       topic,
       online,
@@ -141,6 +165,7 @@ export default function SimpleTable() {
       title: title,
       address: address && address.description,
       startDate: startDate,
+      endDate: endDate,
       topic: topic.name,
       online: online,
       eventParticipants: eventParticipants,
@@ -179,163 +204,204 @@ export default function SimpleTable() {
 
   return (
     <div>
-      <Box sx={{ paddingBlock: "2rem" }}>
-        <Box className={classes.content}>
-          <div className={classes.toolbar}>
-            <Typography variant="h4" component="h2">
-              活动数据
-            </Typography>
-            <Button
-              variant="outlined"
-              color="secondary"
-              component={Link}
-              to="/staff/event/postEvent"
-            >
-              添加新活动
-            </Button>
-          </div>
-          <TableContainer component={Paper}>
-            <Table
-              className={classes.table}
-              aria-label="simple table"
-              // rowsPerPageOptions={[5]}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell padding="checkbox" />
-                  {/* <TableCell sx={{ width: 150 }}>ID</TableCell> */}
-                  <TableCell sx={{ width: 110 }}>标题</TableCell>
-                  <TableCell sx={{ width: 110 }}>主题</TableCell>
-                  <TableCell sx={{ width: 150 }}>地点</TableCell>
-                  <TableCell sx={{ width: 200 }}>状态</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
-                    <ExpandableTableRow
-                      key={row.id}
-                      expandComponent={
-                        <TableCell
-                          style={{ paddingBottom: 0, paddingTop: 0 }}
-                          colSpan={6}
-                        >
-                          <Box margin={1}>
-                            <Typography
-                              variant="h6"
-                              sx={{ flex: "1 1 100%" }}
-                              component="div"
+      <Box sx={{ paddingTop: "2rem", margin: "auto" }}>
+        <Box className={classes.toolbar}>
+          <Typography variant="h4" component="h2">
+            活动数据
+          </Typography>
+          <Button
+            variant="outlined"
+            color="secondary"
+            component={Link}
+            to="/staff/event/postEvent"
+          >
+            添加新活动
+          </Button>
+        </Box>
+        <TableContainer component={Paper}>
+          <Table
+            sx={{ minWidth: 500 }}
+            // rowsPerPageOptions={[5]}
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell padding="checkbox" />
+                {/* <TableCell sx={{ width: 150 }}>ID</TableCell> */}
+                <TableCell sx={{ width: 100 }}>标题</TableCell>
+                <TableCell sx={{ width: 100 }}>主题</TableCell>
+                <TableCell sx={{ width: 150 }}>地点</TableCell>
+                <TableCell sx={{ width: 150 }}>状态</TableCell>
+                <TableCell padding="checkbox" />
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <ExpandableTableRow
+                    key={row.id}
+                    id={row.id}
+                    expandComponent={
+                      <TableCell
+                        style={{ paddingBottom: 0, paddingTop: 0 }}
+                        colSpan={6}
+                      >
+                        <Box margin={1}>
+                          <Typography
+                            variant="h6"
+                            sx={{ flex: "1 1 100%" }}
+                            component="div"
+                          >
+                            报名者: 已有
+                            {row.eventParticipants.items.reduce(function (
+                              sum,
+                              items
+                            ) {
+                              return sum + items.numberOfPeople;
+                            },
+                            0)}
+                            人报名
+                            <Button
+                              color="primary"
+                              aria-label="download csv"
+                              sx={{ float: "right" }}
+                              onClick={() =>
+                                downloadExcel(
+                                  row.eventParticipants.items,
+                                  row.title
+                                )
+                              }
                             >
-                              报名者
-                              <Button
-                                color="primary"
-                                aria-label="download csv"
-                                sx={{ float: "right" }}
-                                onClick={() =>
-                                  downloadExcel(
-                                    row.eventParticipants.items,
-                                    row.title
-                                  )
-                                }
-                              >
-                                下载csv
-                                <DownloadIcon />
-                              </Button>
-                            </Typography>
+                              下载csv
+                              <DownloadIcon />
+                            </Button>
+                          </Typography>
 
-                            <Table size="small" aria-label="purchases">
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell>用户名</TableCell>
-                                  <TableCell>姓名</TableCell>
-                                  <TableCell>Email</TableCell>
-                                  <TableCell>微信</TableCell>
-                                  <TableCell>电话</TableCell>
-                                  <TableCell>人数</TableCell>
-                                  <TableCell>地址</TableCell>
-                                  <TableCell>备注</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {row.eventParticipants.items.map(
-                                  (eventParticipant) => (
-                                    <TableRow key={eventParticipant.name}>
-                                      <TableCell component="th" scope="row">
-                                        {eventParticipant.owner}
-                                      </TableCell>
-                                      <TableCell component="th" scope="row">
-                                        {eventParticipant.name}
-                                      </TableCell>
-                                      <TableCell>
-                                        {eventParticipant.email}
-                                      </TableCell>
-                                      <TableCell>
-                                        {eventParticipant.weChat}
-                                      </TableCell>
-                                      <TableCell>
-                                        {eventParticipant.phone}
-                                      </TableCell>
-                                      <TableCell>
-                                        {eventParticipant.numberOfPeople}
-                                      </TableCell>
-                                      <TableCell>
-                                        {eventParticipant.address &&
-                                          eventParticipant.address.description}
-                                      </TableCell>
-                                      <TableCell>
-                                        {eventParticipant.message}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                )}
-                              </TableBody>
-                            </Table>
-                          </Box>
-                        </TableCell>
-                      }
-                    >
-                      {/* <TableCell component="th" scope="row">
+                          <Table size="small" aria-label="purchases">
+                            <TableHead>
+                              <TableRow>
+                                <TableCell>用户名</TableCell>
+                                <TableCell>姓名</TableCell>
+                                <TableCell>Email</TableCell>
+                                <TableCell>微信</TableCell>
+                                <TableCell>电话</TableCell>
+                                <TableCell>人数</TableCell>
+                                <TableCell>地址</TableCell>
+                                <TableCell>备注</TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {row.eventParticipants.items.map(
+                                (eventParticipant) => (
+                                  <TableRow key={eventParticipant.name}>
+                                    <TableCell component="th" scope="row">
+                                      {eventParticipant.owner}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                      {eventParticipant.name}
+                                    </TableCell>
+                                    <TableCell>
+                                      {eventParticipant.email}
+                                    </TableCell>
+                                    <TableCell>
+                                      {eventParticipant.weChat}
+                                    </TableCell>
+                                    <TableCell>
+                                      {eventParticipant.phone}
+                                    </TableCell>
+                                    <TableCell>
+                                      {eventParticipant.numberOfPeople}
+                                    </TableCell>
+                                    <TableCell>
+                                      {eventParticipant.address &&
+                                        eventParticipant.address.description}
+                                    </TableCell>
+                                    <TableCell>
+                                      {eventParticipant.message}
+                                    </TableCell>
+                                  </TableRow>
+                                )
+                              )}
+                            </TableBody>
+                          </Table>
+                        </Box>
+                      </TableCell>
+                    }
+                  >
+                    {/* <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell> */}
-                      <TableCell component="th" scope="row">
-                        {row.title}
+                    <TableCell component="th" scope="row">
+                      {row.title}
+                    </TableCell>
+                    <TableCell>{row.topic}</TableCell>
+                    {row.online === true ? (
+                      <TableCell>
+                        <Typography>线上</Typography>
                       </TableCell>
-                      <TableCell>{row.topic}</TableCell>
-                      {row.online === true ? (
-                        <TableCell>
-                          <Typography>线上</Typography>
-                        </TableCell>
-                      ) : (
-                        <TableCell>
-                          {row.address ? (
-                            <Typography>{row.address}</Typography>
+                    ) : (
+                      <TableCell>
+                        {row.address ? (
+                          <Typography>{row.address}</Typography>
+                        ) : (
+                          <Typography>暂无</Typography>
+                        )}
+                      </TableCell>
+                    )}
+                    <TableCell>
+                      <Stack direction="row" spacing={2}>
+                        <div>{row.eventStatus}</div>
+                        <div>
+                          {row.endDate < moment().format() &&
+                          row.eventStatus !== "Finished" ? (
+                            <Tooltip
+                              disableFocusListener
+                              title="活动结束了，记得修改活动状态"
+                              placement="right"
+                              arrow
+                            >
+                              <ErrorOutlineRoundedIcon />
+                            </Tooltip>
                           ) : (
-                            <Typography>暂无</Typography>
+                            <div>
+                              {moment().isBetween(row.startDate, row.endDate) &&
+                              row.eventStatus !== "InProgress" ? (
+                                <Tooltip
+                                  disableFocusListener
+                                  title="活动已经开始，记得修改活动状态"
+                                  placement="right"
+                                  arrow
+                                >
+                                  <ErrorOutlineRoundedIcon />
+                                </Tooltip>
+                              ) : null}
+                            </div>
                           )}
-                        </TableCell>
-                      )}
-                      <TableCell>{row.eventStatus}</TableCell>
-                    </ExpandableTableRow>
-                  ))}
-                {emptyRows > 0 && (
-                  <TableRow>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </TableContainer>
-        </Box>
+                        </div>
+                      </Stack>
+                    </TableCell>
+                  </ExpandableTableRow>
+                ))}
+              {emptyRows > 0 && (
+                <TableRow>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  count={rows.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </TableContainer>
       </Box>
     </div>
   );

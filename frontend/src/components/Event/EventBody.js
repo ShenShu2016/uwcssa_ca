@@ -161,6 +161,7 @@ export default function EventBody({ event }) {
     owner,
     id,
     online,
+    eventStatus,
   } = event;
 
   // console.log(online);
@@ -328,50 +329,61 @@ export default function EventBody({ event }) {
               {/* 这里有红字，需要改一下 */}
               <Box className={classes.action}>
                 <Stack direction="row" spacing={2}>
-                  {localEndDate > moment().format() ? (
+                  {new Date(localEndDate) - new Date() > 0 ? (
                     <div>
                       {userInfo.isAuthenticated ? (
                         <div>
-                          {event.eventParticipants.items.some(
-                            (item) => item.userID === userAuth.user.username
-                          ) === false ? (
-                            <Box className={classes.button}>
-                              <Tooltip title="点击报名此活动" placement="top">
-                                <Button
-                                  size="large"
-                                  // variant="outlined"
-                                  fullWidth
-                                  sx={{
-                                    background:
-                                      "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                                    "& > *": {
-                                      textTransform: "none !important",
-                                    },
-                                    border: 0,
-                                    boxShadow:
-                                      "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                                    color: "white",
-                                    padding: "0 30px",
-                                    borderRadius: "20rem",
-                                  }}
-                                  className={classes.join}
-                                  variant={"contained"}
-                                  color={"primary"}
-                                  disableRipple
-                                  component={Link}
-                                  to={`/event/${event.id}/eventSignUp`}
-                                  startIcon={<AppRegistrationIcon />}
-                                >
-                                  报名
-                                </Button>
-                              </Tooltip>
+                          {eventStatus === "SignUpClosed" ? (
+                            <Box className={classes.alert}>
+                              <Alert severity="info">报名通道关闭啦~🥳</Alert>
                             </Box>
                           ) : (
-                            <Box className={classes.alert}>
-                              <Alert severity="success">
-                                你已经报过名啦~🥳
-                              </Alert>
-                            </Box>
+                            <div>
+                              {event.eventParticipants.items.some(
+                                (item) => item.userID === userAuth.user.username
+                              ) === false ? (
+                                <Box className={classes.button}>
+                                  <Tooltip
+                                    title="点击报名此活动"
+                                    placement="top"
+                                  >
+                                    <Button
+                                      size="large"
+                                      // variant="outlined"
+                                      fullWidth
+                                      sx={{
+                                        background:
+                                          "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                                        "& > *": {
+                                          textTransform: "none !important",
+                                        },
+                                        border: 0,
+                                        boxShadow:
+                                          "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                                        color: "white",
+                                        padding: "0 30px",
+                                        borderRadius: "20rem",
+                                      }}
+                                      className={classes.join}
+                                      variant={"contained"}
+                                      color={"primary"}
+                                      disableRipple
+                                      component={Link}
+                                      to={`/event/${event.id}/eventSignUp`}
+                                      startIcon={<AppRegistrationIcon />}
+                                    >
+                                      报名
+                                    </Button>
+                                  </Tooltip>
+                                </Box>
+                              ) : (
+                                <Box className={classes.alert}>
+                                  <Alert severity="success">
+                                    你已经报过名啦~🥳
+                                  </Alert>
+                                </Box>
+                              )}
+                            </div>
                           )}
                         </div>
                       ) : (
@@ -495,22 +507,45 @@ export default function EventBody({ event }) {
                                 {topic.name}
                               </Typography>
                             ) : null}
-                            {endDate > moment().format() ? (
+                            {localStartDate > moment().format() ? (
                               <Typography variant="body2" gutterBottom>
                                 <AccessTimeIcon
                                   color="action"
                                   sx={{ float: "left", marginRight: "10px" }}
                                 />
-                                ComingSoon
+                                即将来临
                               </Typography>
                             ) : (
-                              <Typography variant="body2" gutterBottom>
-                                <AccessTimeIcon
-                                  color="action"
-                                  sx={{ float: "left", marginRight: "10px" }}
-                                />
-                                正在进行中
-                              </Typography>
+                              <div>
+                                {moment().isBetween(
+                                  localStartDate,
+                                  localEndDate
+                                ) ? (
+                                  <Typography variant="body2" gutterBottom>
+                                    <AccessTimeIcon
+                                      color="action"
+                                      sx={{
+                                        float: "left",
+                                        marginRight: "10px",
+                                      }}
+                                    />
+                                    进行中
+                                  </Typography>
+                                ) : (
+                                  <Typography variant="body2" gutterBottom>
+                                    <AccessTimeIcon
+                                      color="action"
+                                      sx={{
+                                        float: "left",
+                                        marginRight: "10px",
+                                      }}
+                                    />
+                                    {localEndDate < moment().format()
+                                      ? "完成"
+                                      : `${eventStatus}`}
+                                  </Typography>
+                                )}
+                              </div>
                             )}
                             <Box sx={{ my: 3 }}>
                               {/* <Typography
