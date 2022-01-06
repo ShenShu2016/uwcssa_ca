@@ -8,8 +8,12 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  FormControl,
   FormControlLabel,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
   Slide,
   Slider,
   Switch,
@@ -18,27 +22,31 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  fetchDepartments,
+  selectAllDepartments,
+} from "../../redux/slice/departmentSlice";
+import getCroppedImg, {
+  generateDownload,
+} from "../Account/Profile/Info/canvasUtils";
+import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import Cropper from "react-easy-crop";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MUIRichTextEditor from "mui-rte";
 import { convertToRaw } from "draft-js";
+import { dataURLtoFile } from "../Account/Profile/Info/dataURLtoFile";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../redux/slice/generalSlice";
 // import { styled } from "@mui/material/styles";
 import { updateUwcssaMemberDetail } from "../../redux/slice/uwcssaMemberSlice";
-import { useDispatch } from "react-redux";
 import { usePermit } from "../../Hooks/usePermit";
 import { useRef } from "react";
-import getCroppedImg, {
-  generateDownload,
-} from "../Account/Profile/Info/canvasUtils";
-import { dataURLtoFile } from "../Account/Profile/Info/dataURLtoFile";
 import { v4 as uuid } from "uuid";
-import Cropper from "react-easy-crop";
 
 // const Input = styled("input")({
 //   display: "none",
@@ -121,7 +129,16 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const [croppedArea, setCroppedArea] = useState(null);
   const inputRef = useRef();
   const triggerFileSelectPopup = () => inputRef.current.click();
-
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
+  const departments = useSelector(selectAllDepartments);
+  const [departmentID, setDepartmentID] = useState(item.departmentID);
+  console.log(departmentID);
+  useEffect(() => {
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, fetchDepartmentsStatus]);
+  //console.log(departments);
   const {
     handleSubmit,
     control,
@@ -143,6 +160,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       content: newContent,
       startDate: startDate,
       endDate: endDate,
+      departmentID: departmentID,
     };
     setLoading(true);
     const response = await dispatch(
@@ -236,6 +254,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                       />
                     )}
                   />
+
                   <Controller
                     name="active"
                     control={control}
@@ -255,6 +274,31 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                       />
                     )}
                   />
+                  <FormControl
+                    variant="outlined"
+                    fullWidth
+                    sx={{ marginBlock: "2rem" }}
+                  >
+                    <InputLabel id="demo-simple-select-outlined-label2">
+                      部门名称
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-outlined-label2"
+                      id="demo-simple-select-outlined2"
+                      value={departmentID}
+                      onChange={(e) => setDepartmentID(e.target.value)}
+                      label="Topic"
+                    >
+                      {departments &&
+                        departments.map((department) => {
+                          return (
+                            <MenuItem value={department.id} key={department.id}>
+                              {department.name}
+                            </MenuItem>
+                          );
+                        })}
+                    </Select>
+                  </FormControl>
                 </Box>
               )}
               <Controller

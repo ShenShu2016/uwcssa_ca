@@ -9,11 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import {
+  fetchDepartments,
+  selectAllDepartments,
+} from "../../../../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import PublishIcon from "@mui/icons-material/Publish";
-import { fetchDepartments } from "../../../../redux/slice/careerSlice";
 import { fetchUsers } from "../../../../redux/slice/generalSlice";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
@@ -66,17 +69,19 @@ export default function PostUwcssaMember() {
   const [departmentID, setDepartmentID] = useState("");
   const [userID, setUserID] = useState("");
 
-  const { departments } = useSelector((state) => state.career);
+  const departments = useSelector(selectAllDepartments);
 
-  const { users } = useSelector((state) => state.general);
-
-  useEffect(() => {
-    dispatch(fetchDepartments());
-  }, [dispatch]);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
+  const { users, fetchUsersStatus } = useSelector((state) => state.general);
 
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+    if (fetchUsersStatus === "idle" || undefined) {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, fetchDepartmentsStatus, fetchUsersStatus]);
 
   const onSubmit = async () => {
     setLoading(true);

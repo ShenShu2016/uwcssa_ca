@@ -9,10 +9,10 @@ import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listDepartments } from "../CustomQuery/DepartmentQueries";
 
-const fundingMemberAdapter = createEntityAdapter({
+const departmentAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
 });
-const initialState = fundingMemberAdapter.getInitialState({
+const initialState = departmentAdapter.getInitialState({
   fetchDepartmentsStatus: "idle",
   fetchDepartmentsError: null,
   postDepartmentStatus: "idle",
@@ -22,7 +22,7 @@ const initialState = fundingMemberAdapter.getInitialState({
 });
 
 export const fetchDepartments = createAsyncThunk(
-  "fundingMember/fetchDepartments",
+  "department/fetchDepartments",
   async () => {
     const response = await API.graphql({
       query: listDepartments,
@@ -33,7 +33,7 @@ export const fetchDepartments = createAsyncThunk(
 );
 
 export const postDepartment = createAsyncThunk(
-  "fundingMember/postDepartment",
+  "department/postDepartment",
   async ({ createDepartmentInput }) => {
     try {
       const response = await API.graphql(
@@ -49,7 +49,7 @@ export const postDepartment = createAsyncThunk(
 );
 
 export const updateDepartmentDetail = createAsyncThunk(
-  "fundingMember/updateDepartmentDetail",
+  "department/updateDepartmentDetail",
   async ({ updateDepartmentInput }) => {
     try {
       const response = await API.graphql(
@@ -75,8 +75,8 @@ const departmentSlice = createSlice({
       })
       .addCase(fetchDepartments.fulfilled, (state, action) => {
         state.fetchDepartmentsStatus = "succeeded";
-        fundingMemberAdapter.removeAll(state);
-        fundingMemberAdapter.upsertMany(state, action.payload);
+        departmentAdapter.removeAll(state);
+        departmentAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchDepartments.rejected, (state, action) => {
         state.fetchDepartmentsStatus = "failed";
@@ -88,7 +88,7 @@ const departmentSlice = createSlice({
       })
       .addCase(updateDepartmentDetail.fulfilled, (state, action) => {
         state.updateDepartmentDetailStatus = "succeeded";
-        fundingMemberAdapter.upsertOne(state, action.payload);
+        departmentAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateDepartmentDetail.rejected, (state, action) => {
         state.updateDepartmentDetailStatus = "failed";
@@ -101,6 +101,6 @@ export const {
   selectAll: selectAllDepartments,
   selectById: selectDepartmentById,
   selectIds: selectDepartmentIds,
-} = fundingMemberAdapter.getSelectors((state) => state.department);
+} = departmentAdapter.getSelectors((state) => state.department);
 
 export default departmentSlice.reducer;

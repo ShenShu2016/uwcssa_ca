@@ -177,14 +177,13 @@ export default function ProfessionalCard({
   const [open, setOpen] = React.useState(false);
 
   const handleEditClickOpen = () => {
+    setSettingMoreAnchorEl(null);
     setEditOpen(true);
   };
   const handleEditClose = () => {
     setEditOpen(false);
   };
-  //   const handleExpandClick = () => {
-  //     setExpanded(!expanded);
-  //   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
