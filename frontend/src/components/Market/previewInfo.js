@@ -30,7 +30,7 @@ const useStyle = makeStyles((theme) => ({
   },
   previewInfo: {
     width: "350px",
-    height: "100%",
+    // height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
     color: "#c1c1c1",
@@ -58,7 +58,7 @@ const useStyle = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("lg")]: {
       width: "100%",
-      height: "100vh",
+      // height: "100vh",
       overflow: "hidden",
     },
   },

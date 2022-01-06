@@ -659,7 +659,7 @@ export default function PostMarketRental() {
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传 MarketHome{" "}
+              上传 MarketHome
               {loading && (
                 <CircularProgress
                   size={24}
@@ -686,19 +686,18 @@ export default function PostMarketRental() {
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={
-              <PreviewInfo
-                imgURLs={imgURLs}
-                fakeItems={fakeItems}
-                darkTheme={darkTheme}
-              />
-            }
             title="Preview"
             position="bottom"
             open={open}
             setOpen={() => setOpen(true)}
             setClose={() => setOpen(false)}
-          />
+          >
+            <PreviewInfo
+              imgURLs={imgURLs}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
+          </SwipeableDrawerInfo>
         </Box>
       </Stack>
     </div>

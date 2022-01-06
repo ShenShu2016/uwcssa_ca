@@ -101,6 +101,7 @@ export const marketItemStyle = makeStyles((theme) => ({
   imgPaper2: {
     alignContent: "center",
     marginBottom: "1rem",
+    width: "100%",
     padding: "2rem",
     display: "none",
     [theme.breakpoints.down("md")]: {

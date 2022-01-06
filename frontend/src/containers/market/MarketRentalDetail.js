@@ -111,10 +111,7 @@ export default function MarketRentalDetail() {
   const { darkTheme } = useSelector((state) => state.general);
   const starter = useStarter(marketItem, "rental");
   const closeHandler = () => {
-    const currentURL = window.location.href;
-    const goURL = currentURL.split("/");
-    const type = goURL.indexOf("market") + 1;
-    history.push(`/market/${goURL[type]}`);
+    history.goBack();
   };
   return (
     <div className={classes.root}>
