@@ -42,7 +42,7 @@ const MarketSideBar = ({
     },
     paper: {
       padding: "1rem",
-      //   backgroundColor: "black",
+      height: "100%",
       marginRight: "5px",
       position: "absolute",
       top: "0",
@@ -127,7 +127,6 @@ const MarketSideBar = ({
         </Typography>
         <Box
           width="100%"
-          maxHeight="500px"
           sx={{
             overflowY: "auto",
             color: "#c1c1c1",

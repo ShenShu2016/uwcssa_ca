@@ -18,6 +18,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  fetchDepartments,
+  selectAllDepartments,
+} from "../../../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
@@ -26,7 +30,6 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Link } from "react-router-dom";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { createUwcssaJob } from "../../../graphql/mutations";
-import { fetchDepartments } from "../../../redux/slice/careerSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
@@ -50,9 +53,8 @@ export default function PostUwcssaJob(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userAuth);
-  const { departments, fetchDepartmentsStatus } = useSelector(
-    (state) => state.career
-  );
+  const departments = useSelector(selectAllDepartments);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const [info, setInfo] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitFailure, setSubmitFailure] = useState(false);
@@ -80,7 +82,7 @@ export default function PostUwcssaJob(props) {
   const handleSubmit = async () => {
     try {
       const createUwcssaJobInput = {
-        id: uwcssaJobData.title,
+        // id: uwcssaJobData.title,
         title: uwcssaJobData.title,
         introduction: uwcssaJobData.introduction,
         requirements: uwcssaJobData.requirements.filter((e) => e !== ""),

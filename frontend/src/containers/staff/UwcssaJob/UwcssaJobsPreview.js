@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import {
-  fetchDepartments,
   fetchUwcssaJobs,
-} from "../../../redux/slice/careerSlice";
+  selectAllUwcssaJobs,
+} from "../../../redux/slice/uwcssaJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
+import { fetchDepartments } from "../../../redux/slice/departmentSlice";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -61,9 +62,10 @@ const columns = [
 export default function UwcssaJobsPreview() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { uwcssaJobs, fetchUwcssaJobsStatus, fetchDepartmentsStatus } =
-    useSelector((state) => state.career);
+  const { fetchUwcssaJobsStatus } = useSelector((state) => state.uwcssaJob);
+  const uwcssaJobs = useSelector(selectAllUwcssaJobs);
 
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
       dispatch(fetchDepartments());

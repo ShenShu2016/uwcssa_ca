@@ -1,7 +1,7 @@
 import addressReducer from "./slice/addressSlice";
 import articleReducer from "./slice/articleSlice";
 import authReducer from "./slice/authSlice";
-import careerSlice from "./slice/careerSlice";
+//import careerSlice from "./slice/careerSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import departmentReducer from "./slice/departmentSlice";
 import eventReducer from "./slice/eventSlice";
@@ -26,7 +26,7 @@ export default configureStore({
     profile: profileReducer,
     topic: topicReducer,
     article: articleReducer,
-    career: careerSlice,
+    //career: careerSlice,
     forum: forumReducer,
     market: marketReducer,
     marketUser: marketUserReducer,

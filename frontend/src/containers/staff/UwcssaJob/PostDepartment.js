@@ -7,12 +7,15 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  fetchDepartments,
+  selectAllDepartments,
+} from "../../../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import API from "@aws-amplify/api";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createDepartment } from "../../../graphql/mutations";
-import { fetchDepartments } from "../../../redux/slice/careerSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 
@@ -30,10 +33,13 @@ const useStyles = makeStyles({
 
 export default function PostDepartment(props) {
   const dispatch = useDispatch();
-  const { departments } = useSelector((state) => state.career);
+  const departments = useSelector(selectAllDepartments);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   useEffect(() => {
-    dispatch(fetchDepartments());
-  }, [dispatch]);
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, fetchDepartmentsStatus]);
 
   const classes = useStyles();
   const { user } = useSelector((state) => state.userAuth);
