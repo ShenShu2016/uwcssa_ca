@@ -80,7 +80,7 @@ export default function PostUwcssaJob(props) {
   const handleSubmit = async () => {
     try {
       const createUwcssaJobInput = {
-        id: uwcssaJobData.title,
+        // id: uwcssaJobData.title,
         title: uwcssaJobData.title,
         introduction: uwcssaJobData.introduction,
         requirements: uwcssaJobData.requirements.filter((e) => e !== ""),
