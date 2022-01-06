@@ -99,9 +99,8 @@ export default function MarketItemDetail() {
   const { darkTheme } = useSelector((state) => state.general);
   const starter = useStarter(marketItem, "item");
   const closeHandler = () => {
-  history.goBack();
+    history.goBack();
   };
-  console.log(window.history)
   return (
     <div className={classes.root}>
       {starter === false ? (

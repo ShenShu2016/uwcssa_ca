@@ -30,7 +30,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function SwipeableDrawerInfo({
-  content,
+  children,
   title,
   position,
   open,
@@ -50,7 +50,7 @@ export default function SwipeableDrawerInfo({
         keepMounted: true,
       }}
       sx={{
-        "& .MuiPaper-root": {
+        "& .MuiDrawer-paper": {
           height: `calc(80% - ${drawerBleeding}px)`,
           overflow: "visible",
         },
@@ -72,7 +72,7 @@ export default function SwipeableDrawerInfo({
         <Typography sx={{ p: 2, color: "text.secondary" }}>{title}</Typography>
       </Box>
       <Box height="100%" width="100%">
-        {content}
+        {children}
       </Box>
     </SwipeableDrawer>
   );
