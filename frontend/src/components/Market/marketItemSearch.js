@@ -1,5 +1,8 @@
 import {
+  Avatar,
+  Box,
   Button,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -11,6 +14,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -69,8 +73,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, open, control, onKeyDownHandler, darkTheme, ...other } =
-    props;
+  const {
+    onClose,
+    open,
+    control,
+    onKeyDownHandler,
+    darkTheme,
+    sortedOccurrence,
+    occurrence,
+    ...other
+  } = props;
+  const [clickedTags, setClickedTags] = React.useState([]);
 
   const handleCancel = () => {
     onClose();
@@ -84,13 +97,15 @@ function ConfirmationDialogRaw(props) {
       onClose={onClose}
       {...other}
     >
-      <DialogTitle>位置</DialogTitle>
+      <DialogTitle>搜索</DialogTitle>
       <DialogContent dividers>
         {/* <Box sx={{ marginBottom: "1rem" }}>
           <Typography variant="caption">根据地址，邮编搜索</Typography>
         </Box> */}
         <Search
-          sx={{ backgroundColor: darkTheme ? "#121212" : "rgb(243, 246, 249)" }}
+          style={{
+            backgroundColor: darkTheme ? "#121212" : "rgb(243, 246, 249)",
+          }}
         >
           <SearchIconWrapper>
             <SearchIcon />
@@ -112,6 +127,31 @@ function ConfirmationDialogRaw(props) {
             )}
           />
         </Search>
+        <Box sx={{ color: "action.active", marginTop: "0.5rem" }}>
+          <Typography marginBottom="0.5rem" fontSize="14px" fontWeight="600">
+            热度趋势
+          </Typography>
+
+          {sortedOccurrence &&
+            sortedOccurrence.slice(0, 6).map((tag, tagIdx) => {
+              return (
+                <Chip
+                  key={tagIdx}
+                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
+                  label={tag}
+                  sx={{ margin: "0.2rem" }}
+                  color="default"
+                  onClick={() => {
+                    if (clickedTags.includes(tag)) {
+                      setClickedTags((prev) => prev.filter((t) => t !== tag));
+                    } else {
+                      setClickedTags((prev) => prev.concat(tag));
+                    }
+                  }}
+                />
+              );
+            })}
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancel}>关闭</Button>
@@ -120,7 +160,13 @@ function ConfirmationDialogRaw(props) {
   );
 }
 
-export const SearchArea = ({ type = "all", darkTheme, mode = "fullWidth" }) => {
+export const SearchArea = ({
+  type = "all",
+  darkTheme,
+  mode = "fullWidth",
+  occurrence,
+  sortedOccurrence,
+}) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const { control, reset, getValues } = useForm({
@@ -158,7 +204,11 @@ export const SearchArea = ({ type = "all", darkTheme, mode = "fullWidth" }) => {
     <>
       {mode === "fullWidth" ? (
         <Search
-          sx={{ backgroundColor: darkTheme ? "#121212" : "rgb(243, 246, 249)" }}
+          sx={{
+            backgroundColor: darkTheme
+              ? "rgba(247, 247, 247,0.85)"
+              : "rgb(243, 246, 249)",
+          }}
         >
           <SearchIconWrapper>
             <SearchIcon />
@@ -188,6 +238,8 @@ export const SearchArea = ({ type = "all", darkTheme, mode = "fullWidth" }) => {
             id="ringtone-menu"
             keepMounted
             onKeyDownHandler={onKeyDownHandler}
+            sortedOccurrence={sortedOccurrence}
+            occurrence={occurrence}
             open={open}
             onClose={() => setOpen(false)}
           />
@@ -234,38 +286,8 @@ export const CategoryIcons = ({ darkTheme }) => {
           icon={<EmojiTransportation />}
         />
         <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
-          icon={<AccessibilityNewIcon />}
-        />
-        <IconList
-          to="/market/vehicle"
-          label="凑数"
+          to="/market"
+          label="敬请期待"
           icon={<AccessibilityNewIcon />}
         />
       </List>

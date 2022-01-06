@@ -35,12 +35,27 @@ export default function MarketList() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  let tags = [];
+  marketItems
+    .filter((a) => a.tags !== null)
+    .forEach((item) => {
+      item.tags.map((subitem) => tags.push(subitem));
+    });
+  const countTags = (arr) =>
+    arr.reduce((obj, e) => {
+      obj[e] = (obj[e] || 0) + 1;
+      return obj;
+    }, {});
+  const occurrence = countTags(tags);
+  const sortedOccurrence = Object.keys(occurrence).sort(
+    (a, b) => occurrence[b] - occurrence[a]
+  );
+
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
   useEffect(() => {
     const addressInfo = { lat: 42.2732, lng: -83.0014 };
-
-    // console.log("filter:", filter);
     if (searchRadius === 0) {
       dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
     } else {
@@ -100,6 +115,8 @@ export default function MarketList() {
           <MarketTopBar
             darkTheme={darkTheme}
             setSearchRadius={setSearchRadius}
+            sortedOccurrence={sortedOccurrence}
+            occurrence={occurrence}
           />
           <Box className={classes.items}>
             {starter === false ? <BackdropLoading /> : marketItemRenderList}

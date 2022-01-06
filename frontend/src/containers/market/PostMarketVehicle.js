@@ -593,19 +593,18 @@ export default function PostMarketVehicle() {
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            content={
-              <PreviewInfo
-                imgURLs={imgURLs}
-                fakeItems={fakeItems}
-                darkTheme={darkTheme}
-              />
-            }
             title="Preview"
             position="bottom"
             open={open}
             setOpen={() => setOpen(true)}
             setClose={() => setOpen(false)}
-          />
+          >
+            <PreviewInfo
+              imgURLs={imgURLs}
+              fakeItems={fakeItems}
+              darkTheme={darkTheme}
+            />
+          </SwipeableDrawerInfo>
         </Box>
       </Stack>
     </div>

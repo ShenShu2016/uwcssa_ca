@@ -1,6 +1,8 @@
 import {
+  Avatar,
   Box,
   Button,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -12,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  Slide,
   Stack,
   Typography,
 } from "@mui/material";
@@ -26,6 +29,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PropTypes from "prop-types";
 import WorkIcon from "@mui/icons-material/Work";
 import { marketItemStyle } from "./marketItemCss";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function UtilityDialog(props) {
   const { onClose, value: valueProp, open, darkTheme, ...other } = props;
@@ -43,7 +50,7 @@ function UtilityDialog(props) {
       sx={{ "& .MuiDialog-paper": { width: "100%", maxHeight: 600 } }}
       maxWidth="xs"
       onClose={() => onClose()}
-      // TransitionProps={{ onEntering: handleEntering }}
+      TransitionComponent={Transition}
       open={open}
       {...other}
     >
@@ -51,7 +58,7 @@ function UtilityDialog(props) {
       <DialogContent dividers>
         <Box
           width="100%"
-          color={`${darkTheme ? "#787878" : "rgba(0, 0, 0, 0.54)"}`}
+          color={`${darkTheme ? "#787878" : "rgba(0, 0, 0, 0.8)"}`}
         >
           <nav aria-label="main mailbox folders">
             <List>
@@ -108,17 +115,14 @@ function CategoryDialog(props) {
     <Dialog
       sx={{ "& .MuiDialog-paper": { width: "100%", maxHeight: 600 } }}
       maxWidth="xs"
-      // TransitionProps={{ onEntering: handleEntering }}
+      TransitionComponent={Transition}
       open={open}
       onClose={() => onClose()}
       {...other}
     >
       <DialogTitle>选择种类</DialogTitle>
       <DialogContent dividers>
-        <Box
-          width="100%"
-          // maxHeight="400px" overflow="auto"
-        >
+        <Box width="100%">
           <CategoryIcons darkTheme={darkTheme} />
         </Box>
       </DialogContent>
@@ -141,47 +145,15 @@ CategoryDialog.propTypes = {
 export default function MarketTopBar({
   darkTheme,
   setSearchRadius,
-  // type,
-  // trueMarketItems,
-  // handleClick,
-  // filterList,
-  // handleSortKey,
-  // handleMin,
-  // handleMax,
-  // handleCategory,
-  // handleCondition,
-  // handleVehicleType,
-  // handleMinYear,
-  // handleMaxYear,
-  // handleMake,
-  // handleModel,
-  // handleMarketRentalSaleRent,
-  // handlePropertyType,
-  // handleAirConditioningType,
-  // handleHeatingType,
-  // handleReset,
+  sortedOccurrence,
+  occurrence,
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState("");
-
-  //   let tags = [];
-  //   trueMarketItems
-  //     .filter((a) => a.tags !== null)
-  //     .forEach((item) => {
-  //       item.tags.map((subitem) => tags.push(subitem));
-  //     });
-  //   const countTags = (arr) =>
-  //     arr.reduce((obj, e) => {
-  //       obj[e] = (obj[e] || 0) + 1;
-  //       return obj;
-  //     }, {});
-  //   const occurrence = countTags(tags);
-  //   const sortedOccurrence = Object.keys(occurrence).sort(
-  //     (a, b) => occurrence[b] - occurrence[a]
-  //   );
+  const [clickedTags, setClickedTags] = useState([]);
 
   const handleClickListItem = () => {
     setOpen(true);
@@ -203,82 +175,121 @@ export default function MarketTopBar({
       setValue(newValue);
     }
   };
+  console.log("size", window.outerWidth);
   return (
     <React.Fragment>
-      {/* ImgTopFIlter for large screen */}
-      <Paper elevation={3} className={classes.imgPaper1}>
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          color={`${darkTheme ? "#787878" : "#fffff"}`}
-        >
-          二手商城
-        </Typography>
-      </Paper>
-      {/* ImgTopFilter for medium screen  */}
-      <Paper elevation={3} className={classes.imgPaper2}>
-        <Button
-          endIcon={<MoreVertIcon />}
-          sx={{
-            fontWeight: "bold",
-            color: `${darkTheme ? "#787878" : "rgba(0, 0, 0, 1)"}`,
-            fontSize: "1.25rem",
-            padding: 0,
-          }}
-          onClick={handleClickListItem}
-        >
-          二手商城
-        </Button>
-        <UtilityDialog
-          id="ringtone-menu"
-          keepMounted
-          open={open}
-          darkTheme={darkTheme}
-          onClose={handleClose}
-          value={value}
-        />
-        <SearchArea darkTheme={darkTheme} />
-        <Divider sx={{ marginY: "0.5rem" }} />
-        <Stack spacing={2} direction="row" justifyContent="flex-end">
-          <Button startIcon={<AddIcon />} component={Link} to="/market/create">
-            发布我的物品
+      {window.innerWidth >= 900 ? (
+        /* ImgTopFIlter for large screen */
+        <Paper elevation={3} className={classes.imgPaper1}>
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            color={`${darkTheme ? "#787878" : "#fffff"}`}
+          >
+            二手商城
+          </Typography>
+          <Stack
+            spacing={1}
+            direction="row"
+            sx={{ color: "action.active", marginTop: "0.5rem" }}
+          >
+            {sortedOccurrence.slice(0, 8).map((tag, tagIdx) => {
+              return (
+                <Chip
+                  key={tagIdx}
+                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
+                  label={tag}
+                  color={clickedTags.includes(tag) ? "primary" : "default"}
+                  onClick={() => {
+                    if (clickedTags.includes(tag)) {
+                      setClickedTags((prev) => prev.filter((t) => t !== tag));
+                    } else {
+                      setClickedTags((prev) => prev.concat(tag));
+                    }
+                  }}
+                />
+              );
+            })}
+          </Stack>
+        </Paper>
+      ) : (
+        /* ImgTopFilter for medium screen  */
+        <Paper elevation={3} className={classes.imgPaper2}>
+          <Button
+            endIcon={<MoreVertIcon />}
+            sx={{
+              fontWeight: "bold",
+              color: `${darkTheme ? "#787878" : "rgba(0, 0, 0, 1)"}`,
+              fontSize: "1.25rem",
+              padding: 0,
+            }}
+            onClick={handleClickListItem}
+          >
+            二手商城
           </Button>
-          <Button onClick={handleClickListItem2}>选择种类</Button>
-          <CategoryDialog
+          <UtilityDialog
             id="ringtone-menu"
             keepMounted
+            open={open}
             darkTheme={darkTheme}
-            open={open2}
-            onClose={handleClose2}
+            onClose={handleClose}
             value={value}
           />
-          <MarketFIlterLocation
-            type="button"
-            setSearchRadius={setSearchRadius}
-          />
 
-          {/* <FilterInfo
-            form="button"
-            type={type}
-            filterList={filterList}
-            handleSortKey={handleSortKey}
-            handleMin={handleMin}
-            handleMax={handleMax}
-            handleCategory={handleCategory}
-            handleCondition={handleCondition}
-            handleReset={handleReset}
-            handleMarketRentalSaleRent={handleMarketRentalSaleRent}
-            handlePropertyType={handlePropertyType}
-            handleAirConditioningType={handleAirConditioningType}
-            handleHeatingType={handleHeatingType}
-            handleVehicleType={handleVehicleType}
-            handleMinYear={handleMinYear}
-            handleMaxYear={handleMaxYear}
-            handleMake={handleMake}
-            handleModel={handleModel}
-          /> */}
-        </Stack>
-      </Paper>
+          <Box sx={{ color: "action.active", marginTop: "0.5rem" }}>
+            {sortedOccurrence.slice(0, 6).map((tag, tagIdx) => {
+              return (
+                <Chip
+                  key={tagIdx}
+                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
+                  label={tag}
+                  sx={{ margin: "0.2rem" }}
+                  color={clickedTags.includes(tag) ? "primary" : "default"}
+                  onClick={() => {
+                    if (clickedTags.includes(tag)) {
+                      setClickedTags((prev) => prev.filter((t) => t !== tag));
+                    } else {
+                      setClickedTags((prev) => prev.concat(tag));
+                    }
+                  }}
+                />
+              );
+            })}
+          </Box>
+          <Divider sx={{ marginY: "0.5rem" }} />
+          <Stack spacing={2} direction="row" justifyContent="flex-end">
+            <SearchArea
+              darkTheme={darkTheme}
+              mode="halfWidth"
+              sortedOccurrence={sortedOccurrence}
+              occurrence={occurrence}
+            />
+            <Button
+              variant="outlined"
+              startIcon={<AddIcon />}
+              component={Link}
+              to="/market/create"
+            >
+              发布
+            </Button>
+            <Button variant="outlined" onClick={handleClickListItem2}>
+              分类
+            </Button>
+            <CategoryDialog
+              id="ringtone-menu"
+              keepMounted
+              darkTheme={darkTheme}
+              open={open2}
+              onClose={handleClose2}
+              value={value}
+            />
+            <MarketFIlterLocation
+              type="button"
+              setSearchRadius={setSearchRadius}
+            />
+          </Stack>
+        </Paper>
+      )}
     </React.Fragment>
   );
 }
