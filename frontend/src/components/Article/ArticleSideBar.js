@@ -60,7 +60,7 @@ export default function ArticleSideBar() {
       dispatch(fetchUwcssaJobs());
     }
   }, [dispatch, fetchUwcssaJobsStatus, fetchArticlesStatus]);
-  console.log(articleID);
+
   const filteredArticles = articles
     .filter((x) => x.id !== articleID)
     .slice(0, 10);
@@ -77,12 +77,8 @@ export default function ArticleSideBar() {
           {filteredArticles &&
             filteredArticles.map((article, idx) => {
               return (
-                <Fragment>
-                  <ListItem
-                    key={idx}
-                    component={Link}
-                    to={`/article/${article.id}`}
-                  >
+                <Fragment key={idx}>
+                  <ListItem component={Link} to={`/article/${article.id}`}>
                     <ListItemIcon sx={{ fontSize: 20 }}>💥</ListItemIcon>
                     <ListItemText
                       primary={article.title}
@@ -104,12 +100,8 @@ export default function ArticleSideBar() {
       <List>
         {uwcssaJobs.map((job, idx) => {
           return (
-            <Fragment>
-              <ListItem
-                key={idx}
-                component={Link}
-                to={`/career/jobDetail/${job.id}`}
-              >
+            <Fragment key={idx}>
+              <ListItem component={Link} to={`/career/jobDetail/${job.id}`}>
                 <ListItemIcon sx={{ fontSize: 20 }}>🔥</ListItemIcon>
                 <ListItemText
                   primary={job.title}

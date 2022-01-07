@@ -66,7 +66,7 @@ export const ShareInfoDialog = forwardRef((props, ref) => {
     });
     console.log("完全结束啦");
   };
-  console.log(loading);
+
   return (
     <Dialog open={open} ref={innerRef} onClose={handleCLose}>
       <DialogTitle>分享</DialogTitle>

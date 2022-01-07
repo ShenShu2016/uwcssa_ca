@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-import AddIcon from "@mui/icons-material/Add";
 import ArticleIcon from "@mui/icons-material/Article";
 import CloseIcon from "@mui/icons-material/Close";
 import EventIcon from "@mui/icons-material/Event";
@@ -25,18 +24,11 @@ import uwcssa_logo from "../../static/uwcssa_logo.svg";
 
 export default function DrawerList({ toggleDrawer }) {
   const [openStaff, setOpenStaff] = useState(false);
-  const [openMarket, setOpenMarket] = useState(false);
-  const [openForum, setOpenForum] = useState(false);
+
   const handleClick = () => {
     setOpenStaff(!openStaff);
   };
 
-  const handleClickMarket = () => {
-    setOpenMarket(!openMarket);
-  };
-  const handleClickForum = () => {
-    setOpenForum(!openForum);
-  };
   return (
     <div>
       <Box
@@ -82,6 +74,40 @@ export default function DrawerList({ toggleDrawer }) {
             </ListItemButton>
             <ListItemButton
               component={Link}
+              to="/forum"
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemIcon>
+                <ForumIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary="论坛"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to="/market"
+              onClick={toggleDrawer(false)}
+            >
+              <ListItemIcon>
+                <ShopIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary="二手闲置"
+                primaryTypographyProps={{
+                  fontSize: 18,
+                  fontWeight: "medium",
+                  color: "primary",
+                }}
+              />
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
               to="/career"
               onClick={toggleDrawer(false)}
             >
@@ -97,185 +123,6 @@ export default function DrawerList({ toggleDrawer }) {
                 }}
               />
             </ListItemButton>
-            <div>
-              <ListItemButton onClick={handleClickForum}>
-                <ListItemIcon>
-                  <ForumIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="论坛"
-                  primaryTypographyProps={{
-                    fontSize: 18,
-                    fontWeight: "medium",
-                    color: "primary",
-                  }}
-                />
-                {openForum ? <ExpandMore /> : <ExpandLess />}
-              </ListItemButton>
-
-              <Collapse in={openForum} timeout="auto">
-                <ListItem>
-                  <ListItemButton
-                    component={Link}
-                    to="/forum"
-                    onClick={toggleDrawer(false)}
-                    sx={{ pl: 7 }}
-                  >
-                    <ListItemText
-                      primary="论坛首页"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton
-                    disabled
-                    sx={{ pl: 7 }}
-                    component={Link}
-                    to="/forum/forumPostUpload"
-                    onClick={toggleDrawer(false)}
-                  >
-                    <ListItemText
-                      primary="发布帖子"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                    <AddIcon color="primary" />
-                  </ListItemButton>
-                </ListItem>
-                {/* <ListItem>
-                  <ListItemButton
-                    sx={{ pl: 7 }}
-                    component={Link}
-                    to="/forum/admin/forumTopicCURD"
-                    onClick={toggleDrawer(false)}
-                  >
-                    <ListItemText primary="论坛主题" />
-                  </ListItemButton>
-                </ListItem> */}
-                <ListItem>
-                  <ListItemButton
-                    sx={{ pl: 7 }}
-                    component={Link}
-                    to="/forumPostList"
-                    onClick={toggleDrawer(false)}
-                    disabled
-                  >
-                    <ListItemText
-                      primary="forumPostList"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton sx={{ pl: 7 }} disabled>
-                    <ListItemText
-                      primary="举报审核"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </Collapse>
-            </div>
-
-            <div>
-              <ListItemButton onClick={handleClickMarket}>
-                <ListItemIcon>
-                  <ShopIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary="商城"
-                  primaryTypographyProps={{
-                    fontSize: 18,
-                    fontWeight: "medium",
-                    color: "primary",
-                  }}
-                />
-                {openMarket ? <ExpandMore /> : <ExpandLess />}
-              </ListItemButton>
-              <Collapse in={openMarket} timeout="auto">
-                <ListItem>
-                  <ListItemButton
-                    component={Link}
-                    to="/market"
-                    onClick={toggleDrawer(false)}
-                    sx={{ pl: 7 }}
-                  >
-                    <ListItemText
-                      primary="商城首页"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton
-                    sx={{ pl: 7 }}
-                    onClick={toggleDrawer(false)}
-                    component={Link}
-                    to="/market/create"
-                  >
-                    <ListItemText
-                      primary="发布商品"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                    <AddIcon color="primary" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton
-                    sx={{ pl: 7 }}
-                    onClick={toggleDrawer(false)}
-                    component={Link}
-                    to="/market"
-                  >
-                    <ListItemText
-                      primary="查看全部商品"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-
-                <ListItem>
-                  <ListItemButton sx={{ pl: 7 }} disabled>
-                    <ListItemText
-                      primary="举报审核"
-                      primaryTypographyProps={{
-                        fontSize: 18,
-                        fontWeight: "medium",
-                        color: "primary",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </Collapse>
-            </div>
           </div>
         </List>
         <Divider />

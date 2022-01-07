@@ -6203,11 +6203,28 @@ export const listAddresss = /* GraphQL */ `
         geocodingResult
         lat
         lng
-        # itemID
+        itemID
         userID
         createdAt
         updatedAt
-
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
         event {
           id
           summary
@@ -6289,24 +6306,6 @@ export const listAddresss = /* GraphQL */ `
           userID
           updatedAt
           owner
-          user {
-            id
-            username
-            email
-            owner
-            firstName
-            lastName
-            intro
-            major
-            avatarImgURL
-            backGroundImgURL
-            linkedIn
-            github
-            sortKey
-            createdAt
-            updatedAt
-            badges
-          }
         }
         owner
       }
