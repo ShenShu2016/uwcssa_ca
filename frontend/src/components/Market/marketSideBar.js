@@ -22,7 +22,7 @@ import { makeStyles } from "@mui/styles";
 
 const MarketSideBar = ({
   // setAddressInfo,
-  setSearchRadius,
+  // setSearchRadius,
   clickHandler,
   darkTheme,
 }) => {
@@ -113,8 +113,8 @@ const MarketSideBar = ({
             位置
           </Typography>
           <MarketFIlterLocation
-            // setAddressInfo={setAddressInfo}
-            setSearchRadius={setSearchRadius}
+          // setAddressInfo={setAddressInfo}
+          // setSearchRadius={setSearchRadius}
           />
         </Box>
         <Typography

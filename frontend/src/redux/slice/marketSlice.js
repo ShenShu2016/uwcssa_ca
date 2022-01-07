@@ -73,15 +73,15 @@ export const selectedMarketItem = createAsyncThunk(
 
 export const addressFilteredMarketItem = createAsyncThunk(
   "market/addressFilteredMarketItem",
-  async ({ filter }) => {
+  async ({ filter, marketType = "all" }) => {
     try {
       const response = await API.graphql({
         query: listAddresss,
         variables: { filter: filter },
         authMode: "AWS_IAM",
       });
-      console.log("res:", response);
-      return response.data.listAddresss.items;
+      // console.log("res:", response);
+      return [response.data.listAddresss.items, marketType];
     } catch (error) {
       console.log(error);
     }
@@ -199,8 +199,13 @@ const marketSlice = createSlice({
       .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
         state.addressFilteredMarketItemStatus = "succeeded";
         marketAdapter.removeAll(state);
-        let marketItems = action.payload;
+        let marketItems = action.payload[0];
+        let marketType = action.payload[1];
         let marketItem = marketItems.map((item) => item.marketItem);
+        marketItem =
+          marketType !== "all"
+            ? marketItem.filter((item) => item.marketType === marketType)
+            : marketItem;
         marketAdapter.upsertMany(state, marketItem);
       })
       .addCase(addressFilteredMarketItem.rejected, (state, action) => {
