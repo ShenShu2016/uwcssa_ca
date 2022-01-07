@@ -1,7 +1,6 @@
 import { Backdrop, Box, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import {
-  addressFilteredMarketItem,
   fetchMarketItems,
   selectAllMarketItems,
 } from "../../redux/slice/marketSlice";
@@ -27,14 +26,13 @@ export default function MarketList() {
   const dispatch = useDispatch();
   const useStyles = marketItemStyle;
   const classes = useStyles();
-  // const [addressInfo, setAddressInfo] = React.useState({});
-  const [searchRadius, setSearchRadius] = React.useState(0);
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
   const starter = useStarter(marketItems);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const topRef = React.useRef(null);
 
   let tags = [];
   marketItems
@@ -52,37 +50,9 @@ export default function MarketList() {
     (a, b) => occurrence[b] - occurrence[a]
   );
 
-  //conversion: Latitude: 1 deg = 110.574 km
-  // Longitude: 1 deg = 111.320*cos(latitude) km
   useEffect(() => {
-    const addressInfo = { lat: 42.2732, lng: -83.0014 };
-    if (searchRadius === 0) {
-      dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
-    } else {
-      const filter = {
-        // and: { lat: { between: [50, 52] }, lng: { between: [-2, 0] } },
-        and: {
-          lat: {
-            between: [
-              addressInfo.lat - searchRadius / 110.574,
-              addressInfo.lat + searchRadius / 110.574,
-            ],
-          },
-          lng: {
-            between: [
-              addressInfo.lng -
-                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
-              addressInfo.lng +
-                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
-            ],
-          },
-        },
-      };
-      console.log(filter);
-      dispatch(addressFilteredMarketItem({ filter: filter }));
-    }
-  }, [dispatch, searchRadius]);
-
+    dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+  }, [dispatch]);
   const clickHandler = () => {
     dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
   };
@@ -92,6 +62,7 @@ export default function MarketList() {
     marketItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          starter={starter}
           darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
@@ -101,26 +72,20 @@ export default function MarketList() {
     });
   return (
     <Box className={classes.root}>
+      {!starter && <BackdropLoading />}
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
+        ref={topRef}
       >
-        <MarketSideBar
-          darkTheme={darkTheme}
-          // setAddressInfo={setAddressInfo}
-          setSearchRadius={setSearchRadius}
-          clickHandler={clickHandler}
-        />
+        <MarketSideBar darkTheme={darkTheme} clickHandler={clickHandler} />
         <Box className={classes.img}>
           <MarketTopBar
             darkTheme={darkTheme}
-            setSearchRadius={setSearchRadius}
             sortedOccurrence={sortedOccurrence}
             occurrence={occurrence}
           />
-          <Box className={classes.items}>
-            {starter === false ? <BackdropLoading /> : marketItemRenderList}
-          </Box>
+          <Box className={classes.items}>{marketItemRenderList}</Box>
           <Box className={classes.fabBox}>
             <Backdrop open={open} />
             <SpeedDial
@@ -137,7 +102,9 @@ export default function MarketList() {
                   icon={action.icon}
                   tooltipTitle={action.name}
                   tooltipOpen
-                  onClick={() => {}}
+                  onClick={() => {
+                    topRef.current.scrollIntoView({ behavior: "smooth" });
+                  }}
                 />
               ))}
             </SpeedDial>

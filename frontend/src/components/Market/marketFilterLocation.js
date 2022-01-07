@@ -19,6 +19,8 @@ import GoogleMaps from "../GoogleMap/GoogleMapsPlace";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import PropTypes from "prop-types";
+import { addressFilteredMarketItem } from "../../redux/slice/marketSlice";
+import { useDispatch } from "react-redux";
 
 // import { styled } from "@mui/material/styles";
 
@@ -115,13 +117,41 @@ ConfirmationDialogRaw.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ConfirmationDialog({
-  // setAddressInfo,
-  setSearchRadius,
-  type = "plain",
-}) {
+export default function MarketFIlterLocation({ type = "plain", marketType }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("位置");
+  const [searchRadius, setSearchRadius] = React.useState(0);
+  const dispatch = useDispatch();
+
+  //conversion: Latitude: 1 deg = 110.574 km
+  // Longitude: 1 deg = 111.320*cos(latitude) km
+  React.useEffect(() => {
+    const addressInfo = { lat: 42.2732, lng: -83.0014 };
+    if (searchRadius !== 0) {
+      const filter = {
+        // and: { lat: { between: [50, 52] }, lng: { between: [-2, 0] } },
+        and: {
+          lat: {
+            between: [
+              addressInfo.lat - searchRadius / 110.574,
+              addressInfo.lat + searchRadius / 110.574,
+            ],
+          },
+          lng: {
+            between: [
+              addressInfo.lng -
+                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+              addressInfo.lng +
+                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+            ],
+          },
+        },
+      };
+      dispatch(
+        addressFilteredMarketItem({ filter: filter, marketType: marketType })
+      );
+    }
+  }, [dispatch, searchRadius, marketType]);
 
   const handleClickListItem = () => {
     setOpen(true);

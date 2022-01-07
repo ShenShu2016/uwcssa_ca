@@ -73,7 +73,7 @@ const FilterContent = (props) => {
         </Stack>
       </Box>
       <Box className={classes.special}>
-        <MarketFIlterLocation />
+        <MarketFIlterLocation marketType={type} />
       </Box>
       <Controller
         name="sortKey"
@@ -450,7 +450,7 @@ export default function FilterInfo({
                   商城
                 </Button>
               </span>
-              {type === "item" ? (
+              {type === "Item" ? (
                 <span style={{ cursor: "not-allowed" }}>
                   <Button
                     startIcon={<AddShoppingCartIcon />}
@@ -462,7 +462,7 @@ export default function FilterInfo({
                   </Button>
                 </span>
               ) : null}
-              {type === "vehicle" ? (
+              {type === "Vehicle" ? (
                 <span style={{ cursor: "not-allowed" }}>
                   <Button
                     startIcon={<DriveEtaIcon />}
@@ -474,7 +474,7 @@ export default function FilterInfo({
                   </Button>
                 </span>
               ) : null}
-              {type === "rental" ? (
+              {type === "Rental" ? (
                 <span style={{ cursor: "not-allowed" }}>
                   <Button
                     startIcon={<HouseIcon />}
@@ -486,7 +486,7 @@ export default function FilterInfo({
                   </Button>
                 </span>
               ) : null}
-              {type === "pet" ? (
+              {type === "Pet" ? (
                 <span style={{ cursor: "not-allowed" }}>
                   <Button
                     startIcon={<PetsIcon />}
@@ -498,7 +498,7 @@ export default function FilterInfo({
                   </Button>
                 </span>
               ) : null}
-              {type === "carpool" ? (
+              {type === "Carpool" ? (
                 <span style={{ cursor: "not-allowed" }}>
                   <Button
                     startIcon={<EmojiTransportation />}
@@ -532,7 +532,7 @@ export default function FilterInfo({
               sx={{ margin: "1rem" }}
               startIcon={<AddIcon />}
               component={Link}
-              to={`/market/create/${type}`}
+              to={`/market/create/${type.toLowerCase()}`}
             >
               新增商品
             </Button>

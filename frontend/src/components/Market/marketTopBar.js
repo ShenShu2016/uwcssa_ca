@@ -144,7 +144,7 @@ CategoryDialog.propTypes = {
 
 export default function MarketTopBar({
   darkTheme,
-  setSearchRadius,
+  // setSearchRadius,
   sortedOccurrence,
   occurrence,
 }) {
@@ -175,7 +175,6 @@ export default function MarketTopBar({
       setValue(newValue);
     }
   };
-  console.log("size", window.outerWidth);
   return (
     <React.Fragment>
       {window.innerWidth >= 900 ? (
@@ -188,14 +187,11 @@ export default function MarketTopBar({
           >
             二手商城
           </Typography>
-          <Stack
-            spacing={1}
-            direction="row"
-            sx={{ color: "action.active", marginTop: "0.5rem" }}
-          >
+          <Box marginTop="1rem">
             {sortedOccurrence.slice(0, 8).map((tag, tagIdx) => {
               return (
                 <Chip
+                  sx={{ margin: "0.25rem" }}
                   key={tagIdx}
                   avatar={<Avatar>{occurrence[tag]}</Avatar>}
                   label={tag}
@@ -210,7 +206,7 @@ export default function MarketTopBar({
                 />
               );
             })}
-          </Stack>
+          </Box>
         </Paper>
       ) : (
         /* ImgTopFilter for medium screen  */
@@ -285,7 +281,7 @@ export default function MarketTopBar({
             />
             <MarketFIlterLocation
               type="button"
-              setSearchRadius={setSearchRadius}
+              // setSearchRadius={setSearchRadius}
             />
           </Stack>
         </Paper>

@@ -1,14 +1,17 @@
-import { Box, CardActionArea, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  CardActionArea,
+  Paper,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 import { Link } from "react-router-dom";
 import React from "react";
 import UWinBadge from "./uwinBadge";
-// import Storage from "@aws-amplify/storage";
 import { makeStyles } from "@mui/styles";
 import moment from "moment";
-// import { getImage, selectImageById } from "../../redux/slice/imageSlice";
-// import { useDispatch } from "react-redux";
-import useHover from "../../Hooks/useHover";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
       width: "173px",
     },
   },
-  paper: {},
   content: {
     maxHeight: "200px",
   },
@@ -35,24 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MarketComponent({ item, type, darkTheme }) {
+export default function MarketComponent({ item, type, darkTheme, starter }) {
   const classes = useStyles();
-  const [hoverRef, isHover] = useHover();
-  const {
-    id,
-    name,
-    // description,
-    price,
-    imgURLs,
-    // marketItemCategory,
-    // marketItemCondition,
-    location,
-    createdAt,
-    user,
-    // tags,
-    // active,
-    // ByCreatedAt,
-  } = item;
+  const { id, name, price, imgURLs, location, createdAt, user } = item;
   const isUWin =
     user.email.includes("uwindsor") || user.badges.includes("uwindsor");
 
@@ -106,28 +93,36 @@ export default function MarketComponent({ item, type, darkTheme }) {
               {moment(createdAt).fromNow()}
             </Typography>
           </Box>
-          <UWinBadge onHover={isHover} isUWin={isUWin} />
+          <UWinBadge isUWin={isUWin} />
         </Box>
       </React.Fragment>
     );
   };
-
+  const SkeletonFade = () => {
+    return (
+      <Stack spacing={1}>
+        <Skeleton variant="text" />
+        <Skeleton variant="circular" width={40} height={40} />
+        <Skeleton variant="rectangular" height={118} />
+      </Stack>
+    );
+  };
   return (
     <Paper elevation={0} className={classes.root}>
-      <CardActionArea
-        ref={hoverRef}
-        component={Link}
-        to={`/market/${type}/${id}`}
-        sx={{
-          transition: "background-color 0.7s",
-          "&:hover": {
+      {starter ? (
+        <CardActionArea
+          component={Link}
+          to={`/market/${type}/${id}`}
+          sx={{
             backgroundColor: darkTheme ? "#121212" : "#f5f5f5",
-          },
-        }}
-      >
-        <img src={imgURLs[0]} alt="" className={classes.s3image} />
-        <Box my={"8px"}>{displayInfo()}</Box>
-      </CardActionArea>
+          }}
+        >
+          <img src={imgURLs[0]} alt={name} className={classes.s3image} />
+          <Box my={"8px"}>{displayInfo()}</Box>
+        </CardActionArea>
+      ) : (
+        <SkeletonFade />
+      )}
     </Paper>
   );
 }

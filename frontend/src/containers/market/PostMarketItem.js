@@ -418,7 +418,7 @@ export default function PostMarketItem() {
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传MarketItem{" "}
+              上传MarketItem
               {loading && (
                 <CircularProgress
                   size={24}

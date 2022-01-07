@@ -56,6 +56,7 @@ export default function MarketRental() {
     filteredItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          starter={starter}
           darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
@@ -85,7 +86,7 @@ export default function MarketRental() {
         <FilterInfo
           darkTheme={darkTheme}
           form="plain"
-          type="rental"
+          type="Rental"
           filterList={filterList}
           control={control}
           handleSearch={handleSearch}
@@ -95,7 +96,7 @@ export default function MarketRental() {
           <MarketImgTopFilter
             darkTheme={darkTheme}
             control={control}
-            type="rental"
+            type="Rental"
             trueMarketItems={filteredItems}
             filterList={filterList}
             handleSearch={handleSearch}
