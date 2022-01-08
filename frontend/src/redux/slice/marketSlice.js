@@ -20,6 +20,8 @@ const marketAdapter = createEntityAdapter({
 });
 
 const initialState = marketAdapter.getInitialState({
+  filter: {},
+  currentFilterType: null,
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
   selectedMarketItemStatus: "idle",
@@ -80,7 +82,7 @@ export const addressFilteredMarketItem = createAsyncThunk(
         variables: { filter: filter },
         authMode: "AWS_IAM",
       });
-      // console.log("res:", response);
+      console.log("res:", response);
       return [response.data.listAddresss.items, marketType];
     } catch (error) {
       console.log(error);
@@ -132,9 +134,16 @@ const marketSlice = createSlice({
   name: "market",
   initialState,
   reducers: {
-    removeSelectedMarketItem(state, action) {
-      state.selected.marketItem = {};
-      console.log("remove selected market item successfully!");
+    filterUpdated(state, action) {
+      // action.payload:　e.g. filter : {lat: -56, lng: 25, price: [0,200]}
+      const { marketType, filter } = action.payload;
+      const currentType = state.currentFilterType;
+      const currentFilter = state.filter;
+      state.filter =
+        currentType === marketType || currentType === null
+          ? Object.assign(currentFilter, filter)
+          : filter;
+      state.currentFilterType = marketType;
     },
   },
   extraReducers(builder) {
@@ -214,7 +223,7 @@ const marketSlice = createSlice({
   },
 });
 
-export const { removeSelectedMarketItem } = marketSlice.actions;
+export const { filterUpdated } = marketSlice.actions;
 
 export const {
   selectAll: selectAllMarketItems,
