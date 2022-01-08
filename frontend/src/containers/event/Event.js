@@ -186,20 +186,30 @@ export default function Event() {
         <div>
           <Box sx={{ bgcolor: "", paddingBottom: "3rem" }}>
             <Container>
-              <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 2, sm: 8, md: 12 }}
-                padding="0 1rem"
-              >
-                {renderList}
-              </Grid>
-
-              {/* <Box className={classes.seeMore}>
-                <Button variant="outlined" component={Link} to="" disabled>
-                  查看更多
-                </Button>
-              </Box> */}
+              {renderList.length !== 0 ? (
+                <Grid
+                  container
+                  spacing={{ xs: 2, md: 3 }}
+                  columns={{ xs: 2, sm: 8, md: 12 }}
+                  padding="0 1rem"
+                >
+                  {renderList}
+                </Grid>
+              ) : (
+                <Grid
+                  item
+                  xs={12}
+                  sx={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  <h3>
+                    More events coming soon! Please check back here later.
+                  </h3>
+                </Grid>
+              )}
             </Container>
           </Box>
         </div>
