@@ -19,7 +19,7 @@ import GoogleMaps from "../GoogleMap/GoogleMapsPlace";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import PropTypes from "prop-types";
-import { addressFilteredMarketItem } from "../../redux/slice/marketSlice";
+import { filterUpdated } from "../../redux/slice/marketSlice";
 import { useDispatch } from "react-redux";
 
 // import { styled } from "@mui/material/styles";
@@ -34,6 +34,7 @@ function ConfirmationDialogRaw(props) {
     ...other
   } = props;
   const [newLocationRadius, setNewLocationRadius] = useState(5);
+
   // const Item = styled(Paper)(({ theme }) => ({
   //   ...theme.typography.body2,
   //   padding: theme.spacing(1),
@@ -49,14 +50,12 @@ function ConfirmationDialogRaw(props) {
   };
 
   const handleOk = () => {
-    // const windsor = { lat: 42.2732, lng: -83.0014 };
-    // setAddressInfo(windsor);
-    setSearchRadius(newLocationRadius);
     onClose(`距离温莎大学 ${newLocationRadius}km`);
   };
 
   const handleRadiusChange = (e) => {
     setNewLocationRadius(e.target.value);
+    setSearchRadius(e.target.value);
   };
 
   return (
@@ -125,33 +124,6 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
 
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
-  React.useEffect(() => {
-    const addressInfo = { lat: 42.2732, lng: -83.0014 };
-    if (searchRadius !== 0) {
-      const filter = {
-        // and: { lat: { between: [50, 52] }, lng: { between: [-2, 0] } },
-        and: {
-          lat: {
-            between: [
-              addressInfo.lat - searchRadius / 110.574,
-              addressInfo.lat + searchRadius / 110.574,
-            ],
-          },
-          lng: {
-            between: [
-              addressInfo.lng -
-                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
-              addressInfo.lng +
-                searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
-            ],
-          },
-        },
-      };
-      dispatch(
-        addressFilteredMarketItem({ filter: filter, marketType: marketType })
-      );
-    }
-  }, [dispatch, searchRadius, marketType]);
 
   const handleClickListItem = () => {
     setOpen(true);
@@ -159,7 +131,24 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
 
   const handleClose = (newValue) => {
     setOpen(false);
-
+    const addressInfo = { lat: 42.2732, lng: -83.0014 };
+    const filter = {
+      lat: {
+        between: [
+          addressInfo.lat - searchRadius / 110.574,
+          addressInfo.lat + searchRadius / 110.574,
+        ],
+      },
+      lng: {
+        between: [
+          addressInfo.lng -
+            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+          addressInfo.lng +
+            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+        ],
+      },
+    };
+    dispatch(filterUpdated({ filter, marketType }));
     if (newValue) {
       setValue(newValue);
     }

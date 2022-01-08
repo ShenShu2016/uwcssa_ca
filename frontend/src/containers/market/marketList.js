@@ -1,6 +1,7 @@
 import { Backdrop, Box, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import {
+  addressFilteredMarketItem,
   fetchMarketItems,
   selectAllMarketItems,
 } from "../../redux/slice/marketSlice";
@@ -28,6 +29,7 @@ export default function MarketList() {
   const classes = useStyles();
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
+  const { filter } = useSelector((state) => state.market);
   const starter = useStarter(marketItems);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -46,13 +48,18 @@ export default function MarketList() {
       return obj;
     }, {});
   const occurrence = countTags(tags);
+
   const sortedOccurrence = Object.keys(occurrence).sort(
     (a, b) => occurrence[b] - occurrence[a]
   );
 
   useEffect(() => {
-    dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
-  }, [dispatch]);
+    if (Object.keys(filter).length === 0) {
+      dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+    } else {
+      dispatch(addressFilteredMarketItem({ filter }));
+    }
+  }, [dispatch, filter]);
   const clickHandler = () => {
     dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
   };

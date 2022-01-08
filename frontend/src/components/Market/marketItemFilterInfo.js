@@ -139,7 +139,7 @@ const FilterContent = (props) => {
           )}
         />
       </Stack>
-      {type === "item" ? (
+      {type === "Item" ? (
         <React.Fragment>
           <Box mb="1rem">
             <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
@@ -177,7 +177,7 @@ const FilterContent = (props) => {
           </Box>
         </React.Fragment>
       ) : null}
-      {type === "vehicle" ? (
+      {type === "Vehicle" ? (
         <React.Fragment>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             车型
@@ -276,7 +276,7 @@ const FilterContent = (props) => {
           </Box>
         </React.Fragment>
       ) : null}
-      {type === "rental" ? (
+      {type === "Rental" ? (
         <React.Fragment>
           <Typography variant="h6" marginBottom="1rem" fontWeight="bold">
             出租/出售
