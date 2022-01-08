@@ -5898,6 +5898,103 @@ export const marketRentalSortByMarketRentalSaleRent = /* GraphQL */ `
     }
   }
 `;
+export const marketItemSortByPriceTagsActiveCreatedAt = /* GraphQL */ `
+  query MarketItemSortByPriceTagsActiveCreatedAt(
+    $sortKey: SortKey
+    $priceTagsCreatedAt: ModelMarketItemMarketItemSortByPriceTagsActiveCreatedAtCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMarketItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    marketItemSortByPriceTagsActiveCreatedAt(
+      sortKey: $sortKey
+      priceTagsCreatedAt: $priceTagsCreatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        imgURLs
+        title
+        price
+        marketType
+        description
+        location
+        marketItemCondition
+        marketItemCategory
+        tags
+        vehicleType
+        year
+        make
+        model
+        exteriorColor
+        interiorColor
+        fuelType
+        marketRentalSaleRent
+        propertyType
+        bedroomCounts
+        bathroomsCounts
+        addressID
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        updatedAt
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
+        owner
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
@@ -6306,24 +6403,6 @@ export const listAddresss = /* GraphQL */ `
           userID
           updatedAt
           owner
-          user {
-            id
-            username
-            email
-            owner
-            firstName
-            lastName
-            intro
-            major
-            avatarImgURL
-            backGroundImgURL
-            linkedIn
-            github
-            sortKey
-            createdAt
-            updatedAt
-            badges
-          }
         }
         owner
       }
