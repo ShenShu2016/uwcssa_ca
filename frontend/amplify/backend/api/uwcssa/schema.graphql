@@ -693,7 +693,7 @@ type MarketItem
   @key(
     name: "marketItemSortByPriceTagsActiveCreatedAt"
     fields: ["sortKey", "price", "tags", "createdAt"]
-    queryField: "marketRentalSortByMarketRentalSaleRent"
+    queryField: "marketItemSortByPriceTagsActiveCreatedAt"
   )
   @key(name: "byUser", fields: ["userID", "createdAt"]) {
   id: ID!
