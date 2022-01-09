@@ -22,9 +22,7 @@ exports.handler = async (event) => {
           },
           Source: "admin@uwcssa.ca",
           Message: {
-            Subject: {
-              Data: `UWCSSA Kanban 通知: ${record.dynamodb.NewImage.title.S}`,
-            },
+            Subject: { Data: record.dynamodb.NewImage.title.S },
             Body: {
               Text: {
                 Data: `${
