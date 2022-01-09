@@ -83,6 +83,10 @@
         "userMutationLog": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/userMutationLog-4e69584d34732f4f3235-build.zip"
+        },
+        "KanbanNotification": {
+          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
+          "s3Key": "amplify-builds/KanbanNotification-64644b4b497150642b62-build.zip"
         }
       }
     }
