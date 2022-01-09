@@ -50,6 +50,7 @@ export default function PostMarketItem() {
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [defaultInfo, setDefaultInfo] = useState(true);
+  // const [backDropOpen, setBackDropOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, username)
@@ -445,8 +446,7 @@ export default function PostMarketItem() {
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            title="Preview"
-            position="bottom"
+            position="left"
             open={open}
             setOpen={() => setOpen(true)}
             setClose={() => setOpen(false)}

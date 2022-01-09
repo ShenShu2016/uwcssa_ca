@@ -46,7 +46,7 @@ export const postStyle = makeStyles((theme) => ({
 
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      height: `calc(100% - ${drawerBleeding}px)`,
+      height: "100%",
     },
   },
   previewImg: {
