@@ -593,8 +593,7 @@ export default function PostMarketVehicle() {
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            title="Preview"
-            position="bottom"
+            position="left"
             open={open}
             setOpen={() => setOpen(true)}
             setClose={() => setOpen(false)}
