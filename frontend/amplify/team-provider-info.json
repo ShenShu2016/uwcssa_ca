@@ -86,7 +86,7 @@
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/KanbanNotification-64644b4b497150642b62-build.zip"
+          "s3Key": "amplify-builds/KanbanNotification-634d4a4f64346a6b464b-build.zip"
         }
       }
     }
