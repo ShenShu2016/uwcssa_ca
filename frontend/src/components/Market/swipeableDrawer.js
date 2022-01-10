@@ -1,4 +1,4 @@
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Box } from "@mui/material";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { grey } from "@mui/material/colors";
@@ -16,7 +16,7 @@ const useStyle = makeStyles((theme) => ({
       // backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
       // borderRadius: 3,
       position: "absolute",
-      right: 12,
+      left: 5,
       top: "calc(50% - 15px)",
     },
   },
@@ -59,7 +59,7 @@ export default function SwipeableDrawerInfo({
         className={classes.styledBox}
         sx={{
           position: "absolute",
-          right: -drawerBleeding,
+          left: -drawerBleeding,
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
           visibility: "visible",
@@ -68,7 +68,7 @@ export default function SwipeableDrawerInfo({
         }}
       >
         <Box className={classes.puller}>
-          <ArrowForwardIosIcon />
+          <ArrowBackIosNewIcon />
         </Box>
       </Box>
       <Box height="100%" width="100%">
