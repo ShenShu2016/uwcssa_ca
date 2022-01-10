@@ -126,7 +126,10 @@ export default function BasicInfo({ user, ownerID }) {
               noWrap
               sx={{ fontWeight: "700" }}
             >
-              {user.lastName} {user.firstName}
+              {!/[^a-zA-Z]/.test(user.lastName) &&
+              !/[^a-zA-Z]/.test(user.firstName)
+                ? `${user.firstName} ${user.lastName}`
+                : `${user.lastName} ${user.firstName}`}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {user.intro}

@@ -230,11 +230,13 @@ export default function PersonalCard({
           <CardContent sx={{ textAlign: "center", marginTop: "8rem" }}>
             {lastName && firstName ? (
               <Typography variant="subtitle1" className={classes.heading}>
-                {lastName}, {firstName}
+                {!/[^a-zA-Z]/.test(lastName) && !/[^a-zA-Z]/.test(firstName)
+                  ? `${firstName} ${lastName}`
+                  : `${lastName}${firstName}`}
               </Typography>
             ) : (
               <Typography variant="subtitle1" className={classes.heading}>
-                LastName, FirstName
+                Full Name
               </Typography>
             )}
             <Typography

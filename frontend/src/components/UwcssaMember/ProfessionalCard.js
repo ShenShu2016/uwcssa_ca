@@ -278,11 +278,13 @@ export default function ProfessionalCard({
 
           {lastName && firstName ? (
             <Typography variant="subtitle1" className={classes.heading}>
-              {item.user.lastName}, {item.user.firstName}
+              {!/[^a-zA-Z]/.test(lastName) && !/[^a-zA-Z]/.test(firstName)
+                ? `${item.user.firstName} ${item.user.lastName}`
+                : `${item.user.lastName}${item.user.firstName}`}
             </Typography>
           ) : (
             <Typography variant="subtitle1" className={classes.heading}>
-              LastName, FirstName
+              Full Name
             </Typography>
           )}
           <Typography
