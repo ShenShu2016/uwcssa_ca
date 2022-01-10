@@ -761,7 +761,9 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                     onChange={onChange}
                     value={value}
                     error={!!errors.linkedIn}
-                    helperText={errors.linkedIn ? "格式不对" : null}
+                    helperText={
+                      errors.linkedIn ? "格式不对" : "Format as https://"
+                    }
                   />
                 )}
               />
@@ -783,7 +785,9 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                     onChange={onChange}
                     value={value}
                     error={!!errors.github}
-                    helperText={errors.github ? "格式不对" : null}
+                    helperText={
+                      errors.github ? "格式不对" : "Format as https://"
+                    }
                   />
                 )}
               />

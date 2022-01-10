@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     marginTop: "2rem",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     textAlign: "center",
@@ -123,6 +125,7 @@ export default function Event() {
         xs={2}
         sm={4}
         md={4}
+        lg={3}
         key={idx}
         style={{ animation: animStr(idx), marginBottom: "1rem" }}
       >
@@ -153,6 +156,7 @@ export default function Event() {
           xs={2}
           sm={4}
           md={4}
+          lg={3}
           key={idx}
           style={{ animation: animStr(idx), marginBottom: "1rem" }}
         >
@@ -162,7 +166,7 @@ export default function Event() {
     });
 
   return (
-    <div>
+    <Container maxWidth="lg">
       <Box className={classes.root}>
         {/* <EventSliderShow events={events} /> */}
         <Box className={classes.list}>
@@ -184,33 +188,29 @@ export default function Event() {
         </Box>
 
         <div>
-          <Box sx={{ bgcolor: "", paddingBottom: "3rem" }}>
-            <Container>
-              {renderList.length !== 0 ? (
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 3 }}
-                  columns={{ xs: 2, sm: 8, md: 12 }}
-                  padding="0 1rem"
-                >
-                  {renderList}
-                </Grid>
-              ) : (
-                <Grid
-                  item
-                  xs={12}
-                  sx={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
-                  }}
-                >
-                  <h3>
-                    More events coming soon! Please check back here later.
-                  </h3>
-                </Grid>
-              )}
-            </Container>
+          <Box sx={{ bgcolor: "", paddingBottom: "3rem", flexGrow: 1 }}>
+            {renderList.length !== 0 ? (
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 2, sm: 8, md: 12, lg: 12 }}
+                padding="0 1rem"
+              >
+                {renderList}
+              </Grid>
+            ) : (
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <h3>More events coming soon! Please check back here later.</h3>
+              </Grid>
+            )}
           </Box>
         </div>
         <Box className={classes.list}>
@@ -222,20 +222,24 @@ export default function Event() {
         </Box>
 
         <div>
-          <Box sx={{ bgcolor: "", paddingBottom: "3rem" }}>
-            <Container>
-              <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 2, sm: 8, md: 12 }}
-                padding="0 1rem"
-              >
-                {pastList}
-              </Grid>
-            </Container>
+          <Box
+            sx={{
+              bgcolor: "",
+              paddingBottom: "3rem",
+              flexGrow: 1,
+            }}
+          >
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 2, sm: 8, md: 12, lg: 12 }}
+              padding="0 1rem"
+            >
+              {pastList}
+            </Grid>
           </Box>
         </div>
       </Box>
-    </div>
+    </Container>
   );
 }
