@@ -4,14 +4,14 @@ import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import React from "react";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
-export default function UWinBadge({ onHover, isUWin }) {
+export default function UWinBadge({ isUWin }) {
   return (
     <Box>
       <Chip
         icon={isUWin ? <VerifiedUserIcon /> : <GppMaybeIcon />}
         color={`${isUWin ? "success" : "warning"}`}
         size="small"
-        variant={`${onHover ? "filled" : "outlined"}`}
+        variant={"outlined"}
         label="UWIN"
       />
     </Box>

@@ -53,6 +53,7 @@ export default function MarketItem() {
     filteredItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          starter={starter}
           darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
@@ -74,6 +75,7 @@ export default function MarketItem() {
 
   return (
     <Box className={classes.root}>
+      {!starter ? <BackdropLoading /> : null}
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
@@ -81,7 +83,7 @@ export default function MarketItem() {
         <FilterInfo
           darkTheme={darkTheme}
           form="plain"
-          type="item"
+          type="Item"
           filterList={filterList}
           control={control}
           handleSearch={handleSearch}
@@ -91,7 +93,7 @@ export default function MarketItem() {
           <MarketImgTopFilter
             darkTheme={darkTheme}
             control={control}
-            type="item"
+            type="Item"
             trueMarketItems={filteredItems}
             filterList={filterList}
             handleSearch={handleSearch}
@@ -103,7 +105,7 @@ export default function MarketItem() {
                 Found {filteredItems.length} related results...
               </Box>
             )}
-            {starter === false ? <BackdropLoading /> : itemRenderList}
+            {itemRenderList}
           </Box>
         </Box>
       </Stack>

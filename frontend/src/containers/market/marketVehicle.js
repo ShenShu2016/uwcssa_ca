@@ -58,6 +58,7 @@ export default function MarketVehicle() {
     filteredItems.map((marketItem, marketItemIdx) => {
       return (
         <MarketComponent
+          starter={starter}
           darkTheme={darkTheme}
           item={marketItem}
           type={marketItem.marketType.toLowerCase()}
@@ -89,7 +90,7 @@ export default function MarketVehicle() {
         <FilterInfo
           darkTheme={darkTheme}
           form="plain"
-          type="vehicle"
+          type="Vehicle"
           filterList={filterList}
           control={control}
           handleSearch={handleSearch}
@@ -99,7 +100,7 @@ export default function MarketVehicle() {
           <MarketImgTopFilter
             darkTheme={darkTheme}
             control={control}
-            type="vehicle"
+            type="Vehicle"
             trueMarketItems={filteredItems}
             filterList={filterList}
             handleSearch={handleSearch}

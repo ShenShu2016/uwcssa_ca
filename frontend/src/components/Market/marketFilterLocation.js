@@ -19,6 +19,8 @@ import GoogleMaps from "../GoogleMap/GoogleMapsPlace";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import PropTypes from "prop-types";
+import { filterUpdated } from "../../redux/slice/marketSlice";
+import { useDispatch } from "react-redux";
 
 // import { styled } from "@mui/material/styles";
 
@@ -32,6 +34,7 @@ function ConfirmationDialogRaw(props) {
     ...other
   } = props;
   const [newLocationRadius, setNewLocationRadius] = useState(5);
+
   // const Item = styled(Paper)(({ theme }) => ({
   //   ...theme.typography.body2,
   //   padding: theme.spacing(1),
@@ -47,14 +50,12 @@ function ConfirmationDialogRaw(props) {
   };
 
   const handleOk = () => {
-    // const windsor = { lat: 42.2732, lng: -83.0014 };
-    // setAddressInfo(windsor);
-    setSearchRadius(newLocationRadius);
     onClose(`距离温莎大学 ${newLocationRadius}km`);
   };
 
   const handleRadiusChange = (e) => {
     setNewLocationRadius(e.target.value);
+    setSearchRadius(e.target.value);
   };
 
   return (
@@ -115,13 +116,14 @@ ConfirmationDialogRaw.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ConfirmationDialog({
-  // setAddressInfo,
-  setSearchRadius,
-  type = "plain",
-}) {
+export default function MarketFIlterLocation({ type = "plain", marketType }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("位置");
+  const [searchRadius, setSearchRadius] = React.useState(0);
+  const dispatch = useDispatch();
+
+  //conversion: Latitude: 1 deg = 110.574 km
+  // Longitude: 1 deg = 111.320*cos(latitude) km
 
   const handleClickListItem = () => {
     setOpen(true);
@@ -129,7 +131,24 @@ export default function ConfirmationDialog({
 
   const handleClose = (newValue) => {
     setOpen(false);
-
+    const addressInfo = { lat: 42.2732, lng: -83.0014 };
+    const filter = {
+      lat: {
+        between: [
+          addressInfo.lat - searchRadius / 110.574,
+          addressInfo.lat + searchRadius / 110.574,
+        ],
+      },
+      lng: {
+        between: [
+          addressInfo.lng -
+            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+          addressInfo.lng +
+            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+        ],
+      },
+    };
+    dispatch(filterUpdated({ filter, marketType }));
     if (newValue) {
       setValue(newValue);
     }

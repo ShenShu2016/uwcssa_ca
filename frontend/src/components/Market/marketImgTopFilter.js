@@ -170,7 +170,7 @@ export default function MarketImgTopFilter({
                 Market
               </Button>
             </span>
-            {type === "item" ? (
+            {type === "Item" ? (
               <span style={{ cursor: "not-allowed" }}>
                 <Button
                   startIcon={<AddShoppingCartIcon />}
@@ -182,7 +182,7 @@ export default function MarketImgTopFilter({
                 </Button>
               </span>
             ) : null}
-            {type === "vehicle" ? (
+            {type === "Vehicle" ? (
               <span style={{ cursor: "not-allowed" }}>
                 <Button
                   startIcon={<DriveEtaIcon />}
@@ -194,7 +194,7 @@ export default function MarketImgTopFilter({
                 </Button>
               </span>
             ) : null}
-            {type === "rental" ? (
+            {type === "Rental" ? (
               <span style={{ cursor: "not-allowed" }}>
                 <Button
                   startIcon={<HouseIcon />}
@@ -206,7 +206,7 @@ export default function MarketImgTopFilter({
                 </Button>
               </span>
             ) : null}
-            {type === "pet" ? (
+            {type === "Pet" ? (
               <span style={{ cursor: "not-allowed" }}>
                 <Button
                   startIcon={<PetsIcon />}
@@ -218,7 +218,7 @@ export default function MarketImgTopFilter({
                 </Button>
               </span>
             ) : null}
-            {type === "carpool" ? (
+            {type === "Carpool" ? (
               <span style={{ cursor: "not-allowed" }}>
                 <Button
                   startIcon={<EmojiTransportation />}
@@ -290,11 +290,11 @@ export default function MarketImgTopFilter({
             startIcon={<AddIcon />}
             component={Link}
             variant="outlined"
-            to={`/market/create/${type}`}
+            to={`/market/create/${type.toLowerCase()}`}
           >
             Add
           </Button>
-          <MarketFIlterLocation type="button" />
+          <MarketFIlterLocation type="button" marketType={type} />
           <FilterInfo
             darkTheme={darkTheme}
             control={control}

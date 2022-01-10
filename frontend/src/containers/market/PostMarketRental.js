@@ -29,6 +29,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
+import PostMobileBackDrop from "../../components/Market/postMobileBackDrop";
 import PostUserInfo from "../../components/Market/postUserInfo";
 import PreviewInfo from "../../components/Market/previewInfo";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -231,6 +232,7 @@ export default function PostMarketRental() {
   return (
     <div className={classes.root}>
       <Stack className={classes.contain} direction="row">
+        <PostMobileBackDrop />
         <Box className={classes.info}>
           <Paper
             className={classes.leftInfoPaper}
@@ -686,8 +688,7 @@ export default function PostMarketRental() {
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            title="Preview"
-            position="bottom"
+            position="right"
             open={open}
             setOpen={() => setOpen(true)}
             setClose={() => setOpen(false)}

@@ -690,6 +690,11 @@ type MarketItem
     fields: ["marketRentalSaleRent", "createdAt"]
     queryField: "marketRentalSortByMarketRentalSaleRent"
   )
+  @key(
+    name: "marketItemSortByPriceTagsActiveCreatedAt"
+    fields: ["sortKey", "price", "tags", "createdAt"]
+    queryField: "marketItemSortByPriceTagsActiveCreatedAt"
+  )
   @key(name: "byUser", fields: ["userID", "createdAt"]) {
   id: ID!
   name: String

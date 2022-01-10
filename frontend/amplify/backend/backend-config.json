@@ -34,6 +34,21 @@
           ]
         }
       ]
+    },
+    "KanbanNotification": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "uwcssa",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
   },
   "auth": {
@@ -76,7 +91,8 @@
   "storage": {
     "uwcssas3": {
       "service": "S3",
-      "providerPlugin": "awscloudformation"
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   },
   "api": {

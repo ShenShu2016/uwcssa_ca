@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
+import PostMobileBackDrop from "../../components/Market/postMobileBackDrop";
 import PostUserInfo from "../../components/Market/postUserInfo";
 import PreviewInfo from "../../components/Market/previewInfo";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -50,6 +51,7 @@ export default function PostMarketItem() {
   const user = useSelector((state) => state.userAuth.userProfile);
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [defaultInfo, setDefaultInfo] = useState(true);
+  // const [backDropOpen, setBackDropOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, username)
@@ -208,6 +210,7 @@ export default function PostMarketItem() {
   return (
     <div className={classes.root}>
       <Stack className={classes.contain} direction="row">
+        <PostMobileBackDrop />
         <Box className={classes.info}>
           <Paper
             className={classes.leftInfoPaper}
@@ -418,7 +421,7 @@ export default function PostMarketItem() {
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传MarketItem{" "}
+              上传MarketItem
               {loading && (
                 <CircularProgress
                   size={24}
@@ -445,8 +448,7 @@ export default function PostMarketItem() {
         </Box>
         <Box className={classes.drawer}>
           <SwipeableDrawerInfo
-            title="Preview"
-            position="bottom"
+            position="right"
             open={open}
             setOpen={() => setOpen(true)}
             setClose={() => setOpen(false)}

@@ -20,6 +20,8 @@ const marketAdapter = createEntityAdapter({
 });
 
 const initialState = marketAdapter.getInitialState({
+  filter: {},
+  currentFilterType: null,
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
   selectedMarketItemStatus: "idle",
@@ -73,7 +75,7 @@ export const selectedMarketItem = createAsyncThunk(
 
 export const addressFilteredMarketItem = createAsyncThunk(
   "market/addressFilteredMarketItem",
-  async ({ filter }) => {
+  async ({ filter, marketType = "all" }) => {
     try {
       const response = await API.graphql({
         query: listAddresss,
@@ -81,7 +83,7 @@ export const addressFilteredMarketItem = createAsyncThunk(
         authMode: "AWS_IAM",
       });
       console.log("res:", response);
-      return response.data.listAddresss.items;
+      return [response.data.listAddresss.items, marketType];
     } catch (error) {
       console.log(error);
     }
@@ -132,9 +134,16 @@ const marketSlice = createSlice({
   name: "market",
   initialState,
   reducers: {
-    removeSelectedMarketItem(state, action) {
-      state.selected.marketItem = {};
-      console.log("remove selected market item successfully!");
+    filterUpdated(state, action) {
+      // action.payload:　e.g. filter : {lat: -56, lng: 25, price: [0,200]}
+      const { marketType, filter } = action.payload;
+      const currentType = state.currentFilterType;
+      const currentFilter = state.filter;
+      state.filter =
+        currentType === marketType || currentType === null
+          ? Object.assign(currentFilter, filter)
+          : filter;
+      state.currentFilterType = marketType;
     },
   },
   extraReducers(builder) {
@@ -199,8 +208,13 @@ const marketSlice = createSlice({
       .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
         state.addressFilteredMarketItemStatus = "succeeded";
         marketAdapter.removeAll(state);
-        let marketItems = action.payload;
+        let marketItems = action.payload[0];
+        let marketType = action.payload[1];
         let marketItem = marketItems.map((item) => item.marketItem);
+        marketItem =
+          marketType !== "all"
+            ? marketItem.filter((item) => item.marketType === marketType)
+            : marketItem;
         marketAdapter.upsertMany(state, marketItem);
       })
       .addCase(addressFilteredMarketItem.rejected, (state, action) => {
@@ -209,7 +223,7 @@ const marketSlice = createSlice({
   },
 });
 
-export const { removeSelectedMarketItem } = marketSlice.actions;
+export const { filterUpdated } = marketSlice.actions;
 
 export const {
   selectAll: selectAllMarketItems,

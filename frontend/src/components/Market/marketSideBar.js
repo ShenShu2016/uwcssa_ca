@@ -20,18 +20,12 @@ import React from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { makeStyles } from "@mui/styles";
 
-const MarketSideBar = ({
-  // setAddressInfo,
-  setSearchRadius,
-  clickHandler,
-  darkTheme,
-}) => {
+const MarketSideBar = ({ clickHandler, darkTheme }) => {
   const useStyles = makeStyles((theme) => ({
     info: {
       width: "360px",
       height: "100%",
       float: "left",
-      // overflowY: "scroll",
       overflow: "hidden",
       position: "relative",
 
@@ -112,10 +106,7 @@ const MarketSideBar = ({
           <Typography variant="h6" fontWeight="bold">
             位置
           </Typography>
-          <MarketFIlterLocation
-            // setAddressInfo={setAddressInfo}
-            setSearchRadius={setSearchRadius}
-          />
+          <MarketFIlterLocation marketType={"all"} />
         </Box>
         <Typography
           variant="h6"

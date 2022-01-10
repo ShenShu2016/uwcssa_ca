@@ -3,8 +3,8 @@ import {
   Backdrop,
   Box,
   Button,
+  ButtonBase,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   CircularProgress,
@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useHistory } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -99,6 +99,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "400",
     height: 45,
     margin: 8,
+  },
+  hero: {
+    padding: "0 4.5rem",
+    [theme.breakpoints.between("sm", "lg")]: {
+      padding: "0 1rem",
+    },
   },
 }));
 function TabPanel(props) {
@@ -181,13 +187,148 @@ export default function EventBody({ event }) {
     .tz("America/New_York")
     .format("YYYY-MM-DD HH:mm:ss.SSS");
 
+  const [currentTime, setCurrentTime] = useState(moment());
+  const timeBetween = moment.duration(moment(localStartDate).diff(currentTime));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(moment());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [moment]);
+
   return (
     <Box>
       {event.startDate ? (
         <div>
           <Box>
             <div>
-              <CardActionArea
+              <Card
+                variant="outlined"
+                sx={{
+                  margin: "auto",
+                  maxWidth: "100%",
+                  flexGrow: 1,
+                  position: "relative",
+                  backgroundImage: `url(${
+                    backGroundImgURL
+                      ? backGroundImgURL
+                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+                  })`,
+                  backgroundSize: "contained",
+
+                  // objectFit: "cover",
+                }}
+              >
+                <Grid
+                  container
+                  columns={12}
+                  sx={{ backgroundColor: "rgba(0,0,0,0.25)" }}
+                >
+                  <Grid item xs={12} sm={6}>
+                    <ButtonBase
+                      sx={{
+                        width: "100%",
+                        height: 500,
+                        justifyContent: "center",
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = posterImgURL;
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        src={
+                          posterImgURL
+                            ? posterImgURL
+                            : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/no_pic.png"
+                        }
+                        maxHeight="100%"
+                        maxWidth="100%"
+                      />
+                    </ButtonBase>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    sx={{
+                      backgroundColor: "rgba(0, 0, 0, 0.6)",
+                    }}
+                  >
+                    <Box
+                      display={"flex"}
+                      flexDirection={"column"}
+                      justifyContent={"center"}
+                      minHeight={360}
+                      className={classes.hero}
+                      color={"common.white"}
+                    >
+                      <Typography component="div" variant="h4" gutterBottom>
+                        <b>{title}</b>
+                      </Typography>
+                      {moment(localStartDate).format("YYYY") ===
+                      moment(localEndDate).format("YYYY") ? (
+                        <Typography variant="h6" gutterBottom>
+                          时间：{localStartDate.slice(0, 4)}年
+                          {localStartDate.slice(5, 7)}月
+                          {localStartDate.slice(8, 10)}号{" "}
+                          {localStartDate.slice(11, 16)} -{" "}
+                          {localEndDate.slice(5, 7)}月
+                          {localEndDate.slice(8, 10)}号{" "}
+                          {localEndDate.slice(11, 16)}
+                        </Typography>
+                      ) : (
+                        <Typography variant="h6" gutterBottom>
+                          时间：{localStartDate.slice(0, 4)} 年
+                          {localStartDate.slice(5, 7)}月
+                          {localStartDate.slice(8, 10)}号{" "}
+                          {localStartDate.slice(11, 16)} -{" "}
+                          {localEndDate.slice(0, 4)}年{localEndDate.slice(5, 7)}
+                          月{localEndDate.slice(8, 10)}号{" "}
+                          {localEndDate.slice(11, 16)}
+                        </Typography>
+                      )}
+                      {online === true ? (
+                        <Typography variant="h6" component="div" gutterBottom>
+                          地点：线上
+                        </Typography>
+                      ) : (
+                        <div>
+                          {address ? (
+                            <Typography
+                              variant="h6"
+                              component="div"
+                              gutterBottom
+                            >
+                              地点：{address.description}
+                            </Typography>
+                          ) : (
+                            <Typography
+                              variant="h6"
+                              component="div"
+                              gutterBottom
+                            >
+                              地点：暂无
+                            </Typography>
+                          )}
+                        </div>
+                      )}
+                      {new Date(localStartDate) > new Date() ? (
+                        <Typography variant="subtitle1" component="div">
+                          <span>{timeBetween.days()}天 </span>
+                          <span>{timeBetween.hours()}小时 </span>
+                          <span>{timeBetween.minutes()}分钟 </span>
+                          <span>{timeBetween.seconds()}秒 </span>
+                        </Typography>
+                      ) : null}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Card>
+              {/* <CardActionArea
                 onClick={(e) => {
                   e.preventDefault();
                   window.location.href = posterImgURL;
@@ -227,9 +368,9 @@ export default function EventBody({ event }) {
                     }}
                   />
                 </Box>
-              </CardActionArea>
+              </CardActionArea> */}
             </div>
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 justifyContent: "left",
@@ -298,7 +439,7 @@ export default function EventBody({ event }) {
                   </div>
                 )}
               </Box>
-            </Box>
+            </Box> */}
           </Box>
           <Divider sx={{ margin: "0.5rem" }} />
           <div sx={{ width: "100%" }}>
