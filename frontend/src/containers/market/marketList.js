@@ -1,4 +1,4 @@
-import { Backdrop, Box, Stack } from "@mui/material";
+import { Box, Fab, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   addressFilteredMarketItem,
@@ -7,20 +7,15 @@ import {
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import AppsIcon from "@mui/icons-material/Apps";
 import BackdropLoading from "../../components/BackdropLoading";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
 import MarketTopBar from "../../components/Market/marketTopBar";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
-
-const actions = [{ icon: <KeyboardArrowUpIcon />, name: "Top" }];
 
 export default function MarketList() {
   useTitle("UWCSSA商城");
@@ -31,9 +26,6 @@ export default function MarketList() {
   const { darkTheme } = useSelector((state) => state.general);
   const { filter } = useSelector((state) => state.market);
   const starter = useStarter(marketItems);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const topRef = React.useRef(null);
 
   let tags = [];
@@ -94,27 +86,14 @@ export default function MarketList() {
           />
           <Box className={classes.items}>{marketItemRenderList}</Box>
           <Box className={classes.fabBox}>
-            <Backdrop open={open} />
-            <SpeedDial
-              ariaLabel="SpeedDial controlled open example"
-              FabProps={{ color: "default" }}
-              icon={<AppsIcon />}
-              onClose={handleClose}
-              onOpen={handleOpen}
-              open={open}
+            <Fab
+              color="info"
+              onClick={() => {
+                topRef.current.scrollIntoView({ behavior: "smooth" });
+              }}
             >
-              {actions.map((action) => (
-                <SpeedDialAction
-                  key={action.name}
-                  icon={action.icon}
-                  tooltipTitle={action.name}
-                  tooltipOpen
-                  onClick={() => {
-                    topRef.current.scrollIntoView({ behavior: "smooth" });
-                  }}
-                />
-              ))}
-            </SpeedDial>
+              <KeyboardArrowUpIcon />
+            </Fab>
           </Box>
         </Box>
       </Stack>
