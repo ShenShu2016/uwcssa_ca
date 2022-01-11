@@ -41,6 +41,13 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "function",
+          "resourceName": "uwcssanodejsLibrarieslayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "uwcssa",
           "attributes": [
@@ -49,6 +56,11 @@
           ]
         }
       ]
+    },
+    "uwcssanodejsLibrarieslayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   },
   "auth": {

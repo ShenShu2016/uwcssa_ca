@@ -1,5 +1,6 @@
 const aws = require("aws-sdk");
 const ses = new aws.SES({ region: "us-east-1" });
+const momentTimezone = require("moment-timezone");
 var documentClient = new aws.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
