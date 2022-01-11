@@ -17,6 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { fetchMarketItems, filterClear } from "../../redux/slice/marketSlice";
 import {
   marketItemSortBySortKey,
   marketItemSortBySortKeyItem,
@@ -33,7 +34,6 @@ import { Link } from "react-router-dom";
 import PetsIcon from "@mui/icons-material/Pets";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { fetchMarketItems } from "../../redux/slice/marketSlice";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
@@ -250,13 +250,20 @@ export const SearchArea = ({
 };
 
 export const CategoryIcons = ({ darkTheme }) => {
+  const dispatch = useDispatch();
   const IconList = ({ to, label, icon }) => {
     return (
       <ListItem
         disablePadding
         sx={{ color: darkTheme ? "#787878" : "rgb(0,0,0)" }}
       >
-        <ListItemButton component={Link} to={to}>
+        <ListItemButton
+          component={Link}
+          to={to}
+          onClick={() => {
+            dispatch(filterClear());
+          }}
+        >
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText primary={label} />
         </ListItemButton>

@@ -29,8 +29,9 @@ import MarketFIlterLocation from "./marketFilterLocation";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
 import PropTypes from "prop-types";
+import { filterClear } from "../../redux/slice/marketSlice";
 import { marketItemStyle } from "./marketItemCss";
-
+import { useDispatch } from "react-redux";
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, darkTheme, ...other } = props;
 
@@ -83,6 +84,7 @@ export default function MarketImgTopFilter({
   handleReset,
 }) {
   const useStyles = marketItemStyle;
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
@@ -119,7 +121,9 @@ export default function MarketImgTopFilter({
       setValue(newValue);
     }
   };
-
+  const handleFilter = () => {
+    dispatch(filterClear());
+  };
   return (
     <React.Fragment>
       {/* ImgTopFIlter for large screen */}
@@ -166,6 +170,7 @@ export default function MarketImgTopFilter({
                 color="inherit"
                 component={Link}
                 to="/market"
+                onClick={handleFilter}
               >
                 Market
               </Button>
@@ -177,6 +182,7 @@ export default function MarketImgTopFilter({
                   color="inherit"
                   component={Link}
                   to="/market/item"
+                  onClick={handleFilter}
                 >
                   Item
                 </Button>
@@ -189,6 +195,7 @@ export default function MarketImgTopFilter({
                   color="inherit"
                   component={Link}
                   to="/market/vehicle"
+                  onClick={handleFilter}
                 >
                   Vehicle
                 </Button>
@@ -201,6 +208,7 @@ export default function MarketImgTopFilter({
                   color="inherit"
                   component={Link}
                   to="/market/rental"
+                  onClick={handleFilter}
                 >
                   Rental
                 </Button>
@@ -213,6 +221,7 @@ export default function MarketImgTopFilter({
                   color="inherit"
                   component={Link}
                   to="/market/pet"
+                  onClick={handleFilter}
                 >
                   Pet
                 </Button>
@@ -225,6 +234,7 @@ export default function MarketImgTopFilter({
                   color="inherit"
                   component={Link}
                   to="/market/carpool"
+                  onClick={handleFilter}
                 >
                   Carpool
                 </Button>

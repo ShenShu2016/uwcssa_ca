@@ -145,6 +145,9 @@ const marketSlice = createSlice({
           : filter;
       state.currentFilterType = marketType;
     },
+    filterClear(state, action) {
+      state.filter = {};
+    },
   },
   extraReducers(builder) {
     builder
@@ -223,7 +226,7 @@ const marketSlice = createSlice({
   },
 });
 
-export const { filterUpdated } = marketSlice.actions;
+export const { filterUpdated, filterClear } = marketSlice.actions;
 
 export const {
   selectAll: selectAllMarketItems,

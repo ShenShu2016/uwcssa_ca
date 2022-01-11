@@ -42,7 +42,6 @@ export default function MarketComponent({ item, type, darkTheme, starter }) {
   const { id, name, price, imgURLs, location, createdAt, user } = item;
   const isUWin =
     user.email.includes("uwindsor") || user.badges.includes("uwindsor");
-
   const displayInfo = () => {
     return (
       <React.Fragment>
