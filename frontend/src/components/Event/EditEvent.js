@@ -249,7 +249,7 @@ export default function EditEvent() {
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,
-      addressID: address && addressID,
+      addressID: state.online ? "" : address && addressID,
       content: updatedContent,
       online: state.online,
       group: state.group,
