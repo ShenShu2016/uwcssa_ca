@@ -40,13 +40,7 @@ export default function Kanban() {
   const { fetchKanbansStatus } = useSelector((state) => state.kanban);
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  // const momentTimezone = require("moment-timezone");
-  // console.log(
-  //   momentTimezone("2014-06-01T12:00:00Z")
-  //     .tz("America/New_York")
-  //     .format("LLLL"),
-  //   momentTimezone("2014-06-01T12:00:00Z").fromNow()
-  // );
+
   useEffect(() => {
     if (fetchKanbansStatus === "idle" || undefined) {
       dispatch(fetchKanbans());

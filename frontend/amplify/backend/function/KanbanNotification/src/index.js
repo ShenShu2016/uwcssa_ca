@@ -21,20 +21,24 @@ exports.handler = async (event) => {
           Destination: {
             ToAddresses: [response.Item.email],
           },
-          Source: "admin@uwcssa.ca",
+          Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
           Message: {
             Subject: {
               Data: `UWCSSA 任务提醒 ${record.dynamodb.NewImage.title.S} ${record.dynamodb.NewImage.kanbanStatus.S}`,
             },
             Body: {
               Text: {
-                Data: `${record.dynamodb.NewImage.userID.S} ${
+                Data: `${record.dynamodb.NewImage.userID.S}:\t ${
                   record.eventName === "INSERT"
                     ? "给你添加的新的任务"
                     : "给您更新了任务信息"
-                }.\n截止日期是 ${
+                }.\n截止日期是: ${
                   record.dynamodb.NewImage.deadLine
-                    ? record.dynamodb.NewImage.deadLine.S
+                    ? `${momentTimezone(record.dynamodb.NewImage.deadLine.S)
+                        .tz("America/New_York")
+                        .format("LLLL")}\n距离截止日期:\t ${momentTimezone(
+                        record.dynamodb.NewImage.deadLine.S
+                      ).fromNow()}`
                     : "待定"
                 }\n\n${
                   record.dynamodb.NewImage.content.S
