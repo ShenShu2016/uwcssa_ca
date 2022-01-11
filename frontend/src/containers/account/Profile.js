@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   getProfile,
@@ -45,9 +45,21 @@ export default function Profile() {
         <div>
           <BasicInfo user={user} ownerID={username} />
           <div className={classes.root}>
-            <AboutMe user={user} />
-            <Education userAuth={userAuth} user={user} ownerID={username} />
-            <Experience userAuth={userAuth} user={user} ownerID={username} />
+            <Grid container spacing={2} columns={12} p={"0 1rem"}>
+              <Grid item xs={12} sm={5} md={5}>
+                <AboutMe user={user} />
+              </Grid>
+              <Grid item xs={12}>
+                <Education userAuth={userAuth} user={user} ownerID={username} />
+              </Grid>
+              <Grid item xs={12}>
+                <Experience
+                  userAuth={userAuth}
+                  user={user}
+                  ownerID={username}
+                />
+              </Grid>
+            </Grid>
           </div>
         </div>
       ) : (
