@@ -51,7 +51,7 @@ export default function ByDepartment({ department }) {
   const classes = useStyles();
   const uwcssaMembers = useSelector(selectAllUwcssaMembers);
   let membersByDepartment = uwcssaMembers.filter(
-    (x) => x.departmentID === department.id
+    (x) => x.departmentID === department.id && x.active === true
   );
 
   // membersByDepartment = membersByDepartment.find((x) => x.leader === true)
