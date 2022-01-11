@@ -37,6 +37,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { useTheme } from "@mui/material/styles";
+import MUIRichTextEditor from "mui-rte";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -233,6 +234,7 @@ export default function SimpleTable() {
       online,
       address,
       eventParticipants,
+      content,
     } = event;
 
     return {
@@ -245,6 +247,7 @@ export default function SimpleTable() {
       online: online,
       eventParticipants: eventParticipants,
       eventStatus: eventStatus,
+      content: str(content),
     };
   });
   const [page, setPage] = useState(0);
@@ -307,7 +310,8 @@ export default function SimpleTable() {
                 <TableCell sx={{ width: 100 }}>标题</TableCell>
                 <TableCell sx={{ width: 100 }}>主题</TableCell>
                 <TableCell sx={{ width: 150 }}>地点</TableCell>
-                <TableCell sx={{ width: 150 }}>状态</TableCell>
+                <TableCell sx={{ width: 150 }}>内容</TableCell>
+                <TableCell sx={{ width: 100 }}>状态</TableCell>
                 <TableCell padding="checkbox" />
               </TableRow>
             </TableHead>
@@ -430,6 +434,20 @@ export default function SimpleTable() {
                       </TableCell>
                     )}
                     <TableCell>
+                      <Tooltip title={row.content} placement="left" arrow>
+                        <Box
+                          style={{
+                            height: "30px",
+                            overflow: "hidden",
+                            wordBreak: "break-word",
+                          }}
+                        >
+                          {row.content}
+                        </Box>
+                      </Tooltip>
+                    </TableCell>
+
+                    <TableCell>
                       <Stack direction="row" spacing={2}>
                         <div>{row.eventStatus}</div>
                         <div>
@@ -486,5 +504,19 @@ export default function SimpleTable() {
         </TableContainer>
       </Box>
     </div>
+  );
+}
+
+function str(content) {
+  return (
+    <MUIRichTextEditor
+      defaultValue={content}
+      readOnly={true}
+      toolbar={false}
+      style={{
+        wordBreak: "break-word",
+        overflow: "hidden",
+      }}
+    />
   );
 }

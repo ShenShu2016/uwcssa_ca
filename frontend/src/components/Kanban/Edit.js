@@ -24,8 +24,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
@@ -332,7 +332,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                     }}
                     render={({ field: { onChange, value } }) => (
                       <Box sx={{ margin: "1rem 0" }}>
-                        <MobileDatePicker
+                        <DateTimePicker
                           label="Due Date"
                           value={value}
                           id="deadLine"

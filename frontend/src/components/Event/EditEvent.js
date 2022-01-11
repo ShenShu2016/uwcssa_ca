@@ -439,7 +439,7 @@ export default function EditEvent() {
                           id="startDate"
                           error={!!errors.startDate}
                           onChange={onChange}
-                          minDateTime={new Date()}
+                          // minDateTime={new Date()}
                           renderInput={(params) => <TextField {...params} />}
                         />
                         {errors.startDate && (
@@ -465,7 +465,7 @@ export default function EditEvent() {
                           value={value}
                           id="endDate"
                           onChange={onChange}
-                          minDateTime={new Date()}
+                          // minDateTime={new Date()}
                           renderInput={(params) => <TextField {...params} />}
                           error={!!errors.endDate}
                         />
