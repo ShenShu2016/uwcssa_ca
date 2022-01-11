@@ -42,7 +42,7 @@ exports.handler = async (event) => {
                     : "待定"
                 }\n\n${
                   record.dynamodb.NewImage.content.S
-                }\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
+                }\n点击 https://uwcssa.ca/kanban 查看\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
               },
             },
           },

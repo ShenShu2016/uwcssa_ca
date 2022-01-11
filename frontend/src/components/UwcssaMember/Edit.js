@@ -132,7 +132,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const departments = useSelector(selectAllDepartments);
   const [departmentID, setDepartmentID] = useState(item.departmentID);
-  console.log(departmentID);
+  //console.log(departmentID);
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
       dispatch(fetchDepartments());
@@ -168,7 +168,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     );
     handleEditClose();
     if (response) {
-      console.log(response);
+      //console.log(response);
       setLoading(false);
     }
   };

@@ -38,7 +38,7 @@ export default function UwcssaMember() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isPermit = usePermit(null, "admin");
-  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
+
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const { fetchUwcssaMembersStatus } = useSelector(
@@ -78,13 +78,7 @@ export default function UwcssaMember() {
           )}
         </Box>
         {departments.map((department, departmentIdx) => {
-          return (
-            <ByDepartment
-              department={department}
-              uwcssaMembers={uwcssaMembers}
-              key={departmentIdx}
-            />
-          );
+          return <ByDepartment department={department} key={departmentIdx} />;
         })}
       </div>
       <Footer />

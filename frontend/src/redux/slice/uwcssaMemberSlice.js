@@ -12,10 +12,10 @@ import API from "@aws-amplify/api";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listUwcssaMembers } from "../../graphql/queries";
 
-const fundingMemberAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.departmentID.localeCompare(b.departmentID),
+const uwcssaMemberAdapter = createEntityAdapter({
+  sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
 });
-const initialState = fundingMemberAdapter.getInitialState({
+const initialState = uwcssaMemberAdapter.getInitialState({
   fetchUwcssaMembersStatus: "idle",
   fetchUwcssaMembersError: null,
   postUwcssaMemberStatus: "idle",
@@ -25,7 +25,7 @@ const initialState = fundingMemberAdapter.getInitialState({
 });
 
 export const fetchUwcssaMembers = createAsyncThunk(
-  "fundingMember/fetchUwcssaMembers",
+  "uwcssaMember/fetchUwcssaMembers",
   async () => {
     const response = await API.graphql({
       query: listUwcssaMembers,
@@ -36,7 +36,7 @@ export const fetchUwcssaMembers = createAsyncThunk(
 );
 
 export const postUwcssaMember = createAsyncThunk(
-  "fundingMember/postUwcssaMember",
+  "uwcssaMember/postUwcssaMember",
   async ({ createUwcssaMemberInput }) => {
     try {
       const response = await API.graphql(
@@ -52,7 +52,7 @@ export const postUwcssaMember = createAsyncThunk(
 );
 
 export const updateUwcssaMemberDetail = createAsyncThunk(
-  "fundingMember/updateUwcssaMemberDetail",
+  "uwcssaMember/updateUwcssaMemberDetail",
   async ({ updateUwcssaMemberInput }) => {
     try {
       const response = await API.graphql(
@@ -60,6 +60,7 @@ export const updateUwcssaMemberDetail = createAsyncThunk(
           input: updateUwcssaMemberInput,
         })
       );
+      console.log(response.data.updateUwcssaMember);
       return response.data.updateUwcssaMember;
     } catch (error) {
       console.log(error);
@@ -78,8 +79,8 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(fetchUwcssaMembers.fulfilled, (state, action) => {
         state.fetchUwcssaMembersStatus = "succeeded";
-        fundingMemberAdapter.removeAll(state);
-        fundingMemberAdapter.upsertMany(state, action.payload);
+        uwcssaMemberAdapter.removeAll(state);
+        uwcssaMemberAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchUwcssaMembers.rejected, (state, action) => {
         state.fetchUwcssaMembersStatus = "failed";
@@ -91,7 +92,7 @@ const uwcssaMemberSlice = createSlice({
       })
       .addCase(updateUwcssaMemberDetail.fulfilled, (state, action) => {
         state.updateUwcssaMemberDetailStatus = "succeeded";
-        fundingMemberAdapter.upsertOne(state, action.payload);
+        uwcssaMemberAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateUwcssaMemberDetail.rejected, (state, action) => {
         state.updateUwcssaMemberDetailStatus = "failed";
@@ -104,6 +105,6 @@ export const {
   selectAll: selectAllUwcssaMembers,
   selectById: selectUwcssaMemberById,
   selectIds: selectUwcssaMemberIds,
-} = fundingMemberAdapter.getSelectors((state) => state.uwcssaMember);
+} = uwcssaMemberAdapter.getSelectors((state) => state.uwcssaMember);
 
 export default uwcssaMemberSlice.reducer;

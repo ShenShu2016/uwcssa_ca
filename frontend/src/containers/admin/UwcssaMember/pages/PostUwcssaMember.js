@@ -88,6 +88,7 @@ export default function PostUwcssaMember() {
     const createUwcssaMemberInput = {
       id: userID,
       active: true,
+      leader: false,
       departmentID: departmentID,
       owner: userID,
       userID: userID,

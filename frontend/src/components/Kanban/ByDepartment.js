@@ -45,12 +45,12 @@ export default function ByDepartment({ department, kanbans }) {
     (x) => x.departmentID === department.id
   );
 
-  kanbansByDepartment = kanbansByDepartment.find((x) => x.leader === true)
-    ? [
-        kanbansByDepartment.find((x) => x.leader === true),
-        ...kanbansByDepartment.filter((x) => x.leader !== true),
-      ]
-    : kanbansByDepartment;
+  // kanbansByDepartment = kanbansByDepartment.find((x) => x.leader === true)
+  //   ? [
+  //       kanbansByDepartment.find((x) => x.leader === true),
+  //       ...kanbansByDepartment.filter((x) => x.leader !== true),
+  //     ]
+  //   : kanbansByDepartment;
 
   const [expanded, setExpanded] = useState(null);
 
