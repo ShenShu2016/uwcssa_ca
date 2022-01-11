@@ -1,3 +1,5 @@
+import "./styles.css";
+
 import {
   CardActions,
   Collapse,
@@ -11,8 +13,10 @@ import { Box } from "@mui/system";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoCard from "./InfoCard";
 import { makeStyles } from "@mui/styles";
+import { selectAllUwcssaMembers } from "../../redux/slice/uwcssaMemberSlice";
 import { styled } from "@mui/material/styles";
-import "./styles.css";
+import { useSelector } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   cards: {
     marginBlock: "1rem",
@@ -43,18 +47,19 @@ const Root = styled("div")(({ theme }) => ({
   },
 }));
 
-export default function ByDepartment({ department, uwcssaMembers }) {
+export default function ByDepartment({ department }) {
   const classes = useStyles();
+  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
   let membersByDepartment = uwcssaMembers.filter(
     (x) => x.departmentID === department.id
   );
 
-  membersByDepartment = membersByDepartment.find((x) => x.leader === true)
-    ? [
-        membersByDepartment.find((x) => x.leader === true),
-        ...membersByDepartment.filter((x) => x.leader !== true),
-      ]
-    : membersByDepartment;
+  // membersByDepartment = membersByDepartment.find((x) => x.leader === true)
+  //   ? [
+  //       membersByDepartment.find((x) => x.leader === true),
+  //       ...membersByDepartment.filter((x) => x.leader !== true),
+  //     ]
+  //   : membersByDepartment;
 
   const [expanded, setExpanded] = useState(true);
 
