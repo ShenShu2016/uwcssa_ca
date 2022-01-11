@@ -37,7 +37,7 @@ exports.handler = async (event) => {
                     : "待定"
                 }\n\n${
                   record.dynamodb.NewImage.content.S
-                }\n\nShen Shu\n 有任何问题请发邮件至 你老大给你换内容啦`,
+                }\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
               },
             },
           },
