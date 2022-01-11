@@ -8,10 +8,10 @@ import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../../Hooks/usePermit";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "960px",
-    marginBlock: "1rem",
-  },
+  // root: {
+  //   maxWidth: "960px",
+  //   marginBlock: "1rem",
+  // },
   card: {
     // paddingInline: "1rem",
     paddingTop: "1rem",
