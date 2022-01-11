@@ -42,9 +42,13 @@ export default function SwipeableDrawerInfo({
       anchor={position}
       open={open}
       onClose={setClose}
+      SwipeAreaProps={{
+        style: { height: "85%", transform: "translate(0,-50%)", top: "50%" },
+      }}
       onOpen={setOpen}
-      swipeAreaWidth={drawerBleeding}
+      swipeAreaWidth={2 * drawerBleeding}
       disableSwipeToOpen={false}
+      disableBackdropTransition={true}
       ModalProps={{
         keepMounted: true,
       }}

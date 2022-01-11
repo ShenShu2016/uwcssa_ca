@@ -6403,6 +6403,24 @@ export const listAddresss = /* GraphQL */ `
           userID
           updatedAt
           owner
+          user {
+            id
+            username
+            email
+            owner
+            firstName
+            lastName
+            intro
+            major
+            avatarImgURL
+            backGroundImgURL
+            linkedIn
+            github
+            sortKey
+            createdAt
+            updatedAt
+            badges
+          }
         }
         owner
       }

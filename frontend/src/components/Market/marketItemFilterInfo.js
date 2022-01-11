@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -151,9 +152,17 @@ const FilterContent = (props) => {
               render={({ field: { onChange, value } }) => (
                 <MarketForm
                   title="Category"
-                  value={value}
+                  value={typeof value === "object" ? value : ""}
                   options={marketItemCategoryList}
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -168,9 +177,17 @@ const FilterContent = (props) => {
               render={({ field: { onChange, value } }) => (
                 <MarketForm
                   title="Condition"
-                  value={value}
+                  value={typeof value === "object" ? value : ""}
                   options={marketItemConditionList}
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />

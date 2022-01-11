@@ -1,12 +1,16 @@
 import { Box, Stack } from "@mui/material";
 import React, { useState } from "react";
+import {
+  filterUpdated,
+  selectAllMarketItems,
+} from "../../redux/slice/marketSlice";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
-import { selectAllMarketItems } from "../../redux/slice/marketSlice";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
 import { useSelector } from "react-redux";
@@ -15,6 +19,7 @@ import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketItem() {
   const useStyles = marketItemStyle;
+  const dispatch = useDispatch();
   useTitle("Item");
   const classes = useStyles();
 
@@ -33,12 +38,20 @@ export default function MarketItem() {
       sortKey: "original",
       min: "",
       max: "",
-      category: "",
-      condition: "",
+      category: [],
+      condition: [],
     },
   });
 
   const handleSearch = handleSubmit((data) => {
+    const { type, min, max, category, condition } = data;
+
+    const filter = {
+      price: { between: [min === "" ? 0 : min, max === "" ? 999999 : max] },
+    };
+    console.log(category, condition);
+    dispatch(filterUpdated({ marketType: type, filter: filter }));
+
     setFilterList(data);
   });
 
@@ -84,7 +97,6 @@ export default function MarketItem() {
           darkTheme={darkTheme}
           form="plain"
           type="Item"
-          filterList={filterList}
           control={control}
           handleSearch={handleSearch}
           handleReset={handleReset}
@@ -95,7 +107,6 @@ export default function MarketItem() {
             control={control}
             type="Item"
             trueMarketItems={filteredItems}
-            filterList={filterList}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />
