@@ -25,9 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { Box } from "@mui/system";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import MUIRichTextEditor from "mui-rte";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
-import { convertToRaw } from "draft-js";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postKanban } from "../../redux/slice/kanbanSlice";
@@ -36,19 +34,17 @@ const useStyles = makeStyles({
   content: {
     marginTop: "1rem",
     minHeight: "300px",
-    maxWidth: "780px",
     paddingInline: "1rem",
     overflow: "auto",
-    border: "1px solid",
-    borderColor: "#cfd8dc",
-    borderRadius: 5,
+    width: "100%",
+    maxWidth: "600px",
   },
 });
 export default function Create({ createOpen, handleCreateClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.userAuth.user);
-  const [content, setContent] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [tags, setTags] = useState([]);
   const uwcssaMembers = useSelector(selectAllUwcssaMembers);
@@ -78,12 +74,10 @@ export default function Create({ createOpen, handleCreateClose }) {
       sortKey: "SortKey",
       assigneeID: "shushen2013",
       priority: "Average",
+      content: "",
     },
   });
-  const handleOnChange = () => (event) => {
-    const content = JSON.stringify(convertToRaw(event.getCurrentContent()));
-    setContent(content);
-  };
+
   const handleKeyDown = (e) => {
     const newTags = [...tags, e];
     setTags(newTags);
@@ -100,7 +94,6 @@ export default function Create({ createOpen, handleCreateClose }) {
         (x) => x.id === getValues("assigneeID")
       )[0].departmentID,
       userID: username,
-      content: content,
       tags: GetTags(),
     };
     setLoading(true);
@@ -135,27 +128,28 @@ export default function Create({ createOpen, handleCreateClose }) {
               }}
             >
               <Box className={classes.content}>
-                <MUIRichTextEditor
-                  label="活动详情"
-                  onChange={handleOnChange()}
-                  inlineToolbar={true}
-                  controls={[
-                    "title",
-                    "bold",
-                    "italic",
-                    "underline",
-                    "strikethrough",
-                    "highlight",
-                    "undo",
-                    "redo",
-                    "link",
-                    "media",
-                    "numberList",
-                    "bulletList",
-                    "quote",
-                    "code",
-                    "clear",
-                  ]}
+                <Controller
+                  name="content"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      multiline
+                      rows={10}
+                      required
+                      id="content"
+                      label="详细内容"
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.content}
+                      helperText={errors.content ? "不能为空" : null}
+                    />
+                  )}
                 />
               </Box>
               <Stack
