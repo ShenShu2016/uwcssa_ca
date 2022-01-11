@@ -1,24 +1,14 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 import React from "react";
-import { makeStyles } from "@mui/styles";
 
 const MarketForm = ({
   title,
-  value,
-  onChange,
   options,
   required = false,
   error = false,
-  disabled = false,
+  ...rest
 }) => {
-  const useStyles = makeStyles((theme) => ({
-    menuPaper: {
-      maxHeight: 100,
-    },
-  }));
-  const classes = useStyles();
-
   return (
     <div className="newTopic">
       <FormControl
@@ -33,11 +23,9 @@ const MarketForm = ({
         <Select
           labelId="demo-simple-select-outlined-label2"
           id="demo-simple-select-outlined2"
-          disabled={disabled}
-          value={value}
-          MenuProps={{ classes: { paper: classes.menuPaper } }}
-          onChange={onChange}
-          label={title} //title
+          MenuProps={{ PaperProps: { style: { maxHeight: 300 } } }}
+          label={title}
+          {...rest}
         >
           {options.map((category, categoryIdx) => {
             return (

@@ -26,9 +26,11 @@ import { useDispatch } from "react-redux";
 
 function ConfirmationDialogRaw(props) {
   const {
+    type = "plain",
     onClose,
     value: valueProp,
     open,
+    onOK,
     // setAddressInfo,
     setSearchRadius,
     ...other
@@ -50,7 +52,7 @@ function ConfirmationDialogRaw(props) {
   };
 
   const handleOk = () => {
-    onClose(`距离温莎大学 ${newLocationRadius}km`);
+    type === "plain" ? onOK(`距离温莎大学 ${newLocationRadius}km`) : onOK();
   };
 
   const handleRadiusChange = (e) => {
@@ -68,7 +70,7 @@ function ConfirmationDialogRaw(props) {
       }}
       maxWidth="xs"
       open={open}
-      onClose={() => onClose()}
+      onClose={handleCancel}
       {...other}
     >
       <DialogTitle>位置</DialogTitle>
@@ -81,6 +83,7 @@ function ConfirmationDialogRaw(props) {
           sx={{ marginBottom: "1rem" }}
           id="input-with-icon-textfield"
           label="半径 [km]"
+          value={newLocationRadius}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -129,7 +132,7 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
     setOpen(true);
   };
 
-  const handleClose = (newValue) => {
+  const handleOK = (newValue) => {
     setOpen(false);
     const addressInfo = { lat: 42.2732, lng: -83.0014 };
     const filter = {
@@ -153,7 +156,13 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
       setValue(newValue);
     }
   };
+  const handleClose = (newValue) => {
+    setOpen(false);
 
+    if (newValue) {
+      setValue(newValue);
+    }
+  };
   if (type === "plain") {
     return (
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
@@ -173,6 +182,7 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
             id="ringtone-menu"
             keepMounted
             open={open}
+            onOK={handleOK}
             onClose={handleClose}
             value={value}
           />
@@ -191,10 +201,12 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
         </Button>
         <ConfirmationDialogRaw
           // setAddressInfo={setAddressInfo}
+          type={type}
           setSearchRadius={setSearchRadius}
           id="ringtone-menu"
           keepMounted
           open={open}
+          onOK={handleOK}
           onClose={handleClose}
           value={value}
         />

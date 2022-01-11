@@ -19,7 +19,6 @@ import Edit from "./Edit";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { GetStatusColor } from "./ByStatus";
 import IconButton from "@mui/material/IconButton";
-import MUIRichTextEditor from "mui-rte";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoticeIcons from "./NoticeIcons";
 import { Typography } from "@mui/material";
@@ -129,11 +128,12 @@ export default function Ticket({ item }) {
           <Box sx={{ textAlign: "left", px: "8px", minHeight: "80px" }}>
             {content ? (
               <div sx={{ overflow: "auto" }}>
-                <MUIRichTextEditor
-                  defaultValue={content}
-                  readOnly={true}
-                  toolbar={false}
-                />
+                <Typography
+                  variant="body1"
+                  style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
+                >
+                  {content}
+                </Typography>
               </div>
             ) : (
               "这人很懒什么都没写"

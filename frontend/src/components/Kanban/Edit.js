@@ -25,9 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import MUIRichTextEditor from "mui-rte";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
-import { convertToRaw } from "draft-js";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
@@ -42,12 +40,11 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
   },
   content: {
+    width: "100%",
+    maxWidth: "600px",
     minHeight: "300px",
     paddingInline: "1rem",
     overflow: "auto",
-    border: "1px solid",
-    borderColor: "#cfd8dc",
-    borderRadius: 5,
   },
 });
 
@@ -76,7 +73,6 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     deadLine,
   } = item;
   const [loading, setLoading] = useState(false);
-  const [newContent, setNewContent] = useState(content);
   const [tags, setTags] = useState([]);
   const {
     handleSubmit,
@@ -91,6 +87,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       points: points,
       assigneeID: assigneeID,
       priority: priority,
+      content: content,
     },
   });
   const handleKeyDown = (e) => {
@@ -110,7 +107,6 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       departmentID: uwcssaMembers.filter(
         (x) => x.id === getValues("assigneeID")
       )[0].departmentID,
-      content: newContent,
       tags: GetTags(),
     };
     setLoading(true);
@@ -121,11 +117,6 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       console.log(response);
       setLoading(false);
     }
-  };
-
-  const handleOnChange = (prop) => (event) => {
-    const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
-    setNewContent(tempContent);
   };
   return (
     <div className={classes.root}>
@@ -147,31 +138,31 @@ export default function Edit({ editOpen, handleEditClose, item }) {
               }}
             >
               <Box className={classes.content}>
-                <MUIRichTextEditor
-                  label="活动详情"
-                  defaultValue={content}
-                  onChange={handleOnChange()}
-                  inlineToolbar={true}
-                  controls={[
-                    "title",
-                    "bold",
-                    "italic",
-                    "underline",
-                    "strikethrough",
-                    "highlight",
-                    "undo",
-                    "redo",
-                    "link",
-                    "media",
-                    "numberList",
-                    "bulletList",
-                    "quote",
-                    "code",
-                    "clear",
-                  ]}
+                <Controller
+                  name="content"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      multiline
+                      rows={10}
+                      required
+                      id="content"
+                      label="详细内容"
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.content}
+                      helperText={errors.content ? "不能为空" : null}
+                    />
+                  )}
                 />
               </Box>
-              <Stack spacing={2}>
+              <Stack spacing={2} sx={{ maxWidth: "100%" }}>
                 <Controller
                   name="title"
                   control={control}
