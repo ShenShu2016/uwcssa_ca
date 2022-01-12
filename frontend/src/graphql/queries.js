@@ -701,6 +701,7 @@ export const getUser = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -3350,6 +3351,7 @@ export const getDepartment = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -6403,24 +6405,6 @@ export const listAddresss = /* GraphQL */ `
           userID
           updatedAt
           owner
-          user {
-            id
-            username
-            email
-            owner
-            firstName
-            lastName
-            intro
-            major
-            avatarImgURL
-            backGroundImgURL
-            linkedIn
-            github
-            sortKey
-            createdAt
-            updatedAt
-            badges
-          }
         }
         owner
       }
@@ -7387,11 +7371,51 @@ export const getKanban = /* GraphQL */ `
       tags
       points
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username
@@ -7527,11 +7551,30 @@ export const listKanbans = /* GraphQL */ `
         tags
         points
         sortKey
+        lastUpdatedID
         assigneeID
         departmentID
         userID
         createdAt
         updatedAt
+        lastUpdated {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
         assignee {
           id
           username
@@ -7610,11 +7653,30 @@ export const kanbanSortBySortKey = /* GraphQL */ `
         tags
         points
         sortKey
+        lastUpdatedID
         assigneeID
         departmentID
         userID
         createdAt
         updatedAt
+        lastUpdated {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
         assignee {
           id
           username

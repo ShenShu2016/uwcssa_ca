@@ -157,6 +157,7 @@ export const createUser = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -324,6 +325,7 @@ export const updateUser = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -491,6 +493,7 @@ export const deleteUser = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -4746,6 +4749,7 @@ export const createDepartment = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -4861,6 +4865,7 @@ export const updateDepartment = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -4976,6 +4981,7 @@ export const deleteDepartment = /* GraphQL */ `
           tags
           points
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -11848,11 +11854,51 @@ export const createKanban = /* GraphQL */ `
       tags
       points
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username
@@ -11986,11 +12032,51 @@ export const updateKanban = /* GraphQL */ `
       tags
       points
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username
@@ -12124,11 +12210,51 @@ export const deleteKanban = /* GraphQL */ `
       tags
       points
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username

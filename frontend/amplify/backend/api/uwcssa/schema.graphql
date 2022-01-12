@@ -1001,6 +1001,8 @@ type Kanban
   tags: [String]
   points: Int
   sortKey: SortKey!
+  lastUpdatedID: ID
+  lastUpdated: User @connection(fields: ["lastUpdatedID"])
   assigneeID: ID
   assignee: User @connection(fields: ["assigneeID"])
   departmentID: ID
