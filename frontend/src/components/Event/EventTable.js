@@ -463,17 +463,33 @@ export default function SimpleTable() {
                             </Tooltip>
                           ) : (
                             <div>
-                              {moment().isBetween(row.startDate, row.endDate) &&
-                              row.eventStatus !== "InProgress" ? (
+                              {row.startDate > moment().format() &&
+                              row.eventStatus === "InProgress" ? (
                                 <Tooltip
                                   disableFocusListener
-                                  title="活动已经开始，记得修改活动状态"
+                                  title="活动还没开始，活动状态选择有问题"
                                   placement="right"
                                   arrow
                                 >
                                   <WarningAmberIcon color="warning" />
                                 </Tooltip>
-                              ) : null}
+                              ) : (
+                                <div>
+                                  {moment().isBetween(
+                                    row.startDate,
+                                    row.endDate
+                                  ) && row.eventStatus !== "InProgress" ? (
+                                    <Tooltip
+                                      disableFocusListener
+                                      title="活动已经开始，记得修改活动状态"
+                                      placement="right"
+                                      arrow
+                                    >
+                                      <WarningAmberIcon color="warning" />
+                                    </Tooltip>
+                                  ) : null}
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>

@@ -689,24 +689,23 @@ export default function EventBody({ event }) {
                               </div>
                             )}
                             <Box sx={{ my: 3 }}>
-                              {/* <Typography
-                                variant="body1"
-                                // sx={{ marginTop: "2rem" }}
-                                component="span"
-                                style={{
-                                  whiteSpace: "pre-wrap",
-                                  wordBreak: "break-word",
-                                }}
-                                gutterBottom
-                              >
-                                {content}
-                              </Typography> */}
                               <SeeMore content={content} />
                             </Box>
                           </CardContent>
                         </Card>
                       </Grid>
-                      <Grid item xs={6} sm={8} md={4}>
+                      <Grid
+                        item
+                        xs={6}
+                        sm={8}
+                        md={4}
+                        style={{
+                          display:
+                            eventParticipants.items.length === 0
+                              ? "none"
+                              : "block",
+                        }}
+                      >
                         <Card>
                           <CardContent>
                             <Typography
@@ -716,31 +715,31 @@ export default function EventBody({ event }) {
                             >
                               <b>参与者</b>
                             </Typography>
-                            {eventParticipants.items.length === 0 ? (
+                            {/* {eventParticipants.items.length === 0 ? (
                               <Typography
                                 variant="h6"
                                 sx={{ textAlign: "center" }}
                                 gutterBottom
                               >
-                                已有0人报名
+                                
                               </Typography>
-                            ) : (
-                              <Typography
-                                variant="h6"
-                                sx={{ textAlign: "center" }}
-                                gutterBottom
-                              >
-                                已有
-                                {eventParticipants.items.reduce(function (
-                                  sum,
-                                  items
-                                ) {
-                                  return sum + items.numberOfPeople;
-                                },
-                                0)}
-                                人报名
-                              </Typography>
-                            )}
+                            ) : ( */}
+                            <Typography
+                              variant="h6"
+                              sx={{ textAlign: "center" }}
+                              gutterBottom
+                            >
+                              已有
+                              {eventParticipants.items.reduce(function (
+                                sum,
+                                items
+                              ) {
+                                return sum + items.numberOfPeople;
+                              },
+                              0)}
+                              人报名
+                            </Typography>
+                            {/* )} */}
                           </CardContent>
                         </Card>
                       </Grid>
