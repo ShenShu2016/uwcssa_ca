@@ -80,7 +80,7 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     letterSpacing: "0.5px",
     marginTop: 8,
     marginBottom: 0,
-    textAlign: "center",
+    // textAlign: "center",
   },
   subheader: {
     fontSize: 20,
@@ -387,7 +387,7 @@ export default function ProfessionalCard({
                     <Typography
                       variant="h4"
                       className={classes.heading}
-                      sx={{ margin: "3rem auto" }}
+                      sx={{ margin: "3rem auto 1rem auto" }}
                     >
                       {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
                       !/[^a-zA-Z,(,)]+$/.test(firstName)
@@ -398,7 +398,7 @@ export default function ProfessionalCard({
                     <Typography
                       variant="h4"
                       className={classes.heading}
-                      sx={{ margin: "3rem auto" }}
+                      sx={{ margin: "3rem auto 1rem auto" }}
                     >
                       Full Name
                     </Typography>
@@ -407,7 +407,9 @@ export default function ProfessionalCard({
                   <Typography
                     variant="h5"
                     color="primary"
-                    sx={{ marginTop: "2rem" }}
+                    sx={{
+                      margin: "auto auto 2rem auto",
+                    }}
                   >
                     <b>{title ? title : "暂无，请编辑..."}</b>
                   </Typography>
