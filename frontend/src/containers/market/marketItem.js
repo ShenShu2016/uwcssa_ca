@@ -50,6 +50,15 @@ export default function MarketItem() {
       price: { between: [min === "" ? 0 : min, max === "" ? 999999 : max] },
     };
     console.log(category, condition);
+    // {marketItemCategory:{eq:category[]}}
+    let itemFilter = [];
+
+    category.length !== 0 &&
+      category.map((c) => itemFilter.push({ marketItemCategory: { eq: c } }));
+    condition.length !== 0 &&
+      condition.map((c) => itemFilter.push({ marketItemCondition: { eq: c } }));
+    Object.assign(filter, { or: itemFilter });
+    console.log(filter);
     dispatch(filterUpdated({ marketType: type, filter: filter }));
 
     setFilterList(data);
