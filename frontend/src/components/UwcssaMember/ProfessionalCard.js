@@ -33,7 +33,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
-
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   root: {
     // backgroundColor: "#F3F2EF",
@@ -67,8 +66,9 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     },
   },
   avatar: {
-    width: 125,
-    height: 125,
+    display: "block",
+    width: 200,
+    height: 160,
     margin: "auto",
     borderRadius: 12,
     size: 48,
@@ -80,6 +80,7 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     letterSpacing: "0.5px",
     marginTop: 8,
     marginBottom: 0,
+    textAlign: "center",
   },
   subheader: {
     fontSize: 20,
@@ -253,18 +254,6 @@ export default function ProfessionalCard({
               </div>
             </Box>
           ) : null} */}
-          {isPermit ? (
-            <IconButton
-              aria-label="settings"
-              aria-haspopup="true"
-              onClick={handleSettingMenuOpen}
-              color="inherit"
-              // disabled={!isPermit}
-              className={classes.edit}
-            >
-              <MoreVertIcon />
-            </IconButton>
-          ) : null}
 
           <img
             src={
@@ -278,7 +267,8 @@ export default function ProfessionalCard({
 
           {lastName && firstName ? (
             <Typography variant="subtitle1" className={classes.heading}>
-              {!/[^a-zA-Z]/.test(lastName) && !/[^a-zA-Z]/.test(firstName)
+              {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
+              !/[^a-zA-Z,(,)]+$/.test(firstName)
                 ? `${item.user.firstName} ${item.user.lastName}`
                 : `${item.user.lastName}${item.user.firstName}`}
             </Typography>
@@ -287,27 +277,40 @@ export default function ProfessionalCard({
               Full Name
             </Typography>
           )}
-          <Typography
-            variant="body2"
-            color="primary"
-            component={Link}
-            to={`/account/profile/${username}`}
-            sx={{ textDecoration: "none" }}
-            gutterBottom
-          >
-            <b>@{id}</b>
-          </Typography>
-          <Typography variant="body2" className={classes.subheader}>
-            {title ? title : "暂无，请编辑..."}
-          </Typography>
-          <Typography variant="caption">
-            在职时间: {startDate ? startDate.slice(0, 10) : "yyyy-mm-dd"} -{" "}
-            {endDate ? endDate.slice(0, 10) : "yyyy-mm-dd"}
-          </Typography>
+          <div style={{ textAlign: "center" }}>
+            <Typography
+              variant="body2"
+              color="primary"
+              component={Link}
+              to={`/account/profile/${username}`}
+              sx={{ textDecoration: "none" }}
+              gutterBottom
+            >
+              <b>@{id}</b>
+            </Typography>
+
+            <Typography variant="body2" className={classes.subheader}>
+              {title ? title : "暂无，请编辑..."}
+            </Typography>
+            <Typography variant="caption">
+              在职时间: {startDate ? startDate.slice(0, 10) : "yyyy-mm-dd"} -{" "}
+              {endDate ? endDate.slice(0, 10) : "yyyy-mm-dd"}
+            </Typography>
+          </div>
           <Divider light sx={{ margin: "1rem 0" }} />
-          <Typography variant="body2" color="text.secondary">
-            {summary ? summary : "请编辑..."}
-          </Typography>
+          <Box
+            sx={{
+              overflow: "hidden",
+            }}
+          >
+            <Grid container wrap="nowrap" sx={{ mx: "auto" }}>
+              <Grid item xs zeroMinWidth>
+                <Typography variant="body2" color="text.secondary" noWrap>
+                  {summary ? summary : "请编辑..."}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
         </CardContent>
 
         <CardActions disableSpacing>
@@ -333,6 +336,18 @@ export default function ProfessionalCard({
               }}
             >
               <GitHubIcon />
+            </IconButton>
+          ) : null}
+          {isPermit ? (
+            <IconButton
+              aria-label="settings"
+              aria-haspopup="true"
+              onClick={handleSettingMenuOpen}
+              color="inherit"
+              // disabled={!isPermit}
+              className={classes.edit}
+            >
+              <MoreVertIcon />
             </IconButton>
           ) : null}
           <Button
@@ -367,15 +382,15 @@ export default function ProfessionalCard({
           <Container maxWidth="md">
             <Box className={classes.pad}>
               <Grid container columns={12}>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={12} sm={4}>
                   {lastName && firstName ? (
                     <Typography
                       variant="h4"
                       className={classes.heading}
-                      sx={{ margin: "3rem 0" }}
+                      sx={{ margin: "3rem auto" }}
                     >
-                      {!/[^a-zA-Z]/.test(lastName) &&
-                      !/[^a-zA-Z]/.test(firstName)
+                      {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
+                      !/[^a-zA-Z,(,)]+$/.test(firstName)
                         ? `${item.user.firstName} ${item.user.lastName}`
                         : `${item.user.lastName}${item.user.firstName}`}
                     </Typography>
@@ -383,7 +398,7 @@ export default function ProfessionalCard({
                     <Typography
                       variant="h4"
                       className={classes.heading}
-                      sx={{ margin: "3rem 0" }}
+                      sx={{ margin: "3rem auto" }}
                     >
                       Full Name
                     </Typography>

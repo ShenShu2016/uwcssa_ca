@@ -50,7 +50,7 @@ function AboutMe({ user, ownerID }) {
       <CardContent>
         <Grid container spacing={1} marginBottom={"1rem"}>
           <Grid item xs={12}>
-            <Stack direction={"row"} style={{ verticalAlign: "middle" }}>
+            <Stack direction={"row"} style={{ verticalAlign: "baseline" }}>
               <LocalLibraryRoundedIcon
                 sx={{ height: 25, width: 25, marginRight: "0.5rem" }}
               />
@@ -80,8 +80,12 @@ function AboutMe({ user, ownerID }) {
                 </Grid>
               </Grid>
             </Grid> */}
-          <Grid item xs={12}>
-            <Stack direction={"row"} style={{ verticalAlign: "middle" }}>
+          <Grid
+            item
+            xs={12}
+            style={{ display: user.linkedIn ? "block" : "none" }}
+          >
+            <Stack direction={"row"} style={{ verticalAlign: "baseline" }}>
               <LinkedInIcon
                 sx={{ height: 25, width: 25, marginRight: "0.5rem" }}
               />
@@ -98,21 +102,24 @@ function AboutMe({ user, ownerID }) {
                 sx={{ textDecoration: "none" }}
               >
                 LinkedIn：
-                <span color="primary">
-                  {user.linkedIn ? user.linkedIn : "暂未填写"}
+                <span style={{ color: "#3f51b5", cursor: "pointer" }}>
+                  {user.linkedIn}
                 </span>
               </Typography>
             </Stack>
           </Grid>
-          <Grid item xs={12}>
-            <Stack direction={"row"} style={{ verticalAlign: "middle" }}>
+          <Grid
+            item
+            xs={12}
+            style={{ display: user.github ? "block" : "none" }}
+          >
+            <Stack direction={"row"} style={{ verticalAlign: "baseline" }}>
               <GitHubIcon
                 sx={{ height: 25, width: 25, marginRight: "0.5rem" }}
               />
               <Typography
                 variant="body2"
                 gutterBottom
-                color="primary"
                 onClick={
                   user.github
                     ? () => {
@@ -123,7 +130,9 @@ function AboutMe({ user, ownerID }) {
                 sx={{ textDecoration: "none" }}
               >
                 GitHub：
-                <span> {user.github ? user.github : "暂未填写"}</span>
+                <span style={{ color: "#3f51b5", cursor: "pointer" }}>
+                  {user.github}
+                </span>
               </Typography>
             </Stack>
           </Grid>
