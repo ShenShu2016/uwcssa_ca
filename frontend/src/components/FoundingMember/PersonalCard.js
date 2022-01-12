@@ -349,7 +349,7 @@ export default function PersonalCard({
                       <Typography
                         variant="h4"
                         className={classes.heading}
-                        sx={{ margin: "3rem auto" }}
+                        sx={{ margin: "3rem auto 1rem auto" }}
                       >
                         Full Name
                       </Typography>

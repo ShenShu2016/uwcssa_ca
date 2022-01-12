@@ -266,14 +266,22 @@ export default function ProfessionalCard({
           />
 
           {lastName && firstName ? (
-            <Typography variant="subtitle1" className={classes.heading}>
+            <Typography
+              variant="subtitle1"
+              className={classes.heading}
+              sx={{ textAlign: "center" }}
+            >
               {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
               !/[^a-zA-Z,(,)]+$/.test(firstName)
                 ? `${item.user.firstName} ${item.user.lastName}`
                 : `${item.user.lastName}${item.user.firstName}`}
             </Typography>
           ) : (
-            <Typography variant="subtitle1" className={classes.heading}>
+            <Typography
+              variant="subtitle1"
+              className={classes.heading}
+              sx={{ textAlign: "center" }}
+            >
               Full Name
             </Typography>
           )}
@@ -382,7 +390,7 @@ export default function ProfessionalCard({
           <Container maxWidth="md">
             <Box className={classes.pad}>
               <Grid container columns={12}>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={8}>
                   {lastName && firstName ? (
                     <Typography
                       variant="h4"
