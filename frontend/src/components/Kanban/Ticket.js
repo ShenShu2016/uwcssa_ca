@@ -90,7 +90,7 @@ export default function Ticket({ item }) {
             <IconButton
               aria-label="settings"
               onClick={handleClick}
-              disabled={!isPermit}
+              disabled={!(isPermit && window.location.pathname === "/kanban")}
             >
               <MoreVertIcon />
             </IconButton>

@@ -29,8 +29,8 @@ export default function MyKanbans() {
               justifyContent: "space-around",
             }}
           >
-            {ticketsNeedToDo.map((ticket, idx) => {
-              return <Ticket item={ticket} key={idx} />;
+            {ticketsNeedToDo.map((ticket) => {
+              return <Ticket item={ticket} key={ticket.id} />;
             })}
           </Box>
           <Button variant="contained" component={Link} to="/kanban">
