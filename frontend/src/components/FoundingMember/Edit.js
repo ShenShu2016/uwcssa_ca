@@ -182,6 +182,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       console.log("response", response);
       setImgURL(response.payload);
       setLoading(false);
+      setImageSrc(null);
     }
   };
   const handleOnChange = (prop) => (event) => {
