@@ -213,6 +213,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
       console.log("response", response);
       setImgURL(response.payload);
       setLoading(false);
+      setImageSrc(null);
     }
   };
   const handleOnChange = (prop) => (event) => {
@@ -329,11 +330,11 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                 rules={{
                   required: false,
                   pattern: /\D+/,
-                  maxLength: 100,
+                  maxLength: 16,
                 }}
                 render={({ field: { onChange, value } }) => (
                   <TextField
-                    label="简介"
+                    label="简介（1~16个字）"
                     variant="outlined"
                     fullWidth
                     margin="dense"

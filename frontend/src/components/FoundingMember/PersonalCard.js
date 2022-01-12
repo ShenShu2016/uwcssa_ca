@@ -230,7 +230,8 @@ export default function PersonalCard({
           <CardContent sx={{ textAlign: "center", marginTop: "8rem" }}>
             {lastName && firstName ? (
               <Typography variant="subtitle1" className={classes.heading}>
-                {!/[^a-zA-Z]/.test(lastName) && !/[^a-zA-Z]/.test(firstName)
+                {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
+                !/[^a-zA-Z,(,)]+$/.test(firstName)
                   ? `${firstName} ${lastName}`
                   : `${lastName}${firstName}`}
               </Typography>
@@ -337,10 +338,10 @@ export default function PersonalCard({
                       <Typography
                         variant="h4"
                         className={classes.heading}
-                        sx={{ margin: "3rem 0" }}
+                        sx={{ margin: "3rem auto 1rem auto" }}
                       >
-                        {!/[^a-zA-Z]/.test(lastName) &&
-                        !/[^a-zA-Z]/.test(firstName)
+                        {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
+                        !/[^a-zA-Z,(,)]+$/.test(firstName)
                           ? `${firstName} ${lastName}`
                           : `${lastName}${firstName}`}
                       </Typography>
@@ -348,7 +349,7 @@ export default function PersonalCard({
                       <Typography
                         variant="h4"
                         className={classes.heading}
-                        sx={{ margin: "3rem 0" }}
+                        sx={{ margin: "3rem auto 1rem auto" }}
                       >
                         Full Name
                       </Typography>
@@ -357,7 +358,7 @@ export default function PersonalCard({
                     <Typography
                       variant="h5"
                       color="primary"
-                      sx={{ marginTop: "2rem" }}
+                      sx={{ margin: "auto auto 2rem auto" }}
                     >
                       <b>{title ? title : "暂无，请编辑..."}</b>
                     </Typography>
