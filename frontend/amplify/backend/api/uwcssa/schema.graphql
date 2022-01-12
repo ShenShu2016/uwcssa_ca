@@ -1000,6 +1000,7 @@ type Kanban
   priority: Priority
   tags: [String]
   points: Int
+  active: Boolean
   sortKey: SortKey!
   lastUpdatedID: ID
   lastUpdated: User @connection(fields: ["lastUpdatedID"])

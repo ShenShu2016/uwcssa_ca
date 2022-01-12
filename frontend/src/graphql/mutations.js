@@ -156,6 +156,7 @@ export const createUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -324,6 +325,7 @@ export const updateUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -492,6 +494,7 @@ export const deleteUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -4748,6 +4751,7 @@ export const createDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -4864,6 +4868,7 @@ export const updateDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -4980,6 +4985,7 @@ export const deleteDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -11853,6 +11859,7 @@ export const createKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
       lastUpdatedID
       assigneeID
@@ -12031,6 +12038,7 @@ export const updateKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
       lastUpdatedID
       assigneeID
@@ -12209,6 +12217,7 @@ export const deleteKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
       lastUpdatedID
       assigneeID

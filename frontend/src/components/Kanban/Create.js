@@ -75,6 +75,7 @@ export default function Create({ createOpen, handleCreateClose }) {
       assigneeID: "shushen2013",
       priority: "Average",
       content: "",
+      active: true,
     },
   });
 

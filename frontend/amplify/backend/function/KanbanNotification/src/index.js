@@ -42,44 +42,67 @@ exports.handler = async (event) => {
         },
       };
       const response = await documentClient.get(params).promise();
-      const emailResponse = await ses
-        .sendEmail({
+      try {
+        const emailResponse = await ses
+          .sendEmail({
+            Destination: {
+              ToAddresses: getToAddress(response),
+            },
+            Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
+            Message: {
+              Subject: {
+                Data: `UWCSSA 任务提醒 ${record.dynamodb.NewImage.title.S} ${record.dynamodb.NewImage.kanbanStatus.S}`,
+              },
+              Body: {
+                Text: {
+                  Data: `${
+                    record.eventName === "INSERT"
+                      ? record.dynamodb.NewImage.userID.S
+                      : record.dynamodb.NewImage.lastUpdatedID.S
+                  }:\t ${
+                    record.eventName === "INSERT"
+                      ? "给你添加的新的任务"
+                      : "给您更新了任务信息"
+                  }.\n截止日期是: ${
+                    record.dynamodb.NewImage.deadLine
+                      ? `${momentTimezone(record.dynamodb.NewImage.deadLine.S)
+                          .tz("America/New_York")
+                          .format("LLLL")}\n距离截止日期:\t ${momentTimezone(
+                          record.dynamodb.NewImage.deadLine.S
+                        ).fromNow()}`
+                      : "待定"
+                  }\n\n${
+                    record.dynamodb.NewImage.content.S
+                  }\n\n点击 https://uwcssa.ca/kanban 查看\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
+                },
+              },
+            },
+          })
+          .promise();
+        console.log(
+          "EMAIL发送结束",
+          "发送给",
+          getToAddress(response),
+          emailResponse
+        );
+      } catch (error) {
+        await ses.sendEmail({
           Destination: {
-            ToAddresses: getToAddress(response),
+            ToAddresses: "shushen2013@gmail.com",
           },
           Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
           Message: {
             Subject: {
-              Data: `UWCSSA 任务提醒 ${record.dynamodb.NewImage.title.S} ${record.dynamodb.NewImage.kanbanStatus.S}`,
+              Data: `KanbanLambda failure`,
             },
             Body: {
               Text: {
-                Data: `${record.dynamodb.NewImage.userID.S}:\t ${
-                  record.eventName === "INSERT"
-                    ? "给你添加的新的任务"
-                    : "给您更新了任务信息"
-                }.\n截止日期是: ${
-                  record.dynamodb.NewImage.deadLine
-                    ? `${momentTimezone(record.dynamodb.NewImage.deadLine.S)
-                        .tz("America/New_York")
-                        .format("LLLL")}\n距离截止日期:\t ${momentTimezone(
-                        record.dynamodb.NewImage.deadLine.S
-                      ).fromNow()}`
-                    : "待定"
-                }\n\n${
-                  record.dynamodb.NewImage.content.S
-                }\n\n点击 https://uwcssa.ca/kanban 查看\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
+                Data: `${record}`,
               },
             },
           },
-        })
-        .promise();
-      console.log(
-        "EMAIL发送结束",
-        "发送给",
-        getToAddress(response),
-        emailResponse
-      );
+        });
+      }
     }
   }
   return { status: "done" };

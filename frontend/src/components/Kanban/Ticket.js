@@ -10,6 +10,7 @@ import {
   MenuList,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Box } from "@mui/system";
 import CardHeader from "@mui/material/CardHeader";
@@ -22,9 +23,9 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoticeIcons from "./NoticeIcons";
 import { Typography } from "@mui/material";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import moment from "moment";
 import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
-import { useDispatch } from "react-redux";
 import { usePermit } from "../../Hooks/usePermit";
 
 const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
@@ -32,6 +33,7 @@ const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
 export default function Ticket({ item }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { username } = useSelector((state) => state.userAuth.user);
   const {
     id,
     content,
@@ -67,11 +69,24 @@ export default function Ticket({ item }) {
     const updateKanbanInput = {
       id: id,
       kanbanStatus: status,
+      lastUpdatedID: username,
     };
     console.log("updateKanbanInput", updateKanbanInput);
 
     await dispatch(updateKanbanDetail({ updateKanbanInput }));
   };
+
+  const handleChangeInactive = async () => {
+    setLoading(true);
+    const updateKanbanInput = {
+      id: id,
+      active: false,
+    };
+    console.log("updateKanbanInput", updateKanbanInput);
+
+    await dispatch(updateKanbanDetail({ updateKanbanInput }));
+  };
+
   return (
     <Box sx={{ my: "1rem" }}>
       <Card sx={{ width: 250 }}>
@@ -192,6 +207,20 @@ export default function Ticket({ item }) {
               </Box>
             );
           })}
+          {(kanbanStatus === "WASTED" || kanbanStatus === "DONE") && (
+            <Box>
+              <MenuItem
+                onClick={() => {
+                  handleChangeInactive();
+                }}
+              >
+                <ListItemIcon>
+                  <VisibilityOffRoundedIcon />
+                </ListItemIcon>
+                <ListItemText>隐藏不再显示</ListItemText>
+              </MenuItem>
+            </Box>
+          )}
         </MenuList>
       </Menu>
       <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />

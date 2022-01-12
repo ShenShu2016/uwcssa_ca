@@ -55,7 +55,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const { fetchUwcssaMembersStatus } = useSelector(
     (state) => state.uwcssaMember
   );
-
+  const { username } = useSelector((state) => state.userAuth.user);
   useEffect(() => {
     if (fetchUwcssaMembersStatus === "idle" || undefined) {
       dispatch(fetchUwcssaMembers());
@@ -108,6 +108,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
         (x) => x.id === getValues("assigneeID")
       )[0].departmentID,
       tags: GetTags(),
+      lastUpdatedID: username,
     };
     setLoading(true);
     console.log("updateKanbanInput", updateKanbanInput);

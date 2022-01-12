@@ -700,6 +700,7 @@ export const getUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -3350,6 +3351,7 @@ export const getDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
           lastUpdatedID
           assigneeID
@@ -7370,6 +7372,7 @@ export const getKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
       lastUpdatedID
       assigneeID
@@ -7550,6 +7553,7 @@ export const listKanbans = /* GraphQL */ `
         priority
         tags
         points
+        active
         sortKey
         lastUpdatedID
         assigneeID
@@ -7652,6 +7656,7 @@ export const kanbanSortBySortKey = /* GraphQL */ `
         priority
         tags
         points
+        active
         sortKey
         lastUpdatedID
         assigneeID
