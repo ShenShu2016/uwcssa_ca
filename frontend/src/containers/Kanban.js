@@ -4,13 +4,13 @@ import {
   fetchDepartments,
   selectAllDepartments,
 } from "../redux/slice/departmentSlice";
-import { fetchKanbans, selectAllKanbans } from "../redux/slice/kanbanSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ByDepartment from "../components/Kanban/ByDepartment";
 import Create from "../components/Kanban/Create";
 import Footer from "./Footer";
+import { fetchKanbans } from "../redux/slice/kanbanSlice";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../Hooks/usePermit";
 import { useTitle } from "../Hooks/useTitle";
@@ -35,7 +35,6 @@ export default function Kanban() {
   const dispatch = useDispatch();
   const [createOpen, setCreateOpen] = useState(false);
   const isPermit = usePermit(null, "staff");
-  const kanbans = useSelector(selectAllKanbans);
 
   const { fetchKanbansStatus } = useSelector((state) => state.kanban);
   const departments = useSelector(selectAllDepartments);
@@ -77,11 +76,7 @@ export default function Kanban() {
           <Box className={classes.main}>
             {departments.map((department, departmentIdx) => {
               return (
-                <ByDepartment
-                  department={department}
-                  kanbans={kanbans}
-                  key={departmentIdx}
-                />
+                <ByDepartment department={department} key={departmentIdx} />
               );
             })}
           </Box>

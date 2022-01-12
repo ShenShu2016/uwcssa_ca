@@ -47,7 +47,9 @@ export default function Create({ createOpen, handleCreateClose }) {
 
   const [loading, setLoading] = useState(false);
   const [tags, setTags] = useState([]);
-  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
+  const uwcssaMembers = useSelector(selectAllUwcssaMembers).sort(
+    (a, b) => a.departmentID - b.departmentID
+  );
 
   const { fetchUwcssaMembersStatus } = useSelector(
     (state) => state.uwcssaMember

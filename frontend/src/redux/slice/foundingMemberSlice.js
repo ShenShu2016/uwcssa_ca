@@ -47,6 +47,7 @@ export const postFoundingMember = createAsyncThunk(
           input: createFoundingMemberInput,
         })
       );
+      console.log(response.data.createFoundingMember);
       return response.data.createFoundingMember;
     } catch (error) {
       console.log(error);
@@ -87,6 +88,17 @@ const foundingMemberSlice = createSlice({
       .addCase(fetchFoundingMembers.rejected, (state, action) => {
         state.fetchFoundingMembersStatus = "failed";
         state.fetchFoundingMembersError = action.error.message;
+      })
+      .addCase(postFoundingMember.pending, (state, action) => {
+        state.postFoundingMemberStatus = "loading";
+      })
+      .addCase(postFoundingMember.fulfilled, (state, action) => {
+        state.postUwcssaMemberStatus = "succeeded";
+        fundingMemberAdapter.addOne(state, action.payload);
+      })
+      .addCase(postFoundingMember.rejected, (state, action) => {
+        state.postFoundingMemberStatus = "failed";
+        state.postFoundingMemberError = action.error.message;
       })
       // Cases for status of updateMarketItem (pending, fulfilled, and rejected)
       .addCase(updateFoundingMemberDetail.pending, (state, action) => {

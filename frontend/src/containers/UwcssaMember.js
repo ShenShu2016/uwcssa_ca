@@ -4,16 +4,13 @@ import {
   fetchDepartments,
   selectAllDepartments,
 } from "../redux/slice/departmentSlice";
-import {
-  fetchUwcssaMembers,
-  selectAllUwcssaMembers,
-} from "../redux/slice/uwcssaMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ByDepartment from "../components/UwcssaMember/ByDepartment";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { fetchUwcssaMembers } from "../redux/slice/uwcssaMemberSlice";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../Hooks/usePermit";
 import { useTitle } from "../Hooks/useTitle";

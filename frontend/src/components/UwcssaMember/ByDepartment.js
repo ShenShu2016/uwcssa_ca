@@ -13,7 +13,7 @@ import { Box } from "@mui/system";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoCard from "./InfoCard";
 import { makeStyles } from "@mui/styles";
-import { selectAllUwcssaMembers } from "../../redux/slice/uwcssaMemberSlice";
+import { selectUwcssaMembersByDepartmentId } from "../../redux/slice/uwcssaMemberSlice";
 import { styled } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 
@@ -49,11 +49,13 @@ const Root = styled("div")(({ theme }) => ({
 
 export default function ByDepartment({ department }) {
   const classes = useStyles();
-  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
-  let membersByDepartment = uwcssaMembers.filter(
-    (x) => x.departmentID === department.id && x.active === true
+  // const uwcssaMembers = useSelector(selectAllUwcssaMembers);
+  // let membersByDepartment = uwcssaMembers.filter(
+  //   (x) => x.departmentID === department.id && x.active === true
+  // );
+  const membersByDepartment = useSelector(
+    selectUwcssaMembersByDepartmentId(department.id)
   );
-
   // membersByDepartment = membersByDepartment.find((x) => x.leader === true)
   //   ? [
   //       membersByDepartment.find((x) => x.leader === true),
