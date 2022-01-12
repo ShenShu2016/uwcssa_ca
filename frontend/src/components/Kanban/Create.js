@@ -29,7 +29,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postKanban } from "../../redux/slice/kanbanSlice";
-import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   content: {
@@ -44,7 +43,6 @@ const useStyles = makeStyles({
 export default function Create({ createOpen, handleCreateClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
   const { username } = useSelector((state) => state.userAuth.user);
 
   const [loading, setLoading] = useState(false);
@@ -107,7 +105,6 @@ export default function Create({ createOpen, handleCreateClose }) {
       setLoading(false);
       reset();
       handleCreateClose();
-      history.replace(`/kanban`);
     }
   };
 
