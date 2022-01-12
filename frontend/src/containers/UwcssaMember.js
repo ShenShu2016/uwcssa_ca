@@ -74,8 +74,8 @@ export default function UwcssaMember() {
             </Button>
           )}
         </Box>
-        {departments.map((department, departmentIdx) => {
-          return <ByDepartment department={department} key={departmentIdx} />;
+        {departments.map((department) => {
+          return <ByDepartment department={department} key={department.id} />;
         })}
       </div>
       <Footer />

@@ -46,8 +46,8 @@ export default function ByStatus({ status, departmentID }) {
           justifyContent="flex-start"
           alignItems="center"
         >
-          {kanbansByStatus.map((ticket, idx) => {
-            return <Ticket item={ticket} key={idx} />;
+          {kanbansByStatus.map((ticket) => {
+            return <Ticket item={ticket} key={ticket.id} />;
           })}
         </Stack>
       </CardContent>

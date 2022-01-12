@@ -117,7 +117,7 @@ export default function ByDepartment({ department }) {
           <div className={classes.cards}>
             {membersByDepartment.map((member, memberIdx) => {
               return (
-                <div key={memberIdx} style={{ animation: animStr(memberIdx) }}>
+                <div key={member.id} style={{ animation: animStr(memberIdx) }}>
                   <InfoCard item={member} />
                 </div>
               );
