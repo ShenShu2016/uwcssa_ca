@@ -68,7 +68,7 @@ export default function Education({ user, userAuth, ownerID }) {
         )}
         {user.userEducations.items.map((education, idx) => {
           return (
-            <div key={idx}>
+            <div key={education.id}>
               <EducationListing
                 education={education}
                 idx={idx}

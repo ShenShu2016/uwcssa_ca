@@ -68,9 +68,9 @@ export default function ByDepartment({ department, uwcssaJobs }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <List sx={{ mx: "1rem" }}>
-            {jobsByDepartment.map((job, idx) => {
+            {jobsByDepartment.map((job) => {
               return (
-                <Paper sx={{ my: "0.5rem" }} key={idx}>
+                <Paper sx={{ my: "0.5rem" }} key={job.id}>
                   <CardActionArea
                     component={Link}
                     to={`/career/jobDetail/${job.id}`}

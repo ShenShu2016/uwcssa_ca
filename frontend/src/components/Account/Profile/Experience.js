@@ -68,7 +68,7 @@ export default function Experience({ user, userAuth, ownerID }) {
         )}
         {user.userExperiences.items.map((experience, idx) => {
           return (
-            <div key={idx}>
+            <div key={experience.id}>
               <ExperienceListing
                 experience={experience}
                 idx={idx}

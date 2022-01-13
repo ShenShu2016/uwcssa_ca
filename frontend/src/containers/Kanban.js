@@ -74,9 +74,9 @@ export default function Kanban() {
             )}
           </Typography>
           <Box className={classes.main}>
-            {departments.map((department, departmentIdx) => {
+            {departments.map((department) => {
               return (
-                <ByDepartment department={department} key={departmentIdx} />
+                <ByDepartment department={department} key={department.id} />
               );
             })}
           </Box>
