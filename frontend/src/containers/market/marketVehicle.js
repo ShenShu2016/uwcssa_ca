@@ -1,33 +1,30 @@
 import { Box, Stack } from "@mui/material";
-import React, { useState } from "react";
+import {
+  filterClear,
+  selectAllMarketItems,
+} from "../../redux/slice/marketSlice";
+import useMarketItemFilter, {
+  marketItemFilterUpdate,
+} from "../../components/Market/useMarketItemFilter";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
-import { selectAllMarketItems } from "../../redux/slice/marketSlice";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
 import { useSelector } from "react-redux";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketVehicle() {
   const useStyles = marketItemStyle;
+  const dispatch = useDispatch();
   useTitle("Vehicle");
   const classes = useStyles();
-  const [filterList, setFilterList] = useState({
-    type: "Vehicle",
-    sortKey: "original",
-    min: "",
-    max: "",
-    vehicleType: "",
-    minYear: "",
-    maxYear: "",
-    make: "",
-    model: "",
-  });
+  const { darkTheme } = useSelector((state) => state.general);
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -35,20 +32,20 @@ export default function MarketVehicle() {
       sortKey: "original",
       min: "",
       max: "",
-      vehicleType: "",
+      vehicleType: [],
       minYear: "",
       maxYear: "",
-      make: "",
-      model: "",
+      make: [],
+      model: [],
     },
   });
 
   const handleSearch = handleSubmit((data) => {
-    setFilterList(data);
+    marketItemFilterUpdate(data, dispatch);
   });
+  const filterList = useSelector((state) => state.market.filter);
 
-  const isFiltering = useMarketItemFilter(filterList);
-  const { darkTheme } = useSelector((state) => state.general);
+  const isFiltering = useMarketItemFilter(filterList, "Vehicle");
   const filteredItems = useSelector(selectAllMarketItems);
 
   const starter = useStarter(filteredItems, "all", isFiltering);
@@ -68,16 +65,18 @@ export default function MarketVehicle() {
     });
 
   const handleReset = () => {
+    dispatch(filterClear());
+
     reset({
       type: "Vehicle",
       sortKey: "original",
       min: "",
       max: "",
-      vehicleType: "",
+      vehicleType: [],
       minYear: "",
       maxYear: "",
-      make: "",
-      model: "",
+      make: [],
+      model: [],
     });
   };
 
@@ -91,7 +90,6 @@ export default function MarketVehicle() {
           darkTheme={darkTheme}
           form="plain"
           type="Vehicle"
-          filterList={filterList}
           control={control}
           handleSearch={handleSearch}
           handleReset={handleReset}
@@ -102,7 +100,6 @@ export default function MarketVehicle() {
             control={control}
             type="Vehicle"
             trueMarketItems={filteredItems}
-            filterList={filterList}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />
