@@ -1,3 +1,4 @@
+import { fetchMarketItems, filterUpdated } from "../../redux/slice/marketSlice";
 import {
   marketItemSortBySortKeyItem,
   marketItemSortBySortKeyRental,
@@ -5,27 +6,68 @@ import {
 } from "./marketQueries";
 import { useEffect, useState } from "react";
 
-import { fetchMarketItems } from "../../redux/slice/marketSlice";
 import { useDispatch } from "react-redux";
 
-export default function useMarketItemFilter(props) {
+export function marketItemFilterUpdate(props, dispatch) {
   const {
     type,
-    category,
-    condition,
-    min,
-    max,
-    minYear,
-    maxYear,
-    make,
-    model,
-    vehicleType,
-    marketRentalSaleRent,
-    propertyType,
-    airConditioningType,
-    heatingType,
+    category = [],
+    condition = [],
+    min = "",
+    max = "",
+    minYear = "",
+    maxYear = "",
+    make = [],
+    model = [],
+    vehicleType = [],
+    marketRentalSaleRent = [],
+    propertyType = [],
+    airConditioningType = [],
+    heatingType = [],
   } = props;
 
+  const filter = {
+    price: { between: [min === "" ? 0 : min, max === "" ? 999999 : max] },
+  };
+  minYear !== "" ||
+    (maxYear !== "" &&
+      Object.assign(filter, {
+        year: {
+          between: [
+            minYear === "" ? 0 : minYear,
+            maxYear === "" ? 999999 : maxYear,
+          ],
+        },
+      }));
+  // {marketItemCategory:{eq:category[]}}
+  let itemFilter = [];
+
+  category.length !== 0 &&
+    category.map((c) => itemFilter.push({ marketItemCategory: { eq: c } }));
+  condition.length !== 0 &&
+    condition.map((c) => itemFilter.push({ marketItemCondition: { eq: c } }));
+  make.length !== 0 && make.map((c) => itemFilter.push({ make: { eq: c } }));
+  model.length !== 0 && model.map((c) => itemFilter.push({ model: { eq: c } }));
+  vehicleType.length !== 0 &&
+    vehicleType.map((c) => itemFilter.push({ vehicleType: { eq: c } }));
+  marketRentalSaleRent.length !== 0 &&
+    marketRentalSaleRent.map((c) =>
+      itemFilter.push({ marketRentalSaleRent: { eq: c } })
+    );
+  propertyType.length !== 0 &&
+    propertyType.map((c) => itemFilter.push({ propertyType: { eq: c } }));
+  airConditioningType.length !== 0 &&
+    airConditioningType.map((c) =>
+      itemFilter.push({ airConditioningType: { eq: c } })
+    );
+  heatingType.length !== 0 &&
+    heatingType.map((c) => itemFilter.push({ heatingType: { eq: c } }));
+  itemFilter.length !== 0 && Object.assign(filter, { or: itemFilter });
+  console.log(filter);
+  dispatch(filterUpdated({ marketType: type, filter: filter }));
+}
+
+export default function useMarketItemFilter(filterList, type) {
   const dispatch = useDispatch();
   const [isFiltering, setIsFiltering] = useState(false);
   const query =
@@ -38,60 +80,7 @@ export default function useMarketItemFilter(props) {
       : null;
 
   useEffect(() => {
-    let filter = {};
-    // general filter;
-    if (min !== "") {
-      if (max !== "") {
-        filter["price"] = { between: [min, max] };
-      } else {
-        filter["price"] = { ge: min };
-      }
-    } else {
-      if (max !== "") {
-        filter["price"] = { le: max };
-      }
-    }
-    // Item filter;
-    if (category !== undefined && category !== "") {
-      filter["marketItemCategory"] = { eq: category };
-    }
-    if (condition !== undefined && condition !== "") {
-      filter["marketItemCondition"] = { eq: condition };
-    }
-    // vehicle filter;
-    if (vehicleType !== undefined && vehicleType !== "") {
-      filter["vehicleType"] = { eq: vehicleType };
-    }
-    if (minYear !== undefined && minYear !== "") {
-      if (maxYear !== "") {
-        filter["year"] = { between: [minYear, maxYear] };
-      } else {
-        filter["year"] = { ge: minYear };
-      }
-    } else {
-      if (maxYear !== undefined && maxYear !== "") {
-        filter["year"] = { le: maxYear };
-      }
-    }
-    if (make !== undefined && make !== "") {
-      filter["make"] = { eq: make };
-    }
-    if (model !== undefined && model !== "") {
-      filter["model"] = { eq: model };
-    }
-    // Rental filter;
-    if (marketRentalSaleRent !== undefined && marketRentalSaleRent !== "") {
-      filter["marketRentalSaleRent"] = { eq: marketRentalSaleRent };
-    }
-    if (propertyType !== undefined && propertyType !== "") {
-      filter["propertyType"] = { eq: propertyType };
-    }
-    if (airConditioningType !== undefined && airConditioningType !== "") {
-      filter["airConditioningType"] = { eq: airConditioningType };
-    }
-    if (heatingType !== undefined && heatingType !== "") {
-      filter["heatingType"] = { eq: heatingType };
-    }
+    const filter = { ...filterList };
     if (query !== null) {
       if (Object.keys(filter).length === 0) {
         setIsFiltering(false);
@@ -107,24 +96,7 @@ export default function useMarketItemFilter(props) {
         dispatch(fetchMarketItems({ query: query, filter }));
       }
     }
-  }, [
-    dispatch,
-    query,
-    type,
-    category,
-    condition,
-    min,
-    max,
-    minYear,
-    maxYear,
-    make,
-    model,
-    vehicleType,
-    marketRentalSaleRent,
-    propertyType,
-    airConditioningType,
-    heatingType,
-  ]);
+  }, [dispatch, query, type, filterList]);
 
   return isFiltering;
 }

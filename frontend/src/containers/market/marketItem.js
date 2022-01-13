@@ -1,36 +1,30 @@
 import { Box, Stack } from "@mui/material";
-import React, { useState } from "react";
 import {
-  filterUpdated,
+  filterClear,
   selectAllMarketItems,
 } from "../../redux/slice/marketSlice";
+import useMarketItemFilter, {
+  marketItemFilterUpdate,
+} from "../../components/Market/useMarketItemFilter";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
 import { useSelector } from "react-redux";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
 export default function MarketItem() {
-  const useStyles = marketItemStyle;
-  const dispatch = useDispatch();
   useTitle("Item");
+  const useStyles = marketItemStyle;
+  const { darkTheme } = useSelector((state) => state.general);
+  const dispatch = useDispatch();
   const classes = useStyles();
-
-  const [filterList, setFilterList] = useState({
-    type: "Item",
-    sortKey: "original",
-    min: "",
-    max: "",
-    category: "",
-    condition: "",
-  });
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -44,28 +38,11 @@ export default function MarketItem() {
   });
 
   const handleSearch = handleSubmit((data) => {
-    const { type, min, max, category, condition } = data;
-
-    const filter = {
-      price: { between: [min === "" ? 0 : min, max === "" ? 999999 : max] },
-    };
-    console.log(category, condition);
-    // {marketItemCategory:{eq:category[]}}
-    let itemFilter = [];
-
-    category.length !== 0 &&
-      category.map((c) => itemFilter.push({ marketItemCategory: { eq: c } }));
-    condition.length !== 0 &&
-      condition.map((c) => itemFilter.push({ marketItemCondition: { eq: c } }));
-    Object.assign(filter, { or: itemFilter });
-    console.log(filter);
-    dispatch(filterUpdated({ marketType: type, filter: filter }));
-
-    setFilterList(data);
+    marketItemFilterUpdate(data, dispatch);
   });
 
-  const isFiltering = useMarketItemFilter(filterList);
-  const { darkTheme } = useSelector((state) => state.general);
+  const filterList = useSelector((state) => state.market.filter);
+  const isFiltering = useMarketItemFilter(filterList, "Item");
   const filteredItems = useSelector(selectAllMarketItems);
 
   const starter = useStarter(filteredItems, "all", isFiltering);
@@ -85,13 +62,15 @@ export default function MarketItem() {
     });
 
   const handleReset = () => {
+    dispatch(filterClear());
+
     reset({
       type: "Item",
       sortKey: "original",
       min: "",
       max: "",
-      category: "",
-      condition: "",
+      category: [],
+      condition: [],
     });
   };
 
