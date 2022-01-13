@@ -326,19 +326,6 @@ export default function EventMain({ event }) {
               </Typography>
             </Box> */}
           </CardContent>
-          {/* <CardActions>
-          {userInfo.isAuthenticated ? (
-            <Button
-              size="small"
-              component={Link}
-              to={`/event/${event.id}/eventSignUp`}
-            >
-              报名
-            </Button>
-          ) : (
-            <SignUpRequest />
-          )}
-        </CardActions> */}
         </Box>
       </Card>
     </CardActionArea>

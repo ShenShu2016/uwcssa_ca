@@ -10,10 +10,12 @@ import {
   MenuList,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Box } from "@mui/system";
 import CardHeader from "@mui/material/CardHeader";
 import CircleIcon from "@mui/icons-material/Circle";
+import CloseTicket from "./CloseTicket";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
@@ -22,9 +24,9 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoticeIcons from "./NoticeIcons";
 import { Typography } from "@mui/material";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import moment from "moment";
 import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
-import { useDispatch } from "react-redux";
 import { usePermit } from "../../Hooks/usePermit";
 
 const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
@@ -32,6 +34,7 @@ const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
 export default function Ticket({ item }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { username } = useSelector((state) => state.userAuth.user);
   const {
     id,
     content,
@@ -47,12 +50,19 @@ export default function Ticket({ item }) {
   const isPermit = usePermit(null, "staff");
 
   const [editOpen, setEditOpen] = useState(false);
-
+  const [closeTicketOpen, setCloseTicketOpen] = useState(false);
   const handleEditClickOpen = () => {
     setEditOpen(true);
   };
   const handleEditClose = () => {
     setEditOpen(false);
+  };
+
+  const handleCloseTicketClickOpen = () => {
+    setCloseTicketOpen(true);
+  };
+  const handleCloseTicketClose = () => {
+    setCloseTicketOpen(false);
   };
   const open = Boolean(anchorEl);
 
@@ -67,11 +77,13 @@ export default function Ticket({ item }) {
     const updateKanbanInput = {
       id: id,
       kanbanStatus: status,
+      lastUpdatedID: username,
     };
     console.log("updateKanbanInput", updateKanbanInput);
 
     await dispatch(updateKanbanDetail({ updateKanbanInput }));
   };
+
   return (
     <Box sx={{ my: "1rem" }}>
       <Card sx={{ width: 250 }}>
@@ -90,7 +102,7 @@ export default function Ticket({ item }) {
             <IconButton
               aria-label="settings"
               onClick={handleClick}
-              disabled={!isPermit}
+              disabled={!(isPermit && window.location.pathname === "/kanban")}
             >
               <MoreVertIcon />
             </IconButton>
@@ -171,9 +183,9 @@ export default function Ticket({ item }) {
             <ListItemText>编辑</ListItemText>
           </MenuItem>
 
-          {KanbanStatus.map((status, idx) => {
+          {KanbanStatus.map((status) => {
             return (
-              <Box key={idx}>
+              <Box key={status}>
                 {kanbanStatus !== status && (
                   <MenuItem
                     onClick={() => {
@@ -192,9 +204,29 @@ export default function Ticket({ item }) {
               </Box>
             );
           })}
+          {(kanbanStatus === "WASTED" || kanbanStatus === "DONE") && (
+            <Box>
+              <MenuItem
+                onClick={() => {
+                  handleCloseTicketClickOpen();
+                  handleClose();
+                }}
+              >
+                <ListItemIcon>
+                  <VisibilityOffRoundedIcon />
+                </ListItemIcon>
+                <ListItemText>隐藏不再显示</ListItemText>
+              </MenuItem>
+            </Box>
+          )}
         </MenuList>
       </Menu>
       <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
+      <CloseTicket
+        closeTicketOpen={closeTicketOpen}
+        handleCloseTicketClose={handleCloseTicketClose}
+        item={item}
+      />
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}

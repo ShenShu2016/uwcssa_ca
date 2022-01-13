@@ -30,11 +30,13 @@ import MarketFIlterLocation from "./marketFilterLocation";
 import MarketForm from "../../components/Market/marketForm";
 import PetsIcon from "@mui/icons-material/Pets";
 import PropTypes from "prop-types";
+import { filterClear } from "../../redux/slice/marketSlice";
 import { marketItemOptions } from "./marketItemOptions";
 import { marketItemStyle } from "./marketItemCss";
 import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
 import { sortOptions } from "./marketItemFilter";
+import { useDispatch } from "react-redux";
 
 const FilterContent = (props) => {
   const { darkTheme, type, control, handleSearch, handleReset } = props;
@@ -205,9 +207,17 @@ const FilterContent = (props) => {
             render={({ field: { onChange, value } }) => (
               <MarketForm
                 title="Vehicle Type"
-                value={value}
+                value={typeof value === "object" ? value : ""}
                 options={marketVehicleTypeList}
                 onChange={(e) => onChange(e)}
+                multiple
+                renderValue={(selected) => (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
               />
             )}
           />
@@ -265,9 +275,17 @@ const FilterContent = (props) => {
                 <MarketForm
                   title="Make"
                   disabled={true}
-                  value={value} // Need to generate corresponding list
+                  value={typeof value === "object" ? value : ""} // Need to generate corresponding list
                   options={marketVehicleTypeList} //
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -284,9 +302,17 @@ const FilterContent = (props) => {
                 <MarketForm
                   title="Model"
                   disabled={true}
-                  value={value} // Need to generate corresponding list
+                  value={typeof value === "object" ? value : ""} // Need to generate corresponding list
                   options={marketVehicleTypeList} //
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -305,9 +331,17 @@ const FilterContent = (props) => {
               render={({ field: { onChange, value } }) => (
                 <MarketForm
                   title="Home for Rent or Sale"
-                  value={value}
+                  value={typeof value === "object" ? value : ""}
                   options={marketRentalSaleRent}
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -322,9 +356,17 @@ const FilterContent = (props) => {
               render={({ field: { onChange, value } }) => (
                 <MarketForm
                   title="Property Type"
-                  value={value}
+                  value={typeof value === "object" ? value : ""}
                   options={propertyType}
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -340,9 +382,17 @@ const FilterContent = (props) => {
               render={({ field: { onChange, value } }) => (
                 <MarketForm
                   title="AC Type"
-                  value={value}
+                  value={typeof value === "object" ? value : ""}
                   options={airConditionType}
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -358,9 +408,17 @@ const FilterContent = (props) => {
               render={({ field: { onChange, value } }) => (
                 <MarketForm
                   title="Heating Type"
-                  value={value}
+                  value={typeof value === "object" ? value : ""}
                   options={heatingType}
                   onChange={(e) => onChange(e)}
+                  multiple
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
                 />
               )}
             />
@@ -385,7 +443,6 @@ function ConfirmationDialogRaw(props) {
     open,
     type,
     control,
-    filterList,
     handleSearch,
     handleReset,
     ...other
@@ -413,7 +470,6 @@ function ConfirmationDialogRaw(props) {
           darkTheme={darkTheme}
           type={type}
           control={control}
-          filterList={filterList}
           handleSearch={handleSearch}
           handleReset={handleReset}
         />
@@ -439,14 +495,18 @@ export default function FilterInfo({
   control,
   type,
   form = "plain",
-  filterList,
   handleSearch,
   handleReset,
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
+
+  const filterReset = () => {
+    dispatch(filterClear());
+  };
 
   if (form === "plain") {
     return (
@@ -463,6 +523,7 @@ export default function FilterInfo({
                   color="inherit"
                   component={Link}
                   to="/market"
+                  onClick={filterReset}
                 >
                   商城
                 </Button>
@@ -474,6 +535,7 @@ export default function FilterInfo({
                     color="inherit"
                     component={Link}
                     to="/market/item"
+                    onClick={filterReset}
                   >
                     二手商品
                   </Button>
@@ -486,6 +548,7 @@ export default function FilterInfo({
                     color="inherit"
                     component={Link}
                     to="/market/vehicle"
+                    onClick={filterReset}
                   >
                     汽车
                   </Button>
@@ -498,6 +561,7 @@ export default function FilterInfo({
                     color="inherit"
                     component={Link}
                     to="/market/rental"
+                    onClick={filterReset}
                   >
                     租房
                   </Button>
@@ -510,6 +574,7 @@ export default function FilterInfo({
                     color="inherit"
                     component={Link}
                     to="/market/pet"
+                    onClick={filterReset}
                   >
                     宠物
                   </Button>
@@ -522,6 +587,7 @@ export default function FilterInfo({
                     color="inherit"
                     component={Link}
                     to="/market/carpool"
+                    onClick={filterReset}
                   >
                     拼车
                   </Button>
@@ -550,6 +616,7 @@ export default function FilterInfo({
               startIcon={<AddIcon />}
               component={Link}
               to={`/market/create/${type.toLowerCase()}`}
+              onClick={filterReset}
             >
               新增商品
             </Button>
@@ -590,7 +657,6 @@ export default function FilterInfo({
               darkTheme={darkTheme}
               type={type}
               control={control}
-              filterList={filterList}
               handleSearch={handleSearch}
               handleReset={handleReset}
             />
@@ -628,7 +694,6 @@ export default function FilterInfo({
           onClose={handleClose}
           value={value}
           type={type}
-          filterList={filterList}
           handleSearch={handleSearch}
           handleReset={handleReset}
         />

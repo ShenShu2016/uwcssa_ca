@@ -98,10 +98,10 @@ const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
     },
   },
   image: {
-    marginLeft: "15rem",
+    marginLeft: "2rem",
     marginTop: "-8rem",
     [breakpoints.down("lg")]: {
-      marginLeft: "2rem",
+      // marginLeft: "2rem",
       marginTop: "-8rem",
     },
     [breakpoints.down("sm")]: {
@@ -119,8 +119,8 @@ const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
     backgroundColor: palette.mode === "dark" ? "#616161" : "#ffff",
   },
   information: {
-    minWidth: 200,
-    maxWidth: 500,
+    minWidth: 500,
+    maxWidth: 800,
     [breakpoints.down("md")]: {
       minWidth: 200,
       maxWidth: 340,
@@ -230,7 +230,8 @@ export default function PersonalCard({
           <CardContent sx={{ textAlign: "center", marginTop: "8rem" }}>
             {lastName && firstName ? (
               <Typography variant="subtitle1" className={classes.heading}>
-                {!/[^a-zA-Z]/.test(lastName) && !/[^a-zA-Z]/.test(firstName)
+                {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
+                !/[^a-zA-Z,(,)]+$/.test(firstName)
                   ? `${firstName} ${lastName}`
                   : `${lastName}${firstName}`}
               </Typography>
@@ -331,49 +332,61 @@ export default function PersonalCard({
 
             <Container maxWidth="md">
               <Box className={classes.pad}>
-                <Typography
-                  variant="h4"
-                  className={classes.heading}
-                  sx={{ margin: "3rem 0" }}
-                >
-                  {lastName && firstName
-                    ? `${lastName}, ${firstName}`
-                    : "LastName, FirstName"}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  color="primary"
-                  sx={{ marginTop: "2rem" }}
-                >
-                  <b>{title ? title : "暂无，请编辑..."}</b>
-                </Typography>
-                <Box className={classes.container}>
-                  <img
-                    src={imgURL}
-                    alt="Avatar"
-                    style={{
-                      borderRadius: "50%",
-                      width: "300px",
-                      height: "300px",
-                      objectFit: "cover",
-                    }}
-                    className={classes.image}
-                  />
+                <Grid container columns={12}>
+                  <Grid item xs={12} sm={8}>
+                    {lastName && firstName ? (
+                      <Typography
+                        variant="h4"
+                        className={classes.heading}
+                        sx={{ margin: "3rem auto 1rem auto" }}
+                      >
+                        {!/[^a-zA-Z,(,)]+$/.test(lastName) &&
+                        !/[^a-zA-Z,(,)]+$/.test(firstName)
+                          ? `${firstName} ${lastName}`
+                          : `${lastName}${firstName}`}
+                      </Typography>
+                    ) : (
+                      <Typography
+                        variant="h4"
+                        className={classes.heading}
+                        sx={{ margin: "3rem auto 1rem auto" }}
+                      >
+                        Full Name
+                      </Typography>
+                    )}
 
-                  <Box
-                    sx={{
-                      my: 2,
-                      overflow: "auto",
-                    }}
-                    className={classes.information}
-                  >
-                    <MUIRichTextEditor
-                      defaultValue={content}
-                      readOnly={true}
-                      toolbar={false}
-                    />
+                    <Typography
+                      variant="h5"
+                      color="primary"
+                      sx={{ margin: "auto auto 2rem auto" }}
+                    >
+                      <b>{title ? title : "暂无，请编辑..."}</b>
+                    </Typography>
+                  </Grid>
+                  <Box className={classes.container}>
+                    <Grid item xs={12} sm={4} p={"0 1rem"}>
+                      <img
+                        src={imgURL}
+                        alt="Avatar"
+                        style={{
+                          borderRadius: "50%",
+                          width: "300px",
+                          height: "300px",
+                          objectFit: "cover",
+                        }}
+                        className={classes.image}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} sm={8}>
+                      <MUIRichTextEditor
+                        defaultValue={content}
+                        readOnly={true}
+                        toolbar={false}
+                      />
+                    </Grid>
                   </Box>
-                </Box>
+                </Grid>
               </Box>
             </Container>
           </Dialog>

@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import {
@@ -13,7 +14,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { listUwcssaMembers } from "../../graphql/queries";
 
 const uwcssaMemberAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.createdAt.localeCompare(b.createdAt),
+  sortComparer: (a, b) => a.departmentID.localeCompare(b.departmentID),
 });
 const initialState = uwcssaMemberAdapter.getInitialState({
   fetchUwcssaMembersStatus: "idle",
@@ -86,6 +87,17 @@ const uwcssaMemberSlice = createSlice({
         state.fetchUwcssaMembersStatus = "failed";
         state.fetchUwcssaMembersError = action.error.message;
       })
+      .addCase(postUwcssaMember.pending, (state, action) => {
+        state.postKanbanStatus = "loading";
+      })
+      .addCase(postUwcssaMember.fulfilled, (state, action) => {
+        state.postUwcssaMemberStatus = "succeeded";
+        uwcssaMemberAdapter.addOne(state, action.payload);
+      })
+      .addCase(postUwcssaMember.rejected, (state, action) => {
+        state.postUwcssaMemberStatus = "failed";
+        state.postUwcssaMemberError = action.error.message;
+      })
       // Cases for status of updateMarketItem (pending, fulfilled, and rejected)
       .addCase(updateUwcssaMemberDetail.pending, (state, action) => {
         state.updateUwcssaMemberDetailStatus = "loading";
@@ -106,5 +118,10 @@ export const {
   selectById: selectUwcssaMemberById,
   selectIds: selectUwcssaMemberIds,
 } = uwcssaMemberAdapter.getSelectors((state) => state.uwcssaMember);
+
+export const selectUwcssaMembersByDepartmentId = (departmentID) =>
+  createSelector(selectAllUwcssaMembers, (uwcssaMember) => {
+    return uwcssaMember.filter((x) => x.departmentID === departmentID);
+  });
 
 export default uwcssaMemberSlice.reducer;

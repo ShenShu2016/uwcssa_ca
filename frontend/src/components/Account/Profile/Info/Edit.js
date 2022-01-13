@@ -243,6 +243,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
       console.log("response", response);
       setAvatarImgURL(response.payload);
       setLoading(false);
+      setAvatarImageSrc(null);
     }
   };
 
@@ -272,6 +273,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
       setBackGroundImgURL(response.payload);
       console.log("response", response);
       setLoading(false);
+      setBackgroundImageSrc(null);
     }
   };
 

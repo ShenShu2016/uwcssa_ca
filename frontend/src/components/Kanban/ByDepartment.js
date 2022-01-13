@@ -10,8 +10,10 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import ByStatus from "./ByStatus";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { getKanbansByDepartmentLength } from "../../redux/slice/kanbanSlice";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,12 +41,12 @@ const ExpandMore = styled((props) => {
 
 const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
 
-export default function ByDepartment({ department, kanbans }) {
+export default function ByDepartment({ department }) {
   const classes = useStyles();
-  let kanbansByDepartment = kanbans.filter(
-    (x) => x.departmentID === department.id
-  );
 
+  const kanbansByDepartmentLength = useSelector(
+    getKanbansByDepartmentLength(department.id)
+  );
   // kanbansByDepartment = kanbansByDepartment.find((x) => x.leader === true)
   //   ? [
   //       kanbansByDepartment.find((x) => x.leader === true),
@@ -55,8 +57,8 @@ export default function ByDepartment({ department, kanbans }) {
   const [expanded, setExpanded] = useState(null);
 
   useEffect(() => {
-    setExpanded(kanbansByDepartment.length > 0 ? true : false);
-  }, [kanbansByDepartment.length]);
+    setExpanded(kanbansByDepartmentLength > 0 ? true : false);
+  }, [kanbansByDepartmentLength]);
   //console.log("kanbansByDepartment", kanbansByDepartment);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -82,22 +84,14 @@ export default function ByDepartment({ department, kanbans }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <Box className={classes.kanbanStatus}>
-            {KanbanStatus.map((status, idx) => {
+            {KanbanStatus.map((status) => {
               return (
-                <Box key={idx} sx={{ width: "100%", hight: "100%" }}>
-                  <ByStatus
-                    status={status}
-                    kanbansByDepartment={kanbansByDepartment}
-                  />
+                <Box key={status} sx={{ width: "100%", hight: "100%" }}>
+                  <ByStatus status={status} departmentID={department.id} />
                 </Box>
               );
             })}
           </Box>
-          {/* <div className={classes.cards}>
-            {kanbansByDepartment.map((ticket, idx) => {
-              return <Ticket item={ticket} key={idx} />;
-            })}
-          </div> */}
         </Collapse>
       </Paper>
     </Box>

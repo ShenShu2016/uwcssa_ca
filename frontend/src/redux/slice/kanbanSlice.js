@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import { createKanban, updateKanban } from "../../graphql/mutations";
@@ -37,6 +38,7 @@ export const fetchKanbans = createAsyncThunk(
         variables: {
           sortKey: "SortKey",
           sortDirection: "DESC",
+          filter: { active: { eq: true } },
         },
         authMode: "AWS_IAM",
       });
@@ -129,9 +131,7 @@ const kanbanSlice = createSlice({
       })
       .addCase(postKanban.fulfilled, (state, action) => {
         state.postKanbanStatus = "succeeded";
-        // state.kanbans.unshift(action.payload.data.createKanban);
         kanbanAdapter.addOne(state, action.payload);
-        // state.postKanbanStatus = "idle";
       })
       .addCase(postKanban.rejected, (state, action) => {
         state.postKanbanStatus = "failed";
@@ -161,5 +161,23 @@ export const {
   selectById: selectKanbanById,
   selectIds: selectKanbanIds,
 } = kanbanAdapter.getSelectors((state) => state.kanban);
+
+export const selectKanbansByDepartmentIdStatus = ({
+  departmentID,
+  kanbanStatus,
+}) =>
+  createSelector(selectAllKanbans, (kanban) => {
+    return kanban.filter(
+      (x) =>
+        x.departmentID === departmentID &&
+        x.kanbanStatus === kanbanStatus &&
+        x.active === true //这个之后要改
+    );
+  });
+
+export const getKanbansByDepartmentLength = (departmentID) =>
+  createSelector(selectAllKanbans, (kanban) => {
+    return kanban.filter((x) => x.departmentID === departmentID).length;
+  });
 
 export default kanbanSlice.reducer;

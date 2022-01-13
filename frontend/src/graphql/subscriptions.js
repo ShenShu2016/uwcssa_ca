@@ -630,7 +630,9 @@ export const onCreateUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -794,7 +796,9 @@ export const onUpdateUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -958,7 +962,9 @@ export const onDeleteUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -5120,7 +5126,9 @@ export const onCreateDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -5232,7 +5240,9 @@ export const onUpdateDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -5344,7 +5354,9 @@ export const onDeleteDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -11601,12 +11613,53 @@ export const onCreateKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username
@@ -11736,12 +11789,53 @@ export const onUpdateKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username
@@ -11871,12 +11965,53 @@ export const onDeleteKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username

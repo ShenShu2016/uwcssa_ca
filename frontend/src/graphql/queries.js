@@ -700,7 +700,9 @@ export const getUser = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -3349,7 +3351,9 @@ export const getDepartment = /* GraphQL */ `
           priority
           tags
           points
+          active
           sortKey
+          lastUpdatedID
           assigneeID
           departmentID
           userID
@@ -6403,24 +6407,6 @@ export const listAddresss = /* GraphQL */ `
           userID
           updatedAt
           owner
-          user {
-            id
-            username
-            email
-            owner
-            firstName
-            lastName
-            intro
-            major
-            avatarImgURL
-            backGroundImgURL
-            linkedIn
-            github
-            sortKey
-            createdAt
-            updatedAt
-            badges
-          }
         }
         owner
       }
@@ -7386,12 +7372,53 @@ export const getKanban = /* GraphQL */ `
       priority
       tags
       points
+      active
       sortKey
+      lastUpdatedID
       assigneeID
       departmentID
       userID
       createdAt
       updatedAt
+      lastUpdated {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        updatedAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+      }
       assignee {
         id
         username
@@ -7526,12 +7553,32 @@ export const listKanbans = /* GraphQL */ `
         priority
         tags
         points
+        active
         sortKey
+        lastUpdatedID
         assigneeID
         departmentID
         userID
         createdAt
         updatedAt
+        lastUpdated {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
         assignee {
           id
           username
@@ -7609,12 +7656,32 @@ export const kanbanSortBySortKey = /* GraphQL */ `
         priority
         tags
         points
+        active
         sortKey
+        lastUpdatedID
         assigneeID
         departmentID
         userID
         createdAt
         updatedAt
+        lastUpdated {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          updatedAt
+          badges
+        }
         assignee {
           id
           username

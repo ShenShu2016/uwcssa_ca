@@ -230,7 +230,7 @@ export default function PostEvent() {
     const createEventInput = {
       ...data,
       id: itemID,
-      addressID: address && addressID,
+      addressID: state.online ? "" : address && addressID,
       backGroundImgURL: backGroundImgURL,
       posterImgURL: posterImgURL,
       qrCodeImgURL: qrCodeImgURL,

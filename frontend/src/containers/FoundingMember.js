@@ -84,7 +84,7 @@ export default function FoundingMember() {
         <div className={classes.cards}>
           {foundingMembers.map((member, memberIdx) => {
             return (
-              <div key={memberIdx} style={{ animation: animStr(memberIdx) }}>
+              <div key={member.id} style={{ animation: animStr(memberIdx) }}>
                 <InfoCard item={member} />
               </div>
             );

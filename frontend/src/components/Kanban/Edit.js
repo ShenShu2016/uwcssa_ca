@@ -55,7 +55,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const { fetchUwcssaMembersStatus } = useSelector(
     (state) => state.uwcssaMember
   );
-
+  const { username } = useSelector((state) => state.userAuth.user);
   useEffect(() => {
     if (fetchUwcssaMembersStatus === "idle" || undefined) {
       dispatch(fetchUwcssaMembers());
@@ -108,6 +108,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
         (x) => x.id === getValues("assigneeID")
       )[0].departmentID,
       tags: GetTags(),
+      lastUpdatedID: username,
     };
     setLoading(true);
     console.log("updateKanbanInput", updateKanbanInput);
@@ -126,6 +127,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
           maxWidth={"lg"}
           open={editOpen}
           onClose={handleEditClose}
+          disableScrollLock={true}
         >
           <DialogTitle>编辑 ticket</DialogTitle>
           <Divider light />
@@ -184,39 +186,6 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                     />
                   )}
                 />
-                {/* <Controller
-                name="departmentID"
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field: { onChange, value } }) => (
-                  <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="departmentID">部门</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-outlined-label"
-                      id="departmentID"
-                      value={value}
-                      onChange={onChange}
-                      label="部门"
-                      error={!!errors.departmentID}
-                    >
-                      {departments.map((department) => {
-                        return (
-                          <MenuItem value={department.id} key={department.id}>
-                            {department.id}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                    {errors.departmentID && (
-                      <FormHelperText sx={{ color: "#d32f2f" }}>
-                        请选择一个部门
-                      </FormHelperText>
-                    )}
-                  </FormControl>
-                )}
-              /> */}
                 <Controller
                   name="assigneeID"
                   control={control}
@@ -316,7 +285,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                   )}
                 />
                 <CustomTags
-                  placeholder="新装修， 独立卫浴..."
+                  placeholder="网站。新闻。。等等"
                   initial={tags}
                   onKeyDown={(e) => handleKeyDown(e)}
                   onDelete={(e) => handleDelete(e)}

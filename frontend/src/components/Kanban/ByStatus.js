@@ -9,6 +9,8 @@ import {
 
 import React from "react";
 import Ticket from "./Ticket";
+import { selectKanbansByDepartmentIdStatus } from "../../redux/slice/kanbanSlice";
+import { useSelector } from "react-redux";
 
 export const GetStatusColor = (status) => {
   if (status === "IDEA") {
@@ -24,11 +26,14 @@ export const GetStatusColor = (status) => {
   }
 };
 
-export default function ByStatus({ status, kanbansByDepartment }) {
-  let kanbansByStatus = kanbansByDepartment.filter(
-    (x) => x.kanbanStatus === status
+export default function ByStatus({ status, departmentID }) {
+  const kanbansByStatus = useSelector(
+    selectKanbansByDepartmentIdStatus({
+      departmentID: departmentID,
+      kanbanStatus: status,
+    })
   );
-  //console.log("kanbansByStatus", kanbansByStatus);
+  //console.log(kanbansByStatus);
   return (
     <Card sx={{ height: "100%", width: "100%" }}>
       <CardHeader sx={{ bgcolor: GetStatusColor(status), py: "3px" }} />
@@ -41,8 +46,8 @@ export default function ByStatus({ status, kanbansByDepartment }) {
           justifyContent="flex-start"
           alignItems="center"
         >
-          {kanbansByStatus.map((ticket, idx) => {
-            return <Ticket item={ticket} key={idx} />;
+          {kanbansByStatus.map((ticket) => {
+            return <Ticket item={ticket} key={ticket.id} />;
           })}
         </Stack>
       </CardContent>
