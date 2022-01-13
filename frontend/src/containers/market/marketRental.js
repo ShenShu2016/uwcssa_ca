@@ -1,14 +1,20 @@
 import { Box, Stack } from "@mui/material";
-import React, { useState } from "react";
+import {
+  filterClear,
+  selectAllMarketItems,
+} from "../../redux/slice/marketSlice";
+import useMarketItemFilter, {
+  marketItemFilterUpdate,
+} from "../../components/Market/useMarketItemFilter";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
-import { selectAllMarketItems } from "../../redux/slice/marketSlice";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
 import { useSelector } from "react-redux";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
@@ -17,17 +23,8 @@ export default function MarketRental() {
   const useStyles = marketItemStyle;
   useTitle("Rental");
   const classes = useStyles();
-
-  const [filterList, setFilterList] = useState({
-    type: "Rental",
-    sortKey: "original",
-    min: "",
-    max: "",
-    marketRentalSaleRent: "",
-    propertyType: "",
-    airConditioningType: "",
-    heatingType: "",
-  });
+  const dispatch = useDispatch();
+  const { darkTheme } = useSelector((state) => state.general);
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -35,18 +32,18 @@ export default function MarketRental() {
       sortKey: "original",
       min: "",
       max: "",
-      marketRentalSaleRent: "",
-      propertyType: "",
-      airConditioningType: "",
-      heatingType: "",
+      marketRentalSaleRent: [],
+      propertyType: [],
+      airConditioningType: [],
+      heatingType: [],
     },
   });
   const handleSearch = handleSubmit((data) => {
-    setFilterList(data);
+    marketItemFilterUpdate(data, dispatch);
   });
 
-  const isFiltering = useMarketItemFilter(filterList);
-  const { darkTheme } = useSelector((state) => state.general);
+  const filterList = useSelector((state) => state.market.filter);
+  const isFiltering = useMarketItemFilter(filterList, "Rental");
   const filteredItems = useSelector(selectAllMarketItems);
 
   const starter = useStarter(filteredItems, "all", isFiltering);
@@ -66,15 +63,16 @@ export default function MarketRental() {
     });
 
   const handleReset = () => {
+    dispatch(filterClear());
     reset({
       type: "Rental",
       sortKey: "original",
       min: "",
       max: "",
-      marketRentalSaleRent: "",
-      propertyType: "",
-      airConditioningType: "",
-      heatingType: "",
+      marketRentalSaleRent: [],
+      propertyType: [],
+      airConditioningType: [],
+      heatingType: [],
     });
   };
   return (
@@ -87,7 +85,6 @@ export default function MarketRental() {
           darkTheme={darkTheme}
           form="plain"
           type="Rental"
-          filterList={filterList}
           control={control}
           handleSearch={handleSearch}
           handleReset={handleReset}
@@ -98,7 +95,6 @@ export default function MarketRental() {
             control={control}
             type="Rental"
             trueMarketItems={filteredItems}
-            filterList={filterList}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />
