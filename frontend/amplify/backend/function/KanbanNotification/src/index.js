@@ -32,7 +32,10 @@ function getToAddress(response) {
 exports.handler = async (event) => {
   for (const record of event.Records) {
     console.log(JSON.stringify(record, null, 2));
-    if (record.eventName === "INSERT" || record.eventName === "MODIFY") {
+    if (
+      (record.eventName === "INSERT" || record.eventName === "MODIFY") &&
+      record.dynamodb.NewImage.active.BOOL === true
+    ) {
       console.log(record.dynamodb.NewImage.assigneeID.S);
       const assigneeID = record.dynamodb.NewImage.assigneeID.S;
       var params = {
@@ -97,7 +100,7 @@ exports.handler = async (event) => {
             },
             Body: {
               Text: {
-                Data: `${record}`,
+                Data: `${record}/n/n${error}`,
               },
             },
           },

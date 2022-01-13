@@ -70,7 +70,7 @@ export default function Create({ createOpen, handleCreateClose }) {
       title: "",
       kanbanStatus: "IDEA",
       deadLine: undefined,
-      points: 10,
+      points: 0,
       sortKey: "SortKey",
       assigneeID: "shushen2013",
       priority: "Average",

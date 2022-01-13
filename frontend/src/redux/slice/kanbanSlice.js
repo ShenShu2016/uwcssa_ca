@@ -38,6 +38,7 @@ export const fetchKanbans = createAsyncThunk(
         variables: {
           sortKey: "SortKey",
           sortDirection: "DESC",
+          filter: { active: { eq: true } },
         },
         authMode: "AWS_IAM",
       });
@@ -167,7 +168,10 @@ export const selectKanbansByDepartmentIdStatus = ({
 }) =>
   createSelector(selectAllKanbans, (kanban) => {
     return kanban.filter(
-      (x) => x.departmentID === departmentID && x.kanbanStatus === kanbanStatus
+      (x) =>
+        x.departmentID === departmentID &&
+        x.kanbanStatus === kanbanStatus &&
+        x.active === true //这个之后要改
     );
   });
 

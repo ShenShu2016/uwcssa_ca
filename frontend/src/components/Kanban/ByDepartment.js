@@ -84,9 +84,9 @@ export default function ByDepartment({ department }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <Box className={classes.kanbanStatus}>
-            {KanbanStatus.map((status, idx) => {
+            {KanbanStatus.map((status) => {
               return (
-                <Box key={idx} sx={{ width: "100%", hight: "100%" }}>
+                <Box key={status} sx={{ width: "100%", hight: "100%" }}>
                   <ByStatus status={status} departmentID={department.id} />
                 </Box>
               );

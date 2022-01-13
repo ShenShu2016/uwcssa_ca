@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import CardHeader from "@mui/material/CardHeader";
 import CircleIcon from "@mui/icons-material/Circle";
+import CloseTicket from "./CloseTicket";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
@@ -49,12 +50,19 @@ export default function Ticket({ item }) {
   const isPermit = usePermit(null, "staff");
 
   const [editOpen, setEditOpen] = useState(false);
-
+  const [closeTicketOpen, setCloseTicketOpen] = useState(false);
   const handleEditClickOpen = () => {
     setEditOpen(true);
   };
   const handleEditClose = () => {
     setEditOpen(false);
+  };
+
+  const handleCloseTicketClickOpen = () => {
+    setCloseTicketOpen(true);
+  };
+  const handleCloseTicketClose = () => {
+    setCloseTicketOpen(false);
   };
   const open = Boolean(anchorEl);
 
@@ -70,17 +78,6 @@ export default function Ticket({ item }) {
       id: id,
       kanbanStatus: status,
       lastUpdatedID: username,
-    };
-    console.log("updateKanbanInput", updateKanbanInput);
-
-    await dispatch(updateKanbanDetail({ updateKanbanInput }));
-  };
-
-  const handleChangeInactive = async () => {
-    setLoading(true);
-    const updateKanbanInput = {
-      id: id,
-      active: false,
     };
     console.log("updateKanbanInput", updateKanbanInput);
 
@@ -186,9 +183,9 @@ export default function Ticket({ item }) {
             <ListItemText>编辑</ListItemText>
           </MenuItem>
 
-          {KanbanStatus.map((status, idx) => {
+          {KanbanStatus.map((status) => {
             return (
-              <Box key={idx}>
+              <Box key={status}>
                 {kanbanStatus !== status && (
                   <MenuItem
                     onClick={() => {
@@ -211,7 +208,8 @@ export default function Ticket({ item }) {
             <Box>
               <MenuItem
                 onClick={() => {
-                  handleChangeInactive();
+                  handleCloseTicketClickOpen();
+                  handleClose();
                 }}
               >
                 <ListItemIcon>
@@ -224,6 +222,11 @@ export default function Ticket({ item }) {
         </MenuList>
       </Menu>
       <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
+      <CloseTicket
+        closeTicketOpen={closeTicketOpen}
+        handleCloseTicketClose={handleCloseTicketClose}
+        item={item}
+      />
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
