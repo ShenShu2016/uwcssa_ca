@@ -24,7 +24,7 @@ import {
 import API from "@aws-amplify/api";
 import { getAddress } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listAddresss } from "../../graphql/queries";
+import { listAddresss } from "../../components/Market/marketQueries";
 
 const addressAdapter = createEntityAdapter({
   // selectId: (item) => item.id,

@@ -19,7 +19,7 @@ import GoogleMaps from "../GoogleMap/GoogleMapsPlace";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import PropTypes from "prop-types";
-import { filterUpdated } from "../../redux/slice/marketSlice";
+import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { useDispatch } from "react-redux";
 
 // import { styled } from "@mui/material/styles";
@@ -125,33 +125,13 @@ export default function MarketFIlterLocation({ type = "plain", marketType }) {
   const [searchRadius, setSearchRadius] = React.useState(0);
   const dispatch = useDispatch();
 
-  //conversion: Latitude: 1 deg = 110.574 km
-  // Longitude: 1 deg = 111.320*cos(latitude) km
-
   const handleClickListItem = () => {
     setOpen(true);
   };
 
   const handleOK = (newValue) => {
     setOpen(false);
-    const addressInfo = { lat: 42.2732, lng: -83.0014 };
-    const filter = {
-      lat: {
-        between: [
-          addressInfo.lat - searchRadius / 110.574,
-          addressInfo.lat + searchRadius / 110.574,
-        ],
-      },
-      lng: {
-        between: [
-          addressInfo.lng -
-            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
-          addressInfo.lng +
-            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
-        ],
-      },
-    };
-    dispatch(filterUpdated({ filter, marketType }));
+    marketItemFilterUpdate({ searchRadius, marketType }, dispatch);
     if (newValue) {
       setValue(newValue);
     }

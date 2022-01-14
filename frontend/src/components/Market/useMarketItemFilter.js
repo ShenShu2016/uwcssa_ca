@@ -1,5 +1,10 @@
-import { fetchMarketItems, filterUpdated } from "../../redux/slice/marketSlice";
 import {
+  addressFilteredMarketItem,
+  fetchMarketItems,
+  filterUpdated,
+} from "../../redux/slice/marketSlice";
+import {
+  marketItemSortBySortKey,
   marketItemSortBySortKeyItem,
   marketItemSortBySortKeyRental,
   marketItemSortBySortKeyVehicle,
@@ -11,6 +16,7 @@ import { useDispatch } from "react-redux";
 export function marketItemFilterUpdate(props, dispatch) {
   const {
     type,
+    name = "",
     category = [],
     condition = [],
     min = "",
@@ -24,11 +30,19 @@ export function marketItemFilterUpdate(props, dispatch) {
     propertyType = [],
     airConditioningType = [],
     heatingType = [],
+    searchRadius = "",
   } = props;
 
-  const filter = {
-    price: { between: [min === "" ? 0 : min, max === "" ? 999999 : max] },
-  };
+  const addressInfo = { lat: 42.2732, lng: -83.0014 };
+
+  const filter = {};
+  min !== "" ||
+    (max !== "" &&
+      Object.assign(filter, {
+        price: {
+          between: [min === "" ? 0 : min, max === "" ? 999999 : max],
+        },
+      }));
   minYear !== "" ||
     (maxYear !== "" &&
       Object.assign(filter, {
@@ -42,6 +56,32 @@ export function marketItemFilterUpdate(props, dispatch) {
   // {marketItemCategory:{eq:category[]}}
   let itemFilter = [];
 
+  //conversion: Latitude: 1 deg = 110.574 km
+  // Longitude: 1 deg = 111.320*cos(latitude) km
+  console.log(searchRadius);
+  searchRadius.length !== 0 &&
+    itemFilter.push({
+      lat: {
+        between: [
+          addressInfo.lat - searchRadius / 110.574,
+          addressInfo.lat + searchRadius / 110.574,
+        ],
+      },
+      lng: {
+        between: [
+          addressInfo.lng -
+            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+          addressInfo.lng +
+            searchRadius / Math.abs(111.32 * Math.cos(addressInfo.lat)),
+        ],
+      },
+    });
+
+  name.length !== 0 &&
+    itemFilter.push(
+      { name: { contains: name } },
+      { description: { contains: name } }
+    );
   category.length !== 0 &&
     category.map((c) => itemFilter.push({ marketItemCategory: { eq: c } }));
   condition.length !== 0 &&
@@ -63,7 +103,6 @@ export function marketItemFilterUpdate(props, dispatch) {
   heatingType.length !== 0 &&
     heatingType.map((c) => itemFilter.push({ heatingType: { eq: c } }));
   itemFilter.length !== 0 && Object.assign(filter, { or: itemFilter });
-  console.log(filter);
   dispatch(filterUpdated({ marketType: type, filter: filter }));
 }
 
@@ -77,23 +116,41 @@ export default function useMarketItemFilter(filterList, type) {
       ? marketItemSortBySortKeyVehicle
       : type === "Rental"
       ? marketItemSortBySortKeyRental
+      : type === "all"
+      ? marketItemSortBySortKey
       : null;
 
   useEffect(() => {
     const filter = { ...filterList };
+
     if (query !== null) {
-      if (Object.keys(filter).length === 0) {
-        setIsFiltering(false);
-        dispatch(
-          fetchMarketItems({
-            query: query,
-            filter: { marketType: { eq: type } },
-          })
-        );
+      if (type === "all") {
+        if (Object.keys(filter).length === 0) {
+          setIsFiltering(false);
+          dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+        } else if (Object.keys(Object.values(filter)[0][0]).includes("name")) {
+          setIsFiltering(true);
+          dispatch(
+            fetchMarketItems({ query: marketItemSortBySortKey, filter: filter })
+          );
+        } else {
+          setIsFiltering(true);
+          dispatch(addressFilteredMarketItem({ filter }));
+        }
       } else {
-        setIsFiltering(true);
-        filter["marketType"] = { eq: type };
-        dispatch(fetchMarketItems({ query: query, filter }));
+        if (Object.keys(filter).length === 0) {
+          setIsFiltering(false);
+          dispatch(
+            fetchMarketItems({
+              query: query,
+              filter: { marketType: { eq: type } },
+            })
+          );
+        } else {
+          setIsFiltering(true);
+          filter["marketType"] = { eq: type };
+          dispatch(fetchMarketItems({ query: query, filter }));
+        }
       }
     }
   }, [dispatch, query, type, filterList]);

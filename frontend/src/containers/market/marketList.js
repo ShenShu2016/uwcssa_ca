@@ -1,8 +1,6 @@
 import { Box, Fab, Stack } from "@mui/material";
-import React, { useEffect } from "react";
 import {
-  addressFilteredMarketItem,
-  fetchMarketItems,
+  filterClear,
   selectAllMarketItems,
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,8 +10,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
 import MarketTopBar from "../../components/Market/marketTopBar";
-import { marketItemSortBySortKey } from "../../components/Market/marketQueries";
+import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
+import useMarketItemFilter from "../../components/Market/useMarketItemFilter";
 import useStarter from "../../components/Market/useStarter";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -25,7 +24,8 @@ export default function MarketList() {
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
   const { filter } = useSelector((state) => state.market);
-  const starter = useStarter(marketItems);
+  const isFiltering = useMarketItemFilter(filter, "all");
+  const starter = useStarter(marketItems, "all", isFiltering);
   const topRef = React.useRef(null);
 
   let tags = [];
@@ -45,15 +45,8 @@ export default function MarketList() {
     (a, b) => occurrence[b] - occurrence[a]
   );
 
-  useEffect(() => {
-    if (Object.keys(filter).length === 0) {
-      dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
-    } else {
-      dispatch(addressFilteredMarketItem({ filter }));
-    }
-  }, [dispatch, filter]);
   const clickHandler = () => {
-    dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+    dispatch(filterClear());
   };
 
   const marketItemRenderList =
@@ -71,7 +64,6 @@ export default function MarketList() {
     });
   return (
     <Box className={classes.root}>
-      {!starter && <BackdropLoading />}
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
@@ -84,7 +76,14 @@ export default function MarketList() {
             sortedOccurrence={sortedOccurrence}
             occurrence={occurrence}
           />
-          <Box className={classes.items}>{marketItemRenderList}</Box>
+          <Box className={classes.items}>
+            {isFiltering && (
+              <Box width="100%" margin="0.5rem" color="#6c6c6c" fontSize="14px">
+                Found {marketItems.length} related results...
+              </Box>
+            )}
+            {starter === false ? <BackdropLoading /> : marketItemRenderList}
+          </Box>
           <Box className={classes.fabBox}>
             <Fab
               color="info"
