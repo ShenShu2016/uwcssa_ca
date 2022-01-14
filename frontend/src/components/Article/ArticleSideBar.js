@@ -75,9 +75,9 @@ export default function ArticleSideBar() {
           <DialogTitle variant="h5">其他新闻</DialogTitle>
           <Divider />
           {filteredArticles &&
-            filteredArticles.map((article, idx) => {
+            filteredArticles.map((article) => {
               return (
-                <Fragment key={idx}>
+                <Fragment key={article.id}>
                   <ListItem component={Link} to={`/article/${article.id}`}>
                     <ListItemIcon sx={{ fontSize: 20 }}>💥</ListItemIcon>
                     <ListItemText
@@ -98,9 +98,9 @@ export default function ArticleSideBar() {
       <DialogTitle variant="h5">学生会招新啦</DialogTitle>
       <Divider />
       <List>
-        {uwcssaJobs.map((job, idx) => {
+        {uwcssaJobs.map((job) => {
           return (
-            <Fragment key={idx}>
+            <Fragment key={job.id}>
               <ListItem component={Link} to={`/career/jobDetail/${job.id}`}>
                 <ListItemIcon sx={{ fontSize: 20 }}>🔥</ListItemIcon>
                 <ListItemText

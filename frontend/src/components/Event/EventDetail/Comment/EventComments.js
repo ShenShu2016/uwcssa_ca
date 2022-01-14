@@ -32,7 +32,11 @@ export default function EventComments({ event }) {
         <div>
           {event.eventComments.items.map((comment, idx) => {
             return (
-              <EventCommentsComponents comment={comment} idx={idx} key={idx} />
+              <EventCommentsComponents
+                comment={comment}
+                idx={idx}
+                key={comment.id}
+              />
             );
           })}
         </div>

@@ -158,6 +158,7 @@ export const createUser = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -327,6 +328,7 @@ export const updateUser = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -496,6 +498,7 @@ export const deleteUser = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -4753,6 +4756,7 @@ export const createDepartment = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -4870,6 +4874,7 @@ export const updateDepartment = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -4987,6 +4992,7 @@ export const deleteDepartment = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -11861,6 +11867,7 @@ export const createKanban = /* GraphQL */ `
       points
       active
       sortKey
+      workSummary
       lastUpdatedID
       assigneeID
       departmentID
@@ -12040,6 +12047,7 @@ export const updateKanban = /* GraphQL */ `
       points
       active
       sortKey
+      workSummary
       lastUpdatedID
       assigneeID
       departmentID
@@ -12219,6 +12227,7 @@ export const deleteKanban = /* GraphQL */ `
       points
       active
       sortKey
+      workSummary
       lastUpdatedID
       assigneeID
       departmentID

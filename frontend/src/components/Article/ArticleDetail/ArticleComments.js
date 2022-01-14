@@ -32,7 +32,7 @@ export default function ArticleComments({ article }) {
             return (
               <ArticleCommentsComponents
                 comment={comment}
-                key={idx}
+                key={comment.id}
                 idx={idx}
               />
             );

@@ -995,13 +995,14 @@ type Kanban
   id: ID!
   title: String!
   content: String
-  kanbanStatus: KanbanStatus
+  kanbanStatus: KanbanStatus!
   deadLine: AWSDateTime
-  priority: Priority
+  priority: Priority!
   tags: [String]
   points: Int
   active: Boolean!
   sortKey: SortKey!
+  workSummary: String
   lastUpdatedID: ID
   lastUpdated: User @connection(fields: ["lastUpdatedID"])
   assigneeID: ID
