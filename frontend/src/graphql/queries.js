@@ -702,6 +702,7 @@ export const getUser = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -3353,6 +3354,7 @@ export const getDepartment = /* GraphQL */ `
           points
           active
           sortKey
+          workSummary
           lastUpdatedID
           assigneeID
           departmentID
@@ -7374,6 +7376,7 @@ export const getKanban = /* GraphQL */ `
       points
       active
       sortKey
+      workSummary
       lastUpdatedID
       assigneeID
       departmentID
@@ -7555,6 +7558,7 @@ export const listKanbans = /* GraphQL */ `
         points
         active
         sortKey
+        workSummary
         lastUpdatedID
         assigneeID
         departmentID
@@ -7658,6 +7662,7 @@ export const kanbanSortBySortKey = /* GraphQL */ `
         points
         active
         sortKey
+        workSummary
         lastUpdatedID
         assigneeID
         departmentID

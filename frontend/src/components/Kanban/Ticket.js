@@ -1,38 +1,41 @@
 import {
   Backdrop,
+  Box,
   Card,
+  CardHeader,
   CircularProgress,
   Divider,
+  IconButton,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
   MenuList,
+  Typography,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Box } from "@mui/system";
-import CardHeader from "@mui/material/CardHeader";
 import CircleIcon from "@mui/icons-material/Circle";
 import CloseTicket from "./CloseTicket";
 import CustomAvatar from "../CustomMUI/CustomAvatar";
 import Edit from "./Edit";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { GetStatusColor } from "./ByStatus";
-import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NoticeIcons from "./NoticeIcons";
-import { Typography } from "@mui/material";
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import moment from "moment";
 import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
+import { useLocation } from "react-router";
 import { usePermit } from "../../Hooks/usePermit";
 
 const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
 
 export default function Ticket({ item }) {
   const dispatch = useDispatch();
+  const location = useLocation();
+  //console.log(location);
   const [loading, setLoading] = useState(false);
   const { username } = useSelector((state) => state.userAuth.user);
   const {
@@ -102,7 +105,7 @@ export default function Ticket({ item }) {
             <IconButton
               aria-label="settings"
               onClick={handleClick}
-              disabled={!(isPermit && window.location.pathname === "/kanban")}
+              disabled={!(isPermit && location.pathname === "/kanban")}
             >
               <MoreVertIcon />
             </IconButton>
@@ -215,7 +218,7 @@ export default function Ticket({ item }) {
                 <ListItemIcon>
                   <VisibilityOffRoundedIcon />
                 </ListItemIcon>
-                <ListItemText>隐藏不再显示</ListItemText>
+                <ListItemText>隐藏并结束</ListItemText>
               </MenuItem>
             </Box>
           )}

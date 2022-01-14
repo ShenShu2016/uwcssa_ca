@@ -43,6 +43,7 @@ export default function CloseTicket({
   } = useForm({
     defaultValues: {
       points: item.points,
+      workSummary: "",
     },
   });
 
@@ -70,7 +71,7 @@ export default function CloseTicket({
           open={closeTicketOpen}
           onClose={handleCloseTicketClose}
         >
-          <DialogTitle>关闭Ticket</DialogTitle>
+          <DialogTitle>隐藏并结束Ticket</DialogTitle>
           <Divider light />
           <DialogContent>
             <DialogContentText>
@@ -98,6 +99,32 @@ export default function CloseTicket({
                     value={value}
                     error={!!errors.points}
                     helperText={errors.points ? "不能为空" : null}
+                  />
+                )}
+              />
+            </Box>
+            <Box sx={{ textAlign: "center", my: "1rem" }}>
+              <Controller
+                name="workSummary"
+                control={control}
+                rules={{
+                  required: true,
+                  min: 10,
+                }}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    multiline
+                    rows={4}
+                    id="workSummary"
+                    label="结束评语评语"
+                    variant="outlined"
+                    onChange={onChange}
+                    value={value}
+                    error={!!errors.workSummary}
+                    helperText={errors.workSummary ? "不能低于10个字" : null}
                   />
                 )}
               />

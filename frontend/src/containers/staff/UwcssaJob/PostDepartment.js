@@ -50,9 +50,9 @@ export default function PostDepartment(props) {
 
   const [departmentData, setDepartmentData] = useState({
     name: "",
-    introduction: "",
+    // introduction: "",
     email: undefined,
-    leader: "",
+    // leader: "",
   });
 
   const handleSubmit = async () => {
