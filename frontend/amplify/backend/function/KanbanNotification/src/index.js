@@ -89,22 +89,28 @@ exports.handler = async (event) => {
           emailResponse
         );
       } catch (error) {
-        await ses.sendEmail({
-          Destination: {
-            ToAddresses: "shushen2013@gmail.com",
-          },
-          Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
-          Message: {
-            Subject: {
-              Data: `KanbanLambda failure`,
+        await ses
+          .sendEmail({
+            Destination: {
+              ToAddresses: "shushen2013@gmail.com",
             },
-            Body: {
-              Text: {
-                Data: `${record}/n/n${error}`,
+            Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
+            Message: {
+              Subject: {
+                Data: `KanbanLambda failure`,
+              },
+              Body: {
+                Text: {
+                  Data: `${JSON.stringify(record, null, 2)}/n/n${JSON.stringify(
+                    error,
+                    null,
+                    2
+                  )}`,
+                },
               },
             },
-          },
-        });
+          })
+          .promise();
       }
     }
   }

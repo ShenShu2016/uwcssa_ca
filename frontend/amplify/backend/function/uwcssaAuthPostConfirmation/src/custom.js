@@ -47,22 +47,26 @@ exports.handler = async (event) => {
       console.log("Error", err);
     }
     try {
-      await ses.sendEmail({
-        Destination: {
-          ToAddresses: "shushen2013@gmail.com",
-        },
-        Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
-        Message: {
-          Subject: {
-            Data: `UWCSSA 新用户注册`,
+      console.log("开发发email");
+      const response = await ses
+        .sendEmail({
+          Destination: {
+            ToAddresses: ["shushen2013@gmail.com"],
           },
-          Body: {
-            Text: {
-              Data: `${params}/n/n`,
+          Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
+          Message: {
+            Subject: {
+              Data: `UWCSSA 新用户注册`,
+            },
+            Body: {
+              Text: {
+                Data: `${JSON.stringify(params, null, 2)}/n`,
+              },
             },
           },
-        },
-      });
+        })
+        .promise();
+      console.log("response", response);
     } catch (error) {
       console.log(error);
     }
