@@ -17,13 +17,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { fetchMarketItems, filterClear } from "../../redux/slice/marketSlice";
-import {
-  marketItemSortBySortKey,
-  marketItemSortBySortKeyItem,
-  marketItemSortBySortKeyRental,
-  marketItemSortBySortKeyVehicle,
-} from "./marketQueries";
 
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -34,6 +27,8 @@ import { Link } from "react-router-dom";
 import PetsIcon from "@mui/icons-material/Pets";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { filterClear } from "../../redux/slice/marketSlice";
+import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 
@@ -178,24 +173,7 @@ export const SearchArea = ({
   const onKeyDownHandler = (e) => {
     if (e.key.toLowerCase() === "enter") {
       const searchInfos = getValues("searchInfo");
-      console.log("searchInfo:", searchInfos);
-
-      const filter = {
-        name: { contains: searchInfos },
-        // description: { contains: { searchInfo } },
-      };
-      if (type === "all") {
-        dispatch(
-          fetchMarketItems({ query: marketItemSortBySortKey, filter: filter })
-        );
-      } else if (type === "item") {
-        dispatch(fetchMarketItems({ query: marketItemSortBySortKeyItem }));
-      } else if (type === "vehicle") {
-        dispatch(fetchMarketItems({ query: marketItemSortBySortKeyVehicle }));
-      } else if (type === "rental") {
-        dispatch(fetchMarketItems({ query: marketItemSortBySortKeyRental }));
-      }
-
+      marketItemFilterUpdate({ name: searchInfos }, dispatch);
       reset();
     }
   };
