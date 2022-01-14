@@ -1,6 +1,6 @@
 var aws = require("aws-sdk");
 var ddb = new aws.DynamoDB();
-
+const ses = new aws.SES({ region: "us-east-1" });
 exports.handler = async (event) => {
   let date = new Date();
   console.log("event", event);
@@ -46,7 +46,26 @@ exports.handler = async (event) => {
     } catch (err) {
       console.log("Error", err);
     }
-
+    try {
+      await ses.sendEmail({
+        Destination: {
+          ToAddresses: "shushen2013@gmail.com",
+        },
+        Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
+        Message: {
+          Subject: {
+            Data: `UWCSSA 新用户注册`,
+          },
+          Body: {
+            Text: {
+              Data: `${params}/n/n`,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
     console.log("Success: Everything executed correctly");
   } else {
     console.log("Error: Nothing was written to DynamoDB");
