@@ -106,8 +106,8 @@ export default function Event() {
 
   const duration = 750;
 
-  const animStr = (idx) =>
-    `glowIn ${duration}ms ease-out ${delay * (idx + 1)}ms backwards`;
+  const animStr = (id) =>
+    `glowIn ${duration}ms ease-out ${delay * (id + 1)}ms backwards`;
 
   // const currentEvent = filteredEventList.filter(
   //   (d) => new Date(d.startDate) - new Date() >= 0
@@ -118,7 +118,7 @@ export default function Event() {
   //   (d) => new Date(d.startDate) - new Date() < 0
   // );
   // console.log("pastEvent", pastEvent);
-  const renderList = filteredEventList.map((event, idx) => {
+  const renderList = filteredEventList.map((event, id) => {
     return (
       <Grid
         item
@@ -126,10 +126,10 @@ export default function Event() {
         sm={4}
         md={4}
         lg={3}
-        key={idx}
-        style={{ animation: animStr(idx), marginBottom: "1rem" }}
+        key={id}
+        style={{ animation: animStr(id), marginBottom: "1rem" }}
       >
-        <EventMain key={idx} event={event} />
+        <EventMain key={id} event={event} />
       </Grid>
     );
   });
@@ -149,7 +149,7 @@ export default function Event() {
       (a, b) =>
         new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     )
-    .map((event, idx) => {
+    .map((event, id) => {
       return (
         <Grid
           item
@@ -157,8 +157,8 @@ export default function Event() {
           sm={4}
           md={4}
           lg={3}
-          key={idx}
-          style={{ animation: animStr(idx), marginBottom: "1rem" }}
+          key={id}
+          style={{ animation: animStr(id), marginBottom: "1rem" }}
         >
           <PastEvent event={event} />
         </Grid>
