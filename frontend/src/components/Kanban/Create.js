@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   CircularProgress,
   Dialog,
@@ -23,18 +24,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import { Box } from "@mui/system";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import moment from "moment";
 import { postKanban } from "../../redux/slice/kanbanSlice";
 
 const useStyles = makeStyles({
   content: {
-    marginTop: "1rem",
+    // marginTop: "1rem",
     minHeight: "300px",
-    paddingInline: "1rem",
+    // paddingInline: "1rem",
     overflow: "auto",
     width: "100%",
     maxWidth: "600px",
@@ -58,7 +59,7 @@ export default function Create({ createOpen, handleCreateClose }) {
       dispatch(fetchUwcssaMembers());
     }
   }, [dispatch, fetchUwcssaMembersStatus]);
-
+  console.log();
   const {
     handleSubmit,
     control,
@@ -69,10 +70,10 @@ export default function Create({ createOpen, handleCreateClose }) {
     defaultValues: {
       title: "",
       kanbanStatus: "IDEA",
-      deadLine: undefined,
+      deadLine: moment().add(7, "d"),
       points: 0,
       sortKey: "SortKey",
-      assigneeID: "shushen2013",
+      assigneeID: username,
       priority: "Average",
       content: "",
       active: true,

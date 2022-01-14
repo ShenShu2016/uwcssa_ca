@@ -86,7 +86,11 @@ export default function Ticket({ item }) {
 
     await dispatch(updateKanbanDetail({ updateKanbanInput }));
   };
-
+  console.log(
+    'location.pathname === "/kanban"',
+    location.pathname === "/kanban"
+  );
+  console.log("isPermit", isPermit);
   return (
     <Box sx={{ my: "1rem" }}>
       <Card sx={{ width: 250 }}>
@@ -102,13 +106,11 @@ export default function Ticket({ item }) {
             </Fragment>
           }
           action={
-            <IconButton
-              aria-label="settings"
-              onClick={handleClick}
-              disabled={!(isPermit && location.pathname === "/kanban")}
-            >
-              <MoreVertIcon />
-            </IconButton>
+            isPermit && (
+              <IconButton aria-label="settings" onClick={handleClick}>
+                <MoreVertIcon />
+              </IconButton>
+            )
           }
         />
 
@@ -185,7 +187,6 @@ export default function Ticket({ item }) {
             </ListItemIcon>
             <ListItemText>编辑</ListItemText>
           </MenuItem>
-
           {KanbanStatus.map((status) => {
             return (
               <Box key={status}>
