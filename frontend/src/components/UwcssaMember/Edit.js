@@ -27,9 +27,7 @@ import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../redux/slice/departmentSlice";
-import getCroppedImg, {
-  generateDownload,
-} from "../Account/Profile/Info/canvasUtils";
+import getCroppedImg from "../Account/Profile/Info/canvasUtils";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -188,10 +186,14 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const onImgClear = () => {
     setImageSrc(null);
   };
-
-  const onImgDownload = () => {
-    generateDownload(imageSrc, croppedArea);
+  const noChange = () => {
+    setImageSrc(null);
+    handleEditClose();
   };
+
+  // const onImgDownload = () => {
+  //   generateDownload(imageSrc, croppedArea);
+  // };
 
   const uploadImg = async (e) => {
     setLoading(true);
@@ -435,7 +437,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                       disabled={loading}
                       sx={{ margin: "1rem 0 1rem 1rem" }}
                     >
-                      上传头像
+                      更换
                       {loading && (
                         <CircularProgress
                           size={24}
@@ -457,7 +459,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                       sx={{ margin: "1rem 0 1rem 1rem" }}
                       disabled={!imageSrc}
                     >
-                      清除头像
+                      取消
                       {loading && (
                         <CircularProgress
                           size={24}
@@ -472,7 +474,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                         />
                       )}
                     </Button>
-                    <Tooltip title="点击下载剪裁好的头像" placement="top">
+                    {/*  <Tooltip title="点击下载剪裁好的头像" placement="top">
                       <Button
                         onClick={onImgDownload}
                         variant="outlined"
@@ -495,7 +497,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                           />
                         )}
                       </Button>
-                    </Tooltip>
+                    </Tooltip> */}
                     <Tooltip title="点击完成裁剪" placement="top">
                       <Button
                         onClick={uploadImg}
@@ -504,7 +506,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                         sx={{ margin: "1rem" }}
                         disabled={!imageSrc}
                       >
-                        确认头像
+                        确认裁剪
                         {loading && (
                           <CircularProgress
                             size={24}
@@ -621,7 +623,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
           >
             <DialogActions>
               <Button
-                onClick={handleEditClose}
+                onClick={noChange}
                 size="large"
                 variant="outlined"
                 color="error"
