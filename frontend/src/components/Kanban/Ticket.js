@@ -27,14 +27,12 @@ import NoticeIcons from "./NoticeIcons";
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import moment from "moment";
 import { updateKanbanDetail } from "../../redux/slice/kanbanSlice";
-import { useLocation } from "react-router";
 import { usePermit } from "../../Hooks/usePermit";
 
 const KanbanStatus = ["IDEA", "TODO", "INPROGRESS", "DONE", "WASTED"];
 
 export default function Ticket({ item }) {
   const dispatch = useDispatch();
-  const location = useLocation();
   //console.log(location);
   const [loading, setLoading] = useState(false);
   const { username } = useSelector((state) => state.userAuth.user);
@@ -86,11 +84,11 @@ export default function Ticket({ item }) {
 
     await dispatch(updateKanbanDetail({ updateKanbanInput }));
   };
-  console.log(
-    'location.pathname === "/kanban"',
-    location.pathname === "/kanban"
-  );
-  console.log("isPermit", isPermit);
+  // console.log(
+  //   'location.pathname === "/kanban"',
+  //   location.pathname === "/kanban"
+  // );
+  // console.log("isPermit", isPermit);
   return (
     <Box sx={{ my: "1rem" }}>
       <Card sx={{ width: 250 }}>

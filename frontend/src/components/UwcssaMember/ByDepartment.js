@@ -49,29 +49,18 @@ const Root = styled("div")(({ theme }) => ({
 
 export default function ByDepartment({ department }) {
   const classes = useStyles();
-  // const uwcssaMembers = useSelector(selectAllUwcssaMembers);
-  // let membersByDepartment = uwcssaMembers.filter(
-  //   (x) => x.departmentID === department.id && x.active === true
-  // );
+
   const membersByDepartment = useSelector(
     selectUwcssaMembersByDepartmentId(department.id)
   );
-  // membersByDepartment = membersByDepartment.find((x) => x.leader === true)
-  //   ? [
-  //       membersByDepartment.find((x) => x.leader === true),
-  //       ...membersByDepartment.filter((x) => x.leader !== true),
-  //     ]
-  //   : membersByDepartment;
 
   const [expanded, setExpanded] = useState(true);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  //   console.log("department", department);
-  //console.log("membersByDepartment", membersByDepartment);
-  const delay = 600;
 
+  const delay = 600;
   const duration = 1000;
 
   const animStr = (memberIdx) =>

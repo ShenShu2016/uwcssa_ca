@@ -33,6 +33,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
+
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   root: {
     // backgroundColor: "#F3F2EF",
@@ -208,11 +209,9 @@ export default function ProfessionalCard({
       open={isSettingMenuOpen}
       onClose={handleSettingMenuClose}
     >
-      <MenuItem>
-        <IconButton onClick={handleEditClickOpen}>
-          <EditIcon />
-          编辑
-        </IconButton>
+      <MenuItem onClick={handleEditClickOpen}>
+        <EditIcon />
+        编辑
       </MenuItem>
     </Menu>
   );

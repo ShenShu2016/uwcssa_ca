@@ -9,6 +9,7 @@ import {
   Divider,
   FormControl,
   InputLabel,
+  ListSubheader,
   MenuItem,
   Select,
   Stack,
@@ -18,8 +19,12 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import {
+  fetchDepartments,
+  selectAllDepartments,
+} from "../../redux/slice/departmentSlice";
+import {
   fetchUwcssaMembers,
-  selectAllUwcssaMembers,
+  selectUwcssaMembersByActive,
 } from "../../redux/slice/uwcssaMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -51,16 +56,21 @@ const useStyles = makeStyles({
 export default function Edit({ editOpen, handleEditClose, item }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
+  const uwcssaMembers = useSelector(selectUwcssaMembersByActive);
   const { fetchUwcssaMembersStatus } = useSelector(
     (state) => state.uwcssaMember
   );
   const { username } = useSelector((state) => state.userAuth.user);
+  const departments = useSelector(selectAllDepartments);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   useEffect(() => {
     if (fetchUwcssaMembersStatus === "idle" || undefined) {
       dispatch(fetchUwcssaMembers());
     }
-  }, [dispatch, fetchUwcssaMembersStatus]);
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus]);
 
   const {
     id,
@@ -203,12 +213,50 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                         label="任务接受者"
                         error={!!errors.assigneeID}
                       >
-                        {uwcssaMembers.map((member) => {
+                        {/* {uwcssaMembers.map((member) => {
+                          //console.log(member);
                           return (
-                            <MenuItem value={member.id} key={member.id}>
-                              {`${member.departmentID}: ${member.id}`}
+                            <MenuItem
+                              value={member.id}
+                              key={member.id}
+                              divider
+                              sx={{ bgcolor: member.leader && "warning.main" }}
+                            >
+                              {member.leader && "🔥"}
+                              {`${member.departmentID}: ${member.id} (${member.user.lastName} ${member.user.firstName})`}
                             </MenuItem>
                           );
+                        })} */}
+                        {departments.map((department, idx) => {
+                          const membersByDepartment = uwcssaMembers.filter(
+                            (x) => x.departmentID === department.id
+                          );
+                          //console.log(membersByDepartment);
+                          const renderList = membersByDepartment.map(
+                            (member) => {
+                              // let buffer=[]
+                              return [
+                                <ListSubheader>
+                                  {department.name}
+                                </ListSubheader>,
+                                <MenuItem
+                                  value={member.id}
+                                  key={member.id}
+                                  sx={{
+                                    color: member.leader && "info.main",
+                                  }}
+                                >
+                                  {member.leader && "✨"}
+                                  {`${member.id}`}
+                                  {member.user.lastName &&
+                                    member.user.firstName &&
+                                    ` (${member.user.lastName} ${member.user.firstName})`}
+                                </MenuItem>,
+                              ];
+                            }
+                          );
+                          // const header
+                          return renderList;
                         })}
                       </Select>
                     </FormControl>

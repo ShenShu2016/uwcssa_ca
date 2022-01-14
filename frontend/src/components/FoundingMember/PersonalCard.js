@@ -193,11 +193,9 @@ export default function PersonalCard({
       open={isSettingMenuOpen}
       onClose={handleSettingMenuClose}
     >
-      <MenuItem>
-        <IconButton onClick={handleEditClickOpen}>
-          <EditIcon />
-          编辑
-        </IconButton>
+      <MenuItem onClick={handleEditClickOpen}>
+        <EditIcon />
+        编辑
       </MenuItem>
     </Menu>
   );
