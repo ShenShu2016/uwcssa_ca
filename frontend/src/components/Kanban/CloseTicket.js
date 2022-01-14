@@ -119,7 +119,7 @@ export default function CloseTicket({
                     multiline
                     rows={4}
                     id="workSummary"
-                    label="结束评语评语"
+                    label="结束总结与评语"
                     variant="outlined"
                     onChange={onChange}
                     value={value}

@@ -19,7 +19,7 @@ import CustomTags, { GetTags } from "../CustomMUI/CustomTags";
 import React, { useEffect, useState } from "react";
 import {
   fetchUwcssaMembers,
-  selectAllUwcssaMembers,
+  selectUwcssaMembersByActive,
 } from "../../redux/slice/uwcssaMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -48,8 +48,8 @@ export default function Create({ createOpen, handleCreateClose }) {
 
   const [loading, setLoading] = useState(false);
   const [tags, setTags] = useState([]);
-  const uwcssaMembers = useSelector(selectAllUwcssaMembers);
-
+  const uwcssaMembers = useSelector(selectUwcssaMembersByActive);
+  //console.log(uwcssaMembers);
   const { fetchUwcssaMembersStatus } = useSelector(
     (state) => state.uwcssaMember
   );
@@ -198,9 +198,16 @@ export default function Create({ createOpen, handleCreateClose }) {
                         error={!!errors.assigneeID}
                       >
                         {uwcssaMembers.map((member) => {
+                          //console.log(member);
                           return (
-                            <MenuItem value={member.id} key={member.id}>
-                              {`${member.departmentID}: ${member.id}`}
+                            <MenuItem
+                              value={member.id}
+                              key={member.id}
+                              divider
+                              sx={{ bgcolor: member.leader && "warning.main" }}
+                            >
+                              {member.leader && "🔥"}
+                              {`${member.departmentID}: ${member.id} (${member.user.lastName} ${member.user.firstName})`}
                             </MenuItem>
                           );
                         })}

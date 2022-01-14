@@ -124,4 +124,10 @@ export const selectUwcssaMembersByDepartmentId = (departmentID) =>
     return uwcssaMember.filter((x) => x.departmentID === departmentID);
   });
 
+export const selectUwcssaMembersByActive = createSelector(
+  selectAllUwcssaMembers,
+  (uwcssaMember) => {
+    return uwcssaMember.filter((x) => x.active === true);
+  }
+);
 export default uwcssaMemberSlice.reducer;
