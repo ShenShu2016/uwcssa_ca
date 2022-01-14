@@ -231,19 +231,15 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                           const membersByDepartment = uwcssaMembers.filter(
                             (x) => x.departmentID === department.id
                           );
-                          //console.log(membersByDepartment);
                           const renderList = membersByDepartment.map(
                             (member) => {
-                              // let buffer=[]
-                              return [
-                                <ListSubheader>
-                                  {department.name}
-                                </ListSubheader>,
+                              return (
                                 <MenuItem
                                   value={member.id}
                                   key={member.id}
                                   sx={{
                                     color: member.leader && "info.main",
+                                    ml: member.leader ? "0.5rem" : "1rem",
                                   }}
                                 >
                                   {member.leader && "✨"}
@@ -251,12 +247,23 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                                   {member.user.lastName &&
                                     member.user.firstName &&
                                     ` (${member.user.lastName} ${member.user.firstName})`}
-                                </MenuItem>,
-                              ];
+                                </MenuItem>
+                              );
                             }
                           );
-                          // const header
-                          return renderList;
+                          return [
+                            <ListSubheader
+                              sx={{
+                                fontWeight: 700,
+                                fontSize: 18,
+                                // textAlign: "center",
+                              }}
+                            >
+                              {department.name}
+                            </ListSubheader>,
+
+                            renderList,
+                          ];
                         })}
                       </Select>
                     </FormControl>
