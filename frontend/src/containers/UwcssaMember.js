@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   fetchDepartments,
@@ -6,7 +6,7 @@ import {
 } from "../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddIcon from "@mui/icons-material/Add";
 import ByDepartment from "../components/UwcssaMember/ByDepartment";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -27,6 +27,16 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
+  },
+  fabBox: {
+    display: "block",
+    position: "fixed",
+    right: "4rem",
+    bottom: "5rem",
+    [theme.breakpoints.down("sm")]: {
+      right: 10,
+      bottom: 70,
+    },
   },
 }));
 
@@ -61,22 +71,21 @@ export default function UwcssaMember() {
           >
             学生会成员
           </Typography>
-          {isPermit && (
-            <Button
-              variant="contained"
-              component={Link}
-              to="/admin/uwcssaMember/create"
-              sx={{ my: "1rem", borderRadius: "10px" }}
-              size="large"
-              startIcon={<AddCircleOutlineIcon />}
-            >
-              添加新成员
-            </Button>
-          )}
         </Box>
         {departments.map((department) => {
           return <ByDepartment department={department} key={department.id} />;
         })}
+        {isPermit && (
+          <Box className={classes.fabBox}>
+            <Fab
+              color="primary"
+              component={Link}
+              to="/admin/uwcssaMember/create"
+            >
+              <AddIcon />
+            </Fab>
+          </Box>
+        )}
       </div>
       <Footer />
     </Box>

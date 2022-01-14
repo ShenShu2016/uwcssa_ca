@@ -24,7 +24,7 @@ import { postSingleImage } from "../../../../redux/slice/generalSlice";
 import { putUserProfile } from "../../../../redux/slice/profileSlice";
 // import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import getCroppedImg, { generateDownload } from "./canvasUtils";
+import getCroppedImg from "./canvasUtils";
 import Cropper from "react-easy-crop";
 import { dataURLtoFile } from "./dataURLtoFile";
 import { v4 as uuid } from "uuid";
@@ -106,16 +106,16 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [avatarImgURL, setAvatarImgURL] = useState(user.avatarImgURL);
+  // const [avatarImgURL, setAvatarImgURL] = useState(user.avatarImgURL);
   const [backGroundImgURL, setBackGroundImgURL] = useState(
     user.backGroundImgURL
   );
-  const inputAvatarRef = useRef();
+  // const inputAvatarRef = useRef();
   const inputRef = useRef();
-  const triggerAvatarFileSelectPopup = () => inputAvatarRef.current.click();
+  // const triggerAvatarFileSelectPopup = () => inputAvatarRef.current.click();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
-  const [avatarImageSrc, setAvatarImageSrc] = useState(null);
+  // const [avatarImageSrc, setAvatarImageSrc] = useState(null);
   const [backgroundImageSrc, setBackgroundImageSrc] = useState(null);
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -141,7 +141,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
   const onSubmit = async (data) => {
     const updateUserInput = {
       ...data,
-      avatarImgURL: avatarImgURL,
+      // avatarImgURL: avatarImgURL,
       backGroundImgURL: backGroundImgURL,
     };
     setLoading(true);
@@ -171,21 +171,21 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     setCroppedArea(croppedAreaPixels);
   };
 
-  const onAvatarImgFileChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      let imageDataUrl = await readFile(file);
-      setAvatarImageSrc(imageDataUrl);
-    }
-  };
+  // const onAvatarImgFileChange = async (e) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const file = e.target.files[0];
+  //     let imageDataUrl = await readFile(file);
+  //     setAvatarImageSrc(imageDataUrl);
+  //   }
+  // };
 
-  const onAvatarImgClear = () => {
-    setAvatarImageSrc(null);
-  };
+  // const onAvatarImgClear = () => {
+  //   setAvatarImageSrc(null);
+  // };
 
-  const onAvatarImgDownload = () => {
-    generateDownload(avatarImageSrc, croppedArea);
-  };
+  // const onAvatarImgDownload = () => {
+  //   generateDownload(avatarImageSrc, croppedArea);
+  // };
 
   const onBackgroundImgFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -199,53 +199,53 @@ export default function Edit({ user, editOpen, handleEditClose }) {
     setBackgroundImageSrc(null);
   };
 
-  const onBackgroundImgDownload = () => {
-    generateDownload(backgroundImageSrc, croppedArea);
-  };
+  // const onBackgroundImgDownload = () => {
+  //   generateDownload(backgroundImageSrc, croppedArea);
+  // };
 
-  const uploadAvatarImg = async (e) => {
-    setLoading(true);
-    // const imageData = e.target.files;
-    // console.log(imageData, "image");
+  // const uploadAvatarImg = async (e) => {
+  // setLoading(true);
+  // const imageData = e.target.files;
+  // console.log(imageData, "image");
 
-    // const imageLocation = "user/Avatar";
-    // const maxPixel = 300;
-    // const response = await dispatch(
-    //   postSingleImage({ imageData, imageLocation, maxPixel })
-    // );
-    // if (response.meta.requestStatus === "fulfilled") {
-    //   console.log("response", response);
-    //   setAvatarImgURL(response.payload);
-    //   setLoading(false);
-    // }
-    const canvas = await getCroppedImg(avatarImageSrc, croppedArea);
+  // const imageLocation = "user/Avatar";
+  // const maxPixel = 300;
+  // const response = await dispatch(
+  //   postSingleImage({ imageData, imageLocation, maxPixel })
+  // );
+  // if (response.meta.requestStatus === "fulfilled") {
+  //   console.log("response", response);
+  //   setAvatarImgURL(response.payload);
+  //   setLoading(false);
+  // }
+  //   const canvas = await getCroppedImg(avatarImageSrc, croppedArea);
 
-    const canvasDataUrl = canvas.toDataURL("image/jpeg");
-    // console.log(canvasDataUrl);
+  //   const canvasDataUrl = canvas.toDataURL("image/jpeg");
+  //   // console.log(canvasDataUrl);
 
-    const convertedUrlToFile = dataURLtoFile(
-      canvasDataUrl,
-      `croppedAvatarImg${uuid()}.jpeg`
-    );
-    // console.log(convertedUrlToFile);
+  //   const convertedUrlToFile = dataURLtoFile(
+  //     canvasDataUrl,
+  //     `croppedAvatarImg${uuid()}.jpeg`
+  //   );
+  //   // console.log(convertedUrlToFile);
 
-    const files = [convertedUrlToFile];
-    const fileInputFiles = new FileListItems(files);
-    console.log(fileInputFiles);
+  //   const files = [convertedUrlToFile];
+  //   const fileInputFiles = new FileListItems(files);
+  //   console.log(fileInputFiles);
 
-    const imageData = fileInputFiles;
-    const imageLocation = "user/Avatar";
-    const maxPixel = 300;
-    const response = await dispatch(
-      postSingleImage({ imageData, imageLocation, maxPixel })
-    );
-    if (response.meta.requestStatus === "fulfilled") {
-      console.log("response", response);
-      setAvatarImgURL(response.payload);
-      setLoading(false);
-      setAvatarImageSrc(null);
-    }
-  };
+  //   const imageData = fileInputFiles;
+  //   const imageLocation = "user/Avatar";
+  //   const maxPixel = 300;
+  //   const response = await dispatch(
+  //     postSingleImage({ imageData, imageLocation, maxPixel })
+  //   );
+  //   if (response.meta.requestStatus === "fulfilled") {
+  //     console.log("response", response);
+  //     setAvatarImgURL(response.payload);
+  //     setLoading(false);
+  //     setAvatarImageSrc(null);
+  //   }
+  // };
 
   const uploadBackGroundImgImg = async (e) => {
     setLoading(true);
@@ -275,6 +275,11 @@ export default function Edit({ user, editOpen, handleEditClose }) {
       setLoading(false);
       setBackgroundImageSrc(null);
     }
+  };
+  const noChange = () => {
+    // setAvatarImageSrc(null);
+    setBackgroundImageSrc(null);
+    handleEditClose();
   };
 
   return (
@@ -336,7 +341,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
               />
               <div className={classes.splitter} />
 
-              {avatarImageSrc ? (
+              {/* {avatarImageSrc ? (
                 <React.Fragment>
                   <Box className={classes.cropContainer}>
                     <Cropper
@@ -383,7 +388,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                       disabled={loading}
                       sx={{ margin: "1rem 0 1rem 1rem" }}
                     >
-                      上传头像
+                      更换头像
                       {loading && (
                         <CircularProgress
                           size={24}
@@ -419,8 +424,8 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                           }}
                         />
                       )}
-                    </Button>
-                    <Tooltip title="点击下载剪裁好的头像" placement="top">
+                    </Button> */}
+              {/* <Tooltip title="点击下载剪裁好的头像" placement="top">
                       <Button
                         onClick={onAvatarImgDownload}
                         variant="outlined"
@@ -443,8 +448,8 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                           />
                         )}
                       </Button>
-                    </Tooltip>
-                    <Tooltip title="点击完成裁剪" placement="top">
+                    </Tooltip> */}
+              {/* <Tooltip title="点击完成裁剪" placement="top">
                       <Button
                         onClick={uploadAvatarImg}
                         variant="contained"
@@ -452,7 +457,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                         sx={{ margin: "1rem" }}
                         disabled={!avatarImageSrc}
                       >
-                        确认头像
+                        确认裁剪
                         {loading && (
                           <CircularProgress
                             size={24}
@@ -514,7 +519,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                     )}
                   </Button>
                 </div>
-              )}
+              )} */}
 
               {/* <Box my={"2rem"}>
               <label htmlFor="uploadAvatarImg">
@@ -602,7 +607,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                       disabled={loading}
                       sx={{ margin: "1rem 0 1rem 1rem" }}
                     >
-                      上传背景
+                      更换背景
                       {loading && (
                         <CircularProgress
                           size={24}
@@ -639,7 +644,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                         />
                       )}
                     </Button>
-                    <Tooltip title="点击下载剪裁好的背景" placement="top">
+                    {/* <Tooltip title="点击下载剪裁好的背景" placement="top">
                       <Button
                         onClick={onBackgroundImgDownload}
                         variant="outlined"
@@ -662,7 +667,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                           />
                         )}
                       </Button>
-                    </Tooltip>
+                    </Tooltip> */}
 
                     <Tooltip title="点击完成裁剪" placement="top">
                       <Button
@@ -672,7 +677,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
                         sx={{ margin: "1rem" }}
                         disabled={!backgroundImageSrc}
                       >
-                        确认背景
+                        确认裁剪
                         {loading && (
                           <CircularProgress
                             size={24}
@@ -849,7 +854,10 @@ export default function Edit({ user, editOpen, handleEditClose }) {
           >
             <DialogActions>
               <Button
-                onClick={handleEditClose}
+                // onChange={
+                //   setAvatarImageSrc(null) && setBackgroundImageSrc(null)
+                // }
+                onClick={noChange}
                 size="large"
                 variant="outlined"
                 color="error"

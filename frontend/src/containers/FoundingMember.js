@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Fab, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   fetchFoundingMembers,
@@ -6,7 +6,7 @@ import {
 } from "../redux/slice/foundingMemberSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/system";
 import Footer from "./Footer";
 import InfoCard from "../components/FoundingMember/InfoCard";
@@ -30,6 +30,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     [theme.breakpoints.up("sm")]: {
       marginLeft: "auto",
+    },
+  },
+  fabBox: {
+    display: "block",
+    position: "fixed",
+    right: "4rem",
+    bottom: "5rem",
+    [theme.breakpoints.down("sm")]: {
+      right: 10,
+      bottom: 70,
     },
   },
 }));
@@ -67,19 +77,6 @@ export default function FoundingMember() {
           >
             创始团队以及贡献者
           </Typography>
-
-          {isPermit && (
-            <Button
-              variant="contained"
-              component={Link}
-              to="/admin/foundingMember/create"
-              sx={{ my: "1rem", borderRadius: "10px" }}
-              size="large"
-              startIcon={<AddCircleOutlineIcon />}
-            >
-              添加新成员
-            </Button>
-          )}
         </Box>
         <div className={classes.cards}>
           {foundingMembers.map((member, memberIdx) => {
@@ -90,6 +87,17 @@ export default function FoundingMember() {
             );
           })}
         </div>
+        {isPermit && (
+          <Box className={classes.fabBox}>
+            <Fab
+              color="primary"
+              component={Link}
+              to="/admin/foundingMember/create"
+            >
+              <AddIcon />
+            </Fab>
+          </Box>
+        )}
       </div>
       <Footer />
     </Box>

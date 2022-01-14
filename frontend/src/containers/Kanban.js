@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   fetchDepartments,
@@ -6,7 +6,7 @@ import {
 } from "../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddIcon from "@mui/icons-material/Add";
 import ByDepartment from "../components/Kanban/ByDepartment";
 import Create from "../components/Kanban/Create";
 import Footer from "./Footer";
@@ -25,6 +25,16 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "100vw",
       overflow: "auto",
+    },
+  },
+  fabBox: {
+    display: "block",
+    position: "fixed",
+    right: "4rem",
+    bottom: "5rem",
+    [theme.breakpoints.down("sm")]: {
+      right: 10,
+      bottom: 70,
     },
   },
 }));
@@ -59,7 +69,7 @@ export default function Kanban() {
         <div className={classes.root}>
           <Typography variant="h3" className={classes.title}>
             Kanban
-            {isPermit && (
+            {/* {isPermit && (
               <Button
                 variant="contained"
                 sx={{ my: "1rem", borderRadius: "10px" }}
@@ -71,7 +81,7 @@ export default function Kanban() {
               >
                 添加Kanban
               </Button>
-            )}
+            )} */}
           </Typography>
           <Box className={classes.main}>
             {departments.map((department) => {
@@ -81,6 +91,18 @@ export default function Kanban() {
             })}
           </Box>
         </div>
+        {isPermit && (
+          <Box className={classes.fabBox}>
+            <Fab
+              color="primary"
+              onClick={() => {
+                setCreateOpen(!createOpen);
+              }}
+            >
+              <AddIcon />
+            </Fab>
+          </Box>
+        )}
       </Box>
       <Create createOpen={createOpen} handleCreateClose={handleCreateClose} />
       <Footer />

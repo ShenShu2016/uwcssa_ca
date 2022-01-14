@@ -121,13 +121,17 @@ export const {
 
 export const selectUwcssaMembersByDepartmentId = (departmentID) =>
   createSelector(selectAllUwcssaMembers, (uwcssaMember) => {
-    return uwcssaMember.filter((x) => x.departmentID === departmentID);
+    return uwcssaMember
+      .filter((x) => x.departmentID === departmentID)
+      .sort((a, b) => b.leader - a.leader);
   });
 
 export const selectUwcssaMembersByActive = createSelector(
   selectAllUwcssaMembers,
   (uwcssaMember) => {
-    return uwcssaMember.filter((x) => x.active === true);
+    return uwcssaMember
+      .filter((x) => x.active === true)
+      .sort((a, b) => b.leader - a.leader);
   }
 );
 export default uwcssaMemberSlice.reducer;

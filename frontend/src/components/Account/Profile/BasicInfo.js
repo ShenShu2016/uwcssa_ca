@@ -15,6 +15,7 @@ import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { usePermit } from "../../../Hooks/usePermit";
 import uwindsor from "../../../static/svg icons/uwindsor.svg";
+import EditAvatar from "./Info/EditAvatar";
 
 const useStyles = makeStyles({
   root: {
@@ -44,6 +45,8 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 export default function BasicInfo({ user, ownerID }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
+  const [editAvatarOpen, setEditAvatarOpen] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const isPermit = usePermit(ownerID, "admin");
 
@@ -52,6 +55,12 @@ export default function BasicInfo({ user, ownerID }) {
   };
   const handleEditClose = () => {
     setEditOpen(false);
+  };
+  const handleEditAvatarClickOpen = () => {
+    setEditAvatarOpen(true);
+  };
+  const handleEditAvatarClose = () => {
+    setEditAvatarOpen(false);
   };
 
   return (
@@ -88,17 +97,32 @@ export default function BasicInfo({ user, ownerID }) {
                   />
                 }
               >
-                <Avatar
-                  alt="avatar"
-                  src={
-                    user.avatarImgURL
-                      ? user.avatarImgURL
-                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
-                  }
-                  sx={{ width: 150, height: 150, cursor: "pointer" }}
-                  className={classes.avatar}
-                  onClick={isPermit ? handleEditClickOpen : undefined}
-                />
+                <div
+                  onMouseOver={() => setHover(true)}
+                  onMouseOut={() => setHover(false)}
+                >
+                  {hover ? (
+                    <Avatar
+                      alt="avatar"
+                      sx={{ width: 150, height: 150, cursor: "pointer" }}
+                      className={classes.avatar}
+                      onClick={isPermit ? handleEditAvatarClickOpen : undefined}
+                    >
+                      修改头像
+                    </Avatar>
+                  ) : (
+                    <Avatar
+                      alt="avatar"
+                      src={
+                        user.avatarImgURL
+                          ? user.avatarImgURL
+                          : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
+                      }
+                      sx={{ width: 150, height: 150, cursor: "pointer" }}
+                      className={classes.avatar}
+                    />
+                  )}
+                </div>
               </Badge>
               {isPermit && (
                 <Button
@@ -138,6 +162,11 @@ export default function BasicInfo({ user, ownerID }) {
         </Card>
       </div>
       <Edit editOpen={editOpen} user={user} handleEditClose={handleEditClose} />
+      <EditAvatar
+        editAvatarOpen={editAvatarOpen}
+        user={user}
+        handleEditAvatarClose={handleEditAvatarClose}
+      />
     </div>
   );
 }

@@ -46,7 +46,7 @@ export default function Profile() {
           <BasicInfo user={user} ownerID={username} />
           <div className={classes.root}>
             <Grid container spacing={2} columns={12} p={"0 1rem"}>
-              <Grid item xs={12} sm={5} md={5}>
+              <Grid item xs={12} sm={6} md={6}>
                 <AboutMe user={user} />
               </Grid>
               <Grid item xs={12}>

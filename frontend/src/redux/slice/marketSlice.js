@@ -9,10 +9,11 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { getMarketItem, listAddresss } from "../../graphql/queries";
 
 import API from "@aws-amplify/api";
+import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
+import { listAddresss } from "../../components/Market/marketQueries";
 
 const marketAdapter = createEntityAdapter({
   // selectId: (item) => item.id,
