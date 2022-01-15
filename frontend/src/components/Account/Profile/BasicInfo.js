@@ -101,12 +101,12 @@ export default function BasicInfo({ user, ownerID }) {
                   onMouseOver={() => setHover(true)}
                   onMouseOut={() => setHover(false)}
                 >
-                  {hover ? (
+                  {hover && isPermit ? (
                     <Avatar
                       alt="avatar"
                       sx={{ width: 150, height: 150, cursor: "pointer" }}
                       className={classes.avatar}
-                      onClick={isPermit ? handleEditAvatarClickOpen : undefined}
+                      onClick={handleEditAvatarClickOpen}
                     >
                       修改头像
                     </Avatar>
