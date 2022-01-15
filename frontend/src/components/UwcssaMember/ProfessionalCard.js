@@ -33,7 +33,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
-
+import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded";
+import EditAvatar from "./EditAvatar";
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   root: {
     // backgroundColor: "#F3F2EF",
@@ -177,13 +178,22 @@ export default function ProfessionalCard({
 
   const [editOpen, setEditOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [editAvatarOpen, setEditAvatarOpen] = useState(false);
 
   const handleEditClickOpen = () => {
     setSettingMoreAnchorEl(null);
     setEditOpen(true);
   };
+
+  const handleEditAvatarClickOpen = () => {
+    setSettingMoreAnchorEl(null);
+    setEditAvatarOpen(true);
+  };
   const handleEditClose = () => {
     setEditOpen(false);
+  };
+  const handleEditAvatarClose = () => {
+    setEditAvatarOpen(false);
   };
 
   const handleClickOpen = () => {
@@ -209,9 +219,13 @@ export default function ProfessionalCard({
       open={isSettingMenuOpen}
       onClose={handleSettingMenuClose}
     >
+      <MenuItem onClick={handleEditAvatarClickOpen}>
+        <PhotoCameraRoundedIcon />
+        编辑 头像
+      </MenuItem>
       <MenuItem onClick={handleEditClickOpen}>
         <EditIcon />
-        编辑
+        编辑 信息
       </MenuItem>
     </Menu>
   );
@@ -459,6 +473,11 @@ export default function ProfessionalCard({
       </Card>
       {renderSettingMenu}
       <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
+      <EditAvatar
+        editAvatarOpen={editAvatarOpen}
+        handleEditAvatarClose={handleEditAvatarClose}
+        item={item}
+      />
     </Grid>
   );
 }
