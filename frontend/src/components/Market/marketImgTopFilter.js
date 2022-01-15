@@ -30,8 +30,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
 import PropTypes from "prop-types";
 import { filterClear } from "../../redux/slice/marketSlice";
+import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { marketItemStyle } from "./marketItemCss";
 import { useDispatch } from "react-redux";
+
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, darkTheme, ...other } = props;
 
@@ -78,7 +80,8 @@ export default function MarketImgTopFilter({
   darkTheme,
   control,
   type,
-  trueMarketItems,
+  occurrence,
+  sortedOccurrence,
   handleSearch,
   filterList,
   handleReset,
@@ -89,26 +92,9 @@ export default function MarketImgTopFilter({
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
   const [clickedTags, setClickedTags] = useState([]);
-
-  let tags = [];
-
-  trueMarketItems
-    .filter((a) => a.tags !== null)
-    .forEach((item) => {
-      item.tags.map((subitem) => tags.push(subitem));
-    });
-
-  const countTags = (arr) =>
-    arr.reduce((obj, e) => {
-      obj[e] = (obj[e] || 0) + 1;
-      return obj;
-    }, {});
-
-  const occurrence = countTags(tags);
-
-  const sortedOccurrence = Object.keys(occurrence).sort(
-    (a, b) => occurrence[b] - occurrence[a]
-  );
+  React.useEffect(() => {
+    marketItemFilterUpdate({ tags: clickedTags, type: "all" }, dispatch);
+  }, [dispatch, clickedTags]);
 
   const handleClickListItem = () => {
     setOpen(true);

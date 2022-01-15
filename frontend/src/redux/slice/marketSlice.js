@@ -22,6 +22,8 @@ const marketAdapter = createEntityAdapter({
 
 const initialState = marketAdapter.getInitialState({
   filter: {},
+  occurrence: {},
+  sortedOccurrence: [],
   currentFilterType: null,
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
@@ -160,6 +162,26 @@ const marketSlice = createSlice({
         state.fetchMarketItemsStatus = "succeeded";
         marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload);
+        const currentFilter = state.filter;
+        const marketItems = action.payload;
+        if (Object.keys(currentFilter).length === 0) {
+          let tags = [];
+          marketItems
+            .filter((a) => a.tags !== null)
+            .forEach((item) => {
+              item.tags.map((subitem) => tags.push(subitem));
+            });
+          const countTags = (arr) =>
+            arr.reduce((obj, e) => {
+              obj[e] = (obj[e] || 0) + 1;
+              return obj;
+            }, {});
+          const occurrence = countTags(tags);
+          state.occurrence = occurrence;
+          state.sortedOccurrence = Object.keys(occurrence).sort(
+            (a, b) => occurrence[b] - occurrence[a]
+          );
+        }
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
         state.fetchMarketItemsStatus = "failed";
