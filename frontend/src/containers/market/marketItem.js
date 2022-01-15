@@ -41,7 +41,11 @@ export default function MarketItem() {
     marketItemFilterUpdate(data, dispatch);
   });
 
-  const filterList = useSelector((state) => state.market.filter);
+  const {
+    filter: filterList,
+    occurrence,
+    sortedOccurrence,
+  } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filterList, "Item");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -63,7 +67,6 @@ export default function MarketItem() {
 
   const handleReset = () => {
     dispatch(filterClear());
-
     reset({
       type: "Item",
       sortKey: "original",
@@ -94,7 +97,8 @@ export default function MarketItem() {
             darkTheme={darkTheme}
             control={control}
             type="Item"
-            trueMarketItems={filteredItems}
+            occurrence={occurrence}
+            sortedOccurrence={sortedOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />
