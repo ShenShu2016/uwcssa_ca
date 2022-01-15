@@ -129,7 +129,7 @@ export default function EditAvatar({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedArea, setCroppedArea] = useState(null);
-
+  const [finish, setFinish] = useState(false);
   const {
     handleSubmit,
     // control,
@@ -169,6 +169,7 @@ export default function EditAvatar({
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
       setAvatarImageSrc(imageDataUrl);
+      setFinish(false);
     }
   };
 
@@ -205,6 +206,7 @@ export default function EditAvatar({
       setAvatarImgURL(response.payload);
       setLoading(false);
       setAvatarImageSrc(null);
+      setFinish(true);
     }
   };
 
@@ -267,7 +269,7 @@ export default function EditAvatar({
                   </Typography>
                   <Slider
                     style={{ color: "#ffff" }}
-                    value={avatarImageSrc ? zoom : null}
+                    value={zoom}
                     min={1}
                     max={3}
                     step={0.1}
@@ -297,6 +299,7 @@ export default function EditAvatar({
                     />
                     <Button
                       variant="text"
+                      size="large"
                       sx={{
                         color: "white",
                         ":hover": {
@@ -326,6 +329,7 @@ export default function EditAvatar({
                     {/* <Tooltip title="点击完成裁剪" placement="top"> */}
                     <Button
                       variant="text"
+                      size="large"
                       sx={{
                         color: "white",
                         ":hover": {
@@ -334,6 +338,7 @@ export default function EditAvatar({
                       }}
                       onClick={uploadAvatarImg}
                       startIcon={<CropRoundedIcon />}
+                      disabled={!avatarImageSrc}
                     >
                       确认裁剪
                       {loading && (
@@ -412,19 +417,14 @@ export default function EditAvatar({
                 padding: "1rem",
               }}
             >
-              <Button
-                onClick={noChange}
-                size="large"
-                variant="outlined"
-                color="error"
-              >
+              <Button onClick={noChange} variant="outlined" color="error">
                 取消
               </Button>
               <Button
                 onClick={handleSubmit(onSubmit)}
                 variant="contained"
-                size="large"
                 disabled={loading}
+                sx={{ display: finish ? "block" : "none" }}
               >
                 保存头像
                 {loading && (
