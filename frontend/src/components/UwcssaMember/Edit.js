@@ -16,6 +16,7 @@ import {
   Select,
   Slide,
   Slider,
+  Stack,
   Switch,
   TextField,
   Tooltip,
@@ -45,7 +46,8 @@ import { updateUwcssaMemberDetail } from "../../redux/slice/uwcssaMemberSlice";
 import { usePermit } from "../../Hooks/usePermit";
 import { useRef } from "react";
 import { v4 as uuid } from "uuid";
-
+import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
+import CropRoundedIcon from "@mui/icons-material/CropRounded";
 // const Input = styled("input")({
 //   display: "none",
 // });
@@ -391,11 +393,23 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                 </Button>
               </label>
             </Box> */}
-              {imageSrc ? (
-                <React.Fragment>
+              {/* {imageSrc ? ( */}
+              <React.Fragment>
+                <Typography variant="h5" gutterBottom>
+                  编辑 头像
+                </Typography>
+                <Box
+                  sx={{
+                    backgroundColor: "rgba(0, 0, 0, 0.9)",
+                    padding: "1rem",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "15px",
+                  }}
+                >
                   <Box className={classes.cropContainer}>
                     <Cropper
-                      image={imageSrc}
+                      image={imageSrc ? imageSrc : imgURL}
                       crop={crop}
                       zoom={zoom}
                       aspect={125 / 125}
@@ -408,12 +422,14 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                   <Box className={classes.controls}>
                     <Box className={classes.sliderContainer}>
                       <Typography
+                        style={{ color: "#ffff" }}
                         variant="overline"
                         className={classes.sliderLabel}
                       >
                         缩放
                       </Typography>
                       <Slider
+                        style={{ color: "#ffff" }}
                         value={zoom}
                         min={1}
                         max={3}
@@ -423,108 +439,84 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                         onChange={(e, zoom) => setZoom(zoom)}
                       />
                     </Box>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      ref={inputRef}
-                      onChange={onImgFileChange}
-                      style={{ display: "none" }}
-                    />
-                    <Button
-                      variant="outlined"
-                      component="span"
-                      onClick={triggerFileSelectPopup}
-                      disabled={loading}
-                      sx={{ margin: "1rem 0 1rem 1rem" }}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        "& > *": {
+                          m: 1,
+                        },
+                      }}
                     >
-                      更换
-                      {loading && (
-                        <CircularProgress
-                          size={24}
-                          sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
-                          }}
+                      <Stack spacing={2} direction="row">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={inputRef}
+                          onChange={onImgFileChange}
+                          style={{ display: "none" }}
                         />
-                      )}
-                    </Button>
-                    <Button
-                      onClick={onImgClear}
-                      variant="outlined"
-                      color="error"
-                      sx={{ margin: "1rem 0 1rem 1rem" }}
-                      disabled={!imageSrc}
-                    >
-                      取消
-                      {loading && (
-                        <CircularProgress
-                          size={24}
+                        <Button
+                          variant="text"
                           sx={{
-                            color: green[500],
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            marginTop: "-0.75rem",
-                            marginLeft: "-0.75rem",
+                            color: "white",
+                            ":hover": {
+                              color: "#9e9e9e",
+                            },
                           }}
-                        />
-                      )}
-                    </Button>
-                    {/*  <Tooltip title="点击下载剪裁好的头像" placement="top">
-                      <Button
-                        onClick={onImgDownload}
-                        variant="outlined"
-                        color="warning"
-                        sx={{ margin: "1rem 0rem 1rem 1rem" }}
-                        disabled={!imageSrc}
-                      >
-                        下载头像
-                        {loading && (
-                          <CircularProgress
-                            size={24}
-                            sx={{
-                              color: green[500],
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              marginTop: "-0.75rem",
-                              marginLeft: "-0.75rem",
-                            }}
-                          />
-                        )}
-                      </Button>
-                    </Tooltip> */}
-                    <Tooltip title="点击完成裁剪" placement="top">
-                      <Button
-                        onClick={uploadImg}
-                        variant="contained"
-                        color="success"
-                        sx={{ margin: "1rem" }}
-                        disabled={!imageSrc}
-                      >
-                        确认裁剪
-                        {loading && (
-                          <CircularProgress
-                            size={24}
-                            sx={{
-                              color: green[500],
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              marginTop: "-0.75rem",
-                              marginLeft: "-0.75rem",
-                            }}
-                          />
-                        )}
-                      </Button>
-                    </Tooltip>
+                          onClick={triggerFileSelectPopup}
+                          disabled={loading}
+                          startIcon={<AddAPhotoRoundedIcon />}
+                        >
+                          上传头像
+                          {loading && (
+                            <CircularProgress
+                              size={24}
+                              sx={{
+                                color: green[500],
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                marginTop: "-0.75rem",
+                                marginLeft: "-0.75rem",
+                              }}
+                            />
+                          )}
+                        </Button>
+
+                        <Button
+                          variant="text"
+                          sx={{
+                            color: "white",
+                            ":hover": {
+                              color: "#9e9e9e",
+                            },
+                          }}
+                          onClick={uploadImg}
+                          startIcon={<CropRoundedIcon />}
+                        >
+                          确认裁剪
+                          {loading && (
+                            <CircularProgress
+                              size={24}
+                              sx={{
+                                color: green[500],
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                marginTop: "-0.75rem",
+                                marginLeft: "-0.75rem",
+                              }}
+                            />
+                          )}
+                        </Button>
+                      </Stack>
+                    </Box>
                   </Box>
-                </React.Fragment>
-              ) : (
+                </Box>
+              </React.Fragment>
+              {/* ) : (
                 <div>
                   <Box sx={{ textAlign: "center" }}>
                     <img
@@ -564,7 +556,9 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                     )}
                   </Button>
                 </div>
-              )}
+              )} */}
+              <div className={classes.splitter} />
+
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Box className={classes.starEndDate}>
                   <div>
@@ -636,7 +630,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                 size="large"
                 disabled={loading}
               >
-                更新
+                保存
                 {loading && (
                   <CircularProgress
                     size={24}
