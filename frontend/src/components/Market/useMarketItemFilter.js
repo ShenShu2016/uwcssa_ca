@@ -1,6 +1,7 @@
 import {
   addressFilteredMarketItem,
   fetchMarketItems,
+  filterClear,
   filterUpdated,
 } from "../../redux/slice/marketSlice";
 import {
@@ -31,34 +32,30 @@ export function marketItemFilterUpdate(props, dispatch) {
     airConditioningType = [],
     heatingType = [],
     searchRadius = "",
+    tags = [],
   } = props;
-
   const addressInfo = { lat: 42.2732, lng: -83.0014 };
 
   const filter = {};
-  min !== "" ||
-    (max !== "" &&
-      Object.assign(filter, {
-        price: {
-          between: [min === "" ? 0 : min, max === "" ? 999999 : max],
-        },
-      }));
-  minYear !== "" ||
-    (maxYear !== "" &&
-      Object.assign(filter, {
-        year: {
-          between: [
-            minYear === "" ? 0 : minYear,
-            maxYear === "" ? 999999 : maxYear,
-          ],
-        },
-      }));
+  (min !== "" || max !== "") &&
+    Object.assign(filter, {
+      price: {
+        between: [min === "" ? 0 : min, max === "" ? 999999 : max],
+      },
+    });
+  (minYear !== "" || maxYear !== "") &&
+    Object.assign(filter, {
+      year: {
+        between: [
+          minYear === "" ? 0 : minYear,
+          maxYear === "" ? 999999 : maxYear,
+        ],
+      },
+    });
   // {marketItemCategory:{eq:category[]}}
   let itemFilter = [];
-
   //conversion: Latitude: 1 deg = 110.574 km
   // Longitude: 1 deg = 111.320*cos(latitude) km
-  console.log(searchRadius);
   searchRadius.length !== 0 &&
     itemFilter.push({
       lat: {
@@ -102,7 +99,11 @@ export function marketItemFilterUpdate(props, dispatch) {
     );
   heatingType.length !== 0 &&
     heatingType.map((c) => itemFilter.push({ heatingType: { eq: c } }));
+  tags.length !== 0 &&
+    tags.map((c) => itemFilter.push({ tags: { contains: c } }));
+  tags.length === 0 && itemFilter.map((item) => Object.keys(item) !== tags);
   itemFilter.length !== 0 && Object.assign(filter, { or: itemFilter });
+  dispatch(filterClear());
   dispatch(filterUpdated({ marketType: type, filter: filter }));
 }
 
@@ -128,7 +129,10 @@ export default function useMarketItemFilter(filterList, type) {
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
           dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
-        } else if (Object.keys(Object.values(filter)[0][0]).includes("name")) {
+        } else if (
+          Object.keys(Object.values(filter)[0][0]).includes("name") ||
+          Object.keys(Object.values(filter)[0][0]).includes("tags")
+        ) {
           setIsFiltering(true);
           dispatch(
             fetchMarketItems({ query: marketItemSortBySortKey, filter: filter })

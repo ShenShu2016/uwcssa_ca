@@ -23,27 +23,12 @@ export default function MarketList() {
   const classes = useStyles();
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
-  const { filter } = useSelector((state) => state.market);
+  const { filter, occurrence, sortedOccurrence } = useSelector(
+    (state) => state.market
+  );
   const isFiltering = useMarketItemFilter(filter, "all");
   const starter = useStarter(marketItems, "all", isFiltering);
   const topRef = React.useRef(null);
-
-  let tags = [];
-  marketItems
-    .filter((a) => a.tags !== null)
-    .forEach((item) => {
-      item.tags.map((subitem) => tags.push(subitem));
-    });
-  const countTags = (arr) =>
-    arr.reduce((obj, e) => {
-      obj[e] = (obj[e] || 0) + 1;
-      return obj;
-    }, {});
-  const occurrence = countTags(tags);
-
-  const sortedOccurrence = Object.keys(occurrence).sort(
-    (a, b) => occurrence[b] - occurrence[a]
-  );
 
   const clickHandler = () => {
     dispatch(filterClear());

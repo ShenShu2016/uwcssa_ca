@@ -28,7 +28,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PropTypes from "prop-types";
 import WorkIcon from "@mui/icons-material/Work";
+import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { marketItemStyle } from "./marketItemCss";
+import { useDispatch } from "react-redux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -150,11 +152,14 @@ export default function MarketTopBar({
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState("");
   const [clickedTags, setClickedTags] = useState([]);
-
+  React.useEffect(() => {
+    marketItemFilterUpdate({ tags: clickedTags, type: "all" }, dispatch);
+  }, [dispatch, clickedTags]);
   const handleClickListItem = () => {
     setOpen(true);
   };
