@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     right: "4rem",
     bottom: "5rem",
+    zIndex: 2,
     [theme.breakpoints.down("sm")]: {
       right: 10,
       bottom: 70,
