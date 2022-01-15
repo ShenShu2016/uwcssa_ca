@@ -1,17 +1,16 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   CircularProgress,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
-  Paper,
   Slide,
   Slider,
+  Stack,
+
   //   TextField,
   //   Tooltip,
   Typography,
@@ -20,7 +19,7 @@ import { useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
 
 import { green } from "@mui/material/colors";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, useTheme } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/slice/generalSlice";
 import { putUserProfile } from "../../../../redux/slice/profileSlice";
 // import { styled } from "@mui/material/styles";
@@ -32,6 +31,7 @@ import { v4 as uuid } from "uuid";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 // import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import CropRoundedIcon from "@mui/icons-material/CropRounded";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // const Input = styled("input")({
 //   display: "none",
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sliderLabel: {
     minWidth: 25,
-
+    color: "white",
     [theme.breakpoints.down("xs")]: {
       minWidth: 65,
     },
@@ -129,7 +129,7 @@ export default function EditAvatar({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedArea, setCroppedArea] = useState(null);
-
+  const [finish, setFinish] = useState(false);
   const {
     handleSubmit,
     // control,
@@ -169,6 +169,7 @@ export default function EditAvatar({
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
       setAvatarImageSrc(imageDataUrl);
+      setFinish(false);
     }
   };
 
@@ -205,6 +206,7 @@ export default function EditAvatar({
       setAvatarImgURL(response.payload);
       setLoading(false);
       setAvatarImageSrc(null);
+      setFinish(true);
     }
   };
 
@@ -213,147 +215,152 @@ export default function EditAvatar({
     // setBackgroundImageSrc(null);
     handleEditAvatarClose();
   };
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <div className={classes.root}>
       <form>
-        <Dialog
-          fullScreen
-          open={editAvatarOpen}
-          onClose={handleEditAvatarClose}
-          TransitionComponent={Transition}
-        >
-          <DialogTitle>编辑 个人信息</DialogTitle>
-          <Divider light />
-          <Container maxWidth="md">
-            <DialogContent>
+        <React.Fragment>
+          <Dialog
+            fullScreen={fullScreen}
+            open={editAvatarOpen}
+            onClose={handleEditAvatarClose}
+            TransitionComponent={Transition}
+            PaperProps={{
+              style: { borderRadius: fullScreen ? "none" : "16px" },
+            }}
+          >
+            <DialogTitle>编辑 头像</DialogTitle>
+            <Divider light />
+            {/* <Container maxWidth="md"> */}
+            <DialogContent
+              sx={{
+                backgroundColor: "rgba(0, 0, 0, 0.9)",
+                padding: "1rem",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <div className={classes.splitter} />
 
               {/* {avatarImageSrc ? ( */}
-              <React.Fragment>
-                <Box className={classes.cropContainer}>
-                  <Cropper
-                    image={avatarImageSrc ? avatarImageSrc : avatarImgURL}
-                    crop={crop}
-                    zoom={zoom}
-                    aspect={1}
-                    cropShape="round"
-                    showGrid={false}
-                    onCropChange={setCrop}
-                    onCropComplete={onCropComplete}
-                    onZoomChange={setZoom}
+
+              <Box className={classes.cropContainer}>
+                <Cropper
+                  image={avatarImageSrc ? avatarImageSrc : avatarImgURL}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1}
+                  cropShape="round"
+                  showGrid={false}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </Box>
+              <Box className={classes.controls}>
+                <Box className={classes.sliderContainer}>
+                  <Typography
+                    variant="overline"
+                    className={classes.sliderLabel}
+                  >
+                    缩放
+                  </Typography>
+                  <Slider
+                    style={{ color: "#ffff" }}
+                    value={zoom}
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    aria-labelledby="Zoom"
+                    className={classes.slider}
+                    onChange={(e, zoom) => setZoom(zoom)}
                   />
                 </Box>
-                <Box className={classes.controls}>
-                  <Box className={classes.sliderContainer}>
-                    <Typography
-                      variant="overline"
-                      className={classes.sliderLabel}
-                    >
-                      缩放
-                    </Typography>
-                    <Slider
-                      value={zoom}
-                      min={1}
-                      max={3}
-                      step={0.1}
-                      aria-labelledby="Zoom"
-                      className={classes.slider}
-                      onChange={(e, zoom) => setZoom(zoom)}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    "& > *": {
+                      m: 1,
+                    },
+                  }}
+                >
+                  {/* <ButtonGroup variant="text" size="large"> */}
+                  <Stack spacing={2} direction="row">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={inputAvatarRef}
+                      onChange={onAvatarImgFileChange}
+                      style={{ display: "none" }}
                     />
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      "& > *": {
-                        m: 1,
-                      },
-                    }}
-                  >
-                    <ButtonGroup variant="text" size="large">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        ref={inputAvatarRef}
-                        onChange={onAvatarImgFileChange}
-                        style={{ display: "none" }}
-                      />
-                      <Button
-                        //   variant="outlined"
-                        onClick={triggerAvatarFileSelectPopup}
-                        disabled={loading}
-                        startIcon={<AddAPhotoRoundedIcon />}
-                      >
-                        上传头像
-                        {loading && (
-                          <CircularProgress
-                            size={24}
-                            sx={{
-                              color: green[500],
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              marginTop: "-0.75rem",
-                              marginLeft: "-0.75rem",
-                            }}
-                          />
-                        )}
-                      </Button>
-                      {/* <Button
-                        onClick={onAvatarImgClear}
-                        //   variant="outlined"
-                        //   color="error"
-                        //   sx={{ margin: "1rem 0 1rem 1rem" }}
-                        // disabled={!avatarImageSrc}
-                        startIcon={<DeleteRoundedIcon />}
-                      >
-                        清除
-                        {loading && (
-                          <CircularProgress
-                            size={24}
-                            sx={{
-                              color: green[500],
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              marginTop: "-0.75rem",
-                              marginLeft: "-0.75rem",
-                            }}
-                          />
-                        )}
-                      </Button> */}
+                    <Button
+                      variant="text"
+                      size="large"
+                      sx={{
+                        color: "white",
+                        ":hover": {
+                          color: "#9e9e9e",
+                        },
+                      }}
+                      onClick={triggerAvatarFileSelectPopup}
+                      disabled={loading}
+                      startIcon={<AddAPhotoRoundedIcon />}
+                    >
+                      上传头像
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
 
-                      {/* <Tooltip title="点击完成裁剪" placement="top"> */}
-                      <Button
-                        onClick={uploadAvatarImg}
-                        //   variant="contained"
-                        //   color="success"
-                        //   sx={{ margin: "1rem" }}
-                        //   disabled={!avatarImageSrc}
-                        startIcon={<CropRoundedIcon />}
-                      >
-                        确认裁剪
-                        {loading && (
-                          <CircularProgress
-                            size={24}
-                            sx={{
-                              color: green[500],
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              marginTop: "-0.75rem",
-                              marginLeft: "-0.75rem",
-                            }}
-                          />
-                        )}
-                      </Button>
-                      {/* </Tooltip> */}
-                    </ButtonGroup>
-                  </Box>
+                    {/* <Tooltip title="点击完成裁剪" placement="top"> */}
+                    <Button
+                      variant="text"
+                      size="large"
+                      sx={{
+                        color: "white",
+                        ":hover": {
+                          color: "#9e9e9e",
+                        },
+                      }}
+                      onClick={uploadAvatarImg}
+                      startIcon={<CropRoundedIcon />}
+                      disabled={!avatarImageSrc}
+                    >
+                      确认裁剪
+                      {loading && (
+                        <CircularProgress
+                          size={24}
+                          sx={{
+                            color: green[500],
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            marginTop: "-0.75rem",
+                            marginLeft: "-0.75rem",
+                          }}
+                        />
+                      )}
+                    </Button>
+                    {/* </Tooltip> */}
+                    {/* </ButtonGroup> */}
+                  </Stack>
                 </Box>
-              </React.Fragment>
+              </Box>
+
               {/*) : (
                 <div>
                   <Box sx={{ textAlign: "center" }}>
@@ -400,25 +407,24 @@ export default function EditAvatar({
                 </div>
               )} */}
             </DialogContent>
-          </Container>
-          <Paper
+            {/* </Container> */}
+            {/* <Paper
             sx={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 1 }}
             elevation={3}
-          >
-            <DialogActions>
-              <Button
-                onClick={noChange}
-                size="large"
-                variant="outlined"
-                color="error"
-              >
+          > */}
+            <DialogActions
+              sx={{
+                padding: "1rem",
+              }}
+            >
+              <Button onClick={noChange} variant="outlined" color="error">
                 取消
               </Button>
               <Button
                 onClick={handleSubmit(onSubmit)}
                 variant="contained"
-                size="large"
                 disabled={loading}
+                sx={{ display: finish ? "block" : "none" }}
               >
                 保存头像
                 {loading && (
@@ -436,8 +442,9 @@ export default function EditAvatar({
                 )}
               </Button>
             </DialogActions>
-          </Paper>
-        </Dialog>
+            {/* </Paper> */}
+          </Dialog>
+        </React.Fragment>
       </form>
     </div>
   );
