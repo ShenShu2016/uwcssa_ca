@@ -34,6 +34,7 @@ export const marketItemStyle = makeStyles((theme) => ({
     paddingBottom: "1rem",
     //   backgroundColor: "black",
     position: "absolute",
+    height: "100%",
     top: "0",
     left: "0",
     right: "0",

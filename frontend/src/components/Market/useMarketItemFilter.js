@@ -31,11 +31,10 @@ export function marketItemFilterUpdate(props, dispatch) {
     propertyType = [],
     airConditioningType = [],
     heatingType = [],
-    searchRadius = "",
     tags = [],
+    searchRadius = "",
   } = props;
   const addressInfo = { lat: 42.2732, lng: -83.0014 };
-
   const filter = {};
   (min !== "" || max !== "") &&
     Object.assign(filter, {
@@ -99,17 +98,19 @@ export function marketItemFilterUpdate(props, dispatch) {
     );
   heatingType.length !== 0 &&
     heatingType.map((c) => itemFilter.push({ heatingType: { eq: c } }));
-  tags.length !== 0 &&
-    tags.map((c) => itemFilter.push({ tags: { contains: c } }));
-  tags.length === 0 && itemFilter.map((item) => Object.keys(item) !== tags);
-  itemFilter.length !== 0 && Object.assign(filter, { or: itemFilter });
-  dispatch(filterClear());
+  tags.length !== 0
+    ? tags.map((c) => itemFilter.push({ tags: { contains: c } }))
+    : itemFilter.map((item) => Object.keys(item) !== tags);
+  itemFilter.length !== 0
+    ? Object.assign(filter, { or: itemFilter })
+    : dispatch(filterClear());
   dispatch(filterUpdated({ marketType: type, filter: filter }));
 }
 
 export default function useMarketItemFilter(filterList, type) {
   const dispatch = useDispatch();
   const [isFiltering, setIsFiltering] = useState(false);
+
   const query =
     type === "Item"
       ? marketItemSortBySortKeyItem
@@ -123,7 +124,6 @@ export default function useMarketItemFilter(filterList, type) {
 
   useEffect(() => {
     const filter = { ...filterList };
-
     if (query !== null) {
       if (type === "all") {
         if (Object.keys(filter).length === 0) {
