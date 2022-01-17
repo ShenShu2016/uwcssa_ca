@@ -100,8 +100,9 @@ export default function MarketRentalDetail() {
   const classes = detailStyle();
   const dispatch = useDispatch();
   const history = useHistory();
-  useTitle("租房信息");
+
   const { id } = useParams();
+  useTitle(`租房${id}`);
 
   useEffect(() => {
     dispatch(selectedMarketItem(id));
