@@ -151,6 +151,7 @@ export default function PostMarketVehicle() {
       tags: GetTags(),
       active: true,
       userID: username,
+      createdAt: new Date(),
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;

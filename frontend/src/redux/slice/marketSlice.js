@@ -96,10 +96,15 @@ export const addressFilteredMarketItem = createAsyncThunk(
 export const postMarketItem = createAsyncThunk(
   "market/postMarketItem",
   async (createMarketItemInput) => {
-    const response = await API.graphql(
-      graphqlOperation(createMarketItem, { input: createMarketItemInput })
-    );
-    return response.data.createMarketItem;
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createMarketItem, { input: createMarketItemInput })
+      );
+      console.log("res:", response);
+      return response.data.createMarketItem;
+    } catch (error) {
+      console.log("error:", error);
+    }
   }
 );
 
