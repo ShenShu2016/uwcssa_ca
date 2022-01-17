@@ -4,6 +4,7 @@ enum SortKey {
 
 type User
   @model
+  @searchable
   @auth(
     rules: [
       { allow: owner, ownerField: "owner", operations: [create, read, update] }
@@ -674,6 +675,7 @@ type MarketUserInfo
 
 type MarketItem
   @model
+  @searchable
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
@@ -751,6 +753,7 @@ type MarketItem
 
 type Address
   @model
+  @searchable
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
