@@ -26,7 +26,6 @@ export default function MarketList() {
   const { filter, occurrence, sortedOccurrence } = useSelector(
     (state) => state.market
   );
-  console.log(filter);
   const isFiltering = useMarketItemFilter(filter, "all");
   const starter = useStarter(marketItems, "all", isFiltering);
   const topRef = React.useRef(null);

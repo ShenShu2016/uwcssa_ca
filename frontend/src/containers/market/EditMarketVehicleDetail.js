@@ -55,6 +55,7 @@ export default function EditMarketVehicleDetail() {
   const { darkTheme } = useSelector((state) => state.general);
   const {
     imgURLs,
+    createdAt,
     vehicleType,
     addressID,
     year,
@@ -169,6 +170,7 @@ export default function EditMarketVehicleDetail() {
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
+      createdAt: createdAt,
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;

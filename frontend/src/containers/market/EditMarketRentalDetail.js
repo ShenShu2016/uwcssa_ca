@@ -57,6 +57,7 @@ export default function EditMarketRentalDetail() {
   const { darkTheme } = useSelector((state) => state.general);
   const {
     imgURLs,
+    createdAt,
     marketRentalSaleRent,
     propertyType,
     bedroomCounts,
@@ -189,6 +190,7 @@ export default function EditMarketRentalDetail() {
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
+      createdAt: createdAt,
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;

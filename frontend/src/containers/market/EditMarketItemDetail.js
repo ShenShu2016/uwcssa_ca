@@ -65,6 +65,7 @@ export default function EditMarketItemDetail() {
     description,
     marketItemCategory,
     marketItemCondition,
+    createdAt,
     contactEmail,
     contactPhone,
     contactWeChat,
@@ -165,6 +166,7 @@ export default function EditMarketItemDetail() {
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
+      createdAt: createdAt,
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;
