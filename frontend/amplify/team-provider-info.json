@@ -73,7 +73,7 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-4248696f516246316e58-build.zip",
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-4f376f5a644c48584c47-build.zip",
           "GROUP": "anyone"
         },
         "updateLastReplyAt": {
@@ -87,6 +87,10 @@
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/KanbanNotification-634d4a4f64346a6b464b-build.zip"
+        },
+        "uwcssanodejsLibrarieslayer": {
+          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersion53866a94-build.zip"
         }
       }
     }
