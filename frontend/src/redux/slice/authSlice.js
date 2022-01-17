@@ -48,12 +48,16 @@ export const signIn = createAsyncThunk(
 export const fetchUserProfile = createAsyncThunk(
   "auth/fetchUserProfile",
   async ({ username }) => {
-    const response = await API.graphql({
-      query: getUser,
-      variables: { id: username },
-      authMode: "AWS_IAM",
-    });
-    return response.data.getUser;
+    try {
+      const response = await API.graphql({
+        query: getUser,
+        variables: { id: username },
+        authMode: "AWS_IAM",
+      });
+      return response.data.getUser;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

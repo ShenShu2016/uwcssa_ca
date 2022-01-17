@@ -54,17 +54,21 @@ const initialState = {
 export const fetchArticles = createAsyncThunk(
   "article/fetchArticles",
   async () => {
-    const articleData = await API.graphql({
-      query: articleSortBySortKey,
-      variables: {
-        sortKey: "SortKey",
-        sortDirection: "DESC",
-        filter: { active: { eq: true } },
-      },
-      authMode: "AWS_IAM",
-    });
+    try {
+      const articleData = await API.graphql({
+        query: articleSortBySortKey,
+        variables: {
+          sortKey: "SortKey",
+          sortDirection: "DESC",
+          filter: { active: { eq: true } },
+        },
+        authMode: "AWS_IAM",
+      });
 
-    return articleData.data.articleSortBySortKey.items;
+      return articleData.data.articleSortBySortKey.items;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

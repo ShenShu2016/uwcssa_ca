@@ -59,16 +59,20 @@ export const removeURLFrom = createAsyncThunk(
 );
 
 export const fetchUsers = createAsyncThunk("general/fetchUsers", async () => {
-  const usersData = await API.graphql({
-    query: userSortBySortKey,
-    variables: {
-      sortKey: "SortKey",
-      sortDirection: "DESC",
-    },
-    authMode: "AWS_IAM",
-  });
+  try {
+    const usersData = await API.graphql({
+      query: userSortBySortKey,
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+      },
+      authMode: "AWS_IAM",
+    });
 
-  return usersData.data.userSortBySortKey.items;
+    return usersData.data.userSortBySortKey.items;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const fetchForumPostCounts = createAsyncThunk(

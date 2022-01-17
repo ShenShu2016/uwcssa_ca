@@ -1,6 +1,6 @@
 export const userSortBySortKey = /* GraphQL */ `
   query UserSortBySortKey(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelUserFilterInput

@@ -8,8 +8,11 @@ type User
     rules: [
       { allow: owner, ownerField: "owner", operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["everyone"], operations: [read] }
+      { allow: groups, groups: ["staff"], operations: [read] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -36,8 +39,10 @@ type User
       rules: [
         { allow: owner, operations: [read] }
         { allow: groups, groups: ["admin"] }
-        { allow: private, operations: [read] }
+        { allow: groups, groups: ["everyone"], operations: [read] }
+        { allow: groups, groups: ["staff"], operations: [read] }
         { allow: public, operations: [read], provider: iam }
+        { allow: private, operations: [read], provider: iam }
       ]
     )
   userEducations: [UserEducation] @hasMany(indexName: "byUser", fields: ["id"])
@@ -58,6 +63,7 @@ type UserEducation
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -81,6 +87,7 @@ type UserExperience
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -104,6 +111,7 @@ type Topic
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -121,6 +129,7 @@ type Article
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -155,6 +164,7 @@ type ArticleComment
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -184,6 +194,7 @@ type ArticleSubComment
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -210,6 +221,7 @@ type Event
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -263,6 +275,7 @@ type EventComment
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -292,6 +305,7 @@ type EventSubComment
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -319,6 +333,7 @@ type EventParticipant
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -358,6 +373,7 @@ type Department
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -381,6 +397,7 @@ type UwcssaMember
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -397,7 +414,7 @@ type UwcssaMember
   departmentID: ID!
     @index(
       name: "uwcssaMemberSortByDepartmentID"
-      queryField: "uwcssaJobSortByDepartmentID"
+      queryField: "uwcssaMemberSortByDepartmentID"
       sortKeyFields: ["createdAt"]
     )
     @index(name: "byDepartment", sortKeyFields: ["createdAt"])
@@ -414,6 +431,7 @@ type UwcssaJob
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -483,6 +501,7 @@ type ForumTopic
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -500,6 +519,7 @@ type ForumSubTopic
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -521,6 +541,7 @@ type ForumPost
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -542,6 +563,7 @@ type ForumPost
         { allow: groups, groups: ["admin", "staff"] }
         { allow: private, operations: [read] }
         { allow: public, operations: [read], provider: iam }
+        { allow: private, operations: [read], provider: iam }
       ]
     )
   active: Boolean!
@@ -576,6 +598,7 @@ type ForumPostComment
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -606,6 +629,7 @@ type ForumPostSubComment
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -637,6 +661,7 @@ type MarketUserInfo
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -655,6 +680,7 @@ type MarketItem
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -731,6 +757,7 @@ type Address
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -849,6 +876,7 @@ type FoundingMember
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -872,6 +900,7 @@ type Like
       { allow: groups, groups: ["admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -909,6 +938,7 @@ type WebFeedBack
       { allow: groups, groups: ["admin"], operations: [create, read, update] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!
@@ -960,6 +990,7 @@ type Kanban
       { allow: groups, groups: ["admin", "staff"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
     ]
   ) {
   id: ID!

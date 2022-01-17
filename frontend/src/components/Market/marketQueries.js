@@ -1,6 +1,6 @@
 export const marketItemSortBySortKey = /* GraphQL */ `
   query MarketItemSortBySortKey(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelMarketItemFilterInput
@@ -76,7 +76,7 @@ export const marketItemSortBySortKey = /* GraphQL */ `
 `;
 export const marketItemSortBySortKeyPosts = /* GraphQL */ `
   query MarketItemSortBySortKey(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelMarketItemFilterInput
@@ -151,7 +151,7 @@ export const marketItemSortBySortKeyPosts = /* GraphQL */ `
 `;
 export const marketItemSortBySortKeyItem = /* GraphQL */ `
   query MarketItemSortBySortKeyItem(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelMarketItemFilterInput
@@ -219,7 +219,7 @@ export const marketItemSortBySortKeyItem = /* GraphQL */ `
 
 export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
   query MarketItemSortBySortKeyVehicle(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelMarketItemFilterInput
@@ -291,7 +291,7 @@ export const marketItemSortBySortKeyVehicle = /* GraphQL */ `
 
 export const marketItemSortBySortKeyRental = /* GraphQL */ `
   query MarketItemSortBySortKeyRental(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelMarketItemFilterInput
