@@ -1,20 +1,15 @@
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-
 import getCroppedImg from "../Account/Profile/Info/canvasUtils";
 import { useDispatch } from "react-redux";
-
 import { dataURLtoFile } from "../Account/Profile/Info/dataURLtoFile";
-
 import { postSingleImage } from "../../redux/slice/generalSlice";
-// import { styled } from "@mui/material/styles";
-import { updateUwcssaMemberDetail } from "../../redux/slice/uwcssaMemberSlice";
-// import { usePermit } from "../../Hooks/usePermit";
 import { useRef } from "react";
 import { v4 as uuid } from "uuid";
 import readFile from "../cropper/readFile";
 import FileListItems from "../cropper/FileListItems";
 import AvatarCropper from "../cropper/AvatarCropper";
+import { updateFoundingMemberDetail } from "../../redux/slice/foundingMemberSlice";
 
 export default function EditAvatar({
   editAvatarOpen,
@@ -37,12 +32,7 @@ export default function EditAvatar({
   const triggerFileSelectPopup = () => inputRef.current.click();
 
   const { handleSubmit } = useForm({
-    defaultValues: {
-      title: item.title,
-      summary: item.summary,
-      leader: item.leader,
-      active: item.active,
-    },
+    defaultValues: {},
   });
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
@@ -79,7 +69,7 @@ export default function EditAvatar({
     const files = [convertedUrlToFile];
     const fileInputFiles = new FileListItems(files);
     const imageData = fileInputFiles;
-    const imageLocation = "uwcssaMember";
+    const imageLocation = "foundingMember";
     const response = await dispatch(
       postSingleImage({ imageData, imageLocation })
     );
@@ -94,18 +84,18 @@ export default function EditAvatar({
   };
 
   const onSubmit = async (data) => {
-    const updateUwcssaMemberInput = {
+    const updateFoundingMemberInput = {
       ...data,
       id: item.id,
       imgURL: imgURL,
     };
     setLoading(true);
     const response = await dispatch(
-      updateUwcssaMemberDetail({ updateUwcssaMemberInput })
+      updateFoundingMemberDetail({ updateFoundingMemberInput })
     );
     handleEditAvatarClose();
     if (response) {
-      //console.log(response);
+      console.log(response);
       setLoading(false);
     }
   };

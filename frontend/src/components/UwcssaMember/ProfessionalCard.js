@@ -13,6 +13,7 @@ import {
   MenuItem,
   Slide,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { forwardRef, useState } from "react";
@@ -319,19 +320,21 @@ export default function ProfessionalCard({
             </Typography>
           </div>
           <Divider light sx={{ margin: "1rem 0" }} />
-          <Box
-            sx={{
-              overflow: "hidden",
-            }}
-          >
-            <Grid container wrap="nowrap" sx={{ mx: "auto" }}>
-              <Grid item xs zeroMinWidth>
-                <Typography variant="body2" color="text.secondary" noWrap>
-                  {summary ? summary : "请编辑..."}
-                </Typography>
+          <Tooltip title={summary ? summary : "请编辑..."}>
+            <Box
+              sx={{
+                overflow: "hidden",
+              }}
+            >
+              <Grid container wrap="nowrap" sx={{ mx: "auto" }}>
+                <Grid item xs zeroMinWidth>
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    {summary ? summary : "请编辑..."}
+                  </Typography>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          </Tooltip>
         </CardContent>
 
         <CardActions disableSpacing>
