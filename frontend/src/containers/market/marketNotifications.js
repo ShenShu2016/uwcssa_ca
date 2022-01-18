@@ -48,7 +48,15 @@ export default function MarketNotifications() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box
+      sx={{
+        maxWidth: "400px",
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%,-50%)",
+      }}
+    >
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
