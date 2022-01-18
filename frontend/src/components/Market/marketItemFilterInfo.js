@@ -624,7 +624,7 @@ export default function FilterInfo({
           </Box>
           <Box
             width="100%"
-            maxHeight="75vh"
+            maxHeight="70%"
             paddingRight="1rem"
             sx={{
               overflowY: "auto",

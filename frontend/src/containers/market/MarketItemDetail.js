@@ -88,8 +88,8 @@ export default function MarketItemDetail() {
   const classes = detailStyle();
   const history = useHistory();
   const dispatch = useDispatch();
-  useTitle("二手商品信息");
   const { id } = useParams();
+  useTitle(`二手商品${id}`);
 
   useEffect(() => {
     dispatch(selectedMarketItem(id));

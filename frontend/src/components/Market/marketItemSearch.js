@@ -74,8 +74,7 @@ function ConfirmationDialogRaw(props) {
     control,
     onKeyDownHandler,
     darkTheme,
-    sortedOccurrence,
-    occurrence,
+    tagsOccurrence,
     ...other
   } = props;
   const [clickedTags, setClickedTags] = React.useState([]);
@@ -126,26 +125,27 @@ function ConfirmationDialogRaw(props) {
           <Typography marginBottom="0.5rem" fontSize="14px" fontWeight="600">
             热度趋势
           </Typography>
-
-          {sortedOccurrence &&
-            sortedOccurrence.slice(0, 6).map((tag, tagIdx) => {
-              return (
-                <Chip
-                  key={tagIdx}
-                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
-                  label={tag}
-                  sx={{ margin: "0.2rem" }}
-                  color="default"
-                  onClick={() => {
-                    if (clickedTags.includes(tag)) {
-                      setClickedTags((prev) => prev.filter((t) => t !== tag));
-                    } else {
-                      setClickedTags((prev) => prev.concat(tag));
-                    }
-                  }}
-                />
-              );
-            })}
+          {tagsOccurrence &&
+            Object.keys(tagsOccurrence)
+              .slice(0, 5)
+              .map((tag, tagIdx) => {
+                return (
+                  <Chip
+                    sx={{ margin: "0.25rem" }}
+                    key={tagIdx}
+                    avatar={<Avatar>{tagsOccurrence[tag]}</Avatar>}
+                    label={tag}
+                    color={clickedTags.includes(tag) ? "primary" : "default"}
+                    onClick={() => {
+                      if (clickedTags.includes(tag)) {
+                        setClickedTags((prev) => prev.filter((t) => t !== tag));
+                      } else {
+                        setClickedTags((prev) => prev.concat(tag));
+                      }
+                    }}
+                  />
+                );
+              })}
         </Box>
       </DialogContent>
       <DialogActions>
@@ -159,8 +159,7 @@ export const SearchArea = ({
   type = "all",
   darkTheme,
   mode = "fullWidth",
-  occurrence,
-  sortedOccurrence,
+  tagsOccurrence,
 }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
@@ -216,8 +215,7 @@ export const SearchArea = ({
             id="ringtone-menu"
             keepMounted
             onKeyDownHandler={onKeyDownHandler}
-            sortedOccurrence={sortedOccurrence}
-            occurrence={occurrence}
+            tagsOccurrence={tagsOccurrence}
             open={open}
             onClose={() => setOpen(false)}
           />

@@ -430,7 +430,7 @@ export const forumPostSortByForumPostLastReplyAt = /* GraphQL */ `
 
 export const forumPostSortBySortKey = /* GraphQL */ `
   query ForumPostSortBySortKey(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelForumPostFilterInput

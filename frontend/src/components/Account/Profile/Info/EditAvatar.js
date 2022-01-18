@@ -205,6 +205,7 @@ export default function EditAvatar({
       console.log("response", response);
       setAvatarImgURL(response.payload);
       setLoading(false);
+      setZoom(1);
       setAvatarImageSrc(null);
       setFinish(true);
     }
@@ -212,6 +213,10 @@ export default function EditAvatar({
 
   const noChange = () => {
     setAvatarImageSrc(null);
+    setAvatarImgURL(user.avatarImgURL);
+    setFinish(false);
+    setZoom(1);
+
     // setBackgroundImageSrc(null);
     handleEditAvatarClose();
   };
@@ -249,8 +254,8 @@ export default function EditAvatar({
               <Box className={classes.cropContainer}>
                 <Cropper
                   image={avatarImageSrc ? avatarImageSrc : avatarImgURL}
-                  crop={crop}
-                  zoom={zoom}
+                  crop={avatarImageSrc ? crop : { x: 0, y: 0 }}
+                  zoom={avatarImageSrc ? zoom : 1}
                   aspect={1}
                   cropShape="round"
                   showGrid={false}

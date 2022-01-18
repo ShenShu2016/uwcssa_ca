@@ -1,6 +1,6 @@
 export const userSortBySortKey = /* GraphQL */ `
   query UserSortBySortKey(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelUserFilterInput
@@ -34,6 +34,28 @@ export const listForumPosts = /* GraphQL */ `
         id
       }
       nextToken
+    }
+  }
+`;
+
+export const searchUsers = /* GraphQL */ `
+  query SearchUsers(
+    $filter: SearchableUserFilterInput
+    $sort: [SearchableUserSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableUserAggregationInput]
+  ) {
+    searchUsers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      total
     }
   }
 `;

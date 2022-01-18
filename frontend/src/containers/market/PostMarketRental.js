@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -24,6 +23,7 @@ import { postAddress, postMarketItem } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import BackdropLoading from "../../components/BackdropLoading";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -121,6 +121,7 @@ export default function PostMarketRental() {
   });
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const address = await GetAddress();
     const addressID = uuid();
     const itemID = uuid();
@@ -162,6 +163,7 @@ export default function PostMarketRental() {
       tags: GetTags(),
       active: true,
       userID: username,
+      createdAt: new Date(),
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;
@@ -173,7 +175,6 @@ export default function PostMarketRental() {
       userID: username,
     };
     // console.log("createMarketItemInput", createMarketItemInput);
-    setLoading(true);
     const response = await dispatch(postMarketItem(createMarketItemInput));
     if (marketUserInfo === undefined) {
       await dispatch(postMarketUserInfo(userInfo));
@@ -184,11 +185,14 @@ export default function PostMarketRental() {
     }
 
     console.log("Something should be here", response);
+    console.log("Can upload");
+
     if (response.meta.requestStatus === "fulfilled") {
       history.replace(`/market/rental/${response.payload.id}`);
       reset();
+    } else {
+      setLoading(false);
     }
-    console.log("Can upload");
   };
 
   useEffect(() => {
@@ -654,7 +658,7 @@ export default function PostMarketRental() {
                 setDefaultInfo={setDefaultInfo}
               />
             </Box>
-
+            <BackdropLoading open={loading} />
             <Button
               variant="outlined"
               endIcon={<PublishIcon />}
@@ -662,18 +666,6 @@ export default function PostMarketRental() {
               color="primary"
             >
               上传 MarketHome
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
             </Button>
           </Paper>
         </Box>

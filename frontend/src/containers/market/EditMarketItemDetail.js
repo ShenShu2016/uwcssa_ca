@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -27,6 +26,7 @@ import {
 } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import BackdropLoading from "../../components/BackdropLoading";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
@@ -65,6 +65,7 @@ export default function EditMarketItemDetail() {
     description,
     marketItemCategory,
     marketItemCondition,
+    createdAt,
     contactEmail,
     contactPhone,
     contactWeChat,
@@ -123,6 +124,7 @@ export default function EditMarketItemDetail() {
   // console.log("??", GetAddress().description);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const address = await GetAddress();
     const {
       description,
@@ -165,6 +167,7 @@ export default function EditMarketItemDetail() {
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
+      createdAt: createdAt,
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;
@@ -176,7 +179,6 @@ export default function EditMarketItemDetail() {
       userID: marketUserInfo.userID,
     };
     console.log("createMarketItemInput", createMarketItemInput);
-    setLoading(true);
     const response = await dispatch(
       updateMarketItemDetail(createMarketItemInput)
     );
@@ -189,11 +191,14 @@ export default function EditMarketItemDetail() {
     }
 
     console.log("Something should be here", response);
+    console.log("Can upload");
+
     if (response.meta.requestStatus === "fulfilled") {
       history.replace(`/market/item/${response.payload.id}`);
       reset();
+    } else {
+      setLoading(false);
     }
-    console.log("Can upload");
   };
 
   const handleDeleteImg = (imgKey) => {
@@ -400,7 +405,7 @@ export default function EditMarketItemDetail() {
                     />
                   )}
                 /> */}
-                <GoogleMaps />
+                <GoogleMaps userInputValue={marketItem.address} />
               </Box>
               <Box sx={{ marginY: "1rem" }}>
                 <Controller
@@ -442,25 +447,14 @@ export default function EditMarketItemDetail() {
                 setDefaultInfo={setDefaultInfo}
               />
             </Box>
+            <BackdropLoading open={loading} />
             <Button
               variant="outlined"
               endIcon={<PublishIcon />}
               onClick={handleSubmit(onSubmit)}
               color="primary"
             >
-              上传MarketItem{" "}
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
+              上传MarketItem
             </Button>
           </Paper>
         </Box>

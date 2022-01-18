@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createLike, deleteLike, updateLike } from "../../graphql/mutations";
-import {
-  listForumPosts,
-  userSortBySortKey,
-} from "../CustomQuery/GenerialQueries";
+import { listForumPosts, searchUsers } from "../CustomQuery/GenerialQueries";
 
 import API from "@aws-amplify/api";
 import Compressor from "compressorjs";
@@ -13,7 +10,7 @@ import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
 const initialState = {
-  users: null,
+  userCounts: null,
   darkTheme: false,
   forumPostCounts: "",
   urlFrom: null,
@@ -59,16 +56,16 @@ export const removeURLFrom = createAsyncThunk(
 );
 
 export const fetchUsers = createAsyncThunk("general/fetchUsers", async () => {
-  const usersData = await API.graphql({
-    query: userSortBySortKey,
-    variables: {
-      sortKey: "SortKey",
-      sortDirection: "DESC",
-    },
-    authMode: "AWS_IAM",
-  });
-
-  return usersData.data.userSortBySortKey.items;
+  try {
+    const usersData = await API.graphql({
+      query: searchUsers,
+      authMode: "AWS_IAM",
+    });
+    console.log("usersData", usersData);
+    return usersData.data.searchUsers.total;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const fetchForumPostCounts = createAsyncThunk(
@@ -239,7 +236,7 @@ const generalSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      // Cases for status of fetchUsers (pending, fulfilled, and rejected)
+      // Cases for status of setURLFrom (pending, fulfilled, and rejected)
       .addCase(setURLFrom.pending, (state, action) => {
         state.setURLFromStatus = "loading";
       })
@@ -269,7 +266,7 @@ const generalSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.fetchUsersStatus = "succeeded";
-        state.users = action.payload;
+        state.userCounts = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.fetchUsersStatus = "failed";

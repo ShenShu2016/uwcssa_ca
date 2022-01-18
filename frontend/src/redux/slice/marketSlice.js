@@ -9,11 +9,14 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
+import {
+  listAddresss,
+  searchMarketItems,
+} from "../../components/Market/marketQueries";
 
 import API from "@aws-amplify/api";
 import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listAddresss } from "../../components/Market/marketQueries";
 
 const marketAdapter = createEntityAdapter({
   // selectId: (item) => item.id,
@@ -22,8 +25,7 @@ const marketAdapter = createEntityAdapter({
 
 const initialState = marketAdapter.getInitialState({
   filter: {},
-  occurrence: {},
-  sortedOccurrence: [],
+  tagsOccurrence: [],
   currentFilterType: null,
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
@@ -37,6 +39,8 @@ const initialState = marketAdapter.getInitialState({
   updateMarketItemDetailError: null,
   addressFilteredMarketItemStatus: "idle",
   addressFilteredMarketItemError: null,
+  getAllTagsTermsStatus: "idle",
+  getAllTagsTermsError: null,
 });
 
 export const fetchMarketItems = createAsyncThunk(
@@ -96,10 +100,15 @@ export const addressFilteredMarketItem = createAsyncThunk(
 export const postMarketItem = createAsyncThunk(
   "market/postMarketItem",
   async (createMarketItemInput) => {
-    const response = await API.graphql(
-      graphqlOperation(createMarketItem, { input: createMarketItemInput })
-    );
-    return response.data.createMarketItem;
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createMarketItem, { input: createMarketItemInput })
+      );
+      console.log("res:", response);
+      return response.data.createMarketItem;
+    } catch (error) {
+      console.log("error:", error);
+    }
   }
 );
 
@@ -133,6 +142,25 @@ export const updateMarketItemDetail = createAsyncThunk(
   }
 );
 
+export const getAllTagsTerms = createAsyncThunk(
+  "market/getAllTagsTerms",
+  async ({ filter = { active: { eq: true } } }) => {
+    try {
+      const response = await API.graphql({
+        query: searchMarketItems,
+        variables: {
+          aggregates: { field: "tags", name: "tagsTerms", type: "terms" },
+          filter: filter,
+        },
+        authMode: "AWS_IAM",
+      });
+      return response.data.searchMarketItems.aggregateItems[0];
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const marketSlice = createSlice({
   name: "market",
   initialState,
@@ -162,26 +190,6 @@ const marketSlice = createSlice({
         state.fetchMarketItemsStatus = "succeeded";
         marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload);
-        const currentFilter = state.filter;
-        const marketItems = action.payload;
-        if (Object.keys(currentFilter).length === 0) {
-          let tags = [];
-          marketItems
-            .filter((a) => a.tags !== null)
-            .forEach((item) => {
-              item.tags.map((subitem) => tags.push(subitem));
-            });
-          const countTags = (arr) =>
-            arr.reduce((obj, e) => {
-              obj[e] = (obj[e] || 0) + 1;
-              return obj;
-            }, {});
-          const occurrence = countTags(tags);
-          state.occurrence = occurrence;
-          state.sortedOccurrence = Object.keys(occurrence).sort(
-            (a, b) => occurrence[b] - occurrence[a]
-          );
-        }
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
         state.fetchMarketItemsStatus = "failed";
@@ -245,6 +253,25 @@ const marketSlice = createSlice({
       })
       .addCase(addressFilteredMarketItem.rejected, (state, action) => {
         state.addressFilteredMarketItemStatus = "failed";
+      })
+      // Cases for status of getAllTagTerms (pending, fulfilled, and rejected)
+      .addCase(getAllTagsTerms.pending, (state, action) => {
+        state.getAllTagsTermsStatus = "loading";
+      })
+      .addCase(getAllTagsTerms.fulfilled, (state, action) => {
+        state.getAllTagsTermsStatus = "succeeded";
+        const originalOccurrence = action.payload.result.buckets;
+        let result = {};
+        originalOccurrence.map((item) => {
+          let temp = {};
+          temp[item["key"]] = item["doc_count"];
+          return Object.assign(result, temp);
+        });
+        state.tagsOccurrence = result;
+      })
+      .addCase(getAllTagsTerms.rejected, (state, action) => {
+        state.getAllTagsTermsStatus = "failed";
+        state.getAllTagsTermsError = action.error.message;
       });
   },
 });

@@ -43,11 +43,9 @@ export default function MarketVehicle() {
   const handleSearch = handleSubmit((data) => {
     marketItemFilterUpdate(data, dispatch);
   });
-  const {
-    filter: filterList,
-    occurrence,
-    sortedOccurrence,
-  } = useSelector((state) => state.market);
+  const { filter: filterList, tagsOccurrence } = useSelector(
+    (state) => state.market
+  );
   const isFiltering = useMarketItemFilter(filterList, "Vehicle");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -102,8 +100,7 @@ export default function MarketVehicle() {
             darkTheme={darkTheme}
             control={control}
             type="Vehicle"
-            occurrence={occurrence}
-            sortedOccurrence={sortedOccurrence}
+            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />

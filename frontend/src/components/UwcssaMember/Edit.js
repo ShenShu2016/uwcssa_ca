@@ -15,11 +15,8 @@ import {
   Paper,
   Select,
   Slide,
-  Slider,
-  Stack,
   Switch,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
@@ -28,26 +25,25 @@ import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../redux/slice/departmentSlice";
-import getCroppedImg from "../Account/Profile/Info/canvasUtils";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import Cropper from "react-easy-crop";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MUIRichTextEditor from "mui-rte";
 import { convertToRaw } from "draft-js";
-import { dataURLtoFile } from "../Account/Profile/Info/dataURLtoFile";
+
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postSingleImage } from "../../redux/slice/generalSlice";
+// import { postSingleImage } from "../../redux/slice/generalSlice";
 // import { styled } from "@mui/material/styles";
 import { updateUwcssaMemberDetail } from "../../redux/slice/uwcssaMemberSlice";
 import { usePermit } from "../../Hooks/usePermit";
-import { useRef } from "react";
-import { v4 as uuid } from "uuid";
-import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import CropRoundedIcon from "@mui/icons-material/CropRounded";
+// import { useRef } from "react";
+// import { v4 as uuid } from "uuid";
+// import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
+// import CropRoundedIcon from "@mui/icons-material/CropRounded";
 // const Input = styled("input")({
 //   display: "none",
 // });
@@ -118,17 +114,17 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const dispatch = useDispatch();
   const isPermit = usePermit(null, "admin");
   const [loading, setLoading] = useState(false);
-  const [imgURL, setImgURL] = useState(item.imgURL);
+  // const [imgURL, setImgURL] = useState(item.imgURL);
   const [newContent, setNewContent] = useState(item.content);
   const [startDate, setStartDate] = useState(item.startDate);
   const [endDate, setEndDate] = useState(item.endDate);
-  const [imageSrc, setImageSrc] = useState(null);
+  // const [imageSrc, setImageSrc] = useState(null);
 
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
-  const [croppedArea, setCroppedArea] = useState(null);
-  const inputRef = useRef();
-  const triggerFileSelectPopup = () => inputRef.current.click();
+  // const [crop, setCrop] = useState({ x: 0, y: 0 });
+  // const [zoom, setZoom] = useState(1);
+  // const [croppedArea, setCroppedArea] = useState(null);
+  // const inputRef = useRef();
+  // const triggerFileSelectPopup = () => inputRef.current.click();
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   const departments = useSelector(selectAllDepartments);
   const [departmentID, setDepartmentID] = useState(item.departmentID);
@@ -156,7 +152,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     const updateUwcssaMemberInput = {
       ...data,
       id: item.id,
-      imgURL: imgURL,
+      // imgURL: imgURL,
       content: newContent,
       startDate: startDate,
       endDate: endDate,
@@ -173,23 +169,23 @@ export default function Edit({ editOpen, handleEditClose, item }) {
     }
   };
 
-  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
-    setCroppedArea(croppedAreaPixels);
-  };
+  // const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+  //   setCroppedArea(croppedAreaPixels);
+  // };
 
-  const onImgFileChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      let imageDataUrl = await readFile(file);
-      setImageSrc(imageDataUrl);
-    }
-  };
+  // const onImgFileChange = async (e) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const file = e.target.files[0];
+  //     let imageDataUrl = await readFile(file);
+  //     setImageSrc(imageDataUrl);
+  //   }
+  // };
 
-  const onImgClear = () => {
-    setImageSrc(null);
-  };
+  // const onImgClear = () => {
+  //   setImageSrc(null);
+  // };
   const noChange = () => {
-    setImageSrc(null);
+    // setImageSrc(null);
     handleEditClose();
   };
 
@@ -197,29 +193,29 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   //   generateDownload(imageSrc, croppedArea);
   // };
 
-  const uploadImg = async (e) => {
-    setLoading(true);
+  // const uploadImg = async (e) => {
+  //   setLoading(true);
 
-    const canvas = await getCroppedImg(imageSrc, croppedArea);
-    const canvasDataUrl = canvas.toDataURL("image/jpeg");
-    const convertedUrlToFile = dataURLtoFile(
-      canvasDataUrl,
-      `croppedImg${uuid()}.jpeg`
-    );
-    const files = [convertedUrlToFile];
-    const fileInputFiles = new FileListItems(files);
-    const imageData = fileInputFiles;
-    const imageLocation = "foundingMember";
-    const response = await dispatch(
-      postSingleImage({ imageData, imageLocation })
-    );
-    if (response.meta.requestStatus === "fulfilled") {
-      console.log("response", response);
-      setImgURL(response.payload);
-      setLoading(false);
-      setImageSrc(null);
-    }
-  };
+  //   const canvas = await getCroppedImg(imageSrc, croppedArea);
+  //   const canvasDataUrl = canvas.toDataURL("image/jpeg");
+  //   const convertedUrlToFile = dataURLtoFile(
+  //     canvasDataUrl,
+  //     `croppedImg${uuid()}.jpeg`
+  //   );
+  //   const files = [convertedUrlToFile];
+  //   const fileInputFiles = new FileListItems(files);
+  //   const imageData = fileInputFiles;
+  //   const imageLocation = "foundingMember";
+  //   const response = await dispatch(
+  //     postSingleImage({ imageData, imageLocation })
+  //   );
+  //   if (response.meta.requestStatus === "fulfilled") {
+  //     console.log("response", response);
+  //     setImgURL(response.payload);
+  //     setLoading(false);
+  //     setImageSrc(null);
+  //   }
+  // };
   const handleOnChange = (prop) => (event) => {
     const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
     setNewContent(tempContent);
@@ -394,10 +390,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
               </label>
             </Box> */}
               {/* {imageSrc ? ( */}
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  编辑 头像
-                </Typography>
+              {/* <React.Fragment>
                 <Box
                   sx={{
                     backgroundColor: "rgba(0, 0, 0, 0.9)",
@@ -515,7 +508,7 @@ export default function Edit({ editOpen, handleEditClose, item }) {
                     </Box>
                   </Box>
                 </Box>
-              </React.Fragment>
+              </React.Fragment> */}
               {/* ) : (
                 <div>
                   <Box sx={{ textAlign: "center" }}>
@@ -653,16 +646,16 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   );
 }
 
-function readFile(file) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => resolve(reader.result), false);
-    reader.readAsDataURL(file);
-  });
-}
+// function readFile(file) {
+//   return new Promise((resolve) => {
+//     const reader = new FileReader();
+//     reader.addEventListener("load", () => resolve(reader.result), false);
+//     reader.readAsDataURL(file);
+//   });
+// }
 
-function FileListItems(files) {
-  var b = new ClipboardEvent("").clipboardData || new DataTransfer();
-  for (var i = 0, len = files.length; i < len; i++) b.items.add(files[i]);
-  return b.files;
-}
+// function FileListItems(files) {
+//   var b = new ClipboardEvent("").clipboardData || new DataTransfer();
+//   for (var i = 0, len = files.length; i < len; i++) b.items.add(files[i]);
+//   return b.files;
+// }

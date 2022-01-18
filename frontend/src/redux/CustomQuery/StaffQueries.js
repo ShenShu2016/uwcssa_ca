@@ -100,7 +100,7 @@
 // `;
 export const eventSortBySortKey = /* GraphQL */ `
   query EventSortBySortKey(
-    $sortKey: SortKey
+    $sortKey: SortKey!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelEventFilterInput

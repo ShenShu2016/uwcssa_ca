@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -28,6 +27,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import BackdropLoading from "../../components/BackdropLoading";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -57,6 +57,7 @@ export default function EditMarketRentalDetail() {
   const { darkTheme } = useSelector((state) => state.general);
   const {
     imgURLs,
+    createdAt,
     marketRentalSaleRent,
     propertyType,
     bedroomCounts,
@@ -148,6 +149,7 @@ export default function EditMarketRentalDetail() {
   }, [marketItem.userID, dispatch]);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const address = await GetAddress();
     const {
       description,
@@ -189,6 +191,7 @@ export default function EditMarketRentalDetail() {
       tags: GetTags(),
       active: true,
       userID: marketUserInfo.userID,
+      createdAt: createdAt,
       sortKey: "SortKey",
     };
     const { contactEmail, contactPhone, contactWeChat } = data;
@@ -199,7 +202,6 @@ export default function EditMarketRentalDetail() {
       email: contactEmail,
       userID: marketUserInfo.userID,
     };
-    setLoading(true);
     const response = await dispatch(
       updateMarketItemDetail(createMarketItemInput)
     );
@@ -212,11 +214,14 @@ export default function EditMarketRentalDetail() {
     }
 
     console.log("Something should be here", response);
+    console.log("Can upload");
+
     if (response.meta.requestStatus === "fulfilled") {
       history.replace(`/market/rental/${response.payload.id}`);
       reset();
+    } else {
+      setLoading(false);
     }
-    console.log("Can upload");
   };
 
   const handleDeleteImg = (imgKey) => {
@@ -457,7 +462,7 @@ export default function EditMarketRentalDetail() {
                     />
                   )}
                 /> */}
-                <GoogleMaps></GoogleMaps>
+                <GoogleMaps userInputValue={marketItem.address} />
               </Box>
 
               <Box sx={{ marginY: "1rem" }}>
@@ -655,7 +660,7 @@ export default function EditMarketRentalDetail() {
                 setDefaultInfo={setDefaultInfo}
               />
             </Box>
-
+            <BackdropLoading open={loading} />
             <Button
               variant="outlined"
               endIcon={<PublishIcon />}
@@ -663,18 +668,6 @@ export default function EditMarketRentalDetail() {
               color="primary"
             >
               上传 MarketHome
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
             </Button>
           </Paper>
         </Box>

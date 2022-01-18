@@ -42,11 +42,9 @@ export default function MarketRental() {
     marketItemFilterUpdate(data, dispatch);
   });
 
-  const {
-    filter: filterList,
-    occurrence,
-    sortedOccurrence,
-  } = useSelector((state) => state.market);
+  const { filter: filterList, tagsOccurrence } = useSelector(
+    (state) => state.market
+  );
   const isFiltering = useMarketItemFilter(filterList, "Rental");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -98,8 +96,7 @@ export default function MarketRental() {
             darkTheme={darkTheme}
             control={control}
             type="Rental"
-            occurrence={occurrence}
-            sortedOccurrence={sortedOccurrence}
+            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />

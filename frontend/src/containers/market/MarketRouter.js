@@ -11,6 +11,7 @@ import MarketCreate from "./MarketCreate";
 import MarketItem from "./marketItem";
 import MarketItemDetail from "./MarketItemDetail";
 import MarketList from "./marketList";
+import MarketNotifications from "./marketNotifications";
 import MarketPet from "./marketPet";
 import MarketPetDetail from "./MarketPetDetail";
 import MarketRental from "./marketRental";
@@ -73,6 +74,7 @@ export default function MarketRouter() {
         <Route path="/market/pet/" component={MarketPet} />
         <Route path="/market/carpool/" component={MarketCarpool} />
         <Route path="/market/loading/" component={Loading} />
+        <Route path="/market/notifications" component={MarketNotifications} />
       </Switch>
     </Box>
   );

@@ -13,6 +13,7 @@ import {
   MenuItem,
   Slide,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { forwardRef, useState } from "react";
@@ -33,7 +34,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
-
+import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded";
+import EditAvatar from "./EditAvatar";
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   root: {
     // backgroundColor: "#F3F2EF",
@@ -177,13 +179,22 @@ export default function ProfessionalCard({
 
   const [editOpen, setEditOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [editAvatarOpen, setEditAvatarOpen] = useState(false);
 
   const handleEditClickOpen = () => {
     setSettingMoreAnchorEl(null);
     setEditOpen(true);
   };
+
+  const handleEditAvatarClickOpen = () => {
+    setSettingMoreAnchorEl(null);
+    setEditAvatarOpen(true);
+  };
   const handleEditClose = () => {
     setEditOpen(false);
+  };
+  const handleEditAvatarClose = () => {
+    setEditAvatarOpen(false);
   };
 
   const handleClickOpen = () => {
@@ -209,9 +220,13 @@ export default function ProfessionalCard({
       open={isSettingMenuOpen}
       onClose={handleSettingMenuClose}
     >
+      <MenuItem onClick={handleEditAvatarClickOpen}>
+        <PhotoCameraRoundedIcon />
+        编辑 头像
+      </MenuItem>
       <MenuItem onClick={handleEditClickOpen}>
         <EditIcon />
-        编辑
+        编辑 信息
       </MenuItem>
     </Menu>
   );
@@ -305,19 +320,21 @@ export default function ProfessionalCard({
             </Typography>
           </div>
           <Divider light sx={{ margin: "1rem 0" }} />
-          <Box
-            sx={{
-              overflow: "hidden",
-            }}
-          >
-            <Grid container wrap="nowrap" sx={{ mx: "auto" }}>
-              <Grid item xs zeroMinWidth>
-                <Typography variant="body2" color="text.secondary" noWrap>
-                  {summary ? summary : "请编辑..."}
-                </Typography>
+          <Tooltip title={summary ? summary : "请编辑..."}>
+            <Box
+              sx={{
+                overflow: "hidden",
+              }}
+            >
+              <Grid container wrap="nowrap" sx={{ mx: "auto" }}>
+                <Grid item xs zeroMinWidth>
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    {summary ? summary : "请编辑..."}
+                  </Typography>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          </Tooltip>
         </CardContent>
 
         <CardActions disableSpacing>
@@ -459,6 +476,11 @@ export default function ProfessionalCard({
       </Card>
       {renderSettingMenu}
       <Edit editOpen={editOpen} handleEditClose={handleEditClose} item={item} />
+      <EditAvatar
+        editAvatarOpen={editAvatarOpen}
+        handleEditAvatarClose={handleEditAvatarClose}
+        item={item}
+      />
     </Grid>
   );
 }

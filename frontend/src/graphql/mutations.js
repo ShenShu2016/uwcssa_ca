@@ -21,7 +21,6 @@ export const createUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      updatedAt
       badges
       userEducations {
         items {
@@ -58,25 +57,6 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
-      forumPosts {
-        items {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        nextToken
-      }
       marketUserInfo {
         items {
           id
@@ -85,6 +65,37 @@ export const createUser = /* GraphQL */ `
           email
           userID
           createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      beingLiked {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPosts {
+        items {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -134,18 +145,6 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       kanbanAssignee {
         items {
           id
@@ -168,6 +167,7 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      updatedAt
     }
   }
 `;
@@ -191,7 +191,6 @@ export const updateUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      updatedAt
       badges
       userEducations {
         items {
@@ -228,25 +227,6 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
-      forumPosts {
-        items {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        nextToken
-      }
       marketUserInfo {
         items {
           id
@@ -255,6 +235,37 @@ export const updateUser = /* GraphQL */ `
           email
           userID
           createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      beingLiked {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPosts {
+        items {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -304,18 +315,6 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       kanbanAssignee {
         items {
           id
@@ -338,6 +337,7 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
+      updatedAt
     }
   }
 `;
@@ -361,7 +361,6 @@ export const deleteUser = /* GraphQL */ `
       github
       sortKey
       createdAt
-      updatedAt
       badges
       userEducations {
         items {
@@ -398,25 +397,6 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      forumPosts {
-        items {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        nextToken
-      }
       marketUserInfo {
         items {
           id
@@ -425,6 +405,37 @@ export const deleteUser = /* GraphQL */ `
           email
           userID
           createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      beingLiked {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      forumPosts {
+        items {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
           updatedAt
           owner
         }
@@ -474,18 +485,6 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       kanbanAssignee {
         items {
           id
@@ -508,6 +507,7 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      updatedAt
     }
   }
 `;
@@ -527,7 +527,6 @@ export const createUserEducation = /* GraphQL */ `
       description
       createdAt
       userID
-      updatedAt
       user {
         id
         username
@@ -543,7 +542,6 @@ export const createUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -551,22 +549,24 @@ export const createUserEducation = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
       owner
     }
   }
@@ -587,7 +587,6 @@ export const updateUserEducation = /* GraphQL */ `
       description
       createdAt
       userID
-      updatedAt
       user {
         id
         username
@@ -603,7 +602,6 @@ export const updateUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -611,22 +609,24 @@ export const updateUserEducation = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
       owner
     }
   }
@@ -647,7 +647,6 @@ export const deleteUserEducation = /* GraphQL */ `
       description
       createdAt
       userID
-      updatedAt
       user {
         id
         username
@@ -663,7 +662,6 @@ export const deleteUserEducation = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -671,22 +669,24 @@ export const deleteUserEducation = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
       owner
     }
   }
@@ -708,7 +708,6 @@ export const createUserExperience = /* GraphQL */ `
       description
       createdAt
       userID
-      updatedAt
       user {
         id
         username
@@ -724,7 +723,6 @@ export const createUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -732,22 +730,24 @@ export const createUserExperience = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
       owner
     }
   }
@@ -769,7 +769,6 @@ export const updateUserExperience = /* GraphQL */ `
       description
       createdAt
       userID
-      updatedAt
       user {
         id
         username
@@ -785,7 +784,6 @@ export const updateUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -793,22 +791,24 @@ export const updateUserExperience = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
       owner
     }
   }
@@ -830,7 +830,6 @@ export const deleteUserExperience = /* GraphQL */ `
       description
       createdAt
       userID
-      updatedAt
       user {
         id
         username
@@ -846,7 +845,6 @@ export const deleteUserExperience = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -854,22 +852,24 @@ export const deleteUserExperience = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
       owner
     }
   }
@@ -882,48 +882,6 @@ export const createTopic = /* GraphQL */ `
     createTopic(input: $input, condition: $condition) {
       id
       name
-      userID
-      createdAt
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       articles {
         items {
           id
@@ -969,6 +927,48 @@ export const createTopic = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -980,48 +980,6 @@ export const updateTopic = /* GraphQL */ `
     updateTopic(input: $input, condition: $condition) {
       id
       name
-      userID
-      createdAt
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       articles {
         items {
           id
@@ -1067,6 +1025,48 @@ export const updateTopic = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1078,48 +1078,6 @@ export const deleteTopic = /* GraphQL */ `
     deleteTopic(input: $input, condition: $condition) {
       id
       name
-      userID
-      createdAt
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       articles {
         items {
           id
@@ -1165,6 +1123,48 @@ export const deleteTopic = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1180,58 +1180,33 @@ export const createArticle = /* GraphQL */ `
       content
       imgURLs
       qrCodeImgURL
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       tags
       sortKey
       active
       createdAt
       topicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       topic {
         id
         name
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -1247,15 +1222,11 @@ export const createArticle = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        articles {
-          nextToken
-        }
-        events {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
       articleComments {
         items {
@@ -1270,18 +1241,47 @@ export const createArticle = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -1297,58 +1297,33 @@ export const updateArticle = /* GraphQL */ `
       content
       imgURLs
       qrCodeImgURL
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       tags
       sortKey
       active
       createdAt
       topicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       topic {
         id
         name
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -1364,15 +1339,11 @@ export const updateArticle = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        articles {
-          nextToken
-        }
-        events {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
       articleComments {
         items {
@@ -1387,18 +1358,47 @@ export const updateArticle = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -1414,58 +1414,33 @@ export const deleteArticle = /* GraphQL */ `
       content
       imgURLs
       qrCodeImgURL
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       tags
       sortKey
       active
       createdAt
       topicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       topic {
         id
         name
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -1481,15 +1456,11 @@ export const deleteArticle = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        articles {
-          nextToken
-        }
-        events {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
       articleComments {
         items {
@@ -1504,18 +1475,47 @@ export const deleteArticle = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -1527,50 +1527,20 @@ export const createArticleComment = /* GraphQL */ `
     createArticleComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       articleID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       article {
         id
         title
@@ -1578,13 +1548,25 @@ export const createArticleComment = /* GraphQL */ `
         content
         imgURLs
         qrCodeImgURL
+        likes {
+          nextToken
+        }
         tags
         sortKey
         active
         createdAt
         topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -1600,24 +1582,12 @@ export const createArticleComment = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
           updatedAt
         }
-        articleComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
+        updatedAt
       }
-      owner
+      createdAt
       articleSubComments {
         items {
           id
@@ -1631,18 +1601,48 @@ export const createArticleComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -1654,50 +1654,20 @@ export const updateArticleComment = /* GraphQL */ `
     updateArticleComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       articleID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       article {
         id
         title
@@ -1705,13 +1675,25 @@ export const updateArticleComment = /* GraphQL */ `
         content
         imgURLs
         qrCodeImgURL
+        likes {
+          nextToken
+        }
         tags
         sortKey
         active
         createdAt
         topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -1727,24 +1709,12 @@ export const updateArticleComment = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
           updatedAt
         }
-        articleComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
+        updatedAt
       }
-      owner
+      createdAt
       articleSubComments {
         items {
           id
@@ -1758,18 +1728,48 @@ export const updateArticleComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -1781,50 +1781,20 @@ export const deleteArticleComment = /* GraphQL */ `
     deleteArticleComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       articleID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       article {
         id
         title
@@ -1832,13 +1802,25 @@ export const deleteArticleComment = /* GraphQL */ `
         content
         imgURLs
         qrCodeImgURL
+        likes {
+          nextToken
+        }
         tags
         sortKey
         active
         createdAt
         topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        articleComments {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -1854,24 +1836,12 @@ export const deleteArticleComment = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
           updatedAt
         }
-        articleComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
+        updatedAt
       }
-      owner
+      createdAt
       articleSubComments {
         items {
           id
@@ -1885,18 +1855,48 @@ export const deleteArticleComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -1908,76 +1908,28 @@ export const createArticleSubComment = /* GraphQL */ `
     createArticleSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       articleCommentID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       articleComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         articleID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         article {
           id
           title
@@ -1993,27 +1945,75 @@ export const createArticleSubComment = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
+        createdAt
         articleSubComments {
           nextToken
         }
-        likes {
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
-      }
-      owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+        userExperiences {
+          nextToken
         }
-        nextToken
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -2025,76 +2025,28 @@ export const updateArticleSubComment = /* GraphQL */ `
     updateArticleSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       articleCommentID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       articleComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         articleID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         article {
           id
           title
@@ -2110,27 +2062,75 @@ export const updateArticleSubComment = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
+        createdAt
         articleSubComments {
           nextToken
         }
-        likes {
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
-      }
-      owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+        userExperiences {
+          nextToken
         }
-        nextToken
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -2142,76 +2142,28 @@ export const deleteArticleSubComment = /* GraphQL */ `
     deleteArticleSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       articleCommentID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       articleComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         articleID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         article {
           id
           title
@@ -2227,27 +2179,75 @@ export const deleteArticleSubComment = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
+        createdAt
         articleSubComments {
           nextToken
         }
-        likes {
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
-      }
-      owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+        userExperiences {
+          nextToken
         }
-        nextToken
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -2270,100 +2270,19 @@ export const createEvent = /* GraphQL */ `
       imgURLs
       content
       addressID
-      sponsor
-      tags
-      eventStatus
-      active
-      createdAt
-      sortKey
-      topicID
-      userID
-      updatedAt
-      user {
+      address {
         id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      topic {
-        id
-        name
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        articles {
-          nextToken
-        }
-        events {
-          nextToken
-        }
-      }
-      eventComments {
-        items {
-          id
-          content
-          active
-          eventID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      eventParticipants {
-        items {
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        itemID
+        eventParticipant {
           id
           name
           email
@@ -2379,41 +2298,6 @@ export const createEvent = /* GraphQL */ `
           userID
           updatedAt
           owner
-        }
-        nextToken
-      }
-      address {
-        id
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-        itemID
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
         }
         event {
           id
@@ -2438,23 +2322,6 @@ export const createEvent = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -2497,7 +2364,99 @@ export const createEvent = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
+      }
+      sponsor
+      tags
+      eventStatus
+      active
+      createdAt
+      sortKey
+      topicID
+      topic {
+        id
+        name
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      eventComments {
+        items {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       likes {
         items {
@@ -2511,6 +2470,47 @@ export const createEvent = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -2533,100 +2533,19 @@ export const updateEvent = /* GraphQL */ `
       imgURLs
       content
       addressID
-      sponsor
-      tags
-      eventStatus
-      active
-      createdAt
-      sortKey
-      topicID
-      userID
-      updatedAt
-      user {
+      address {
         id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      topic {
-        id
-        name
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        articles {
-          nextToken
-        }
-        events {
-          nextToken
-        }
-      }
-      eventComments {
-        items {
-          id
-          content
-          active
-          eventID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      eventParticipants {
-        items {
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        itemID
+        eventParticipant {
           id
           name
           email
@@ -2642,41 +2561,6 @@ export const updateEvent = /* GraphQL */ `
           userID
           updatedAt
           owner
-        }
-        nextToken
-      }
-      address {
-        id
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-        itemID
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
         }
         event {
           id
@@ -2701,23 +2585,6 @@ export const updateEvent = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -2760,7 +2627,99 @@ export const updateEvent = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
+      }
+      sponsor
+      tags
+      eventStatus
+      active
+      createdAt
+      sortKey
+      topicID
+      topic {
+        id
+        name
+        articles {
+          nextToken
+        }
+        events {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      eventComments {
+        items {
+          id
+          content
+          active
+          eventID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      eventParticipants {
+        items {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       likes {
         items {
@@ -2774,6 +2733,47 @@ export const updateEvent = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -2796,60 +2796,101 @@ export const deleteEvent = /* GraphQL */ `
       imgURLs
       content
       addressID
-      sponsor
-      tags
-      eventStatus
-      active
-      createdAt
-      sortKey
-      topicID
-      userID
-      updatedAt
-      user {
+      address {
         id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        itemID
+        eventParticipant {
+          id
+          name
+          email
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
+          createdAt
+          eventParticipantStatus
+          eventID
+          userID
+          updatedAt
+          owner
         }
-        userExperiences {
-          nextToken
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
         }
-        forumPosts {
-          nextToken
+        marketItem {
+          id
+          name
+          imgURLs
+          title
+          price
+          marketType
+          description
+          location
+          marketItemCondition
+          marketItemCategory
+          tags
+          vehicleType
+          year
+          make
+          model
+          exteriorColor
+          interiorColor
+          fuelType
+          marketRentalSaleRent
+          propertyType
+          bedroomCounts
+          bathroomsCounts
+          addressID
+          propertySize
+          dateAvailable
+          laundryType
+          airConditionType
+          heatingType
+          catFriendly
+          dogFriendly
+          contactPhone
+          contactWeChat
+          contactEmail
+          sortKey
+          active
+          createdAt
+          userID
+          updatedAt
+          owner
         }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      topic {
-        id
-        name
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -2865,15 +2906,50 @@ export const deleteEvent = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        createdAt
+        updatedAt
+        owner
+      }
+      sponsor
+      tags
+      eventStatus
+      active
+      createdAt
+      sortKey
+      topicID
+      topic {
+        id
+        name
         articles {
           nextToken
         }
         events {
           nextToken
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
       }
       eventComments {
         items {
@@ -2908,123 +2984,6 @@ export const deleteEvent = /* GraphQL */ `
         }
         nextToken
       }
-      address {
-        id
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-        itemID
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        event {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          addressID
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        marketItem {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          addressID
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        owner
-      }
       likes {
         items {
           id
@@ -3037,6 +2996,47 @@ export const deleteEvent = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -3048,50 +3048,20 @@ export const createEventComment = /* GraphQL */ `
     createEventComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       eventID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       event {
         id
         summary
@@ -3106,46 +3076,6 @@ export const createEventComment = /* GraphQL */ `
         imgURLs
         content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -3163,11 +3093,50 @@ export const createEventComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
         likes {
           nextToken
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
       }
-      owner
       eventSubComments {
         items {
           id
@@ -3181,18 +3150,49 @@ export const createEventComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -3204,50 +3204,20 @@ export const updateEventComment = /* GraphQL */ `
     updateEventComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       eventID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       event {
         id
         summary
@@ -3262,46 +3232,6 @@ export const updateEventComment = /* GraphQL */ `
         imgURLs
         content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -3319,11 +3249,50 @@ export const updateEventComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
         likes {
           nextToken
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
       }
-      owner
       eventSubComments {
         items {
           id
@@ -3337,18 +3306,49 @@ export const updateEventComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -3360,50 +3360,20 @@ export const deleteEventComment = /* GraphQL */ `
     deleteEventComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       eventID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       event {
         id
         summary
@@ -3418,46 +3388,6 @@ export const deleteEventComment = /* GraphQL */ `
         imgURLs
         content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -3475,11 +3405,50 @@ export const deleteEventComment = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
         likes {
           nextToken
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
       }
-      owner
       eventSubComments {
         items {
           id
@@ -3493,18 +3462,49 @@ export const deleteEventComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -3516,76 +3516,28 @@ export const createEventSubComment = /* GraphQL */ `
     createEventSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       eventCommentID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       eventComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         eventID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         event {
           id
           summary
@@ -3610,27 +3562,75 @@ export const createEventSubComment = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
         eventSubComments {
           nextToken
         }
-        likes {
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
-      }
-      owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+        userExperiences {
+          nextToken
         }
-        nextToken
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -3642,76 +3642,28 @@ export const updateEventSubComment = /* GraphQL */ `
     updateEventSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       eventCommentID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       eventComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         eventID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         event {
           id
           summary
@@ -3736,27 +3688,75 @@ export const updateEventSubComment = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
         eventSubComments {
           nextToken
         }
-        likes {
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
-      }
-      owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+        userExperiences {
+          nextToken
         }
-        nextToken
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -3768,76 +3768,28 @@ export const deleteEventSubComment = /* GraphQL */ `
     deleteEventSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       eventCommentID
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       eventComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         eventID
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         event {
           id
           summary
@@ -3862,27 +3814,75 @@ export const deleteEventSubComment = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
         eventSubComments {
           nextToken
         }
-        likes {
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
-      }
-      owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+        userExperiences {
+          nextToken
         }
-        nextToken
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -3896,131 +3896,6 @@ export const createEventParticipant = /* GraphQL */ `
       name
       email
       addressID
-      phone
-      weChat
-      message
-      numberOfPeople
-      active
-      createdAt
-      eventParticipantStatus
-      eventID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      event {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
-        addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
-        address {
-          id
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        likes {
-          nextToken
-        }
-      }
-      owner
       address {
         id
         description
@@ -4033,26 +3908,22 @@ export const createEventParticipant = /* GraphQL */ `
         lat
         lng
         itemID
-        userID
-        createdAt
-        updatedAt
-        user {
+        eventParticipant {
           id
-          username
+          name
           email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
           createdAt
+          eventParticipantStatus
+          eventID
+          userID
           updatedAt
-          badges
+          owner
         }
         event {
           id
@@ -4077,23 +3948,6 @@ export const createEventParticipant = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -4136,8 +3990,154 @@ export const createEventParticipant = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
       }
+      phone
+      weChat
+      message
+      numberOfPeople
+      active
+      createdAt
+      eventParticipantStatus
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -4151,131 +4151,6 @@ export const updateEventParticipant = /* GraphQL */ `
       name
       email
       addressID
-      phone
-      weChat
-      message
-      numberOfPeople
-      active
-      createdAt
-      eventParticipantStatus
-      eventID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      event {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
-        addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
-        address {
-          id
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        likes {
-          nextToken
-        }
-      }
-      owner
       address {
         id
         description
@@ -4288,26 +4163,22 @@ export const updateEventParticipant = /* GraphQL */ `
         lat
         lng
         itemID
-        userID
-        createdAt
-        updatedAt
-        user {
+        eventParticipant {
           id
-          username
+          name
           email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
           createdAt
+          eventParticipantStatus
+          eventID
+          userID
           updatedAt
-          badges
+          owner
         }
         event {
           id
@@ -4332,23 +4203,6 @@ export const updateEventParticipant = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -4391,8 +4245,154 @@ export const updateEventParticipant = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
       }
+      phone
+      weChat
+      message
+      numberOfPeople
+      active
+      createdAt
+      eventParticipantStatus
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -4406,131 +4406,6 @@ export const deleteEventParticipant = /* GraphQL */ `
       name
       email
       addressID
-      phone
-      weChat
-      message
-      numberOfPeople
-      active
-      createdAt
-      eventParticipantStatus
-      eventID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      event {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
-        addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
-        address {
-          id
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        likes {
-          nextToken
-        }
-      }
-      owner
       address {
         id
         description
@@ -4543,26 +4418,22 @@ export const deleteEventParticipant = /* GraphQL */ `
         lat
         lng
         itemID
-        userID
-        createdAt
-        updatedAt
-        user {
+        eventParticipant {
           id
-          username
+          name
           email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
           createdAt
+          eventParticipantStatus
+          eventID
+          userID
           updatedAt
-          badges
+          owner
         }
         event {
           id
@@ -4587,23 +4458,6 @@ export const deleteEventParticipant = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -4646,8 +4500,154 @@ export const deleteEventParticipant = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
       }
+      phone
+      weChat
+      message
+      numberOfPeople
+      active
+      createdAt
+      eventParticipantStatus
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -4662,47 +4662,25 @@ export const createDepartment = /* GraphQL */ `
       introduction
       email
       leader
-      userID
-      createdAt
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
         }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
+        nextToken
       }
       uwcssaMembers {
         items {
@@ -4719,26 +4697,6 @@ export const createDepartment = /* GraphQL */ `
           createdAt
           departmentID
           owner
-          userID
-          updatedAt
-        }
-        nextToken
-      }
-      uwcssaJobs {
-        items {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
           userID
           updatedAt
         }
@@ -4766,6 +4724,48 @@ export const createDepartment = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -4780,47 +4780,25 @@ export const updateDepartment = /* GraphQL */ `
       introduction
       email
       leader
-      userID
-      createdAt
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
         }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
+        nextToken
       }
       uwcssaMembers {
         items {
@@ -4837,26 +4815,6 @@ export const updateDepartment = /* GraphQL */ `
           createdAt
           departmentID
           owner
-          userID
-          updatedAt
-        }
-        nextToken
-      }
-      uwcssaJobs {
-        items {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
           userID
           updatedAt
         }
@@ -4884,6 +4842,48 @@ export const updateDepartment = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -4898,47 +4898,25 @@ export const deleteDepartment = /* GraphQL */ `
       introduction
       email
       leader
-      userID
-      createdAt
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
+      uwcssaJobs {
+        items {
+          id
+          introduction
+          title
+          requirements
+          bonus
+          imgURLs
+          benefits
+          schedule
+          like
+          unlike
+          active
+          createdAt
+          departmentID
+          userID
+          updatedAt
         }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
+        nextToken
       }
       uwcssaMembers {
         items {
@@ -4955,26 +4933,6 @@ export const deleteDepartment = /* GraphQL */ `
           createdAt
           departmentID
           owner
-          userID
-          updatedAt
-        }
-        nextToken
-      }
-      uwcssaJobs {
-        items {
-          id
-          introduction
-          title
-          requirements
-          bonus
-          imgURLs
-          benefits
-          schedule
-          like
-          unlike
-          active
-          createdAt
-          departmentID
           userID
           updatedAt
         }
@@ -5002,6 +4960,48 @@ export const deleteDepartment = /* GraphQL */ `
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -5023,57 +5023,22 @@ export const createUwcssaMember = /* GraphQL */ `
       endDate
       createdAt
       departmentID
-      owner
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       department {
         id
         name
         introduction
         email
         leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -5089,19 +5054,54 @@ export const createUwcssaMember = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
+      owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -5123,57 +5123,22 @@ export const updateUwcssaMember = /* GraphQL */ `
       endDate
       createdAt
       departmentID
-      owner
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       department {
         id
         name
         introduction
         email
         leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -5189,19 +5154,54 @@ export const updateUwcssaMember = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
+      owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -5223,57 +5223,22 @@ export const deleteUwcssaMember = /* GraphQL */ `
       endDate
       createdAt
       departmentID
-      owner
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       department {
         id
         name
         introduction
         email
         leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -5289,19 +5254,54 @@ export const deleteUwcssaMember = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
+      owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -5324,6 +5324,43 @@ export const createUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       uwcssaJobResumes {
         items {
           id
@@ -5342,7 +5379,6 @@ export const createUwcssaJob = /* GraphQL */ `
         nextToken
       }
       userID
-      updatedAt
       user {
         id
         username
@@ -5358,7 +5394,6 @@ export const createUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -5366,59 +5401,24 @@ export const createUwcssaJob = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      department {
-        id
-        name
-        introduction
-        email
-        leader
-        userID
-        createdAt
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
       }
+      updatedAt
     }
   }
 `;
@@ -5441,6 +5441,43 @@ export const updateUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       uwcssaJobResumes {
         items {
           id
@@ -5459,7 +5496,6 @@ export const updateUwcssaJob = /* GraphQL */ `
         nextToken
       }
       userID
-      updatedAt
       user {
         id
         username
@@ -5475,7 +5511,6 @@ export const updateUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -5483,59 +5518,24 @@ export const updateUwcssaJob = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      department {
-        id
-        name
-        introduction
-        email
-        leader
-        userID
-        createdAt
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
       }
+      updatedAt
     }
   }
 `;
@@ -5558,6 +5558,43 @@ export const deleteUwcssaJob = /* GraphQL */ `
       active
       createdAt
       departmentID
+      department {
+        id
+        name
+        introduction
+        email
+        leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       uwcssaJobResumes {
         items {
           id
@@ -5576,7 +5613,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
         nextToken
       }
       userID
-      updatedAt
       user {
         id
         username
@@ -5592,7 +5628,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -5600,59 +5635,24 @@ export const deleteUwcssaJob = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      department {
-        id
-        name
-        introduction
-        email
-        leader
-        userID
-        createdAt
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
       }
+      updatedAt
     }
   }
 `;
@@ -5671,47 +5671,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
       uwcssaJobResumeStatus
       createdAt
       uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       uwcssaJob {
         id
         introduction
@@ -5726,11 +5685,20 @@ export const createUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
         uwcssaJobResumes {
           nextToken
         }
         userID
-        updatedAt
         user {
           id
           username
@@ -5746,20 +5714,52 @@ export const createUwcssaJobResume = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
           updatedAt
         }
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
       owner
     }
   }
@@ -5779,47 +5779,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
       uwcssaJobResumeStatus
       createdAt
       uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       uwcssaJob {
         id
         introduction
@@ -5834,11 +5793,20 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
         uwcssaJobResumes {
           nextToken
         }
         userID
-        updatedAt
         user {
           id
           username
@@ -5854,20 +5822,52 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
           updatedAt
         }
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
       owner
     }
   }
@@ -5887,47 +5887,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
       uwcssaJobResumeStatus
       createdAt
       uwcssaJobID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       uwcssaJob {
         id
         introduction
@@ -5942,11 +5901,20 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         active
         createdAt
         departmentID
+        department {
+          id
+          name
+          introduction
+          email
+          leader
+          userID
+          createdAt
+          updatedAt
+        }
         uwcssaJobResumes {
           nextToken
         }
         userID
-        updatedAt
         user {
           id
           username
@@ -5962,20 +5930,52 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        department {
-          id
-          name
-          introduction
-          email
-          leader
-          userID
-          createdAt
           updatedAt
         }
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
       owner
     }
   }
@@ -5988,9 +5988,18 @@ export const createForumTopic = /* GraphQL */ `
     createForumTopic(input: $input, condition: $condition) {
       id
       name
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -6006,7 +6015,6 @@ export const createForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -6014,33 +6022,25 @@ export const createForumTopic = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
-      forumSubTopics {
-        items {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        nextToken
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -6052,9 +6052,18 @@ export const updateForumTopic = /* GraphQL */ `
     updateForumTopic(input: $input, condition: $condition) {
       id
       name
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -6070,7 +6079,6 @@ export const updateForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -6078,33 +6086,25 @@ export const updateForumTopic = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
-      forumSubTopics {
-        items {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        nextToken
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -6116,9 +6116,18 @@ export const deleteForumTopic = /* GraphQL */ `
     deleteForumTopic(input: $input, condition: $condition) {
       id
       name
+      forumSubTopics {
+        items {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        nextToken
+      }
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -6134,7 +6143,6 @@ export const deleteForumTopic = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -6142,33 +6150,25 @@ export const deleteForumTopic = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
-      forumSubTopics {
-        items {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        nextToken
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -6182,53 +6182,13 @@ export const createForumSubTopic = /* GraphQL */ `
       name
       createdAt
       forumTopicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumTopic {
         id
         name
+        forumSubTopics {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -6244,12 +6204,11 @@ export const createForumSubTopic = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        forumSubTopics {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
       forumPosts {
         items {
@@ -6259,6 +6218,7 @@ export const createForumSubTopic = /* GraphQL */ `
           imgURLs
           tags
           sortKey
+          essential
           active
           createdAt
           lastReplyAt
@@ -6266,10 +6226,50 @@ export const createForumSubTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
-          essential
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -6283,53 +6283,13 @@ export const updateForumSubTopic = /* GraphQL */ `
       name
       createdAt
       forumTopicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumTopic {
         id
         name
+        forumSubTopics {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -6345,12 +6305,11 @@ export const updateForumSubTopic = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        forumSubTopics {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
       forumPosts {
         items {
@@ -6360,6 +6319,7 @@ export const updateForumSubTopic = /* GraphQL */ `
           imgURLs
           tags
           sortKey
+          essential
           active
           createdAt
           lastReplyAt
@@ -6367,10 +6327,50 @@ export const updateForumSubTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
-          essential
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -6384,53 +6384,13 @@ export const deleteForumSubTopic = /* GraphQL */ `
       name
       createdAt
       forumTopicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumTopic {
         id
         name
+        forumSubTopics {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -6446,12 +6406,11 @@ export const deleteForumSubTopic = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        forumSubTopics {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
       forumPosts {
         items {
@@ -6461,6 +6420,7 @@ export const deleteForumSubTopic = /* GraphQL */ `
           imgURLs
           tags
           sortKey
+          essential
           active
           createdAt
           lastReplyAt
@@ -6468,10 +6428,50 @@ export const deleteForumSubTopic = /* GraphQL */ `
           userID
           updatedAt
           owner
-          essential
         }
         nextToken
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
     }
   }
 `;
@@ -6486,59 +6486,40 @@ export const createForumPost = /* GraphQL */ `
       content
       imgURLs
       tags
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       sortKey
+      essential
       active
       createdAt
       lastReplyAt
       forumSubTopicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumSubTopic {
         id
         name
         createdAt
         forumTopicID
+        forumTopic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumPosts {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -6554,22 +6535,11 @@ export const createForumPost = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumTopic {
-          id
-          name
-          userID
-          createdAt
           updatedAt
         }
-        forumPosts {
-          nextToken
-        }
+        updatedAt
       }
-      owner
-      essential
       forumPostComments {
         items {
           id
@@ -6599,18 +6569,48 @@ export const createForumPost = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -6625,59 +6625,40 @@ export const updateForumPost = /* GraphQL */ `
       content
       imgURLs
       tags
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       sortKey
+      essential
       active
       createdAt
       lastReplyAt
       forumSubTopicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumSubTopic {
         id
         name
         createdAt
         forumTopicID
+        forumTopic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumPosts {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -6693,22 +6674,11 @@ export const updateForumPost = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumTopic {
-          id
-          name
-          userID
-          createdAt
           updatedAt
         }
-        forumPosts {
-          nextToken
-        }
+        updatedAt
       }
-      owner
-      essential
       forumPostComments {
         items {
           id
@@ -6738,18 +6708,48 @@ export const updateForumPost = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -6764,59 +6764,40 @@ export const deleteForumPost = /* GraphQL */ `
       content
       imgURLs
       tags
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       sortKey
+      essential
       active
       createdAt
       lastReplyAt
       forumSubTopicID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumSubTopic {
         id
         name
         createdAt
         forumTopicID
+        forumTopic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forumPosts {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -6832,22 +6813,11 @@ export const deleteForumPost = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumTopic {
-          id
-          name
-          userID
-          createdAt
           updatedAt
         }
-        forumPosts {
-          nextToken
-        }
+        updatedAt
       }
-      owner
-      essential
       forumPostComments {
         items {
           id
@@ -6877,18 +6847,48 @@ export const deleteForumPost = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -6901,63 +6901,51 @@ export const createForumPostComment = /* GraphQL */ `
       id
       content
       imgURLs
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       active
       forumPostID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumPost {
         id
         title
         content
         imgURLs
         tags
+        likes {
+          nextToken
+        }
         sortKey
+        essential
         active
         createdAt
         lastReplyAt
         forumSubTopicID
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -6973,30 +6961,12 @@ export const createForumPostComment = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
           updatedAt
         }
+        updatedAt
         owner
-        essential
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
       }
-      owner
       forumPostSubComments {
         items {
           id
@@ -7012,18 +6982,48 @@ export const createForumPostComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -7036,63 +7036,51 @@ export const updateForumPostComment = /* GraphQL */ `
       id
       content
       imgURLs
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       active
       forumPostID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumPost {
         id
         title
         content
         imgURLs
         tags
+        likes {
+          nextToken
+        }
         sortKey
+        essential
         active
         createdAt
         lastReplyAt
         forumSubTopicID
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -7108,30 +7096,12 @@ export const updateForumPostComment = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
           updatedAt
         }
+        updatedAt
         owner
-        essential
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
       }
-      owner
       forumPostSubComments {
         items {
           id
@@ -7147,18 +7117,48 @@ export const updateForumPostComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -7171,63 +7171,51 @@ export const deleteForumPostComment = /* GraphQL */ `
       id
       content
       imgURLs
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       active
       forumPostID
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       forumPost {
         id
         title
         content
         imgURLs
         tags
+        likes {
+          nextToken
+        }
         sortKey
+        essential
         active
         createdAt
         lastReplyAt
         forumSubTopicID
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
         userID
-        updatedAt
         user {
           id
           username
@@ -7243,30 +7231,12 @@ export const deleteForumPostComment = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
           updatedAt
         }
+        updatedAt
         owner
-        essential
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
       }
-      owner
       forumPostSubComments {
         items {
           id
@@ -7282,18 +7252,48 @@ export const deleteForumPostComment = /* GraphQL */ `
         }
         nextToken
       }
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
         }
-        nextToken
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      updatedAt
+      owner
     }
   }
 `;
@@ -7305,13 +7305,21 @@ export const createForumPostSubComment = /* GraphQL */ `
     createForumPostSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       createdAt
       replyToUserID
-      forumPostID
-      forumPostCommentID
-      userID
-      updatedAt
       replyTo {
         id
         username
@@ -7327,7 +7335,6 @@ export const createForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7335,22 +7342,128 @@ export const createForumPostSubComment = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      forumPostID
+      forumPost {
+        id
+        title
+        content
+        imgURLs
+        tags
+        likes {
+          nextToken
+        }
+        sortKey
+        essential
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      forumPostCommentID
+      forumPostComment {
+        id
+        content
+        imgURLs
+        likes {
+          nextToken
+        }
+        createdAt
+        active
+        forumPostID
+        forumPost {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      userID
       user {
         id
         username
@@ -7366,7 +7479,6 @@ export const createForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7374,137 +7486,25 @@ export const createForumPostSubComment = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      forumPost {
-        id
-        title
-        content
-        imgURLs
-        tags
-        sortKey
-        active
-        createdAt
-        lastReplyAt
-        forumSubTopicID
-        userID
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        owner
-        essential
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
       }
-      forumPostComment {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        owner
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
+      updatedAt
       owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -7516,13 +7516,21 @@ export const updateForumPostSubComment = /* GraphQL */ `
     updateForumPostSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       createdAt
       replyToUserID
-      forumPostID
-      forumPostCommentID
-      userID
-      updatedAt
       replyTo {
         id
         username
@@ -7538,7 +7546,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7546,22 +7553,128 @@ export const updateForumPostSubComment = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      forumPostID
+      forumPost {
+        id
+        title
+        content
+        imgURLs
+        tags
+        likes {
+          nextToken
+        }
+        sortKey
+        essential
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      forumPostCommentID
+      forumPostComment {
+        id
+        content
+        imgURLs
+        likes {
+          nextToken
+        }
+        createdAt
+        active
+        forumPostID
+        forumPost {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      userID
       user {
         id
         username
@@ -7577,7 +7690,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7585,137 +7697,25 @@ export const updateForumPostSubComment = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      forumPost {
-        id
-        title
-        content
-        imgURLs
-        tags
-        sortKey
-        active
-        createdAt
-        lastReplyAt
-        forumSubTopicID
-        userID
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        owner
-        essential
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
       }
-      forumPostComment {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        owner
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
+      updatedAt
       owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -7727,13 +7727,21 @@ export const deleteForumPostSubComment = /* GraphQL */ `
     deleteForumPostSubComment(input: $input, condition: $condition) {
       id
       content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       active
       createdAt
       replyToUserID
-      forumPostID
-      forumPostCommentID
-      userID
-      updatedAt
       replyTo {
         id
         username
@@ -7749,7 +7757,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7757,22 +7764,128 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      forumPostID
+      forumPost {
+        id
+        title
+        content
+        imgURLs
+        tags
+        likes {
+          nextToken
+        }
+        sortKey
+        essential
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
+        forumSubTopic {
+          id
+          name
+          createdAt
+          forumTopicID
+          userID
+          updatedAt
+        }
+        forumPostComments {
+          nextToken
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      forumPostCommentID
+      forumPostComment {
+        id
+        content
+        imgURLs
+        likes {
+          nextToken
+        }
+        createdAt
+        active
+        forumPostID
+        forumPost {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostSubComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      userID
       user {
         id
         username
@@ -7788,7 +7901,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7796,137 +7908,25 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      forumPost {
-        id
-        title
-        content
-        imgURLs
-        tags
-        sortKey
-        active
-        createdAt
-        lastReplyAt
-        forumSubTopicID
-        userID
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumSubTopic {
-          id
-          name
-          createdAt
-          forumTopicID
-          userID
-          updatedAt
-        }
-        owner
-        essential
-        forumPostComments {
-          nextToken
-        }
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
       }
-      forumPostComment {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
-          updatedAt
-          owner
-          essential
-        }
-        owner
-        forumPostSubComments {
-          nextToken
-        }
-        likes {
-          nextToken
-        }
-      }
+      updatedAt
       owner
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -7941,8 +7941,6 @@ export const createMarketUserInfo = /* GraphQL */ `
       weChat
       email
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -7958,7 +7956,6 @@ export const createMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -7966,22 +7963,25 @@ export const createMarketUserInfo = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -7997,8 +7997,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
       weChat
       email
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -8014,7 +8012,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -8022,22 +8019,25 @@ export const updateMarketUserInfo = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -8053,8 +8053,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
       weChat
       email
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -8070,7 +8068,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -8078,22 +8075,25 @@ export const deleteMarketUserInfo = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -8127,61 +8127,6 @@ export const createMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       addressID
-      propertySize
-      dateAvailable
-      laundryType
-      airConditionType
-      heatingType
-      catFriendly
-      dogFriendly
-      contactPhone
-      contactWeChat
-      contactEmail
-      sortKey
-      active
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      owner
       address {
         id
         description
@@ -8194,26 +8139,22 @@ export const createMarketItem = /* GraphQL */ `
         lat
         lng
         itemID
-        userID
-        createdAt
-        updatedAt
-        user {
+        eventParticipant {
           id
-          username
+          name
           email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
           createdAt
+          eventParticipantStatus
+          eventID
+          userID
           updatedAt
-          badges
+          owner
         }
         event {
           id
@@ -8238,23 +8179,6 @@ export const createMarketItem = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -8297,8 +8221,84 @@ export const createMarketItem = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
       }
+      propertySize
+      dateAvailable
+      laundryType
+      airConditionType
+      heatingType
+      catFriendly
+      dogFriendly
+      contactPhone
+      contactWeChat
+      contactEmail
+      sortKey
+      active
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -8331,61 +8331,6 @@ export const updateMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       addressID
-      propertySize
-      dateAvailable
-      laundryType
-      airConditionType
-      heatingType
-      catFriendly
-      dogFriendly
-      contactPhone
-      contactWeChat
-      contactEmail
-      sortKey
-      active
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      owner
       address {
         id
         description
@@ -8398,26 +8343,22 @@ export const updateMarketItem = /* GraphQL */ `
         lat
         lng
         itemID
-        userID
-        createdAt
-        updatedAt
-        user {
+        eventParticipant {
           id
-          username
+          name
           email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
           createdAt
+          eventParticipantStatus
+          eventID
+          userID
           updatedAt
-          badges
+          owner
         }
         event {
           id
@@ -8442,23 +8383,6 @@ export const updateMarketItem = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -8501,8 +8425,84 @@ export const updateMarketItem = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
       }
+      propertySize
+      dateAvailable
+      laundryType
+      airConditionType
+      heatingType
+      catFriendly
+      dogFriendly
+      contactPhone
+      contactWeChat
+      contactEmail
+      sortKey
+      active
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -8535,61 +8535,6 @@ export const deleteMarketItem = /* GraphQL */ `
       bedroomCounts
       bathroomsCounts
       addressID
-      propertySize
-      dateAvailable
-      laundryType
-      airConditionType
-      heatingType
-      catFriendly
-      dogFriendly
-      contactPhone
-      contactWeChat
-      contactEmail
-      sortKey
-      active
-      createdAt
-      userID
-      updatedAt
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      owner
       address {
         id
         description
@@ -8602,26 +8547,22 @@ export const deleteMarketItem = /* GraphQL */ `
         lat
         lng
         itemID
-        userID
-        createdAt
-        updatedAt
-        user {
+        eventParticipant {
           id
-          username
+          name
           email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
+          addressID
+          phone
+          weChat
+          message
+          numberOfPeople
+          active
           createdAt
+          eventParticipantStatus
+          eventID
+          userID
           updatedAt
-          badges
+          owner
         }
         event {
           id
@@ -8646,23 +8587,6 @@ export const deleteMarketItem = /* GraphQL */ `
           topicID
           userID
           updatedAt
-        }
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
         }
         marketItem {
           id
@@ -8705,8 +8629,84 @@ export const deleteMarketItem = /* GraphQL */ `
           updatedAt
           owner
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
         owner
       }
+      propertySize
+      dateAvailable
+      laundryType
+      airConditionType
+      heatingType
+      catFriendly
+      dogFriendly
+      contactPhone
+      contactWeChat
+      contactEmail
+      sortKey
+      active
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -8727,102 +8727,11 @@ export const createAddress = /* GraphQL */ `
       lat
       lng
       itemID
-      userID
-      createdAt
-      updatedAt
-      user {
+      eventParticipant {
         id
-        username
+        name
         email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      event {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -8840,15 +8749,6 @@ export const createAddress = /* GraphQL */ `
           updatedAt
           owner
         }
-        likes {
-          nextToken
-        }
-      }
-      eventParticipant {
-        id
-        name
-        email
-        addressID
         phone
         weChat
         message
@@ -8857,26 +8757,6 @@ export const createAddress = /* GraphQL */ `
         createdAt
         eventParticipantStatus
         eventID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         event {
           id
           summary
@@ -8901,7 +8781,42 @@ export const createAddress = /* GraphQL */ `
           userID
           updatedAt
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
         owner
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
         address {
           id
           description
@@ -8919,6 +8834,49 @@ export const createAddress = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
       }
       marketItem {
         id
@@ -8944,40 +8902,6 @@ export const createAddress = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         addressID
-        propertySize
-        dateAvailable
-        laundryType
-        airConditionType
-        heatingType
-        catFriendly
-        dogFriendly
-        contactPhone
-        contactWeChat
-        contactEmail
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        owner
         address {
           id
           description
@@ -8995,7 +8919,83 @@ export const createAddress = /* GraphQL */ `
           updatedAt
           owner
         }
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -9017,102 +9017,11 @@ export const updateAddress = /* GraphQL */ `
       lat
       lng
       itemID
-      userID
-      createdAt
-      updatedAt
-      user {
+      eventParticipant {
         id
-        username
+        name
         email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      event {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -9130,15 +9039,6 @@ export const updateAddress = /* GraphQL */ `
           updatedAt
           owner
         }
-        likes {
-          nextToken
-        }
-      }
-      eventParticipant {
-        id
-        name
-        email
-        addressID
         phone
         weChat
         message
@@ -9147,26 +9047,6 @@ export const updateAddress = /* GraphQL */ `
         createdAt
         eventParticipantStatus
         eventID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         event {
           id
           summary
@@ -9191,7 +9071,42 @@ export const updateAddress = /* GraphQL */ `
           userID
           updatedAt
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
         owner
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
         address {
           id
           description
@@ -9209,6 +9124,49 @@ export const updateAddress = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
       }
       marketItem {
         id
@@ -9234,40 +9192,6 @@ export const updateAddress = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         addressID
-        propertySize
-        dateAvailable
-        laundryType
-        airConditionType
-        heatingType
-        catFriendly
-        dogFriendly
-        contactPhone
-        contactWeChat
-        contactEmail
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        owner
         address {
           id
           description
@@ -9285,7 +9209,83 @@ export const updateAddress = /* GraphQL */ `
           updatedAt
           owner
         }
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -9307,102 +9307,11 @@ export const deleteAddress = /* GraphQL */ `
       lat
       lng
       itemID
-      userID
-      createdAt
-      updatedAt
-      user {
+      eventParticipant {
         id
-        username
+        name
         email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      event {
-        id
-        summary
-        title
-        startDate
-        endDate
-        online
-        group
-        backGroundImgURL
-        qrCodeImgURL
-        posterImgURL
-        imgURLs
-        content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -9420,15 +9329,6 @@ export const deleteAddress = /* GraphQL */ `
           updatedAt
           owner
         }
-        likes {
-          nextToken
-        }
-      }
-      eventParticipant {
-        id
-        name
-        email
-        addressID
         phone
         weChat
         message
@@ -9437,26 +9337,6 @@ export const deleteAddress = /* GraphQL */ `
         createdAt
         eventParticipantStatus
         eventID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         event {
           id
           summary
@@ -9481,7 +9361,42 @@ export const deleteAddress = /* GraphQL */ `
           userID
           updatedAt
         }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
         owner
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
         address {
           id
           description
@@ -9499,6 +9414,49 @@ export const deleteAddress = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
       }
       marketItem {
         id
@@ -9524,40 +9482,6 @@ export const deleteAddress = /* GraphQL */ `
         bedroomCounts
         bathroomsCounts
         addressID
-        propertySize
-        dateAvailable
-        laundryType
-        airConditionType
-        heatingType
-        catFriendly
-        dogFriendly
-        contactPhone
-        contactWeChat
-        contactEmail
-        sortKey
-        active
-        createdAt
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        owner
         address {
           id
           description
@@ -9575,7 +9499,83 @@ export const deleteAddress = /* GraphQL */ `
           updatedAt
           owner
         }
+        propertySize
+        dateAvailable
+        laundryType
+        airConditionType
+        heatingType
+        catFriendly
+        dogFriendly
+        contactPhone
+        contactWeChat
+        contactEmail
+        sortKey
+        active
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -9596,8 +9596,6 @@ export const createFoundingMember = /* GraphQL */ `
       imgURL
       owner
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -9613,7 +9611,6 @@ export const createFoundingMember = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -9621,22 +9618,25 @@ export const createFoundingMember = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -9656,8 +9656,6 @@ export const updateFoundingMember = /* GraphQL */ `
       imgURL
       owner
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -9673,7 +9671,6 @@ export const updateFoundingMember = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -9681,22 +9678,25 @@ export const updateFoundingMember = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -9716,8 +9716,6 @@ export const deleteFoundingMember = /* GraphQL */ `
       imgURL
       owner
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -9733,7 +9731,6 @@ export const deleteFoundingMember = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -9741,22 +9738,25 @@ export const deleteFoundingMember = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -9769,87 +9769,6 @@ export const createLike = /* GraphQL */ `
       id
       like
       itemID
-      userID
-      createdAt
-      updatedAt
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       article {
         id
         title
@@ -9857,31 +9776,14 @@ export const createLike = /* GraphQL */ `
         content
         imgURLs
         qrCodeImgURL
+        likes {
+          nextToken
+        }
         tags
         sortKey
         active
         createdAt
         topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         topic {
           id
           name
@@ -9892,18 +9794,7 @@ export const createLike = /* GraphQL */ `
         articleComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      articleComment {
-        id
-        content
-        active
-        articleID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -9919,9 +9810,19 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+      }
+      articleComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        articleID
         article {
           id
           title
@@ -9937,22 +9838,11 @@ export const createLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
+        createdAt
         articleSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      articleSubComment {
-        id
-        content
-        active
-        articleCommentID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -9968,9 +9858,20 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      articleSubComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        articleCommentID
         articleComment {
           id
           content
@@ -9981,10 +9882,28 @@ export const createLike = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        likes {
-          nextToken
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
         }
+        updatedAt
+        owner
       }
       event {
         id
@@ -10000,46 +9919,6 @@ export const createLike = /* GraphQL */ `
         imgURLs
         content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -10057,18 +9936,30 @@ export const createLike = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
         likes {
           nextToken
         }
-      }
-      eventComment {
-        id
-        content
-        active
-        eventID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -10084,9 +9975,19 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+      }
+      eventComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        eventID
         event {
           id
           summary
@@ -10111,22 +10012,11 @@ export const createLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
         eventSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      eventSubComment {
-        id
-        content
-        active
-        eventCommentID
         createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -10142,9 +10032,20 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      eventSubComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        eventCommentID
         eventComment {
           id
           content
@@ -10155,24 +10056,8 @@ export const createLike = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        likes {
-          nextToken
-        }
-      }
-      forumPost {
-        id
-        title
-        content
-        imgURLs
-        tags
-        sortKey
-        active
         createdAt
-        lastReplyAt
-        forumSubTopicID
         userID
-        updatedAt
         user {
           id
           username
@@ -10188,9 +10073,27 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      forumPost {
+        id
+        title
+        content
+        imgURLs
+        tags
+        likes {
+          nextToken
+        }
+        sortKey
+        essential
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
         forumSubTopic {
           id
           name
@@ -10199,27 +10102,13 @@ export const createLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
-        essential
         forumPostComments {
           nextToken
         }
         forumPostSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      forumPostComment {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
         userID
-        updatedAt
         user {
           id
           username
@@ -10235,9 +10124,22 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      forumPostComment {
+        id
+        content
+        imgURLs
+        likes {
+          nextToken
+        }
+        createdAt
+        active
+        forumPostID
         forumPost {
           id
           title
@@ -10245,6 +10147,7 @@ export const createLike = /* GraphQL */ `
           imgURLs
           tags
           sortKey
+          essential
           active
           createdAt
           lastReplyAt
@@ -10252,26 +10155,41 @@ export const createLike = /* GraphQL */ `
           userID
           updatedAt
           owner
-          essential
         }
-        owner
         forumPostSubComments {
           nextToken
         }
-        likes {
-          nextToken
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
         }
+        updatedAt
+        owner
       }
       forumPostSubComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         createdAt
         replyToUserID
-        forumPostID
-        forumPostCommentID
-        userID
-        updatedAt
         replyTo {
           id
           username
@@ -10287,9 +10205,39 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        forumPostID
+        forumPost {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostCommentID
+        forumPostComment {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        userID
         user {
           id
           username
@@ -10305,41 +10253,93 @@ export const createLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
           updatedAt
-          owner
-          essential
         }
-        forumPostComment {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
+        updatedAt
         owner
-        likes {
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -10353,87 +10353,6 @@ export const updateLike = /* GraphQL */ `
       id
       like
       itemID
-      userID
-      createdAt
-      updatedAt
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       article {
         id
         title
@@ -10441,31 +10360,14 @@ export const updateLike = /* GraphQL */ `
         content
         imgURLs
         qrCodeImgURL
+        likes {
+          nextToken
+        }
         tags
         sortKey
         active
         createdAt
         topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         topic {
           id
           name
@@ -10476,18 +10378,7 @@ export const updateLike = /* GraphQL */ `
         articleComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      articleComment {
-        id
-        content
-        active
-        articleID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -10503,9 +10394,19 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+      }
+      articleComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        articleID
         article {
           id
           title
@@ -10521,22 +10422,11 @@ export const updateLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
+        createdAt
         articleSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      articleSubComment {
-        id
-        content
-        active
-        articleCommentID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -10552,9 +10442,20 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      articleSubComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        articleCommentID
         articleComment {
           id
           content
@@ -10565,10 +10466,28 @@ export const updateLike = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        likes {
-          nextToken
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
         }
+        updatedAt
+        owner
       }
       event {
         id
@@ -10584,46 +10503,6 @@ export const updateLike = /* GraphQL */ `
         imgURLs
         content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -10641,18 +10520,30 @@ export const updateLike = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
         likes {
           nextToken
         }
-      }
-      eventComment {
-        id
-        content
-        active
-        eventID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -10668,9 +10559,19 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+      }
+      eventComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        eventID
         event {
           id
           summary
@@ -10695,22 +10596,11 @@ export const updateLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
         eventSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      eventSubComment {
-        id
-        content
-        active
-        eventCommentID
         createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -10726,9 +10616,20 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      eventSubComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        eventCommentID
         eventComment {
           id
           content
@@ -10739,24 +10640,8 @@ export const updateLike = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        likes {
-          nextToken
-        }
-      }
-      forumPost {
-        id
-        title
-        content
-        imgURLs
-        tags
-        sortKey
-        active
         createdAt
-        lastReplyAt
-        forumSubTopicID
         userID
-        updatedAt
         user {
           id
           username
@@ -10772,9 +10657,27 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      forumPost {
+        id
+        title
+        content
+        imgURLs
+        tags
+        likes {
+          nextToken
+        }
+        sortKey
+        essential
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
         forumSubTopic {
           id
           name
@@ -10783,27 +10686,13 @@ export const updateLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
-        essential
         forumPostComments {
           nextToken
         }
         forumPostSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      forumPostComment {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
         userID
-        updatedAt
         user {
           id
           username
@@ -10819,9 +10708,22 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      forumPostComment {
+        id
+        content
+        imgURLs
+        likes {
+          nextToken
+        }
+        createdAt
+        active
+        forumPostID
         forumPost {
           id
           title
@@ -10829,6 +10731,7 @@ export const updateLike = /* GraphQL */ `
           imgURLs
           tags
           sortKey
+          essential
           active
           createdAt
           lastReplyAt
@@ -10836,26 +10739,41 @@ export const updateLike = /* GraphQL */ `
           userID
           updatedAt
           owner
-          essential
         }
-        owner
         forumPostSubComments {
           nextToken
         }
-        likes {
-          nextToken
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
         }
+        updatedAt
+        owner
       }
       forumPostSubComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         createdAt
         replyToUserID
-        forumPostID
-        forumPostCommentID
-        userID
-        updatedAt
         replyTo {
           id
           username
@@ -10871,9 +10789,39 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        forumPostID
+        forumPost {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostCommentID
+        forumPostComment {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        userID
         user {
           id
           username
@@ -10889,41 +10837,93 @@ export const updateLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
           updatedAt
-          owner
-          essential
         }
-        forumPostComment {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
+        updatedAt
         owner
-        likes {
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -10937,87 +10937,6 @@ export const deleteLike = /* GraphQL */ `
       id
       like
       itemID
-      userID
-      createdAt
-      updatedAt
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-      }
       article {
         id
         title
@@ -11025,31 +10944,14 @@ export const deleteLike = /* GraphQL */ `
         content
         imgURLs
         qrCodeImgURL
+        likes {
+          nextToken
+        }
         tags
         sortKey
         active
         createdAt
         topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         topic {
           id
           name
@@ -11060,18 +10962,7 @@ export const deleteLike = /* GraphQL */ `
         articleComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      articleComment {
-        id
-        content
-        active
-        articleID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -11087,9 +10978,19 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+      }
+      articleComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        articleID
         article {
           id
           title
@@ -11105,22 +11006,11 @@ export const deleteLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
+        createdAt
         articleSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      articleSubComment {
-        id
-        content
-        active
-        articleCommentID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -11136,9 +11026,20 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      articleSubComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        articleCommentID
         articleComment {
           id
           content
@@ -11149,10 +11050,28 @@ export const deleteLike = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        likes {
-          nextToken
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
         }
+        updatedAt
+        owner
       }
       event {
         id
@@ -11168,46 +11087,6 @@ export const deleteLike = /* GraphQL */ `
         imgURLs
         content
         addressID
-        sponsor
-        tags
-        eventStatus
-        active
-        createdAt
-        sortKey
-        topicID
-        userID
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        eventComments {
-          nextToken
-        }
-        eventParticipants {
-          nextToken
-        }
         address {
           id
           description
@@ -11225,18 +11104,30 @@ export const deleteLike = /* GraphQL */ `
           updatedAt
           owner
         }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
         likes {
           nextToken
         }
-      }
-      eventComment {
-        id
-        content
-        active
-        eventID
-        createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -11252,9 +11143,19 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+      }
+      eventComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        eventID
         event {
           id
           summary
@@ -11279,22 +11180,11 @@ export const deleteLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
         eventSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      eventSubComment {
-        id
-        content
-        active
-        eventCommentID
         createdAt
         userID
-        updatedAt
         user {
           id
           username
@@ -11310,9 +11200,20 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      eventSubComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        eventCommentID
         eventComment {
           id
           content
@@ -11323,24 +11224,8 @@ export const deleteLike = /* GraphQL */ `
           updatedAt
           owner
         }
-        owner
-        likes {
-          nextToken
-        }
-      }
-      forumPost {
-        id
-        title
-        content
-        imgURLs
-        tags
-        sortKey
-        active
         createdAt
-        lastReplyAt
-        forumSubTopicID
         userID
-        updatedAt
         user {
           id
           username
@@ -11356,9 +11241,27 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      forumPost {
+        id
+        title
+        content
+        imgURLs
+        tags
+        likes {
+          nextToken
+        }
+        sortKey
+        essential
+        active
+        createdAt
+        lastReplyAt
+        forumSubTopicID
         forumSubTopic {
           id
           name
@@ -11367,27 +11270,13 @@ export const deleteLike = /* GraphQL */ `
           userID
           updatedAt
         }
-        owner
-        essential
         forumPostComments {
           nextToken
         }
         forumPostSubComments {
           nextToken
         }
-        likes {
-          nextToken
-        }
-      }
-      forumPostComment {
-        id
-        content
-        imgURLs
-        createdAt
-        active
-        forumPostID
         userID
-        updatedAt
         user {
           id
           username
@@ -11403,9 +11292,22 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        updatedAt
+        owner
+      }
+      forumPostComment {
+        id
+        content
+        imgURLs
+        likes {
+          nextToken
+        }
+        createdAt
+        active
+        forumPostID
         forumPost {
           id
           title
@@ -11413,6 +11315,7 @@ export const deleteLike = /* GraphQL */ `
           imgURLs
           tags
           sortKey
+          essential
           active
           createdAt
           lastReplyAt
@@ -11420,26 +11323,41 @@ export const deleteLike = /* GraphQL */ `
           userID
           updatedAt
           owner
-          essential
         }
-        owner
         forumPostSubComments {
           nextToken
         }
-        likes {
-          nextToken
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
         }
+        updatedAt
+        owner
       }
       forumPostSubComment {
         id
         content
+        likes {
+          nextToken
+        }
         active
         createdAt
         replyToUserID
-        forumPostID
-        forumPostCommentID
-        userID
-        updatedAt
         replyTo {
           id
           username
@@ -11455,9 +11373,39 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
+        forumPostID
+        forumPost {
+          id
+          title
+          content
+          imgURLs
+          tags
+          sortKey
+          essential
+          active
+          createdAt
+          lastReplyAt
+          forumSubTopicID
+          userID
+          updatedAt
+          owner
+        }
+        forumPostCommentID
+        forumPostComment {
+          id
+          content
+          imgURLs
+          createdAt
+          active
+          forumPostID
+          userID
+          updatedAt
+          owner
+        }
+        userID
         user {
           id
           username
@@ -11473,41 +11421,93 @@ export const deleteLike = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
-        }
-        forumPost {
-          id
-          title
-          content
-          imgURLs
-          tags
-          sortKey
-          active
-          createdAt
-          lastReplyAt
-          forumSubTopicID
-          userID
           updatedAt
-          owner
-          essential
         }
-        forumPostComment {
-          id
-          content
-          imgURLs
-          createdAt
-          active
-          forumPostID
-          userID
-          updatedAt
-          owner
-        }
+        updatedAt
         owner
-        likes {
+      }
+      userBeingLiked {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
           nextToken
         }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -11523,8 +11523,6 @@ export const createWebFeedBack = /* GraphQL */ `
       reason
       improvement
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -11540,7 +11538,6 @@ export const createWebFeedBack = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11548,22 +11545,25 @@ export const createWebFeedBack = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -11579,8 +11579,6 @@ export const updateWebFeedBack = /* GraphQL */ `
       reason
       improvement
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -11596,7 +11594,6 @@ export const updateWebFeedBack = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11604,22 +11601,25 @@ export const updateWebFeedBack = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -11635,8 +11635,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
       reason
       improvement
       userID
-      createdAt
-      updatedAt
       user {
         id
         username
@@ -11652,7 +11650,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11660,22 +11657,25 @@ export const deleteWebFeedBack = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -11694,7 +11694,6 @@ export const createUserMutationLog = /* GraphQL */ `
       createdAt
       sortKey
       userID
-      updatedAt
       user {
         id
         username
@@ -11710,7 +11709,6 @@ export const createUserMutationLog = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11718,22 +11716,24 @@ export const createUserMutationLog = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -11751,7 +11751,6 @@ export const updateUserMutationLog = /* GraphQL */ `
       createdAt
       sortKey
       userID
-      updatedAt
       user {
         id
         username
@@ -11767,7 +11766,6 @@ export const updateUserMutationLog = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11775,22 +11773,24 @@ export const updateUserMutationLog = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -11808,7 +11808,6 @@ export const deleteUserMutationLog = /* GraphQL */ `
       createdAt
       sortKey
       userID
-      updatedAt
       user {
         id
         username
@@ -11824,7 +11823,6 @@ export const deleteUserMutationLog = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11832,22 +11830,24 @@ export const deleteUserMutationLog = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      updatedAt
     }
   }
 `;
@@ -11869,11 +11869,6 @@ export const createKanban = /* GraphQL */ `
       sortKey
       workSummary
       lastUpdatedID
-      assigneeID
-      departmentID
-      userID
-      createdAt
-      updatedAt
       lastUpdated {
         id
         username
@@ -11889,7 +11884,6 @@ export const createKanban = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11897,22 +11891,24 @@ export const createKanban = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      assigneeID
       assignee {
         id
         username
@@ -11928,7 +11924,6 @@ export const createKanban = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -11936,70 +11931,40 @@ export const createKanban = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
         updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
       }
+      departmentID
       department {
         id
         name
         introduction
         email
         leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -12015,19 +11980,54 @@ export const createKanban = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -12049,11 +12049,6 @@ export const updateKanban = /* GraphQL */ `
       sortKey
       workSummary
       lastUpdatedID
-      assigneeID
-      departmentID
-      userID
-      createdAt
-      updatedAt
       lastUpdated {
         id
         username
@@ -12069,7 +12064,6 @@ export const updateKanban = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -12077,22 +12071,24 @@ export const updateKanban = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      assigneeID
       assignee {
         id
         username
@@ -12108,7 +12104,6 @@ export const updateKanban = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -12116,70 +12111,40 @@ export const updateKanban = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
         updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
       }
+      departmentID
       department {
         id
         name
         introduction
         email
         leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -12195,19 +12160,54 @@ export const updateKanban = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -12229,11 +12229,6 @@ export const deleteKanban = /* GraphQL */ `
       sortKey
       workSummary
       lastUpdatedID
-      assigneeID
-      departmentID
-      userID
-      createdAt
-      updatedAt
       lastUpdated {
         id
         username
@@ -12249,7 +12244,6 @@ export const deleteKanban = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -12257,22 +12251,24 @@ export const deleteKanban = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
+        updatedAt
       }
+      assigneeID
       assignee {
         id
         username
@@ -12288,7 +12284,6 @@ export const deleteKanban = /* GraphQL */ `
         github
         sortKey
         createdAt
-        updatedAt
         badges
         userEducations {
           nextToken
@@ -12296,70 +12291,40 @@ export const deleteKanban = /* GraphQL */ `
         userExperiences {
           nextToken
         }
-        forumPosts {
-          nextToken
-        }
         marketUserInfo {
-          nextToken
-        }
-        marketItems {
           nextToken
         }
         beingLiked {
           nextToken
         }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
         kanbanAssignee {
           nextToken
         }
-      }
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
         updatedAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
       }
+      departmentID
       department {
         id
         name
         introduction
         email
         leader
+        uwcssaJobs {
+          nextToken
+        }
+        uwcssaMembers {
+          nextToken
+        }
+        kanbans {
+          nextToken
+        }
         userID
-        createdAt
-        updatedAt
         user {
           id
           username
@@ -12375,19 +12340,54 @@ export const deleteKanban = /* GraphQL */ `
           github
           sortKey
           createdAt
-          updatedAt
           badges
+          updatedAt
         }
-        uwcssaMembers {
-          nextToken
-        }
-        uwcssaJobs {
-          nextToken
-        }
-        kanbans {
-          nextToken
-        }
+        createdAt
+        updatedAt
       }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
