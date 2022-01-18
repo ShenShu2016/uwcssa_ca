@@ -32,6 +32,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
+import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded";
+import EditAvatar from "./EditAvatar";
 
 const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
   box: {
@@ -154,22 +156,31 @@ export default function PersonalCard({
   email,
 }) {
   const classes = useStyles();
+
   const isPermit = usePermit(owner, "admin");
   //   const [expanded, setExpanded] = useState(true);
   const [settingMoreAnchorEl, setSettingMoreAnchorEl] = useState(null);
   const isSettingMenuOpen = Boolean(settingMoreAnchorEl);
   const [editOpen, setEditOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [editAvatarOpen, setEditAvatarOpen] = useState(false);
 
   const handleEditClickOpen = () => {
+    setSettingMoreAnchorEl(null);
     setEditOpen(true);
+  };
+
+  const handleEditAvatarClickOpen = () => {
+    setSettingMoreAnchorEl(null);
+    setEditAvatarOpen(true);
   };
   const handleEditClose = () => {
     setEditOpen(false);
   };
-  //   const handleExpandClick = () => {
-  //     setExpanded(!expanded);
-  //   };
+  const handleEditAvatarClose = () => {
+    setEditAvatarOpen(false);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -193,9 +204,13 @@ export default function PersonalCard({
       open={isSettingMenuOpen}
       onClose={handleSettingMenuClose}
     >
+      <MenuItem onClick={handleEditAvatarClickOpen}>
+        <PhotoCameraRoundedIcon />
+        编辑 头像
+      </MenuItem>
       <MenuItem onClick={handleEditClickOpen}>
         <EditIcon />
-        编辑
+        编辑 信息
       </MenuItem>
     </Menu>
   );
@@ -393,6 +408,11 @@ export default function PersonalCard({
         <Edit
           editOpen={editOpen}
           handleEditClose={handleEditClose}
+          item={item}
+        />
+        <EditAvatar
+          editAvatarOpen={editAvatarOpen}
+          handleEditAvatarClose={handleEditAvatarClose}
           item={item}
         />
       </Box>
