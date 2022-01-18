@@ -1,3 +1,5 @@
+import "./styles.css";
+
 import {
   Box,
   Button,
@@ -6,9 +8,7 @@ import {
   Container,
   Grid,
   Paper,
-  Tooltip,
   Typography,
-  Zoom,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import {
@@ -20,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import cssalogo from "../../static/cssa-logo1.png";
 import { makeStyles } from "@mui/styles";
-import "./styles.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,7 +111,7 @@ export default function UwcssaIntro() {
   const dispatch = useDispatch();
   const { userAuth } = useSelector((state) => state);
   const {
-    users,
+    userCounts,
     fetchUsersStatus,
     forumPostCounts,
     fetchForumPostCountsStatus,
@@ -200,31 +199,18 @@ export default function UwcssaIntro() {
                 <Box className={classes.webData}>
                   <Grid container spacing={3} className="animate pop delay-2">
                     <Grid item xs={6}>
-                      <Tooltip
-                        title={`${
-                          users &&
-                          users
-                            .map((x) => x.id)
-                            .join()
-                            .slice(0, 100)
-                        }...`}
-                        TransitionComponent={Zoom}
-                        arrow
-                        leaveDelay={200}
-                      >
-                        <Paper elevation={4}>
-                          <Typography variant="h5">
-                            {users ? (
-                              users.length
-                            ) : (
-                              <CircularProgress
-                                style={{ height: "26px", width: "26px" }}
-                              />
-                            )}
-                          </Typography>
-                          <Typography variant="h5">用户</Typography>
-                        </Paper>
-                      </Tooltip>
+                      <Paper elevation={4}>
+                        <Typography variant="h5">
+                          {userCounts ? (
+                            userCounts
+                          ) : (
+                            <CircularProgress
+                              style={{ height: "26px", width: "26px" }}
+                            />
+                          )}
+                        </Typography>
+                        <Typography variant="h5">用户</Typography>
+                      </Paper>
                     </Grid>
                     <Grid
                       item
