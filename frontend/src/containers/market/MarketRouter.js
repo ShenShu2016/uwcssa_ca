@@ -74,7 +74,7 @@ export default function MarketRouter() {
         <Route path="/market/pet/" component={MarketPet} />
         <Route path="/market/carpool/" component={MarketCarpool} />
         <Route path="/market/loading/" component={Loading} />
-        <Route path="/market/notification" component={MarketNotifications} />
+        <Route path="/market/notifications" component={MarketNotifications} />
       </Switch>
     </Box>
   );

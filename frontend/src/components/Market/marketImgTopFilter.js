@@ -80,8 +80,7 @@ export default function MarketImgTopFilter({
   darkTheme,
   control,
   type,
-  occurrence,
-  sortedOccurrence,
+  tagsOccurrence,
   handleSearch,
   filterList,
   handleReset,
@@ -127,23 +126,26 @@ export default function MarketImgTopFilter({
           direction="row"
           sx={{ color: "action.active", marginTop: "0.5rem" }}
         >
-          {sortedOccurrence.slice(0, 5).map((tag, tagIdx) => {
-            return (
-              <Chip
-                key={tagIdx}
-                avatar={<Avatar>{occurrence[tag]}</Avatar>}
-                label={tag}
-                color={clickedTags.includes(tag) ? "primary" : "default"}
-                onClick={() => {
-                  if (clickedTags.includes(tag)) {
-                    setClickedTags((prev) => prev.filter((t) => t !== tag));
-                  } else {
-                    setClickedTags((prev) => prev.concat(tag));
-                  }
-                }}
-              />
-            );
-          })}
+          {Object.keys(tagsOccurrence)
+            .slice(0, 5)
+            .map((tag, tagIdx) => {
+              return (
+                <Chip
+                  sx={{ margin: "0.25rem" }}
+                  key={tagIdx}
+                  avatar={<Avatar>{tagsOccurrence[tag]}</Avatar>}
+                  label={tag}
+                  color={clickedTags.includes(tag) ? "primary" : "default"}
+                  onClick={() => {
+                    if (clickedTags.includes(tag)) {
+                      setClickedTags((prev) => prev.filter((t) => t !== tag));
+                    } else {
+                      setClickedTags((prev) => prev.concat(tag));
+                    }
+                  }}
+                />
+              );
+            })}
         </Stack>
       </Paper>
       {/* ImgTopFilter for medium screen  */}
@@ -260,12 +262,16 @@ export default function MarketImgTopFilter({
             marginBottom: "1rem",
           }}
         >
-          {sortedOccurrence.slice(0, 5).map((tag, tagIdx) => {
-            return (
-              <Grid item key={tagIdx}>
+          {Object.keys(tagsOccurrence)
+            .slice(0, 5)
+            .map((tag, tagIdx) => {
+              return (
                 <Chip
-                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
+                  sx={{ margin: "0.25rem" }}
+                  key={tagIdx}
+                  avatar={<Avatar>{tagsOccurrence[tag]}</Avatar>}
                   label={tag}
+                  color={clickedTags.includes(tag) ? "primary" : "default"}
                   onClick={() => {
                     if (clickedTags.includes(tag)) {
                       setClickedTags((prev) => prev.filter((t) => t !== tag));
@@ -274,9 +280,8 @@ export default function MarketImgTopFilter({
                     }
                   }}
                 />
-              </Grid>
-            );
-          })}
+              );
+            })}
         </Grid>
 
         <Divider sx={{ marginY: "1rem" }} />

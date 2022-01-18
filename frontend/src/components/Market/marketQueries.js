@@ -525,3 +525,37 @@ export const listAddresss = /* GraphQL */ `
     }
   }
 `;
+
+export const searchMarketItems = /* GraphQL */ `
+  query SearchMarketItems(
+    $filter: SearchableMarketItemFilterInput
+    $sort: [SearchableMarketItemSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableMarketItemAggregationInput]
+  ) {
+    searchMarketItems(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;

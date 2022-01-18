@@ -147,8 +147,7 @@ CategoryDialog.propTypes = {
 export default function MarketTopBar({
   darkTheme,
   // setSearchRadius,
-  sortedOccurrence,
-  occurrence,
+  tagsOccurrence,
 }) {
   const useStyles = marketItemStyle;
   const classes = useStyles();
@@ -193,24 +192,26 @@ export default function MarketTopBar({
             二手商城
           </Typography>
           <Box marginTop="1rem">
-            {sortedOccurrence.slice(0, 8).map((tag, tagIdx) => {
-              return (
-                <Chip
-                  sx={{ margin: "0.25rem" }}
-                  key={tagIdx}
-                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
-                  label={tag}
-                  color={clickedTags.includes(tag) ? "primary" : "default"}
-                  onClick={() => {
-                    if (clickedTags.includes(tag)) {
-                      setClickedTags((prev) => prev.filter((t) => t !== tag));
-                    } else {
-                      setClickedTags((prev) => prev.concat(tag));
-                    }
-                  }}
-                />
-              );
-            })}
+            {Object.keys(tagsOccurrence)
+              .slice(0, 8)
+              .map((tag, tagIdx) => {
+                return (
+                  <Chip
+                    sx={{ margin: "0.25rem" }}
+                    key={tagIdx}
+                    avatar={<Avatar>{tagsOccurrence[tag]}</Avatar>}
+                    label={tag}
+                    color={clickedTags.includes(tag) ? "primary" : "default"}
+                    onClick={() => {
+                      if (clickedTags.includes(tag)) {
+                        setClickedTags((prev) => prev.filter((t) => t !== tag));
+                      } else {
+                        setClickedTags((prev) => prev.concat(tag));
+                      }
+                    }}
+                  />
+                );
+              })}
           </Box>
         </Paper>
       ) : (
@@ -238,32 +239,33 @@ export default function MarketTopBar({
           />
 
           <Box sx={{ color: "action.active", marginTop: "0.5rem" }}>
-            {sortedOccurrence.slice(0, 6).map((tag, tagIdx) => {
-              return (
-                <Chip
-                  key={tagIdx}
-                  avatar={<Avatar>{occurrence[tag]}</Avatar>}
-                  label={tag}
-                  sx={{ margin: "0.2rem" }}
-                  color={clickedTags.includes(tag) ? "primary" : "default"}
-                  onClick={() => {
-                    if (clickedTags.includes(tag)) {
-                      setClickedTags((prev) => prev.filter((t) => t !== tag));
-                    } else {
-                      setClickedTags((prev) => prev.concat(tag));
-                    }
-                  }}
-                />
-              );
-            })}
+            {Object.keys(tagsOccurrence)
+              .slice(0, 8)
+              .map((tag, tagIdx) => {
+                return (
+                  <Chip
+                    sx={{ margin: "0.25rem" }}
+                    key={tagIdx}
+                    avatar={<Avatar>{tagsOccurrence[tag]}</Avatar>}
+                    label={tag}
+                    color={clickedTags.includes(tag) ? "primary" : "default"}
+                    onClick={() => {
+                      if (clickedTags.includes(tag)) {
+                        setClickedTags((prev) => prev.filter((t) => t !== tag));
+                      } else {
+                        setClickedTags((prev) => prev.concat(tag));
+                      }
+                    }}
+                  />
+                );
+              })}
           </Box>
           <Divider sx={{ marginY: "0.5rem" }} />
           <Stack spacing={2} direction="row" justifyContent="flex-end">
             <SearchArea
               darkTheme={darkTheme}
               mode="halfWidth"
-              sortedOccurrence={sortedOccurrence}
-              occurrence={occurrence}
+              tagsOccurrence={tagsOccurrence}
             />
             <Button
               variant="outlined"

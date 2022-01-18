@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CircularProgress,
   IconButton,
   Paper,
   Stack,
@@ -23,6 +22,7 @@ import {
 import { postAddress, postMarketItem } from "../../redux/slice/marketSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import BackdropLoading from "../../components/BackdropLoading";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
@@ -110,6 +110,7 @@ export default function PostMarketVehicle() {
   }, [errors]);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const address = await GetAddress();
     const addressID = uuid();
     const itemID = uuid();
@@ -163,7 +164,6 @@ export default function PostMarketVehicle() {
       userID: username,
     };
     // console.log("createMarketItemInput", createMarketItemInput);
-    setLoading(true);
     const response = await dispatch(postMarketItem(createMarketItemInput));
     if (marketUserInfo === undefined) {
       await dispatch(postMarketUserInfo(userInfo));
@@ -174,11 +174,14 @@ export default function PostMarketVehicle() {
     }
 
     console.log("Something should be here", response);
+    console.log("Can upload");
+
     if (response.meta.requestStatus === "fulfilled") {
       history.replace(`/market/vehicle/${response.payload.id}`);
       reset();
+    } else {
+      setLoading(false);
     }
-    console.log("Can upload");
   };
 
   useEffect(() => {
@@ -561,7 +564,7 @@ export default function PostMarketVehicle() {
                 setDefaultInfo={setDefaultInfo}
               />
             </Box>
-
+            <BackdropLoading open={loading} />
             <Button
               variant="outlined"
               endIcon={<PublishIcon />}
@@ -570,18 +573,6 @@ export default function PostMarketVehicle() {
               disabled={loading}
             >
               上传MarketItem
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-0.75rem",
-                    marginLeft: "-0.75rem",
-                  }}
-                />
-              )}
             </Button>
           </Paper>
         </Box>
