@@ -108,7 +108,7 @@ export default function MarketComponent({ item, type, darkTheme, starter }) {
   };
   return (
     <Paper elevation={0} className={classes.root}>
-      {starter ? (
+      {starter === true ? (
         <CardActionArea
           component={Link}
           to={`/market/${type}/${id}`}

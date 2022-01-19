@@ -92,8 +92,8 @@ export default function MarketImgTopFilter({
   const [value, setValue] = useState("Filter");
   const [clickedTags, setClickedTags] = useState([]);
   React.useEffect(() => {
-    marketItemFilterUpdate({ tags: clickedTags, type: "all" }, dispatch);
-  }, [dispatch, clickedTags]);
+    marketItemFilterUpdate({ tags: clickedTags, type: type }, dispatch);
+  }, [dispatch, clickedTags, type]);
 
   const handleClickListItem = () => {
     setOpen(true);

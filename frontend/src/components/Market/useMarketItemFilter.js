@@ -11,7 +11,7 @@ import {
   marketItemSortBySortKeyRental,
   marketItemSortBySortKeyVehicle,
 } from "./marketQueries";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -111,7 +111,6 @@ export function marketItemFilterUpdate(props, dispatch) {
 export default function useMarketItemFilter(filterList, type) {
   const dispatch = useDispatch();
   const [isFiltering, setIsFiltering] = useState(false);
-
   const query =
     type === "Item"
       ? marketItemSortBySortKeyItem
@@ -123,7 +122,7 @@ export default function useMarketItemFilter(filterList, type) {
       ? marketItemSortBySortKey
       : null;
 
-  useEffect(() => {
+  useMemo(() => {
     const filter = { ...filterList };
     if (query !== null) {
       if (type === "all") {
@@ -160,7 +159,8 @@ export default function useMarketItemFilter(filterList, type) {
         }
       }
     }
-  }, [dispatch, query, type, filterList]);
-
+    console.log("once");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return isFiltering;
 }

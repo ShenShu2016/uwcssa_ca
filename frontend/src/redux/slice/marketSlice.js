@@ -51,6 +51,7 @@ export const fetchMarketItems = createAsyncThunk(
       const MarketItemsData = await API.graphql({
         query: query,
         variables: {
+          limit: 1000,
           sortKey: "SortKey",
           sortDirection: "DESC",
           filter: filter,
@@ -86,7 +87,7 @@ export const addressFilteredMarketItem = createAsyncThunk(
     try {
       const response = await API.graphql({
         query: listAddresss,
-        variables: { filter: filter },
+        variables: { filter: filter, limit: 1000 },
         authMode: "AWS_IAM",
       });
       console.log("res:", response);
@@ -148,7 +149,9 @@ export const getAllTagsTerms = createAsyncThunk(
     try {
       const response = await API.graphql({
         query: searchMarketItems,
+
         variables: {
+          limit: 1000,
           aggregates: { field: "tags", name: "tagsTerms", type: "terms" },
           filter: filter,
         },
