@@ -25,7 +25,7 @@ import FilterInfo from "./marketItemFilterInfo";
 import HomeIcon from "@mui/icons-material/Home";
 import HouseIcon from "@mui/icons-material/House";
 import { Link } from "react-router-dom";
-import MarketFIlterLocation from "./marketFilterLocation";
+// import MarketFIlterLocation from "./marketFilterLocation";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
 import PropTypes from "prop-types";
@@ -295,7 +295,7 @@ export default function MarketImgTopFilter({
           >
             Add
           </Button>
-          <MarketFIlterLocation type="button" marketType={type} />
+          {/* <MarketFIlterLocation type="button" marketType={type} /> */}
           <FilterInfo
             darkTheme={darkTheme}
             control={control}
