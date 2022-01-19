@@ -453,6 +453,7 @@ function ConfirmationDialogRaw(props) {
   };
 
   const handleOk = () => {
+    handleSearch();
     onClose();
   };
 
