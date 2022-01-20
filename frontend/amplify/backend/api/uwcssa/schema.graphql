@@ -1,3 +1,4 @@
+# sudo amplify api gql-compile && amplify codegen
 enum SortKey {
   SortKey
 }
@@ -151,10 +152,67 @@ type Article
   createdAt: AWSDateTime!
   topicID: ID! @index(name: "byTopic")
   topic: Topic! @belongsTo(fields: ["topicID"])
+  comments: [Comment] @hasMany(indexName: "byArticle", fields: ["id"])
   articleComments: [ArticleComment]
     @hasMany(indexName: "byArticle", fields: ["id"])
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
+  subComments: [SubComment] @hasMany(indexName: "byArticle", fields: ["id"])
+}
+
+type Comment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  content: String!
+  likes: [Like] @hasMany(indexName: "byComment", fields: ["id"])
+  active: Boolean!
+  targetID: ID!
+    @index(name: "byArticle", sortKeyFields: ["createdAt"])
+    @index(name: "byEvent", sortKeyFields: ["createdAt"])
+  article: Article @belongsTo(fields: ["targetID"])
+  event: Event @belongsTo(fields: ["targetID"])
+  createdAt: AWSDateTime!
+  subComments: [SubComment] @hasMany(indexName: "byComment", fields: ["id"])
+  userID: ID!
+  user: User! @hasOne(fields: ["userID"])
+}
+
+type SubComment
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  content: String!
+  likes: [Like] @hasMany(indexName: "bySubComment", fields: ["id"])
+  active: Boolean!
+  targetID: ID!
+    @index(name: "byArticle", sortKeyFields: ["createdAt"])
+    @index(name: "byEvent", sortKeyFields: ["createdAt"])
+  article: Article @belongsTo(fields: ["targetID"])
+  event: Event @belongsTo(fields: ["targetID"])
+  commentID: ID! @index(name: "byComment", sortKeyFields: ["createdAt"])
+  comment: Comment! @belongsTo(fields: ["commentID"])
+  createdAt: AWSDateTime!
+  userID: ID!
+  user: User! @hasOne(fields: ["userID"])
+  replyToUserID: ID!
+  replyTo: User @hasOne(fields: ["replyToUserID"])
 }
 
 type ArticleComment
@@ -258,6 +316,8 @@ type Event
   likes: [Like] @hasMany(indexName: "byEvent", fields: ["id"])
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
+  comments: [Comment] @hasMany(indexName: "byEvent", fields: ["id"])
+  subComments: [SubComment] @hasMany(indexName: "byEvent", fields: ["id"])
 }
 
 enum EventStatus {
@@ -914,6 +974,10 @@ type Like
     @index(name: "byForumPost")
     @index(name: "byForumPostComment")
     @index(name: "byForumPostSubComment")
+    @index(name: "byComment")
+    @index(name: "bySubComment")
+  comment: Comment @belongsTo(fields: ["itemID"])
+  subComment: SubComment @belongsTo(fields: ["itemID"])
   article: Article @belongsTo(fields: ["itemID"])
   articleComment: ArticleComment @belongsTo(fields: ["itemID"])
   articleSubComment: ArticleSubComment @belongsTo(fields: ["itemID"])

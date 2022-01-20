@@ -90,7 +90,7 @@
         },
         "uwcssanodejsLibrarieslayer": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersionecea6a10-build.zip"
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersionc24b7b32-build.zip"
         }
       }
     }
