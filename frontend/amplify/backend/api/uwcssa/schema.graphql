@@ -740,11 +740,6 @@ type MarketItem
       queryField: "marketItemSortBySortKey"
       sortKeyFields: ["createdAt"]
     )
-    @index(
-      name: "marketItemSortByPriceTagsActiveCreatedAt"
-      queryField: "marketItemSortByPriceTagsActiveCreatedAt"
-      sortKeyFields: ["price", "tags", "createdAt"]
-    )
   active: Boolean!
   createdAt: AWSDateTime!
   userID: ID! @index(name: "byUser", sortKeyFields: ["createdAt"])
@@ -963,26 +958,11 @@ type UserMutationLog
   id: ID!
   eventName: String!
   typename: String!
-    @index(
-      name: "userMutationLogSortBy__typename"
-      queryField: "userMutationLogSortBy__typename"
-      sortKeyFields: ["createdAt"]
-    )
   eventSourceARN: String!
   record: AWSJSON!
   createdAt: AWSDateTime!
   sortKey: SortKey!
-    @index(
-      name: "userMutationLogSortBySortKey"
-      queryField: "userMutationLogSortBySortKey"
-      sortKeyFields: ["createdAt"]
-    )
   userID: ID!
-    @index(
-      name: "userMutationLogSortByUserID"
-      queryField: "userMutationLogSortByUserID"
-      sortKeyFields: ["createdAt"]
-    )
   user: User! @hasOne(fields: ["userID"])
 }
 
