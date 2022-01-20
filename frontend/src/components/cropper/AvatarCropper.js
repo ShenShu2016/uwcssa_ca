@@ -103,6 +103,8 @@ export default function AvatarCropper({
   onSubmit,
   finish,
   aspect,
+  cropShape,
+  showGrid,
 }) {
   const classes = useStyles();
 
@@ -134,6 +136,8 @@ export default function AvatarCropper({
                     crop={imageSrc ? crop : { x: 0, y: 0 }}
                     zoom={imageSrc ? zoom : 1}
                     aspect={aspect}
+                    cropShape={cropShape}
+                    showGrid={showGrid}
                     onCropChange={setCrop}
                     onCropComplete={onCropComplete}
                     onZoomChange={setZoom}
@@ -216,6 +220,7 @@ export default function AvatarCropper({
                         }}
                         onClick={uploadImg}
                         startIcon={<CropRoundedIcon />}
+                        disabled={!imageSrc}
                       >
                         确认裁剪
                         {loading && (

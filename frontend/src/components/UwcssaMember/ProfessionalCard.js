@@ -35,7 +35,8 @@ import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded";
-import EditAvatar from "./EditAvatar";
+import EditAvatar from "../cropper/EditAvatar";
+
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   root: {
     // backgroundColor: "#F3F2EF",
@@ -480,6 +481,7 @@ export default function ProfessionalCard({
         editAvatarOpen={editAvatarOpen}
         handleEditAvatarClose={handleEditAvatarClose}
         item={item}
+        type="uwcssaMember"
       />
     </Grid>
   );
