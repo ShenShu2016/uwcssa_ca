@@ -129,14 +129,23 @@ export default function useMarketItemFilter(filterList, type) {
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
           dispatch(getAllTagsTerms({ filter: { active: { eq: true } } }));
-          dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+          dispatch(
+            fetchMarketItems({
+              query: marketItemSortBySortKey,
+              marketType: type,
+            })
+          );
         } else if (
           Object.keys(Object.values(filter)[0][0]).includes("name") ||
           Object.keys(Object.values(filter)[0][0]).includes("tags")
         ) {
           setIsFiltering(true);
           dispatch(
-            fetchMarketItems({ query: marketItemSortBySortKey, filter: filter })
+            fetchMarketItems({
+              query: marketItemSortBySortKey,
+              filter: filter,
+              marketType: type,
+            })
           );
         } else {
           setIsFiltering(true);
@@ -150,12 +159,15 @@ export default function useMarketItemFilter(filterList, type) {
             fetchMarketItems({
               query: query,
               filter: { marketType: { eq: type } },
+              marketType: type,
             })
           );
         } else {
           setIsFiltering(true);
           filter["marketType"] = { eq: type };
-          dispatch(fetchMarketItems({ query: query, filter }));
+          dispatch(
+            fetchMarketItems({ query: query, filter, marketType: type })
+          );
         }
       }
     }
