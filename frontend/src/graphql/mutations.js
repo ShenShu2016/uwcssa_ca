@@ -1228,6 +1228,19 @@ export const createArticle = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      comments {
+        items {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       articleComments {
         items {
           id
@@ -1280,6 +1293,21 @@ export const createArticle = /* GraphQL */ `
           nextToken
         }
         updatedAt
+      }
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       updatedAt
     }
@@ -1345,6 +1373,19 @@ export const updateArticle = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      comments {
+        items {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       articleComments {
         items {
           id
@@ -1397,6 +1438,21 @@ export const updateArticle = /* GraphQL */ `
           nextToken
         }
         updatedAt
+      }
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       updatedAt
     }
@@ -1462,6 +1518,19 @@ export const deleteArticle = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      comments {
+        items {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       articleComments {
         items {
           id
@@ -1515,7 +1584,1615 @@ export const deleteArticle = /* GraphQL */ `
         }
         updatedAt
       }
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
+    }
+  }
+`;
+export const createComment = /* GraphQL */ `
+  mutation CreateComment(
+    $input: CreateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    createComment(input: $input, condition: $condition) {
+      id
+      content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      active
+      targetID
+      article {
+        id
+        title
+        summary
+        content
+        imgURLs
+        qrCodeImgURL
+        likes {
+          nextToken
+        }
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    updateComment(input: $input, condition: $condition) {
+      id
+      content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      active
+      targetID
+      article {
+        id
+        title
+        summary
+        content
+        imgURLs
+        qrCodeImgURL
+        likes {
+          nextToken
+        }
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteComment = /* GraphQL */ `
+  mutation DeleteComment(
+    $input: DeleteCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    deleteComment(input: $input, condition: $condition) {
+      id
+      content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      active
+      targetID
+      article {
+        id
+        title
+        summary
+        content
+        imgURLs
+        qrCodeImgURL
+        likes {
+          nextToken
+        }
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createSubComment = /* GraphQL */ `
+  mutation CreateSubComment(
+    $input: CreateSubCommentInput!
+    $condition: ModelSubCommentConditionInput
+  ) {
+    createSubComment(input: $input, condition: $condition) {
+      id
+      content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      active
+      targetID
+      article {
+        id
+        title
+        summary
+        content
+        imgURLs
+        qrCodeImgURL
+        likes {
+          nextToken
+        }
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      commentID
+      comment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        createdAt
+        subComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      replyToUserID
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateSubComment = /* GraphQL */ `
+  mutation UpdateSubComment(
+    $input: UpdateSubCommentInput!
+    $condition: ModelSubCommentConditionInput
+  ) {
+    updateSubComment(input: $input, condition: $condition) {
+      id
+      content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      active
+      targetID
+      article {
+        id
+        title
+        summary
+        content
+        imgURLs
+        qrCodeImgURL
+        likes {
+          nextToken
+        }
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      commentID
+      comment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        createdAt
+        subComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      replyToUserID
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteSubComment = /* GraphQL */ `
+  mutation DeleteSubComment(
+    $input: DeleteSubCommentInput!
+    $condition: ModelSubCommentConditionInput
+  ) {
+    deleteSubComment(input: $input, condition: $condition) {
+      id
+      content
+      likes {
+        items {
+          id
+          like
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      active
+      targetID
+      article {
+        id
+        title
+        summary
+        content
+        imgURLs
+        qrCodeImgURL
+        likes {
+          nextToken
+        }
+        tags
+        sortKey
+        active
+        createdAt
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        articleComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      commentID
+      comment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        createdAt
+        subComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      createdAt
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      replyToUserID
+      replyTo {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      updatedAt
+      owner
     }
   }
 `;
@@ -1563,6 +3240,9 @@ export const createArticleComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        comments {
+          nextToken
+        }
         articleComments {
           nextToken
         }
@@ -1584,6 +3264,9 @@ export const createArticleComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -1690,6 +3373,9 @@ export const updateArticleComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        comments {
+          nextToken
+        }
         articleComments {
           nextToken
         }
@@ -1711,6 +3397,9 @@ export const updateArticleComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -1817,6 +3506,9 @@ export const deleteArticleComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        comments {
+          nextToken
+        }
         articleComments {
           nextToken
         }
@@ -1838,6 +3530,9 @@ export const deleteArticleComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -2510,6 +4205,34 @@ export const createEvent = /* GraphQL */ `
         }
         updatedAt
       }
+      comments {
+        items {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -2772,6 +4495,34 @@ export const updateEvent = /* GraphQL */ `
           nextToken
         }
         updatedAt
+      }
+      comments {
+        items {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
       }
       updatedAt
     }
@@ -3036,6 +4787,34 @@ export const deleteEvent = /* GraphQL */ `
         }
         updatedAt
       }
+      comments {
+        items {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      subComments {
+        items {
+          id
+          content
+          active
+          targetID
+          commentID
+          createdAt
+          userID
+          replyToUserID
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -3134,6 +4913,12 @@ export const createEventComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -3291,6 +5076,12 @@ export const updateEventComment = /* GraphQL */ `
           badges
           updatedAt
         }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
         updatedAt
       }
       eventSubComments {
@@ -3446,6 +5237,12 @@ export const deleteEventComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -4094,6 +5891,12 @@ export const createEventParticipant = /* GraphQL */ `
           badges
           updatedAt
         }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
         updatedAt
       }
       userID
@@ -4349,6 +6152,12 @@ export const updateEventParticipant = /* GraphQL */ `
           badges
           updatedAt
         }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
         updatedAt
       }
       userID
@@ -4603,6 +6412,12 @@ export const deleteEventParticipant = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -8876,6 +10691,12 @@ export const createAddress = /* GraphQL */ `
           badges
           updatedAt
         }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
         updatedAt
       }
       marketItem {
@@ -9166,6 +10987,12 @@ export const updateAddress = /* GraphQL */ `
           badges
           updatedAt
         }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
         updatedAt
       }
       marketItem {
@@ -9455,6 +11282,12 @@ export const deleteAddress = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -9769,6 +11602,179 @@ export const createLike = /* GraphQL */ `
       id
       like
       itemID
+      comment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        createdAt
+        subComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      subComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        commentID
+        comment {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        replyToUserID
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
       article {
         id
         title
@@ -9791,6 +11797,9 @@ export const createLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        comments {
+          nextToken
+        }
         articleComments {
           nextToken
         }
@@ -9812,6 +11821,9 @@ export const createLike = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -9977,6 +11989,12 @@ export const createLike = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -10353,6 +12371,179 @@ export const updateLike = /* GraphQL */ `
       id
       like
       itemID
+      comment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        createdAt
+        subComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      subComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        commentID
+        comment {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        replyToUserID
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
       article {
         id
         title
@@ -10375,6 +12566,9 @@ export const updateLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        comments {
+          nextToken
+        }
         articleComments {
           nextToken
         }
@@ -10396,6 +12590,9 @@ export const updateLike = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -10561,6 +12758,12 @@ export const updateLike = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -10937,6 +13140,179 @@ export const deleteLike = /* GraphQL */ `
       id
       like
       itemID
+      comment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        createdAt
+        subComments {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
+      subComment {
+        id
+        content
+        likes {
+          nextToken
+        }
+        active
+        targetID
+        article {
+          id
+          title
+          summary
+          content
+          imgURLs
+          qrCodeImgURL
+          tags
+          sortKey
+          active
+          createdAt
+          topicID
+          userID
+          updatedAt
+        }
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        commentID
+        comment {
+          id
+          content
+          active
+          targetID
+          createdAt
+          userID
+          updatedAt
+          owner
+        }
+        createdAt
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        replyToUserID
+        replyTo {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        updatedAt
+        owner
+      }
       article {
         id
         title
@@ -10959,6 +13335,9 @@ export const deleteLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        comments {
+          nextToken
+        }
         articleComments {
           nextToken
         }
@@ -10980,6 +13359,9 @@ export const deleteLike = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
@@ -11145,6 +13527,12 @@ export const deleteLike = /* GraphQL */ `
           createdAt
           badges
           updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
         }
         updatedAt
       }
