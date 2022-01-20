@@ -15,15 +15,13 @@ import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  fetchTopics,
-  modifyArticle,
-  removeSelectedArticle,
-  selectedArticle,
-} from "../../../redux/slice/articleSlice";
-import {
   postMultipleImages,
   postSingleImage,
 } from "../../../redux/slice/generalSlice";
+import {
+  selectedArticle,
+  updateArticleDetail,
+} from "../../../redux/slice/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
@@ -36,6 +34,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
 import { convertToRaw } from "draft-js";
 import { createTopic } from "../../../graphql/mutations";
+import { fetchTopics } from "../../../redux/slice/topicSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
@@ -80,10 +79,7 @@ export default function EditArticle() {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
-    if (articleID && articleID !== "") {
-      dispatch(selectedArticle({ articleID }));
-    }
-    return () => dispatch(removeSelectedArticle());
+    dispatch(selectedArticle({ articleID }));
   }, [articleID, dispatch]);
 
   const { article } = useSelector((state) => state.article.selected);
@@ -155,7 +151,9 @@ export default function EditArticle() {
       createdAt: createdAt,
       tags: GetTags(),
     };
-    const response = await dispatch(modifyArticle({ updateArticleInput }));
+    const response = await dispatch(
+      updateArticleDetail({ updateArticleInput })
+    );
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);

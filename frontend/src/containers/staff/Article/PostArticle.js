@@ -13,7 +13,6 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchTopics, postArticle } from "../../../redux/slice/articleSlice";
 import {
   postMultipleImages,
   postSingleImage,
@@ -29,9 +28,11 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
 import { convertToRaw } from "draft-js";
 import { createTopic } from "../../../graphql/mutations";
+import { fetchTopics } from "../../../redux/slice/topicSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { postArticle } from "../../../redux/slice/articleSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../../Hooks/useTitle";
