@@ -8,7 +8,7 @@ export const marketRentalOptions = {
     { value: "Apartment", label: "公寓" },
     { value: "House", label: "独立屋house" },
     { value: "RoomOnly", label: "单间" },
-    { value: "TownHouse", label: "Townhouse" },
+    { value: "Townhouse", label: "Townhouse" },
     { value: "Other", label: "其他" },
   ],
   laundryType: [

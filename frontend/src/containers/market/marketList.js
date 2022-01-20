@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BackdropLoading from "../../components/BackdropLoading";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import LoadMore from "../../components/LoadMore";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
 import MarketTopBar from "../../components/Market/marketTopBar";
@@ -27,7 +28,6 @@ export default function MarketList() {
   const isFiltering = useMarketItemFilter(filter, "all");
   const starter = useStarter(marketItems, "all", isFiltering);
   const topRef = React.useRef(null);
-
   const clickHandler = () => {
     dispatch(filterClear());
   };
@@ -62,6 +62,7 @@ export default function MarketList() {
               </Box>
             )}
             {starter === false ? <BackdropLoading /> : marketItemRenderList}
+            <LoadMore />
           </Box>
           <Box className={classes.fabBox}>
             <Fab

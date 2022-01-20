@@ -26,6 +26,8 @@ const marketAdapter = createEntityAdapter({
 const initialState = marketAdapter.getInitialState({
   filter: {},
   tagsOccurrence: [],
+  nextToken: null,
+  currentFetchType: null,
   currentFilterType: null,
   fetchMarketItemsStatus: "idle",
   fetchMarketItemsError: null,
@@ -45,19 +47,26 @@ const initialState = marketAdapter.getInitialState({
 
 export const fetchMarketItems = createAsyncThunk(
   "market/fetchMarketItems",
-  async ({ query, filter = { active: { eq: true } } }) => {
+  async ({
+    query,
+    marketType = "all",
+    nextToken = null,
+    filter = { active: { eq: true } },
+  }) => {
     try {
-      // console.log("filter", filter);
+      const variables = {
+        limit: 50,
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: filter,
+      };
+      nextToken !== null && Object.assign(variables, { nextToken: nextToken });
       const MarketItemsData = await API.graphql({
         query: query,
-        variables: {
-          sortKey: "SortKey",
-          sortDirection: "DESC",
-          filter: filter,
-        },
+        variables: variables,
         authMode: "AWS_IAM",
       });
-      return MarketItemsData.data.marketItemSortBySortKey.items;
+      return [MarketItemsData.data.marketItemSortBySortKey, marketType];
     } catch (error) {
       console.log(error);
     }
@@ -82,11 +91,13 @@ export const selectedMarketItem = createAsyncThunk(
 
 export const addressFilteredMarketItem = createAsyncThunk(
   "market/addressFilteredMarketItem",
-  async ({ filter, marketType = "all" }) => {
+  async ({ filter, marketType = "all", nextToken = null }) => {
     try {
+      const variables = { filter: filter, limit: 50 };
+      nextToken !== null && Object.assign(variables, { nextToken: nextToken });
       const response = await API.graphql({
         query: listAddresss,
-        variables: { filter: filter },
+        variables: variables,
         authMode: "AWS_IAM",
       });
       console.log("res:", response);
@@ -148,6 +159,7 @@ export const getAllTagsTerms = createAsyncThunk(
     try {
       const response = await API.graphql({
         query: searchMarketItems,
+
         variables: {
           aggregates: { field: "tags", name: "tagsTerms", type: "terms" },
           filter: filter,
@@ -188,8 +200,11 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        marketAdapter.removeAll(state);
-        marketAdapter.upsertMany(state, action.payload);
+        state.currentFetchType !== action.payload[1] &&
+          marketAdapter.removeAll(state);
+        marketAdapter.upsertMany(state, action.payload[0].items);
+        state.currentFetchType = action.payload[1];
+        state.nextToken = action.payload[0].nextToken;
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
         state.fetchMarketItemsStatus = "failed";

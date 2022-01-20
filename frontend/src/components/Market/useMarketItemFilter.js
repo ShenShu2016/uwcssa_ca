@@ -11,7 +11,7 @@ import {
   marketItemSortBySortKeyRental,
   marketItemSortBySortKeyVehicle,
 } from "./marketQueries";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -111,7 +111,6 @@ export function marketItemFilterUpdate(props, dispatch) {
 export default function useMarketItemFilter(filterList, type) {
   const dispatch = useDispatch();
   const [isFiltering, setIsFiltering] = useState(false);
-
   const query =
     type === "Item"
       ? marketItemSortBySortKeyItem
@@ -123,21 +122,30 @@ export default function useMarketItemFilter(filterList, type) {
       ? marketItemSortBySortKey
       : null;
 
-  useEffect(() => {
+  useMemo(() => {
     const filter = { ...filterList };
     if (query !== null) {
       if (type === "all") {
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
           dispatch(getAllTagsTerms({ filter: { active: { eq: true } } }));
-          dispatch(fetchMarketItems({ query: marketItemSortBySortKey }));
+          dispatch(
+            fetchMarketItems({
+              query: marketItemSortBySortKey,
+              marketType: type,
+            })
+          );
         } else if (
           Object.keys(Object.values(filter)[0][0]).includes("name") ||
           Object.keys(Object.values(filter)[0][0]).includes("tags")
         ) {
           setIsFiltering(true);
           dispatch(
-            fetchMarketItems({ query: marketItemSortBySortKey, filter: filter })
+            fetchMarketItems({
+              query: marketItemSortBySortKey,
+              filter: filter,
+              marketType: type,
+            })
           );
         } else {
           setIsFiltering(true);
@@ -151,16 +159,20 @@ export default function useMarketItemFilter(filterList, type) {
             fetchMarketItems({
               query: query,
               filter: { marketType: { eq: type } },
+              marketType: type,
             })
           );
         } else {
           setIsFiltering(true);
           filter["marketType"] = { eq: type };
-          dispatch(fetchMarketItems({ query: query, filter }));
+          dispatch(
+            fetchMarketItems({ query: query, filter, marketType: type })
+          );
         }
       }
     }
-  }, [dispatch, query, type, filterList]);
-
+    console.log("once");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return isFiltering;
 }

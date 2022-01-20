@@ -33,7 +33,7 @@ import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { usePermit } from "../../Hooks/usePermit";
 import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded";
-import EditAvatar from "./EditAvatar";
+import EditAvatar from "../cropper/EditAvatar";
 
 const useStyles = makeStyles(({ breakpoints, spacing, palette }) => ({
   box: {
@@ -414,6 +414,7 @@ export default function PersonalCard({
           editAvatarOpen={editAvatarOpen}
           handleEditAvatarClose={handleEditAvatarClose}
           item={item}
+          type="foundingMember"
         />
       </Box>
     </Grid>
