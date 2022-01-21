@@ -46,7 +46,7 @@ export default function ArticleRouter() {
         <CustomBreadcrumbs />
         <Switch>
           <Route exact path="/article" component={ArticleList} />
-          <Route path="/article/:articleID" component={ArticleDetail} />
+          <Route path="/article/:id" component={ArticleDetail} />
         </Switch>
       </Box>
       <Footer />

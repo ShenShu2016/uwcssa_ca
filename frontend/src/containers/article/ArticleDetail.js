@@ -1,18 +1,23 @@
 import React, { useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
 import { Skeleton, Typography } from "@mui/material";
 import {
-  removeSelectedArticle,
+  insertComments,
+  removeAllComments,
+} from "../../redux/slice/commentSlice";
+import {
+  selectArticleById,
   selectedArticle,
 } from "../../redux/slice/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import ArticleComments from "../../components/Article/ArticleDetail/ArticleComments";
-import ArticleCommentsPost from "../../components/Article/ArticleDetail/ArticleCommentsPost";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
+import BackdropLoading from "../../components/BackdropLoading";
 import { Box } from "@mui/system";
+import CommentYT from "../../components/Comment/CommentYT";
 import Main from "../../components/Article/ArticleDetail/Main";
 import { makeStyles } from "@mui/styles";
+import { removeAllSubComments } from "../../redux/slice/subCommentSlice";
+import { useParams } from "react-router-dom";
 import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
@@ -41,22 +46,31 @@ const useStyles = makeStyles((theme) => ({
 export default function ArticleDetail() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { articleID } = useParams();
-  useTitle(`近期新闻-${articleID}`);
+  const { id } = useParams();
+  useTitle(`近期新闻-${id}`);
+  const { fetchArticlesStatus } = useSelector((state) => state.article);
   useEffect(() => {
-    if (articleID && articleID !== "") {
-      dispatch(selectedArticle({ articleID }));
+    if (fetchArticlesStatus === "succeeded") {
+      dispatch(selectedArticle(id));
     }
-    return () => dispatch(removeSelectedArticle());
-  }, [articleID, dispatch]);
+    return () => {
+      dispatch(removeAllComments());
+      dispatch(removeAllSubComments());
+    };
+  }, [id, dispatch, fetchArticlesStatus]);
 
-  const { article } = useSelector((state) => state.article.selected);
+  const article = useSelector((state) => selectArticleById(state, id));
+  const { insertCommentsStatus } = useSelector((state) => state.comment);
+
+  useEffect(() => {
+    if (article && article.comments && insertCommentsStatus === "idle") {
+      dispatch(insertComments(article.comments.items));
+    }
+  }, [article, dispatch, insertCommentsStatus]);
 
   return (
     <Box>
-      {article.active === false ? (
-        <Redirect to="/" />
-      ) : (
+      {article ? (
         <div>
           <Typography
             variant="h4"
@@ -72,7 +86,7 @@ export default function ArticleDetail() {
           </Typography>
           <Box className={classes.main}>
             <Box className={classes.body}>
-              {article.active === true ? (
+              {article.content ? (
                 <Main article={article} />
               ) : (
                 <Box sx={{ my: 3 }}>
@@ -81,14 +95,17 @@ export default function ArticleDetail() {
                   <Skeleton variant="rectangular" height={300} />
                 </Box>
               )}
-              <ArticleCommentsPost article={article} />
-              <ArticleComments article={article} />
+              {/* <ArticleCommentsPost id={id} />
+              <ArticleComments article={article} /> */}
+              <CommentYT id={id} />
             </Box>
             <Box>
               <ArticleSideBar />
             </Box>
           </Box>
         </div>
+      ) : (
+        <BackdropLoading />
       )}
     </Box>
   );

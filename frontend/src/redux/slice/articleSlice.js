@@ -1,3 +1,7 @@
+import {
+  articleSortBySortKey,
+  getArticle,
+} from "../CustomQuery/ArticleQueries";
 import { createArticle, updateArticle } from "../../graphql/mutations";
 import {
   createAsyncThunk,
@@ -6,8 +10,6 @@ import {
 } from "@reduxjs/toolkit";
 
 import API from "@aws-amplify/api";
-import { articleSortBySortKey } from "../../graphql/queries";
-import { getArticle } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const articleAdapter = createEntityAdapter({

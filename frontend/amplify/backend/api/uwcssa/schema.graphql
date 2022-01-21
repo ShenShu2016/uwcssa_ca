@@ -211,7 +211,7 @@ type SubComment
   createdAt: AWSDateTime!
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
-  replyToUserID: ID!
+  replyToUserID: ID
   replyTo: User @hasOne(fields: ["replyToUserID"])
 }
 

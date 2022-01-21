@@ -1,12 +1,15 @@
 import { Box, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import {
+  fetchArticles,
+  selectAllArticles,
+} from "../../redux/slice/articleSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import ArticleComponent from "../../components/Article/ArticleComponent";
 import ArticleSideBar from "../../components/Article/ArticleSideBar";
 import BackdropLoading from "../BackdropLoading";
-import React from "react";
 import { makeStyles } from "@mui/styles";
-import { selectAllArticles } from "../../redux/slice/articleSlice";
-import { useSelector } from "react-redux";
 import { useTheme } from "@emotion/react";
 import { useTitle } from "../../Hooks/useTitle";
 
@@ -28,7 +31,13 @@ export default function ArticleList() {
   const theme = useTheme();
   const classes = useStyles();
   const articles = useSelector(selectAllArticles);
-
+  const dispatch = useDispatch();
+  const { fetchArticlesStatus } = useSelector((state) => state.article);
+  useEffect(() => {
+    if (fetchArticlesStatus === "idle" || undefined) {
+      dispatch(fetchArticles());
+    }
+  }, [dispatch, fetchArticlesStatus]);
   const renderList = articles.map((article) => {
     return <ArticleComponent article={article} key={article.id} />;
   });

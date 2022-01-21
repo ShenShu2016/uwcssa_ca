@@ -17,8 +17,8 @@ const commentAdapter = createEntityAdapter({
 });
 
 const initialState = commentAdapter.getInitialState({
-  //   fetchCommentsStatus: "idle",
-  //   fetchCommentsError: null,
+  insertCommentsStatus: "idle",
+  insertCommentsError: null,
   selectedCommentStatus: "idle",
   selectedCommentError: null,
   postCommentStatus: "idle",
@@ -91,7 +91,17 @@ export const updateCommentDetail = createAsyncThunk(
 const commentSlice = createSlice({
   name: "comment",
   initialState,
-  reducers: {},
+  reducers: {
+    insertComments(state, data) {
+      commentAdapter.upsertMany(state, data);
+      state.insertCommentsStatus = "succeeded";
+    },
+    removeAllComments(state, data) {
+      commentAdapter.removeAll(state);
+      state.insertCommentsStatus = "idle";
+      console.log("移除全部Comment");
+    },
+  },
   extraReducers(builder) {
     builder
       // Cases for status of fetchComments (pending, fulfilled, and rejected)
@@ -150,8 +160,8 @@ const commentSlice = createSlice({
   },
 });
 
-export const { removeSelectedComment } = commentSlice.actions;
-
+export const { removeAllComments } = commentSlice.actions;
+export const { insertComments } = commentSlice.actions;
 export const {
   selectAll: selectAllComments,
   selectById: selectCommentById,

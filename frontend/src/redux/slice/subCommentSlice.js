@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import { createSubComment, updateSubComment } from "../../graphql/mutations";
@@ -17,8 +18,8 @@ const subCommentAdapter = createEntityAdapter({
 });
 
 const initialState = subCommentAdapter.getInitialState({
-  //   fetchSubCommentsStatus: "idle",
-  //   fetchSubCommentsError: null,
+  insertSubCommentsStatus: "idle",
+  insertSubCommentsError: null,
   selectedSubCommentStatus: "idle",
   selectedSubCommentError: null,
   postSubCommentStatus: "idle",
@@ -91,7 +92,17 @@ export const updateSubCommentDetail = createAsyncThunk(
 const subCommentSlice = createSlice({
   name: "subComment",
   initialState,
-  reducers: {},
+  reducers: {
+    insertSubComments(state, data) {
+      subCommentAdapter.upsertMany(state, data);
+      state.insertSubCommentsStatus = "succeeded";
+    },
+    removeAllSubComments(state, data) {
+      subCommentAdapter.removeAll(state);
+      state.insertSubCommentsStatus = "idle";
+      console.log("移除全部SubComment");
+    },
+  },
   extraReducers(builder) {
     builder
       // Cases for status of fetchSubComments (pending, fulfilled, and rejected)
@@ -150,12 +161,18 @@ const subCommentSlice = createSlice({
   },
 });
 
-export const { removeSelectedSubComment } = subCommentSlice.actions;
-
+export const { removeAllSubComments } = subCommentSlice.actions;
+export const { insertSubComments } = subCommentSlice.actions;
 export const {
   selectAll: selectAllSubComments,
   selectById: selectSubCommentById,
   selectIds: selectSubCommentIds,
 } = subCommentAdapter.getSelectors((state) => state.subComment);
+
+export const selectSubCommentsByCommentID = (commentID) =>
+  createSelector(selectAllSubComments, (subComments) => {
+    //console.log(commentID);
+    return subComments.filter((x) => x.commentID === commentID);
+  });
 
 export default subCommentSlice.reducer;

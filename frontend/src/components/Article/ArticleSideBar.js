@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ArticleSideBar() {
   const classes = useStyles();
-
   const location = useLocation();
   const { articleID } = useParams();
   const articles = useSelector(selectAllArticles);
