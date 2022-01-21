@@ -144,8 +144,8 @@ const articleSlice = createSlice({
       })
       .addCase(updateArticleDetail.fulfilled, (state, action) => {
         state.updateArticleDetailStatus = "succeeded";
-        // state.articles.unshift(action.payload.data.createArticle);
-        // articleAdapter.upsertOne(state, action.payload);
+        //state.articles.unshift(action.payload.data.createArticle);
+        //articleAdapter.upsertOne(state, action.payload);
         // state.updateArticleStatus = "idle";
       })
       .addCase(updateArticleDetail.rejected, (state, action) => {

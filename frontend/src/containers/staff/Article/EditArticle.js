@@ -79,7 +79,7 @@ export default function EditArticle() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(id);
+  //console.log(id);
   useEffect(() => {
     dispatch(selectedArticle(id));
   }, [id, dispatch]);
@@ -100,6 +100,7 @@ export default function EditArticle() {
     control,
     formState: { errors },
   } = useForm();
+  const topics = useSelector(selectAllTopics);
   useEffect(() => {
     dispatch(fetchTopics());
   }, [dispatch]);
@@ -113,8 +114,6 @@ export default function EditArticle() {
       setCreatedAt(article.createdAt);
     }
   }, [article]);
-
-  const topics = useSelector(selectAllTopics);
 
   const uploadArticleImg = async (e) => {
     setLoading(true);
