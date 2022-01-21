@@ -81,11 +81,15 @@ export const postArticle = createAsyncThunk(
 
 export const updateArticleDetail = createAsyncThunk(
   "article/updateArticleDetail",
-  async (updateArticleDetail) => {
-    const response = await API.graphql(
-      graphqlOperation(updateArticle, { input: updateArticleDetail })
-    );
-    return response.data.updateArticle;
+  async ({ updateArticleInput }) => {
+    try {
+      const response = await API.graphql(
+        graphqlOperation(updateArticle, { input: updateArticleInput })
+      );
+      return response.data.updateArticle;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -141,7 +145,7 @@ const articleSlice = createSlice({
       .addCase(updateArticleDetail.fulfilled, (state, action) => {
         state.updateArticleDetailStatus = "succeeded";
         // state.articles.unshift(action.payload.data.createArticle);
-        articleAdapter.upsertOne(state, action.payload);
+        // articleAdapter.upsertOne(state, action.payload);
         // state.updateArticleStatus = "idle";
       })
       .addCase(updateArticleDetail.rejected, (state, action) => {

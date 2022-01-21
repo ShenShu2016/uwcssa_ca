@@ -14,11 +14,13 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
+import { fetchTopics, selectAllTopics } from "../../../redux/slice/topicSlice";
 import {
   postMultipleImages,
   postSingleImage,
 } from "../../../redux/slice/generalSlice";
 import {
+  selectArticleById,
   selectedArticle,
   updateArticleDetail,
 } from "../../../redux/slice/articleSlice";
@@ -34,7 +36,6 @@ import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
 import { convertToRaw } from "draft-js";
 import { createTopic } from "../../../graphql/mutations";
-import { fetchTopics } from "../../../redux/slice/topicSlice";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
@@ -75,22 +76,23 @@ const Input = styled("input")({
 export default function EditArticle() {
   const classes = useStyles();
   useTitle("编辑新闻");
-  const { articleID } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log(id);
   useEffect(() => {
-    dispatch(selectedArticle({ articleID }));
-  }, [articleID, dispatch]);
+    dispatch(selectedArticle(id));
+  }, [id, dispatch]);
 
-  const { article } = useSelector((state) => state.article.selected);
+  const article = useSelector((state) => selectArticleById(state, id));
   const { username } = useSelector((state) => state.userAuth.user);
-  const [tags, setTags] = useState(article.tags);
-  const [imgURLs, setImgURLs] = useState(article.imgURLs);
-  const [qrCodeImgURL, setQrCodeImgURL] = useState(article.qrCodeImgURL);
+  const [tags, setTags] = useState();
+  const [imgURLs, setImgURLs] = useState();
+  const [qrCodeImgURL, setQrCodeImgURL] = useState();
   const [content, setContent] = useState();
   const [content2, setContent2] = useState();
   const [loading, setLoading] = useState(false);
-  const [createdAt, setCreatedAt] = useState(article.createdAt);
+  const [createdAt, setCreatedAt] = useState();
   const timer = useRef();
 
   const {
@@ -103,13 +105,16 @@ export default function EditArticle() {
   }, [dispatch]);
 
   useEffect(() => {
-    setImgURLs(article.imgURLs);
-    setQrCodeImgURL(article.qrCodeImgURL);
-    setContent(article.content);
-    setCreatedAt(article.createdAt);
+    if (article) {
+      setTags(article.tags);
+      setImgURLs(article.imgURLs);
+      setQrCodeImgURL(article.qrCodeImgURL);
+      setContent(article.content);
+      setCreatedAt(article.createdAt);
+    }
   }, [article]);
 
-  const { topics } = useSelector((state) => state.article);
+  const topics = useSelector(selectAllTopics);
 
   const uploadArticleImg = async (e) => {
     setLoading(true);
@@ -157,7 +162,8 @@ export default function EditArticle() {
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);
-      history.push(`/article/${response.payload.data.updateArticle.id}`);
+      console.log(response);
+      history.push(`/article/${id}`);
     } else {
       timer.current = window.setTimeout(() => {
         setLoading(false);
@@ -203,7 +209,7 @@ export default function EditArticle() {
   // console.log("content", content);
   return (
     <div>
-      {article.active === true ? (
+      {topics && article && article.active === true ? (
         <Box
           className={classes.root}
           component="form"
