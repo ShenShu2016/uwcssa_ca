@@ -10,6 +10,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import LoadMore from "../../components/LoadMore";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketSideBar from "../../components/Market/marketSideBar";
+import MarketSkeleton from "../../components/Market/MarketSkeleton";
 import MarketTopBar from "../../components/Market/marketTopBar";
 import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
@@ -47,6 +48,7 @@ export default function MarketList() {
     });
   return (
     <Box className={classes.root}>
+      {starter === false && <BackdropLoading />}
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
@@ -61,7 +63,7 @@ export default function MarketList() {
                 Found {marketItems.length} related results...
               </Box>
             )}
-            {starter === false ? <BackdropLoading /> : marketItemRenderList}
+            {starter === false ? <MarketSkeleton /> : marketItemRenderList}
             <LoadMore />
           </Box>
           <Box className={classes.fabBox}>
