@@ -16,10 +16,9 @@ import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import { green } from "@mui/material/colors";
 import { postSubComment } from "../../../redux/slice/subCommentSlice";
 
-export default function ArticleReplyComments({
+export default function PostSubComment({
   isReplyOpen,
   item,
-  idx,
   handleSubCommentReply,
 }) {
   const dispatch = useDispatch();
@@ -31,31 +30,26 @@ export default function ArticleReplyComments({
     handleSubmit,
     control,
     reset,
-    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      comment: "",
+      content: "",
     },
   });
 
-  // const onChange = (e) => {
-  //   e.preventDefault();
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-  // const { comment } = formData;
-
-  const onSubmit = async (e) => {
-    const createArticleSubCommentInput = {
-      content: getValues("comment"),
+  const onSubmit = async (data) => {
+    const createSubCommentInput = {
+      ...data,
       active: true,
-      articleCommentID: item.id,
+      commentID: item.id,
+      targetID: item.targetID,
       userID: user.username,
     };
+    console.log(createSubCommentInput);
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
-        postSubComment({ createArticleSubCommentInput, idx })
+        postSubComment({ createSubCommentInput })
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
@@ -84,7 +78,7 @@ export default function ArticleReplyComments({
         <Grid item xs>
           <Box sx={{ my: 1 }}>
             <Controller
-              name="comment"
+              name="content"
               control={control}
               rules={{
                 required: true,
@@ -99,8 +93,8 @@ export default function ArticleReplyComments({
                   disabled={loading || !isAuthenticated}
                   onChange={onChange}
                   value={value}
-                  error={!!errors.comment}
-                  helperText={errors.comment ? "不能为空" : null}
+                  error={!!errors.content}
+                  helperText={errors.content ? "不能为空" : null}
                 />
               )}
             />

@@ -27,7 +27,7 @@ export default function StaffRouter() {
         />
         <Route
           exact
-          path="/staff/article/editArticle/:articleID"
+          path="/staff/article/editArticle/:id"
           component={EditArticle}
         />
         <Route

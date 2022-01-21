@@ -13,7 +13,7 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchTopics, postArticle } from "../../../redux/slice/articleSlice";
+import { fetchTopics, selectAllTopics } from "../../../redux/slice/topicSlice";
 import {
   postMultipleImages,
   postSingleImage,
@@ -32,6 +32,7 @@ import { createTopic } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { postArticle } from "../../../redux/slice/articleSlice";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router";
 import { useTitle } from "../../../Hooks/useTitle";
@@ -93,11 +94,11 @@ export default function PostArticle() {
       topicID: "",
     },
   });
+
+  const topics = useSelector(selectAllTopics);
   useEffect(() => {
     dispatch(fetchTopics());
   }, [dispatch]);
-
-  const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
     setLoading(true);
@@ -148,7 +149,8 @@ export default function PostArticle() {
     const response = await dispatch(postArticle({ createArticleInput }));
 
     if (response.meta.requestStatus === "fulfilled") {
-      history.push(`/article/${response.payload.data.createArticle.id}`);
+      //console.log(response);
+      history.push(`/article/${response.payload.id}`);
     } else {
       timer.current = window.setTimeout(() => {
         setLoading(false);

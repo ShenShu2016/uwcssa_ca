@@ -6,7 +6,6 @@ import API from "@aws-amplify/api";
 import Compressor from "compressorjs";
 import Storage from "@aws-amplify/storage";
 import awsmobile from "../../aws-exports";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
 const initialState = {
@@ -83,49 +82,66 @@ export const fetchForumPostCounts = createAsyncThunk(
 export const postLike = createAsyncThunk(
   "general/postLike",
   async ({ itemID, username, isLike }) => {
-    const response = await API.graphql(
-      graphqlOperation(createLike, {
-        input: {
-          id: `${itemID}-${username}`,
-          like: isLike,
-          itemID: itemID,
-          userID: username,
+    try {
+      const response = await API.graphql({
+        query: createLike,
+        variables: {
+          input: {
+            id: `${itemID}-${username}`,
+            like: isLike,
+            itemID: itemID,
+            userID: username,
+          },
         },
-      })
-    );
-    console.log(response);
-    return response.data;
+      });
+      //console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const putLike = createAsyncThunk(
   "general/putLike",
   async ({ itemID, username, isLike }) => {
-    const response = await API.graphql(
-      graphqlOperation(updateLike, {
-        input: {
-          id: `${itemID}-${username}`,
-          like: isLike,
+    try {
+      const response = await API.graphql({
+        query: updateLike,
+
+        variables: {
+          input: {
+            id: `${itemID}-${username}`,
+            like: isLike,
+          },
         },
-      })
-    );
-    console.log(response);
-    return response.data;
+      });
+      //console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const removeLike = createAsyncThunk(
   "general/removeLike",
   async ({ itemID, username }) => {
-    const response = await API.graphql(
-      graphqlOperation(deleteLike, {
-        input: {
-          id: `${itemID}-${username}`,
+    try {
+      const response = await API.graphql({
+        query: deleteLike,
+        variables: {
+          input: {
+            id: `${itemID}-${username}`,
+          },
         },
-      })
-    );
-    console.log(response);
-    return response.data;
+      });
+
+      //console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

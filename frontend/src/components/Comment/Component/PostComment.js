@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
-import SignInRequest from "../../Comment/Component/SignInRequest";
+import SignInRequest from "./SignInRequest";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postComment } from "../../../redux/slice/commentSlice";
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   card: {},
 });
 
-export default function ArticleCommentsPost({ id }) {
+export default function PostComment({ id }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const {
