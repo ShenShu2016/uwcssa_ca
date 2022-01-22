@@ -682,7 +682,16 @@ export default function EditJob() {
                 variant="contained"
                 type="submit"
                 color="primary"
-                disabled={loading}
+                sx={{ marginBlock: "2rem" }}
+              >
+                测试
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                type="submit"
+                color="primary"
+                disabled
                 sx={{ marginBlock: "2rem" }}
               >
                 更新
