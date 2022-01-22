@@ -2,6 +2,7 @@ import {
   Box,
   CircularProgress,
   Container,
+  DialogTitle,
   Divider,
   FormControl,
   FormControlLabel,
@@ -29,7 +30,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import DateTimePicker from "@mui/lab/DateTimePicker";
@@ -308,8 +308,11 @@ export default function EditEvent() {
 
   return (
     <div>
-      <AppBar>
+      <DialogTitle>
         <Toolbar>
+          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            活动编辑
+          </Typography>
           <IconButton
             edge="start"
             color="inherit"
@@ -318,11 +321,10 @@ export default function EditEvent() {
           >
             <CloseIcon />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            活动编辑
-          </Typography>
         </Toolbar>
-      </AppBar>
+        <Divider light />
+      </DialogTitle>
+
       <Container maxWidth="md">
         {event.active === true ? (
           <Box
@@ -356,7 +358,7 @@ export default function EditEvent() {
               />
               <Controller
                 name="topicID"
-                defaultValue={event.topicID}
+                defaultValue={event.topic.id}
                 control={control}
                 rules={{
                   required: true,
