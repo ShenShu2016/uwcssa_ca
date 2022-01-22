@@ -463,20 +463,20 @@ export default function EditJob() {
                         {...register(`requirements.${i}.requirement`)}
                       />
                     </ListItemText>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <IconButton
                         type="button"
                         onClick={() => requirementsRemove(i)}
                       >
                         <DeleteRoundedIcon />
                       </IconButton>
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                   </ListItem>
                 </List>
               ))}
             </>
 
-            <Button
+            {/* <Button
               sx={{ margin: "1rem" }}
               variant="contained"
               type="button"
@@ -485,7 +485,7 @@ export default function EditJob() {
               }}
             >
               增加
-            </Button>
+            </Button> */}
 
             <Divider />
             <Typography variant="h5" marginTop={"1rem"} gutterBottom>
@@ -527,26 +527,10 @@ export default function EditJob() {
                         {...register(`bonus.${i}.bonus`)}
                       />
                     </ListItemText>
-                    <ListItemIcon>
-                      <IconButton type="button" onClick={() => bonusRemove(i)}>
-                        <DeleteRoundedIcon />
-                      </IconButton>
-                    </ListItemIcon>
                   </ListItem>
                 </List>
               ))}
             </>
-
-            <Button
-              sx={{ margin: "1rem" }}
-              variant="contained"
-              type="button"
-              onClick={() => {
-                bonusAppend({ bonus: "" });
-              }}
-            >
-              增加
-            </Button>
 
             <Divider />
             <Typography variant="h5" marginTop={"1rem"} gutterBottom>
@@ -589,29 +573,10 @@ export default function EditJob() {
                         {...register(`schedule.${i}.schedule`)}
                       />
                     </ListItemText>
-                    <ListItemIcon>
-                      <IconButton
-                        type="button"
-                        onClick={() => scheduleRemove(i)}
-                      >
-                        <DeleteRoundedIcon />
-                      </IconButton>
-                    </ListItemIcon>
                   </ListItem>
                 </List>
               ))}
             </>
-
-            <Button
-              sx={{ margin: "1rem" }}
-              variant="contained"
-              type="button"
-              onClick={() => {
-                scheduleAppend({ schedule: "" });
-              }}
-            >
-              增加
-            </Button>
 
             <Divider />
             <Typography variant="h5" marginTop={"1rem"} gutterBottom>
@@ -652,29 +617,11 @@ export default function EditJob() {
                         {...register(`benefits.${i}.benefits`)}
                       />
                     </ListItemText>
-                    <ListItemIcon>
-                      <IconButton
-                        type="button"
-                        onClick={() => benefitsRemove(i)}
-                      >
-                        <DeleteRoundedIcon />
-                      </IconButton>
-                    </ListItemIcon>
                   </ListItem>
                 </List>
               ))}
             </>
 
-            <Button
-              sx={{ margin: "1rem" }}
-              variant="contained"
-              type="button"
-              onClick={() => {
-                benefitsAppend({ benefits: "" });
-              }}
-            >
-              增加
-            </Button>
             {/* see console */}
             <Grid item xs={12} md={6}>
               <Button

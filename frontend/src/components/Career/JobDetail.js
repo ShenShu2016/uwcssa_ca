@@ -53,7 +53,7 @@ export default function JobDetail(props) {
           <Typography variant="h6">基本要求:</Typography>
           <br />
           {job.requirements
-            ? job.requirements.map((requirement, index) => {
+            ? Object.values(job.requirements).map((requirement, index) => {
                 return (
                   <div key={index}>
                     <li className={classes.body}>{requirement}</li>
@@ -65,7 +65,7 @@ export default function JobDetail(props) {
           <Typography variant="h6">额外要求(nice to have):</Typography>
           <br />
           {job.bonus
-            ? job.bonus.map((bonus, index) => {
+            ? Object.values(job.bonus).map((bonus, index) => {
                 return (
                   <div key={index}>
                     <li className={classes.body}>{bonus}</li>
@@ -77,7 +77,7 @@ export default function JobDetail(props) {
           <Typography variant="h6">工作计划与时间安排:</Typography>
           <br />
           {job.schedule
-            ? job.schedule.map((schedule, index) => {
+            ? Object.values(job.schedule).map((schedule, index) => {
                 return (
                   <div key={index}>
                     <li className={classes.body}>{schedule}</li>
@@ -89,7 +89,7 @@ export default function JobDetail(props) {
           <Typography variant="h6">BENEFITS:</Typography>
           <br />
           {job.benefits
-            ? job.benefits.map((benefit, index) => {
+            ? Object.values(job.benefits).map((benefit, index) => {
                 return (
                   <div key={index}>
                     <li className={classes.body}>{benefit}</li>
