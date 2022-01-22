@@ -10,7 +10,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import {
-  listAddresss,
+  listAddresses,
   searchMarketItems,
 } from "../../components/Market/marketQueries";
 
@@ -95,13 +95,14 @@ export const addressFilteredMarketItem = createAsyncThunk(
     try {
       const variables = { filter: filter, limit: 50 };
       nextToken !== null && Object.assign(variables, { nextToken: nextToken });
+      console.log(variables);
       const response = await API.graphql({
-        query: listAddresss,
+        query: listAddresses,
         variables: variables,
         authMode: "AWS_IAM",
       });
       console.log("res:", response);
-      return [response.data.listAddresss.items, marketType];
+      return [response.data.listAddresses.items, marketType];
     } catch (error) {
       console.log(error);
     }
@@ -200,8 +201,8 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        state.currentFetchType !== action.payload[1] &&
-          marketAdapter.removeAll(state);
+        // state.currentFetchType !== action.payload[1] &&
+        marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload[0].items);
         state.currentFetchType = action.payload[1];
         state.nextToken = action.payload[0].nextToken;

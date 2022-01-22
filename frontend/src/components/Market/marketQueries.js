@@ -379,13 +379,13 @@ export const getMarketUserInfo = /* GraphQL */ `
   }
 `;
 
-export const listAddresss = /* GraphQL */ `
-  query ListAddresss(
+export const listAddresses = /* GraphQL */ `
+  query listAddresses(
     $filter: ModelAddressFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listAddresss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         description

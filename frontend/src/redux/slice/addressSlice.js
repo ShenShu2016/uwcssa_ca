@@ -24,7 +24,7 @@ import {
 import API from "@aws-amplify/api";
 import { getAddress } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listAddresss } from "../../components/Market/marketQueries";
+import { listAddresses } from "../../components/Market/marketQueries";
 
 const addressAdapter = createEntityAdapter({
   // selectId: (item) => item.id,
@@ -49,10 +49,10 @@ export const fetchAddresss = createAsyncThunk(
   async () => {
     try {
       const AddresssData = await API.graphql({
-        query: listAddresss,
+        query: listAddresses,
         authMode: "AWS_IAM",
       });
-      return AddresssData.data.listAddresss.items;
+      return AddresssData.data.listAddresses.items;
     } catch (error) {
       console.log(error);
     }
