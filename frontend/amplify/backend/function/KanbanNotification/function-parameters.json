@@ -3,9 +3,9 @@
     {
       "type": "ProjectLayer",
       "resourceName": "uwcssanodejsLibrarieslayer",
-      "env": "develop",
       "version": "Always choose latest version",
-      "isLatestVersionSelected": true
+      "isLatestVersionSelected": true,
+      "env": "develop"
     }
   ]
 }

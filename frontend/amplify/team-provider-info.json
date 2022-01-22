@@ -19,11 +19,23 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-722f32686865765a7566-build.zip"
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-4f376f5a644c48584c47-build.zip"
         },
         "updateLastReplyAt": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/updateLastReplyAt-6b535632584232744349-build.zip"
+          "s3Key": "amplify-builds/updateLastReplyAt-72497750703070767052-build.zip"
+        },
+        "userMutationLog": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/userMutationLog-3573554f464576464175-build.zip"
+        },
+        "KanbanNotification": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
+        },
+        "uwcssanodejsLibrarieslayer": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersion00bd8539-build.zip"
         }
       }
     }

@@ -45,6 +45,7 @@ type User
         { allow: groups, groups: ["staff"], operations: [read] }
         { allow: public, operations: [read], provider: iam }
         { allow: private, operations: [read], provider: iam }
+        { allow: private, operations: [read] }
       ]
     )
   userEducations: [UserEducation] @hasMany(indexName: "byUser", fields: ["id"])
