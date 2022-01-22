@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import {
   selectUwcssaJobById,
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
+import { usePermit } from "../../Hooks/usePermit";
 
 // import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
 
@@ -35,8 +36,9 @@ export default function JobDetail(props) {
   useEffect(() => {
     dispatch(selectedUwcssaJob(id));
   }, [id, dispatch]);
-
+  const { user } = useSelector((state) => state.userAuth);
   const job = useSelector((state) => selectUwcssaJobById(state, id));
+  const isPermit = usePermit(user.name, "admin");
   //console.log(job);
   return (
     <div className={classes.root}>
@@ -96,14 +98,30 @@ export default function JobDetail(props) {
               })
             : ""}
           <br />
-          <Button
-            variant="outlined"
-            color="primary"
-            to={`/career/applyJob/${job.id}`}
-            component={Link}
-          >
-            申请
-          </Button>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Button
+                variant="outlined"
+                color="primary"
+                to={`/career/applyJob/${job.id}`}
+                component={Link}
+              >
+                申请
+              </Button>
+            </Grid>
+            {isPermit ? (
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="warning"
+                  to={`/staff/uwcssaJob//editJob/${job.id}`}
+                  component={Link}
+                >
+                  编辑
+                </Button>
+              </Grid>
+            ) : null}
+          </Grid>
         </Box>
       ) : (
         <BackdropLoading />
