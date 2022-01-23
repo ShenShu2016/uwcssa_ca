@@ -9,8 +9,10 @@ import useMarketItemFilter, {
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
+import LoadMore from "../../components/LoadMore";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import MarketSkeleton from "../../components/Market/MarketSkeleton";
 import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useDispatch } from "react-redux";
@@ -79,6 +81,7 @@ export default function MarketRental() {
   };
   return (
     <Box className={classes.root}>
+      {starter === false && <BackdropLoading />}
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
@@ -106,7 +109,8 @@ export default function MarketRental() {
                 Found {filteredItems.length} related results...
               </Box>
             )}
-            {starter === false ? <BackdropLoading /> : itemRenderList}
+            {starter === false ? <MarketSkeleton /> : itemRenderList}
+            <LoadMore />
           </Box>
         </Box>
       </Stack>

@@ -61,12 +61,18 @@ export const fetchMarketItems = createAsyncThunk(
         filter: filter,
       };
       nextToken !== null && Object.assign(variables, { nextToken: nextToken });
+      marketType !== "all" &&
+        Object.assign(variables["filter"], { marketType: { eq: marketType } });
       const MarketItemsData = await API.graphql({
         query: query,
         variables: variables,
         authMode: "AWS_IAM",
       });
-      return [MarketItemsData.data.marketItemSortBySortKey, marketType];
+      return [
+        MarketItemsData.data.marketItemSortBySortKey,
+        marketType,
+        nextToken === null,
+      ];
     } catch (error) {
       console.log(error);
     }
@@ -201,8 +207,7 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        // state.currentFetchType !== action.payload[1] &&
-        marketAdapter.removeAll(state);
+        action.payload[2] && marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload[0].items);
         state.currentFetchType = action.payload[1];
         state.nextToken = action.payload[0].nextToken;

@@ -122,8 +122,7 @@ export default function useMarketItemFilter(filterList, type) {
       : type === "all"
       ? marketItemSortBySortKey
       : null;
-  console.log(Object.keys(filter), starter);
-
+  console.log(type);
   useEffect(() => {
     if (Object.keys(filter).length !== 0) {
       console.log("???");
