@@ -122,14 +122,12 @@ export default function useMarketItemFilter(filterList, type) {
       : type === "all"
       ? marketItemSortBySortKey
       : null;
-  console.log(type);
   useEffect(() => {
     if (Object.keys(filter).length !== 0) {
-      console.log("???");
-      setStarter((prev) => !prev);
+      setStarter(true);
     }
   }, [filter]);
-
+  console.log(starter);
   useEffect(() => {
     if (starter) {
       if (type === "all") {
@@ -177,7 +175,6 @@ export default function useMarketItemFilter(filterList, type) {
           );
         }
       }
-      console.log("once");
       setStarter(false);
     }
   }, [filter, type, dispatch, query, starter]);

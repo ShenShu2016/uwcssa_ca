@@ -44,9 +44,7 @@ export default function MarketRental() {
     marketItemFilterUpdate(data, dispatch);
   });
 
-  const { filter: filterList, tagsOccurrence } = useSelector(
-    (state) => state.market
-  );
+  const { filter: filterList } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filterList, "Rental");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -87,7 +85,6 @@ export default function MarketRental() {
         className={classes.contain}
       >
         <FilterInfo
-          darkTheme={darkTheme}
           form="plain"
           type="Rental"
           control={control}
@@ -96,10 +93,8 @@ export default function MarketRental() {
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
-            darkTheme={darkTheme}
             control={control}
             type="Rental"
-            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />

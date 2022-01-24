@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import { CategoryIcons, SearchArea } from "./marketItemSearch";
 import React, { useState } from "react";
+import { filterClear, updateClickedTags } from "../../redux/slice/marketSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -29,10 +31,8 @@ import { Link } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PetsIcon from "@mui/icons-material/Pets";
 import PropTypes from "prop-types";
-import { filterClear } from "../../redux/slice/marketSlice";
 import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { marketItemStyle } from "./marketItemCss";
-import { useDispatch } from "react-redux";
 
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, darkTheme, ...other } = props;
@@ -77,12 +77,9 @@ ConfirmationDialogRaw.propTypes = {
 };
 
 export default function MarketImgTopFilter({
-  darkTheme,
   control,
   type,
-  tagsOccurrence,
   handleSearch,
-  filterList,
   handleReset,
 }) {
   const useStyles = marketItemStyle;
@@ -90,7 +87,8 @@ export default function MarketImgTopFilter({
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
-  const [clickedTags, setClickedTags] = useState([]);
+  const { tagsOccurrence, clickedTags } = useSelector((state) => state.market);
+  const { darkTheme } = useSelector((state) => state.general);
   React.useEffect(() => {
     marketItemFilterUpdate({ tags: clickedTags, type: type }, dispatch);
   }, [dispatch, clickedTags, type]);
@@ -137,11 +135,7 @@ export default function MarketImgTopFilter({
                   label={tag}
                   color={clickedTags.includes(tag) ? "primary" : "default"}
                   onClick={() => {
-                    if (clickedTags.includes(tag)) {
-                      setClickedTags((prev) => prev.filter((t) => t !== tag));
-                    } else {
-                      setClickedTags((prev) => prev.concat(tag));
-                    }
+                    dispatch(updateClickedTags(tag));
                   }}
                 />
               );
@@ -273,11 +267,7 @@ export default function MarketImgTopFilter({
                   label={tag}
                   color={clickedTags.includes(tag) ? "primary" : "default"}
                   onClick={() => {
-                    if (clickedTags.includes(tag)) {
-                      setClickedTags((prev) => prev.filter((t) => t !== tag));
-                    } else {
-                      setClickedTags((prev) => prev.concat(tag));
-                    }
+                    dispatch(updateClickedTags(tag));
                   }}
                 />
               );
@@ -302,7 +292,6 @@ export default function MarketImgTopFilter({
             form="button"
             type={type}
             handleSearch={handleSearch}
-            filterList={filterList}
             handleReset={handleReset}
           />
         </Stack>
