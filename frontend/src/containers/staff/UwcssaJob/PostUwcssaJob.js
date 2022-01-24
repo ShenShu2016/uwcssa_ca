@@ -92,10 +92,10 @@ export default function PostUwcssaJob(props) {
   const [uwcssaJobData, setUwcssaJobData] = useState({
     introduction: "",
     title: "",
-    requirements: [""],
-    bonus: [""],
-    benefits: [""],
-    schedule: [""],
+    requirements: [{ requirement: "" }],
+    bonus: [{ bonus: "" }],
+    benefits: [{ benefits: "" }],
+    schedule: [{ schedule: "" }],
     userID: user ? user.username : "",
     departmentName: "",
   });
@@ -104,15 +104,16 @@ export default function PostUwcssaJob(props) {
     register,
     control,
     handleSubmit,
+    getValues,
     // reset,
     // watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      requirements: [""],
-      bonus: [""],
-      schedule: [""],
-      benefits: [""],
+      requirements: [{ requirement: "" }],
+      bonus: [{ bonus: "" }],
+      schedule: [{ schedule: "" }],
+      benefits: [{ benefits: "" }],
     },
   });
   const {
@@ -140,79 +141,21 @@ export default function PostUwcssaJob(props) {
   } = useFieldArray({ control, name: "benefits" });
   const [introduction, setIntroduction] = useState(null);
 
-  //   const { fields, append, remove } = useFieldArray({
-  //     name: "requirements",
-  //     control,
-  //   });
-  // const numberOfRequirements = watch("numberOfRequirements");
-  // const numberOfBonus = watch("numberOfBonus");
-  // const numberOfSchedule = watch("numberOfSchedule");
-  // const numberOfBenefits = watch("numberOfBenefits");
+  const getFinalList = ({ list, field }) => {
+    let temp;
+    temp = list.field.map((item) => {
+      return item.field;
+    });
+    return temp;
+  };
 
-  // useEffect(() => {
-  //   const newVal = parseInt(numberOfRequirements || 0);
-  //   const oldVal = requirementsFields.length;
-  //   if (newVal > oldVal) {
-  //     for (let i = oldVal; i < newVal; i++) {
-  //       requirementsAppend([""]);
-  //     }
-  //   } else {
-  //     for (let i = oldVal; i > newVal; i--) {
-  //       requirementsRemove(i - 1);
-  //     }
-  //   }
-  // }, [
-  //   numberOfRequirements,
-  //   requirementsAppend,
-  //   requirementsFields.length,
-  //   requirementsRemove,
-  // ]);
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(getFinalList(data, data.requirements));
+  };
 
-  // useEffect(() => {
-  //   const newVal = parseInt(numberOfBonus || 0);
-  //   const oldVal = bonusFields.length;
-  //   if (newVal > oldVal) {
-  //     for (let i = oldVal; i < newVal; i++) {
-  //       bonusAppend([""]);
-  //     }
-  //   } else {
-  //     for (let i = oldVal; i > newVal; i--) {
-  //       bonusRemove(i - 1);
-  //     }
-  //   }
-  // }, [numberOfBonus, bonusAppend, bonusFields.length, bonusRemove]);
-
-  // useEffect(() => {
-  //   const newVal = parseInt(numberOfSchedule || 0);
-  //   const oldVal = scheduleFields.length;
-  //   if (newVal > oldVal) {
-  //     for (let i = oldVal; i < newVal; i++) {
-  //       scheduleAppend([""]);
-  //     }
-  //   } else {
-  //     for (let i = oldVal; i > newVal; i--) {
-  //       scheduleRemove(i - 1);
-  //     }
-  //   }
-  // }, [numberOfSchedule, scheduleAppend, scheduleFields.length, scheduleRemove]);
-
-  // useEffect(() => {
-  //   const newVal = parseInt(numberOfBenefits || 0);
-  //   const oldVal = benefitsFields.length;
-  //   if (newVal > oldVal) {
-  //     for (let i = oldVal; i < newVal; i++) {
-  //       benefitsAppend([""]);
-  //     }
-  //   } else {
-  //     for (let i = oldVal; i > newVal; i--) {
-  //       benefitsRemove(i - 1);
-  //     }
-  //   }
-  // }, [numberOfBenefits, benefitsAppend, benefitsFields.length, benefitsRemove]);
-
-  const onSubmit = (data) => console.log("data", data);
   {
-    /*  const onSubmit = async (data) => {
+    /*const onSubmit = async (data) => {
     //   // setLoading(true);
 
     const createUwcssaJobInput = {
@@ -478,7 +421,7 @@ export default function PostUwcssaJob(props) {
                     fullWidth
                     variant="standard"
                     type="text"
-                    {...register(`requirements[${i}]`)}
+                    {...register(`requirements[${i}].requirement`)}
                   />
                 </ListItemText>
                 <ListItemIcon>
@@ -534,7 +477,7 @@ export default function PostUwcssaJob(props) {
                       fullWidth
                       variant="standard"
                       type="text"
-                      {...register(`bonus[${i}]`)}
+                      {...register(`bonus[${i}].bonus`)}
                     />
                   </ListItemText>
                   <ListItemIcon>
@@ -597,7 +540,8 @@ export default function PostUwcssaJob(props) {
                       fullWidth
                       variant="standard"
                       type="text"
-                      {...register(`schedule[${i}]`)}
+                      control={control}
+                      {...register(`schedule[${i}].schedule`)}
                     />
                   </ListItemText>
                   <ListItemIcon>
@@ -653,7 +597,7 @@ export default function PostUwcssaJob(props) {
                     <Input
                       fullWidth
                       type="text"
-                      {...register(`benefits[${i}]`)}
+                      {...register(`benefits[${i}].benefits`)}
                     />
                   </ListItemText>
                   <ListItemIcon>
