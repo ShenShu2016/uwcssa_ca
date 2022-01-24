@@ -52,16 +52,20 @@ export const fetchArticles = createAsyncThunk(
 export const selectedArticle = createAsyncThunk(
   "article/selectedArticle",
   async (id) => {
-    const response = await API.graphql({
-      query: getArticle,
-      variables: { id: id },
-      authMode: "AWS_IAM",
-    });
-    // console.log("what?", response);
-    if (response.data.getArticle === null) {
-      return { id: id, description: "not-found" };
+    try {
+      const response = await API.graphql({
+        query: getArticle,
+        variables: { id: id },
+        authMode: "AWS_IAM",
+      });
+      // console.log("what?", response);
+      if (response.data.getArticle === null) {
+        return { id: id, description: "not-found" };
+      }
+      return response.data.getArticle;
+    } catch (error) {
+      console.log(error);
     }
-    return response.data.getArticle;
   }
 );
 

@@ -1,9 +1,8 @@
 import { Avatar, Badge } from "@mui/material";
+import { makeStyles, useTheme } from "@mui/styles";
 
 import { Link } from "react-router-dom";
 import React from "react";
-import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
 import uwindsor from "../../static/svg icons/uwindsor.svg";
 
@@ -38,13 +37,10 @@ function stringAvatar(name) {
     children: `${name.slice(0, 1)}`,
   };
 }
-const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  width: 22,
-  height: 22,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
+
 export default function CustomAvatar({ user, variant, sx, link }) {
   const classes = useStyles();
+  const theme = useTheme();
   return (
     <div>
       {user && user.username ? (
@@ -79,7 +75,12 @@ export default function CustomAvatar({ user, variant, sx, link }) {
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={
-                <SmallAvatar
+                <Avatar
+                  sx={{
+                    width: 22,
+                    height: 22,
+                    border: `2px solid ${theme.palette.background.paper}`,
+                  }}
                   alt="uwindsor"
                   src={user.badges.includes("cssa") ? uwcssa_logo : uwindsor}
                 />

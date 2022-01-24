@@ -1,18 +1,15 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import {
-  selectUwcssaJobById,
-  selectedUwcssaJob,
-} from "../../redux/slice/uwcssaJobSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 import BackdropLoading from "../BackdropLoading";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
-import { useParams } from "react-router";
-import { useTitle } from "../../Hooks/useTitle";
-import { usePermit } from "../../Hooks/usePermit";
 import MUIRichTextEditor from "mui-rte";
+import React from "react";
+import { makeStyles } from "@mui/styles";
+import { selectUwcssaJobById } from "../../redux/slice/uwcssaJobSlice";
+import { useParams } from "react-router";
+import { usePermit } from "../../Hooks/usePermit";
+import { useSelector } from "react-redux";
+import { useTitle } from "../../Hooks/useTitle";
 
 // import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
 
@@ -29,14 +26,14 @@ const useStyles = makeStyles(() => ({
 
 export default function JobDetail(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { id } = useParams();
   //console.log(id);
   useTitle(`开放职位-${id}`);
 
-  useEffect(() => {
-    dispatch(selectedUwcssaJob(id));
-  }, [id, dispatch]);
+  // useEffect(() => {
+  //   dispatch(selectedUwcssaJob(id));
+  // }, [id, dispatch]);
   const { user } = useSelector((state) => state.userAuth);
   const job = useSelector((state) => selectUwcssaJobById(state, id));
   const isPermit = usePermit(user.name, "admin");

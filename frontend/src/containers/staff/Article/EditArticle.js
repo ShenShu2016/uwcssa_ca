@@ -14,7 +14,11 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
-import { fetchTopics, selectAllTopics } from "../../../redux/slice/topicSlice";
+import {
+  fetchTopics,
+  postTopic,
+  selectAllTopics,
+} from "../../../redux/slice/topicSlice";
 import {
   postMultipleImages,
   postSingleImage,
@@ -27,7 +31,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
-import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -35,8 +38,6 @@ import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
 import { convertToRaw } from "draft-js";
-import { createTopic } from "../../../graphql/mutations";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
@@ -101,9 +102,14 @@ export default function EditArticle() {
     formState: { errors },
   } = useForm();
   const topics = useSelector(selectAllTopics);
+
+  const { fetchTopicsStatus } = useSelector((state) => state.topic);
+
   useEffect(() => {
-    dispatch(fetchTopics());
-  }, [dispatch]);
+    if (fetchTopicsStatus === "idle" || undefined) {
+      dispatch(fetchTopics());
+    }
+  }, [dispatch, fetchTopicsStatus]);
 
   useEffect(() => {
     if (article) {
@@ -185,10 +191,10 @@ export default function EditArticle() {
       name: topicData.name,
       userID: username,
     };
-    await API.graphql(
-      graphqlOperation(createTopic, { input: createTopicInput })
-    );
-    dispatch(fetchTopics());
+    // await API.graphql(
+    //   graphqlOperation(createTopic, { input: createTopicInput })
+    // );
+    dispatch(postTopic({ createTopicInput }));
     setTopicData({ name: "" });
   };
   const handleKeyDown = (e) => {
