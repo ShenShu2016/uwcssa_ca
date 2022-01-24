@@ -17,6 +17,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchDepartments,
@@ -27,24 +28,23 @@ import { useDispatch, useSelector } from "react-redux";
 import API from "@aws-amplify/api";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import { FormHelperText } from "@mui/material";
+import { Grid } from "@mui/material";
+import { Input } from "@mui/material";
 import { Link } from "react-router-dom";
+import { List } from "@mui/material";
+import { ListItem } from "@mui/material";
+import { ListItemIcon } from "@mui/material";
+import { ListItemText } from "@mui/material";
+import MUIRichTextEditor from "mui-rte";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { convertToRaw } from "draft-js";
 import { createUwcssaJob } from "../../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
-import { useHistory } from "react-router";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { FormHelperText } from "@mui/material";
-import { Grid } from "@mui/material";
-import { List } from "@mui/material";
-import { ListItem } from "@mui/material";
-import { ListItemText } from "@mui/material";
-import { Input } from "@mui/material";
 import { postUwcssaJob } from "../../../redux/slice/uwcssaJobSlice";
-import { ListItemIcon } from "@mui/material";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import MUIRichTextEditor from "mui-rte";
-import { convertToRaw } from "draft-js";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,7 +110,7 @@ export default function PostUwcssaJob(props) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      requirements: [{ requirement: "" }],
+      requirements: [{ requirements: "" }],
       bonus: [{ bonus: "" }],
       schedule: [{ schedule: "" }],
       benefits: [{ benefits: "" }],
@@ -142,16 +142,21 @@ export default function PostUwcssaJob(props) {
   const [introduction, setIntroduction] = useState(null);
 
   const getFinalList = ({ list, field }) => {
-    let temp;
-    temp = list.field.map((item) => {
-      return item.field;
+    return list[field].map((item) => {
+      return item[field];
     });
-    return temp;
   };
 
   const onSubmit = (data) => {
     console.log(data);
-    console.log(getFinalList(data, data.requirements));
+    console.log(getFinalList({ list: data, field: "requirements" }));
+    console.log({
+      ...data,
+      requirements: getFinalList({ list: data, field: "requirements" }),
+      bonus: getFinalList({ list: data, field: "bonus" }),
+      benefits: getFinalList({ list: data, field: "benefits" }),
+      schedule: getFinalList({ list: data, field: "schedule" }),
+    });
   };
 
   {
@@ -421,7 +426,7 @@ export default function PostUwcssaJob(props) {
                     fullWidth
                     variant="standard"
                     type="text"
-                    {...register(`requirements[${i}].requirement`)}
+                    {...register(`requirements[${i}].requirements`)}
                   />
                 </ListItemText>
                 <ListItemIcon>
