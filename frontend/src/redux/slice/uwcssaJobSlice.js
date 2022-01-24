@@ -116,6 +116,17 @@ const uwcssaJobSlice = createSlice({
         state.selectedUwcssaJobStatus = "failed";
         state.selectedUwcssaError = action.error.message;
       })
+      .addCase(postUwcssaJob.pending, (state, action) => {
+        state.postUwcssaJobStatus = "loading";
+      })
+      .addCase(postUwcssaJob.fulfilled, (state, action) => {
+        state.postUwcssaJobStatus = "succeeded";
+        uwcssaJobAdapter.addOne(state, action.payload);
+      })
+      .addCase(postUwcssaJob.rejected, (state, action) => {
+        state.postUwcssaJobStatus = "failed";
+        state.postUwcssaJobError = action.error.message;
+      })
       // Cases for status of updateUwcssa (pending, fulfilled, and rejected)
       .addCase(updateUwcssaJobDetail.pending, (state, action) => {
         state.updateUwcssaJobDetailStatus = "loading";

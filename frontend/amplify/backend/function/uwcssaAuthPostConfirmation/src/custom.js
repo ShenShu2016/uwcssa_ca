@@ -43,33 +43,34 @@ exports.handler = async (event) => {
     try {
       await ddb.putItem(params).promise();
       console.log("Success");
+      try {
+        console.log("开发发email");
+        const response = await ses
+          .sendEmail({
+            Destination: {
+              ToAddresses: ["shushen2013@gmail.com"],
+            },
+            Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
+            Message: {
+              Subject: {
+                Data: `UWCSSA 新用户注册`,
+              },
+              Body: {
+                Text: {
+                  Data: `${JSON.stringify(params, null, 2)}/n`,
+                },
+              },
+            },
+          })
+          .promise();
+        console.log("response", response);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (err) {
       console.log("Error", err);
     }
-    try {
-      console.log("开发发email");
-      const response = await ses
-        .sendEmail({
-          Destination: {
-            ToAddresses: ["shushen2013@gmail.com"],
-          },
-          Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
-          Message: {
-            Subject: {
-              Data: `UWCSSA 新用户注册`,
-            },
-            Body: {
-              Text: {
-                Data: `${JSON.stringify(params, null, 2)}/n`,
-              },
-            },
-          },
-        })
-        .promise();
-      console.log("response", response);
-    } catch (error) {
-      console.log(error);
-    }
+
     console.log("Success: Everything executed correctly");
   } else {
     console.log("Error: Nothing was written to DynamoDB");
