@@ -43,9 +43,7 @@ export default function MarketItem() {
     marketItemFilterUpdate(data, dispatch);
   });
 
-  const { filter: filterList, tagsOccurrence } = useSelector(
-    (state) => state.market
-  );
+  const { filter: filterList } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filterList, "Item");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -85,7 +83,6 @@ export default function MarketItem() {
         className={classes.contain}
       >
         <FilterInfo
-          darkTheme={darkTheme}
           form="plain"
           type="Item"
           control={control}
@@ -94,10 +91,8 @@ export default function MarketItem() {
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
-            darkTheme={darkTheme}
             control={control}
             type="Item"
-            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />

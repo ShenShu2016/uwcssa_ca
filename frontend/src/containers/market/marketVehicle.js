@@ -45,9 +45,7 @@ export default function MarketVehicle() {
   const handleSearch = handleSubmit((data) => {
     marketItemFilterUpdate(data, dispatch);
   });
-  const { filter: filterList, tagsOccurrence } = useSelector(
-    (state) => state.market
-  );
+  const { filter: filterList } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filterList, "Vehicle");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -92,7 +90,6 @@ export default function MarketVehicle() {
         className={classes.contain}
       >
         <FilterInfo
-          darkTheme={darkTheme}
           form="plain"
           type="Vehicle"
           control={control}
@@ -101,10 +98,8 @@ export default function MarketVehicle() {
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
-            darkTheme={darkTheme}
             control={control}
             type="Vehicle"
-            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />

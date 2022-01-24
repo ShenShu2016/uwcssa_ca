@@ -25,7 +25,7 @@ export default function MarketList() {
   const classes = useStyles();
   const marketItems = useSelector(selectAllMarketItems);
   const { darkTheme } = useSelector((state) => state.general);
-  const { filter, tagsOccurrence } = useSelector((state) => state.market);
+  const { filter } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filter, "all");
   const starter = useStarter(marketItems, "all", isFiltering);
   const topRef = React.useRef(null);
@@ -56,7 +56,7 @@ export default function MarketList() {
       >
         <MarketSideBar darkTheme={darkTheme} clickHandler={clickHandler} />
         <Box className={classes.img}>
-          <MarketTopBar darkTheme={darkTheme} tagsOccurrence={tagsOccurrence} />
+          <MarketTopBar />
           <Box className={classes.items}>
             {isFiltering && (
               <Box width="100%" margin="0.5rem" color="#6c6c6c" fontSize="14px">
