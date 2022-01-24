@@ -41,8 +41,6 @@ export default function JobDetail(props) {
   const job = useSelector((state) => selectUwcssaJobById(state, id));
   const isPermit = usePermit(user.name, "admin");
 
-  console.log(job.requirements);
-
   return (
     <div className={classes.root}>
       {job ? (

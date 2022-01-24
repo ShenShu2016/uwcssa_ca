@@ -1,5 +1,4 @@
 import {
-  Alert,
   Box,
   Button,
   FormControl,
@@ -7,27 +6,16 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Snackbar,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-import API from "@aws-amplify/api";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { FormHelperText } from "@mui/material";
 import { Grid } from "@mui/material";
@@ -38,10 +26,7 @@ import { ListItem } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import MUIRichTextEditor from "mui-rte";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { convertToRaw } from "draft-js";
-import { createUwcssaJob } from "../../../graphql/mutations";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { makeStyles } from "@mui/styles";
 import { postUwcssaJob } from "../../../redux/slice/uwcssaJobSlice";
 import { useHistory } from "react-router";
@@ -76,10 +61,7 @@ export default function PostUwcssaJob(props) {
   const { user } = useSelector((state) => state.userAuth);
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  const [info, setInfo] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitFailure, setSubmitFailure] = useState(false);
-  const [depart, setDepart] = useState(false);
+
   const timer = useRef();
   const [loading, setLoading] = useState(false);
 
@@ -89,24 +71,10 @@ export default function PostUwcssaJob(props) {
     }
   }, [dispatch, fetchDepartmentsStatus]);
 
-  const [uwcssaJobData, setUwcssaJobData] = useState({
-    introduction: "",
-    title: "",
-    requirements: [{ requirement: "" }],
-    bonus: [{ bonus: "" }],
-    benefits: [{ benefits: "" }],
-    schedule: [{ schedule: "" }],
-    userID: user ? user.username : "",
-    departmentName: "",
-  });
-
   const {
     register,
     control,
     handleSubmit,
-    getValues,
-    // reset,
-    // watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -147,24 +115,15 @@ export default function PostUwcssaJob(props) {
     });
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(getFinalList({ list: data, field: "requirements" }));
-    console.log({
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    const createUwcssaJobInput = {
       ...data,
       requirements: getFinalList({ list: data, field: "requirements" }),
       bonus: getFinalList({ list: data, field: "bonus" }),
       benefits: getFinalList({ list: data, field: "benefits" }),
       schedule: getFinalList({ list: data, field: "schedule" }),
-    });
-  };
-
-  {
-    /*const onSubmit = async (data) => {
-    //   // setLoading(true);
-
-    const createUwcssaJobInput = {
-      ...data,
       introduction: introduction,
       active: true,
       like: [""],
@@ -178,9 +137,8 @@ export default function PostUwcssaJob(props) {
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);
-      history.replace(
-        `/career/jobDetail/${response.payload.data.createUwcssaJob.id}`
-      );
+      console.log(response);
+      history.replace(`/career/jobDetail/${response.payload.id}`);
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);
@@ -189,66 +147,12 @@ export default function PostUwcssaJob(props) {
 
       alert(response.error.message);
     }
-  };*/
-  }
+  };
 
   const handleOnChange = (prop) => (event) => {
     const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
     setIntroduction(tempContent);
   };
-
-  // let departmentList = [];
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     const createUwcssaJobInput = {
-  //       // id: uwcssaJobData.title,
-  //       title: uwcssaJobData.title,
-  //       introduction: uwcssaJobData.introduction,
-  //       requirements: uwcssaJobData.requirements.filter((e) => e !== ""),
-  //       schedule: uwcssaJobData.schedule.filter((e) => e !== ""),
-  //       benefits: uwcssaJobData.benefits.filter((e) => e !== ""),
-  //       bonus: uwcssaJobData.bonus.filter((e) => e !== ""),
-  //       like: [""],
-  //       unlike: [""],
-  //       active: 1,
-  //       departmentID: uwcssaJobData.departmentName,
-  //       userID: uwcssaJobData.userID,
-  //     };
-
-  //     const newUwcssaJob = await API.graphql(
-  //       graphqlOperation(createUwcssaJob, { input: createUwcssaJobInput })
-  //     );
-
-  //     console.log("newUwcssaJob:", newUwcssaJob.data.createUwcssaJob);
-
-  //     if (newUwcssaJob) {
-  //       setSubmitSuccess(true);
-  //       history.push(
-  //         `/career/jobDetail/${newUwcssaJob.data.createUwcssaJob.id}`
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.log("submit resume failure: ", error);
-  //     setSubmitFailure(true);
-  //   }
-  // };
-
-  // const handleCloseInfo = (event, reason) => {
-  //   setInfo(false);
-  // };
-
-  // const handleCloseSuccess = (event, reason) => {
-  //   setSubmitSuccess(false);
-  // };
-
-  // const handleCloseFailure = (event, reason) => {
-  //   setSubmitFailure(false);
-  // };
-
-  // const handleCloseDepart = (event, reason) => {
-  //   setDepart(false);
-  // };
 
   return (
     <div>
@@ -265,13 +169,7 @@ export default function PostUwcssaJob(props) {
           <Typography variant="h5" gutterBottom>
             职位名称
           </Typography>
-          {/* <Controller
-            name="title"
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field }) => ( */}
+
           <TextField
             name="title"
             margin="normal"
@@ -287,8 +185,7 @@ export default function PostUwcssaJob(props) {
             })}
             control={control}
           />
-          {/* )}
-          /> */}
+
           <Typography variant="h5" marginTop={"1rem"} gutterBottom>
             所属部门
           </Typography>
@@ -300,10 +197,7 @@ export default function PostUwcssaJob(props) {
           >
             如果没有请点击这里添加部门
           </Button>
-          {/* <Controller
-            control={control}
-            name="departmentID"
-            render={({ field }) => ( */}
+
           <FormControl
             variant="outlined"
             fullWidth
@@ -334,36 +228,11 @@ export default function PostUwcssaJob(props) {
               </FormHelperText>
             )}
           </FormControl>
-          {/* )}
-          /> */}
+
           <Typography variant="h5" marginTop={"1rem"} gutterBottom>
             简介
           </Typography>
-          {/* <Controller
-            name="introduction"
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field }) => ( */}
-          {/* <TextField
-            margin="normal"
-            fullWidth
-            required
-            id="introduction"
-            label="职位名称"
-            variant="outlined"
-            error={!!errors.introduction}
-            helperText={errors.introduction ? "不能为空" : null}
-            multiline
-            minRows={5}
-            control={control}
-            {...register("introduction", {
-              required: true,
-            })}
-          /> */}
-          {/* )}
-          /> */}
+
           <Box className={classes.content}>
             <MUIRichTextEditor
               label="简介"
@@ -391,42 +260,20 @@ export default function PostUwcssaJob(props) {
           <Typography variant="h5" marginTop={"1rem"} gutterBottom>
             基本要求
           </Typography>
-          {/* <FormControl
-            variant="filled"
-            fullWidth
-            //   style={{ display: "none" }}
-          >
-            <InputLabel id="numberOfRequirements">要求数量</InputLabel>
-            <Select
-              name="numberOfRequirements"
-              {...register("numberOfRequirements")}
-              defaultValue={""}
-              // className={`form-control ${
-              //   errors.numberOfRequirements ? "is-invalid" : ""
-              // }`}
-            >
-              {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                <MenuItem key={i} value={i}>
-                  {i}
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.numberOfRequirements && (
-              <FormHelperText sx={{ color: "#d32f2f" }}>
-                请选择要求数量
-              </FormHelperText>
-            )}
-          </FormControl> */}
+
           {requirementsFields.map((item, i) => (
             <List key={item.id}>
               <ListItem>
                 <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
                 <ListItemText>
                   <Input
+                    error={errors.requirements ? true : false}
                     fullWidth
                     variant="standard"
                     type="text"
-                    {...register(`requirements[${i}].requirements`)}
+                    {...register(`requirements[${i}].requirements`, {
+                      required: true,
+                    })}
                   />
                 </ListItemText>
                 <ListItemIcon>
@@ -452,26 +299,7 @@ export default function PostUwcssaJob(props) {
           <Typography variant="h5" marginTop={"1rem"} gutterBottom>
             额外要求(nice to have)
           </Typography>
-          {/* <FormControl
-            variant="filled"
-            fullWidth
-            //   style={{ display: "none" }}
-          >
-            <InputLabel id="numberOfBonus">额外要求数量</InputLabel>
-            <Select
-              defaultValue={""}
-              name="numberOfBonus"
-              {...register("numberOfBonus")}
-            >
-              {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                <MenuItem key={i} value={i}>
-                  {i}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-           )}
-            />  */}
+
           <>
             {bonusFields.map((item, i) => (
               <List key={item.id}>
@@ -479,10 +307,13 @@ export default function PostUwcssaJob(props) {
                   <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
                   <ListItemText>
                     <Input
+                      error={errors.bonus ? true : false}
                       fullWidth
                       variant="standard"
                       type="text"
-                      {...register(`bonus[${i}].bonus`)}
+                      {...register(`bonus[${i}].bonus`, {
+                        required: true,
+                      })}
                     />
                   </ListItemText>
                   <ListItemIcon>
@@ -507,34 +338,7 @@ export default function PostUwcssaJob(props) {
           <Typography variant="h5" marginTop={"1rem"} gutterBottom>
             工作计划与时间安排
           </Typography>
-          {/* <FormControl
-            variant="filled"
-            fullWidth
-            //   style={{ display: "none" }}
-          >
-            <InputLabel id="numberOfSchedule">
-              工作计划与时间安排数量
-            </InputLabel>
-            <Select
-              defaultValue={""}
-              name="numberOfSchedule"
-              {...register("numberOfSchedule")}
-              // className={`form-control ${
-              //   errors.numberOfSchedule ? "is-invalid" : ""
-              // }`}
-            >
-              {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                <MenuItem key={i} value={i}>
-                  {i}
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.numberOfSchedule && (
-              <FormHelperText sx={{ color: "#d32f2f" }}>
-                请选择工作计划与时间安排数量
-              </FormHelperText>
-            )}
-          </FormControl> */}
+
           <>
             {scheduleFields.map((item, i) => (
               <List key={item.id}>
@@ -542,11 +346,14 @@ export default function PostUwcssaJob(props) {
                   <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
                   <ListItemText>
                     <Input
+                      error={errors.schedule ? true : false}
                       fullWidth
                       variant="standard"
                       type="text"
                       control={control}
-                      {...register(`schedule[${i}].schedule`)}
+                      {...register(`schedule[${i}].schedule`, {
+                        required: true,
+                      })}
                     />
                   </ListItemText>
                   <ListItemIcon>
@@ -571,27 +378,6 @@ export default function PostUwcssaJob(props) {
           <Typography variant="h5" marginTop={"1rem"} gutterBottom>
             BENEFITS
           </Typography>
-          {/*  <FormControl
-            variant="filled"
-            fullWidth
-            //   style={{ display: "none" }}
-          >
-            <InputLabel id="numberOfBenefits">BENEFITS数量</InputLabel>
-            <Select
-              defaultValue={""}
-              name="numberOfBenefits"
-              {...register("numberOfBenefits")}
-              // className={`form-control ${
-              //   errors.numberOfBenefits ? "is-invalid" : ""
-              // }`}
-            >
-              {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                <MenuItem key={i} value={i}>
-                  {i}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>*/}
 
           <>
             {benefitsFields.map((item, i) => (
@@ -600,9 +386,12 @@ export default function PostUwcssaJob(props) {
                   <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
                   <ListItemText>
                     <Input
+                      error={errors.benefits ? true : false}
                       fullWidth
                       type="text"
-                      {...register(`benefits[${i}].benefits`)}
+                      {...register(`benefits[${i}].benefits`, {
+                        required: true,
+                      })}
                     />
                   </ListItemText>
                   <ListItemIcon>
@@ -629,408 +418,14 @@ export default function PostUwcssaJob(props) {
               variant="contained"
               type="submit"
               color="primary"
+              disabled={loading}
               sx={{ marginBlock: "2rem" }}
             >
-              更新
+              上传
             </Button>
           </Grid>
         </Box>
       </Box>
     </div>
-    // <div className={classes.root}>
-    //   <Typography variant="h4" sx={{ my: "2rem", textAlign: "center" }}>
-    //     发布新职位
-    //   </Typography>
-    //   <Box>
-    //     <Typography variant="h5">职位名称</Typography>
-    //     <TextField
-    //       label="职位名称"
-    //       variant="outlined"
-    //       fullWidth
-    //       value={uwcssaJobData.title}
-    //       sx={{ marginBlock: "2rem" }}
-    //       onChange={(e) =>
-    //         setUwcssaJobData({ ...uwcssaJobData, title: e.target.value })
-    //       }
-    //     />
-    //   </Box>
-    //   <Box>
-    //     <Typography variant="h5">所属部门</Typography>
-    //     <Button
-    //       variant="contained"
-    //       component={Link}
-    //       to="/staff/uwcssaJob/postDepartment"
-    //     >
-    //       如果没有请点击这里添加部门
-    //     </Button>
-    //     <FormControl variant="outlined" fullWidth sx={{ marginBlock: "2rem" }}>
-    //       <InputLabel id="demo-simple-select-outlined-label2">
-    //         部门名称
-    //       </InputLabel>
-    //       <Select
-    //         labelId="demo-simple-select-outlined-label2"
-    //         id="demo-simple-select-outlined2"
-    //         value={uwcssaJobData.departmentName}
-    //         onChange={(e) =>
-    //           setUwcssaJobData({
-    //             ...uwcssaJobData,
-    //             departmentName: e.target.value,
-    //           })
-    //         }
-    //         label="Topic"
-    //       >
-    //         {departments.map((department) => {
-    //           return (
-    //             <MenuItem value={department.id} key={department.id}>
-    //               {department.name}
-    //             </MenuItem>
-    //           );
-    //         })}
-    //       </Select>
-    //     </FormControl>
-    //   </Box>
-    //   <Box>
-    //     <Typography variant="h5">简介</Typography>
-    //     <TextField
-    //       label="简介"
-    //       variant="outlined"
-    //       fullWidth
-    //       multiline
-    //       minRows={5}
-    //       value={uwcssaJobData.introduction}
-    //       sx={{ marginBlock: "2rem" }}
-    //       onChange={(e) =>
-    //         setUwcssaJobData({ ...uwcssaJobData, introduction: e.target.value })
-    //       }
-    //     />
-    //   </Box>
-    //   <Box>
-    //     <Typography variant="h5">基本要求</Typography>
-    //     <TableContainer className={classes.table}>
-    //       <Table aria-label="simple table">
-    //         <TableBody>
-    //           {uwcssaJobData.requirements.map((row, index) => (
-    //             <TableRow key={index}>
-    //               <TableCell component="th" scope="row" width="1%">
-    //                 {index + 1}
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <TextField
-    //                   variant="standard"
-    //                   fullWidth
-    //                   type="text"
-    //                   value={row}
-    //                   onChange={(e) => {
-    //                     const newRequirements = uwcssaJobData.requirements;
-    //                     newRequirements[index] = e.target.value;
-    //                     setUwcssaJobData({
-    //                       ...uwcssaJobData,
-    //                       requirements: newRequirements,
-    //                     });
-    //                     console.log(uwcssaJobData);
-    //                   }}
-    //                 />
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <Tooltip title="Add New Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newRequirements = uwcssaJobData.requirements;
-    //                       newRequirements.push("");
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         requirements: newRequirements,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <AddCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //                 <Tooltip title="Delete This Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newRequirements = uwcssaJobData.requirements;
-    //                       console.log(newRequirements.length);
-    //                       if (newRequirements.length > 1) {
-    //                         newRequirements.splice(index, 1);
-    //                       }
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         requirements: newRequirements,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <RemoveCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //               </TableCell>
-    //             </TableRow>
-    //           ))}
-    //         </TableBody>
-    //       </Table>
-    //     </TableContainer>
-    //   </Box>
-    //   <Box>
-    //     <Typography variant="h5">额外要求(nice to have)</Typography>
-    //     <TableContainer className={classes.table}>
-    //       <Table aria-label="simple table">
-    //         <TableBody>
-    //           {uwcssaJobData.bonus.map((row, index) => (
-    //             <TableRow key={index}>
-    //               <TableCell component="th" scope="row" width="1%">
-    //                 {index + 1}
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <TextField
-    //                   variant="standard"
-    //                   fullWidth
-    //                   type="text"
-    //                   value={row}
-    //                   onChange={(e) => {
-    //                     const newBonus = uwcssaJobData.bonus;
-    //                     newBonus[index] = e.target.value;
-    //                     setUwcssaJobData({ ...uwcssaJobData, bonus: newBonus });
-    //                     console.log(uwcssaJobData);
-    //                   }}
-    //                 />
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <Tooltip title="Add New Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newBonus = uwcssaJobData.bonus;
-    //                       newBonus.push("");
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         bonus: newBonus,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <AddCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //                 <Tooltip title="Delete This Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newBonus = uwcssaJobData.bonus;
-    //                       console.log(newBonus.length);
-    //                       if (newBonus.length > 1) {
-    //                         newBonus.splice(index, 1);
-    //                       }
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         bonus: newBonus,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <RemoveCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //               </TableCell>
-    //             </TableRow>
-    //           ))}
-    //         </TableBody>
-    //       </Table>
-    //     </TableContainer>
-    //   </Box>
-    //   <Box>
-    //     <Typography variant="h5">工作计划与时间安排</Typography>
-    //     <TableContainer className={classes.table}>
-    //       <Table aria-label="simple table">
-    //         <TableBody>
-    //           {uwcssaJobData.schedule.map((row, index) => (
-    //             <TableRow key={index}>
-    //               <TableCell component="th" scope="row" width="1%">
-    //                 {index + 1}
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <TextField
-    //                   variant="standard"
-    //                   fullWidth
-    //                   type="text"
-    //                   value={row}
-    //                   onChange={(e) => {
-    //                     const newSchedule = uwcssaJobData.schedule;
-    //                     newSchedule[index] = e.target.value;
-    //                     setUwcssaJobData({
-    //                       ...uwcssaJobData,
-    //                       schedule: newSchedule,
-    //                     });
-    //                     console.log(uwcssaJobData);
-    //                   }}
-    //                 />
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <Tooltip title="Add New Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newSchedule = uwcssaJobData.schedule;
-    //                       newSchedule.push("");
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         schedule: newSchedule,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <AddCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //                 <Tooltip title="Delete This Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newSchedule = uwcssaJobData.schedule;
-    //                       console.log(newSchedule.length);
-    //                       if (newSchedule.length > 1) {
-    //                         newSchedule.splice(index, 1);
-    //                       }
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         schedule: newSchedule,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <RemoveCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //               </TableCell>
-    //             </TableRow>
-    //           ))}
-    //         </TableBody>
-    //       </Table>
-    //     </TableContainer>
-    //   </Box>
-    //   <Box>
-    //     <Typography variant="h5">BENEFITS</Typography>
-    //     <TableContainer className={classes.table}>
-    //       <Table aria-label="simple table">
-    //         <TableBody>
-    //           {uwcssaJobData.benefits.map((row, index) => (
-    //             <TableRow key={index}>
-    //               <TableCell component="th" scope="row" width="1%">
-    //                 {index + 1}
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <TextField
-    //                   variant="standard"
-    //                   fullWidth
-    //                   type="text"
-    //                   value={row}
-    //                   onChange={(e) => {
-    //                     const newBenefits = uwcssaJobData.benefits;
-    //                     newBenefits[index] = e.target.value;
-    //                     setUwcssaJobData({
-    //                       ...uwcssaJobData,
-    //                       benefits: newBenefits,
-    //                     });
-    //                     console.log(uwcssaJobData);
-    //                   }}
-    //                 />
-    //               </TableCell>
-    //               <TableCell component="th" scope="row">
-    //                 <Tooltip title="Add New Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newBenefits = uwcssaJobData.benefits;
-    //                       newBenefits.push("");
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         benefits: newBenefits,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <AddCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //                 <Tooltip title="Delete This Row">
-    //                   <IconButton
-    //                     className={classes.button}
-    //                     onClick={(e) => {
-    //                       const newBenefits = uwcssaJobData.benefits;
-    //                       console.log(newBenefits.length);
-    //                       if (newBenefits.length > 1) {
-    //                         newBenefits.splice(index, 1);
-    //                       }
-    //                       setUwcssaJobData({
-    //                         ...uwcssaJobData,
-    //                         benefits: newBenefits,
-    //                       });
-    //                       console.log(uwcssaJobData);
-    //                     }}
-    //                   >
-    //                     <RemoveCircleOutlineIcon />
-    //                   </IconButton>
-    //                 </Tooltip>
-    //               </TableCell>
-    //             </TableRow>
-    //           ))}
-    //         </TableBody>
-    //       </Table>
-    //     </TableContainer>
-    //   </Box>
-
-    //   <Button
-    //     variant="contained"
-    //     color="primary"
-    //     sx={{ marginBlock: "2rem" }}
-    //     startIcon={<CloudUploadIcon />}
-    //     onClick={handleSubmit}
-    //   >
-    //     提交
-    //   </Button>
-    //   <Snackbar
-    //     open={info}
-    //     anchorOrigin={{ vertical: "top", horizontal: "center" }}
-    //     autoHideDuration={4000}
-    //     onClose={handleCloseInfo}
-    //   >
-    //     <Alert severity="warning" onClose={handleCloseInfo}>
-    //       请补充完整 Title, Requirements 及 Department Name 的信息!
-    //     </Alert>
-    //   </Snackbar>
-    //   <Snackbar
-    //     open={submitSuccess}
-    //     anchorOrigin={{ vertical: "top", horizontal: "center" }}
-    //     autoHideDuration={3000}
-    //     onClose={handleCloseSuccess}
-    //   >
-    //     <Alert severity="success" onClose={handleCloseSuccess}>
-    //       提交成功!
-    //     </Alert>
-    //   </Snackbar>
-    //   <Snackbar
-    //     open={submitFailure}
-    //     anchorOrigin={{ vertical: "top", horizontal: "center" }}
-    //     autoHideDuration={4000}
-    //     onClose={handleCloseFailure}
-    //   >
-    //     <Alert severity="error" onClose={handleCloseFailure}>
-    //       提交失败,请重试!
-    //     </Alert>
-    //   </Snackbar>
-    //   <Snackbar
-    //     open={depart}
-    //     anchorOrigin={{ vertical: "top", horizontal: "center" }}
-    //     autoHideDuration={4000}
-    //     onClose={handleCloseDepart}
-    //   >
-    //     <Alert severity="error" onClose={handleCloseDepart}>
-    //       部门不存在,请重新填写部门名称!
-    //     </Alert>
-    //   </Snackbar>
-    // </div>
   );
 }
