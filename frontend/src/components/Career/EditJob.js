@@ -19,24 +19,22 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { useTitle } from "../../Hooks/useTitle";
-import {
-  selectedUwcssaJob,
-  //   removeSelectedUwcssaJob,
-  selectUwcssaJobById,
-  //   updateUwcssaJobDetail,
-} from "../../redux/slice/uwcssaJobSlice";
-import CloseIcon from "@mui/icons-material/Close";
-import { makeStyles } from "@mui/styles";
+import React, { useEffect } from "react";
 import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../redux/slice/departmentSlice";
+import {
+  selectUwcssaJobById,
+  selectedUwcssaJob,
+} from "../../redux/slice/uwcssaJobSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import CloseIcon from "@mui/icons-material/Close";
+import { makeStyles } from "@mui/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +78,7 @@ export default function EditJob() {
     history.goBack();
   };
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   //   const [updatedIntroduction, setUpdatedIntroduction] = useState();
   //   const [uwcssaJobData, setUwcssaJobData] = useState({
   //     requirements: job.requirements ? [] : [""],
