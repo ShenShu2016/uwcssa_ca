@@ -1,3 +1,5 @@
+import "./styles.css";
+
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +11,6 @@ import PastEvent from "../../components/Event/PastEvents";
 import { fetchEvents } from "../../redux/slice/eventSlice";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
-import "./styles.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Event() {
-  useTitle("UWCSSA活动");
+  useTitle("活动");
   const classes = useStyles();
 
   const [eventList, setEventList] = useState([]);
