@@ -12,6 +12,7 @@ import { makeStyles } from "@mui/styles";
 import { useParams } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import { usePermit } from "../../Hooks/usePermit";
+import MUIRichTextEditor from "mui-rte";
 
 // import { listUwcssaJobs } from "../../redux/actions/uwcssaJobActions";
 
@@ -39,16 +40,21 @@ export default function JobDetail(props) {
   const { user } = useSelector((state) => state.userAuth);
   const job = useSelector((state) => selectUwcssaJobById(state, id));
   const isPermit = usePermit(user.name, "admin");
-  //console.log(job);
+
   return (
     <div className={classes.root}>
       {job ? (
         <Box>
-          <Typography variant="h6">{job.title}</Typography>
-          <br />
-          <Typography variant="body1" className={classes.intro}>
-            {job.introduction}
+          <Typography variant="h6" gutterBottom>
+            {job.title}
           </Typography>
+
+          <MUIRichTextEditor
+            defaultValue={job.introduction}
+            readOnly={true}
+            toolbar={false}
+          />
+
           <br />
           <Typography variant="h6">基本要求:</Typography>
           <br />

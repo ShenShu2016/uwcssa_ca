@@ -12,7 +12,6 @@ import {
   InputLabel,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   MenuItem,
   Select,
@@ -39,8 +38,6 @@ import {
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -51,43 +48,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     alignItems: "center",
     justifyContent: "center",
-  },
-  content: {
-    marginBlock: "2rem",
-    minHeight: "300px",
-    paddingInline: "1rem",
-    overflow: "auto",
-    border: "1px solid",
-    borderColor: "#cfd8dc",
-    borderRadius: 5,
-  },
-  picture: {
-    marginBlock: "2rem",
-    Height: "300px",
-    minHeight: "300px",
-    paddingInline: "1rem",
-    overflow: "auto",
-    border: "1px dashed",
-    borderColor: "#cfd8dc",
-    borderRadius: 5,
-  },
-  container: {
-    marginBlock: "2rem",
-    Height: "300px",
-    minHeight: "300px",
-    paddingInline: "1rem",
-    overflow: "auto",
-    border: "1px dashed",
-    borderColor: "#cfd8dc",
-    borderRadius: 5,
-    position: "relative",
-  },
-  child: {
-    textAlign: "center",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
   },
 }));
 
@@ -136,7 +96,7 @@ export default function EditJob() {
     register,
     control,
     handleSubmit,
-    reset,
+    // reset,
     watch,
     formState: { errors },
   } = useForm({
@@ -319,7 +279,7 @@ export default function EditJob() {
                   variant="outlined"
                   error={!!errors.title}
                   helperText={errors.title ? "不能为空" : null}
-                  {...register("title")}
+                  {...field}
                 />
               )}
             />
@@ -370,16 +330,16 @@ export default function EditJob() {
             /> */}
             <Controller
               control={control}
-              name="departmentName"
+              name="departmentID"
               defaultValue={job.department.id}
               render={({ field }) => (
                 <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="departmentName">部门名称</InputLabel>
+                  <InputLabel id="departmentID">部门名称</InputLabel>
                   <Select
                     {...field}
-                    labelId="departmentName"
+                    labelId="departmentID"
                     label="主题"
-                    error={!!errors.topicID}
+                    error={!!errors.departmentID}
                   >
                     {departments.map((department) => {
                       return (
@@ -389,7 +349,7 @@ export default function EditJob() {
                       );
                     })}
                   </Select>
-                  {errors.topicID && (
+                  {errors.departmentID && (
                     <FormHelperText sx={{ color: "#d32f2f" }}>
                       请选择一个部门名称，没有的话请上传新的主题
                     </FormHelperText>
@@ -415,7 +375,7 @@ export default function EditJob() {
                   multiline
                   minRows={5}
                   variant="outlined"
-                  {...register("introduction")}
+                  {...field}
                 />
               )}
             />
