@@ -19,13 +19,14 @@ import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const marketAdapter = createEntityAdapter({
-  // selectId: (item) => item.id,
+  selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = marketAdapter.getInitialState({
   filter: {},
   tagsOccurrence: [],
+  clickedTags: [],
   nextToken: null,
   currentFetchType: null,
   currentFilterType: null,
@@ -198,6 +199,13 @@ const marketSlice = createSlice({
     filterClear(state, action) {
       state.filter = {};
     },
+    updateClickedTags(state, action) {
+      const tag = action.payload;
+      const currentTags = state.clickedTags;
+      state.clickedTags = currentTags.includes(tag)
+        ? currentTags.filter((t) => t !== tag)
+        : currentTags.concat([tag]);
+    },
   },
   extraReducers(builder) {
     builder
@@ -297,7 +305,8 @@ const marketSlice = createSlice({
   },
 });
 
-export const { filterUpdated, filterClear } = marketSlice.actions;
+export const { filterUpdated, filterClear, updateClickedTags } =
+  marketSlice.actions;
 
 export const {
   selectAll: selectAllMarketItems,

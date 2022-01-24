@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import { CategoryIcons, SearchArea } from "./marketItemSearch";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
@@ -30,7 +31,7 @@ import PropTypes from "prop-types";
 import WorkIcon from "@mui/icons-material/Work";
 import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { marketItemStyle } from "./marketItemCss";
-import { useDispatch } from "react-redux";
+import { updateClickedTags } from "../../redux/slice/marketSlice";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -144,18 +145,15 @@ CategoryDialog.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function MarketTopBar({
-  darkTheme,
-  // setSearchRadius,
-  tagsOccurrence,
-}) {
+export default function MarketTopBar() {
   const useStyles = marketItemStyle;
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { tagsOccurrence, clickedTags } = useSelector((state) => state.market);
+  const { darkTheme } = useSelector((state) => state.general);
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState("");
-  const [clickedTags, setClickedTags] = useState([]);
   React.useEffect(() => {
     marketItemFilterUpdate({ tags: clickedTags, type: "all" }, dispatch);
   }, [dispatch, clickedTags]);
@@ -203,11 +201,7 @@ export default function MarketTopBar({
                     label={tag}
                     color={clickedTags.includes(tag) ? "primary" : "default"}
                     onClick={() => {
-                      if (clickedTags.includes(tag)) {
-                        setClickedTags((prev) => prev.filter((t) => t !== tag));
-                      } else {
-                        setClickedTags((prev) => prev.concat(tag));
-                      }
+                      dispatch(updateClickedTags(tag));
                     }}
                   />
                 );
@@ -250,11 +244,7 @@ export default function MarketTopBar({
                     label={tag}
                     color={clickedTags.includes(tag) ? "primary" : "default"}
                     onClick={() => {
-                      if (clickedTags.includes(tag)) {
-                        setClickedTags((prev) => prev.filter((t) => t !== tag));
-                      } else {
-                        setClickedTags((prev) => prev.concat(tag));
-                      }
+                      dispatch(updateClickedTags(tag));
                     }}
                   />
                 );

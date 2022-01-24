@@ -17,6 +17,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { filterClear, updateClickedTags } from "../../redux/slice/marketSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -27,10 +29,8 @@ import { Link } from "react-router-dom";
 import PetsIcon from "@mui/icons-material/Pets";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { filterClear } from "../../redux/slice/marketSlice";
 import { marketItemFilterUpdate } from "./useMarketItemFilter";
 import { styled } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -75,9 +75,10 @@ function ConfirmationDialogRaw(props) {
     onKeyDownHandler,
     darkTheme,
     tagsOccurrence,
+    clickedTags,
+    setClickedTags,
     ...other
   } = props;
-  const [clickedTags, setClickedTags] = React.useState([]);
 
   const handleCancel = () => {
     onClose();
@@ -137,11 +138,7 @@ function ConfirmationDialogRaw(props) {
                     label={tag}
                     color={clickedTags.includes(tag) ? "primary" : "default"}
                     onClick={() => {
-                      if (clickedTags.includes(tag)) {
-                        setClickedTags((prev) => prev.filter((t) => t !== tag));
-                      } else {
-                        setClickedTags((prev) => prev.concat(tag));
-                      }
+                      setClickedTags(tag);
                     }}
                   />
                 );
@@ -155,20 +152,19 @@ function ConfirmationDialogRaw(props) {
   );
 }
 
-export const SearchArea = ({
-  type = "all",
-  darkTheme,
-  mode = "fullWidth",
-  tagsOccurrence,
-}) => {
+export const SearchArea = ({ mode = "fullWidth" }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+  const { clickedTags, tagsOccurrence } = useSelector((state) => state.market);
+  const { darkTheme } = useSelector((state) => state.general);
   const { control, reset, getValues } = useForm({
     defaultValues: {
       searchInfo: "",
     },
   });
-
+  const handleClickedTags = (t) => {
+    dispatch(updateClickedTags(t));
+  };
   const onKeyDownHandler = (e) => {
     if (e.key.toLowerCase() === "enter") {
       const searchInfos = getValues("searchInfo");
@@ -210,6 +206,8 @@ export const SearchArea = ({
             <SearchIcon />
           </IconButton>
           <ConfirmationDialogRaw
+            clickedTags={clickedTags}
+            setClickedTags={handleClickedTags}
             control={control}
             darkTheme={darkTheme}
             id="ringtone-menu"
