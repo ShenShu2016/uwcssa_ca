@@ -2,7 +2,6 @@ import { Avatar, Badge } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import React from "react";
-import king from "../../static/avatarIcons/king.png";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import uwcssa_logo from "../../static/uwcssa_logo.svg";
@@ -44,14 +43,6 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   height: 22,
   border: `2px solid ${theme.palette.background.paper}`,
 }));
-const CrownAvatar = styled(Avatar)(({ theme }) => ({
-  width: 30,
-  height: 30,
-  // border: `2px solid ${theme.palette.background.paper}`,
-  top: "-8px",
-  right: "-8px",
-  // transform: `rotate(45deg)`,
-}));
 export default function CustomAvatar({ user, variant, sx, link }) {
   const classes = useStyles();
   return (
@@ -59,13 +50,27 @@ export default function CustomAvatar({ user, variant, sx, link }) {
       {user && user.username ? (
         <div>
           <Badge
-            invisible={!user.badges.includes("king")}
+            invisible={!user.badges.includes("top100")}
             overlap="circular"
             // anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            badgeContent={<CrownAvatar alt="king" src={king} />}
+            badgeContent={
+              <Avatar
+                alt="top100"
+                src={
+                  "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/AvatarIcons/top100.png"
+                }
+                sx={{
+                  width: 58,
+                  height: 58,
+                  top: "4px",
+                  right: "-21px",
+                  borderRadius: "0",
+                }}
+              />
+            }
             sx={{
               "& .MuiBadge-anchorOriginTopRightCircular": {
-                transform: "translate(0, -50%)",
+                transform: "translate(0, 0)",
               },
             }} // 直接找到他所对应的className，修改位置
           >

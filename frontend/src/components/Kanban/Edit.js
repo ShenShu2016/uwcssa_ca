@@ -64,13 +64,15 @@ export default function Edit({ editOpen, handleEditClose, item }) {
   const departments = useSelector(selectAllDepartments);
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
   useEffect(() => {
-    if (fetchUwcssaMembersStatus === "idle" || undefined) {
-      dispatch(fetchUwcssaMembers());
+    if (editOpen) {
+      if (fetchUwcssaMembersStatus === "idle" || undefined) {
+        dispatch(fetchUwcssaMembers());
+      }
+      if (fetchDepartmentsStatus === "idle" || undefined) {
+        dispatch(fetchDepartments());
+      }
     }
-    if (fetchDepartmentsStatus === "idle" || undefined) {
-      dispatch(fetchDepartments());
-    }
-  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus]);
+  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus, editOpen]);
 
   const {
     id,

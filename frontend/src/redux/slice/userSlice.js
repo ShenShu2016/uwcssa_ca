@@ -12,7 +12,7 @@ import { userSortBySortKey } from "../CustomQuery/UserQueries";
 
 const userAdapter = createEntityAdapter({
   // selectId: (item) => item.id,
-  sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
+  // sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = userAdapter.getInitialState({

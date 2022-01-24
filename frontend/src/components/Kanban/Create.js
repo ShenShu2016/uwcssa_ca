@@ -61,14 +61,17 @@ export default function Create({ createOpen, handleCreateClose }) {
     (state) => state.uwcssaMember
   );
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
+
   useEffect(() => {
-    if (fetchUwcssaMembersStatus === "idle" || undefined) {
-      dispatch(fetchUwcssaMembers());
+    if (createOpen) {
+      if (fetchUwcssaMembersStatus === "idle" || undefined) {
+        dispatch(fetchUwcssaMembers());
+      }
+      if (fetchDepartmentsStatus === "idle" || undefined) {
+        dispatch(fetchDepartments());
+      }
     }
-    if (fetchDepartmentsStatus === "idle" || undefined) {
-      dispatch(fetchDepartments());
-    }
-  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus]);
+  }, [dispatch, fetchUwcssaMembersStatus, fetchDepartmentsStatus, createOpen]);
 
   const {
     handleSubmit,

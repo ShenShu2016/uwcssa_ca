@@ -24,8 +24,8 @@ const initialState = {
 
   removeURLFromStatus: "idle",
   removeURLFromError: null,
-  fetchUsersError: null,
-  fetchUsersStatus: "idle",
+  fetchUserCountsError: null,
+  fetchUserCountsStatus: "idle",
   fetchForumPostCountsStatus: "idle",
   fetchForumPostCountsError: null,
   postLikeStatus: "idle",
@@ -54,18 +54,21 @@ export const removeURLFrom = createAsyncThunk(
   }
 );
 
-export const fetchUsers = createAsyncThunk("general/fetchUsers", async () => {
-  try {
-    const usersData = await API.graphql({
-      query: searchUsers,
-      authMode: "AWS_IAM",
-    });
-    console.log("usersData", usersData);
-    return usersData.data.searchUsers.total;
-  } catch (error) {
-    console.log(error);
+export const fetchUserCounts = createAsyncThunk(
+  "general/fetchUserCounts",
+  async () => {
+    try {
+      const usersData = await API.graphql({
+        query: searchUsers,
+        authMode: "AWS_IAM",
+      });
+      console.log("usersData", usersData);
+      return usersData.data.searchUsers.total;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 export const fetchForumPostCounts = createAsyncThunk(
   "general/fetchForumPostCounts",
@@ -277,15 +280,15 @@ const generalSlice = createSlice({
         state.removeURLFromError = action.error.message;
       })
       // Cases for status of fetchUsers (pending, fulfilled, and rejected)
-      .addCase(fetchUsers.pending, (state, action) => {
-        state.fetchUsersStatus = "loading";
+      .addCase(fetchUserCounts.pending, (state, action) => {
+        state.fetchUserCountsStatus = "loading";
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.fetchUsersStatus = "succeeded";
+      .addCase(fetchUserCounts.fulfilled, (state, action) => {
+        state.fetchUserCountsStatus = "succeeded";
         state.userCounts = action.payload;
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.fetchUsersStatus = "failed";
+      .addCase(fetchUserCounts.rejected, (state, action) => {
+        state.fetchUserCountsError = "failed";
         state.fetchUsersError = action.error.message;
       })
       // Cases for status of fetchForumPostCounts (pending, fulfilled, and rejected)
