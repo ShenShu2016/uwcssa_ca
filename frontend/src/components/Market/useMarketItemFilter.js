@@ -110,8 +110,7 @@ export function marketItemFilterUpdate(props, dispatch) {
 export default function useMarketItemFilter(filterList, type) {
   const dispatch = useDispatch();
   const [isFiltering, setIsFiltering] = useState(false);
-  const { filter } = useSelector((state) => state.market);
-  const [starter, setStarter] = useState(true);
+  const { filter, fetchStatus } = useSelector((state) => state.market);
   const query =
     type === "Item"
       ? marketItemSortBySortKeyItem
@@ -122,14 +121,10 @@ export default function useMarketItemFilter(filterList, type) {
       : type === "all"
       ? marketItemSortBySortKey
       : null;
+
+  console.log(filter);
   useEffect(() => {
-    if (Object.keys(filter).length !== 0) {
-      setStarter(true);
-    }
-  }, [filter]);
-  console.log(starter);
-  useEffect(() => {
-    if (starter) {
+    if (fetchStatus) {
       if (type === "all") {
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
@@ -175,9 +170,9 @@ export default function useMarketItemFilter(filterList, type) {
           );
         }
       }
-      setStarter(false);
+      // setStarter(false);
     }
-  }, [filter, type, dispatch, query, starter]);
+  }, [filter, type, dispatch, query, fetchStatus]);
   return isFiltering;
 }
 

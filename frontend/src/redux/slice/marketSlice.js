@@ -27,6 +27,7 @@ const initialState = marketAdapter.getInitialState({
   filter: {},
   tagsOccurrence: [],
   clickedTags: [],
+  fetchStatus: true,
   nextToken: null,
   currentFetchType: null,
   currentFilterType: null,
@@ -55,15 +56,17 @@ export const fetchMarketItems = createAsyncThunk(
     filter = { active: { eq: true } },
   }) => {
     try {
+      const filterList = { ...filter };
       const variables = {
         limit: 50,
         sortKey: "SortKey",
         sortDirection: "DESC",
-        filter: filter,
+        filter: filterList,
       };
       nextToken !== null && Object.assign(variables, { nextToken: nextToken });
       marketType !== "all" &&
         Object.assign(variables["filter"], { marketType: { eq: marketType } });
+      console.log(variables);
       const MarketItemsData = await API.graphql({
         query: query,
         variables: variables,
@@ -195,9 +198,11 @@ const marketSlice = createSlice({
           ? Object.assign(currentFilter, filter)
           : filter;
       state.currentFilterType = marketType;
+      state.fetchStatus = true;
     },
     filterClear(state, action) {
       state.filter = {};
+      state.fetchStatus = true;
     },
     updateClickedTags(state, action) {
       const tag = action.payload;
@@ -212,9 +217,11 @@ const marketSlice = createSlice({
       // Cases for status of fetchMarketItems (pending, fulfilled, and rejected)
       .addCase(fetchMarketItems.pending, (state, action) => {
         state.fetchMarketItemsStatus = "loading";
+        state.fetchStatus = false;
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
+        console.log(action.payload);
         action.payload[2] && marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload[0].items);
         state.currentFetchType = action.payload[1];
@@ -267,6 +274,7 @@ const marketSlice = createSlice({
       // Cases for status of addressFilteredMarketItem (pending, fulfilled, and rejected)
       .addCase(addressFilteredMarketItem.pending, (state, action) => {
         state.addressFilteredMarketItemStatus = "loading";
+        state.fetchStatus = false;
       })
       .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
         state.addressFilteredMarketItemStatus = "succeeded";
