@@ -16,15 +16,30 @@ exports.handler = async (event) => {
       await ses
         .sendEmail({
           Destination: {
-            ToAddresses: [
-              record.dynamodb.NewImage.email.S,
-              "shushen2013@gmail.com",
-            ],
+            ToAddresses: [record.dynamodb.NewImage.email.S],
           },
           Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
           Message: {
             Subject: {
-              Data: `你参加了巴拉巴拉请准时到达`,
+              Data: `活动回执`,
+            },
+            Body: {
+              Text: {
+                Data: `恭喜您已经成功报名。\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
+              },
+            },
+          },
+        })
+        .promise();
+      await ses
+        .sendEmail({
+          Destination: {
+            ToAddresses: ["shikaijin7@gmail.com", "shushen2013@gmail.com"],
+          },
+          Source: `"uwcssa.ca" <admin@uwcssa.ca>`,
+          Message: {
+            Subject: {
+              Data: `有人参加了活动${record.dynamodb.NewImage.userID.S}`,
             },
             Body: {
               Text: {

@@ -60,7 +60,7 @@ export default function Individual() {
       name: "",
       phone: "",
       weChat: "",
-      message: "",
+      message: "收信人手机号：\n收信人地址：\n\n留言/祝福语：\n\n",
       numberOfPeople: "",
     },
   });
@@ -174,7 +174,7 @@ export default function Individual() {
                       margin="normal"
                       required
                       fullWidth
-                      label="姓名"
+                      label="寄信人姓名"
                       placeholder="张三"
                       autoComplete="name"
                       autoFocus
@@ -224,7 +224,7 @@ export default function Individual() {
                       margin="normal"
                       fullWidth
                       autoComplete="weChat"
-                      label="微信号(可以不填)"
+                      label="微信号"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
@@ -264,9 +264,10 @@ export default function Individual() {
                       id="message"
                       margin="normal"
                       fullWidth
-                      label="备注"
+                      label="详细信息"
                       multiline
-                      rows={4}
+                      // helperText=''
+                      minRows={4}
                       variant="outlined"
                       onChange={onChange}
                       value={value}
