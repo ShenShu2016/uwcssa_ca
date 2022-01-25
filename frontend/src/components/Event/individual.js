@@ -4,7 +4,10 @@ import {
   Button,
   CircularProgress,
   CssBaseline,
+  FormControl,
   Grid,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -24,6 +27,7 @@ import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import { v4 as uuid } from "uuid";
+import InputLabel from "@mui/material/node/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -50,6 +54,11 @@ export default function Individual() {
   const { userAuth } = useSelector((state) => state);
   const [loading, setLoading] = useState(false);
   const timer = useRef();
+  const [toLocation, setToLocation] = useState("");
+
+  const handleChange = (event) => {
+    setToLocation(event.target.value);
+  };
 
   const {
     handleSubmit,
@@ -60,7 +69,7 @@ export default function Individual() {
       name: "",
       phone: "",
       weChat: "",
-      message: "收信人手机号：\n收信人地址：\n\n留言/祝福语：\n\n",
+      message: "收信人姓名：\n收信人地址：\n\n留言/祝福语：\n\n",
       numberOfPeople: "",
     },
   });
@@ -69,7 +78,8 @@ export default function Individual() {
     setLoading(true);
     const address = await GetAddress();
     const addressID = uuid();
-    const itemID = `${eventID}-${userAuth.user.username}`;
+    const itemID = `${toLocation}-${eventID}-${userAuth.user.username}`;
+    console.log(itemID);
     if (address) {
       const {
         description,
@@ -114,7 +124,7 @@ export default function Individual() {
       eventID: eventID,
       userID: userAuth.user.username,
     };
-    console.log("createEventParticipantInput", createEventParticipantInput);
+    // console.log("createEventParticipantInput", createEventParticipantInput);
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput })
     );
@@ -186,6 +196,19 @@ export default function Individual() {
                     />
                   )}
                 />
+
+                <FormControl sx={{ width: "100%" }}>
+                  <InputLabel id="toLocation">收件地址</InputLabel>
+                  <Select
+                    value={toLocation}
+                    id="toLocation"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"China"}>中国</MenuItem>
+                    <MenuItem value={"Canada"}>加拿大</MenuItem>
+                  </Select>
+                </FormControl>
+
                 <Controller
                   name="phone"
                   control={control}
@@ -200,7 +223,7 @@ export default function Individual() {
                       id="phone"
                       margin="normal"
                       fullWidth
-                      required
+                      // required
                       placeholder="e.g. 1234567890"
                       autoComplete="phone"
                       label="手机号码"
@@ -252,7 +275,13 @@ export default function Individual() {
                     />
                   )}
                 /> */}
-                <GoogleMapsPlace />
+                <div
+                  style={{
+                    display: toLocation !== "China" ? "block" : "none",
+                  }}
+                >
+                  <GoogleMapsPlace />
+                </div>
                 <Controller
                   name="message"
                   control={control}

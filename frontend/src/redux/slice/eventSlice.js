@@ -199,17 +199,17 @@ export const postEventParticipant = createAsyncThunk(
   "event/postEventParticipant",
   async ({ createEventParticipantInput }) => {
     // console.log("createEventParticipantInput", createEventParticipantInput);
-    // try {
-    const response = await API.graphql(
-      graphqlOperation(createEventParticipant, {
-        input: createEventParticipantInput,
-      })
-    );
-    return response;
-    // } catch (err) {
-    //   console.log(err);
-    //   return err;
-    // }
+    try {
+      const response = await API.graphql(
+        graphqlOperation(createEventParticipant, {
+          input: createEventParticipantInput,
+        })
+      );
+      return response;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 );
 
