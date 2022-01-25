@@ -26,6 +26,18 @@ export type AmplifyDependentResourcesAttributes = {
         },
         "uwcssanodejsLibrarieslayer": {
             "Arn": "string"
+        },
+        "EventConfirmation": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "UwcssaJobConfirmation": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "auth": {
