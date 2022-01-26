@@ -68,6 +68,11 @@ export const getProfile = createAsyncThunk(
 export const putUserProfile = createAsyncThunk(
   "profile/putUserProfile",
   async ({ updateUserInput }) => {
+    Object.keys(updateUserInput).forEach((key) =>
+      updateUserInput[key] === null ? delete updateUserInput[key] : {}
+    );
+
+    console.log(updateUserInput);
     try {
       const response = await API.graphql(
         graphqlOperation(updateUser, {
@@ -85,6 +90,7 @@ export const putUserProfile = createAsyncThunk(
 export const postUserEducation = createAsyncThunk(
   "profile/postUserEducation",
   async ({ createUserEducationInput }) => {
+    console.log("createUserEducationInput", createUserEducationInput);
     const response = await API.graphql(
       graphqlOperation(createUserEducation, {
         input: createUserEducationInput,
