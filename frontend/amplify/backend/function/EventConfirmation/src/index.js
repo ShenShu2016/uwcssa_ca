@@ -11,6 +11,10 @@ exports.handler = async (event) => {
     if (record.eventName === "INSERT") {
       console.log(record.dynamodb.NewImage.userID.S);
       console.log(record.dynamodb.NewImage.email.S);
+      console.log(record.dynamodb.NewImage.name.S);
+      console.log(record.dynamodb.NewImage.phone.S);
+      console.log(record.dynamodb.NewImage.message.S);
+      console.log(record.dynamodb.NewImage.id.S);
       console.log(record.dynamodb.NewImage.numberOfPeople.N);
 
       await ses
@@ -25,7 +29,13 @@ exports.handler = async (event) => {
             },
             Body: {
               Text: {
-                Data: `恭喜您已经成功报名。\n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
+                Data: `恭喜您已经成功报名。\n请确认以下信息是否正确：\n姓名：${
+                  record.dynamodb.NewImage.name.S
+                }\n寄信人加拿大手机号码：${
+                  record.dynamodb.NewImage.phone.S
+                }\n前往国家：${record.dynamodb.NewImage.id.S.split("-")[0]}
+                \n详细信息：\n${record.dynamodb.NewImage.message.S}
+                \n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
               },
             },
           },
@@ -43,7 +53,13 @@ exports.handler = async (event) => {
             },
             Body: {
               Text: {
-                Data: `不知道你要说什么之后再改把`,
+                Data: `恭喜您已经成功报名。\n请确认以下信息是否正确：\n姓名：${
+                  record.dynamodb.NewImage.name.S
+                }\n寄信人加拿大手机号码：${
+                  record.dynamodb.NewImage.phone.S
+                }\n前往国家：${record.dynamodb.NewImage.id.S.split("-")[0]}
+                \n详细信息：\n${record.dynamodb.NewImage.message.S}
+                \n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
               },
             },
           },
