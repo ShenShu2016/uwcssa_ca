@@ -68,13 +68,17 @@ export const getProfile = createAsyncThunk(
 export const putUserProfile = createAsyncThunk(
   "profile/putUserProfile",
   async ({ updateUserInput }) => {
-    const response = await API.graphql(
-      graphqlOperation(updateUser, {
-        input: updateUserInput,
-      })
-    );
-    console.log("response", response);
-    return response.data.updateUser;
+    try {
+      const response = await API.graphql(
+        graphqlOperation(updateUser, {
+          input: updateUserInput,
+        })
+      );
+      console.log("response", response);
+      return response.data.updateUser;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

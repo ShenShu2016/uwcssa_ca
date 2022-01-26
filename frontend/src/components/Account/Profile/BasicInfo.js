@@ -47,7 +47,6 @@ export default function BasicInfo({ user, ownerID }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
   const [editAvatarOpen, setEditAvatarOpen] = useState(false);
-  const [hover, setHover] = useState(false);
 
   const isPermit = usePermit(ownerID, "admin");
 
@@ -85,8 +84,9 @@ export default function BasicInfo({ user, ownerID }) {
             />
           </CardActionArea>
           <CardContent className={classes.info}>
-            <div className={classes.outer}>
+            <Box className={classes.outer}>
               <Badge
+                onClick={isPermit ? handleEditAvatarClickOpen : null}
                 invisible={!user.badges.includes("top100")}
                 overlap="circular"
                 // anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -109,6 +109,7 @@ export default function BasicInfo({ user, ownerID }) {
                   zIndex: "1",
                   "& .MuiBadge-anchorOriginTopRightCircular": {
                     transform: "translate(0, 0)",
+                    cursor: "pointer",
                   },
                 }} // 直接找到他所对应的className，修改位置
               >
@@ -124,36 +125,16 @@ export default function BasicInfo({ user, ownerID }) {
                     />
                   }
                 >
-                  <Box
-                    onMouseOver={() => setHover(true)}
-                    onMouseOut={() => setHover(false)}
-                  >
-                    {hover && isPermit ? (
-                      <Avatar
-                        alt="avatar"
-                        sx={{
-                          width: 150,
-                          height: 150,
-                          cursor: "pointer",
-                        }}
-                        className={classes.avatar}
-                        onClick={handleEditAvatarClickOpen}
-                      >
-                        修改头像
-                      </Avatar>
-                    ) : (
-                      <Avatar
-                        alt="avatar"
-                        src={
-                          user.avatarImgURL
-                            ? user.avatarImgURL
-                            : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
-                        }
-                        sx={{ width: 150, height: 150, cursor: "pointer" }}
-                        className={classes.avatar}
-                      />
-                    )}
-                  </Box>
+                  <Avatar
+                    alt="avatar"
+                    src={
+                      user.avatarImgURL
+                        ? user.avatarImgURL
+                        : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
+                    }
+                    sx={{ width: 150, height: 150, cursor: "pointer" }}
+                    className={classes.avatar}
+                  />
                 </Badge>
               </Badge>
               {isPermit && (
@@ -167,7 +148,7 @@ export default function BasicInfo({ user, ownerID }) {
                   点击编辑
                 </Button>
               )}
-            </div>
+            </Box>
             <Typography
               gutterBottom
               variant="h5"
