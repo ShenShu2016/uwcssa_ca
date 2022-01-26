@@ -28,6 +28,8 @@ import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
 import { v4 as uuid } from "uuid";
 import InputLabel from "@mui/material/node/InputLabel";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -36,16 +38,19 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "3rem",
-    marginBottom: "2rem",
+    // marginTop: "3rem",
+    // marginBottom: "2rem",
     padding: "0 1rem",
-    [theme.breakpoints.up("lg")]: {
-      padding: "0 10rem",
-    },
+    height: "100%",
+    // [theme.breakpoints.up("lg")]: {
+    //   padding: "0 10rem",
+    // },
   },
 }));
 
 export default function Individual() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -69,7 +74,8 @@ export default function Individual() {
       name: "",
       phone: "",
       weChat: "",
-      message: "收信人姓名：\n收信人地址：\n\n留言/祝福语：\n\n",
+      message:
+        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：\n\n",
       numberOfPeople: "",
     },
   });
@@ -145,7 +151,11 @@ export default function Individual() {
     <div>
       {userAuth.isAuthenticated ? "" : <SignUpRequest />}
       <div>
-        <Grid container component="main" sx={{ height: "100%" }}>
+        <Grid
+          container
+          component="main"
+          sx={{ height: isMobile ? "100%" : "840px" }}
+        >
           <CssBaseline />
           <Grid
             item
@@ -197,18 +207,6 @@ export default function Individual() {
                   )}
                 />
 
-                <FormControl sx={{ width: "100%" }}>
-                  <InputLabel id="toLocation">收件地址</InputLabel>
-                  <Select
-                    value={toLocation}
-                    id="toLocation"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={"China"}>中国</MenuItem>
-                    <MenuItem value={"Canada"}>加拿大</MenuItem>
-                  </Select>
-                </FormControl>
-
                 <Controller
                   name="phone"
                   control={control}
@@ -223,10 +221,10 @@ export default function Individual() {
                       id="phone"
                       margin="normal"
                       fullWidth
-                      // required
+                      required
                       placeholder="e.g. 1234567890"
                       autoComplete="phone"
-                      label="手机号码"
+                      label="寄信人加拿大手机号码"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
@@ -275,6 +273,17 @@ export default function Individual() {
                     />
                   )}
                 /> */}
+                <FormControl sx={{ width: "100%", marginBottom: "1rem" }}>
+                  <InputLabel id="toLocation">收件地址</InputLabel>
+                  <Select
+                    value={toLocation}
+                    id="toLocation"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"China"}>中国</MenuItem>
+                    <MenuItem value={"Canada"}>加拿大</MenuItem>
+                  </Select>
+                </FormControl>
                 <div
                   style={{
                     display: toLocation !== "China" ? "block" : "none",
