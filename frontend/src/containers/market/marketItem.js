@@ -9,8 +9,10 @@ import useMarketItemFilter, {
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
+import LoadMore from "../../components/LoadMore";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import MarketSkeleton from "../../components/Market/MarketSkeleton";
 import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useDispatch } from "react-redux";
@@ -41,9 +43,7 @@ export default function MarketItem() {
     marketItemFilterUpdate(data, dispatch);
   });
 
-  const { filter: filterList, tagsOccurrence } = useSelector(
-    (state) => state.market
-  );
+  const { filter: filterList } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filterList, "Item");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -83,7 +83,6 @@ export default function MarketItem() {
         className={classes.contain}
       >
         <FilterInfo
-          darkTheme={darkTheme}
           form="plain"
           type="Item"
           control={control}
@@ -92,10 +91,8 @@ export default function MarketItem() {
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
-            darkTheme={darkTheme}
             control={control}
             type="Item"
-            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />
@@ -105,7 +102,8 @@ export default function MarketItem() {
                 Found {filteredItems.length} related results...
               </Box>
             )}
-            {itemRenderList}
+            {starter === false ? <MarketSkeleton /> : itemRenderList}
+            <LoadMore />
           </Box>
         </Box>
       </Stack>

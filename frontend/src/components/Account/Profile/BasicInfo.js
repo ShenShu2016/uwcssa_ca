@@ -1,6 +1,7 @@
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -10,12 +11,12 @@ import {
 import React, { useState } from "react";
 
 import Edit from "./Info/Edit";
+import EditAvatar from "./Info/EditAvatar";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import { usePermit } from "../../../Hooks/usePermit";
 import uwindsor from "../../../static/svg icons/uwindsor.svg";
-import EditAvatar from "./Info/EditAvatar";
 
 const useStyles = makeStyles({
   root: {
@@ -46,7 +47,6 @@ export default function BasicInfo({ user, ownerID }) {
   const classes = useStyles();
   const [editOpen, setEditOpen] = useState(false);
   const [editAvatarOpen, setEditAvatarOpen] = useState(false);
-  const [hover, setHover] = useState(false);
 
   const isPermit = usePermit(ownerID, "admin");
 
@@ -84,45 +84,58 @@ export default function BasicInfo({ user, ownerID }) {
             />
           </CardActionArea>
           <CardContent className={classes.info}>
-            <div className={classes.outer}>
+            <Box className={classes.outer}>
               <Badge
-                invisible={!user.badges.includes("uwindsor")}
+                onClick={isPermit ? handleEditAvatarClickOpen : null}
+                invisible={!user.badges.includes("top100")}
                 overlap="circular"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                // anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 badgeContent={
-                  <SmallAvatar
-                    alt="uwindsor"
-                    src={uwindsor}
-                    sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
+                  <Avatar
+                    alt="top100"
+                    src={
+                      "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/AvatarIcons/top100.png"
+                    }
+                    sx={{
+                      width: 200,
+                      height: 200,
+                      top: "-37px",
+                      right: "-52px",
+                      borderRadius: 0,
+                    }}
                   />
                 }
+                sx={{
+                  zIndex: "1",
+                  "& .MuiBadge-anchorOriginTopRightCircular": {
+                    transform: "translate(0, 0)",
+                    cursor: "pointer",
+                  },
+                }} // 直接找到他所对应的className，修改位置
               >
-                <div
-                  onMouseOver={() => setHover(true)}
-                  onMouseOut={() => setHover(false)}
-                >
-                  {hover && isPermit ? (
-                    <Avatar
-                      alt="avatar"
-                      sx={{ width: 150, height: 150, cursor: "pointer" }}
-                      className={classes.avatar}
-                      onClick={handleEditAvatarClickOpen}
-                    >
-                      修改头像
-                    </Avatar>
-                  ) : (
-                    <Avatar
-                      alt="avatar"
-                      src={
-                        user.avatarImgURL
-                          ? user.avatarImgURL
-                          : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
-                      }
-                      sx={{ width: 150, height: 150, cursor: "pointer" }}
-                      className={classes.avatar}
+                <Badge
+                  invisible={!user.badges.includes("uwindsor")}
+                  overlap="circular"
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  badgeContent={
+                    <SmallAvatar
+                      alt="uwindsor"
+                      src={uwindsor}
+                      sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
                     />
-                  )}
-                </div>
+                  }
+                >
+                  <Avatar
+                    alt="avatar"
+                    src={
+                      user.avatarImgURL
+                        ? user.avatarImgURL
+                        : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
+                    }
+                    sx={{ width: 150, height: 150, cursor: "pointer" }}
+                    className={classes.avatar}
+                  />
+                </Badge>
               </Badge>
               {isPermit && (
                 <Button
@@ -135,7 +148,7 @@ export default function BasicInfo({ user, ownerID }) {
                   点击编辑
                 </Button>
               )}
-            </div>
+            </Box>
             <Typography
               gutterBottom
               variant="h5"

@@ -2,6 +2,7 @@ import {
   Box,
   CircularProgress,
   Container,
+  DialogTitle,
   Divider,
   FormControl,
   FormControlLabel,
@@ -29,7 +30,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import DateTimePicker from "@mui/lab/DateTimePicker";
@@ -207,69 +207,99 @@ export default function EditEvent() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-
-    const address = await GetAddress();
-    const addressID = uuid();
-    const itemID = uuid();
-    if (address) {
-      const {
-        description,
-        place_id,
-        reference,
-        terms,
-        types,
-        apartmentNumber,
-        geocodingResult,
-        lat,
-        lng,
-      } = address;
-      const createAddressInput = {
-        description,
-        place_id,
-        reference,
-        terms,
-        types,
-        apartmentNumber,
-        geocodingResult,
-        lat,
-        lng,
-        itemID: itemID,
+    if (!state.online) {
+      const address = await GetAddress();
+      const addressID = uuid();
+      const itemID = uuid();
+      if (address) {
+        const {
+          description,
+          place_id,
+          reference,
+          terms,
+          types,
+          apartmentNumber,
+          geocodingResult,
+          lat,
+          lng,
+        } = address;
+        const createAddressInput = {
+          description,
+          place_id,
+          reference,
+          terms,
+          types,
+          apartmentNumber,
+          geocodingResult,
+          lat,
+          lng,
+          itemID: itemID,
+          userID: username,
+          id: addressID,
+        };
+        console.log(createAddressInput);
+        const addressResponse = await dispatch(
+          postAddress({ createAddressInput })
+        );
+        console.log(addressResponse);
+      }
+      const updateEventInput = {
+        ...data,
+        id: event.id,
+        backGroundImgURL: backGroundImgURL,
+        posterImgURL: posterImgURL,
+        qrCodeImgURL: qrCodeImgURL,
+        addressID: address && addressID,
+        content: updatedContent,
+        online: state.online,
+        group: state.group,
+        active: true,
         userID: username,
-        id: addressID,
+        tags: GetTags(),
       };
-      console.log(createAddressInput);
-      const addressResponse = await dispatch(
-        postAddress({ createAddressInput })
-      );
-      console.log(addressResponse);
-    }
-    const updateEventInput = {
-      ...data,
-      id: event.id,
-      backGroundImgURL: backGroundImgURL,
-      posterImgURL: posterImgURL,
-      qrCodeImgURL: qrCodeImgURL,
-      addressID: state.online ? "" : address && addressID,
-      content: updatedContent,
-      online: state.online,
-      group: state.group,
-      active: true,
-      userID: username,
-      tags: GetTags(),
-    };
-    const response = await dispatch(modifyEvent({ updateEventInput }));
+      const response = await dispatch(modifyEvent({ updateEventInput }));
 
-    if (response.meta.requestStatus === "fulfilled") {
-      setLoading(false);
-      history.push(`/event/${response.payload.data.updateEvent.id}`);
-    } else {
-      timer.current = window.setTimeout(() => {
+      if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
+        history.push(`/event/${response.payload.data.updateEvent.id}`);
+      } else {
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
 
-        console.log(response.error.message);
-      }, 1000);
+          console.log(response.error.message);
+        }, 1000);
 
-      console.log(response);
+        console.log(response);
+      }
+    } else {
+      const updateEventInput = {
+        ...data,
+        id: event.id,
+        backGroundImgURL: backGroundImgURL,
+        posterImgURL: posterImgURL,
+        qrCodeImgURL: qrCodeImgURL,
+        addressID: "",
+        content: updatedContent,
+        online: state.online,
+        group: state.group,
+        active: true,
+        userID: username,
+        tags: GetTags(),
+      };
+      const response = await dispatch(modifyEvent({ updateEventInput }));
+
+      if (response.meta.requestStatus === "fulfilled") {
+        setLoading(false);
+        history.push(`/event/${response.payload.data.updateEvent.id}`);
+      } else {
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+
+          console.log(response.error.message);
+        }, 1000);
+
+        console.log(response);
+      }
     }
   };
 
@@ -308,8 +338,11 @@ export default function EditEvent() {
 
   return (
     <div>
-      <AppBar>
+      <DialogTitle>
         <Toolbar>
+          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            活动编辑
+          </Typography>
           <IconButton
             edge="start"
             color="inherit"
@@ -318,11 +351,10 @@ export default function EditEvent() {
           >
             <CloseIcon />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            活动编辑
-          </Typography>
         </Toolbar>
-      </AppBar>
+        <Divider light />
+      </DialogTitle>
+
       <Container maxWidth="md">
         {event.active === true ? (
           <Box
@@ -356,7 +388,7 @@ export default function EditEvent() {
               />
               <Controller
                 name="topicID"
-                defaultValue={event.topicID}
+                defaultValue={event.topic.id}
                 control={control}
                 rules={{
                   required: true,

@@ -6,7 +6,6 @@ import API from "@aws-amplify/api";
 import Compressor from "compressorjs";
 import Storage from "@aws-amplify/storage";
 import awsmobile from "../../aws-exports";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { v4 as uuid } from "uuid";
 
 const initialState = {
@@ -25,8 +24,8 @@ const initialState = {
 
   removeURLFromStatus: "idle",
   removeURLFromError: null,
-  fetchUsersError: null,
-  fetchUsersStatus: "idle",
+  fetchUserCountsError: null,
+  fetchUserCountsStatus: "idle",
   fetchForumPostCountsStatus: "idle",
   fetchForumPostCountsError: null,
   postLikeStatus: "idle",
@@ -55,18 +54,21 @@ export const removeURLFrom = createAsyncThunk(
   }
 );
 
-export const fetchUsers = createAsyncThunk("general/fetchUsers", async () => {
-  try {
-    const usersData = await API.graphql({
-      query: searchUsers,
-      authMode: "AWS_IAM",
-    });
-    console.log("usersData", usersData);
-    return usersData.data.searchUsers.total;
-  } catch (error) {
-    console.log(error);
+export const fetchUserCounts = createAsyncThunk(
+  "general/fetchUserCounts",
+  async () => {
+    try {
+      const usersData = await API.graphql({
+        query: searchUsers,
+        authMode: "AWS_IAM",
+      });
+      console.log("usersData", usersData);
+      return usersData.data.searchUsers.total;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 export const fetchForumPostCounts = createAsyncThunk(
   "general/fetchForumPostCounts",
@@ -83,49 +85,66 @@ export const fetchForumPostCounts = createAsyncThunk(
 export const postLike = createAsyncThunk(
   "general/postLike",
   async ({ itemID, username, isLike }) => {
-    const response = await API.graphql(
-      graphqlOperation(createLike, {
-        input: {
-          id: `${itemID}-${username}`,
-          like: isLike,
-          itemID: itemID,
-          userID: username,
+    try {
+      const response = await API.graphql({
+        query: createLike,
+        variables: {
+          input: {
+            id: `${itemID}-${username}`,
+            like: isLike,
+            itemID: itemID,
+            userID: username,
+          },
         },
-      })
-    );
-    console.log(response);
-    return response.data;
+      });
+      //console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const putLike = createAsyncThunk(
   "general/putLike",
   async ({ itemID, username, isLike }) => {
-    const response = await API.graphql(
-      graphqlOperation(updateLike, {
-        input: {
-          id: `${itemID}-${username}`,
-          like: isLike,
+    try {
+      const response = await API.graphql({
+        query: updateLike,
+
+        variables: {
+          input: {
+            id: `${itemID}-${username}`,
+            like: isLike,
+          },
         },
-      })
-    );
-    console.log(response);
-    return response.data;
+      });
+      //console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const removeLike = createAsyncThunk(
   "general/removeLike",
   async ({ itemID, username }) => {
-    const response = await API.graphql(
-      graphqlOperation(deleteLike, {
-        input: {
-          id: `${itemID}-${username}`,
+    try {
+      const response = await API.graphql({
+        query: deleteLike,
+        variables: {
+          input: {
+            id: `${itemID}-${username}`,
+          },
         },
-      })
-    );
-    console.log(response);
-    return response.data;
+      });
+
+      //console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -261,15 +280,15 @@ const generalSlice = createSlice({
         state.removeURLFromError = action.error.message;
       })
       // Cases for status of fetchUsers (pending, fulfilled, and rejected)
-      .addCase(fetchUsers.pending, (state, action) => {
-        state.fetchUsersStatus = "loading";
+      .addCase(fetchUserCounts.pending, (state, action) => {
+        state.fetchUserCountsStatus = "loading";
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.fetchUsersStatus = "succeeded";
+      .addCase(fetchUserCounts.fulfilled, (state, action) => {
+        state.fetchUserCountsStatus = "succeeded";
         state.userCounts = action.payload;
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.fetchUsersStatus = "failed";
+      .addCase(fetchUserCounts.rejected, (state, action) => {
+        state.fetchUserCountsError = "failed";
         state.fetchUsersError = action.error.message;
       })
       // Cases for status of fetchForumPostCounts (pending, fulfilled, and rejected)

@@ -75,30 +75,56 @@ export default function DashboardBasicInfo({ userProfile }) {
           <CardContent className={classes.info}>
             <div className={classes.outer}>
               <Badge
-                invisible={!userProfile.badges.includes("uwindsor")}
+                invisible={!userProfile.badges.includes("top100")}
                 overlap="circular"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                // anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 badgeContent={
-                  <SmallAvatar
-                    alt="uwindsor"
-                    src={uwindsor}
-                    sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
+                  <Avatar
+                    alt="top100"
+                    src={
+                      "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/AvatarIcons/top100.png"
+                    }
+                    sx={{
+                      width: 200,
+                      height: 200,
+                      top: "-37px",
+                      right: "-52px",
+                      borderRadius: "0",
+                    }}
                   />
                 }
+                sx={{
+                  "& .MuiBadge-anchorOriginTopRightCircular": {
+                    transform: "translate(0, 0)",
+                  },
+                }} // 直接找到他所对应的className，修改位置
               >
-                <Avatar
-                  onClick={() => {
-                    history.push(`/account/profile/${userProfile.username}`);
-                  }}
-                  alt="avatar"
-                  src={
-                    userProfile.avatarImgURL
-                      ? userProfile.avatarImgURL
-                      : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
+                <Badge
+                  invisible={!userProfile.badges.includes("uwindsor")}
+                  overlap="circular"
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  badgeContent={
+                    <SmallAvatar
+                      alt="uwindsor"
+                      src={uwindsor}
+                      sx={{ top: "-75px", right: "10px", marginLeft: "1rem" }}
+                    />
                   }
-                  sx={{ width: 150, height: 150, cursor: "pointer" }}
-                  className={classes.avatar}
-                />
+                >
+                  <Avatar
+                    onClick={() => {
+                      history.push(`/account/profile/${userProfile.username}`);
+                    }}
+                    alt="avatar"
+                    src={
+                      userProfile.avatarImgURL
+                        ? userProfile.avatarImgURL
+                        : "https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/basicInfo_Avatar.png"
+                    }
+                    sx={{ width: 150, height: 150, cursor: "pointer" }}
+                    className={classes.avatar}
+                  />
+                </Badge>{" "}
               </Badge>
               <Button
                 variant="contained"

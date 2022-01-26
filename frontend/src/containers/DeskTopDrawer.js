@@ -366,7 +366,7 @@ export default function DeskTopDrawer(props) {
                 </Typography>
                 <CustomAvatar
                   user={userAuth.userProfile}
-                  sx={{ width: 35, height: 35 }}
+                  sx={{ width: 40, height: 40 }}
                 />
               </IconButton>
             ) : (

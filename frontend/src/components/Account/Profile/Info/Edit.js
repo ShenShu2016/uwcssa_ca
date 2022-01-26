@@ -18,15 +18,15 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import React, { useRef, useState } from "react";
 
+import Cropper from "react-easy-crop";
+import { dataURLtoFile } from "./dataURLtoFile";
+import getCroppedImg from "./canvasUtils";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postSingleImage } from "../../../../redux/slice/generalSlice";
 import { putUserProfile } from "../../../../redux/slice/profileSlice";
 // import { styled } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import getCroppedImg from "./canvasUtils";
-import Cropper from "react-easy-crop";
-import { dataURLtoFile } from "./dataURLtoFile";
 import { v4 as uuid } from "uuid";
 
 // const Input = styled("input")({
@@ -145,6 +145,7 @@ export default function Edit({ user, editOpen, handleEditClose }) {
       backGroundImgURL: backGroundImgURL,
     };
     setLoading(true);
+    console.log("updateUserInput", updateUserInput);
     const response = await dispatch(putUserProfile({ updateUserInput }));
     handleEditClose();
     if (response) {

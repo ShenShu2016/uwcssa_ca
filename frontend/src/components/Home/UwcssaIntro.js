@@ -13,7 +13,7 @@ import {
 import React, { useEffect } from "react";
 import {
   fetchForumPostCounts,
-  fetchUsers,
+  fetchUserCounts,
 } from "../../redux/slice/generalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -112,17 +112,17 @@ export default function UwcssaIntro() {
   const { userAuth } = useSelector((state) => state);
   const {
     userCounts,
-    fetchUsersStatus,
+    fetchUserCountsStatus,
     forumPostCounts,
     fetchForumPostCountsStatus,
   } = useSelector((state) => state.general);
   const { isAuthenticated } = useSelector((state) => state.userAuth);
 
   useEffect(() => {
-    if (fetchUsersStatus === "idle" || undefined) {
-      dispatch(fetchUsers());
+    if (fetchUserCountsStatus === "idle" || undefined) {
+      dispatch(fetchUserCounts());
     }
-  }, [dispatch, fetchUsersStatus]);
+  }, [dispatch, fetchUserCountsStatus]);
 
   useEffect(() => {
     if (fetchForumPostCountsStatus === "idle" || undefined) {

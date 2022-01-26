@@ -18,8 +18,8 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   actionArea: {
-    maxWidth: 300,
-    minWidth: 256,
+    maxWidth: 280,
+    minWidth: 280,
     // borderRadius: 16,
     transition: "0.2s",
     "&:hover": {
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   cardDetails: {
-    maxWidth: 300,
-    minWidth: 256,
+    maxWidth: 280,
+    minWidth: 280,
     // borderRadius: 16,
     boxShadow: "none",
     "&:hover": {

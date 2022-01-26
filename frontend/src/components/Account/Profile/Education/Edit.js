@@ -74,6 +74,7 @@ export default function Edit({ education, editOpen, handleEditClose, idx }) {
       endDate: endDate,
       startDate: startDate,
     };
+    console.log("updateUserEducationInput", updateUserEducationInput);
     const response = await dispatch(
       putUserEducation({ updateUserEducationInput, idx })
     );

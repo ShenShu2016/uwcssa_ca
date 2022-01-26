@@ -4,12 +4,15 @@ import {
   Button,
   CircularProgress,
   CssBaseline,
+  FormControl,
   Grid,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
+// import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import { Link, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,11 +22,14 @@ import SignUpRequest from "../Auth/SignUpRequireDialog";
 import eventImg from "../../static/event.jpg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { postAddress } from "../../redux/slice/addressSlice";
+// import { postAddress } from "../../redux/slice/addressSlice";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import { useTitle } from "../../Hooks/useTitle";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
+import InputLabel from "@mui/material/node/InputLabel";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -32,16 +38,19 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "3rem",
-    marginBottom: "2rem",
+    // marginTop: "3rem",
+    // marginBottom: "2rem",
     padding: "0 1rem",
-    [theme.breakpoints.up("lg")]: {
-      padding: "0 10rem",
-    },
+    height: "100%",
+    // [theme.breakpoints.up("lg")]: {
+    //   padding: "0 10rem",
+    // },
   },
 }));
 
 export default function Individual() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,6 +59,11 @@ export default function Individual() {
   const { userAuth } = useSelector((state) => state);
   const [loading, setLoading] = useState(false);
   const timer = useRef();
+  const [toLocation, setToLocation] = useState("Canada");
+
+  const handleChange = (event) => {
+    setToLocation(event.target.value);
+  };
 
   const {
     handleSubmit,
@@ -60,53 +74,56 @@ export default function Individual() {
       name: "",
       phone: "",
       weChat: "",
-      message: "",
+      message:
+        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：\n\n",
       numberOfPeople: "",
     },
   });
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const address = await GetAddress();
-    const addressID = uuid();
-    const itemID = `${eventID}-${userAuth.user.username}`;
-    if (address) {
-      const {
-        description,
-        place_id,
-        reference,
-        terms,
-        types,
-        apartmentNumber,
-        geocodingResult,
-        lat,
-        lng,
-      } = address;
-      const createAddressInput = {
-        description,
-        place_id,
-        reference,
-        terms,
-        types,
-        apartmentNumber,
-        geocodingResult,
-        lat,
-        lng,
-        itemID: itemID,
-        userID: userAuth.user.username,
-        id: addressID,
-      };
-      console.log(createAddressInput);
-      const addressResponse = await dispatch(
-        postAddress({ createAddressInput })
-      );
-      console.log(addressResponse);
-    }
+    // const address = await GetAddress();
+    // const addressID = uuid();
+    const itemID = `${toLocation}-${eventID}-${userAuth.user.username}`;
+    // console.log(itemID);
+    // if (address) {
+    //   const {
+    //     description,
+    //     place_id,
+    //     reference,
+    //     terms,
+    //     types,
+    //     apartmentNumber,
+    //     geocodingResult,
+    //     lat,
+    //     lng,
+    //   } = address;
+    //   const createAddressInput = {
+    //     description,
+    //     place_id,
+    //     reference,
+    //     terms,
+    //     types,
+    //     apartmentNumber,
+    //     geocodingResult,
+    //     lat,
+    //     lng,
+    //     itemID: itemID,
+    //     userID: userAuth.user.username,
+    //     id: addressID,
+    //   };
+    //   console.log(createAddressInput);
+    //   const addressResponse = await dispatch(
+    //     postAddress({ createAddressInput })
+    //   );
+    //   console.log(addressResponse);
+    // }
 
     const createEventParticipantInput = {
       ...data,
       id: itemID,
-      addressID: address && addressID,
+      // addressID: address && addressID,
+      addressID: undefined,
       numberOfPeople: 1,
       eventParticipantStatus: "ArriveOnTime",
       email: userAuth.user.attributes.email,
@@ -114,14 +131,14 @@ export default function Individual() {
       eventID: eventID,
       userID: userAuth.user.username,
     };
-    console.log("createEventParticipantInput", createEventParticipantInput);
+    // console.log("createEventParticipantInput", createEventParticipantInput);
     const response = await dispatch(
       postEventParticipant({ createEventParticipantInput })
     );
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);
-      history.push(`/event/${eventID}/eventSignUp/success`);
+      history.replace(`/event/${eventID}/eventSignUp/success`);
     } else {
       timer.current = window.setTimeout(() => {
         console.log(response.error.message);
@@ -135,7 +152,11 @@ export default function Individual() {
     <div>
       {userAuth.isAuthenticated ? "" : <SignUpRequest />}
       <div>
-        <Grid container component="main" sx={{ height: "100%" }}>
+        <Grid
+          container
+          component="main"
+          sx={{ height: isMobile ? "100%" : "840px" }}
+        >
           <CssBaseline />
           <Grid
             item
@@ -174,7 +195,7 @@ export default function Individual() {
                       margin="normal"
                       required
                       fullWidth
-                      label="姓名"
+                      label="寄信人姓名"
                       placeholder="张三"
                       autoComplete="name"
                       autoFocus
@@ -186,6 +207,7 @@ export default function Individual() {
                     />
                   )}
                 />
+
                 <Controller
                   name="phone"
                   control={control}
@@ -203,7 +225,7 @@ export default function Individual() {
                       required
                       placeholder="e.g. 1234567890"
                       autoComplete="phone"
-                      label="手机号码"
+                      label="寄信人加拿大手机号码"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
@@ -224,7 +246,7 @@ export default function Individual() {
                       margin="normal"
                       fullWidth
                       autoComplete="weChat"
-                      label="微信号(可以不填)"
+                      label="微信号"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
@@ -252,7 +274,24 @@ export default function Individual() {
                     />
                   )}
                 /> */}
-                <GoogleMapsPlace />
+                <FormControl sx={{ width: "100%", marginBottom: "1rem" }}>
+                  <InputLabel id="toLocation">收件地址</InputLabel>
+                  <Select
+                    value={toLocation}
+                    id="toLocation"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"China"}>中国</MenuItem>
+                    <MenuItem value={"Canada"}>加拿大</MenuItem>
+                  </Select>
+                </FormControl>
+                {/* <div
+                  style={{
+                    display: toLocation !== "China" ? "block" : "none",
+                  }}
+                >
+                  <GoogleMapsPlace />
+                </div> */}
                 <Controller
                   name="message"
                   control={control}
@@ -264,9 +303,10 @@ export default function Individual() {
                       id="message"
                       margin="normal"
                       fullWidth
-                      label="备注"
+                      label="详细信息"
                       multiline
-                      rows={4}
+                      // helperText=''
+                      minRows={4}
                       variant="outlined"
                       onChange={onChange}
                       value={value}

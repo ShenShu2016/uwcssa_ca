@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
 import { green } from "@mui/material/colors";
-import { postArticleSubComment } from "../../../redux/slice/articleSlice";
+import { postSubComment } from "../../../redux/slice/subCommentSlice";
 
 export default function ArticleReplyComments({
   isReplyOpen,
@@ -55,7 +55,7 @@ export default function ArticleReplyComments({
     if (!loading) {
       setLoading(true); //开始转圈
       const response = await dispatch(
-        postArticleSubComment({ createArticleSubCommentInput, idx })
+        postSubComment({ createArticleSubCommentInput, idx })
       );
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);

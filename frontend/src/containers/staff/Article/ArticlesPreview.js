@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
+import {
+  fetchArticles,
+  selectAllArticles,
+} from "../../../redux/slice/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Box } from "@mui/system";
 import { DataGrid } from "@mui/x-data-grid";
 import { Typography } from "@mui/material";
-import { fetchArticles } from "../../../redux/slice/articleSlice";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -22,8 +25,8 @@ const columns = [
     editable: false,
   },
   {
-    field: "topic",
-    headerName: "Topic",
+    field: "topicID",
+    headerName: "topicID",
     width: 90,
     editable: false,
   },
@@ -55,8 +58,8 @@ const columns = [
     editable: false,
   },
   {
-    field: "owner",
-    headerName: "Owner",
+    field: "userID",
+    headerName: "userID",
     width: 110,
     editable: false,
   },
@@ -64,28 +67,31 @@ const columns = [
 export default function ArticlesPreview() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const articles = useSelector(selectAllArticles);
+  const { fetchArticlesStatus } = useSelector((state) => state.article);
   useEffect(() => {
-    dispatch(fetchArticles());
-  }, [dispatch]);
-  const { articles } = useSelector((state) => state.article);
+    if (fetchArticlesStatus === "idle" || undefined) {
+      dispatch(fetchArticles());
+    }
+  }, [dispatch, fetchArticlesStatus]);
 
   const rows = articles.map((article) => {
     const {
       id,
-      content,
+      // content,
       title,
-      topic,
+      topicID,
       createdAt,
       // updateAt,
-      owner,
+      userID,
     } = article;
     return {
-      id: id,
-      content: content.slice(0, 20),
-      title: title,
-      topic: topic.name,
-      createdAt: createdAt,
-      owner,
+      id,
+      // content: content.slice(0, 20),
+      title,
+      topicID,
+      createdAt,
+      userID,
     };
   });
 

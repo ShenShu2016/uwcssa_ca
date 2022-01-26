@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { CategoryIcons, SearchArea } from "./marketItemSearch";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -36,7 +37,6 @@ import { marketItemStyle } from "./marketItemCss";
 import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
 import { sortOptions } from "./marketItemFilter";
-import { useDispatch } from "react-redux";
 
 const FilterContent = (props) => {
   const { darkTheme, type, control, handleSearch, handleReset } = props;
@@ -492,7 +492,6 @@ ConfirmationDialogRaw.propTypes = {
 };
 
 export default function FilterInfo({
-  darkTheme,
   control,
   type,
   form = "plain",
@@ -502,6 +501,7 @@ export default function FilterInfo({
   const useStyles = marketItemStyle;
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { darkTheme } = useSelector((state) => state.general);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Filter");
 

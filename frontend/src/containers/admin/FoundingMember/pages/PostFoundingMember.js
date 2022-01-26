@@ -9,10 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { fetchUsers, selectAllUsers } from "../../../../redux/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import PublishIcon from "@mui/icons-material/Publish";
-import { fetchUsers } from "../../../../redux/slice/generalSlice";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postFoundingMember } from "../../../../redux/slice/foundingMemberSlice";
@@ -64,11 +64,14 @@ export default function PostFoundingMember() {
 
   const [userID, setUserID] = useState("");
 
-  const { users } = useSelector((state) => state.general);
+  const users = useSelector(selectAllUsers);
 
+  const { fetchUsersStatus } = useSelector((state) => state.user);
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    if (fetchUsersStatus === "idle" || undefined) {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, fetchUsersStatus]);
 
   const onSubmit = async () => {
     setLoading(true);

@@ -16,18 +16,21 @@ import CustomTags, { GetTags } from "../../../components/CustomMUI/CustomTags";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchTopics,
-  modifyArticle,
-  removeSelectedArticle,
-  selectedArticle,
-} from "../../../redux/slice/articleSlice";
+  postTopic,
+  selectAllTopics,
+} from "../../../redux/slice/topicSlice";
 import {
   postMultipleImages,
   postSingleImage,
 } from "../../../redux/slice/generalSlice";
+import {
+  selectArticleById,
+  selectedArticle,
+  updateArticleDetail,
+} from "../../../redux/slice/articleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
-import API from "@aws-amplify/api";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -35,8 +38,6 @@ import MUIRichTextEditor from "mui-rte";
 import PublishIcon from "@mui/icons-material/Publish";
 import SwipeViews from "../../../components/SwipeViews";
 import { convertToRaw } from "draft-js";
-import { createTopic } from "../../../graphql/mutations";
-import { graphqlOperation } from "@aws-amplify/api-graphql";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
@@ -76,25 +77,23 @@ const Input = styled("input")({
 export default function EditArticle() {
   const classes = useStyles();
   useTitle("编辑新闻");
-  const { articleID } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  //console.log(id);
   useEffect(() => {
-    if (articleID && articleID !== "") {
-      dispatch(selectedArticle({ articleID }));
-    }
-    return () => dispatch(removeSelectedArticle());
-  }, [articleID, dispatch]);
+    dispatch(selectedArticle(id));
+  }, [id, dispatch]);
 
-  const { article } = useSelector((state) => state.article.selected);
+  const article = useSelector((state) => selectArticleById(state, id));
   const { username } = useSelector((state) => state.userAuth.user);
-  const [tags, setTags] = useState(article.tags);
-  const [imgURLs, setImgURLs] = useState(article.imgURLs);
-  const [qrCodeImgURL, setQrCodeImgURL] = useState(article.qrCodeImgURL);
+  const [tags, setTags] = useState();
+  const [imgURLs, setImgURLs] = useState();
+  const [qrCodeImgURL, setQrCodeImgURL] = useState();
   const [content, setContent] = useState();
   const [content2, setContent2] = useState();
   const [loading, setLoading] = useState(false);
-  const [createdAt, setCreatedAt] = useState(article.createdAt);
+  const [createdAt, setCreatedAt] = useState();
   const timer = useRef();
 
   const {
@@ -102,18 +101,25 @@ export default function EditArticle() {
     control,
     formState: { errors },
   } = useForm();
-  useEffect(() => {
-    dispatch(fetchTopics());
-  }, [dispatch]);
+  const topics = useSelector(selectAllTopics);
+
+  const { fetchTopicsStatus } = useSelector((state) => state.topic);
 
   useEffect(() => {
-    setImgURLs(article.imgURLs);
-    setQrCodeImgURL(article.qrCodeImgURL);
-    setContent(article.content);
-    setCreatedAt(article.createdAt);
+    if (fetchTopicsStatus === "idle" || undefined) {
+      dispatch(fetchTopics());
+    }
+  }, [dispatch, fetchTopicsStatus]);
+
+  useEffect(() => {
+    if (article) {
+      setTags(article.tags);
+      setImgURLs(article.imgURLs);
+      setQrCodeImgURL(article.qrCodeImgURL);
+      setContent(article.content);
+      setCreatedAt(article.createdAt);
+    }
   }, [article]);
-
-  const { topics } = useSelector((state) => state.article);
 
   const uploadArticleImg = async (e) => {
     setLoading(true);
@@ -155,11 +161,14 @@ export default function EditArticle() {
       createdAt: createdAt,
       tags: GetTags(),
     };
-    const response = await dispatch(modifyArticle({ updateArticleInput }));
+    const response = await dispatch(
+      updateArticleDetail({ updateArticleInput })
+    );
 
     if (response.meta.requestStatus === "fulfilled") {
       setLoading(false);
-      history.push(`/article/${response.payload.data.updateArticle.id}`);
+      console.log(response);
+      history.push(`/article/${id}`);
     } else {
       timer.current = window.setTimeout(() => {
         setLoading(false);
@@ -182,10 +191,10 @@ export default function EditArticle() {
       name: topicData.name,
       userID: username,
     };
-    await API.graphql(
-      graphqlOperation(createTopic, { input: createTopicInput })
-    );
-    dispatch(fetchTopics());
+    // await API.graphql(
+    //   graphqlOperation(createTopic, { input: createTopicInput })
+    // );
+    dispatch(postTopic({ createTopicInput }));
     setTopicData({ name: "" });
   };
   const handleKeyDown = (e) => {
@@ -205,7 +214,7 @@ export default function EditArticle() {
   // console.log("content", content);
   return (
     <div>
-      {article.active === true ? (
+      {topics && article && article.active === true ? (
         <Box
           className={classes.root}
           component="form"

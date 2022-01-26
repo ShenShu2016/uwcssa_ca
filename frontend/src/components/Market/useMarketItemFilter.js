@@ -11,9 +11,8 @@ import {
   marketItemSortBySortKeyRental,
   marketItemSortBySortKeyVehicle,
 } from "./marketQueries";
-import { useMemo, useState } from "react";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export function marketItemFilterUpdate(props, dispatch) {
   const {
@@ -111,6 +110,7 @@ export function marketItemFilterUpdate(props, dispatch) {
 export default function useMarketItemFilter(filterList, type) {
   const dispatch = useDispatch();
   const [isFiltering, setIsFiltering] = useState(false);
+  const { filter, fetchStatus } = useSelector((state) => state.market);
   const query =
     type === "Item"
       ? marketItemSortBySortKeyItem
@@ -122,9 +122,9 @@ export default function useMarketItemFilter(filterList, type) {
       ? marketItemSortBySortKey
       : null;
 
-  useMemo(() => {
-    const filter = { ...filterList };
-    if (query !== null) {
+  console.log(filter);
+  useEffect(() => {
+    if (fetchStatus) {
       if (type === "all") {
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
@@ -158,21 +158,22 @@ export default function useMarketItemFilter(filterList, type) {
           dispatch(
             fetchMarketItems({
               query: query,
-              filter: { marketType: { eq: type } },
+              // filter: { marketType: { eq: type } },
               marketType: type,
             })
           );
         } else {
           setIsFiltering(true);
-          filter["marketType"] = { eq: type };
+          // filter["marketType"] = { eq: type };
           dispatch(
             fetchMarketItems({ query: query, filter, marketType: type })
           );
         }
       }
+      // setStarter(false);
     }
-    console.log("once");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filter, type, dispatch, query, fetchStatus]);
   return isFiltering;
 }
+
+// eslint-disable-next-line react-hooks/exhaustive-deps

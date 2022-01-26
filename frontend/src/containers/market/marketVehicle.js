@@ -9,8 +9,10 @@ import useMarketItemFilter, {
 
 import BackdropLoading from "../../components/BackdropLoading";
 import FilterInfo from "../../components/Market/marketItemFilterInfo";
+import LoadMore from "../../components/LoadMore";
 import MarketComponent from "../../components/Market/MarketComponent";
 import MarketImgTopFilter from "../../components/Market/marketImgTopFilter";
+import MarketSkeleton from "../../components/Market/MarketSkeleton";
 import React from "react";
 import { marketItemStyle } from "../../components/Market/marketItemCss";
 import { useDispatch } from "react-redux";
@@ -43,9 +45,7 @@ export default function MarketVehicle() {
   const handleSearch = handleSubmit((data) => {
     marketItemFilterUpdate(data, dispatch);
   });
-  const { filter: filterList, tagsOccurrence } = useSelector(
-    (state) => state.market
-  );
+  const { filter: filterList } = useSelector((state) => state.market);
   const isFiltering = useMarketItemFilter(filterList, "Vehicle");
   const filteredItems = useSelector(selectAllMarketItems);
 
@@ -83,12 +83,13 @@ export default function MarketVehicle() {
 
   return (
     <Box className={classes.root}>
+      {starter === false && <BackdropLoading />}
+
       <Stack
         direction={{ xs: "column", md: "row" }}
         className={classes.contain}
       >
         <FilterInfo
-          darkTheme={darkTheme}
           form="plain"
           type="Vehicle"
           control={control}
@@ -97,10 +98,8 @@ export default function MarketVehicle() {
         />
         <Box className={classes.img}>
           <MarketImgTopFilter
-            darkTheme={darkTheme}
             control={control}
             type="Vehicle"
-            tagsOccurrence={tagsOccurrence}
             handleSearch={handleSearch}
             handleReset={handleReset}
           />
@@ -110,7 +109,8 @@ export default function MarketVehicle() {
                 Found {filteredItems.length} related results...
               </Box>
             )}
-            {starter === false ? <BackdropLoading /> : itemRenderList}
+            {starter === false ? <MarketSkeleton /> : itemRenderList}
+            <LoadMore />
           </Box>
         </Box>
       </Stack>

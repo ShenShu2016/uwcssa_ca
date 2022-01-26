@@ -13,11 +13,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomAvatar from "../../CustomMUI/CustomAvatar";
-import SignInRequest from "../SignInRequest";
+import SignInRequest from "../../Comment/Component/SignInRequest";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { postComment } from "../../../redux/slice/commentSlice";
+
 // import { postArticleComment } from "../../../redux/actions/articleActions";
-import { postArticleComment } from "../../../redux/slice/articleSlice";
+// import { postArticleComment } from "../../../redux/slice/articleSlice";
 
 const useStyles = makeStyles({
   root: {},
@@ -27,18 +29,18 @@ const useStyles = makeStyles({
   card: {},
 });
 
-export default function ArticleCommentsPost({ article }) {
+export default function ArticleCommentsPost({ id }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const {
     handleSubmit,
     control,
     reset,
-    getValues,
+
     formState: { errors },
   } = useForm({
     defaultValues: {
-      comment: "",
+      content: "",
     },
   });
 
@@ -46,18 +48,17 @@ export default function ArticleCommentsPost({ article }) {
   const { isAuthenticated, user, userProfile } = useSelector(
     (state) => state.userAuth
   );
-  const onSubmit = async (e) => {
-    const createArticleCommentInput = {
-      content: getValues("comment"),
+  const onSubmit = async (data) => {
+    const createCommentInput = {
+      ...data,
       active: true,
-      articleID: article.id,
+      targetID: id,
       userID: user.username,
     };
+    console.log(createCommentInput);
     if (!loading) {
       setLoading(true); //开始转圈
-      const response = await dispatch(
-        postArticleComment({ createArticleCommentInput })
-      );
+      const response = await dispatch(postComment({ createCommentInput }));
       if (response.meta.requestStatus === "fulfilled") {
         setLoading(false);
         reset();
@@ -90,7 +91,7 @@ export default function ArticleCommentsPost({ article }) {
             <Grid item xs>
               <Box sx={{ my: 1 }}>
                 <Controller
-                  name="comment"
+                  name="content"
                   control={control}
                   rules={{
                     required: true,
@@ -105,8 +106,8 @@ export default function ArticleCommentsPost({ article }) {
                       disabled={loading || !isAuthenticated}
                       onChange={onChange}
                       value={value}
-                      error={!!errors.comment}
-                      helperText={errors.comment ? "不能为空" : null}
+                      error={!!errors.content}
+                      helperText={errors.content ? "不能为空" : null}
                     />
                   )}
                 />

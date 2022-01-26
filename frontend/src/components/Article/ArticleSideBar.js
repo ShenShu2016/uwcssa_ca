@@ -9,15 +9,12 @@ import {
   Paper,
 } from "@mui/material";
 import { Link, useLocation, useParams } from "react-router-dom";
-import React, { Fragment, useEffect } from "react";
-import {
-  fetchUwcssaJobs,
-  selectAllUwcssaJobs,
-} from "../../redux/slice/uwcssaJobSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment } from "react";
 
-import { fetchArticles } from "../../redux/slice/articleSlice";
 import { makeStyles } from "@mui/styles";
+import { selectAllArticles } from "../../redux/slice/articleSlice";
+import { selectAllUwcssaJobs } from "../../redux/slice/uwcssaJobSlice";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,26 +41,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ArticleSideBar() {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const location = useLocation();
   const { articleID } = useParams();
-  const { articles, fetchArticlesStatus } = useSelector(
-    (state) => state.article
-  );
-  const { fetchUwcssaJobsStatus } = useSelector((state) => state.uwcssaJob);
+  const articles = useSelector(selectAllArticles);
+
   const uwcssaJobs = useSelector(selectAllUwcssaJobs);
-  useEffect(() => {
-    if (fetchArticlesStatus === "idle" || undefined) {
-      dispatch(fetchArticles());
-    }
-    if (fetchUwcssaJobsStatus === "idle" || undefined) {
-      dispatch(fetchUwcssaJobs());
-    }
-  }, [dispatch, fetchUwcssaJobsStatus, fetchArticlesStatus]);
 
   const filteredArticles = articles
     .filter((x) => x.id !== articleID)
     .slice(0, 10);
+
   return (
     <Paper
       variant="outlined"

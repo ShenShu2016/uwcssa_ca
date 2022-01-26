@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import ApplyJob from "../components/Career/ApplyJob";
 import CustomBreadcrumbs from "../components/CustomMUI/CustomBreadcrumbs";
@@ -8,6 +9,8 @@ import Openings from "../components/Career/Openings";
 import PrivateRoute from "../components/PrivateRoute";
 import { Route } from "react-router";
 import { Typography } from "@mui/material";
+import { fetchDepartments } from "../redux/slice/departmentSlice";
+import { fetchUwcssaJobs } from "../redux/slice/uwcssaJobSlice";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +25,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CareerRouter() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { fetchUwcssaJobsStatus } = useSelector((state) => state.uwcssaJob);
+  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
+  //console.log("departments", departments);
+
+  useEffect(() => {
+    if (fetchDepartmentsStatus === "idle" || undefined) {
+      dispatch(fetchDepartments());
+    }
+    if (fetchUwcssaJobsStatus === "idle" || undefined) {
+      dispatch(fetchUwcssaJobs());
+    }
+  }, [dispatch, fetchUwcssaJobsStatus, fetchDepartmentsStatus]);
 
   return (
     <Fragment>

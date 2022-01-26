@@ -63,7 +63,7 @@ const autocompleteService = { current: null };
 // console.log("autocompleteService", autocompleteService);
 export default function GoogleMaps({
   userInputValue = null,
-  label = "添加地址",
+  label = "加拿大地址",
   ...rest
 }) {
   const [value, setValue] = useState(userInputValue);

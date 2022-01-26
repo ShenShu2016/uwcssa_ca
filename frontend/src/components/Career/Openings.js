@@ -1,16 +1,9 @@
-import { React, useEffect } from "react";
-import {
-  fetchDepartments,
-  selectAllDepartments,
-} from "../../redux/slice/departmentSlice";
-import {
-  fetchUwcssaJobs,
-  selectAllUwcssaJobs,
-} from "../../redux/slice/uwcssaJobSlice";
-import { useDispatch, useSelector } from "react-redux";
-
 import ByDepartment from "../../components/Career/ByDepartment";
+import { React } from "react";
 import { makeStyles } from "@mui/styles";
+import { selectAllDepartments } from "../../redux/slice/departmentSlice";
+import { selectAllUwcssaJobs } from "../../redux/slice/uwcssaJobSlice";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   // root: {
@@ -31,21 +24,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Openings() {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const departments = useSelector(selectAllDepartments);
   const uwcssaJobs = useSelector(selectAllUwcssaJobs);
-  const { fetchUwcssaJobsStatus } = useSelector((state) => state.uwcssaJob);
-  const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  //console.log("departments", departments);
+  // const { fetchUwcssaJobsStatus } = useSelector((state) => state.uwcssaJob);
+  // const { fetchDepartmentsStatus } = useSelector((state) => state.department);
+  // //console.log("departments", departments);
 
-  useEffect(() => {
-    if (fetchDepartmentsStatus === "idle" || undefined) {
-      dispatch(fetchDepartments());
-    }
-    if (fetchUwcssaJobsStatus === "idle" || undefined) {
-      dispatch(fetchUwcssaJobs());
-    }
-  }, [dispatch, fetchUwcssaJobsStatus, fetchDepartmentsStatus]);
+  // useEffect(() => {
+  //   if (fetchDepartmentsStatus === "idle" || undefined) {
+  //     dispatch(fetchDepartments());
+  //   }
+  //   if (fetchUwcssaJobsStatus === "idle" || undefined) {
+  //     dispatch(fetchUwcssaJobs());
+  //   }
+  // }, [dispatch, fetchUwcssaJobsStatus, fetchDepartmentsStatus]);
 
   return (
     <div className={classes.root}>

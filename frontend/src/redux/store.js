@@ -1,6 +1,7 @@
 import addressReducer from "./slice/addressSlice";
 import articleReducer from "./slice/articleSlice";
 import authReducer from "./slice/authSlice";
+import commentReducer from "./slice/commentSlice";
 //import careerSlice from "./slice/careerSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import departmentReducer from "./slice/departmentSlice";
@@ -15,16 +16,20 @@ import marketReducer from "./slice/marketSlice";
 import marketUserReducer from "./slice/marketUserSlice";
 import profileReducer from "./slice/profileSlice";
 import staffReducer from "./slice/staffSlice";
+import subCommentReducer from "./slice/subCommentSlice";
 import topicReducer from "./slice/topicSlice";
 import userReducer from "./slice/userSlice";
 import uwcssaJobReducer from "./slice/uwcssaJobSlice";
 import uwcssaMemberReducer from "./slice/uwcssaMemberSlice";
+
 export default configureStore({
   reducer: {
     general: generalReducer,
     userAuth: authReducer,
     profile: profileReducer,
     topic: topicReducer,
+    comment: commentReducer,
+    subComment: subCommentReducer,
     article: articleReducer,
     //career: careerSlice,
     forum: forumReducer,

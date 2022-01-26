@@ -19,8 +19,8 @@ import moment from "moment";
 
 const useStyles = makeStyles(({ breakpoints, palette }) => ({
   actionArea: {
-    maxWidth: 300,
-    minWidth: 256,
+    maxWidth: 280,
+    minWidth: 280,
     borderRadius: 16,
     maxHeight: 360,
     height: 335,
@@ -30,8 +30,8 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
     },
   },
   cardDetails: {
-    maxWidth: 300,
-    minWidth: 256,
+    maxWidth: 280,
+    minWidth: 280,
     // borderRadius: 16,
     // color: "transparent",
     boxShadow: "none",

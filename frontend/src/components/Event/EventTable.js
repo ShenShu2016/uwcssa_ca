@@ -267,9 +267,17 @@ export default function SimpleTable() {
 
   const downloadExcel = (dataset, title) => {
     const newData = dataset.map((row) => {
+      console.log(row);
+      console.log(row.tableData);
       delete row.tableData;
-      return row;
+      console.log(row);
+      let newRow = { toLoaction: row.id.split("-")[0], ...row };
+      console.log(newRow);
+      // newRow.id.split("-")[0];
+
+      return newRow;
     });
+    console.log(newData);
     const workSheet = XLSX.utils.json_to_sheet(newData);
     const workBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workBook, workSheet, "students");
@@ -361,6 +369,7 @@ export default function SimpleTable() {
                           <Table size="small" aria-label="purchases">
                             <TableHead>
                               <TableRow>
+                                <TableCell></TableCell>
                                 <TableCell>用户名</TableCell>
                                 <TableCell>姓名</TableCell>
                                 <TableCell>Email</TableCell>
@@ -368,43 +377,50 @@ export default function SimpleTable() {
                                 <TableCell>电话</TableCell>
                                 <TableCell>人数</TableCell>
                                 <TableCell>地址</TableCell>
-                                <TableCell>状态</TableCell>
+                                {/* <TableCell>状态</TableCell> */}
                                 <TableCell>备注</TableCell>
                               </TableRow>
                             </TableHead>
+                            {console.log(row.eventParticipants.items)}
                             <TableBody>
                               {row.eventParticipants.items.map(
                                 (eventParticipant) => (
-                                  <TableRow key={eventParticipant.name}>
-                                    <TableCell component="th" scope="row">
-                                      {eventParticipant.owner}
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                      {eventParticipant.name}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.email}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.weChat}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.phone}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.numberOfPeople}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.address &&
-                                        eventParticipant.address.description}
-                                    </TableCell>
-                                    <TableCell>
+                                  <>
+                                    <TableRow key={eventParticipant.name}>
+                                      <TableCell component="th" scope="row">
+                                        {eventParticipant.id.split("-")[0]}
+                                      </TableCell>
+
+                                      <TableCell component="th" scope="row">
+                                        {eventParticipant.owner}
+                                      </TableCell>
+                                      <TableCell component="th" scope="row">
+                                        {eventParticipant.name}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.email}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.weChat}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.phone}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.numberOfPeople}
+                                      </TableCell>
+                                      <TableCell>
+                                        {eventParticipant.address &&
+                                          eventParticipant.address.description}
+                                      </TableCell>
+                                      {/* <TableCell>
                                       {eventParticipant.eventParticipantStatus}
-                                    </TableCell>
-                                    <TableCell>
-                                      {eventParticipant.message}
-                                    </TableCell>
-                                  </TableRow>
+                                    </TableCell> */}
+                                      <TableCell>
+                                        {eventParticipant.message}
+                                      </TableCell>
+                                    </TableRow>
+                                  </>
                                 )
                               )}
                             </TableBody>

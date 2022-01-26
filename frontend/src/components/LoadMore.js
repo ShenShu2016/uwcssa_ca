@@ -13,8 +13,12 @@ import { fetchMarketItems } from "../redux/slice/marketSlice";
 
 export default function LoadMore() {
   const dispatch = useDispatch();
-  const { nextToken, currentFetchType } = useSelector((state) => state.market);
+  const { nextToken, currentFetchType, filter } = useSelector(
+    (state) => state.market
+  );
   const [clicked, setClicked] = React.useState(false);
+  const filterList =
+    Object.keys(filter).length !== 0 ? filter : { active: { eq: true } };
   const query =
     currentFetchType === "Item"
       ? marketItemSortBySortKeyItem
@@ -29,7 +33,12 @@ export default function LoadMore() {
     setClicked(true);
     console.log(clicked);
     dispatch(
-      fetchMarketItems({ query, nextToken, marketType: currentFetchType })
+      fetchMarketItems({
+        query,
+        nextToken,
+        marketType: currentFetchType,
+        filter: filterList,
+      })
     );
     setTimeout(() => setClicked(false), 2000);
   };

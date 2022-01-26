@@ -12,6 +12,7 @@ import PostUwcssaJob from "./UwcssaJob/PostUwcssaJob";
 import React from "react";
 import Staff from "./Staff";
 import UwcssaJobsPreview from "./UwcssaJob/UwcssaJobsPreview";
+import EditJob from "../../components/Career/EditJob";
 
 export default function StaffRouter() {
   return (
@@ -27,7 +28,7 @@ export default function StaffRouter() {
         />
         <Route
           exact
-          path="/staff/article/editArticle/:articleID"
+          path="/staff/article/editArticle/:id"
           component={EditArticle}
         />
         <Route
@@ -46,6 +47,7 @@ export default function StaffRouter() {
           path="/staff/uwcssaJob/postDepartment"
           component={PostDepartment}
         />
+        <Route exact path="/staff/uwcssaJob//editJob/:id" component={EditJob} />
       </Switch>
       <Footer />
     </Box>

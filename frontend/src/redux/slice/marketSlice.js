@@ -10,7 +10,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import {
-  listAddresss,
+  listAddresses,
   searchMarketItems,
 } from "../../components/Market/marketQueries";
 
@@ -19,13 +19,15 @@ import { getMarketItem } from "../../graphql/queries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const marketAdapter = createEntityAdapter({
-  // selectId: (item) => item.id,
+  selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
 
 const initialState = marketAdapter.getInitialState({
   filter: {},
   tagsOccurrence: [],
+  clickedTags: [],
+  fetchStatus: true,
   nextToken: null,
   currentFetchType: null,
   currentFilterType: null,
@@ -54,19 +56,27 @@ export const fetchMarketItems = createAsyncThunk(
     filter = { active: { eq: true } },
   }) => {
     try {
+      const filterList = { ...filter };
       const variables = {
         limit: 50,
         sortKey: "SortKey",
         sortDirection: "DESC",
-        filter: filter,
+        filter: filterList,
       };
       nextToken !== null && Object.assign(variables, { nextToken: nextToken });
+      marketType !== "all" &&
+        Object.assign(variables["filter"], { marketType: { eq: marketType } });
+      console.log(variables);
       const MarketItemsData = await API.graphql({
         query: query,
         variables: variables,
         authMode: "AWS_IAM",
       });
-      return [MarketItemsData.data.marketItemSortBySortKey, marketType];
+      return [
+        MarketItemsData.data.marketItemSortBySortKey,
+        marketType,
+        nextToken === null,
+      ];
     } catch (error) {
       console.log(error);
     }
@@ -95,13 +105,14 @@ export const addressFilteredMarketItem = createAsyncThunk(
     try {
       const variables = { filter: filter, limit: 50 };
       nextToken !== null && Object.assign(variables, { nextToken: nextToken });
+      console.log(variables);
       const response = await API.graphql({
-        query: listAddresss,
+        query: listAddresses,
         variables: variables,
         authMode: "AWS_IAM",
       });
       console.log("res:", response);
-      return [response.data.listAddresss.items, marketType];
+      return [response.data.listAddresses.items, marketType];
     } catch (error) {
       console.log(error);
     }
@@ -187,9 +198,18 @@ const marketSlice = createSlice({
           ? Object.assign(currentFilter, filter)
           : filter;
       state.currentFilterType = marketType;
+      state.fetchStatus = true;
     },
     filterClear(state, action) {
       state.filter = {};
+      state.fetchStatus = true;
+    },
+    updateClickedTags(state, action) {
+      const tag = action.payload;
+      const currentTags = state.clickedTags;
+      state.clickedTags = currentTags.includes(tag)
+        ? currentTags.filter((t) => t !== tag)
+        : currentTags.concat([tag]);
     },
   },
   extraReducers(builder) {
@@ -197,11 +217,12 @@ const marketSlice = createSlice({
       // Cases for status of fetchMarketItems (pending, fulfilled, and rejected)
       .addCase(fetchMarketItems.pending, (state, action) => {
         state.fetchMarketItemsStatus = "loading";
+        state.fetchStatus = false;
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        state.currentFetchType !== action.payload[1] &&
-          marketAdapter.removeAll(state);
+        console.log(action.payload);
+        action.payload[2] && marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload[0].items);
         state.currentFetchType = action.payload[1];
         state.nextToken = action.payload[0].nextToken;
@@ -253,6 +274,7 @@ const marketSlice = createSlice({
       // Cases for status of addressFilteredMarketItem (pending, fulfilled, and rejected)
       .addCase(addressFilteredMarketItem.pending, (state, action) => {
         state.addressFilteredMarketItemStatus = "loading";
+        state.fetchStatus = false;
       })
       .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
         state.addressFilteredMarketItemStatus = "succeeded";
@@ -291,7 +313,8 @@ const marketSlice = createSlice({
   },
 });
 
-export const { filterUpdated, filterClear } = marketSlice.actions;
+export const { filterUpdated, filterClear, updateClickedTags } =
+  marketSlice.actions;
 
 export const {
   selectAll: selectAllMarketItems,

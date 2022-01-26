@@ -24,7 +24,7 @@ export default function LikeButtonGroup({ item }) {
     likeUp: false,
     disLikeUp: false,
   });
-  //   console.log(likesDetail);
+  //console.log(item);
 
   useEffect(() => {
     if (Object.keys(item).length !== 0) {
@@ -34,10 +34,10 @@ export default function LikeButtonGroup({ item }) {
       setLikesDetail({
         like: likeTrue.length,
         disLike: LikeFalse.length,
-        likeUp: likeTrue.filter((x) => x.owner === username).length >= 1,
-        disLikeUp: LikeFalse.filter((x) => x.owner === username).length >= 1,
-        likeUserName: likeTrue.map((x) => x.owner).join(),
-        dislikeUserName: LikeFalse.map((x) => x.owner).join(),
+        likeUp: likeTrue.filter((x) => x.userID === username).length >= 1,
+        disLikeUp: LikeFalse.filter((x) => x.userID === username).length >= 1,
+        likeUserName: likeTrue.map((x) => x.userID).join(),
+        dislikeUserName: LikeFalse.map((x) => x.userID).join(),
       });
     }
   }, [item, username]);
@@ -58,7 +58,7 @@ export default function LikeButtonGroup({ item }) {
       });
 
       const response = await dispatch(postLike({ itemID, username, isLike }));
-      console.log(response);
+      //console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
         console.log(response);
@@ -109,7 +109,7 @@ export default function LikeButtonGroup({ item }) {
         disLikeUp: true,
       });
       const response = await dispatch(postLike({ itemID, username, isLike }));
-      console.log(response);
+      //console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
         // Do something later
@@ -122,7 +122,7 @@ export default function LikeButtonGroup({ item }) {
         disLikeUp: false,
       });
       const response = await dispatch(removeLike({ itemID, username }));
-      console.log(response);
+      //console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
         // Do something later
@@ -135,7 +135,7 @@ export default function LikeButtonGroup({ item }) {
         disLikeUp: true,
       });
       const response = await dispatch(putLike({ itemID, username, isLike }));
-      console.log(response);
+      //console.log(response);
 
       if (response.meta.requestStatus === "fulfilled") {
         // Do something later

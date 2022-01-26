@@ -13,11 +13,11 @@ import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../../../redux/slice/departmentSlice";
+import { fetchUsers, selectAllUsers } from "../../../../redux/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import PublishIcon from "@mui/icons-material/Publish";
-import { fetchUsers } from "../../../../redux/slice/generalSlice";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 import { postUwcssaMember } from "../../../../redux/slice/uwcssaMemberSlice";
@@ -72,8 +72,10 @@ export default function PostUwcssaMember() {
   const departments = useSelector(selectAllDepartments);
 
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  const { users, fetchUsersStatus } = useSelector((state) => state.general);
 
+  const users = useSelector(selectAllUsers);
+
+  const { fetchUsersStatus } = useSelector((state) => state.user);
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
       dispatch(fetchDepartments());
