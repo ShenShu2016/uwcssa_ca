@@ -3,13 +3,16 @@ import {
   Chip,
   Divider,
   Grid,
+  IconButton,
   Paper,
   Stack,
   Typography,
 } from "@mui/material";
 
 import GoogleMap from "../GoogleMap/GoogleMap";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import React from "react";
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { marketItemOptions } from "./marketItemOptions";
 import { marketRentalOptions } from "./marketRentalOptions";
 import { marketVehicleOptions } from "./marketVehicleOptions";
@@ -56,6 +59,7 @@ const DetailInfo = ({
   interiorColor,
   fuelType,
 }) => {
+  const [moreDescription, setMoreDescription] = React.useState(false);
   return (
     <React.Fragment>
       <Typography marginX="1rem" marginY="0.5rem" fontWeight="600">
@@ -185,15 +189,33 @@ const DetailInfo = ({
       <Typography marginX="1rem" marginY="0.25rem" fontWeight="600">
         详情描述
       </Typography>
-      <Typography
+      <Box
         marginX="1rem"
         marginY="0.25rem"
         fontWeight="350"
         component="div"
         style={{ wordBreak: "break-word" }}
+        sx={{
+          "& .MuiButtonBase-root": {
+            display: description.length < 100 ? "none" : "inline-flex",
+          },
+        }}
       >
-        {description.length === 0 ? "Description Goes Here" : description}
-      </Typography>
+        {description.length === 0
+          ? "Description Goes Here"
+          : moreDescription
+          ? description
+          : description.slice(0, 100)}
+        <IconButton
+          size="small"
+          onClick={(e) => {
+            e.preventDefault();
+            setMoreDescription((prev) => !prev);
+          }}
+        >
+          {!moreDescription ? <MoreHorizIcon /> : <SearchOffIcon />}
+        </IconButton>
+      </Box>
 
       <Paper
         sx={{
