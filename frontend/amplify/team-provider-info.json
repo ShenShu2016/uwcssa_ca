@@ -20,11 +20,13 @@
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
           "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip",
-          "GROUP": "anyone"
+          "GROUP": "anyone",
+          "USERTABLE": "User-6hj4ht7unzduphcdran4ogs2za-master"
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip",
+          "USERTABLE": "User-6hj4ht7unzduphcdran4ogs2za-master"
         },
         "EventConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
@@ -59,12 +61,14 @@
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip",
-          "GROUP": "anyone"
+          "GROUP": "anyone",
+          "USERTABLE": "User-ooc7vvqq6jgrbhbybwrqn7njxy-develop"
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip",
-          "test": "woshishushen"
+          "test": "woshishushen",
+          "USERTABLE": "User-ooc7vvqq6jgrbhbybwrqn7njxy-develop"
         },
         "uwcssanodejsLibrarieslayer": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",

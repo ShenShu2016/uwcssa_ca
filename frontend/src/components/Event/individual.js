@@ -75,7 +75,7 @@ export default function Individual() {
       phone: "",
       weChat: "",
       message:
-        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：(最多30字)\n\n",
+        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：(最多50字)\n\n",
       numberOfPeople: "",
     },
   });
