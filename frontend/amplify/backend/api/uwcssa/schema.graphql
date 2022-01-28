@@ -4,15 +4,12 @@ enum SortKey {
 }
 
 type User
-  @model
+  @model(subscriptions: null)(subscriptions: null)
   @searchable
   @auth(
     rules: [
       { allow: owner, ownerField: "owner", operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
-      { allow: groups, groups: ["everyone"], operations: [read] }
-      { allow: groups, groups: ["staff"], operations: [read] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -41,11 +38,9 @@ type User
       rules: [
         { allow: owner, operations: [read] }
         { allow: groups, groups: ["admin"] }
-        { allow: groups, groups: ["everyone"], operations: [read] }
-        { allow: groups, groups: ["staff"], operations: [read] }
         { allow: public, operations: [read], provider: iam }
         { allow: private, operations: [read], provider: iam }
-        { allow: private, operations: [read] }
+         
       ]
     )
   userEducations: [UserEducation] @hasMany(indexName: "byUser", fields: ["id"])
@@ -59,12 +54,11 @@ type User
 }
 
 type UserEducation
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner }
       { allow: groups, groups: ["admin"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -83,12 +77,11 @@ type UserEducation
 }
 
 type UserExperience
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner }
       { allow: groups, groups: ["admin"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -108,11 +101,10 @@ type UserExperience
 }
 
 type Topic
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -126,11 +118,10 @@ type Topic
 }
 
 type Article
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -154,20 +145,18 @@ type Article
   topicID: ID! @index(name: "byTopic")
   topic: Topic! @belongsTo(fields: ["topicID"])
   comments: [Comment] @hasMany(indexName: "byArticle", fields: ["id"])
-  articleComments: [ArticleComment]
-    @hasMany(indexName: "byArticle", fields: ["id"])
+  subComments: [SubComment] @hasMany(indexName: "byArticle", fields: ["id"])
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
-  subComments: [SubComment] @hasMany(indexName: "byArticle", fields: ["id"])
+
 }
 
 type Comment
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -188,12 +177,11 @@ type Comment
 }
 
 type SubComment
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -275,11 +263,10 @@ type SubComment
 # }
 
 type Event
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -330,12 +317,11 @@ enum EventStatus {
 }
 
 type EventComment
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -360,12 +346,11 @@ type EventComment
 }
 
 type EventSubComment
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -388,12 +373,11 @@ type EventSubComment
 }
 
 type EventParticipant
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -429,11 +413,10 @@ enum EventParticipantStatus {
 }
 
 type Department
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -452,12 +435,11 @@ type Department
 }
 
 type UwcssaMember
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -487,11 +469,10 @@ type UwcssaMember
 }
 
 type UwcssaJob
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -523,7 +504,7 @@ type UwcssaJob
 }
 
 type UwcssaJobResume
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read] }
@@ -557,11 +538,10 @@ enum UwcssaJobResumeStatus {
 }
 
 type ForumTopic
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -575,11 +555,10 @@ type ForumTopic
 }
 
 type ForumSubTopic
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -596,12 +575,11 @@ type ForumSubTopic
 }
 
 type ForumPost
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -621,9 +599,8 @@ type ForumPost
   essential: Boolean
     @auth(
       rules: [
-        { allow: owner, operations: [read] }
+        # { allow: owner, operations: [read] }
         { allow: groups, groups: ["admin", "staff"] }
-        { allow: private, operations: [read] }
         { allow: public, operations: [read], provider: iam }
         { allow: private, operations: [read], provider: iam }
       ]
@@ -653,12 +630,11 @@ type ForumPost
 }
 
 type ForumPostComment
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -684,12 +660,11 @@ type ForumPostComment
 }
 
 type ForumPostSubComment
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -716,12 +691,11 @@ type ForumPostSubComment
 }
 
 type MarketUserInfo
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
+      { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -735,13 +709,12 @@ type MarketUserInfo
 }
 
 type MarketItem
-  @model
+  @model(subscriptions: null)
   @searchable
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
+      { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -808,13 +781,12 @@ type MarketItem
 }
 
 type Address
-  @model
+  @model(subscriptions: null)
   @searchable
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
-      { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
+      { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -928,12 +900,11 @@ enum HeatingType {
 }
 
 type FoundingMember
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner, operations: [read, update] }
       { allow: groups, groups: ["admin"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -952,12 +923,11 @@ type FoundingMember
 }
 
 type Like
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner }
       { allow: groups, groups: ["admin"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -967,8 +937,6 @@ type Like
   itemID: ID!
     @index(name: "byUserBeingLiked")
     @index(name: "byArticle")
-    @index(name: "byArticleComment")
-    @index(name: "byArticleSubComment")
     @index(name: "byEvent")
     @index(name: "byEventComment")
     @index(name: "byEventSubComment")
@@ -994,12 +962,11 @@ type Like
 }
 
 type WebFeedBack
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: owner }
-      { allow: groups, groups: ["admin"], operations: [create, read, update] }
-      { allow: private, operations: [read] }
+      { allow: groups, groups: ["admin"]}
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
@@ -1036,7 +1003,6 @@ type Kanban
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
-      { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read], provider: iam }
     ]
