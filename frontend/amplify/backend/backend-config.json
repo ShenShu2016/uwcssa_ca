@@ -20,21 +20,6 @@
         }
       ]
     },
-    "userMutationLog": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "uwcssa",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
-    },
     "KanbanNotification": {
       "build": true,
       "providerPlugin": "awscloudformation",
