@@ -99,7 +99,10 @@
           }
         },
         "Role": {
-          "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
+          "Fn::GetAtt": [
+            "LambdaExecutionRole",
+            "Arn"
+          ]
         },
         "Runtime": "nodejs14.x",
         "Timeout": 25,
@@ -140,16 +143,22 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": ["lambda.amazonaws.com"]
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
               },
-              "Action": ["sts:AssumeRole"]
+              "Action": [
+                "sts:AssumeRole"
+              ]
             }
           ]
         }
       }
     },
     "lambdaexecutionpolicy": {
-      "DependsOn": ["LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-execution-policy",
@@ -186,28 +195,38 @@
               }
             },
             {
-              "Action": ["ses:SendEmail"],
+              "Action": [
+                "ses:SendEmail"
+              ],
               "Effect": "Allow",
               "Resource": "*"
             },
             {
               "Effect": "Allow",
-              "Action": ["dynamodb:PutItem"],
+              "Action": [
+                "dynamodb:PutItem"
+              ],
               "Resource": "*"
             },
             {
               "Effect": "Allow",
-              "Action": ["cognito-identity:*"],
+              "Action": [
+                "cognito-identity:*"
+              ],
               "Resource": "*"
             },
             {
               "Effect": "Allow",
-              "Action": ["cognito-sync:*"],
+              "Action": [
+                "cognito-sync:*"
+              ],
               "Resource": "*"
             },
             {
               "Effect": "Allow",
-              "Action": ["cognito-idp:*"],
+              "Action": [
+                "cognito-idp:*"
+              ],
               "Resource": "*"
             }
           ]
@@ -223,7 +242,10 @@
     },
     "Arn": {
       "Value": {
-        "Fn::GetAtt": ["LambdaFunction", "Arn"]
+        "Fn::GetAtt": [
+          "LambdaFunction",
+          "Arn"
+        ]
       }
     },
     "LambdaExecutionRole": {

@@ -4,13 +4,14 @@ enum SortKey {
 }
 
 type User
-  @model(subscriptions: null)(subscriptions: null)
+  @model(subscriptions: null)
   @searchable
   @auth(
     rules: [
       { allow: owner, ownerField: "owner", operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] } #如果不加的话会导致在创建的时候unauthorize
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -39,8 +40,8 @@ type User
         { allow: owner, operations: [read] }
         { allow: groups, groups: ["admin"] }
         { allow: public, operations: [read], provider: iam }
+        { allow: private, operations: [read] }
         { allow: private, operations: [read], provider: iam }
-         
       ]
     )
   userEducations: [UserEducation] @hasMany(indexName: "byUser", fields: ["id"])
@@ -60,6 +61,7 @@ type UserEducation
       { allow: owner }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -83,6 +85,7 @@ type UserExperience
       { allow: owner }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -106,6 +109,7 @@ type Topic
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -123,6 +127,7 @@ type Article
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -148,7 +153,6 @@ type Article
   subComments: [SubComment] @hasMany(indexName: "byArticle", fields: ["id"])
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
-
 }
 
 type Comment
@@ -158,6 +162,7 @@ type Comment
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -183,6 +188,7 @@ type SubComment
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -204,70 +210,13 @@ type SubComment
   replyTo: User @hasOne(fields: ["replyToUserID"])
 }
 
-# type ArticleComment
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: owner, operations: [create, read, update] }
-#       { allow: groups, groups: ["admin", "staff"] }
-#       { allow: private, operations: [read] }
-#       { allow: public, operations: [read], provider: iam }
-#       { allow: private, operations: [read], provider: iam }
-#     ]
-#   ) {
-#   id: ID!
-#   content: String!
-#   likes: [Like] @hasMany(indexName: "byArticleComment", fields: ["id"])
-#   active: Boolean!
-#   articleID: ID!
-#     @index(
-#       name: "articleCommentSortByArticleID"
-#       queryField: "articleCommentSortByArticleID"
-#       sortKeyFields: ["createdAt"]
-#     )
-#     @index(name: "byArticle", sortKeyFields: ["createdAt"])
-#   article: Article! @belongsTo(fields: ["articleID"])
-#   createdAt: AWSDateTime!
-#   articleSubComments: [ArticleSubComment]
-#     @hasMany(indexName: "byArticleComment", fields: ["id"])
-#   userID: ID!
-#   user: User! @hasOne(fields: ["userID"])
-# }
-
-# type ArticleSubComment
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: owner, operations: [create, read, update] }
-#       { allow: groups, groups: ["admin", "staff"] }
-#       { allow: private, operations: [read] }
-#       { allow: public, operations: [read], provider: iam }
-#       { allow: private, operations: [read], provider: iam }
-#     ]
-#   ) {
-#   id: ID!
-#   content: String!
-#   likes: [Like] @hasMany(indexName: "byArticleSubComment", fields: ["id"])
-#   active: Boolean!
-#   articleCommentID: ID!
-#     @index(
-#       name: "articleSubCommentSortByArticleCommentID"
-#       queryField: "articleSubCommentSortByArticleCommentID"
-#       sortKeyFields: ["createdAt"]
-#     )
-#     @index(name: "byArticleComment", sortKeyFields: ["createdAt"])
-#   articleComment: ArticleComment! @belongsTo(fields: ["articleCommentID"])
-#   createdAt: AWSDateTime!
-#   userID: ID!
-#   user: User! @hasOne(fields: ["userID"])
-# }
-
 type Event
   @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -323,6 +272,7 @@ type EventComment
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -352,6 +302,7 @@ type EventSubComment
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -379,6 +330,7 @@ type EventParticipant
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -418,6 +370,7 @@ type Department
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -441,6 +394,7 @@ type UwcssaMember
       { allow: owner, operations: [read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -474,6 +428,7 @@ type UwcssaJob
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -543,6 +498,7 @@ type ForumTopic
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -560,6 +516,7 @@ type ForumSubTopic
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -581,6 +538,7 @@ type ForumPost
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -602,6 +560,7 @@ type ForumPost
         # { allow: owner, operations: [read] }
         { allow: groups, groups: ["admin", "staff"] }
         { allow: public, operations: [read], provider: iam }
+        { allow: private, operations: [read] }
         { allow: private, operations: [read], provider: iam }
       ]
     )
@@ -636,6 +595,7 @@ type ForumPostComment
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -666,6 +626,7 @@ type ForumPostSubComment
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -697,6 +658,7 @@ type MarketUserInfo
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -716,6 +678,7 @@ type MarketItem
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -788,6 +751,7 @@ type Address
       { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -906,6 +870,7 @@ type FoundingMember
       { allow: owner, operations: [read, update] }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -929,6 +894,7 @@ type Like
       { allow: owner }
       { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -948,8 +914,6 @@ type Like
   comment: Comment @belongsTo(fields: ["itemID"])
   subComment: SubComment @belongsTo(fields: ["itemID"])
   article: Article @belongsTo(fields: ["itemID"])
-  articleComment: ArticleComment @belongsTo(fields: ["itemID"])
-  articleSubComment: ArticleSubComment @belongsTo(fields: ["itemID"])
   event: Event @belongsTo(fields: ["itemID"])
   eventComment: EventComment @belongsTo(fields: ["itemID"])
   eventSubComment: EventSubComment @belongsTo(fields: ["itemID"])
@@ -966,8 +930,9 @@ type WebFeedBack
   @auth(
     rules: [
       { allow: owner }
-      { allow: groups, groups: ["admin"]}
+      { allow: groups, groups: ["admin"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {
@@ -979,31 +944,13 @@ type WebFeedBack
   user: User! @hasOne(fields: ["userID"])
 }
 
-# type UserMutationLog
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: groups, groups: ["admin"] }
-#       { allow: private, operations: [create, delete] }
-#     ]
-#   ) {
-#   id: ID!
-#   eventName: String!
-#   typename: String!
-#   eventSourceARN: String!
-#   record: AWSJSON!
-#   createdAt: AWSDateTime!
-#   sortKey: SortKey!
-#   userID: ID!
-#   user: User! @hasOne(fields: ["userID"])
-# }
-
 type Kanban
   @model
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
       { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
       { allow: private, operations: [read], provider: iam }
     ]
   ) {

@@ -17,6 +17,8 @@ import { Link, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// import { v4 as uuid } from "uuid";
+import InputLabel from "@mui/material/node/InputLabel";
 import PersonIcon from "@mui/icons-material/Person";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import eventImg from "../../static/event.jpg";
@@ -25,11 +27,9 @@ import { makeStyles } from "@mui/styles";
 // import { postAddress } from "../../redux/slice/addressSlice";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
-import { useTitle } from "../../Hooks/useTitle";
-// import { v4 as uuid } from "uuid";
-import InputLabel from "@mui/material/node/InputLabel";
-import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import { useTitle } from "../../Hooks/useTitle";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -75,7 +75,7 @@ export default function Individual() {
       phone: "",
       weChat: "",
       message:
-        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：\n\n",
+        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：(最多30字)\n\n",
       numberOfPeople: "",
     },
   });
@@ -310,6 +310,10 @@ export default function Individual() {
                       variant="outlined"
                       onChange={onChange}
                       value={value}
+                      error={!!errors.message}
+                      helperText={
+                        errors.message ? "不符合要求，是不是太长了" : null
+                      }
                     />
                   )}
                 />

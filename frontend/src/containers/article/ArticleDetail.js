@@ -95,8 +95,6 @@ export default function ArticleDetail() {
                   <Skeleton variant="rectangular" height={300} />
                 </Box>
               )}
-              {/* <ArticleCommentsPost id={id} />
-              <ArticleComments article={article} /> */}
               <CommentYT id={id} />
             </Box>
             <Box>

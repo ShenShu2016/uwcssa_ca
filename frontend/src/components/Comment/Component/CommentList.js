@@ -1,8 +1,6 @@
-// import CustomAlert from "../../CustomMUI/CustomAlert";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import Comment from "./ArticleCommentsComponents";
 import Comment from "./Comment";
 import { Typography } from "@mui/material";
 import { insertSubComments } from "../../../redux/slice/subCommentSlice";
