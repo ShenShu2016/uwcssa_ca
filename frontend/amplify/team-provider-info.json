@@ -16,26 +16,24 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-34526c347945534b3566-build.zip"
-        },
-        "updateLastReplyAt": {
-          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/updateLastReplyAt-413349664e522f324f65-build.zip"
-        },
-        "userMutationLog": {
-          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/userMutationLog-4e69584d34732f4f3235-build.zip"
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip"
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/KanbanNotification-544c726f545367497142-build.zip"
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
         },
         "uwcssanodejsLibrarieslayer": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersione8f268e0-build.zip"
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersione377492a-build.zip"
         },
-        "EventConfirmation": {},
-        "UwcssaJobConfirmation": {}
+        "EventConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
+          "s3Key": "amplify-builds/EventConfirmation-674256773772674d7551-build.zip"
+        },
+        "UwcssaJobConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
+          "s3Key": "amplify-builds/UwcssaJobConfirmation-774d52615678444c776c-build.zip"
+        }
       },
       "auth": {
         "uwcssaAuth": {}

@@ -1,8 +1,6 @@
 import { Box, LinearProgress, Typography } from "@mui/material";
 
 import EventCommentsComponents from "./EventCommentsComponents";
-// import ArticleCommentsComponents from "./ArticleCommentsComponents";
-// import CustomAlert from "../../CustomMUI/CustomAlert";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 

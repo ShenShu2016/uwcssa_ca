@@ -1,9 +1,9 @@
 import { Box, ButtonGroup } from "@mui/material";
 import { Button, Typography } from "@mui/material";
-import React, { Fragment } from "react";
+import { Link, useHistory } from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
 
 import Footer from "./Footer";
-import { Link, useHistory } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,9 +22,15 @@ export default function NoPermission() {
   const classes = useStyles();
   const history = useHistory();
 
-  setTimeout(function () {
-    history.push("/");
-  }, 10000);
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      history.replace("/");
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [history]);
 
   return (
     <Fragment>

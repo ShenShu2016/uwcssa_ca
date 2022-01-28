@@ -1241,14 +1241,16 @@ export const createArticle = /* GraphQL */ `
         }
         nextToken
       }
-      articleComments {
+      subComments {
         items {
           id
           content
           active
-          articleID
+          targetID
+          commentID
           createdAt
           userID
+          replyToUserID
           updatedAt
           owner
         }
@@ -1293,21 +1295,6 @@ export const createArticle = /* GraphQL */ `
           nextToken
         }
         updatedAt
-      }
-      subComments {
-        items {
-          id
-          content
-          active
-          targetID
-          commentID
-          createdAt
-          userID
-          replyToUserID
-          updatedAt
-          owner
-        }
-        nextToken
       }
       updatedAt
     }
@@ -1386,14 +1373,16 @@ export const updateArticle = /* GraphQL */ `
         }
         nextToken
       }
-      articleComments {
+      subComments {
         items {
           id
           content
           active
-          articleID
+          targetID
+          commentID
           createdAt
           userID
+          replyToUserID
           updatedAt
           owner
         }
@@ -1438,21 +1427,6 @@ export const updateArticle = /* GraphQL */ `
           nextToken
         }
         updatedAt
-      }
-      subComments {
-        items {
-          id
-          content
-          active
-          targetID
-          commentID
-          createdAt
-          userID
-          replyToUserID
-          updatedAt
-          owner
-        }
-        nextToken
       }
       updatedAt
     }
@@ -1531,14 +1505,16 @@ export const deleteArticle = /* GraphQL */ `
         }
         nextToken
       }
-      articleComments {
+      subComments {
         items {
           id
           content
           active
-          articleID
+          targetID
+          commentID
           createdAt
           userID
+          replyToUserID
           updatedAt
           owner
         }
@@ -1583,21 +1559,6 @@ export const deleteArticle = /* GraphQL */ `
           nextToken
         }
         updatedAt
-      }
-      subComments {
-        items {
-          id
-          content
-          active
-          targetID
-          commentID
-          createdAt
-          userID
-          replyToUserID
-          updatedAt
-          owner
-        }
-        nextToken
       }
       updatedAt
     }
@@ -1650,7 +1611,7 @@ export const createComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -1671,9 +1632,6 @@ export const createComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -1866,7 +1824,7 @@ export const updateComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -1887,9 +1845,6 @@ export const updateComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -2082,7 +2037,7 @@ export const deleteComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -2103,9 +2058,6 @@ export const deleteComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -2298,7 +2250,7 @@ export const createSubComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -2319,9 +2271,6 @@ export const createSubComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -2613,7 +2562,7 @@ export const updateSubComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -2634,9 +2583,6 @@ export const updateSubComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -2928,7 +2874,7 @@ export const deleteSubComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -2949,9 +2895,6 @@ export const deleteSubComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -3153,756 +3096,6 @@ export const deleteSubComment = /* GraphQL */ `
       }
       replyToUserID
       replyTo {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createArticleComment = /* GraphQL */ `
-  mutation CreateArticleComment(
-    $input: CreateArticleCommentInput!
-    $condition: ModelArticleCommentConditionInput
-  ) {
-    createArticleComment(input: $input, condition: $condition) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleID
-      article {
-        id
-        title
-        summary
-        content
-        imgURLs
-        qrCodeImgURL
-        likes {
-          nextToken
-        }
-        tags
-        sortKey
-        active
-        createdAt
-        topicID
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        subComments {
-          nextToken
-        }
-        updatedAt
-      }
-      createdAt
-      articleSubComments {
-        items {
-          id
-          content
-          active
-          articleCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateArticleComment = /* GraphQL */ `
-  mutation UpdateArticleComment(
-    $input: UpdateArticleCommentInput!
-    $condition: ModelArticleCommentConditionInput
-  ) {
-    updateArticleComment(input: $input, condition: $condition) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleID
-      article {
-        id
-        title
-        summary
-        content
-        imgURLs
-        qrCodeImgURL
-        likes {
-          nextToken
-        }
-        tags
-        sortKey
-        active
-        createdAt
-        topicID
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        subComments {
-          nextToken
-        }
-        updatedAt
-      }
-      createdAt
-      articleSubComments {
-        items {
-          id
-          content
-          active
-          articleCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteArticleComment = /* GraphQL */ `
-  mutation DeleteArticleComment(
-    $input: DeleteArticleCommentInput!
-    $condition: ModelArticleCommentConditionInput
-  ) {
-    deleteArticleComment(input: $input, condition: $condition) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleID
-      article {
-        id
-        title
-        summary
-        content
-        imgURLs
-        qrCodeImgURL
-        likes {
-          nextToken
-        }
-        tags
-        sortKey
-        active
-        createdAt
-        topicID
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        subComments {
-          nextToken
-        }
-        updatedAt
-      }
-      createdAt
-      articleSubComments {
-        items {
-          id
-          content
-          active
-          articleCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createArticleSubComment = /* GraphQL */ `
-  mutation CreateArticleSubComment(
-    $input: CreateArticleSubCommentInput!
-    $condition: ModelArticleSubCommentConditionInput
-  ) {
-    createArticleSubComment(input: $input, condition: $condition) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleCommentID
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      createdAt
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateArticleSubComment = /* GraphQL */ `
-  mutation UpdateArticleSubComment(
-    $input: UpdateArticleSubCommentInput!
-    $condition: ModelArticleSubCommentConditionInput
-  ) {
-    updateArticleSubComment(input: $input, condition: $condition) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleCommentID
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      createdAt
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteArticleSubComment = /* GraphQL */ `
-  mutation DeleteArticleSubComment(
-    $input: DeleteArticleSubCommentInput!
-    $condition: ModelArticleSubCommentConditionInput
-  ) {
-    deleteArticleSubComment(input: $input, condition: $condition) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleCommentID
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      createdAt
-      userID
-      user {
         id
         username
         email
@@ -11800,60 +10993,9 @@ export const createLike = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
         subComments {
           nextToken
         }
-        updatedAt
-      }
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
         userID
         user {
           id
@@ -11874,48 +11016,6 @@ export const createLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        owner
-      }
-      articleSubComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleCommentID
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        createdAt
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
       }
       event {
         id
@@ -12569,60 +11669,9 @@ export const updateLike = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
         subComments {
           nextToken
         }
-        updatedAt
-      }
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
         userID
         user {
           id
@@ -12643,48 +11692,6 @@ export const updateLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        owner
-      }
-      articleSubComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleCommentID
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        createdAt
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
       }
       event {
         id
@@ -13338,60 +12345,9 @@ export const deleteLike = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
         subComments {
           nextToken
         }
-        updatedAt
-      }
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
         userID
         user {
           id
@@ -13412,48 +12368,6 @@ export const deleteLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        owner
-      }
-      articleSubComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleCommentID
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        createdAt
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
       }
       event {
         id
@@ -14065,177 +12979,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-    }
-  }
-`;
-export const createUserMutationLog = /* GraphQL */ `
-  mutation CreateUserMutationLog(
-    $input: CreateUserMutationLogInput!
-    $condition: ModelUserMutationLogConditionInput
-  ) {
-    createUserMutationLog(input: $input, condition: $condition) {
-      id
-      eventName
-      typename
-      eventSourceARN
-      record
-      createdAt
-      sortKey
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-    }
-  }
-`;
-export const updateUserMutationLog = /* GraphQL */ `
-  mutation UpdateUserMutationLog(
-    $input: UpdateUserMutationLogInput!
-    $condition: ModelUserMutationLogConditionInput
-  ) {
-    updateUserMutationLog(input: $input, condition: $condition) {
-      id
-      eventName
-      typename
-      eventSourceARN
-      record
-      createdAt
-      sortKey
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-    }
-  }
-`;
-export const deleteUserMutationLog = /* GraphQL */ `
-  mutation DeleteUserMutationLog(
-    $input: DeleteUserMutationLogInput!
-    $condition: ModelUserMutationLogConditionInput
-  ) {
-    deleteUserMutationLog(input: $input, condition: $condition) {
-      id
-      eventName
-      typename
-      eventSourceARN
-      record
-      createdAt
-      sortKey
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
     }
   }
 `;

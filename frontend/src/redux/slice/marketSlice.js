@@ -112,7 +112,11 @@ export const addressFilteredMarketItem = createAsyncThunk(
         authMode: "AWS_IAM",
       });
       console.log("res:", response);
-      return [response.data.listAddresses.items, marketType];
+      return [
+        response.data.listAddresses.items,
+        marketType,
+        response.data.listAddresses.nextToken,
+      ];
     } catch (error) {
       console.log(error);
     }
@@ -279,6 +283,7 @@ const marketSlice = createSlice({
       .addCase(addressFilteredMarketItem.fulfilled, (state, action) => {
         state.addressFilteredMarketItemStatus = "succeeded";
         marketAdapter.removeAll(state);
+        state.currentFetchType = "address";
         let marketItems = action.payload[0];
         let marketType = action.payload[1];
         let marketItem = marketItems.map((item) => item.marketItem);
@@ -286,6 +291,8 @@ const marketSlice = createSlice({
           marketType !== "all"
             ? marketItem.filter((item) => item.marketType === marketType)
             : marketItem;
+        console.log(action.payload[0]);
+        state.nextToken = action.payload[2];
         marketAdapter.upsertMany(state, marketItem);
       })
       .addCase(addressFilteredMarketItem.rejected, (state, action) => {

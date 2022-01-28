@@ -1,8 +1,9 @@
-import { Typography, Box, Container } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Container, Typography } from "@mui/material";
 import React, { useEffect } from "react";
+
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { green } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,9 +24,13 @@ export default function Success() {
   const classes = useStyles();
   const history = useHistory();
   useEffect(() => {
-    setTimeout(function () {
+    let timeout = setTimeout(() => {
       history.replace("/event");
     }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [history]);
 
   return (

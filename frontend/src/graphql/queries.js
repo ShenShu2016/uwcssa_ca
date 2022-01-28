@@ -762,14 +762,16 @@ export const getArticle = /* GraphQL */ `
         }
         nextToken
       }
-      articleComments {
+      subComments {
         items {
           id
           content
           active
-          articleID
+          targetID
+          commentID
           createdAt
           userID
+          replyToUserID
           updatedAt
           owner
         }
@@ -815,21 +817,6 @@ export const getArticle = /* GraphQL */ `
         }
         updatedAt
       }
-      subComments {
-        items {
-          id
-          content
-          active
-          targetID
-          commentID
-          createdAt
-          userID
-          replyToUserID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       updatedAt
     }
   }
@@ -866,7 +853,7 @@ export const listArticles = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -887,9 +874,6 @@ export const listArticles = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -939,7 +923,7 @@ export const articleSortBySortKey = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -960,9 +944,6 @@ export const articleSortBySortKey = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -1014,7 +995,7 @@ export const getComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -1035,9 +1016,6 @@ export const getComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -1311,7 +1289,7 @@ export const getSubComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
+        subComments {
           nextToken
         }
         userID
@@ -1332,9 +1310,6 @@ export const getSubComment = /* GraphQL */ `
           createdAt
           badges
           updatedAt
-        }
-        subComments {
-          nextToken
         }
         updatedAt
       }
@@ -1666,498 +1641,6 @@ export const listSubComments = /* GraphQL */ `
         }
         replyToUserID
         replyTo {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getArticleComment = /* GraphQL */ `
-  query GetArticleComment($id: ID!) {
-    getArticleComment(id: $id) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleID
-      article {
-        id
-        title
-        summary
-        content
-        imgURLs
-        qrCodeImgURL
-        likes {
-          nextToken
-        }
-        tags
-        sortKey
-        active
-        createdAt
-        topicID
-        topic {
-          id
-          name
-          userID
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        subComments {
-          nextToken
-        }
-        updatedAt
-      }
-      createdAt
-      articleSubComments {
-        items {
-          id
-          content
-          active
-          articleCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listArticleComments = /* GraphQL */ `
-  query ListArticleComments(
-    $filter: ModelArticleCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listArticleComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const articleCommentSortByArticleID = /* GraphQL */ `
-  query ArticleCommentSortByArticleID(
-    $articleID: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelArticleCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    articleCommentSortByArticleID(
-      articleID: $articleID
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getArticleSubComment = /* GraphQL */ `
-  query GetArticleSubComment($id: ID!) {
-    getArticleSubComment(id: $id) {
-      id
-      content
-      likes {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      active
-      articleCommentID
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      createdAt
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listArticleSubComments = /* GraphQL */ `
-  query ListArticleSubComments(
-    $filter: ModelArticleSubCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listArticleSubComments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleCommentID
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        createdAt
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const articleSubCommentSortByArticleCommentID = /* GraphQL */ `
-  query ArticleSubCommentSortByArticleCommentID(
-    $articleCommentID: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelArticleSubCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    articleSubCommentSortByArticleCommentID(
-      articleCommentID: $articleCommentID
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleCommentID
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        createdAt
-        userID
-        user {
           id
           username
           email
@@ -7608,60 +7091,9 @@ export const getLike = /* GraphQL */ `
         comments {
           nextToken
         }
-        articleComments {
-          nextToken
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
         subComments {
           nextToken
         }
-        updatedAt
-      }
-      articleComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleID
-        article {
-          id
-          title
-          summary
-          content
-          imgURLs
-          qrCodeImgURL
-          tags
-          sortKey
-          active
-          createdAt
-          topicID
-          userID
-          updatedAt
-        }
-        createdAt
-        articleSubComments {
-          nextToken
-        }
         userID
         user {
           id
@@ -7682,48 +7114,6 @@ export const getLike = /* GraphQL */ `
           updatedAt
         }
         updatedAt
-        owner
-      }
-      articleSubComment {
-        id
-        content
-        likes {
-          nextToken
-        }
-        active
-        articleCommentID
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        createdAt
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
       }
       event {
         id
@@ -8218,26 +7608,6 @@ export const listLikes = /* GraphQL */ `
           userID
           updatedAt
         }
-        articleComment {
-          id
-          content
-          active
-          articleID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        articleSubComment {
-          id
-          content
-          active
-          articleCommentID
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
         event {
           id
           summary
@@ -8453,104 +7823,6 @@ export const listWebFeedBacks = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getUserMutationLog = /* GraphQL */ `
-  query GetUserMutationLog($id: ID!) {
-    getUserMutationLog(id: $id) {
-      id
-      eventName
-      typename
-      eventSourceARN
-      record
-      createdAt
-      sortKey
-      userID
-      user {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      updatedAt
-    }
-  }
-`;
-export const listUserMutationLogs = /* GraphQL */ `
-  query ListUserMutationLogs(
-    $filter: ModelUserMutationLogFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserMutationLogs(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        eventName
-        typename
-        eventSourceARN
-        record
-        createdAt
-        sortKey
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
       }
       nextToken
     }
