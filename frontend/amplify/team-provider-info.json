@@ -18,10 +18,6 @@
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-34526c347945534b3566-build.zip"
         },
-        "updateLastReplyAt": {
-          "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/updateLastReplyAt-413349664e522f324f65-build.zip"
-        },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
           "s3Key": "amplify-builds/KanbanNotification-544c726f545367497142-build.zip"
