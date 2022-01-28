@@ -1,5 +1,9 @@
 import { Box, Button, CircularProgress, Divider } from "@mui/material";
 import {
+  addressFilteredMarketItem,
+  fetchMarketItems,
+} from "../redux/slice/marketSlice";
+import {
   marketItemSortBySortKey,
   marketItemSortBySortKeyItem,
   marketItemSortBySortKeyRental,
@@ -9,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import React from "react";
-import { fetchMarketItems } from "../redux/slice/marketSlice";
 
 export default function LoadMore() {
   const dispatch = useDispatch();
@@ -32,14 +35,21 @@ export default function LoadMore() {
   const handleClicked = () => {
     setClicked(true);
     console.log(clicked);
-    dispatch(
-      fetchMarketItems({
-        query,
-        nextToken,
-        marketType: currentFetchType,
-        filter: filterList,
-      })
-    );
+    currentFetchType !== "address"
+      ? dispatch(
+          fetchMarketItems({
+            query,
+            nextToken,
+            marketType: currentFetchType,
+            filter: filterList,
+          })
+        )
+      : dispatch(
+          addressFilteredMarketItem({
+            filter: { itemID: {attributeExists : true } },
+            nextToken,
+          })
+        );
     setTimeout(() => setClicked(false), 2000);
   };
   return (
