@@ -1,4 +1,46 @@
 {
+  "master": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssa-master-53243-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssa-master-53243-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssa-master-53243-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+      "UnauthRoleName": "amplify-uwcssa-master-53243-unauthRole",
+      "StackName": "amplify-uwcssa-master-53243",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssa-master-53243/f6431ce0-4379-11ec-8478-02fd07c740be",
+      "AmplifyAppId": "d23ollqt4907qw",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssa-master-53243-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "uwcssaAuth": {}
+      },
+      "function": {
+        "uwcssaAuthPostConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip",
+          "GROUP": "anyone"
+        },
+        "KanbanNotification": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
+        },
+        "EventConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/EventConfirmation-674256773772674d7551-build.zip"
+        },
+        "UwcssaJobConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/UwcssaJobConfirmation-774d52615678444c776c-build.zip"
+        },
+        "uwcssanodejsLibrarieslayer": {
+          "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersion1d4b1c53-build.zip"
+        }
+      }
+    }
+  },
   "develop": {
     "awscloudformation": {
       "AuthRoleName": "amplify-uwcssa-develop-145628-authRole",
@@ -16,11 +58,13 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip"
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip",
+          "GROUP": "anyone"
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip",
+          "test": "woshishushen"
         },
         "uwcssanodejsLibrarieslayer": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",

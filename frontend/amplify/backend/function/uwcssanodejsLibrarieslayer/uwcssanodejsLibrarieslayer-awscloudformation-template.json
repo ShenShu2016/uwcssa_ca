@@ -20,7 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersione377492a": {
+    "LambdaLayerVersion3663f32a": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": {
@@ -51,60 +51,13 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionPrivatee377492a": {
+    "LambdaLayerPermissionPrivate3663f32a": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
-          "Ref": "LambdaLayerVersione377492a"
+          "Ref": "LambdaLayerVersion3663f32a"
         },
-        "Principal": {
-          "Ref": "AWS::AccountId"
-        }
-      }
-    },
-    "LambdaLayerVersiond82f8b86": {
-      "Type": "AWS::Lambda::LayerVersion",
-      "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs14.x"
-        ],
-        "Content": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersiond82f8b86-build.zip"
-        },
-        "Description": "Updated layer version 2022-01-26T06:32:11.248Z",
-        "LayerName": {
-          "Fn::Sub": [
-            "uwcssanodejsLibrarieslayer-${env}",
-            {
-              "env": {
-                "Ref": "env"
-              }
-            }
-          ]
-        }
-      },
-      "DeletionPolicy": "Delete",
-      "UpdateReplacePolicy": "Retain"
-    },
-    "LambdaLayerPermissionPrivated82f8b86": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-2:537666141782:layer:uwcssanodejsLibrarieslayer-develop:67",
-        "Principal": {
-          "Ref": "AWS::AccountId"
-        }
-      }
-    },
-    "LambdaLayerPermissionPrivateLegacy52": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-2:537666141782:layer:uwcssanodejsLibrarieslayer-develop:52",
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -114,7 +67,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersione377492a"
+        "Ref": "LambdaLayerVersion3663f32a"
       }
     }
   }
