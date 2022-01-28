@@ -101,6 +101,7 @@ export function marketItemFilterUpdate(props, dispatch) {
   tags.length !== 0
     ? tags.map((c) => itemFilter.push({ tags: { contains: c } }))
     : itemFilter.map((item) => Object.keys(item) !== tags);
+  itemFilter.length !== 0 && Object.assign(filter, { active: { eq: true } });
   itemFilter.length !== 0
     ? Object.assign(filter, { or: itemFilter })
     : dispatch(filterClear());

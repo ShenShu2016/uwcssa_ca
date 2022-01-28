@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import BackdropLoading from "../../components/BackdropLoading";
+import CustomSwitch from "./CustomSwitch";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import InputAdornment from "@mui/material/InputAdornment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -79,7 +80,7 @@ export default function EditMarketRentalDetail() {
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [loading, setLoading] = useState(false);
   // const [trigger, setTrigger] = useState(true);
-
+  const [active, setActive] = useState(true);
   const marketUserInfo = useSelector((state) =>
     selectMarketUserById(state, marketItem.userID)
   );
@@ -189,7 +190,7 @@ export default function EditMarketRentalDetail() {
       marketType: "Rental",
       imgURLs: imgKeyFromServer,
       tags: GetTags(),
-      active: true,
+      active: active,
       userID: marketUserInfo.userID,
       createdAt: createdAt,
       sortKey: "SortKey",
@@ -261,8 +262,13 @@ export default function EditMarketRentalDetail() {
                 fontWeight="bold"
                 sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
               >
-                新增房源
+                编辑房源
               </Typography>
+              <CustomSwitch
+                checked={active}
+                onChange={() => setActive((prev) => !prev)}
+                label={active ? "在线" : "离线"}
+              />
               <Box className={classes.icon}>
                 <IconButton onClick={() => setOpen(true)}>
                   <VisibilityIcon />

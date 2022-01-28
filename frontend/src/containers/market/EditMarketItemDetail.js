@@ -27,6 +27,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BackdropLoading from "../../components/BackdropLoading";
+import CustomSwitch from "./CustomSwitch";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
@@ -76,7 +77,7 @@ export default function EditMarketItemDetail() {
   const { marketItemConditionList, marketItemCategoryList } = marketItemOptions;
   // let temp = [];
   const [imgKeyFromServer, setImgKeyFromServer] = useState(imgURLs);
-
+  const [active, setActive] = useState(true);
   const [open, setOpen] = useState(false);
 
   const {
@@ -165,7 +166,7 @@ export default function EditMarketItemDetail() {
       marketType: "Item",
       imgURLs: imgKeyFromServer,
       tags: GetTags(),
-      active: true,
+      active: active,
       userID: marketUserInfo.userID,
       createdAt: createdAt,
       sortKey: "SortKey",
@@ -238,8 +239,13 @@ export default function EditMarketItemDetail() {
                 fontWeight="bold"
                 sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
               >
-                Edit Item Listing
+                编辑物品
               </Typography>
+              <CustomSwitch
+                checked={active}
+                onChange={() => setActive((prev) => !prev)}
+                label={active ? "在线" : "离线"}
+              />
               <Box className={classes.icon}>
                 <IconButton onClick={() => setOpen(true)}>
                   <VisibilityIcon />
