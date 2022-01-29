@@ -996,7 +996,7 @@ enum KanbanStatus {
 
 # Form 里面跟着很多Formquesions
 type Form
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
@@ -1018,7 +1018,7 @@ type Form
 
 # FormQuestion 每个可以跟着多个 From
 type FormQuestion
-  @model
+  @model(subscriptions: null)
   @auth(
     rules: [
       { allow: groups, groups: ["admin", "staff"] }
