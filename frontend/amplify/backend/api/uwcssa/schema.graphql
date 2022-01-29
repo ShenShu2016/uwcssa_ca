@@ -1011,7 +1011,7 @@ type Form
   id: ID!
   formQuestionID: ID!
   formQuestion: FormQuestion @hasOne(fields: ["formQuestionID"])
-  order: int!
+  order: Int!
   required: Boolean!
   eventID: ID @index(name: "byEvent", sortKeyFields: ["order"])
   event: Event @belongsTo(fields: ["eventID"])
@@ -1037,8 +1037,8 @@ type FormQuestion
   helperText: String
   imgURLs: [AWSURL]
   pattern: String
-  minLength: int
-  maxLength: int
+  minLength: Int
+  maxLength: Int
   placeholder: String
   label: String
   choices: [FormQuestionChoice]
