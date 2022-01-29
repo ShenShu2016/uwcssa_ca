@@ -32,17 +32,8 @@ export const getEvent = /* GraphQL */ `
       user {
         id
         username
-        email
         owner
-        firstName
-        lastName
-        intro
-        major
         avatarImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
         badges
       }
       eventComments {
@@ -126,27 +117,7 @@ export const getEvent = /* GraphQL */ `
       eventParticipants {
         items {
           id
-          name
-          email
-          address {
-            description
-            place_id
-            reference
-            terms
-            types
-            apartmentNumbers
-          }
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
           userID
-          updatedAt
-          owner
         }
         nextToken
       }
@@ -171,27 +142,6 @@ export const getEvent = /* GraphQL */ `
       }
       topic {
         id
-        name
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
       }
     }
   }
