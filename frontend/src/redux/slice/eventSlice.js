@@ -63,17 +63,21 @@ const initialState = {
 };
 
 export const fetchEvents = createAsyncThunk("event/fetchEvents", async () => {
-  const eventData = await API.graphql({
-    query: eventSortBySortKey,
-    variables: {
-      sortKey: "SortKey",
-      sortDirection: "DESC",
-      filter: { active: { eq: true } },
-    },
-    authMode: "AWS_IAM",
-  });
+  try {
+    const eventData = await API.graphql({
+      query: eventSortBySortKey,
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
+      authMode: "AWS_IAM",
+    });
 
-  return eventData.data.eventSortBySortKey.items;
+    return eventData.data.eventSortBySortKey.items;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const selectedEvent = createAsyncThunk(
