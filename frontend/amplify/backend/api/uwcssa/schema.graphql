@@ -247,6 +247,7 @@ type Event
     )
   topicID: ID! @index(name: "byTopic")
   topic: Topic! @belongsTo(fields: ["topicID"])
+  forms: [Form] @hasMany(indexName: "byEvent", fields: ["id"])
   eventComments: [EventComment] @hasMany(indexName: "byEvent", fields: ["id"])
   eventParticipants: [EventParticipant]
     @hasMany(indexName: "byEvent", fields: ["id"])
@@ -994,4 +995,70 @@ enum KanbanStatus {
   INPROGRESS
   DONE
   WASTED
+}
+
+# Form 里面跟着很多Formquesions
+type Form
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
+      { allow: private, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  formQuestionID: ID!
+  formQuestion: FormQuestion @hasOne(fields: ["formQuestionID"])
+  order: int!
+  required: Boolean!
+  eventID: ID @index(name: "byEvent", sortKeyFields: ["order"])
+  event: Event @belongsTo(fields: ["eventID"])
+  userID: ID!
+  user: User! @hasOne(fields: ["userID"])
+}
+
+# FormQuestion 每个可以跟着多个 From
+type FormQuestion
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
+      { allow: private, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String
+  description: String
+  formType: FormType!
+  helperText: String
+  imgURLs: [AWSURL]
+  pattern: String
+  minLength: int
+  maxLength: int
+  placeholder: String
+  label: String
+  choices: [FormQuestionChoice]
+  userID: ID!
+  user: User! @hasOne(fields: ["userID"])
+}
+
+enum FormType {
+  TextFieldShort
+  TextFieldLong
+  RadioGroupH
+  RadioGroupV
+  DatePicker
+  DateTimePicker
+  TimePicker
+  FileUpload
+  Checkbox
+  Select
+}
+
+type FormQuestionChoice {
+  formQuestionChoice: String
 }
