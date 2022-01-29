@@ -470,72 +470,69 @@ export default function EventBody({ event }) {
               {/* 这里有红字，需要改一下 */}
               <Box className={classes.action}>
                 <Stack direction="row" spacing={2}>
-                  {new Date(localEndDate) - new Date() > 0 ? (
+                  {/* {new Date(localEndDate) - new Date() > 0 ? (
+                    <div> */}
+                  {userInfo.isAuthenticated ? (
                     <div>
-                      {userInfo.isAuthenticated ? (
+                      {eventStatus === "SignUpClosed" ? (
+                        <Box className={classes.alert}>
+                          <Alert severity="info">报名通道关闭啦~🥳</Alert>
+                        </Box>
+                      ) : (
                         <div>
-                          {eventStatus === "SignUpClosed" ? (
-                            <Box className={classes.alert}>
-                              <Alert severity="info">报名通道关闭啦~🥳</Alert>
+                          {event.eventParticipants.items.some(
+                            (item) => item.userID === userAuth.user.username
+                          ) === false ? (
+                            <Box className={classes.button}>
+                              <Tooltip title="点击报名此活动" placement="top">
+                                <Button
+                                  size="large"
+                                  // variant="outlined"
+                                  fullWidth
+                                  sx={{
+                                    background:
+                                      "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+                                    "& > *": {
+                                      textTransform: "none !important",
+                                    },
+                                    border: 0,
+                                    boxShadow:
+                                      "0 3px 5px 2px rgba(33, 203, 243, .3)",
+                                    color: "white",
+                                    padding: "0 30px",
+                                    borderRadius: "20rem",
+                                  }}
+                                  className={classes.join}
+                                  variant={"contained"}
+                                  color={"primary"}
+                                  disableRipple
+                                  component={Link}
+                                  to={`/event/${event.id}/eventSignUp`}
+                                  startIcon={<AppRegistrationIcon />}
+                                >
+                                  报名
+                                </Button>
+                              </Tooltip>
                             </Box>
                           ) : (
-                            <div>
-                              {event.eventParticipants.items.some(
-                                (item) => item.userID === userAuth.user.username
-                              ) === false ? (
-                                <Box className={classes.button}>
-                                  <Tooltip
-                                    title="点击报名此活动"
-                                    placement="top"
-                                  >
-                                    <Button
-                                      size="large"
-                                      // variant="outlined"
-                                      fullWidth
-                                      sx={{
-                                        background:
-                                          "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                                        "& > *": {
-                                          textTransform: "none !important",
-                                        },
-                                        border: 0,
-                                        boxShadow:
-                                          "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                                        color: "white",
-                                        padding: "0 30px",
-                                        borderRadius: "20rem",
-                                      }}
-                                      className={classes.join}
-                                      variant={"contained"}
-                                      color={"primary"}
-                                      disableRipple
-                                      component={Link}
-                                      to={`/event/${event.id}/eventSignUp`}
-                                      startIcon={<AppRegistrationIcon />}
-                                    >
-                                      报名
-                                    </Button>
-                                  </Tooltip>
-                                </Box>
-                              ) : (
-                                <Box className={classes.alert}>
-                                  <Alert severity="success">
-                                    你已经报过名啦~🥳
-                                  </Alert>
-                                </Box>
-                              )}
-                            </div>
+                            <Box className={classes.alert}>
+                              <Alert severity="success">
+                                你已经报过名啦~🥳
+                              </Alert>
+                            </Box>
                           )}
                         </div>
-                      ) : (
-                        <SignUpRequest />
                       )}
                     </div>
                   ) : (
-                    <Box className={classes.alert}>
-                      <Alert severity="info">活动结束啦~🥳</Alert>
-                    </Box>
+                    <SignUpRequest />
                   )}
+                  {/* </div>
+                  // ) : (
+                  //   <Box className={classes.alert}>
+                  //     <Alert severity="info">活动结束啦~🥳</Alert>
+                  //   </Box>
+                  // )} */}
 
                   <div className={classes.share}>
                     <Tooltip title="点击分享活动链接" placement="top">
