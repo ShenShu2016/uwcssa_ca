@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SeeMore({ content }) {
   const classes = useStyles();
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(true);
   const newContent = content.substring(34, content.length - 98);
 
   return (
