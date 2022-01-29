@@ -1064,6 +1064,9 @@ export const getComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -1357,6 +1360,9 @@ export const getSubComment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -1836,6 +1842,19 @@ export const getEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -2005,6 +2024,9 @@ export const listEvents = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2106,6 +2128,9 @@ export const eventSortBySortKey = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -2210,6 +2235,9 @@ export const getEventComment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -2871,6 +2899,9 @@ export const getEventParticipant = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -6348,6 +6379,9 @@ export const getAddress = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -7159,6 +7193,9 @@ export const getLike = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -8176,6 +8213,369 @@ export const kanbanSortBySortKey = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getForm = /* GraphQL */ `
+  query GetForm($id: ID!) {
+    getForm(id: $id) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listForms = /* GraphQL */ `
+  query ListForms(
+    $filter: ModelFormFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        formQuestionID
+        formQuestion {
+          id
+          name
+          description
+          formType
+          helperText
+          imgURLs
+          pattern
+          minLength
+          maxLength
+          placeholder
+          label
+          userID
+          createdAt
+          updatedAt
+        }
+        order
+        required
+        eventID
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFormQuestion = /* GraphQL */ `
+  query GetFormQuestion($id: ID!) {
+    getFormQuestion(id: $id) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFormQuestions = /* GraphQL */ `
+  query ListFormQuestions(
+    $filter: ModelFormQuestionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFormQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
         }
         userID
         user {

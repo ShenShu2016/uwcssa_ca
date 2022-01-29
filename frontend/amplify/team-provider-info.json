@@ -19,14 +19,11 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip",
-          "GROUP": "anyone",
-          "USERTABLE": "User-6hj4ht7unzduphcdran4ogs2za-master"
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip"
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
-          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip",
-          "USERTABLE": "User-6hj4ht7unzduphcdran4ogs2za-master"
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
         },
         "EventConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-master-53243-deployment",
@@ -60,19 +57,15 @@
       "function": {
         "uwcssaAuthPostConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip",
-          "GROUP": "anyone",
-          "USERTABLE": "User-ooc7vvqq6jgrbhbybwrqn7njxy-develop"
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip"
         },
         "KanbanNotification": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip",
-          "test": "woshishushen",
-          "USERTABLE": "User-ooc7vvqq6jgrbhbybwrqn7njxy-develop"
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
         },
         "uwcssanodejsLibrarieslayer": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",
-          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersione377492a-build.zip"
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersiond8c8fc39-build.zip"
         },
         "EventConfirmation": {
           "deploymentBucketName": "amplify-uwcssa-develop-145628-deployment",

@@ -1680,6 +1680,9 @@ export const createComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -1892,6 +1895,9 @@ export const updateComment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -2106,6 +2112,9 @@ export const deleteComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2318,6 +2327,9 @@ export const createSubComment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -2631,6 +2643,9 @@ export const updateSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2942,6 +2957,9 @@ export const deleteSubComment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -3313,6 +3331,19 @@ export const createEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -3603,6 +3634,19 @@ export const updateEvent = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       eventComments {
         items {
@@ -3895,6 +3939,19 @@ export const deleteEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -4079,6 +4136,9 @@ export const createEventComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -4241,6 +4301,9 @@ export const updateEventComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -4402,6 +4465,9 @@ export const deleteEventComment = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -5056,6 +5122,9 @@ export const createEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -5317,6 +5386,9 @@ export const updateEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -5577,6 +5649,9 @@ export const deleteEventParticipant = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -9856,6 +9931,9 @@ export const createAddress = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -10152,6 +10230,9 @@ export const updateAddress = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -10447,6 +10528,9 @@ export const deleteAddress = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -11061,6 +11145,9 @@ export const createLike = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -11738,6 +11825,9 @@ export const updateLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -12413,6 +12503,9 @@ export const deleteLike = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -13476,6 +13569,732 @@ export const deleteKanban = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createForm = /* GraphQL */ `
+  mutation CreateForm(
+    $input: CreateFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    createForm(input: $input, condition: $condition) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateForm = /* GraphQL */ `
+  mutation UpdateForm(
+    $input: UpdateFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    updateForm(input: $input, condition: $condition) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteForm = /* GraphQL */ `
+  mutation DeleteForm(
+    $input: DeleteFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    deleteForm(input: $input, condition: $condition) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createFormQuestion = /* GraphQL */ `
+  mutation CreateFormQuestion(
+    $input: CreateFormQuestionInput!
+    $condition: ModelFormQuestionConditionInput
+  ) {
+    createFormQuestion(input: $input, condition: $condition) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFormQuestion = /* GraphQL */ `
+  mutation UpdateFormQuestion(
+    $input: UpdateFormQuestionInput!
+    $condition: ModelFormQuestionConditionInput
+  ) {
+    updateFormQuestion(input: $input, condition: $condition) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        beingLiked {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFormQuestion = /* GraphQL */ `
+  mutation DeleteFormQuestion(
+    $input: DeleteFormQuestionInput!
+    $condition: ModelFormQuestionConditionInput
+  ) {
+    deleteFormQuestion(input: $input, condition: $condition) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
       }
       userID
       user {
