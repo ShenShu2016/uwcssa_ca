@@ -41,9 +41,6 @@ export const onCreateKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -79,9 +76,6 @@ export const onCreateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -157,9 +151,6 @@ export const onCreateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -218,9 +209,6 @@ export const onUpdateKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -256,9 +244,6 @@ export const onUpdateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -334,9 +319,6 @@ export const onUpdateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -395,9 +377,6 @@ export const onDeleteKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -433,9 +412,6 @@ export const onDeleteKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -511,9 +487,6 @@ export const onDeleteKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {

@@ -32,20 +32,6 @@ const columns = [
     editable: false,
   },
   {
-    field: "like",
-    headerName: "Like",
-    width: 100,
-    type: "number",
-    editable: false,
-  },
-  {
-    field: "unlike",
-    headerName: "Unlike",
-    width: 100,
-    type: "number",
-    editable: false,
-  },
-  {
     field: "active",
     headerName: "Active",
     width: 100,
@@ -78,14 +64,11 @@ export default function UwcssaJobsPreview() {
   //console.log("departments, uwcssaJobs", departments, uwcssaJobs);
 
   const rows = uwcssaJobs.map((uwcssaJob) => {
-    const { id, title, department, like, unlike, active, uwcssaJobResumes } =
-      uwcssaJob;
+    const { id, title, department, active, uwcssaJobResumes } = uwcssaJob;
     return {
       id: id,
       title: title,
       department: department.name,
-      like: like.filter((e) => e !== "").length,
-      unlike: unlike.filter((e) => e !== "").length,
       active: active,
       applied: uwcssaJobResumes,
     };

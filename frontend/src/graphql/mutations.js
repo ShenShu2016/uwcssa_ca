@@ -70,18 +70,6 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumPosts {
         items {
           id
@@ -233,18 +221,6 @@ export const updateUser = /* GraphQL */ `
           phone
           weChat
           email
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
           userID
           createdAt
           updatedAt
@@ -410,18 +386,6 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumPosts {
         items {
           id
@@ -552,9 +516,6 @@ export const createUserEducation = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -612,9 +573,6 @@ export const updateUserEducation = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -670,9 +628,6 @@ export const deleteUserEducation = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -733,9 +688,6 @@ export const createUserExperience = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -794,9 +746,6 @@ export const updateUserExperience = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -853,9 +802,6 @@ export const deleteUserExperience = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -953,9 +899,6 @@ export const createTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1051,9 +994,6 @@ export const updateTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1147,9 +1087,6 @@ export const deleteTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1282,9 +1219,6 @@ export const createArticle = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1414,9 +1348,6 @@ export const updateArticle = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1544,9 +1475,6 @@ export const deleteArticle = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1759,9 +1687,6 @@ export const createComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1977,9 +1902,6 @@ export const updateComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -2191,9 +2113,6 @@ export const deleteComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2468,9 +2387,6 @@ export const createSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -2506,9 +2422,6 @@ export const createSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2783,9 +2696,6 @@ export const updateSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -2821,9 +2731,6 @@ export const updateSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3098,9 +3005,6 @@ export const deleteSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3136,9 +3040,6 @@ export const deleteSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3413,9 +3314,6 @@ export const createEvent = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3719,9 +3617,6 @@ export const updateEvent = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4023,9 +3918,6 @@ export const deleteEvent = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4215,9 +4107,6 @@ export const createEventComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4378,9 +4267,6 @@ export const updateEventComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4545,9 +4431,6 @@ export const deleteEventComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4669,9 +4552,6 @@ export const createEventSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4797,9 +4677,6 @@ export const updateEventSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4921,9 +4798,6 @@ export const deleteEventSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5187,9 +5061,6 @@ export const createEventParticipant = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5449,9 +5320,6 @@ export const updateEventParticipant = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5715,9 +5583,6 @@ export const deleteEventParticipant = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5755,8 +5620,6 @@ export const createDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -5831,9 +5694,6 @@ export const createDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5873,8 +5733,6 @@ export const updateDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -5949,9 +5807,6 @@ export const updateDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5991,8 +5846,6 @@ export const deleteDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -6067,9 +5920,6 @@ export const deleteDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6170,9 +6020,6 @@ export const createUwcssaMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -6268,9 +6115,6 @@ export const updateUwcssaMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6370,9 +6214,6 @@ export const deleteUwcssaMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -6402,8 +6243,6 @@ export const createUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -6485,9 +6324,6 @@ export const createUwcssaJob = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6519,8 +6355,6 @@ export const updateUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -6602,9 +6436,6 @@ export const updateUwcssaJob = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6636,8 +6467,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -6719,9 +6548,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6763,8 +6589,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -6826,9 +6650,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6871,8 +6692,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -6934,9 +6753,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6979,8 +6795,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -7042,9 +6856,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7108,9 +6919,6 @@ export const createForumTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7172,9 +6980,6 @@ export const updateForumTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7234,9 +7039,6 @@ export const deleteForumTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7338,9 +7140,6 @@ export const createForumSubTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7439,9 +7238,6 @@ export const updateForumSubTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7538,9 +7334,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7676,9 +7469,6 @@ export const createForumPost = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7817,9 +7607,6 @@ export const updateForumPost = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7956,9 +7743,6 @@ export const deleteForumPost = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8089,9 +7873,6 @@ export const createForumPostComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8226,9 +8007,6 @@ export const updateForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8361,9 +8139,6 @@ export const deleteForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8426,9 +8201,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8570,9 +8342,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8639,9 +8408,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8781,9 +8547,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8850,9 +8613,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8994,9 +8754,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9047,9 +8804,6 @@ export const createMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -9105,9 +8859,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9159,9 +8910,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -9366,9 +9114,6 @@ export const createMarketItem = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9570,9 +9315,6 @@ export const updateMarketItem = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9772,9 +9514,6 @@ export const deleteMarketItem = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -10070,9 +9809,6 @@ export const createAddress = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -10371,9 +10107,6 @@ export const updateAddress = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -10670,9 +10403,6 @@ export const deleteAddress = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -10729,9 +10459,6 @@ export const createFoundingMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -10791,9 +10518,6 @@ export const updateFoundingMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -10849,9 +10573,6 @@ export const deleteFoundingMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -11464,45 +11185,6 @@ export const createLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -11527,9 +11209,6 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -12143,45 +11822,6 @@ export const updateLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -12206,9 +11846,6 @@ export const updateLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -12822,45 +12459,6 @@ export const deleteLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -12885,9 +12483,6 @@ export const deleteLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -12943,9 +12538,6 @@ export const createWebFeedBack = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -12999,9 +12591,6 @@ export const updateWebFeedBack = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13053,9 +12642,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13118,9 +12704,6 @@ export const createKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13156,9 +12739,6 @@ export const createKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13234,9 +12814,6 @@ export const createKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13298,9 +12875,6 @@ export const updateKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13336,9 +12910,6 @@ export const updateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13414,9 +12985,6 @@ export const updateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13478,9 +13046,6 @@ export const deleteKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13516,9 +13081,6 @@ export const deleteKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13594,9 +13156,6 @@ export const deleteKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13773,9 +13332,6 @@ export const createForm = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13948,9 +13504,6 @@ export const updateForm = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -14127,9 +13680,6 @@ export const deleteForm = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -14190,9 +13740,6 @@ export const createFormQuestion = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -14257,9 +13804,6 @@ export const updateFormQuestion = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -14320,9 +13864,6 @@ export const deleteFormQuestion = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {

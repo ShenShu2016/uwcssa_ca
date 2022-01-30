@@ -47,7 +47,6 @@ type User
   userExperiences: [UserExperience]
     @hasMany(indexName: "byUser", fields: ["id"])
   marketUserInfo: [MarketUserInfo] @hasMany(indexName: "byUser", fields: ["id"])
-  beingLiked: [Like] @hasMany(indexName: "byUserBeingLiked", fields: ["id"])
   forumPosts: [ForumPost] @hasMany(indexName: "byUser", fields: ["id"])
   marketItems: [MarketItem] @hasMany(indexName: "byUser", fields: ["id"])
   kanbanAssignee: [Kanban] @hasMany(indexName: "byUserAssignee", fields: ["id"])
@@ -440,8 +439,6 @@ type UwcssaJob
   imgURLs: [AWSURL]
   benefits: [String]!
   schedule: [String]!
-  like: [String]!
-  unlike: [String]!
   active: Boolean!
   createdAt: AWSDateTime!
   departmentID: ID!
@@ -899,7 +896,6 @@ type Like
   id: ID!
   like: Boolean!
   itemID: ID!
-    @index(name: "byUserBeingLiked")
     @index(name: "byArticle")
     @index(name: "byEvent")
     @index(name: "byEventComment")
@@ -918,7 +914,6 @@ type Like
   forumPost: ForumPost @belongsTo(fields: ["itemID"])
   forumPostComment: ForumPostComment @belongsTo(fields: ["itemID"])
   forumPostSubComment: ForumPostSubComment @belongsTo(fields: ["itemID"])
-  userBeingLiked: User @belongsTo(fields: ["itemID"])
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
 }

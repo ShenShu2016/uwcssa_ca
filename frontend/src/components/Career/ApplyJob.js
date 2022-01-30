@@ -7,13 +7,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import API from "@aws-amplify/api";
 import Storage from "@aws-amplify/storage";
 import { createUwcssaJobResume } from "../../graphql/mutations";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
-import { listUwcssaJobs } from "../../redux/CustomQuery/CareerQueries";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
@@ -56,32 +55,12 @@ export default function ApplyJob(props) {
   const userAuth = useSelector((state) => state.userAuth);
 
   const [applyData, setApplyData] = useState({
-    job: "",
+    job: id,
     applyName: userAuth.user.username,
     applyEmail: userAuth.user.attributes.email,
     applyPhone: undefined,
     message: "",
   });
-
-  useEffect(() => {
-    fetchJob();
-    //console.log("applyData", applyData);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const fetchJob = async () => {
-    try {
-      const jobData = await API.graphql({
-        query: listUwcssaJobs,
-        variables: { filter: { id: { eq: id } } },
-        authMode: "AWS_IAM",
-      });
-      const job = jobData.data.listUwcssaJobs.items[0];
-      //console.log("jobTitle: ", job.title);
-      setApplyData({ ...applyData, job: job });
-    } catch (error) {
-      console.log("error on fetching Job", error);
-    }
-  };
 
   const onChange = (event) => {
     setApplyData({ ...applyData, [event.target.name]: event.target.value });
@@ -133,10 +112,11 @@ export default function ApplyJob(props) {
             phone: applyData.applyPhone,
             resumeFileS3Key: key,
             message: applyData.message,
-            uwcssaJobID: applyData.job.id,
+            uwcssaJobID: id,
             uwcssaJobResumeStatus: "pending",
             userID: userAuth.user.username,
           };
+          console.log("createUwcssaJobResumeInput", createUwcssaJobResumeInput);
           const newUwcssaJobResume = await API.graphql(
             graphqlOperation(createUwcssaJobResume, {
               input: createUwcssaJobResumeInput,

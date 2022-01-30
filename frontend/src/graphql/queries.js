@@ -67,18 +67,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumPosts {
         items {
           id
@@ -200,9 +188,6 @@ export const listUsers = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -260,9 +245,6 @@ export const userSortBySortKey = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -314,9 +296,6 @@ export const getUserEducation = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -415,9 +394,6 @@ export const getUserExperience = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -554,9 +530,6 @@ export const getTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -726,9 +699,6 @@ export const getArticle = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1068,9 +1038,6 @@ export const getComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1426,9 +1393,6 @@ export const getSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1464,9 +1428,6 @@ export const getSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1849,9 +1810,6 @@ export const getEvent = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2240,9 +2198,6 @@ export const getEventComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -2509,9 +2464,6 @@ export const getEventSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2890,9 +2842,6 @@ export const getEventParticipant = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3115,8 +3064,6 @@ export const getDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -3191,9 +3138,6 @@ export const getDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3337,9 +3281,6 @@ export const getUwcssaMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3490,8 +3431,6 @@ export const getUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -3575,9 +3514,6 @@ export const getUwcssaJob = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3609,8 +3545,6 @@ export const listUwcssaJobs = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -3678,8 +3612,6 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -3742,8 +3674,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -3807,9 +3737,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3856,8 +3783,6 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -3926,8 +3851,6 @@ export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -4000,9 +3923,6 @@ export const getForumTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4138,9 +4058,6 @@ export const getForumSubTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4320,9 +4237,6 @@ export const getForumPost = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4732,9 +4646,6 @@ export const getForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4934,9 +4845,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5076,9 +4984,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5322,9 +5227,6 @@ export const getMarketUserInfo = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5561,9 +5463,6 @@ export const getMarketItem = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6333,9 +6232,6 @@ export const getAddress = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -6517,9 +6413,6 @@ export const getFoundingMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7172,45 +7065,6 @@ export const getLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -7235,9 +7089,6 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7388,24 +7239,6 @@ export const listLikes = /* GraphQL */ `
           updatedAt
           owner
         }
-        userBeingLiked {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
         userID
         user {
           id
@@ -7464,9 +7297,6 @@ export const getWebFeedBack = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7565,9 +7395,6 @@ export const getKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7603,9 +7430,6 @@ export const getKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7681,9 +7505,6 @@ export const getKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8055,9 +7876,6 @@ export const getForm = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8194,9 +8012,6 @@ export const getFormQuestion = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {

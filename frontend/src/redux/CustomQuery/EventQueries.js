@@ -1,3 +1,43 @@
+export const eventSortBySortKey = /* GraphQL */ `
+  query EventSortBySortKey(
+    $sortKey: SortKey!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        startDate
+        endDate
+        online
+        posterImgURL
+        address {
+          description
+        }
+        active
+        createdAt
+        topic {
+          id
+          name
+        }
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+
 export const getEvent = /* GraphQL */ `
   query GetEvent($id: ID!) {
     getEvent(id: $id) {

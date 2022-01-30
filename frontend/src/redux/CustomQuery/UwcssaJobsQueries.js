@@ -11,67 +11,15 @@ export const listUwcssaJobs = /* GraphQL */ `
         title
         requirements
         bonus
-        imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
-        userID
         updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
         department {
           id
           name
-          introduction
-          email
-          leader
-          userID
-          createdAt
-          updatedAt
-          user {
-            id
-            username
-            email
-            owner
-            firstName
-            lastName
-            intro
-            major
-            avatarImgURL
-            backGroundImgURL
-            linkedIn
-            github
-            sortKey
-            createdAt
-            updatedAt
-            badges
-          }
-          uwcssaMembers {
-            nextToken
-          }
-          uwcssaJobs {
-            nextToken
-          }
         }
       }
     }
