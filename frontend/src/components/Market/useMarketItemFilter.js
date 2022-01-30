@@ -3,7 +3,7 @@ import {
   fetchMarketItems,
   filterClear,
   filterUpdated,
-  getAllTagsTerms,
+  // getAllTagsTerms,
 } from "../../redux/slice/marketSlice";
 import {
   marketItemSortBySortKey,
@@ -129,7 +129,7 @@ export default function useMarketItemFilter(filterList, type) {
       if (type === "all") {
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
-          dispatch(getAllTagsTerms({ filter: { active: { eq: true } } }));
+          // dispatch(getAllTagsTerms({ filter: { active: { eq: true } } }));
           dispatch(
             fetchMarketItems({
               query: marketItemSortBySortKey,
@@ -153,7 +153,7 @@ export default function useMarketItemFilter(filterList, type) {
           dispatch(addressFilteredMarketItem({ filter }));
         }
       } else {
-        dispatch(getAllTagsTerms({ filter: { marketType: { eq: type } } }));
+        // dispatch(getAllTagsTerms({ filter: { marketType: { eq: type } } }));
         if (Object.keys(filter).length === 0) {
           setIsFiltering(false);
           dispatch(

@@ -225,11 +225,21 @@ const marketSlice = createSlice({
       })
       .addCase(fetchMarketItems.fulfilled, (state, action) => {
         state.fetchMarketItemsStatus = "succeeded";
-        console.log(action.payload);
+        let tags = [];
+        action.payload[0].items.map((item) =>
+          item.tags.map((tag) => tags.push(tag))
+        );
+        const occurrences = tags.reduce(function (obj, item) {
+          obj[item] = (obj[item] || 0) + 1;
+          return obj;
+        }, {});
         action.payload[2] && marketAdapter.removeAll(state);
         marketAdapter.upsertMany(state, action.payload[0].items);
         state.currentFetchType = action.payload[1];
         state.nextToken = action.payload[0].nextToken;
+        state.tagsOccurrence = Object.fromEntries(
+          Object.entries(occurrences).sort((a, b) => b[1] - a[1])
+        );
       })
       .addCase(fetchMarketItems.rejected, (state, action) => {
         state.fetchMarketItemsStatus = "failed";
