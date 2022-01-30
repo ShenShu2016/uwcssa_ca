@@ -27,6 +27,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BackdropLoading from "../../components/BackdropLoading";
+import CustomSwitch from "./CustomSwitch";
 import InputAdornment from "@mui/material/InputAdornment";
 import MarketForm from "../../components/Market/marketForm";
 import PostImgPreview from "../../components/Market/postImgPrev";
@@ -53,7 +54,7 @@ export default function EditMarketVehicleDetail() {
   const [loading, setLoading] = useState(false);
   const marketItem = useSelector((state) => selectMarketItemById(state, id));
   const { darkTheme } = useSelector((state) => state.general);
-  console.log(loading);
+  const [active, setActive] = useState(true);
   const {
     imgURLs,
     createdAt,
@@ -170,7 +171,7 @@ export default function EditMarketVehicleDetail() {
       addressID: addressID,
       imgURLs: imgKeyFromServer,
       tags: GetTags(),
-      active: true,
+      active: active,
       userID: marketUserInfo.userID,
       createdAt: createdAt,
       sortKey: "SortKey",
@@ -243,8 +244,13 @@ export default function EditMarketVehicleDetail() {
                 fontWeight="bold"
                 sx={{ color: darkTheme ? "#c1c1c1" : "rgb(0,0,0)" }}
               >
-                New Vehicle Listing
+                编辑汽车
               </Typography>
+              <CustomSwitch
+                checked={active}
+                onChange={() => setActive((prev) => !prev)}
+                label={active ? "在线" : "离线"}
+              />
               <Box className={classes.icon}>
                 <IconButton onClick={() => setOpen(true)}>
                   <VisibilityIcon />

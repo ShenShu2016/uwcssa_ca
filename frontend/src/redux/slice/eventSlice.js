@@ -9,12 +9,11 @@ import {
 import {
   eventCommentSortByEventID,
   eventParticipantSortByEventID,
-  eventSortBySortKey,
   listTopics,
 } from "../../graphql/queries";
+import { eventSortBySortKey, getEvent } from "../CustomQuery/EventQueries";
 
 import API from "@aws-amplify/api";
-import { getEvent } from "../CustomQuery/EventQueries";
 import { graphqlOperation } from "@aws-amplify/api-graphql";
 
 const initialState = {
@@ -63,17 +62,21 @@ const initialState = {
 };
 
 export const fetchEvents = createAsyncThunk("event/fetchEvents", async () => {
-  const eventData = await API.graphql({
-    query: eventSortBySortKey,
-    variables: {
-      sortKey: "SortKey",
-      sortDirection: "DESC",
-      filter: { active: { eq: true } },
-    },
-    authMode: "AWS_IAM",
-  });
+  try {
+    const eventData = await API.graphql({
+      query: eventSortBySortKey,
+      variables: {
+        sortKey: "SortKey",
+        sortDirection: "DESC",
+        filter: { active: { eq: true } },
+      },
+      authMode: "AWS_IAM",
+    });
 
-  return eventData.data.eventSortBySortKey.items;
+    return eventData.data.eventSortBySortKey.items;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const selectedEvent = createAsyncThunk(

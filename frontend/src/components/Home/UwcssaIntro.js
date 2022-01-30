@@ -4,22 +4,21 @@ import {
   Box,
   Button,
   ButtonGroup,
-  CircularProgress,
   Container,
   Grid,
   Paper,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
-import {
-  fetchForumPostCounts,
-  fetchUserCounts,
-} from "../../redux/slice/generalSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
+import React from "react";
 import cssalogo from "../../static/cssa-logo1.png";
 import { makeStyles } from "@mui/styles";
+// import {
+//   fetchForumPostCounts,
+//   fetchUserCounts,
+// } from "../../redux/slice/generalSlice";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,27 +107,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function UwcssaIntro() {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { userAuth } = useSelector((state) => state);
-  const {
-    userCounts,
-    fetchUserCountsStatus,
-    forumPostCounts,
-    fetchForumPostCountsStatus,
-  } = useSelector((state) => state.general);
+  // const {
+  //   fetchUserCountsStatus,
+  //   fetchForumPostCountsStatus,
+  // } = useSelector((state) => state.general);
   const { isAuthenticated } = useSelector((state) => state.userAuth);
 
-  useEffect(() => {
-    if (fetchUserCountsStatus === "idle" || undefined) {
-      dispatch(fetchUserCounts());
-    }
-  }, [dispatch, fetchUserCountsStatus]);
+  // useEffect(() => {
+  //   if (fetchUserCountsStatus === "idle" || undefined) {
+  //     dispatch(fetchUserCounts());
+  //   }
+  // }, [dispatch, fetchUserCountsStatus]);
 
-  useEffect(() => {
-    if (fetchForumPostCountsStatus === "idle" || undefined) {
-      dispatch(fetchForumPostCounts());
-    }
-  }, [dispatch, fetchForumPostCountsStatus]);
+  // useEffect(() => {
+  //   if (fetchForumPostCountsStatus === "idle" || undefined) {
+  //     dispatch(fetchForumPostCounts());
+  //   }
+  // }, [dispatch, fetchForumPostCountsStatus]);
 
   const guestButton = () => (
     <div>
@@ -201,13 +198,14 @@ export default function UwcssaIntro() {
                     <Grid item xs={6}>
                       <Paper elevation={4}>
                         <Typography variant="h5">
-                          {userCounts ? (
+                          {/* {userCounts ? (
                             userCounts
                           ) : (
                             <CircularProgress
                               style={{ height: "26px", width: "26px" }}
                             />
-                          )}
+                          )} */}
+                          80+
                         </Typography>
                         <Typography variant="h5">用户</Typography>
                       </Paper>
@@ -221,15 +219,16 @@ export default function UwcssaIntro() {
                     >
                       <Paper elevation={4}>
                         <Typography variant="h5">
-                          {forumPostCounts ? (
+                          {/* {forumPostCounts ? (
                             forumPostCounts
                           ) : (
                             <CircularProgress
                               style={{ height: "26px", width: "26px" }}
                             />
-                          )}
+                          )} */}
+                          尽请期待
                         </Typography>
-                        <Typography variant="h5">帖子</Typography>
+                        <Typography variant="h5">论坛</Typography>
                       </Paper>
                     </Grid>
                   </Grid>

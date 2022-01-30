@@ -445,7 +445,6 @@ export default function PostEvent() {
                         id="startDate"
                         error={!!errors.startDate}
                         onChange={onChange}
-                        // minDateTime={new Date()}
                         renderInput={(params) => <TextField {...params} />}
                       />
                       {errors.startDate && (
@@ -470,7 +469,6 @@ export default function PostEvent() {
                         value={value}
                         id="endDate"
                         onChange={onChange}
-                        // minDateTime={new Date()}
                         renderInput={(params) => <TextField {...params} />}
                         error={!!errors.endDate}
                       />

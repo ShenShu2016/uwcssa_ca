@@ -25,7 +25,7 @@ export default function NoPermission() {
   useEffect(() => {
     let timeout = setTimeout(() => {
       history.replace("/");
-    }, 1000);
+    }, 5000);
 
     return () => {
       clearTimeout(timeout);

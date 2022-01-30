@@ -39,6 +39,17 @@ Amplify.configure(awsconfig);
 
 export default function App() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    async function initialUser() {
+      const response = await dispatch(loadUser());
+      // console.log("loadUser", response);
+      if (response.meta.requestStatus === "fulfilled") {
+        const { username } = response.payload;
+        dispatch(fetchUserProfile({ username }));
+      }
+    }
+    initialUser();
+  }, [dispatch]);
   const { darkTheme } = useSelector((state) => state.general);
   const theme = createTheme({
     typography: {
@@ -80,17 +91,6 @@ export default function App() {
     }
     setIsAlertOpen(false);
   };
-  useEffect(() => {
-    async function initialUser() {
-      const response = await dispatch(loadUser());
-      // console.log("loadUser", response);
-      if (response.meta.requestStatus === "fulfilled") {
-        const { username } = response.payload;
-        await dispatch(fetchUserProfile({ username }));
-      }
-    }
-    initialUser();
-  }, [dispatch]);
 
   useEffect(() => {
     setIsAlertOpen(isAuthenticated);
@@ -100,8 +100,6 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <ScrollToTop />
-        {/* <Header />
-        <Box className={classes.headerBox} /> */}{" "}
         <DeskTopDrawer>
           <Switch>
             <Route path="/" exact component={Home} />

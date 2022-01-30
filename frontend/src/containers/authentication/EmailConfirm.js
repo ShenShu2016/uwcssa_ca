@@ -86,7 +86,10 @@ export default function EmailConfirm() {
           alt="uwcssaLogo"
           style={{ margin: "1rem", height: "50px" }}
         />
-        <Typography variant="h5">验证</Typography>
+        <Typography variant="h5">邮箱验证</Typography>
+        <Typography variant="body1" sx={{ my: 1, color: "red" }}>
+          请检查邮箱,有可能会在垃圾邮件里!
+        </Typography>
         {alert ? (
           <Alert className={classes.alert} severity="error">
             {alertContent}

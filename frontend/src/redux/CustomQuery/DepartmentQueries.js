@@ -8,11 +8,7 @@ export const listDepartments = /* GraphQL */ `
       items {
         id
         name
-        introduction
-        email
-        leader
         createdAt
-        updatedAt
       }
       nextToken
     }

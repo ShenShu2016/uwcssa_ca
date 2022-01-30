@@ -9,13 +9,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useFieldArray, useForm } from "react-hook-form";
 import React, { useEffect, useRef, useState } from "react";
 import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../../redux/slice/departmentSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useFieldArray, useForm } from "react-hook-form";
+
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { FormHelperText } from "@mui/material";
 import { Grid } from "@mui/material";
@@ -126,8 +127,8 @@ export default function PostUwcssaJob(props) {
       schedule: getFinalList({ list: data, field: "schedule" }),
       introduction: introduction,
       active: true,
-      like: [""],
-      unlike: [""],
+      // like: [""],
+      // unlike: [""],
       // sortKey: "SortKey",
       userID: user.username,
     };

@@ -1,3 +1,43 @@
+export const eventSortBySortKey = /* GraphQL */ `
+  query EventSortBySortKey(
+    $sortKey: SortKey!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventSortBySortKey(
+      sortKey: $sortKey
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        startDate
+        endDate
+        online
+        posterImgURL
+        address {
+          description
+        }
+        active
+        createdAt
+        topic {
+          id
+          name
+        }
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+
 export const getEvent = /* GraphQL */ `
   query GetEvent($id: ID!) {
     getEvent(id: $id) {
@@ -32,17 +72,8 @@ export const getEvent = /* GraphQL */ `
       user {
         id
         username
-        email
         owner
-        firstName
-        lastName
-        intro
-        major
         avatarImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
         badges
       }
       eventComments {
@@ -126,27 +157,7 @@ export const getEvent = /* GraphQL */ `
       eventParticipants {
         items {
           id
-          name
-          email
-          address {
-            description
-            place_id
-            reference
-            terms
-            types
-            apartmentNumbers
-          }
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
           userID
-          updatedAt
-          owner
         }
         nextToken
       }
@@ -171,27 +182,6 @@ export const getEvent = /* GraphQL */ `
       }
       topic {
         id
-        name
-        userID
-        createdAt
-        updatedAt
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          updatedAt
-          badges
-        }
       }
     }
   }

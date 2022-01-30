@@ -67,18 +67,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumPosts {
         items {
           id
@@ -200,9 +188,6 @@ export const listUsers = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -260,9 +245,6 @@ export const userSortBySortKey = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -275,81 +257,6 @@ export const userSortBySortKey = /* GraphQL */ `
         updatedAt
       }
       nextToken
-    }
-  }
-`;
-export const searchUsers = /* GraphQL */ `
-  query SearchUsers(
-    $filter: SearchableUserFilterInput
-    $sort: [SearchableUserSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableUserAggregationInput]
-  ) {
-    searchUsers(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
     }
   }
 `;
@@ -389,9 +296,6 @@ export const getUserEducation = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -490,9 +394,6 @@ export const getUserExperience = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -629,9 +530,6 @@ export const getTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -801,9 +699,6 @@ export const getArticle = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1064,6 +959,9 @@ export const getComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -1140,9 +1038,6 @@ export const getComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1358,6 +1253,9 @@ export const getSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -1495,9 +1393,6 @@ export const getSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1533,9 +1428,6 @@ export const getSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1836,6 +1728,19 @@ export const getEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -1905,9 +1810,6 @@ export const getEvent = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2004,6 +1906,9 @@ export const listEvents = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -2106,6 +2011,9 @@ export const eventSortBySortKey = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -2211,6 +2119,9 @@ export const getEventComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2285,9 +2196,6 @@ export const getEventComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2556,9 +2464,6 @@ export const getEventSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2872,6 +2777,9 @@ export const getEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2932,9 +2840,6 @@ export const getEventParticipant = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3159,8 +3064,6 @@ export const getDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -3235,9 +3138,6 @@ export const getDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3381,9 +3281,6 @@ export const getUwcssaMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3534,8 +3431,6 @@ export const getUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -3619,9 +3514,6 @@ export const getUwcssaJob = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3653,8 +3545,6 @@ export const listUwcssaJobs = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -3722,8 +3612,6 @@ export const uwcssaJobSortByDepartmentID = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -3786,8 +3674,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -3851,9 +3737,6 @@ export const getUwcssaJobResume = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3900,8 +3783,6 @@ export const listUwcssaJobResumes = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -3970,8 +3851,6 @@ export const uwcssaJobResumeSortByUwcssaJobID = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -4044,9 +3923,6 @@ export const getForumTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4182,9 +4058,6 @@ export const getForumSubTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4364,9 +4237,6 @@ export const getForumPost = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4776,9 +4646,6 @@ export const getForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4978,9 +4845,6 @@ export const getForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5120,9 +4984,6 @@ export const getForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5366,9 +5227,6 @@ export const getMarketUserInfo = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5605,9 +5463,6 @@ export const getMarketItem = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6101,118 +5956,6 @@ export const marketItemSortBySortKey = /* GraphQL */ `
     }
   }
 `;
-export const searchMarketItems = /* GraphQL */ `
-  query SearchMarketItems(
-    $filter: SearchableMarketItemFilterInput
-    $sort: [SearchableMarketItemSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableMarketItemAggregationInput]
-  ) {
-    searchMarketItems(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        name
-        imgURLs
-        title
-        price
-        marketType
-        description
-        location
-        marketItemCondition
-        marketItemCategory
-        tags
-        vehicleType
-        year
-        make
-        model
-        exteriorColor
-        interiorColor
-        fuelType
-        marketRentalSaleRent
-        propertyType
-        bedroomCounts
-        bathroomsCounts
-        addressID
-        address {
-          id
-          description
-          place_id
-          reference
-          terms
-          types
-          apartmentNumbers
-          geocodingResult
-          lat
-          lng
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        propertySize
-        dateAvailable
-        laundryType
-        airConditionType
-        heatingType
-        catFriendly
-        dogFriendly
-        contactPhone
-        contactWeChat
-        contactEmail
-        sortKey
-        active
-        createdAt
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        updatedAt
-        owner
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
@@ -6347,6 +6090,9 @@ export const getAddress = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -6484,9 +6230,6 @@ export const getAddress = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6634,159 +6377,6 @@ export const listAddresses = /* GraphQL */ `
     }
   }
 `;
-export const searchAddresses = /* GraphQL */ `
-  query SearchAddresses(
-    $filter: SearchableAddressFilterInput
-    $sort: [SearchableAddressSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableAddressAggregationInput]
-  ) {
-    searchAddresses(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        description
-        place_id
-        reference
-        terms
-        types
-        apartmentNumbers
-        geocodingResult
-        lat
-        lng
-        itemID
-        eventParticipant {
-          id
-          name
-          email
-          addressID
-          phone
-          weChat
-          message
-          numberOfPeople
-          active
-          createdAt
-          eventParticipantStatus
-          eventID
-          userID
-          updatedAt
-          owner
-        }
-        event {
-          id
-          summary
-          title
-          startDate
-          endDate
-          online
-          group
-          backGroundImgURL
-          qrCodeImgURL
-          posterImgURL
-          imgURLs
-          content
-          addressID
-          sponsor
-          tags
-          eventStatus
-          active
-          createdAt
-          sortKey
-          topicID
-          userID
-          updatedAt
-        }
-        marketItem {
-          id
-          name
-          imgURLs
-          title
-          price
-          marketType
-          description
-          location
-          marketItemCondition
-          marketItemCategory
-          tags
-          vehicleType
-          year
-          make
-          model
-          exteriorColor
-          interiorColor
-          fuelType
-          marketRentalSaleRent
-          propertyType
-          bedroomCounts
-          bathroomsCounts
-          addressID
-          propertySize
-          dateAvailable
-          laundryType
-          airConditionType
-          heatingType
-          catFriendly
-          dogFriendly
-          contactPhone
-          contactWeChat
-          contactEmail
-          sortKey
-          active
-          createdAt
-          userID
-          updatedAt
-          owner
-        }
-        userID
-        user {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 export const getFoundingMember = /* GraphQL */ `
   query GetFoundingMember($id: ID!) {
     getFoundingMember(id: $id) {
@@ -6823,9 +6413,6 @@ export const getFoundingMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7160,6 +6747,9 @@ export const getLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -7475,45 +7065,6 @@ export const getLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -7538,9 +7089,6 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7691,24 +7239,6 @@ export const listLikes = /* GraphQL */ `
           updatedAt
           owner
         }
-        userBeingLiked {
-          id
-          username
-          email
-          owner
-          firstName
-          lastName
-          intro
-          major
-          avatarImgURL
-          backGroundImgURL
-          linkedIn
-          github
-          sortKey
-          createdAt
-          badges
-          updatedAt
-        }
         userID
         user {
           id
@@ -7767,9 +7297,6 @@ export const getWebFeedBack = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7868,9 +7395,6 @@ export const getKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7906,9 +7430,6 @@ export const getKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7984,9 +7505,6 @@ export const getKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8176,6 +7694,363 @@ export const kanbanSortBySortKey = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getForm = /* GraphQL */ `
+  query GetForm($id: ID!) {
+    getForm(id: $id) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listForms = /* GraphQL */ `
+  query ListForms(
+    $filter: ModelFormFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        formQuestionID
+        formQuestion {
+          id
+          name
+          description
+          formType
+          helperText
+          imgURLs
+          pattern
+          minLength
+          maxLength
+          placeholder
+          label
+          userID
+          createdAt
+          updatedAt
+        }
+        order
+        required
+        eventID
+        event {
+          id
+          summary
+          title
+          startDate
+          endDate
+          online
+          group
+          backGroundImgURL
+          qrCodeImgURL
+          posterImgURL
+          imgURLs
+          content
+          addressID
+          sponsor
+          tags
+          eventStatus
+          active
+          createdAt
+          sortKey
+          topicID
+          userID
+          updatedAt
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFormQuestion = /* GraphQL */ `
+  query GetFormQuestion($id: ID!) {
+    getFormQuestion(id: $id) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFormQuestions = /* GraphQL */ `
+  query ListFormQuestions(
+    $filter: ModelFormQuestionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFormQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
         }
         userID
         user {

@@ -5,7 +5,6 @@ enum SortKey {
 
 type User
   @model(subscriptions: null)
-  @searchable
   @auth(
     rules: [
       { allow: owner, ownerField: "owner", operations: [create, read, update] }
@@ -48,7 +47,6 @@ type User
   userExperiences: [UserExperience]
     @hasMany(indexName: "byUser", fields: ["id"])
   marketUserInfo: [MarketUserInfo] @hasMany(indexName: "byUser", fields: ["id"])
-  beingLiked: [Like] @hasMany(indexName: "byUserBeingLiked", fields: ["id"])
   forumPosts: [ForumPost] @hasMany(indexName: "byUser", fields: ["id"])
   marketItems: [MarketItem] @hasMany(indexName: "byUser", fields: ["id"])
   kanbanAssignee: [Kanban] @hasMany(indexName: "byUserAssignee", fields: ["id"])
@@ -247,6 +245,7 @@ type Event
     )
   topicID: ID! @index(name: "byTopic")
   topic: Topic! @belongsTo(fields: ["topicID"])
+  forms: [Form] @hasMany(indexName: "byEvent", fields: ["id"])
   eventComments: [EventComment] @hasMany(indexName: "byEvent", fields: ["id"])
   eventParticipants: [EventParticipant]
     @hasMany(indexName: "byEvent", fields: ["id"])
@@ -440,8 +439,6 @@ type UwcssaJob
   imgURLs: [AWSURL]
   benefits: [String]!
   schedule: [String]!
-  like: [String]!
-  unlike: [String]!
   active: Boolean!
   createdAt: AWSDateTime!
   departmentID: ID!
@@ -672,7 +669,6 @@ type MarketUserInfo
 
 type MarketItem
   @model(subscriptions: null)
-  @searchable
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
@@ -745,7 +741,6 @@ type MarketItem
 
 type Address
   @model(subscriptions: null)
-  @searchable
   @auth(
     rules: [
       { allow: owner, operations: [create, read, update] }
@@ -901,7 +896,6 @@ type Like
   id: ID!
   like: Boolean!
   itemID: ID!
-    @index(name: "byUserBeingLiked")
     @index(name: "byArticle")
     @index(name: "byEvent")
     @index(name: "byEventComment")
@@ -920,7 +914,6 @@ type Like
   forumPost: ForumPost @belongsTo(fields: ["itemID"])
   forumPostComment: ForumPostComment @belongsTo(fields: ["itemID"])
   forumPostSubComment: ForumPostSubComment @belongsTo(fields: ["itemID"])
-  userBeingLiked: User @belongsTo(fields: ["itemID"])
   userID: ID!
   user: User! @hasOne(fields: ["userID"])
 }
@@ -994,4 +987,70 @@ enum KanbanStatus {
   INPROGRESS
   DONE
   WASTED
+}
+
+# Form 里面跟着很多Formquesions
+type Form
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
+      { allow: private, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  formQuestionID: ID!
+  formQuestion: FormQuestion @hasOne(fields: ["formQuestionID"])
+  order: Int!
+  required: Boolean!
+  eventID: ID @index(name: "byEvent", sortKeyFields: ["order"])
+  event: Event @belongsTo(fields: ["eventID"])
+  userID: ID!
+  user: User! @hasOne(fields: ["userID"])
+}
+
+# FormQuestion 每个可以跟着多个 From
+type FormQuestion
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin", "staff"] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: private, operations: [read] }
+      { allow: private, operations: [read], provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String
+  description: String
+  formType: FormType!
+  helperText: String
+  imgURLs: [AWSURL]
+  pattern: String
+  minLength: Int
+  maxLength: Int
+  placeholder: String
+  label: String
+  choices: [FormQuestionChoice]
+  userID: ID!
+  user: User! @hasOne(fields: ["userID"])
+}
+
+enum FormType {
+  TextFieldShort
+  TextFieldLong
+  RadioGroupH
+  RadioGroupV
+  DatePicker
+  DateTimePicker
+  TimePicker
+  FileUpload
+  Checkbox
+  Select
+}
+
+type FormQuestionChoice {
+  formQuestionChoice: String
 }

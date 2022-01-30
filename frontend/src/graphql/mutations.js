@@ -70,18 +70,6 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumPosts {
         items {
           id
@@ -233,18 +221,6 @@ export const updateUser = /* GraphQL */ `
           phone
           weChat
           email
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
           userID
           createdAt
           updatedAt
@@ -410,18 +386,6 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      beingLiked {
-        items {
-          id
-          like
-          itemID
-          userID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       forumPosts {
         items {
           id
@@ -552,9 +516,6 @@ export const createUserEducation = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -612,9 +573,6 @@ export const updateUserEducation = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -670,9 +628,6 @@ export const deleteUserEducation = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -733,9 +688,6 @@ export const createUserExperience = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -794,9 +746,6 @@ export const updateUserExperience = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -853,9 +802,6 @@ export const deleteUserExperience = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -953,9 +899,6 @@ export const createTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1051,9 +994,6 @@ export const updateTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1147,9 +1087,6 @@ export const deleteTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1282,9 +1219,6 @@ export const createArticle = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1414,9 +1348,6 @@ export const updateArticle = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -1544,9 +1475,6 @@ export const deleteArticle = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1680,6 +1608,9 @@ export const createComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -1756,9 +1687,6 @@ export const createComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -1893,6 +1821,9 @@ export const updateComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -1969,9 +1900,6 @@ export const updateComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2106,6 +2034,9 @@ export const deleteComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2182,9 +2113,6 @@ export const deleteComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2319,6 +2247,9 @@ export const createSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2456,9 +2387,6 @@ export const createSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -2494,9 +2422,6 @@ export const createSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2631,6 +2556,9 @@ export const updateSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -2768,9 +2696,6 @@ export const updateSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -2806,9 +2731,6 @@ export const updateSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -2943,6 +2865,9 @@ export const deleteSubComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -3080,9 +3005,6 @@ export const deleteSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -3118,9 +3040,6 @@ export const deleteSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3313,6 +3232,19 @@ export const createEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -3382,9 +3314,6 @@ export const createEvent = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3604,6 +3533,19 @@ export const updateEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -3673,9 +3615,6 @@ export const updateEvent = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -3895,6 +3834,19 @@ export const deleteEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      forms {
+        items {
+          id
+          formQuestionID
+          order
+          required
+          eventID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       eventComments {
         items {
           id
@@ -3964,9 +3916,6 @@ export const deleteEvent = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4079,6 +4028,9 @@ export const createEventComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -4153,9 +4105,6 @@ export const createEventComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4241,6 +4190,9 @@ export const updateEventComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -4315,9 +4267,6 @@ export const updateEventComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4403,6 +4352,9 @@ export const deleteEventComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -4477,9 +4429,6 @@ export const deleteEventComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -4605,9 +4554,6 @@ export const createEventSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4731,9 +4677,6 @@ export const updateEventSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -4855,9 +4798,6 @@ export const deleteEventSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5056,6 +4996,9 @@ export const createEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -5116,9 +5059,6 @@ export const createEventParticipant = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5317,6 +5257,9 @@ export const updateEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -5377,9 +5320,6 @@ export const updateEventParticipant = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5578,6 +5518,9 @@ export const deleteEventParticipant = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -5640,9 +5583,6 @@ export const deleteEventParticipant = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -5680,8 +5620,6 @@ export const createDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -5756,9 +5694,6 @@ export const createDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5798,8 +5733,6 @@ export const updateDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -5874,9 +5807,6 @@ export const updateDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -5916,8 +5846,6 @@ export const deleteDepartment = /* GraphQL */ `
           imgURLs
           benefits
           schedule
-          like
-          unlike
           active
           createdAt
           departmentID
@@ -5992,9 +5920,6 @@ export const deleteDepartment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6095,9 +6020,6 @@ export const createUwcssaMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -6193,9 +6115,6 @@ export const updateUwcssaMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6295,9 +6214,6 @@ export const deleteUwcssaMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -6327,8 +6243,6 @@ export const createUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -6410,9 +6324,6 @@ export const createUwcssaJob = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6444,8 +6355,6 @@ export const updateUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -6527,9 +6436,6 @@ export const updateUwcssaJob = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6561,8 +6467,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
       imgURLs
       benefits
       schedule
-      like
-      unlike
       active
       createdAt
       departmentID
@@ -6644,9 +6548,6 @@ export const deleteUwcssaJob = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6688,8 +6589,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -6751,9 +6650,6 @@ export const createUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6796,8 +6692,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -6859,9 +6753,6 @@ export const updateUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -6904,8 +6795,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
         imgURLs
         benefits
         schedule
-        like
-        unlike
         active
         createdAt
         departmentID
@@ -6967,9 +6856,6 @@ export const deleteUwcssaJobResume = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7033,9 +6919,6 @@ export const createForumTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7097,9 +6980,6 @@ export const updateForumTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7159,9 +7039,6 @@ export const deleteForumTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7263,9 +7140,6 @@ export const createForumSubTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7364,9 +7238,6 @@ export const updateForumSubTopic = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7463,9 +7334,6 @@ export const deleteForumSubTopic = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7601,9 +7469,6 @@ export const createForumPost = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -7742,9 +7607,6 @@ export const updateForumPost = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -7881,9 +7743,6 @@ export const deleteForumPost = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8014,9 +7873,6 @@ export const createForumPostComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8151,9 +8007,6 @@ export const updateForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8286,9 +8139,6 @@ export const deleteForumPostComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8351,9 +8201,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8495,9 +8342,6 @@ export const createForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8564,9 +8408,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8706,9 +8547,6 @@ export const updateForumPostSubComment = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -8775,9 +8613,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8919,9 +8754,6 @@ export const deleteForumPostSubComment = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -8972,9 +8804,6 @@ export const createMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -9030,9 +8859,6 @@ export const updateMarketUserInfo = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9084,9 +8910,6 @@ export const deleteMarketUserInfo = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -9291,9 +9114,6 @@ export const createMarketItem = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9493,9 +9313,6 @@ export const updateMarketItem = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -9699,9 +9516,6 @@ export const deleteMarketItem = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -9856,6 +9670,9 @@ export const createAddress = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -9992,9 +9809,6 @@ export const createAddress = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -10152,6 +9966,9 @@ export const updateAddress = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -10288,9 +10105,6 @@ export const updateAddress = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -10448,6 +10262,9 @@ export const deleteAddress = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -10586,9 +10403,6 @@ export const deleteAddress = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -10645,9 +10459,6 @@ export const createFoundingMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -10707,9 +10518,6 @@ export const updateFoundingMember = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -10765,9 +10573,6 @@ export const deleteFoundingMember = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -11061,6 +10866,9 @@ export const createLike = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+        }
+        forms {
+          nextToken
         }
         eventComments {
           nextToken
@@ -11377,45 +11185,6 @@ export const createLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -11440,9 +11209,6 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -11738,6 +11504,9 @@ export const updateLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -12053,45 +11822,6 @@ export const updateLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -12116,9 +11846,6 @@ export const updateLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -12414,6 +12141,9 @@ export const deleteLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        forms {
+          nextToken
+        }
         eventComments {
           nextToken
         }
@@ -12729,45 +12459,6 @@ export const deleteLike = /* GraphQL */ `
         updatedAt
         owner
       }
-      userBeingLiked {
-        id
-        username
-        email
-        owner
-        firstName
-        lastName
-        intro
-        major
-        avatarImgURL
-        backGroundImgURL
-        linkedIn
-        github
-        sortKey
-        createdAt
-        badges
-        userEducations {
-          nextToken
-        }
-        userExperiences {
-          nextToken
-        }
-        marketUserInfo {
-          nextToken
-        }
-        beingLiked {
-          nextToken
-        }
-        forumPosts {
-          nextToken
-        }
-        marketItems {
-          nextToken
-        }
-        kanbanAssignee {
-          nextToken
-        }
-        updatedAt
-      }
       userID
       user {
         id
@@ -12792,9 +12483,6 @@ export const deleteLike = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -12850,9 +12538,6 @@ export const createWebFeedBack = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -12906,9 +12591,6 @@ export const updateWebFeedBack = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -12960,9 +12642,6 @@ export const deleteWebFeedBack = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13025,9 +12704,6 @@ export const createKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13063,9 +12739,6 @@ export const createKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13141,9 +12814,6 @@ export const createKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13205,9 +12875,6 @@ export const updateKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13243,9 +12910,6 @@ export const updateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13321,9 +12985,6 @@ export const updateKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13385,9 +13046,6 @@ export const deleteKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
-          nextToken
-        }
         forumPosts {
           nextToken
         }
@@ -13423,9 +13081,6 @@ export const deleteKanban = /* GraphQL */ `
           nextToken
         }
         marketUserInfo {
-          nextToken
-        }
-        beingLiked {
           nextToken
         }
         forumPosts {
@@ -13503,7 +13158,712 @@ export const deleteKanban = /* GraphQL */ `
         marketUserInfo {
           nextToken
         }
-        beingLiked {
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createForm = /* GraphQL */ `
+  mutation CreateForm(
+    $input: CreateFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    createForm(input: $input, condition: $condition) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateForm = /* GraphQL */ `
+  mutation UpdateForm(
+    $input: UpdateFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    updateForm(input: $input, condition: $condition) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteForm = /* GraphQL */ `
+  mutation DeleteForm(
+    $input: DeleteFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    deleteForm(input: $input, condition: $condition) {
+      id
+      formQuestionID
+      formQuestion {
+        id
+        name
+        description
+        formType
+        helperText
+        imgURLs
+        pattern
+        minLength
+        maxLength
+        placeholder
+        label
+        choices {
+          formQuestionChoice
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      order
+      required
+      eventID
+      event {
+        id
+        summary
+        title
+        startDate
+        endDate
+        online
+        group
+        backGroundImgURL
+        qrCodeImgURL
+        posterImgURL
+        imgURLs
+        content
+        addressID
+        address {
+          id
+          description
+          place_id
+          reference
+          terms
+          types
+          apartmentNumbers
+          geocodingResult
+          lat
+          lng
+          itemID
+          userID
+          createdAt
+          updatedAt
+          owner
+        }
+        sponsor
+        tags
+        eventStatus
+        active
+        createdAt
+        sortKey
+        topicID
+        topic {
+          id
+          name
+          userID
+          createdAt
+          updatedAt
+        }
+        forms {
+          nextToken
+        }
+        eventComments {
+          nextToken
+        }
+        eventParticipants {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        userID
+        user {
+          id
+          username
+          email
+          owner
+          firstName
+          lastName
+          intro
+          major
+          avatarImgURL
+          backGroundImgURL
+          linkedIn
+          github
+          sortKey
+          createdAt
+          badges
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        subComments {
+          nextToken
+        }
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createFormQuestion = /* GraphQL */ `
+  mutation CreateFormQuestion(
+    $input: CreateFormQuestionInput!
+    $condition: ModelFormQuestionConditionInput
+  ) {
+    createFormQuestion(input: $input, condition: $condition) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFormQuestion = /* GraphQL */ `
+  mutation UpdateFormQuestion(
+    $input: UpdateFormQuestionInput!
+    $condition: ModelFormQuestionConditionInput
+  ) {
+    updateFormQuestion(input: $input, condition: $condition) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
+          nextToken
+        }
+        forumPosts {
+          nextToken
+        }
+        marketItems {
+          nextToken
+        }
+        kanbanAssignee {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFormQuestion = /* GraphQL */ `
+  mutation DeleteFormQuestion(
+    $input: DeleteFormQuestionInput!
+    $condition: ModelFormQuestionConditionInput
+  ) {
+    deleteFormQuestion(input: $input, condition: $condition) {
+      id
+      name
+      description
+      formType
+      helperText
+      imgURLs
+      pattern
+      minLength
+      maxLength
+      placeholder
+      label
+      choices {
+        formQuestionChoice
+      }
+      userID
+      user {
+        id
+        username
+        email
+        owner
+        firstName
+        lastName
+        intro
+        major
+        avatarImgURL
+        backGroundImgURL
+        linkedIn
+        github
+        sortKey
+        createdAt
+        badges
+        userEducations {
+          nextToken
+        }
+        userExperiences {
+          nextToken
+        }
+        marketUserInfo {
           nextToken
         }
         forumPosts {
