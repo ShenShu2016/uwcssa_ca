@@ -93,20 +93,8 @@ export default function Event() {
 
     setFilteredEventList(
       [...filtered]
-        .filter(
-          (d) =>
-            new Date(
-              moment(d.endDate)
-                .tz("America/New_York")
-                .format("YYYY-MM-DD HH:mm:ss.SSS")
-            ) -
-              new Date() >=
-            0
-        )
-        .sort(
-          (a, b) =>
-            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-        )
+        .filter((d) => moment(d.endDate).isAfter(moment()))
+        .sort((a, b) => moment(a.endDate) - moment(b.endDate))
     );
   }, [selectedTopic, sortBy, eventList, events, moment]);
 
@@ -117,15 +105,6 @@ export default function Event() {
   const animStr = (id) =>
     `glowIn ${duration}ms ease-out ${delay * (id + 1)}ms backwards`;
 
-  // const currentEvent = filteredEventList.filter(
-  //   (d) => new Date(d.startDate) - new Date() >= 0
-  // );
-  // console.log("currentEvent", currentEvent);
-
-  // const pastEvent = filteredEventList.filter(
-  //   (d) => new Date(d.startDate) - new Date() < 0
-  // );
-  // console.log("pastEvent", pastEvent);
   const renderList = filteredEventList.map((event, id) => {
     return (
       <Grid
@@ -143,20 +122,8 @@ export default function Event() {
   });
 
   const pastList = events
-    .filter(
-      (d) =>
-        new Date(
-          moment(d.endDate)
-            .tz("America/New_York")
-            .format("YYYY-MM-DD HH:mm:ss.SSS")
-        ) -
-          new Date() <
-        0
-    )
-    .sort(
-      (a, b) =>
-        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-    )
+    .filter((d) => moment(d.endDate).isBefore(moment()))
+    .sort((a, b) => moment(a.endDate) - moment(b.endDate))
     .map((event, id) => {
       return (
         <Grid
@@ -180,18 +147,6 @@ export default function Event() {
         <Typography variant="h3" className={classes.title}>
           近期活动
         </Typography>
-        {/* <Fade in={true}>
-            <Box className={classes.timeTag}>
-              <Filter
-                handleSort={setSortBy}
-                handleTopicChange={setSelectedTopic}
-                selectedTopic={selectedTopic}
-                // sortBy={sortBy}
-              /> */}
-
-        {/* <h2>活动: {filteredEventList.length}</h2> */}
-        {/* </Box>
-          </Fade> */}
       </Box>
 
       <div>
