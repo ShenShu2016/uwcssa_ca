@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Container,
   DialogTitle,
   Divider,
   FormControl,
@@ -12,6 +11,7 @@ import {
   InputLabel,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
   MenuItem,
   Select,
@@ -19,33 +19,45 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Link, useHistory, useParams } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   fetchDepartments,
   selectAllDepartments,
 } from "../../redux/slice/departmentSlice";
 import {
+  postUwcssaJob,
   selectUwcssaJobById,
-  selectedUwcssaJob,
 } from "../../redux/slice/uwcssaJobSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { convertToRaw } from "draft-js";
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@mui/styles";
 import { useTitle } from "../../Hooks/useTitle";
+import MUIRichTextEditor from "mui-rte";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "block",
-    marginBottom: "2rem",
-    marginTop: "2rem",
+    margin: "auto",
+    marginTop: "3rem",
+    maxWidth: "960px",
   },
 
   form: {
+    margin: "auto 1rem",
     alignItems: "center",
     justifyContent: "center",
+  },
+  content: {
+    marginBlock: "2rem",
+    minHeight: "300px",
+    paddingInline: "1rem",
+    overflow: "auto",
+    border: "1px solid",
+    borderColor: "#cfd8dc",
+    borderRadius: 5,
   },
 }));
 
@@ -56,17 +68,11 @@ export default function EditJob() {
   useTitle(`职位编辑-${id}`);
   const dispatch = useDispatch();
   const history = useHistory();
-  //   const { user } = useSelector((state) => state.userAuth);
+  const { user } = useSelector((state) => state.userAuth);
   const job = useSelector((state) => selectUwcssaJobById(state, id));
   const { fetchDepartmentsStatus } = useSelector((state) => state.department);
-  //   const timer = useRef();
+  const timer = useRef();
   const departments = useSelector(selectAllDepartments);
-
-  useEffect(() => {
-    if (id && id !== "") {
-      dispatch(selectedUwcssaJob(id));
-    }
-  }, [id, dispatch]);
 
   useEffect(() => {
     if (fetchDepartmentsStatus === "idle" || undefined) {
@@ -78,27 +84,23 @@ export default function EditJob() {
     history.goBack();
   };
 
-  // const [loading, setLoading] = useState(false);
-  //   const [updatedIntroduction, setUpdatedIntroduction] = useState();
-  //   const [uwcssaJobData, setUwcssaJobData] = useState({
-  //     requirements: job.requirements ? [] : [""],
-  //     bonus: [""],
-  //     benefits: [""],
-  //     schedule: [""],
-  //   });
-
-  //   const newArray = job.requirements.concat(uwcssaJobData.requirements);
-  //    console.log(Object.values(job.requirements)[1]);
+  const [loading, setLoading] = useState(false);
+  const [updatedIntroduction, setUpdatedIntroduction] = useState();
 
   const {
     register,
     control,
     handleSubmit,
     // reset,
-    watch,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      title: job.title,
+      requirements: job.requirements,
+      bonus: job.bonus,
+      schedule: job.schedule,
+      benefits: job.benefits,
+    },
   });
   const {
     fields: requirementsFields,
@@ -124,111 +126,46 @@ export default function EditJob() {
     remove: benefitsRemove,
   } = useFieldArray({ control, name: "benefits" });
 
-  //   const { fields, append, remove } = useFieldArray({
-  //     name: "requirements",
-  //     control,
-  //   });
-  const numberOfRequirements = watch("numberOfRequirements");
-  const numberOfBonus = watch("numberOfBonus");
-  const numberOfSchedule = watch("numberOfSchedule");
-  const numberOfBenefits = watch("numberOfBenefits");
+  const getFinalList = ({ list, field }) => {
+    return list[field].map((item) => {
+      return item[field];
+    });
+  };
 
-  useEffect(() => {
-    const newVal = parseInt(numberOfRequirements || 0);
-    const oldVal = requirementsFields.length;
-    if (newVal > oldVal) {
-      for (let i = oldVal; i < newVal; i++) {
-        requirementsAppend([""]);
-      }
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    const createUwcssaJobInput = {
+      ...data,
+      requirements: getFinalList({ list: data, field: "requirements" }),
+      bonus: getFinalList({ list: data, field: "bonus" }),
+      benefits: getFinalList({ list: data, field: "benefits" }),
+      schedule: getFinalList({ list: data, field: "schedule" }),
+      introduction: updatedIntroduction,
+      active: true,
+
+      userID: user.username,
+    };
+
+    const response = await dispatch(postUwcssaJob({ createUwcssaJobInput }));
+
+    if (response.meta.requestStatus === "fulfilled") {
+      setLoading(false);
+      // console.log(response);
+      history.replace(`/career/jobDetail/${response.payload.id}`);
     } else {
-      for (let i = oldVal; i > newVal; i--) {
-        requirementsRemove(i - 1);
-      }
+      timer.current = window.setTimeout(() => {
+        console.log(response.error.message);
+        setLoading(false);
+      }, 1000);
+
+      alert(response.error.message);
     }
-  }, [
-    numberOfRequirements,
-    requirementsAppend,
-    requirementsFields.length,
-    requirementsRemove,
-  ]);
-
-  useEffect(() => {
-    const newVal = parseInt(numberOfBonus || 0);
-    const oldVal = bonusFields.length;
-    if (newVal > oldVal) {
-      for (let i = oldVal; i < newVal; i++) {
-        bonusAppend([""]);
-      }
-    } else {
-      for (let i = oldVal; i > newVal; i--) {
-        bonusRemove(i - 1);
-      }
-    }
-  }, [numberOfBonus, bonusAppend, bonusFields.length, bonusRemove]);
-
-  useEffect(() => {
-    const newVal = parseInt(numberOfSchedule || 0);
-    const oldVal = scheduleFields.length;
-    if (newVal > oldVal) {
-      for (let i = oldVal; i < newVal; i++) {
-        scheduleAppend([""]);
-      }
-    } else {
-      for (let i = oldVal; i > newVal; i--) {
-        scheduleRemove(i - 1);
-      }
-    }
-  }, [numberOfSchedule, scheduleAppend, scheduleFields.length, scheduleRemove]);
-
-  useEffect(() => {
-    const newVal = parseInt(numberOfBenefits || 0);
-    const oldVal = benefitsFields.length;
-    if (newVal > oldVal) {
-      for (let i = oldVal; i < newVal; i++) {
-        benefitsAppend([""]);
-      }
-    } else {
-      for (let i = oldVal; i > newVal; i--) {
-        benefitsRemove(i - 1);
-      }
-    }
-  }, [numberOfBenefits, benefitsAppend, benefitsFields.length, benefitsRemove]);
-
-  const onSubmit = (data) => console.log("data", data);
-  //   function onSubmit(data) {
-  //     // display form data on success
-  //     alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-  //   }
-  //   const onSubmit = async (data) => {
-  //     setLoading(true);
-  //     const updateUwcssaJobInput = {
-  //       ...data,
-  //       id: job.id,
-  //       //   introduction: updatedIntroduction,
-  //       active: true,
-  //       userID: user.name,
-  //     };
-  //     const response = await dispatch(
-  //       updateUwcssaJobDetail({ updateUwcssaJobInput })
-  //     );
-  //     if (response.meta.requestStatus === "fulfilled") {
-  //       setLoading(false);
-  //       history.push(
-  //         `/career/jobDetail/${response.payload.data.updateUwcssaJob.id}`
-  //       );
-  //     } else {
-  //       timer.current = window.setTimeout(() => {
-  //         setLoading(false);
-
-  //         console.log(response.error.message);
-  //       }, 1000);
-
-  //       console.log(response);
-  //     }
-  //   };
-
-  //   console.log(job.requirements);
-  //   console.log(uwcssaJobData.requirements.concat(job.requirements).splice(0, 1));
+  };
+  const handleOnChange = (prop) => (event) => {
+    const tempContent = JSON.stringify(convertToRaw(event.getCurrentContent()));
+    setUpdatedIntroduction(tempContent);
+  };
 
   return (
     <div>
@@ -248,529 +185,274 @@ export default function EditJob() {
         </Toolbar>
         <Divider light />
       </DialogTitle>
-      <Container maxWidth="md">
-        {/* {job.active ? ( */}
-        <Box
-          className={classes.root}
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <Box className={classes.form}>
-            <Typography variant="h5" gutterBottom>
-              职位名称
-            </Typography>
-            <Controller
-              name="title"
-              defaultValue={job.title}
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field }) => (
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  required
-                  id="title"
-                  label="职位名称"
-                  variant="outlined"
-                  error={!!errors.title}
-                  helperText={errors.title ? "不能为空" : null}
-                  {...field}
-                />
-              )}
-            />
 
-            <Typography variant="h5" marginTop={"1rem"} gutterBottom>
-              所属部门
-            </Typography>
-            <Button
-              variant="contained"
-              component={Link}
-              to="/staff/job/postDepartment"
-              style={{ margin: "1rem auto" }}
-            >
-              如果没有请点击这里添加部门
-            </Button>
-            {/* <Controller
-              name="departmentName"
-              defaultValue={job.departmentName}
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="departmentName">部门名称</InputLabel>
-                  <Select
-                    labelId="departmentName"
-                    value={value}
-                    onChange={onChange}
-                    label="主题"
-                    error={!!errors.topicID}
-                  >
-                    {departments.map((department) => {
-                      return (
-                        <MenuItem value={department.id} key={department.id}>
-                          {department.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  {errors.topicID && (
-                    <FormHelperText sx={{ color: "#d32f2f" }}>
-                      请选择一个部门名称，没有的话请上传新的主题
-                    </FormHelperText>
-                  )}
-                </FormControl>
-              )}
-            /> */}
-            <Controller
-              control={control}
-              name="departmentID"
+      <Box
+        className={classes.root}
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <Box className={classes.form}>
+          <Typography variant="h5" gutterBottom>
+            职位名称
+          </Typography>
+          <TextField
+            // defaultValue={job.title}
+            name="title"
+            margin="normal"
+            fullWidth
+            required
+            id="title"
+            label="职位名称"
+            variant="outlined"
+            error={!!errors.title}
+            helperText={errors.title ? "不能为空" : null}
+            {...register("title", {
+              required: true,
+            })}
+            control={control}
+          />
+
+          <Typography variant="h5" marginTop={"1rem"} gutterBottom>
+            所属部门
+          </Typography>
+          <Button
+            variant="contained"
+            component={Link}
+            to="/staff/job/postDepartment"
+            style={{ margin: "1rem auto" }}
+          >
+            如果没有请点击这里添加部门
+          </Button>
+
+          <FormControl
+            variant="outlined"
+            fullWidth
+            error={errors.departmentID ? true : false}
+          >
+            <InputLabel id="departmentID">部门名称</InputLabel>
+            <Select
               defaultValue={job.department.id}
-              render={({ field }) => (
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="departmentID">部门名称</InputLabel>
-                  <Select
-                    {...field}
-                    labelId="departmentID"
-                    label="主题"
-                    error={!!errors.departmentID}
-                  >
-                    {departments.map((department) => {
-                      return (
-                        <MenuItem value={department.id} key={department.id}>
-                          {department.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  {errors.departmentID && (
-                    <FormHelperText sx={{ color: "#d32f2f" }}>
-                      请选择一个部门名称，没有的话请上传新的主题
-                    </FormHelperText>
-                  )}
-                </FormControl>
-              )}
-            />
-            <Typography variant="h5" marginTop={"1rem"} gutterBottom>
-              简介
-            </Typography>
-            <Controller
-              name="introduction"
+              name="departmentID"
+              labelId="departmentID"
+              label="主题"
+              {...register("departmentID", {
+                required: true,
+              })}
+              control={control}
+            >
+              {departments.map((department) => {
+                return (
+                  <MenuItem value={department.id} key={department.id}>
+                    {department.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            {errors.departmentID && (
+              <FormHelperText sx={{ color: "#d32f2f" }}>
+                请选择一个部门名称，没有的话请上传新的主题
+              </FormHelperText>
+            )}
+          </FormControl>
+
+          <Typography variant="h5" marginTop={"1rem"} gutterBottom>
+            简介
+          </Typography>
+          <Box className={classes.content}>
+            <MUIRichTextEditor
               defaultValue={job.introduction}
-              control={control}
-              rules={{
-                required: false,
-              }}
-              render={({ field }) => (
-                <TextField
-                  id="introduction"
-                  margin="normal"
-                  fullWidth
-                  multiline
-                  minRows={5}
-                  variant="outlined"
-                  {...field}
-                />
-              )}
+              label="简介"
+              onChange={handleOnChange()}
+              inlineToolbar={true}
+              controls={[
+                "title",
+                "bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "highlight",
+                "undo",
+                "redo",
+                "link",
+                "media",
+                "numberList",
+                "bulletList",
+                "quote",
+                "code",
+                "clear",
+              ]}
             />
-            <Typography variant="h5" marginTop={"1rem"} gutterBottom>
-              基本要求
-            </Typography>
+          </Box>
+          <Typography variant="h5" marginTop={"1rem"} gutterBottom>
+            基本要求
+          </Typography>
 
-            {/* <Controller
-              control={control}
-              defaultValue={job.requirements.length}
-              render={({ field }) => ( */}
-            <FormControl
-              variant="filled"
-              fullWidth
-              //   style={{ display: "none" }}
-            >
-              <InputLabel id="numberOfRequirements">要求数量</InputLabel>
-              <Select
-                defaultValue={job.requirements.length}
-                name="numberOfRequirements"
-                {...register("numberOfRequirements")}
-                className={`form-control ${
-                  errors.numberOfRequirements ? "is-invalid" : ""
-                }`}
-              >
-                {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            {/* )}
-            /> */}
-            <>
-              {requirementsFields.map((item, i) => (
-                <List key={i}>
-                  <ListItem>
-                    <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
-                    <ListItemText>
-                      <Input
-                        fullWidth
-                        type="text"
-                        defaultValue={job.requirements[i]}
-                        {...register(`requirements.${i}.requirement`)}
-                      />
-                    </ListItemText>
-                    {/* <ListItemIcon>
-                      <IconButton
-                        type="button"
-                        onClick={() => requirementsRemove(i)}
-                      >
-                        <DeleteRoundedIcon />
-                      </IconButton>
-                    </ListItemIcon> */}
-                  </ListItem>
-                </List>
-              ))}
-            </>
+          {requirementsFields.map((item, i) => (
+            <List key={item.id}>
+              <ListItem>
+                <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
+                <ListItemText>
+                  <Input
+                    defaultValue={job.requirements[i]}
+                    error={errors.requirements ? true : false}
+                    fullWidth
+                    variant="standard"
+                    type="text"
+                    {...register(`requirements[${i}].requirements`, {
+                      required: true,
+                    })}
+                  />
+                </ListItemText>
+                <ListItemIcon>
+                  <IconButton
+                    type="button"
+                    onClick={() => requirementsRemove(i)}
+                  >
+                    <DeleteRoundedIcon />
+                  </IconButton>
+                </ListItemIcon>
+              </ListItem>
+            </List>
+          ))}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              requirementsAppend("");
+            }}
+          >
+            增加基本要求
+          </Button>
+          <Typography variant="h5" marginTop={"1rem"} gutterBottom>
+            额外要求(nice to have)
+          </Typography>
 
-            {/* <Button
-              sx={{ margin: "1rem" }}
-              variant="contained"
-              type="button"
+          <>
+            {bonusFields.map((item, i) => (
+              <List key={item.id}>
+                <ListItem>
+                  <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
+                  <ListItemText>
+                    <Input
+                      defaultValue={job.bonus[i]}
+                      error={errors.bonus ? true : false}
+                      fullWidth
+                      variant="standard"
+                      type="text"
+                      {...register(`bonus[${i}].bonus`, {
+                        required: true,
+                      })}
+                    />
+                  </ListItemText>
+                  <ListItemIcon>
+                    <IconButton type="button" onClick={() => bonusRemove(i)}>
+                      <DeleteRoundedIcon />
+                    </IconButton>
+                  </ListItemIcon>
+                </ListItem>
+              </List>
+            ))}
+            <Button
+              variant="outlined"
               onClick={() => {
-                requirementsAppend({ requirement: "" });
+                bonusAppend("");
               }}
             >
-              增加
-            </Button> */}
+              增加额外要求
+            </Button>
+          </>
 
-            <Divider />
-            <Typography variant="h5" marginTop={"1rem"} gutterBottom>
-              额外要求(nice to have)
-            </Typography>
-            <FormControl
-              variant="filled"
-              fullWidth
-              //   style={{ display: "none" }}
-            >
-              <InputLabel id="numberOfBonus">额外要求数量</InputLabel>
-              <Select
-                defaultValue={job.bonus.length}
-                name="numberOfBonus"
-                {...register("numberOfBonus")}
-                className={`form-control ${
-                  errors.numberOfBonus ? "is-invalid" : ""
-                }`}
-              >
-                {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            {/* )}
-            /> */}
-            <>
-              {bonusFields.map((item, i) => (
-                <List key={i}>
-                  <ListItem>
-                    <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
-                    <ListItemText>
-                      <Input
-                        fullWidth
-                        type="text"
-                        defaultValue={job.bonus[i]}
-                        {...register(`bonus.${i}.bonus`)}
-                      />
-                    </ListItemText>
-                  </ListItem>
-                </List>
-              ))}
-            </>
+          <Typography variant="h5" marginTop={"1rem"} gutterBottom>
+            工作计划与时间安排
+          </Typography>
 
-            <Divider />
-            <Typography variant="h5" marginTop={"1rem"} gutterBottom>
-              工作计划与时间安排
-            </Typography>
-            <FormControl
-              variant="filled"
-              fullWidth
-              //   style={{ display: "none" }}
-            >
-              <InputLabel id="numberOfSchedule">
-                工作计划与时间安排数量
-              </InputLabel>
-              <Select
-                defaultValue={job.schedule.length}
-                name="numberOfSchedule"
-                {...register("numberOfSchedule")}
-                className={`form-control ${
-                  errors.numberOfSchedule ? "is-invalid" : ""
-                }`}
-              >
-                {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <>
-              {scheduleFields.map((item, i) => (
-                <List key={i}>
-                  <ListItem>
-                    <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
-                    <ListItemText>
-                      <Input
-                        fullWidth
-                        type="text"
-                        defaultValue={job.schedule[i]}
-                        {...register(`schedule.${i}.schedule`)}
-                      />
-                    </ListItemText>
-                  </ListItem>
-                </List>
-              ))}
-            </>
-
-            <Divider />
-            <Typography variant="h5" marginTop={"1rem"} gutterBottom>
-              BENEFITS
-            </Typography>
-            <FormControl
-              variant="filled"
-              fullWidth
-              //   style={{ display: "none" }}
-            >
-              <InputLabel id="numberOfBenefits">BENEFITS数量</InputLabel>
-              <Select
-                defaultValue={job.benefits.length}
-                name="numberOfBenefits"
-                {...register("numberOfBenefits")}
-                className={`form-control ${
-                  errors.numberOfBenefits ? "is-invalid" : ""
-                }`}
-              >
-                {["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <>
-              {benefitsFields.map((item, i) => (
-                <List key={i}>
-                  <ListItem>
-                    <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
-                    <ListItemText>
-                      <Input
-                        fullWidth
-                        type="text"
-                        defaultValue={job.benefits[i]}
-                        {...register(`benefits.${i}.benefits`)}
-                      />
-                    </ListItemText>
-                  </ListItem>
-                </List>
-              ))}
-            </>
-
-            {/* see console */}
-            <Grid item xs={12} md={6}>
-              <Button
-                fullWidth
-                variant="contained"
-                type="submit"
-                color="primary"
-                sx={{ marginBlock: "2rem" }}
-              >
-                测试
-              </Button>
-              <Button
-                fullWidth
-                variant="contained"
-                type="submit"
-                color="primary"
-                disabled
-                sx={{ marginBlock: "2rem" }}
-              >
-                更新
-              </Button>
-            </Grid>
-          </Box>
-          {/* <List>
-              {uwcssaJobData.requirements.map((item, index) => (
+          <>
+            {scheduleFields.map((item, i) => (
+              <List key={item.id}>
                 <ListItem>
-                  <Typography marginRight={"0.25rem"}>{index + 1}</Typography>
+                  <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
                   <ListItemText>
                     <Input
+                      defaultValue={job.schedule[i]}
+                      error={errors.schedule ? true : false}
                       fullWidth
+                      variant="standard"
                       type="text"
-                      defaultValue={Object.values(job.requirements)[index]}
+                      control={control}
+                      {...register(`schedule[${i}].schedule`, {
+                        required: true,
+                      })}
                     />
                   </ListItemText>
-                  <ListItemIcon component="th" scope="row">
-                    <Tooltip title="Add New Row">
-                      <IconButton
-                        className={classes.button}
-                        onClick={(e) => {
-                          const newRequirements = uwcssaJobData.requirements;
-                          newRequirements.push("");
-                          setUwcssaJobData({
-                            ...uwcssaJobData,
-                            requirements: newRequirements,
-                          });
-                          console.log(uwcssaJobData);
-                        }}
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete This Row">
-                      <IconButton
-                        className={classes.button}
-                        onClick={(e) => {
-                          const newRequirements = uwcssaJobData.requirements;
-                          console.log(newRequirements.length);
-                          if (newRequirements.length > 1) {
-                            newRequirements.splice(index, 1);
-                          }
-                          setUwcssaJobData({
-                            ...uwcssaJobData,
-                            requirements: newRequirements,
-                          });
-                          console.log(uwcssaJobData);
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
+                  <ListItemIcon>
+                    <IconButton type="button" onClick={() => scheduleRemove(i)}>
+                      <DeleteRoundedIcon />
+                    </IconButton>
                   </ListItemIcon>
                 </ListItem>
-              ))}
-            </List> */}
-          {/* <List>
-              {job.requirements.map((item, i) => (
-                <ListItem key={i}>
-                  <Typography marginRight={"0.25rem"}>{i + 1}</Typography>
+              </List>
+            ))}
+            <Button
+              variant="outlined"
+              onClick={() => {
+                scheduleAppend("");
+              }}
+            >
+              增加工作计划与时间安排
+            </Button>
+          </>
+
+          <Typography variant="h5" marginTop={"1rem"} gutterBottom>
+            BENEFITS
+          </Typography>
+
+          <>
+            {benefitsFields.map((item, i) => (
+              <List key={item.id}>
+                <ListItem>
+                  <Typography marginRight={"0.25rem"}>{i + 1})</Typography>
                   <ListItemText>
                     <Input
+                      defaultValue={job.benefits[i]}
+                      error={errors.benefits ? true : false}
                       fullWidth
                       type="text"
-                      defaultValue={job.requirements[i]}
-                      //   {...register(`requirement${[i]}`)}
+                      {...register(`benefits[${i}].benefits`, {
+                        required: true,
+                      })}
                     />
                   </ListItemText>
-                  <ListItemIcon component="th" scope="row">
-                    {" "}
-                    <Tooltip title="Add New Row">
-                      <IconButton
-                        className={classes.button}
-                        onClick={(e) => {
-                          const newRequirements = uwcssaJobData.requirements;
-                          newRequirements.push("");
-                          setUwcssaJobData({
-                            ...uwcssaJobData,
-                            requirements: newRequirements,
-                          });
-                          console.log(uwcssaJobData);
-                        }}
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete This Row">
-                      <IconButton
-                        className={classes.button}
-                        onClick={(e) => {
-                          const newRequirements = uwcssaJobData.requirements;
-
-                          console.log(newRequirements.length);
-                          if (newRequirements.length === 0) {
-                            newRequirements
-                              .concat(job.requirements)
-                              .splice(0, 1);
-                          }
-                          setUwcssaJobData({
-                            ...uwcssaJobData,
-                            requirements: newRequirements,
-                          });
-                          console.log(uwcssaJobData);
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                    </Tooltip>
+                  <ListItemIcon>
+                    <IconButton type="button" onClick={() => benefitsRemove(i)}>
+                      <DeleteRoundedIcon />
+                    </IconButton>
                   </ListItemIcon>
                 </ListItem>
-              ))}
-
-              <>
-                {uwcssaJobData.requirements.map((item, index) => (
-                  <ListItem key={index}>
-                    <Typography marginRight={"0.25rem"}>
-                      {job.requirements.length + index + 1}
-                    </Typography>
-                    <ListItemText>
-                      <Input
-                        fullWidth
-                        type="text"
-                        // value={value}
-                        // onChange={onChange}
-                      />
-                    </ListItemText>
-                    <ListItemIcon component="th" scope="row">
-                      <Tooltip title="Add New Row">
-                        <IconButton
-                          className={classes.button}
-                          onClick={(e) => {
-                            const newRequirements = uwcssaJobData.requirements;
-                            newRequirements.push("");
-                            setUwcssaJobData({
-                              ...uwcssaJobData,
-                              requirements: newRequirements,
-                            });
-                            console.log(uwcssaJobData);
-                          }}
-                        >
-                          <AddCircleOutlineIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="Delete This Row">
-                        <IconButton
-                          className={classes.button}
-                          onClick={(e) => {
-                            const newRequirements = uwcssaJobData.requirements;
-
-                            console.log(newRequirements.length);
-                            if (newRequirements.length >= 1) {
-                              newRequirements.splice(index, 1);
-                            }
-                            setUwcssaJobData({
-                              ...uwcssaJobData,
-                              requirements: newRequirements,
-                            });
-                            console.log(uwcssaJobData);
-                          }}
-                        >
-                          <RemoveCircleOutlineIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemIcon>
-                  </ListItem>
-                ))}
-              </>
-            </List> */}
+              </List>
+            ))}
+            <Button
+              variant="outlined"
+              onClick={() => {
+                benefitsAppend("");
+              }}
+            >
+              增加 benefits
+            </Button>
+          </>
+          <Grid item xs={12} md={6}>
+            <Button
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary"
+              disabled={loading}
+              sx={{ marginBlock: "2rem" }}
+            >
+              更新
+            </Button>
+          </Grid>
         </Box>
-        {/* ) : (
-          <LinearProgress />
-        )} */}
-      </Container>
+      </Box>
     </div>
   );
 }
