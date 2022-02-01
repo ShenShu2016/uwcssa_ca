@@ -20,19 +20,23 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersionf63d6491": {
+    "LambdaLayerVersionad53ec24": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs14.x"
-        ],
+        "CompatibleRuntimes": {
+          "Ref": "runtimes"
+        },
         "Content": {
           "S3Bucket": {
             "Ref": "deploymentBucketName"
           },
-          "S3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersionf63d6491-build.zip"
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         },
-        "Description": "Updated layer version 2022-01-29T22:57:32.022Z",
+        "Description": {
+          "Ref": "description"
+        },
         "LayerName": {
           "Fn::Sub": [
             "uwcssanodejsLibrarieslayer-${env}",
@@ -47,21 +51,13 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionPrivatef63d6491": {
+    "LambdaLayerPermissionPrivatead53ec24": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-2:537666141782:layer:uwcssanodejsLibrarieslayer-develop:73",
-        "Principal": {
-          "Ref": "AWS::AccountId"
-        }
-      }
-    },
-    "LambdaLayerPermissionPrivateLegacy52": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:us-east-2:537666141782:layer:uwcssanodejsLibrarieslayer-develop:52",
+        "LayerVersionArn": {
+          "Ref": "LambdaLayerVersionad53ec24"
+        },
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -71,7 +67,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersionf63d6491"
+        "Ref": "LambdaLayerVersionad53ec24"
       }
     }
   }

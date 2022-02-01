@@ -1,6 +1,8 @@
-import { Route, Switch } from "react-router-dom";
+import { Box, Button } from "@mui/material";
+import { Link, Route, Switch } from "react-router-dom";
 
-import { Box } from "@mui/material";
+import Form from "../../components/Form/Form";
+import FormQuestion from "../../components/Form/FormQuestion";
 import GoogleMapsPlace from "../../components/GoogleMap/GoogleMapsPlace";
 import React from "react";
 import { makeStyles } from "@mui/styles";
@@ -22,9 +24,14 @@ export default function ForumRouter() {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
+      <Button variant="contained" component={Link} to="/test">
+        Test
+      </Button>
       <Switch>
         <Route exact path="/test" component={test1} />
         <Route path="/test/googleMapsPlace" exact component={GoogleMapsPlace} />
+        <Route path="/test/form" exact component={Form} />
+        <Route path="/test/formQuestion" exact component={FormQuestion} />
       </Switch>
     </Box>
   );
