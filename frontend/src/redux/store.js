@@ -6,6 +6,8 @@ import commentReducer from "./slice/commentSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import departmentReducer from "./slice/departmentSlice";
 import eventReducer from "./slice/eventSlice";
+import formQuestionReducer from "./slice/formQuestionSlice";
+import formReducer from "./slice/formSlice";
 import forumReducer from "./slice/forumSlice";
 import foundingMemberReducer from "./slice/foundingMemberSlice";
 import generalReducer from "./slice/generalSlice";
@@ -46,6 +48,8 @@ export default configureStore({
     user: userReducer,
     like: likeReducer,
     address: addressReducer,
+    form: formReducer,
+    formQuestion: formQuestionReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

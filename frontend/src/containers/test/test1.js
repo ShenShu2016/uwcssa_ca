@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 import API from "@aws-amplify/api";
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ const GetArticle = async (articleID) => {
 
 export default function test1() {
   return (
-    <div>
+    <Stack spacing={2}>
       <Typography variant="h4">Test 1</Typography>
       <Button variant="contained" onClick={(e) => GetArticle("xczfsdfdsf")}>
         click me
@@ -31,6 +31,12 @@ export default function test1() {
       <Button component={Link} to="/test/googleMapsPlace">
         googleMapsPlace
       </Button>
-    </div>
+      <Button variant="contained" component={Link} to="/test/Form">
+        Form
+      </Button>
+      <Button variant="contained" component={Link} to="/test/FormQuestion">
+        FormQuestion
+      </Button>
+    </Stack>
   );
 }

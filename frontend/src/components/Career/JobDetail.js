@@ -120,7 +120,7 @@ export default function JobDetail(props) {
                   to={`/staff/uwcssaJob//editJob/${job.id}`}
                   component={Link}
                 >
-                  编辑（测试）
+                  编辑
                 </Button>
               </Grid>
             ) : null}
