@@ -11,6 +11,7 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -211,14 +212,24 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/auth/forgotPassword" variant="body2">
-                忘记密码?
-              </Link>
+              <Stack spacing={2}>
+                <Link to="/auth/forgotPassword" variant="body2">
+                  忘记密码?
+                </Link>
+                {/* <Link to="/auth/forgotUsername" variant="body2">
+                  忘记用户名?
+                </Link> */}
+              </Stack>
             </Grid>
             <Grid item>
-              <Link to="/auth/signUp" variant="body2">
-                {"还没有账户？ 注册"}
-              </Link>
+              <Stack spacing={2}>
+                <Link to="/auth/signUp" variant="body2">
+                  还没有账户？ 注册
+                </Link>
+                <Link to="/auth/resendConfirmationCode" variant="body2">
+                  重新发送邮箱验证码
+                </Link>
+              </Stack>
             </Grid>
           </Grid>
         </Box>

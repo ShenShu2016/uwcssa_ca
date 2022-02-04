@@ -24,6 +24,8 @@ const initialState = {
   checkEmailExistError: null,
   emailConfirmStatus: "idle",
   emailConfirmError: null,
+  resendConfirmationCodeStatus: "idle",
+  resendConfirmationCodeError: null,
   forgotPasswordStatus: "idle",
   forgotPasswordError: null,
   forgotPassWordSubmitStatus: "idle",
@@ -114,6 +116,14 @@ export const forgotPassWordSubmit = createAsyncThunk(
       code,
       new_password
     );
+    return response;
+  }
+);
+
+export const resendConfirmationCode = createAsyncThunk(
+  "auth/resendConfirmationCode",
+  async ({ username }) => {
+    const response = await Auth.resendSignUp(username);
     return response;
   }
 );
@@ -230,6 +240,18 @@ const authSlice = createSlice({
       .addCase(forgotPassword.rejected, (state, action) => {
         state.forgotPasswordStatus = "failed";
         state.forgotPasswordError = action.error.message;
+      })
+      // Cases for status of resendConfirmationCode (pending, fulfilled, and rejected)
+      .addCase(resendConfirmationCode.pending, (state, action) => {
+        state.resendConfirmationCodeStatus = "loading";
+      })
+      .addCase(resendConfirmationCode.fulfilled, (state, action) => {
+        state.resendConfirmationCodeStatus = "succeeded";
+        //! need to do later
+      })
+      .addCase(resendConfirmationCode.rejected, (state, action) => {
+        state.resendConfirmationCodeStatus = "failed";
+        state.resendConfirmationCodeError = action.error.message;
       })
       // Cases for status of forgotPassWordSubmit (pending, fulfilled, and rejected)
       .addCase(forgotPassWordSubmit.pending, (state, action) => {
