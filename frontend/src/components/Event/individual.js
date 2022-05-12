@@ -12,24 +12,27 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-// import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
 import { Link, useParams } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { v4 as uuid } from "uuid";
 import InputLabel from "@mui/material/node/InputLabel";
 import PersonIcon from "@mui/icons-material/Person";
 import SignUpRequest from "../Auth/SignUpRequireDialog";
 import eventImg from "../../static/event.jpg";
 import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-// import { postAddress } from "../../redux/slice/addressSlice";
 import { postEventParticipant } from "../../redux/slice/eventSlice";
 import { useHistory } from "react-router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useTitle } from "../../Hooks/useTitle";
+
+// import GoogleMapsPlace, { GetAddress } from "../GoogleMap/GoogleMapsPlace";
+
+// import { v4 as uuid } from "uuid";
+
+// import { postAddress } from "../../redux/slice/addressSlice";
 
 const useStyles = makeStyles((theme) => ({
   rightBox: {
@@ -75,8 +78,18 @@ export default function Individual() {
       phone: "",
       weChat: "",
       message:
-        "收信人姓名：\n收信人手机号码：\n收信人地址：\n\n留言/祝福语：(最多50字)\n\n",
+        "单人报名不用填写!!\n队友1 温莎email：\n队友1性别：\n队友1 游戏id:\n队友1 微信：\n-------------------\n队友2 温莎email：\n队友2性别：\n队友2游戏id：\n队友2 微信：\n-------------------\n队友3 温莎email：\n队友3性别：\n队友3游戏id：\n队友3 微信：\n-------------------\n队友4 温莎email：\n队友4性别：\n队友4游戏id：\n队友4 微信：\n-------------------\n",
       numberOfPeople: "",
+      text1: "",
+      text2: "",
+      text3: "",
+      text4: "",
+      text5: "",
+      text6: "",
+      text7: "",
+      text8: "",
+      text9: "",
+      text10: "",
     },
   });
 
@@ -84,7 +97,7 @@ export default function Individual() {
     setLoading(true);
     // const address = await GetAddress();
     // const addressID = uuid();
-    const itemID = `${toLocation}-${eventID}-${userAuth.user.username}`;
+    const itemID = `${eventID}-${userAuth.user.username}`;
     // console.log(itemID);
     // if (address) {
     //   const {
@@ -149,7 +162,7 @@ export default function Individual() {
   };
 
   return (
-    <div>
+    <Box sx={{ height: "2000px" }}>
       {userAuth.isAuthenticated ? "" : <SignUpRequest />}
       <div>
         <Grid
@@ -180,7 +193,7 @@ export default function Individual() {
                 <PersonIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                个人报名
+                报名
               </Typography>
               <Box>
                 <Controller
@@ -195,7 +208,7 @@ export default function Individual() {
                       margin="normal"
                       required
                       fullWidth
-                      label="寄信人姓名"
+                      label="姓名"
                       placeholder="张三"
                       autoComplete="name"
                       autoFocus
@@ -207,7 +220,46 @@ export default function Individual() {
                     />
                   )}
                 />
+                <Controller
+                  name="text5"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      id="text5"
+                      margin="normal"
+                      required
+                      fullWidth
+                      label="温莎大学email"
+                      placeholder="xxx@uwindsor.ca"
+                      autoFocus
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.text5}
+                    />
+                  )}
+                />
 
+                <Controller
+                  name="text1"
+                  control={control}
+                  rules={{}}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      id="text1"
+                      margin="normal"
+                      fullWidth
+                      label="性别"
+                      placeholder="男"
+                      autoFocus
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.text1}
+                    />
+                  )}
+                />
                 <Controller
                   name="phone"
                   control={control}
@@ -225,7 +277,7 @@ export default function Individual() {
                       required
                       placeholder="e.g. 1234567890"
                       autoComplete="phone"
-                      label="寄信人加拿大手机号码"
+                      label="加拿大手机号码"
                       variant="outlined"
                       onChange={onChange}
                       value={value}
@@ -255,6 +307,85 @@ export default function Individual() {
                     />
                   )}
                 />
+                <Controller
+                  name="text2"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      id="text2"
+                      margin="normal"
+                      required
+                      fullWidth
+                      label="游戏id"
+                      placeholder="abcd123456"
+                      autoFocus
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.text2}
+                    />
+                  )}
+                />
+                <Controller
+                  name="text3"
+                  control={control}
+                  rules={{ required: false }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      id="text3"
+                      margin="normal"
+                      fullWidth
+                      label="擅长玩的位置1"
+                      placeholder="上路"
+                      autoFocus
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.text3}
+                    />
+                  )}
+                />
+                <Controller
+                  name="text4"
+                  control={control}
+                  rules={{ required: false }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      id="text4"
+                      margin="normal"
+                      fullWidth
+                      label="擅长玩的位置2"
+                      placeholder="中路"
+                      autoFocus
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.text4}
+                    />
+                  )}
+                />
+                <Controller
+                  name="text6"
+                  control={control}
+                  rules={{ required: false }}
+                  render={({ field: { onChange, value } }) => (
+                    <TextField
+                      id="text6"
+                      margin="normal"
+                      fullWidth
+                      label="战队名称（团队报名使用）"
+                      placeholder="qq飞车战队"
+                      autoFocus
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                      error={!!errors.text6}
+                    />
+                  )}
+                />
                 {/* <Controller
                   name="address"
                   control={control}
@@ -274,7 +405,7 @@ export default function Individual() {
                     />
                   )}
                 /> */}
-                <FormControl sx={{ width: "100%", marginBottom: "1rem" }}>
+                {/* <FormControl sx={{ width: "100%", marginBottom: "1rem" }}>
                   <InputLabel id="toLocation">收件地址</InputLabel>
                   <Select
                     value={toLocation}
@@ -284,7 +415,7 @@ export default function Individual() {
                     <MenuItem value={"China"}>中国</MenuItem>
                     <MenuItem value={"Canada"}>加拿大</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
                 {/* <div
                   style={{
                     display: toLocation !== "China" ? "block" : "none",
@@ -292,6 +423,7 @@ export default function Individual() {
                 >
                   <GoogleMapsPlace />
                 </div> */}
+
                 <Controller
                   name="message"
                   control={control}
@@ -349,6 +481,6 @@ export default function Individual() {
           </Grid>
         </Grid>
       </div>
-    </div>
+    </Box>
   );
 }
