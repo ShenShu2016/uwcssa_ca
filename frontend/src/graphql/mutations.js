@@ -3097,6 +3097,16 @@ export const createEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -3267,6 +3277,16 @@ export const createEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -3398,6 +3418,16 @@ export const updateEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -3568,6 +3598,16 @@ export const updateEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -3699,6 +3739,16 @@ export const deleteEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -3869,6 +3919,16 @@ export const deleteEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -4846,6 +4906,16 @@ export const createEventParticipant = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -4946,6 +5016,16 @@ export const createEventParticipant = /* GraphQL */ `
       phone
       weChat
       message
+      text1
+      text2
+      text3
+      text4
+      text5
+      text6
+      text7
+      text8
+      text9
+      text10
       numberOfPeople
       active
       createdAt
@@ -5107,6 +5187,16 @@ export const updateEventParticipant = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -5207,6 +5297,16 @@ export const updateEventParticipant = /* GraphQL */ `
       phone
       weChat
       message
+      text1
+      text2
+      text3
+      text4
+      text5
+      text6
+      text7
+      text8
+      text9
+      text10
       numberOfPeople
       active
       createdAt
@@ -5368,6 +5468,16 @@ export const deleteEventParticipant = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -5468,6 +5578,16 @@ export const deleteEventParticipant = /* GraphQL */ `
       phone
       weChat
       message
+      text1
+      text2
+      text3
+      text4
+      text5
+      text6
+      text7
+      text8
+      text9
+      text10
       numberOfPeople
       active
       createdAt
@@ -8978,6 +9098,16 @@ export const createMarketItem = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -9179,6 +9309,16 @@ export const updateMarketItem = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -9380,6 +9520,16 @@ export const deleteMarketItem = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -9574,6 +9724,16 @@ export const createAddress = /* GraphQL */ `
         phone
         weChat
         message
+        text1
+        text2
+        text3
+        text4
+        text5
+        text6
+        text7
+        text8
+        text9
+        text10
         numberOfPeople
         active
         createdAt
@@ -9870,6 +10030,16 @@ export const updateAddress = /* GraphQL */ `
         phone
         weChat
         message
+        text1
+        text2
+        text3
+        text4
+        text5
+        text6
+        text7
+        text8
+        text9
+        text10
         numberOfPeople
         active
         createdAt
@@ -10166,6 +10336,16 @@ export const deleteAddress = /* GraphQL */ `
         phone
         weChat
         message
+        text1
+        text2
+        text3
+        text4
+        text5
+        text6
+        text7
+        text8
+        text9
+        text10
         numberOfPeople
         active
         createdAt

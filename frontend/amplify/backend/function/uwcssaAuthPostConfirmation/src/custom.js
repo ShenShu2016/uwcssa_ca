@@ -30,6 +30,7 @@ exports.handler = async (event) => {
               .includes("@uwindsor.ca")
               ? { S: "uwindsor" }
               : undefined,
+            { S: "top100" },
           ],
         },
         sortKey: { S: "SortKey" },

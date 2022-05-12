@@ -341,6 +341,16 @@ type EventParticipant
   phone: AWSPhone
   weChat: String
   message: String
+  text1: String
+  text2: String
+  text3: String
+  text4: String
+  text5: String
+  text6: String
+  text7: String
+  text8: String
+  text9: String
+  text10: String
   numberOfPeople: Int!
   active: Boolean!
   createdAt: AWSDateTime!

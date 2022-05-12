@@ -1593,6 +1593,16 @@ export const getEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -1763,6 +1773,16 @@ export const getEvent = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -2627,6 +2647,16 @@ export const getEventParticipant = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -2727,6 +2757,16 @@ export const getEventParticipant = /* GraphQL */ `
       phone
       weChat
       message
+      text1
+      text2
+      text3
+      text4
+      text5
+      text6
+      text7
+      text8
+      text9
+      text10
       numberOfPeople
       active
       createdAt
@@ -2894,6 +2934,16 @@ export const listEventParticipants = /* GraphQL */ `
         phone
         weChat
         message
+        text1
+        text2
+        text3
+        text4
+        text5
+        text6
+        text7
+        text8
+        text9
+        text10
         numberOfPeople
         active
         createdAt
@@ -2991,6 +3041,16 @@ export const eventParticipantSortByEventID = /* GraphQL */ `
         phone
         weChat
         message
+        text1
+        text2
+        text3
+        text4
+        text5
+        text6
+        text7
+        text8
+        text9
+        text10
         numberOfPeople
         active
         createdAt
@@ -5329,6 +5389,16 @@ export const getMarketItem = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt
@@ -5995,6 +6065,16 @@ export const getAddress = /* GraphQL */ `
         phone
         weChat
         message
+        text1
+        text2
+        text3
+        text4
+        text5
+        text6
+        text7
+        text8
+        text9
+        text10
         numberOfPeople
         active
         createdAt
@@ -6276,6 +6356,16 @@ export const listAddresses = /* GraphQL */ `
           phone
           weChat
           message
+          text1
+          text2
+          text3
+          text4
+          text5
+          text6
+          text7
+          text8
+          text9
+          text10
           numberOfPeople
           active
           createdAt

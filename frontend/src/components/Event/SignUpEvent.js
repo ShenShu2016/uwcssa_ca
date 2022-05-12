@@ -69,7 +69,7 @@ export default function EventSignUp() {
                   <PersonIcon />
                 </Avatar>
                 <Typography gutterBottom variant="h5">
-                  个人
+                  个人与团体
                 </Typography>
               </IconButton>
             </Paper>
