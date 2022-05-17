@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:10:44
+ * @LastEditTime: 2022-05-17 16:27:23
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
@@ -12,7 +12,7 @@ export { default as IndexView } from './IndexView';
 // export { default as HireUs } from './HireUs';
 // export { default as Faq } from './Faq';
 // export { default as Agency } from './Agency';
-// export { default as CareerListing } from './CareerListing';
+export { default as CareerListing } from './CareerListing';
 // export { default as CareerListingMinimal } from './CareerListingMinimal';
 // export { default as CareerOpening } from './CareerOpening';
 // export { default as ContactPage } from './ContactPage';

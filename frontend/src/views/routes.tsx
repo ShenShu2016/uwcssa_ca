@@ -2,13 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:10:45
+ * @LastEditTime: 2022-05-17 16:33:03
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
  */
 
 import {
+  CareerListing as CareerListingView,
   CompanyTerms as CompanyTermsView,
   Home as HomeView,
   Logistics as LogisticsView,
@@ -41,10 +42,10 @@ const routes = [
   //   path: '/faq',
   //   renderer: (params = {}): JSX.Element => <FaqView {...params} />,
   // },
-  // {
-  //   path: '/career-listing',
-  //   renderer: (params = {}): JSX.Element => <CareerListingView {...params} />,
-  // },
+  {
+    path: '/career',
+    renderer: (params = {}): JSX.Element => <CareerListingView {...params} />,
+  },
   // {
   //   path: '/career-listing-minimal',
   //   renderer: (params = {}): JSX.Element => (
