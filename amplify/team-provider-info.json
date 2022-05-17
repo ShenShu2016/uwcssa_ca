@@ -1,0 +1,43 @@
+{
+  "devts": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uwcssa-devts-225941-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssa-devts-225941-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537666141782:role/amplify-uwcssa-devts-225941-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+      "UnauthRoleName": "amplify-uwcssa-devts-225941-unauthRole",
+      "StackName": "amplify-uwcssa-devts-225941",
+      "StackId": "arn:aws:cloudformation:us-east-2:537666141782:stack/amplify-uwcssa-devts-225941/ded8cd50-d56b-11ec-afd6-0287b7d41892",
+      "AmplifyAppId": "d23ollqt4907qw",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-uwcssa-devts-225941-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "uwcssaAuth": {}
+      },
+      "function": {
+        "uwcssaAuthPostConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/uwcssaAuthPostConfirmation-473065596f3279616f56-build.zip"
+        },
+        "KanbanNotification": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/KanbanNotification-694d5346787349664d73-build.zip"
+        },
+        "uwcssanodejsLibrarieslayer": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/uwcssanodejsLibrarieslayer-LambdaLayerVersionb41129f3-build.zip"
+        },
+        "EventConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/EventConfirmation-674256773772674d7551-build.zip"
+        },
+        "UwcssaJobConfirmation": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/UwcssaJobConfirmation-774d52615678444c776c-build.zip"
+        }
+      }
+    }
+  }
+}
