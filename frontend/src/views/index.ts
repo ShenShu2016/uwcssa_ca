@@ -2,12 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:27:23
+ * @LastEditTime: 2022-05-17 16:45:14
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
-export { default as Home } from './Home';
-export { default as IndexView } from './IndexView';
+// export { default as Home } from './Home';
+// export { default as IndexView } from './IndexView';
 // export { default as Customers } from './Customers';
 // export { default as HireUs } from './HireUs';
 // export { default as Faq } from './Faq';

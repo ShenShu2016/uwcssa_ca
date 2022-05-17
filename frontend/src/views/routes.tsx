@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:33:03
+ * @LastEditTime: 2022-05-17 16:44:43
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -11,7 +11,6 @@
 import {
   CareerListing as CareerListingView,
   CompanyTerms as CompanyTermsView,
-  Home as HomeView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
@@ -26,10 +25,10 @@ const routes = [
     path: '/',
     renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
   },
-  {
-    path: '/home',
-    renderer: (params = {}): JSX.Element => <HomeView {...params} />,
-  },
+  // {
+  //   path: '/home',
+  //   renderer: (params = {}): JSX.Element => <HomeView {...params} />,
+  // },
   // {
   //   path: '/customers',
   //   renderer: (params = {}): JSX.Element => <CustomersView {...params} />,
