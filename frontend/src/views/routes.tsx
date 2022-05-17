@@ -2,13 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 15:58:55
+ * @LastEditTime: 2022-05-17 16:00:59
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
  */
 
 import {
+  CompanyTerms as CompanyTermsView,
   Home as HomeView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
@@ -145,10 +146,10 @@ const routes = [
   //   path: '/portfolio-grid',
   //   renderer: (params = {}): JSX.Element => <PortfolioGridView {...params} />,
   // },
-  // {
-  //   path: '/company-terms',
-  //   renderer: (params = {}): JSX.Element => <CompanyTermsView {...params} />,
-  // },
+  {
+    path: '/terms',
+    renderer: (params = {}): JSX.Element => <CompanyTermsView {...params} />,
+  },
   // {
   //   path: '/contact-sidebar-map',
   //   renderer: (params = {}): JSX.Element => (

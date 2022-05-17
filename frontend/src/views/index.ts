@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 15:50:37
+ * @LastEditTime: 2022-05-17 16:01:34
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
@@ -38,7 +38,7 @@ export { default as Logistics } from './Logistics';
 // export { default as PortfolioPage } from './PortfolioPage';
 // export { default as PortfolioMasonry } from './PortfolioMasonry';
 // export { default as PortfolioGrid } from './PortfolioGrid';
-// export { default as CompanyTerms } from './CompanyTerms';
+export { default as CompanyTerms } from './CompanyTerms';
 // export { default as ContactPageSidebarMap } from './ContactPageSidebarMap';
 // export { default as ContactPageCover } from './ContactPageCover';
 // export { default as AboutSideCover } from './AboutSideCover';

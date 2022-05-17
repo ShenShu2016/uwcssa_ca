@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 15:58:20
+ * @LastEditTime: 2022-05-17 16:00:52
  * @FilePath: \uwcssa_ca\frontend\src\views\SignupCover\components\Form\Form.tsx
  * @Description:
  *
@@ -196,7 +196,7 @@ const Form = (): JSX.Element => {
               <Link
                 component={'a'}
                 color={'primary'}
-                href={'/company-terms'}
+                href={'/terms'}
                 underline={'none'}
               >
                 company terms and conditions.
