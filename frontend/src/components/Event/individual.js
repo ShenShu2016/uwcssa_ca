@@ -86,7 +86,7 @@ export default function Individual() {
       text4: "",
       text5: "",
       text6: "",
-      text7: "",
+      text7: "qq区",
       text8: "",
       text9: "",
       text10: "",
@@ -384,6 +384,30 @@ export default function Individual() {
                       value={value}
                       error={!!errors.text6}
                     />
+                  )}
+                />
+                <Controller
+                  name="text7"
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <FormControl variant="outlined" fullWidth>
+                      <InputLabel id="text7">qq区 还是微信区</InputLabel>
+                      <Select
+                        labelId="text7"
+                        id="text7"
+                        name="text7"
+                        onChange={onChange}
+                        value={value}
+                        error={!!errors.text7}
+                        label="什么区"
+                      >
+                        <MenuItem value="qq区">qq区</MenuItem>
+                        <MenuItem value="微信区">微信区</MenuItem>
+                      </Select>
+                    </FormControl>
                   )}
                 />
                 {/* <Controller
