@@ -1,10 +1,21 @@
-import React from 'react';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 14:08:10
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 15:49:19
+ * @FilePath: \uwcssa_ca\frontend\src\layouts\Main\components\Topbar\Topbar.tsx
+ * @Description:
+ *
+ */
+
+import { alpha, useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { alpha, useTheme } from '@mui/material/styles';
+import { Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import { NavItem } from './components';
+import React from 'react';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -114,12 +125,12 @@ const Topbar = ({
           <Button
             variant="contained"
             color="primary"
-            component="a"
-            target="blank"
-            href="https://mui.com/store/items/the-front-landing-page/"
+            component={Link}
+            //target="blank"
+            href="/auth/signIn"
             size="large"
           >
-            Buy now
+            Sign in
           </Button>
         </Box>
       </Box>

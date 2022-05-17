@@ -1,7 +1,19 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 14:08:10
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 15:58:55
+ * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
+ * @Description:
+ *
+ */
+
 import {
   Home as HomeView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
+  SigninCover as SigninCoverView,
+  SignupCover as SignupCoverView,
 } from 'views';
 
 import React from 'react';
@@ -193,18 +205,18 @@ const routes = [
   //   path: '/signin-simple',
   //   renderer: (params = {}): JSX.Element => <SigninSimpleView {...params} />,
   // },
-  // {
-  //   path: '/signin-cover',
-  //   renderer: (params = {}): JSX.Element => <SigninCoverView {...params} />,
-  // },
+  {
+    path: '/auth/signIn',
+    renderer: (params = {}): JSX.Element => <SigninCoverView {...params} />,
+  },
   // {
   //   path: '/signup-simple',
   //   renderer: (params = {}): JSX.Element => <SignupSimpleView {...params} />,
   // },
-  // {
-  //   path: '/signup-cover',
-  //   renderer: (params = {}): JSX.Element => <SignupCoverView {...params} />,
-  // },
+  {
+    path: '/auth/signUp',
+    renderer: (params = {}): JSX.Element => <SignupCoverView {...params} />,
+  },
   // {
   //   path: '/account-billing',
   //   renderer: (params = {}): JSX.Element => <AccountBillingView {...params} />,
