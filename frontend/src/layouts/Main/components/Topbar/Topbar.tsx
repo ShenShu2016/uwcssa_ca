@@ -2,17 +2,17 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 15:49:19
+ * @LastEditTime: 2022-05-17 18:02:42
  * @FilePath: \uwcssa_ca\frontend\src\layouts\Main\components\Topbar\Topbar.tsx
  * @Description:
  *
  */
 
+import { Link, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavItem } from './components';
 import React from 'react';
@@ -58,19 +58,23 @@ const Topbar = ({
         display={'flex'}
         component="a"
         href="/"
-        title="theFront"
-        width={{ xs: 100, md: 120 }}
+        title="UWCSSA"
+        height={{ xs: 24, md: 29 }}
+        sx={{ textDecoration: 'none' }}
       >
         <Box
           component={'img'}
           src={
             mode === 'light' && !colorInvert
-              ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-              : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+              ? '/assets/images/uwcssa_logo.svg'
+              : '/assets/images/uwcssa_logo.svg'
           }
           height={1}
           width={1}
         />
+        <Typography variant="h5" sx={{ ml: '1rem' }}>
+          UWCSSA
+        </Typography>
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>

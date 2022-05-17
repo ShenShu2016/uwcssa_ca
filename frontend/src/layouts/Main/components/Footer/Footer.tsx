@@ -1,8 +1,18 @@
-import React from 'react';
-import Grid from '@mui/material/Grid';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 14:08:10
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 18:06:47
+ * @FilePath: \uwcssa_ca\frontend\src\layouts\Main\components\Footer\Footer.tsx
+ * @Description:
+ *
+ */
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
@@ -25,18 +35,22 @@ const Footer = (): JSX.Element => {
             component="a"
             href="/"
             title="theFront"
-            width={80}
+            height={19}
+            sx={{ textDecoration: 'none' }}
           >
             <Box
               component={'img'}
               src={
                 mode === 'light'
-                  ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-                  : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+                  ? '/assets/images/uwcssa_logo.svg'
+                  : '/assets/images/uwcssa_logo.svg'
               }
               height={1}
               width={1}
             />
+            <Typography variant="h6" sx={{ ml: '1rem', lineHeight: 1.2 }}>
+              UWCSSA
+            </Typography>
           </Box>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
             <Box marginTop={1} marginRight={2}>
