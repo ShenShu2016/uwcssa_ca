@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:00:59
+ * @LastEditTime: 2022-05-17 16:10:45
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -13,6 +13,7 @@ import {
   Home as HomeView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
+  PasswordResetCover as PasswordResetCoverView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
 } from 'views';
@@ -190,12 +191,12 @@ const routes = [
   //   path: '/blog-reach-view',
   //   renderer: (params = {}): JSX.Element => <BlogReachViewView {...params} />,
   // },
-  // {
-  //   path: '/password-reset-cover',
-  //   renderer: (params = {}): JSX.Element => (
-  //     <PasswordResetCoverView {...params} />
-  //   ),
-  // },
+  {
+    path: '/passwordReset',
+    renderer: (params = {}): JSX.Element => (
+      <PasswordResetCoverView {...params} />
+    ),
+  },
   // {
   //   path: '/password-reset-simple',
   //   renderer: (params = {}): JSX.Element => (
