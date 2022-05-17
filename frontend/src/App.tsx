@@ -1,3 +1,12 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 14:08:10
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 14:25:51
+ * @FilePath: \uwcssa_ca\frontend\src\App.tsx
+ * @Description:
+ *
+ */
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

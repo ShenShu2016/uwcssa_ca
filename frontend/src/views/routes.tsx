@@ -1,11 +1,11 @@
-import { Home as HomeView, IndexView } from 'views';
+import { Home as HomeView, Logistics as LogisticsView } from 'views';
 
 import React from 'react';
 
 const routes = [
   {
     path: '/',
-    renderer: (params = {}): JSX.Element => <IndexView {...params} />,
+    renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
   },
   {
     path: '/home',

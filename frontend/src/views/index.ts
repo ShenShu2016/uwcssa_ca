@@ -2,11 +2,9 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-16 22:13:46
- * @FilePath: \uwcssa_ca\src\views\index.ts
+ * @LastEditTime: 2022-05-17 15:18:45
+ * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
- *
- * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
 export { default as Home } from './Home';
 export { default as IndexView } from './IndexView';
@@ -31,7 +29,7 @@ export { default as IndexView } from './IndexView';
 // export { default as JobListing } from './JobListing';
 // export { default as Rental } from './Rental';
 // export { default as CloudHosting } from './CloudHosting';
-// export { default as Logistics } from './Logistics';
+export { default as Logistics } from './Logistics';
 // export { default as Ecommerce } from './Ecommerce';
 // export { default as Pricing } from './Pricing';
 // export { default as About } from './About';
