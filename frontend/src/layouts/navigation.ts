@@ -78,10 +78,10 @@ const pages = {
       title: 'Career',
       href: '/career',
     },
-    // {
-    //   title: 'Job Opening',
-    //   href: '/career-opening',
-    // },
+    {
+      title: 'Job Opening',
+      href: '/careerOpening',
+    },
     // {
     //   title: 'Customer Stories',
     //   href: '/customers',

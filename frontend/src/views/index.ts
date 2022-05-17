@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:45:14
+ * @LastEditTime: 2022-05-17 16:46:31
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
@@ -14,7 +14,7 @@
 // export { default as Agency } from './Agency';
 export { default as CareerListing } from './CareerListing';
 // export { default as CareerListingMinimal } from './CareerListingMinimal';
-// export { default as CareerOpening } from './CareerOpening';
+export { default as CareerOpening } from './CareerOpening';
 // export { default as ContactPage } from './ContactPage';
 // export { default as Coworking } from './Coworking';
 // export { default as Elearning } from './Elearning';

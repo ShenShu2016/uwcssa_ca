@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:44:43
+ * @LastEditTime: 2022-05-17 16:48:12
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -10,6 +10,7 @@
 
 import {
   CareerListing as CareerListingView,
+  CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
@@ -51,10 +52,10 @@ const routes = [
   //     <CareerListingMinimalView {...params} />
   //   ),
   // },
-  // {
-  //   path: '/career-opening',
-  //   renderer: (params = {}): JSX.Element => <CareerOpeningView {...params} />,
-  // },
+  {
+    path: '/careerOpening',
+    renderer: (params = {}): JSX.Element => <CareerOpeningView {...params} />,
+  },
   // {
   //   path: '/contact-page',
   //   renderer: (params = {}): JSX.Element => <ContactPageView {...params} />,
