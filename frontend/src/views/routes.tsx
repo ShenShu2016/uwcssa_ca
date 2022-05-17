@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:48:12
+ * @LastEditTime: 2022-05-17 16:55:15
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -12,6 +12,7 @@ import {
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
+  ContactPageSidebarMap as ContactPageSidebarMapView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
@@ -152,12 +153,12 @@ const routes = [
     path: '/terms',
     renderer: (params = {}): JSX.Element => <CompanyTermsView {...params} />,
   },
-  // {
-  //   path: '/contact-sidebar-map',
-  //   renderer: (params = {}): JSX.Element => (
-  //     <ContactPageSidebarMapView {...params} />
-  //   ),
-  // },
+  {
+    path: '/contactUs',
+    renderer: (params = {}): JSX.Element => (
+      <ContactPageSidebarMapView {...params} />
+    ),
+  },
   // {
   //   path: '/contact-page-cover',
   //   renderer: (params = {}): JSX.Element => (

@@ -106,10 +106,10 @@ const pages = {
       title: 'Terms',
       href: '/terms',
     },
-    // {
-    //   title: 'Contact: Map',
-    //   href: '/contact-sidebar-map',
-    // },
+    {
+      title: 'Contact: Map',
+      href: '/contactUs',
+    },
     // {
     //   title: 'Contact: Minimal',
     //   href: '/contact-page-cover',
