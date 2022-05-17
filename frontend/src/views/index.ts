@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 15:18:45
+ * @LastEditTime: 2022-05-17 15:42:02
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
@@ -57,4 +57,4 @@ export { default as Logistics } from './Logistics';
 // export { default as AccountNotifications } from './Account/Notifications';
 // export { default as AccountSecurity } from './Account/Security';
 // export { default as NotFound } from './NotFound';
-// export { default as NotFoundCover } from './NotFoundCover';
+export { default as NotFoundCover } from './NotFoundCover';

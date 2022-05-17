@@ -1,4 +1,8 @@
-import { Home as HomeView, Logistics as LogisticsView } from 'views';
+import {
+  Home as HomeView,
+  Logistics as LogisticsView,
+  NotFoundCover as NotFoundCoverView,
+} from 'views';
 
 import React from 'react';
 
@@ -223,10 +227,10 @@ const routes = [
   //   path: '/not-found',
   //   renderer: (params = {}): JSX.Element => <NotFoundView {...params} />,
   // },
-  // {
-  //   path: '/not-found-cover',
-  //   renderer: (params = {}): JSX.Element => <NotFoundCoverView {...params} />,
-  // },
+  {
+    path: '/404',
+    renderer: (params = {}): JSX.Element => <NotFoundCoverView {...params} />,
+  },
 ];
 
 export default routes;

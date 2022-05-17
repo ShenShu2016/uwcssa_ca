@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 14:08:10
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 15:42:52
+ * @FilePath: \uwcssa_ca\frontend\src\Routes.tsx
+ * @Description:
+ *
+ */
+
 import { Navigate, Routes as ReactRoutes, Route } from 'react-router-dom';
 
 import React from 'react';
@@ -22,8 +32,8 @@ const Routes = (): JSX.Element => {
       {demosRoutes.map((item, i) => (
         <Route key={i} path={item.path} element={item.renderer()} />
       ))} 
-      <Route path="/" element={<Navigate replace to="/" />} />
-      <Route path="*" element={<Navigate replace to="/not-found-cover" />} /> */}
+      <Route path="/" element={<Navigate replace to="/" />} />*/}
+      <Route path="*" element={<Navigate replace to="/404" />} />
     </ReactRoutes>
   );
 };
