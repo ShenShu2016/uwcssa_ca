@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:55:15
+ * @LastEditTime: 2022-05-17 18:52:54
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -16,6 +16,7 @@ import {
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
+  ReduxCounter as ReduxCounterView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
 } from 'views';
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/',
     renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
+  },
+  {
+    path: '/reduxCounter',
+    renderer: (params = {}): JSX.Element => <ReduxCounterView {...params} />,
   },
   // {
   //   path: '/home',

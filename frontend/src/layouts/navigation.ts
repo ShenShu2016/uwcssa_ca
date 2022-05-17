@@ -20,6 +20,10 @@ const pages = {
       title: 'Home',
       href: '/',
     },
+    {
+      title: 'Redux Counter',
+      href: '/reduxCounter',
+    },
     // {
     //   title: 'Service',
     //   href: '/service',

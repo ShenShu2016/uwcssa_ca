@@ -5,7 +5,7 @@
       "resourceName": "uwcssanodejsLibrarieslayer",
       "version": "Always choose latest version",
       "isLatestVersionSelected": true,
-      "env": "develop"
+      "env": "devts"
     }
   ]
 }
