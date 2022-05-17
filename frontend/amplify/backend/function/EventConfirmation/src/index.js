@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-16 22:31:01
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-17 13:25:23
+ * @FilePath: \uwcssa_ca\frontend\amplify\backend\function\EventConfirmation\src\index.js
+ * @Description:
+ *
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
+ */
 const aws = require("aws-sdk");
 const ses = new aws.SES({ region: "us-east-1" });
 
@@ -29,12 +39,7 @@ exports.handler = async (event) => {
             },
             Body: {
               Text: {
-                Data: `恭喜您已经成功报名。\n请确认以下信息是否正确：\n姓名：${
-                  record.dynamodb.NewImage.name.S
-                }\n寄信人加拿大手机号码：${
-                  record.dynamodb.NewImage.phone.S
-                }\n前往国家：${record.dynamodb.NewImage.id.S.split("-")[0]}
-                \n详细信息：\n${record.dynamodb.NewImage.message.S}
+                Data: `恭喜您已经成功报名
                 \n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
               },
             },
@@ -53,12 +58,7 @@ exports.handler = async (event) => {
             },
             Body: {
               Text: {
-                Data: `恭喜您已经成功报名。\n请确认以下信息是否正确：\n姓名：${
-                  record.dynamodb.NewImage.name.S
-                }\n寄信人加拿大手机号码：${
-                  record.dynamodb.NewImage.phone.S
-                }\n前往国家：${record.dynamodb.NewImage.id.S.split("-")[0]}
-                \n详细信息：\n${record.dynamodb.NewImage.message.S}
+                Data: `恭喜您已经成功报名
                 \n\nShen Shu\n有任何问题请发邮件至: uwincssa.it@gmail.com`,
               },
             },
