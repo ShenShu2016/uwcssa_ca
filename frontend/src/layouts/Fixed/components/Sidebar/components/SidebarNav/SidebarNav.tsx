@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types

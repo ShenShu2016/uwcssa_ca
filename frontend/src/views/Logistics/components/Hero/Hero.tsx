@@ -1,13 +1,13 @@
-import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, useTheme } from '@mui/material/styles';
 
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Container from 'components/Container';
+import Divider from '@mui/material/Divider';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import React from 'react';
+import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Hero = (): JSX.Element => {
   const theme = useTheme();

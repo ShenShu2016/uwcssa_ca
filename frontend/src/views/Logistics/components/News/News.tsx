@@ -1,21 +1,21 @@
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Grid from '@mui/material/Grid';
+import React from 'react';
 import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const mock = [
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img2.jpg',
     title: 'Motivation is the first step to success',
     subtitle:
-      'Once you\'re setup, instantly withdraw payments or deposit into your bank account within 2-3 business days.',
+      "Once you're setup, instantly withdraw payments or deposit into your bank account within 2-3 business days.",
   },
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img3.jpg',
@@ -27,7 +27,7 @@ const mock = [
     media: 'https://assets.maccarianagency.com/backgrounds/img4.jpg',
     title: 'Increasing prosperity with positive thinking',
     subtitle:
-      'Once you\'re setup, instantly withdraw payments or deposit into your bank account within 2-3 business days.',
+      "Once you're setup, instantly withdraw payments or deposit into your bank account within 2-3 business days.",
   },
 ];
 

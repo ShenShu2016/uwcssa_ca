@@ -1,17 +1,15 @@
+import { Footer, Sidebar, Topbar } from './components';
 import React, { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
+
 import AppBar from '@mui/material/AppBar';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-
+import Box from '@mui/material/Box';
 import Container from 'components/Container';
+import Divider from '@mui/material/Divider';
 import TopNav from 'components/TopNav';
-
-import { Topbar, Sidebar, Footer } from './components';
-
 import pages from '../navigation';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
   children: React.ReactNode;

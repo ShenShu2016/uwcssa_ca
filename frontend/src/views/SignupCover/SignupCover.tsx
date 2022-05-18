@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 15:51:51
+ * @LastEditTime: 2022-05-17 20:11:02
  * @FilePath: \uwcssa_ca\frontend\src\views\SignupCover\SignupCover.tsx
  * @Description:
  *

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import CssBaseline from '@mui/material/CssBaseline';
-import getTheme from 'theme';
+import React, { useEffect, useState } from 'react';
+
 import AOS from 'aos';
+import CssBaseline from '@mui/material/CssBaseline';
+import Paper from '@mui/material/Paper';
+import { ThemeProvider } from '@mui/material/styles';
+import getTheme from 'theme';
 
 export const useDarkMode = (): [string, () => void, boolean] => {
   const [themeMode, setTheme] = useState('light');

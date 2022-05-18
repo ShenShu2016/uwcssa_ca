@@ -1,9 +1,8 @@
-import React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-
 import Container from 'components/Container';
+import IconButton from '@mui/material/IconButton';
+import React from 'react';
+import Typography from '@mui/material/Typography';
 
 const Video = (): JSX.Element => {
   return (
