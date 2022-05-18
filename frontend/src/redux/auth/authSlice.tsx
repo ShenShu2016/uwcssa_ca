@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 18:47:03
+ * @LastEditTime: 2022-05-18 17:54:30
  * @FilePath: \uwcssa_ca\frontend\src\redux\auth\authSlice.tsx
  * @Description:
  *
@@ -73,12 +73,9 @@ export const loadUser = createAsyncThunk('auth/loadUser', async () => {
 
 export const signIn = createAsyncThunk(
   'auth/signIn',
-  async ({ email, password }: { email: string; password: string }) => {
-    const username = email;
-    if (username) {
-      const response = await Auth.signIn(username, password);
-      return response;
-    }
+  async ({ username, password }: { username: string; password: string }) => {
+    const response = await Auth.signIn(username, password);
+    return response;
   },
 );
 
@@ -93,15 +90,15 @@ export const signUp = createAsyncThunk(
   'auth/signUp',
   async ({
     password,
-    email,
+    username,
     name,
   }: {
     password: string;
-    email: string;
+    username: string;
     name: string;
   }) => {
     const response = await Auth.signUp({
-      username: email,
+      username,
       password,
       attributes: { name: name },
     });
