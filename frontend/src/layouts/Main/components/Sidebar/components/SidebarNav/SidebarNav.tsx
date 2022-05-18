@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import NavItem from './components/NavItem';
 import React from 'react';
+import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 interface Props {
@@ -35,19 +36,23 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
           display={'flex'}
           component="a"
           href="/"
-          title="theFront"
-          width={{ xs: 100, md: 120 }}
+          title="UWCSSA"
+          height={{ xs: 24, md: 29 }}
+          sx={{ textDecoration: 'none' }}
         >
           <Box
             component={'img'}
             src={
               mode === 'light'
-                ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-                : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+                ? '/assets/images/uwcssa_logo.svg'
+                : '/assets/images/uwcssa_logo.svg'
             }
             height={1}
-            width={1}
+            //width={1}
           />
+          <Typography variant="h5" sx={{ ml: '1rem' }}>
+            UWCSSA
+          </Typography>
         </Box>
       </Box>
       <Box paddingX={2} paddingY={2}>
