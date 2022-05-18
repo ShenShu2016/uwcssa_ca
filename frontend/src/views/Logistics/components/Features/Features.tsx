@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Typography from '@mui/material/Typography';
 
@@ -33,6 +32,7 @@ const mock = [
   {
     title: 'Select companies',
     subtitle:
+      // eslint-disable-next-line quotes
       "We'll immediately match you with any relevant openings and you get to pick which ones you're interested in.",
     icon: (
       <svg
