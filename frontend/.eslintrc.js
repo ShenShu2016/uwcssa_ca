@@ -1,3 +1,10 @@
+/*
+ * @Author: 李佳修
+ * @Date: 2022-05-18 09:12:03
+ * @LastEditTime: 2022-05-18 09:20:58
+ * @LastEditors: 李佳修
+ * @FilePath: /uwcssa_ca/frontend/.eslintrc.js
+ */
 /* eslint-disable no-undef */
 module.exports = {
   env: {
@@ -27,7 +34,7 @@ module.exports = {
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
+    // quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'comma-dangle': ['error', 'only-multiline'],
   },
