@@ -1,3 +1,12 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-17 21:41:42
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-18 17:58:13
+ * @FilePath: \uwcssa_ca\frontend\src\views\SigninCover\components\Form\Form.tsx
+ * @Description:
+ *
+ */
 /* eslint-disable react/no-unescaped-entities */
 
 import * as yup from 'yup';
@@ -9,10 +18,13 @@ import Link from '@mui/material/Link';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { signIn } from 'redux/auth/authSlice';
+import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  email: yup
+  username: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
@@ -24,12 +36,24 @@ const validationSchema = yup.object({
 });
 
 const Form = (): JSX.Element => {
+  const navigate = useNavigate();
+  //const { email } = useParams();
+  const dispatch = useAppDispatch();
   const initialValues = {
-    email: '',
+    username: '',
     password: '',
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(JSON.stringify(values));
+    const { username, password } = values;
+    const response = await dispatch(signIn({ username, password }));
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('/');
+    } else {
+      return false;
+    }
+
     return values;
   };
 
@@ -73,12 +97,13 @@ const Form = (): JSX.Element => {
             <TextField
               label="Email *"
               variant="outlined"
-              name={'email'}
+              name={'username'}
+              type="email"
               fullWidth
-              value={formik.values.email}
+              value={formik.values.username}
               onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
             />
           </Grid>
           <Grid item xs={12}>

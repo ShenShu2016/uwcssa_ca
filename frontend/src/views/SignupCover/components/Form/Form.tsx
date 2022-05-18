@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 01:02:40
+ * @LastEditTime: 2022-05-18 17:58:28
  * @FilePath: \uwcssa_ca\frontend\src\views\SignupCover\components\Form\Form.tsx
  * @Description:
  *
@@ -30,7 +30,7 @@ const validationSchema = yup.object({
     .min(2, 'Please enter a valid name')
     .max(50, 'Please enter a valid name')
     .required('Please specify your first name'),
-  email: yup
+  username: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
@@ -46,14 +46,14 @@ const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const initialValues = {
     name: '',
-    email: '',
+    username: '',
     password: '',
   };
 
   const onSubmit = async (values) => {
     console.log(values);
-    const { password, email, name } = values;
-    const response = await dispatch(signUp({ password, email, name }));
+    const { password, username, name } = values;
+    const response = await dispatch(signUp({ password, username, name }));
     console.log(response);
     if (response.meta.requestStatus === 'fulfilled') {
       navigate('/');
@@ -118,12 +118,12 @@ const Form = (): JSX.Element => {
             <TextField
               label="Email *"
               variant="outlined"
-              name={'email'}
+              name={'username'}
               fullWidth
-              value={formik.values.email}
+              value={formik.values.username}
               onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
             />
           </Grid>
           <Grid item xs={12}>
