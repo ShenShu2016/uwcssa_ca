@@ -1,13 +1,50 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.2.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
+    "REDIRECTURL": {
+      "Type": "String",
+      "Default": ""
+    },
+    "EMAILMESSAGE": {
+      "Type": "String",
+      "Default": ""
+    },
+    "EMAILSUBJECT": {
+      "Type": "String",
+      "Default": ""
+    },
+    "modules": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Comma-delimited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+    },
+    "resourceName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "trigger": {
+      "Type": "String",
+      "Default": "true"
+    },
+    "functionName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "roleName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentResource": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentStack": {
+      "Type": "String",
+      "Default": ""
+    },
     "env": {
       "Type": "String"
-    },
-    "authuwcssatsUserPoolId": {
-      "Type": "String",
-      "Default": "authuwcssatsUserPoolId"
     },
     "deploymentBucketName": {
       "Type": "String"
@@ -38,12 +75,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueriesdf7beb2c",
+            "uwcssatsCustomMessage",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueriesdf7beb2c",
+                  "uwcssatsCustomMessage",
                   "-",
                   {
                     "Ref": "env"
@@ -58,9 +95,23 @@
             "ENV": {
               "Ref": "env"
             },
-            "GROUP": "uwcssaAdmin",
-            "USERPOOL": {
-              "Ref": "authuwcssatsUserPoolId"
+            "MODULES": {
+              "Ref": "modules"
+            },
+            "REGION": {
+              "Ref": "AWS::Region"
+            },
+            "REDIRECTURL": {
+              "Ref": "REDIRECTURL"
+            },
+            "EMAILSUBJECT": {
+              "Ref": "EMAILSUBJECT"
+            },
+            "EMAILMESSAGE": {
+              "Ref": "EMAILMESSAGE"
+            },
+            "RESOURCENAME": {
+              "Ref": "resourceName"
             }
           }
         },
@@ -88,12 +139,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AdminQueriesdf7beb2cLambdaRole",
+            "uwcssatsCustomMessage",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AdminQueriesdf7beb2cLambdaRole",
+                  "uwcssatsCustomMessage",
                   "-",
                   {
                     "Ref": "env"
@@ -159,41 +210,6 @@
                   }
                 ]
               }
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "cognito-idp:ListUsersInGroup",
-                "cognito-idp:AdminUserGlobalSignOut",
-                "cognito-idp:AdminEnableUser",
-                "cognito-idp:AdminDisableUser",
-                "cognito-idp:AdminRemoveUserFromGroup",
-                "cognito-idp:AdminAddUserToGroup",
-                "cognito-idp:AdminListGroupsForUser",
-                "cognito-idp:AdminGetUser",
-                "cognito-idp:AdminConfirmSignUp",
-                "cognito-idp:ListUsers",
-                "cognito-idp:ListGroups"
-              ],
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:cognito-idp:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":userpool/",
-                    {
-                      "Ref": "authuwcssatsUserPoolId"
-                    }
-                  ]
-                ]
-              }
             }
           ]
         }
@@ -214,14 +230,14 @@
         ]
       }
     },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
-      }
-    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
       }
     }
   }

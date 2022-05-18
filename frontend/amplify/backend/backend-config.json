@@ -23,6 +23,11 @@
       "service": "Lambda",
       "providerPlugin": "awscloudformation",
       "build": true
+    },
+    "uwcssatsCustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "auth": {
@@ -49,6 +54,15 @@
         {
           "category": "function",
           "resourceName": "uwcssatsPostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "uwcssatsCustomMessage",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",

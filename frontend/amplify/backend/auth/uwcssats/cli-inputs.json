@@ -48,6 +48,10 @@
     "userPoolGroups": true,
     "adminQueries": true,
     "triggers": {
+      "CustomMessage": [
+        "verification-link",
+        "custom"
+      ],
       "PostConfirmation": [
         "add-to-group",
         "custom"
@@ -59,7 +63,6 @@
       "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"]}",
     "userPoolGroupList": [
       "uwcssaUser",
       "uwcssaAdmin"
@@ -67,6 +70,48 @@
     "adminQueryGroup": "uwcssaAdmin",
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": false
+    "useEnabledMfas": false,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "uwcssatsPostConfirmation",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      },
+      {
+        "category": "function",
+        "resourceName": "uwcssatsCustomMessage",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "permissions": [
+      "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
+    ],
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"uwcssatsCustomMessage\"\n  },\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"uwcssatsPostConfirmation\"\n  }\n]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"]}",
+    "verificationBucketName": "uwcssatsverificationbucket",
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    }
   }
 }

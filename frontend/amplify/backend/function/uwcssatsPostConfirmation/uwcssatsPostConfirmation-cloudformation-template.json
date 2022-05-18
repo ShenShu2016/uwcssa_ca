@@ -43,6 +43,9 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "userDynamoDbTable": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -95,6 +98,9 @@
             },
             "GROUP": {
               "Ref": "GROUP"
+            },
+            "User_DynamoDB_Table": {
+              "Ref": "userDynamoDbTable"
             }
           }
         },
