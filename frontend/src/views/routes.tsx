@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 01:32:18
+ * @LastEditTime: 2022-05-18 01:35:24
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -13,6 +13,7 @@ import {
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
   ContactPageSidebarMap as ContactPageSidebarMapView,
+  EmailConfirmationCover as EmailConfirmationCoverView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
@@ -225,6 +226,12 @@ const routes = [
   {
     path: '/auth/signUp',
     renderer: (params = {}): JSX.Element => <SignupCoverView {...params} />,
+  },
+  {
+    path: '/auth/emailConfirmation',
+    renderer: (params = {}): JSX.Element => (
+      <EmailConfirmationCoverView {...params} />
+    ),
   },
   // {
   //   path: '/account-billing',

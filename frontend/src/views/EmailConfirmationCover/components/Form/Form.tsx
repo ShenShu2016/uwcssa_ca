@@ -1,12 +1,3 @@
-/*
- * @Author: Shen Shu
- * @Date: 2022-05-17 15:50:53
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 01:02:40
- * @FilePath: \uwcssa_ca\frontend\src\views\SignupCover\components\Form\Form.tsx
- * @Description:
- *
- */
 /* eslint-disable react/no-unescaped-entities */
 
 import * as yup from 'yup';
@@ -18,48 +9,46 @@ import Link from '@mui/material/Link';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { signUp } from 'redux/auth/authSlice';
+import { emailConfirm } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  name: yup
-    .string()
-    .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your first name'),
   email: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
     .required('Email is required.'),
-  password: yup
+  authenticationCode: yup
     .string()
-    .required('Please specify your password')
-    .min(8, 'The password should have at minimum length of 8'),
+    .required('Please specify your code')
+    .min(6, 'The code should have at minimum length of 6')
+    .max(6, 'The code should have at maximum length of 6'),
 });
 
 const Form = (): JSX.Element => {
   const navigate = useNavigate();
+  //const { email } = useParams();
   const dispatch = useAppDispatch();
+
   const initialValues = {
-    name: '',
     email: '',
-    password: '',
+    authenticationCode: '',
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
-    const { password, email, name } = values;
-    const response = await dispatch(signUp({ password, email, name }));
-    console.log(response);
+    console.log(JSON.stringify(values));
+    const { email, authenticationCode } = values;
+    const response = await dispatch(
+      emailConfirm({ email, authenticationCode }),
+    );
     if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/');
+      navigate('/auth/signIn');
     } else {
       return false;
     }
+
     return values;
   };
 
@@ -80,7 +69,7 @@ const Form = (): JSX.Element => {
           gutterBottom
           color={'text.secondary'}
         >
-          SignUp
+          Email Confirmation
         </Typography>
         <Typography
           variant="h4"
@@ -88,29 +77,12 @@ const Form = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Create an account
+          Please check your email
         </Typography>
-        <Typography color="text.secondary">
-          Fill out the form to get started.
-        </Typography>
+        <Typography color="text.secondary">May be in the spam box.</Typography>
       </Box>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your user name
-            </Typography>
-            <TextField
-              label="User name *"
-              variant="outlined"
-              name={'name'}
-              fullWidth
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
-            />
-          </Grid>
           <Grid item xs={12}>
             <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
               Enter your email
@@ -127,19 +99,46 @@ const Form = (): JSX.Element => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-              Enter your password
-            </Typography>
+            <Box
+              display="flex"
+              flexDirection={{ xs: 'column', sm: 'row' }}
+              alignItems={{ xs: 'stretched', sm: 'center' }}
+              justifyContent={'space-between'}
+              width={1}
+              marginBottom={2}
+            >
+              <Box marginBottom={{ xs: 1, sm: 0 }}>
+                <Typography variant={'subtitle2'}>
+                  Enter your verification code
+                </Typography>
+              </Box>
+              <Typography variant={'subtitle2'}>
+                <Link
+                  component={'a'}
+                  color={'primary'}
+                  href={'/auth/passwordReset'}
+                  underline={'none'}
+                >
+                  Forgot your password?
+                </Link>
+              </Typography>
+            </Box>
             <TextField
-              label="Password *"
+              label="Authentication Code *"
               variant="outlined"
-              name={'password'}
-              type={'password'}
+              name={'authenticationCode'}
+              type={'string'}
               fullWidth
-              value={formik.values.password}
+              value={formik.values.authenticationCode}
               onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
+              error={
+                formik.touched.authenticationCode &&
+                Boolean(formik.errors.authenticationCode)
+              }
+              helperText={
+                formik.touched.authenticationCode &&
+                formik.errors.authenticationCode
+              }
             />
           </Grid>
           <Grid item container xs={12}>
@@ -154,44 +153,21 @@ const Form = (): JSX.Element => {
             >
               <Box marginBottom={{ xs: 1, sm: 0 }}>
                 <Typography variant={'subtitle2'}>
-                  Already have an account?{' '}
+                  Don't have an account yet?{' '}
                   <Link
                     component={'a'}
                     color={'primary'}
-                    href={'/auth/signIn'}
+                    href={'/auth/signUp'}
                     underline={'none'}
                   >
-                    Login.
+                    Sign up here.
                   </Link>
                 </Typography>
               </Box>
               <Button size={'large'} variant={'contained'} type={'submit'}>
-                Sign up
+                Confirm
               </Button>
             </Box>
-          </Grid>
-          <Grid
-            item
-            container
-            xs={12}
-            justifyContent={'center'}
-            alignItems={'center'}
-          >
-            <Typography
-              variant={'subtitle2'}
-              color={'text.secondary'}
-              align={'center'}
-            >
-              By clicking "Sign up" button you agree with our{' '}
-              <Link
-                component={'a'}
-                color={'primary'}
-                href={'/terms'}
-                underline={'none'}
-              >
-                company terms and conditions.
-              </Link>
-            </Typography>
           </Grid>
         </Grid>
       </form>

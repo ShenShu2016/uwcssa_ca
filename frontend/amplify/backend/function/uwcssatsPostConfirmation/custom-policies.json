@@ -1,6 +1,10 @@
 [
   {
-    "Action": [],
-    "Resource": []
+    "Action": ["cognito-idp:*"],
+    "Resource": ["arn:aws:cognito-idp:*:*:userpool/*"]
+  },
+  {
+    "Action": ["dynamodb:PutItem"],
+    "Resource": ["arn:aws:dynamodb:*:*:table/*"]
   }
 ]

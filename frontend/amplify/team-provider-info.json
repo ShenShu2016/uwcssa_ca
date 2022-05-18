@@ -22,8 +22,7 @@
         "uwcssatsPostConfirmation": {
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssatsPostConfirmation-3243775773636f6b7039-build.zip",
-          "userDynamoDbTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts"
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-3243775773636f6b7039-build.zip"
         },
         "S3Trigger085746e7": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
@@ -32,13 +31,6 @@
         "AdminQueriesdf7beb2c": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
           "s3Key": "amplify-builds/AdminQueriesdf7beb2c-306b6a47703234557839-build.zip"
-        },
-        "uwcssatsCustomMessage": {
-          "REDIRECTURL": "https://uwcssa.ca/",
-          "EMAILSUBJECT": "uwcssa.ca email verification",
-          "EMAILMESSAGE": "Please click the link to confirm!",
-          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssatsCustomMessage-4a4a4a766e2b446d3065-build.zip"
         }
       }
     }

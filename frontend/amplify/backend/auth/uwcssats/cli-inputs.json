@@ -48,10 +48,6 @@
     "userPoolGroups": true,
     "adminQueries": true,
     "triggers": {
-      "CustomMessage": [
-        "verification-link",
-        "custom"
-      ],
       "PostConfirmation": [
         "add-to-group",
         "custom"
@@ -93,25 +89,16 @@
           "Arn",
           "Name"
         ]
-      },
-      {
-        "category": "function",
-        "resourceName": "uwcssatsCustomMessage",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
       }
     ],
     "permissions": [
       "{\n  \"policyName\": \"AddToGroupCognito\",\n  \"trigger\": \"PostConfirmation\",\n  \"effect\": \"Allow\",\n  \"actions\": [\n    \"cognito-idp:AdminAddUserToGroup\",\n    \"cognito-idp:GetGroup\",\n    \"cognito-idp:CreateGroup\"\n  ],\n  \"resource\": {\n    \"paramType\": \"!GetAtt\",\n    \"keys\": [\n      \"UserPool\",\n      \"Arn\"\n    ]\n  }\n}"
     ],
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"uwcssatsCustomMessage\"\n  },\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"uwcssatsPostConfirmation\"\n  }\n]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"]}",
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"uwcssatsPostConfirmation\"\n  }\n]",
     "verificationBucketName": "uwcssatsverificationbucket",
     "parentStack": {
       "Ref": "AWS::StackId"
-    }
+    },
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://devts.uwcssa.ca/\"]}"
   }
 }

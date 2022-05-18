@@ -16,10 +16,5 @@
   "skipEdit": true,
   "GROUP": "uwcssaUser",
   "enableCors": false,
-  "environmentVariableList": [
-    {
-      "cloudFormationParameterName": "userDynamoDbTable",
-      "environmentVariableName": "User_DynamoDB_Table"
-    }
-  ]
+  "environmentVariableList": []
 }

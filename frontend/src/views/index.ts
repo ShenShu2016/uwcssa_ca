@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 18:52:41
+ * @LastEditTime: 2022-05-18 01:35:19
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
@@ -53,6 +53,7 @@ export { default as PasswordResetCover } from './PasswordResetCover';
 export { default as SigninCover } from './SigninCover';
 // export { default as SignupSimple } from './SignupSimple';
 export { default as SignupCover } from './SignupCover';
+export { default as EmailConfirmationCover } from './EmailConfirmationCover';
 // export { default as AccountBilling } from './Account/Billing';
 // export { default as AccountGeneral } from './Account/General';
 // export { default as AccountNotifications } from './Account/Notifications';
