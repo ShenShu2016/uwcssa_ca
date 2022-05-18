@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 01:35:19
+ * @LastEditTime: 2022-05-18 17:55:36
  * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
  * @Description:
  */
@@ -48,6 +48,7 @@ export { default as ContactPageSidebarMap } from './ContactPageSidebarMap';
 // export { default as BlogArticle } from './BlogArticle';
 // export { default as BlogReachView } from './BlogReachView';
 export { default as PasswordResetCover } from './PasswordResetCover';
+export { default as ForgotPassWordSubmit } from './ForgotPassWordSubmit';
 // export { default as PasswordResetSimple } from './PasswordResetSimple';
 // export { default as SigninSimple } from './SigninSimple';
 export { default as SigninCover } from './SigninCover';

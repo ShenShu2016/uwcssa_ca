@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 01:35:24
+ * @LastEditTime: 2022-05-18 15:39:41
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -14,6 +14,7 @@ import {
   CompanyTerms as CompanyTermsView,
   ContactPageSidebarMap as ContactPageSidebarMapView,
   EmailConfirmationCover as EmailConfirmationCoverView,
+  ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
@@ -203,6 +204,12 @@ const routes = [
     path: '/auth/passwordReset',
     renderer: (params = {}): JSX.Element => (
       <PasswordResetCoverView {...params} />
+    ),
+  },
+  {
+    path: '/auth/passWordResetSubmit',
+    renderer: (params = {}): JSX.Element => (
+      <ForgotPassWordSubmitView {...params} />
     ),
   },
   // {

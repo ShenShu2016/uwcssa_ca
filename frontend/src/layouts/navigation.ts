@@ -161,8 +161,12 @@ const pages = {
     //   href: '/password-reset-simple',
     // },
     {
-      title: 'Password: Cover',
+      title: 'Password Reset: Cover',
       href: '/auth/passwordReset',
+    },
+    {
+      title: 'Forgot PassWord Submit',
+      href: '/auth/forgotPassWordSubmit',
     },
   ],
   secondary: [
