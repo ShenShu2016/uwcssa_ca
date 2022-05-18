@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:10:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:11:22
+ * @LastEditTime: 2022-05-18 17:56:47
  * @FilePath: \uwcssa_ca\frontend\src\views\PasswordResetCover\components\Form\Form.tsx
  * @Description:
  *
@@ -18,7 +18,10 @@ import Link from '@mui/material/Link';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { forgotPassword } from 'redux/auth/authSlice';
+import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   email: yup
@@ -29,11 +32,23 @@ const validationSchema = yup.object({
 });
 
 const Form = (): JSX.Element => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const initialValues = {
     email: '',
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(values);
+    const { email } = values;
+    const response = await dispatch(forgotPassword(email));
+    console.log(response);
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('/');
+    } else {
+      return false;
+    }
     return values;
   };
 
