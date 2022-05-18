@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "uwcssats",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\shush\\Documents\\GitHub\\uwcssa_ca\\frontend\\amplify\\backend\\api\\uwcssats\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authuwcssats"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+
+type User
+  @model(subscriptions: null)
+  @auth(rules: [{ allow: groups, groups: ["uwcssaAdmin"] }]) {
+  id: ID!
+  email: AWSEmail!
+  userName: String! # 和这个东西一样：event.request.userAttributes.sub
+  name: String! # 额外的name，但是他们的username 还是uuid。和Google连用不错
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}

@@ -1,0 +1,15 @@
+{
+  "resourceName": "s3uwcssats",
+  "policyUUID": "39c84a4a",
+  "bucketName": "uwcssats",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger085746e7"
+}
