@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 18:52:54
+ * @LastEditTime: 2022-05-18 01:32:18
  * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
@@ -199,7 +199,7 @@ const routes = [
   //   renderer: (params = {}): JSX.Element => <BlogReachViewView {...params} />,
   // },
   {
-    path: '/passwordReset',
+    path: '/auth/passwordReset',
     renderer: (params = {}): JSX.Element => (
       <PasswordResetCoverView {...params} />
     ),

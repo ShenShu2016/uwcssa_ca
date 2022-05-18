@@ -99,7 +99,7 @@ const Form = (): JSX.Element => {
                 <Link
                   component={'a'}
                   color={'primary'}
-                  href={'/passwordReset'}
+                  href={'/auth/passwordReset'}
                   underline={'none'}
                 >
                   Forgot your password?

@@ -162,7 +162,7 @@ const pages = {
     // },
     {
       title: 'Password: Cover',
-      href: '/passwordReset',
+      href: '/auth/passwordReset',
     },
   ],
   secondary: [
