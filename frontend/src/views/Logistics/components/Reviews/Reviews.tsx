@@ -1,3 +1,15 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-05-17 22:50:55
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-19 15:46:50
+ * @FilePath: \uwcssa_ca\frontend\src\views\Logistics\components\Reviews\Reviews.tsx
+ * @Description:
+ *
+ */
+
+import { Stack, Tooltip } from '@mui/material';
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -47,7 +59,7 @@ const Reviews = (): JSX.Element => {
             color: 'common.white',
           }}
         >
-          Trusted by the world’s most innovative businesses – big and small
+          Our Awesome Team
         </Typography>
         <Typography
           variant="h6"
@@ -55,10 +67,8 @@ const Reviews = (): JSX.Element => {
           data-aos={'fade-up'}
           sx={{ color: 'common.white' }}
         >
-          Companies from across the globe have had fantastic experiences using
-          theFront.
-          <br />
-          Here’s what they have to say.
+          This is the paragraph where you can write more details about your
+          team. Keep you user engaged by providing meaningful information.
         </Typography>
       </Box>
       <Grid container spacing={2}>
@@ -100,7 +110,34 @@ const Reviews = (): JSX.Element => {
                     />
                   </ListItem>
                 </Box>
-                <Typography color="text.secondary">{item.feedback}</Typography>
+                <Typography
+                  color="text.secondary"
+                  sx={{ paddingBottom: 5, maxHeight: '100px' }}
+                >
+                  {item.feedback}
+                </Typography>
+                <Stack direction="row" spacing={2}>
+                  <Tooltip placement="top" title="Follow me!" arrow>
+                    <Box
+                      component={Avatar}
+                      src="https://www.logo.wine/a/logo/GitHub/GitHub-Icon-White-Dark-Background-Logo.wine.svg"
+                      fontSize="1.125rem"
+                      sx={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </Tooltip>
+                  <Tooltip placement="top" title="Follow me!" arrow>
+                    <Box
+                      component={Avatar}
+                      src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Icon-Logo.wine.svg"
+                      fontSize="1.125rem"
+                      sx={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </Tooltip>
+                </Stack>
               </CardContent>
             </Box>
           </Grid>
