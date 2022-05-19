@@ -2,30 +2,33 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 17:49:13
+ * @LastEditTime: 2022-05-19 19:27:31
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
  */
 
 import React, { useState } from 'react';
+import { getUserInfo, signOut } from 'redux/auth/authSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import { Link } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Tooltip from '@mui/material/Tooltip';
-import { getUserInfo } from 'redux/auth/authSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useAppSelector } from 'redux/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userInfo = useAppSelector(getUserInfo);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -35,6 +38,12 @@ export default function AccountMenu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogout = async () => {
+    const response = await dispatch(signOut());
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('/', { replace: true });
+    }
   };
   return (
     <React.Fragment>
@@ -93,26 +102,26 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem component={Link} href="/settings/profile">
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem>
+        {/* <MenuItem >
           <Avatar /> My account
-        </MenuItem>
+        </MenuItem> */}
         <Divider />
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another account
-        </MenuItem>
-        <MenuItem>
+        </MenuItem> */}
+        <MenuItem component={Link} href="/settings/general">
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

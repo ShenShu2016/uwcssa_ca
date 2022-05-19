@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import Container from 'components/Container';
+import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
-import Container from 'components/Container';
+import { useTheme } from '@mui/material/styles';
 
 const pages = [
   {
     id: 'general',
-    href: '/account-general',
+    href: '/settings/general',
     title: 'General',
   },
   {
     id: 'security',
-    href: '/account-security',
+    href: '/settings/security',
     title: 'Security',
   },
   {
     id: 'notifications',
-    href: '/account-notifications',
+    href: '/settings/notifications',
     title: 'Notifications',
   },
   {
     id: 'billing',
-    href: '/account-billing',
+    href: '/settings/billing',
     title: 'Billing Information',
   },
 ];
