@@ -1,27 +1,37 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-05-17 22:50:55
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-19 13:32:38
+ * @FilePath: \uwcssa_ca\frontend\src\views\Logistics\components\Integrations\Integrations.tsx
+ * @Description:
+ *
+ */
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 
+// 暂时先这样，之后再细改
 const mock = [
   {
-    title: 'Google Drive',
-    subtitle:
-      'A very simple and modern template with a very harmonious color scheme. Also the additional plugins like the statistics are great and fit perfectly into the overall picture.',
-    icon: 'https://assets.maccarianagency.com/svg/logos/google-drive.svg',
+    title: 'Github',
+    subtitle: 'Contribute to our project and help our community!',
+    icon: 'https://www.logo.wine/a/logo/GitHub/GitHub-Icon-White-Dark-Background-Logo.wine.svg',
+    link: 'https://github.com/ShenShu2016/uwcssa_ca',
   },
   {
-    title: 'Google Ad Manager',
-    subtitle:
-      'A very simple and modern template with a very harmonious color scheme. Also the additional plugins like the statistics are great and fit perfectly into the overall picture.',
-    icon: 'https://assets.maccarianagency.com/svg/logos/google-ad-manager.svg',
+    title: 'WeChat',
+    subtitle: 'Join our WeChat community and let’s get to know each other.',
+    icon: 'https://www.logo.wine/a/logo/WeChat/WeChat-Icon-Logo.wine.svg',
   },
   {
-    title: 'Atlassian',
-    subtitle:
-      'Keep your entire team in sync with development and easily manage tasks, goals, and deadlines. Easily manage and edit any Adwords campaign inline to improve ROI with constant review.',
-    icon: 'https://assets.maccarianagency.com/svg/logos/atlassian.svg',
+    title: 'Facebook',
+    subtitle: 'Follow us on Facebook and keep up-to-date with our latest news.',
+    icon: 'https://www.logo.wine/a/logo/Facebook/Facebook-f_Logo-Blue-Logo.wine.svg',
+    link: 'https://www.facebook.com/uwincssa',
   },
 ];
 
@@ -35,7 +45,7 @@ const Integrations = (): JSX.Element => {
           align={'center'}
           sx={{ fontWeight: 700, color: 'common.white' }}
         >
-          Syncronization with different companiees
+          Join our community
         </Typography>
         <Typography
           variant={'h6'}
@@ -44,8 +54,8 @@ const Integrations = (): JSX.Element => {
           align={'center'}
           sx={{ color: 'common.white' }}
         >
-          Forward thinking businesses use our cloud backup service to ensure
-          data reliability and safety.
+          Since UWCSSA is an open source project, we want to continue this
+          movement too.
         </Typography>
       </Box>
       <Grid container spacing={2}>
@@ -59,11 +69,18 @@ const Integrations = (): JSX.Element => {
               }}
             >
               <Box
+                onClick={() => window.open(item.link)}
                 component={Avatar}
                 width={{ xs: 60, md: 80 }}
                 height={{ xs: 60, md: 80 }}
                 marginBottom={2}
                 src={item.icon}
+                sx={{
+                  position: 'relative',
+                  top: '0',
+                  transition: 'top ease 0.3s',
+                  '&:hover': { top: '-5px' },
+                }}
               />
               <Typography
                 variant={'h6'}
