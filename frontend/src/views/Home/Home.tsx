@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-05-19 09:19:47
+ * @LastEditTime: 2022-05-19 09:55:25
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/Home/Home.tsx
  */
@@ -9,7 +9,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import ArticleContainer from 'components/ArticleContainer';
-
+import UserCardGrid from 'components/UserCardGrid';
 const Home = (): React.ReactElement => {
   return (
     <Main>
@@ -23,7 +23,7 @@ const Home = (): React.ReactElement => {
           backgroundColor: '#ffffff'  }}>123</Box>
         
         <Box sx={{ 
-          flex: 2,
+          flex: 3,
           minHeight: '100vh',
           borderRadius: '12px',
           margin: '0px 4px',
@@ -33,15 +33,12 @@ const Home = (): React.ReactElement => {
 
         <Box sx={{flex: 1}}>
           <Box sx={{ 
-            height: '30%',
+            // height: '30%',
             borderRadius: '12px',
             margin: '0px 4px',
-            backgroundColor: '#ffffff'  }}>123</Box>
-          <Box sx={{ 
-            height: '50%',
-            borderRadius: '12px',
-            margin: '8px 4px',
-            backgroundColor: '#ffffff'  }}>123</Box>
+            backgroundColor: '#ffffff'  }}>
+            <UserCardGrid/>
+          </Box>
         </Box>
       </Box>
     </Main>
