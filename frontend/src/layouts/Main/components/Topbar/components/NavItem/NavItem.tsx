@@ -45,9 +45,9 @@ const NavItem = ({
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
-      return items.find((i) => i.href === activeLink);
+      return items.find((i) => i.href === activeLink || i.href === `${activeLink}/`);
     } else {
-      return items.href === activeLink;
+      return items.href === activeLink || items.href === `${activeLink}/`;
     }
   };
   const linkColor = colorInvert ? 'common.white' : 'text.primary';

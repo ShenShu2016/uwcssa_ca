@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-19 17:32:21
+ * @LastEditTime: 2022-05-19 17:52:13
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Sidebar/components/SidebarNav/components/NavItem/NavItem.tsx
  */
@@ -33,9 +33,9 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
-      return items.find((i) => i.href === activeLink);
+      return items.find((i) => i.href === activeLink || i.href === `${activeLink}/`);
     } else {
-      return items.href === activeLink;
+      return items.href === activeLink || items.href === `${activeLink}/`;
     }
   };
 
