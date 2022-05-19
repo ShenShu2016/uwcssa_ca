@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-19 10:34:07
- * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-19 00:11:01
+ * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
  * @Description:
  *
  */
@@ -15,13 +15,13 @@ import {
   ContactPageSidebarMap as ContactPageSidebarMapView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
-  // Logistics as LogisticsView,
+  Home,
+  Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
   ReduxCounter as ReduxCounterView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
-  Home as Home
 } from 'views';
 
 import React from 'react';
@@ -33,7 +33,11 @@ const routes = [
   // },
   {
     path: '/',
-    renderer: (): JSX.Element => <Home  />,
+    renderer: (): JSX.Element => <Home />,
+  },
+  {
+    path: '/index',
+    renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
   },
   {
     path: '/reduxCounter',

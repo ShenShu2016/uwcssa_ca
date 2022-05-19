@@ -24,6 +24,10 @@ const pages = {
       title: 'Redux Counter',
       href: '/reduxCounter',
     },
+    {
+      title: 'Second Home',
+      href: '/index',
+    },
     // {
     //   title: 'Service',
     //   href: '/service',
