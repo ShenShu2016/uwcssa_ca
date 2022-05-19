@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:54:30
+ * @LastEditTime: 2022-05-18 23:42:10
  * @FilePath: \uwcssa_ca\frontend\src\redux\auth\authSlice.tsx
  * @Description:
  *
@@ -332,5 +332,10 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const getAuthState = (state: { auth: { isAuth: boolean } }) =>
+  state.auth.isAuth;
+
+export const getUserInfo = (state) => state.auth?.user?.attributes;
 
 export default authSlice.reducer;

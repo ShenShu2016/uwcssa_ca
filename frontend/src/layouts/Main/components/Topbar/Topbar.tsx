@@ -2,20 +2,22 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 18:02:42
+ * @LastEditTime: 2022-05-18 23:42:05
  * @FilePath: \uwcssa_ca\frontend\src\layouts\Main\components\Topbar\Topbar.tsx
  * @Description:
  *
  */
 
-import { Link, Typography } from '@mui/material';
+import { Avatar, Link, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
+import { getAuthState, getUserInfo } from 'redux/auth/authSlice';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavItem } from './components';
 import React from 'react';
+import { useAppSelector } from 'redux/hooks';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -47,6 +49,9 @@ const Topbar = ({
     blog: blogPages,
   } = pages;
 
+  const isAuth = useAppSelector(getAuthState);
+  const userInfo = useAppSelector(getUserInfo);
+  console.log(userInfo);
   return (
     <Box
       display={'flex'}
@@ -126,16 +131,29 @@ const Topbar = ({
           />
         </Box>
         <Box marginLeft={4}>
-          <Button
-            variant="contained"
-            color="primary"
-            component={Link}
-            //target="blank"
-            href="/auth/signIn"
-            size="large"
-          >
-            Sign in
-          </Button>
+          {isAuth ? (
+            <Avatar
+              sx={{
+                bgcolor: theme.palette.primary.main,
+                color: theme.palette.common.white,
+                width: 30,
+                height: 30,
+              }}
+            >
+              {userInfo.name.slice(0, 1)}
+            </Avatar>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              //target="blank"
+              href="/auth/signIn"
+              size="large"
+            >
+              Sign in
+            </Button>
+          )}
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
