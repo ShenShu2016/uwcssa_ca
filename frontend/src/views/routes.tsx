@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-19 08:17:07
+ * @LastEditTime: 2022-05-19 10:34:07
  * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
@@ -15,7 +15,7 @@ import {
   ContactPageSidebarMap as ContactPageSidebarMapView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
-  Logistics as LogisticsView,
+  // Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
   ReduxCounter as ReduxCounterView,
