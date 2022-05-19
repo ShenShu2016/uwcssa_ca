@@ -1,5 +1,6 @@
 import { alpha, useTheme } from '@mui/material/styles';
 
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from 'components/Container';
@@ -8,7 +9,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = (): JSX.Element => {
@@ -22,7 +22,7 @@ const Hero = (): JSX.Element => {
     <Box data-aos={isMd ? 'fade-right' : 'fade-up'}>
       <Box marginBottom={2}>
         <Typography variant="h2" color="text.primary" sx={{ fontWeight: 700 }}>
-          We make trucking{' '}
+          A Student Community like{' '}
         </Typography>
         <Typography
           color={'primary'}
@@ -36,24 +36,23 @@ const Hero = (): JSX.Element => {
             )} 0%)`,
           }}
         >
-          efficient
+          No Other
         </Typography>
       </Box>
       <Box marginBottom={3}>
         <Typography variant="h6" component="p" color="text.secondary">
-          Forward thinking businesses use our cloud backup service to ensure
-          data reliability and safety.
+          We provide a variety of information to enhance your experience.
         </Typography>
       </Box>
       <Button variant="contained" size="large">
         Sign in
       </Button>
-      <Button size="large" style={{marginLeft: 24}}>
+      <Button size="large" style={{ marginLeft: 24 }}>
         Sign up
       </Button>
       <Button
         size="large"
-        style={{marginLeft: 24}}
+        style={{ marginLeft: 24 }}
         endIcon={<ArrowForwardIcon />}
         onClick={() => navigate('dashboard')}
       >
@@ -79,7 +78,9 @@ const Hero = (): JSX.Element => {
         <Box
           component={LazyLoadImage}
           effect="blur"
-          src={'https://img02.en25.com/Web/UniversityofWindsor/%7Bd8f91307-a2fc-4c74-976f-746c732a1bec%7D_uwindsor-dillon-hall-drone-hero.jpg'}
+          src={
+            'https://img02.en25.com/Web/UniversityofWindsor/%7Bd8f91307-a2fc-4c74-976f-746c732a1bec%7D_uwindsor-dillon-hall-drone-hero.jpg'
+          }
           height={{ xs: 'auto', md: 1 }}
           maxHeight={{ xs: 300, md: 1 }}
           width={1}
@@ -97,7 +98,7 @@ const Hero = (): JSX.Element => {
         overflow: 'hidden',
       }}
     >
-      <Container paddingX={0} paddingY={0} >
+      <Container paddingX={0} paddingY={0}>
         <Box
           display={'flex'}
           flexDirection={{ xs: 'column', md: 'row' }}
@@ -111,10 +112,7 @@ const Hero = (): JSX.Element => {
             display={'flex'}
             alignItems={'center'}
           >
-            <Box 
-              position='absolute'
-              zIndex={-1}
-            >
+            <Box position="absolute" zIndex={-1}>
               <Box
                 component={LazyLoadImage}
                 effect="blur"
@@ -123,7 +121,7 @@ const Hero = (): JSX.Element => {
                 maxHeight={{ xs: 300, md: 1 }}
                 width={1}
                 maxWidth={1}
-                style={{opacity: 0.1}}
+                style={{ opacity: 0.1 }}
               />
             </Box>
             <Container>
