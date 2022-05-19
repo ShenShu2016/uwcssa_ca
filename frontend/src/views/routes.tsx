@@ -1,14 +1,19 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-19 17:39:55
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-19 18:49:58
  * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
  */
 
 import {
+  AccountBilling as AccountBillingView,
+  AccountGeneral as AccountGeneralView,
+  AccountNotifications as AccountNotificationsView,
+  AccountProfile as AccountProfileView,
+  AccountSecurity as AccountSecurityView,
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
@@ -33,7 +38,7 @@ const routes = [
   },
   {
     path: '/dashboard',
-    renderer: (): JSX.Element => <Home  />,
+    renderer: (): JSX.Element => <Home />,
   },
   {
     path: '/reduxCounter',
@@ -245,24 +250,33 @@ const routes = [
       <EmailConfirmationCoverView {...params} />
     ),
   },
-  // {
-  //   path: '/account-billing',
-  //   renderer: (params = {}): JSX.Element => <AccountBillingView {...params} />,
-  // },
-  // {
-  //   path: '/account-general',
-  //   renderer: (params = {}): JSX.Element => <AccountGeneralView {...params} />,
-  // },
-  // {
-  //   path: '/account-notifications',
-  //   renderer: (params = {}): JSX.Element => (
-  //     <AccountNotificationsView {...params} />
-  //   ),
-  // },
-  // {
-  //   path: '/account-security',
-  //   renderer: (params = {}): JSX.Element => <AccountSecurityView {...params} />,
-  // },
+  {
+    path: '/settings',
+    renderer: (params = {}): JSX.Element => <AccountGeneralView {...params} />,
+  },
+  {
+    path: '/settings/general',
+    renderer: (params = {}): JSX.Element => <AccountGeneralView {...params} />,
+  },
+  {
+    path: '/settings/profile',
+    renderer: (params = {}): JSX.Element => <AccountProfileView {...params} />,
+  },
+
+  {
+    path: '/settings/notifications',
+    renderer: (params = {}): JSX.Element => (
+      <AccountNotificationsView {...params} />
+    ),
+  },
+  {
+    path: '/settings/security',
+    renderer: (params = {}): JSX.Element => <AccountSecurityView {...params} />,
+  },
+  {
+    path: '/settings/billing',
+    renderer: (params = {}): JSX.Element => <AccountBillingView {...params} />,
+  },
   // {
   //   path: '/not-found',
   //   renderer: (params = {}): JSX.Element => <NotFoundView {...params} />,
