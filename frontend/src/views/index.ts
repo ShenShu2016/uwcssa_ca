@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:55:36
- * @FilePath: \uwcssa_ca\frontend\src\views\index.ts
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-19 08:17:00
+ * @FilePath: /uwcssa_ca/frontend/src/views/index.ts
  * @Description:
  */
 // export { default as Home } from './Home';
@@ -61,3 +61,4 @@ export { default as EmailConfirmationCover } from './EmailConfirmationCover';
 // export { default as AccountSecurity } from './Account/Security';
 // export { default as NotFound } from './NotFound';
 export { default as NotFoundCover } from './NotFoundCover';
+export { default as Home } from './Home';
