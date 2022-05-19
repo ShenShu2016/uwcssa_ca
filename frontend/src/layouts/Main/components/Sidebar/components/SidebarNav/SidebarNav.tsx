@@ -7,12 +7,13 @@ import { useTheme } from '@mui/material/styles';
 
 interface Props {
   pages: {
-    landings: Array<PageItem>;
-    company: Array<PageItem>;
-    account: Array<PageItem>;
-    secondary: Array<PageItem>;
-    blog: Array<PageItem>;
-    portfolio: Array<PageItem>;
+    dashboard: Array<PageItem> | PageItem;
+    UWCSSA: Array<PageItem> | PageItem;
+    freshman: Array<PageItem> | PageItem;
+    house: Array<PageItem> | PageItem;
+    jobs: Array<PageItem> | PageItem;
+    about: Array<PageItem> | PageItem;
+    activity: Array<PageItem> | PageItem;
   };
 }
 
@@ -21,12 +22,13 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
   const { mode } = theme.palette;
 
   const {
-    landings: landingPages,
-    secondary: secondaryPages,
-    company: companyPages,
-    account: accountPages,
-    portfolio: portfolioPages,
-    blog: blogPages,
+    UWCSSA: UWCSSAPages,
+    dashboard: dashboardPages,
+    freshman: freshmanPages,
+    house: housePages,
+    activity: activityPages,
+    jobs: jobsPages,
+    about: aboutPages,
   } = pages;
 
   return (
@@ -57,22 +59,25 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
       </Box>
       <Box paddingX={2} paddingY={2}>
         <Box>
-          <NavItem title={'Landings'} items={landingPages} />
+          <NavItem title={'UWCSSA'} items={UWCSSAPages} />
         </Box>
         <Box>
-          <NavItem title={'Company'} items={companyPages} />
+          <NavItem title={'首页'} items={dashboardPages} />
         </Box>
         <Box>
-          <NavItem title={'Pages'} items={secondaryPages} />
+          <NavItem title={'新生手册'} items={freshmanPages} />
         </Box>
         <Box>
-          <NavItem title={'Account'} items={accountPages} />
+          <NavItem title={'租房'} items={housePages} />
         </Box>
         <Box>
-          <NavItem title={'Blog'} items={blogPages} />
+          <NavItem title={'活动'} items={activityPages} />
         </Box>
         <Box>
-          <NavItem title={'Portfolio'} items={portfolioPages} />
+          <NavItem title={'工作机会'} items={jobsPages} />
+        </Box>
+        <Box>
+          <NavItem title={'关于'} items={aboutPages} />
         </Box>
         <Box marginTop={2}>
           <Button

@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 00:11:01
- * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-19 17:39:55
+ * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
  */
@@ -27,17 +27,13 @@ import {
 import React from 'react';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
-  // },
   {
     path: '/',
-    renderer: (): JSX.Element => <Home />,
+    renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
   },
   {
-    path: '/index',
-    renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
+    path: '/dashboard',
+    renderer: (): JSX.Element => <Home  />,
   },
   {
     path: '/reduxCounter',

@@ -1,3 +1,10 @@
+/*
+ * @Author: 李佳修
+ * @Date: 2022-05-18 09:12:03
+ * @LastEditTime: 2022-05-19 17:17:10
+ * @LastEditors: 李佳修
+ * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Sidebar/Sidebar.tsx
+ */
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import React from 'react';
@@ -9,12 +16,13 @@ interface Props {
   open: boolean;
   variant: 'permanent' | 'persistent' | 'temporary' | undefined;
   pages: {
-    landings: Array<PageItem>;
-    company: Array<PageItem>;
-    account: Array<PageItem>;
-    secondary: Array<PageItem>;
-    blog: Array<PageItem>;
-    portfolio: Array<PageItem>;
+    dashboard: Array<PageItem> | PageItem;
+    UWCSSA: Array<PageItem> | PageItem;
+    freshman: Array<PageItem> | PageItem;
+    house: Array<PageItem> | PageItem;
+    jobs: Array<PageItem> | PageItem;
+    about: Array<PageItem> | PageItem;
+    activity: Array<PageItem> | PageItem;
   };
 }
 

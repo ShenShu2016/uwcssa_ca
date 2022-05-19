@@ -1,5 +1,6 @@
+// 如果每个分类下是数组 那么就有下拉菜单 如果是对象 就是点击直接跳转
 const pages = {
-  landings: [
+  UWCSSA: [
     // {
     //   title: 'Mobile App',
     //   href: '/mobile-app',
@@ -81,53 +82,15 @@ const pages = {
     //   href: '/e-commerce',
     // },
   ],
-  company: [
-    {
-      title: 'Career',
-      href: '/career',
-    },
-    {
-      title: 'Job Opening',
-      href: '/careerOpening',
-    },
-    // {
-    //   title: 'Customer Stories',
-    //   href: '/customers',
-    // },
-    // {
-    //   title: 'Hire Us',
-    //   href: '/hire-us',
-    // },
-    // {
-    //   title: 'About: Startup',
-    //   href: '/about-side-cover',
-    // },
-    // {
-    //   title: 'About',
-    //   href: '/about',
-    // },
-    // {
-    //   title: 'Pricing',
-    //   href: '/pricing',
-    // },
-    {
-      title: 'Terms',
-      href: '/terms',
-    },
-    {
-      title: 'Contact: Map',
-      href: '/contactUs',
-    },
-    // {
-    //   title: 'Contact: Minimal',
-    //   href: '/contact-page-cover',
-    // },
-    // {
-    //   title: 'Contact: Startup',
-    //   href: '/contact-page',
-    // },
-  ],
-  account: [
+  dashboard: {
+    title: 'dashboard',
+    href: '/dashboard'
+  },
+  freshman: {
+    title: 'terms',
+    href: '/terms',
+  },
+  house: [
     // {
     //   title: 'General Settings',
     //   href: '/account-general',
@@ -173,7 +136,7 @@ const pages = {
       href: '/auth/forgotPassWordSubmit',
     },
   ],
-  secondary: [
+  activity: [
     // {
     //   title: 'Help Center: Overview',
     //   href: '/help-center',
@@ -199,42 +162,14 @@ const pages = {
     //   href: '/career-listing-minimal',
     // },
   ],
-  blog: [
-    // {
-    //   title: 'Reach View',
-    //   href: '/blog-reach-view',
-    // },
-    // {
-    //   title: 'Search',
-    //   href: '/blog-search',
-    // },
-    // {
-    //   title: 'Newsroom',
-    //   href: '/blog-newsroom',
-    // },
-    // {
-    //   title: 'Article',
-    //   href: '/blog-article',
-    // },
-  ],
-  portfolio: [
-    // {
-    //   title: 'Grid View',
-    //   href: '/portfolio-grid',
-    // },
-    // {
-    //   title: 'Masonry',
-    //   href: '/portfolio-masonry',
-    // },
-    // {
-    //   title: 'Basic',
-    //   href: '/portfolio-page',
-    // },
-    // {
-    //   title: 'Parallax',
-    //   href: '/agency',
-    // },
-  ],
+  jobs: {
+    title: 'careerOpening',
+    href: '/careerOpening',
+  },
+  about: {
+    title: 'contactUs',
+    href: '/contactUs',
+  },
 };
 
 export default pages;

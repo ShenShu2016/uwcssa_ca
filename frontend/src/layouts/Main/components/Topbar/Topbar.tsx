@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 23:42:05
- * @FilePath: \uwcssa_ca\frontend\src\layouts\Main\components\Topbar\Topbar.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-19 17:39:08
+ * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
  */
@@ -23,12 +23,13 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onSidebarOpen: () => void;
   pages: {
-    landings: Array<PageItem>;
-    company: Array<PageItem>;
-    account: Array<PageItem>;
-    secondary: Array<PageItem>;
-    blog: Array<PageItem>;
-    portfolio: Array<PageItem>;
+    dashboard: Array<PageItem> | PageItem;
+    UWCSSA: Array<PageItem> | PageItem;
+    freshman: Array<PageItem> | PageItem;
+    house: Array<PageItem> | PageItem;
+    jobs: Array<PageItem> | PageItem;
+    about: Array<PageItem> | PageItem;
+    activity: Array<PageItem> | PageItem;
   };
   colorInvert?: boolean;
 }
@@ -41,12 +42,13 @@ const Topbar = ({
   const theme = useTheme();
   const { mode } = theme.palette;
   const {
-    landings: landingPages,
-    secondary: secondaryPages,
-    company: companyPages,
-    account: accountPages,
-    portfolio: portfolioPages,
-    blog: blogPages,
+    UWCSSA: UWCSSAPages,
+    dashboard: dashboardPages,
+    freshman: freshmanPages,
+    house: housePages,
+    activity: activityPages,
+    jobs: jobsPages,
+    about: aboutPages,
   } = pages;
 
   const isAuth = useAppSelector(getAuthState);
@@ -84,49 +86,57 @@ const Topbar = ({
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box>
           <NavItem
-            title={'Landings'}
-            id={'landing-pages'}
-            items={landingPages}
+            title={'UWCSSA'}
+            id={'UWCSSA-pages'}
+            items={UWCSSAPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'Company'}
-            id={'company-pages'}
-            items={companyPages}
+            title={'首页'}
+            id={'dashboard-pages'}
+            items={dashboardPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'Account'}
-            id={'account-pages'}
-            items={accountPages}
+            title={'新生手册'}
+            id={'freshman-pages'}
+            items={freshmanPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'Pages'}
-            id={'secondary-pages'}
-            items={secondaryPages}
+            title={'租房'}
+            id={'house-pages'}
+            items={housePages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'Blog'}
-            id={'blog-pages'}
-            items={blogPages}
+            title={'活动'}
+            id={'activity-pages'}
+            items={activityPages}
             colorInvert={colorInvert}
           />
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'Portfolio'}
-            id={'portfolio-pages'}
-            items={portfolioPages}
+            title={'工作机会'}
+            id={'jobs-pages'}
+            items={jobsPages}
+            colorInvert={colorInvert}
+          />
+        </Box>
+        <Box marginLeft={4}>
+          <NavItem
+            title={'关于'}
+            id={'about-pages'}
+            items={aboutPages}
             colorInvert={colorInvert}
           />
         </Box>

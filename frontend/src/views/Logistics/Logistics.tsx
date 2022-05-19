@@ -1,15 +1,15 @@
 import {
-  About,
+  // About,
   AboutBottom,
   Features,
   Hero,
   Integrations,
   Jobs,
   News,
-  Pricings,
+  // Pricings,
   Reviews,
   Team,
-  Trucking,
+  // Trucking,
   Video,
 } from './components';
 import { alpha, useTheme } from '@mui/material/styles';
@@ -49,10 +49,10 @@ const Logistics = (): JSX.Element => {
           <Hero />
         </Box>
       </Box>
-      <Container>
+      {/* <Container>
         <Trucking />
-      </Container>
-      <About />
+      </Container> */}
+      {/* <About /> */}
       <Container>
         <Features />
       </Container>
@@ -70,9 +70,9 @@ const Logistics = (): JSX.Element => {
           <Integrations />
         </Container>
       </Box>
-      <Container>
+      {/* <Container>
         <Pricings />
-      </Container>
+      </Container> */}
       <Box bgcolor={'alternate.main'}>
         <Container>
           <Jobs />

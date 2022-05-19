@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-19 08:26:55
+ * @LastEditTime: 2022-05-19 17:15:41
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/Main.tsx
  */
@@ -16,7 +16,7 @@ import { styled } from '@mui/material/styles';
 import TopNav from 'components/TopNav';
 import pages from '../navigation';
 import useMediaQuery from '@mui/material/useMediaQuery';
-// import useScrollTrigger from '@mui/material/useScrollTrigger';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useTheme } from '@mui/material/styles';
 
 interface Props {
@@ -36,8 +36,8 @@ const Content = styled(Box)(({theme}) => ({
 
 const Main = ({
   children,
-  // colorInvert = false,
-  // bgcolor = 'transparent',
+  colorInvert = false,
+  bgcolor = 'transparent',
 }: Props): JSX.Element => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
@@ -56,14 +56,14 @@ const Main = ({
 
   const open = isMd ? false : openSidebar;
 
-  // const trigger = useScrollTrigger({
-  //   disableHysteresis: true,
-  //   // threshold: 38,
-  // });
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 38,
+  });
 
   return (
     <Box>
-      <Box bgcolor={'#ffffff'} position={'relative'} zIndex={theme.zIndex.appBar}>
+      <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
         <Container paddingTop={'8px !important'} paddingBottom={'0 !important'}>
           <TopNav />
         </Container>
@@ -73,16 +73,15 @@ const Main = ({
         sx={{
           top: 0,
           boxShadow: '0px 15px 10px -15px #bdbdbd',
-          backgroundColor: '#fff'
-          // backgroundColor: trigger ? theme.palette.background.paper : bgcolor,
+          backgroundColor: trigger ? theme.palette.background.paper : bgcolor,
         }}
-        // elevation={trigger ? 1 : 0}
+        elevation={trigger ? 1 : 0}
       >
         <Container paddingY={1}>
           <Topbar
             onSidebarOpen={handleSidebarOpen}
             pages={pages}
-            // colorInvert={trigger ? false : colorInvert}
+            colorInvert={trigger ? false : colorInvert}
           />
         </Container>
       </AppBar>
@@ -92,7 +91,7 @@ const Main = ({
         variant="temporary"
         pages={pages}
       />
-      <Content>
+      <Content sx={{ backgroundColor: bgcolor }}>
         {children}
       </Content>
       <Divider />
