@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 15:39:41
- * @FilePath: \uwcssa_ca\frontend\src\views\routes.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-19 08:17:07
+ * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
  */
@@ -21,14 +21,19 @@ import {
   ReduxCounter as ReduxCounterView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
+  Home as Home
 } from 'views';
 
 import React from 'react';
 
 const routes = [
+  // {
+  //   path: '/',
+  //   renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
+  // },
   {
     path: '/',
-    renderer: (params = {}): JSX.Element => <LogisticsView {...params} />,
+    renderer: (): JSX.Element => <Home  />,
   },
   {
     path: '/reduxCounter',
