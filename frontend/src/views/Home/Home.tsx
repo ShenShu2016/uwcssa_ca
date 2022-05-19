@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-05-19 09:55:25
+ * @LastEditTime: 2022-05-19 10:01:42
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/Home/Home.tsx
  */
@@ -9,36 +9,34 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import ArticleContainer from 'components/ArticleContainer';
+import Card from '@mui/material/Card';
 import UserCardGrid from 'components/UserCardGrid';
 const Home = (): React.ReactElement => {
   return (
     <Main>
       {/* 暂时定格局 样式先内联写死 之后再修改 */}
       <Box sx={{ display: 'flex' }}>
-        <Box sx={{ 
+        <Card sx={{ 
           flex: 1,
           minHeight: '100vh',
-          borderRadius: '12px',
           margin: '0px 4px',
-          backgroundColor: '#ffffff'  }}>123</Box>
+        }}>123</Card>
         
-        <Box sx={{ 
+        <Card sx={{ 
           flex: 3,
           minHeight: '100vh',
-          borderRadius: '12px',
           margin: '0px 4px',
-          backgroundColor: '#ffffff'  }}>
+        }}>
           <ArticleContainer />
-        </Box>
+        </Card>
 
         <Box sx={{flex: 1}}>
-          <Box sx={{ 
-            // height: '30%',
-            borderRadius: '12px',
+          <Card sx={{ 
+            flex: 1,
             margin: '0px 4px',
-            backgroundColor: '#ffffff'  }}>
+          }}>
             <UserCardGrid/>
-          </Box>
+          </Card>
         </Box>
       </Box>
     </Main>
