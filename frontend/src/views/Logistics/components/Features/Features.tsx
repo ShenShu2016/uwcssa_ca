@@ -108,7 +108,7 @@ const Features = (): JSX.Element => {
           align={'center'}
           sx={{ fontWeight: 700 }}
         >
-          Our features
+          Check out what&apos;s new
         </Typography>
         <Typography
           variant={'h6'}

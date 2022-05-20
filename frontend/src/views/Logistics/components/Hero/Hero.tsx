@@ -26,7 +26,7 @@ const Hero = (): JSX.Element => {
     <Box data-aos={isMd ? 'fade-right' : 'fade-up'}>
       <Box marginBottom={2}>
         <Typography variant="h2" color="text.primary" sx={{ fontWeight: 700 }}>
-          We make trucking{' '}
+          A Student Community like{' '}
         </Typography>
         <Typography
           color={'primary'}
@@ -40,13 +40,12 @@ const Hero = (): JSX.Element => {
             )} 0%)`,
           }}
         >
-          efficient
+          No Other
         </Typography>
       </Box>
       <Box marginBottom={3}>
         <Typography variant="h6" component="p" color="text.secondary">
-          Forward thinking businesses use our cloud backup service to ensure
-          data reliability and safety.
+          We provide a variety of information to enhance your experience.
         </Typography>
       </Box>
 
@@ -80,6 +79,7 @@ const Hero = (): JSX.Element => {
           </Button>
         </Box>
       )}
+      
     </Box>
   );
 
