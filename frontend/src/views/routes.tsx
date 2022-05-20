@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 18:49:58
+ * @LastEditTime: 2022-05-19 21:18:06
  * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
@@ -17,7 +17,7 @@ import {
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
-  ContactPageSidebarMap as ContactPageSidebarMapView,
+  ContactPage as ContactPageView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home,
@@ -172,9 +172,7 @@ const routes = [
   },
   {
     path: '/contactUs',
-    renderer: (params = {}): JSX.Element => (
-      <ContactPageSidebarMapView {...params} />
-    ),
+    renderer: (params = {}): JSX.Element => <ContactPageView {...params} />,
   },
   // {
   //   path: '/contact-page-cover',

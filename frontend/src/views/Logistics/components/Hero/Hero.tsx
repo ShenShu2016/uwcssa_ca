@@ -1,5 +1,7 @@
 import { alpha, useTheme } from '@mui/material/styles';
+import { getAuthState, getUserInfo } from 'redux/auth/authSlice';
 
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from 'components/Container';
@@ -7,8 +9,8 @@ import Divider from '@mui/material/Divider';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { useAppSelector } from 'redux/hooks';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = (): JSX.Element => {
@@ -17,7 +19,8 @@ const Hero = (): JSX.Element => {
     defaultMatches: true,
   });
   const navigate = useNavigate();
-
+  const isAuth = useAppSelector(getAuthState);
+  const userInfo = useAppSelector(getUserInfo);
   const LeftSide = () => (
     <Box data-aos={isMd ? 'fade-right' : 'fade-up'}>
       <Box marginBottom={2}>
@@ -45,20 +48,27 @@ const Hero = (): JSX.Element => {
           data reliability and safety.
         </Typography>
       </Box>
-      <Button variant="contained" size="large">
-        Sign in
-      </Button>
-      <Button size="large" style={{marginLeft: 24}}>
-        Sign up
-      </Button>
-      <Button
-        size="large"
-        style={{marginLeft: 24}}
-        endIcon={<ArrowForwardIcon />}
-        onClick={() => navigate('dashboard')}
-      >
-        Get start as a guest
-      </Button>
+
+      {isAuth ? (
+        <Typography variant="h4">Welcome {userInfo.name}</Typography>
+      ) : (
+        <Box>
+          <Button variant="contained" size="large">
+            Sign in
+          </Button>
+          <Button size="large" style={{ marginLeft: 24 }}>
+            Sign up
+          </Button>
+          <Button
+            size="large"
+            style={{ marginLeft: 24 }}
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => navigate('dashboard')}
+          >
+            Get start as a guest
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 
@@ -79,7 +89,9 @@ const Hero = (): JSX.Element => {
         <Box
           component={LazyLoadImage}
           effect="blur"
-          src={'https://img02.en25.com/Web/UniversityofWindsor/%7Bd8f91307-a2fc-4c74-976f-746c732a1bec%7D_uwindsor-dillon-hall-drone-hero.jpg'}
+          src={
+            'https://img02.en25.com/Web/UniversityofWindsor/%7Bd8f91307-a2fc-4c74-976f-746c732a1bec%7D_uwindsor-dillon-hall-drone-hero.jpg'
+          }
           height={{ xs: 'auto', md: 1 }}
           maxHeight={{ xs: 300, md: 1 }}
           width={1}
@@ -97,7 +109,7 @@ const Hero = (): JSX.Element => {
         overflow: 'hidden',
       }}
     >
-      <Container paddingX={0} paddingY={0} >
+      <Container paddingX={0} paddingY={0}>
         <Box
           display={'flex'}
           flexDirection={{ xs: 'column', md: 'row' }}
@@ -111,10 +123,7 @@ const Hero = (): JSX.Element => {
             display={'flex'}
             alignItems={'center'}
           >
-            <Box 
-              position='absolute'
-              zIndex={-1}
-            >
+            <Box position="absolute" zIndex={-1}>
               <Box
                 component={LazyLoadImage}
                 effect="blur"
@@ -123,7 +132,7 @@ const Hero = (): JSX.Element => {
                 maxHeight={{ xs: 300, md: 1 }}
                 width={1}
                 maxWidth={1}
-                style={{opacity: 0.1}}
+                style={{ opacity: 0.1 }}
               />
             </Box>
             <Container>

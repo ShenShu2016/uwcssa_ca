@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 17:51:36
+ * @LastEditTime: 2022-05-19 20:29:00
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
@@ -157,6 +157,21 @@ const Topbar = ({
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+        {isAuth ? (
+          <AccountMenu />
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            //target="blank"
+            href="/auth/signIn"
+            size="small"
+            sx={{ mr: '1rem' }}
+          >
+            Sign in
+          </Button>
+        )}
         <Button
           onClick={() => onSidebarOpen()}
           aria-label="Menu"
