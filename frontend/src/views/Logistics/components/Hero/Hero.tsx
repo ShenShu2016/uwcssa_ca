@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from '@mui/material';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { useAppSelector } from 'redux/hooks';
@@ -50,13 +51,23 @@ const Hero = (): JSX.Element => {
       </Box>
 
       {isAuth ? (
-        <Typography variant="h4">Welcome {userInfo.name}</Typography>
+        <Typography variant="h4">Welcome {userInfo.name}!</Typography>
       ) : (
         <Box>
-          <Button variant="contained" size="large">
+          <Button
+            variant="contained"
+            size="large"
+            component={Link}
+            href="/auth/signIn"
+          >
             Sign in
           </Button>
-          <Button size="large" style={{ marginLeft: 24 }}>
+          <Button
+            size="large"
+            style={{ marginLeft: 24 }}
+            component={Link}
+            href="/auth/signUp"
+          >
             Sign up
           </Button>
           <Button
