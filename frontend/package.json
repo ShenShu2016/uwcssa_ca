@@ -32,6 +32,9 @@
     ]
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-alignment": "^18.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-react": "^5.0.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.4",
@@ -41,11 +44,13 @@
     "aos": "^2.3.4",
     "aws-amplify": "^4.3.22",
     "card-validator": "^8.1.1",
+    "ckeditor5-custom-build": "file:ckeditor5",
     "formik": "^2.2.6",
     "jarallax": "^1.12.8",
     "react": "^17.0.1",
     "react-countup": "^6.1.0",
     "react-dom": "^17.0.1",
+    "react-html-parser": "^2.0.2",
     "react-image-lightbox": "^5.1.4",
     "react-lazy-load-image-component": "^1.5.1",
     "react-redux": "^8.0.1",

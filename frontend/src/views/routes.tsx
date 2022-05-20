@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 21:18:06
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-20 13:21:29
  * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
@@ -20,6 +20,7 @@ import {
   ContactPage as ContactPageView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
+  ArticlePublish as ArticlePublishView,
   Home,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
@@ -43,6 +44,10 @@ const routes = [
   {
     path: '/reduxCounter',
     renderer: (params = {}): JSX.Element => <ReduxCounterView {...params} />,
+  },
+  {
+    path: '/article-publish',
+    renderer: (): JSX.Element => <ArticlePublishView />,
   },
   // {
   //   path: '/home',

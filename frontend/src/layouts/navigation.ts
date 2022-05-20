@@ -29,6 +29,10 @@ const pages = {
       title: 'Second Home',
       href: '/index',
     },
+    {
+      title: '发布文章',
+      href: '/article-publish',
+    },
     // {
     //   title: 'Service',
     //   href: '/service',
