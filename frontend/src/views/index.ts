@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-19 08:17:00
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-19 21:17:49
  * @FilePath: /uwcssa_ca/frontend/src/views/index.ts
  * @Description:
  */
@@ -40,7 +40,7 @@ export { default as Logistics } from './Logistics';
 // export { default as PortfolioMasonry } from './PortfolioMasonry';
 // export { default as PortfolioGrid } from './PortfolioGrid';
 export { default as CompanyTerms } from './CompanyTerms';
-export { default as ContactPageSidebarMap } from './ContactPageSidebarMap';
+export { default as ContactPage } from './ContactPage';
 // export { default as ContactPageCover } from './ContactPageCover';
 // export { default as AboutSideCover } from './AboutSideCover';
 // export { default as BlogSearch } from './BlogSearch';
@@ -55,10 +55,11 @@ export { default as SigninCover } from './SigninCover';
 // export { default as SignupSimple } from './SignupSimple';
 export { default as SignupCover } from './SignupCover';
 export { default as EmailConfirmationCover } from './EmailConfirmationCover';
-// export { default as AccountBilling } from './Account/Billing';
-// export { default as AccountGeneral } from './Account/General';
-// export { default as AccountNotifications } from './Account/Notifications';
-// export { default as AccountSecurity } from './Account/Security';
+export { default as AccountBilling } from './Settings/Billing';
+export { default as AccountGeneral } from './Settings/General';
+export { default as AccountNotifications } from './Settings/Notifications';
+export { default as AccountSecurity } from './Settings/Security';
+export { default as AccountProfile } from './Settings/Profile';
 // export { default as NotFound } from './NotFound';
 export { default as NotFoundCover } from './NotFoundCover';
 export { default as Home } from './Home';

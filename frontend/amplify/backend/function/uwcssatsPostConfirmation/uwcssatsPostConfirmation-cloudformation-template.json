@@ -43,6 +43,12 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "userTable": {
+      "Type": "String"
+    },
+    "userProfileTable": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -95,6 +101,12 @@
             },
             "GROUP": {
               "Ref": "GROUP"
+            },
+            "User_Table": {
+              "Ref": "userTable"
+            },
+            "UserProfile_Table": {
+              "Ref": "userProfileTable"
             }
           }
         },

@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 19:42:53
- * @FilePath: \uwcssa_ca\frontend\src\index.tsx
+ * @LastEditTime: 2022-05-19 19:53:55
+ * @FilePath: /uwcssa_ca/frontend/src/index.tsx
  * @Description:
  *
  */
@@ -17,9 +17,23 @@ import config from './aws-exports';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 
+function getUri() {
+  if (window.location.hostname === 'localhost') {
+    return 'http://localhost:3000/';
+  } else if (window.location.hostname === 'devts.uwcssa.ca') {
+    return 'https://devts.uwcssa.ca/';
+  }
+}
+
 const updatedAwsConfig = {
   ...config,
+  oauth: {
+    ...config.oauth,
+    redirectSignIn: getUri(),
+    redirectSignOut: getUri(),
+  },
 };
+
 Amplify.configure(updatedAwsConfig);
 
 ReactDOM.render(

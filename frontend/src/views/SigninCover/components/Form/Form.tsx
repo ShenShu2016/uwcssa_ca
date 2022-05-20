@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:58:13
- * @FilePath: \uwcssa_ca\frontend\src\views\SigninCover\components\Form\Form.tsx
+ * @LastEditTime: 2022-05-19 19:51:40
+ * @FilePath: /uwcssa_ca/frontend/src/views/SigninCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -11,14 +11,17 @@
 
 import * as yup from 'yup';
 
+import { googleSignIn, signIn } from 'redux/auth/authSlice';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { Divider } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from '@mui/material/Link';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { signIn } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -63,6 +66,9 @@ const Form = (): JSX.Element => {
     onSubmit,
   });
 
+  const handleGoogleSignIn = async () => {
+    dispatch(googleSignIn());
+  };
   return (
     <Box>
       <Box marginBottom={4}>
@@ -168,6 +174,39 @@ const Form = (): JSX.Element => {
               </Box>
               <Button size={'large'} variant={'contained'} type={'submit'}>
                 Login
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item container xs={12}>
+            <Divider sx={{ px: '1rem', width: '100%', lineHeight: '0' }}>
+              on
+            </Divider>
+          </Grid>
+          <Grid item container xs={12}>
+            <Box
+              display="flex"
+              flexDirection={{ xs: 'column', sm: 'row' }}
+              alignItems={{ xs: 'stretched', sm: 'center' }}
+              justifyContent={'space-between'}
+              width={1}
+              maxWidth={600}
+              margin={'0 auto'}
+            >
+              <Button
+                variant={'contained'}
+                color={'primary'}
+                onClick={() => handleGoogleSignIn()}
+                fullWidth
+                sx={{ lineHeight: 1 }}
+              >
+                <Box
+                  component={LazyLoadImage}
+                  effect="blur"
+                  src="/assets/images/icons/google-1.svg"
+                />
+                <Box sx={{ fontSize: '12px', marginLeft: '1rem' }}>
+                  Continue with Google
+                </Box>
               </Button>
             </Box>
           </Grid>

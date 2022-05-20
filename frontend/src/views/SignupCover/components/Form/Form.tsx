@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:58:28
- * @FilePath: \uwcssa_ca\frontend\src\views\SignupCover\components\Form\Form.tsx
+ * @LastEditTime: 2022-05-19 23:56:21
+ * @FilePath: /uwcssa_ca/frontend/src/views/SignupCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -56,7 +56,7 @@ const Form = (): JSX.Element => {
     const response = await dispatch(signUp({ password, username, name }));
     console.log(response);
     if (response.meta.requestStatus === 'fulfilled') {
-      navigate('/');
+      navigate('/auth/emailConfirmation');
     } else {
       return false;
     }

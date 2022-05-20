@@ -16,5 +16,14 @@
   "skipEdit": true,
   "GROUP": "uwcssaUser",
   "enableCors": false,
-  "environmentVariableList": []
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "userTable",
+      "environmentVariableName": "User_Table"
+    },
+    {
+      "cloudFormationParameterName": "userProfileTable",
+      "environmentVariableName": "UserProfile_Table"
+    }
+  ]
 }

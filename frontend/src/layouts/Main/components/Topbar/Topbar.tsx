@@ -1,22 +1,22 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-19 17:39:08
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-19 20:29:00
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
  */
 
-import { Avatar, Link, Typography } from '@mui/material';
+import { AccountMenu, NavItem } from './components';
+import { Link, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
-import { getAuthState, getUserInfo } from 'redux/auth/authSlice';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavItem } from './components';
 import React from 'react';
+import { getAuthState } from 'redux/auth/authSlice';
 import { useAppSelector } from 'redux/hooks';
 
 interface Props {
@@ -52,8 +52,7 @@ const Topbar = ({
   } = pages;
 
   const isAuth = useAppSelector(getAuthState);
-  const userInfo = useAppSelector(getUserInfo);
-  console.log(userInfo);
+
   return (
     <Box
       display={'flex'}
@@ -142,16 +141,7 @@ const Topbar = ({
         </Box>
         <Box marginLeft={4}>
           {isAuth ? (
-            <Avatar
-              sx={{
-                bgcolor: theme.palette.primary.main,
-                color: theme.palette.common.white,
-                width: 30,
-                height: 30,
-              }}
-            >
-              {userInfo.name.slice(0, 1)}
-            </Avatar>
+            <AccountMenu />
           ) : (
             <Button
               variant="contained"
@@ -167,6 +157,21 @@ const Topbar = ({
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+        {isAuth ? (
+          <AccountMenu />
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            //target="blank"
+            href="/auth/signIn"
+            size="small"
+            sx={{ mr: '1rem' }}
+          >
+            Sign in
+          </Button>
+        )}
         <Button
           onClick={() => onSidebarOpen()}
           aria-label="Menu"
