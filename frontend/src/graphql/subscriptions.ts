@@ -10,10 +10,6 @@ export const onCreateArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -21,29 +17,11 @@ export const onCreateArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -58,10 +36,6 @@ export const onUpdateArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -69,29 +43,11 @@ export const onUpdateArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -106,10 +62,6 @@ export const onDeleteArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -117,29 +69,11 @@ export const onDeleteArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt

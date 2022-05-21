@@ -117,15 +117,7 @@ export const createTag = /* GraphQL */ `
   ) {
     createTag(input: $input, condition: $condition) {
       id
-      label
       articles {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -141,15 +133,7 @@ export const updateTag = /* GraphQL */ `
   ) {
     updateTag(input: $input, condition: $condition) {
       id
-      label
       articles {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -165,15 +149,7 @@ export const deleteTag = /* GraphQL */ `
   ) {
     deleteTag(input: $input, condition: $condition) {
       id
-      label
       articles {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -190,27 +166,11 @@ export const createArticle = /* GraphQL */ `
     createArticle(input: $input, condition: $condition) {
       id
       title
+      content
       tags {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       comments {
-        items {
-          id
-          content
-          isDeleted
-          articleCommentId
-          createdAt
-          updatedAt
-          owner
-          articleCommentsId
-        }
         nextToken
       }
       active
@@ -241,27 +201,11 @@ export const updateArticle = /* GraphQL */ `
     updateArticle(input: $input, condition: $condition) {
       id
       title
+      content
       tags {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       comments {
-        items {
-          id
-          content
-          isDeleted
-          articleCommentId
-          createdAt
-          updatedAt
-          owner
-          articleCommentsId
-        }
         nextToken
       }
       active
@@ -292,27 +236,11 @@ export const deleteArticle = /* GraphQL */ `
     deleteArticle(input: $input, condition: $condition) {
       id
       title
+      content
       tags {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       comments {
-        items {
-          id
-          content
-          isDeleted
-          articleCommentId
-          createdAt
-          updatedAt
-          owner
-          articleCommentsId
-        }
         nextToken
       }
       active
@@ -348,29 +276,11 @@ export const createComment = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -405,29 +315,11 @@ export const updateComment = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -462,29 +354,11 @@ export const deleteComment = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -607,10 +481,6 @@ export const createArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -618,29 +488,11 @@ export const createArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -658,10 +510,6 @@ export const updateArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -669,29 +517,11 @@ export const updateArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -709,10 +539,6 @@ export const deleteArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -720,29 +546,11 @@ export const deleteArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt

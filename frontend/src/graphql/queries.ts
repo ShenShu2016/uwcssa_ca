@@ -80,15 +80,7 @@ export const getTag = /* GraphQL */ `
   query GetTag($id: ID!) {
     getTag(id: $id) {
       id
-      label
       articles {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -106,10 +98,6 @@ export const listTags = /* GraphQL */ `
     listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -123,27 +111,11 @@ export const getArticle = /* GraphQL */ `
     getArticle(id: $id) {
       id
       title
+      content
       tags {
-        items {
-          id
-          tagID
-          articleID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       comments {
-        items {
-          id
-          content
-          isDeleted
-          articleCommentId
-          createdAt
-          updatedAt
-          owner
-          articleCommentsId
-        }
         nextToken
       }
       active
@@ -176,29 +148,11 @@ export const listArticles = /* GraphQL */ `
       items {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
@@ -213,7 +167,7 @@ export const articleSortByCreatedAt = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ArticleSortByCreatedAt(
+    articleSortByCreatedAt(
       active: $active
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -224,29 +178,11 @@ export const articleSortByCreatedAt = /* GraphQL */ `
       items {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
@@ -262,29 +198,11 @@ export const getComment = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -318,30 +236,9 @@ export const listComments = /* GraphQL */ `
         content
         isDeleted
         articleCommentId
-        article {
-          id
-          title
-          active
-          createdAt
-          updatedAt
-          owner
-        }
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
         articleCommentsId
       }
       nextToken
@@ -391,19 +288,6 @@ export const listContactuses = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
@@ -417,10 +301,6 @@ export const getArticleTags = /* GraphQL */ `
       articleID
       tag {
         id
-        label
-        articles {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -428,29 +308,11 @@ export const getArticleTags = /* GraphQL */ `
       article {
         id
         title
-        tags {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
+        content
         active
         createdAt
         updatedAt
         owner
-        user {
-          id
-          name
-          firstName
-          contactEmail
-          title
-          about
-          avatarURL
-          website
-          createdAt
-          updatedAt
-          owner
-        }
       }
       createdAt
       updatedAt
@@ -468,21 +330,6 @@ export const listArticleTags = /* GraphQL */ `
         id
         tagID
         articleID
-        tag {
-          id
-          label
-          createdAt
-          updatedAt
-          owner
-        }
-        article {
-          id
-          title
-          active
-          createdAt
-          updatedAt
-          owner
-        }
         createdAt
         updatedAt
       }

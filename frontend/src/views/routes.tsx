@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-20 13:21:29
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-20 21:48:06
  * @FilePath: /uwcssa_ca/frontend/src/views/routes.tsx
  * @Description:
  *
@@ -14,13 +14,13 @@ import {
   AccountNotifications as AccountNotificationsView,
   AccountProfile as AccountProfileView,
   AccountSecurity as AccountSecurityView,
+  ArticlePublish as ArticlePublishView,
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
   ContactPage as ContactPageView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
-  ArticlePublish as ArticlePublishView,
   Home,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
@@ -30,6 +30,7 @@ import {
   SignupCover as SignupCoverView,
 } from 'views';
 
+import ArticleAPI from './Demo/ArticleAPI';
 import React from 'react';
 
 const routes = [
@@ -287,6 +288,11 @@ const routes = [
   {
     path: '/404',
     renderer: (params = {}): JSX.Element => <NotFoundCoverView {...params} />,
+  },
+
+  {
+    path: '/demo/articleAPI',
+    renderer: (params = {}): JSX.Element => <ArticleAPI {...params} />,
   },
 ];
 

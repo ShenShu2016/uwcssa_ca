@@ -59,8 +59,7 @@ type Tag
       { allow: groups, groups: ["uwcssaAdmin"] }
     ]
   ) {
-  id: ID!
-  label: String!
+  id: ID! #用id 直接放tag 名词会比较好
   articles: [Article] @manyToMany(relationName: "ArticleTags")
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -78,12 +77,13 @@ type Article
   ) {
   id: ID!
   title: String!
+  content: String!
   tags: [Tag] @manyToMany(relationName: "ArticleTags")
   comments: [Comment] @hasMany
   active: ActiveType!
     @index(
-      name: "ArticleSortByCreatedAt"
-      queryField: "ArticleSortByCreatedAt"
+      name: "articleSortByCreatedAt" #名字要用小写
+      queryField: "articleSortByCreatedAt"
       sortKeyFields: ["createdAt"]
     )
   createdAt: AWSDateTime!
