@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 13:07:23
- * @LastEditTime: 2022-05-21 17:16:22
+ * @LastEditTime: 2022-05-21 17:27:32
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddTags.tsx
  */
@@ -65,15 +65,13 @@ const AddTags = () => {
     <Card
       sx={{
         p: '12px',
-        height: '25vh'
+        height: '25vh',
       }}
       component="ul"
     >
       <Box
         width='100%'
         display='flex'
-        // height={36}
-        // alignItems={'flex-end'}
       >
         <Input
           fullWidth
@@ -95,6 +93,8 @@ const AddTags = () => {
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
+          height: '85%',
+          overflow: 'auto',
           padding: '12px 8px'
         }}
       >
