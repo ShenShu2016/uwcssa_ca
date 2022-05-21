@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-21 17:19:57
+ * @LastEditTime: 2022-05-21 21:00:53
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
@@ -81,6 +81,7 @@ const AddCoverPic = () => {
                     width: '100%',
                     height: '100%',
                     borderRadius: '12px',
+                    backgroundColor: '#000',
                     boxSizing: 'border-box',
                     padding: '8px'
                   }}

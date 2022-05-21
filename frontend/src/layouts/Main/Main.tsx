@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-19 17:15:41
+ * @LastEditTime: 2022-05-21 20:44:26
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/Main.tsx
  */
@@ -28,7 +28,7 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Content = styled(Box)(({theme}) => ({
   width: '100%',
-  minHeight: '100vh',
+  // minHeight: '100vh',
   padding: '24px 5%',
   background: '#f5f5f5'
 }));

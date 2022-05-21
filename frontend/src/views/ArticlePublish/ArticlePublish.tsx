@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-21 16:08:46
+ * @LastEditTime: 2022-05-21 20:57:37
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/ArticlePublish.tsx
  */
@@ -23,8 +23,11 @@ const ArticlePublish = () => {
 
   return (
     <Main>
-      <Box display={'flex'}>
-        <Box width={'70%'}>
+      <Box display={'flex'} height={'80vh'}>
+        <Box 
+          width='70%'
+          height='100%'
+        >
           <TextField
             id="standard-textarea"
             fullWidth
@@ -45,32 +48,41 @@ const ArticlePublish = () => {
               paddingBottom: 2,
             }}
           />
-          <CKEditor
-            editor={Editor}
-            data={data}
-            onReady={(editor) => {
+          <Box
+            height='calc(100% - 71px)'
+            overflow='auto'
+          >
+            <CKEditor
+              editor={Editor}
+              data={data}
+              onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
-              console.log('Editor is ready to use!', editor);
-            }}
-            onChange={(event, editor) => {
-              const data = editor.getData();
-              setData(data);
-            }}
-          />
+                console.log('Editor is ready to use!', editor);
+              }}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                setData(data);
+              }}
+            />
+          </Box>
           {/* 必须加className='ck-content' 否则parse出的html没有样式 */}
           {/* <div style={{ width: '45%' }} className="ck-content">
             {ReactHtmlParser(data)}
           </div> */}
         </Box>
-        <Box width={'30%'} ml='30px'>
+        <Box
+          width='30%'
+          ml='30px'
+          height='100%'
+          display='flex'
+          flexDirection='column'
+          justifyContent='space-between'
+        >
           <AddTags />
           <AddCoverPic />
           <Button
             fullWidth
             variant="contained"
-            sx={{
-              marginTop: '16px'
-            }}
           >
             发布文章
           </Button>

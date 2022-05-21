@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 13:07:23
- * @LastEditTime: 2022-05-21 17:27:32
+ * @LastEditTime: 2022-05-21 21:10:30
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddTags.tsx
  */
@@ -64,6 +64,7 @@ const AddTags = () => {
   return (
     <Card
       sx={{
+        margin: 0,
         p: '12px',
         height: '25vh',
       }}
@@ -103,6 +104,7 @@ const AddTags = () => {
           return (
             <ListItem key={data.key}>
               <Chip
+                color='primary'
                 label={data.label}
                 onDelete={() => handleDelete(data)}
               />

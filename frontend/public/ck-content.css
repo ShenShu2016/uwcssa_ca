@@ -6,8 +6,15 @@
 .ck-sticky-panel__content_sticky {
     top: 62px !important
 }
+.ck-editor {
+    height: calc(100% - 40px) !important;
+}
+.ck-editor__main {
+    height: 100% !important;
+}
 .ck-editor__editable {
-    min-height: 70vh !important;
+    /* min-height: calc(100% - 71px) !important; */
+    height: 100% !important;
 }
  :root {
     --ck-color-image-caption-background: hsl(0, 0%, 97%);
