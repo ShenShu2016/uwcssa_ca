@@ -16,7 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import DoneIcon from '@mui/icons-material/Done';
 import useMessage from 'hooks/useMessage';
 
-const ListItem = styled('span')(({ theme }) => ({
+const ListItem = styled('div')(({ theme }) => ({
   marginRight: theme.spacing(),
   marginBottom: theme.spacing(),
 }));
@@ -93,6 +93,7 @@ const AddTags = () => {
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
+          alignContent: 'flex-start', 
           height: '85%',
           overflow: 'auto',
           padding: '12px 8px'
