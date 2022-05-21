@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 21:41:42
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 19:51:40
+ * @LastEditTime: 2022-05-21 02:11:20
  * @FilePath: /uwcssa_ca/frontend/src/views/SigninCover/components/Form/Form.tsx
  * @Description:
  *
@@ -18,7 +18,8 @@ import Button from '@mui/material/Button';
 import { Divider } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
+import { Link as MUILink } from '@mui/material';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -127,14 +128,14 @@ const Form = (): JSX.Element => {
                 </Typography>
               </Box>
               <Typography variant={'subtitle2'}>
-                <Link
-                  component={'a'}
+                <MUILink
+                  component={Link}
                   color={'primary'}
-                  href={'/auth/passwordReset'}
+                  to={'/auth/passwordReset'}
                   underline={'none'}
                 >
                   Forgot your password?
-                </Link>
+                </MUILink>
               </Typography>
             </Box>
             <TextField
@@ -162,14 +163,14 @@ const Form = (): JSX.Element => {
               <Box marginBottom={{ xs: 1, sm: 0 }}>
                 <Typography variant={'subtitle2'}>
                   Don't have an account yet?{' '}
-                  <Link
-                    component={'a'}
+                  <MUILink
+                    component={Link}
                     color={'primary'}
-                    href={'/auth/signUp'}
+                    to={'/auth/signUp'}
                     underline={'none'}
                   >
                     Sign up here.
-                  </Link>
+                  </MUILink>
                 </Typography>
               </Box>
               <Button size={'large'} variant={'contained'} type={'submit'}>

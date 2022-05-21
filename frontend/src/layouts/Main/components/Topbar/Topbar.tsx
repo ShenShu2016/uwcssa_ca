@@ -2,20 +2,21 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 20:29:00
+ * @LastEditTime: 2022-05-21 01:58:56
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
  */
 
 import { AccountMenu, NavItem } from './components';
-import { Link, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
+import { Typography } from '@mui/material';
 import { getAuthState } from 'redux/auth/authSlice';
 import { useAppSelector } from 'redux/hooks';
 
@@ -148,7 +149,7 @@ const Topbar = ({
               color="primary"
               component={Link}
               //target="blank"
-              href="/auth/signIn"
+              to="/auth/signIn"
               size="large"
             >
               Sign in
@@ -165,7 +166,7 @@ const Topbar = ({
             color="primary"
             component={Link}
             //target="blank"
-            href="/auth/signIn"
+            to="/auth/signIn"
             size="small"
             sx={{ mr: '1rem' }}
           >

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 19:27:31
+ * @LastEditTime: 2022-05-21 01:59:37
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
@@ -16,7 +16,7 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
 import Menu from '@mui/material/Menu';
@@ -102,7 +102,7 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem component={Link} href="/settings/profile">
+        <MenuItem component={Link} to="/settings/profile">
           <Avatar /> Profile
         </MenuItem>
         {/* <MenuItem >
@@ -115,7 +115,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           Add another account
         </MenuItem> */}
-        <MenuItem component={Link} href="/settings/general">
+        <MenuItem component={Link} to="/settings/general">
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

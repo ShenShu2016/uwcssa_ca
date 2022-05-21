@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:10:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:56:47
- * @FilePath: \uwcssa_ca\frontend\src\views\PasswordResetCover\components\Form\Form.tsx
+ * @LastEditTime: 2022-05-21 02:14:09
+ * @FilePath: /uwcssa_ca/frontend/src/views/PasswordResetCover/components/Form/Form.tsx
  * @Description:
  *
  */
@@ -14,7 +14,7 @@ import * as yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -115,7 +115,7 @@ const Form = (): JSX.Element => {
                   size={'large'}
                   variant={'outlined'}
                   component={Link}
-                  href={'/auth/signIn'}
+                  to={'/auth/signIn'}
                   fullWidth
                 >
                   Back to login

@@ -2,7 +2,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from 'components/Container';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
+import { Link as MUILink } from '@mui/material';
 import Main from 'layouts/Main';
 import React from 'react';
 import Typography from '@mui/material/Typography';
@@ -55,9 +56,13 @@ const NotFoundCover = (): JSX.Element => {
                     Oops! Looks like you followed a bad link.
                     <br />
                     If you think this is a problem with us, please{' '}
-                    <Link href={''} underline="none">
+                    <MUILink
+                      component={Link}
+                      to={'/contactUs'}
+                      underline="none"
+                    >
                       tell us
-                    </Link>
+                    </MUILink>
                   </Typography>
                   <Box
                     marginTop={4}
@@ -69,7 +74,7 @@ const NotFoundCover = (): JSX.Element => {
                       variant="contained"
                       color="primary"
                       size="large"
-                      href={'/'}
+                      to={'/'}
                     >
                       Back home
                     </Button>

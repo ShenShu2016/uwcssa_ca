@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-19 17:21:07
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-21 02:03:30
+ * @FilePath: /uwcssa_ca/frontend/src/views/Logistics/components/Hero/Hero.tsx
+ * @Description:
+ *
+ */
+
 import { alpha, useTheme } from '@mui/material/styles';
 import { getAuthState, getUserInfo } from 'redux/auth/authSlice';
 
@@ -7,7 +17,7 @@ import Button from '@mui/material/Button';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { useAppSelector } from 'redux/hooks';
@@ -57,7 +67,7 @@ const Hero = (): JSX.Element => {
             variant="contained"
             size="large"
             component={Link}
-            href="/auth/signIn"
+            to="/auth/signIn"
           >
             Sign in
           </Button>
@@ -65,7 +75,7 @@ const Hero = (): JSX.Element => {
             size="large"
             style={{ marginLeft: 24 }}
             component={Link}
-            href="/auth/signUp"
+            to="/auth/signUp"
           >
             Sign up
           </Button>
@@ -79,7 +89,6 @@ const Hero = (): JSX.Element => {
           </Button>
         </Box>
       )}
-      
     </Box>
   );
 

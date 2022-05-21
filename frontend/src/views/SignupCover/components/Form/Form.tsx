@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 23:56:21
+ * @LastEditTime: 2022-05-21 02:09:51
  * @FilePath: /uwcssa_ca/frontend/src/views/SignupCover/components/Form/Form.tsx
  * @Description:
  *
@@ -14,7 +14,8 @@ import * as yup from 'yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
+import { Link as MUILink } from '@mui/material';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -155,14 +156,14 @@ const Form = (): JSX.Element => {
               <Box marginBottom={{ xs: 1, sm: 0 }}>
                 <Typography variant={'subtitle2'}>
                   Already have an account?{' '}
-                  <Link
-                    component={'a'}
+                  <MUILink
+                    component={Link}
                     color={'primary'}
-                    href={'/auth/signIn'}
+                    to={'/auth/signIn'}
                     underline={'none'}
                   >
                     Login.
-                  </Link>
+                  </MUILink>
                 </Typography>
               </Box>
               <Button size={'large'} variant={'contained'} type={'submit'}>
@@ -183,14 +184,14 @@ const Form = (): JSX.Element => {
               align={'center'}
             >
               By clicking "Sign up" button you agree with our{' '}
-              <Link
-                component={'a'}
+              <MUILink
+                component={Link}
                 color={'primary'}
-                href={'/terms'}
+                to={'/terms'}
                 underline={'none'}
               >
                 company terms and conditions.
-              </Link>
+              </MUILink>
             </Typography>
           </Grid>
         </Grid>
