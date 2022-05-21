@@ -50,7 +50,8 @@ const ArticlePublish = () => {
           />
           <Box
             height='calc(100% - 71px)'
-            overflow='auto'
+            overflow-y='auto'
+            overflow-x='hidden'
           >
             <CKEditor
               editor={Editor}
