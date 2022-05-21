@@ -118,6 +118,8 @@ type ContactUs
   @auth(
     rules: [
       { allow: public, operations: [create], provider: iam }
+      { allow: owner, operations: [create, read] }
+      { allow: groups, operations: [create], groups: ["uwcssaUser"] }
       { allow: groups, groups: ["uwcssaAdmin"] }
     ]
   ) {
