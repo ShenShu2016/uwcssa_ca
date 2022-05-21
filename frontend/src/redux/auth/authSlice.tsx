@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 23:42:10
- * @FilePath: \uwcssa_ca\frontend\src\redux\auth\authSlice.tsx
+ * @LastEditTime: 2022-05-21 01:40:00
+ * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -337,5 +337,7 @@ export const getAuthState = (state: { auth: { isAuth: boolean } }) =>
   state.auth.isAuth;
 
 export const getUserInfo = (state) => state.auth?.user?.attributes;
+
+export const getOwnerUserName = (state) => state.auth?.user?.username;
 
 export default authSlice.reducer;

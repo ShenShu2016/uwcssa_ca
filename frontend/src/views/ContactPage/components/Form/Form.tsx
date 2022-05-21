@@ -1,14 +1,28 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-19 21:16:43
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-21 01:55:01
+ * @FilePath: /uwcssa_ca/frontend/src/views/ContactPage/components/Form/Form.tsx
+ * @Description:
+ *
+ */
+import * as yup from 'yup';
+
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { getOwnerUserName } from 'redux/auth/authSlice';
+import { postContactUs } from 'redux/contactUs/ContactUsSlice';
+import { useFormik } from 'formik';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const validationSchema = yup.object({
   fullName: yup
@@ -17,19 +31,25 @@ const validationSchema = yup.object({
     .min(2, 'Please enter a valid full name')
     .max(50, 'Please enter a valid full name')
     .required('Please specify your full name'),
-  message: yup
-    .string()
-    .trim()
-    .required('Please specify your message'),
+  message: yup.string().trim().required('Please specify your message'),
   email: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
     .required('Email is required'),
+  phone: yup
+    .string()
+    .trim()
+    .min(9, 'Please enter a valid phone number')
+    .max(15, 'Please enter a valid phone number'),
+  //.required('Please specify your phone number'),
 });
 
 const Form = (): JSX.Element => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const ownerUserName = useAppSelector(getOwnerUserName);
+  console.log(ownerUserName);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
@@ -38,9 +58,27 @@ const Form = (): JSX.Element => {
     fullName: '',
     message: '',
     email: '',
+    phone: '',
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(JSON.stringify(values));
+    const { fullName, message, email, phone } = values;
+    const createContactUsInput = {
+      id: undefined,
+      fullName,
+      message,
+      email,
+      phone,
+      owner: ownerUserName && ownerUserName,
+    };
+    const response = await dispatch(postContactUs({ createContactUsInput }));
+    if (response.meta.requestStatus === 'fulfilled') {
+      alert('提交成功');
+    } else {
+      alert('提交失败');
+      return false;
+    }
     return values;
   };
 
@@ -125,6 +163,28 @@ const Form = (): JSX.Element => {
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              variant="subtitle1"
+              color="text.primary"
+              fontWeight={700}
+              gutterBottom
+            >
+              Phone Number
+            </Typography>
+            <TextField
+              placeholder="Your phone number"
+              variant="outlined"
+              size="medium"
+              name="phone"
+              fullWidth
+              //type="email"
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+              error={formik.touched.phone && Boolean(formik.errors.phone)}
+              helperText={formik.touched.phone && formik.errors.phone}
             />
           </Grid>
           <Grid item xs={12}>
