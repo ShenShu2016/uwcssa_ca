@@ -3,7 +3,12 @@
  * Generated on Wed, 18 May 2022 11:33:29 GMT.
  * For more information, check out https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/content-styles.html
  */
-
+.ck-sticky-panel__content_sticky {
+    top: 62px !important
+}
+.ck-editor__editable {
+    min-height: 70vh !important;
+}
  :root {
     --ck-color-image-caption-background: hsl(0, 0%, 97%);
     --ck-color-image-caption-text: hsl(0, 0%, 20%);
