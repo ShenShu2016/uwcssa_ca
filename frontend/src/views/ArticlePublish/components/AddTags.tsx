@@ -1,76 +1,114 @@
+/*
+ * @Author: 李佳修
+ * @Date: 2022-05-21 13:07:23
+ * @LastEditTime: 2022-05-21 17:16:22
+ * @LastEditors: 李佳修
+ * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddTags.tsx
+ */
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import TagFacesIcon from '@mui/icons-material/TagFaces';
+// import TagFacesIcon from '@mui/icons-material/TagFaces';
+import IconButton from '@mui/material/IconButton';
+import DoneIcon from '@mui/icons-material/Done';
+import useMessage from 'hooks/useMessage';
 
-const ListItem = styled('li')(({ theme }) => ({
-  margin: theme.spacing(0.5),
+const ListItem = styled('span')(({ theme }) => ({
+  marginRight: theme.spacing(),
+  marginBottom: theme.spacing(),
 }));
 
 const AddTags = () => {
+  const [tagInput, setTagInput] = React.useState<string>('');
+  const [chipData, setChipData] = React.useState([]);
+  const message = useMessage();
 
-  const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Angular' },
-    { key: 1, label: 'jQuery' },
-    { key: 2, label: 'Polymer' },
-    { key: 3, label: 'React' },
-    { key: 4, label: 'Vue.js' },
-    { key: 5, label: 'Angular' },
-    { key: 6, label: 'jQuery' },
-    { key: 7, label: 'Polymer' },
-    { key: 8, label: 'React' },
-    { key: 9, label: 'Vue.js' },
-  ]);
-
-  const handleDelete = (chipToDelete) => () => {
+  const handleDelete = (chipToDelete) => {
     setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
   };
-    
+
+  const handleTagInputChange = (e) => {
+    setTagInput(e.target.value);
+  };
+
+  const handleTagInputKeyDown = (e) => {
+    if (e.code === 'Enter') {
+      addTag();
+    }
+  };
+
+  const addTag = () => {
+    // 判断当前的tag列表里是否有这个tag
+    const find = chipData.findIndex((item) => item.key === tagInput);
+    if (find !== -1) {
+      message.open({
+        type: 'warning',
+        message: `标签【${tagInput}】已存在`
+      });
+      return;
+    }
+    // 如果没有
+    setChipData((prev) => {
+      prev.push({
+        key: tagInput,
+        label: tagInput
+      });
+      return [...prev];
+    });
+    setTagInput('');
+  };
+
   return (
     <Card
       sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        listStyle: 'none',
-        p: 0.5,
-        // mt: '54px',
-        minHeight: '128px'
+        p: '12px',
+        height: '25vh'
       }}
       component="ul"
     >
-      <Box p='12px' width='100%'>
-        <TextField
-          id="standard-textarea"
+      <Box
+        width='100%'
+        display='flex'
+        // height={36}
+        // alignItems={'flex-end'}
+      >
+        <Input
           fullWidth
-          label="添加标签"
-          multiline
-          variant="standard"
-          sx={{
-            paddingBottom: 2,
-          }}
+          value={tagInput}
+          placeholder="添加标签"
+          style={{ marginRight: 16 }}
+          onKeyDown={(e) => handleTagInputKeyDown(e)}
+          onChange={(e) => handleTagInputChange(e)}
         />
+        <IconButton
+          color="primary"
+          component="span"
+          onClick={addTag}
+        >
+          <DoneIcon />
+        </IconButton>
       </Box>
-      {chipData.map((data) => {
-        let icon;
-
-        if (data.label === 'React') {
-          icon = <TagFacesIcon />;
-        }
-
-        return (
-          <ListItem key={data.key}>
-            <Chip
-              icon={icon}
-              label={data.label}
-              onDelete={data.label === 'React' ? undefined : handleDelete(data)}
-            />
-          </ListItem>
-        );
-      })}
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          padding: '12px 8px'
+        }}
+      >
+        {chipData.map((data) => {
+          return (
+            <ListItem key={data.key}>
+              <Chip
+                label={data.label}
+                onDelete={() => handleDelete(data)}
+              />
+            </ListItem>
+          );
+        })}
+      </Box>
     </Card>
   );
 };

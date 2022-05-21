@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 18:10:27
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 00:50:53
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-21 17:22:15
  * @FilePath: /uwcssa_ca/frontend/src/redux/store.ts
  * @Description:
  *
@@ -14,6 +14,7 @@ import articleReducer from './article/articleSlice';
 import authReducer from './auth/authSlice';
 import contactUsReducer from './contactUs/ContactUsSlice';
 import counterReducer from './counter/counterSlice';
+import alertSlice from './alert/alertSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     counter: counterReducer,
     article: articleReducer,
     contactUs: contactUsReducer,
+    alert: alertSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }), //https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using,

@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 19:53:55
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-21 14:49:00
  * @FilePath: /uwcssa_ca/frontend/src/index.tsx
  * @Description:
  *
@@ -16,6 +16,7 @@ import ReactDOM from 'react-dom';
 import config from './aws-exports';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
+import Message from 'components/Message';
 
 function getUri() {
   if (window.location.hostname === 'localhost') {
@@ -38,7 +39,9 @@ Amplify.configure(updatedAwsConfig);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Message>
+      <App />
+    </Message>
   </Provider>,
   document.getElementById('root'),
 );

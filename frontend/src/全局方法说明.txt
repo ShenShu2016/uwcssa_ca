@@ -1,0 +1,15 @@
+
+1. redux dispatch 和 useSelector
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
+2. 全局alert提示
+import useMessage from 'hooks/useMessage';
+const message = useMessage();
+打开alert
+message.open({
+    type: 'warning',
+    message: `标签【${tagInput}】已存在`
+});
+
+type: 'success' | 'info' | 'warning' | 'error';
+message: string;
