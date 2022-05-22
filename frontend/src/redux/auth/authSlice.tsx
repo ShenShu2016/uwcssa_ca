@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 14:53:29
+ * @LastEditTime: 2022-05-22 18:29:52
  * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -17,7 +17,7 @@ import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 export interface AuthState {
   isAuth: null | boolean;
   isAdmin: null | boolean;
-  user: unknown | null;
+  user: any | null;
   cognitoGroup: Array<'uwcssaUser' | 'uwcssaAdmin' | string> | null;
   loadUserStatus: 'idle' | 'loading' | 'failed' | 'succeed';
   loadUserError: null | unknown;
@@ -72,7 +72,8 @@ const initialState: AuthState = {
 
 export const loadUser = createAsyncThunk('auth/loadUser', async () => {
   const response = await Auth.currentAuthenticatedUser();
-  return response;
+  const credentials = await Auth.currentUserCredentials();
+  return { ...response, ...credentials };
 });
 
 export const signIn = createAsyncThunk(
@@ -346,6 +347,8 @@ const authSlice = createSlice({
 export const getAuthState = (state) => state.auth.isAuth;
 
 export const getUserInfo = (state) => state.auth?.user?.attributes;
+
+export const getUserIdentityID = (state) => state.auth?.user?.identityId;
 
 export const getOwnerUserName = (state) => state.auth?.user?.username;
 
