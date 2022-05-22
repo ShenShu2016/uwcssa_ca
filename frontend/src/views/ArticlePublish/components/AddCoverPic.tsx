@@ -1,28 +1,42 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-21 21:00:53
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-22 16:20:53
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
+
 import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
+import API from '@aws-amplify/api';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import Storage from '@aws-amplify/storage';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+
+// import Button from '@mui/material/Button';
 
 const Input = styled('input')({
   display: 'none',
 });
-  
 
 const AddCoverPic = () => {
   const [imgFile, setImgFile] = useState('');
 
-  const handleImgUpload = (e) => {
+  const handleImgUpload = async (e) => {
+    console.log(e.target.files[0]);
+    const storageResult = await Storage.put(
+      'what/test.png',
+      e.target.files[0],
+      {
+        // level: 'protected',
+        contentType: 'image/png',
+      },
+    );
+    console.log(storageResult);
     setImgFile(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -40,9 +54,15 @@ const AddCoverPic = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-      <Typography variant="subtitle1" gutterBottom component="div" color='#9e9e9e'>
+        alignItems: 'center',
+      }}
+    >
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        color="#9e9e9e"
+      >
         {imgFile ? '封面图片' : '添加封面图片'}
       </Typography>
       <Box
@@ -67,37 +87,38 @@ const AddCoverPic = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer'
-            }}>
-            {
-              imgFile ?
+              cursor: 'pointer',
+            }}
+          >
+            {imgFile ? (
+              <div
+                style={{
+                  position: 'relative',
+                  backgroundImage: `url(${imgFile})`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '12px',
+                  backgroundColor: '#000',
+                  boxSizing: 'border-box',
+                  padding: '8px',
+                }}
+              >
                 <div
                   style={{
-                    position: 'relative',
-                    backgroundImage: `url(${imgFile})`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '12px',
-                    backgroundColor: '#000',
-                    boxSizing: 'border-box',
-                    padding: '8px'
+                    position: 'absolute',
+                    right: '8px',
                   }}
+                  onClick={(e) => handleRemovePic(e)}
                 >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      right: '8px',
-                    }}
-                    onClick={(e) => handleRemovePic(e)}
-                  >
-                    <RemoveCircleIcon style={{color: '#e57373'}}/>
-                  </div>
-                </div> :
-                <AddAPhotoIcon style={{ fontSize: 40, color: '#9e9e9e' }}/>
-            }
+                  <RemoveCircleIcon style={{ color: '#e57373' }} />
+                </div>
+              </div>
+            ) : (
+              <AddAPhotoIcon style={{ fontSize: 40, color: '#9e9e9e' }} />
+            )}
           </Box>
         </label>
       </Box>

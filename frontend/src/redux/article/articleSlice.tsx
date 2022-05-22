@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-22 16:12:48
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-22 15:14:39
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -25,10 +25,12 @@ import { graphqlOperation } from '@aws-amplify/api-graphql';
 type Article = {
   id: string;
   title: string;
-  tags?: { items: Array<{ tagID: string }> };
+  tags?: { items: Array<{ tagID: string }> } | null;
   content: string;
-  comments?: any;
+  comments?: any | null;
   active: 'T' | 'F';
+  coverPageImgURL?: string | null;
+  coverPageDescription?: string | null;
   createdAt?: string;
   updatedAt?: string;
   owner: string;
