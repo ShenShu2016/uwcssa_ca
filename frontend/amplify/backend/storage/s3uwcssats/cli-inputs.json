@@ -11,5 +11,17 @@
     "READ",
     "DELETE"
   ],
-  "triggerFunction": "S3Trigger085746e7"
+  "triggerFunction": "S3Trigger085746e7",
+  "groupAccess": {
+    "uwcssaUser": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ],
+    "uwcssaAdmin": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ]
+  }
 }

@@ -110,6 +110,27 @@
             "Arn",
             "LambdaExecutionRole"
           ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "uwcssats",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "userPoolGroups",
+          "attributes": [
+            "uwcssaUserGroupRole"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "userPoolGroups",
+          "attributes": [
+            "uwcssaAdminGroupRole"
+          ]
         }
       ]
     }
