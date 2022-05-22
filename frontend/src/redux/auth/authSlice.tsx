@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 01:40:00
+ * @LastEditTime: 2022-05-22 14:35:03
  * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -17,6 +17,7 @@ import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 export interface AuthState {
   isAuth: null | boolean;
   user: unknown | null;
+  cognitoGroup: Array<'uwcssaUser' | 'uwcssaAdmin' | string> | null;
   loadUserStatus: 'idle' | 'loading' | 'failed' | 'succeed';
   loadUserError: null | unknown;
   signInStatus: 'idle' | 'loading' | 'failed' | 'succeed';
@@ -42,6 +43,7 @@ export interface AuthState {
 const initialState: AuthState = {
   isAuth: null,
   user: null,
+  cognitoGroup: null,
   //  Status: "idle",
   //  Error: null,
   loadUserStatus: 'idle',
@@ -200,10 +202,10 @@ const authSlice = createSlice({
         state.loadUserStatus = 'succeed';
         state.isAuth = true;
         state.user = action.payload;
-        // state.cognitoGroup =
-        //   action.payload.signInUserSession.accessToken.payload[
-        //     "cognito:groups"
-        //   ];
+        state.cognitoGroup =
+          action.payload.signInUserSession.accessToken.payload[
+            'cognito:groups'
+          ];
       })
       .addCase(loadUser.rejected, (state, action) => {
         state.loadUserStatus = 'failed';
@@ -220,6 +222,10 @@ const authSlice = createSlice({
         state.signInStatus = 'succeed';
         state.isAuth = true;
         state.user = action.payload;
+        state.cognitoGroup =
+          action.payload.signInUserSession.accessToken.payload[
+            'cognito:groups'
+          ];
       })
       .addCase(signIn.rejected, (state, action) => {
         state.signInStatus = 'failed';
@@ -324,20 +330,29 @@ const authSlice = createSlice({
         state.signOutStatus = 'succeed';
         state.isAuth = false;
         state.user = null;
+        state.cognitoGroup = null;
       })
       .addCase(signOut.rejected, (state) => {
         state.signOutStatus = 'failed';
         state.isAuth = false;
         state.user = null;
+        state.cognitoGroup = null;
       });
   },
 });
 
-export const getAuthState = (state: { auth: { isAuth: boolean } }) =>
-  state.auth.isAuth;
+export const getAuthState = (state) => state.auth.isAuth;
 
 export const getUserInfo = (state) => state.auth?.user?.attributes;
 
 export const getOwnerUserName = (state) => state.auth?.user?.username;
+
+export const getIsAdmin = (state) => {
+  let result = false;
+  if (state.auth.cognitoGroup) {
+    result = state.auth.cognitoGroup.includes('uwcssaAdmin');
+  }
+  return result;
+};
 
 export default authSlice.reducer;
