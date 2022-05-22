@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 13:07:23
- * @LastEditTime: 2022-05-21 21:10:30
+ * @LastEditTime: 2022-05-21 22:51:23
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddTags.tsx
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Input from '@mui/material/Input';
@@ -20,14 +20,22 @@ const ListItem = styled('div')(({ theme }) => ({
   marginRight: theme.spacing(),
   marginBottom: theme.spacing(),
 }));
+interface Tag {
+  tagID: string;
+  label: string;
+}
 
-const AddTags = () => {
+const AddTags: React.FC<{tagListChange: (tags: Tag[]) => void}> = ({ tagListChange }) => {
   const [tagInput, setTagInput] = React.useState<string>('');
-  const [chipData, setChipData] = React.useState([]);
+  const [chipData, setChipData] = React.useState<Array<Tag>>([]);
   const message = useMessage();
 
+  useEffect(() => {
+    tagListChange(chipData);
+  }, [chipData.length]);
+
   const handleDelete = (chipToDelete) => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    setChipData((chips) => chips.filter((chip) => chip.tagID !== chipToDelete.tagID));
   };
 
   const handleTagInputChange = (e) => {
@@ -42,7 +50,7 @@ const AddTags = () => {
 
   const addTag = () => {
     // 判断当前的tag列表里是否有这个tag
-    const find = chipData.findIndex((item) => item.key === tagInput);
+    const find = chipData.findIndex((item) => item.tagID === tagInput);
     if (find !== -1) {
       message.open({
         type: 'warning',
@@ -53,7 +61,7 @@ const AddTags = () => {
     // 如果没有
     setChipData((prev) => {
       prev.push({
-        key: tagInput,
+        tagID: tagInput,
         label: tagInput
       });
       return [...prev];
@@ -102,7 +110,7 @@ const AddTags = () => {
       >
         {chipData.map((data) => {
           return (
-            <ListItem key={data.key}>
+            <ListItem key={data.tagID}>
               <Chip
                 color='primary'
                 label={data.label}

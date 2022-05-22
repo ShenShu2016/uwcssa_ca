@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 00:25:19
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-22 16:12:48
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -25,14 +25,14 @@ import { graphqlOperation } from '@aws-amplify/api-graphql';
 type Article = {
   id: string;
   title: string;
-  tags: { items: Array<{ tagID: string }> };
+  tags?: { items: Array<{ tagID: string }> };
   content: string;
-  comments: any;
+  comments?: any;
   active: 'T' | 'F';
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   owner: string;
-  user: { avatarURL: string; id: string; name: string };
+  user?: { avatarURL: string; id: string; name: string };
 };
 
 const articleAdapter = createEntityAdapter<Article>({
@@ -65,7 +65,6 @@ export const fetchArticles = createAsyncThunk(
         },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
-      console.log(result);
       return result.data.articleSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
