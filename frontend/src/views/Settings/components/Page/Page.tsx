@@ -1,9 +1,19 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-19 18:25:04
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-22 01:23:17
+ * @FilePath: /uwcssa_ca/frontend/src/views/Settings/components/Page/Page.tsx
+ * @Description:
+ *
+ */
 import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
@@ -80,8 +90,8 @@ const Page = ({ children }: Props): JSX.Element => {
                 {pages.map((item) => (
                   <ListItem
                     key={item.id}
-                    component={'a'}
-                    href={item.href}
+                    component={Link}
+                    to={item.href}
                     disableGutters
                     sx={{
                       marginRight: { xs: 2, md: 0 },
