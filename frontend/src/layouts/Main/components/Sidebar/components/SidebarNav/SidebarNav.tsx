@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 import NavItem from './components/NavItem';
 import React from 'react';
 import { Typography } from '@mui/material';
@@ -36,8 +37,8 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
       <Box width={1} paddingX={2} paddingY={1}>
         <Box
           display={'flex'}
-          component="a"
-          href="/"
+          component={Link}
+          to="/"
           title="UWCSSA"
           height={{ xs: 24, md: 29 }}
           sx={{ textDecoration: 'none' }}
@@ -84,8 +85,8 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
             size={'large'}
             variant="outlined"
             fullWidth
-            component="a"
-            href="/docs/introduction"
+            component={Link}
+            to="/docs/introduction"
           >
             Documentation
           </Button>
@@ -96,7 +97,7 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
             variant="contained"
             color="primary"
             fullWidth
-            component="a"
+            component={'a'}
             target="blank"
             href="https://mui.com/store/items/the-front-landing-page/"
           >
