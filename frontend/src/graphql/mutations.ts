@@ -110,6 +110,69 @@ export const deleteUserProfile = /* GraphQL */ `
     }
   }
 `;
+export const createUserImage = /* GraphQL */ `
+  mutation CreateUserImage(
+    $input: CreateUserImageInput!
+    $condition: ModelUserImageConditionInput
+  ) {
+    createUserImage(input: $input, condition: $condition) {
+      id
+      objectURL
+      key
+      targetTable
+      lastModified
+      lastModifiedDate
+      name
+      size
+      type
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateUserImage = /* GraphQL */ `
+  mutation UpdateUserImage(
+    $input: UpdateUserImageInput!
+    $condition: ModelUserImageConditionInput
+  ) {
+    updateUserImage(input: $input, condition: $condition) {
+      id
+      objectURL
+      key
+      targetTable
+      lastModified
+      lastModifiedDate
+      name
+      size
+      type
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteUserImage = /* GraphQL */ `
+  mutation DeleteUserImage(
+    $input: DeleteUserImageInput!
+    $condition: ModelUserImageConditionInput
+  ) {
+    deleteUserImage(input: $input, condition: $condition) {
+      id
+      objectURL
+      key
+      targetTable
+      lastModified
+      lastModifiedDate
+      name
+      size
+      type
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createTag = /* GraphQL */ `
   mutation CreateTag(
     $input: CreateTagInput!
@@ -479,54 +542,6 @@ export const deleteContactUs = /* GraphQL */ `
         updatedAt
         owner
       }
-    }
-  }
-`;
-export const createUserImage = /* GraphQL */ `
-  mutation CreateUserImage(
-    $input: CreateUserImageInput!
-    $condition: ModelUserImageConditionInput
-  ) {
-    createUserImage(input: $input, condition: $condition) {
-      id
-      objectURL
-      key
-      targetTable
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateUserImage = /* GraphQL */ `
-  mutation UpdateUserImage(
-    $input: UpdateUserImageInput!
-    $condition: ModelUserImageConditionInput
-  ) {
-    updateUserImage(input: $input, condition: $condition) {
-      id
-      objectURL
-      key
-      targetTable
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteUserImage = /* GraphQL */ `
-  mutation DeleteUserImage(
-    $input: DeleteUserImageInput!
-    $condition: ModelUserImageConditionInput
-  ) {
-    deleteUserImage(input: $input, condition: $condition) {
-      id
-      objectURL
-      key
-      targetTable
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;

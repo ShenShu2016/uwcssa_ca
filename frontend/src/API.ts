@@ -168,6 +168,85 @@ export type DeleteUserProfileInput = {
   id: string,
 };
 
+export type CreateUserImageInput = {
+  id?: string | null,
+  objectURL: string,
+  key: string,
+  targetTable?: string | null,
+  lastModified?: string | null,
+  lastModifiedDate?: string | null,
+  name?: string | null,
+  size?: number | null,
+  type?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelUserImageConditionInput = {
+  objectURL?: ModelStringInput | null,
+  key?: ModelStringInput | null,
+  targetTable?: ModelStringInput | null,
+  lastModified?: ModelStringInput | null,
+  lastModifiedDate?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  size?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserImageConditionInput | null > | null,
+  or?: Array< ModelUserImageConditionInput | null > | null,
+  not?: ModelUserImageConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type UserImage = {
+  __typename: "UserImage",
+  id: string,
+  objectURL: string,
+  key: string,
+  targetTable?: string | null,
+  lastModified?: string | null,
+  lastModifiedDate?: string | null,
+  name?: string | null,
+  size?: number | null,
+  type?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+};
+
+export type UpdateUserImageInput = {
+  id: string,
+  objectURL?: string | null,
+  key?: string | null,
+  targetTable?: string | null,
+  lastModified?: string | null,
+  lastModifiedDate?: string | null,
+  name?: string | null,
+  size?: number | null,
+  type?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteUserImageInput = {
+  id: string,
+};
+
 export type CreateTagInput = {
   id?: string | null,
   createdAt?: string | null,
@@ -408,53 +487,6 @@ export type DeleteContactUsInput = {
   id: string,
 };
 
-export type CreateUserImageInput = {
-  id?: string | null,
-  objectURL: string,
-  key: string,
-  targetTable?: string | null,
-  createdAt?: string | null,
-  updatedAt?: string | null,
-  owner: string,
-};
-
-export type ModelUserImageConditionInput = {
-  objectURL?: ModelStringInput | null,
-  key?: ModelStringInput | null,
-  targetTable?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  owner?: ModelIDInput | null,
-  and?: Array< ModelUserImageConditionInput | null > | null,
-  or?: Array< ModelUserImageConditionInput | null > | null,
-  not?: ModelUserImageConditionInput | null,
-};
-
-export type UserImage = {
-  __typename: "UserImage",
-  id: string,
-  objectURL: string,
-  key: string,
-  targetTable?: string | null,
-  createdAt: string,
-  updatedAt: string,
-  owner: string,
-};
-
-export type UpdateUserImageInput = {
-  id: string,
-  objectURL?: string | null,
-  key?: string | null,
-  targetTable?: string | null,
-  createdAt?: string | null,
-  updatedAt?: string | null,
-  owner?: string | null,
-};
-
-export type DeleteUserImageInput = {
-  id: string,
-};
-
 export type CreateArticleTagsInput = {
   id?: string | null,
   tagID: string,
@@ -518,6 +550,30 @@ export type ModelUserProfileFilterInput = {
 export type ModelUserProfileConnection = {
   __typename: "ModelUserProfileConnection",
   items:  Array<UserProfile | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUserImageFilterInput = {
+  id?: ModelIDInput | null,
+  objectURL?: ModelStringInput | null,
+  key?: ModelStringInput | null,
+  targetTable?: ModelStringInput | null,
+  lastModified?: ModelStringInput | null,
+  lastModifiedDate?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  size?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserImageFilterInput | null > | null,
+  or?: Array< ModelUserImageFilterInput | null > | null,
+  not?: ModelUserImageFilterInput | null,
+};
+
+export type ModelUserImageConnection = {
+  __typename: "ModelUserImageConnection",
+  items:  Array<UserImage | null >,
   nextToken?: string | null,
 };
 
@@ -605,25 +661,6 @@ export type ModelContactUsFilterInput = {
 export type ModelContactUsConnection = {
   __typename: "ModelContactUsConnection",
   items:  Array<ContactUs | null >,
-  nextToken?: string | null,
-};
-
-export type ModelUserImageFilterInput = {
-  id?: ModelIDInput | null,
-  objectURL?: ModelStringInput | null,
-  key?: ModelStringInput | null,
-  targetTable?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  owner?: ModelIDInput | null,
-  and?: Array< ModelUserImageFilterInput | null > | null,
-  or?: Array< ModelUserImageFilterInput | null > | null,
-  not?: ModelUserImageFilterInput | null,
-};
-
-export type ModelUserImageConnection = {
-  __typename: "ModelUserImageConnection",
-  items:  Array<UserImage | null >,
   nextToken?: string | null,
 };
 
@@ -750,6 +787,75 @@ export type DeleteUserProfileMutation = {
     about?: string | null,
     avatarURL?: string | null,
     website?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type CreateUserImageMutationVariables = {
+  input: CreateUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
+};
+
+export type CreateUserImageMutation = {
+  createUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    name?: string | null,
+    size?: number | null,
+    type?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type UpdateUserImageMutationVariables = {
+  input: UpdateUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
+};
+
+export type UpdateUserImageMutation = {
+  updateUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    name?: string | null,
+    size?: number | null,
+    type?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type DeleteUserImageMutationVariables = {
+  input: DeleteUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
+};
+
+export type DeleteUserImageMutation = {
+  deleteUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    name?: string | null,
+    size?: number | null,
+    type?: string | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1173,60 +1279,6 @@ export type DeleteContactUsMutation = {
   } | null,
 };
 
-export type CreateUserImageMutationVariables = {
-  input: CreateUserImageInput,
-  condition?: ModelUserImageConditionInput | null,
-};
-
-export type CreateUserImageMutation = {
-  createUserImage?:  {
-    __typename: "UserImage",
-    id: string,
-    objectURL: string,
-    key: string,
-    targetTable?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    owner: string,
-  } | null,
-};
-
-export type UpdateUserImageMutationVariables = {
-  input: UpdateUserImageInput,
-  condition?: ModelUserImageConditionInput | null,
-};
-
-export type UpdateUserImageMutation = {
-  updateUserImage?:  {
-    __typename: "UserImage",
-    id: string,
-    objectURL: string,
-    key: string,
-    targetTable?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    owner: string,
-  } | null,
-};
-
-export type DeleteUserImageMutationVariables = {
-  input: DeleteUserImageInput,
-  condition?: ModelUserImageConditionInput | null,
-};
-
-export type DeleteUserImageMutation = {
-  deleteUserImage?:  {
-    __typename: "UserImage",
-    id: string,
-    objectURL: string,
-    key: string,
-    targetTable?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    owner: string,
-  } | null,
-};
-
 export type CreateArticleTagsMutationVariables = {
   input: CreateArticleTagsInput,
   condition?: ModelArticleTagsConditionInput | null,
@@ -1412,6 +1464,56 @@ export type ListUserProfilesQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserImageQueryVariables = {
+  id: string,
+};
+
+export type GetUserImageQuery = {
+  getUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    name?: string | null,
+    size?: number | null,
+    type?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type ListUserImagesQueryVariables = {
+  filter?: ModelUserImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUserImagesQuery = {
+  listUserImages?:  {
+    __typename: "ModelUserImageConnection",
+    items:  Array< {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      targetTable?: string | null,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      name?: string | null,
+      size?: number | null,
+      type?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1671,46 +1773,6 @@ export type ListContactusesQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetUserImageQueryVariables = {
-  id: string,
-};
-
-export type GetUserImageQuery = {
-  getUserImage?:  {
-    __typename: "UserImage",
-    id: string,
-    objectURL: string,
-    key: string,
-    targetTable?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    owner: string,
-  } | null,
-};
-
-export type ListUserImagesQueryVariables = {
-  filter?: ModelUserImageFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListUserImagesQuery = {
-  listUserImages?:  {
-    __typename: "ModelUserImageConnection",
-    items:  Array< {
-      __typename: "UserImage",
-      id: string,
-      objectURL: string,
-      key: string,
-      targetTable?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      owner: string,
     } | null >,
     nextToken?: string | null,
   } | null,

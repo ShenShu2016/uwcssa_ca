@@ -76,6 +76,49 @@ export const listUserProfiles = /* GraphQL */ `
     }
   }
 `;
+export const getUserImage = /* GraphQL */ `
+  query GetUserImage($id: ID!) {
+    getUserImage(id: $id) {
+      id
+      objectURL
+      key
+      targetTable
+      lastModified
+      lastModifiedDate
+      name
+      size
+      type
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listUserImages = /* GraphQL */ `
+  query ListUserImages(
+    $filter: ModelUserImageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        objectURL
+        key
+        targetTable
+        lastModified
+        lastModifiedDate
+        name
+        size
+        type
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getTag = /* GraphQL */ `
   query GetTag($id: ID!) {
     getTag(id: $id) {
@@ -293,39 +336,6 @@ export const listContactuses = /* GraphQL */ `
         email
         message
         phone
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getUserImage = /* GraphQL */ `
-  query GetUserImage($id: ID!) {
-    getUserImage(id: $id) {
-      id
-      objectURL
-      key
-      targetTable
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listUserImages = /* GraphQL */ `
-  query ListUserImages(
-    $filter: ModelUserImageFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        objectURL
-        key
-        targetTable
         createdAt
         updatedAt
         owner
