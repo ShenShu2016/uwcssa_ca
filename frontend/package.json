@@ -38,6 +38,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.4",
+    "@mui/lab": "^5.0.0-alpha.82",
     "@mui/material": "^5.2.4",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/jest": "^27.5.1",
@@ -46,6 +47,7 @@
     "card-validator": "^8.1.1",
     "ckeditor5-custom-build": "file:ckeditor5",
     "formik": "^2.2.6",
+    "htmlparser2": "^8.0.1",
     "jarallax": "^1.12.8",
     "react": "^17.0.1",
     "react-countup": "^6.1.0",
@@ -61,6 +63,7 @@
     "react-typed": "^1.2.0",
     "react-visibility-sensor": "^5.1.1",
     "slick-carousel": "^1.8.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.2",
     "yup": "^0.32.11"
   },

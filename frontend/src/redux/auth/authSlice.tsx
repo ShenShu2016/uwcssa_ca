@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 01:40:00
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-22 17:25:37
  * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -16,6 +16,7 @@ import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 
 export interface AuthState {
   isAuth: null | boolean;
+  isAdmin: null | boolean;
   user: unknown | null;
   loadUserStatus: 'idle' | 'loading' | 'failed' | 'succeed';
   loadUserError: null | unknown;
@@ -41,6 +42,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isAuth: null,
+  isAdmin: null,
   user: null,
   //  Status: "idle",
   //  Error: null,
