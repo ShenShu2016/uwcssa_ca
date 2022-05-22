@@ -1,18 +1,35 @@
+/*
+ * @Author: 李佳修
+ * @Date: 2022-05-19 17:21:06
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-22 15:48:26
+ * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
+ * @Description:
+ *
+ */
+/* eslint-disable indent */
 /* eslint-disable react/no-unescaped-entities */
+
+import './index.css';
+
+import * as htmlparser2 from 'htmlparser2';
+
 import React, { useEffect } from 'react';
-import { useTheme } from '@mui/material/styles';
+import { fetchArticles, selectAllArticles } from 'redux/article/articleSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import { fetchArticles } from 'redux/article/articleSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import * as htmlparser2 from 'htmlparser2';
-import './index.css';
+import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import { getAuthState } from 'redux/auth/authSlice';
+import { useTheme } from '@mui/material/styles';
+
 // import Container from 'components/Container';
 
 const mock = [
@@ -68,15 +85,18 @@ const mock = [
 
 const BlogWithLargeImage = (): JSX.Element => {
   const theme = useTheme();
-  const articles = useAppSelector(state => state.article);
-  console.log('articles', articles);
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false
+  const articles = useAppSelector(selectAllArticles); // redux 有这种用法
+  console.log('articles', articles);
 
   useEffect(() => {
     const getArticles = async () => {
-      await dispatch(fetchArticles({
-        isAuth: true
-      }));
+      await dispatch(
+        fetchArticles({
+          isAuth,
+        }),
+      );
     };
 
     getArticles();
@@ -85,20 +105,19 @@ const BlogWithLargeImage = (): JSX.Element => {
   return (
     <Box>
       <Grid container>
-        {
-          Object.keys(articles.entities).length ?
-            Object.keys(articles.entities).map((key, i) => {
-              const item = articles.entities[key];
+        {articles.length // 这里我不太明白你想做啥，稍微解释一下
+          ? articles.map((item) => {
               let contentStr = '';
               const parser = new htmlparser2.Parser({
                 ontext(text) {
                   contentStr += text;
-                }
+                },
               });
               parser.write(item.content);
               parser.end();
               return (
-                <Grid key={i} item width={'100%'}>
+                // 用index javascript react 会经常有毛病，key最好用id
+                <Grid key={item.id} item width={'100%'}>
                   <Box
                     component={Card}
                     width={'100%'}
@@ -119,28 +138,26 @@ const BlogWithLargeImage = (): JSX.Element => {
                       }}
                     >
                       <Box>
-                        {
-                          item?.tags ?
-                            item?.tags?.items.map((tag) => (
+                        {item?.tags
+                          ? item?.tags?.items.map((tag) => (
                               <Chip
                                 key={tag.tagID}
                                 label={tag.tagID}
-                                component="a"
-                                href=""
+                                component={Link} //用react router
+                                to="" //用react router
                                 clickable
                                 size={'small'}
                                 color={'primary'}
                                 sx={{ marginRight: 1, fontSize: '12px' }}
                               />
-                            )) 
-                            : null
-                        }
+                            ))
+                          : null}
                       </Box>
                       <Typography
                         // variant={'h6'}
                         marginTop={1}
                         fontWeight={400}
-                      // sx={{ textTransform: 'uppercase' }}
+                        // sx={{ textTransform: 'uppercase' }}
                       >
                         {item.title}
                       </Typography>
@@ -156,7 +173,7 @@ const BlogWithLargeImage = (): JSX.Element => {
                       <Typography
                         color="text.secondary"
                         sx={{ fontSize: 12 }}
-                        className='article-list-text'
+                        className="article-list-text"
                       >
                         {contentStr}
                       </Typography>
@@ -171,16 +188,18 @@ const BlogWithLargeImage = (): JSX.Element => {
                         component={'img'}
                         height={1}
                         width={1}
-                        src={'https://assets.maccarianagency.com/backgrounds/img3.jpg'}
+                        src={
+                          'https://assets.maccarianagency.com/backgrounds/img3.jpg'
+                        }
                         alt="..."
                         sx={{
                           objectFit: 'cover',
                           maxHeight: 150,
                           borderRadius: '12px',
                           filter:
-                      theme.palette.mode === 'dark'
-                        ? 'brightness(0.7)'
-                        : 'none',
+                            theme.palette.mode === 'dark'
+                              ? 'brightness(0.7)'
+                              : 'none',
                         }}
                       />
                       <Button
@@ -203,14 +222,15 @@ const BlogWithLargeImage = (): JSX.Element => {
                           </Box>
                         }
                       >
-                    Read More
+                        Read More
                       </Button>
                     </Box>
                   </Box>
                   <Divider />
                 </Grid>
-              );}): null
-        }
+              );
+            })
+          : null}
       </Grid>
     </Box>
   );
