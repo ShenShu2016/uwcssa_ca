@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 18:29:52
+ * @LastEditTime: 2022-05-22 19:12:13
  * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -347,8 +347,6 @@ const authSlice = createSlice({
 export const getAuthState = (state) => state.auth.isAuth;
 
 export const getUserInfo = (state) => state.auth?.user?.attributes;
-
-export const getUserIdentityID = (state) => state.auth?.user?.identityId;
 
 export const getOwnerUserName = (state) => state.auth?.user?.username;
 

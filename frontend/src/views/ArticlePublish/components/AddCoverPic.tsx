@@ -1,20 +1,20 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-22 16:20:53
+ * @LastEditTime: 2022-05-22 19:15:26
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
 
 import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import API from '@aws-amplify/api';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import Storage from '@aws-amplify/storage';
 import Typography from '@mui/material/Typography';
+import { postUserImage } from 'redux/userImage/userImageSlice';
 import { styled } from '@mui/material/styles';
 
 // import Button from '@mui/material/Button';
@@ -24,20 +24,20 @@ const Input = styled('input')({
 });
 
 const AddCoverPic = () => {
+  const dispatch = useAppDispatch();
+  const authUser = useAppSelector((state) => state.auth.user);
   const [imgFile, setImgFile] = useState('');
 
   const handleImgUpload = async (e) => {
-    console.log(e.target.files[0]);
-    const storageResult = await Storage.put(
-      'what/test.png',
-      e.target.files[0],
-      {
-        // level: 'protected',
-        contentType: 'image/png',
-      },
+    const targetTable = 'Article';
+    const file = e.target.files[0];
+    const response = await dispatch(
+      postUserImage({ targetTable, file, authUser }),
     );
-    console.log(storageResult);
-    setImgFile(URL.createObjectURL(e.target.files[0]));
+
+    if (response.meta.requestStatus === 'fulfilled') {
+      setImgFile(response.payload.objectURL);
+    }
   };
 
   const handleRemovePic = (e) => {

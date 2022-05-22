@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 16:20:31
+ * @LastEditTime: 2022-05-22 19:12:58
  * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -15,11 +15,13 @@ import {
 } from '@reduxjs/toolkit';
 
 import API from '@aws-amplify/api';
-import { CreateUserImageInput } from 'API';
 import Storage from '@aws-amplify/storage';
 import awsmobile from '../../aws-exports';
 import { createUserImage } from 'graphql/mutations';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { v4 as uuid } from 'uuid';
+
+const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } = awsmobile;
 
 type UserImage = {
   id: string;
@@ -44,25 +46,46 @@ const initialState = userImageAdapter.getInitialState({
 export const postUserImage = createAsyncThunk(
   'userImage/postUserImage',
   async ({
-    createUserImageInput,
+    targetTable,
+    file,
+    authUser,
   }: {
-    createUserImageInput: CreateUserImageInput;
+    targetTable: string;
+    file: any;
+    authUser: any;
   }) => {
+    const id = uuid();
+    const fileEXT = file.name.split('.').pop();
+    const incompleteKey = `${targetTable}/${id}.${fileEXT}`;
+    const { identityId, username } = authUser;
+    const key = `protected/${identityId}/${incompleteKey}`;
+    const createUserImageInput = {
+      id,
+      objectURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${key}`,
+      key: key,
+      targetTable,
+      lastModified: file.lastModified,
+      lastModifiedDate: file.lastModifiedDate,
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      owner: username,
+    };
+    console.log(createUserImageInput);
+
     try {
-      const storageResult = await Storage.put('test.txt', 'Protected Content', {
+      await Storage.put(incompleteKey, file, {
         level: 'protected',
         contentType: 'image/*',
       });
-      console.log(storageResult);
+      const result: any = await API.graphql(
+        graphqlOperation(createUserImage, { input: createUserImageInput }),
+      );
+      return result.data.createUserImage;
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      return error;
     }
-
-    const result: any = await API.graphql(
-      graphqlOperation(createUserImage, { input: createUserImageInput }),
-    );
-
-    return result.data.createArticle;
   },
 );
 
