@@ -215,6 +215,8 @@ export type Article = {
   id: string,
   title: string,
   content: string,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
   tags?: ModelArticleTagsConnection | null,
   comments?: ModelCommentConnection | null,
   active: ActiveType,
@@ -265,6 +267,8 @@ export type CreateArticleInput = {
   id?: string | null,
   title: string,
   content: string,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
   active: ActiveType,
   createdAt?: string | null,
   updatedAt?: string | null,
@@ -274,6 +278,8 @@ export type CreateArticleInput = {
 export type ModelArticleConditionInput = {
   title?: ModelStringInput | null,
   content?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
   active?: ModelActiveTypeInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
@@ -292,6 +298,8 @@ export type UpdateArticleInput = {
   id: string,
   title?: string | null,
   content?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
   active?: ActiveType | null,
   createdAt?: string | null,
   updatedAt?: string | null,
@@ -400,6 +408,53 @@ export type DeleteContactUsInput = {
   id: string,
 };
 
+export type CreateUserImageInput = {
+  id?: string | null,
+  objectURL: string,
+  key: string,
+  targetTable?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelUserImageConditionInput = {
+  objectURL?: ModelStringInput | null,
+  key?: ModelStringInput | null,
+  targetTable?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserImageConditionInput | null > | null,
+  or?: Array< ModelUserImageConditionInput | null > | null,
+  not?: ModelUserImageConditionInput | null,
+};
+
+export type UserImage = {
+  __typename: "UserImage",
+  id: string,
+  objectURL: string,
+  key: string,
+  targetTable?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+};
+
+export type UpdateUserImageInput = {
+  id: string,
+  objectURL?: string | null,
+  key?: string | null,
+  targetTable?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteUserImageInput = {
+  id: string,
+};
+
 export type CreateArticleTagsInput = {
   id?: string | null,
   tagID: string,
@@ -486,6 +541,8 @@ export type ModelArticleFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
   content?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
   active?: ModelActiveTypeInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
@@ -548,6 +605,25 @@ export type ModelContactUsFilterInput = {
 export type ModelContactUsConnection = {
   __typename: "ModelContactUsConnection",
   items:  Array<ContactUs | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUserImageFilterInput = {
+  id?: ModelIDInput | null,
+  objectURL?: ModelStringInput | null,
+  key?: ModelStringInput | null,
+  targetTable?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserImageFilterInput | null > | null,
+  or?: Array< ModelUserImageFilterInput | null > | null,
+  not?: ModelUserImageFilterInput | null,
+};
+
+export type ModelUserImageConnection = {
+  __typename: "ModelUserImageConnection",
+  items:  Array<UserImage | null >,
   nextToken?: string | null,
 };
 
@@ -748,6 +824,8 @@ export type CreateArticleMutation = {
     id: string,
     title: string,
     content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
     tags?:  {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
@@ -788,6 +866,8 @@ export type UpdateArticleMutation = {
     id: string,
     title: string,
     content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
     tags?:  {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
@@ -828,6 +908,8 @@ export type DeleteArticleMutation = {
     id: string,
     title: string,
     content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
     tags?:  {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
@@ -874,6 +956,8 @@ export type CreateCommentMutation = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -917,6 +1001,8 @@ export type UpdateCommentMutation = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -960,6 +1046,8 @@ export type DeleteCommentMutation = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1085,6 +1173,60 @@ export type DeleteContactUsMutation = {
   } | null,
 };
 
+export type CreateUserImageMutationVariables = {
+  input: CreateUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
+};
+
+export type CreateUserImageMutation = {
+  createUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type UpdateUserImageMutationVariables = {
+  input: UpdateUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
+};
+
+export type UpdateUserImageMutation = {
+  updateUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type DeleteUserImageMutationVariables = {
+  input: DeleteUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
+};
+
+export type DeleteUserImageMutation = {
+  deleteUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
 export type CreateArticleTagsMutationVariables = {
   input: CreateArticleTagsInput,
   condition?: ModelArticleTagsConditionInput | null,
@@ -1108,6 +1250,8 @@ export type CreateArticleTagsMutation = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1141,6 +1285,8 @@ export type UpdateArticleTagsMutation = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1174,6 +1320,8 @@ export type DeleteArticleTagsMutation = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1320,6 +1468,8 @@ export type GetArticleQuery = {
     id: string,
     title: string,
     content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
     tags?:  {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
@@ -1363,6 +1513,8 @@ export type ListArticlesQuery = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1389,6 +1541,8 @@ export type ArticleSortByCreatedAtQuery = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1414,6 +1568,8 @@ export type GetCommentQuery = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1520,6 +1676,46 @@ export type ListContactusesQuery = {
   } | null,
 };
 
+export type GetUserImageQueryVariables = {
+  id: string,
+};
+
+export type GetUserImageQuery = {
+  getUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    targetTable?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type ListUserImagesQueryVariables = {
+  filter?: ModelUserImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUserImagesQuery = {
+  listUserImages?:  {
+    __typename: "ModelUserImageConnection",
+    items:  Array< {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      targetTable?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetArticleTagsQueryVariables = {
   id: string,
 };
@@ -1542,6 +1738,8 @@ export type GetArticleTagsQuery = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1591,6 +1789,8 @@ export type OnCreateArticleTagsSubscription = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1619,6 +1819,8 @@ export type OnUpdateArticleTagsSubscription = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,
@@ -1647,6 +1849,8 @@ export type OnDeleteArticleTagsSubscription = {
       id: string,
       title: string,
       content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
       active: ActiveType,
       createdAt: string,
       updatedAt: string,

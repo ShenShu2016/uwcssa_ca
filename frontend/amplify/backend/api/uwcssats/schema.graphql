@@ -50,6 +50,24 @@ type UserProfile
   owner: ID! # 与id 一致
 }
 
+type UserImage  # user 所上传的image 都会留个记录
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  objectURL: AWSURL!
+  key: String!
+  targetTable: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+  # user: UserProfile! @hasOne(fields: ["owner"])
+}
+
 type Tag
   @model(subscriptions: null)
   @auth(
@@ -78,6 +96,8 @@ type Article
   id: ID!
   title: String!
   content: String!
+  coverPageImgURL: AWSURL
+  coverPageDescription: String
   tags: [Tag] @manyToMany(relationName: "ArticleTags")
   comments: [Comment] @hasMany
   active: ActiveType!

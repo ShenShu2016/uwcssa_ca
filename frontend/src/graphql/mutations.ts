@@ -167,6 +167,8 @@ export const createArticle = /* GraphQL */ `
       id
       title
       content
+      coverPageImgURL
+      coverPageDescription
       tags {
         nextToken
       }
@@ -202,6 +204,8 @@ export const updateArticle = /* GraphQL */ `
       id
       title
       content
+      coverPageImgURL
+      coverPageDescription
       tags {
         nextToken
       }
@@ -237,6 +241,8 @@ export const deleteArticle = /* GraphQL */ `
       id
       title
       content
+      coverPageImgURL
+      coverPageDescription
       tags {
         nextToken
       }
@@ -277,6 +283,8 @@ export const createComment = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -316,6 +324,8 @@ export const updateComment = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -355,6 +365,8 @@ export const deleteComment = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -470,6 +482,54 @@ export const deleteContactUs = /* GraphQL */ `
     }
   }
 `;
+export const createUserImage = /* GraphQL */ `
+  mutation CreateUserImage(
+    $input: CreateUserImageInput!
+    $condition: ModelUserImageConditionInput
+  ) {
+    createUserImage(input: $input, condition: $condition) {
+      id
+      objectURL
+      key
+      targetTable
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateUserImage = /* GraphQL */ `
+  mutation UpdateUserImage(
+    $input: UpdateUserImageInput!
+    $condition: ModelUserImageConditionInput
+  ) {
+    updateUserImage(input: $input, condition: $condition) {
+      id
+      objectURL
+      key
+      targetTable
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteUserImage = /* GraphQL */ `
+  mutation DeleteUserImage(
+    $input: DeleteUserImageInput!
+    $condition: ModelUserImageConditionInput
+  ) {
+    deleteUserImage(input: $input, condition: $condition) {
+      id
+      objectURL
+      key
+      targetTable
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createArticleTags = /* GraphQL */ `
   mutation CreateArticleTags(
     $input: CreateArticleTagsInput!
@@ -489,6 +549,8 @@ export const createArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -518,6 +580,8 @@ export const updateArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -547,6 +611,8 @@ export const deleteArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt

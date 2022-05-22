@@ -18,6 +18,8 @@ export const onCreateArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -44,6 +46,8 @@ export const onUpdateArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -70,6 +74,8 @@ export const onDeleteArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt

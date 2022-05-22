@@ -112,6 +112,8 @@ export const getArticle = /* GraphQL */ `
       id
       title
       content
+      coverPageImgURL
+      coverPageDescription
       tags {
         nextToken
       }
@@ -149,6 +151,8 @@ export const listArticles = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -179,6 +183,8 @@ export const articleSortByCreatedAt = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -199,6 +205,8 @@ export const getComment = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
@@ -293,6 +301,39 @@ export const listContactuses = /* GraphQL */ `
     }
   }
 `;
+export const getUserImage = /* GraphQL */ `
+  query GetUserImage($id: ID!) {
+    getUserImage(id: $id) {
+      id
+      objectURL
+      key
+      targetTable
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listUserImages = /* GraphQL */ `
+  query ListUserImages(
+    $filter: ModelUserImageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        objectURL
+        key
+        targetTable
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getArticleTags = /* GraphQL */ `
   query GetArticleTags($id: ID!) {
     getArticleTags(id: $id) {
@@ -309,6 +350,8 @@ export const getArticleTags = /* GraphQL */ `
         id
         title
         content
+        coverPageImgURL
+        coverPageDescription
         active
         createdAt
         updatedAt
