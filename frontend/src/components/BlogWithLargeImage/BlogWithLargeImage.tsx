@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 15:48:26
+ * @LastEditTime: 2022-05-22 22:12:12
  * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -92,13 +92,14 @@ const BlogWithLargeImage = (): JSX.Element => {
 
   useEffect(() => {
     const getArticles = async () => {
-      await dispatch(
-        fetchArticles({
-          isAuth,
-        }),
-      );
+      if (isAuth !== null) {
+        await dispatch(
+          fetchArticles({
+            isAuth,
+          }),
+        );
+      }
     };
-
     getArticles();
   }, []);
 
