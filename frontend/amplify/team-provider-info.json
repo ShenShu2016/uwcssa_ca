@@ -36,7 +36,7 @@
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ContactUsHandler-62786341613076384d78-build.zip"
+          "s3Key": "amplify-builds/ContactUsHandler-624579534a3346696347-build.zip"
         }
       }
     }

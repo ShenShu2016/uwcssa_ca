@@ -122,6 +122,7 @@ export const createUserImage = /* GraphQL */ `
       targetTable
       lastModified
       lastModifiedDate
+      active
       name
       size
       type
@@ -143,6 +144,7 @@ export const updateUserImage = /* GraphQL */ `
       targetTable
       lastModified
       lastModifiedDate
+      active
       name
       size
       type
@@ -164,6 +166,7 @@ export const deleteUserImage = /* GraphQL */ `
       targetTable
       lastModified
       lastModifiedDate
+      active
       name
       size
       type

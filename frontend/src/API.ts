@@ -175,6 +175,7 @@ export type CreateUserImageInput = {
   targetTable?: string | null,
   lastModified?: string | null,
   lastModifiedDate?: string | null,
+  active: ActiveType,
   name?: string | null,
   size?: number | null,
   type?: string | null,
@@ -183,12 +184,19 @@ export type CreateUserImageInput = {
   owner: string,
 };
 
+export enum ActiveType {
+  T = "T",
+  F = "F",
+}
+
+
 export type ModelUserImageConditionInput = {
   objectURL?: ModelStringInput | null,
   key?: ModelStringInput | null,
   targetTable?: ModelStringInput | null,
   lastModified?: ModelStringInput | null,
   lastModifiedDate?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
   name?: ModelStringInput | null,
   size?: ModelIntInput | null,
   type?: ModelStringInput | null,
@@ -198,6 +206,11 @@ export type ModelUserImageConditionInput = {
   and?: Array< ModelUserImageConditionInput | null > | null,
   or?: Array< ModelUserImageConditionInput | null > | null,
   not?: ModelUserImageConditionInput | null,
+};
+
+export type ModelActiveTypeInput = {
+  eq?: ActiveType | null,
+  ne?: ActiveType | null,
 };
 
 export type ModelIntInput = {
@@ -220,6 +233,7 @@ export type UserImage = {
   targetTable?: string | null,
   lastModified?: string | null,
   lastModifiedDate?: string | null,
+  active: ActiveType,
   name?: string | null,
   size?: number | null,
   type?: string | null,
@@ -235,6 +249,7 @@ export type UpdateUserImageInput = {
   targetTable?: string | null,
   lastModified?: string | null,
   lastModifiedDate?: string | null,
+  active?: ActiveType | null,
   name?: string | null,
   size?: number | null,
   type?: string | null,
@@ -325,12 +340,6 @@ export type Comment = {
   articleCommentsId?: string | null,
 };
 
-export enum ActiveType {
-  T = "T",
-  F = "F",
-}
-
-
 export type UpdateTagInput = {
   id: string,
   createdAt?: string | null,
@@ -366,11 +375,6 @@ export type ModelArticleConditionInput = {
   and?: Array< ModelArticleConditionInput | null > | null,
   or?: Array< ModelArticleConditionInput | null > | null,
   not?: ModelArticleConditionInput | null,
-};
-
-export type ModelActiveTypeInput = {
-  eq?: ActiveType | null,
-  ne?: ActiveType | null,
 };
 
 export type UpdateArticleInput = {
@@ -560,6 +564,7 @@ export type ModelUserImageFilterInput = {
   targetTable?: ModelStringInput | null,
   lastModified?: ModelStringInput | null,
   lastModifiedDate?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
   name?: ModelStringInput | null,
   size?: ModelIntInput | null,
   type?: ModelStringInput | null,
@@ -576,6 +581,22 @@ export type ModelUserImageConnection = {
   items:  Array<UserImage | null >,
   nextToken?: string | null,
 };
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelTagFilterInput = {
   id?: ModelIDInput | null,
@@ -613,22 +634,6 @@ export type ModelArticleConnection = {
   items:  Array<Article | null >,
   nextToken?: string | null,
 };
-
-export type ModelStringKeyConditionInput = {
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
 
 export type ModelCommentFilterInput = {
   id?: ModelIDInput | null,
@@ -807,6 +812,7 @@ export type CreateUserImageMutation = {
     targetTable?: string | null,
     lastModified?: string | null,
     lastModifiedDate?: string | null,
+    active: ActiveType,
     name?: string | null,
     size?: number | null,
     type?: string | null,
@@ -830,6 +836,7 @@ export type UpdateUserImageMutation = {
     targetTable?: string | null,
     lastModified?: string | null,
     lastModifiedDate?: string | null,
+    active: ActiveType,
     name?: string | null,
     size?: number | null,
     type?: string | null,
@@ -853,6 +860,7 @@ export type DeleteUserImageMutation = {
     targetTable?: string | null,
     lastModified?: string | null,
     lastModifiedDate?: string | null,
+    active: ActiveType,
     name?: string | null,
     size?: number | null,
     type?: string | null,
@@ -1485,6 +1493,7 @@ export type GetUserImageQuery = {
     targetTable?: string | null,
     lastModified?: string | null,
     lastModifiedDate?: string | null,
+    active: ActiveType,
     name?: string | null,
     size?: number | null,
     type?: string | null,
@@ -1511,6 +1520,39 @@ export type ListUserImagesQuery = {
       targetTable?: string | null,
       lastModified?: string | null,
       lastModifiedDate?: string | null,
+      active: ActiveType,
+      name?: string | null,
+      size?: number | null,
+      type?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UserImageSortByCreatedAtQueryVariables = {
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UserImageSortByCreatedAtQuery = {
+  userImageSortByCreatedAt?:  {
+    __typename: "ModelUserImageConnection",
+    items:  Array< {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      targetTable?: string | null,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      active: ActiveType,
       name?: string | null,
       size?: number | null,
       type?: string | null,

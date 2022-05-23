@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-22 23:54:59
+ * @LastEditTime: 2022-05-23 13:57:02
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/ArticlePublish.tsx
  */
@@ -17,6 +17,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Main from 'layouts/Main';
+import MyImageList from './components/MyImageList';
 import TextField from '@mui/material/TextField';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postArticle } from 'redux/article/articleSlice';
@@ -29,20 +30,20 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface Tag {
   tagID: string;
-  label: string;
 }
 
 const ArticlePublish = () => {
-  const [content, setContent] = useState('');
-  const [title, setTitle] = useState('');
-  const [coverPageDescription, setCoverPageDescription] = useState('');
-  const [tags, setTags] = useState<Array<Tag>>([]);
-  const [imgFile, setImgFile] = useState('');
-  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const username = useAppSelector(getOwnerUserName);
   const dispatch = useAppDispatch();
   const message = useMessage();
   const navigate = useNavigate();
+  const username = useAppSelector(getOwnerUserName);
+
+  const [content, setContent] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [coverPageDescription, setCoverPageDescription] = useState<string>('');
+  const [tags, setTags] = useState<Array<Tag>>([]);
+  const [imgFile, setImgFile] = useState('');
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const handleTagsChange = (tagList) => {
     setTags(tagList);
@@ -235,6 +236,7 @@ const ArticlePublish = () => {
           justifyContent="space-between"
         >
           <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
+          <MyImageList />
           <AddCoverPic imgFile={imgFile} setImgFile={setImgFile} />
           <LoadingButton
             loading={submitLoading}

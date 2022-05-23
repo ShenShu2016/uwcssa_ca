@@ -54,7 +54,7 @@ type UserImage  # user 所上传的image 都会留个记录
   @model(subscriptions: null)
   @auth(
     rules: [
-      { allow: owner, operations: [create, read] }
+      { allow: owner, operations: [create, read, update] }
       { allow: groups, groups: ["uwcssaAdmin"] }
     ]
   ) {
@@ -64,6 +64,13 @@ type UserImage  # user 所上传的image 都会留个记录
   targetTable: String
   lastModified: String
   lastModifiedDate: String
+  active: ActiveType!
+    @default(value: "T")
+    @index(
+      name: "userImageSortByCreatedAt" #名字要用小写
+      queryField: "userImageSortByCreatedAt"
+      sortKeyFields: ["createdAt"]
+    )
   name: String
   size: Int
   type: String
@@ -106,6 +113,7 @@ type Article
   tags: [Tag] @manyToMany(relationName: "ArticleTags")
   comments: [Comment] @hasMany
   active: ActiveType!
+    @default(value: "T")
     @index(
       name: "articleSortByCreatedAt" #名字要用小写
       queryField: "articleSortByCreatedAt"
@@ -130,7 +138,7 @@ type Comment
   id: ID!
   content: String!
   isDeleted: Boolean!
-  articleCommentId: ID @index(name: "byArticle", sortKeyFields: ["createdAt"]) # 为什么不！ 因为有event 也需要用comment
+  articleCommentId: ID @index(name: "byArticle", sortKeyFields: ["createdAt"]) # 为什么不加 ！ 因为有event 也需要用comment
   article: Article @belongsTo(fields: ["articleCommentId"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!

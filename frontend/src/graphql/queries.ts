@@ -85,6 +85,7 @@ export const getUserImage = /* GraphQL */ `
       targetTable
       lastModified
       lastModifiedDate
+      active
       name
       size
       type
@@ -108,6 +109,43 @@ export const listUserImages = /* GraphQL */ `
         targetTable
         lastModified
         lastModifiedDate
+        active
+        name
+        size
+        type
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const userImageSortByCreatedAt = /* GraphQL */ `
+  query UserImageSortByCreatedAt(
+    $active: ActiveType!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserImageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userImageSortByCreatedAt(
+      active: $active
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        objectURL
+        key
+        targetTable
+        lastModified
+        lastModifiedDate
+        active
         name
         size
         type
