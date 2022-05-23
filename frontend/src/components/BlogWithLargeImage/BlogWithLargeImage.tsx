@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 22:12:12
+ * @LastEditTime: 2022-05-22 23:21:09
  * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -101,21 +101,21 @@ const BlogWithLargeImage = (): JSX.Element => {
       }
     };
     getArticles();
-  }, []);
+  }, [isAuth]);
 
   return (
     <Box>
       <Grid container>
         {articles.length // 这里我不太明白你想做啥，稍微解释一下
           ? articles.map((item) => {
-              let contentStr = '';
-              const parser = new htmlparser2.Parser({
-                ontext(text) {
-                  contentStr += text;
-                },
-              });
-              parser.write(item.content);
-              parser.end();
+              // let contentStr = '';
+              // const parser = new htmlparser2.Parser({
+              //   ontext(text) {
+              //     contentStr += text;
+              //   },
+              // });
+              // parser.write(item.content);
+              // parser.end();
               return (
                 // 用index javascript react 会经常有毛病，key最好用id
                 <Grid key={item.id} item width={'100%'}>
@@ -176,7 +176,7 @@ const BlogWithLargeImage = (): JSX.Element => {
                         sx={{ fontSize: 12 }}
                         className="article-list-text"
                       >
-                        {contentStr}
+                        {item.coverPageDescription}
                       </Typography>
                     </CardContent>
 
@@ -190,7 +190,8 @@ const BlogWithLargeImage = (): JSX.Element => {
                         height={1}
                         width={1}
                         src={
-                          'https://assets.maccarianagency.com/backgrounds/img3.jpg'
+                          item.coverPageImgURL ||
+                          'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
                         }
                         alt="..."
                         sx={{

@@ -1,27 +1,28 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-22 17:47:52
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-22 23:54:59
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/ArticlePublish.tsx
  */
 
 import React, { useState } from 'react';
+import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
+import AddCoverPic from './components/AddCoverPic';
+import AddTags from './components/AddTags';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import Main from 'layouts/Main';
 import LoadingButton from '@mui/lab/LoadingButton';
-import AddTags from './components/AddTags';
-import AddCoverPic from './components/AddCoverPic';
-import { createNewTag, createArticleTag } from 'redux/tag/tagSlice';
-import { postArticle } from 'redux/article/articleSlice';
-import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import Main from 'layouts/Main';
+import TextField from '@mui/material/TextField';
 import { getOwnerUserName } from 'redux/auth/authSlice';
+import { postArticle } from 'redux/article/articleSlice';
 import useMessage from 'hooks/useMessage';
-import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router';
+import { v4 as uuidv4 } from 'uuid';
 
 // import ReactHtmlParser from 'react-html-parser';
 // import demoContent from './demo';
@@ -34,7 +35,9 @@ interface Tag {
 const ArticlePublish = () => {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
+  const [coverPageDescription, setCoverPageDescription] = useState('');
   const [tags, setTags] = useState<Array<Tag>>([]);
+  const [imgFile, setImgFile] = useState('');
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const username = useAppSelector(getOwnerUserName);
   const dispatch = useAppDispatch();
@@ -50,26 +53,31 @@ const ArticlePublish = () => {
     const currentTitle = title;
     const currentContent = content;
     const currentTags = tags;
+    const currentCoverPageDescription = coverPageDescription;
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCreate] = await Promise.all([
       createTags(currentTags),
-      createArticle(currentTitle, currentContent)
+      createArticle(currentTitle, currentContent, currentCoverPageDescription),
     ]);
     // 都完成后进行tag与文章的关联
     if (tagCreate.status && articleCreate.status) {
-      const isConnected = await connectTagsAndArticle(articleCreate.articleID, tagCreate.tags);
+      const isConnected = await connectTagsAndArticle(
+        articleCreate.articleID,
+        tagCreate.tags,
+      );
       if (isConnected) {
         message.open({
           type: 'success',
-          message: '文章发布完成'
+          message: '文章发布完成',
         });
         setTimeout(() => {
-          navigate('/dashboard');
+          setSubmitLoading(false);
+          navigate('/dashboard', { replace: true });
         }, 1000);
       } else {
         message.open({
           type: 'warning',
-          message: '文章发布有误'
+          message: '文章发布有误',
         });
       }
     } else {
@@ -78,68 +86,83 @@ const ArticlePublish = () => {
     setSubmitLoading(false);
   };
 
-  const createArticle = async (currentTitle, currentContent) => {
+  const createArticle = async (
+    currentTitle,
+    currentContent,
+    currentCoverPageDescription,
+  ) => {
     const articleID = uuidv4();
-    const articlePostRes = await dispatch(postArticle({
-      createArticleInput: {
-        id: articleID,
-        title: currentTitle,
-        content: currentContent,
-        active: 'T',
-        owner: username
-      }
-    }));
+    const articlePostRes = await dispatch(
+      postArticle({
+        createArticleInput: {
+          id: articleID,
+          title: currentTitle,
+          content: currentContent,
+          active: 'T',
+          coverPageImgURL: imgFile || undefined,
+          coverPageDescription: currentCoverPageDescription,
+          owner: username,
+        },
+      }),
+    );
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
     return {
       articleID,
-      status: isPosted
+      status: isPosted,
     };
   };
 
   const createTags = async (currentTags) => {
-    const tagsPromises = currentTags.map((item) => dispatch(createNewTag({
-      createTagInput: {
-        id: item.tagID,
-        owner: username
-      }
-    })));
+    const tagsPromises = currentTags.map((item) =>
+      dispatch(
+        createNewTag({
+          createTagInput: {
+            id: item.tagID,
+            owner: username,
+          },
+        }),
+      ),
+    );
     const tagUploadRes = await Promise.all(tagsPromises);
-    const isAllTagCreated = tagUploadRes.every((res) => res.meta.requestStatus === 'fulfilled');
+    const isAllTagCreated = tagUploadRes.every(
+      (res) => res.meta.requestStatus === 'fulfilled',
+    );
     if (isAllTagCreated) {
       message.open({
         type: 'success',
-        message: '标签已创建'
+        message: '标签已创建',
       });
     } else {
       message.open({
         type: 'warning',
-        message: '标签创建错误'
+        message: '标签创建错误',
       });
     }
     return {
-      tags: tagUploadRes.map(tag => tag.meta.arg.createTagInput.id),
-      status: isAllTagCreated
+      tags: tagUploadRes.map((tag) => tag.meta.arg.createTagInput.id),
+      status: isAllTagCreated,
     };
   };
 
   const connectTagsAndArticle = async (articleID, tags) => {
-    const connectReqs = tags.map(tagID => dispatch(createArticleTag({
-      createArticleTagInput: {
-        tagID,
-        articleID
-      }
-    })));
-    const resList = await Promise.all(connectReqs);
-    return resList.every(res => res.meta.requestStatus === 'fulfilled');
+    const connectTaqs = tags.map((tagID) =>
+      dispatch(
+        createArticleTag({
+          createArticleTagInput: {
+            tagID,
+            articleID,
+          },
+        }),
+      ),
+    );
+    const resList = await Promise.all(connectTaqs);
+    return resList.every((res) => res.meta.requestStatus === 'fulfilled');
   };
 
   return (
     <Main>
       <Box display={'flex'} height={'80vh'}>
-        <Box 
-          width='70%'
-          height='100%'
-        >
+        <Box width="70%" height="100%">
           <TextField
             id="standard-textarea"
             fullWidth
@@ -149,29 +172,47 @@ const ArticlePublish = () => {
             variant="standard"
             inputProps={{
               style: {
-                fontSize: 20
-              }
+                fontSize: 20,
+              },
             }}
             InputLabelProps={{
               style: {
-                fontSize: 18
-              }
+                fontSize: 18,
+              },
             }}
             sx={{
               paddingBottom: 2,
             }}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Box
-            height='calc(100% - 64px)'
-            overflow-y='auto'
-            overflow-x='hidden'
-          >
+          <TextField
+            id="standard-textarea"
+            fullWidth
+            label="coverPageDescription"
+            multiline
+            value={coverPageDescription}
+            variant="standard"
+            inputProps={{
+              style: {
+                fontSize: 20,
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                fontSize: 18,
+              },
+            }}
+            sx={{
+              paddingBottom: 2,
+            }}
+            onChange={(e) => setCoverPageDescription(e.target.value)}
+          />
+          <Box height="calc(100% - 64px)" overflow-y="auto" overflow-x="hidden">
             <CKEditor
               editor={Editor}
               data={content}
               onReady={(editor) => {
-              // You can store the "editor" and use when it is needed.
+                // You can store the "editor" and use when it is needed.
                 console.log('Editor is ready to use!', editor);
               }}
               onChange={(event, editor) => {
@@ -186,17 +227,17 @@ const ArticlePublish = () => {
           </div> */}
         </Box>
         <Box
-          width='30%'
-          ml='30px'
-          height='100%'
-          display='flex'
-          flexDirection='column'
-          justifyContent='space-between'
+          width="30%"
+          ml="30px"
+          height="100%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
         >
-          <AddTags tagListChange={(tags) => handleTagsChange(tags)}/>
-          <AddCoverPic />
+          <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
+          <AddCoverPic imgFile={imgFile} setImgFile={setImgFile} />
           <LoadingButton
-            loading={submitLoading} 
+            loading={submitLoading}
             fullWidth
             variant="contained"
             onClick={handleSubmitArticle}

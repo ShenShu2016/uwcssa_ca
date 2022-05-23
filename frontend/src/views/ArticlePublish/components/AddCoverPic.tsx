@@ -1,17 +1,17 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-22 19:15:26
+ * @LastEditTime: 2022-05-22 23:44:22
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
 
-import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import React from 'react';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Typography from '@mui/material/Typography';
 import { postUserImage } from 'redux/userImage/userImageSlice';
@@ -23,10 +23,15 @@ const Input = styled('input')({
   display: 'none',
 });
 
-const AddCoverPic = () => {
+const AddCoverPic = ({
+  imgFile,
+  setImgFile,
+}: {
+  imgFile: string;
+  setImgFile: any;
+}) => {
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((state) => state.auth.user);
-  const [imgFile, setImgFile] = useState('');
 
   const handleImgUpload = async (e) => {
     const targetTable = 'Article';

@@ -2,14 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 15:14:39
+ * @LastEditTime: 2022-05-22 23:23:32
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { createArticle, updateArticle } from 'graphql/mutations';
+import { articleSortByCreatedAt, createArticle } from './custom_q_m_s';
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -18,9 +18,9 @@ import {
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
-import { articleSortByCreatedAt } from './custom_q_m_s';
 import { getArticle } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { updateArticle } from 'graphql/mutations';
 
 type Article = {
   id: string;
@@ -64,6 +64,7 @@ export const fetchArticles = createAsyncThunk(
         variables: {
           active: 'T',
           sortDirection: 'DESC',
+          limit: 10,
         },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
