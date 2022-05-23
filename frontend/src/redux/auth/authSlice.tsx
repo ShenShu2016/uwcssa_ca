@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 19:12:13
+ * @LastEditTime: 2022-05-22 22:25:20
  * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
  * @Description:
  *
@@ -80,7 +80,9 @@ export const signIn = createAsyncThunk(
   'auth/signIn',
   async ({ username, password }: { username: string; password: string }) => {
     const response = await Auth.signIn(username, password);
-    return response;
+    const credentials = await Auth.currentUserCredentials();
+    console.log(response);
+    return { ...response, ...credentials };
   },
 );
 

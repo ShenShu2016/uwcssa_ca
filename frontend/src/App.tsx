@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:53:57
- * @FilePath: \uwcssa_ca\frontend\src\App.tsx
+ * @LastEditTime: 2022-05-22 22:19:56
+ * @FilePath: /uwcssa_ca/frontend/src/App.tsx
  * @Description:
  *
  */
@@ -26,8 +26,11 @@ const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
+    const getUser = async () => {
+      dispatch(loadUser());
+    };
+    getUser();
+  }, []);
 
   return (
     <Page>
