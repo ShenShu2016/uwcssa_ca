@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 21:38:43
+ * @LastEditTime: 2022-05-23 12:13:59
  * @FilePath: /uwcssa_ca/frontend/src/views/ContactPage/components/Contact/Contact.tsx
  * @Description:
  *
@@ -21,7 +21,7 @@ import { useTheme } from '@mui/material/styles';
 const mock = [
   {
     label: 'Phone',
-    value: '+39 659-657-0133',
+    value: '+1 647-871-0781',
     icon: (
       <svg
         width={20}
@@ -36,7 +36,7 @@ const mock = [
   },
   {
     label: 'Email',
-    value: 'hi@maccarianagency.com',
+    value: 'uwincssa.it@gmail.com',
     icon: (
       <svg
         width={20}
@@ -50,25 +50,25 @@ const mock = [
       </svg>
     ),
   },
-  {
-    label: 'Address',
-    value: 'Via Venini 33, 20147',
-    icon: (
-      <svg
-        width={20}
-        height={20}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-  },
+  // {
+  //   label: 'Address',
+  //   value: 'Via Venini 33, 20147',
+  //   icon: (
+  //     <svg
+  //       width={20}
+  //       height={20}
+  //       xmlns="http://www.w3.org/2000/svg"
+  //       viewBox="0 0 20 20"
+  //       fill="currentColor"
+  //     >
+  //       <path
+  //         fillRule="evenodd"
+  //         d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+  //         clipRule="evenodd"
+  //       />
+  //     </svg>
+  //   ),
+  // },
 ];
 
 const Contact = (): JSX.Element => {

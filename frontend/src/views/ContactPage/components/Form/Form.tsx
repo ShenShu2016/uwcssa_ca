@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 21:16:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 01:55:01
+ * @LastEditTime: 2022-05-23 12:08:42
  * @FilePath: /uwcssa_ca/frontend/src/views/ContactPage/components/Form/Form.tsx
  * @Description:
  *
@@ -49,7 +49,6 @@ const Form = (): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const ownerUserName = useAppSelector(getOwnerUserName);
-  console.log(ownerUserName);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
@@ -62,7 +61,6 @@ const Form = (): JSX.Element => {
   };
 
   const onSubmit = async (values) => {
-    console.log(JSON.stringify(values));
     const { fullName, message, email, phone } = values;
     const createContactUsInput = {
       id: undefined,

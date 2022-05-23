@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 14:36:13
+ * @LastEditTime: 2022-05-23 12:07:34
  * @FilePath: /uwcssa_ca/frontend/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -46,7 +46,6 @@ function ViewRoutes(): Array<{
   const isAuth = useAppSelector(getAuthState);
   const isAdmin = useAppSelector(getIsAdmin);
 
-  console.log(isAuth, isAdmin);
   return [
     {
       path: '/',
