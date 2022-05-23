@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-22 23:44:22
+ * @LastEditTime: 2022-05-23 13:04:15
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
@@ -28,7 +28,7 @@ const AddCoverPic = ({
   setImgFile,
 }: {
   imgFile: string;
-  setImgFile: any;
+  setImgFile: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((state) => state.auth.user);

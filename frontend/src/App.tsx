@@ -19,12 +19,14 @@ import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Page from './components/Page';
 import Routes from './Routes';
+import { getAuthState } from 'redux/auth/authSlice';
 import { loadUser } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
+import { useAppSelector } from 'redux/hooks';
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
-
+  const isAuth = useAppSelector(getAuthState);
   useEffect(() => {
     const getUser = async () => {
       dispatch(loadUser());
@@ -34,9 +36,7 @@ const App = (): JSX.Element => {
 
   return (
     <Page>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <BrowserRouter>{isAuth !== null && <Routes />}</BrowserRouter>
     </Page>
   );
 };
