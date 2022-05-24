@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.2.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -72,11 +72,20 @@
         },
         "Environment": {
           "Variables": {
-            "ENV": { "Ref": "env" },
-            "REGION": { "Ref": "AWS::Region" }
+            "ENV": {
+              "Ref": "env"
+            },
+            "REGION": {
+              "Ref": "AWS::Region"
+            }
           }
         },
-        "Role": { "Fn::GetAtt": ["LambdaExecutionRole", "Arn"] },
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaExecutionRole",
+            "Arn"
+          ]
+        },
         "Runtime": "python3.8",
         "Layers": [],
         "Timeout": 25
@@ -109,20 +118,30 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": ["lambda.amazonaws.com"]
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
               },
-              "Action": ["sts:AssumeRole"]
+              "Action": [
+                "sts:AssumeRole"
+              ]
             }
           ]
         }
       }
     },
     "lambdaexecutionpolicy": {
-      "DependsOn": ["LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-execution-policy",
-        "Roles": [{ "Ref": "LambdaExecutionRole" }],
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
@@ -137,9 +156,15 @@
                 "Fn::Sub": [
                   "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*",
                   {
-                    "region": { "Ref": "AWS::Region" },
-                    "account": { "Ref": "AWS::AccountId" },
-                    "lambda": { "Ref": "LambdaFunction" }
+                    "region": {
+                      "Ref": "AWS::Region"
+                    },
+                    "account": {
+                      "Ref": "AWS::AccountId"
+                    },
+                    "lambda": {
+                      "Ref": "LambdaFunction"
+                    }
                   }
                 ]
               }
@@ -149,7 +174,9 @@
       }
     },
     "LambdaTriggerPolicyArticle": {
-      "DependsOn": ["LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "amplify-lambda-execution-policy-Article",
@@ -181,7 +208,10 @@
     },
     "LambdaEventSourceMappingArticle": {
       "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": ["LambdaTriggerPolicyArticle", "LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaTriggerPolicyArticle",
+        "LambdaExecutionRole"
+      ],
       "Properties": {
         "BatchSize": 100,
         "Enabled": true,
@@ -191,10 +221,39 @@
           }
         },
         "FunctionName": {
-          "Fn::GetAtt": ["LambdaFunction", "Arn"]
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
         },
         "StartingPosition": "LATEST"
       }
+    },
+    "CustomLambdaExecutionPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "custom-lambda-execution-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "ses:SendEmail"
+              ],
+              "Resource": [
+                "arn:aws:ses:*:537666141782:identity/*"
+              ],
+              "Effect": "Allow"
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ]
+      },
+      "DependsOn": "LambdaExecutionRole"
     }
   },
   "Outputs": {
@@ -204,7 +263,12 @@
       }
     },
     "Arn": {
-      "Value": { "Fn::GetAtt": ["LambdaFunction", "Arn"] }
+      "Value": {
+        "Fn::GetAtt": [
+          "LambdaFunction",
+          "Arn"
+        ]
+      }
     },
     "Region": {
       "Value": {
