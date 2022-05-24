@@ -36,7 +36,7 @@ def handler(event, context):
     response = ses_client.send_email(
         Destination={
             "ToAddresses": [
-                "shushen2013@gmail.com",
+                event["Records"][0]["dynamodb"]["NewImage"]["email"]["S"],
             ],
         },
         Message={
@@ -60,9 +60,9 @@ def handler(event, context):
             <h1 style='text-align:center'>有人联系我们啦</h1>
             <p>姓名： {event['Records'][0]['dynamodb']['NewImage']['fullName']['S']}</p>
             <p>电话： {event['Records'][0]['dynamodb']['NewImage']['phone']['S']}</p>
-            <p>email {event['Records'][0]['dynamodb']['NewImage']['email']['S']}</p>
-            <p>Message {event['Records'][0]['dynamodb']['NewImage']['message']['S']}</p>
-            <p>回执是否成功 {response}</p>
+            <p>email: {event['Records'][0]['dynamodb']['NewImage']['email']['S']}</p>
+            <p>Message: {event['Records'][0]['dynamodb']['NewImage']['message']['S']}</p>
+            <p>回执是否成功: {response}</p>
             </body>
         </html>
     """
