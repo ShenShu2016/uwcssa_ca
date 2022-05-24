@@ -15,6 +15,14 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "apiuwcssatsGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apiuwcssatsGraphQLAPIIdOutput"
+    },
+    "apiuwcssatsGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apiuwcssatsGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -80,12 +88,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "uwcssaLambdaRole276bcdea",
+            "uwcssaLambdaRole276bcdeb",
             {
               "Fn::Join": [
                 "",
                 [
-                  "uwcssaLambdaRole276bcdea",
+                  "uwcssaLambdaRole276bcdeb",
                   "-",
                   {
                     "Ref": "env"
@@ -138,6 +146,54 @@
             }
           ]
         }
+      }
+    },
+    "LambdaTriggerPolicyArticle": {
+      "DependsOn": ["LambdaExecutionRole"],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy-Article",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:ListStreams"
+              ],
+              "Resource": {
+                "Fn::ImportValue": {
+                  "Fn::Sub": "${apiuwcssatsGraphQLAPIIdOutput}:GetAtt:ArticleTable:StreamArn"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LambdaEventSourceMappingArticle": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "DependsOn": ["LambdaTriggerPolicyArticle", "LambdaExecutionRole"],
+      "Properties": {
+        "BatchSize": 100,
+        "Enabled": true,
+        "EventSourceArn": {
+          "Fn::ImportValue": {
+            "Fn::Sub": "${apiuwcssatsGraphQLAPIIdOutput}:GetAtt:ArticleTable:StreamArn"
+          }
+        },
+        "FunctionName": {
+          "Fn::GetAtt": ["LambdaFunction", "Arn"]
+        },
+        "StartingPosition": "LATEST"
       }
     }
   },

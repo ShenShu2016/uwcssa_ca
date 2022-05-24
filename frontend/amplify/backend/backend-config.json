@@ -13,9 +13,7 @@
         {
           "category": "auth",
           "resourceName": "uwcssats",
-          "attributes": [
-            "UserPoolId"
-          ]
+          "attributes": ["UserPoolId"]
         }
       ]
     },
@@ -32,17 +30,21 @@
         {
           "category": "api",
           "resourceName": "uwcssats",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
+          "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"]
         }
       ]
     },
     "ArticlePushNotificationHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "uwcssats",
+          "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"]
+        }
+      ]
     }
   },
   "auth": {
@@ -70,35 +72,21 @@
           "category": "function",
           "resourceName": "uwcssatsPostConfirmation",
           "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
+          "attributes": ["Arn", "Name"]
         }
       ],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [
-          "GOOGLE"
-        ],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL",
-          "NAME"
-        ],
+        "socialProviders": ["GOOGLE"],
+        "usernameAttributes": ["EMAIL"],
+        "signupAttributes": ["EMAIL", "NAME"],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
         "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
+        "mfaTypes": ["SMS"],
+        "verificationMechanisms": ["EMAIL"]
       }
     }
   },
@@ -110,32 +98,22 @@
         {
           "category": "function",
           "resourceName": "S3Trigger085746e7",
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ]
+          "attributes": ["Name", "Arn", "LambdaExecutionRole"]
         },
         {
           "category": "auth",
           "resourceName": "uwcssats",
-          "attributes": [
-            "UserPoolId"
-          ]
+          "attributes": ["UserPoolId"]
         },
         {
           "category": "auth",
           "resourceName": "userPoolGroups",
-          "attributes": [
-            "uwcssaUserGroupRole"
-          ]
+          "attributes": ["uwcssaUserGroupRole"]
         },
         {
           "category": "auth",
           "resourceName": "userPoolGroups",
-          "attributes": [
-            "uwcssaAdminGroupRole"
-          ]
+          "attributes": ["uwcssaAdminGroupRole"]
         }
       ]
     }
@@ -149,17 +127,12 @@
         {
           "category": "auth",
           "resourceName": "uwcssats",
-          "attributes": [
-            "UserPoolId"
-          ]
+          "attributes": ["UserPoolId"]
         },
         {
           "category": "function",
           "resourceName": "AdminQueriesdf7beb2c",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
+          "attributes": ["Arn", "Name"]
         }
       ]
     },
@@ -170,9 +143,7 @@
         {
           "category": "auth",
           "resourceName": "uwcssats",
-          "attributes": [
-            "UserPoolId"
-          ]
+          "attributes": ["UserPoolId"]
         }
       ],
       "output": {
