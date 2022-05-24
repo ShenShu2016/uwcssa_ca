@@ -10,5 +10,6 @@
     "Topbar",
     "UWCSSA",
     "uwcssats"
-  ]
+  ],
+  "python.formatting.provider": "black"
 }

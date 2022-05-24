@@ -16,7 +16,8 @@
       "auth": {
         "uwcssats": {
           "googleClientId": "1067602080073-g7b7tnerk3fg7rt7f3fpir8a1jubjbma.apps.googleusercontent.com"
-        }
+        },
+        "userPoolGroups": {}
       },
       "function": {
         "uwcssatsPostConfirmation": {

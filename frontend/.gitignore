@@ -1,5 +1,6 @@
 node_modules
-
+!ckeditor5/build/
+.env
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -20,6 +21,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-
-
-!ckeditor5/build/
