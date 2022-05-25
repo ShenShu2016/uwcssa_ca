@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react';
+import { fetchArticles, selectAllArticles } from 'redux/article/articleSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -5,39 +9,33 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
-import React from 'react';
 import Typography from '@mui/material/Typography';
+import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-
-const mock = [
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img2.jpg',
-    title: 'Motivation is the first step to success',
-    subtitle:
-      // eslint-disable-next-line quotes
-      "Once you're setup, instantly withdraw payments or deposit into your bank account within 2-3 business days.",
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img3.jpg',
-    title: 'Success steps for your personal or business life',
-    subtitle:
-      'We make sure to include all the amenities and niceties that a growing startup could possibly need.',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img4.jpg',
-    title: 'Increasing prosperity with positive thinking',
-    subtitle:
-      // eslint-disable-next-line quotes
-      "Once you're setup, instantly withdraw payments or deposit into your bank account within 2-3 business days.",
-  },
-];
 
 const News = (): JSX.Element => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
+  const articles = useAppSelector(selectAllArticles); // redux 有这种用法
+  const { fetchArticlesStatus } = useAppSelector((state) => state.article);
+
+  useEffect(() => {
+    const getArticles = async () => {
+      if (isAuth !== null && fetchArticlesStatus !== 'succeed') {
+        await dispatch(
+          fetchArticles({
+            isAuth,
+          }),
+        );
+      }
+    };
+    getArticles();
+  }, [isAuth, fetchArticlesStatus]);
 
   return (
     <Box>
@@ -63,11 +61,11 @@ const News = (): JSX.Element => {
       <Grid container spacing={isMd ? 4 : 2}>
         <Grid item xs={12} md={8}>
           <Grid container spacing={isMd ? 4 : 2} direction="column">
-            {mock.map((item, index) => (
+            {articles.slice(0, 3).map((item, index) => (
               <Grid
                 item
                 xs={12}
-                key={index}
+                key={item.id}
                 data-aos="fade-up"
                 data-aos-delay={index * 200}
                 data-aos-offset={100}
@@ -80,7 +78,7 @@ const News = (): JSX.Element => {
                 >
                   <CardMedia
                     title={item.title}
-                    image={item.media}
+                    image={item.coverPageImgURL}
                     sx={{
                       height: { xs: 240, sm: 'auto' },
                       width: { xs: 1, sm: 300 },
@@ -96,7 +94,7 @@ const News = (): JSX.Element => {
                         {item.title}
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary">
-                        {item.subtitle}
+                        {item.coverPageDescription}
                       </Typography>
                     </Box>
                     <CardActions sx={{ justifyContent: 'flex-end' }}>

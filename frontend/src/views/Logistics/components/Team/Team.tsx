@@ -77,7 +77,9 @@ const Team = (): JSX.Element => {
           <Box height={1} width={1} display={'flex'} flexDirection={'column'}>
             <Box
               component={'img'}
-              src={'https://assets.maccarianagency.com/backgrounds/img1.jpg'}
+              src={
+                'https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7572fa7c-2ecd-46ee-a5c8-ebb3ce30f60c/Article/5c98e0e1-6a9b-4c0a-a1c6-71d31e2c36ed.png'
+              }
               alt="..."
               width={160}
               height={160}
@@ -96,7 +98,9 @@ const Team = (): JSX.Element => {
               component={'img'}
               width={200}
               height={200}
-              src={'https://assets.maccarianagency.com/backgrounds/img2.jpg'}
+              src={
+                'https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7845a883-556b-4fd6-b477-333b873abb68/Article/e75f7f3d-6ad0-466e-b5f9-e5b6b0c2b515.jpg'
+              }
               alt="..."
               marginTop={'-8%'}
               zIndex={2}
@@ -113,7 +117,9 @@ const Team = (): JSX.Element => {
               component={'img'}
               width={300}
               height={300}
-              src={'https://assets.maccarianagency.com/backgrounds/img4.jpg'}
+              src={
+                'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
+              }
               alt="..."
               marginTop={'-20%'}
               marginLeft={'calc(100% - 300px)'}

@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 23:21:09
+ * @LastEditTime: 2022-05-25 18:21:49
  * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -28,71 +28,22 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
+import moment from 'moment';
 import { useTheme } from '@mui/material/styles';
 
 // import Container from 'components/Container';
 
-const mock = [
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img3.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Lorem ipsum dolor sit amet',
-    tags: ['UX', 'Design', 'Themes', 'Photography'],
-    author: {
-      name: 'Clara Bertoletti',
-      avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
-    },
-    date: '04 Aug',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img25.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Consectetur adipiscing elit',
-    tags: ['UX', 'Design', 'Themes', 'Photography'],
-    author: {
-      name: 'Jhon Anderson',
-      avatar: 'https://assets.maccarianagency.com/avatars/img5.jpg',
-    },
-    date: '12 Sep',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img3.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Lorem ipsum dolor sit amet',
-    tags: ['UX', 'Design', 'Themes', 'Photography'],
-    author: {
-      name: 'Clara Bertoletti',
-      avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
-    },
-    date: '04 Aug',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img25.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Consectetur adipiscing elit',
-    tags: ['UX', 'Design', 'Themes', 'Photography'],
-    author: {
-      name: 'Jhon Anderson',
-      avatar: 'https://assets.maccarianagency.com/avatars/img5.jpg',
-    },
-    date: '12 Sep',
-  },
-];
-
 const BlogWithLargeImage = (): JSX.Element => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false
+  const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
+  const { fetchArticlesStatus } = useAppSelector((state) => state.article);
   console.log('articles', articles);
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null) {
+      if (isAuth !== null && fetchArticlesStatus !== 'succeed') {
         await dispatch(
           fetchArticles({
             isAuth,
@@ -101,13 +52,13 @@ const BlogWithLargeImage = (): JSX.Element => {
       }
     };
     getArticles();
-  }, [isAuth]);
+  }, [isAuth, fetchArticlesStatus]);
 
   return (
     <Box>
       <Grid container>
         {articles.length // 这里我不太明白你想做啥，稍微解释一下
-          ? articles.map((item) => {
+          ? articles.map((item, index) => {
               // let contentStr = '';
               // const parser = new htmlparser2.Parser({
               //   ontext(text) {
@@ -118,7 +69,15 @@ const BlogWithLargeImage = (): JSX.Element => {
               // parser.end();
               return (
                 // 用index javascript react 会经常有毛病，key最好用id
-                <Grid key={item.id} item width={'100%'}>
+                <Grid
+                  key={item.id}
+                  item
+                  width={'100%'}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 200}
+                  data-aos-offset={100}
+                  data-aos-duration={600}
+                >
                   <Box
                     component={Card}
                     width={'100%'}
@@ -168,7 +127,7 @@ const BlogWithLargeImage = (): JSX.Element => {
                           color={'text.secondary'}
                           component={'i'}
                         >
-                          {item.user.name} - {item.createdAt}
+                          {item.user.name} - {moment(item.createdAt).fromNow()}
                         </Typography>
                       </Box>
                       <Typography
