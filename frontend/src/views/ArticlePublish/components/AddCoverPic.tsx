@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-23 13:04:15
+ * @LastEditTime: 2022-05-25 15:55:16
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
@@ -78,7 +78,7 @@ const AddCoverPic = ({
       >
         <label htmlFor="contained-button-file">
           <Input
-            accept="image/*"
+            accept="image/jpeg,image/jpg, image/png, image/webp,  image/svg" //目前不支持gif
             id="contained-button-file"
             type="file"
             onChange={(e) => handleImgUpload(e)}

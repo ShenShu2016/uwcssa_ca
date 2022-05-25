@@ -35,6 +35,9 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "uwcssaLayerNodeJSSharp": {
+            "Arn": "string"
         }
     },
     "auth": {

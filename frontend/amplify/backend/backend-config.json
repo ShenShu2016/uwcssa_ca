@@ -60,6 +60,13 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "function",
+          "resourceName": "uwcssaLayerNodeJSSharp",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "uwcssats",
           "attributes": [
@@ -75,6 +82,11 @@
           ]
         }
       ]
+    },
+    "uwcssaLayerNodeJSSharp": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   },
   "auth": {
