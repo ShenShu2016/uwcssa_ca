@@ -75,6 +75,7 @@
     "@types/react-html-parser": "^2.0.2",
     "@types/react-lazy-load-image-component": "^1.5.2",
     "@types/react-router-dom": "^5.3.2",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "babel-eslint": "^10.1.0",
