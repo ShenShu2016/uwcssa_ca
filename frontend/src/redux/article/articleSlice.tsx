@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 23:23:32
+ * @LastEditTime: 2022-05-25 17:54:22
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -134,7 +134,7 @@ const articleSlice = createSlice({
         state.fetchArticlesStatus = 'loading';
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
-        state.fetchArticlesStatus = 'succeeded';
+        state.fetchArticlesStatus = 'succeed';
         articleAdapter.removeAll(state);
         articleAdapter.upsertMany(state, action.payload);
       })
@@ -147,7 +147,7 @@ const articleSlice = createSlice({
         state.selectedArticleStatus = 'loading';
       })
       .addCase(selectedArticle.fulfilled, (state, action) => {
-        state.selectedArticleStatus = 'succeeded';
+        state.selectedArticleStatus = 'succeed';
         articleAdapter.upsertOne(state, action.payload);
       })
       .addCase(selectedArticle.rejected, (state, action) => {
@@ -159,7 +159,7 @@ const articleSlice = createSlice({
         state.postArticleStatus = 'loading';
       })
       .addCase(postArticle.fulfilled, (state, action) => {
-        state.postArticleStatus = 'succeeded';
+        state.postArticleStatus = 'succeed';
         // state.articles.unshift(action.payload.data.createArticle);
         articleAdapter.addOne(state, action.payload);
         // state.postArticleStatus = "idle";
@@ -173,7 +173,7 @@ const articleSlice = createSlice({
         state.updateArticleDetailStatus = 'loading';
       })
       .addCase(updateArticleDetail.fulfilled, (state) => {
-        state.updateArticleDetailStatus = 'succeeded';
+        state.updateArticleDetailStatus = 'succeed';
         //state.articles.unshift(action.payload.data.createArticle);
         //articleAdapter.upsertOne(state, action.payload);
         // state.updateArticleStatus = "idle";

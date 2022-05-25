@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 17:44:32
+ * @LastEditTime: 2022-05-25 17:54:31
  * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -145,7 +145,7 @@ const userImageSlice = createSlice({
         state.fetchUserImagesStatus = 'loading';
       })
       .addCase(fetchUserImages.fulfilled, (state, action) => {
-        state.fetchUserImagesStatus = 'succeeded';
+        state.fetchUserImagesStatus = 'succeed';
         userImageAdapter.removeAll(state);
         userImageAdapter.upsertMany(state, action.payload);
       })
