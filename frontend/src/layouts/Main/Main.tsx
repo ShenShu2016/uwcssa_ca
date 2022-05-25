@@ -1,10 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-21 20:44:26
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-25 19:23:35
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/Main.tsx
  */
+
 import { Footer, Sidebar, Topbar } from './components';
 import React, { useState } from 'react';
 
@@ -12,7 +13,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
 import TopNav from 'components/TopNav';
 import pages from '../navigation';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -25,15 +25,14 @@ interface Props {
   bgcolor?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Content = styled(Box)(({theme}) => ({
-  width: '100%',
-  // minHeight: '100vh',
-  padding: '24px 5%',
-  background: '#f5f5f5'
-}));
-
-
+// // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// const Content = styled(Box)(({theme}) => ({
+//   width: '100%',
+//   // minHeight: '100vh',
+//   padding: '24px 5%',
+//   background: '#f5f5f5'
+// }));
+//这里改了会导致后面的东西都会有奇奇怪怪的毛病
 const Main = ({
   children,
   colorInvert = false,
@@ -65,7 +64,7 @@ const Main = ({
     <Box>
       <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
         <Container paddingTop={'8px !important'} paddingBottom={'0 !important'}>
-          <TopNav />
+          <TopNav colorInvert={colorInvert} />
         </Container>
       </Box>
       <AppBar
@@ -91,10 +90,10 @@ const Main = ({
         variant="temporary"
         pages={pages}
       />
-      <Content sx={{ backgroundColor: bgcolor }}>
+      <main>
         {children}
-      </Content>
-      <Divider />
+        <Divider />
+      </main>
       <Container paddingY={4}>
         <Footer />
       </Container>
