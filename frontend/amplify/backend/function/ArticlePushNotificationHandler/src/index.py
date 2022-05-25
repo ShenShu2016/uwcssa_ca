@@ -1,23 +1,15 @@
 """
 Author: Shikai Jin
-Date: 2022-05-24 20:41:55
-LastEditors: Shikai Jin
-LastEditTime: 2022-05-24 22:29:29
-FilePath: /uwcssa_ca/frontend/amplify/backend/function/ArticlePushNotificationHandler/src/index.py
-Description: 
-
-"""
-"""
-Author: Shen Shu
 Date: 2022-05-23 21:08:12
 LastEditors: Shen Shu
-LastEditTime: 2022-05-23 21:08:29
+LastEditTime: 2022-05-25 18:25:34
 FilePath: /uwcssa_ca/frontend/amplify/backend/function/ArticlePushNotificationHandler/src/index.py
 Description: 
 
 """
 
 import json
+
 import boto3
 
 
@@ -29,9 +21,9 @@ def handler(event, context):
 
     HTML_EMAIL_CONTENT = f"""
     <!DOCTYPE html>
-<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+	<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
 
-<head>
+	<head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
