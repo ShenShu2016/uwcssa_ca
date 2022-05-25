@@ -49,6 +49,7 @@
     "formik": "^2.2.6",
     "htmlparser2": "^8.0.1",
     "jarallax": "^1.12.8",
+    "moment": "^2.29.3",
     "react": "^17.0.1",
     "react-countup": "^6.1.0",
     "react-dom": "^17.0.1",
