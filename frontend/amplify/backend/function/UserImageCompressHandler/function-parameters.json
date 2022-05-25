@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "s3uwcssats": [
+        "create"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

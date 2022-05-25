@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-23 13:55:42
+ * @LastEditTime: 2022-05-24 23:02:35
  * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -70,6 +70,9 @@ export const fetchUserImages = createAsyncThunk(
     }
   },
 );
+interface MyFile extends File {
+  lastModifiedDate: Date;
+}
 
 export const postUserImage = createAsyncThunk(
   'userImage/postUserImage',
@@ -79,8 +82,8 @@ export const postUserImage = createAsyncThunk(
     authUser,
   }: {
     targetTable: string;
-    file: any;
-    authUser: any;
+    file: MyFile; //自己编的一个type
+    authUser: { identityId: string; username: string }; //这个type编的也不太好
   }) => {
     const id = uuid();
     const fileEXT = file.name.split('.').pop();

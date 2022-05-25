@@ -53,6 +53,28 @@
           ]
         }
       ]
+    },
+    "UserImageCompressHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "uwcssats",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "s3uwcssats",
+          "attributes": [
+            "BucketName"
+          ]
+        }
+      ]
     }
   },
   "auth": {
