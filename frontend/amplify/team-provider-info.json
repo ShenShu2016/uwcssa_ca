@@ -37,15 +37,15 @@
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ContactUsHandler-342b475758505961686b-build.zip"
+          "s3Key": "amplify-builds/ContactUsHandler-5a696533793575784f38-build.zip"
         },
         "ArticlePushNotificationHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ArticlePushNotificationHandler-543369526d724b447146-build.zip"
+          "s3Key": "amplify-builds/ArticlePushNotificationHandler-616a6464502b474f7163-build.zip"
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/UserImageCompressHandler-6d58452f327065717053-build.zip"
+          "s3Key": "amplify-builds/UserImageCompressHandler-4b336442673362704d47-build.zip"
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",

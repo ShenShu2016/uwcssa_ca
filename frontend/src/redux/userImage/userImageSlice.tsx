@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-24 23:02:35
+ * @LastEditTime: 2022-05-25 17:44:32
  * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -26,17 +26,22 @@ import { v4 as uuid } from 'uuid';
 const { aws_user_files_s3_bucket, aws_user_files_s3_bucket_region } = awsmobile;
 
 type UserImage = {
-  id: string;
+  id: string; //id 必须要有
   objectURL: string;
   key: string;
-  targetTable?: string | null;
-  lastModified?: string;
-  lastModifiedDate: Date;
   name: string;
+  size: number;
   type: string;
-  size: string;
-  createdAt: string;
-  updatedAt: string;
+  compressedWidth?: number | null;
+  objectCompressedURL: string;
+  thumbnailWidth?: number | null;
+  objectThumbnailURL: string;
+  targetTable: string;
+  lastModified?: string | null;
+  lastModifiedDate?: string | null;
+  active: 'T' | 'F';
+  createdAt?: string | null;
+  updatedAt?: string | null;
   owner: string;
 };
 
@@ -80,38 +85,47 @@ export const postUserImage = createAsyncThunk(
     targetTable,
     file,
     authUser,
+    compressedWidth,
+    thumbnailWidth,
   }: {
     targetTable: string;
     file: MyFile; //自己编的一个type
     authUser: { identityId: string; username: string }; //这个type编的也不太好
+    compressedWidth?: number | null;
+    thumbnailWidth?: number | null;
   }) => {
     const id = uuid();
     const fileEXT = file.name.split('.').pop();
-    const incompleteKey = `${targetTable}/${id}.${fileEXT}`;
     const { identityId, username } = authUser;
-    const key = `protected/${identityId}/${incompleteKey}`;
+    const key = `protected/${identityId}/${targetTable}/${id}.${fileEXT}`;
+    const compressedKey = `protected/${identityId}/${targetTable}/${id}-compressed.webp`;
+    const thumbnailKey = `protected/${identityId}/${targetTable}/${id}-thumbnail.webp`; //所有图片终于将变成webp 格式
     const createUserImageInput = {
       id,
       objectURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${key}`,
       key: key,
-      targetTable,
-      lastModified: file.lastModified,
-      lastModifiedDate: file.lastModifiedDate,
-      active: 'T',
       name: file.name,
       size: file.size,
       type: file.type,
+      compressedWidth: compressedWidth || 700,
+      objectCompressedURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${compressedKey}`,
+      thumbnailWidth: thumbnailWidth || 200,
+      objectThumbnailURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${thumbnailKey}`,
+      targetTable: targetTable,
+      lastModified: file.lastModified,
+      lastModifiedDate: file.lastModifiedDate,
+      active: 'T',
       owner: username,
     };
     console.log(createUserImageInput);
 
     try {
-      await Storage.put(incompleteKey, file, {
+      await Storage.put(`${targetTable}/${id}.${fileEXT}`, file, {
         level: 'protected',
         contentType: 'image/*',
       });
       const result: any = await API.graphql(
-        graphqlOperation(createUserImage, { input: createUserImageInput }),
+        graphqlOperation(createUserImage, { input: createUserImageInput }), //当这里发上去之后lambda function 会开始做两个东西，一个是压缩，一个是做thumbnail
       );
       return result.data.createUserImage;
     } catch (error) {

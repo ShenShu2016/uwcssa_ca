@@ -1,16 +1,18 @@
 {
-  "cSpell.words": [
-    "awsmobile",
-    "AWSURL",
-    "bgcolor",
-    "ckeditor",
-    "devts",
-    "formik",
-    "reduxjs",
-    "Shen",
-    "Topbar",
-    "UWCSSA",
-    "uwcssats"
-  ],
-  "python.formatting.provider": "black"
+    "cSpell.words": [
+        "awsmobile",
+        "AWSURL",
+        "bgcolor",
+        "ckeditor",
+        "devts",
+        "formik",
+        "reduxjs",
+        "Shen",
+        "Topbar",
+        "upsert",
+        "UWCSSA",
+        "uwcssats",
+        "webp"
+    ],
+    "python.formatting.provider": "black"
 }

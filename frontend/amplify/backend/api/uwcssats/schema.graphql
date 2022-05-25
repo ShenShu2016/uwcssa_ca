@@ -61,19 +61,23 @@ type UserImage  # user 所上传的image 都会留个记录
   id: ID!
   objectURL: AWSURL!
   key: String!
-  targetTable: String
+  name: String!
+  size: Int!
+  type: String!
   lastModified: String
   lastModifiedDate: String
+  compressedWidth: Int
+  objectCompressedURL: AWSURL
+  thumbnailWidth: Int
+  objectThumbnailURL: AWSURL
+  targetTable: String!
   active: ActiveType!
-    @default(value: "T")
     @index(
       name: "userImageSortByCreatedAt" #名字要用小写
       queryField: "userImageSortByCreatedAt"
       sortKeyFields: ["createdAt"]
     )
-  name: String
-  size: Int
-  type: String
+
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -113,7 +117,6 @@ type Article
   tags: [Tag] @manyToMany(relationName: "ArticleTags")
   comments: [Comment] @hasMany
   active: ActiveType!
-    @default(value: "T")
     @index(
       name: "articleSortByCreatedAt" #名字要用小写
       queryField: "articleSortByCreatedAt"

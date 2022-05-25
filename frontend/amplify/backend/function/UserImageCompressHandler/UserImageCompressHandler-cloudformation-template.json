@@ -92,7 +92,10 @@
           }
         },
         "Role": {
-          "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
+          "Fn::GetAtt": [
+            "LambdaExecutionRole",
+            "Arn"
+          ]
         },
         "Runtime": "nodejs14.x",
         "MemorySize": "256",
@@ -131,16 +134,22 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": ["lambda.amazonaws.com"]
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
               },
-              "Action": ["sts:AssumeRole"]
+              "Action": [
+                "sts:AssumeRole"
+              ]
             }
           ]
         }
       }
     },
     "lambdaexecutionpolicy": {
-      "DependsOn": ["LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-execution-policy",
@@ -181,7 +190,9 @@
       }
     },
     "AmplifyResourcesPolicy": {
-      "DependsOn": ["LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "amplify-lambda-execution-policy",
@@ -195,7 +206,9 @@
           "Statement": [
             {
               "Effect": "Allow",
-              "Action": ["s3:PutObject"],
+              "Action": [
+                "s3:PutObject"
+              ],
               "Resource": [
                 {
                   "Fn::Join": [
@@ -216,7 +229,9 @@
       }
     },
     "LambdaTriggerPolicyUserImage": {
-      "DependsOn": ["LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "amplify-lambda-execution-policy-UserImage",
@@ -248,7 +263,10 @@
     },
     "LambdaEventSourceMappingUserImage": {
       "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": ["LambdaTriggerPolicyUserImage", "LambdaExecutionRole"],
+      "DependsOn": [
+        "LambdaTriggerPolicyUserImage",
+        "LambdaExecutionRole"
+      ],
       "Properties": {
         "BatchSize": 100,
         "Enabled": true,
@@ -258,7 +276,10 @@
           }
         },
         "FunctionName": {
-          "Fn::GetAtt": ["LambdaFunction", "Arn"]
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
         },
         "StartingPosition": "LATEST"
       }
@@ -272,7 +293,10 @@
     },
     "Arn": {
       "Value": {
-        "Fn::GetAtt": ["LambdaFunction", "Arn"]
+        "Fn::GetAtt": [
+          "LambdaFunction",
+          "Arn"
+        ]
       }
     },
     "Region": {

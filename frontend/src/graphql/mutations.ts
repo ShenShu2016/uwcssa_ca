@@ -119,13 +119,17 @@ export const createUserImage = /* GraphQL */ `
       id
       objectURL
       key
+      name
+      size
+      type
+      compressedWidth
+      objectCompressedURL
+      thumbnailWidth
+      objectThumbnailURL
       targetTable
       lastModified
       lastModifiedDate
       active
-      name
-      size
-      type
       createdAt
       updatedAt
       owner
@@ -141,13 +145,17 @@ export const updateUserImage = /* GraphQL */ `
       id
       objectURL
       key
+      name
+      size
+      type
+      compressedWidth
+      objectCompressedURL
+      thumbnailWidth
+      objectThumbnailURL
       targetTable
       lastModified
       lastModifiedDate
       active
-      name
-      size
-      type
       createdAt
       updatedAt
       owner
@@ -163,13 +171,17 @@ export const deleteUserImage = /* GraphQL */ `
       id
       objectURL
       key
+      name
+      size
+      type
+      compressedWidth
+      objectCompressedURL
+      thumbnailWidth
+      objectThumbnailURL
       targetTable
       lastModified
       lastModifiedDate
       active
-      name
-      size
-      type
       createdAt
       updatedAt
       owner

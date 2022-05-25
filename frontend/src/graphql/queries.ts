@@ -82,13 +82,17 @@ export const getUserImage = /* GraphQL */ `
       id
       objectURL
       key
+      name
+      size
+      type
+      compressedWidth
+      objectCompressedURL
+      thumbnailWidth
+      objectThumbnailURL
       targetTable
       lastModified
       lastModifiedDate
       active
-      name
-      size
-      type
       createdAt
       updatedAt
       owner
@@ -106,13 +110,17 @@ export const listUserImages = /* GraphQL */ `
         id
         objectURL
         key
+        name
+        size
+        type
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
         targetTable
         lastModified
         lastModifiedDate
         active
-        name
-        size
-        type
         createdAt
         updatedAt
         owner
@@ -142,13 +150,17 @@ export const userImageSortByCreatedAt = /* GraphQL */ `
         id
         objectURL
         key
+        name
+        size
+        type
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
         targetTable
         lastModified
         lastModifiedDate
         active
-        name
-        size
-        type
         createdAt
         updatedAt
         owner
