@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-23 13:57:02
+ * @LastEditTime: 2022-05-25 18:33:43
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/ArticlePublish.tsx
  */
@@ -237,7 +237,7 @@ const ArticlePublish = () => {
         >
           <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
           <MyImageList />
-          <AddCoverPic imgFile={imgFile} setImgFile={setImgFile} />
+          <AddCoverPic setImgFile={setImgFile} />
           <LoadingButton
             loading={submitLoading}
             fullWidth

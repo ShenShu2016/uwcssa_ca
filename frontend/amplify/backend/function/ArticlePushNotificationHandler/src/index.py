@@ -314,7 +314,6 @@ def handler(event, context):
     response = ses_client.send_email(
         Destination={
             "ToAddresses": [
-                event["Records"][0]["dynamodb"]["NewImage"]["email"]["S"],
                 "shushen2013@gmail.com",
                 "zoejinmessiah@gmail.com",
             ],
@@ -349,33 +348,32 @@ if __name__ == "__main__":
     event = {
         "Records": [
             {
-                "eventID": "f261066fc368d6b3a113119270e11c9b",
+                "eventID": "1b00618711db07699d067499fb765268",
                 "eventName": "INSERT",
                 "eventVersion": "1.1",
                 "eventSource": "aws:dynamodb",
                 "awsRegion": "us-east-2",
                 "dynamodb": {
-                    "ApproximateCreationDateTime": 1653445622.0,
-                    "Keys": {"id": {"S": "84915768-7027-4867-8ba2-370ae46ac6d1"}},
+                    "ApproximateCreationDateTime": 1653518286.0,
+                    "Keys": {"id": {"S": "d0dd28fe-9dd5-4e99-92b8-3087b1b6add2"}},
                     "NewImage": {
-                        "owner": {"S": "d77b094c-93a9-40da-9274-b133ce9212d1"},
-                        "createdAt": {"S": "2022-05-25T02:27:02.291Z"},
-                        "coverPageDescription": {"S": "nothing to say"},
+                        "owner": {"S": "d1f0729b-b5d6-4d7c-b3dd-36c17b1a1d44"},
+                        "createdAt": {"S": "2022-05-25T22:38:05.729Z"},
+                        "coverPageDescription": {"S": "每天都在摸鱼，有点不好意思了，但是又不想上班哎"},
                         "__typename": {"S": "Article"},
                         "active": {"S": "T"},
                         "coverPageImgURL": {
-                            "S": "https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7572fa7c-2ecd-46ee-a5c8-ebb3ce30f60c/Article/5c98e0e1-6a9b-4c0a-a1c6-71d31e2c36ed.png"
+                            "S": "https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7845a883-556b-4fd6-b477-333b873abb68/Article/1fae8194-e34d-44d6-adc2-7aba7ee0cd0d-compressed.webp"
                         },
-                        "id": {"S": "84915768-7027-4867-8ba2-370ae46ac6d1"},
-                        "title": {"S": "Happy Wednesday"},
+                        "id": {"S": "d0dd28fe-9dd5-4e99-92b8-3087b1b6add2"},
+                        "title": {"S": "今天上班又什么都没干，怎么办呢"},
                         "content": {
-                            "S": '<h2><span style="background-color:hsl(0, 0%, 0%);">ab</span>cd<span class="text-huge">e</span><span class="text-huge" style="font-family:\'Trebuchet MS\', Helvetica, sans-serif;">fg</span></h2>'
+                            "S": '<h2>section 1’</h2><p>上班时候写写自己的代码，真不好意思</p><figure class="image image_resized" style="width:24.15%;"><img src="https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:7845a883-556b-4fd6-b477-333b873abb68/Article/393dde85-e58a-4b25-a62c-9eb62b739d1b-compressed.webp"></figure><p>&nbsp;</p><p><span style="font-family:Tahoma, Geneva, sans-serif;">Shen Shu</span></p><p>&nbsp;</p>'
                         },
-                        "email": {"S": "zoejinmessiah@gmail.com"},
-                        "updatedAt": {"S": "2022-05-25T02:27:02.291Z"},
+                        "updatedAt": {"S": "2022-05-25T22:38:05.729Z"},
                     },
-                    "SequenceNumber": "23110500000000000478767577",
-                    "SizeBytes": 622,
+                    "SequenceNumber": "26838300000000004045270508",
+                    "SizeBytes": 974,
                     "StreamViewType": "NEW_AND_OLD_IMAGES",
                 },
                 "eventSourceARN": "arn:aws:dynamodb:us-east-2:537666141782:table/Article-4r2t6l2uprdgjhmoocpazejjcq-devts/stream/2022-05-20T03:39:41.885",

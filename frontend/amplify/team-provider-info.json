@@ -41,7 +41,7 @@
         },
         "ArticlePushNotificationHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ArticlePushNotificationHandler-616a6464502b474f7163-build.zip"
+          "s3Key": "amplify-builds/ArticlePushNotificationHandler-6e7842466c564b2b5631-build.zip"
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",

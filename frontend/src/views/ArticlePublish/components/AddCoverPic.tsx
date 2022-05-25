@@ -1,17 +1,17 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-25 15:55:16
+ * @LastEditTime: 2022-05-25 18:37:15
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
 
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import React from 'react';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Typography from '@mui/material/Typography';
 import { postUserImage } from 'redux/userImage/userImageSlice';
@@ -24,15 +24,14 @@ const Input = styled('input')({
 });
 
 const AddCoverPic = ({
-  imgFile,
   setImgFile,
 }: {
-  imgFile: string;
   setImgFile: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((state) => state.auth.user);
-
+  const [originImg, setOriginImg] = useState<string>();
+  console.log('originImg', originImg);
   const handleImgUpload = async (e) => {
     const targetTable = 'Article';
     const file = e.target.files[0];
@@ -41,7 +40,8 @@ const AddCoverPic = ({
     );
 
     if (response.meta.requestStatus === 'fulfilled') {
-      setImgFile(response.payload.objectURL);
+      setImgFile(response.payload.objectCompressedURL);
+      setOriginImg(response.payload.objectURL);
     }
   };
 
@@ -49,7 +49,7 @@ const AddCoverPic = ({
     e.preventDefault();
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    setImgFile('');
+    setOriginImg('');
   };
 
   return (
@@ -68,7 +68,7 @@ const AddCoverPic = ({
         component="div"
         color="#9e9e9e"
       >
-        {imgFile ? '封面图片' : '添加封面图片'}
+        {originImg ? '封面图片' : '添加封面图片'}
       </Typography>
       <Box
         sx={{
@@ -95,11 +95,11 @@ const AddCoverPic = ({
               cursor: 'pointer',
             }}
           >
-            {imgFile ? (
+            {originImg ? (
               <div
                 style={{
                   position: 'relative',
-                  backgroundImage: `url(${imgFile})`,
+                  backgroundImage: `url(${originImg})`,
                   backgroundSize: 'contain',
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'center',
