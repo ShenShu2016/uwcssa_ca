@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-25 18:33:43
+ * @LastEditTime: 2022-05-25 21:01:10
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/ArticlePublish.tsx
  */
@@ -14,6 +14,7 @@ import AddCoverPic from './components/AddCoverPic';
 import AddTags from './components/AddTags';
 import Box from '@mui/material/Box';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { Container } from '@mui/material';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Main from 'layouts/Main';
@@ -162,92 +163,94 @@ const ArticlePublish = () => {
 
   return (
     <Main>
-      <Box display={'flex'} height={'80vh'}>
-        <Box width="70%" height="100%">
-          <TextField
-            id="standard-textarea"
-            fullWidth
-            label="Title"
-            multiline
-            value={title}
-            variant="standard"
-            inputProps={{
-              style: {
-                fontSize: 20,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                fontSize: 18,
-              },
-            }}
-            sx={{
-              paddingBottom: 2,
-            }}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <TextField
-            id="standard-textarea"
-            fullWidth
-            label="coverPageDescription"
-            multiline
-            value={coverPageDescription}
-            variant="standard"
-            inputProps={{
-              style: {
-                fontSize: 20,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                fontSize: 18,
-              },
-            }}
-            sx={{
-              paddingBottom: 2,
-            }}
-            onChange={(e) => setCoverPageDescription(e.target.value)}
-          />
-          <Box height="calc(100% - 64px)" overflow-y="auto" overflow-x="hidden">
-            <CKEditor
-              editor={Editor}
-              data={content}
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log('Editor is ready to use!', editor);
+      <Container maxWidth="xl" sx={{ mt: '2rem' }}>
+        <Box display={'flex'}>
+          <Box width="70%" height="100%">
+            <TextField
+              id="standard-textarea"
+              fullWidth
+              label="Title"
+              multiline
+              value={title}
+              variant="standard"
+              inputProps={{
+                style: {
+                  fontSize: 20,
+                },
               }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setContent(data);
+              InputLabelProps={{
+                style: {
+                  fontSize: 18,
+                },
               }}
+              sx={{
+                paddingBottom: 2,
+              }}
+              onChange={(e) => setTitle(e.target.value)}
             />
-          </Box>
-          {/* 必须加className='ck-content' 否则parse出的html没有样式 */}
-          {/* <div style={{ width: '45%' }} className="ck-content">
+            <TextField
+              id="standard-textarea"
+              fullWidth
+              label="coverPageDescription"
+              multiline
+              value={coverPageDescription}
+              variant="standard"
+              inputProps={{
+                style: {
+                  fontSize: 20,
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontSize: 18,
+                },
+              }}
+              sx={{
+                paddingBottom: 2,
+              }}
+              onChange={(e) => setCoverPageDescription(e.target.value)}
+            />
+            <Box height="500px" overflow-y="auto" overflow-x="hidden">
+              <CKEditor
+                editor={Editor}
+                data={content}
+                onReady={(editor) => {
+                  // You can store the "editor" and use when it is needed.
+                  console.log('Editor is ready to use!', editor);
+                }}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setContent(data);
+                }}
+              />
+            </Box>
+            {/* 必须加className='ck-content' 否则parse出的html没有样式 */}
+            {/* <div style={{ width: '45%' }} className="ck-content">
             {ReactHtmlParser(data)}
           </div> */}
-        </Box>
-        <Box
-          width="30%"
-          ml="30px"
-          height="100%"
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
-          <MyImageList />
-          <AddCoverPic setImgFile={setImgFile} />
-          <LoadingButton
-            loading={submitLoading}
-            fullWidth
-            variant="contained"
-            onClick={handleSubmitArticle}
+          </Box>
+          <Box
+            width="30%"
+            ml="30px"
+            height="100%"
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
           >
-            发布文章
-          </LoadingButton>
+            <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
+            <MyImageList />
+            <AddCoverPic setImgFile={setImgFile} />
+            <LoadingButton
+              loading={submitLoading}
+              fullWidth
+              variant="contained"
+              onClick={handleSubmitArticle}
+            >
+              发布文章
+            </LoadingButton>
+          </Box>
         </Box>
-      </Box>
+      </Container>
     </Main>
   );
 };
