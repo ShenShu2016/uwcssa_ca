@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 18:26:37
+ * @LastEditTime: 2022-05-26 18:34:47
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/SidebarArticles/SidebarArticles.tsx
  * @Description:
  *
@@ -52,7 +52,7 @@ const SidebarArticles = (): JSX.Element => {
     .filter((article) => article.id !== articleId)
     .slice(0, 5);
   return (
-    <Box component={Card} variant={'outlined'} padding={2}>
+    <Box component={Card} padding={2}>
       <Typography
         variant="h6"
         data-aos={'fade-up'}

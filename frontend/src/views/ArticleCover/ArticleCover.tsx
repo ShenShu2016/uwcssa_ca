@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 17:30:50
+ * @LastEditTime: 2022-05-26 18:35:59
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -66,7 +66,7 @@ const ArticleCover = (): JSX.Element => {
             </Grid>
             <Grid item xs={12} md={4}>
               {isMd ? (
-                <Box marginBottom={4}>
+                <Box marginBottom={2}>
                   <SidebarArticles />
                 </Box>
               ) : null}
