@@ -1,7 +1,8 @@
+import { ComponentsOverrides, createTheme } from '@mui/material/styles';
 import { Theme, responsiveFontSizes } from '@mui/material';
-import { createTheme, ComponentsOverrides } from '@mui/material/styles';
+import { dark, light } from './palette';
+
 import shadows from './shadows';
-import { light, dark } from './palette';
 
 const getTheme = (mode: string, themeToggler: () => void): Theme =>
   responsiveFontSizes(
@@ -9,7 +10,7 @@ const getTheme = (mode: string, themeToggler: () => void): Theme =>
       palette: mode === 'light' ? light : dark,
       shadows: shadows(mode),
       typography: {
-        fontFamily: '"Inter", sans-serif',
+        fontFamily: '"Inter", sans-serif,"Noto Sans SC","Noto Serif SC", serif',
         button: {
           textTransform: 'none',
           fontWeight: 'medium' as React.CSSProperties['fontWeight'],
