@@ -10,7 +10,7 @@
 
 import React, { useEffect } from 'react';
 import {
-  fetchUserImages,
+  fetchUserImageList,
   selectAllUserImages,
 } from 'redux/userImage/userImageSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -27,7 +27,7 @@ function MyImageList() {
   const dispatch = useAppDispatch();
   const userImages = useAppSelector(selectAllUserImages);
   useEffect(() => {
-    dispatch(fetchUserImages());
+    dispatch(fetchUserImageList());
   }, []);
 
   return (

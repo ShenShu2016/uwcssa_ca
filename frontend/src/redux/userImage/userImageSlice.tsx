@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 17:54:31
+ * @LastEditTime: 2022-05-25 20:55:20
  * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -51,14 +51,14 @@ const userImageAdapter = createEntityAdapter<UserImage>({
 });
 
 const initialState = userImageAdapter.getInitialState({
-  fetchUserImagesStatus: 'idle',
-  fetchUserImagesError: null,
+  fetchUserImageListStatus: 'idle',
+  fetchUserImageListError: null,
   postUserImageStatus: 'idle',
   postUserImageError: null,
 });
 
-export const fetchUserImages = createAsyncThunk(
-  'userImage/fetchUserImages',
+export const fetchUserImageList = createAsyncThunk(
+  'userImage/fetchUserImageList',
   async () => {
     try {
       const result: any = await API.graphql({
@@ -141,17 +141,17 @@ const userImageSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder // Cases for status of fetchArticleList (pending, fulfilled, and rejected)
-      .addCase(fetchUserImages.pending, (state) => {
-        state.fetchUserImagesStatus = 'loading';
+      .addCase(fetchUserImageList.pending, (state) => {
+        state.fetchUserImageListStatus = 'loading';
       })
-      .addCase(fetchUserImages.fulfilled, (state, action) => {
-        state.fetchUserImagesStatus = 'succeed';
+      .addCase(fetchUserImageList.fulfilled, (state, action) => {
+        state.fetchUserImageListStatus = 'succeed';
         userImageAdapter.removeAll(state);
         userImageAdapter.upsertMany(state, action.payload);
       })
-      .addCase(fetchUserImages.rejected, (state, action) => {
-        state.fetchUserImagesStatus = 'failed';
-        state.fetchUserImagesError = action.error.message;
+      .addCase(fetchUserImageList.rejected, (state, action) => {
+        state.fetchUserImageListStatus = 'failed';
+        state.fetchUserImageListError = action.error.message;
       })
       // Cases for status of postUserImage (pending, fulfilled, and rejected)
       .addCase(postUserImage.pending, (state) => {
