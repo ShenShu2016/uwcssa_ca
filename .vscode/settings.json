@@ -3,6 +3,7 @@
         "awsmobile",
         "AWSURL",
         "bgcolor",
+        "boto",
         "ckeditor",
         "devts",
         "formik",

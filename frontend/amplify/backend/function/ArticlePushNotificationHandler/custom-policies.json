@@ -2,5 +2,9 @@
   {
     "Action": ["ses:SendEmail"],
     "Resource": ["arn:aws:ses:*:537666141782:identity/*"]
+  },
+  {
+    "Action": ["dynamodb:Scan"],
+    "Resource": ["arn:aws:dynamodb:*:*:table/*"]
   }
 ]
