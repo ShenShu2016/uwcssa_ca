@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 23:01:28
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-26 18:26:37
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/SidebarArticles/SidebarArticles.tsx
  * @Description:
  *
@@ -25,6 +25,7 @@ import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import moment from 'moment';
+// import Link from '@mui/material/Link';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
@@ -84,7 +85,7 @@ const SidebarArticles = (): JSX.Element => {
             >
               <Box
                 sx={{
-                  width: { xs: 1, md: '50%' },
+                  // width: { xs: 1, md: '50%' },
                   '& .lazy-load-image-loaded': {
                     height: 1,
                     display: 'flex !important',
@@ -93,14 +94,14 @@ const SidebarArticles = (): JSX.Element => {
               >
                 <Box
                   component={LazyLoadImage}
-                  height={1}
-                  width={1}
+                  height={'100px'}
+                  width={'150px'}
                   src={item.coverPageImgURL}
                   alt="..."
                   effect="blur"
                   sx={{
                     objectFit: 'cover',
-                    maxHeight: 120,
+                    // maxHeight: 120,
                     borderRadius: 2,
                     filter:
                       theme.palette.mode === 'dark'
@@ -110,10 +111,17 @@ const SidebarArticles = (): JSX.Element => {
                 />
               </Box>
               <CardContent
-                sx={{ padding: 1, '&:last-child': { paddingBottom: 1 } }}
+                sx={{
+                  flex: 1,
+                  padding: '0px 8px',
+                  '&:last-child': { paddingBottom: 0 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}
               >
-                <Typography fontWeight={700}>{item.title}</Typography>
-                <Box marginY={1 / 4}>
+                <Box>
+                  <Typography fontSize={14} fontWeight={700}>{item.title}</Typography>
                   <Typography
                     variant={'caption'}
                     color={'text.secondary'}
@@ -127,6 +135,10 @@ const SidebarArticles = (): JSX.Element => {
                   component={Link}
                   to={`/article/${item.id}`}
                   size={'small'}
+                  sx={{
+                    width: 'fit-content',
+                    padding: 0
+                  }}
                 >
                   Read More
                 </Button>

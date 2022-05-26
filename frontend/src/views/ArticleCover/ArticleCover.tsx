@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 22:02:48
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-26 17:30:50
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -40,7 +40,7 @@ const ArticleCover = (): JSX.Element => {
   const article = useAppSelector((state) =>
     selectArticleById(state, articleId),
   );
-  console.log('article', article);
+  // console.log('article', article);
   useEffect(() => {
     const getArticle = async () => {
       if (articleId !== null) {
@@ -56,11 +56,11 @@ const ArticleCover = (): JSX.Element => {
   }, [articleId]);
 
   return (
-    <Main colorInvert={true}>
+    <Main>
       <Box>
         {article && <Hero article={article} />}
-        <Container>
-          <Grid container spacing={4}>
+        <Container style={{padding: '12px 0px'}}>
+          <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
               {article && <Content article={article} />}
             </Grid>
