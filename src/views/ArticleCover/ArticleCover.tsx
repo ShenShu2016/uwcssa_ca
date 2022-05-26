@@ -7,6 +7,7 @@
  * @Description:
  *
  */
+
 import {
   Content,
   FooterNewsletter,
@@ -20,6 +21,7 @@ import { fetchArticle, selectArticleById } from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Box from '@mui/material/Box';
+import CommentOverview from 'components/Comment/CommentOverview';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
 import Main from 'layouts/Main';
@@ -59,7 +61,7 @@ const ArticleCover = (): JSX.Element => {
     <Main>
       <Box>
         {article && <Hero article={article} />}
-        <Container style={{padding: '12px 0px'}}>
+        <Container style={{ padding: '12px 0px' }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
               {article && <Content article={article} />}
@@ -73,6 +75,7 @@ const ArticleCover = (): JSX.Element => {
               <SidebarNewsletter />
             </Grid>
           </Grid>
+          <CommentOverview />
         </Container>
         <Box
           component={'svg'}
