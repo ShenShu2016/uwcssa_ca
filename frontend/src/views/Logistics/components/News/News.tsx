@@ -9,7 +9,10 @@
  */
 
 import React, { useEffect } from 'react';
-import { fetchArticles, selectAllArticles } from 'redux/article/articleSlice';
+import {
+  fetchArticleList,
+  selectAllArticles,
+} from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Box from '@mui/material/Box';
@@ -33,20 +36,20 @@ const News = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
-  const { fetchArticlesStatus } = useAppSelector((state) => state.article);
+  const { fetchArticleListStatus } = useAppSelector((state) => state.article);
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticlesStatus !== 'succeed') {
+      if (isAuth !== null && fetchArticleListStatus !== 'succeed') {
         await dispatch(
-          fetchArticles({
+          fetchArticleList({
             isAuth,
           }),
         );
       }
     };
     getArticles();
-  }, [isAuth, fetchArticlesStatus]);
+  }, [isAuth, fetchArticleListStatus]);
 
   return (
     <Box>

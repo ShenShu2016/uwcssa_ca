@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 19:44:15
+ * @LastEditTime: 2022-05-25 20:50:00
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -22,6 +22,7 @@ import Grid from '@mui/material/Grid';
 import Main from 'layouts/Main';
 import React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 const ArticleCover = (): JSX.Element => {
@@ -29,6 +30,7 @@ const ArticleCover = (): JSX.Element => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+  const { articleId } = useParams();
 
   return (
     <Main colorInvert={true}>

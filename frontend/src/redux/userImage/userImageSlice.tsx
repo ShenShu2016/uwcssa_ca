@@ -140,7 +140,7 @@ const userImageSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder // Cases for status of fetchArticles (pending, fulfilled, and rejected)
+    builder // Cases for status of fetchArticleList (pending, fulfilled, and rejected)
       .addCase(fetchUserImages.pending, (state) => {
         state.fetchUserImagesStatus = 'loading';
       })

@@ -10,7 +10,10 @@
 
 import { Box, Button, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
-import { fetchArticles, selectAllArticles } from 'redux/article/articleSlice';
+import {
+  fetchArticleList,
+  selectAllArticles,
+} from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { Main } from 'layouts';
@@ -21,7 +24,7 @@ const ArticleAPI = (): JSX.Element => {
   const isAuth = useAppSelector(getAuthState);
   useEffect(() => {
     if (isAuth !== null) {
-      dispatch(fetchArticles({ isAuth }));
+      dispatch(fetchArticleList({ isAuth }));
     }
   }, [isAuth]);
 

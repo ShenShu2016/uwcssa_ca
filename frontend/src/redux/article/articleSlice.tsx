@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 17:54:22
+ * @LastEditTime: 2022-05-25 20:52:09
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -43,10 +43,10 @@ const articleAdapter = createEntityAdapter<Article>({
 });
 
 const initialState = articleAdapter.getInitialState({
-  fetchArticlesStatus: 'idle',
-  fetchArticlesError: null,
-  selectedArticleStatus: 'idle',
-  selectedArticleError: null,
+  fetchArticleListStatus: 'idle',
+  fetchArticleListError: null,
+  fetchArticleStatus: 'idle',
+  fetchArticleError: null,
   postArticleStatus: 'idle',
   postArticleError: null,
   postArticleImgStatus: 'idle',
@@ -55,8 +55,8 @@ const initialState = articleAdapter.getInitialState({
   updateArticleDetailError: null,
 });
 
-export const fetchArticles = createAsyncThunk(
-  'article/fetchArticles',
+export const fetchArticleList = createAsyncThunk(
+  'article/fetchArticleList',
   async ({ isAuth }: { isAuth: boolean }) => {
     try {
       const result: any = await API.graphql({
@@ -75,8 +75,8 @@ export const fetchArticles = createAsyncThunk(
   },
 );
 
-export const selectedArticle = createAsyncThunk(
-  'article/selectedArticle',
+export const fetchArticle = createAsyncThunk(
+  'article/fetchArticle',
   async (id) => {
     try {
       const result: any = await API.graphql({
@@ -129,30 +129,30 @@ const articleSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      // Cases for status of fetchArticles (pending, fulfilled, and rejected)
-      .addCase(fetchArticles.pending, (state) => {
-        state.fetchArticlesStatus = 'loading';
+      // Cases for status of fetchArticleList (pending, fulfilled, and rejected)
+      .addCase(fetchArticleList.pending, (state) => {
+        state.fetchArticleListStatus = 'loading';
       })
-      .addCase(fetchArticles.fulfilled, (state, action) => {
-        state.fetchArticlesStatus = 'succeed';
+      .addCase(fetchArticleList.fulfilled, (state, action) => {
+        state.fetchArticleListStatus = 'succeed';
         articleAdapter.removeAll(state);
         articleAdapter.upsertMany(state, action.payload);
       })
-      .addCase(fetchArticles.rejected, (state, action) => {
-        state.fetchArticlesStatus = 'failed';
-        state.fetchArticlesError = action.error.message;
+      .addCase(fetchArticleList.rejected, (state, action) => {
+        state.fetchArticleListStatus = 'failed';
+        state.fetchArticleError = action.error.message;
       })
       // Cases for status of selectedArticle (pending, fulfilled, and rejected)
-      .addCase(selectedArticle.pending, (state) => {
-        state.selectedArticleStatus = 'loading';
+      .addCase(fetchArticle.pending, (state) => {
+        state.fetchArticleStatus = 'loading';
       })
-      .addCase(selectedArticle.fulfilled, (state, action) => {
-        state.selectedArticleStatus = 'succeed';
+      .addCase(fetchArticle.fulfilled, (state, action) => {
+        state.fetchArticleStatus = 'succeed';
         articleAdapter.upsertOne(state, action.payload);
       })
-      .addCase(selectedArticle.rejected, (state, action) => {
-        state.selectedArticleStatus = 'failed';
-        state.selectedArticleError = action.error.message;
+      .addCase(fetchArticle.rejected, (state, action) => {
+        state.fetchArticleStatus = 'failed';
+        state.fetchArticleError = action.error.message;
       })
       // Cases for status of postArticle (pending, fulfilled, and rejected)
       .addCase(postArticle.pending, (state) => {
