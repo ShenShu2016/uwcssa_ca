@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 16:38:05
- * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-26 16:06:49
+ * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
  */
@@ -85,14 +85,14 @@ export const postUserImage = createAsyncThunk(
     targetTable,
     file,
     authUser,
-    compressedWidth,
-    thumbnailWidth,
+    compressedWidth = 700,
+    thumbnailWidth = 200,
   }: {
     targetTable: string;
     file: MyFile; //自己编的一个type
     authUser: { identityId: string; username: string }; //这个type编的也不太好
-    compressedWidth?: number | null;
-    thumbnailWidth?: number | null;
+    compressedWidth?: number;
+    thumbnailWidth?: number;
   }) => {
     const id = uuid();
     const fileEXT = file.name.split('.').pop();
@@ -107,9 +107,9 @@ export const postUserImage = createAsyncThunk(
       name: file.name,
       size: file.size,
       type: file.type,
-      compressedWidth: compressedWidth || 700,
+      compressedWidth: compressedWidth,
       objectCompressedURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${compressedKey}`,
-      thumbnailWidth: thumbnailWidth || 200,
+      thumbnailWidth: thumbnailWidth,
       objectThumbnailURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${thumbnailKey}`,
       targetTable: targetTable,
       lastModified: file.lastModified,

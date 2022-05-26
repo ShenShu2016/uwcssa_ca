@@ -1,15 +1,14 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-24 23:30:45
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 16:13:54
- * @FilePath: /uwcssa_ca/frontend/amplify/backend/function/UserImageCompressHandler/src/index.js
+ * @LastEditTime: 2022-05-26 16:29:17
+ * @FilePath: /uwcssa_ca/amplify/backend/function/UserImageCompressHandler/src/index.js
  * @Description:
  *
  */
-
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* Amplify Params - DO NOT EDIT
 	ENV
@@ -70,12 +69,13 @@ exports.handler = async (event, context, callback) => {
     return;
   }
   // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
-  const width = 700;
+  const compressedWidth = event.Records[0].dynamodb.NewImage.compressedWidth.N;
+  console.log('compressedWidth', compressedWidth);
   // Use the sharp module to resize the image and save in a buffer.
   try {
     var buffer = await sharp(origimage.Body)
-      .resize(width)
-      .webp({ effort: 0 })
+      .resize(parseInt(compressedWidth))
+      .webp()
       .toBuffer();
   } catch (error) {
     console.log(error);
@@ -105,11 +105,12 @@ exports.handler = async (event, context, callback) => {
       '/' +
       dstKey,
   );
-
+  const thumbnailWidth = event.Records[0].dynamodb.NewImage.thumbnailWidth.N;
+  console.log('thumbnailWidth', thumbnailWidth);
   try {
     var buffer2 = await sharp(origimage.Body)
-      .resize(200)
-      .webp({ effort: 0 })
+      .resize(parseInt(thumbnailWidth))
+      .webp()
       .toBuffer();
   } catch (error) {
     console.log(error);

@@ -2,9 +2,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-26 16:35:36
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
+ * @LastEditTime: 2022-05-26 16:04:26
+ * @LastEditors: Shen Shu
+ * @FilePath: /uwcssa_ca/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
 
 import React, { useState } from 'react';
@@ -13,12 +13,13 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import LinearProgress from '@mui/material/LinearProgress';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Typography from '@mui/material/Typography';
-import LinearProgress from '@mui/material/LinearProgress';
 import { postUserImage } from 'redux/userImage/userImageSlice';
 import { styled } from '@mui/material/styles';
 import useMessage from 'hooks/useMessage';
+
 // import Button from '@mui/material/Button';
 
 const Input = styled('input')({
@@ -27,41 +28,43 @@ const Input = styled('input')({
 // 直接使用父组件记录的图片url 这样可以直接使用recent list里面的图片 两个组件使用单一数据源
 const AddCoverPic = ({
   setImgFile,
-  imgFile
+  imgFile,
 }: {
   setImgFile: React.Dispatch<React.SetStateAction<string>>;
-  imgFile
+  imgFile: string;
 }) => {
   const dispatch = useAppDispatch();
   const message = useMessage();
   const authUser = useAppSelector((state) => state.auth.user);
   // const [originImg, setOriginImg] = useState<string>();
-  const [uploadImgLoading, setuploadIngLoading] = useState<boolean>(false);
+  const [uploadImgLoading, setUploadIngLoading] = useState<boolean>(false);
   const handleImgUpload = async (e) => {
     // input点击取消之后 change事件仍有可能触发
     // 这个如果value = '' 就是点击取消以后触发的 需要阻止后续动作 不然会弹上传错误的提示
     if (!e.target.value) return;
-    
+
     const targetTable = 'Article';
     const file = e.target.files[0];
-    setuploadIngLoading(true);
+    setUploadIngLoading(true);
     const response = await dispatch(
-      postUserImage({ targetTable, file, authUser }),
+      postUserImage({ targetTable, file, authUser, compressedWidth: 1920 }),
     );
     if (response.meta.requestStatus === 'fulfilled') {
-      setImgFile(response.payload.objectURL || response.payload.objectCompressedURL);
+      setImgFile(
+        response.payload.objectURL || response.payload.objectCompressedURL,
+      );
       // setOriginImg(response.payload.objectURL);
       message.open({
         type: 'success',
-        message: '图片上传成功'
+        message: '图片上传成功',
       });
     } else {
       message.open({
         type: 'error',
-        message: '图片上传失败'
+        message: '图片上传失败',
       });
     }
-    setuploadIngLoading(false);
+    setUploadIngLoading(false);
   };
 
   const handleRemovePic = (e) => {
@@ -115,48 +118,47 @@ const AddCoverPic = ({
               cursor: 'pointer',
             }}
           >
-            {
-              uploadImgLoading ?
-                <Box sx={{ width: '50%', textAlign: 'center' }}>
-                  <LinearProgress />
-                  <Typography
-                    fontSize={14}
-                    marginTop={1}
-                    component="div"
-                    color="#9e9e9e"
-                  >
-                    uploading...
-                  </Typography>
-                </Box> :
-                imgFile ? (
-                  <div
-                    style={{
-                      position: 'relative',
-                      backgroundImage: `url(${imgFile})`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                      width: '100%',
-                      height: '100%',
-                      borderRadius: '12px',
-                      backgroundColor: '#000',
-                      boxSizing: 'border-box',
-                      padding: '8px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: 'absolute',
-                        right: '8px',
-                      }}
-                      onClick={(e) => handleRemovePic(e)}
-                    >
-                      <RemoveCircleIcon style={{ color: '#e57373' }} />
-                    </div>
-                  </div>
-                ) : (
-                  <AddAPhotoIcon style={{ fontSize: 40, color: '#9e9e9e' }} />
-                )}
+            {uploadImgLoading ? (
+              <Box sx={{ width: '50%', textAlign: 'center' }}>
+                <LinearProgress />
+                <Typography
+                  fontSize={14}
+                  marginTop={1}
+                  component="div"
+                  color="#9e9e9e"
+                >
+                  uploading...
+                </Typography>
+              </Box>
+            ) : imgFile ? (
+              <div
+                style={{
+                  position: 'relative',
+                  backgroundImage: `url(${imgFile})`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '12px',
+                  backgroundColor: '#000',
+                  boxSizing: 'border-box',
+                  padding: '8px',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '8px',
+                  }}
+                  onClick={(e) => handleRemovePic(e)}
+                >
+                  <RemoveCircleIcon style={{ color: '#e57373' }} />
+                </div>
+              </div>
+            ) : (
+              <AddAPhotoIcon style={{ fontSize: 40, color: '#9e9e9e' }} />
+            )}
           </Box>
         </label>
       </Box>
