@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-23 12:07:34
+ * @LastEditTime: 2022-05-25 19:45:17
  * @FilePath: /uwcssa_ca/frontend/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -14,6 +14,7 @@ import {
   AccountNotifications as AccountNotificationsView,
   AccountProfile as AccountProfileView,
   AccountSecurity as AccountSecurityView,
+  ArticleCover as ArticleCoverView,
   ArticlePublish as ArticlePublishView,
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
@@ -235,10 +236,12 @@ function ViewRoutes(): Array<{
     //   path: '/blog-newsroom',
     //   renderer: (params = {}): JSX.Element => <BlogNewsroomView {...params} />,
     // },
-    // {
-    //   path: '/blog-article',
-    //   renderer: (params = {}): JSX.Element => <BlogArticleView {...params} />,
-    // },
+    {
+      path: '/article/:articleId',
+      renderer: (params = {}): JSX.Element => <ArticleCoverView {...params} />,
+      isAllowed: true,
+      redirectPath: '/',
+    },
     // {
     //   path: '/blog-reach-view',
     //   renderer: (params = {}): JSX.Element => <BlogReachViewView {...params} />,

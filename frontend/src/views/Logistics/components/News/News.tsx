@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-23 19:00:55
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-25 20:43:28
+ * @FilePath: /uwcssa_ca/frontend/src/views/Logistics/components/News/News.tsx
+ * @Description:
+ *
+ */
+
 import React, { useEffect } from 'react';
 import { fetchArticles, selectAllArticles } from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -9,6 +19,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -98,7 +109,9 @@ const News = (): JSX.Element => {
                       </Typography>
                     </Box>
                     <CardActions sx={{ justifyContent: 'flex-end' }}>
-                      <Button>Read More</Button>
+                      <Button component={Link} to={`/article/${item.id}`}>
+                        Read More
+                      </Button>
                     </CardActions>
                   </CardContent>
                 </Box>

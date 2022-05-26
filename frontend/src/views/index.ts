@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-20 13:21:25
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-25 19:45:10
  * @FilePath: /uwcssa_ca/frontend/src/views/index.ts
  * @Description:
  */
@@ -45,7 +45,7 @@ export { default as ContactPage } from './ContactPage';
 // export { default as AboutSideCover } from './AboutSideCover';
 // export { default as BlogSearch } from './BlogSearch';
 // export { default as BlogNewsroom } from './BlogNewsroom';
-// export { default as BlogArticle } from './BlogArticle';
+export { default as ArticleCover } from './ArticleCover';
 // export { default as BlogReachView } from './BlogReachView';
 export { default as PasswordResetCover } from './PasswordResetCover';
 export { default as ForgotPassWordSubmit } from './ForgotPassWordSubmit';

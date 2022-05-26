@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 18:21:49
+ * @LastEditTime: 2022-05-25 19:46:40
  * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -164,6 +164,8 @@ const BlogWithLargeImage = (): JSX.Element => {
                         }}
                       />
                       <Button
+                        component={Link}
+                        to={`/article/${item.id}`}
                         endIcon={
                           <Box
                             component={'svg'}
