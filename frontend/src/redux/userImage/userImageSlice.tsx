@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:55:20
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-26 16:38:05
  * @FilePath: /uwcssa_ca/frontend/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -117,7 +117,7 @@ export const postUserImage = createAsyncThunk(
       active: 'T',
       owner: username,
     };
-    console.log(createUserImageInput);
+    // console.log(createUserImageInput);
 
     try {
       await Storage.put(`${targetTable}/${id}.${fileEXT}`, file, {

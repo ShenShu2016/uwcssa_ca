@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-25 19:23:35
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-26 15:01:11
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/Main.tsx
  */
 
@@ -90,10 +90,10 @@ const Main = ({
         variant="temporary"
         pages={pages}
       />
-      <main>
+      <Container paddingY={2}>
         {children}
-        <Divider />
-      </main>
+      </Container>
+      <Divider />
       <Container paddingY={4}>
         <Footer />
       </Container>

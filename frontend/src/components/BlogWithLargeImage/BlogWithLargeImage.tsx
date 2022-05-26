@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:49:42
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-26 14:49:11
  * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -62,14 +62,15 @@ const BlogWithLargeImage = (): JSX.Element => {
       <Grid container>
         {articles.length // 这里我不太明白你想做啥，稍微解释一下
           ? articles.map((item, index) => {
-              // let contentStr = '';
-              // const parser = new htmlparser2.Parser({
-              //   ontext(text) {
-              //     contentStr += text;
-              //   },
-              // });
-              // parser.write(item.content);
-              // parser.end();
+              let contentStr = '';
+              const parser = new htmlparser2.Parser({
+                ontext(text) {
+                  contentStr += text;
+                },
+              });
+              parser.write(item.content);
+              parser.end();
+              // console.log(item);
               return (
                 // 用index javascript react 会经常有毛病，key最好用id
                 <Grid
@@ -84,7 +85,7 @@ const BlogWithLargeImage = (): JSX.Element => {
                   <Box
                     component={Card}
                     width={'100%'}
-                    height={1}
+                    height={'auto'}
                     borderRadius={0}
                     boxShadow={0}
                     display={'flex'}
@@ -138,34 +139,9 @@ const BlogWithLargeImage = (): JSX.Element => {
                         sx={{ fontSize: 12 }}
                         className="article-list-text"
                       >
-                        {item.coverPageDescription}
+                        {/* {item.coverPageDescription} */}
+                        { contentStr }
                       </Typography>
-                    </CardContent>
-
-                    <Box
-                      sx={{
-                        width: { md: '30%', height: 'auto' },
-                      }}
-                    >
-                      <Box
-                        component={'img'}
-                        height={1}
-                        width={1}
-                        src={
-                          item.coverPageImgURL ||
-                          'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
-                        }
-                        alt="..."
-                        sx={{
-                          objectFit: 'cover',
-                          maxHeight: 150,
-                          borderRadius: '12px',
-                          filter:
-                            theme.palette.mode === 'dark'
-                              ? 'brightness(0.7)'
-                              : 'none',
-                        }}
-                      />
                       <Button
                         component={Link}
                         to={`/article/${item.id}`}
@@ -187,10 +163,54 @@ const BlogWithLargeImage = (): JSX.Element => {
                             />
                           </Box>
                         }
+                        sx={{
+                          justifyContent: 'flex-start',
+                          padding: '8px 0px 0px 0px',
+                          marginTop: 'auto',
+                          width: 'fit-content'
+                        }}
                       >
                         Read More
                       </Button>
+                    </CardContent>
+
+                    <Box
+                      sx={{
+                        width: { md: '30%', height: 'auto'},
+                      }}
+                    >
+                      <Box>
+                        <Box
+                          component={'img'}
+                          height={1}
+                          width={1}
+                          src={
+                            item.coverPageImgURL ||
+                            'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
+                          }
+                          alt="..."
+                          sx={{
+                            objectFit: 'cover',
+                            height: 180,
+                            borderRadius: '12px',
+                            filter:
+                              theme.palette.mode === 'dark'
+                                ? 'brightness(0.7)'
+                                : 'none',
+                          }}
+                        />
+                      </Box>
+                      <Box marginTop='auto'>
+                        <Typography
+                          variant={'caption'}
+                          color={'text.secondary'}
+                          component={'i'}
+                        >
+                          {item.coverPageDescription}
+                        </Typography>
+                      </Box>
                     </Box>
+                    
                   </Box>
                   <Divider />
                 </Grid>

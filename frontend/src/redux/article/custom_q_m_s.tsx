@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:00:03
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 21:18:14
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-26 14:15:37
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/custom_q_m_s.tsx
  * @Description:
  *
@@ -28,7 +28,7 @@ export const articleSortByCreatedAt = /* GraphQL */ `
       items {
         id
         title
-        # content
+        content
         coverPageImgURL
         coverPageDescription
         # active

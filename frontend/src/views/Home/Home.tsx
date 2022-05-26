@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-05-19 11:11:03
+ * @LastEditTime: 2022-05-26 14:32:04
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/frontend/src/views/Home/Home.tsx
  */
@@ -24,13 +24,13 @@ const Home = (): React.ReactElement => {
       {/* 暂时定格局 样式先内联写死 之后再修改 */}
       <Box sx={{ display: 'flex' }}>
         <Card sx={{ 
-          flex: 1,
+          flex: 2,
           minHeight: '100vh',
           margin: '0px 4px',
         }}>123</Card>
         
         <Card sx={{ 
-          flex: 3,
+          flex: 5,
           minHeight: '100vh',
           margin: '0px 4px',
         }}>

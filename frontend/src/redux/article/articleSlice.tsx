@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 22:38:24
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-26 14:13:57
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -87,7 +87,6 @@ export const fetchArticle = createAsyncThunk(
         variables: { id: articleId },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
-      // console.log("what?", response);
       if (result.data.getArticle === null) {
         return { id: articleId, description: 'not-found' };
       }
