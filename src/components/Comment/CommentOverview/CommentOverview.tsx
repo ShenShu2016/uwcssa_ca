@@ -1,22 +1,27 @@
+import React, { useState } from 'react';
+
 import { Avatar } from '@mui/material';
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 17:14:42
+ * @LastEditTime: 2022-05-26 18:51:24
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
  */
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CommentDialog from 'components/Comment/CommentDialog';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
+import { FeedbackForm } from '../CommentDialog/components';
 import Grid from '@mui/material/Grid';
-import React from 'react';
 import Typography from '@mui/material/Typography';
+import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useTheme } from '@mui/material/styles';
+
 const mock = [
   {
     score: 4,
@@ -62,9 +67,10 @@ const mock = [
   },
 ];
 
-const CommentOverview = (): JSX.Element => {
+const CommentOverview = ({ comments }: { comments: any }): JSX.Element => {
   const theme = useTheme();
-
+  const [open, setOpen] = useState(false);
+  console.log('comments', comments);
   return (
     <Container
       display={'flex'}
@@ -72,6 +78,7 @@ const CommentOverview = (): JSX.Element => {
       alignItems={'center'}
       sx={{ p: 0 }}
     >
+      <FeedbackForm open={open} onClose={() => setOpen(false)} />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Box
@@ -118,6 +125,7 @@ const CommentOverview = (): JSX.Element => {
               sx={{
                 marginTop: { xs: 2, md: 0 },
               }}
+              onClick={() => setOpen(true)}
             >
               Write a review
             </Button>
@@ -126,8 +134,8 @@ const CommentOverview = (): JSX.Element => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        {mock.map((item, i) => (
-          <Grid key={i} xs={12} sm={12} item>
+        {comments.map((item, i) => (
+          <Grid key={item.id} xs={12} sm={12} item>
             {/* <Box display={'flex'} alignItems={'center'}>
               {[1, 2, 3, 4, 5].map((r) => (
                 <Box
@@ -155,15 +163,15 @@ const CommentOverview = (): JSX.Element => {
                     width: 32,
                     height: 32,
                   }}
-                  {...stringAvatar('Hello')}
+                  {...stringAvatar(item.user.name)}
                 />
               </Box>
               <Box sx={{ ml: '1rem' }}>
                 <Typography variant={'caption'} color={'text.secondary'}>
-                  {item.subtitle}
+                  {item.user.name} - {moment(item.createdAt).fromNow()}
                 </Typography>
                 <Typography marginY={1}>{item.title}</Typography>
-                <Typography>{item.feedback}</Typography>
+                <Typography>{item.content}</Typography>
               </Box>
             </Box>
           </Grid>

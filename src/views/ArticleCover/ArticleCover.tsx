@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 18:35:59
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/ArticleCover.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-26 18:40:53
+ * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
  */
@@ -18,6 +18,10 @@ import {
 } from './components';
 import React, { useEffect } from 'react';
 import { fetchArticle, selectArticleById } from 'redux/article/articleSlice';
+import {
+  fetchCommentList,
+  selectAllComments,
+} from 'redux/comment/commentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Box from '@mui/material/Box';
@@ -42,6 +46,8 @@ const ArticleCover = (): JSX.Element => {
   const article = useAppSelector((state) =>
     selectArticleById(state, articleId),
   );
+  const comments = useAppSelector(selectAllComments);
+  console.log('comments', comments);
   // console.log('article', article);
   useEffect(() => {
     const getArticle = async () => {
@@ -55,6 +61,20 @@ const ArticleCover = (): JSX.Element => {
       }
     };
     getArticle();
+  }, [articleId]);
+
+  useEffect(() => {
+    const getComments = async () => {
+      if (articleId !== null) {
+        await dispatch(
+          fetchCommentList({
+            articleCommentsId: articleId,
+            isAuth,
+          }),
+        );
+      }
+    };
+    getComments();
   }, [articleId]);
 
   return (
@@ -75,7 +95,7 @@ const ArticleCover = (): JSX.Element => {
               <SidebarNewsletter />
             </Grid>
           </Grid>
-          <CommentOverview />
+          {comments && <CommentOverview comments={comments} />}
         </Container>
         <Box
           component={'svg'}
