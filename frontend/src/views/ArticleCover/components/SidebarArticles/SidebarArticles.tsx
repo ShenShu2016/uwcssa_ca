@@ -2,67 +2,54 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 19:48:58
+ * @LastEditTime: 2022-05-25 23:01:28
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/SidebarArticles/SidebarArticles.tsx
  * @Description:
  *
  */
+
+import React, { useEffect } from 'react';
+import {
+  fetchArticleList,
+  selectAllArticles,
+} from 'redux/article/articleSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-/* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import { getAuthState } from 'redux/auth/authSlice';
+import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-
-const mock = [
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img13.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Lorem ipsum dolor sit amet',
-    author: {
-      name: 'Clara Bertoletti',
-    },
-    date: '04 Aug',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img14.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Consectetur adipiscing elit',
-    author: {
-      name: 'Jhon Anderson',
-    },
-    date: '12 Sep',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img15.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Lorem ipsum dolor sit amet',
-    author: {
-      name: 'Clara Bertoletti',
-    },
-    date: '04 Aug',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img16.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    title: 'Consectetur adipiscing elit',
-    author: {
-      name: 'Jhon Anderson',
-    },
-    date: '12 Sep',
-  },
-];
 
 const SidebarArticles = (): JSX.Element => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState);
+  const { articleId } = useParams();
+  const { fetchArticleListStatus } = useAppSelector((state) => state.article);
+  useEffect(() => {
+    const getArticles = async () => {
+      if (isAuth !== null && fetchArticleListStatus !== 'succeed') {
+        await dispatch(
+          fetchArticleList({
+            isAuth,
+          }),
+        );
+      }
+    };
+    getArticles();
+  }, [isAuth, fetchArticleListStatus]);
+  const articles = useAppSelector(selectAllArticles);
+  const articlesWhereIdNotEqualToArticleId = articles
+    .filter((article) => article.id !== articleId)
+    .slice(0, 5);
   return (
     <Box component={Card} variant={'outlined'} padding={2}>
       <Typography
@@ -76,8 +63,16 @@ const SidebarArticles = (): JSX.Element => {
         Upcoming updates
       </Typography>
       <Grid container spacing={2}>
-        {mock.map((item, i) => (
-          <Grid key={i} item xs={12}>
+        {articlesWhereIdNotEqualToArticleId.map((item, index) => (
+          <Grid
+            key={item.id}
+            data-aos="fade-up"
+            data-aos-delay={index * 200}
+            data-aos-offset={100}
+            data-aos-duration={600}
+            item
+            xs={12}
+          >
             <Box
               component={Card}
               width={1}
@@ -100,7 +95,7 @@ const SidebarArticles = (): JSX.Element => {
                   component={LazyLoadImage}
                   height={1}
                   width={1}
-                  src={item.image}
+                  src={item.coverPageImgURL}
                   alt="..."
                   effect="blur"
                   sx={{
@@ -124,10 +119,17 @@ const SidebarArticles = (): JSX.Element => {
                     color={'text.secondary'}
                     component={'i'}
                   >
-                    {item.author.name} - {item.date}
+                    {item.user.name} -{' '}
+                    {moment(item.createdAt).format('MMMM Do YYYY, h:mm a')}
                   </Typography>
                 </Box>
-                <Button size={'small'}>Read More</Button>
+                <Button
+                  component={Link}
+                  to={`/article/${item.id}`}
+                  size={'small'}
+                >
+                  Read More
+                </Button>
               </CardContent>
             </Box>
           </Grid>

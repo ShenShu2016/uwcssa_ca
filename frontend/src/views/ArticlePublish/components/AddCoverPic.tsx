@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 15:30:41
- * @LastEditTime: 2022-05-25 18:37:15
+ * @LastEditTime: 2022-05-25 21:16:16
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddCoverPic.tsx
  */
@@ -31,7 +31,7 @@ const AddCoverPic = ({
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((state) => state.auth.user);
   const [originImg, setOriginImg] = useState<string>();
-  console.log('originImg', originImg);
+  //console.log('originImg', originImg);
   const handleImgUpload = async (e) => {
     const targetTable = 'Article';
     const file = e.target.files[0];

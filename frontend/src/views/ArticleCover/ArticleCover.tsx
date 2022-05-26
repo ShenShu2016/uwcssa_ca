@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:50:00
+ * @LastEditTime: 2022-05-25 22:02:48
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -15,31 +15,54 @@ import {
   SidebarNewsletter,
   SimilarStories,
 } from './components';
+import React, { useEffect } from 'react';
+import { fetchArticle, selectArticleById } from 'redux/article/articleSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
 import Main from 'layouts/Main';
-import React from 'react';
+import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 const ArticleCover = (): JSX.Element => {
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getAuthState);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+
   const { articleId } = useParams();
+  const article = useAppSelector((state) =>
+    selectArticleById(state, articleId),
+  );
+  console.log('article', article);
+  useEffect(() => {
+    const getArticle = async () => {
+      if (articleId !== null) {
+        await dispatch(
+          fetchArticle({
+            articleId,
+            isAuth,
+          }),
+        );
+      }
+    };
+    getArticle();
+  }, [articleId]);
 
   return (
     <Main colorInvert={true}>
       <Box>
-        <Hero />
+        {article && <Hero article={article} />}
         <Container>
           <Grid container spacing={4}>
             <Grid item xs={12} md={8}>
-              <Content />
+              {article && <Content article={article} />}
             </Grid>
             <Grid item xs={12} md={4}>
               {isMd ? (

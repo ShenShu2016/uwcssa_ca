@@ -2,21 +2,24 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:42:52
+ * @LastEditTime: 2022-05-25 21:43:23
  * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/Hero/Hero.tsx
  * @Description:
  *
  */
 import React, { useEffect } from 'react';
 
+import { Article } from 'redux/article/articleSlice';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
+import moment from 'moment';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
-const Hero = (): JSX.Element => {
+const Hero = ({ article }: { article: Article }): JSX.Element => {
   useEffect(() => {
     const jarallaxInit = async () => {
       const jarallaxElems = document.querySelectorAll('.jarallax');
@@ -30,7 +33,7 @@ const Hero = (): JSX.Element => {
 
     jarallaxInit();
   });
-
+  console.log('article', article);
   return (
     <Box
       className={'jarallax'}
@@ -59,8 +62,7 @@ const Hero = (): JSX.Element => {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
-          backgroundImage:
-            'url(https://assets.maccarianagency.com/backgrounds/img3.jpg)',
+          backgroundImage: `url(${article.coverPageImgURL})`,
         }}
       />
       <Box
@@ -86,17 +88,20 @@ const Hero = (): JSX.Element => {
               marginBottom: 2,
             }}
           >
-            Remote work is the future, but should you go remote?
+            {article.title}
           </Typography>
           <Box display={'flex'} alignItems={'center'}>
             <Avatar
-              sx={{ width: 60, height: 60, marginRight: 2 }}
-              src={'https://assets.maccarianagency.com/avatars/img3.jpg'}
+              style={{ width: 60, height: 60, marginRight: '1rem' }}
+              src={article.user.avatarURL}
+              {...stringAvatar(article.user.name.toUpperCase())}
             />
             <ListItemText
               sx={{ margin: 0 }}
-              primary={'Jhon Anderson'}
-              secondary={'May 19, 2021'}
+              primary={article.user.name}
+              secondary={moment(article.createdAt).format(
+                'dddd, MMMM Do YYYY, h:mm:ss a',
+              )} //https://momentjs.com/docs/#/displaying/format/
               primaryTypographyProps={{
                 variant: 'h6',
                 sx: { color: 'common.white' },

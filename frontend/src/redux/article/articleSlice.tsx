@@ -2,14 +2,18 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:52:09
+ * @LastEditTime: 2022-05-25 22:38:24
  * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
  * @Description:
  *
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { articleSortByCreatedAt, createArticle } from './custom_q_m_s';
+import {
+  articleSortByCreatedAt,
+  createArticle,
+  getArticle,
+} from './custom_q_m_s';
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -18,11 +22,10 @@ import {
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
-import { getArticle } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { updateArticle } from 'graphql/mutations';
 
-type Article = {
+export type Article = {
   id: string;
   title: string;
   tags?: { items: Array<{ tagID: string }> } | null;
@@ -77,16 +80,16 @@ export const fetchArticleList = createAsyncThunk(
 
 export const fetchArticle = createAsyncThunk(
   'article/fetchArticle',
-  async (id) => {
+  async ({ articleId, isAuth }: { articleId: string; isAuth: boolean }) => {
     try {
       const result: any = await API.graphql({
         query: getArticle,
-        variables: { id: id },
-        authMode: 'AWS_IAM',
+        variables: { id: articleId },
+        authMode: isAuth ? undefined : 'AWS_IAM',
       });
       // console.log("what?", response);
       if (result.data.getArticle === null) {
-        return { id: id, description: 'not-found' };
+        return { id: articleId, description: 'not-found' };
       }
       return result.data.getArticle;
     } catch (error) {
@@ -135,7 +138,7 @@ const articleSlice = createSlice({
       })
       .addCase(fetchArticleList.fulfilled, (state, action) => {
         state.fetchArticleListStatus = 'succeed';
-        articleAdapter.removeAll(state);
+        //articleAdapter.removeAll(state);
         articleAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchArticleList.rejected, (state, action) => {
