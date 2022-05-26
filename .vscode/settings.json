@@ -7,7 +7,7 @@
     "amplify/#current-cloud-backend": true,
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
-  },    
+  },
   "cSpell.words": [
     "awsmobile",
     "AWSURL",
@@ -24,6 +24,6 @@
     "UWCSSA",
     "uwcssats",
     "webp"
-],
-"python.formatting.provider": "black"
+  ],
+  "python.formatting.provider": "black"
 }

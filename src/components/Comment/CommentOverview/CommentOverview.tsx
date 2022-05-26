@@ -1,8 +1,9 @@
+import { Avatar } from '@mui/material';
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 17:01:17
+ * @LastEditTime: 2022-05-26 17:14:42
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -14,8 +15,8 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useTheme } from '@mui/material/styles';
-
 const mock = [
   {
     score: 4,
@@ -65,7 +66,12 @@ const CommentOverview = (): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <Container display={'flex'} justifyContent={'center'} alignItems={'center'}>
+    <Container
+      display={'flex'}
+      justifyContent={'center'}
+      alignItems={'center'}
+      sx={{ p: 0 }}
+    >
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Box
@@ -78,10 +84,10 @@ const CommentOverview = (): JSX.Element => {
           >
             <Box>
               <Typography variant={'h4'} fontWeight={700} marginBottom={1}>
-                Customer reviews
+                Comments
               </Typography>
               <Box display={'flex'} alignItems={'center'}>
-                <Box display={'flex'} alignItems={'center'}>
+                {/* <Box display={'flex'} alignItems={'center'}>
                   {[1, 2, 3, 4, 5].map((r) => (
                     <Box
                       key={r}
@@ -103,7 +109,7 @@ const CommentOverview = (): JSX.Element => {
                 </Box>
                 <Typography color={'text.secondary'} marginLeft={1}>
                   Based on 12 reviews
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
             <Button
@@ -122,7 +128,7 @@ const CommentOverview = (): JSX.Element => {
         </Grid>
         {mock.map((item, i) => (
           <Grid key={i} xs={12} sm={12} item>
-            <Box display={'flex'} alignItems={'center'}>
+            {/* <Box display={'flex'} alignItems={'center'}>
               {[1, 2, 3, 4, 5].map((r) => (
                 <Box
                   key={r}
@@ -141,12 +147,25 @@ const CommentOverview = (): JSX.Element => {
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </Box>
               ))}
+            </Box> */}
+            <Box display={'flex'} alignItems={'center'}>
+              <Box>
+                <Avatar
+                  sx={{
+                    width: 32,
+                    height: 32,
+                  }}
+                  {...stringAvatar('Hello')}
+                />
+              </Box>
+              <Box sx={{ ml: '1rem' }}>
+                <Typography variant={'caption'} color={'text.secondary'}>
+                  {item.subtitle}
+                </Typography>
+                <Typography marginY={1}>{item.title}</Typography>
+                <Typography>{item.feedback}</Typography>
+              </Box>
             </Box>
-            <Typography variant={'caption'} color={'text.secondary'}>
-              {item.subtitle}
-            </Typography>
-            <Typography marginY={1}>{item.title}</Typography>
-            <Typography>{item.feedback}</Typography>
           </Grid>
         ))}
         <Grid container item xs={12} justifyContent={'center'}>

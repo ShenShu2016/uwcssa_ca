@@ -2,7 +2,7 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 # 用来更新local 的 graphql 操作： amplify api gql-compile && amplify codegen
 # 注意！active用来做sort key(因为布尔值不支持)，但是不是boolean， 只能有'T' 'F'
-
+# https://us-east-2.console.aws.amazon.com/appsync/home?region=us-east-2#/4r2t6l2uprdgjhmoocpazejjcq/v1/queries
 enum ActiveType {
   T
   F
@@ -141,8 +141,13 @@ type Comment
   id: ID!
   content: String!
   isDeleted: Boolean!
-  articleCommentId: ID @index(name: "byArticle", sortKeyFields: ["createdAt"]) # 为什么不加 ！ 因为有event 也需要用comment
-  article: Article @belongsTo(fields: ["articleCommentId"])
+  articleCommentsId: ID
+    @index(
+      name: "commentSortByArticleCommentsIdCreatedAt" #名字要用小写
+      queryField: "commentSortByArticleCommentsIdCreatedAt"
+      sortKeyFields: ["createdAt"]
+    ) # 为什么不加 ！ 因为有event 也需要用comment
+  article: Article @belongsTo(fields: ["articleCommentsId"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!

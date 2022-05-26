@@ -85,13 +85,13 @@ export const getUserImage = /* GraphQL */ `
       name
       size
       type
+      lastModified
+      lastModifiedDate
       compressedWidth
       objectCompressedURL
       thumbnailWidth
       objectThumbnailURL
       targetTable
-      lastModified
-      lastModifiedDate
       active
       createdAt
       updatedAt
@@ -113,13 +113,13 @@ export const listUserImages = /* GraphQL */ `
         name
         size
         type
+        lastModified
+        lastModifiedDate
         compressedWidth
         objectCompressedURL
         thumbnailWidth
         objectThumbnailURL
         targetTable
-        lastModified
-        lastModifiedDate
         active
         createdAt
         updatedAt
@@ -153,13 +153,13 @@ export const userImageSortByCreatedAt = /* GraphQL */ `
         name
         size
         type
+        lastModified
+        lastModifiedDate
         compressedWidth
         objectCompressedURL
         thumbnailWidth
         objectThumbnailURL
         targetTable
-        lastModified
-        lastModifiedDate
         active
         createdAt
         updatedAt
@@ -293,7 +293,7 @@ export const getComment = /* GraphQL */ `
       id
       content
       isDeleted
-      articleCommentId
+      articleCommentsId
       article {
         id
         title
@@ -321,7 +321,6 @@ export const getComment = /* GraphQL */ `
         updatedAt
         owner
       }
-      articleCommentsId
     }
   }
 `;
@@ -336,11 +335,40 @@ export const listComments = /* GraphQL */ `
         id
         content
         isDeleted
-        articleCommentId
+        articleCommentsId
         createdAt
         updatedAt
         owner
+      }
+      nextToken
+    }
+  }
+`;
+export const commentSortByArticleCommentsIdCreatedAt = /* GraphQL */ `
+  query CommentSortByArticleCommentsIdCreatedAt(
+    $articleCommentsId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentSortByArticleCommentsIdCreatedAt(
+      articleCommentsId: $articleCommentsId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        isDeleted
         articleCommentsId
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

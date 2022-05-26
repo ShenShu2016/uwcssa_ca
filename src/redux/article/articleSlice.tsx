@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 14:13:57
- * @FilePath: /uwcssa_ca/frontend/src/redux/article/articleSlice.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-26 18:29:16
+ * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
  */
@@ -30,7 +30,6 @@ export type Article = {
   title: string;
   tags?: { items: Array<{ tagID: string }> } | null;
   content: string;
-  comments?: any | null;
   active: 'T' | 'F';
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;

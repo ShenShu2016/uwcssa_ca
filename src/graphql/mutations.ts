@@ -122,13 +122,13 @@ export const createUserImage = /* GraphQL */ `
       name
       size
       type
+      lastModified
+      lastModifiedDate
       compressedWidth
       objectCompressedURL
       thumbnailWidth
       objectThumbnailURL
       targetTable
-      lastModified
-      lastModifiedDate
       active
       createdAt
       updatedAt
@@ -148,13 +148,13 @@ export const updateUserImage = /* GraphQL */ `
       name
       size
       type
+      lastModified
+      lastModifiedDate
       compressedWidth
       objectCompressedURL
       thumbnailWidth
       objectThumbnailURL
       targetTable
-      lastModified
-      lastModifiedDate
       active
       createdAt
       updatedAt
@@ -174,13 +174,13 @@ export const deleteUserImage = /* GraphQL */ `
       name
       size
       type
+      lastModified
+      lastModifiedDate
       compressedWidth
       objectCompressedURL
       thumbnailWidth
       objectThumbnailURL
       targetTable
-      lastModified
-      lastModifiedDate
       active
       createdAt
       updatedAt
@@ -356,7 +356,7 @@ export const createComment = /* GraphQL */ `
       id
       content
       isDeleted
-      articleCommentId
+      articleCommentsId
       article {
         id
         title
@@ -384,7 +384,6 @@ export const createComment = /* GraphQL */ `
         updatedAt
         owner
       }
-      articleCommentsId
     }
   }
 `;
@@ -397,7 +396,7 @@ export const updateComment = /* GraphQL */ `
       id
       content
       isDeleted
-      articleCommentId
+      articleCommentsId
       article {
         id
         title
@@ -425,7 +424,6 @@ export const updateComment = /* GraphQL */ `
         updatedAt
         owner
       }
-      articleCommentsId
     }
   }
 `;
@@ -438,7 +436,7 @@ export const deleteComment = /* GraphQL */ `
       id
       content
       isDeleted
-      articleCommentId
+      articleCommentsId
       article {
         id
         title
@@ -466,7 +464,6 @@ export const deleteComment = /* GraphQL */ `
         updatedAt
         owner
       }
-      articleCommentsId
     }
   }
 `;
