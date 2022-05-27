@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 17:46:54
- * @FilePath: /uwcssa_ca/frontend/src/components/Avatar/AvatarFunction.tsx
+ * @LastEditTime: 2022-05-27 13:09:30
+ * @FilePath: /uwcssa_ca/src/components/Avatar/AvatarFunction.tsx
  * @Description:
  *
  */
@@ -27,7 +27,7 @@ export function stringToColorAvatar(string: string) {
 export function stringAvatar(name: string) {
   return {
     sx: {
-      bgcolor: stringToColorAvatar(name),
+      bgcolor: stringToColorAvatar(name.toLocaleUpperCase()),
     },
     children: `${name.slice(0, 1)}`,
   };

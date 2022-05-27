@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 01:58:56
- * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/Topbar.tsx
+ * @LastEditTime: 2022-05-27 13:17:59
+ * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
  */
@@ -63,11 +63,14 @@ const Topbar = ({
     >
       <Box
         display={'flex'}
-        component="a"
-        href="/"
+        component={Link}
+        to="/"
         title="UWCSSA"
         height={{ xs: 24, md: 29 }}
-        sx={{ textDecoration: 'none' }}
+        sx={{
+          textDecoration: 'none',
+          color: mode === 'light' && !colorInvert ? 'black' : 'white',
+        }}
       >
         <Box
           component={'img'}
@@ -79,7 +82,7 @@ const Topbar = ({
           height={1}
           width={1}
         />
-        <Typography variant="h5" sx={{ ml: '1rem' }}>
+        <Typography variant="h5" sx={{ ml: '1rem', fontWeight: '700' }}>
           UWCSSA
         </Typography>
       </Box>

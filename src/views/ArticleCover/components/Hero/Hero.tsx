@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-27 10:03:45
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-27 17:23:21
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/Hero/Hero.tsx
  * @Description:
  *
@@ -13,7 +13,6 @@ import React, { useEffect } from 'react';
 import { Article } from 'redux/article/articleSlice';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import Container from 'components/Container';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
@@ -96,7 +95,7 @@ const Hero = ({ article }: { article: Article }): JSX.Element => {
             <Avatar
               style={{ width: 60, height: 60, marginRight: '1rem' }}
               src={article.user.avatarURL}
-              {...stringAvatar(article.user.name.toUpperCase())}
+              {...stringAvatar(article.user.name)}
             />
             <ListItemText
               sx={{ margin: 0 }}

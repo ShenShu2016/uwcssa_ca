@@ -5,13 +5,14 @@ import { Avatar } from '@mui/material';
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:08:00
+ * @LastEditTime: 2022-05-27 16:25:43
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
  */
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CommentGroupButton from './components/CommentGroupButton';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
 import { FeedbackForm } from '../CommentDialog/components';
@@ -125,19 +126,23 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
             <Box display={'flex'} alignItems={'center'}>
               <Box>
                 <Avatar
-                  sx={{
-                    width: 32,
-                    height: 32,
+                  style={{
+                    width: 48,
+                    height: 48,
                   }}
+                  src={item.user.avatarURL}
                   {...stringAvatar(item.user.name)}
                 />
               </Box>
               <Box sx={{ ml: '1rem' }}>
-                <Typography variant={'caption'} color={'text.secondary'}>
-                  {item.user.name} - {moment(item.createdAt).fromNow()}
-                </Typography>
-                {/* <Typography marginY={1}></Typography> */}
-                <Typography>{item.content}</Typography>
+                <Box sx={{ pl: '8px' }}>
+                  <Typography variant={'caption'} color={'text.secondary'}>
+                    {item.user.name} - {moment(item.createdAt).fromNow()}
+                  </Typography>
+                  {/* <Typography marginY={1}></Typography> */}
+                  <Typography>{item.content}</Typography>
+                </Box>
+                <CommentGroupButton />
               </Box>
             </Box>
           </Grid>

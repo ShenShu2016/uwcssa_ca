@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:27:39
+ * @LastEditTime: 2022-05-27 13:05:38
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -72,7 +72,7 @@ const ArticleCover = (): JSX.Element => {
     <Main colorInvert={true}>
       <Box>
         {article && <Hero article={article} />}
-        <Container style={{ padding: '12px 0px' }}>
+        <Container style={{ padding: '12px 16px' }}>
           <Grid container spacing={8}>
             <Grid item xs={12} md={8}>
               {article && <Content article={article} />}

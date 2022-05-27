@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 01:59:37
- * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
+ * @LastEditTime: 2022-05-27 13:10:32
+ * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
  */
@@ -58,11 +58,11 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar
-              sx={{
+              style={{
                 width: 32,
                 height: 32,
               }}
-              {...stringAvatar(userInfo.name.toUpperCase())}
+              {...stringAvatar(userInfo.name)}
             />
           </IconButton>
         </Tooltip>

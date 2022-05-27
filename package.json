@@ -40,6 +40,7 @@
     "@mui/icons-material": "^5.2.4",
     "@mui/lab": "^5.0.0-alpha.82",
     "@mui/material": "^5.2.4",
+    "@mui/styles": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/jest": "^27.5.1",
     "aos": "^2.3.4",

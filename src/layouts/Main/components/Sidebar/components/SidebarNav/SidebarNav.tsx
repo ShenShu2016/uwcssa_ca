@@ -41,7 +41,10 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
           to="/"
           title="UWCSSA"
           height={{ xs: 24, md: 29 }}
-          sx={{ textDecoration: 'none' }}
+          sx={{
+            textDecoration: 'none',
+            color: mode === 'light' ? 'black' : 'white',
+          }}
         >
           <Box
             component={'img'}
@@ -53,7 +56,7 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
             height={1}
             //width={1}
           />
-          <Typography variant="h5" sx={{ ml: '1rem' }}>
+          <Typography variant="h5" sx={{ ml: '1rem', fontWeight: '700' }}>
             UWCSSA
           </Typography>
         </Box>
