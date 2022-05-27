@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 21:04:45
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-27 10:24:20
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -69,7 +69,7 @@ const ArticleCover = (): JSX.Element => {
   }, [articleId]);
 
   return (
-    <Main>
+    <Main colorInvert={true}>
       <Box>
         {article && <Hero article={article} />}
         <Container style={{ padding: '12px 0px' }}>
