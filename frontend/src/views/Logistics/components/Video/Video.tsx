@@ -1,7 +1,18 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-05-26 22:30:04
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-27 15:40:34
+ * @FilePath: /uwcssa_ca/frontend/src/views/Logistics/components/Video/Video.tsx
+ * @Description:
+ *
+ */
+
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import IconButton from '@mui/material/IconButton';
 import React from 'react';
+import ReactPlayer from 'react-player';
 import Typography from '@mui/material/Typography';
 
 const Video = (): JSX.Element => {
@@ -10,7 +21,7 @@ const Video = (): JSX.Element => {
       sx={{
         position: 'relative',
         backgroundImage:
-          'url(https://assets.maccarianagency.com/backgrounds/img50.jpg)',
+          'url(https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/105574608_2541619195939656_2339835405235735184_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=Pwx2262mWqkAX98GQ-a&_nc_ht=scontent-yyz1-1.xx&oh=00_AT-uxn1hwnk8qHlfL0jsUh54HpgwfS3npsCvgMLvLHRN2A&oe=62B7CC7E)',
         backgroundPosition: 'center center',
         '&:after': {
           content: '""',
@@ -60,7 +71,19 @@ const Video = (): JSX.Element => {
               justifyContent: 'center',
             }}
           >
-            <IconButton size={'large'}>
+            <ReactPlayer
+              url={'https://www.youtube.com/watch?v=e6Tys8ZuF_k'}
+              config={{
+                youtube: {
+                  playerVars: { showinfo: 1 },
+                },
+                facebook: {
+                  appId: '12345',
+                },
+              }}
+              controls
+            />
+            {/* <IconButton size={'large'}>
               <Box
                 component={'svg'}
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +98,7 @@ const Video = (): JSX.Element => {
                   clipRule="evenodd"
                 />
               </Box>
-            </IconButton>
+            </IconButton> */}
           </Box>
         </Box>
       </Container>
