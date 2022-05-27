@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Dialog from '@mui/material/Dialog';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 16:50:46
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-26 22:07:05
+ * @FilePath: /uwcssa_ca/src/components/Comment/CommentDialog/components/FeedbackForm/FeedbackForm.tsx
+ * @Description:
+ *
+ */
+import * as yup from 'yup';
 
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import Grid from '@mui/material/Grid';
+import React from 'react';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { getOwnerUserName } from 'redux/auth/authSlice';
+import { postComment } from 'redux/comment/commentSlice';
+import { useFormik } from 'formik';
+import { useParams } from 'react-router-dom';
+
+const validationSchema = yup.object({
+  content: yup.string().trim().required('content is required.'),
+});
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClose: () => void;
@@ -14,8 +33,39 @@ interface Props {
 }
 
 const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
-  const theme = useTheme();
-  const [currentScore, setCurrentScore] = useState(3);
+  const { articleId } = useParams();
+  const dispatch = useAppDispatch();
+  const ownerUsername = useAppSelector(getOwnerUserName);
+
+  const initialValues = {
+    content: '',
+  };
+
+  const onSubmit = async (values) => {
+    console.log(JSON.stringify(values));
+    const { content } = values;
+    const createCommentInput = {
+      content: content,
+      isDeleted: false,
+      articleCommentsId: articleId,
+      owner: ownerUsername,
+    };
+    console.log(createCommentInput);
+    const response = await dispatch(postComment({ createCommentInput }));
+    if (response.meta.requestStatus === 'fulfilled') {
+      onClose();
+      formik.resetForm();
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit,
+  });
 
   return (
     <Dialog
@@ -31,7 +81,7 @@ const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
       <Box paddingY={2} paddingX={4}>
         <Box paddingY={2} display={'flex'} justifyContent={'space-between'}>
           <Typography variant={'h5'} fontWeight={700}>
-            Write a review
+            Write a comment
           </Typography>
           <Box
             component={'svg'}
@@ -53,68 +103,25 @@ const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
           </Box>
         </Box>
         <Box paddingY={2}>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Enter your name
+                  Write your comment
                 </Typography>
                 <TextField
-                  label="Name *"
+                  label="Comment *"
                   variant="outlined"
-                  name={'name'}
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Enter your email
-                </Typography>
-                <TextField
-                  label="Email *"
-                  variant="outlined"
-                  name={'email'}
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Rating
-                </Typography>
-                <Box display={'flex'} alignItems={'center'}>
-                  {[1, 2, 3, 4, 5].map((r) => (
-                    <Box
-                      key={r}
-                      component={'svg'}
-                      color={
-                        r <= currentScore
-                          ? theme.palette.primary.main
-                          : theme.palette.divider
-                      }
-                      width={28}
-                      height={28}
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      sx={{ cursor: 'pointer' }}
-                      onClick={() => setCurrentScore(r)}
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </Box>
-                  ))}
-                </Box>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 1 }}>
-                  Write your feedback
-                </Typography>
-                <TextField
-                  label="Feedback *"
-                  variant="outlined"
-                  name={'feedback'}
+                  name={'content'}
                   fullWidth
                   multiline
                   rows={5}
+                  value={formik.values.content}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.content && Boolean(formik.errors.content)
+                  }
+                  helperText={formik.touched.content && formik.errors.content}
                 />
               </Grid>
               <Grid item container xs={12}>

@@ -1,29 +1,34 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 18:35:37
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/SidebarNewsletter/SidebarNewsletter.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-26 22:26:14
+ * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SidebarNewsletter/SidebarNewsletter.tsx
  * @Description:
  *
  */
 /* eslint-disable react/no-unescaped-entities */
+
 import * as yup from 'yup';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import { Link as MUILink } from '@mui/material';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { signIn } from 'redux/auth/authSlice';
+import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 const validationSchema = yup.object({
-  email: yup
+  username: yup
     .string()
     .trim()
     .email('Please enter a valid email address')
@@ -35,17 +40,28 @@ const validationSchema = yup.object({
 });
 
 const SidebarNewsletter = (): JSX.Element => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
 
   const initialValues = {
-    email: '',
+    username: '',
     password: '',
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(JSON.stringify(values));
+    const { username, password } = values;
+    const response = await dispatch(signIn({ username, password }));
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('', { replace: true });
+    } else {
+      return false;
+    }
+
     return values;
   };
 
@@ -56,11 +72,7 @@ const SidebarNewsletter = (): JSX.Element => {
   });
 
   return (
-    <Box
-      component={Card}
-      padding={2}
-      bgcolor={'transparent'}
-    >
+    <Box component={Card} padding={2} bgcolor={'transparent'}>
       <Grid container spacing={4}>
         {isMd ? (
           <Grid item container justifyContent={'center'} xs={12}>
@@ -99,12 +111,14 @@ const SidebarNewsletter = (): JSX.Element => {
                 <TextField
                   label="Email *"
                   variant="outlined"
-                  name={'email'}
+                  name={'username'}
                   fullWidth
-                  value={formik.values.email}
+                  value={formik.values.username}
                   onChange={formik.handleChange}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
+                  error={
+                    formik.touched.username && Boolean(formik.errors.username)
+                  }
+                  helperText={formik.touched.username && formik.errors.username}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,14 +136,14 @@ const SidebarNewsletter = (): JSX.Element => {
                     </Typography>
                   </Box>
                   <Typography variant={'subtitle2'}>
-                    <Link
-                      component={'a'}
+                    <MUILink
+                      component={Link}
                       color={'primary'}
-                      href={'/password-reset-simple'}
+                      to={'/auth/passwordReset'}
                       underline={'none'}
                     >
                       Forgot your password?
-                    </Link>
+                    </MUILink>
                   </Typography>
                 </Box>
                 <TextField
@@ -159,14 +173,14 @@ const SidebarNewsletter = (): JSX.Element => {
                   <Box marginBottom={{ xs: 1, sm: 0 }}>
                     <Typography variant={'subtitle2'}>
                       Don't have an account yet?{' '}
-                      <Link
-                        component={'a'}
+                      <MUILink
+                        component={Link}
                         color={'primary'}
-                        href={'/signup-simple'}
+                        to={'/auth/signUp'}
                         underline={'none'}
                       >
                         Sign up here.
-                      </Link>
+                      </MUILink>
                     </Typography>
                   </Box>
                   <Button size={'large'} variant={'contained'} type={'submit'}>

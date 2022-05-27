@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 22:25:20
- * @FilePath: /uwcssa_ca/frontend/src/redux/auth/authSlice.tsx
+ * @LastEditTime: 2022-05-26 22:17:56
+ * @FilePath: /uwcssa_ca/src/redux/auth/authSlice.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -16,7 +16,7 @@ import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 
 export interface AuthState {
   isAuth: null | boolean;
-  isAdmin: null | boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any | null;
   cognitoGroup: Array<'uwcssaUser' | 'uwcssaAdmin' | string> | null;
   loadUserStatus: 'idle' | 'loading' | 'failed' | 'succeed';
@@ -43,7 +43,6 @@ export interface AuthState {
 
 const initialState: AuthState = {
   isAuth: null,
-  isAdmin: null,
   user: null,
   cognitoGroup: null,
   //  Status: "idle",
@@ -346,13 +345,30 @@ const authSlice = createSlice({
   },
 });
 
-export const getAuthState = (state) => state.auth.isAuth;
+export const getAuthState = (state: {
+  auth: { isAuth: null | true | false };
+}) => state.auth.isAuth;
 
-export const getUserInfo = (state) => state.auth?.user?.attributes;
+export const getUserInfo = (state: {
+  auth: {
+    user: {
+      attributes: {
+        sub: string;
+        email_verified: boolean;
+        name: string;
+        email: string;
+      };
+    };
+  };
+}) => state.auth?.user?.attributes;
 
-export const getOwnerUserName = (state) => state.auth?.user?.username;
+export const getOwnerUserName = (state: {
+  auth: { user: { username: string } };
+}) => state.auth?.user?.username;
 
-export const getIsAdmin = (state) => {
+export const getIsAdmin = (state: {
+  auth: { cognitoGroup: string | string[] };
+}) => {
   let result = false;
   if (state.auth.cognitoGroup) {
     result = state.auth.cognitoGroup.includes('uwcssaAdmin');

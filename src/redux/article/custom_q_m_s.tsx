@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:00:03
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 20:55:28
+ * @LastEditTime: 2022-05-26 21:47:05
  * @FilePath: /uwcssa_ca/src/redux/article/custom_q_m_s.tsx
  * @Description:
  *
@@ -63,7 +63,7 @@ export const getArticle = /* GraphQL */ `
           tagID
         }
       }
-      comments(filter: { isDeleted: { eq: false } }) {
+      comments(sortDirection: DESC, filter: { isDeleted: { eq: false } }) {
         items {
           id
           content

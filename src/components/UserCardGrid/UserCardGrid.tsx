@@ -2,8 +2,8 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 22:07:52
- * @FilePath: /uwcssa_ca/frontend/src/components/UserCardGrid/UserCardGrid.tsx
+ * @LastEditTime: 2022-05-26 22:13:35
+ * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
  */
@@ -35,7 +35,7 @@ const UserCardGrid = (): JSX.Element => {
   const theme = useTheme();
   const userInfo = useAppSelector(getUserInfo); //用这个代替直接从store拿，但是要注意google 登录的话sub 和username不一样，owner一定要用username，有另一个api叫 getOwnerUserName
   //const dispatch = useAppDispatch();
-  console.log(userInfo);
+  //console.log(userInfo);
 
   // 这里不需要，在index里面只需要一个
   // useEffect(() => {
@@ -64,7 +64,7 @@ const UserCardGrid = (): JSX.Element => {
           <Avatar
             src={'info.avatar'}
             variant={'circular'}
-            alt={(userInfo as any).name}
+            alt={userInfo.name}
             sx={{
               width: 80,
               height: 80,
@@ -76,7 +76,7 @@ const UserCardGrid = (): JSX.Element => {
             alignItems={'center'}
             marginTop={2}
           >
-            <Typography fontWeight={600}>{(userInfo as any).name}</Typography>
+            <Typography fontWeight={600}>{userInfo.name}</Typography>
             {userInfo ? (
               <Box
                 component={'svg'}
@@ -99,7 +99,7 @@ const UserCardGrid = (): JSX.Element => {
             ) : null}
           </Box>
           <Typography fontSize={12} color={'text.secondary'}>
-            {(userInfo as any).email}
+            {userInfo.email}
           </Typography>
           <Box flexGrow={1} />
           <Stack spacing={2} marginTop={2} width={1} alignItems={'center'}>

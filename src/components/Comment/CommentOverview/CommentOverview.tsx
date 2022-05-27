@@ -5,14 +5,13 @@ import { Avatar } from '@mui/material';
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 21:02:16
+ * @LastEditTime: 2022-05-26 22:08:00
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
  */
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CommentDialog from 'components/Comment/CommentDialog';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
 import { FeedbackForm } from '../CommentDialog/components';
@@ -20,55 +19,22 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
-import { useTheme } from '@mui/material/styles';
 
-const mock = [
-  {
-    score: 4,
-    title: 'Love this product!',
-    feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    subtitle: 'by Christopher, July 15h 2020',
-  },
-  {
-    score: 5,
-    title: 'Great price & quality',
-    feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    subtitle: 'by Sarah, July 14h 2020',
-  },
-  {
-    score: 5,
-    title: 'Highly recommended',
-    feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    subtitle: 'by Toby, July 13h 2020',
-  },
-  {
-    score: 5,
-    title: 'Best watch I have ever bought',
-    feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    subtitle: 'by Dakota, July 12h 2020',
-  },
-  {
-    score: 5,
-    title: 'First class customer service',
-    feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    subtitle: 'by Pheobe, July 11th 2020',
-  },
-  {
-    score: 4,
-    title: 'Love my new watch',
-    feedback:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    subtitle: 'by George, July 10th 2020',
-  },
-];
+interface Props {
+  comments: Array<{
+    id: string;
+    content: string;
+    createdAt: string;
+    user?: {
+      name: string;
+      avatarURL: string;
+      id: string;
+      createdAt: string;
+    };
+  }>;
+}
 
-const CommentOverview = ({ comments }: { comments: any }): JSX.Element => {
-  const theme = useTheme();
+const CommentOverview = ({ comments }: Props): JSX.Element => {
   const [open, setOpen] = useState(false);
   //console.log('comments', comments);
   return (
@@ -127,14 +93,14 @@ const CommentOverview = ({ comments }: { comments: any }): JSX.Element => {
               }}
               onClick={() => setOpen(true)}
             >
-              Write a review
+              Write a comment
             </Button>
           </Box>
         </Grid>
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        {comments.map((item, i) => (
+        {comments.map((item) => (
           <Grid key={item.id} xs={12} sm={12} item>
             {/* <Box display={'flex'} alignItems={'center'}>
               {[1, 2, 3, 4, 5].map((r) => (
@@ -170,7 +136,7 @@ const CommentOverview = ({ comments }: { comments: any }): JSX.Element => {
                 <Typography variant={'caption'} color={'text.secondary'}>
                   {item.user.name} - {moment(item.createdAt).fromNow()}
                 </Typography>
-                <Typography marginY={1}>{item.title}</Typography>
+                {/* <Typography marginY={1}></Typography> */}
                 <Typography>{item.content}</Typography>
               </Box>
             </Box>

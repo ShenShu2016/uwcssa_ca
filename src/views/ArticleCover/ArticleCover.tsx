@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 21:04:45
+ * @LastEditTime: 2022-05-26 22:03:13
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -83,7 +83,7 @@ const ArticleCover = (): JSX.Element => {
                   <SidebarArticles />
                 </Box>
               ) : null}
-              <SidebarNewsletter />
+              {!isAuth && <SidebarNewsletter />}
             </Grid>
           </Grid>
           {comments && <CommentOverview comments={comments} />}

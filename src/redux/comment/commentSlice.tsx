@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 21:03:17
+ * @LastEditTime: 2022-05-26 22:05:13
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -20,6 +20,7 @@ import {
 } from '@reduxjs/toolkit';
 
 import API from '@aws-amplify/api';
+import { CreateCommentInput } from 'API';
 import { RootState } from 'redux/store';
 import { getComment } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
@@ -33,7 +34,7 @@ export type Comment = {
   createdAt: string;
   updatedAt: string;
   owner: string;
-  user?: { avatarURL: string; id: string; name: string };
+  user?: { avatarURL: string; id: string; name: string; createdAt: string };
 };
 
 export const commentAdapter = createEntityAdapter<Comment>({
@@ -102,7 +103,11 @@ export const fetchComment = createAsyncThunk(
 
 export const postComment = createAsyncThunk(
   'comment/postComment',
-  async ({ createCommentInput }: { createCommentInput: Comment }) => {
+  async ({
+    createCommentInput,
+  }: {
+    createCommentInput: CreateCommentInput;
+  }) => {
     try {
       const result: any = await API.graphql(
         graphqlOperation(createComment, { input: createCommentInput }),
