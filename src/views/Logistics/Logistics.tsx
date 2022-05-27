@@ -1,21 +1,29 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-05-27 17:53:27
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-27 18:12:35
+ * @FilePath: /uwcssa_ca/src/views/Logistics/Logistics.tsx
+ * @Description:
+ *
+ */
+
 import {
-  // About,
   AboutBottom,
   Features,
   Hero,
   Integrations,
   Jobs,
   News,
-  // Pricings,
   Reviews,
   Team,
-  // Trucking,
   Video,
 } from './components';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
+import FQA from 'views/FQA';
 import Main from 'layouts/Main';
 import React from 'react';
 
@@ -86,6 +94,9 @@ const Logistics = (): JSX.Element => {
           <Reviews />
         </Container>
       </Box>
+      <Container>
+        <FQA />
+      </Container>
     </Main>
   );
 };
