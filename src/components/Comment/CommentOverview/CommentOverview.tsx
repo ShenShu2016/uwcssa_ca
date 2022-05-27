@@ -5,7 +5,7 @@ import { Avatar } from '@mui/material';
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 18:51:24
+ * @LastEditTime: 2022-05-26 21:02:16
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -70,7 +70,7 @@ const mock = [
 const CommentOverview = ({ comments }: { comments: any }): JSX.Element => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  console.log('comments', comments);
+  //console.log('comments', comments);
   return (
     <Container
       display={'flex'}

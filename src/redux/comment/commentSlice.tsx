@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 18:28:01
+ * @LastEditTime: 2022-05-26 21:03:17
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -36,7 +36,7 @@ export type Comment = {
   user?: { avatarURL: string; id: string; name: string };
 };
 
-const commentAdapter = createEntityAdapter<Comment>({
+export const commentAdapter = createEntityAdapter<Comment>({
   // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
 });
@@ -131,7 +131,15 @@ export const updateCommentDetail = createAsyncThunk(
 const commentSlice = createSlice({
   name: 'comment',
   initialState,
-  reducers: {},
+  reducers: {
+    removeAllComments(state) {
+      commentAdapter.removeAll(state);
+    },
+    insertAllComments(state, data) {
+      //console.log(data);
+      commentAdapter.upsertMany(state, data);
+    },
+  },
   extraReducers(builder) {
     builder
       // Cases for status of fetchCommentList (pending, fulfilled, and rejected)
@@ -196,4 +204,5 @@ export const {
   selectIds: selectCommentIds,
 } = commentAdapter.getSelectors((state: RootState) => state.comment);
 
+export const { insertAllComments, removeAllComments } = commentSlice.actions;
 export default commentSlice.reducer;

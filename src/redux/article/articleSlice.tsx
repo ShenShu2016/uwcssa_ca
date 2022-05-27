@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 18:29:16
+ * @LastEditTime: 2022-05-26 21:05:06
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -30,6 +30,7 @@ export type Article = {
   title: string;
   tags?: { items: Array<{ tagID: string }> } | null;
   content: string;
+  comments?: any;
   active: 'T' | 'F';
   coverPageImgURL?: string | null;
   coverPageDescription?: string | null;
@@ -150,6 +151,8 @@ const articleSlice = createSlice({
       .addCase(fetchArticle.fulfilled, (state, action) => {
         state.fetchArticleStatus = 'succeed';
         articleAdapter.upsertOne(state, action.payload);
+        //console.log(action.payload.comments.items);
+        // store.dispatch(insertAllComments(action.payload.comments.items));
       })
       .addCase(fetchArticle.rejected, (state, action) => {
         state.fetchArticleStatus = 'failed';

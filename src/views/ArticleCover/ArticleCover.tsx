@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 18:40:53
+ * @LastEditTime: 2022-05-26 21:04:45
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -19,7 +19,8 @@ import {
 import React, { useEffect } from 'react';
 import { fetchArticle, selectArticleById } from 'redux/article/articleSlice';
 import {
-  fetchCommentList,
+  insertAllComments,
+  removeAllComments,
   selectAllComments,
 } from 'redux/comment/commentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -47,34 +48,24 @@ const ArticleCover = (): JSX.Element => {
     selectArticleById(state, articleId),
   );
   const comments = useAppSelector(selectAllComments);
-  console.log('comments', comments);
   // console.log('article', article);
   useEffect(() => {
     const getArticle = async () => {
       if (articleId !== null) {
-        await dispatch(
+        const response = await dispatch(
           fetchArticle({
             articleId,
             isAuth,
           }),
         );
+        //console.log('response', response);
+        dispatch(insertAllComments(response.payload.comments.items)); //这种方法不太好
       }
     };
     getArticle();
-  }, [articleId]);
-
-  useEffect(() => {
-    const getComments = async () => {
-      if (articleId !== null) {
-        await dispatch(
-          fetchCommentList({
-            articleCommentsId: articleId,
-            isAuth,
-          }),
-        );
-      }
+    return () => {
+      dispatch(removeAllComments());
     };
-    getComments();
   }, [articleId]);
 
   return (
