@@ -7,6 +7,7 @@
  * @Description:
  *
  */
+
 import React, { useEffect } from 'react';
 
 import { Article } from 'redux/article/articleSlice';
@@ -44,11 +45,6 @@ const Hero = ({ article }: { article: Article }): JSX.Element => {
       minHeight={{ xs: 400, sm: 500, md: 600 }}
       display={'flex'}
       marginTop={-13}
-      marginLeft='-5%'
-      marginRight='-5%'
-      // top='0px'
-      // left='-6%'
-      // width={'100vw'}
       paddingTop={13}
       alignItems={'center'}
       id="agency__portfolio-item--js-scroll"
