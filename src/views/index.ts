@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 19:45:10
- * @FilePath: /uwcssa_ca/frontend/src/views/index.ts
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-27 18:10:39
+ * @FilePath: /uwcssa_ca/src/views/index.ts
  * @Description:
  */
 // export { default as Home } from './Home';
@@ -64,3 +64,4 @@ export { default as AccountProfile } from './Settings/Profile';
 export { default as NotFoundCover } from './NotFoundCover';
 export { default as Home } from './Home';
 export { default as ArticlePublish } from './ArticlePublish';
+export { default as FQA } from './FQA';
