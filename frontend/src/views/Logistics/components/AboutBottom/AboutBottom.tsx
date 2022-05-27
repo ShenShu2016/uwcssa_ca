@@ -1,11 +1,23 @@
+/*
+ * @Author: Shikai Jin
+ * @Date: 2022-05-26 22:30:04
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-27 15:32:28
+ * @FilePath: /uwcssa_ca/frontend/src/views/Logistics/components/AboutBottom/AboutBottom.tsx
+ * @Description:
+ *
+ */
+
 import Box from '@mui/material/Box';
+import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+
+/* eslint-disable react/no-unescaped-entities */
 
 const AboutBottom = (): JSX.Element => {
   const theme = useTheme();
@@ -36,20 +48,17 @@ const AboutBottom = (): JSX.Element => {
                 fontWeight: 700,
               }}
             >
-              Monitor and analyze usage patterns.
+              Make a Donation
             </Typography>
-            <Typography data-aos={'fade-up'}>
-              Keep track of what's happening with your data, change permissions,
-              and run reports against your data anywhere in the world.Keep track
-              of what's happening with your data, change permissions, and run
-              reports against your data anywhere in the world.Keep track of
-              what's happening with your data, change permissions, and run
-              reports against your data anywhere in the world.Keep track of
-              what's happening with your data, change permissions, and run
-              reports against your data anywhere in the world.Keep track of
-              what's happening with your data, change permissions, and run
-              reports against your data anywhere in the world.
+            <Typography variant="h6" data-aos={'fade-up'}>
+              When you donate to UWCCSA, you enable us to increase the speed of
+              bug fixes, web page improvements and feature development.
             </Typography>
+            <Box display="flex" justifyContent={'left'} marginTop={2}>
+              <Button variant="contained" color="primary" size="large">
+                Donate
+              </Button>
+            </Box>
           </Box>
         </Grid>
       </Grid>
