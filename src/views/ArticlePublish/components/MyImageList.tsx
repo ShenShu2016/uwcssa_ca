@@ -3,8 +3,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-23 13:50:22
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 16:29:09
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/MyImageList.tsx
+ * @LastEditTime: 2022-05-27 15:30:21
+ * @FilePath: /uwcssa_ca/src/views/ArticlePublish/components/MyImageList.tsx
  * @Description:
  *
  */
@@ -71,7 +71,7 @@ function MyImageList({ useImgFromRecent }) {
                     ? item.objectThumbnailURL || item.objectURL
                     : item.objectURL
                 }
-                alt={item.name}
+                alt={''}
                 loading="lazy"
               />
 

@@ -1,103 +1,62 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-05-26 14:32:04
+ * @LastEditTime: 2022-05-27 17:50:05
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/views/Home/Home.tsx
+ * @FilePath: /uwcssa_ca/src/views/Home/Home.tsx
  */
 import React from 'react';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import ArticleContainer from 'components/ArticleContainer';
 import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
 import UserCardGrid from 'components/UserCardGrid';
 import Button from '@mui/material/Button';
-import HomeIcon from '@mui/icons-material/Home';
-import SellIcon from '@mui/icons-material/Sell';
-import WorkIcon from '@mui/icons-material/Work';
-import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+import Section from './components/Section';
+import Entries from './components/Entries';
 
 const Home = (): React.ReactElement => {
   return (
     <Main>
-      {/* 暂时定格局 样式先内联写死 之后再修改 */}
-      <Box sx={{ display: 'flex' }}>
-        <Card sx={{ 
-          flex: 2,
-          minHeight: '100vh',
-          margin: '0px 4px',
-        }}>123</Card>
-        
-        <Card sx={{ 
-          flex: 5,
-          minHeight: '100vh',
-          margin: '0px 4px',
-        }}>
-          <ArticleContainer />
-        </Card>
+      <Box sx={{ display: 'flex', padding: '24px 5%' }}>
 
-        <Box sx={{flex: 1}}>
-          <Card sx={{ margin: '0px 4px'}}>
+        <Section 
+          title='新闻'
+          hasPadding={false}
+          component={Box}
+          sx={{ 
+            flex: 1,
+            minHeight: '100vh',
+          }}
+        >
+          <ArticleContainer />
+        </Section>
+        
+        <Section
+          title='活动'
+          sx={{ 
+            flex: 2,
+            minHeight: '100vh',
+          }}
+        >
+        </Section>
+
+        <Box sx={{flex: 1}} position='sticky' top='80px' alignSelf='flex-start'>
+          <Section title='个人信息' hasPadding={false}>
             <UserCardGrid/>
-          </Card>
-          <Card sx={{ margin: '8px 4px' }}>
+          </Section>
+
+          <Card sx={{ margin: '12px 8px' }}>
             <Button fullWidth>新生必读</Button>
           </Card>
-          <Card sx={{ margin: '8px 4px', padding: '12px', display: 'flex', justifyContent: 'space-between'}}>
-            <Box>
-              <Card 
-                sx={{ 
-                  width: '65px',
-                  height: '65px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <HomeIcon color="primary" fontSize='large'/>
-              </Card>
-              <Typography align='center' fontSize={12} p={1}>租房</Typography>
-            </Box>
-            <Box>
-              <Card 
-                sx={{ 
-                  width: '65px',
-                  height: '65px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <LocalActivityIcon color="primary" fontSize='large'/>
-              </Card>
-              <Typography align='center' fontSize={12} p={1}>活动</Typography>
-            </Box>
-            <Box>
-              <Card 
-                sx={{ 
-                  width: '65px',
-                  height: '65px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <SellIcon color="primary" fontSize='large'/>
-              </Card>
-              <Typography align='center' fontSize={12} p={1}>二手交易</Typography>
-            </Box>
-            <Box>
-              <Card sx={{ 
-                width: '65px',
-                height: '65px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <WorkIcon color="primary" fontSize='large'/>
-              </Card>
-              <Typography align='center' fontSize={12} p={1}>工作机会</Typography>
-            </Box>
-          </Card>
+          
+          <Section
+            title='功能入口'
+            hasPadding={false}
+            component={Box}
+          >
+            <Entries/>
+          </Section>
         </Box>
       </Box>
     </Main>

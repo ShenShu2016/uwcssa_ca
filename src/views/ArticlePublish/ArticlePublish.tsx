@@ -1,14 +1,15 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-26 16:29:19
+ * @LastEditTime: 2022-05-27 16:07:05
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/ArticlePublish.tsx
+ * @FilePath: /uwcssa_ca/src/views/ArticlePublish/ArticlePublish.tsx
  */
 
 import React, { useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import Container from 'components/Container';
 
 import AddCoverPic from './components/AddCoverPic';
 import AddTags from './components/AddTags';
@@ -25,8 +26,7 @@ import { postArticle } from 'redux/article/articleSlice';
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
-import { ConstructionOutlined } from '@mui/icons-material';
-
+import './editor.css';
 // import ReactHtmlParser from 'react-html-parser';
 // import demoContent from './demo';
 
@@ -169,7 +169,7 @@ const ArticlePublish = () => {
   return (
     <Main>
       {/* <Container sx={{ mt: '2rem',border: '1px solid black' }}> */}
-      <Box display={'flex'}>
+      <Container display={'flex'}>
         <Box width="70%">
           <TextField
             id="standard-textarea"
@@ -196,10 +196,10 @@ const ArticlePublish = () => {
           <TextField
             id="standard-textarea"
             fullWidth
-            label="coverPageDescription"
+            label={'description & preview'}
             multiline
+            rows={3}
             value={coverPageDescription}
-            variant="standard"
             inputProps={{
               style: {
                 fontSize: 20,
@@ -207,7 +207,7 @@ const ArticlePublish = () => {
             }}
             InputLabelProps={{
               style: {
-                fontSize: 18,
+                fontSize: 16,
               },
             }}
             sx={{
@@ -215,7 +215,7 @@ const ArticlePublish = () => {
             }}
             onChange={(e) => setCoverPageDescription(e.target.value)}
           />
-          <Box height='calc(100% - 128px)' overflow-x="hidden">
+          <Box height='calc(100% - 180px)' overflow-x="hidden">
             <CKEditor
               editor={Editor}
               data={content}
@@ -259,7 +259,7 @@ const ArticlePublish = () => {
             </LoadingButton>
           </Box>
         </Box>
-      </Box>
+      </Container>
       {/* </Container> */}
     </Main>
   );

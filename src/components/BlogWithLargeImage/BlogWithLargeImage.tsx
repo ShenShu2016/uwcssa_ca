@@ -2,8 +2,8 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 14:49:11
- * @FilePath: /uwcssa_ca/frontend/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
+ * @LastEditTime: 2022-05-27 17:13:06
+ * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
  */
@@ -62,21 +62,21 @@ const BlogWithLargeImage = (): JSX.Element => {
       <Grid container>
         {articles.length // 这里我不太明白你想做啥，稍微解释一下
           ? articles.map((item, index) => {
-              let contentStr = '';
-              const parser = new htmlparser2.Parser({
-                ontext(text) {
-                  contentStr += text;
-                },
-              });
-              parser.write(item.content);
-              parser.end();
-              // console.log(item);
+              // let contentStr = '';
+              // const parser = new htmlparser2.Parser({
+              //   ontext(text) {
+              //     contentStr += text;
+              //   },
+              // });
+              // parser.write(item.content);
+              // parser.end();
               return (
                 // 用index javascript react 会经常有毛病，key最好用id
                 <Grid
                   key={item.id}
                   item
                   width={'100%'}
+                  mb='8px'
                   data-aos="fade-up"
                   data-aos-delay={index * 200}
                   data-aos-offset={100}
@@ -86,17 +86,21 @@ const BlogWithLargeImage = (): JSX.Element => {
                     component={Card}
                     width={'100%'}
                     height={'auto'}
-                    borderRadius={0}
-                    boxShadow={0}
-                    display={'flex'}
-                    padding={'12px'}
-                    sx={{ backgroundImage: 'none', bgcolor: 'transparent' }}
+                    position='relative'
+                    // borderRadius={0}
+                    // boxShadow={0}
+                    // display={'flex'}
+                    padding={'8px'}
+                    sx={{
+                      backgroundImage: 'none',
+                      bgcolor: 'transparent'
+                    }}
                   >
                     <CardContent
                       sx={{
                         padding: 0,
-                        paddingRight: 3,
-                        width: { xs: 1, md: '70%' },
+                        // paddingRight: 3,
+                        width: 1,
                         display: 'flex',
                         flexDirection: 'column',
                       }}
@@ -119,8 +123,9 @@ const BlogWithLargeImage = (): JSX.Element => {
                       </Box>
                       <Typography
                         // variant={'h6'}
+                        color={'#ffffff'}
                         marginTop={1}
-                        fontWeight={400}
+                        fontWeight={600}
                         // sx={{ textTransform: 'uppercase' }}
                       >
                         {item.title}
@@ -128,22 +133,23 @@ const BlogWithLargeImage = (): JSX.Element => {
                       <Box marginY={1}>
                         <Typography
                           variant={'caption'}
-                          color={'text.secondary'}
+                          color={'#eeeeee'}
                           component={'i'}
                         >
                           {item.user.name} - {moment(item.createdAt).fromNow()}
                         </Typography>
                       </Box>
                       <Typography
-                        color="text.secondary"
+                        color="#eeeeee"
                         sx={{ fontSize: 12 }}
                         className="article-list-text"
                       >
-                        {/* {item.coverPageDescription} */}
-                        { contentStr }
+                        {item.coverPageDescription}
+                        {/* { contentStr } */}
                       </Typography>
                       <Button
                         component={Link}
+                        color={'primary'}
                         to={`/article/${item.id}`}
                         endIcon={
                           <Box
@@ -173,46 +179,64 @@ const BlogWithLargeImage = (): JSX.Element => {
                         Read More
                       </Button>
                     </CardContent>
-
                     <Box
+                        position={'absolute'}
+                        left='0'
+                        top='0'
+                        component={'img'}
+                        height={'100%'}
+                        width={'100%'}
+                        zIndex={-2}
+                        src={
+                          item.coverPageImgURL ||
+                          'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
+                        }
+                        alt="..."
+                        sx={{
+                          objectFit: 'cover',
+                          // height: 150,
+                          filter: 'blur(3px)'
+                        }}
+                      />
+                      {/* 半透明蒙层 */}
+                      <Box
+                        sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: -1,
+                        background: 'rgba(0, 0, 0, 0.5)'
+                      }}>
+                      </Box>
+                    {/* <Box
                       sx={{
                         width: { md: '30%', height: 'auto'},
                       }}
                     >
-                      <Box>
-                        <Box
-                          component={'img'}
-                          height={1}
-                          width={1}
-                          src={
-                            item.coverPageImgURL ||
-                            'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
-                          }
-                          alt="..."
-                          sx={{
-                            objectFit: 'cover',
-                            height: 180,
-                            borderRadius: '12px',
-                            filter:
-                              theme.palette.mode === 'dark'
-                                ? 'brightness(0.7)'
-                                : 'none',
-                          }}
-                        />
-                      </Box>
-                      <Box marginTop='auto'>
-                        <Typography
-                          variant={'caption'}
-                          color={'text.secondary'}
-                          component={'i'}
-                        >
-                          {item.coverPageDescription}
-                        </Typography>
-                      </Box>
-                    </Box>
-                    
+                      <Box
+                        component={'img'}
+                        height={1}
+                        width={1}
+                        src={
+                          item.coverPageImgURL ||
+                          'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
+                        }
+                        alt="..."
+                        sx={{
+                          objectFit: 'cover',
+                          height: 150,
+                          borderRadius: '12px',
+                          filter:
+                            theme.palette.mode === 'dark'
+                              ? 'brightness(0.7)'
+                              : 'none',
+                        }}
+                      />
+                    </Box> */}
                   </Box>
-                  <Divider />
+                  {/* <Divider /> */}
                 </Grid>
               );
             })

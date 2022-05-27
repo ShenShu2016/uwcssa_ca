@@ -83,7 +83,7 @@ const Hero = ({ article }: { article: Article }): JSX.Element => {
       <Container position={'relative'} zIndex={2}>
         <Box>
           <Typography
-            variant="h5"
+            variant="h4"
             sx={{
               fontWeight: 400,
               color: 'common.white',

@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-26 22:32:57
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-27 11:25:48
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/Container.tsx
  */
 
@@ -21,8 +21,6 @@ const Container = ({ children, ...rest }: Props): JSX.Element => (
     maxWidth={{ sm: 720, md: 1236 }}
     width={1}
     margin={'0 auto'}
-    // boxSizing={'border-box'}
-    // paddingX='5%'
     paddingX={2}
     paddingY={{ xs: 4, sm: 6, md: 8 }}
     {...rest}

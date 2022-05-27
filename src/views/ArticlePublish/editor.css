@@ -1,0 +1,14 @@
+/* 这个文件是ckeditor的样式 不然如果在文章页面刷新页面 再来到发布文章页面 样式会丢失 */
+.ck-sticky-panel__content_sticky {
+    top: 62px !important
+}
+.ck-editor {
+    height: calc(100% - 40px) !important;
+}
+.ck-editor__main {
+    height: 100% !important;
+}
+.ck-editor__editable {
+    /* min-height: calc(100% - 71px) !important; */
+    height: 100% !important;
+}
