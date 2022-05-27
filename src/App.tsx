@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-22 22:19:56
- * @FilePath: /uwcssa_ca/frontend/src/App.tsx
+ * @LastEditTime: 2022-05-27 00:22:29
+ * @FilePath: /uwcssa_ca/src/App.tsx
  * @Description:
  *
  */
@@ -19,6 +19,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Page from './components/Page';
 import Routes from './Routes';
+import ScrollToTop from 'hooks/ScrollToTop';
 import { getAuthState } from 'redux/auth/authSlice';
 import { loadUser } from 'redux/auth/authSlice';
 import { useAppDispatch } from 'redux/hooks';
@@ -36,7 +37,9 @@ const App = (): JSX.Element => {
 
   return (
     <Page>
-      <BrowserRouter>{isAuth !== null && <Routes />}</BrowserRouter>
+      <BrowserRouter>
+        <ScrollToTop>{isAuth !== null && <Routes />} </ScrollToTop>
+      </BrowserRouter>
     </Page>
   );
 };
