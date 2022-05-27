@@ -2,11 +2,14 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:43:20
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/SimilarStories/SimilarStories.tsx
+ * @LastEditTime: 2022-05-26 22:51:39
+ * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SimilarStories/SimilarStories.tsx
  * @Description:
  *
  */
+
+import { Link, useNavigate } from 'react-router-dom';
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -17,44 +20,21 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import moment from 'moment';
+import { selectAllArticles } from 'redux/article/articleSlice';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import { useAppSelector } from 'redux/hooks';
 import { useTheme } from '@mui/material/styles';
-
-const mock = [
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img23.jpg',
-    description:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem',
-    title: 'Eiusmod tempor incididunt',
-    author: {
-      name: 'Clara Bertoletti',
-      avatar: 'https://assets.maccarianagency.com/avatars/img1.jpg',
-    },
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img24.jpg',
-    description: 'At vero eos et accusamus et iusto odio dignissimos ducimus',
-    title: 'Sed ut perspiciatis',
-    author: {
-      name: 'Jhon Anderson',
-      avatar: 'https://assets.maccarianagency.com/avatars/img2.jpg',
-    },
-    date: '02 Aug',
-  },
-  {
-    image: 'https://assets.maccarianagency.com/backgrounds/img25.jpg',
-    description:
-      'Qui blanditiis praesentium voluptatum deleniti atque corrupti',
-    title: 'Unde omnis iste natus',
-    author: {
-      name: 'Chary Smith',
-      avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
-    },
-    date: '05 Mar',
-  },
-];
 
 const SimilarStories = (): JSX.Element => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const articles = useAppSelector(selectAllArticles);
+  const randomArticles = [...Array(articles.length).keys()]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 3)
+    .map((index) => articles[index]);
+  console.log(randomArticles);
   return (
     <Box>
       <Box
@@ -79,17 +59,20 @@ const SimilarStories = (): JSX.Element => {
             color="primary"
             size="large"
             marginLeft={2}
+            onClick={() => {
+              navigate('/dashboard');
+            }}
           >
             View all
           </Box>
         </Box>
       </Box>
       <Grid container spacing={4}>
-        {mock.map((item, i) => (
-          <Grid item xs={12} md={4} key={i}>
+        {randomArticles.map((item) => (
+          <Grid item xs={12} md={4} key={item.id}>
             <Box
-              component={'a'}
-              href={''}
+              component={Link}
+              to={`/article/${item.id}`}
               display={'block'}
               width={1}
               height={1}
@@ -111,7 +94,7 @@ const SimilarStories = (): JSX.Element => {
                 sx={{ backgroundImage: 'none' }}
               >
                 <CardMedia
-                  image={item.image}
+                  image={item.coverPageImgURL}
                   title={item.title}
                   sx={{
                     height: { xs: 300, md: 360 },
@@ -146,7 +129,7 @@ const SimilarStories = (): JSX.Element => {
                     {item.title}
                   </Typography>
                   <Typography color="text.secondary">
-                    {item.description}
+                    {item.coverPageDescription}
                   </Typography>
                 </Box>
                 <Box flexGrow={1} />
@@ -161,15 +144,16 @@ const SimilarStories = (): JSX.Element => {
                   >
                     <Box display={'flex'} alignItems={'center'}>
                       <Avatar
-                        src={item.author.avatar}
-                        sx={{ marginRight: 1 }}
+                        src={item.user.avatarURL}
+                        style={{ marginRight: '1rem' }}
+                        {...stringAvatar(item.user.name)}
                       />
                       <Typography color={'text.secondary'}>
-                        {item.author.name}
+                        {item.user.name}
                       </Typography>
                     </Box>
                     <Typography color={'text.secondary'}>
-                      {item.date}
+                      {moment(item.createdAt).format('DD MMM')}
                     </Typography>
                   </Box>
                 </Box>
