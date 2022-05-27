@@ -1,21 +1,19 @@
 import {
-  // About,
   AboutBottom,
   Features,
   Hero,
   Integrations,
   Jobs,
   News,
-  // Pricings,
   Reviews,
   Team,
-  // Trucking,
   Video,
 } from './components';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
+import FQA from 'views/FQA';
 import Main from 'layouts/Main';
 import React from 'react';
 
@@ -80,6 +78,9 @@ const Logistics = (): JSX.Element => {
       </Box>
       <Container>
         <AboutBottom />
+      </Container>
+      <Container>
+        <FQA />
       </Container>
       <Box bgcolor={'primary.main'}>
         <Container>
