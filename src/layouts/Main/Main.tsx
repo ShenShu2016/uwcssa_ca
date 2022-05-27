@@ -71,7 +71,7 @@ const Main = ({
         position={'sticky'}
         sx={{
           top: 0,
-          boxShadow: '0px 15px 10px -15px #bdbdbd',
+          // boxShadow: '0px 15px 10px -15px #bdbdbd',
           backgroundColor: trigger ? theme.palette.background.paper : bgcolor,
         }}
         elevation={trigger ? 1 : 0}
@@ -90,7 +90,7 @@ const Main = ({
         variant="temporary"
         pages={pages}
       />
-      <Container paddingY={2}>
+      <Container paddingY={0}>
         {children}
       </Container>
       <Divider />
