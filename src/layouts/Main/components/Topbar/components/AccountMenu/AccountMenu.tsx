@@ -2,14 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 01:39:49
+ * @LastEditTime: 2022-05-28 15:29:13
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
  */
 
 import React, { useState } from 'react';
-import { getUserInfo, signOut } from 'redux/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Avatar from '@mui/material/Avatar';
@@ -23,14 +22,18 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Settings from '@mui/icons-material/Settings';
 import Tooltip from '@mui/material/Tooltip';
+import { blue } from '@mui/material/colors';
 import { removeMyUserProfile } from 'redux/userProfile/userProfileSlice';
+import { signOut } from 'redux/auth/authSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material';
 
 export default function AccountMenu() {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const userInfo = useAppSelector(getUserInfo);
+  const { myUserProfile } = useAppSelector((state) => state.userProfile);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -60,9 +63,18 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar
-              {...stringAvatar(userInfo.name, {
+              {...stringAvatar(myUserProfile.name, {
                 width: 32,
                 height: 32,
+                transition: 'all .2s ease-in-out',
+                '&:hover': {
+                  borderColor: theme.palette.secondary.light,
+                  background: `${theme.palette.secondary.light}!important`,
+                  color: theme.palette.primary.light,
+                  '& svg': {
+                    stroke: blue[100],
+                  },
+                },
               })}
             />
           </IconButton>

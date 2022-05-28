@@ -88,7 +88,7 @@ const pages = {
   ],
   dashboard: {
     title: 'dashboard',
-    href: '/dashboard'
+    href: '/dashboard',
   },
   freshman: {
     title: 'terms',

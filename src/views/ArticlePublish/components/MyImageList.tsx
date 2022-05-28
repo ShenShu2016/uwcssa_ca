@@ -2,8 +2,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 13:50:22
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-27 15:30:21
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 15:29:25
  * @FilePath: /uwcssa_ca/src/views/ArticlePublish/components/MyImageList.tsx
  * @Description:
  *
@@ -16,22 +16,27 @@ import {
 } from 'redux/userImage/userImageSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import Typography from '@mui/material/Typography';
 import ListSubheader from '@mui/material/ListSubheader';
+import Typography from '@mui/material/Typography';
 import moment from 'moment';
 
 function MyImageList({ useImgFromRecent }) {
   const dispatch = useAppDispatch();
   const userImages = useAppSelector(selectAllUserImages);
+  const { fetchUserImageListStatus } = useAppSelector(
+    (state) => state.userImage,
+  );
   useEffect(() => {
-    dispatch(fetchUserImageList());
+    if (fetchUserImageListStatus === 'idle') {
+      dispatch(fetchUserImageList());
+    }
   }, []);
 
   const handleUseImg = (item) => {
@@ -39,7 +44,7 @@ function MyImageList({ useImgFromRecent }) {
   };
 
   return (
-    <Box sx={{margin: '8px 0px'}}>
+    <Box sx={{ margin: '8px 0px' }}>
       <Typography
         variant="subtitle1"
         gutterBottom
@@ -56,8 +61,8 @@ function MyImageList({ useImgFromRecent }) {
           {userImages.map((item) => (
             <ImageListItem
               key={item.id}
-              style={{cursor: 'pointer'}}
-              title='点击使用图片'
+              style={{ cursor: 'pointer' }}
+              title="点击使用图片"
               onClick={() => handleUseImg(item)}
             >
               <img
