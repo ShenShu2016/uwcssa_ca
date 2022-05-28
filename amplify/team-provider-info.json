@@ -38,6 +38,14 @@
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
           "s3Key": "amplify-builds/uwcssaLayerNodeJSSharp-LambdaLayerVersionf172a294-build.zip"
+        },
+        "ContactUsHandler": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/ContactUsHandler-56704f3448334169567a-build.zip"
+        },
+        "ArticlePublishHandler": {
+          "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
+          "s3Key": "amplify-builds/ArticlePublishHandler-714c5a45766d364f7972-build.zip"
         }
       }
     }

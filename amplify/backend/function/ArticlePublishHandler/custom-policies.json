@@ -1,0 +1,10 @@
+[
+  {
+    "Action": ["ses:SendEmail"],
+    "Resource": ["arn:aws:ses:*:*:identity/*"]
+  },
+  {
+    "Action": ["dynamodb:Scan"],
+    "Resource": ["arn:aws:dynamodb:*:*:table/*"]
+  }
+]

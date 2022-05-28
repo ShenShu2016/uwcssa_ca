@@ -20,6 +20,18 @@ export type AmplifyDependentResourcesAttributes = {
         },
         "uwcssaLayerNodeJSSharp": {
             "Arn": "string"
+        },
+        "ArticlePublishHandler": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "ContactUsHandler": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "auth": {

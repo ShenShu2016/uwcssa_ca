@@ -1,14 +1,16 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-24 23:30:45
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 16:29:17
+ * @LastEditTime: 2022-05-28 00:17:46
  * @FilePath: /uwcssa_ca/amplify/backend/function/UserImageCompressHandler/src/index.js
  * @Description:
  *
  */
+// AWS https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/UserImageCompressHandler-devts?tab=code
+
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* Amplify Params - DO NOT EDIT
 	ENV
