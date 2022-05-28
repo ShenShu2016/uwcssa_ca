@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-28 16:04:22
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 16:40:10
+ * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/AdminLayout.tsx
+ * @Description:
+ *
+ */
+
 import { Footer, Sidebar, Topbar } from './components';
 import React, { useState } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
@@ -6,7 +16,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
-import pages from '../navigation--docs';
+import pages from '../navigation--admin';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface Props {

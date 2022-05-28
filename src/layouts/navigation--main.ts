@@ -1,3 +1,12 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 16:39:55
+ * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
+ * @Description:
+ *
+ */
 // 如果每个分类下是数组 那么就有下拉菜单 如果是对象 就是点击直接跳转
 const pages = {
   UWCSSA: [

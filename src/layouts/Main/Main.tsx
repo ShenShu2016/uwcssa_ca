@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-28 11:51:36
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 16:39:47
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/layouts/Main/Main.tsx
  */
 
@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
 import TopNav from 'components/TopNav';
-import pages from '../navigation';
+import pages from '../navigation--main';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useTheme } from '@mui/material/styles';

@@ -1,10 +1,21 @@
-import React from 'react';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-28 16:04:31
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 16:53:02
+ * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Topbar/Topbar.tsx
+ * @Description:
+ *
+ */
+
+import { Link as MUILink, Typography } from '@mui/material';
+import { alpha, useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import { alpha, useTheme } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import React from 'react';
 import { ThemeModeToggler } from './components';
 
 interface Props {
@@ -25,58 +36,71 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
     >
       <Box
         display={'flex'}
-        component={'a'}
-        href="/"
-        title="theFront"
+        component={Link}
+        to="/"
+        title="UWCSSA"
         width={{ xs: 100, md: 120 }}
+        sx={{
+          textDecoration: 'none',
+          color: mode === 'light' ? 'black' : 'white',
+        }}
       >
         <Box
           component={'img'}
           src={
             mode === 'light'
-              ? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-              : 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
+              ? '/assets/images/uwcssa_logo.svg'
+              : '/assets/images/uwcssa_logo.svg'
           }
-          height={1}
-          width={1}
+          height={{ xs: 24, md: 29 }}
         />
+        <Typography variant="h5" sx={{ ml: '1rem', fontWeight: '700' }}>
+          UWCSSA
+        </Typography>
       </Box>
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-        <Box marginLeft={3}>
-          <Link underline="none" component="a" href="/" color="text.primary">
+        <Box marginLeft={3} sx={{ textDecoration: 'none' }}>
+          <Box
+            component={Link}
+            to="/"
+            sx={{
+              textDecoration: 'none',
+              color: mode === 'light' ? 'black' : 'white',
+            }}
+          >
             Home
-          </Link>
+          </Box>
         </Box>
-        <Box marginLeft={3}>
-          <Link
+        {/* <Box marginLeft={3}>
+          <MUILink
             underline="none"
             component="a"
             href="/home"
             color="text.primary"
           >
             Pages
-          </Link>
+          </MUILink>
         </Box>
         <Box marginLeft={3}>
-          <Link
+          <MUILink
             underline="none"
             component="a"
             href="/blocks"
             color="text.primary"
           >
             Components
-          </Link>
+          </MUILink>
         </Box>
         <Box marginLeft={3}>
-          <Link
+          <MUILink
             underline="none"
             component="a"
             href="/demos"
             color="text.primary"
           >
             Demos
-          </Link>
-        </Box>
+          </MUILink>
+        </Box> */}
         <Box marginLeft={3}>
           <ThemeModeToggler />
         </Box>
@@ -86,10 +110,9 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
             color="primary"
             component="a"
             target="blank"
-            href="https://mui.com/store/items/the-front-landing-page/"
-            size="large"
+            href="https://shushengacademy.com/en/"
           >
-            Purchase now
+            Love Me Now
           </Button>
         </Box>
       </Box>

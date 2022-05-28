@@ -1,9 +1,21 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-28 16:04:29
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 16:40:14
+ * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Sidebar/components/SidebarNav/SidebarNav.tsx
+ * @Description:
+ *
+ */
+
 import React, { useEffect, useState } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -48,8 +60,8 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
               {item.pages.map((p, i) => (
                 <Box marginBottom={1 / 2} key={i}>
                   <Button
-                    component={'a'}
-                    href={p.href}
+                    component={Link}
+                    to={p.href}
                     target={p.target}
                     fullWidth
                     sx={{
@@ -74,11 +86,11 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
           </Box>
         ))}
       </Box>
-      <Box>
+      {/* <Box>
         <Button variant="outlined" fullWidth component="a" href="/">
           Browse pages
         </Button>
-      </Box>
+      </Box> */}
       <Box marginTop={1}>
         <Button
           variant="contained"
@@ -86,9 +98,9 @@ const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
           fullWidth
           component="a"
           target="blank"
-          href="https://mui.com/store/items/the-front-landing-page/"
+          href="https://shushengacademy.com/en/"
         >
-          Purchase now
+          Love Me Now
         </Button>
       </Box>
     </Box>
