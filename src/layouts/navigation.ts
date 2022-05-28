@@ -30,10 +30,6 @@ const pages = {
       href: '/index',
     },
     {
-      title: '发布文章',
-      href: '/article-publish',
-    },
-    {
       title: '后台管理',
       href: '/admin',
     },

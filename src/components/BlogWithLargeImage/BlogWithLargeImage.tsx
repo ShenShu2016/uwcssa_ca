@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 00:58:53
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 17:21:31
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -11,33 +11,29 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import './index.css';
-
-import * as htmlparser2 from 'htmlparser2';
-
 import React, { useEffect } from 'react';
 import {
   fetchArticleList,
   selectAllArticles,
 } from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Chip from '@mui/material/Chip';
-import Divider from '@mui/material/Divider';
+// import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import moment from 'moment';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 
 // import Container from 'components/Container';
 
 const BlogWithLargeImage = (): JSX.Element => {
-  const theme = useTheme();
+  // const theme = useTheme();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法

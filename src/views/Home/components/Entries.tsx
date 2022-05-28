@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-27 17:23:40
- * @LastEditTime: 2022-05-27 17:47:27
+ * @LastEditTime: 2022-05-28 10:59:05
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/views/Home/components/Entries.tsx
  */
@@ -34,8 +34,8 @@ const Entries = () => {
       sx={{
         display: 'grid',
         justifyContent: 'space-between',
-        'grid-template-columns': 'repeat(2,50%)',
-        'grid-gap': '12px'
+        gridTemplateColumns: 'repeat(2,50%)',
+        gridGap: '12px'
       }}>
       <Box>
         <StyledCard>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-28 10:35:04
+ * @LastEditTime: 2022-05-28 16:46:30
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -68,13 +68,7 @@ function ViewRoutes(): Array<{
       redirectPath: undefined,
     },
     {
-      path: '/article-publish',
-      renderer: (): JSX.Element => <ArticlePublishView />,
-      isAllowed: isAdmin,
-      redirectPath: '/404',
-    },
-    {
-      path: '/admin',
+      path: '/admin/*',
       renderer: (): JSX.Element => <AdministratorPage />,
       isAllowed: isAdmin,
       redirectPath: '/404',

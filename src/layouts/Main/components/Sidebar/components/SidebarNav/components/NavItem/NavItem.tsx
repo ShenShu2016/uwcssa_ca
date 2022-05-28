@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-22 14:40:00
- * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Sidebar/components/SidebarNav/components/NavItem/NavItem.tsx
+ * @LastEditTime: 2022-05-28 18:00:44
+ * @LastEditors: 李佳修
+ * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/components/SidebarNav/components/NavItem/NavItem.tsx
  */
 
 import React, { useEffect, useState } from 'react';
@@ -18,7 +18,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router';
+import { useNavigate, matchPath } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   title: string;
@@ -29,17 +30,19 @@ const NavItem = ({ title, items }: Props): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState('');
+  const location = useLocation();
+
   useEffect(() => {
-    setActiveLink(window && window.location ? window.location.pathname : '');
+    setActiveLink(location.pathname);
   }, []);
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
       return items.find(
-        (i) => i.href === activeLink || i.href === `${activeLink}/`,
+        (i) => matchPath(i.href, activeLink)
       );
     } else {
-      return items.href === activeLink || items.href === `${activeLink}/`;
+      return matchPath(items.href, activeLink);
     }
   };
 

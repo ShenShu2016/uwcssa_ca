@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:07
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 02:16:29
- * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Topbar/components/NavItem/NavItem.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 17:59:41
+ * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/NavItem/NavItem.tsx
  * @Description:
  *
  */
@@ -18,8 +18,8 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router';
-
+import { useNavigate, matchPath } from 'react-router';
+import { useLocation } from 'react-router-dom';
 interface Props {
   title: string;
   id: string;
@@ -50,17 +50,19 @@ const NavItem = ({
   };
 
   const [activeLink, setActiveLink] = useState('');
+  const location = useLocation();
+
   useEffect(() => {
-    setActiveLink(window && window.location ? window.location.pathname : '');
+    setActiveLink(location.pathname);
   }, []);
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
       return items.find(
-        (i) => i.href === activeLink || i.href === `${activeLink}/`,
+        (i) => matchPath(i.href, activeLink)
       );
     } else {
-      return items.href === activeLink || items.href === `${activeLink}/`;
+      return matchPath(items.href, activeLink);
     }
   };
   const linkColor = colorInvert ? 'common.white' : 'text.primary';

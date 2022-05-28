@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 01:00:08
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 16:56:06
  * @FilePath: /uwcssa_ca/src/views/Logistics/components/News/News.tsx
  * @Description:
  *
