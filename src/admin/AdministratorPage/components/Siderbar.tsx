@@ -1,22 +1,25 @@
 import * as React from 'react';
-import { styled, Theme, CSSObject } from '@mui/material/styles';
+
+import { CSSObject, Theme, styled } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { Link } from 'react-router-dom';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Link } from 'react-router-dom';
+import MuiDrawer from '@mui/material/Drawer';
 import { matchPath } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import items from '../route-items';
+
+// import items from '../route-items';
 
 const drawerWidth = 240;
 
@@ -50,23 +53,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open && {
-      ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
-    }),
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  boxSizing: 'border-box',
+  ...(open && {
+    ...openedMixin(theme),
+    '& .MuiDrawer-paper': openedMixin(theme),
   }),
-);
+  ...(!open && {
+    ...closedMixin(theme),
+    '& .MuiDrawer-paper': closedMixin(theme),
+  }),
+}));
 
 export default function Siderbar() {
   const [open, setOpen] = React.useState(true);
@@ -76,13 +78,16 @@ export default function Siderbar() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }} height='100%'>
-      <Drawer variant="permanent" open={open} style={{position: 'relative'}}
+    <Box sx={{ display: 'flex' }} height="100%">
+      <Drawer
+        variant="permanent"
+        open={open}
+        style={{ position: 'relative' }}
         PaperProps={{
           style: {
             position: 'relative',
-            zIndex: 1
-          }
+            zIndex: 1,
+          },
         }}
       >
         <DrawerHeader>
@@ -92,12 +97,8 @@ export default function Siderbar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {items.map((ele) => (
-            <ListItem
-              key={ele.key}
-              disablePadding
-              sx={{display: 'block'}}
-            >
+          {/* {items.map((ele) => (
+            <ListItem key={ele.key} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 selected={!!matchPath(`/admin/${ele.path}`, location.pathname)}
                 component={Link}
@@ -106,7 +107,7 @@ export default function Siderbar() {
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
-                  borderRadius: '8px'
+                  borderRadius: '8px',
                 }}
               >
                 <ListItemIcon
@@ -118,10 +119,13 @@ export default function Siderbar() {
                 >
                   {ele.icon}
                 </ListItemIcon>
-                <ListItemText primary={ele.label} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={ele.label}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
-          ))}
+          ))} */}
         </List>
         <Divider />
         <List>

@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-28 16:46:30
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 15:54:29
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -15,7 +15,6 @@ import {
   AccountProfile as AccountProfileView,
   AccountSecurity as AccountSecurityView,
   ArticleCover as ArticleCoverView,
-  ArticlePublish as ArticlePublishView,
   CareerListing as CareerListingView,
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
@@ -23,7 +22,6 @@ import {
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home,
-  AdministratorPage,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
@@ -67,12 +65,12 @@ function ViewRoutes(): Array<{
       isAllowed: true,
       redirectPath: undefined,
     },
-    {
-      path: '/admin/*',
-      renderer: (): JSX.Element => <AdministratorPage />,
-      isAllowed: isAdmin,
-      redirectPath: '/404',
-    },
+    // {
+    //   path: '/admin/*',
+    //   renderer: (): JSX.Element => <AdministratorPage />,
+    //   isAllowed: isAdmin,
+    //   redirectPath: '/404',
+    // },
     // {
     //   path: '/home',
     //   renderer: (params = {}): JSX.Element => <HomeView {...params} />,

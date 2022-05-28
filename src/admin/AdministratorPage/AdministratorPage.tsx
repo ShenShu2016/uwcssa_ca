@@ -1,23 +1,25 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-05-28 15:26:45
+ * @LastEditTime: 2022-05-28 16:13:28
  * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/views/AdministratorPage/AdministratorPage.tsx
+ * @FilePath: /uwcssa_ca/src/admin/AdministratorPage/AdministratorPage.tsx
  */
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { AdminLayout } from 'layouts';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Main from 'layouts/Main';
 import React from 'react';
 import Sidebar from './components/Siderbar';
-import items from './route-items';
+
+//import items from './route-items';
 
 const AdministratorPage = (): React.ReactElement => {
   return (
-    <Main>
+    <AdminLayout>
       <Divider />
       <Box
         sx={{ display: 'flex' }}
@@ -29,14 +31,14 @@ const AdministratorPage = (): React.ReactElement => {
         </Box>
         <Box sx={{ flexGrow: 1, p: 3 }}>
           <Routes>
-            <Route path="/" element={<Navigate to="/admin/dashboard" />} />
+            {/* <Route path="/" element={<Navigate to="/admin/dashboard" />} />
             {items.map((item) => (
               <Route key={item.key} path={item.path} element={item.component} />
-            ))}
+            ))} */}
           </Routes>
         </Box>
       </Box>
-    </Main>
+    </AdminLayout>
   );
 };
 

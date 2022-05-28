@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 00:37:33
+ * @LastEditTime: 2022-05-28 15:58:48
  * @FilePath: /uwcssa_ca/src/Routes.tsx
  * @Description:
  *
@@ -16,6 +16,7 @@ import {
 } from 'react-router-dom';
 import React, { useEffect } from 'react';
 
+import AdminRoutes from 'admin/AdminRoutes';
 import ProtectedRoute from 'components/ProtectedRoute';
 import ViewRoutes from 'views/ViewRoutes';
 
@@ -31,6 +32,20 @@ const Routes = (): JSX.Element => {
   return (
     <ReactRoutes>
       {ViewRoutes().map((item, i) => (
+        <Route
+          key={i}
+          path={item.path}
+          element={
+            <ProtectedRoute
+              redirectPath={item.redirectPath}
+              isAllowed={item.isAllowed}
+            >
+              {item.renderer()}
+            </ProtectedRoute>
+          }
+        />
+      ))}
+      {AdminRoutes().map((item, i) => (
         <Route
           key={i}
           path={item.path}
