@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 13:10:32
+ * @LastEditTime: 2022-05-28 01:39:49
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
@@ -23,6 +23,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Settings from '@mui/icons-material/Settings';
 import Tooltip from '@mui/material/Tooltip';
+import { removeMyUserProfile } from 'redux/userProfile/userProfileSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +43,7 @@ export default function AccountMenu() {
   const handleLogout = async () => {
     const response = await dispatch(signOut());
     if (response.meta.requestStatus === 'fulfilled') {
+      dispatch(removeMyUserProfile());
       navigate('/', { replace: true });
     }
   };
@@ -58,11 +60,10 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar
-              style={{
+              {...stringAvatar(userInfo.name, {
                 width: 32,
                 height: 32,
-              }}
-              {...stringAvatar(userInfo.name)}
+              })}
             />
           </IconButton>
         </Tooltip>

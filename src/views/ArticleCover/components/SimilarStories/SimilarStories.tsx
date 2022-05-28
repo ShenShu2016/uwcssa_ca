@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:51:39
+ * @LastEditTime: 2022-05-28 02:06:04
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SimilarStories/SimilarStories.tsx
  * @Description:
  *
@@ -145,8 +145,9 @@ const SimilarStories = (): JSX.Element => {
                     <Box display={'flex'} alignItems={'center'}>
                       <Avatar
                         src={item.user.avatarURL}
-                        style={{ marginRight: '1rem' }}
-                        {...stringAvatar(item.user.name)}
+                        {...stringAvatar(item.user.name, {
+                          marginRight: '1rem',
+                        })}
                       />
                       <Typography color={'text.secondary'}>
                         {item.user.name}

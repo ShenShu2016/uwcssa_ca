@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-27 16:07:05
+ * @LastEditTime: 2022-05-28 16:22:55
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/views/ArticlePublish/ArticlePublish.tsx
  */
@@ -9,16 +9,12 @@
 import React, { useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import Container from 'components/Container';
-
 import AddCoverPic from './components/AddCoverPic';
 import AddTags from './components/AddTags';
 import Box from '@mui/material/Box';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import { Container } from '@mui/material';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Main from 'layouts/Main';
 import MyImageList from './components/MyImageList';
 import TextField from '@mui/material/TextField';
 import { getOwnerUserName } from 'redux/auth/authSlice';
@@ -27,8 +23,6 @@ import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 import './editor.css';
-// import ReactHtmlParser from 'react-html-parser';
-// import demoContent from './demo';
 
 interface Tag {
   tagID: string;
@@ -167,101 +161,92 @@ const ArticlePublish = () => {
   };
 
   return (
-    <Main>
-      {/* <Container sx={{ mt: '2rem',border: '1px solid black' }}> */}
-      <Container display={'flex'}>
-        <Box width="70%">
-          <TextField
-            id="standard-textarea"
-            fullWidth
-            label="Title"
-            multiline
-            value={title}
-            variant="standard"
-            inputProps={{
-              style: {
-                fontSize: 20,
-              },
+    <Box display={'flex'} paddingX='5%'>
+      <Box width="70%">
+        <TextField
+          id="standard-textarea"
+          fullWidth
+          label="Title"
+          multiline
+          value={title}
+          variant="standard"
+          inputProps={{
+            style: {
+              fontSize: 20,
+            },
+          }}
+          InputLabelProps={{
+            style: {
+              fontSize: 18,
+            },
+          }}
+          sx={{
+            paddingBottom: 2,
+          }}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextField
+          id="standard-textarea"
+          fullWidth
+          label={'description & preview'}
+          multiline
+          rows={3}
+          value={coverPageDescription}
+          inputProps={{
+            style: {
+              fontSize: 20,
+            },
+          }}
+          InputLabelProps={{
+            style: {
+              fontSize: 16,
+            },
+          }}
+          sx={{
+            paddingBottom: 2,
+          }}
+          onChange={(e) => setCoverPageDescription(e.target.value)}
+        />
+        <Box height='calc(100% - 180px)' overflow-x="hidden">
+          <CKEditor
+            editor={Editor}
+            data={content}
+            onReady={(editor) => {
+              console.log('Editor is ready to use!', editor);
             }}
-            InputLabelProps={{
-              style: {
-                fontSize: 18,
-              },
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              setContent(data);
             }}
-            sx={{
-              paddingBottom: 2,
-            }}
-            onChange={(e) => setTitle(e.target.value)}
           />
-          <TextField
-            id="standard-textarea"
-            fullWidth
-            label={'description & preview'}
-            multiline
-            rows={3}
-            value={coverPageDescription}
-            inputProps={{
-              style: {
-                fontSize: 20,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                fontSize: 16,
-              },
-            }}
-            sx={{
-              paddingBottom: 2,
-            }}
-            onChange={(e) => setCoverPageDescription(e.target.value)}
-          />
-          <Box height='calc(100% - 180px)' overflow-x="hidden">
-            <CKEditor
-              editor={Editor}
-              data={content}
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log('Editor is ready to use!', editor);
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setContent(data);
-              }}
-            />
-          </Box>
-          {/* 必须加className='ck-content' 否则parse出的html没有样式 */}
-          {/* <div style={{ width: '45%' }} className="ck-content">
-            {ReactHtmlParser(data)}
-          </div> */}
         </Box>
-        <Box
-          width="30%"
-          ml="30px"
-          height="100%"
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
-          <MyImageList useImgFromRecent={useImgFromRecent}/>
-          <Box>
-            <AddCoverPic setImgFile={setImgFile} imgFile={imgFile}/>
-            <LoadingButton
-              loading={submitLoading}
-              fullWidth
-              variant="contained"
-              onClick={handleSubmitArticle}
-              sx={{
-                marginTop: '8px'
-              }}
-            >
+      </Box>
+      <Box
+        width="30%"
+        ml="30px"
+        height="100%"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
+        <AddTags tagListChange={(tags) => handleTagsChange(tags)} />
+        <MyImageList useImgFromRecent={useImgFromRecent}/>
+        <Box>
+          <AddCoverPic setImgFile={setImgFile} imgFile={imgFile}/>
+          <LoadingButton
+            loading={submitLoading}
+            fullWidth
+            variant="contained"
+            onClick={handleSubmitArticle}
+            sx={{
+              marginTop: '8px'
+            }}
+          >
               发布文章
-            </LoadingButton>
-          </Box>
+          </LoadingButton>
         </Box>
-      </Container>
-      {/* </Container> */}
-    </Main>
+      </Box>
+    </Box>
   );
 };
 

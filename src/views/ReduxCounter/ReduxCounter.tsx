@@ -1,22 +1,22 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:21:55
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 17:57:53
- * @FilePath: \uwcssa_ca\frontend\src\views\ReduxCounter\ReduxCounter.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 17:11:09
+ * @FilePath: /uwcssa_ca/src/views/ReduxCounter/ReduxCounter.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
 
 import { Counter } from '../../redux/counter/Counter';
-import { Main } from 'layouts';
+import Box from '@mui/material/Box';
 import React from 'react';
 import logo from './logo.svg';
 
 function ReduxCounter() {
   return (
-    <Main>
+    <Box>
       <div className="ReduxCounter">
         <img src={logo} className="ReduxCounter-logo" alt="logo" />
         <Counter />
@@ -62,7 +62,7 @@ function ReduxCounter() {
           </a>
         </span>
       </div>
-    </Main>
+    </Box>
   );
 }
 

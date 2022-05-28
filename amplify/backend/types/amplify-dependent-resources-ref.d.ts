@@ -12,7 +12,16 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "S3Trigger085746e7": {
+        "UserImageCompressHandler": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "uwcssaLayerNodeJSSharp": {
+            "Arn": "string"
+        },
+        "ArticlePublishHandler": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
@@ -23,21 +32,6 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
-        },
-        "ArticlePushNotificationHandler": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "UserImageCompressHandler": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "uwcssaLayerNodeJSSharp": {
-            "Arn": "string"
         }
     },
     "auth": {

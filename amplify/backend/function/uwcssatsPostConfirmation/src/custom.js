@@ -2,11 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-19 23:59:17
- * @FilePath: /uwcssa_ca/frontend/amplify/backend/function/uwcssatsPostConfirmation/src/custom.js
+ * @LastEditTime: 2022-05-28 00:19:09
+ * @FilePath: /uwcssa_ca/amplify/backend/function/uwcssatsPostConfirmation/src/custom.js
  * @Description:
  *
  */
+// AWS https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/uwcssatsPostConfirmation-devts?tab=code
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /**

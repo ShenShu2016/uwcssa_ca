@@ -1,7 +1,7 @@
 [
   {
     "Action": ["ses:SendEmail"],
-    "Resource": ["arn:aws:ses:*:537666141782:identity/*"]
+    "Resource": ["arn:aws:ses:*:*:identity/*"]
   },
   {
     "Action": ["dynamodb:Scan"],

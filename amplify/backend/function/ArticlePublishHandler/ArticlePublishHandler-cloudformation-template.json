@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.2.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.3.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -23,9 +23,6 @@
     "apiuwcssatsGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apiuwcssatsGraphQLAPIEndpointOutput"
-    },
-    "userTable": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -58,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ArticlePushNotificationHandler",
+            "ArticlePublishHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ArticlePushNotificationHandler",
+                  "ArticlePublishHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -80,9 +77,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "User_Table": {
-              "Ref": "userTable"
             }
           }
         },
@@ -92,7 +86,7 @@
             "Arn"
           ]
         },
-        "Runtime": "python3.8",
+        "Runtime": "nodejs14.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -103,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "uwcssaLambdaRole276bcdeb",
+            "uwcssaLambdaRole07d3dff1",
             {
               "Fn::Join": [
                 "",
                 [
-                  "uwcssaLambdaRole276bcdeb",
+                  "uwcssaLambdaRole07d3dff1",
                   "-",
                   {
                     "Ref": "env"
@@ -247,7 +241,7 @@
                 "ses:SendEmail"
               ],
               "Resource": [
-                "arn:aws:ses:*:537666141782:identity/*"
+                "arn:aws:ses:*:*:identity/*"
               ],
               "Effect": "Allow"
             },

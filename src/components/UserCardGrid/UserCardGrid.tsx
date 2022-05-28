@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:13:35
+ * @LastEditTime: 2022-05-28 02:22:32
  * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { getUserInfo } from 'redux/auth/authSlice';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
 import { useTheme } from '@mui/material/styles';
 
@@ -33,18 +33,10 @@ import { useTheme } from '@mui/material/styles';
 
 const UserCardGrid = (): JSX.Element => {
   const theme = useTheme();
-  const userInfo = useAppSelector(getUserInfo); //用这个代替直接从store拿，但是要注意google 登录的话sub 和username不一样，owner一定要用username，有另一个api叫 getOwnerUserName
-  //const dispatch = useAppDispatch();
-  //console.log(userInfo);
-
-  // 这里不需要，在index里面只需要一个
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     dispatch(loadUser());
-  //   };
-
-  //   getUser();
-  // }, []);
+  //const userInfo = useAppSelector(getUserInfo); //用这个代替直接从store拿，但是要注意google 登录的话sub 和username不一样，owner一定要用username，有另一个api叫 getOwnerUserName
+  const myUserProfile = useAppSelector(
+    (state) => state.userProfile.myUserProfile,
+  );
 
   return (
     <Box
@@ -59,16 +51,17 @@ const UserCardGrid = (): JSX.Element => {
         backgroundImage: `linear-gradient(0deg, ${theme.palette.background.paper} 75%, ${theme.palette.primary.main} 0%)`,
       }}
     >
-      {userInfo ? (
+      {myUserProfile.id ? (
         <>
           <Avatar
-            src={'info.avatar'}
+            src={myUserProfile.avatarURL}
             variant={'circular'}
-            alt={userInfo.name}
-            sx={{
+            alt={myUserProfile.name}
+            {...stringAvatar(myUserProfile.name, {
               width: 80,
               height: 80,
-            }}
+              fontSize: { xs: '38px', sm: '64px' },
+            })}
           />
           <Box
             display={'flex'}
@@ -76,8 +69,8 @@ const UserCardGrid = (): JSX.Element => {
             alignItems={'center'}
             marginTop={2}
           >
-            <Typography fontWeight={600}>{userInfo.name}</Typography>
-            {userInfo ? (
+            <Typography fontWeight={600}>{myUserProfile.name}</Typography>
+            {myUserProfile.id ? (
               <Box
                 component={'svg'}
                 xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +92,7 @@ const UserCardGrid = (): JSX.Element => {
             ) : null}
           </Box>
           <Typography fontSize={12} color={'text.secondary'}>
-            {userInfo.email}
+            {myUserProfile.contactEmail}
           </Typography>
           <Box flexGrow={1} />
           <Stack spacing={2} marginTop={2} width={1} alignItems={'center'}>
@@ -127,14 +120,14 @@ const UserCardGrid = (): JSX.Element => {
                 />
               </Box>
               <Typography color={'text.secondary'} variant={'subtitle2'}>
-                {'info.followers'}
+                {'300 info.followers'}
               </Typography>
             </Box>
             <Button
               component={'a'}
               variant={'outlined'}
               color={'primary'}
-              href={'info.href'}
+              href={''}
             >
               View profile
             </Button>

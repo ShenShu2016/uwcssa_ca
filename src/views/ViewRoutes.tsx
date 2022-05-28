@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 19:45:17
- * @FilePath: /uwcssa_ca/frontend/src/views/ViewRoutes.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 16:46:30
+ * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
  */
@@ -23,6 +23,7 @@ import {
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home,
+  AdministratorPage,
   Logistics as LogisticsView,
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
@@ -67,8 +68,8 @@ function ViewRoutes(): Array<{
       redirectPath: undefined,
     },
     {
-      path: '/article-publish',
-      renderer: (): JSX.Element => <ArticlePublishView />,
+      path: '/admin/*',
+      renderer: (): JSX.Element => <AdministratorPage />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },

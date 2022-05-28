@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-25 20:43:28
- * @FilePath: /uwcssa_ca/frontend/src/views/Logistics/components/News/News.tsx
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 16:56:06
+ * @FilePath: /uwcssa_ca/src/views/Logistics/components/News/News.tsx
  * @Description:
  *
  */
@@ -40,7 +40,7 @@ const News = (): JSX.Element => {
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus !== 'succeed') {
+      if (isAuth !== null && fetchArticleListStatus === 'idle') {
         await dispatch(
           fetchArticleList({
             isAuth,

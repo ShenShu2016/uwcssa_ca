@@ -2,6 +2,7 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 # 用来更新local 的 graphql 操作： amplify api gql-compile && amplify codegen
 # 注意！active用来做sort key(因为布尔值不支持)，但是不是boolean， 只能有'T' 'F'
+# 有中括号的都有复数，没有的中括号的没复数
 # https://us-east-2.console.aws.amazon.com/appsync/home?region=us-east-2#/4r2t6l2uprdgjhmoocpazejjcq/v1/queries
 enum ActiveType {
   T
@@ -44,7 +45,7 @@ type UserProfile
   title: String
   about: String
   avatarURL: AWSURL
-  website: [AWSURL]
+  website: AWSURL
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID! # 与id 一致
@@ -116,6 +117,8 @@ type Article
   coverPageDescription: String
   tags: [Tag] @manyToMany(relationName: "ArticleTags")
   comments: [Comment] @hasMany
+  likes: [Like] @hasMany
+  count: Count @hasOne # 每一个article 都要有一个count 记录有几个Comments
   active: ActiveType!
     @index(
       name: "articleSortByCreatedAt" #名字要用小写
@@ -148,6 +151,8 @@ type Comment
       sortKeyFields: ["createdAt"]
     ) # 为什么不加 ！ 因为有event 也需要用comment
   article: Article @belongsTo(fields: ["articleCommentsId"])
+  count: Count @hasOne # 每一个comment 都要有一个count 记录有几个Likes
+  likes: [Like] @hasMany
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -173,4 +178,41 @@ type ContactUs
   updatedAt: AWSDateTime!
   owner: ID
   user: UserProfile @hasOne(fields: ["owner"])
+}
+
+type Count
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  count: Int!
+  article: Article @belongsTo
+  comment: Comment @belongsTo
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+}
+
+type Like
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  article: Article @belongsTo
+  comment: Comment @belongsTo
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
 }

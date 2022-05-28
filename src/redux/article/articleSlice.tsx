@@ -2,12 +2,11 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:16:29
+ * @LastEditTime: 2022-05-28 01:04:36
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
   articleSortByCreatedAt,

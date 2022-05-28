@@ -113,7 +113,7 @@ export type CreateUserProfileInput = {
   title?: string | null,
   about?: string | null,
   avatarURL?: string | null,
-  website?: Array< string | null > | null,
+  website?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   owner: string,
@@ -144,7 +144,7 @@ export type UserProfile = {
   title?: string | null,
   about?: string | null,
   avatarURL?: string | null,
-  website?: Array< string | null > | null,
+  website?: string | null,
   createdAt: string,
   updatedAt: string,
   owner: string,
@@ -158,7 +158,7 @@ export type UpdateUserProfileInput = {
   title?: string | null,
   about?: string | null,
   avatarURL?: string | null,
-  website?: Array< string | null > | null,
+  website?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   owner?: string | null,
@@ -329,11 +329,14 @@ export type Article = {
   coverPageDescription?: string | null,
   tags?: ModelArticleTagsConnection | null,
   comments?: ModelCommentConnection | null,
+  likes?: ModelLikeConnection | null,
+  count?: Count | null,
   active: ActiveType,
   createdAt: string,
   updatedAt: string,
   owner: string,
   user: UserProfile,
+  articleCountId?: string | null,
 };
 
 export type ModelCommentConnection = {
@@ -349,10 +352,44 @@ export type Comment = {
   isDeleted: boolean,
   articleCommentsId?: string | null,
   article?: Article | null,
+  count?: Count | null,
+  likes?: ModelLikeConnection | null,
   createdAt: string,
   updatedAt: string,
   owner: string,
   user: UserProfile,
+  commentCountId?: string | null,
+};
+
+export type Count = {
+  __typename: "Count",
+  id: string,
+  count: number,
+  article?: Article | null,
+  comment?: Comment | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  countArticleId?: string | null,
+  countCommentId?: string | null,
+};
+
+export type ModelLikeConnection = {
+  __typename: "ModelLikeConnection",
+  items:  Array<Like | null >,
+  nextToken?: string | null,
+};
+
+export type Like = {
+  __typename: "Like",
+  id: string,
+  article?: Article | null,
+  comment?: Comment | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  articleLikesId?: string | null,
+  commentLikesId?: string | null,
 };
 
 export type UpdateTagInput = {
@@ -376,6 +413,7 @@ export type CreateArticleInput = {
   createdAt?: string | null,
   updatedAt?: string | null,
   owner: string,
+  articleCountId?: string | null,
 };
 
 export type ModelArticleConditionInput = {
@@ -390,6 +428,7 @@ export type ModelArticleConditionInput = {
   and?: Array< ModelArticleConditionInput | null > | null,
   or?: Array< ModelArticleConditionInput | null > | null,
   not?: ModelArticleConditionInput | null,
+  articleCountId?: ModelIDInput | null,
 };
 
 export type UpdateArticleInput = {
@@ -402,6 +441,7 @@ export type UpdateArticleInput = {
   createdAt?: string | null,
   updatedAt?: string | null,
   owner?: string | null,
+  articleCountId?: string | null,
 };
 
 export type DeleteArticleInput = {
@@ -416,6 +456,7 @@ export type CreateCommentInput = {
   createdAt?: string | null,
   updatedAt?: string | null,
   owner: string,
+  commentCountId?: string | null,
 };
 
 export type ModelCommentConditionInput = {
@@ -428,6 +469,7 @@ export type ModelCommentConditionInput = {
   and?: Array< ModelCommentConditionInput | null > | null,
   or?: Array< ModelCommentConditionInput | null > | null,
   not?: ModelCommentConditionInput | null,
+  commentCountId?: ModelIDInput | null,
 };
 
 export type ModelBooleanInput = {
@@ -445,6 +487,7 @@ export type UpdateCommentInput = {
   createdAt?: string | null,
   updatedAt?: string | null,
   owner?: string | null,
+  commentCountId?: string | null,
 };
 
 export type DeleteCommentInput = {
@@ -500,6 +543,75 @@ export type UpdateContactUsInput = {
 };
 
 export type DeleteContactUsInput = {
+  id: string,
+};
+
+export type CreateCountInput = {
+  id?: string | null,
+  count: number,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  countArticleId?: string | null,
+  countCommentId?: string | null,
+};
+
+export type ModelCountConditionInput = {
+  count?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelCountConditionInput | null > | null,
+  or?: Array< ModelCountConditionInput | null > | null,
+  not?: ModelCountConditionInput | null,
+  countArticleId?: ModelIDInput | null,
+  countCommentId?: ModelIDInput | null,
+};
+
+export type UpdateCountInput = {
+  id: string,
+  count?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  countArticleId?: string | null,
+  countCommentId?: string | null,
+};
+
+export type DeleteCountInput = {
+  id: string,
+};
+
+export type CreateLikeInput = {
+  id?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  articleLikesId?: string | null,
+  commentLikesId?: string | null,
+};
+
+export type ModelLikeConditionInput = {
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelLikeConditionInput | null > | null,
+  or?: Array< ModelLikeConditionInput | null > | null,
+  not?: ModelLikeConditionInput | null,
+  articleLikesId?: ModelIDInput | null,
+  commentLikesId?: ModelIDInput | null,
+};
+
+export type UpdateLikeInput = {
+  id: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  articleLikesId?: string | null,
+  commentLikesId?: string | null,
+};
+
+export type DeleteLikeInput = {
   id: string,
 };
 
@@ -643,6 +755,7 @@ export type ModelArticleFilterInput = {
   and?: Array< ModelArticleFilterInput | null > | null,
   or?: Array< ModelArticleFilterInput | null > | null,
   not?: ModelArticleFilterInput | null,
+  articleCountId?: ModelIDInput | null,
 };
 
 export type ModelArticleConnection = {
@@ -662,6 +775,7 @@ export type ModelCommentFilterInput = {
   and?: Array< ModelCommentFilterInput | null > | null,
   or?: Array< ModelCommentFilterInput | null > | null,
   not?: ModelCommentFilterInput | null,
+  commentCountId?: ModelIDInput | null,
 };
 
 export type ModelContactUsFilterInput = {
@@ -682,6 +796,37 @@ export type ModelContactUsConnection = {
   __typename: "ModelContactUsConnection",
   items:  Array<ContactUs | null >,
   nextToken?: string | null,
+};
+
+export type ModelCountFilterInput = {
+  id?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelCountFilterInput | null > | null,
+  or?: Array< ModelCountFilterInput | null > | null,
+  not?: ModelCountFilterInput | null,
+  countArticleId?: ModelIDInput | null,
+  countCommentId?: ModelIDInput | null,
+};
+
+export type ModelCountConnection = {
+  __typename: "ModelCountConnection",
+  items:  Array<Count | null >,
+  nextToken?: string | null,
+};
+
+export type ModelLikeFilterInput = {
+  id?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelLikeFilterInput | null > | null,
+  or?: Array< ModelLikeFilterInput | null > | null,
+  not?: ModelLikeFilterInput | null,
+  articleLikesId?: ModelIDInput | null,
+  commentLikesId?: ModelIDInput | null,
 };
 
 export type ModelArticleTagsFilterInput = {
@@ -762,7 +907,7 @@ export type CreateUserProfileMutation = {
     title?: string | null,
     about?: string | null,
     avatarURL?: string | null,
-    website?: Array< string | null > | null,
+    website?: string | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -784,7 +929,7 @@ export type UpdateUserProfileMutation = {
     title?: string | null,
     about?: string | null,
     avatarURL?: string | null,
-    website?: Array< string | null > | null,
+    website?: string | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -806,7 +951,7 @@ export type DeleteUserProfileMutation = {
     title?: string | null,
     about?: string | null,
     avatarURL?: string | null,
-    website?: Array< string | null > | null,
+    website?: string | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -975,6 +1120,20 @@ export type CreateArticleMutation = {
       __typename: "ModelCommentConnection",
       nextToken?: string | null,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     active: ActiveType,
     createdAt: string,
     updatedAt: string,
@@ -988,11 +1147,12 @@ export type CreateArticleMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    articleCountId?: string | null,
   } | null,
 };
 
@@ -1017,6 +1177,20 @@ export type UpdateArticleMutation = {
       __typename: "ModelCommentConnection",
       nextToken?: string | null,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     active: ActiveType,
     createdAt: string,
     updatedAt: string,
@@ -1030,11 +1204,12 @@ export type UpdateArticleMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    articleCountId?: string | null,
   } | null,
 };
 
@@ -1059,6 +1234,20 @@ export type DeleteArticleMutation = {
       __typename: "ModelCommentConnection",
       nextToken?: string | null,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     active: ActiveType,
     createdAt: string,
     updatedAt: string,
@@ -1072,11 +1261,12 @@ export type DeleteArticleMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    articleCountId?: string | null,
   } | null,
 };
 
@@ -1103,6 +1293,21 @@ export type CreateCommentMutation = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1116,11 +1321,12 @@ export type CreateCommentMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    commentCountId?: string | null,
   } | null,
 };
 
@@ -1147,6 +1353,21 @@ export type UpdateCommentMutation = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1160,11 +1381,12 @@ export type UpdateCommentMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    commentCountId?: string | null,
   } | null,
 };
 
@@ -1191,6 +1413,21 @@ export type DeleteCommentMutation = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1204,11 +1441,12 @@ export type DeleteCommentMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    commentCountId?: string | null,
   } | null,
 };
 
@@ -1237,7 +1475,7 @@ export type CreateContactUsMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1270,7 +1508,7 @@ export type UpdateContactUsMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1303,11 +1541,260 @@ export type DeleteContactUsMutation = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     } | null,
+  } | null,
+};
+
+export type CreateCountMutationVariables = {
+  input: CreateCountInput,
+  condition?: ModelCountConditionInput | null,
+};
+
+export type CreateCountMutation = {
+  createCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
+};
+
+export type UpdateCountMutationVariables = {
+  input: UpdateCountInput,
+  condition?: ModelCountConditionInput | null,
+};
+
+export type UpdateCountMutation = {
+  updateCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
+};
+
+export type DeleteCountMutationVariables = {
+  input: DeleteCountInput,
+  condition?: ModelCountConditionInput | null,
+};
+
+export type DeleteCountMutation = {
+  deleteCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
+};
+
+export type CreateLikeMutationVariables = {
+  input: CreateLikeInput,
+  condition?: ModelLikeConditionInput | null,
+};
+
+export type CreateLikeMutation = {
+  createLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
+};
+
+export type UpdateLikeMutationVariables = {
+  input: UpdateLikeInput,
+  condition?: ModelLikeConditionInput | null,
+};
+
+export type UpdateLikeMutation = {
+  updateLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
+};
+
+export type DeleteLikeMutationVariables = {
+  input: DeleteLikeInput,
+  condition?: ModelLikeConditionInput | null,
+};
+
+export type DeleteLikeMutation = {
+  deleteLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
   } | null,
 };
 
@@ -1340,6 +1827,7 @@ export type CreateArticleTagsMutation = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1375,6 +1863,7 @@ export type UpdateArticleTagsMutation = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1410,6 +1899,7 @@ export type DeleteArticleTagsMutation = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1470,7 +1960,7 @@ export type GetUserProfileQuery = {
     title?: string | null,
     about?: string | null,
     avatarURL?: string | null,
-    website?: Array< string | null > | null,
+    website?: string | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1495,7 +1985,7 @@ export type ListUserProfilesQuery = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1658,6 +2148,20 @@ export type GetArticleQuery = {
       __typename: "ModelCommentConnection",
       nextToken?: string | null,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
     active: ActiveType,
     createdAt: string,
     updatedAt: string,
@@ -1671,11 +2175,12 @@ export type GetArticleQuery = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    articleCountId?: string | null,
   } | null,
 };
 
@@ -1699,6 +2204,7 @@ export type ListArticlesQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1727,6 +2233,7 @@ export type ArticleSortByCreatedAtQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1754,6 +2261,21 @@ export type GetCommentQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1767,11 +2289,12 @@ export type GetCommentQuery = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
     },
+    commentCountId?: string | null,
   } | null,
 };
 
@@ -1793,6 +2316,7 @@ export type ListCommentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      commentCountId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1819,6 +2343,7 @@ export type CommentSortByArticleCommentsIdCreatedAtQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      commentCountId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1848,7 +2373,7 @@ export type GetContactUsQuery = {
       title?: string | null,
       about?: string | null,
       avatarURL?: string | null,
-      website?: Array< string | null > | null,
+      website?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1875,6 +2400,132 @@ export type ListContactusesQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetCountQueryVariables = {
+  id: string,
+};
+
+export type GetCountQuery = {
+  getCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
+};
+
+export type ListCountsQueryVariables = {
+  filter?: ModelCountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCountsQuery = {
+  listCounts?:  {
+    __typename: "ModelCountConnection",
+    items:  Array< {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetLikeQueryVariables = {
+  id: string,
+};
+
+export type GetLikeQuery = {
+  getLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
+};
+
+export type ListLikesQueryVariables = {
+  filter?: ModelLikeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLikesQuery = {
+  listLikes?:  {
+    __typename: "ModelLikeConnection",
+    items:  Array< {
+      __typename: "Like",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleLikesId?: string | null,
+      commentLikesId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1908,6 +2559,7 @@ export type GetArticleTagsQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1959,6 +2611,7 @@ export type OnCreateArticleTagsSubscription = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1989,6 +2642,7 @@ export type OnUpdateArticleTagsSubscription = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -2019,6 +2673,7 @@ export type OnDeleteArticleTagsSubscription = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+      articleCountId?: string | null,
     },
     createdAt: string,
     updatedAt: string,

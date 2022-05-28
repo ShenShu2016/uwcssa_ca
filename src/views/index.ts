@@ -64,6 +64,7 @@ export { default as AccountProfile } from './Settings/Profile';
 export { default as NotFoundCover } from './NotFoundCover';
 export { default as Home } from './Home';
 export { default as ArticlePublish } from './ArticlePublish';
+export { default as AdministratorPage } from './AdministratorPage';
 export { default as FQA } from './FQA';
 export { default as Partner } from './Partner';
 export { default as Sponsor } from './Sponsor';
