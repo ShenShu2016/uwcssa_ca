@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-27 17:53:27
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-27 18:12:35
+ * @LastEditTime: 2022-05-27 20:22:56
  * @FilePath: /uwcssa_ca/src/views/Logistics/Logistics.tsx
  * @Description:
  *
@@ -23,9 +23,12 @@ import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
+import { Divider } from '@mui/material';
 import FQA from 'views/FQA';
 import Main from 'layouts/Main';
+import Partner from 'views/Partner';
 import React from 'react';
+import Sponsor from 'views/Sponsor';
 
 const Logistics = (): JSX.Element => {
   const theme = useTheme();
@@ -97,6 +100,13 @@ const Logistics = (): JSX.Element => {
       <Container>
         <FQA />
       </Container>
+      <Divider />
+      <Sponsor />
+      <Box bgcolor={'primary.main'}>
+        <Container paddingX={'0 !important'} maxWidth={1}>
+          <Partner />
+        </Container>
+      </Box>
     </Main>
   );
 };
