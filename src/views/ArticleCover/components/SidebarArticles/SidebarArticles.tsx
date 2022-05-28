@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-26 18:34:47
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticleCover/components/SidebarArticles/SidebarArticles.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 01:00:22
+ * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SidebarArticles/SidebarArticles.tsx
  * @Description:
  *
  */
@@ -25,7 +25,6 @@ import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import moment from 'moment';
-// import Link from '@mui/material/Link';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
@@ -37,7 +36,7 @@ const SidebarArticles = (): JSX.Element => {
   const { fetchArticleListStatus } = useAppSelector((state) => state.article);
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus !== 'succeed') {
+      if (isAuth !== null && fetchArticleListStatus === 'idle') {
         await dispatch(
           fetchArticleList({
             isAuth,
@@ -117,11 +116,13 @@ const SidebarArticles = (): JSX.Element => {
                   '&:last-child': { paddingBottom: 0 },
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
                 }}
               >
                 <Box>
-                  <Typography fontSize={14} fontWeight={700}>{item.title}</Typography>
+                  <Typography fontSize={14} fontWeight={700}>
+                    {item.title}
+                  </Typography>
                   <Typography
                     variant={'caption'}
                     color={'text.secondary'}
@@ -137,7 +138,7 @@ const SidebarArticles = (): JSX.Element => {
                   size={'small'}
                   sx={{
                     width: 'fit-content',
-                    padding: 0
+                    padding: 0,
                   }}
                 >
                   Read More

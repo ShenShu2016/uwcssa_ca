@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-27 17:13:06
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 00:58:53
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -46,7 +46,7 @@ const BlogWithLargeImage = (): JSX.Element => {
 
   useEffect(() => {
     const getArticles = async () => {
-      if (isAuth !== null && fetchArticleListStatus !== 'succeed') {
+      if (isAuth !== null && fetchArticleListStatus === 'idle') {
         await dispatch(
           fetchArticleList({
             isAuth,
@@ -76,7 +76,7 @@ const BlogWithLargeImage = (): JSX.Element => {
                   key={item.id}
                   item
                   width={'100%'}
-                  mb='8px'
+                  mb="8px"
                   data-aos="fade-up"
                   data-aos-delay={index * 200}
                   data-aos-offset={100}
@@ -86,14 +86,14 @@ const BlogWithLargeImage = (): JSX.Element => {
                     component={Card}
                     width={'100%'}
                     height={'auto'}
-                    position='relative'
+                    position="relative"
                     // borderRadius={0}
                     // boxShadow={0}
                     // display={'flex'}
                     padding={'8px'}
                     sx={{
                       backgroundImage: 'none',
-                      bgcolor: 'transparent'
+                      bgcolor: 'transparent',
                     }}
                   >
                     <CardContent
@@ -173,43 +173,43 @@ const BlogWithLargeImage = (): JSX.Element => {
                           justifyContent: 'flex-start',
                           padding: '8px 0px 0px 0px',
                           marginTop: 'auto',
-                          width: 'fit-content'
+                          width: 'fit-content',
                         }}
                       >
                         Read More
                       </Button>
                     </CardContent>
                     <Box
-                        position={'absolute'}
-                        left='0'
-                        top='0'
-                        component={'img'}
-                        height={'100%'}
-                        width={'100%'}
-                        zIndex={-2}
-                        src={
-                          item.coverPageImgURL ||
-                          'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
-                        }
-                        alt="..."
-                        sx={{
-                          objectFit: 'cover',
-                          // height: 150,
-                          filter: 'blur(3px)'
-                        }}
-                      />
-                      {/* 半透明蒙层 */}
-                      <Box
-                        sx={{
+                      position={'absolute'}
+                      left="0"
+                      top="0"
+                      component={'img'}
+                      height={'100%'}
+                      width={'100%'}
+                      zIndex={-2}
+                      src={
+                        item.coverPageImgURL ||
+                        'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/92f5ce89-2045-408b-9193-0c2ae95dab3b.jpeg'
+                      }
+                      alt="..."
+                      sx={{
+                        objectFit: 'cover',
+                        // height: 150,
+                        filter: 'blur(3px)',
+                      }}
+                    />
+                    {/* 半透明蒙层 */}
+                    <Box
+                      sx={{
                         position: 'absolute',
                         top: 0,
                         left: 0,
                         width: '100%',
                         height: '100%',
                         zIndex: -1,
-                        background: 'rgba(0, 0, 0, 0.5)'
-                      }}>
-                      </Box>
+                        background: 'rgba(0, 0, 0, 0.5)',
+                      }}
+                    ></Box>
                     {/* <Box
                       sx={{
                         width: { md: '30%', height: 'auto'},
