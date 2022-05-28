@@ -213,6 +213,18 @@ export const getArticle = /* GraphQL */ `
       comments {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -230,6 +242,7 @@ export const getArticle = /* GraphQL */ `
         updatedAt
         owner
       }
+      articleCountId
     }
   }
 `;
@@ -250,6 +263,7 @@ export const listArticles = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       nextToken
     }
@@ -282,6 +296,7 @@ export const articleSortByCreatedAt = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       nextToken
     }
@@ -304,6 +319,19 @@ export const getComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
+      likes {
+        nextToken
       }
       createdAt
       updatedAt
@@ -321,6 +349,7 @@ export const getComment = /* GraphQL */ `
         updatedAt
         owner
       }
+      commentCountId
     }
   }
 `;
@@ -339,6 +368,7 @@ export const listComments = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        commentCountId
       }
       nextToken
     }
@@ -369,6 +399,7 @@ export const commentSortByArticleCommentsIdCreatedAt = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        commentCountId
       }
       nextToken
     }
@@ -422,6 +453,114 @@ export const listContactuses = /* GraphQL */ `
     }
   }
 `;
+export const getCount = /* GraphQL */ `
+  query GetCount($id: ID!) {
+    getCount(id: $id) {
+      id
+      count
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      countArticleId
+      countCommentId
+    }
+  }
+`;
+export const listCounts = /* GraphQL */ `
+  query ListCounts(
+    $filter: ModelCountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
+      nextToken
+    }
+  }
+`;
+export const getLike = /* GraphQL */ `
+  query GetLike($id: ID!) {
+    getLike(id: $id) {
+      id
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      articleLikesId
+      commentLikesId
+    }
+  }
+`;
+export const listLikes = /* GraphQL */ `
+  query ListLikes(
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        createdAt
+        updatedAt
+        owner
+        articleLikesId
+        commentLikesId
+      }
+      nextToken
+    }
+  }
+`;
 export const getArticleTags = /* GraphQL */ `
   query GetArticleTags($id: ID!) {
     getArticleTags(id: $id) {
@@ -444,6 +583,7 @@ export const getArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt

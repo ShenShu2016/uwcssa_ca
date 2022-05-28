@@ -253,6 +253,18 @@ export const createArticle = /* GraphQL */ `
       comments {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -270,6 +282,7 @@ export const createArticle = /* GraphQL */ `
         updatedAt
         owner
       }
+      articleCountId
     }
   }
 `;
@@ -290,6 +303,18 @@ export const updateArticle = /* GraphQL */ `
       comments {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -307,6 +332,7 @@ export const updateArticle = /* GraphQL */ `
         updatedAt
         owner
       }
+      articleCountId
     }
   }
 `;
@@ -327,6 +353,18 @@ export const deleteArticle = /* GraphQL */ `
       comments {
         nextToken
       }
+      likes {
+        nextToken
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
       active
       createdAt
       updatedAt
@@ -344,6 +382,7 @@ export const deleteArticle = /* GraphQL */ `
         updatedAt
         owner
       }
+      articleCountId
     }
   }
 `;
@@ -367,6 +406,19 @@ export const createComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
+      likes {
+        nextToken
       }
       createdAt
       updatedAt
@@ -384,6 +436,7 @@ export const createComment = /* GraphQL */ `
         updatedAt
         owner
       }
+      commentCountId
     }
   }
 `;
@@ -407,6 +460,19 @@ export const updateComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
+      likes {
+        nextToken
       }
       createdAt
       updatedAt
@@ -424,6 +490,7 @@ export const updateComment = /* GraphQL */ `
         updatedAt
         owner
       }
+      commentCountId
     }
   }
 `;
@@ -447,6 +514,19 @@ export const deleteComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
+      }
+      count {
+        id
+        count
+        createdAt
+        updatedAt
+        owner
+        countArticleId
+        countCommentId
+      }
+      likes {
+        nextToken
       }
       createdAt
       updatedAt
@@ -464,6 +544,7 @@ export const deleteComment = /* GraphQL */ `
         updatedAt
         owner
       }
+      commentCountId
     }
   }
 `;
@@ -557,6 +638,231 @@ export const deleteContactUs = /* GraphQL */ `
     }
   }
 `;
+export const createCount = /* GraphQL */ `
+  mutation CreateCount(
+    $input: CreateCountInput!
+    $condition: ModelCountConditionInput
+  ) {
+    createCount(input: $input, condition: $condition) {
+      id
+      count
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      countArticleId
+      countCommentId
+    }
+  }
+`;
+export const updateCount = /* GraphQL */ `
+  mutation UpdateCount(
+    $input: UpdateCountInput!
+    $condition: ModelCountConditionInput
+  ) {
+    updateCount(input: $input, condition: $condition) {
+      id
+      count
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      countArticleId
+      countCommentId
+    }
+  }
+`;
+export const deleteCount = /* GraphQL */ `
+  mutation DeleteCount(
+    $input: DeleteCountInput!
+    $condition: ModelCountConditionInput
+  ) {
+    deleteCount(input: $input, condition: $condition) {
+      id
+      count
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      countArticleId
+      countCommentId
+    }
+  }
+`;
+export const createLike = /* GraphQL */ `
+  mutation CreateLike(
+    $input: CreateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    createLike(input: $input, condition: $condition) {
+      id
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      articleLikesId
+      commentLikesId
+    }
+  }
+`;
+export const updateLike = /* GraphQL */ `
+  mutation UpdateLike(
+    $input: UpdateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    updateLike(input: $input, condition: $condition) {
+      id
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      articleLikesId
+      commentLikesId
+    }
+  }
+`;
+export const deleteLike = /* GraphQL */ `
+  mutation DeleteLike(
+    $input: DeleteLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    deleteLike(input: $input, condition: $condition) {
+      id
+      article {
+        id
+        title
+        content
+        coverPageImgURL
+        coverPageDescription
+        active
+        createdAt
+        updatedAt
+        owner
+        articleCountId
+      }
+      comment {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      createdAt
+      updatedAt
+      owner
+      articleLikesId
+      commentLikesId
+    }
+  }
+`;
 export const createArticleTags = /* GraphQL */ `
   mutation CreateArticleTags(
     $input: CreateArticleTagsInput!
@@ -582,6 +888,7 @@ export const createArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt
@@ -613,6 +920,7 @@ export const updateArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt
@@ -644,6 +952,7 @@ export const deleteArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt

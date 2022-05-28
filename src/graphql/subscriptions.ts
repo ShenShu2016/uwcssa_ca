@@ -24,6 +24,7 @@ export const onCreateArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt
@@ -52,6 +53,7 @@ export const onUpdateArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt
@@ -80,6 +82,7 @@ export const onDeleteArticleTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        articleCountId
       }
       createdAt
       updatedAt
