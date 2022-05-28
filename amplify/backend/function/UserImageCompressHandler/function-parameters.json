@@ -10,9 +10,9 @@
     {
       "type": "ProjectLayer",
       "resourceName": "uwcssaLayerNodeJSSharp",
+      "env": "devts",
       "version": "Always choose latest version",
-      "isLatestVersionSelected": true,
-      "env": "devts"
+      "isLatestVersionSelected": true
     }
   ]
 }
