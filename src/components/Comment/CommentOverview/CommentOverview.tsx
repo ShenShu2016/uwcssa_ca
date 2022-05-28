@@ -4,8 +4,8 @@ import { Avatar } from '@mui/material';
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 16:25:43
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-28 10:23:10
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
@@ -123,8 +123,8 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
                 </Box>
               ))}
             </Box> */}
-            <Box display={'flex'} alignItems={'center'}>
-              <Box>
+            <Box display={'flex'}>
+              <Box mt='8px'>
                 <Avatar
                   style={{
                     width: 48,
