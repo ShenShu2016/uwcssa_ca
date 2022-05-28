@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 18:10:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 17:52:25
+ * @LastEditTime: 2022-05-28 01:20:06
  * @FilePath: /uwcssa_ca/src/redux/store.ts
  * @Description:
  *
@@ -17,10 +17,12 @@ import commentReducer from './comment/commentSlice';
 import contactUsReducer from './contactUs/ContactUsSlice';
 import counterReducer from './counter/counterSlice';
 import userImageReducer from './userImage/userImageSlice';
+import userProfileReducer from './userProfile/userProfileSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    userProfile: userProfileReducer,
     counter: counterReducer,
     article: articleReducer,
     comment: commentReducer,

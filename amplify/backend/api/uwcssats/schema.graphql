@@ -45,7 +45,7 @@ type UserProfile
   title: String
   about: String
   avatarURL: AWSURL
-  website: [AWSURL]
+  website: AWSURL
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID! # 与id 一致

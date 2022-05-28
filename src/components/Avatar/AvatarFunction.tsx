@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 13:09:30
+ * @LastEditTime: 2022-05-28 02:23:34
  * @FilePath: /uwcssa_ca/src/components/Avatar/AvatarFunction.tsx
  * @Description:
  *
@@ -24,11 +24,10 @@ export function stringToColorAvatar(string: string) {
   return color;
 }
 
-export function stringAvatar(name: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function stringAvatar(name: string, sx: any = undefined) {
   return {
-    sx: {
-      bgcolor: stringToColorAvatar(name.toLocaleUpperCase()),
-    },
+    sx: { ...sx, bgcolor: stringToColorAvatar(name.toLocaleUpperCase()) },
     children: `${name.slice(0, 1)}`,
   };
 }

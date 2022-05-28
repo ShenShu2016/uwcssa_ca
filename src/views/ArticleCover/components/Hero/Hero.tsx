@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 17:23:21
+ * @LastEditTime: 2022-05-28 02:05:46
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/Hero/Hero.tsx
  * @Description:
  *
@@ -93,9 +93,12 @@ const Hero = ({ article }: { article: Article }): JSX.Element => {
           </Typography>
           <Box display={'flex'} alignItems={'center'}>
             <Avatar
-              style={{ width: 60, height: 60, marginRight: '1rem' }}
               src={article.user.avatarURL}
-              {...stringAvatar(article.user.name)}
+              {...stringAvatar(article.user.name, {
+                width: 60,
+                height: 60,
+                marginRight: '1rem',
+              })}
             />
             <ListItemText
               sx={{ margin: 0 }}

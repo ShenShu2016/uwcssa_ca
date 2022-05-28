@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 02:24:12
+ * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
+ * @Description:
+ *
+ */
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,22 +17,18 @@ import { Main } from 'layouts';
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
+import { useAppSelector } from 'redux/hooks';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-
-const mock = {
-  avatar: 'https://assets.maccarianagency.com/avatars/img5.jpg',
-  name: 'Clara Bertoletti',
-  isVerified: true,
-  title: 'Paradigm Technician',
-  followers: 84,
-  href: '#',
-  location: 'Milan, Italy',
-  website: 'www.example.com',
-  email: 'clara.bertoletti@example.com',
-};
 
 const Profile = (): JSX.Element => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const myUserProfile = useAppSelector(
+    (state) => state.userProfile.myUserProfile,
+  );
+
   return (
     <Main>
       <Box
@@ -35,13 +41,14 @@ const Profile = (): JSX.Element => {
           {/* margin auto 自己加上去的 */}
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Avatar
-              src={mock.avatar}
+              src={myUserProfile.avatarURL}
               variant={'circular'}
-              sx={{
+              {...stringAvatar(myUserProfile.name, {
+                fontSize: { xs: '64px', sm: '80px' },
                 width: { xs: theme.spacing(16), sm: theme.spacing(20) },
                 height: { xs: theme.spacing(16), sm: theme.spacing(20) },
                 border: `8px solid ${theme.palette.background.paper}`,
-              }}
+              })}
             />
             <Card
               sx={{
@@ -77,6 +84,9 @@ const Profile = (): JSX.Element => {
                   backgroundColor: theme.palette.divider,
                   paddingX: 2,
                 }}
+                onClick={() => {
+                  navigate('/settings/general');
+                }}
               >
                 Edit
               </Button>
@@ -88,9 +98,9 @@ const Profile = (): JSX.Element => {
                   marginTop={2}
                 >
                   <Typography fontWeight={700} variant={'h4'}>
-                    {mock.name}
+                    {myUserProfile.name}
                   </Typography>
-                  {mock.isVerified ? (
+                  {myUserProfile.name ? (
                     <Box
                       component={'svg'}
                       xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +126,7 @@ const Profile = (): JSX.Element => {
                   variant={'h6'}
                   align={'center'}
                 >
-                  {mock.title}
+                  {myUserProfile.title}
                 </Typography>
                 <Stack
                   spacing={2}
@@ -158,7 +168,7 @@ const Profile = (): JSX.Element => {
                         />
                       </Box>
                       <Typography color={'primary'} variant={'subtitle2'}>
-                        {mock.location}
+                        {myUserProfile.title}
                       </Typography>
                     </Box>
                     <Box
@@ -185,7 +195,7 @@ const Profile = (): JSX.Element => {
                         />
                       </Box>
                       <Typography color={'primary'} variant={'subtitle2'}>
-                        {mock.website}
+                        {myUserProfile.website}
                       </Typography>
                     </Box>
                     <Box
@@ -212,7 +222,7 @@ const Profile = (): JSX.Element => {
                         />
                       </Box>
                       <Typography color={'primary'} variant={'subtitle2'}>
-                        {mock.email}
+                        {myUserProfile.contactEmail}
                       </Typography>
                     </Box>
                   </Stack>
@@ -240,14 +250,14 @@ const Profile = (): JSX.Element => {
                       />
                     </Box>
                     <Typography color={'text.secondary'} variant={'subtitle2'}>
-                      {mock.followers} followers
+                      300 followers
                     </Typography>
                   </Box>
                   <Button
                     component={'a'}
                     variant={'contained'}
                     color={'primary'}
-                    href={mock.href}
+                    href={myUserProfile.website}
                   >
                     View profile
                   </Button>
