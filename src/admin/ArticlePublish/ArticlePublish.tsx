@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-28 16:14:42
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 10:21:07
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
  */
 
@@ -26,7 +26,7 @@ import { postArticle } from 'redux/article/articleSlice';
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
-
+import FullScreenLoading from 'components/FullScreenLoading';
 interface Tag {
   tagID: string;
 }
@@ -42,10 +42,25 @@ const ArticlePublish = () => {
   const [coverPageDescription, setCoverPageDescription] = useState<string>('');
   const [tags, setTags] = useState<Array<Tag>>([]);
   const [imgFile, setImgFile] = useState('');
+  const [inputStatus, setInputStatus] = useState({
+    title: false,
+    desc: false
+  });
+  const [fullScreenLoading, setFullScreenLoading] = useState({
+    loading: false,
+    message: ''
+  });
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const handleTagsChange = (tagList) => {
     setTags(tagList);
+  };
+
+  const handleFocus = (key) => {
+    setInputStatus((prev) => ({
+      ...prev,
+      [key]: false
+    }));
   };
 
   const handleSubmitArticle = async () => {
@@ -54,11 +69,32 @@ const ArticlePublish = () => {
     const currentContent = content;
     const currentTags = tags;
     const currentCoverPageDescription = coverPageDescription;
+    // 校验
+    if (!title || !coverPageDescription || !content) {
+      setInputStatus(() => ({
+        title: !title,
+        desc: !coverPageDescription
+      }));
+      setSubmitLoading(false);
+      message.open({
+        type: 'error',
+        message: !content ? '请填写文章内容' : '文章信息不全，无法发布'
+      });
+      return;
+    }
+    setFullScreenLoading({
+      loading: true,
+      message: '正在创建标签和文章'
+    });
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCreate] = await Promise.all([
       createTags(currentTags),
       createArticle(currentTitle, currentContent, currentCoverPageDescription),
     ]);
+    setFullScreenLoading({
+      loading: true,
+      message: '正在关联文章和标签'
+    });
     // 都完成后进行tag与文章的关联
     if (tagCreate.status && articleCreate.status) {
       const isConnected = await connectTagsAndArticle(
@@ -70,7 +106,15 @@ const ArticlePublish = () => {
           type: 'success',
           message: '文章发布完成',
         });
+        setFullScreenLoading({
+          loading: true,
+          message: '发布完成，即将跳转'
+        });
         setTimeout(() => {
+          setFullScreenLoading({
+            loading: false,
+            message: ''
+          });
           setSubmitLoading(false);
           navigate('/dashboard', { replace: true });
         }, 1000);
@@ -106,6 +150,17 @@ const ArticlePublish = () => {
       }),
     );
     const isPosted = articlePostRes.meta.requestStatus === 'fulfilled';
+    if (isPosted) {
+      message.open({
+        type: 'success',
+        message: '文章已创建',
+      });
+    } else {
+      message.open({
+        type: 'warning',
+        message: '文章创建错误',
+      });
+    }
     return {
       articleID,
       status: isPosted,
@@ -165,9 +220,14 @@ const ArticlePublish = () => {
 
   return (
     <AdminLayout>
+      <FullScreenLoading
+        message={fullScreenLoading.message}
+        loading={fullScreenLoading.loading}
+      />
       <Box display={'flex'} paddingX="5%">
         <Box width="70%">
           <TextField
+            error={inputStatus.title}
             id="standard-textarea"
             fullWidth
             label="Title"
@@ -188,8 +248,10 @@ const ArticlePublish = () => {
               paddingBottom: 2,
             }}
             onChange={(e) => setTitle(e.target.value)}
+            onFocus={() => handleFocus('title')}
           />
           <TextField
+            error={inputStatus.desc}
             id="standard-textarea"
             fullWidth
             label={'description & preview'}
@@ -210,6 +272,7 @@ const ArticlePublish = () => {
               paddingBottom: 2,
             }}
             onChange={(e) => setCoverPageDescription(e.target.value)}
+            onFocus={() => handleFocus('desc')}
           />
           <Box height="calc(100% - 180px)" overflow-x="hidden">
             <CKEditor

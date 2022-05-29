@@ -1,9 +1,9 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 14:00:36
- * @LastEditTime: 2022-05-21 15:22:07
+ * @LastEditTime: 2022-05-29 10:10:25
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/components/Message/Message.tsx
+ * @FilePath: /uwcssa_ca/src/components/Message/Message.tsx
  */
 import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
@@ -39,6 +39,9 @@ const Message: React.FC<messageProps> = ({ children }) => {
     <>
       {children}
       <Snackbar
+        style={{
+          zIndex: 99999
+        }}
         open={alertState.isOpen}
         autoHideDuration={2500}
         onClose={handleClose}
