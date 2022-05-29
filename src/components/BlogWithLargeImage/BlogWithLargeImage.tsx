@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-28 17:21:31
+ * @LastEditTime: 2022-05-29 10:31:20
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -137,7 +137,7 @@ const BlogWithLargeImage = (): JSX.Element => {
                       </Box>
                       <Typography
                         color="#eeeeee"
-                        sx={{ fontSize: 12 }}
+                        sx={{ fontSize: 12, minHeight: '54px' }}
                         className="article-list-text"
                       >
                         {item.coverPageDescription}
