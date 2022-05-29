@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-29 13:27:58
+ * @LastEditTime: 2022-05-29 16:19:41
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
  */
@@ -281,6 +281,12 @@ const ArticlePublish = () => {
             <CKEditor
               editor={Editor}
               data={content}
+              config={{
+                ckfinder: {
+                // Upload the images to the server using the CKFinder QuickUpload command.
+                  uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                }
+              }}
               onReady={(editor) => {
                 console.log('Editor is ready to use!', editor);
               }}
