@@ -33,7 +33,7 @@
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/UserImageCompressHandler-4c7049542f6b546f6944-build.zip"
+          "s3Key": "amplify-builds/UserImageCompressHandler-38556d63452b78496e77-build.zip"
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
@@ -41,11 +41,11 @@
         },
         "ContactUsHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ContactUsHandler-7850443932314164562b-build.zip"
+          "s3Key": "amplify-builds/ContactUsHandler-71366e7a703664474949-build.zip"
         },
         "ArticlePublishHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/ArticlePublishHandler-5055784e32314e2b426c-build.zip",
+          "s3Key": "amplify-builds/ArticlePublishHandler-51523564524e72307062-build.zip",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
         }
       }

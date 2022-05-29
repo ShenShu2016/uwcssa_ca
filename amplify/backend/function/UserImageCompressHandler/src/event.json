@@ -1,5 +1,49 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+  "Records": [
+    {
+      "eventID": "6c2bf74a3d5d346939780323594cf096",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1653812741,
+        "Keys": { "id": { "S": "7a0751ac-eee0-452d-86ae-4d5aa0c3e17f" } },
+        "NewImage": {
+          "owner": { "S": "dc3611f8-4973-4a8d-9cee-1c9afcf50bed" },
+          "targetTable": { "S": "Article" },
+          "lastModifiedDate": { "S": "2022-05-19T07:12:31.109Z" },
+          "objectURL": {
+            "S": "https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:de5bdfd3-5202-48b8-8be9-56c20c747083/Article/7a0751ac-eee0-452d-86ae-4d5aa0c3e17f.jpg"
+          },
+          "__typename": { "S": "UserImage" },
+          "objectThumbnailURL": {
+            "S": "https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:de5bdfd3-5202-48b8-8be9-56c20c747083/Article/7a0751ac-eee0-452d-86ae-4d5aa0c3e17f-thumbnail.webp"
+          },
+          "active": { "S": "T" },
+          "thumbnailWidth": { "N": "200" },
+          "type": { "S": "image/jpeg" },
+          "objectCompressedURL": {
+            "S": "https://uwcssats225941-devts.s3.us-east-2.amazonaws.com/protected/us-east-2:de5bdfd3-5202-48b8-8be9-56c20c747083/Article/7a0751ac-eee0-452d-86ae-4d5aa0c3e17f-compressed.webp"
+          },
+          "createdAt": { "S": "2022-05-29T08:25:40.684Z" },
+          "size": { "N": "223028" },
+          "compressedWidth": { "N": "1920" },
+          "name": {
+            "S": "{5bb82b3c-f396-426b-ad73-9f9f4708182e}_uwindsor-dillon-hall-drone-hero-sm.jpg"
+          },
+          "id": { "S": "7a0751ac-eee0-452d-86ae-4d5aa0c3e17f" },
+          "lastModified": { "S": "1652944351109" },
+          "key": {
+            "S": "protected/us-east-2:de5bdfd3-5202-48b8-8be9-56c20c747083/Article/7a0751ac-eee0-452d-86ae-4d5aa0c3e17f.jpg"
+          },
+          "updatedAt": { "S": "2022-05-29T08:25:40.684Z" }
+        },
+        "SequenceNumber": "33191400000000028643284823",
+        "SizeBytes": 1089,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:537666141782:table/UserImage-4r2t6l2uprdgjhmoocpazejjcq-devts/stream/2022-05-22T05:46:21.093"
+    }
+  ]
 }

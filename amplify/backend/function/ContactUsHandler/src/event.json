@@ -1,5 +1,52 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+  "Records": [
+    {
+      "eventID": "2cefbbfd071749a3bf96c1a13fefa0b9",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1653796757,
+        "Keys": {
+          "id": {
+            "S": "4c21b04a-b45e-48fc-9fff-47d572ee9913"
+          }
+        },
+        "NewImage": {
+          "owner": {
+            "S": "google_100671951180318399051"
+          },
+          "createdAt": {
+            "S": "2022-05-29T03:59:17.614Z"
+          },
+          "phone": {
+            "S": ""
+          },
+          "__typename": {
+            "S": "ContactUs"
+          },
+          "fullName": {
+            "S": "Shikai Jin"
+          },
+          "id": {
+            "S": "4c21b04a-b45e-48fc-9fff-47d572ee9913"
+          },
+          "message": {
+            "S": "0sjegojsdgjhoidjgojsodigjsgsrgfdsg"
+          },
+          "email": {
+            "S": "shushen2013@gmail.com"
+          },
+          "updatedAt": {
+            "S": "2022-05-29T03:59:17.614Z"
+          }
+        },
+        "SequenceNumber": "42250100000000000653377844",
+        "SizeBytes": 286,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:537666141782:table/ContactUs-4r2t6l2uprdgjhmoocpazejjcq-devts/stream/2022-05-20T03:38:37.566"
+    }
+  ]
 }
