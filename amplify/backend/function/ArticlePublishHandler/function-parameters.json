@@ -1,3 +1,9 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "userProfileTable",
+      "environmentVariableName": "UserProfile_Table"
+    }
+  ]
 }

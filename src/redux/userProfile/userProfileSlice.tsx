@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 22:04:11
+ * @LastEditTime: 2022-05-29 02:25:01
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -24,6 +24,7 @@ import { updateUserProfile } from 'graphql/mutations';
 export type UserProfile = {
   id: string;
   name: string;
+  email?: string | null;
   fullName?: string | null;
   contactEmail?: string | null;
   title?: string | null;

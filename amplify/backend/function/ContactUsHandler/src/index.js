@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-28 22:04:05
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-29 00:07:51
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 02:09:21
  * @FilePath: /uwcssa_ca/amplify/backend/function/ContactUsHandler/src/index.js
  * @Description:
  *
@@ -14,8 +14,8 @@
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-const aws = require('aws-sdk');
-const ses = new aws.SES({ region: 'us-east-1' });
+const AWS = require('aws-sdk');
+const ses = new AWS.SES({ region: 'us-east-1' });
 
 exports.handler = async function (event) {
   console.log(`EVENT: ${JSON.stringify(event)}`);

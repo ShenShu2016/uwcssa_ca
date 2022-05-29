@@ -58,6 +58,7 @@ export const createUserProfile = /* GraphQL */ `
     createUserProfile(input: $input, condition: $condition) {
       id
       name
+      email
       fullName
       contactEmail
       title
@@ -78,6 +79,7 @@ export const updateUserProfile = /* GraphQL */ `
     updateUserProfile(input: $input, condition: $condition) {
       id
       name
+      email
       fullName
       contactEmail
       title
@@ -98,6 +100,7 @@ export const deleteUserProfile = /* GraphQL */ `
     deleteUserProfile(input: $input, condition: $condition) {
       id
       name
+      email
       fullName
       contactEmail
       title
@@ -272,6 +275,7 @@ export const createArticle = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -322,6 +326,7 @@ export const updateArticle = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -372,6 +377,7 @@ export const deleteArticle = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -426,6 +432,7 @@ export const createComment = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -480,6 +487,7 @@ export const updateComment = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -534,6 +542,7 @@ export const deleteComment = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -565,6 +574,7 @@ export const createContactUs = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -595,6 +605,7 @@ export const updateContactUs = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -625,6 +636,7 @@ export const deleteContactUs = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title

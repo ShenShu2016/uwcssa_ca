@@ -40,6 +40,7 @@ export const getUserProfile = /* GraphQL */ `
     getUserProfile(id: $id) {
       id
       name
+      email
       fullName
       contactEmail
       title
@@ -62,6 +63,7 @@ export const listUserProfiles = /* GraphQL */ `
       items {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -232,6 +234,7 @@ export const getArticle = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -339,6 +342,7 @@ export const getComment = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
@@ -419,6 +423,7 @@ export const getContactUs = /* GraphQL */ `
       user {
         id
         name
+        email
         fullName
         contactEmail
         title
