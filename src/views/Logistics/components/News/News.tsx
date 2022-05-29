@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 21:14:58
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-29 16:09:29
  * @FilePath: /uwcssa_ca/src/views/Logistics/components/News/News.tsx
  * @Description:
  *
@@ -101,7 +101,7 @@ const News = (): JSX.Element => {
                       width: { xs: 1, sm: 300 },
                     }}
                   />
-                  <CardContent>
+                  <CardContent sx={{width: { xs: '100%', sm: '60%' }}}>
                     <Box>
                       <Typography
                         variant="h6"

@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-29 10:21:07
+ * @LastEditTime: 2022-05-29 13:27:58
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
  */
@@ -27,9 +27,12 @@ import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 import FullScreenLoading from 'components/FullScreenLoading';
+import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
+import Image from '@ckeditor/ckeditor5-image/src/image';
 interface Tag {
   tagID: string;
 }
+
 
 const ArticlePublish = () => {
   const dispatch = useAppDispatch();
@@ -317,5 +320,6 @@ const ArticlePublish = () => {
     </AdminLayout>
   );
 };
+
 
 export default ArticlePublish;
