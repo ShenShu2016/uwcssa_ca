@@ -58,7 +58,7 @@ export const createUserProfile = /* GraphQL */ `
     createUserProfile(input: $input, condition: $condition) {
       id
       name
-      firstName
+      fullName
       contactEmail
       title
       about
@@ -78,7 +78,7 @@ export const updateUserProfile = /* GraphQL */ `
     updateUserProfile(input: $input, condition: $condition) {
       id
       name
-      firstName
+      fullName
       contactEmail
       title
       about
@@ -98,7 +98,7 @@ export const deleteUserProfile = /* GraphQL */ `
     deleteUserProfile(input: $input, condition: $condition) {
       id
       name
-      firstName
+      fullName
       contactEmail
       title
       about
@@ -272,7 +272,7 @@ export const createArticle = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -322,7 +322,7 @@ export const updateArticle = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -372,7 +372,7 @@ export const deleteArticle = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -426,7 +426,7 @@ export const createComment = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -480,7 +480,7 @@ export const updateComment = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -534,7 +534,7 @@ export const deleteComment = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -565,7 +565,7 @@ export const createContactUs = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -595,7 +595,7 @@ export const updateContactUs = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -625,7 +625,7 @@ export const deleteContactUs = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about

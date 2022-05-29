@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:00:03
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 21:47:05
+ * @LastEditTime: 2022-05-28 22:25:08
  * @FilePath: /uwcssa_ca/src/redux/article/custom_q_m_s.tsx
  * @Description:
  *
@@ -112,7 +112,7 @@ export const createArticle = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about

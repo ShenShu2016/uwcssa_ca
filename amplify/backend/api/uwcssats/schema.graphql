@@ -40,7 +40,7 @@ type UserProfile
         { allow: groups, groups: ["uwcssaAdmin"] }
       ]
     )
-  firstName: String
+  fullName: String
   contactEmail: AWSEmail
   title: String
   about: String

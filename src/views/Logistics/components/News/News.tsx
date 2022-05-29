@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-28 16:56:06
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-28 21:14:58
  * @FilePath: /uwcssa_ca/src/views/Logistics/components/News/News.tsx
  * @Description:
  *
@@ -92,7 +92,10 @@ const News = (): JSX.Element => {
                 >
                   <CardMedia
                     title={item.title}
-                    image={item.coverPageImgURL}
+                    image={
+                      item.coverPageImgURL ||
+                      'https://uwcssabucket53243-master.s3.us-east-2.amazonaws.com/public/user/BackGround/6d328ddc-08d7-4f7d-8527-2173349796a7.jpg'
+                    }
                     sx={{
                       height: { xs: 240, sm: 'auto' },
                       width: { xs: 1, sm: 300 },

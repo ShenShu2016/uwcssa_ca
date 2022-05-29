@@ -40,7 +40,7 @@ export const getUserProfile = /* GraphQL */ `
     getUserProfile(id: $id) {
       id
       name
-      firstName
+      fullName
       contactEmail
       title
       about
@@ -62,7 +62,7 @@ export const listUserProfiles = /* GraphQL */ `
       items {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -232,7 +232,7 @@ export const getArticle = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -339,7 +339,7 @@ export const getComment = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about
@@ -419,7 +419,7 @@ export const getContactUs = /* GraphQL */ `
       user {
         id
         name
-        firstName
+        fullName
         contactEmail
         title
         about

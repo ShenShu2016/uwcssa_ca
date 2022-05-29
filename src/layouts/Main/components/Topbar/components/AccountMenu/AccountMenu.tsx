@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 15:29:13
+ * @LastEditTime: 2022-05-28 22:20:44
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
@@ -63,6 +63,7 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar
+              src={myUserProfile.avatarURL}
               {...stringAvatar(myUserProfile.name, {
                 width: 32,
                 height: 32,

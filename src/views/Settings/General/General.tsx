@@ -1,68 +1,82 @@
-import React from 'react';
-import { useFormik } from 'formik';
 import * as yup from 'yup';
+
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
-import Page from '../components/Page';
 import Main from 'layouts/Main';
+import Page from '../components/Page';
+import React from 'react';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { getOwnerUserName } from 'redux/auth/authSlice';
+import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
+import { useFormik } from 'formik';
 
 const validationSchema = yup.object({
   fullName: yup
     .string()
     .trim()
     .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your first name'),
-  email: yup
-    .string()
-    .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
-  bio: yup
-    .string()
-    .trim()
-    .max(500, 'Should be less than 500 chars'),
-  country: yup
+    .max(50, 'Please enter a valid name'),
+  contactEmail: yup.string().trim().email('Please enter a valid email address'),
+  about: yup.string().trim().max(1000, 'Should be less than 1000 chars'),
+  title: yup
     .string()
     .trim()
     .min(2, 'Please enter a valid name')
-    .max(80, 'Please enter a valid name')
-    .required('Please specify your country name'),
-  city: yup
+    .max(80, 'Please enter a valid name'),
+
+  avatarURL: yup
     .string()
     .trim()
-    .min(2, 'Please enter a valid name')
-    .max(80, 'Please enter a valid name')
-    .required('Please specify your city name'),
-  address: yup
+    .matches(
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      'Enter correct url!',
+    ),
+
+  website: yup
     .string()
-    .required('Please specify your address')
-    .min(2, 'Please enter a valid address')
-    .max(200, 'Please enter a valid address'),
+    .trim()
+    .matches(
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      'Enter correct url!',
+    ),
 });
 
 const General = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const ownerUsername = useAppSelector(getOwnerUserName);
+  const myUserProfile = useAppSelector(
+    (state) => state.userProfile.myUserProfile,
+  );
+  console.log('myUserProfile', myUserProfile);
   const initialValues = {
-    fullName: '',
-    bio: '',
-    email: '',
-    country: '',
-    city: '',
-    address: '',
+    fullName: myUserProfile.fullName || '',
+    about: myUserProfile.about || '',
+    contactEmail: myUserProfile.contactEmail || '',
+    title: myUserProfile.title || '',
+    avatarURL: myUserProfile.avatarURL || '',
+    website: myUserProfile.website || '',
   };
-
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(values);
+    const updateUserProfileInput = {
+      id: ownerUsername,
+      ...values,
+    };
+    const response = await dispatch(
+      updateUserProfileData(updateUserProfileInput),
+    );
     return values;
   };
 
   const formik = useFormik({
     initialValues,
+    enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit,
   });
@@ -92,10 +106,10 @@ const General = (): JSX.Element => {
                   sx={{ marginBottom: 2 }}
                   fontWeight={700}
                 >
-                  Enter your first name
+                  Enter your Full Name
                 </Typography>
                 <TextField
-                  label="First name *"
+                  label="Full Name *"
                   variant="outlined"
                   name={'fullName'}
                   fullWidth
@@ -116,14 +130,19 @@ const General = (): JSX.Element => {
                   Enter your email
                 </Typography>
                 <TextField
-                  label="Email *"
+                  label="Email"
                   variant="outlined"
-                  name={'email'}
+                  name={'contactEmail'}
                   fullWidth
-                  value={formik.values.email}
+                  value={formik.values.contactEmail}
                   onChange={formik.handleChange}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
+                  error={
+                    formik.touched.contactEmail &&
+                    Boolean(formik.errors.contactEmail)
+                  }
+                  helperText={
+                    formik.touched.contactEmail && formik.errors.contactEmail
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -132,19 +151,19 @@ const General = (): JSX.Element => {
                   sx={{ marginBottom: 2 }}
                   fontWeight={700}
                 >
-                  Bio
+                  About
                 </Typography>
                 <TextField
-                  label="Bio"
+                  label="Tell us about yourself"
                   variant="outlined"
-                  name={'bio'}
+                  name={'about'}
                   multiline
                   rows={5}
                   fullWidth
-                  value={formik.values.bio}
+                  value={formik.values.about}
                   onChange={formik.handleChange}
-                  error={formik.touched.bio && Boolean(formik.errors.bio)}
-                  helperText={formik.touched.bio && formik.errors.bio}
+                  error={formik.touched.about && Boolean(formik.errors.about)}
+                  helperText={formik.touched.about && formik.errors.about}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -156,19 +175,17 @@ const General = (): JSX.Element => {
                   sx={{ marginBottom: 2 }}
                   fontWeight={700}
                 >
-                  Country
+                  Title
                 </Typography>
                 <TextField
-                  label="Country *"
+                  label="Title"
                   variant="outlined"
-                  name={'country'}
+                  name={'title'}
                   fullWidth
-                  value={formik.values.country}
+                  value={formik.values.title}
                   onChange={formik.handleChange}
-                  error={
-                    formik.touched.country && Boolean(formik.errors.country)
-                  }
-                  helperText={formik.touched.country && formik.errors.country}
+                  error={formik.touched.title && Boolean(formik.errors.title)}
+                  helperText={formik.touched.title && formik.errors.title}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -177,17 +194,21 @@ const General = (): JSX.Element => {
                   sx={{ marginBottom: 2 }}
                   fontWeight={700}
                 >
-                  City
+                  头像图片地址
                 </Typography>
                 <TextField
-                  label="City *"
+                  label="www.xxx.com.jpg"
                   variant="outlined"
-                  name={'city'}
+                  name={'avatarURL'}
                   fullWidth
-                  value={formik.values.city}
+                  value={formik.values.avatarURL}
                   onChange={formik.handleChange}
-                  error={formik.touched.city && Boolean(formik.errors.city)}
-                  helperText={formik.touched.city && formik.errors.city}
+                  error={
+                    formik.touched.avatarURL && Boolean(formik.errors.avatarURL)
+                  }
+                  helperText={
+                    formik.touched.avatarURL && formik.errors.avatarURL
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -196,19 +217,19 @@ const General = (): JSX.Element => {
                   sx={{ marginBottom: 2 }}
                   fontWeight={700}
                 >
-                  Enter your address
+                  Enter your website
                 </Typography>
                 <TextField
-                  label="Address *"
+                  label="Website"
                   variant="outlined"
-                  name={'address'}
+                  name={'website'}
                   fullWidth
-                  value={formik.values.address}
+                  value={formik.values.website}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.address && Boolean(formik.errors.address)
+                    formik.touched.website && Boolean(formik.errors.website)
                   }
-                  helperText={formik.touched.address && formik.errors.address}
+                  helperText={formik.touched.website && formik.errors.website}
                 />
               </Grid>
               <Grid item container xs={12}>
@@ -220,10 +241,11 @@ const General = (): JSX.Element => {
                   width={1}
                   margin={'0 auto'}
                 >
-                  <Box marginBottom={{ xs: 1, sm: 0 }}>
+                  {/* <Box marginBottom={{ xs: 1, sm: 0 }}>
                     <Typography variant={'subtitle2'}>
                       You may also consider to update your{' '}
                       <Link
+                      
                         color={'primary'}
                         href={'/account-billing'}
                         underline={'none'}
@@ -231,7 +253,7 @@ const General = (): JSX.Element => {
                         billing information.
                       </Link>
                     </Typography>
-                  </Box>
+                  </Box> */}
                   <Button size={'large'} variant={'contained'} type={'submit'}>
                     Save
                   </Button>
