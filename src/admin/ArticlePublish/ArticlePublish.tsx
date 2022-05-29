@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-29 16:19:41
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-29 17:48:03
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
  */
 
@@ -17,7 +17,9 @@ import AddTags from './components/AddTags';
 import { AdminLayout } from 'layouts';
 import Box from '@mui/material/Box';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import CkeditorS3UploadAdapter from 'components/CkeditorS3UploadAdapter';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import FullScreenLoading from 'components/FullScreenLoading';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MyImageList from './components/MyImageList';
 import TextField from '@mui/material/TextField';
@@ -26,16 +28,24 @@ import { postArticle } from 'redux/article/articleSlice';
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
-import FullScreenLoading from 'components/FullScreenLoading';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import Image from '@ckeditor/ckeditor5-image/src/image';
+
 interface Tag {
   tagID: string;
 }
 
-
 const ArticlePublish = () => {
   const dispatch = useAppDispatch();
+  const test = useAppSelector((state) => state.auth);
+  console.log(test);
+  const authUser = useAppSelector((state) => state.auth.user);
+  function MyCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return new CkeditorS3UploadAdapter(loader, dispatch, {
+        authUser,
+        targetTable: 'Article',
+      });
+    };
+  }
   const message = useMessage();
   const navigate = useNavigate();
   const username = useAppSelector(getOwnerUserName);
@@ -47,11 +57,11 @@ const ArticlePublish = () => {
   const [imgFile, setImgFile] = useState('');
   const [inputStatus, setInputStatus] = useState({
     title: false,
-    desc: false
+    desc: false,
   });
   const [fullScreenLoading, setFullScreenLoading] = useState({
     loading: false,
-    message: ''
+    message: '',
   });
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
@@ -62,7 +72,7 @@ const ArticlePublish = () => {
   const handleFocus = (key) => {
     setInputStatus((prev) => ({
       ...prev,
-      [key]: false
+      [key]: false,
     }));
   };
 
@@ -76,18 +86,18 @@ const ArticlePublish = () => {
     if (!title || !coverPageDescription || !content) {
       setInputStatus(() => ({
         title: !title,
-        desc: !coverPageDescription
+        desc: !coverPageDescription,
       }));
       setSubmitLoading(false);
       message.open({
         type: 'error',
-        message: !content ? '请填写文章内容' : '文章信息不全，无法发布'
+        message: !content ? '请填写文章内容' : '文章信息不全，无法发布',
       });
       return;
     }
     setFullScreenLoading({
       loading: true,
-      message: '正在创建标签和文章'
+      message: '正在创建标签和文章',
     });
     // 创建tag 和 创建文章异步进行 因为此时tag和文章之间没有依赖关系
     const [tagCreate, articleCreate] = await Promise.all([
@@ -96,7 +106,7 @@ const ArticlePublish = () => {
     ]);
     setFullScreenLoading({
       loading: true,
-      message: '正在关联文章和标签'
+      message: '正在关联文章和标签',
     });
     // 都完成后进行tag与文章的关联
     if (tagCreate.status && articleCreate.status) {
@@ -111,12 +121,12 @@ const ArticlePublish = () => {
         });
         setFullScreenLoading({
           loading: true,
-          message: '发布完成，即将跳转'
+          message: '发布完成，即将跳转',
         });
         setTimeout(() => {
           setFullScreenLoading({
             loading: false,
-            message: ''
+            message: '',
           });
           setSubmitLoading(false);
           navigate('/dashboard', { replace: true });
@@ -282,10 +292,11 @@ const ArticlePublish = () => {
               editor={Editor}
               data={content}
               config={{
-                ckfinder: {
-                // Upload the images to the server using the CKFinder QuickUpload command.
-                  uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
-                }
+                extraPlugins: [MyCustomUploadAdapterPlugin],
+                // ckfinder: {
+                // // Upload the images to the server using the CKFinder QuickUpload command.
+                //   uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                // }
               }}
               onReady={(editor) => {
                 console.log('Editor is ready to use!', editor);
@@ -326,6 +337,5 @@ const ArticlePublish = () => {
     </AdminLayout>
   );
 };
-
 
 export default ArticlePublish;
