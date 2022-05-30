@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-23 19:00:55
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-29 16:09:29
+ * @LastEditTime: 2022-05-30 08:37:52
  * @FilePath: /uwcssa_ca/src/views/Logistics/components/News/News.tsx
  * @Description:
  *
@@ -27,6 +27,7 @@ import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import './index.css';
 
 const News = (): JSX.Element => {
   const theme = useTheme();
@@ -110,7 +111,7 @@ const News = (): JSX.Element => {
                       >
                         {item.title}
                       </Typography>
-                      <Typography variant="subtitle1" color="text.secondary">
+                      <Typography variant="subtitle1" color="text.secondary" className='article-list-text'>
                         {item.coverPageDescription}
                       </Typography>
                     </Box>
