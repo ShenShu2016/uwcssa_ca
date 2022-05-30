@@ -2,7 +2,7 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-29 10:31:20
+ * @LastEditTime: 2022-05-30 10:04:15
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -135,14 +135,16 @@ const BlogWithLargeImage = (): JSX.Element => {
                           {item.user.name} - {moment(item.createdAt).fromNow()}
                         </Typography>
                       </Box>
-                      <Typography
-                        color="#eeeeee"
-                        sx={{ fontSize: 12, minHeight: '54px' }}
-                        className="article-list-text"
-                      >
-                        {item.coverPageDescription}
-                        {/* { contentStr } */}
-                      </Typography>
+                      <Box minHeight={'60px'}>
+                        <Typography
+                          color="#eeeeee"
+                          sx={{ fontSize: 12 }}
+                          className="article-list-text"
+                        >
+                          {item.coverPageDescription}
+                          {/* { contentStr } */}
+                        </Typography>
+                      </Box>
                       <Button
                         component={Link}
                         color={'primary'}
