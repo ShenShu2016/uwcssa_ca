@@ -2,12 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 15:58:48
+ * @LastEditTime: 2022-05-29 23:43:50
  * @FilePath: /uwcssa_ca/src/Routes.tsx
  * @Description:
  *
  */
 
+import { AdminLayout, Main } from 'layouts';
 import {
   Navigate,
   Routes as ReactRoutes,
@@ -40,7 +41,7 @@ const Routes = (): JSX.Element => {
               redirectPath={item.redirectPath}
               isAllowed={item.isAllowed}
             >
-              {item.renderer()}
+              <Main>{item.renderer()}</Main>
             </ProtectedRoute>
           }
         />
@@ -54,7 +55,7 @@ const Routes = (): JSX.Element => {
               redirectPath={item.redirectPath}
               isAllowed={item.isAllowed}
             >
-              {item.renderer()}
+              <AdminLayout>{item.renderer()}</AdminLayout>
             </ProtectedRoute>
           }
         />
