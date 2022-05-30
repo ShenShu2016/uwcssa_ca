@@ -217,3 +217,76 @@ type Like
   updatedAt: AWSDateTime!
   owner: ID!
 }
+
+type ResearchDevelopmentTeam
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner, operations: [update] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  title: String
+  subTitle: String
+  content: String
+  imgURL: AWSURL
+  email: AWSEmail
+  linkedIn: AWSURL
+  github: AWSURL
+  website: AWSURL
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+type UwcssaDepartment
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID! #用来做名字
+  introduction: String
+  email: AWSEmail
+  leader: ID
+  currentLeader: UserProfile @hasOne(fields: ["leader"])
+  uwcssaMembers: [UwcssaMember] @hasMany
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+}
+
+type UwcssaMember
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner, operations: [update] }
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  title: String
+  subTitle: String
+  content: String
+  imgURL: AWSURL
+  email: AWSEmail
+  department: UwcssaDepartment @belongsTo
+  linkedIn: AWSURL
+  website: AWSURL
+  github: AWSURL
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+  user: UserProfile @hasOne(fields: ["owner"])
+}

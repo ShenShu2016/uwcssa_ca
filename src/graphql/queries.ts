@@ -566,6 +566,193 @@ export const listLikes = /* GraphQL */ `
     }
   }
 `;
+export const getResearchDevelopmentTeam = /* GraphQL */ `
+  query GetResearchDevelopmentTeam($id: ID!) {
+    getResearchDevelopmentTeam(id: $id) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      linkedIn
+      github
+      website
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const listResearchDevelopmentTeams = /* GraphQL */ `
+  query ListResearchDevelopmentTeams(
+    $filter: ModelResearchDevelopmentTeamFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listResearchDevelopmentTeams(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        title
+        subTitle
+        content
+        imgURL
+        email
+        linkedIn
+        github
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaDepartment = /* GraphQL */ `
+  query GetUwcssaDepartment($id: ID!) {
+    getUwcssaDepartment(id: $id) {
+      id
+      introduction
+      email
+      leader
+      currentLeader {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaMembers {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listUwcssaDepartments = /* GraphQL */ `
+  query ListUwcssaDepartments(
+    $filter: ModelUwcssaDepartmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaDepartments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getUwcssaMember = /* GraphQL */ `
+  query GetUwcssaMember($id: ID!) {
+    getUwcssaMember(id: $id) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      department {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      linkedIn
+      website
+      github
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaDepartmentUwcssaMembersId
+    }
+  }
+`;
+export const listUwcssaMembers = /* GraphQL */ `
+  query ListUwcssaMembers(
+    $filter: ModelUwcssaMemberFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUwcssaMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        title
+        subTitle
+        content
+        imgURL
+        email
+        linkedIn
+        website
+        github
+        createdAt
+        updatedAt
+        owner
+        uwcssaDepartmentUwcssaMembersId
+      }
+      nextToken
+    }
+  }
+`;
 export const getArticleTags = /* GraphQL */ `
   query GetArticleTags($id: ID!) {
     getArticleTags(id: $id) {

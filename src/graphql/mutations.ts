@@ -875,6 +875,351 @@ export const deleteLike = /* GraphQL */ `
     }
   }
 `;
+export const createResearchDevelopmentTeam = /* GraphQL */ `
+  mutation CreateResearchDevelopmentTeam(
+    $input: CreateResearchDevelopmentTeamInput!
+    $condition: ModelResearchDevelopmentTeamConditionInput
+  ) {
+    createResearchDevelopmentTeam(input: $input, condition: $condition) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      linkedIn
+      github
+      website
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const updateResearchDevelopmentTeam = /* GraphQL */ `
+  mutation UpdateResearchDevelopmentTeam(
+    $input: UpdateResearchDevelopmentTeamInput!
+    $condition: ModelResearchDevelopmentTeamConditionInput
+  ) {
+    updateResearchDevelopmentTeam(input: $input, condition: $condition) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      linkedIn
+      github
+      website
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const deleteResearchDevelopmentTeam = /* GraphQL */ `
+  mutation DeleteResearchDevelopmentTeam(
+    $input: DeleteResearchDevelopmentTeamInput!
+    $condition: ModelResearchDevelopmentTeamConditionInput
+  ) {
+    deleteResearchDevelopmentTeam(input: $input, condition: $condition) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      linkedIn
+      github
+      website
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const createUwcssaDepartment = /* GraphQL */ `
+  mutation CreateUwcssaDepartment(
+    $input: CreateUwcssaDepartmentInput!
+    $condition: ModelUwcssaDepartmentConditionInput
+  ) {
+    createUwcssaDepartment(input: $input, condition: $condition) {
+      id
+      introduction
+      email
+      leader
+      currentLeader {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaMembers {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateUwcssaDepartment = /* GraphQL */ `
+  mutation UpdateUwcssaDepartment(
+    $input: UpdateUwcssaDepartmentInput!
+    $condition: ModelUwcssaDepartmentConditionInput
+  ) {
+    updateUwcssaDepartment(input: $input, condition: $condition) {
+      id
+      introduction
+      email
+      leader
+      currentLeader {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaMembers {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteUwcssaDepartment = /* GraphQL */ `
+  mutation DeleteUwcssaDepartment(
+    $input: DeleteUwcssaDepartmentInput!
+    $condition: ModelUwcssaDepartmentConditionInput
+  ) {
+    deleteUwcssaDepartment(input: $input, condition: $condition) {
+      id
+      introduction
+      email
+      leader
+      currentLeader {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaMembers {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createUwcssaMember = /* GraphQL */ `
+  mutation CreateUwcssaMember(
+    $input: CreateUwcssaMemberInput!
+    $condition: ModelUwcssaMemberConditionInput
+  ) {
+    createUwcssaMember(input: $input, condition: $condition) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      department {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      linkedIn
+      website
+      github
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaDepartmentUwcssaMembersId
+    }
+  }
+`;
+export const updateUwcssaMember = /* GraphQL */ `
+  mutation UpdateUwcssaMember(
+    $input: UpdateUwcssaMemberInput!
+    $condition: ModelUwcssaMemberConditionInput
+  ) {
+    updateUwcssaMember(input: $input, condition: $condition) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      department {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      linkedIn
+      website
+      github
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaDepartmentUwcssaMembersId
+    }
+  }
+`;
+export const deleteUwcssaMember = /* GraphQL */ `
+  mutation DeleteUwcssaMember(
+    $input: DeleteUwcssaMemberInput!
+    $condition: ModelUwcssaMemberConditionInput
+  ) {
+    deleteUwcssaMember(input: $input, condition: $condition) {
+      id
+      name
+      title
+      subTitle
+      content
+      imgURL
+      email
+      department {
+        id
+        introduction
+        email
+        leader
+        createdAt
+        updatedAt
+        owner
+      }
+      linkedIn
+      website
+      github
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      uwcssaDepartmentUwcssaMembersId
+    }
+  }
+`;
 export const createArticleTags = /* GraphQL */ `
   mutation CreateArticleTags(
     $input: CreateArticleTagsInput!

@@ -619,6 +619,210 @@ export type DeleteLikeInput = {
   id: string,
 };
 
+export type CreateResearchDevelopmentTeamInput = {
+  id?: string | null,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  github?: string | null,
+  website?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelResearchDevelopmentTeamConditionInput = {
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelResearchDevelopmentTeamConditionInput | null > | null,
+  or?: Array< ModelResearchDevelopmentTeamConditionInput | null > | null,
+  not?: ModelResearchDevelopmentTeamConditionInput | null,
+};
+
+export type ResearchDevelopmentTeam = {
+  __typename: "ResearchDevelopmentTeam",
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  github?: string | null,
+  website?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+};
+
+export type UpdateResearchDevelopmentTeamInput = {
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  github?: string | null,
+  website?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteResearchDevelopmentTeamInput = {
+  id: string,
+};
+
+export type CreateUwcssaDepartmentInput = {
+  id?: string | null,
+  introduction?: string | null,
+  email?: string | null,
+  leader?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelUwcssaDepartmentConditionInput = {
+  introduction?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  leader?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaDepartmentConditionInput | null > | null,
+  or?: Array< ModelUwcssaDepartmentConditionInput | null > | null,
+  not?: ModelUwcssaDepartmentConditionInput | null,
+};
+
+export type UwcssaDepartment = {
+  __typename: "UwcssaDepartment",
+  id: string,
+  introduction?: string | null,
+  email?: string | null,
+  leader?: string | null,
+  currentLeader?: UserProfile | null,
+  uwcssaMembers?: ModelUwcssaMemberConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+};
+
+export type ModelUwcssaMemberConnection = {
+  __typename: "ModelUwcssaMemberConnection",
+  items:  Array<UwcssaMember | null >,
+  nextToken?: string | null,
+};
+
+export type UwcssaMember = {
+  __typename: "UwcssaMember",
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  department?: UwcssaDepartment | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
+};
+
+export type UpdateUwcssaDepartmentInput = {
+  id: string,
+  introduction?: string | null,
+  email?: string | null,
+  leader?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteUwcssaDepartmentInput = {
+  id: string,
+};
+
+export type CreateUwcssaMemberInput = {
+  id?: string | null,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
+};
+
+export type ModelUwcssaMemberConditionInput = {
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaMemberConditionInput | null > | null,
+  or?: Array< ModelUwcssaMemberConditionInput | null > | null,
+  not?: ModelUwcssaMemberConditionInput | null,
+  uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null,
+};
+
+export type UpdateUwcssaMemberInput = {
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
+};
+
+export type DeleteUwcssaMemberInput = {
+  id: string,
+};
+
 export type CreateArticleTagsInput = {
   id?: string | null,
   tagID: string,
@@ -832,6 +1036,70 @@ export type ModelLikeFilterInput = {
   not?: ModelLikeFilterInput | null,
   articleLikesId?: ModelIDInput | null,
   commentLikesId?: ModelIDInput | null,
+};
+
+export type ModelResearchDevelopmentTeamFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelResearchDevelopmentTeamFilterInput | null > | null,
+  or?: Array< ModelResearchDevelopmentTeamFilterInput | null > | null,
+  not?: ModelResearchDevelopmentTeamFilterInput | null,
+};
+
+export type ModelResearchDevelopmentTeamConnection = {
+  __typename: "ModelResearchDevelopmentTeamConnection",
+  items:  Array<ResearchDevelopmentTeam | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUwcssaDepartmentFilterInput = {
+  id?: ModelIDInput | null,
+  introduction?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  leader?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaDepartmentFilterInput | null > | null,
+  or?: Array< ModelUwcssaDepartmentFilterInput | null > | null,
+  not?: ModelUwcssaDepartmentFilterInput | null,
+};
+
+export type ModelUwcssaDepartmentConnection = {
+  __typename: "ModelUwcssaDepartmentConnection",
+  items:  Array<UwcssaDepartment | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUwcssaMemberFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaMemberFilterInput | null > | null,
+  or?: Array< ModelUwcssaMemberFilterInput | null > | null,
+  not?: ModelUwcssaMemberFilterInput | null,
+  uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null,
 };
 
 export type ModelArticleTagsFilterInput = {
@@ -1815,6 +2083,384 @@ export type DeleteLikeMutation = {
   } | null,
 };
 
+export type CreateResearchDevelopmentTeamMutationVariables = {
+  input: CreateResearchDevelopmentTeamInput,
+  condition?: ModelResearchDevelopmentTeamConditionInput | null,
+};
+
+export type CreateResearchDevelopmentTeamMutation = {
+  createResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type UpdateResearchDevelopmentTeamMutationVariables = {
+  input: UpdateResearchDevelopmentTeamInput,
+  condition?: ModelResearchDevelopmentTeamConditionInput | null,
+};
+
+export type UpdateResearchDevelopmentTeamMutation = {
+  updateResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type DeleteResearchDevelopmentTeamMutationVariables = {
+  input: DeleteResearchDevelopmentTeamInput,
+  condition?: ModelResearchDevelopmentTeamConditionInput | null,
+};
+
+export type DeleteResearchDevelopmentTeamMutation = {
+  deleteResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type CreateUwcssaDepartmentMutationVariables = {
+  input: CreateUwcssaDepartmentInput,
+  condition?: ModelUwcssaDepartmentConditionInput | null,
+};
+
+export type CreateUwcssaDepartmentMutation = {
+  createUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type UpdateUwcssaDepartmentMutationVariables = {
+  input: UpdateUwcssaDepartmentInput,
+  condition?: ModelUwcssaDepartmentConditionInput | null,
+};
+
+export type UpdateUwcssaDepartmentMutation = {
+  updateUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type DeleteUwcssaDepartmentMutationVariables = {
+  input: DeleteUwcssaDepartmentInput,
+  condition?: ModelUwcssaDepartmentConditionInput | null,
+};
+
+export type DeleteUwcssaDepartmentMutation = {
+  deleteUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type CreateUwcssaMemberMutationVariables = {
+  input: CreateUwcssaMemberInput,
+  condition?: ModelUwcssaMemberConditionInput | null,
+};
+
+export type CreateUwcssaMemberMutation = {
+  createUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
+};
+
+export type UpdateUwcssaMemberMutationVariables = {
+  input: UpdateUwcssaMemberInput,
+  condition?: ModelUwcssaMemberConditionInput | null,
+};
+
+export type UpdateUwcssaMemberMutation = {
+  updateUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
+};
+
+export type DeleteUwcssaMemberMutationVariables = {
+  input: DeleteUwcssaMemberInput,
+  condition?: ModelUwcssaMemberConditionInput | null,
+};
+
+export type DeleteUwcssaMemberMutation = {
+  deleteUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
+};
+
 export type CreateArticleTagsMutationVariables = {
   input: CreateArticleTagsInput,
   condition?: ModelArticleTagsConditionInput | null,
@@ -2548,6 +3194,211 @@ export type ListLikesQuery = {
       owner: string,
       articleLikesId?: string | null,
       commentLikesId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResearchDevelopmentTeamQueryVariables = {
+  id: string,
+};
+
+export type GetResearchDevelopmentTeamQuery = {
+  getResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type ListResearchDevelopmentTeamsQueryVariables = {
+  filter?: ModelResearchDevelopmentTeamFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResearchDevelopmentTeamsQuery = {
+  listResearchDevelopmentTeams?:  {
+    __typename: "ModelResearchDevelopmentTeamConnection",
+    items:  Array< {
+      __typename: "ResearchDevelopmentTeam",
+      id: string,
+      name?: string | null,
+      title?: string | null,
+      subTitle?: string | null,
+      content?: string | null,
+      imgURL?: string | null,
+      email?: string | null,
+      linkedIn?: string | null,
+      github?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUwcssaDepartmentQueryVariables = {
+  id: string,
+};
+
+export type GetUwcssaDepartmentQuery = {
+  getUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
+};
+
+export type ListUwcssaDepartmentsQueryVariables = {
+  filter?: ModelUwcssaDepartmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUwcssaDepartmentsQuery = {
+  listUwcssaDepartments?:  {
+    __typename: "ModelUwcssaDepartmentConnection",
+    items:  Array< {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUwcssaMemberQueryVariables = {
+  id: string,
+};
+
+export type GetUwcssaMemberQuery = {
+  getUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
+};
+
+export type ListUwcssaMembersQueryVariables = {
+  filter?: ModelUwcssaMemberFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUwcssaMembersQuery = {
+  listUwcssaMembers?:  {
+    __typename: "ModelUwcssaMemberConnection",
+    items:  Array< {
+      __typename: "UwcssaMember",
+      id: string,
+      name?: string | null,
+      title?: string | null,
+      subTitle?: string | null,
+      content?: string | null,
+      imgURL?: string | null,
+      email?: string | null,
+      linkedIn?: string | null,
+      website?: string | null,
+      github?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaMembersId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
