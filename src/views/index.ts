@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-16 22:03:25
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 15:54:31
+ * @LastEditTime: 2022-05-29 23:03:19
  * @FilePath: /uwcssa_ca/src/views/index.ts
  * @Description:
  */
@@ -24,7 +24,7 @@ export { default as ReduxCounter } from './ReduxCounter';
 // export { default as WebBasic } from './WebBasic';
 // export { default as DesktopApp } from './DesktopApp';
 // export { default as Expo } from './Expo';
-// export { default as Startup } from './Startup';
+export { default as ResearchDevelopment } from './ResearchDevelopment';
 // export { default as DesignCompany } from './DesignCompany';
 // export { default as MobileApp } from './MobileApp';
 // export { default as JobListing } from './JobListing';

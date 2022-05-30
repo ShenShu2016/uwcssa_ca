@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 16:39:55
+ * @LastEditTime: 2022-05-29 23:04:57
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -35,8 +35,8 @@ const pages = {
       href: '/reduxCounter',
     },
     {
-      title: 'Second Home',
-      href: '/index',
+      title: 'Research & Development Team',
+      href: '/research-development-team',
     },
     {
       title: '后台管理',

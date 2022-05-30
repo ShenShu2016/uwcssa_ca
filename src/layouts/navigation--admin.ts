@@ -34,57 +34,34 @@ const pages = [
       // },
     ],
   },
-  // {
-  //   groupTitle: 'Theme UI',
-  //   id: 'theme-ui',
-  //   pages: [
-  //     {
-  //       title: 'Colors',
-  //       href: '/docs/colors',
-  //     },
-  //     {
-  //       title: 'Typography',
-  //       href: '/docs/typography',
-  //     },
-  //     {
-  //       title: 'Shadows',
-  //       href: '/docs/shadows',
-  //     },
-  //     {
-  //       title: 'Page',
-  //       href: '/docs/page',
-  //     },
-  //     {
-  //       title: 'Container',
-  //       href: '/docs/container',
-  //     },
-  //     {
-  //       title: 'Layouts',
-  //       href: '/docs/layouts',
-  //     },
-  //     {
-  //       title: 'Icons',
-  //       href: '/docs/icons',
-  //     },
-  //     {
-  //       title: 'Illustrations',
-  //       href: '/docs/illustrations',
-  //     },
-  //     {
-  //       title: 'Components',
-  //       href: '/blocks',
-  //     },
-  //     {
-  //       title: 'Demo Pages',
-  //       href: '/demos',
-  //     },
-  //     {
-  //       title: 'MUI Components',
-  //       href: 'https://mui.com/components/box/',
-  //       target: '_blank',
-  //     },
-  //   ],
-  // },
+  {
+    groupTitle: 'UWCSSA Department',
+    id: 'uwcssa-department',
+    pages: [
+      {
+        title: 'Department',
+        href: '/admin/uwcssa-department',
+      },
+      {
+        title: 'Add New Department',
+        href: '/admin/uwcssa-department/add',
+      },
+    ],
+  },
+  {
+    groupTitle: 'UWCSSA Research & Development',
+    id: 'uwcssa-research-development',
+    pages: [
+      {
+        title: 'Research & Development',
+        href: '/admin/uwcssa-research-development',
+      },
+      {
+        title: 'Add New Developer',
+        href: '/admin/uwcssa-research-development/add',
+      },
+    ],
+  },
   // {
   //   groupTitle: 'Plugins',
   //   id: 'plugins',
