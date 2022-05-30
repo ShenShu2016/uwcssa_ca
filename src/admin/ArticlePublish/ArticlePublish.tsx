@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-29 17:48:03
+ * @LastEditTime: 2022-05-29 21:53:20
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
  */
@@ -27,6 +27,7 @@ import { getOwnerUserName } from 'redux/auth/authSlice';
 import { postArticle } from 'redux/article/articleSlice';
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
+import { useTheme } from '@mui/material/styles';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Tag {
@@ -34,6 +35,7 @@ interface Tag {
 }
 
 const ArticlePublish = () => {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
   const test = useAppSelector((state) => state.auth);
   console.log(test);
@@ -287,16 +289,36 @@ const ArticlePublish = () => {
             onChange={(e) => setCoverPageDescription(e.target.value)}
             onFocus={() => handleFocus('desc')}
           />
-          <Box height="calc(100% - 180px)" overflow-x="hidden">
+          <Box
+            height="calc(100% - 180px)"
+            overflow-x="hidden"
+            sx={{
+              '& .ck.ck-editor__main>.ck-editor__editable': {
+                backgroundColor: theme.palette.background.paper,
+              },
+              '& .ck.ck-toolbar': {
+                backgroundColor: theme.palette.background.paper,
+              },
+              '& .ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset_all':
+                {
+                  color: theme.palette.text.primary,
+                },
+              '& .ck.ck-list': {
+                backgroundColor: theme.palette.background.paper,
+              },
+              '& .ck.ck-list__item .ck-button:hover:not(.ck-disabled)': {
+                backgroundColor: theme.palette.primary.light,
+              },
+              '& .ck.ck-button.ck-on, a.ck.ck-button.ck-on': {
+                backgroundColor: theme.palette.background.paper,
+              },
+            }}
+          >
             <CKEditor
               editor={Editor}
               data={content}
               config={{
                 extraPlugins: [MyCustomUploadAdapterPlugin],
-                // ckfinder: {
-                // // Upload the images to the server using the CKFinder QuickUpload command.
-                //   uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
-                // }
               }}
               onReady={(editor) => {
                 console.log('Editor is ready to use!', editor);

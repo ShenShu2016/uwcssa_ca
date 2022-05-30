@@ -7,7 +7,7 @@
  * @Description:
  *
  */
-// AWS https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/ContactUsHandler-devts?tab=code
+// AWS https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/ArticlePublishHandler-devts?tab=code
 
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
