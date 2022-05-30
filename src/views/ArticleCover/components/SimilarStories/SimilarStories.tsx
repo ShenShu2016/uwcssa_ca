@@ -2,24 +2,26 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 02:06:04
+ * @LastEditTime: 2022-05-30 13:48:52
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SimilarStories/SimilarStories.tsx
  * @Description:
  *
  */
 
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Divider,
+  Grid,
+  Typography,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
 import React from 'react';
-import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import { selectAllArticles } from 'redux/article/articleSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
@@ -34,7 +36,7 @@ const SimilarStories = (): JSX.Element => {
     .sort(() => 0.5 - Math.random())
     .slice(0, 3)
     .map((index) => articles[index]);
-  console.log(randomArticles);
+
   return (
     <Box>
       <Box

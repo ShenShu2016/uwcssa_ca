@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:49:37
+ * @LastEditTime: 2022-05-30 12:33:27
  * @FilePath: /uwcssa_ca/src/Routes.tsx
  * @Description:
  *
@@ -41,7 +41,7 @@ const Routes = (): JSX.Element => {
               redirectPath={item.redirectPath}
               isAllowed={item.isAllowed}
             >
-              <Main>{item.renderer()}</Main>
+              <Main colorInvert={item.colorInvert}>{item.renderer()}</Main>
               {/* 需要处理一下 colorInvert={true} 的问题 */}
             </ProtectedRoute>
           }

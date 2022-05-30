@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-30 10:04:15
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-30 13:50:04
  * @FilePath: /uwcssa_ca/src/components/BlogWithLargeImage/BlogWithLargeImage.tsx
  * @Description:
  *
@@ -11,23 +11,29 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import './index.css';
+
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Grid,
+  Typography,
+} from '@mui/material';
 import React, { useEffect } from 'react';
 import {
   fetchArticleList,
   selectAllArticles,
 } from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-// import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+
 import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import moment from 'moment';
+
+// import Divider from '@mui/material/Divider';
+
 // import { useTheme } from '@mui/material/styles';
 
 // import Container from 'components/Container';
@@ -38,7 +44,6 @@ const BlogWithLargeImage = (): JSX.Element => {
   const isAuth = useAppSelector(getAuthState); //看一下Auth的选项他有可能会返回null 或者false 现在前面没有load 好user 就不让你进了，所以有可能不需要 ！==null的判断了
   const articles = useAppSelector(selectAllArticles); // redux 有这种用法
   const { fetchArticleListStatus } = useAppSelector((state) => state.article);
-  console.log('articles', articles);
 
   useEffect(() => {
     const getArticles = async () => {
@@ -103,9 +108,9 @@ const BlogWithLargeImage = (): JSX.Element => {
                     >
                       <Box>
                         {item?.tags
-                          ? item?.tags?.items.map((tag) => (
+                          ? item?.tags?.items.map((tag, i) => (
                               <Chip
-                                key={tag.tagID}
+                                key={tag.tagID + i} // 为啥有两个一样的tag
                                 label={tag.tagID}
                                 component={Link} //用react router
                                 to="" //用react router

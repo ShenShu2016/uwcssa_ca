@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:07:37
+ * @LastEditTime: 2022-05-30 12:33:10
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -43,6 +43,7 @@ function ViewRoutes(): Array<{
   renderer: Function;
   isAllowed: boolean | void;
   redirectPath: string | undefined;
+  colorInvert?: boolean;
 }> {
   const isAuth = useAppSelector(getAuthState);
   const isAdmin = useAppSelector(getIsAdmin);
@@ -149,6 +150,7 @@ function ViewRoutes(): Array<{
       ),
       isAllowed: true,
       redirectPath: undefined,
+      colorInvert: true,
     },
     // {
     //   path: '/design-company',
@@ -245,6 +247,7 @@ function ViewRoutes(): Array<{
       renderer: (params = {}): JSX.Element => <ArticleCoverView {...params} />,
       isAllowed: true,
       redirectPath: '/',
+      colorInvert: true,
     },
     // {
     //   path: '/blog-reach-view',
