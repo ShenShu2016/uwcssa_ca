@@ -1,4 +1,5 @@
 .article-list-text {
+    height: auto;
     font-size: 12px;
     overflow: hidden; 
     text-overflow: ellipsis;
