@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 15:54:29
+ * @LastEditTime: 2022-05-29 23:07:37
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -26,6 +26,7 @@ import {
   NotFoundCover as NotFoundCoverView,
   PasswordResetCover as PasswordResetCoverView,
   ReduxCounter as ReduxCounterView,
+  ResearchDevelopment as ResearchDevelopmentView,
   SigninCover as SigninCoverView,
   SignupCover as SignupCoverView,
 } from 'views';
@@ -141,10 +142,14 @@ function ViewRoutes(): Array<{
     //   path: '/agency',
     //   renderer: (params = {}): JSX.Element => <AgencyView {...params} />,
     // },
-    // {
-    //   path: '/startup',
-    //   renderer: (params = {}): JSX.Element => <StartupView {...params} />,
-    // },
+    {
+      path: '/research-development-team',
+      renderer: (params = {}): JSX.Element => (
+        <ResearchDevelopmentView {...params} />
+      ),
+      isAllowed: true,
+      redirectPath: undefined,
+    },
     // {
     //   path: '/design-company',
     //   renderer: (params = {}): JSX.Element => <DesignCompanyView {...params} />,
