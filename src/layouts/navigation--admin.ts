@@ -4,12 +4,16 @@ const pages = [
     id: 'getting-started',
     pages: [
       {
-        title: 'Admin Dashboard',
+        title: 'Dashboard',
         href: '/admin',
       },
       {
-        title: 'Publish Article',
+        title: '发布文章',
         href: '/admin/article-publish',
+      },
+      {
+        title: '编辑文章',
+        href: '/admin/article-edit',
       },
       // {
       //   title: 'Quick Start (React Scripts)',

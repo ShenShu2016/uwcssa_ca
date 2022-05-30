@@ -1,14 +1,15 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-05-28 15:57:31
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-30 11:23:32
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
 import {
   AdminDashboard as AdminDashboardView,
   ArticlePublish as ArticlePublishView,
+  ArticleEdit as ArticleEditView
 } from 'admin';
 import { getAuthState, getIsAdmin } from 'redux/auth/authSlice';
 
@@ -36,6 +37,18 @@ function AdminRoutes(): Array<{
     },
     {
       path: '/admin/article-publish',
+      renderer: (): JSX.Element => <ArticlePublishView />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
+      path: '/admin/article-edit',
+      renderer: (): JSX.Element => <ArticleEditView />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
+      path: '/admin/article-edit/:id',
       renderer: (): JSX.Element => <ArticlePublishView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
