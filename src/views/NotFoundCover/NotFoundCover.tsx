@@ -1,10 +1,19 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 23:55:36
+ * @FilePath: /uwcssa_ca/src/views/NotFoundCover/NotFoundCover.tsx
+ * @Description:
+ *
+ */
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from 'components/Container';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { Link as MUILink } from '@mui/material';
-import Main from 'layouts/Main';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -17,7 +26,7 @@ const NotFoundCover = (): JSX.Element => {
   });
 
   return (
-    <Main>
+    <>
       <Box
         sx={{
           width: 1,
@@ -159,7 +168,7 @@ const NotFoundCover = (): JSX.Element => {
           </Box>
         </Container>
       </Box>
-    </Main>
+    </>
   );
 };
 

@@ -1,82 +1,84 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 13:56:36
- * @LastEditTime: 2022-05-30 09:29:07
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-29 23:54:00
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/views/Home/Home.tsx
  */
-import React from 'react';
-import Box from '@mui/material/Box';
-import Main from 'layouts/Main';
-import ArticleContainer from 'components/ArticleContainer';
-import Card from '@mui/material/Card';
-import UserCardGrid from 'components/UserCardGrid';
-import Button from '@mui/material/Button';
-import Section from './components/Section';
-import Entries from './components/Entries';
-import { styled } from '@mui/material/styles';
+
 import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ArticleContainer from 'components/ArticleContainer';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import Entries from './components/Entries';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React from 'react';
+import Section from './components/Section';
+import Typography from '@mui/material/Typography';
+import UserCardGrid from 'components/UserCardGrid';
+import { styled } from '@mui/material/styles';
 
 const StickyAccordion = styled(AccordionSummary)(() => ({
   position: 'sticky',
   top: '58px',
   zIndex: 100,
-  background: '#ffffff'
+  background: '#ffffff',
 }));
 
 const Home = (): React.ReactElement => {
   return (
-    <Main>
+    <>
       {/* PC端显示界面 */}
       <Box
         sx={{
           display: {
             md: 'flex',
-            xs: 'none'
-          }, 
-          padding: '24px 5%'
+            xs: 'none',
+          },
+          padding: '24px 5%',
         }}
       >
-        <Section 
-          title='新闻'
+        <Section
+          title="新闻"
           hasPadding={false}
           component={Box}
-          sx={{ 
+          sx={{
             flex: 1,
             minHeight: '100vh',
           }}
         >
           <ArticleContainer />
         </Section>
-        
+
         <Section
-          title='活动'
-          sx={{ 
+          title="活动"
+          sx={{
             flex: 2,
             minHeight: '100vh',
           }}
         >
+          {''}
         </Section>
 
-        <Box sx={{flex: 1}} position='sticky' top='80px' alignSelf='flex-start'>
-          <Section title='个人信息' hasPadding={false}>
-            <UserCardGrid/>
+        <Box
+          sx={{ flex: 1 }}
+          position="sticky"
+          top="80px"
+          alignSelf="flex-start"
+        >
+          <Section title="个人信息" hasPadding={false}>
+            <UserCardGrid />
           </Section>
 
           <Card sx={{ margin: '12px 8px' }}>
             <Button fullWidth>新生必读</Button>
           </Card>
-          
-          <Section
-            title='功能入口'
-            hasPadding={false}
-            component={Box}
-          >
-            <Entries/>
+
+          <Section title="功能入口" hasPadding={false} component={Box}>
+            <Entries />
           </Section>
         </Box>
       </Box>
@@ -85,9 +87,9 @@ const Home = (): React.ReactElement => {
         sx={{
           display: {
             md: 'none',
-            xs: 'block'
-          }, 
-          padding: '8px'
+            xs: 'block',
+          },
+          padding: '8px',
         }}
       >
         <Accordion defaultExpanded>
@@ -98,17 +100,17 @@ const Home = (): React.ReactElement => {
           >
             <Typography>新闻</Typography>
           </StickyAccordion>
-          <AccordionDetails sx={{padding: 0}}>
-            <Section 
-              title='新闻'
+          <AccordionDetails sx={{ padding: 0 }}>
+            <Section
+              title="新闻"
               showTitle={false}
               hasPadding={false}
               component={Box}
-              sx={{ 
+              sx={{
                 flex: 1,
                 minHeight: {
                   xs: 'unset',
-                  md: '100vh'
+                  md: '100vh',
                 },
               }}
             >
@@ -124,18 +126,19 @@ const Home = (): React.ReactElement => {
           >
             <Typography>活动</Typography>
           </StickyAccordion>
-          <AccordionDetails sx={{padding: 0}}>
+          <AccordionDetails sx={{ padding: 0 }}>
             <Section
-              title='活动'
+              title="活动"
               showTitle={false}
               sx={{
                 flex: 2,
                 minHeight: {
                   xs: 'unset',
-                  md: '100vh'
+                  md: '100vh',
                 },
               }}
             >
+              {''}
             </Section>
           </AccordionDetails>
         </Accordion>
@@ -148,32 +151,27 @@ const Home = (): React.ReactElement => {
           >
             <Typography>个人信息 & 活动入口</Typography>
           </StickyAccordion>
-          <AccordionDetails sx={{padding: 0}}>
-            <Section
-              title='个人信息'
-              showTitle={false}
-              hasPadding={false}
-            >
-              <UserCardGrid/>
+          <AccordionDetails sx={{ padding: 0 }}>
+            <Section title="个人信息" showTitle={false} hasPadding={false}>
+              <UserCardGrid />
             </Section>
 
             <Card sx={{ margin: '12px 8px' }}>
               <Button fullWidth>新生必读</Button>
             </Card>
-          
+
             <Section
-              title='功能入口'
+              title="功能入口"
               hasPadding={false}
               showTitle={false}
               component={Box}
             >
-              <Entries/>
+              <Entries />
             </Section>
           </AccordionDetails>
         </Accordion>
       </Box>
-    
-    </Main>
+    </>
   );
 };
 

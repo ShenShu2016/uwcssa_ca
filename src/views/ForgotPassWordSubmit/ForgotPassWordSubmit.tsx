@@ -2,18 +2,18 @@
  * @Author: Shen Shu
  * @Date: 2022-05-18 15:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-18 15:56:46
- * @FilePath: \uwcssa_ca\frontend\src\views\ForgotPassWordSubmit\ForgotPassWordSubmit.tsx
+ * @LastEditTime: 2022-05-29 23:50:44
+ * @FilePath: /uwcssa_ca/src/views/ForgotPassWordSubmit/ForgotPassWordSubmit.tsx
  * @Description:
  *
  */
 /* eslint-disable react/no-unescaped-entities */
+
 import { Form, Headline } from './components';
 
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
-import { Main } from 'layouts';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
@@ -21,7 +21,7 @@ const ForgotPassWordSubmit = (): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <Main>
+    <>
       <Box
         minHeight={300}
         height={'auto'}
@@ -63,7 +63,7 @@ const ForgotPassWordSubmit = (): JSX.Element => {
           </Grid>
         </Container>
       </Box>
-    </Main>
+    </>
   );
 };
 

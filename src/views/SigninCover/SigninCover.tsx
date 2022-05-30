@@ -1,15 +1,24 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 23:57:04
+ * @FilePath: /uwcssa_ca/src/views/SigninCover/SigninCover.tsx
+ * @Description:
+ *
+ */
+
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import { Form } from './components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Main from 'layouts/Main';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
 const SigninCover = (): JSX.Element => {
   const theme = useTheme();
   return (
-    <Main>
+    <>
       <Box
         sx={{
           width: 1,
@@ -110,7 +119,7 @@ const SigninCover = (): JSX.Element => {
           </Box>
         </Container>
       </Box>
-    </Main>
+    </>
   );
 };
 

@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 23:56:30
+ * @FilePath: /uwcssa_ca/src/views/Settings/General/General.tsx
+ * @Description:
+ *
+ */
+
 import * as yup from 'yup';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -7,7 +17,6 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import Main from 'layouts/Main';
 import Page from '../components/Page';
 import React from 'react';
 import TextField from '@mui/material/TextField';
@@ -71,6 +80,7 @@ const General = (): JSX.Element => {
     const response = await dispatch(
       updateUserProfileData(updateUserProfileInput),
     );
+    console.log('response', response);
     return values;
   };
 
@@ -82,7 +92,7 @@ const General = (): JSX.Element => {
   });
 
   return (
-    <Main>
+    <>
       <Page>
         <Box>
           <Typography variant="h6" gutterBottom fontWeight={700}>
@@ -263,7 +273,7 @@ const General = (): JSX.Element => {
           </form>
         </Box>
       </Page>
-    </Main>
+    </>
   );
 };
 

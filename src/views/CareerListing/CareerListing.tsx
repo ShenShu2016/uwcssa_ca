@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:27:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:31:55
- * @FilePath: \uwcssa_ca\frontend\src\views\CareerListing\CareerListing.tsx
+ * @LastEditTime: 2022-05-29 23:49:59
+ * @FilePath: /uwcssa_ca/src/views/CareerListing/CareerListing.tsx
  * @Description:
  *
  */
@@ -13,14 +13,13 @@ import { About, CompanyValues, Hero, Jobs, Newsletter } from './components';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Divider from '@mui/material/Divider';
-import Main from 'layouts/Main';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
 const CareerListing = (): JSX.Element => {
   const theme = useTheme();
   return (
-    <Main>
+    <>
       <Box>
         <Hero />
         <Container>
@@ -75,7 +74,7 @@ const CareerListing = (): JSX.Element => {
           ></path>
         </Box>
       </Box>
-    </Main>
+    </>
   );
 };
 

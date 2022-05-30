@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:07
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-28 17:59:41
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-30 00:16:17
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/NavItem/NavItem.tsx
  * @Description:
  *
@@ -10,6 +10,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
+import { matchPath, useNavigate } from 'react-router';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -18,8 +19,8 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { useNavigate, matchPath } from 'react-router';
 import { useLocation } from 'react-router-dom';
+
 interface Props {
   title: string;
   id: string;
@@ -35,6 +36,7 @@ const NavItem = ({
 }: Props): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [openedPopoverId, setOpenedPopoverId] = useState(null);
@@ -50,17 +52,15 @@ const NavItem = ({
   };
 
   const [activeLink, setActiveLink] = useState('');
-  const location = useLocation();
 
   useEffect(() => {
+    handleClose(); // 不知道为什么改了这个后，点击才会关闭之前是没有的
     setActiveLink(location.pathname);
-  }, []);
+  }, [location.pathname]); //这个变了就会触发
 
   const hasActiveLink = () => {
     if (items instanceof Array) {
-      return items.find(
-        (i) => matchPath(i.href, activeLink)
-      );
+      return items.find((i) => matchPath(i.href, activeLink));
     } else {
       return matchPath(items.href, activeLink);
     }

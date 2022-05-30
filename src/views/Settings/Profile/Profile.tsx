@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 02:24:12
+ * @LastEditTime: 2022-05-29 23:56:49
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
@@ -13,7 +13,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Container from 'components/Container';
-import { Main } from 'layouts';
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -30,7 +29,7 @@ const Profile = (): JSX.Element => {
   );
 
   return (
-    <Main>
+    <>
       <Box
         sx={{
           background: 'transparent',
@@ -267,7 +266,7 @@ const Profile = (): JSX.Element => {
           </Box>
         </Container>
       </Box>
-    </Main>
+    </>
   );
 };
 

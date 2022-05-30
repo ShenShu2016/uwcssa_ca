@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 15:50:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 20:11:02
- * @FilePath: \uwcssa_ca\frontend\src\views\SignupCover\SignupCover.tsx
+ * @LastEditTime: 2022-05-29 23:57:09
+ * @FilePath: /uwcssa_ca/src/views/SignupCover/SignupCover.tsx
  * @Description:
  *
  */
@@ -12,14 +12,13 @@ import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import { Form } from './components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Main from 'layouts/Main';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
 const SignupCover = (): JSX.Element => {
   const theme = useTheme();
   return (
-    <Main>
+    <>
       <Box
         sx={{
           width: 1,
@@ -120,7 +119,7 @@ const SignupCover = (): JSX.Element => {
           </Box>
         </Container>
       </Box>
-    </Main>
+    </>
   );
 };
 

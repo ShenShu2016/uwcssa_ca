@@ -2,19 +2,19 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:29
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 16:40:14
+ * @LastEditTime: 2022-05-30 00:16:22
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Sidebar/components/SidebarNav/SidebarNav.tsx
  * @Description:
  *
  */
 
+import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 
 interface Props {
@@ -28,10 +28,12 @@ interface Props {
 
 const SidebarNav = ({ pages, onClose }: Props): JSX.Element => {
   const theme = useTheme();
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
+
   useEffect(() => {
-    setActiveLink(window && window.location ? window.location.pathname : '');
-  }, []);
+    setActiveLink(location.pathname);
+  }, [location.pathname]);
 
   return (
     <Box paddingBottom={2}>

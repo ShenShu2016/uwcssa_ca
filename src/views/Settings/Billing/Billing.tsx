@@ -1,17 +1,26 @@
-import React from 'react';
-import { useFormik } from 'formik';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 23:56:13
+ * @FilePath: /uwcssa_ca/src/views/Settings/Billing/Billing.tsx
+ * @Description:
+ *
+ */
+
 import * as yup from 'yup';
-import valid from 'card-validator';
+
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
 import Page from '../components/Page';
-import Main from 'layouts/Main';
+import React from 'react';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useFormik } from 'formik';
+import valid from 'card-validator';
 
 const validationSchema = yup.object({
   cardNumber: yup
@@ -21,10 +30,7 @@ const validationSchema = yup.object({
       'Credit card number is invalid',
       (value) => valid.number(value).isValid,
     ),
-  name: yup
-    .string()
-    .trim()
-    .required('Please specify your name on the card'),
+  name: yup.string().trim().required('Please specify your name on the card'),
   date: yup
     .string()
     .typeError('Not a valid expiration date. Example: MM/YY')
@@ -69,7 +75,7 @@ const Billing = (): JSX.Element => {
   });
 
   return (
-    <Main>
+    <>
       <Page>
         <Box>
           <Typography variant="h6" gutterBottom fontWeight={700}>
@@ -235,7 +241,7 @@ const Billing = (): JSX.Element => {
           </Box>
         </Box>
       </Page>
-    </Main>
+    </>
   );
 };
 

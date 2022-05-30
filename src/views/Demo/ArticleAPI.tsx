@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:45:55
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-21 00:52:02
- * @FilePath: /uwcssa_ca/frontend/src/views/Demo/articleAPI.tsx
+ * @LastEditTime: 2022-05-29 23:50:16
+ * @FilePath: /uwcssa_ca/src/views/Demo/ArticleAPI.tsx
  * @Description:
  *
  */
@@ -16,7 +16,6 @@ import {
 } from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import { Main } from 'layouts';
 import { getAuthState } from 'redux/auth/authSlice';
 
 const ArticleAPI = (): JSX.Element => {
@@ -31,7 +30,7 @@ const ArticleAPI = (): JSX.Element => {
   const articles = useAppSelector(selectAllArticles);
 
   return (
-    <Main>
+    <>
       {articles.map((article) => {
         return (
           <Box key={article.id}>
@@ -49,7 +48,7 @@ const ArticleAPI = (): JSX.Element => {
           </Box>
         );
       })}
-    </Main>
+    </>
   );
 };
 

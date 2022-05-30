@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 16:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-17 16:01:25
- * @FilePath: \uwcssa_ca\frontend\src\views\CompanyTerms\CompanyTerms.tsx
+ * @LastEditTime: 2022-05-29 23:50:10
+ * @FilePath: /uwcssa_ca/src/views/CompanyTerms/CompanyTerms.tsx
  * @Description:
  *
  */
@@ -13,7 +13,6 @@ import { ContactCard, Content } from './components';
 import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
-import Main from 'layouts/Main';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
@@ -22,7 +21,7 @@ const CompanyTerms = (): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <Main>
+    <>
       <Container>
         <Box boxShadow={4} borderRadius={2}>
           <Box bgcolor={theme.palette.primary.main} borderRadius={2}>
@@ -90,7 +89,7 @@ const CompanyTerms = (): JSX.Element => {
           </Container>
         </Box>
       </Container>
-    </Main>
+    </>
   );
 };
 

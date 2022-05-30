@@ -1,19 +1,17 @@
-import React from 'react';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import Page from '../components/Page';
-import Main from 'layouts/Main';
+import React from 'react';
+import Typography from '@mui/material/Typography';
 
 const Notifications = (): JSX.Element => {
   return (
-    <Main>
+    <>
       <Page>
         <Box>
           <Box
@@ -132,7 +130,7 @@ const Notifications = (): JSX.Element => {
           </form>
         </Box>
       </Page>
-    </Main>
+    </>
   );
 };
 

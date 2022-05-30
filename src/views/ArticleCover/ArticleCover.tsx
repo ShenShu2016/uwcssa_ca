@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 13:05:38
+ * @LastEditTime: 2022-05-29 23:47:57
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/ArticleCover.tsx
  * @Description:
  *
@@ -29,7 +29,6 @@ import Box from '@mui/material/Box';
 import CommentOverview from 'components/Comment/CommentOverview';
 import Container from 'components/Container';
 import Grid from '@mui/material/Grid';
-import Main from 'layouts/Main';
 import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useParams } from 'react-router-dom';
@@ -69,7 +68,7 @@ const ArticleCover = (): JSX.Element => {
   }, [articleId]);
 
   return (
-    <Main colorInvert={true}>
+    <>
       <Box>
         {article && <Hero article={article} />}
         <Container style={{ padding: '12px 16px' }}>
@@ -131,7 +130,7 @@ const ArticleCover = (): JSX.Element => {
           ></path>
         </Box>
       </Box>
-    </Main>
+    </>
   );
 };
 

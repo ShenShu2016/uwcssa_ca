@@ -1,18 +1,27 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-29 23:56:57
+ * @FilePath: /uwcssa_ca/src/views/Settings/Security/Security.tsx
+ * @Description:
+ *
+ */
 
+import * as yup from 'yup';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import Page from '../components/Page';
-import Main from 'layouts/Main';
+import React from 'react';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useFormik } from 'formik';
 
 const validationSchema = yup.object({
   currentPassword: yup.string().required('Please specify your password'),
@@ -44,7 +53,7 @@ const Security = (): JSX.Element => {
   });
 
   return (
-    <Main>
+    <>
       <Page>
         <Box>
           <Box
@@ -198,7 +207,7 @@ const Security = (): JSX.Element => {
           </form>
         </Box>
       </Page>
-    </Main>
+    </>
   );
 };
 

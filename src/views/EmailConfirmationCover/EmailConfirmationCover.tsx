@@ -2,14 +2,13 @@ import Box from '@mui/material/Box';
 import Container from 'components/Container';
 import { Form } from './components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Main from 'layouts/Main';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
 const EmailConfirmationCover = (): JSX.Element => {
   const theme = useTheme();
   return (
-    <Main>
+    <>
       <Box
         sx={{
           width: 1,
@@ -110,7 +109,7 @@ const EmailConfirmationCover = (): JSX.Element => {
           </Box>
         </Container>
       </Box>
-    </Main>
+    </>
   );
 };
 

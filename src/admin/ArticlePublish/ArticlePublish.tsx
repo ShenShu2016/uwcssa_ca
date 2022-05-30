@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-29 21:53:20
+ * @LastEditTime: 2022-05-30 00:17:05
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
  */
@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddCoverPic from './components/AddCoverPic';
 import AddTags from './components/AddTags';
-import { AdminLayout } from 'layouts';
 import Box from '@mui/material/Box';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import CkeditorS3UploadAdapter from 'components/CkeditorS3UploadAdapter';
@@ -37,8 +36,6 @@ interface Tag {
 const ArticlePublish = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const test = useAppSelector((state) => state.auth);
-  console.log(test);
   const authUser = useAppSelector((state) => state.auth.user);
   function MyCustomUploadAdapterPlugin(editor) {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -234,7 +231,7 @@ const ArticlePublish = () => {
   };
 
   return (
-    <AdminLayout>
+    <>
       <FullScreenLoading
         message={fullScreenLoading.message}
         loading={fullScreenLoading.loading}
@@ -356,7 +353,7 @@ const ArticlePublish = () => {
           </Box>
         </Box>
       </Box>
-    </AdminLayout>
+    </>
   );
 };
 
