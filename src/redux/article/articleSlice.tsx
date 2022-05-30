@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 01:04:36
+ * @LastEditTime: 2022-05-30 12:29:40
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -23,6 +23,8 @@ import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { updateArticle } from 'graphql/mutations';
+
+//import { commentAdapter } from 'redux/comment/commentSlice';
 
 export type Article = {
   id: string;
@@ -134,6 +136,11 @@ export const updateArticleDetail = createAsyncThunk(
 const articleSlice = createSlice({
   name: 'article',
   initialState,
+  // initialState: articleAdapter.getInitialState({
+  //   ...initialState,
+  //   comments: commentAdapter.getInitialState(),
+  // }),
+
   reducers: {},
   extraReducers(builder) {
     builder
@@ -157,6 +164,10 @@ const articleSlice = createSlice({
       .addCase(fetchArticle.fulfilled, (state, action) => {
         state.fetchArticleStatus = 'succeed';
         articleAdapter.upsertOne(state, action.payload);
+        // commentAdapter.upsertMany(
+        //   state.comments,
+        //   action.payload.comments.items,
+        // );
         //console.log(action.payload.comments.items);
         // store.dispatch(insertAllComments(action.payload.comments.items));
       })
