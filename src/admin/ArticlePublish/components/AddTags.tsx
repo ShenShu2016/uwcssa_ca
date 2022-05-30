@@ -1,41 +1,42 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-21 13:07:23
- * @LastEditTime: 2022-05-21 22:51:23
+ * @LastEditTime: 2022-05-30 15:48:06
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/views/ArticlePublish/components/AddTags.tsx
+ * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/components/AddTags.tsx
  */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-// import TagFacesIcon from '@mui/icons-material/TagFaces';
 import IconButton from '@mui/material/IconButton';
 import DoneIcon from '@mui/icons-material/Done';
-import useMessage from 'hooks/useMessage';
+import { Tag } from '../ArticlePublish';
 
 const ListItem = styled('div')(({ theme }) => ({
   marginRight: theme.spacing(),
   marginBottom: theme.spacing(),
 }));
-interface Tag {
+interface Chip {
   tagID: string;
   label: string;
 }
 
-const AddTags: React.FC<{tagListChange: (tags: Tag[]) => void}> = ({ tagListChange }) => {
-  const [tagInput, setTagInput] = React.useState<string>('');
-  const [chipData, setChipData] = React.useState<Array<Tag>>([]);
-  const message = useMessage();
+interface AddTagProps {
+  addTag: (tag: string) => void;
+  removeTag: (tag: string) => void;
+  tags: Tag[]
+}
 
-  useEffect(() => {
-    tagListChange(chipData);
-  }, [chipData.length]);
+const AddTags: React.FC<AddTagProps> = ({
+  addTag, removeTag, tags
+}) => {
+  const [tagInput, setTagInput] = React.useState<string>('');
 
   const handleDelete = (chipToDelete) => {
-    setChipData((chips) => chips.filter((chip) => chip.tagID !== chipToDelete.tagID));
+    removeTag(chipToDelete.tagID);
   };
 
   const handleTagInputChange = (e) => {
@@ -44,28 +45,12 @@ const AddTags: React.FC<{tagListChange: (tags: Tag[]) => void}> = ({ tagListChan
 
   const handleTagInputKeyDown = (e) => {
     if (e.code === 'Enter') {
-      addTag();
+      addTagInner();
     }
   };
 
-  const addTag = () => {
-    // 判断当前的tag列表里是否有这个tag
-    const find = chipData.findIndex((item) => item.tagID === tagInput);
-    if (find !== -1) {
-      message.open({
-        type: 'warning',
-        message: `标签【${tagInput}】已存在`
-      });
-      return;
-    }
-    // 如果没有
-    setChipData((prev) => {
-      prev.push({
-        tagID: tagInput,
-        label: tagInput
-      });
-      return [...prev];
-    });
+  const addTagInner = () => {
+    addTag(tagInput);
     setTagInput('');
   };
 
@@ -93,7 +78,7 @@ const AddTags: React.FC<{tagListChange: (tags: Tag[]) => void}> = ({ tagListChan
         <IconButton
           color="primary"
           component="span"
-          onClick={addTag}
+          onClick={addTagInner}
         >
           <DoneIcon />
         </IconButton>
@@ -108,12 +93,12 @@ const AddTags: React.FC<{tagListChange: (tags: Tag[]) => void}> = ({ tagListChan
           padding: '12px 8px'
         }}
       >
-        {chipData.map((data) => {
+        {tags.map((data) => {
           return (
             <ListItem key={data.tagID}>
               <Chip
                 color='primary'
-                label={data.label}
+                label={data.tagID}
                 onDelete={() => handleDelete(data)}
               />
             </ListItem>
