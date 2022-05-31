@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 15:13:57
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 20:28:22
- * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/AddUwcssaDepartmentForm/FeedbackForm/FeedbackForm.tsx
+ * @LastEditTime: 2022-05-30 22:18:25
+ * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/components/AddUwcssaDepartment/AddUwcssaDepartmentForm/AddUwcssaDepartmentFormm.tsx
  * @Description:
  *
  */
@@ -37,7 +37,7 @@ interface Props {
   open: boolean;
 }
 
-const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
+const AddUwcssaDepartmentForm = ({ onClose, open }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const ownerUsername = useAppSelector(getOwnerUserName);
 
@@ -176,4 +176,4 @@ const FeedbackForm = ({ onClose, open }: Props): JSX.Element => {
   );
 };
 
-export default FeedbackForm;
+export default AddUwcssaDepartmentForm;

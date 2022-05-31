@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-05-30 20:26:40
+ * @LastEditTime: 2022-05-30 21:09:38
  * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
@@ -14,6 +14,7 @@ import {
 
 import DepartmentDashboard from './Department/DepartmentDashboard';
 import React from 'react';
+import ResearchDevelopmentTeamDashboard from './ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard';
 import { getIsAdmin } from 'redux/auth/authSlice';
 import { useAppSelector } from 'redux/hooks';
 
@@ -57,6 +58,12 @@ function AdminRoutes(): Array<{
     {
       path: '/admin/uwcssa-department',
       renderer: (): JSX.Element => <DepartmentDashboard />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
+      path: '/admin/uwcssa-research-development',
+      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboard />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },
