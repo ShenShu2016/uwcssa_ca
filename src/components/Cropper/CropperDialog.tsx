@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-29 23:50:40
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-31 00:50:15
+ * @LastEditTime: 2022-05-31 00:53:55
  * @FilePath: /uwcssa_ca/src/components/Cropper/CropperDialog.tsx
  * @Description:
  *
@@ -258,8 +258,9 @@ export default function CropperDialog() {
                 <Button
                   // type={'submit'}
                   variant="contained"
-                  disabled={!avatarImageSrc}
+                  // disabled={!avatarImageSrc}
                   onClick={uploadAvatarImg}
+                  disabled
                 >
                   保存头像
                 </Button>
