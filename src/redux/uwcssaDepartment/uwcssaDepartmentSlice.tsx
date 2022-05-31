@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:41:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 22:50:42
+ * @LastEditTime: 2022-05-30 20:30:04
  * @FilePath: /uwcssa_ca/src/redux/uwcssaDepartment/uwcssaDepartmentSlice.tsx
  * @Description:
  * import uwcssaDepartmentReducer from './uwcssaDepartment/uwcssaDepartmentSlice';
@@ -27,6 +27,9 @@ import { graphqlOperation } from '@aws-amplify/api-graphql';
 
 export type UwcssaDepartment = {
   id: string;
+  introduction?: string | null;
+  email?: string | null;
+  leader?: string | null;
   createdAt?: string;
   updatedAt?: string;
   owner: string;
@@ -62,6 +65,7 @@ export const fetchUwcssaDepartmentList = createAsyncThunk(
         // },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
+
       return result.data.listUwcssaDepartments.items;
     } catch (error) {
       console.log(error);
@@ -101,6 +105,12 @@ export const postUwcssaDepartment = createAsyncThunk(
   }: {
     createUwcssaDepartmentInput: CreateUwcssaDepartmentInput;
   }) => {
+    Object.keys(createUwcssaDepartmentInput).forEach((key) =>
+      createUwcssaDepartmentInput[key] === null ||
+      createUwcssaDepartmentInput[key] === ''
+        ? delete createUwcssaDepartmentInput[key]
+        : {},
+    );
     try {
       const result: any = await API.graphql(
         graphqlOperation(createUwcssaDepartment, {
@@ -121,6 +131,12 @@ export const updateUwcssaDepartmentDetail = createAsyncThunk(
   }: {
     updateUwcssaDepartmentInput: UpdateUwcssaDepartmentInput;
   }) => {
+    Object.keys(updateUwcssaDepartmentInput).forEach((key) =>
+      updateUwcssaDepartmentInput[key] === null ||
+      updateUwcssaDepartmentInput[key] === ''
+        ? delete updateUwcssaDepartmentInput[key]
+        : {},
+    );
     try {
       const result: any = await API.graphql(
         graphqlOperation(updateUwcssaDepartment, {
@@ -185,11 +201,9 @@ const uwcssaDepartmentSlice = createSlice({
       .addCase(updateUwcssaDepartmentDetail.pending, (state) => {
         state.updateUwcssaDepartmentDetailStatus = 'loading';
       })
-      .addCase(updateUwcssaDepartmentDetail.fulfilled, (state) => {
+      .addCase(updateUwcssaDepartmentDetail.fulfilled, (state, action) => {
         state.updateUwcssaDepartmentDetailStatus = 'succeed';
-        //state.uwcssaDepartments.unshift(action.payload.data.createUwcssaDepartment);
-        //uwcssaDepartmentAdapter.upsertOne(state, action.payload);
-        // state.updateUwcssaDepartmentStatus = "idle";
+        uwcssaDepartmentAdapter.upsertOne(state, action.payload);
       })
       .addCase(updateUwcssaDepartmentDetail.rejected, (state, action) => {
         state.updateUwcssaDepartmentDetailStatus = 'failed';

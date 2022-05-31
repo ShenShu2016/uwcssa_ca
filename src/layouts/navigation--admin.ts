@@ -1,3 +1,13 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-26 13:57:44
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-30 20:29:51
+ * @FilePath: /uwcssa_ca/src/layouts/navigation--admin.ts
+ * @Description:
+ *
+ */
+
 const pages = [
   {
     groupTitle: 'Getting Started',
@@ -7,6 +17,12 @@ const pages = [
         title: 'Dashboard',
         href: '/admin',
       },
+    ],
+  },
+  {
+    groupTitle: '新闻 & 文章管理',
+    id: 'Article',
+    pages: [
       {
         title: '发布文章',
         href: '/admin/article-publish',
@@ -15,23 +31,6 @@ const pages = [
         title: '编辑文章',
         href: '/admin/article-edit',
       },
-      // {
-      //   title: 'Quick Start (React Scripts)',
-      //   href: '/docs/quick-start-react-scripts',
-      // },
-      // {
-      //   title: 'Quick Start (NextJS)',
-      //   href: '/docs/quick-start-nextjs',
-      // },
-      // {
-      //   title: 'Quick Start (GatsbyJS)',
-      //   href: '/docs/quick-start-gatsbyjs',
-      // },
-      // {
-      //   title: 'MUI',
-      //   href: 'https://mui.com/',
-      //   target: '_blank',
-      // },
     ],
   },
   {
@@ -41,10 +40,6 @@ const pages = [
       {
         title: 'Department',
         href: '/admin/uwcssa-department',
-      },
-      {
-        title: 'Add New Department',
-        href: '/admin/uwcssa-department/add',
       },
     ],
   },
@@ -56,77 +51,8 @@ const pages = [
         title: 'Research & Development',
         href: '/admin/uwcssa-research-development',
       },
-      {
-        title: 'Add New Developer',
-        href: '/admin/uwcssa-research-development/add',
-      },
     ],
   },
-  // {
-  //   groupTitle: 'Plugins',
-  //   id: 'plugins',
-  //   pages: [
-  //     {
-  //       title: 'AOS Animate',
-  //       href: 'https://michalsnik.github.io/aos/',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Formik React Forms',
-  //       href: 'https://formik.org/',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'React Count Up',
-  //       href: 'https://www.npmjs.com/package/react-countup',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Images Carousel and Modals',
-  //       href: 'https://www.npmjs.com/package/react-image-lightbox',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Image Lazy Loading',
-  //       href: 'https://www.npmjs.com/package/react-lazy-load-image-component',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Image Swiper',
-  //       href: 'https://react-slick.neostack.com/',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Typed Text',
-  //       href: 'https://www.npmjs.com/package/react-typed',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Visibility Sensor',
-  //       href: 'https://www.npmjs.com/package/react-visibility-sensor',
-  //       target: '_blank',
-  //     },
-  //     {
-  //       title: 'Jarallax',
-  //       href: 'https://www.npmjs.com/package/jarallax',
-  //       target: '_blank',
-  //     },
-  //   ],
-  // },
-  // {
-  //   groupTitle: 'Support & Change Log',
-  //   id: 'support-change-log',
-  //   pages: [
-  //     {
-  //       title: 'Support',
-  //       href: '/docs/support',
-  //     },
-  //     {
-  //       title: 'Change Log (v4.6.0)',
-  //       href: '/docs/change-log',
-  //     },
-  //   ],
-  // },
 ];
 
 export default pages;

@@ -1,11 +1,22 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-30 10:43:28
- * @LastEditTime: 2022-05-29 23:57:39
+ * @LastEditTime: 2022-05-30 20:27:36
  * @LastEditors: Shen Shu
- * @FilePath: /uwcssa_ca/src/admin/ArticleEdit/ArticleEdit.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticleEdit/ArticleEdit.tsx
  */
 
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
 import React, { useEffect } from 'react';
 import {
   fetchArticleList,
@@ -13,15 +24,7 @@ import {
 } from 'redux/article/articleSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import { getAuthState } from 'redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -51,7 +54,7 @@ const ArticleEdit = () => {
   }, [isAuth, fetchArticleListStatus]);
 
   return (
-    <>
+    <Container>
       <Grid container spacing={isMd ? 4 : 2} direction="column" padding={4}>
         {articles.map((item, index) => (
           <Grid
@@ -108,7 +111,7 @@ const ArticleEdit = () => {
           </Grid>
         ))}
       </Grid>
-    </>
+    </Container>
   );
 };
 

@@ -1,19 +1,20 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-05-30 11:23:32
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-30 20:26:40
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
 import {
   AdminDashboard as AdminDashboardView,
+  ArticleEdit as ArticleEditView,
   ArticlePublish as ArticlePublishView,
-  ArticleEdit as ArticleEditView
 } from 'admin';
-import { getAuthState, getIsAdmin } from 'redux/auth/authSlice';
 
+import DepartmentDashboard from './Department/DepartmentDashboard';
 import React from 'react';
+import { getIsAdmin } from 'redux/auth/authSlice';
 import { useAppSelector } from 'redux/hooks';
 
 function AdminRoutes(): Array<{
@@ -23,7 +24,7 @@ function AdminRoutes(): Array<{
   isAllowed: boolean | void;
   redirectPath: string | undefined;
 }> {
-  const isAuth = useAppSelector(getAuthState);
+  //const isAuth = useAppSelector(getAuthState);
   const isAdmin = useAppSelector(getIsAdmin);
 
   return [
@@ -50,6 +51,12 @@ function AdminRoutes(): Array<{
     {
       path: '/admin/article-edit/:id',
       renderer: (): JSX.Element => <ArticlePublishView />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
+      path: '/admin/uwcssa-department',
+      renderer: (): JSX.Element => <DepartmentDashboard />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },
