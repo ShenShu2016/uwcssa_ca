@@ -35,14 +35,10 @@ const validationSchema = yup.object({
     .string()
     .trim()
     .required('请输入活动标题'),
-  name: yup
-    .string()
-    .trim()
-    .required('Please specify your name on the card'),
   dateTime: yup
     .date()
     .nullable()
-    .required('Please enter a valid date. The field cannot be left blank.'),
+    .required('请选择活动时间'),
   address: yup
     .string()
     .trim()
@@ -154,12 +150,12 @@ const ActivityCreate: React.FC = () => {
                       onChange={(val) => formik.setFieldValue('dateTime', val)}
                       renderInput={(params) => 
                         <TextField
+                          {...params} 
                           size='small'
                           fullWidth
                           name={'dateTime'}
                           error={formik.touched.dateTime && Boolean(formik.errors.dateTime)}
                           helperText={formik.touched.dateTime && formik.errors.dateTime}
-                          {...params} 
                         />}
                     />
                   </LocalizationProvider>
