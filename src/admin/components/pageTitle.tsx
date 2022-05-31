@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:41:55
- * @LastEditTime: 2022-05-31 10:54:17
+ * @LastEditTime: 2022-05-31 11:17:18
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/components/pageTitle.tsx
  */
@@ -12,13 +12,14 @@ import Typography from '@mui/material/Typography';
 interface PageTitleProp {
     title: string;
     children: ReactNode;
-    description?: string;
+    marginTop?: string;
+    description?: string | ReactNode;
 }
 
-const PageTitle: React.FC<PageTitleProp> = ({ children, title='', description='' }) => {
+const PageTitle: React.FC<PageTitleProp> = ({ children, title='', description='', marginTop='-80px' }) => {
   return (
     <>
-      <Box bgcolor={'primary.main'} paddingY={4} paddingX='5%'  height='200px'>
+      <Box bgcolor={'primary.main'} paddingY={4} paddingX='5%' height='200px'>
         <Typography
           variant="h5"
           fontWeight={700}
@@ -31,7 +32,7 @@ const PageTitle: React.FC<PageTitleProp> = ({ children, title='', description=''
           {description}
         </Typography>
       </Box>
-      <Box marginTop={'-80px'}>
+      <Box marginTop={marginTop}>
         {children}
       </Box>
     </>
