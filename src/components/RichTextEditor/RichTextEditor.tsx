@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 13:20:05
- * @LastEditTime: 2022-05-31 13:26:56
+ * @LastEditTime: 2022-05-31 13:39:42
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/components/RichTextEditor/RichTextEditor.tsx
  */
@@ -17,9 +17,10 @@ import './editor.css';
 interface RichTextEditorProp {
     content: string;
     setContent: (content: string) => void;
+    height?: string;
 }
 
-const RichTextEditor: React.FC<RichTextEditorProp> = ({ content, setContent }) => {
+const RichTextEditor: React.FC<RichTextEditorProp> = ({ content, setContent, height='auto' }) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((state) => state.auth.user);
@@ -35,7 +36,7 @@ const RichTextEditor: React.FC<RichTextEditorProp> = ({ content, setContent }) =
 
   return (
     <Box
-      height="calc(100% - 180px)"
+      height={height}
       overflow-x="hidden"
       sx={{
         '& .ck.ck-editor__main>.ck-editor__editable': {
@@ -56,7 +57,7 @@ const RichTextEditor: React.FC<RichTextEditorProp> = ({ content, setContent }) =
         },
         '& .ck.ck-button.ck-on, a.ck.ck-button.ck-on': {
           backgroundColor: theme.palette.background.paper,
-        },
+        }
       }}
     >
       <CKEditor

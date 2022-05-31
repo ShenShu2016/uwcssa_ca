@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-31 13:32:00
+ * @LastEditTime: 2022-05-31 13:36:45
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
@@ -348,7 +348,7 @@ const ArticlePublish: React.FC = () => {
               onChange={(e) => setCoverPageDescription(e.target.value)}
               onFocus={() => handleFocus('desc')}
             />
-            <RichTextEditor content={content} setContent={setContent}/>
+            <RichTextEditor content={content} setContent={setContent} height={'calc(100% - 180px)'}/>
           </Card>
           <Box
             width="30%"
