@@ -2,9 +2,9 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-23 13:50:22
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-29 16:01:29
- * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/components/MyImageList.tsx
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-30 20:58:21
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/components/MyImageList.tsx
  * @Description:
  *
  */
@@ -12,27 +12,32 @@
 import React, { useEffect } from 'react';
 import {
   fetchUserImageList,
+  getNextToken,
+  moreUserImageList,
   selectAllUserImages,
 } from 'redux/userImage/userImageSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import Box from '@mui/material/Box';
+import { Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-// import ListSubheader from '@mui/material/ListSubheader';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import useMessage from 'hooks/useMessage';
-import Tooltip from '@mui/material/Tooltip';
+
+// import ListSubheader from '@mui/material/ListSubheader';
 
 function MyImageList({ useImgFromRecent }) {
   const dispatch = useAppDispatch();
   const message = useMessage();
   const userImages = useAppSelector(selectAllUserImages);
+  const nextToken = useAppSelector(getNextToken);
   const { fetchUserImageListStatus } = useAppSelector(
     (state) => state.userImage,
   );
@@ -103,18 +108,16 @@ function MyImageList({ useImgFromRecent }) {
                           );
                           message.open({
                             type: 'success',
-                            message: '链接已复制'
+                            message: '链接已复制',
                           });
                         } catch (err) {
                           console.error(err);
                           message.open({
                             type: 'warning',
-                            message: '复制有误'
+                            message: '复制有误',
                           });
                         }
-                      }
-                      
-                      }
+                      }}
                     >
                       <ContentCopyIcon />
                     </IconButton>
@@ -124,6 +127,20 @@ function MyImageList({ useImgFromRecent }) {
             </ImageListItem>
           ))}
         </ImageList>
+        {nextToken ? (
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ my: '1rem' }}
+            onClick={() => {
+              dispatch(moreUserImageList(nextToken));
+            }}
+          >
+            Load More
+          </Button>
+        ) : (
+          <Typography> 没有更多了</Typography>
+        )}
       </Card>
     </Box>
   );

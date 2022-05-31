@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 16:06:49
+ * @LastEditTime: 2022-05-30 20:56:29
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -20,6 +20,7 @@ import Storage from '@aws-amplify/storage';
 import awsmobile from '../../aws-exports';
 import { createUserImage } from 'graphql/mutations';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
+import { store } from 'redux/store';
 import { userImageSortByCreatedAt } from 'graphql/queries';
 import { v4 as uuid } from 'uuid';
 
@@ -51,6 +52,7 @@ const userImageAdapter = createEntityAdapter<UserImage>({
 });
 
 const initialState = userImageAdapter.getInitialState({
+  nextToken: null,
   fetchUserImageListStatus: 'idle',
   fetchUserImageListError: null,
   postUserImageStatus: 'idle',
@@ -69,12 +71,34 @@ export const fetchUserImageList = createAsyncThunk(
           limit: 20,
         },
       });
-      return result.data.userImageSortByCreatedAt.items;
+      return result.data.userImageSortByCreatedAt;
     } catch (error) {
       console.log(error);
     }
   },
 );
+
+export const moreUserImageList = createAsyncThunk(
+  'userImage/moreUserImageList',
+  async (nextToken: string) => {
+    try {
+      const result: any = await API.graphql({
+        query: userImageSortByCreatedAt,
+        variables: {
+          active: 'T',
+          sortDirection: 'DESC',
+          limit: 20,
+          nextToken,
+        },
+      });
+
+      return result.data.userImageSortByCreatedAt;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 interface MyFile extends File {
   lastModifiedDate: Date;
 }
@@ -145,13 +169,16 @@ const userImageSlice = createSlice({
         state.fetchUserImageListStatus = 'loading';
       })
       .addCase(fetchUserImageList.fulfilled, (state, action) => {
-        state.fetchUserImageListStatus = 'succeed';
-        userImageAdapter.removeAll(state);
-        userImageAdapter.upsertMany(state, action.payload);
+        userImageAdapter.setAll(state, action.payload.items);
+        state.nextToken = action.payload.nextToken;
       })
       .addCase(fetchUserImageList.rejected, (state, action) => {
         state.fetchUserImageListStatus = 'failed';
         state.fetchUserImageListError = action.error.message;
+      })
+      .addCase(moreUserImageList.fulfilled, (state, action) => {
+        userImageAdapter.upsertMany(state, action.payload.items);
+        state.nextToken = action.payload.nextToken;
       })
       // Cases for status of postUserImage (pending, fulfilled, and rejected)
       .addCase(postUserImage.pending, (state) => {
@@ -173,5 +200,8 @@ export const {
   selectById: selectUserImageById,
   selectIds: selectUserImageIds,
 } = userImageAdapter.getSelectors((state: RootState) => state.userImage);
+
+export const getNextToken = (state: { userImage: { nextToken: any } }) =>
+  state.userImage?.nextToken;
 
 export default userImageSlice.reducer;
