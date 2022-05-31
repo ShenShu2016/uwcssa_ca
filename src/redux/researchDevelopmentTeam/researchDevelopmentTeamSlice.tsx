@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-29 22:42:19
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 22:52:44
+ * @LastEditTime: 2022-05-30 22:13:29
  * @FilePath: /uwcssa_ca/src/redux/researchDevelopmentTeam/researchDevelopmentTeamSlice.tsx
  * @Description:
  * import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
@@ -109,6 +109,12 @@ export const postResearchDevelopmentTeam = createAsyncThunk(
     createResearchDevelopmentTeamInput: CreateResearchDevelopmentTeamInput;
   }) => {
     try {
+      Object.keys(createResearchDevelopmentTeamInput).forEach((key) =>
+        createResearchDevelopmentTeamInput[key] === null ||
+        createResearchDevelopmentTeamInput[key] === ''
+          ? delete createResearchDevelopmentTeamInput[key]
+          : {},
+      );
       const result: any = await API.graphql(
         graphqlOperation(createResearchDevelopmentTeam, {
           input: createResearchDevelopmentTeamInput,
@@ -128,6 +134,12 @@ export const updateResearchDevelopmentTeamDetail = createAsyncThunk(
   }: {
     updateResearchDevelopmentTeamInput: UpdateResearchDevelopmentTeamInput;
   }) => {
+    Object.keys(updateResearchDevelopmentTeamInput).forEach((key) =>
+      updateResearchDevelopmentTeamInput[key] === null ||
+      updateResearchDevelopmentTeamInput[key] === ''
+        ? delete updateResearchDevelopmentTeamInput[key]
+        : {},
+    );
     try {
       const result: any = await API.graphql(
         graphqlOperation(updateResearchDevelopmentTeam, {
@@ -192,12 +204,13 @@ const researchDevelopmentTeamSlice = createSlice({
       .addCase(updateResearchDevelopmentTeamDetail.pending, (state) => {
         state.updateResearchDevelopmentTeamDetailStatus = 'loading';
       })
-      .addCase(updateResearchDevelopmentTeamDetail.fulfilled, (state) => {
-        state.updateResearchDevelopmentTeamDetailStatus = 'succeed';
-        //state.researchDevelopmentTeams.unshift(action.payload.data.createResearchDevelopmentTeam);
-        //researchDevelopmentTeamAdapter.upsertOne(state, action.payload);
-        // state.updateResearchDevelopmentTeamStatus = "idle";
-      })
+      .addCase(
+        updateResearchDevelopmentTeamDetail.fulfilled,
+        (state, action) => {
+          state.updateResearchDevelopmentTeamDetailStatus = 'succeed';
+          researchDevelopmentTeamAdapter.upsertOne(state, action.payload);
+        },
+      )
       .addCase(
         updateResearchDevelopmentTeamDetail.rejected,
         (state, action) => {

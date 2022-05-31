@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-30 14:17:41
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 20:02:33
+ * @LastEditTime: 2022-05-30 22:25:26
  * @FilePath: /uwcssa_ca/src/admin/Department/DepartmentDashboard/DepartmentDashboard.tsx
  * @Description:
  *
@@ -16,8 +16,8 @@ import {
 } from 'redux/uwcssaDepartment/uwcssaDepartmentSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
+import { AddUwcssaDepartmentForm } from './components/AddUwcssaDepartment';
 import Container from 'components/Container';
-import { FeedbackForm } from './components/AddUwcssaDepartmentForm';
 import SimpleStriped from './components/SimpleStriped';
 import { getAuthState } from 'redux/auth/authSlice';
 
@@ -49,7 +49,7 @@ function DepartmentDashboard() {
         Add Department
       </Button>
       <SimpleStriped uwcssaDepartmentList={uwcssaDepartmentList} />
-      <FeedbackForm open={open} onClose={() => setOpen(false)} />
+      <AddUwcssaDepartmentForm open={open} onClose={() => setOpen(false)} />
     </Container>
   );
 }
