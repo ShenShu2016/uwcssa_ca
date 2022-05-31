@@ -1,13 +1,10 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-31 10:55:25
+ * @LastEditTime: 2022-05-31 13:32:00
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
-
-import './editor.css';
-
 import React, { useEffect, useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -16,14 +13,12 @@ import AddCoverPic from './components/AddCoverPic';
 import Card from '@mui/material/Card';
 import AddTags from './components/AddTags';
 import Box from '@mui/material/Box';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import CkeditorS3UploadAdapter from 'components/CkeditorS3UploadAdapter';
-import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import FullScreenLoading from 'components/FullScreenLoading';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MyImageList from './components/MyImageList';
 import TextField from '@mui/material/TextField';
 import { getOwnerUserName } from 'redux/auth/authSlice';
+import RichTextEditor from 'components/RichTextEditor';
 import {
   Article,
   postArticle,
@@ -33,7 +28,6 @@ import {
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
 import PageTitle from 'admin/components/pageTitle';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -46,10 +40,8 @@ enum ActionType {
   edit = '编辑文章'
 }
 
-const ArticlePublish = () => {
-  const theme = useTheme();
+const ArticlePublish: React.FC = () => {
   const dispatch = useAppDispatch();
-  const authUser = useAppSelector((state) => state.auth.user);
   
   const message = useMessage();
   const navigate = useNavigate();
@@ -286,25 +278,17 @@ const ArticlePublish = () => {
     }
     // 如果没有
     setTags((prev) => {
-      prev.push({
+      const current = [...prev];
+      current.push({
         tagID: tag,
       });
-      return [...prev];
+      return current;
     });
   };
 
   const removeTag = (tag: string) => {
     setTags((chips) => chips.filter((chip) => chip.tagID !== tag));
   };
-
-  function MyCustomUploadAdapterPlugin (editor) {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-      return new CkeditorS3UploadAdapter(loader, dispatch, {
-        authUser,
-        targetTable: 'Article',
-      });
-    };
-  }
 
   return (
     <>
@@ -364,46 +348,7 @@ const ArticlePublish = () => {
               onChange={(e) => setCoverPageDescription(e.target.value)}
               onFocus={() => handleFocus('desc')}
             />
-            <Box
-              height="calc(100% - 180px)"
-              overflow-x="hidden"
-              sx={{
-                '& .ck.ck-editor__main>.ck-editor__editable': {
-                  backgroundColor: theme.palette.background.paper,
-                },
-                '& .ck.ck-toolbar': {
-                  backgroundColor: theme.palette.background.paper,
-                },
-                '& .ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset_all':
-                {
-                  color: theme.palette.text.primary,
-                },
-                '& .ck.ck-list': {
-                  backgroundColor: theme.palette.background.paper,
-                },
-                '& .ck.ck-list__item .ck-button:hover:not(.ck-disabled)': {
-                  backgroundColor: theme.palette.primary.light,
-                },
-                '& .ck.ck-button.ck-on, a.ck.ck-button.ck-on': {
-                  backgroundColor: theme.palette.background.paper,
-                },
-              }}
-            >
-              <CKEditor
-                editor={Editor}
-                data={content}
-                config={{
-                  extraPlugins: [MyCustomUploadAdapterPlugin],
-                }}
-                onReady={(editor) => {
-                  console.log('Editor is ready to use!', editor);
-                }}
-                onChange={(event, editor) => {
-                  const data = editor.getData();
-                  setContent(data);
-                }}
-              />
-            </Box>
+            <RichTextEditor content={content} setContent={setContent}/>
           </Card>
           <Box
             width="30%"
