@@ -1,8 +1,8 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-05-30 20:26:40
- * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-31 10:23:50
+ * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
@@ -10,6 +10,7 @@ import {
   AdminDashboard as AdminDashboardView,
   ArticleEdit as ArticleEditView,
   ArticlePublish as ArticlePublishView,
+  ActivityCreate as ActivityCreateView,
 } from 'admin';
 
 import DepartmentDashboard from './Department/DepartmentDashboard';
@@ -51,6 +52,12 @@ function AdminRoutes(): Array<{
     {
       path: '/admin/article-edit/:id',
       renderer: (): JSX.Element => <ArticlePublishView />,
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
+      path: '/admin/activity-create',
+      renderer: (): JSX.Element => <ActivityCreateView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },

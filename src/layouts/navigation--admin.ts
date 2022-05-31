@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 20:29:51
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-31 10:25:53
  * @FilePath: /uwcssa_ca/src/layouts/navigation--admin.ts
  * @Description:
  *
@@ -30,6 +30,16 @@ const pages = [
       {
         title: '编辑文章',
         href: '/admin/article-edit',
+      },
+    ],
+  },
+  {
+    groupTitle: '活动管理',
+    id: 'Activity',
+    pages: [
+      {
+        title: '发起活动',
+        href: '/admin/activity-create',
       },
     ],
   },
