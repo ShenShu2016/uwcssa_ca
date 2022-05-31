@@ -1,28 +1,24 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-20 09:30:58
- * @LastEditTime: 2022-05-30 16:39:56
+ * @LastEditTime: 2022-05-31 13:36:45
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/ArticlePublish/ArticlePublish.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Article/ArticlePublish/ArticlePublish.tsx
  */
-
-import './editor.css';
-
 import React, { useEffect, useState } from 'react';
 import { createArticleTag, createNewTag } from 'redux/tag/tagSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import AddCoverPic from './components/AddCoverPic';
+import Card from '@mui/material/Card';
 import AddTags from './components/AddTags';
 import Box from '@mui/material/Box';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import CkeditorS3UploadAdapter from 'components/CkeditorS3UploadAdapter';
-import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import FullScreenLoading from 'components/FullScreenLoading';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MyImageList from './components/MyImageList';
 import TextField from '@mui/material/TextField';
 import { getOwnerUserName } from 'redux/auth/authSlice';
+import RichTextEditor from 'components/RichTextEditor';
 import {
   Article,
   postArticle,
@@ -32,8 +28,7 @@ import {
 import useMessage from 'hooks/useMessage';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import PageTitle from 'admin/components/pageTitle';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface Tag {
@@ -45,10 +40,8 @@ enum ActionType {
   edit = '编辑文章'
 }
 
-const ArticlePublish = () => {
-  const theme = useTheme();
+const ArticlePublish: React.FC = () => {
   const dispatch = useAppDispatch();
-  const authUser = useAppSelector((state) => state.auth.user);
   
   const message = useMessage();
   const navigate = useNavigate();
@@ -285,10 +278,11 @@ const ArticlePublish = () => {
     }
     // 如果没有
     setTags((prev) => {
-      prev.push({
+      const current = [...prev];
+      current.push({
         tagID: tag,
       });
-      return [...prev];
+      return current;
     });
   };
 
@@ -296,146 +290,98 @@ const ArticlePublish = () => {
     setTags((chips) => chips.filter((chip) => chip.tagID !== tag));
   };
 
-  function MyCustomUploadAdapterPlugin (editor) {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-      return new CkeditorS3UploadAdapter(loader, dispatch, {
-        authUser,
-        targetTable: 'Article',
-      });
-    };
-  }
-
   return (
     <>
       <FullScreenLoading
         message={fullScreenLoading.message}
         loading={fullScreenLoading.loading}
       />
-      <Box display={'flex'} paddingX="5%" paddingY={4}>
-        <Box width="70%">
-          <Typography variant="h6" gutterBottom component="div">
-            {actionType}
-          </Typography>
-          <TextField
-            error={inputStatus.title}
-            id="standard-textarea"
-            fullWidth
-            label="Title"
-            multiline
-            value={title}
-            variant="standard"
-            inputProps={{
-              style: {
-                fontSize: 20,
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                fontSize: 18,
-              },
-            }}
-            sx={{
-              paddingBottom: 2,
-            }}
-            onChange={(e) => setTitle(e.target.value)}
-            onFocus={() => handleFocus('title')}
-          />
-          <TextField
-            error={inputStatus.desc}
-            id="standard-textarea"
-            fullWidth
-            label={'description & preview'}
-            multiline
-            rows={3}
-            value={coverPageDescription}
-            inputProps={{
-              style: {
-                fontSize: 14,
-                color: '#616161'
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                fontSize: 16,
-              },
-            }}
-            sx={{
-              paddingBottom: 2,
-            }}
-            onChange={(e) => setCoverPageDescription(e.target.value)}
-            onFocus={() => handleFocus('desc')}
-          />
-          <Box
-            height="calc(100% - 220px)"
-            overflow-x="hidden"
-            sx={{
-              '& .ck.ck-editor__main>.ck-editor__editable': {
-                backgroundColor: theme.palette.background.paper,
-              },
-              '& .ck.ck-toolbar': {
-                backgroundColor: theme.palette.background.paper,
-              },
-              '& .ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset_all':
-                {
-                  color: theme.palette.text.primary,
-                },
-              '& .ck.ck-list': {
-                backgroundColor: theme.palette.background.paper,
-              },
-              '& .ck.ck-list__item .ck-button:hover:not(.ck-disabled)': {
-                backgroundColor: theme.palette.primary.light,
-              },
-              '& .ck.ck-button.ck-on, a.ck.ck-button.ck-on': {
-                backgroundColor: theme.palette.background.paper,
-              },
-            }}
-          >
-            <CKEditor
-              editor={Editor}
-              data={content}
-              config={{
-                extraPlugins: [MyCustomUploadAdapterPlugin],
-              }}
-              onReady={(editor) => {
-                console.log('Editor is ready to use!', editor);
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setContent(data);
-              }}
-            />
-          </Box>
-        </Box>
-        <Box
-          width="30%"
-          ml="30px"
-          height="100%"
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <AddTags
-            addTag={addTag}
-            tags={tags}
-            removeTag={removeTag}
-          />
-          <MyImageList useImgFromRecent={useImgFromRecent} />
-          <Box>
-            <AddCoverPic setImgFile={setImgFile} imgFile={imgFile} />
-            <LoadingButton
-              loading={submitLoading}
+      <PageTitle title={actionType}>
+        <Box display={'flex'} paddingX="5%" pb={4}>
+          <Card sx={{width: '70%', p: 2}} >
+            <TextField
+              error={inputStatus.title}
+              id="standard-textarea"
               fullWidth
-              variant="contained"
-              onClick={handleSubmitArticle}
-              sx={{
-                marginTop: '8px',
+              label="Title"
+              multiline
+              value={title}
+              variant="standard"
+              inputProps={{
+                style: {
+                  fontSize: 20,
+                },
               }}
-            >
-              {actionType === ActionType.edit ? '更新文章' : '发布文章'}
-            </LoadingButton>
+              InputLabelProps={{
+                style: {
+                  fontSize: 18,
+                },
+              }}
+              sx={{
+                paddingBottom: 2,
+              }}
+              onChange={(e) => setTitle(e.target.value)}
+              onFocus={() => handleFocus('title')}
+            />
+            <TextField
+              error={inputStatus.desc}
+              id="standard-textarea"
+              fullWidth
+              label={'description & preview'}
+              multiline
+              rows={3}
+              value={coverPageDescription}
+              inputProps={{
+                style: {
+                  fontSize: 14,
+                  color: '#616161'
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontSize: 16,
+                },
+              }}
+              sx={{
+                paddingBottom: 2,
+              }}
+              onChange={(e) => setCoverPageDescription(e.target.value)}
+              onFocus={() => handleFocus('desc')}
+            />
+            <RichTextEditor content={content} setContent={setContent} height={'calc(100% - 180px)'}/>
+          </Card>
+          <Box
+            width="30%"
+            ml="30px"
+            height="100%"
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <AddTags
+              addTag={addTag}
+              tags={tags}
+              removeTag={removeTag}
+            />
+            <MyImageList useImgFromRecent={useImgFromRecent} />
+            <Box>
+              <AddCoverPic setImgFile={setImgFile} imgFile={imgFile} />
+              <LoadingButton
+                loading={submitLoading}
+                fullWidth
+                variant="contained"
+                onClick={handleSubmitArticle}
+                sx={{
+                  marginTop: '8px',
+                }}
+              >
+                {actionType === ActionType.edit ? '更新文章' : '发布文章'}
+              </LoadingButton>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </PageTitle>
+   
     </>
   );
 };
