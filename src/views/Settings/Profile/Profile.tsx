@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:56:49
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-30 22:45:05
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Container from 'components/Container';
+import CropperDialog from 'components/Cropper/CropperDialog';
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -20,6 +21,8 @@ import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+
+// import CropperDialog from 'components/Cropper/CropperDialog';
 
 const Profile = (): JSX.Element => {
   const theme = useTheme();
@@ -39,16 +42,20 @@ const Profile = (): JSX.Element => {
         <Container maxWidth={800} sx={{ margin: 'auto' }}>
           {/* margin auto 自己加上去的 */}
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Avatar
-              src={myUserProfile.avatarURL}
-              variant={'circular'}
-              {...stringAvatar(myUserProfile.name, {
-                fontSize: { xs: '64px', sm: '80px' },
-                width: { xs: theme.spacing(16), sm: theme.spacing(20) },
-                height: { xs: theme.spacing(16), sm: theme.spacing(20) },
-                border: `8px solid ${theme.palette.background.paper}`,
-              })}
-            />
+            <Box position={'relative'}>
+              <Avatar
+                src={myUserProfile.avatarURL}
+                variant={'circular'}
+                {...stringAvatar(myUserProfile.name, {
+                  fontSize: { xs: '64px', sm: '80px' },
+                  width: { xs: theme.spacing(16), sm: theme.spacing(20) },
+                  height: { xs: theme.spacing(16), sm: theme.spacing(20) },
+                  border: `8px solid ${theme.palette.background.paper}`,
+                })}
+              />
+              <CropperDialog />
+            </Box>
+
             <Card
               sx={{
                 p: { xs: 2, md: 4 },
