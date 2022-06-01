@@ -178,6 +178,9 @@ export const getTag = /* GraphQL */ `
       articles {
         nextToken
       }
+      events {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -324,6 +327,25 @@ export const getComment = /* GraphQL */ `
         owner
         articleCountId
       }
+      eventCommentsId
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       count {
         id
         count
@@ -369,6 +391,7 @@ export const listComments = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -400,6 +423,39 @@ export const commentSortByArticleCommentsIdCreatedAt = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
+        createdAt
+        updatedAt
+        owner
+        commentCountId
+      }
+      nextToken
+    }
+  }
+`;
+export const commentSortByEventCommentsIdCreatedAt = /* GraphQL */ `
+  query CommentSortByEventCommentsIdCreatedAt(
+    $eventCommentsId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentSortByEventCommentsIdCreatedAt(
+      eventCommentsId: $eventCommentsId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        content
+        isDeleted
+        articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -480,6 +536,7 @@ export const getCount = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -534,6 +591,7 @@ export const getLike = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -753,6 +811,190 @@ export const listUwcssaMembers = /* GraphQL */ `
     }
   }
 `;
+export const getEvent = /* GraphQL */ `
+  query GetEvent($id: ID!) {
+    getEvent(id: $id) {
+      id
+      title
+      coverPageImgURL
+      coverPageDescription
+      content
+      imgURLs
+      sponsor
+      online
+      group
+      tags {
+        nextToken
+      }
+      startDate
+      endDate
+      eventStatus
+      eventLocation {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
+      comments {
+        nextToken
+      }
+      active
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const listEvents = /* GraphQL */ `
+  query ListEvents(
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const eventSortByCreatedAt = /* GraphQL */ `
+  query EventSortByCreatedAt(
+    $active: ActiveType!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventSortByCreatedAt(
+      active: $active
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getAddress = /* GraphQL */ `
+  query GetAddress($id: ID!) {
+    getAddress(id: $id) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const listAddresses = /* GraphQL */ `
+  query ListAddresses(
+    $filter: ModelAddressFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getArticleTags = /* GraphQL */ `
   query GetArticleTags($id: ID!) {
     getArticleTags(id: $id) {
@@ -793,6 +1035,59 @@ export const listArticleTags = /* GraphQL */ `
         id
         tagID
         articleID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getEventTags = /* GraphQL */ `
+  query GetEventTags($id: ID!) {
+    getEventTags(id: $id) {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEventTags = /* GraphQL */ `
+  query ListEventTags(
+    $filter: ModelEventTagsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        tagID
+        eventID
         createdAt
         updatedAt
       }

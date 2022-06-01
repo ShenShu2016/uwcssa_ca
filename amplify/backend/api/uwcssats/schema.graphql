@@ -97,6 +97,7 @@ type Tag
   ) {
   id: ID! #用id 直接放tag 名词会比较好
   articles: [Article] @manyToMany(relationName: "ArticleTags")
+  events: [Event] @manyToMany(relationName: "EventTags")
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -152,6 +153,14 @@ type Comment
       sortKeyFields: ["createdAt"]
     ) # 为什么不加 ！ 因为有event 也需要用comment
   article: Article @belongsTo(fields: ["articleCommentsId"])
+  eventCommentsId: ID
+    @index(
+      name: "commentSortByEventCommentsIdCreatedAt" #名字要用小写
+      queryField: "commentSortByEventCommentsIdCreatedAt"
+      sortKeyFields: ["createdAt"]
+    ) # 为什么不加 ！ 因为有event 也需要用comment
+  event: Event @belongsTo(fields: ["articleCommentsId"])
+
   count: Count @hasOne # 每一个comment 都要有一个count 记录有几个Likes
   likes: [Like] @hasMany
   createdAt: AWSDateTime!
@@ -285,6 +294,76 @@ type UwcssaMember
   linkedIn: AWSURL
   website: AWSURL
   github: AWSURL
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+type Event
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  title: String
+  coverPageImgURL: AWSURL
+  coverPageDescription: String
+  content: String
+  imgURLs: [AWSURL]
+  sponsor: [String]
+  online: Boolean
+  group: Boolean
+  tags: [Tag] @manyToMany(relationName: "EventTags")
+  startDate: AWSDateTime!
+  endDate: AWSDateTime!
+  eventStatus: EventStatus!
+  eventLocation: Address
+  comments: [Comment] @hasMany
+  active: ActiveType!
+    @index(
+      name: "eventSortByCreatedAt" #名字要用小写
+      queryField: "eventSortByCreatedAt"
+      sortKeyFields: ["createdAt"]
+    )
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum EventStatus {
+  ComingSoon
+  InProgress
+  SignUpClosed
+  Finished
+  Canceled
+}
+# https://stackoverflow.com/questions/69464662/add-parameters-to-mui-google-maps-autocomplete
+type Address
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  description: String
+  place_id: String
+  reference: String
+  terms: [String]
+  types: [String]
+  apartmentNumbers: String
+  geocodingResult: String
+  lat: Float
+  lng: Float
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!

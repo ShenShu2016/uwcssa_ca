@@ -89,3 +89,108 @@ export const onDeleteArticleTags = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEventTags = /* GraphQL */ `
+  subscription OnCreateEventTags {
+    onCreateEventTags {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEventTags = /* GraphQL */ `
+  subscription OnUpdateEventTags {
+    onUpdateEventTags {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEventTags = /* GraphQL */ `
+  subscription OnDeleteEventTags {
+    onDeleteEventTags {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

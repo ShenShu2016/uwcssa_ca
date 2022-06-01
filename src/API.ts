@@ -302,6 +302,7 @@ export type Tag = {
   __typename: "Tag",
   id: string,
   articles?: ModelArticleTagsConnection | null,
+  events?: ModelEventTagsConnection | null,
   createdAt: string,
   updatedAt: string,
   owner: string,
@@ -356,6 +357,8 @@ export type Comment = {
   isDeleted: boolean,
   articleCommentsId?: string | null,
   article?: Article | null,
+  eventCommentsId?: string | null,
+  event?: Event | null,
   count?: Count | null,
   likes?: ModelLikeConnection | null,
   createdAt: string,
@@ -363,6 +366,74 @@ export type Comment = {
   owner: string,
   user: UserProfile,
   commentCountId?: string | null,
+};
+
+export type Event = {
+  __typename: "Event",
+  id: string,
+  title?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  content?: string | null,
+  imgURLs?: Array< string | null > | null,
+  sponsor?: Array< string | null > | null,
+  online?: boolean | null,
+  group?: boolean | null,
+  tags?: ModelEventTagsConnection | null,
+  startDate: string,
+  endDate: string,
+  eventStatus: EventStatus,
+  eventLocation?: Address | null,
+  comments?: ModelCommentConnection | null,
+  active: ActiveType,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+};
+
+export type ModelEventTagsConnection = {
+  __typename: "ModelEventTagsConnection",
+  items:  Array<EventTags | null >,
+  nextToken?: string | null,
+};
+
+export type EventTags = {
+  __typename: "EventTags",
+  id: string,
+  tagID: string,
+  eventID: string,
+  tag: Tag,
+  event: Event,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export enum EventStatus {
+  ComingSoon = "ComingSoon",
+  InProgress = "InProgress",
+  SignUpClosed = "SignUpClosed",
+  Finished = "Finished",
+  Canceled = "Canceled",
+}
+
+
+export type Address = {
+  __typename: "Address",
+  id: string,
+  description?: string | null,
+  place_id?: string | null,
+  reference?: string | null,
+  terms?: Array< string | null > | null,
+  types?: Array< string | null > | null,
+  apartmentNumbers?: string | null,
+  geocodingResult?: string | null,
+  lat?: number | null,
+  lng?: number | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
 };
 
 export type Count = {
@@ -457,6 +528,7 @@ export type CreateCommentInput = {
   content: string,
   isDeleted: boolean,
   articleCommentsId?: string | null,
+  eventCommentsId?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   owner: string,
@@ -467,6 +539,7 @@ export type ModelCommentConditionInput = {
   content?: ModelStringInput | null,
   isDeleted?: ModelBooleanInput | null,
   articleCommentsId?: ModelIDInput | null,
+  eventCommentsId?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   owner?: ModelIDInput | null,
@@ -488,6 +561,7 @@ export type UpdateCommentInput = {
   content?: string | null,
   isDeleted?: boolean | null,
   articleCommentsId?: string | null,
+  eventCommentsId?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   owner?: string | null,
@@ -823,6 +897,140 @@ export type DeleteUwcssaMemberInput = {
   id: string,
 };
 
+export type CreateEventInput = {
+  id?: string | null,
+  title?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  content?: string | null,
+  imgURLs?: Array< string | null > | null,
+  sponsor?: Array< string | null > | null,
+  online?: boolean | null,
+  group?: boolean | null,
+  startDate: string,
+  endDate: string,
+  eventStatus: EventStatus,
+  active: ActiveType,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelEventConditionInput = {
+  title?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURLs?: ModelStringInput | null,
+  sponsor?: ModelStringInput | null,
+  online?: ModelBooleanInput | null,
+  group?: ModelBooleanInput | null,
+  startDate?: ModelStringInput | null,
+  endDate?: ModelStringInput | null,
+  eventStatus?: ModelEventStatusInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelEventConditionInput | null > | null,
+  or?: Array< ModelEventConditionInput | null > | null,
+  not?: ModelEventConditionInput | null,
+};
+
+export type ModelEventStatusInput = {
+  eq?: EventStatus | null,
+  ne?: EventStatus | null,
+};
+
+export type UpdateEventInput = {
+  id: string,
+  title?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  content?: string | null,
+  imgURLs?: Array< string | null > | null,
+  sponsor?: Array< string | null > | null,
+  online?: boolean | null,
+  group?: boolean | null,
+  startDate?: string | null,
+  endDate?: string | null,
+  eventStatus?: EventStatus | null,
+  active?: ActiveType | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteEventInput = {
+  id: string,
+};
+
+export type CreateAddressInput = {
+  id?: string | null,
+  description?: string | null,
+  place_id?: string | null,
+  reference?: string | null,
+  terms?: Array< string | null > | null,
+  types?: Array< string | null > | null,
+  apartmentNumbers?: string | null,
+  geocodingResult?: string | null,
+  lat?: number | null,
+  lng?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelAddressConditionInput = {
+  description?: ModelStringInput | null,
+  place_id?: ModelStringInput | null,
+  reference?: ModelStringInput | null,
+  terms?: ModelStringInput | null,
+  types?: ModelStringInput | null,
+  apartmentNumbers?: ModelStringInput | null,
+  geocodingResult?: ModelStringInput | null,
+  lat?: ModelFloatInput | null,
+  lng?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelAddressConditionInput | null > | null,
+  or?: Array< ModelAddressConditionInput | null > | null,
+  not?: ModelAddressConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type UpdateAddressInput = {
+  id: string,
+  description?: string | null,
+  place_id?: string | null,
+  reference?: string | null,
+  terms?: Array< string | null > | null,
+  types?: Array< string | null > | null,
+  apartmentNumbers?: string | null,
+  geocodingResult?: string | null,
+  lat?: number | null,
+  lng?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteAddressInput = {
+  id: string,
+};
+
 export type CreateArticleTagsInput = {
   id?: string | null,
   tagID: string,
@@ -844,6 +1052,30 @@ export type UpdateArticleTagsInput = {
 };
 
 export type DeleteArticleTagsInput = {
+  id: string,
+};
+
+export type CreateEventTagsInput = {
+  id?: string | null,
+  tagID: string,
+  eventID: string,
+};
+
+export type ModelEventTagsConditionInput = {
+  tagID?: ModelIDInput | null,
+  eventID?: ModelIDInput | null,
+  and?: Array< ModelEventTagsConditionInput | null > | null,
+  or?: Array< ModelEventTagsConditionInput | null > | null,
+  not?: ModelEventTagsConditionInput | null,
+};
+
+export type UpdateEventTagsInput = {
+  id: string,
+  tagID?: string | null,
+  eventID?: string | null,
+};
+
+export type DeleteEventTagsInput = {
   id: string,
 };
 
@@ -978,6 +1210,7 @@ export type ModelCommentFilterInput = {
   content?: ModelStringInput | null,
   isDeleted?: ModelBooleanInput | null,
   articleCommentsId?: ModelIDInput | null,
+  eventCommentsId?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   owner?: ModelIDInput | null,
@@ -1102,6 +1335,59 @@ export type ModelUwcssaMemberFilterInput = {
   uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null,
 };
 
+export type ModelEventFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURLs?: ModelStringInput | null,
+  sponsor?: ModelStringInput | null,
+  online?: ModelBooleanInput | null,
+  group?: ModelBooleanInput | null,
+  startDate?: ModelStringInput | null,
+  endDate?: ModelStringInput | null,
+  eventStatus?: ModelEventStatusInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelEventFilterInput | null > | null,
+  or?: Array< ModelEventFilterInput | null > | null,
+  not?: ModelEventFilterInput | null,
+};
+
+export type ModelEventConnection = {
+  __typename: "ModelEventConnection",
+  items:  Array<Event | null >,
+  nextToken?: string | null,
+};
+
+export type ModelAddressFilterInput = {
+  id?: ModelIDInput | null,
+  description?: ModelStringInput | null,
+  place_id?: ModelStringInput | null,
+  reference?: ModelStringInput | null,
+  terms?: ModelStringInput | null,
+  types?: ModelStringInput | null,
+  apartmentNumbers?: ModelStringInput | null,
+  geocodingResult?: ModelStringInput | null,
+  lat?: ModelFloatInput | null,
+  lng?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelAddressFilterInput | null > | null,
+  or?: Array< ModelAddressFilterInput | null > | null,
+  not?: ModelAddressFilterInput | null,
+};
+
+export type ModelAddressConnection = {
+  __typename: "ModelAddressConnection",
+  items:  Array<Address | null >,
+  nextToken?: string | null,
+};
+
 export type ModelArticleTagsFilterInput = {
   id?: ModelIDInput | null,
   tagID?: ModelIDInput | null,
@@ -1109,6 +1395,15 @@ export type ModelArticleTagsFilterInput = {
   and?: Array< ModelArticleTagsFilterInput | null > | null,
   or?: Array< ModelArticleTagsFilterInput | null > | null,
   not?: ModelArticleTagsFilterInput | null,
+};
+
+export type ModelEventTagsFilterInput = {
+  id?: ModelIDInput | null,
+  tagID?: ModelIDInput | null,
+  eventID?: ModelIDInput | null,
+  and?: Array< ModelEventTagsFilterInput | null > | null,
+  or?: Array< ModelEventTagsFilterInput | null > | null,
+  not?: ModelEventTagsFilterInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -1331,6 +1626,10 @@ export type CreateTagMutation = {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
     } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1350,6 +1649,10 @@ export type UpdateTagMutation = {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
     } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1367,6 +1670,10 @@ export type DeleteTagMutation = {
     id: string,
     articles?:  {
       __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1574,6 +1881,26 @@ export type CreateCommentMutation = {
       owner: string,
       articleCountId?: string | null,
     } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
     count?:  {
       __typename: "Count",
       id: string,
@@ -1635,6 +1962,26 @@ export type UpdateCommentMutation = {
       owner: string,
       articleCountId?: string | null,
     } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
     count?:  {
       __typename: "Count",
       id: string,
@@ -1695,6 +2042,26 @@ export type DeleteCommentMutation = {
       updatedAt: string,
       owner: string,
       articleCountId?: string | null,
+    } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
     } | null,
     count?:  {
       __typename: "Count",
@@ -1863,6 +2230,7 @@ export type CreateCountMutation = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1905,6 +2273,7 @@ export type UpdateCountMutation = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1947,6 +2316,7 @@ export type DeleteCountMutation = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1988,6 +2358,7 @@ export type CreateLikeMutation = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2029,6 +2400,7 @@ export type UpdateLikeMutation = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2070,6 +2442,7 @@ export type DeleteLikeMutation = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2461,6 +2834,321 @@ export type DeleteUwcssaMemberMutation = {
   } | null,
 };
 
+export type CreateEventMutationVariables = {
+  input: CreateEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type CreateEventMutation = {
+  createEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online?: boolean | null,
+    group?: boolean | null,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type UpdateEventMutationVariables = {
+  input: UpdateEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type UpdateEventMutation = {
+  updateEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online?: boolean | null,
+    group?: boolean | null,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type DeleteEventMutationVariables = {
+  input: DeleteEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type DeleteEventMutation = {
+  deleteEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online?: boolean | null,
+    group?: boolean | null,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type CreateAddressMutationVariables = {
+  input: CreateAddressInput,
+  condition?: ModelAddressConditionInput | null,
+};
+
+export type CreateAddressMutation = {
+  createAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type UpdateAddressMutationVariables = {
+  input: UpdateAddressInput,
+  condition?: ModelAddressConditionInput | null,
+};
+
+export type UpdateAddressMutation = {
+  updateAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type DeleteAddressMutationVariables = {
+  input: DeleteAddressInput,
+  condition?: ModelAddressConditionInput | null,
+};
+
+export type DeleteAddressMutation = {
+  deleteAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
 export type CreateArticleTagsMutationVariables = {
   input: CreateArticleTagsInput,
   condition?: ModelArticleTagsConditionInput | null,
@@ -2563,6 +3251,132 @@ export type DeleteArticleTagsMutation = {
       updatedAt: string,
       owner: string,
       articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateEventTagsMutationVariables = {
+  input: CreateEventTagsInput,
+  condition?: ModelEventTagsConditionInput | null,
+};
+
+export type CreateEventTagsMutation = {
+  createEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateEventTagsMutationVariables = {
+  input: UpdateEventTagsInput,
+  condition?: ModelEventTagsConditionInput | null,
+};
+
+export type UpdateEventTagsMutation = {
+  updateEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteEventTagsMutationVariables = {
+  input: DeleteEventTagsInput,
+  condition?: ModelEventTagsConditionInput | null,
+};
+
+export type DeleteEventTagsMutation = {
+  deleteEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
     },
     createdAt: string,
     updatedAt: string,
@@ -2767,6 +3581,10 @@ export type GetTagQuery = {
       __typename: "ModelArticleTagsConnection",
       nextToken?: string | null,
     } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -2929,6 +3747,26 @@ export type GetCommentQuery = {
       owner: string,
       articleCountId?: string | null,
     } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
     count?:  {
       __typename: "Count",
       id: string,
@@ -2980,6 +3818,7 @@ export type ListCommentsQuery = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3007,6 +3846,35 @@ export type CommentSortByArticleCommentsIdCreatedAtQuery = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type CommentSortByEventCommentsIdCreatedAtQueryVariables = {
+  eventCommentsId: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type CommentSortByEventCommentsIdCreatedAtQuery = {
+  commentSortByEventCommentsIdCreatedAt?:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3101,6 +3969,7 @@ export type GetCountQuery = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3164,6 +4033,7 @@ export type GetLikeQuery = {
       content: string,
       isDeleted: boolean,
       articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3404,6 +4274,205 @@ export type ListUwcssaMembersQuery = {
   } | null,
 };
 
+export type GetEventQueryVariables = {
+  id: string,
+};
+
+export type GetEventQuery = {
+  getEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online?: boolean | null,
+    group?: boolean | null,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type ListEventsQueryVariables = {
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEventsQuery = {
+  listEvents?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type EventSortByCreatedAtQueryVariables = {
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type EventSortByCreatedAtQuery = {
+  eventSortByCreatedAt?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetAddressQueryVariables = {
+  id: string,
+};
+
+export type GetAddressQuery = {
+  getAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+  } | null,
+};
+
+export type ListAddressesQueryVariables = {
+  filter?: ModelAddressFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAddressesQuery = {
+  listAddresses?:  {
+    __typename: "ModelAddressConnection",
+    items:  Array< {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetArticleTagsQueryVariables = {
   id: string,
 };
@@ -3453,6 +4522,68 @@ export type ListArticleTagsQuery = {
       id: string,
       tagID: string,
       articleID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetEventTagsQueryVariables = {
+  id: string,
+};
+
+export type GetEventTagsQuery = {
+  getEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListEventTagsQueryVariables = {
+  filter?: ModelEventTagsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEventTagsQuery = {
+  listEventTags?:  {
+    __typename: "ModelEventTagsConnection",
+    items:  Array< {
+      __typename: "EventTags",
+      id: string,
+      tagID: string,
+      eventID: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3547,6 +4678,117 @@ export type OnDeleteArticleTagsSubscription = {
       updatedAt: string,
       owner: string,
       articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateEventTagsSubscription = {
+  onCreateEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateEventTagsSubscription = {
+  onUpdateEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteEventTagsSubscription = {
+  onDeleteEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online?: boolean | null,
+      group?: boolean | null,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
     },
     createdAt: string,
     updatedAt: string,

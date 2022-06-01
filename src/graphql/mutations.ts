@@ -201,6 +201,9 @@ export const createTag = /* GraphQL */ `
       articles {
         nextToken
       }
+      events {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -217,6 +220,9 @@ export const updateTag = /* GraphQL */ `
       articles {
         nextToken
       }
+      events {
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -231,6 +237,9 @@ export const deleteTag = /* GraphQL */ `
     deleteTag(input: $input, condition: $condition) {
       id
       articles {
+        nextToken
+      }
+      events {
         nextToken
       }
       createdAt
@@ -414,6 +423,25 @@ export const createComment = /* GraphQL */ `
         owner
         articleCountId
       }
+      eventCommentsId
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       count {
         id
         count
@@ -469,6 +497,25 @@ export const updateComment = /* GraphQL */ `
         owner
         articleCountId
       }
+      eventCommentsId
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       count {
         id
         count
@@ -523,6 +570,25 @@ export const deleteComment = /* GraphQL */ `
         updatedAt
         owner
         articleCountId
+      }
+      eventCommentsId
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
       }
       count {
         id
@@ -675,6 +741,7 @@ export const createCount = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -713,6 +780,7 @@ export const updateCount = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -751,6 +819,7 @@ export const deleteCount = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -788,6 +857,7 @@ export const createLike = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -825,6 +895,7 @@ export const updateLike = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -862,6 +933,7 @@ export const deleteLike = /* GraphQL */ `
         content
         isDeleted
         articleCommentsId
+        eventCommentsId
         createdAt
         updatedAt
         owner
@@ -1220,6 +1292,294 @@ export const deleteUwcssaMember = /* GraphQL */ `
     }
   }
 `;
+export const createEvent = /* GraphQL */ `
+  mutation CreateEvent(
+    $input: CreateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    createEvent(input: $input, condition: $condition) {
+      id
+      title
+      coverPageImgURL
+      coverPageDescription
+      content
+      imgURLs
+      sponsor
+      online
+      group
+      tags {
+        nextToken
+      }
+      startDate
+      endDate
+      eventStatus
+      eventLocation {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
+      comments {
+        nextToken
+      }
+      active
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const updateEvent = /* GraphQL */ `
+  mutation UpdateEvent(
+    $input: UpdateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    updateEvent(input: $input, condition: $condition) {
+      id
+      title
+      coverPageImgURL
+      coverPageDescription
+      content
+      imgURLs
+      sponsor
+      online
+      group
+      tags {
+        nextToken
+      }
+      startDate
+      endDate
+      eventStatus
+      eventLocation {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
+      comments {
+        nextToken
+      }
+      active
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const deleteEvent = /* GraphQL */ `
+  mutation DeleteEvent(
+    $input: DeleteEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    deleteEvent(input: $input, condition: $condition) {
+      id
+      title
+      coverPageImgURL
+      coverPageDescription
+      content
+      imgURLs
+      sponsor
+      online
+      group
+      tags {
+        nextToken
+      }
+      startDate
+      endDate
+      eventStatus
+      eventLocation {
+        id
+        description
+        place_id
+        reference
+        terms
+        types
+        apartmentNumbers
+        geocodingResult
+        lat
+        lng
+        createdAt
+        updatedAt
+        owner
+      }
+      comments {
+        nextToken
+      }
+      active
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const createAddress = /* GraphQL */ `
+  mutation CreateAddress(
+    $input: CreateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    createAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const updateAddress = /* GraphQL */ `
+  mutation UpdateAddress(
+    $input: UpdateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    updateAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const deleteAddress = /* GraphQL */ `
+  mutation DeleteAddress(
+    $input: DeleteAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    deleteAddress(input: $input, condition: $condition) {
+      id
+      description
+      place_id
+      reference
+      terms
+      types
+      apartmentNumbers
+      geocodingResult
+      lat
+      lng
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
 export const createArticleTags = /* GraphQL */ `
   mutation CreateArticleTags(
     $input: CreateArticleTagsInput!
@@ -1310,6 +1670,120 @@ export const deleteArticleTags = /* GraphQL */ `
         updatedAt
         owner
         articleCountId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEventTags = /* GraphQL */ `
+  mutation CreateEventTags(
+    $input: CreateEventTagsInput!
+    $condition: ModelEventTagsConditionInput
+  ) {
+    createEventTags(input: $input, condition: $condition) {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEventTags = /* GraphQL */ `
+  mutation UpdateEventTags(
+    $input: UpdateEventTagsInput!
+    $condition: ModelEventTagsConditionInput
+  ) {
+    updateEventTags(input: $input, condition: $condition) {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEventTags = /* GraphQL */ `
+  mutation DeleteEventTags(
+    $input: DeleteEventTagsInput!
+    $condition: ModelEventTagsConditionInput
+  ) {
+    deleteEventTags(input: $input, condition: $condition) {
+      id
+      tagID
+      eventID
+      tag {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
       }
       createdAt
       updatedAt
