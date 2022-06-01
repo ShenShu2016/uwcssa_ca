@@ -12,7 +12,6 @@ import {
   Typography,
 } from '@mui/material';
 
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import React from 'react';
 import { getInitialsAvatar } from 'components/Avatar/AvatarFunction';
 import moment from 'moment';
@@ -91,75 +90,74 @@ function CustomerListResults({
 
   return (
     <Card {...rest}>
-      <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
+      <Box sx={{ minWidth: 1050 }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  checked={
+                    selectedCustomerIds.length === userProfileList.length
+                  }
+                  color="primary"
+                  indeterminate={
+                    selectedCustomerIds.length > 0 &&
+                    selectedCustomerIds.length < userProfileList.length
+                  }
+                  onChange={handleSelectAll}
+                />
+              </TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Location</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Registration date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {userProfileList.slice(0, limit).map((customer) => (
+              <TableRow
+                hover
+                key={customer.id}
+                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+              >
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={
-                      selectedCustomerIds.length === userProfileList.length
-                    }
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0 &&
-                      selectedCustomerIds.length < userProfileList.length
-                    }
-                    onChange={handleSelectAll}
+                    checked={selectedCustomerIds.indexOf(customer.id) !== -1}
+                    onChange={(event) => handleSelectOne(event, customer.id)}
+                    value="true"
                   />
                 </TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Registration date</TableCell>
+                <TableCell>
+                  <Box
+                    sx={{
+                      alignItems: 'center',
+                      display: 'flex',
+                    }}
+                  >
+                    <Avatar src={customer.avatarURL} sx={{ mr: 2 }}>
+                      {getInitialsAvatar(customer.name)}
+                    </Avatar>
+                    <Typography color="textPrimary" variant="body1">
+                      {customer.name}
+                    </Typography>
+                  </Box>
+                </TableCell>
+                <TableCell>{customer.email}</TableCell>
+                <TableCell>
+                  {/* {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`} */}
+                  不知道随便写点
+                </TableCell>
+                <TableCell>{customer.email}</TableCell>
+                <TableCell>
+                  {moment(customer.createdAt).format('DD/MM/YYYY')}
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {userProfileList.slice(0, limit).map((customer) => (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                      }}
-                    >
-                      <Avatar src={customer.avatarURL} sx={{ mr: 2 }}>
-                        {getInitialsAvatar(customer.name)}
-                      </Avatar>
-                      <Typography color="textPrimary" variant="body1">
-                        {customer.name}
-                      </Typography>
-                    </Box>
-                  </TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>
-                    {/* {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`} */}
-                    不知道随便写点
-                  </TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+
       <TablePagination
         component="div"
         count={userProfileList.length}
