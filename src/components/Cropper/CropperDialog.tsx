@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-29 23:50:40
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-31 23:29:41
+ * @LastEditTime: 2022-05-31 23:55:00
  * @FilePath: /uwcssa_ca/src/components/Cropper/CropperDialog.tsx
  * @Description:
  *
@@ -96,9 +96,6 @@ export default function CropperDialog() {
       setFinish(false);
     }
   };
-  interface MyFile extends File {
-    lastModifiedDate: Date;
-  }
 
   const uploadAvatarImg = async () => {
     setLoading(true);
@@ -111,10 +108,6 @@ export default function CropperDialog() {
       `croppedAvatarImg${uuid()}.jpeg`,
     );
     console.log(convertedUrlToFile);
-
-    // console.log(file);
-    // const fileInputFiles = FileListItems(file);
-    // console.log(fileInputFiles);
 
     const targetTable = 'userProfile';
     const response = await dispatch(
@@ -132,33 +125,18 @@ export default function CropperDialog() {
       setAvatarImageSrc(null);
       setFinish(true);
     }
-  };
 
-  const initialValues = {
-    avatarURL: myUserProfile.avatarURL || '',
-  };
-
-  const onSubmit = async (values) => {
-    console.log(values);
     const updateUserProfileInput = {
       id: ownerUsername,
-      ...values,
+      avatarURL: response.payload.objectCompressedURL,
     };
-    const response = await dispatch(
+    const response2 = await dispatch(
       updateUserProfileData(updateUserProfileInput),
     );
+    setLoading(false);
     handleClose();
-    console.log('response', response);
-
-    if (response) {
-      setLoading(false);
-    }
-    return values;
   };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-  });
+
   const noChange = () => {
     setAvatarImageSrc(null);
     setAvatarImgURL(myUserProfile.avatarURL);
@@ -181,109 +159,109 @@ export default function CropperDialog() {
           <PhotoCamera />
         </IconButton>
       </Box>
-      <form onSubmit={formik.handleSubmit}>
-        <React.Fragment>
-          <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
-            <DialogTitle>编辑 头像</DialogTitle>
-            <DialogContent
+
+      <React.Fragment>
+        <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+          <DialogTitle>编辑 头像</DialogTitle>
+          <DialogContent
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+              padding: '1rem',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div style={{ marginBlock: '2.5rem' }} />
+            <Box
               sx={{
-                backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                padding: '1rem',
-                alignItems: 'center',
-                justifyContent: 'center',
+                position: 'relative',
+                width: '100%',
+                height: isSm ? 400 : 200,
+                background: '#333',
               }}
             >
-              <div style={{ marginBlock: '2.5rem' }} />
+              <Cropper
+                image={avatarImageSrc ? avatarImageSrc : avatarImgURL}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                cropShape="round"
+                showGrid={false}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
+              />
+            </Box>
+            <Box>
               <Box
                 sx={{
-                  position: 'relative',
-                  width: '100%',
-                  height: isSm ? 400 : 200,
-                  background: '#333',
+                  display: 'flex',
+                  flex: '1',
+                  alignItems: 'center',
+                  flexDirection: isSm ? null : 'column',
+                  margin: '1rem 0',
                 }}
               >
-                <Cropper
-                  image={avatarImageSrc ? avatarImageSrc : avatarImgURL}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={1}
-                  cropShape="round"
-                  showGrid={false}
-                  onCropChange={setCrop}
-                  onCropComplete={onCropComplete}
-                  onZoomChange={setZoom}
-                />
-              </Box>
-              <Box>
-                <Box
+                <Typography
+                  variant="overline"
                   sx={{
-                    display: 'flex',
-                    flex: '1',
-                    alignItems: 'center',
-                    flexDirection: isSm ? null : 'column',
-                    margin: '1rem 0',
+                    minWidth: isSm ? 25 : 65,
+                    color: 'white',
                   }}
                 >
-                  <Typography
-                    variant="overline"
-                    sx={{
-                      minWidth: isSm ? 25 : 65,
-                      color: 'white',
-                    }}
-                  >
-                    缩放
-                  </Typography>
-                  <Slider
-                    style={{
-                      color: '#ffff',
-                      padding: '22px 0px',
-                      marginLeft: 16,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      margin: '0 16px',
-                      minWidth: isSm ? '500px' : '200px',
-                    }}
-                    value={zoom}
-                    min={1}
-                    max={3}
-                    step={0.1}
-                    aria-labelledby="Zoom"
-                    onChange={(e, zoom) => setZoom(Number(zoom))}
-                    disabled={avatarImageSrc ? false : true}
-                  />
-                </Box>
+                  缩放
+                </Typography>
+                <Slider
+                  style={{
+                    color: '#ffff',
+                    padding: '22px 0px',
+                    marginLeft: 16,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    margin: '0 16px',
+                    minWidth: isSm ? '500px' : '200px',
+                  }}
+                  value={zoom}
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  aria-labelledby="Zoom"
+                  onChange={(e, zoom) => setZoom(Number(zoom))}
+                  disabled={avatarImageSrc ? false : true}
+                />
               </Box>
-            </DialogContent>
-            <DialogActions>
-              <Button autoFocus onClick={noChange}>
-                取消
-              </Button>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={noChange}>
+              取消
+            </Button>
 
-              {avatarImageSrc ? (
+            {avatarImageSrc ? (
+              <Button
+                type={'submit'}
+                variant="contained"
+                disabled={!avatarImageSrc}
+                onClick={uploadAvatarImg}
+              >
+                保存头像
+              </Button>
+            ) : (
+              <>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={inputAvatarRef}
+                  onChange={onAvatarImgFileChange}
+                  style={{ display: 'none' }}
+                />
                 <Button
-                  // type={'submit'}
-                  variant="contained"
-                  disabled={!avatarImageSrc}
-                  onClick={uploadAvatarImg}
+                  variant="text"
+                  onClick={triggerAvatarFileSelectPopup}
+                  // disabled={loading}
                 >
-                  保存头像
-                </Button>
-              ) : (
-                <>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    ref={inputAvatarRef}
-                    onChange={onAvatarImgFileChange}
-                    style={{ display: 'none' }}
-                  />
-                  <Button
-                    variant="text"
-                    onClick={triggerAvatarFileSelectPopup}
-                    // disabled={loading}
-                  >
-                    上传头像
-                    {/* {loading && (
+                  上传头像
+                  {/* {loading && (
                   <CircularProgress
                     size={24}
                     sx={{
@@ -296,13 +274,12 @@ export default function CropperDialog() {
                     }}
                   />
                 )} */}
-                  </Button>
-                </>
-              )}
-            </DialogActions>
-          </Dialog>
-        </React.Fragment>
-      </form>
+                </Button>
+              </>
+            )}
+          </DialogActions>
+        </Dialog>
+      </React.Fragment>
     </div>
   );
 }
