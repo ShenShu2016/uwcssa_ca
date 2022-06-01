@@ -11,10 +11,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useFormik } from 'formik';
+import { useSwiper } from 'swiper/react';
+import { ActivityFormInfo } from '../ActivityCreate';
 import * as yup from 'yup';
 
 interface ActivityFormProp {
-  setCurrentComponent: (currentComponent: string) => void;
+  activityForm: ActivityFormInfo;
+  setActivityForm: (form: ActivityFormInfo) => void
 }
 
 const validationSchema = yup.object({
@@ -36,18 +39,15 @@ const validationSchema = yup.object({
     .required('请输入活动最多限制人数'),
 });
 
-const ActivityForm: React.FC<ActivityFormProp> = ({ setCurrentComponent }) => {
+const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityForm }) => {
 
   const [description, setDescription] = useState('');
+  const swiper = useSwiper();
 
-  const initialValues = {
-    title: '',
-    dateTime: null,
-    address: '',
-    limit: 0,
-  };
+  const initialValues = activityForm;
   
   const onSubmit = (values) => {
+    console.log(values);
     return values;
   };
   
@@ -59,16 +59,17 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ setCurrentComponent }) => {
 
   return (
     <>
-      <Box mb={2} sx={{ float: 'right' }}>
-        <Button
-          variant="contained"
-          endIcon={<ArrowForwardIcon />}
-          onClick={() => setCurrentComponent('ActivityConfig')}
-        >
-           配置报名表单
-        </Button>
-      </Box>
       <form onSubmit={formik.handleSubmit}>
+        <Box sx={{ float: 'right' }}>
+          <Button
+            variant="contained"
+            type={'submit'}
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => swiper.slideNext()}
+          >
+           配置报名表单
+          </Button>
+        </Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography
@@ -164,7 +165,8 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ setCurrentComponent }) => {
         </Grid>
         <Box
           width='100%'
-          height='60vh'
+          height='80vh'
+          mb={2}
         >
           <Typography
             variant={'subtitle2'}
@@ -178,7 +180,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ setCurrentComponent }) => {
           </Typography>
           <RichTextEditor content={description} setContent={setDescription} height='calc(100% - 21px)'/>
         </Box>
-        <Button
+        {/* <Button
           size={'large'}
           variant={'contained'}
           type={'submit'}
@@ -189,7 +191,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ setCurrentComponent }) => {
           }}
         >
           Save
-        </Button>
+        </Button> */}
       </form>
     </>
   );

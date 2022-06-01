@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:41:55
- * @LastEditTime: 2022-05-31 11:17:18
+ * @LastEditTime: 2022-06-01 15:23:18
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/components/pageTitle.tsx
  */
@@ -28,7 +28,7 @@ const PageTitle: React.FC<PageTitleProp> = ({ children, title='', description=''
         >
           {title}
         </Typography>
-        <Typography sx={{ color: 'common.white' }}>
+        <Typography component={Box} sx={{ color: 'common.white' }}>
           {description}
         </Typography>
       </Box>
