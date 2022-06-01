@@ -2,11 +2,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-06-01 15:18:06
+ * @LastEditTime: 2022-06-01 17:53:04
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/ActivityCreate.tsx
  */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PageTitle from 'admin/components/pageTitle';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -20,6 +20,12 @@ import ActivityPreview from './components/ActivityPreview';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
+export enum Steps {
+    ActivityForm = 'ActivityForm',
+    ActivityPoster = 'ActivityPoster',
+    ActivityConfig = 'ActivityConfig',
+    ActivityPreview = 'ActivityPreview'
+}
 export interface ActivityFormInfo {
     title: string;
     dateTime: null | Date;
@@ -27,32 +33,37 @@ export interface ActivityFormInfo {
     limit: number;
     content: string;
 }
-// isComplete记录该页面是否完成所有必填信息
-// 如果isComplete为true 那么step显示绿色
-const steps = [
+
+// 使用context把设置每一个step是否完成的方法暴露给每一个子组件 就不用给每一个子组件都传一个prop了
+const contextInitValue = {
+  setCompleted: null
+};
+export const CompleteStateContext = React.createContext(contextInitValue);
+
+const stepItems = [
   {
     label: '填写活动信息',
-    key: 'ActivityForm',
-    isComplete: true
+    key: Steps.ActivityForm,
   },{
     label: '添加活动海报',
-    key: 'ActivityPoster',
-    isComplete: false
+    key: Steps.ActivityPoster,
   },{
     label: '配置报名表单',
-    key: 'ActivityConfig',
-    isComplete: false
+    key: Steps.ActivityConfig,
   },{
     label: '完成',
-    key: 'ActivityPreview',
-    isComplete: false
+    key: Steps.ActivityPreview,
   }
-
 ];
 
 const ActivityCreate: React.FC = () => {
-
-  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState({
+    ActivityForm: false,
+    ActivityPoster: false,
+    ActivityConfig: false,
+    ActivityPreview: false
+  });
+  const [activeStep, setActiveStep] = useState<number>(0);
   const [activityForm, setActivityForm] = useState<ActivityFormInfo>({
     title: '',
     dateTime: null,
@@ -60,7 +71,12 @@ const ActivityCreate: React.FC = () => {
     limit: 0,
     content: ''
   });
-
+  // 把setCompleted赋值到context中
+  // context对象需要export出去 所以不能写在函数组件里面
+  // 在函数外面 setCompleted还没有被声明 所以在外面先声明 这里赋值
+  const completeContext = useContext(CompleteStateContext);
+  completeContext.setCompleted = setCompleted;
+  
   return (
     <>
       <PageTitle
@@ -68,10 +84,10 @@ const ActivityCreate: React.FC = () => {
         marginTop='-50px'
         description={
           <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((step) => (
+            {stepItems.map((step) => (
               <Step
                 key={step.key}
-                completed={step.isComplete}
+                completed={completed[step.key]}
                 sx={{
                   '& .MuiStepLabel-label.MuiStepLabel-alternativeLabel':
                       {
@@ -107,18 +123,20 @@ const ActivityCreate: React.FC = () => {
               allowTouchMove={false}
               onSlideChange={(e) => setActiveStep(e.activeIndex)}
             >
-              <SwiperSlide>
-                <ActivityForm activityForm={activityForm} setActivityForm={setActivityForm}/>
-              </SwiperSlide>
-              <SwiperSlide>
-                <ActivityPoster/>
-              </SwiperSlide>
-              <SwiperSlide>
-                <ActivityConfig/>
-              </SwiperSlide>
-              <SwiperSlide>
-                <ActivityPreview/>
-              </SwiperSlide>
+              <CompleteStateContext.Provider value={contextInitValue}>
+                <SwiperSlide>
+                  <ActivityForm activityForm={activityForm} setActivityForm={setActivityForm}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <ActivityPoster/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <ActivityConfig/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <ActivityPreview/>
+                </SwiperSlide>
+              </CompleteStateContext.Provider>
             </Swiper>
           </Card>
         </Box>
@@ -126,5 +144,4 @@ const ActivityCreate: React.FC = () => {
     </>
   );
 };
-
 export default ActivityCreate;

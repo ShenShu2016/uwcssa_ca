@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import RichTextEditor from 'components/RichTextEditor';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -13,11 +13,20 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useFormik } from 'formik';
 import { useSwiper } from 'swiper/react';
 import { ActivityFormInfo } from '../ActivityCreate';
+import { CompleteStateContext } from '../ActivityCreate';
 import * as yup from 'yup';
 
 interface ActivityFormProp {
   activityForm: ActivityFormInfo;
-  setActivityForm: (form: ActivityFormInfo) => void
+  setActivityForm: React.Dispatch<React.SetStateAction<ActivityFormInfo>>
+}
+
+enum FieldType {
+    title = 'title',
+    dateTime = 'dateTime',
+    address = 'address',
+    limit = 'limit',
+    content = 'content'
 }
 
 const validationSchema = yup.object({
@@ -43,19 +52,49 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
 
   const [description, setDescription] = useState('');
   const swiper = useSwiper();
+  const completeContext = useContext(CompleteStateContext);
 
-  const initialValues = activityForm;
-  
+  // 当记录form值的对象变化时 判断是否必填项都填了
+  useEffect(() => {
+    completeContext.setCompleted((prev) => {
+      const current = {
+        ...prev,
+        ActivityForm: Object.keys(activityForm).every((key) => !!activityForm[key] || activityForm[key] === 0)
+      };
+      return current;
+    });
+  }, [activityForm]);
+
   const onSubmit = (values) => {
-    console.log(values);
     return values;
   };
   
-  const formik = useFormik({
-    initialValues,
+  const formik = useFormik({ 
+    initialValues: activityForm,
     validationSchema: validationSchema,
     onSubmit,
   });
+
+  const handleFieldValueChange = (e, type: FieldType) => {
+    setActivityForm((prev: ActivityFormInfo) => {
+      const current: ActivityFormInfo = {
+        ...prev,
+        // 如果是时间或者rte内容变化 e传过来的就不是事件对象了 直接就是值
+        [type]: type === FieldType.dateTime || type === FieldType.content ? 
+          e : e.target.value,
+      };
+      return current;
+    });
+    // 如果是rte传过来的内容 还需要设置一下description 是用于这个组件里显示内容的
+    // 设置完之后就可以return了 因为rte和formik没关系
+    if (type === FieldType.content) {
+      setDescription(e);
+      return;
+    }
+    type === FieldType.dateTime ?
+      formik.setFieldValue('dateTime', e) :
+      formik.handleChange(e);
+  };
 
   return (
     <>
@@ -86,7 +125,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
               fullWidth
               size='small'
               value={formik.values.title}
-              onChange={formik.handleChange}
+              onChange={(e) => handleFieldValueChange(e, FieldType.title)}
               error={formik.touched.title && Boolean(formik.errors.title)}
               helperText={formik.touched.title && formik.errors.title}
             />
@@ -103,9 +142,8 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
               <DateTimePicker
                 label="Date & Time *"
                 value={formik.values.dateTime}
-                minDate={new Date()}
-                minTime={new Date()}
-                onChange={(val) => formik.setFieldValue('dateTime', val)}
+                minDateTime={new Date()}
+                onChange={(e) => handleFieldValueChange(e, FieldType.dateTime)}
                 renderInput={(params) => 
                   <TextField
                     {...params} 
@@ -133,7 +171,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
               fullWidth
               size='small'
               value={formik.values.address}
-              onChange={formik.handleChange}
+              onChange={(e) => handleFieldValueChange(e, FieldType.address)}
               error={formik.touched.address && Boolean(formik.errors.address)}
               helperText={formik.touched.address && formik.errors.address}
             />
@@ -154,7 +192,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
               fullWidth
               size='small'
               value={formik.values.limit}
-              onChange={formik.handleChange}
+              onChange={(e) => handleFieldValueChange(e, FieldType.limit)}
               error={formik.touched.limit && Boolean(formik.errors.limit)}
               helperText={formik.touched.limit && formik.errors.limit}
             />
@@ -178,20 +216,12 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
           >
             活动描述
           </Typography>
-          <RichTextEditor content={description} setContent={setDescription} height='calc(100% - 21px)'/>
+          <RichTextEditor
+            content={description}
+            setContent={(e) => handleFieldValueChange(e, FieldType.content)}
+            height='calc(100% - 21px)'
+          />
         </Box>
-        {/* <Button
-          size={'large'}
-          variant={'contained'}
-          type={'submit'}
-          sx={{
-            width: '150px',
-            marginTop: 4,
-            float: 'right'
-          }}
-        >
-          Save
-        </Button> */}
       </form>
     </>
   );
