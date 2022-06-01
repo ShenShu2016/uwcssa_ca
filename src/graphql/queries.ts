@@ -89,7 +89,7 @@ export const userProfileSortByCreatedAt = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    UserProfileSortByCreatedAt(
+    userProfileSortByCreatedAt(
       active: $active
       createdAt: $createdAt
       sortDirection: $sortDirection

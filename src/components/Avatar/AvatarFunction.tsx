@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 02:23:34
+ * @LastEditTime: 2022-06-01 00:34:41
  * @FilePath: /uwcssa_ca/src/components/Avatar/AvatarFunction.tsx
  * @Description:
  *
@@ -23,6 +23,14 @@ export function stringToColorAvatar(string: string) {
 
   return color;
 }
+
+export const getInitialsAvatar = (name = '') =>
+  name
+    .replace(/\s+/, ' ')
+    .split(' ')
+    .slice(0, 2)
+    .map((v) => v && v[0].toUpperCase())
+    .join('');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function stringAvatar(name: string, sx: any = undefined) {

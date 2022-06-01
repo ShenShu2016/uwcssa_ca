@@ -3517,7 +3517,7 @@ export type UserProfileSortByCreatedAtQueryVariables = {
 };
 
 export type UserProfileSortByCreatedAtQuery = {
-  UserProfileSortByCreatedAt?:  {
+  userProfileSortByCreatedAt?:  {
     __typename: "ModelUserProfileConnection",
     items:  Array< {
       __typename: "UserProfile",

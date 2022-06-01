@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-31 22:59:10
+ * @LastEditTime: 2022-06-01 01:05:15
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -54,7 +54,8 @@ const initialState = userProfileAdapter.getInitialState({
     updatedAt: '',
     owner: '',
   },
-
+  fetchUserProfileListStatus: 'idle',
+  fetchUserProfileListError: null,
   fetchUserProfileStatus: 'idle',
   fetchUserProfileError: null,
   updateUserProfileDetailStatus: 'idle',
@@ -62,7 +63,7 @@ const initialState = userProfileAdapter.getInitialState({
 });
 
 export const fetchUserProfileList = createAsyncThunk(
-  'event/fetchEventList',
+  'userProfile/fetchUserProfileList',
   async ({ isAuth }: { isAuth: boolean }) => {
     try {
       const result: any = await API.graphql({
@@ -74,7 +75,8 @@ export const fetchUserProfileList = createAsyncThunk(
         },
         authMode: isAuth ? undefined : 'AWS_IAM',
       });
-      return result.data.eventSortByCreatedAt.items;
+      console.log('result', result);
+      return result.data.userProfileSortByCreatedAt.items;
     } catch (error) {
       console.log(error);
     }
@@ -127,6 +129,18 @@ const userProfileSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchUserProfileList.pending, (state) => {
+        state.fetchUserProfileListStatus = 'loading';
+      })
+      .addCase(fetchUserProfileList.fulfilled, (state, action) => {
+        state.fetchUserProfileListStatus = 'succeed';
+        //eventAdapter.removeAll(state);
+        userProfileAdapter.upsertMany(state, action.payload);
+      })
+      .addCase(fetchUserProfileList.rejected, (state, action) => {
+        state.fetchUserProfileListStatus = 'failed';
+        state.fetchUserProfileListError = action.error.message;
+      })
       // Cases for status of getProfile (pending, fulfilled, and rejected)
       .addCase(fetchUserProfile.pending, (state) => {
         state.fetchUserProfileStatus = 'loading';

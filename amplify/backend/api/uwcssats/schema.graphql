@@ -49,8 +49,8 @@ type UserProfile
   website: AWSURL
   active: ActiveType
     @index(
-      name: "UserProfileSortByCreatedAt" #名字要用小写
-      queryField: "UserProfileSortByCreatedAt"
+      name: "userProfileSortByCreatedAt" #名字要用小写
+      queryField: "userProfileSortByCreatedAt"
       sortKeyFields: ["createdAt"]
     )
   createdAt: AWSDateTime!
