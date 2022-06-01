@@ -2,12 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:44:58
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 00:34:41
+ * @LastEditTime: 2022-06-01 15:44:37
  * @FilePath: /uwcssa_ca/src/components/Avatar/AvatarFunction.tsx
  * @Description:
  *
  */
-export function stringToColorAvatar(string: string) {
+function stringToColorAvatar(string: string) {
   let hash = 0;
   let i: number;
 
@@ -24,7 +24,7 @@ export function stringToColorAvatar(string: string) {
   return color;
 }
 
-export const getInitialsAvatar = (name = '') =>
+const getInitialsAvatar = (name = '') =>
   name
     .replace(/\s+/, ' ')
     .split(' ')
@@ -35,7 +35,7 @@ export const getInitialsAvatar = (name = '') =>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function stringAvatar(name: string, sx: any = undefined) {
   return {
-    sx: { ...sx, bgcolor: stringToColorAvatar(name.toLocaleUpperCase()) },
-    children: `${name.slice(0, 1)}`,
+    sx: { ...sx, bgcolor: stringToColorAvatar(name) },
+    children: `${getInitialsAvatar(name)}`,
   };
 }

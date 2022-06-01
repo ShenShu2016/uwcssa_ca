@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-30 22:45:05
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-01 14:11:13
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
@@ -30,7 +30,9 @@ const Profile = (): JSX.Element => {
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
   );
-
+  const avatarErrorHandler = () => {
+    console.log('avatar error');
+  };
   return (
     <>
       <Box
@@ -45,6 +47,9 @@ const Profile = (): JSX.Element => {
             <Box position={'relative'}>
               <Avatar
                 src={myUserProfile.avatarURL}
+                imgProps={{
+                  onError: avatarErrorHandler,
+                }}
                 variant={'circular'}
                 {...stringAvatar(myUserProfile.name, {
                   fontSize: { xs: '64px', sm: '80px' },

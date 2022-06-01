@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 
 import React from 'react';
-import { getInitialsAvatar } from 'components/Avatar/AvatarFunction';
 import moment from 'moment';
+import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useState } from 'react';
 
 type UserProfileType = {
@@ -135,9 +135,11 @@ function CustomerListResults({
                       display: 'flex',
                     }}
                   >
-                    <Avatar src={customer.avatarURL} sx={{ mr: 2 }}>
-                      {getInitialsAvatar(customer.name)}
-                    </Avatar>
+                    <Avatar
+                      src={customer.avatarURL}
+                      {...stringAvatar(customer.name, { mr: 2 })}
+                    />
+
                     <Typography color="textPrimary" variant="body1">
                       {customer.name}
                     </Typography>
