@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 00:58:33
+ * @LastEditTime: 2022-05-31 22:10:44
  * @FilePath: /uwcssa_ca/amplify/backend/function/uwcssatsPostConfirmation/src/custom.js
  * @Description:
  *
@@ -40,6 +40,7 @@ exports.handler = async (event, context) => {
         id: { S: event.userName },
         name: { S: event.request.userAttributes.name },
         email: { S: event.request.userAttributes.email },
+        active: { S: 'T' },
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },
         owner: { S: event.userName },

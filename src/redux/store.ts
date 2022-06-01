@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 18:10:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 22:53:20
+ * @LastEditTime: 2022-05-31 21:47:18
  * @FilePath: /uwcssa_ca/src/redux/store.ts
  * @Description:
  *
@@ -16,6 +16,7 @@ import authReducer from './auth/authSlice';
 import commentReducer from './comment/commentSlice';
 import contactUsReducer from './contactUs/ContactUsSlice';
 import counterReducer from './counter/counterSlice';
+import eventReducer from './event/eventSlice';
 import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import userImageReducer from './userImage/userImageSlice';
 import userProfileReducer from './userProfile/userProfileSlice';
@@ -28,6 +29,7 @@ export const store = configureStore({
     userProfile: userProfileReducer,
     counter: counterReducer,
     article: articleReducer,
+    event: eventReducer,
     comment: commentReducer,
     contactUs: contactUsReducer,
     alert: alertReducer,

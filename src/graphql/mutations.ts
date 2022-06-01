@@ -65,6 +65,7 @@ export const createUserProfile = /* GraphQL */ `
       about
       avatarURL
       website
+      active
       createdAt
       updatedAt
       owner
@@ -86,6 +87,7 @@ export const updateUserProfile = /* GraphQL */ `
       about
       avatarURL
       website
+      active
       createdAt
       updatedAt
       owner
@@ -107,6 +109,7 @@ export const deleteUserProfile = /* GraphQL */ `
       about
       avatarURL
       website
+      active
       createdAt
       updatedAt
       owner
@@ -291,6 +294,7 @@ export const createArticle = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -342,6 +346,7 @@ export const updateArticle = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -393,6 +398,7 @@ export const deleteArticle = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -467,6 +473,7 @@ export const createComment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -541,6 +548,7 @@ export const updateComment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -615,6 +623,7 @@ export const deleteComment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -647,6 +656,7 @@ export const createContactUs = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -678,6 +688,7 @@ export const updateContactUs = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -709,6 +720,7 @@ export const deleteContactUs = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -976,6 +988,7 @@ export const createResearchDevelopmentTeam = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1012,6 +1025,7 @@ export const updateResearchDevelopmentTeam = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1048,6 +1062,7 @@ export const deleteResearchDevelopmentTeam = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1075,6 +1090,7 @@ export const createUwcssaDepartment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1108,6 +1124,7 @@ export const updateUwcssaDepartment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1141,6 +1158,7 @@ export const deleteUwcssaDepartment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1192,6 +1210,7 @@ export const createUwcssaMember = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1238,6 +1257,7 @@ export const updateUwcssaMember = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1284,6 +1304,7 @@ export const deleteUwcssaMember = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1345,6 +1366,7 @@ export const createEvent = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1405,6 +1427,7 @@ export const updateEvent = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1465,6 +1488,7 @@ export const deleteEvent = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1501,6 +1525,7 @@ export const createAddress = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1537,6 +1562,7 @@ export const updateAddress = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -1573,6 +1599,7 @@ export const deleteAddress = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner

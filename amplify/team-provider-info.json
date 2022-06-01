@@ -23,7 +23,7 @@
         "uwcssatsPostConfirmation": {
           "GROUP": "uwcssaUser",
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/uwcssatsPostConfirmation-2f75644c4b304a664337-build.zip",
+          "s3Key": "amplify-builds/uwcssatsPostConfirmation-4c78584439682b534c6b-build.zip",
           "userTable": "User-4r2t6l2uprdgjhmoocpazejjcq-devts",
           "userProfileTable": "UserProfile-4r2t6l2uprdgjhmoocpazejjcq-devts"
         },

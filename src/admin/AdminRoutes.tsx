@@ -1,21 +1,22 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-28 16:58:31
- * @LastEditTime: 2022-05-31 10:27:47
- * @LastEditors: 李佳修
+ * @LastEditTime: 2022-05-31 23:08:50
+ * @LastEditors: Shen Shu
  * @FilePath: /uwcssa_ca/src/admin/AdminRoutes.tsx
  */
 
 import {
+  ActivityCreate as ActivityCreateView,
   AdminDashboard as AdminDashboardView,
   ArticleEdit as ArticleEditView,
   ArticlePublish as ArticlePublishView,
-  ActivityCreate as ActivityCreateView,
+  DepartmentDashboard as DepartmentDashboardView,
+  ResearchDevelopmentTeamDashboard as ResearchDevelopmentTeamDashboardView,
+  UserProfileDashboard as UserProfileDashboardView,
 } from 'admin';
 
-import DepartmentDashboard from './Department/DepartmentDashboard';
 import React from 'react';
-import ResearchDevelopmentTeamDashboard from './ResearchDevelopmentTeam/ResearchDevelopmentTeamDashboard';
 import { getIsAdmin } from 'redux/auth/authSlice';
 import { useAppSelector } from 'redux/hooks';
 
@@ -34,6 +35,14 @@ function AdminRoutes(): Array<{
       path: '/admin',
       renderer: (params = {}): JSX.Element => (
         <AdminDashboardView {...params} />
+      ),
+      isAllowed: isAdmin,
+      redirectPath: '/404',
+    },
+    {
+      path: '/admin/users',
+      renderer: (params = {}): JSX.Element => (
+        <UserProfileDashboardView {...params} />
       ),
       isAllowed: isAdmin,
       redirectPath: '/404',
@@ -64,13 +73,13 @@ function AdminRoutes(): Array<{
     },
     {
       path: '/admin/uwcssa-department',
-      renderer: (): JSX.Element => <DepartmentDashboard />,
+      renderer: (): JSX.Element => <DepartmentDashboardView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },
     {
       path: '/admin/uwcssa-research-development',
-      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboard />,
+      renderer: (): JSX.Element => <ResearchDevelopmentTeamDashboardView />,
       isAllowed: isAdmin,
       redirectPath: '/404',
     },

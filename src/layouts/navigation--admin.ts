@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-05-31 10:25:53
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-31 23:00:18
  * @FilePath: /uwcssa_ca/src/layouts/navigation--admin.ts
  * @Description:
  *
@@ -16,6 +16,16 @@ const pages = [
       {
         title: 'Dashboard',
         href: '/admin',
+      },
+    ],
+  },
+  {
+    groupTitle: '用户',
+    id: 'UserProfile',
+    pages: [
+      {
+        title: '用户管理',
+        href: '/admin/users',
       },
     ],
   },

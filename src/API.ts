@@ -115,10 +115,17 @@ export type CreateUserProfileInput = {
   about?: string | null,
   avatarURL?: string | null,
   website?: string | null,
+  active?: ActiveType | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   owner: string,
 };
+
+export enum ActiveType {
+  T = "T",
+  F = "F",
+}
+
 
 export type ModelUserProfileConditionInput = {
   name?: ModelStringInput | null,
@@ -129,12 +136,18 @@ export type ModelUserProfileConditionInput = {
   about?: ModelStringInput | null,
   avatarURL?: ModelStringInput | null,
   website?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   owner?: ModelIDInput | null,
   and?: Array< ModelUserProfileConditionInput | null > | null,
   or?: Array< ModelUserProfileConditionInput | null > | null,
   not?: ModelUserProfileConditionInput | null,
+};
+
+export type ModelActiveTypeInput = {
+  eq?: ActiveType | null,
+  ne?: ActiveType | null,
 };
 
 export type UserProfile = {
@@ -148,6 +161,7 @@ export type UserProfile = {
   about?: string | null,
   avatarURL?: string | null,
   website?: string | null,
+  active?: ActiveType | null,
   createdAt: string,
   updatedAt: string,
   owner: string,
@@ -163,6 +177,7 @@ export type UpdateUserProfileInput = {
   about?: string | null,
   avatarURL?: string | null,
   website?: string | null,
+  active?: ActiveType | null,
   createdAt?: string | null,
   updatedAt?: string | null,
   owner?: string | null,
@@ -191,12 +206,6 @@ export type CreateUserImageInput = {
   updatedAt?: string | null,
   owner: string,
 };
-
-export enum ActiveType {
-  T = "T",
-  F = "F",
-}
-
 
 export type ModelUserImageConditionInput = {
   objectURL?: ModelStringInput | null,
@@ -230,11 +239,6 @@ export type ModelIntInput = {
   between?: Array< number | null > | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
-};
-
-export type ModelActiveTypeInput = {
-  eq?: ActiveType | null,
-  ne?: ActiveType | null,
 };
 
 export type UserImage = {
@@ -1108,6 +1112,7 @@ export type ModelUserProfileFilterInput = {
   about?: ModelStringInput | null,
   avatarURL?: ModelStringInput | null,
   website?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   owner?: ModelIDInput | null,
@@ -1121,6 +1126,22 @@ export type ModelUserProfileConnection = {
   items:  Array<UserProfile | null >,
   nextToken?: string | null,
 };
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelUserImageFilterInput = {
   id?: ModelIDInput | null,
@@ -1150,22 +1171,6 @@ export type ModelUserImageConnection = {
   items:  Array<UserImage | null >,
   nextToken?: string | null,
 };
-
-export type ModelStringKeyConditionInput = {
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
 
 export type ModelTagFilterInput = {
   id?: ModelIDInput | null,
@@ -1477,6 +1482,7 @@ export type CreateUserProfileMutation = {
     about?: string | null,
     avatarURL?: string | null,
     website?: string | null,
+    active?: ActiveType | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1500,6 +1506,7 @@ export type UpdateUserProfileMutation = {
     about?: string | null,
     avatarURL?: string | null,
     website?: string | null,
+    active?: ActiveType | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1523,6 +1530,7 @@ export type DeleteUserProfileMutation = {
     about?: string | null,
     avatarURL?: string | null,
     website?: string | null,
+    active?: ActiveType | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -1732,6 +1740,7 @@ export type CreateArticleMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1790,6 +1799,7 @@ export type UpdateArticleMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1848,6 +1858,7 @@ export type DeleteArticleMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -1929,6 +1940,7 @@ export type CreateCommentMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2010,6 +2022,7 @@ export type UpdateCommentMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2091,6 +2104,7 @@ export type DeleteCommentMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2126,6 +2140,7 @@ export type CreateContactUsMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2160,6 +2175,7 @@ export type UpdateContactUsMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2194,6 +2210,7 @@ export type DeleteContactUsMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2488,6 +2505,7 @@ export type CreateResearchDevelopmentTeamMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2527,6 +2545,7 @@ export type UpdateResearchDevelopmentTeamMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2566,6 +2585,7 @@ export type DeleteResearchDevelopmentTeamMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2596,6 +2616,7 @@ export type CreateUwcssaDepartmentMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2633,6 +2654,7 @@ export type UpdateUwcssaDepartmentMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2670,6 +2692,7 @@ export type DeleteUwcssaDepartmentMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2726,6 +2749,7 @@ export type CreateUwcssaMemberMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2776,6 +2800,7 @@ export type UpdateUwcssaMemberMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2826,6 +2851,7 @@ export type DeleteUwcssaMemberMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2893,6 +2919,7 @@ export type CreateEventMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -2959,6 +2986,7 @@ export type UpdateEventMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3025,6 +3053,7 @@ export type DeleteEventMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3064,6 +3093,7 @@ export type CreateAddressMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3103,6 +3133,7 @@ export type UpdateAddressMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3142,6 +3173,7 @@ export type DeleteAddressMutation = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3439,6 +3471,7 @@ export type GetUserProfileQuery = {
     about?: string | null,
     avatarURL?: string | null,
     website?: string | null,
+    active?: ActiveType | null,
     createdAt: string,
     updatedAt: string,
     owner: string,
@@ -3465,6 +3498,39 @@ export type ListUserProfilesQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UserProfileSortByCreatedAtQueryVariables = {
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserProfileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UserProfileSortByCreatedAtQuery = {
+  UserProfileSortByCreatedAt?:  {
+    __typename: "ModelUserProfileConnection",
+    items:  Array< {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      avatarURL?: string | null,
+      website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3660,6 +3726,7 @@ export type GetArticleQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3795,6 +3862,7 @@ export type GetCommentQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -3910,6 +3978,7 @@ export type GetContactUsQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -4100,6 +4169,7 @@ export type GetResearchDevelopmentTeamQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -4158,6 +4228,7 @@ export type GetUwcssaDepartmentQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -4236,6 +4307,7 @@ export type GetUwcssaMemberQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -4332,6 +4404,7 @@ export type GetEventQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,
@@ -4437,6 +4510,7 @@ export type GetAddressQuery = {
       about?: string | null,
       avatarURL?: string | null,
       website?: string | null,
+      active?: ActiveType | null,
       createdAt: string,
       updatedAt: string,
       owner: string,

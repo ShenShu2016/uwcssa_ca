@@ -47,6 +47,7 @@ export const getUserProfile = /* GraphQL */ `
       about
       avatarURL
       website
+      active
       createdAt
       updatedAt
       owner
@@ -70,6 +71,43 @@ export const listUserProfiles = /* GraphQL */ `
         about
         avatarURL
         website
+        active
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const userProfileSortByCreatedAt = /* GraphQL */ `
+  query UserProfileSortByCreatedAt(
+    $active: ActiveType!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    UserProfileSortByCreatedAt(
+      active: $active
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        avatarURL
+        website
+        active
         createdAt
         updatedAt
         owner
@@ -244,6 +282,7 @@ export const getArticle = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -371,6 +410,7 @@ export const getComment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -486,6 +526,7 @@ export const getContactUs = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -650,6 +691,7 @@ export const getResearchDevelopmentTeam = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -704,6 +746,7 @@ export const getUwcssaDepartment = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -776,6 +819,7 @@ export const getUwcssaMember = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -861,6 +905,7 @@ export const getEvent = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner
@@ -962,6 +1007,7 @@ export const getAddress = /* GraphQL */ `
         about
         avatarURL
         website
+        active
         createdAt
         updatedAt
         owner

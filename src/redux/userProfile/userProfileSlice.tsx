@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 02:25:01
+ * @LastEditTime: 2022-05-31 22:59:10
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -13,11 +13,11 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
+import { getUserProfile, userProfileSortByCreatedAt } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
 import { UpdateUserProfileInput } from 'API';
-import { getUserProfile } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { updateUserProfile } from 'graphql/mutations';
 
@@ -60,6 +60,26 @@ const initialState = userProfileAdapter.getInitialState({
   updateUserProfileDetailStatus: 'idle',
   updateUserProfileDetailError: null,
 });
+
+export const fetchUserProfileList = createAsyncThunk(
+  'event/fetchEventList',
+  async ({ isAuth }: { isAuth: boolean }) => {
+    try {
+      const result: any = await API.graphql({
+        query: userProfileSortByCreatedAt,
+        variables: {
+          active: 'T',
+          sortDirection: 'DESC',
+          limit: 20,
+        },
+        authMode: isAuth ? undefined : 'AWS_IAM',
+      });
+      return result.data.eventSortByCreatedAt.items;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
 
 export const fetchUserProfile = createAsyncThunk(
   'userProfile/fetchUserProfile',
