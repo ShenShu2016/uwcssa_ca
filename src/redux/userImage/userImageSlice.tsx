@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 20:56:29
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-05-31 23:23:39
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -100,7 +100,7 @@ export const moreUserImageList = createAsyncThunk(
 );
 
 interface MyFile extends File {
-  lastModifiedDate: Date;
+  lastModifiedDate?: Date;
 }
 
 export const postUserImage = createAsyncThunk(

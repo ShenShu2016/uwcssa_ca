@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-29 23:50:40
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-31 00:53:55
+ * @LastEditTime: 2022-05-31 23:29:41
  * @FilePath: /uwcssa_ca/src/components/Cropper/CropperDialog.tsx
  * @Description:
  *
@@ -77,7 +77,9 @@ export default function CropperDialog() {
     (state) => state.userProfile.myUserProfile,
   );
   const [loading, setLoading] = useState(false);
-  const [avatarImgURL, setAvatarImgURL] = useState(myUserProfile.avatarURL);
+  const [avatarImgURL, setAvatarImgURL] = useState<string | undefined>(
+    myUserProfile.avatarURL,
+  );
   const inputAvatarRef = useRef<HTMLInputElement>(null);
   const triggerAvatarFileSelectPopup = () => inputAvatarRef.current.click();
   const [avatarImageSrc, setAvatarImageSrc] = useState(null);
@@ -94,8 +96,11 @@ export default function CropperDialog() {
       setFinish(false);
     }
   };
+  interface MyFile extends File {
+    lastModifiedDate: Date;
+  }
 
-  const uploadAvatarImg = async (e) => {
+  const uploadAvatarImg = async () => {
     setLoading(true);
     const canvas = await getCroppedImg(avatarImageSrc, croppedArea);
     console.log(canvas);
@@ -105,28 +110,28 @@ export default function CropperDialog() {
       canvasDataUrl,
       `croppedAvatarImg${uuid()}.jpeg`,
     );
-    const file = [convertedUrlToFile][0];
-    console.log(file, 'new');
+    console.log(convertedUrlToFile);
 
-    // const fileInputFiles = FileListItems(files);
+    // console.log(file);
+    // const fileInputFiles = FileListItems(file);
     // console.log(fileInputFiles);
 
     const targetTable = 'userProfile';
-    // const response = await dispatch(
-    //   postUserImage({
-    //     targetTable,
-    //     file,
-    //     authUser,
-    //   }),
-    // );
-    // if (response.meta.requestStatus === 'fulfilled') {
-    //   console.log('response', response);
-    //   setAvatarImgURL(response.payload);
-    //   setLoading(false);
-    //   setZoom(1);
-    //   setAvatarImageSrc(null);
-    //   setFinish(true);
-    // }
+    const response = await dispatch(
+      postUserImage({
+        targetTable,
+        file: convertedUrlToFile,
+        authUser,
+      }),
+    );
+    if (response.meta.requestStatus === 'fulfilled') {
+      console.log('response', response);
+      setAvatarImgURL(response.payload.objectURL);
+      setLoading(false);
+      setZoom(1);
+      setAvatarImageSrc(null);
+      setFinish(true);
+    }
   };
 
   const initialValues = {
@@ -258,9 +263,8 @@ export default function CropperDialog() {
                 <Button
                   // type={'submit'}
                   variant="contained"
-                  // disabled={!avatarImageSrc}
+                  disabled={!avatarImageSrc}
                   onClick={uploadAvatarImg}
-                  disabled
                 >
                   保存头像
                 </Button>
