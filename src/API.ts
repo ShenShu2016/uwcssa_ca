@@ -1036,6 +1036,160 @@ export type DeleteAddressInput = {
   id: string,
 };
 
+export type CreateFormInput = {
+  id?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+};
+
+export type ModelFormConditionInput = {
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormConditionInput | null > | null,
+  or?: Array< ModelFormConditionInput | null > | null,
+  not?: ModelFormConditionInput | null,
+};
+
+export type Form = {
+  __typename: "Form",
+  id: string,
+  formItems?: ModelFormItemConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+};
+
+export type ModelFormItemConnection = {
+  __typename: "ModelFormItemConnection",
+  items:  Array<FormItem | null >,
+  nextToken?: string | null,
+};
+
+export type FormItem = {
+  __typename: "FormItem",
+  id: string,
+  name: string,
+  isRequired: boolean,
+  isString: boolean,
+  isEmail: boolean,
+  isNumber: boolean,
+  description?: string | null,
+  formType: FormType,
+  helperText?: string | null,
+  minLength?: number | null,
+  maxLength?: number | null,
+  placeholder?: string | null,
+  label?: string | null,
+  formSelectChoices?: Array< string | null > | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  formFormItemsId?: string | null,
+};
+
+export enum FormType {
+  TextFieldShort = "TextFieldShort",
+  TextFieldLong = "TextFieldLong",
+  Checkbox = "Checkbox",
+  Select = "Select",
+  FileUpload = "FileUpload",
+  RadioGroupH = "RadioGroupH",
+  RadioGroupV = "RadioGroupV",
+  DatePicker = "DatePicker",
+  DateTimePicker = "DateTimePicker",
+  TimePicker = "TimePicker",
+}
+
+
+export type UpdateFormInput = {
+  id: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+};
+
+export type DeleteFormInput = {
+  id: string,
+};
+
+export type CreateFormItemInput = {
+  id?: string | null,
+  name: string,
+  isRequired: boolean,
+  isString: boolean,
+  isEmail: boolean,
+  isNumber: boolean,
+  description?: string | null,
+  formType: FormType,
+  helperText?: string | null,
+  minLength?: number | null,
+  maxLength?: number | null,
+  placeholder?: string | null,
+  label?: string | null,
+  formSelectChoices?: Array< string | null > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  formFormItemsId?: string | null,
+};
+
+export type ModelFormItemConditionInput = {
+  name?: ModelStringInput | null,
+  isRequired?: ModelBooleanInput | null,
+  isString?: ModelBooleanInput | null,
+  isEmail?: ModelBooleanInput | null,
+  isNumber?: ModelBooleanInput | null,
+  description?: ModelStringInput | null,
+  formType?: ModelFormTypeInput | null,
+  helperText?: ModelStringInput | null,
+  minLength?: ModelIntInput | null,
+  maxLength?: ModelIntInput | null,
+  placeholder?: ModelStringInput | null,
+  label?: ModelStringInput | null,
+  formSelectChoices?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormItemConditionInput | null > | null,
+  or?: Array< ModelFormItemConditionInput | null > | null,
+  not?: ModelFormItemConditionInput | null,
+  formFormItemsId?: ModelIDInput | null,
+};
+
+export type ModelFormTypeInput = {
+  eq?: FormType | null,
+  ne?: FormType | null,
+};
+
+export type UpdateFormItemInput = {
+  id: string,
+  name?: string | null,
+  isRequired?: boolean | null,
+  isString?: boolean | null,
+  isEmail?: boolean | null,
+  isNumber?: boolean | null,
+  description?: string | null,
+  formType?: FormType | null,
+  helperText?: string | null,
+  minLength?: number | null,
+  maxLength?: number | null,
+  placeholder?: string | null,
+  label?: string | null,
+  formSelectChoices?: Array< string | null > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  formFormItemsId?: string | null,
+};
+
+export type DeleteFormItemInput = {
+  id: string,
+};
+
 export type CreateArticleTagsInput = {
   id?: string | null,
   tagID: string,
@@ -1392,6 +1546,46 @@ export type ModelAddressConnection = {
   __typename: "ModelAddressConnection",
   items:  Array<Address | null >,
   nextToken?: string | null,
+};
+
+export type ModelFormFilterInput = {
+  id?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormFilterInput | null > | null,
+  or?: Array< ModelFormFilterInput | null > | null,
+  not?: ModelFormFilterInput | null,
+};
+
+export type ModelFormConnection = {
+  __typename: "ModelFormConnection",
+  items:  Array<Form | null >,
+  nextToken?: string | null,
+};
+
+export type ModelFormItemFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  isRequired?: ModelBooleanInput | null,
+  isString?: ModelBooleanInput | null,
+  isEmail?: ModelBooleanInput | null,
+  isNumber?: ModelBooleanInput | null,
+  description?: ModelStringInput | null,
+  formType?: ModelFormTypeInput | null,
+  helperText?: ModelStringInput | null,
+  minLength?: ModelIntInput | null,
+  maxLength?: ModelIntInput | null,
+  placeholder?: ModelStringInput | null,
+  label?: ModelStringInput | null,
+  formSelectChoices?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormItemFilterInput | null > | null,
+  or?: Array< ModelFormItemFilterInput | null > | null,
+  not?: ModelFormItemFilterInput | null,
+  formFormItemsId?: ModelIDInput | null,
 };
 
 export type ModelArticleTagsFilterInput = {
@@ -3242,6 +3436,246 @@ export type DeleteAddressMutation = {
   } | null,
 };
 
+export type CreateFormMutationVariables = {
+  input: CreateFormInput,
+  condition?: ModelFormConditionInput | null,
+};
+
+export type CreateFormMutation = {
+  createForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
+};
+
+export type UpdateFormMutationVariables = {
+  input: UpdateFormInput,
+  condition?: ModelFormConditionInput | null,
+};
+
+export type UpdateFormMutation = {
+  updateForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
+};
+
+export type DeleteFormMutationVariables = {
+  input: DeleteFormInput,
+  condition?: ModelFormConditionInput | null,
+};
+
+export type DeleteFormMutation = {
+  deleteForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
+};
+
+export type CreateFormItemMutationVariables = {
+  input: CreateFormItemInput,
+  condition?: ModelFormItemConditionInput | null,
+};
+
+export type CreateFormItemMutation = {
+  createFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formFormItemsId?: string | null,
+  } | null,
+};
+
+export type UpdateFormItemMutationVariables = {
+  input: UpdateFormItemInput,
+  condition?: ModelFormItemConditionInput | null,
+};
+
+export type UpdateFormItemMutation = {
+  updateFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formFormItemsId?: string | null,
+  } | null,
+};
+
+export type DeleteFormItemMutationVariables = {
+  input: DeleteFormItemInput,
+  condition?: ModelFormItemConditionInput | null,
+};
+
+export type DeleteFormItemMutation = {
+  deleteFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formFormItemsId?: string | null,
+  } | null,
+};
+
 export type CreateArticleTagsMutationVariables = {
   input: CreateArticleTagsInput,
   condition?: ModelArticleTagsConditionInput | null,
@@ -4623,6 +5057,138 @@ export type ListAddressesQuery = {
       createdAt: string,
       updatedAt: string,
       owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFormQueryVariables = {
+  id: string,
+};
+
+export type GetFormQuery = {
+  getForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
+};
+
+export type ListFormsQueryVariables = {
+  filter?: ModelFormFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFormsQuery = {
+  listForms?:  {
+    __typename: "ModelFormConnection",
+    items:  Array< {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFormItemQueryVariables = {
+  id: string,
+};
+
+export type GetFormItemQuery = {
+  getFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formFormItemsId?: string | null,
+  } | null,
+};
+
+export type ListFormItemsQueryVariables = {
+  filter?: ModelFormItemFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFormItemsQuery = {
+  listFormItems?:  {
+    __typename: "ModelFormItemConnection",
+    items:  Array< {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,

@@ -1664,6 +1664,225 @@ export const deleteAddress = /* GraphQL */ `
     }
   }
 `;
+export const createForm = /* GraphQL */ `
+  mutation CreateForm(
+    $input: CreateFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    createForm(input: $input, condition: $condition) {
+      id
+      formItems {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+    }
+  }
+`;
+export const updateForm = /* GraphQL */ `
+  mutation UpdateForm(
+    $input: UpdateFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    updateForm(input: $input, condition: $condition) {
+      id
+      formItems {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+    }
+  }
+`;
+export const deleteForm = /* GraphQL */ `
+  mutation DeleteForm(
+    $input: DeleteFormInput!
+    $condition: ModelFormConditionInput
+  ) {
+    deleteForm(input: $input, condition: $condition) {
+      id
+      formItems {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+    }
+  }
+`;
+export const createFormItem = /* GraphQL */ `
+  mutation CreateFormItem(
+    $input: CreateFormItemInput!
+    $condition: ModelFormItemConditionInput
+  ) {
+    createFormItem(input: $input, condition: $condition) {
+      id
+      name
+      isRequired
+      isString
+      isEmail
+      isNumber
+      description
+      formType
+      helperText
+      minLength
+      maxLength
+      placeholder
+      label
+      formSelectChoices
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      formFormItemsId
+    }
+  }
+`;
+export const updateFormItem = /* GraphQL */ `
+  mutation UpdateFormItem(
+    $input: UpdateFormItemInput!
+    $condition: ModelFormItemConditionInput
+  ) {
+    updateFormItem(input: $input, condition: $condition) {
+      id
+      name
+      isRequired
+      isString
+      isEmail
+      isNumber
+      description
+      formType
+      helperText
+      minLength
+      maxLength
+      placeholder
+      label
+      formSelectChoices
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      formFormItemsId
+    }
+  }
+`;
+export const deleteFormItem = /* GraphQL */ `
+  mutation DeleteFormItem(
+    $input: DeleteFormItemInput!
+    $condition: ModelFormItemConditionInput
+  ) {
+    deleteFormItem(input: $input, condition: $condition) {
+      id
+      name
+      isRequired
+      isString
+      isEmail
+      isNumber
+      description
+      formType
+      helperText
+      minLength
+      maxLength
+      placeholder
+      label
+      formSelectChoices
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      formFormItemsId
+    }
+  }
+`;
 export const createArticleTags = /* GraphQL */ `
   mutation CreateArticleTags(
     $input: CreateArticleTagsInput!

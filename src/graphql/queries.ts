@@ -1060,6 +1060,121 @@ export const listAddresses = /* GraphQL */ `
     }
   }
 `;
+export const getForm = /* GraphQL */ `
+  query GetForm($id: ID!) {
+    getForm(id: $id) {
+      id
+      formItems {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+    }
+  }
+`;
+export const listForms = /* GraphQL */ `
+  query ListForms(
+    $filter: ModelFormFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listForms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getFormItem = /* GraphQL */ `
+  query GetFormItem($id: ID!) {
+    getFormItem(id: $id) {
+      id
+      name
+      isRequired
+      isString
+      isEmail
+      isNumber
+      description
+      formType
+      helperText
+      minLength
+      maxLength
+      placeholder
+      label
+      formSelectChoices
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      formFormItemsId
+    }
+  }
+`;
+export const listFormItems = /* GraphQL */ `
+  query ListFormItems(
+    $filter: ModelFormItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFormItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      nextToken
+    }
+  }
+`;
 export const getArticleTags = /* GraphQL */ `
   query GetArticleTags($id: ID!) {
     getArticleTags(id: $id) {

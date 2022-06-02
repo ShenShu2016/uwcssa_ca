@@ -356,6 +356,7 @@ enum EventStatus {
   Finished
   Canceled
 }
+
 # https://stackoverflow.com/questions/69464662/add-parameters-to-mui-google-maps-autocomplete
 type Address
   @model(subscriptions: null)
@@ -381,4 +382,65 @@ type Address
   updatedAt: AWSDateTime!
   owner: ID!
   user: UserProfile @hasOne(fields: ["owner"])
+}
+
+# 一个from里面可以有很多 FormItem form questions 可以重复利用也就是说many to many
+type Form
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  formItems: [FormItem] @hasMany # 可以有很多 FormItem form questions 可以重复利用也就是说many to many
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: ID!
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+# FormItem 每个可以跟着多个 From
+type FormItem
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  isRequired: Boolean! #是否必填
+  isString: Boolean! # 是否是字符串
+  isEmail: Boolean! # 是否是邮箱
+  isNumber: Boolean! # 是否是数字
+  description: String # 描述
+  formType: FormType!
+  helperText: String # 帮助文字
+  minLength: Int # 最小长度
+  maxLength: Int # 最大长度
+  placeholder: String # 占位符
+  label: String # 标签
+  formSelectChoices: [String] # 选项
+  createdAt: AWSDateTime! # 创建时间
+  updatedAt: AWSDateTime! # 更新时间
+  owner: ID! # 创建者
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum FormType {
+  TextFieldShort
+  TextFieldLong
+  Checkbox
+  Select
+  FileUpload
+  RadioGroupH
+  RadioGroupV
+  DatePicker
+  DateTimePicker
+  TimePicker
 }

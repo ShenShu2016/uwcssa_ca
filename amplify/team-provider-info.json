@@ -33,7 +33,7 @@
         },
         "UserImageCompressHandler": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",
-          "s3Key": "amplify-builds/UserImageCompressHandler-664d4d634c754373434a-build.zip"
+          "s3Key": "amplify-builds/UserImageCompressHandler-7a44524d4c4170385258-build.zip"
         },
         "uwcssaLayerNodeJSSharp": {
           "deploymentBucketName": "amplify-uwcssa-devts-225941-deployment",

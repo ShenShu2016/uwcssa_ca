@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 18:10:27
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-31 21:47:18
+ * @LastEditTime: 2022-06-02 17:18:34
  * @FilePath: /uwcssa_ca/src/redux/store.ts
  * @Description:
  *
@@ -17,6 +17,7 @@ import commentReducer from './comment/commentSlice';
 import contactUsReducer from './contactUs/ContactUsSlice';
 import counterReducer from './counter/counterSlice';
 import eventReducer from './event/eventSlice';
+import formReducer from './form/formSlice';
 import researchDevelopmentTeamReducer from './researchDevelopmentTeam/researchDevelopmentTeamSlice';
 import userImageReducer from './userImage/userImageSlice';
 import userProfileReducer from './userProfile/userProfileSlice';
@@ -37,6 +38,7 @@ export const store = configureStore({
     uwcssaDepartment: uwcssaDepartmentReducer,
     uwcssaMember: uwcssaMemberReducer,
     researchDevelopmentTeam: researchDevelopmentTeamReducer,
+    form: formReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }), //https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using,
