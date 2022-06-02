@@ -41,13 +41,20 @@ type UserProfile
       ]
     )
   email: AWSEmail
+    @auth(
+      rules: [
+        { allow: public, operations: [read], provider: iam }
+        { allow: groups, operations: [read], groups: ["uwcssaUser"] }
+        { allow: groups, groups: ["uwcssaAdmin"] }
+      ]
+    )
   fullName: String
   contactEmail: AWSEmail
   title: String
   about: String
   avatarURL: AWSURL
   website: AWSURL
-  active: ActiveType
+  active: ActiveType!
     @index(
       name: "userProfileSortByCreatedAt" #名字要用小写
       queryField: "userProfileSortByCreatedAt"
@@ -322,8 +329,8 @@ type Event
   content: String
   imgURLs: [AWSURL]
   sponsor: [String]
-  online: Boolean
-  group: Boolean
+  online: Boolean!
+  group: Boolean!
   tags: [Tag] @manyToMany(relationName: "EventTags")
   startDate: AWSDateTime!
   endDate: AWSDateTime!

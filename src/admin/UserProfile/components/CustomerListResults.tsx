@@ -1,8 +1,17 @@
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-06-01 00:31:43
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-01 20:06:22
+ * @FilePath: /uwcssa_ca/src/admin/UserProfile/components/CustomerListResults.tsx
+ * @Description:
+ *
+ */
+
 import {
   Avatar,
   Box,
   Card,
-  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -90,23 +99,10 @@ function CustomerListResults({
 
   return (
     <Card {...rest}>
-      <Box sx={{ minWidth: 1050 }}>
+      <Box sx={{ width: '100%', overflow: 'auto' }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={
-                    selectedCustomerIds.length === userProfileList.length
-                  }
-                  color="primary"
-                  indeterminate={
-                    selectedCustomerIds.length > 0 &&
-                    selectedCustomerIds.length < userProfileList.length
-                  }
-                  onChange={handleSelectAll}
-                />
-              </TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Location</TableCell>
@@ -121,13 +117,6 @@ function CustomerListResults({
                 key={customer.id}
                 selected={selectedCustomerIds.indexOf(customer.id) !== -1}
               >
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                    onChange={(event) => handleSelectOne(event, customer.id)}
-                    value="true"
-                  />
-                </TableCell>
                 <TableCell>
                   <Box
                     sx={{

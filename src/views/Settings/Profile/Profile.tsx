@@ -2,21 +2,17 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 14:11:13
+ * @LastEditTime: 2022-06-01 20:07:20
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
  */
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
+import { Avatar, Box, Button, Card, Stack, Typography } from '@mui/material';
+
 import Container from 'components/Container';
 import CropperDialog from 'components/Cropper/CropperDialog';
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
 import { useNavigate } from 'react-router-dom';
@@ -102,14 +98,19 @@ const Profile = (): JSX.Element => {
                 Edit
               </Button>
               <Box marginTop={2}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant={'subtitle2'}>
+                    {myUserProfile.name}
+                  </Typography>
+                </Box>
                 <Box
                   display={'flex'}
                   justifyContent={'center'}
                   alignItems={'center'}
-                  marginTop={2}
+                  marginTop={1}
                 >
                   <Typography fontWeight={700} variant={'h4'}>
-                    {myUserProfile.name}
+                    {myUserProfile.fullName}
                   </Typography>
                   {myUserProfile.name ? (
                     <Box
@@ -149,7 +150,7 @@ const Profile = (): JSX.Element => {
                     direction={{ xs: 'column', md: 'row' }}
                     spacing={{ xs: 1, md: 2 }}
                   >
-                    <Box
+                    {/* <Box
                       display={'flex'}
                       justifyContent={'center'}
                       alignItems={'center'}
@@ -181,61 +182,66 @@ const Profile = (): JSX.Element => {
                       <Typography color={'primary'} variant={'subtitle2'}>
                         {myUserProfile.title}
                       </Typography>
-                    </Box>
-                    <Box
-                      display={'flex'}
-                      justifyContent={'center'}
-                      alignItems={'center'}
-                    >
+                    </Box> */}
+                    {myUserProfile.website && (
                       <Box
-                        component={'svg'}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        width={18}
-                        height={18}
-                        color={'primary.dark'}
-                        marginRight={1}
+                        display={'flex'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                        />
+                        <Box
+                          component={'svg'}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          width={18}
+                          height={18}
+                          color={'primary.dark'}
+                          marginRight={1}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                          />
+                        </Box>
+
+                        <Typography color={'primary'} variant={'subtitle2'}>
+                          {myUserProfile.website}
+                        </Typography>
                       </Box>
-                      <Typography color={'primary'} variant={'subtitle2'}>
-                        {myUserProfile.website}
-                      </Typography>
-                    </Box>
-                    <Box
-                      display={'flex'}
-                      justifyContent={'center'}
-                      alignItems={'center'}
-                    >
+                    )}
+                    {myUserProfile.contactEmail && (
                       <Box
-                        component={'svg'}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        width={18}
-                        height={18}
-                        color={'primary.dark'}
-                        marginRight={1}
+                        display={'flex'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
+                        <Box
+                          component={'svg'}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          width={18}
+                          height={18}
+                          color={'primary.dark'}
+                          marginRight={1}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </Box>
+                        <Typography color={'primary'} variant={'subtitle2'}>
+                          {myUserProfile.contactEmail}
+                        </Typography>
                       </Box>
-                      <Typography color={'primary'} variant={'subtitle2'}>
-                        {myUserProfile.contactEmail}
-                      </Typography>
-                    </Box>
+                    )}
                   </Stack>
                   <Box
                     display={'flex'}

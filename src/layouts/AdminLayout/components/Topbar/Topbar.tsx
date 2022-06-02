@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 16:04:31
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 16:53:02
+ * @LastEditTime: 2022-06-01 20:06:33
  * @FilePath: /uwcssa_ca/src/layouts/AdminLayout/components/Topbar/Topbar.tsx
  * @Description:
  *
@@ -11,6 +11,7 @@
 import { Link as MUILink, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
 
+import { AccountMenu } from 'layouts/Main/components/Topbar/components';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -58,49 +59,11 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
           UWCSSA
         </Typography>
       </Box>
+
       <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
         <Box marginLeft={3} sx={{ textDecoration: 'none' }}>
-          <Box
-            component={Link}
-            to="/"
-            sx={{
-              textDecoration: 'none',
-              color: mode === 'light' ? 'black' : 'white',
-            }}
-          >
-            Home
-          </Box>
+          <AccountMenu />
         </Box>
-        {/* <Box marginLeft={3}>
-          <MUILink
-            underline="none"
-            component="a"
-            href="/home"
-            color="text.primary"
-          >
-            Pages
-          </MUILink>
-        </Box>
-        <Box marginLeft={3}>
-          <MUILink
-            underline="none"
-            component="a"
-            href="/blocks"
-            color="text.primary"
-          >
-            Components
-          </MUILink>
-        </Box>
-        <Box marginLeft={3}>
-          <MUILink
-            underline="none"
-            component="a"
-            href="/demos"
-            color="text.primary"
-          >
-            Demos
-          </MUILink>
-        </Box> */}
         <Box marginLeft={3}>
           <ThemeModeToggler />
         </Box>
@@ -117,6 +80,7 @@ const Topbar = ({ onSidebarOpen }: Props): JSX.Element => {
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+        <AccountMenu />
         <Box marginRight={1}>
           <ThemeModeToggler />
         </Box>

@@ -2,13 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-31 23:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 00:42:55
+ * @LastEditTime: 2022-06-01 20:08:01
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/UserProfileDashboard.tsx
  * @Description:
  *
  */
 
-import { Box, Container } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import {
   fetchUserProfileList,
@@ -16,20 +15,21 @@ import {
 } from 'redux/userProfile/userProfileSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
+import { Box } from '@mui/material';
+import Container from 'components/Container';
 import { CustomerListResults } from './components';
 import { getAuthState } from 'redux/auth/authSlice';
 
 function UserProfileDashboard() {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getAuthState);
-  const [open, setOpen] = useState(false);
   const { fetchUserProfileListStatus } = useAppSelector(
     (state) => state.userProfile,
   );
   const userProfileList = useAppSelector(selectAllUserProfiles);
 
   useEffect(() => {
-    const getUwcssaDepartments = async () => {
+    const getUserProfileList = async () => {
       if (isAuth !== null && fetchUserProfileListStatus === 'idle') {
         await dispatch(
           fetchUserProfileList({
@@ -38,7 +38,7 @@ function UserProfileDashboard() {
         );
       }
     };
-    getUwcssaDepartments();
+    getUserProfileList();
   }, [isAuth, fetchUserProfileListStatus]);
 
   return (
@@ -50,7 +50,7 @@ function UserProfileDashboard() {
           py: 8,
         }}
       >
-        <Container maxWidth={false}>
+        <Container>
           <CustomerListResults userProfileList={userProfileList} />
         </Container>
       </Box>

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 01:05:15
+ * @LastEditTime: 2022-06-01 19:14:01
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -102,7 +102,7 @@ export const updateUserProfileData = createAsyncThunk(
         ? delete updateUserProfileInput[key]
         : {},
     );
-    console.log(updateUserProfileInput);
+
     try {
       const response: any = await API.graphql(
         graphqlOperation(updateUserProfile, {

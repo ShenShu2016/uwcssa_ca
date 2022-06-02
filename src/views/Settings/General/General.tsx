@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:56:30
+ * @LastEditTime: 2022-06-01 19:13:49
  * @FilePath: /uwcssa_ca/src/views/Settings/General/General.tsx
  * @Description:
  *
@@ -62,7 +62,7 @@ const General = (): JSX.Element => {
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
   );
-  console.log('myUserProfile', myUserProfile);
+
   const initialValues = {
     fullName: myUserProfile.fullName || '',
     about: myUserProfile.about || '',
@@ -72,7 +72,6 @@ const General = (): JSX.Element => {
     website: myUserProfile.website || '',
   };
   const onSubmit = async (values) => {
-    console.log(values);
     const updateUserProfileInput = {
       id: ownerUsername,
       ...values,
@@ -198,7 +197,7 @@ const General = (): JSX.Element => {
                   helperText={formik.touched.title && formik.errors.title}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <Typography
                   variant={'subtitle2'}
                   sx={{ marginBottom: 2 }}
@@ -220,7 +219,7 @@ const General = (): JSX.Element => {
                     formik.touched.avatarURL && formik.errors.avatarURL
                   }
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <Typography
                   variant={'subtitle2'}
