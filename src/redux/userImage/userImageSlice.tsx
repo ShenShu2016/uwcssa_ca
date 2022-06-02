@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 20:46:11
+ * @LastEditTime: 2022-06-01 22:56:14
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -121,10 +121,8 @@ export const postUserImage = createAsyncThunk(
     const fileEXT = file.name.split('.').pop();
     const { identityId, username } = authUser;
     const key = `protected/${identityId}/${targetTable}/${id}.${fileEXT}`;
-    const compressedKey =
-      `protected/${identityId}/${targetTable}/${id}-compressed.` + fileEXT;
-    const thumbnailKey =
-      `protected/${identityId}/${targetTable}/${id}-thumbnail.` + fileEXT; //改成原来的样子。。
+    const compressedKey = `protected/${identityId}/${targetTable}/c-${id}.${fileEXT}`;
+    const thumbnailKey = `protected/${identityId}/${targetTable}/t-${id}.${fileEXT}`;
     const createUserImageInput = {
       id,
       objectURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${key}`,

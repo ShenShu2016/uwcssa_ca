@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-29 23:50:40
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:23:44
+ * @LastEditTime: 2022-06-01 22:57:36
  * @FilePath: /uwcssa_ca/src/components/Cropper/CropperDialog.tsx
  * @Description:
  *
@@ -66,7 +66,7 @@ export default function CropperDialog() {
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
   );
-  console.log('myUserProfile', myUserProfile);
+  //console.log('myUserProfile', myUserProfile);
   const [loading, setLoading] = useState(false);
   const [avatarImgURL, setAvatarImgURL] = useState<string | undefined>(
     myUserProfile.avatarURL?.objectURL,

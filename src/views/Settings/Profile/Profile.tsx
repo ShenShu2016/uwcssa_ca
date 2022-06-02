@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:20:59
+ * @LastEditTime: 2022-06-01 23:03:03
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
@@ -34,6 +34,7 @@ const Profile = (): JSX.Element => {
   const avatarErrorHandler = () => {
     console.log('avatar error');
   };
+
   return (
     <>
       <Box
