@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-02 17:36:14
+ * @LastEditTime: 2022-06-02 18:38:52
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -315,6 +315,65 @@ const formSlice = createSlice({
       .addCase(updateFormDetail.rejected, (state, action) => {
         state.updateFormDetailStatus = 'failed';
         state.updateFormDetailError = action.error.message;
+      })
+      // Cases for status of fetchFormItemList (pending, fulfilled, and rejected)
+      .addCase(fetchFormItemList.pending, (state) => {
+        state.formItem.fetchFormItemListStatus = 'loading';
+      })
+      .addCase(fetchFormItemList.fulfilled, (state, action) => {
+        state.formItem.fetchFormItemListStatus = 'succeed';
+        //formItemAdapter.removeAll(state);
+        formItemAdapter.upsertMany(state.formItem, action.payload);
+      })
+      .addCase(fetchFormItemList.rejected, (state, action) => {
+        state.formItem.fetchFormItemListStatus = 'failed';
+        state.formItem.fetchFormItemError = action.error.message;
+      })
+      // Cases for status of selectedFormItem (pending, fulfilled, and rejected)
+      .addCase(fetchFormItem.pending, (state) => {
+        state.formItem.fetchFormItemStatus = 'loading';
+      })
+      .addCase(fetchFormItem.fulfilled, (state, action) => {
+        state.formItem.fetchFormItemStatus = 'succeed';
+        formItemAdapter.upsertOne(state.formItem, action.payload);
+        // commentAdapter.upsertMany(
+        //   state.comments,
+        //   action.payload.comments.items,
+        // );
+        //console.log(action.payload.comments.items);
+        // store.dispatch(insertAllComments(action.payload.comments.items));
+      })
+      .addCase(fetchFormItem.rejected, (state, action) => {
+        state.formItem.fetchFormItemStatus = 'failed';
+        state.formItem.fetchFormItemError = action.error.message;
+      })
+      // Cases for status of postFormItem (pending, fulfilled, and rejected)
+      .addCase(postFormItem.pending, (state) => {
+        state.formItem.postFormItemStatus = 'loading';
+      })
+      .addCase(postFormItem.fulfilled, (state, action) => {
+        state.formItem.postFormItemStatus = 'succeed';
+        // state.formItems.unshift(action.payload.data.createFormItem);
+        formItemAdapter.addOne(state.formItem, action.payload);
+        // state.postFormItemStatus = "idle";
+      })
+      .addCase(postFormItem.rejected, (state, action) => {
+        state.formItem.postFormItemStatus = 'failed';
+        state.formItem.postFormItemError = action.error.message;
+      })
+      // Cases for status of updateFormItem (pending, fulfilled, and rejected)
+      .addCase(updateFormItemDetail.pending, (state) => {
+        state.formItem.updateFormItemDetailStatus = 'loading';
+      })
+      .addCase(updateFormItemDetail.fulfilled, (state) => {
+        state.formItem.updateFormItemDetailStatus = 'succeed';
+        //state.formItems.unshift(action.payload.data.createFormItem);
+        //formItemAdapter.upsertOne(state, action.payload);
+        // state.updateFormItemStatus = "idle";
+      })
+      .addCase(updateFormItemDetail.rejected, (state, action) => {
+        state.formItem.updateFormItemDetailStatus = 'failed';
+        state.formItem.updateFormItemDetailError = action.error.message;
       });
   },
 });
@@ -324,5 +383,11 @@ export const {
   selectById: selectFormById,
   selectIds: selectFormIds,
 } = formAdapter.getSelectors((state: RootState) => state.form);
+
+export const {
+  selectAll: selectAllFormItems,
+  selectById: selectFormItemById,
+  selectIds: selectFormItemIds,
+} = formItemAdapter.getSelectors((state: RootState) => state.form.formItem);
 
 export default formSlice.reducer;

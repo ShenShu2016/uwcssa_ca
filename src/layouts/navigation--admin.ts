@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-31 23:00:18
+ * @LastEditTime: 2022-06-02 18:14:10
  * @FilePath: /uwcssa_ca/src/layouts/navigation--admin.ts
  * @Description:
  *
@@ -50,6 +50,10 @@ const pages = [
       {
         title: '发起活动',
         href: '/admin/activity-create',
+      },
+      {
+        title: 'Form Test',
+        href: '/admin/activity-form-test',
       },
     ],
   },
