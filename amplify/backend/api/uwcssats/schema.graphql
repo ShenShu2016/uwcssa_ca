@@ -54,6 +54,7 @@ type UserProfile
   about: String
   avatarURL: UserImage @hasOne
   website: AWSURL
+  emailSubscription: Boolean!
   active: ActiveType!
     @index(
       name: "userProfileSortByCreatedAt" #名字要用小写
