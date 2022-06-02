@@ -2,7 +2,7 @@
  * @Author: Shikai Jin
  * @Date: 2022-05-29 23:50:40
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 22:14:48
+ * @LastEditTime: 2022-06-01 22:23:44
  * @FilePath: /uwcssa_ca/src/components/Cropper/CropperDialog.tsx
  * @Description:
  *
@@ -107,7 +107,7 @@ export default function CropperDialog() {
         file: convertedUrlToFile,
         authUser,
         compressedWidth: 144,
-        thumbnailWidth: 32,
+        thumbnailWidth: 50,
       }),
     );
     if (response.meta.requestStatus === 'fulfilled') {

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 21:57:09
+ * @LastEditTime: 2022-06-01 22:26:32
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -202,6 +202,8 @@ const userProfileSlice = createSlice({
       .addCase(updateUserProfileData.fulfilled, (state, action) => {
         state.updateUserProfileDetailStatus = 'succeeded';
         state.myUserProfile = action.payload;
+        state.myUserProfile.avatarURL.objectCompressedURL =
+          action.payload.avatarURL.objectURL;
       })
       .addCase(updateUserProfileData.rejected, (state, action) => {
         state.updateUserProfileDetailStatus = 'failed';
