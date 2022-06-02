@@ -52,7 +52,7 @@ type UserProfile
   contactEmail: AWSEmail
   title: String
   about: String
-  avatarURL: AWSURL
+  avatarURL: UserImage @hasOne
   website: AWSURL
   active: ActiveType!
     @index(

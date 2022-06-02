@@ -45,12 +45,31 @@ export const getUserProfile = /* GraphQL */ `
       contactEmail
       title
       about
-      avatarURL
+      avatarURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       website
       active
       createdAt
       updatedAt
       owner
+      userProfileAvatarURLId
     }
   }
 `;
@@ -69,12 +88,12 @@ export const listUserProfiles = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       nextToken
     }
@@ -105,12 +124,12 @@ export const userProfileSortByCreatedAt = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       nextToken
     }
@@ -280,12 +299,12 @@ export const getArticle = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       articleCountId
     }
@@ -408,12 +427,12 @@ export const getComment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       commentCountId
     }
@@ -524,12 +543,12 @@ export const getContactUs = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -689,12 +708,12 @@ export const getResearchDevelopmentTeam = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -744,12 +763,12 @@ export const getUwcssaDepartment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaMembers {
         nextToken
@@ -817,12 +836,12 @@ export const getUwcssaMember = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
     }
@@ -903,12 +922,12 @@ export const getEvent = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1005,12 +1024,12 @@ export const getAddress = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }

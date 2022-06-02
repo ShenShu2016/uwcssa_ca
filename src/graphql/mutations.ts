@@ -63,12 +63,31 @@ export const createUserProfile = /* GraphQL */ `
       contactEmail
       title
       about
-      avatarURL
+      avatarURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       website
       active
       createdAt
       updatedAt
       owner
+      userProfileAvatarURLId
     }
   }
 `;
@@ -85,12 +104,31 @@ export const updateUserProfile = /* GraphQL */ `
       contactEmail
       title
       about
-      avatarURL
+      avatarURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       website
       active
       createdAt
       updatedAt
       owner
+      userProfileAvatarURLId
     }
   }
 `;
@@ -107,12 +145,31 @@ export const deleteUserProfile = /* GraphQL */ `
       contactEmail
       title
       about
-      avatarURL
+      avatarURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       website
       active
       createdAt
       updatedAt
       owner
+      userProfileAvatarURLId
     }
   }
 `;
@@ -292,12 +349,12 @@ export const createArticle = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       articleCountId
     }
@@ -344,12 +401,12 @@ export const updateArticle = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       articleCountId
     }
@@ -396,12 +453,12 @@ export const deleteArticle = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       articleCountId
     }
@@ -471,12 +528,12 @@ export const createComment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       commentCountId
     }
@@ -546,12 +603,12 @@ export const updateComment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       commentCountId
     }
@@ -621,12 +678,12 @@ export const deleteComment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       commentCountId
     }
@@ -654,12 +711,12 @@ export const createContactUs = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -686,12 +743,12 @@ export const updateContactUs = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -718,12 +775,12 @@ export const deleteContactUs = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -986,12 +1043,12 @@ export const createResearchDevelopmentTeam = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1023,12 +1080,12 @@ export const updateResearchDevelopmentTeam = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1060,12 +1117,12 @@ export const deleteResearchDevelopmentTeam = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1088,12 +1145,12 @@ export const createUwcssaDepartment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaMembers {
         nextToken
@@ -1122,12 +1179,12 @@ export const updateUwcssaDepartment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaMembers {
         nextToken
@@ -1156,12 +1213,12 @@ export const deleteUwcssaDepartment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaMembers {
         nextToken
@@ -1208,12 +1265,12 @@ export const createUwcssaMember = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
     }
@@ -1255,12 +1312,12 @@ export const updateUwcssaMember = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
     }
@@ -1302,12 +1359,12 @@ export const deleteUwcssaMember = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
     }
@@ -1364,12 +1421,12 @@ export const createEvent = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1425,12 +1482,12 @@ export const updateEvent = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1486,12 +1543,12 @@ export const deleteEvent = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1523,12 +1580,12 @@ export const createAddress = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1560,12 +1617,12 @@ export const updateAddress = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
@@ -1597,12 +1654,12 @@ export const deleteAddress = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
         website
         active
         createdAt
         updatedAt
         owner
+        userProfileAvatarURLId
       }
     }
   }
