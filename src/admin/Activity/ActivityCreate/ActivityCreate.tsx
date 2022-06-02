@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-06-01 17:53:04
+ * @LastEditTime: 2022-06-02 17:39:40
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/ActivityCreate.tsx
  */
@@ -71,6 +71,7 @@ const ActivityCreate: React.FC = () => {
     limit: 0,
     content: ''
   });
+  const [posterImage, setPosterImage] = useState<string>('');
   // 把setCompleted赋值到context中
   // context对象需要export出去 所以不能写在函数组件里面
   // 在函数外面 setCompleted还没有被声明 所以在外面先声明 这里赋值
@@ -128,7 +129,7 @@ const ActivityCreate: React.FC = () => {
                   <ActivityForm activityForm={activityForm} setActivityForm={setActivityForm}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <ActivityPoster/>
+                  <ActivityPoster posterImage={posterImage} setPosterImage={setPosterImage}/>
                 </SwiperSlide>
                 <SwiperSlide>
                   <ActivityConfig/>
