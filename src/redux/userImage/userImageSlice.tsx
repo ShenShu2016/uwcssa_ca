@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-22 15:10:30
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-31 23:23:39
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-01 20:46:11
  * @FilePath: /uwcssa_ca/src/redux/userImage/userImageSlice.tsx
  * @Description:
  *
@@ -20,7 +20,6 @@ import Storage from '@aws-amplify/storage';
 import awsmobile from '../../aws-exports';
 import { createUserImage } from 'graphql/mutations';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
-import { store } from 'redux/store';
 import { userImageSortByCreatedAt } from 'graphql/queries';
 import { v4 as uuid } from 'uuid';
 
@@ -122,8 +121,10 @@ export const postUserImage = createAsyncThunk(
     const fileEXT = file.name.split('.').pop();
     const { identityId, username } = authUser;
     const key = `protected/${identityId}/${targetTable}/${id}.${fileEXT}`;
-    const compressedKey = `protected/${identityId}/${targetTable}/${id}-compressed.webp`;
-    const thumbnailKey = `protected/${identityId}/${targetTable}/${id}-thumbnail.webp`; //所有图片终于将变成webp 格式
+    const compressedKey =
+      `protected/${identityId}/${targetTable}/${id}-compressed.` + fileEXT;
+    const thumbnailKey =
+      `protected/${identityId}/${targetTable}/${id}-thumbnail.` + fileEXT; //改成原来的样子。。
     const createUserImageInput = {
       id,
       objectURL: `https://${aws_user_files_s3_bucket}.s3.${aws_user_files_s3_bucket_region}.amazonaws.com/${key}`,

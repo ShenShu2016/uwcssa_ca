@@ -2,15 +2,12 @@
  * @Author: Shen Shu
  * @Date: 2022-05-24 23:30:45
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 00:17:46
+ * @LastEditTime: 2022-06-01 20:48:25
  * @FilePath: /uwcssa_ca/amplify/backend/function/UserImageCompressHandler/src/index.js
  * @Description:
  *
  */
 // AWS https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/functions/UserImageCompressHandler-devts?tab=code
-
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* Amplify Params - DO NOT EDIT
 	ENV
@@ -36,103 +33,65 @@ exports.handler = async (event, context, callback) => {
     util.inspect(event, { depth: 5 }),
   );
   const srcBucket = process.env.STORAGE_S3UWCSSATS_BUCKETNAME;
+  const dstBucket = process.env.STORAGE_S3UWCSSATS_BUCKETNAME;
+
   // Object key may have spaces or unicode non-ASCII characters.
   const srcKey = decodeURIComponent(
     event.Records[0].dynamodb.NewImage.key.S.replace(/\+/g, ' '),
   );
-  console.log('srcKey', srcKey);
-  const dstBucket = srcBucket;
-  console.log('dstBucket', dstBucket);
-  const dstKey = srcKey.split('.')[0] + '-compressed' + '.webp';
-  console.log('dstKey', dstKey);
-  // Infer the image type from the file suffix.
   const typeMatch = srcKey.match(/\.([^.]*)$/);
   if (!typeMatch) {
     console.log('Could not determine the image type.');
     return;
   }
+  const filePrefix = srcKey.split('.')[0];
+  const fileSuffix = typeMatch[1];
 
-  // Check that the image type is supported
   const imageType = typeMatch[1].toLowerCase();
   if (!['jpeg', 'jpg', 'png', 'webp', 'svg'].includes(imageType)) {
     console.log(`Unsupported image type: ${imageType}`);
     return;
   }
 
-  // Download the image from the S3 source bucket.
+  const compressedDstKey = filePrefix + '-compressed.' + fileSuffix;
+  const thumbnailDstKey = filePrefix + '-thumbnail.' + fileSuffix;
+
   try {
     const params = {
       Bucket: srcBucket,
       Key: srcKey,
     };
-    var origimage = await s3.getObject(params).promise();
+    var originImg = await s3.getObject(params).promise();
   } catch (error) {
     console.log(error);
     return;
   }
-  // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
+
   const compressedWidth = event.Records[0].dynamodb.NewImage.compressedWidth.N;
-  console.log('compressedWidth', compressedWidth);
-  // Use the sharp module to resize the image and save in a buffer.
-  try {
-    var buffer = await sharp(origimage.Body)
-      .resize(parseInt(compressedWidth))
-      .webp()
-      .toBuffer();
-  } catch (error) {
-    console.log(error);
-    return;
-  }
-  // Upload the thumbnail image to the destination bucket
-  try {
-    const destparams = {
-      Bucket: dstBucket,
-      Key: dstKey,
-      Body: buffer,
-      ContentType: 'image',
-    };
-
-    const putResult = await s3.putObject(destparams).promise();
-  } catch (error) {
-    console.log(error);
-    return;
-  }
-  console.log(
-    'Successfully resized ' +
-      srcBucket +
-      '/' +
-      srcKey +
-      ' and uploaded to ' +
-      dstBucket +
-      '/' +
-      dstKey,
-  );
   const thumbnailWidth = event.Records[0].dynamodb.NewImage.thumbnailWidth.N;
-  console.log('thumbnailWidth', thumbnailWidth);
-  try {
-    var buffer2 = await sharp(origimage.Body)
-      .resize(parseInt(thumbnailWidth))
-      .webp()
-      .toBuffer();
-  } catch (error) {
-    console.log(error);
-    return;
-  }
 
-  // Upload the thumbnail image to the destination bucket
-  try {
-    const destparams = {
-      Bucket: dstBucket,
-      Key: srcKey.split('.')[0] + '-thumbnail' + '.webp',
-      Body: buffer2,
-      ContentType: 'image',
-    };
+  let [compressedBuffer, thumbnailBuffer] = await Promise.all([
+    sharp(originImg.Body).resize(parseInt(compressedWidth)).toBuffer(),
+    sharp(originImg.Body).resize(parseInt(thumbnailWidth)).toBuffer(),
+  ]);
 
-    const putResult = await s3.putObject(destparams).promise();
-  } catch (error) {
-    console.log(error);
-    return;
-  }
+  const compressedDstParams = {
+    Bucket: dstBucket,
+    Key: compressedDstKey,
+    Body: compressedBuffer,
+    ContentType: 'image',
+  };
+  const thumbnailDstPrams = {
+    Bucket: dstBucket,
+    Key: thumbnailDstKey,
+    Body: thumbnailBuffer,
+    ContentType: 'image',
+  };
+
+  let [compressedResult, thumbnailResult] = await Promise.all([
+    s3.putObject(compressedDstParams).promise(),
+    s3.putObject(thumbnailDstPrams).promise(),
+  ]);
   console.log(
     'Successfully resized ' +
       srcBucket +
@@ -141,6 +100,18 @@ exports.handler = async (event, context, callback) => {
       ' and uploaded to ' +
       dstBucket +
       '/' +
-      dstKey,
+      compressedDstKey,
+    compressedResult,
+  );
+  console.log(
+    'Successfully resized ' +
+      srcBucket +
+      '/' +
+      srcKey +
+      ' and uploaded to ' +
+      dstBucket +
+      '/' +
+      thumbnailDstKey,
+    thumbnailResult,
   );
 };
