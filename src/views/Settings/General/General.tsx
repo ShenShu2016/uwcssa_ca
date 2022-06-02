@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 19:13:49
+ * @LastEditTime: 2022-06-01 22:20:18
  * @FilePath: /uwcssa_ca/src/views/Settings/General/General.tsx
  * @Description:
  *
@@ -10,17 +10,19 @@
 
 import * as yup from 'yup';
 
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Link as MUILink,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Page from '../components/Page';
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { getOwnerUserName } from 'redux/auth/authSlice';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
 import { useFormik } from 'formik';
@@ -68,7 +70,6 @@ const General = (): JSX.Element => {
     about: myUserProfile.about || '',
     contactEmail: myUserProfile.contactEmail || '',
     title: myUserProfile.title || '',
-    avatarURL: myUserProfile.avatarURL || '',
     website: myUserProfile.website || '',
   };
   const onSubmit = async (values) => {
@@ -98,10 +99,14 @@ const General = (): JSX.Element => {
             Change your private information
           </Typography>
           <Typography variant={'subtitle2'} color={'text.secondary'}>
-            Please read our{' '}
-            <Link color={'primary'} href={'/company-terms'} underline={'none'}>
+            Please read our
+            <MUILink
+              color={'primary'}
+              href={'/company-terms'}
+              underline={'none'}
+            >
               terms of use
-            </Link>{' '}
+            </MUILink>
             to be informed how we manage your private data.
           </Typography>
           <Box paddingY={4}>
@@ -197,29 +202,6 @@ const General = (): JSX.Element => {
                   helperText={formik.touched.title && formik.errors.title}
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <Typography
-                  variant={'subtitle2'}
-                  sx={{ marginBottom: 2 }}
-                  fontWeight={700}
-                >
-                  头像图片地址
-                </Typography>
-                <TextField
-                  label="www.xxx.com.jpg"
-                  variant="outlined"
-                  name={'avatarURL'}
-                  fullWidth
-                  value={formik.values.avatarURL}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.avatarURL && Boolean(formik.errors.avatarURL)
-                  }
-                  helperText={
-                    formik.touched.avatarURL && formik.errors.avatarURL
-                  }
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <Typography
                   variant={'subtitle2'}

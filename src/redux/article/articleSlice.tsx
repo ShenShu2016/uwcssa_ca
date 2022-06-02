@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 12:29:40
+ * @LastEditTime: 2022-06-01 22:07:33
  * @FilePath: /uwcssa_ca/src/redux/article/articleSlice.tsx
  * @Description:
  *
@@ -20,6 +20,7 @@ import {
 } from '@reduxjs/toolkit';
 
 import API from '@aws-amplify/api';
+import { AvatarURL } from 'redux/userProfile/userProfileSlice';
 import { RootState } from 'redux/store';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { updateArticle } from 'graphql/mutations';
@@ -36,7 +37,12 @@ export type Article = {
       id: string;
       content: string;
       createdAt: string;
-      user: { avatarURL: string; id: string; name: string; createdAt: string };
+      user: {
+        avatarURL: AvatarURL;
+        id: string;
+        name: string;
+        createdAt: string;
+      };
     }>;
   } | null;
   active: 'T' | 'F';
@@ -45,7 +51,7 @@ export type Article = {
   createdAt?: string;
   updatedAt?: string;
   owner: string;
-  user?: { avatarURL: string; id: string; name: string };
+  user?: { avatarURL: AvatarURL; id: string; name: string };
 };
 
 const articleAdapter = createEntityAdapter<Article>({

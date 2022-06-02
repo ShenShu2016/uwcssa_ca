@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-20 21:02:00
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-26 22:05:13
+ * @LastEditTime: 2022-06-01 22:06:50
  * @FilePath: /uwcssa_ca/src/redux/comment/commentSlice.tsx
  * @Description:
  *
@@ -20,6 +20,7 @@ import {
 } from '@reduxjs/toolkit';
 
 import API from '@aws-amplify/api';
+import { AvatarURL } from 'redux/userProfile/userProfileSlice';
 import { CreateCommentInput } from 'API';
 import { RootState } from 'redux/store';
 import { getComment } from 'graphql/queries';
@@ -34,7 +35,7 @@ export type Comment = {
   createdAt: string;
   updatedAt: string;
   owner: string;
-  user?: { avatarURL: string; id: string; name: string; createdAt: string };
+  user?: { avatarURL: AvatarURL; id: string; name: string; createdAt: string };
 };
 
 export const commentAdapter = createEntityAdapter<Comment>({

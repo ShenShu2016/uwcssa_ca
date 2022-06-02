@@ -2,13 +2,21 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 20:07:20
+ * @LastEditTime: 2022-06-01 22:20:59
  * @FilePath: /uwcssa_ca/src/views/Settings/Profile/Profile.tsx
  * @Description:
  *
  */
 
-import { Avatar, Box, Button, Card, Stack, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 import Container from 'components/Container';
 import CropperDialog from 'components/Cropper/CropperDialog';
@@ -16,16 +24,13 @@ import React from 'react';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
 
 // import CropperDialog from 'components/Cropper/CropperDialog';
 
 const Profile = (): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const myUserProfile = useAppSelector(
-    (state) => state.userProfile.myUserProfile,
-  );
+  const { myUserProfile } = useAppSelector((state) => state.userProfile);
   const avatarErrorHandler = () => {
     console.log('avatar error');
   };
@@ -42,7 +47,7 @@ const Profile = (): JSX.Element => {
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Box position={'relative'}>
               <Avatar
-                src={myUserProfile.avatarURL}
+                src={myUserProfile.avatarURL?.objectCompressedURL}
                 imgProps={{
                   onError: avatarErrorHandler,
                 }}

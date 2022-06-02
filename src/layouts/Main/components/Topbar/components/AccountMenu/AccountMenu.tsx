@@ -2,32 +2,34 @@
  * @Author: Shen Shu
  * @Date: 2022-05-19 17:32:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 22:20:44
+ * @LastEditTime: 2022-06-01 22:15:08
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/components/AccountMenu/AccountMenu.tsx
  * @Description:
  *
  */
 
+import {
+  Avatar,
+  Box,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Tooltip,
+  useTheme,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Settings from '@mui/icons-material/Settings';
-import Tooltip from '@mui/material/Tooltip';
 import { blue } from '@mui/material/colors';
 import { removeMyUserProfile } from 'redux/userProfile/userProfileSlice';
 import { signOut } from 'redux/auth/authSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material';
 
 export default function AccountMenu() {
   const theme = useTheme();
@@ -63,7 +65,7 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar
-              src={myUserProfile.avatarURL}
+              src={myUserProfile.avatarURL?.objectThumbnailURL}
               {...stringAvatar(myUserProfile.name, {
                 width: 32,
                 height: 32,

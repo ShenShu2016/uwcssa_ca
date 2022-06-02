@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-28 01:04:11
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 19:14:01
+ * @LastEditTime: 2022-06-01 21:57:09
  * @FilePath: /uwcssa_ca/src/redux/userProfile/userProfileSlice.tsx
  * @Description:
  *
@@ -13,13 +13,14 @@ import {
   createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit';
-import { getUserProfile, userProfileSortByCreatedAt } from 'graphql/queries';
 
 import API from '@aws-amplify/api';
 import { RootState } from 'redux/store';
 import { UpdateUserProfileInput } from 'API';
+import { getUserProfile } from 'graphql/queries';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { updateUserProfile } from 'graphql/mutations';
+import { userProfileSortByCreatedAt } from './custom_q_m_s';
 
 export type UserProfile = {
   id: string;
@@ -29,12 +30,33 @@ export type UserProfile = {
   contactEmail?: string | null;
   title?: string | null;
   about?: string | null;
-  avatarURL?: string | null;
+  avatarURL?: AvatarURL;
+  userProfileAvatarURLId?: string | null;
   website?: string | null;
   createdAt: string;
   updatedAt: string;
   owner: string;
 };
+export interface AvatarURL {
+  id?: string | null;
+  objectURL?: string | null;
+  key?: string | null;
+  name?: string | null;
+  size?: number | null;
+  type?: string | null;
+  lastModified?: string | null;
+  lastModifiedDate?: string | null;
+  compressedWidth?: number | null;
+  objectCompressedURL?: string | null;
+  thumbnailWidth?: number | null;
+  objectThumbnailURL?: string | null;
+  targetTable?: string | null;
+  active?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+  owner?: string | null;
+}
+
 const userProfileAdapter = createEntityAdapter<UserProfile>({
   // selectId: (item) => item.id,
   sortComparer: (a, b) => b.createdAt.localeCompare(a.createdAt),
@@ -48,7 +70,26 @@ const initialState = userProfileAdapter.getInitialState({
     contactEmail: '',
     title: '',
     about: '',
-    avatarURL: '',
+    avatarURL: {
+      id: '',
+      objectURL: '',
+      key: '',
+      name: '',
+      size: '',
+      type: '',
+      lastModified: '',
+      lastModifiedDate: '',
+      compressedWidth: '',
+      objectCompressedURL: '',
+      thumbnailWidth: '',
+      objectThumbnailURL: '',
+      targetTable: '',
+      active: '',
+      createdAt: '',
+      updatedAt: '',
+      owner: '',
+    },
+    userProfileAvatarURLId: '',
     website: '',
     createdAt: '',
     updatedAt: '',

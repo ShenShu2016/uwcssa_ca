@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-01 00:31:43
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 20:06:22
+ * @LastEditTime: 2022-06-01 22:14:41
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/components/CustomerListResults.tsx
  * @Description:
  *
@@ -21,6 +21,7 @@ import {
   Typography,
 } from '@mui/material';
 
+import { AvatarURL } from 'redux/userProfile/userProfileSlice';
 import React from 'react';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
@@ -34,7 +35,7 @@ type UserProfileType = {
   contactEmail?: string | null;
   title?: string | null;
   about?: string | null;
-  avatarURL?: string | null;
+  avatarURL?: AvatarURL | null;
   website?: string | null;
   createdAt: string;
   updatedAt: string;
@@ -125,7 +126,7 @@ function CustomerListResults({
                     }}
                   >
                     <Avatar
-                      src={customer.avatarURL}
+                      src={customer.avatarURL?.objectCompressedURL}
                       {...stringAvatar(customer.name, { mr: 2 })}
                     />
 

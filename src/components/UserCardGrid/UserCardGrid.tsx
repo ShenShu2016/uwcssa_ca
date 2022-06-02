@@ -2,18 +2,16 @@
  * @Author: 李佳修
  * @Date: 2022-05-19 17:21:06
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 02:22:32
+ * @LastEditTime: 2022-06-01 22:17:06
  * @FilePath: /uwcssa_ca/src/components/UserCardGrid/UserCardGrid.tsx
  * @Description:
  *
  */
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
+import { Avatar, Box, Stack, Typography } from '@mui/material';
+
 import Button from '@mui/material/Button';
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
 import { useTheme } from '@mui/material/styles';
@@ -54,7 +52,7 @@ const UserCardGrid = (): JSX.Element => {
       {myUserProfile.id ? (
         <>
           <Avatar
-            src={myUserProfile.avatarURL}
+            src={myUserProfile.avatarURL?.objectCompressedURL}
             variant={'circular'}
             alt={myUserProfile.name}
             {...stringAvatar(myUserProfile.name, {

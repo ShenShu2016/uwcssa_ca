@@ -2,23 +2,19 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 16:50:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 02:22:52
+ * @LastEditTime: 2022-06-01 22:16:36
  * @FilePath: /uwcssa_ca/src/components/Comment/CommentOverview/CommentOverview.tsx
  * @Description:
  *
  */
 
+import { Avatar, Box, Button, Divider, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
-import { Avatar } from '@mui/material';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { AvatarURL } from 'redux/userProfile/userProfileSlice';
 import CommentGroupButton from './components/CommentGroupButton';
 import Container from 'components/Container';
-import Divider from '@mui/material/Divider';
 import { FeedbackForm } from '../CommentDialog/components';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 
@@ -29,7 +25,7 @@ interface Props {
     createdAt: string;
     user?: {
       name: string;
-      avatarURL: string;
+      avatarURL: AvatarURL;
       id: string;
       createdAt: string;
     };
@@ -127,7 +123,7 @@ const CommentOverview = ({ comments }: Props): JSX.Element => {
             <Box display={'flex'}>
               <Box mt="8px">
                 <Avatar
-                  src={item.user.avatarURL}
+                  src={item.user.avatarURL?.objectThumbnailURL}
                   {...stringAvatar(item.user.name, {
                     width: 48,
                     height: 48,

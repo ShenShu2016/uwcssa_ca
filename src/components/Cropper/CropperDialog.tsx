@@ -1,47 +1,37 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-29 23:50:40
- * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-05-31 23:55:00
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-01 22:14:48
  * @FilePath: /uwcssa_ca/src/components/Cropper/CropperDialog.tsx
  * @Description:
  *
  */
 
-import { Area, Point } from 'react-easy-crop/types';
 import {
   Box,
-  CircularProgress,
-  Divider,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Slider,
-  Stack,
   Typography,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
-import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
-import Button from '@mui/material/Button';
-import CropRoundedIcon from '@mui/icons-material/CropRounded';
 import Cropper from 'react-easy-crop';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { FileListItems } from './conponents/CropperDialogContent/FileListItems';
 import { PhotoCamera } from '@mui/icons-material';
 import { dataURLtoFile } from './conponents/CropperDialogContent/dataURLtoFile';
 import getCroppedImg from './conponents/CropperDialogContent/canvasUtils';
 import { getOwnerUserName } from 'redux/auth/authSlice';
-import { green } from '@mui/material/colors';
 import { grey } from '@mui/material/colors';
 import { postUserImage } from 'redux/userImage/userImageSlice';
-import { styled } from '@mui/material/styles';
 import { updateUserProfileData } from 'redux/userProfile/userProfileSlice';
-import { useFormik } from 'formik';
-import { useTheme } from '@mui/material/styles';
 import { v4 as uuid } from 'uuid';
 
 function readFile(file) {
@@ -76,9 +66,10 @@ export default function CropperDialog() {
   const myUserProfile = useAppSelector(
     (state) => state.userProfile.myUserProfile,
   );
+  console.log('myUserProfile', myUserProfile);
   const [loading, setLoading] = useState(false);
   const [avatarImgURL, setAvatarImgURL] = useState<string | undefined>(
-    myUserProfile.avatarURL,
+    myUserProfile.avatarURL?.objectURL,
   );
   const inputAvatarRef = useRef<HTMLInputElement>(null);
   const triggerAvatarFileSelectPopup = () => inputAvatarRef.current.click();
@@ -105,7 +96,7 @@ export default function CropperDialog() {
     // console.log(canvasDataUrl);
     const convertedUrlToFile = dataURLtoFile(
       canvasDataUrl,
-      `croppedAvatarImg${uuid()}.jpeg`,
+      `croppedAvatarImg-${uuid()}.jpeg`,
     );
     console.log(convertedUrlToFile);
 
@@ -115,6 +106,8 @@ export default function CropperDialog() {
         targetTable,
         file: convertedUrlToFile,
         authUser,
+        compressedWidth: 144,
+        thumbnailWidth: 32,
       }),
     );
     if (response.meta.requestStatus === 'fulfilled') {
@@ -128,7 +121,7 @@ export default function CropperDialog() {
 
     const updateUserProfileInput = {
       id: ownerUsername,
-      avatarURL: response.payload.objectCompressedURL,
+      userProfileAvatarURLId: response.payload.id,
     };
     const response2 = await dispatch(
       updateUserProfileData(updateUserProfileInput),
@@ -139,7 +132,7 @@ export default function CropperDialog() {
 
   const noChange = () => {
     setAvatarImageSrc(null);
-    setAvatarImgURL(myUserProfile.avatarURL);
+    setAvatarImgURL(myUserProfile.avatarURL?.objectURL);
     setFinish(false);
     setZoom(1);
     handleClose();

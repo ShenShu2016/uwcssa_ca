@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 17:34:52
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 22:25:10
+ * @LastEditTime: 2022-06-01 22:04:44
  * @FilePath: /uwcssa_ca/src/redux/comment/custom_q_m_s.tsx
  * @Description:
  *
@@ -36,7 +36,11 @@ export const commentSortByArticleCommentsIdCreatedAt = /* GraphQL */ `
         user {
           id
           name
-          avatarURL
+          avatarURL {
+            objectURL
+            objectCompressedURL
+            objectThumbnailURL
+          }
         }
       }
       nextToken
@@ -75,7 +79,11 @@ export const createComment = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
+        avatarURL {
+          objectURL
+          objectCompressedURL
+          objectThumbnailURL
+        }
         website
         createdAt
         updatedAt

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-21 00:00:03
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 22:25:08
+ * @LastEditTime: 2022-06-01 22:04:02
  * @FilePath: /uwcssa_ca/src/redux/article/custom_q_m_s.tsx
  * @Description:
  *
@@ -43,7 +43,11 @@ export const articleSortByCreatedAt = /* GraphQL */ `
         user {
           id
           name
-          avatarURL
+          avatarURL {
+            objectURL
+            objectCompressedURL
+            objectThumbnailURL
+          }
         }
       }
       nextToken
@@ -69,7 +73,11 @@ export const getArticle = /* GraphQL */ `
           content
           createdAt
           user {
-            avatarURL
+            avatarURL {
+              objectURL
+              objectCompressedURL
+              objectThumbnailURL
+            }
             id
             name
             createdAt
@@ -83,7 +91,11 @@ export const getArticle = /* GraphQL */ `
       user {
         id
         name
-        avatarURL
+        avatarURL {
+          objectURL
+          objectCompressedURL
+          objectThumbnailURL
+        }
       }
     }
   }
@@ -116,7 +128,11 @@ export const createArticle = /* GraphQL */ `
         contactEmail
         title
         about
-        avatarURL
+        avatarURL {
+          objectURL
+          objectCompressedURL
+          objectThumbnailURL
+        }
         website
         createdAt
         updatedAt

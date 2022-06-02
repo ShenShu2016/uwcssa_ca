@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 13:48:52
+ * @LastEditTime: 2022-06-01 22:19:37
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/SimilarStories/SimilarStories.tsx
  * @Description:
  *
@@ -18,6 +18,7 @@ import {
   Divider,
   Grid,
   Typography,
+  useTheme,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -26,7 +27,6 @@ import moment from 'moment';
 import { selectAllArticles } from 'redux/article/articleSlice';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
 import { useAppSelector } from 'redux/hooks';
-import { useTheme } from '@mui/material/styles';
 
 const SimilarStories = (): JSX.Element => {
   const theme = useTheme();
@@ -146,7 +146,7 @@ const SimilarStories = (): JSX.Element => {
                   >
                     <Box display={'flex'} alignItems={'center'}>
                       <Avatar
-                        src={item.user.avatarURL}
+                        src={item.user.avatarURL?.objectThumbnailURL}
                         {...stringAvatar(item.user.name, {
                           marginRight: '1rem',
                         })}

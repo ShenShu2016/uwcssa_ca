@@ -2,20 +2,17 @@
  * @Author: Shen Shu
  * @Date: 2022-05-25 19:05:54
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-28 02:05:46
+ * @LastEditTime: 2022-06-01 22:19:19
  * @FilePath: /uwcssa_ca/src/views/ArticleCover/components/Hero/Hero.tsx
  * @Description:
  *
  */
 
+import { Avatar, Box, ListItemText, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 
 import { Article } from 'redux/article/articleSlice';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import Container from 'components/Container';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
 import moment from 'moment';
 import { stringAvatar } from 'components/Avatar/AvatarFunction';
@@ -93,7 +90,7 @@ const Hero = ({ article }: { article: Article }): JSX.Element => {
           </Typography>
           <Box display={'flex'} alignItems={'center'}>
             <Avatar
-              src={article.user.avatarURL}
+              src={article.user.avatarURL?.objectThumbnailURL}
               {...stringAvatar(article.user.name, {
                 width: 60,
                 height: 60,

@@ -2,13 +2,13 @@
  * @Author: Shen Shu
  * @Date: 2022-05-31 23:01:18
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-01 20:08:01
+ * @LastEditTime: 2022-06-01 21:50:46
  * @FilePath: /uwcssa_ca/src/admin/UserProfile/UserProfileDashboard.tsx
  * @Description:
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   fetchUserProfileList,
   selectAllUserProfiles,
