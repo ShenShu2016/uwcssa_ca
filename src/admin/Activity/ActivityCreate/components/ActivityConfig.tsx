@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-03 18:18:13
+ * @LastEditTime: 2022-06-03 18:40:11
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityConfig.tsx
  */
@@ -62,21 +62,23 @@ const ActivityConfig: React.FC = () => {
           <Typography variant="h6" gutterBottom component="div">
               活动报名表单
           </Typography>
-          {
-            selectedQuestions.map(item => (
-              <Box key={item.id}>
-                {
-                  item.formType === FormType.TextFieldShort ?
-                    <TextFieldShort item={item}/> : null
-                }
+          <Box width={'100%'} paddingX={4} boxSizing='border-box'>
+            {
+              selectedQuestions.map(item => (
+                <Box key={item.id} mt={2}>
+                  {
+                    item.formType === FormType.TextFieldShort ?
+                      <TextFieldShort item={item}/> : null
+                  }
              
-                {
-                  item.formType === FormType.Select ?
-                    <Select item={item}/> : null
-                }
-              </Box>
-            ))
-          }
+                  {
+                    item.formType === FormType.Select ?
+                      <Select item={item}/> : null
+                  }
+                </Box>
+              ))
+            }
+          </Box>
           <Button
             variant="contained"
             sx={{width: '30%'}}
