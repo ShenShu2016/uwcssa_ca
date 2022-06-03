@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 18:39:41
+ * @LastEditTime: 2022-06-03 19:04:59
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -22,6 +22,15 @@ function getYupValidation(formItem: FormItem) {
   let validation: any = yup;
   if (formItem.formType === 'Checkbox') {
     return validation.boolean();
+  }
+  if (
+    formItem.formType === 'RadioGroupH' ||
+    formItem.formType === 'RadioGroupV' ||
+    formItem.formType === 'DatePicker' ||
+    formItem.formType === 'DateTimePicker' ||
+    formItem.formType === 'TimePicker'
+  ) {
+    return yup.string();
   }
   if (formItem.isString) {
     validation = validation.string();
@@ -45,7 +54,7 @@ function getYupValidation(formItem: FormItem) {
     );
   }
   if (formItem.isRequired) {
-    validation = validation.required('This field is required');
+    validation = validation.required('This field is required'); //required 要放在最后面
   }
   return validation;
 }

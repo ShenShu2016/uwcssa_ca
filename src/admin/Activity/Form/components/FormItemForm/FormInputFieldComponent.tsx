@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:35:33
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 18:39:09
+ * @LastEditTime: 2022-06-03 19:28:22
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
@@ -12,15 +12,23 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  FormLabel,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   TextField,
   Typography,
 } from '@mui/material';
 
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { FormItem } from 'redux/form/formSlice';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import React from 'react';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 function getInputFieldName({ order }: { order: number }) {
   return 'content' + order;
@@ -256,15 +264,106 @@ function FormInputFieldComponent({
   } else if (formItem.formType === 'FileUpload') {
     return null;
   } else if (formItem.formType === 'RadioGroupH') {
-    return null;
+    return (
+      <FormControl>
+        <FormLabel id={getInputLabelId({ order: formItem.order })}>
+          {formItem.label}
+        </FormLabel>
+        <RadioGroup
+          row
+          aria-labelledby={getInputLabelId({ order: formItem.order })}
+          name={getInputFieldName({ order: formItem.order })}
+          onChange={formik.handleChange}
+          value={getFormikValue({ order: formItem.order })}
+        >
+          {formItem.formSelectChoices.map((option, index) => {
+            return (
+              <FormControlLabel
+                key={index}
+                value={option}
+                control={<Radio />}
+                label={option}
+              />
+            );
+          })}
+        </RadioGroup>
+      </FormControl>
+    );
   } else if (formItem.formType === 'RadioGroupV') {
-    return null;
+    return (
+      <FormControl>
+        <FormLabel id={getInputLabelId({ order: formItem.order })}>
+          {formItem.label}
+        </FormLabel>
+        <RadioGroup
+          row={false}
+          aria-labelledby={getInputLabelId({ order: formItem.order })}
+          name={getInputFieldName({ order: formItem.order })}
+          onChange={formik.handleChange}
+          value={getFormikValue({ order: formItem.order })}
+        >
+          {formItem.formSelectChoices.map((option, index) => {
+            return (
+              <FormControlLabel
+                key={index}
+                value={option}
+                control={<Radio />}
+                label={option}
+              />
+            );
+          })}
+        </RadioGroup>
+      </FormControl>
+    );
   } else if (formItem.formType === 'DatePicker') {
-    return null;
+    return (
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <MobileDatePicker
+          label={formItem.label}
+          inputFormat="MM/dd/yyyy"
+          value={getFormikValue({ order: formItem.order })}
+          onChange={(value) => {
+            formik.setFieldValue(
+              getInputFieldName({ order: formItem.order }),
+              value,
+            );
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
+    );
   } else if (formItem.formType === 'DateTimePicker') {
-    return null;
+    return (
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DateTimePicker
+          label={formItem.label}
+          value={getFormikValue({ order: formItem.order })}
+          onChange={(value) => {
+            formik.setFieldValue(
+              getInputFieldName({ order: formItem.order }),
+              value,
+            );
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
+    );
   } else if (formItem.formType === 'TimePicker') {
-    return null;
+    return (
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <TimePicker
+          label={formItem.label}
+          value={getFormikValue({ order: formItem.order })}
+          onChange={(value) => {
+            formik.setFieldValue(
+              getInputFieldName({ order: formItem.order }),
+              value,
+            );
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
+    );
   }
 }
 
