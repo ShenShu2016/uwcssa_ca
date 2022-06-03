@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:04:57
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-02 20:48:51
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -179,8 +179,23 @@ const pages = {
     title: 'careerOpening',
     href: '/careerOpening',
   },
-  about: {
-    title: 'contactUs',
+  about: [
+    {
+      title: '关于我们',
+      href: '/about',
+    },
+    {
+      title: '合作伙伴',
+      href: '/partners',
+    },
+    {
+      title: 'Developers',
+      href: '/developers',
+    },
+  ],
+
+  contact: {
+    title: 'contact Us',
     href: '/contactUs',
   },
 };

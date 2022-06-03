@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-27 13:17:59
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-02 20:12:42
  * @FilePath: /uwcssa_ca/src/layouts/Main/components/Topbar/Topbar.tsx
  * @Description:
  *
@@ -31,6 +31,7 @@ interface Props {
     jobs: Array<PageItem> | PageItem;
     about: Array<PageItem> | PageItem;
     activity: Array<PageItem> | PageItem;
+    contact: Array<PageItem> | PageItem;
   };
   colorInvert?: boolean;
 }
@@ -50,6 +51,7 @@ const Topbar = ({
     activity: activityPages,
     jobs: jobsPages,
     about: aboutPages,
+    contact: contactPages,
   } = pages;
 
   const isAuth = useAppSelector(getAuthState);
@@ -137,9 +139,17 @@ const Topbar = ({
         </Box>
         <Box marginLeft={4}>
           <NavItem
-            title={'关于'}
+            title={'关于我们'}
             id={'about-pages'}
             items={aboutPages}
+            colorInvert={colorInvert}
+          />
+        </Box>
+        <Box marginLeft={4}>
+          <NavItem
+            title={'联系我们'}
+            id={'contact-pages'}
+            items={contactPages}
             colorInvert={colorInvert}
           />
         </Box>

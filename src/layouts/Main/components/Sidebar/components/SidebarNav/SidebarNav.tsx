@@ -15,6 +15,7 @@ interface Props {
     jobs: Array<PageItem> | PageItem;
     about: Array<PageItem> | PageItem;
     activity: Array<PageItem> | PageItem;
+    contact: Array<PageItem> | PageItem;
   };
 }
 
@@ -30,6 +31,7 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
     activity: activityPages,
     jobs: jobsPages,
     about: aboutPages,
+    contact: contactPages,
   } = pages;
 
   return (
@@ -81,7 +83,10 @@ const SidebarNav = ({ pages }: Props): JSX.Element => {
           <NavItem title={'工作机会'} items={jobsPages} />
         </Box>
         <Box>
-          <NavItem title={'关于'} items={aboutPages} />
+          <NavItem title={'关于我们'} items={aboutPages} />
+        </Box>
+        <Box>
+          <NavItem title={'联系我们'} items={contactPages} />
         </Box>
         <Box marginTop={2}>
           <Button
