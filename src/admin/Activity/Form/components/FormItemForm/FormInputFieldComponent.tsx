@@ -2,28 +2,25 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:35:33
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 18:17:07
+ * @LastEditTime: 2022-06-03 18:39:09
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/components/FormItemForm/FormInputFieldComponent.tsx
  * @Description:
  *
  */
 
-import * as yup from 'yup';
-
 import {
+  Checkbox,
   FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
   TextField,
   Typography,
 } from '@mui/material';
-import { Formik, useFormik } from 'formik';
 
-import { Console } from 'console';
 import { FormItem } from 'redux/form/formSlice';
 import React from 'react';
-import { useAppDispatch } from 'redux/hooks';
 
 function getInputFieldName({ order }: { order: number }) {
   return 'content' + order;
@@ -213,7 +210,20 @@ function FormInputFieldComponent({
       </>
     );
   } else if (formItem.formType === 'Checkbox') {
-    return null;
+    return (
+      <>
+        <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+          {formItem.name}
+        </Typography>
+        <FormControlLabel
+          name={getInputFieldName({ order: formItem.order })}
+          value={getFormikValue({ order: formItem.order })}
+          onChange={formik.handleChange}
+          control={<Checkbox />}
+          label={formItem.label}
+        />
+      </>
+    );
   } else if (formItem.formType === 'Select') {
     return (
       <>

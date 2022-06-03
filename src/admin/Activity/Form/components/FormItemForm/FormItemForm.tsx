@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 18:01:01
+ * @LastEditTime: 2022-06-03 18:39:41
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -10,25 +10,19 @@
 
 import * as yup from 'yup';
 
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, Divider, Grid } from '@mui/material';
 
 import Container from 'components/Container';
 import FormInputFieldComponent from './FormInputFieldComponent';
 import { FormItem } from 'redux/form/formSlice';
 import React from 'react';
-import { useAppDispatch } from 'redux/hooks';
 import { useFormik } from 'formik';
 
 function getYupValidation(formItem: FormItem) {
   let validation: any = yup;
-
+  if (formItem.formType === 'Checkbox') {
+    return validation.boolean();
+  }
   if (formItem.isString) {
     validation = validation.string();
   }
@@ -53,7 +47,7 @@ function getYupValidation(formItem: FormItem) {
   if (formItem.isRequired) {
     validation = validation.required('This field is required');
   }
-  return validation.trim();
+  return validation;
 }
 
 function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
