@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-03 18:21:24
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-06-03 17:01:12
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -46,9 +46,10 @@ export type Form = {
   user?: UserProfile | null;
 };
 
-type FormItem = {
+export type FormItem = {
   id?: string | null;
   name: string;
+  order: number;
   isRequired: boolean;
   isString: boolean;
   isEmail: boolean;
@@ -116,18 +117,18 @@ const initialState = formAdapter.getInitialState({
       ActivityForm: false,
       ActivityPoster: false,
       ActivityConfig: false,
-      ActivityPreview: false
+      ActivityPreview: false,
     },
     basicInfo: {
       title: '',
       dateTime: null,
       address: '',
       limit: 0,
-      content: ''
+      content: '',
     },
     posterImage: {},
-    selectedQuestions: []
-  }
+    selectedQuestions: [],
+  },
 });
 
 export const fetchFormList = createAsyncThunk(
@@ -275,19 +276,20 @@ const formSlice = createSlice({
     setBasicInfo(state, action) {
       state.createData.basicInfo = {
         ...state.createData.basicInfo,
-        ...action.payload
+        ...action.payload,
       };
       // 检查basicInfo中是否所有字段都不为空
       const complete = Object.keys(state.createData.basicInfo).every(
-        (key) => 
-          !!state.createData.basicInfo[key] || state.createData.basicInfo[key] === 0
+        (key) =>
+          !!state.createData.basicInfo[key] ||
+          state.createData.basicInfo[key] === 0,
       );
       state.createData.completeStatus.ActivityForm = complete;
     },
 
     addQuestion(state, action) {
       state.createData.selectedQuestions.push(action.payload);
-    }
+    },
   },
   extraReducers(builder) {
     builder

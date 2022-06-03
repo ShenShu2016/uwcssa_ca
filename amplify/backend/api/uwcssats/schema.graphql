@@ -338,6 +338,7 @@ type Event
   eventStatus: EventStatus!
   eventLocation: Address
   comments: [Comment] @hasMany
+  eventParticipants: [EventParticipant] @hasMany
   active: ActiveType!
     @index(
       name: "eventSortByCreatedAt" #名字要用小写
@@ -385,7 +386,8 @@ type Address
   user: UserProfile @hasOne(fields: ["owner"])
 }
 
-# 一个from里面可以有很多 FormItem form questions 可以重复利用也就是说many to many
+# 一个from里面可以有很多 FormItem form questions 不可以重复利用
+# 每个form里面最多19个选项
 type Form
   @model(subscriptions: null)
   @auth(
@@ -396,14 +398,14 @@ type Form
     ]
   ) {
   id: ID!
-  formItems: [FormItem] @hasMany # 可以有很多 FormItem form questions 可以重复利用也就是说many to many
+  formItems: [FormItem] @hasMany # 可以有很多 FormItem form questions 不可以重复利用
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
   user: UserProfile @hasOne(fields: ["owner"])
 }
 
-# FormItem 每个可以跟着多个 From
+# FormItem 每个可以跟着多个 From ，不能重复利用，每次创建新的，但是可以用来做样本
 type FormItem
   @model(subscriptions: null)
   @auth(
@@ -415,6 +417,7 @@ type FormItem
   ) {
   id: ID!
   name: String!
+  order: Int! #在一个form里面需要 顺序。
   isRequired: Boolean! #是否必填
   isString: Boolean! # 是否是字符串
   isEmail: Boolean! # 是否是邮箱
@@ -429,6 +432,7 @@ type FormItem
   formSelectChoices: [String] # 选项
   createdAt: AWSDateTime! # 创建时间
   updatedAt: AWSDateTime! # 更新时间
+  form: Form @belongsTo
   owner: ID! # 创建者
   user: UserProfile @hasOne(fields: ["owner"])
 }
@@ -444,4 +448,64 @@ enum FormType {
   DatePicker
   DateTimePicker
   TimePicker
+}
+# 每个form里面最多19个选项
+type EventParticipant
+  @model(subscriptions: null)
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: groups, groups: ["uwcssaAdmin"] }
+    ]
+  ) {
+  id: ID!
+  content1: String
+  formItem1: FormItem @hasOne
+  content2: String
+  formItem2: FormItem @hasOne
+  content3: String
+  formItem3: FormItem @hasOne
+  content4: String
+  formItem4: FormItem @hasOne
+  content5: String
+  formItem5: FormItem @hasOne
+  content6: String
+  formItem6: FormItem @hasOne
+  content7: String
+  formItem7: FormItem @hasOne
+  content8: String
+  formItem8: FormItem @hasOne
+  content9: String
+  formItem9: FormItem @hasOne
+  content10: String
+  formItem10: FormItem @hasOne
+  content11: String
+  formItem11: FormItem @hasOne
+  content12: String
+  formItem12: FormItem @hasOne
+  content13: String
+  formItem13: FormItem @hasOne
+  content14: String
+  formItem14: FormItem @hasOne
+  content15: String
+  formItem15: FormItem @hasOne
+  content16: String
+  formItem16: FormItem @hasOne
+  content17: String
+  formItem17: FormItem @hasOne
+  content18: String
+  formItem18: FormItem @hasOne
+  content19: String
+  formItem19: FormItem @hasOne
+  eventParticipantStatus: EventParticipantStatus!
+  createdAt: AWSDateTime! # 创建时间
+  updatedAt: AWSDateTime! # 更新时间
+  owner: ID! # 创建者
+  user: UserProfile @hasOne(fields: ["owner"])
+}
+
+enum EventParticipantStatus {
+  ArriveOnTime
+  CanNotArrive
+  Undecided
 }

@@ -83,6 +83,7 @@ export const createUserProfile = /* GraphQL */ `
         owner
       }
       website
+      emailSubscription
       active
       createdAt
       updatedAt
@@ -124,6 +125,7 @@ export const updateUserProfile = /* GraphQL */ `
         owner
       }
       website
+      emailSubscription
       active
       createdAt
       updatedAt
@@ -165,6 +167,7 @@ export const deleteUserProfile = /* GraphQL */ `
         owner
       }
       website
+      emailSubscription
       active
       createdAt
       updatedAt
@@ -350,6 +353,7 @@ export const createArticle = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -402,6 +406,7 @@ export const updateArticle = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -454,6 +459,7 @@ export const deleteArticle = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -529,6 +535,7 @@ export const createComment = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -604,6 +611,7 @@ export const updateComment = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -679,6 +687,7 @@ export const deleteComment = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -712,6 +721,7 @@ export const createContactUs = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -744,6 +754,7 @@ export const updateContactUs = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -776,6 +787,7 @@ export const deleteContactUs = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1044,6 +1056,7 @@ export const createResearchDevelopmentTeam = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1081,6 +1094,7 @@ export const updateResearchDevelopmentTeam = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1118,6 +1132,7 @@ export const deleteResearchDevelopmentTeam = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1146,6 +1161,7 @@ export const createUwcssaDepartment = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1180,6 +1196,7 @@ export const updateUwcssaDepartment = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1214,6 +1231,7 @@ export const deleteUwcssaDepartment = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1266,6 +1284,7 @@ export const createUwcssaMember = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1313,6 +1332,7 @@ export const updateUwcssaMember = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1360,6 +1380,7 @@ export const deleteUwcssaMember = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1409,6 +1430,9 @@ export const createEvent = /* GraphQL */ `
       comments {
         nextToken
       }
+      eventParticipants {
+        nextToken
+      }
       active
       createdAt
       updatedAt
@@ -1422,6 +1446,7 @@ export const createEvent = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1470,6 +1495,9 @@ export const updateEvent = /* GraphQL */ `
       comments {
         nextToken
       }
+      eventParticipants {
+        nextToken
+      }
       active
       createdAt
       updatedAt
@@ -1483,6 +1511,7 @@ export const updateEvent = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1531,6 +1560,9 @@ export const deleteEvent = /* GraphQL */ `
       comments {
         nextToken
       }
+      eventParticipants {
+        nextToken
+      }
       active
       createdAt
       updatedAt
@@ -1544,6 +1576,7 @@ export const deleteEvent = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1581,6 +1614,7 @@ export const createAddress = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1618,6 +1652,7 @@ export const updateAddress = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1655,6 +1690,7 @@ export const deleteAddress = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1686,6 +1722,7 @@ export const createForm = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1717,6 +1754,7 @@ export const updateForm = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1748,6 +1786,7 @@ export const deleteForm = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1765,6 +1804,7 @@ export const createFormItem = /* GraphQL */ `
     createFormItem(input: $input, condition: $condition) {
       id
       name
+      order
       isRequired
       isString
       isEmail
@@ -1779,6 +1819,12 @@ export const createFormItem = /* GraphQL */ `
       formSelectChoices
       createdAt
       updatedAt
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       owner
       user {
         id
@@ -1789,6 +1835,7 @@ export const createFormItem = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1807,6 +1854,7 @@ export const updateFormItem = /* GraphQL */ `
     updateFormItem(input: $input, condition: $condition) {
       id
       name
+      order
       isRequired
       isString
       isEmail
@@ -1821,6 +1869,12 @@ export const updateFormItem = /* GraphQL */ `
       formSelectChoices
       createdAt
       updatedAt
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       owner
       user {
         id
@@ -1831,6 +1885,7 @@ export const updateFormItem = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1849,6 +1904,7 @@ export const deleteFormItem = /* GraphQL */ `
     deleteFormItem(input: $input, condition: $condition) {
       id
       name
+      order
       isRequired
       isString
       isEmail
@@ -1863,6 +1919,12 @@ export const deleteFormItem = /* GraphQL */ `
       formSelectChoices
       createdAt
       updatedAt
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       owner
       user {
         id
@@ -1873,6 +1935,7 @@ export const deleteFormItem = /* GraphQL */ `
         title
         about
         website
+        emailSubscription
         active
         createdAt
         updatedAt
@@ -1880,6 +1943,1410 @@ export const deleteFormItem = /* GraphQL */ `
         userProfileAvatarURLId
       }
       formFormItemsId
+    }
+  }
+`;
+export const createEventParticipant = /* GraphQL */ `
+  mutation CreateEventParticipant(
+    $input: CreateEventParticipantInput!
+    $condition: ModelEventParticipantConditionInput
+  ) {
+    createEventParticipant(input: $input, condition: $condition) {
+      id
+      content1
+      formItem1 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content2
+      formItem2 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content3
+      formItem3 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content4
+      formItem4 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content5
+      formItem5 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content6
+      formItem6 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content7
+      formItem7 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content8
+      formItem8 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content9
+      formItem9 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content10
+      formItem10 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content11
+      formItem11 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content12
+      formItem12 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content13
+      formItem13 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content14
+      formItem14 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content15
+      formItem15 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content16
+      formItem16 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content17
+      formItem17 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content18
+      formItem18 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content19
+      formItem19 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      eventParticipantStatus
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      eventEventParticipantsId
+      eventParticipantFormItem1Id
+      eventParticipantFormItem2Id
+      eventParticipantFormItem3Id
+      eventParticipantFormItem4Id
+      eventParticipantFormItem5Id
+      eventParticipantFormItem6Id
+      eventParticipantFormItem7Id
+      eventParticipantFormItem8Id
+      eventParticipantFormItem9Id
+      eventParticipantFormItem10Id
+      eventParticipantFormItem11Id
+      eventParticipantFormItem12Id
+      eventParticipantFormItem13Id
+      eventParticipantFormItem14Id
+      eventParticipantFormItem15Id
+      eventParticipantFormItem16Id
+      eventParticipantFormItem17Id
+      eventParticipantFormItem18Id
+      eventParticipantFormItem19Id
+    }
+  }
+`;
+export const updateEventParticipant = /* GraphQL */ `
+  mutation UpdateEventParticipant(
+    $input: UpdateEventParticipantInput!
+    $condition: ModelEventParticipantConditionInput
+  ) {
+    updateEventParticipant(input: $input, condition: $condition) {
+      id
+      content1
+      formItem1 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content2
+      formItem2 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content3
+      formItem3 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content4
+      formItem4 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content5
+      formItem5 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content6
+      formItem6 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content7
+      formItem7 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content8
+      formItem8 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content9
+      formItem9 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content10
+      formItem10 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content11
+      formItem11 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content12
+      formItem12 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content13
+      formItem13 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content14
+      formItem14 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content15
+      formItem15 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content16
+      formItem16 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content17
+      formItem17 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content18
+      formItem18 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content19
+      formItem19 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      eventParticipantStatus
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      eventEventParticipantsId
+      eventParticipantFormItem1Id
+      eventParticipantFormItem2Id
+      eventParticipantFormItem3Id
+      eventParticipantFormItem4Id
+      eventParticipantFormItem5Id
+      eventParticipantFormItem6Id
+      eventParticipantFormItem7Id
+      eventParticipantFormItem8Id
+      eventParticipantFormItem9Id
+      eventParticipantFormItem10Id
+      eventParticipantFormItem11Id
+      eventParticipantFormItem12Id
+      eventParticipantFormItem13Id
+      eventParticipantFormItem14Id
+      eventParticipantFormItem15Id
+      eventParticipantFormItem16Id
+      eventParticipantFormItem17Id
+      eventParticipantFormItem18Id
+      eventParticipantFormItem19Id
+    }
+  }
+`;
+export const deleteEventParticipant = /* GraphQL */ `
+  mutation DeleteEventParticipant(
+    $input: DeleteEventParticipantInput!
+    $condition: ModelEventParticipantConditionInput
+  ) {
+    deleteEventParticipant(input: $input, condition: $condition) {
+      id
+      content1
+      formItem1 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content2
+      formItem2 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content3
+      formItem3 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content4
+      formItem4 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content5
+      formItem5 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content6
+      formItem6 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content7
+      formItem7 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content8
+      formItem8 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content9
+      formItem9 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content10
+      formItem10 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content11
+      formItem11 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content12
+      formItem12 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content13
+      formItem13 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content14
+      formItem14 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content15
+      formItem15 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content16
+      formItem16 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content17
+      formItem17 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content18
+      formItem18 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      content19
+      formItem19 {
+        id
+        name
+        order
+        isRequired
+        isString
+        isEmail
+        isNumber
+        description
+        formType
+        helperText
+        minLength
+        maxLength
+        placeholder
+        label
+        formSelectChoices
+        createdAt
+        updatedAt
+        owner
+        formFormItemsId
+      }
+      eventParticipantStatus
+      createdAt
+      updatedAt
+      owner
+      user {
+        id
+        name
+        email
+        fullName
+        contactEmail
+        title
+        about
+        website
+        emailSubscription
+        active
+        createdAt
+        updatedAt
+        owner
+        userProfileAvatarURLId
+      }
+      eventEventParticipantsId
+      eventParticipantFormItem1Id
+      eventParticipantFormItem2Id
+      eventParticipantFormItem3Id
+      eventParticipantFormItem4Id
+      eventParticipantFormItem5Id
+      eventParticipantFormItem6Id
+      eventParticipantFormItem7Id
+      eventParticipantFormItem8Id
+      eventParticipantFormItem9Id
+      eventParticipantFormItem10Id
+      eventParticipantFormItem11Id
+      eventParticipantFormItem12Id
+      eventParticipantFormItem13Id
+      eventParticipantFormItem14Id
+      eventParticipantFormItem15Id
+      eventParticipantFormItem16Id
+      eventParticipantFormItem17Id
+      eventParticipantFormItem18Id
+      eventParticipantFormItem19Id
     }
   }
 `;
