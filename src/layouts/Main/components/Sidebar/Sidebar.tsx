@@ -1,10 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-18 09:12:03
- * @LastEditTime: 2022-05-19 17:17:10
- * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/frontend/src/layouts/Main/components/Sidebar/Sidebar.tsx
+ * @LastEditTime: 2022-06-02 20:17:48
+ * @LastEditors: Shikai Jin
+ * @FilePath: /uwcssa_ca/src/layouts/Main/components/Sidebar/Sidebar.tsx
  */
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import React from 'react';
@@ -23,6 +24,7 @@ interface Props {
     jobs: Array<PageItem> | PageItem;
     about: Array<PageItem> | PageItem;
     activity: Array<PageItem> | PageItem;
+    contact: Array<PageItem> | PageItem;
   };
 }
 

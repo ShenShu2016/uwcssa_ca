@@ -1,14 +1,15 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-30 12:33:10
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-02 20:54:49
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
  */
 
 import {
+  About as AboutView,
   AccountBilling as AccountBillingView,
   AccountGeneral as AccountGeneralView,
   AccountNotifications as AccountNotificationsView,
@@ -207,6 +208,12 @@ function ViewRoutes(): Array<{
     {
       path: '/terms',
       renderer: (params = {}): JSX.Element => <CompanyTermsView {...params} />,
+      isAllowed: true,
+      redirectPath: undefined,
+    },
+    {
+      path: '/about',
+      renderer: (params = {}): JSX.Element => <AboutView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
