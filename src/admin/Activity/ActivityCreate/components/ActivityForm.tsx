@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RichTextEditor from 'components/RichTextEditor';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,14 +11,10 @@ import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useFormik } from 'formik';
 import { useSwiper } from 'swiper/react';
-import { ActivityFormInfo } from '../ActivityCreate';
-import { CompleteStateContext } from '../ActivityCreate';
+import FieldLabel from './FieldLabel';
+import { setBasicInfo } from 'redux/form/formSlice';
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import * as yup from 'yup';
-
-interface ActivityFormProp {
-  activityForm: ActivityFormInfo;
-  setActivityForm: React.Dispatch<React.SetStateAction<ActivityFormInfo>>
-}
 
 enum FieldType {
     title = 'title',
@@ -48,22 +43,12 @@ const validationSchema = yup.object({
     .required('请输入活动最多限制人数'),
 });
 
-const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityForm }) => {
+const ActivityForm: React.FC = () => {
 
   const [description, setDescription] = useState('');
   const swiper = useSwiper();
-  const completeContext = useContext(CompleteStateContext);
-
-  // 当记录form值的对象变化时 判断是否必填项都填了
-  useEffect(() => {
-    completeContext.setCompleted((prev) => {
-      const current = {
-        ...prev,
-        ActivityForm: Object.keys(activityForm).every((key) => !!activityForm[key] || activityForm[key] === 0)
-      };
-      return current;
-    });
-  }, [activityForm]);
+  const activityForm = useAppSelector(state => state.form.createData.basicInfo);
+  const dispatch = useAppDispatch();
 
   const onSubmit = (values) => {
     return values;
@@ -76,15 +61,10 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
   });
 
   const handleFieldValueChange = (e, type: FieldType) => {
-    setActivityForm((prev: ActivityFormInfo) => {
-      const current: ActivityFormInfo = {
-        ...prev,
-        // 如果是时间或者rte内容变化 e传过来的就不是事件对象了 直接就是值
-        [type]: type === FieldType.dateTime || type === FieldType.content ? 
-          e : e.target.value,
-      };
-      return current;
-    });
+    dispatch(setBasicInfo({
+      [type]: type === FieldType.dateTime || type === FieldType.content ? 
+        e : e.target.value
+    }));
     // 如果是rte传过来的内容 还需要设置一下description 是用于这个组件里显示内容的
     // 设置完之后就可以return了 因为rte和formik没关系
     if (type === FieldType.content) {
@@ -97,7 +77,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
   };
 
   return (
-    <>
+    <Box p={'2px'}>
       <form onSubmit={formik.handleSubmit}>
         <Box sx={{ float: 'right' }}>
           <Button
@@ -111,15 +91,9 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography
-              variant={'subtitle2'}
-              sx={{ marginBottom: 2 }}
-              fontWeight={700}
-            >
-              活动标题
-            </Typography>
+            <FieldLabel name='活动标题' isRequired />
             <TextField
-              label="Title *"
+              label="Title"
               variant="outlined"
               name={'title'}
               fullWidth
@@ -131,16 +105,10 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography
-              variant={'subtitle2'}
-              sx={{ marginBottom: 2 }}
-              fontWeight={700}
-            >
-              活动时间
-            </Typography>
+            <FieldLabel name='活动时间' isRequired />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateTimePicker
-                label="Date & Time *"
+                label="Date & Time"
                 value={formik.values.dateTime}
                 minDateTime={new Date()}
                 onChange={(e) => handleFieldValueChange(e, FieldType.dateTime)}
@@ -157,15 +125,9 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
             </LocalizationProvider>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography
-              variant={'subtitle2'}
-              sx={{ marginBottom: 2 }}
-              fontWeight={700}
-            >
-              活动地点
-            </Typography>
+            <FieldLabel name='活动地点' isRequired />
             <TextField
-              label="Address *"
+              label="Address"
               variant="outlined"
               name={'address'}
               fullWidth
@@ -177,15 +139,9 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography
-              variant={'subtitle2'}
-              sx={{ marginBottom: 2 }}
-              fontWeight={700}
-            >
-              最多参与人数（0表示不限制）
-            </Typography>
+            <FieldLabel name='最多参数人数（0表示不限制）' isRequired />
             <TextField
-              label="Member limitation *"
+              label="Member limitation"
               variant="outlined"
               name={'limit'}
               type="number"
@@ -206,16 +162,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
           height='80vh'
           mb={2}
         >
-          <Typography
-            variant={'subtitle2'}
-            sx={{
-              marginTop: 2,
-              marginBottom: 1
-            }}
-            fontWeight={700}
-          >
-            活动描述
-          </Typography>
+          <FieldLabel name='活动描述' isRequired />
           <RichTextEditor
             content={description}
             setContent={(e) => handleFieldValueChange(e, FieldType.content)}
@@ -223,7 +170,7 @@ const ActivityForm: React.FC<ActivityFormProp> = ({ activityForm, setActivityFor
           />
         </Box>
       </form>
-    </>
+    </Box>
   );
 };
 

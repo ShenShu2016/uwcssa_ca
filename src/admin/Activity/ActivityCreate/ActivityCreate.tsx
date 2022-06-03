@@ -2,11 +2,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-06-02 17:39:40
+ * @LastEditTime: 2022-06-03 18:20:12
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/ActivityCreate.tsx
  */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PageTitle from 'admin/components/pageTitle';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -18,6 +18,7 @@ import ActivityConfig from './components/ActivityConfig';
 import ActivityPoster from './components/ActivityPoster';
 import ActivityPreview from './components/ActivityPreview';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useAppSelector } from 'redux/hooks';
 import 'swiper/css';
 
 export enum Steps {
@@ -33,12 +34,6 @@ export interface ActivityFormInfo {
     limit: number;
     content: string;
 }
-
-// 使用context把设置每一个step是否完成的方法暴露给每一个子组件 就不用给每一个子组件都传一个prop了
-const contextInitValue = {
-  setCompleted: null
-};
-export const CompleteStateContext = React.createContext(contextInitValue);
 
 const stepItems = [
   {
@@ -57,26 +52,9 @@ const stepItems = [
 ];
 
 const ActivityCreate: React.FC = () => {
-  const [completed, setCompleted] = useState({
-    ActivityForm: false,
-    ActivityPoster: false,
-    ActivityConfig: false,
-    ActivityPreview: false
-  });
+  const completed = useAppSelector(state => state.form.createData.completeStatus);
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [activityForm, setActivityForm] = useState<ActivityFormInfo>({
-    title: '',
-    dateTime: null,
-    address: '',
-    limit: 0,
-    content: ''
-  });
   const [posterImage, setPosterImage] = useState<string>('');
-  // 把setCompleted赋值到context中
-  // context对象需要export出去 所以不能写在函数组件里面
-  // 在函数外面 setCompleted还没有被声明 所以在外面先声明 这里赋值
-  const completeContext = useContext(CompleteStateContext);
-  completeContext.setCompleted = setCompleted;
   
   return (
     <>
@@ -124,20 +102,18 @@ const ActivityCreate: React.FC = () => {
               allowTouchMove={false}
               onSlideChange={(e) => setActiveStep(e.activeIndex)}
             >
-              <CompleteStateContext.Provider value={contextInitValue}>
-                <SwiperSlide>
-                  <ActivityForm activityForm={activityForm} setActivityForm={setActivityForm}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ActivityPoster posterImage={posterImage} setPosterImage={setPosterImage}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ActivityConfig/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <ActivityPreview/>
-                </SwiperSlide>
-              </CompleteStateContext.Provider>
+              <SwiperSlide>
+                <ActivityForm />
+              </SwiperSlide>
+              <SwiperSlide>
+                <ActivityPoster posterImage={posterImage} setPosterImage={setPosterImage}/>
+              </SwiperSlide>
+              <SwiperSlide>
+                <ActivityConfig/>
+              </SwiperSlide>
+              <SwiperSlide>
+                <ActivityPreview/>
+              </SwiperSlide>
             </Swiper>
           </Card>
         </Box>

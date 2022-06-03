@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-02 17:53:39
+ * @LastEditTime: 2022-06-03 15:42:35
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityPoster.tsx
  */
@@ -39,7 +39,7 @@ const ActivityPoster: React.FC<ActivityPosterProp> = ({ posterImage, setPosterIm
   };
 
   return (
-    <Box>
+    <Box p={'2px'}>
       <Box display='flex' justifyContent='space-between'>
         <Button
           variant="contained"

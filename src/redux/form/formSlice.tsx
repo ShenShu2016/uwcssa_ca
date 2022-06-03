@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-02 18:38:52
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-03 18:21:24
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -67,7 +67,7 @@ type FormItem = {
   formFormItemsId?: string | null;
 };
 
-enum FormType {
+export enum FormType {
   TextFieldShort = 'TextFieldShort',
   TextFieldLong = 'TextFieldLong',
   Checkbox = 'Checkbox',
@@ -111,6 +111,23 @@ const initialState = formAdapter.getInitialState({
     updateFormItemDetailStatus: 'idle',
     updateFormItemDetailError: null,
   }),
+  createData: {
+    completeStatus: {
+      ActivityForm: false,
+      ActivityPoster: false,
+      ActivityConfig: false,
+      ActivityPreview: false
+    },
+    basicInfo: {
+      title: '',
+      dateTime: null,
+      address: '',
+      limit: 0,
+      content: ''
+    },
+    posterImage: {},
+    selectedQuestions: []
+  }
 });
 
 export const fetchFormList = createAsyncThunk(
@@ -254,7 +271,24 @@ export const updateFormItemDetail = createAsyncThunk(
 const formSlice = createSlice({
   name: 'form',
   initialState,
-  reducers: {},
+  reducers: {
+    setBasicInfo(state, action) {
+      state.createData.basicInfo = {
+        ...state.createData.basicInfo,
+        ...action.payload
+      };
+      // 检查basicInfo中是否所有字段都不为空
+      const complete = Object.keys(state.createData.basicInfo).every(
+        (key) => 
+          !!state.createData.basicInfo[key] || state.createData.basicInfo[key] === 0
+      );
+      state.createData.completeStatus.ActivityForm = complete;
+    },
+
+    addQuestion(state, action) {
+      state.createData.selectedQuestions.push(action.payload);
+    }
+  },
   extraReducers(builder) {
     builder
       // Cases for status of fetchFormList (pending, fulfilled, and rejected)
@@ -377,6 +411,8 @@ const formSlice = createSlice({
       });
   },
 });
+
+export const { setBasicInfo, addQuestion } = formSlice.actions;
 
 export const {
   selectAll: selectAllForms,
