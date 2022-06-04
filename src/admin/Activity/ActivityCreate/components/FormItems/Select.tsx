@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-03 17:14:31
+ * @LastEditTime: 2022-06-04 09:41:49
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/Select.tsx
  */
@@ -27,7 +27,7 @@ interface SelectProp {
 const Select: React.FC<SelectProp> = ({ item }) => {
   return (
     <>
-      <FieldLabel name={item.label} isRequired={item.isRequired} description={item.description}/>
+      <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
       <TextField
         label={item.label}
         select

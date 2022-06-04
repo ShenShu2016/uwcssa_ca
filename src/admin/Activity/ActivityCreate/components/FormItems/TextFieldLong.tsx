@@ -1,15 +1,15 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-06-04 09:41:58
+ * @LastEditTime: 2022-06-04 09:41:53
  * @LastEditors: 李佳修
- * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldShort.tsx
+ * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldLong.tsx
  */
 import React from 'react';
 import FieldLabel from '../FieldLabel';
 import TextField from '@mui/material/TextField';
 
-interface TextFieldShortInfo {
+interface TextFieldLongInfo {
     label?: string;
     isRequired?: boolean;
     description?: string;
@@ -18,11 +18,11 @@ interface TextFieldShortInfo {
     [propName: string]: any
 }
 
-interface TextFieldShortProp {
-    item: TextFieldShortInfo;
+interface TextFieldLongProp {
+    item: TextFieldLongInfo;
 }
 
-const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
+const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
   return (
     <>
       <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
@@ -31,6 +31,8 @@ const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
         placeholder={item.placeholder}
         variant="outlined"
         fullWidth
+        multiline
+        maxRows={4}
         size='small'
         value={''}
         helperText={item.helperText}
@@ -39,4 +41,4 @@ const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
   );
 };
 
-export default TextFieldShort;
+export default TextFieldLong;
