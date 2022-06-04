@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-06-04 09:41:58
+ * @LastEditTime: 2022-06-04 09:49:10
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldShort.tsx
  */
-import React from 'react';
+import React, { useState } from 'react';
 import FieldLabel from '../FieldLabel';
 import TextField from '@mui/material/TextField';
 
@@ -23,6 +23,7 @@ interface TextFieldShortProp {
 }
 
 const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
+  const [value, setValue] = useState<string>('');
   return (
     <>
       <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
@@ -30,9 +31,10 @@ const TextFieldShort: React.FC<TextFieldShortProp> = ({ item }) => {
         label={item.label}
         placeholder={item.placeholder}
         variant="outlined"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         fullWidth
         size='small'
-        value={''}
         helperText={item.helperText}
       />
     </>

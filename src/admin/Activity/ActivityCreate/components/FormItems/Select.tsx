@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-04 09:41:49
+ * @LastEditTime: 2022-06-04 09:50:34
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/Select.tsx
  */
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import FieldLabel from '../FieldLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -25,6 +25,8 @@ interface SelectProp {
 }
 
 const Select: React.FC<SelectProp> = ({ item }) => {
+  const [value, setValue] = useState<string>('');
+
   return (
     <>
       <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
@@ -35,7 +37,8 @@ const Select: React.FC<SelectProp> = ({ item }) => {
         variant="outlined"
         fullWidth
         size='small'
-        value={''}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         helperText={item.helperText}
       >
         {

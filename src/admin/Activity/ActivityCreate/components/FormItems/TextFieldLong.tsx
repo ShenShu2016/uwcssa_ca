@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:02:56
- * @LastEditTime: 2022-06-04 09:41:53
+ * @LastEditTime: 2022-06-04 09:49:27
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/TextFieldLong.tsx
  */
-import React from 'react';
+import React, { useState } from 'react';
 import FieldLabel from '../FieldLabel';
 import TextField from '@mui/material/TextField';
 
@@ -23,6 +23,8 @@ interface TextFieldLongProp {
 }
 
 const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
+  const [value, setValue] = useState<string>('');
+
   return (
     <>
       <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
@@ -32,9 +34,10 @@ const TextFieldLong: React.FC<TextFieldLongProp> = ({ item }) => {
         variant="outlined"
         fullWidth
         multiline
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         maxRows={4}
         size='small'
-        value={''}
         helperText={item.helperText}
       />
     </>
