@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-04 11:13:21
+ * @LastEditTime: 2022-06-04 12:08:13
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityConfig.tsx
  */
@@ -26,6 +26,7 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { useSwiper } from 'swiper/react';
 import { removeQuestion } from 'redux/form/formSlice';
 import Tooltip from '@mui/material/Tooltip';
+import { fetchFormItemList } from 'redux/form/formSlice';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 const ActivityConfig: React.FC = () => {
@@ -36,6 +37,10 @@ const ActivityConfig: React.FC = () => {
 
   const handleRemoveQuestion = (item) => {
     dispatch(removeQuestion(item));
+  };
+
+  const handleCompleteCreateFormItem = () => {
+    dispatch(fetchFormItemList({ isAuth: true }));
   };
 
   return (
@@ -68,7 +73,6 @@ const ActivityConfig: React.FC = () => {
         <Box
           height={'100%'}
           width='65%'
-          // paddingLeft={}
           display='flex'
           flexDirection={'column'}
           alignItems='center'
@@ -165,7 +169,7 @@ const ActivityConfig: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      <FormItemCreate open={dialogOpen} setOpen={setDialogOpen}/>
+      <FormItemCreate open={dialogOpen} setOpen={setDialogOpen} completeCreate={handleCompleteCreateFormItem}/>
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-03 16:09:10
+ * @LastEditTime: 2022-06-04 12:13:54
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemCreate.tsx
  */
@@ -25,12 +25,17 @@ import Input from '@mui/material/Input';
 import useMessage from 'hooks/useMessage';
 import { useFormik } from 'formik';
 import FieldLabel from './FieldLabel';
+import { postFormItem } from 'redux/form/formSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { getOwnerUserName } from 'redux/auth/authSlice';
 import * as yup from 'yup';
 import { Divider } from '@mui/material';
 
+
 interface FormItemCreateProp {
     open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    completeCreate: () => void
 }
 
 interface Option {
@@ -38,10 +43,11 @@ interface Option {
     key: string;
 }
 
-const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
+const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeCreate }) => {
   const [options, setOptions] = useState<Array<Option>>([]);
   const [newOption, setNewOption] = useState<string>('');
-
+  const ownerUserName = useAppSelector(getOwnerUserName);
+  const dispatch = useAppDispatch();
   const message = useMessage();
   const handleClose = () => {
     setOpen(false);
@@ -91,7 +97,47 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
     isRequired: false
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(values);
+    // 如果类型是选择器或者checkbox
+    if ((formik.values.formType === FormType.Select ||
+        formik.values.formType === FormType.Checkbox ||
+        formik.values.formType === FormType.RadioGroupH ||
+        formik.values.formType === FormType.RadioGroupV)
+        && !options.length) {
+      message.open({
+        type: 'warning',
+        message: '请完成选项配置'
+      });
+      return;
+    }
+
+    // 通过前面的校验后 可以发送请求创建问题
+    const res = await dispatch(postFormItem({
+      createFormItemInput: {
+        name: values.title,
+        order: 1,
+        isString: true,
+        isEmail: false,
+        isNumber: false,
+        isRequired: values.isRequired,
+        description: values.description,
+        formType: values.formType,
+        placeholder: values.placeholder,
+        formSelectChoices: options.map((item) => item.label),
+        owner: ownerUserName
+      }
+    }));
+    if (res.meta.requestStatus === 'fulfilled') {
+      message.open({
+        type: 'success',
+        message: '问题创建成功，记得加入表单才能生效哦'
+      });
+      setOpen(false);
+      completeCreate();
+    }
+    console.log(res);
+
     return values;
   };
 
@@ -119,7 +165,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
           <Box width={'50vw'}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <FieldLabel name='问题名称' isRequired />
+                <FieldLabel name='问题标题' isRequired />
                 <TextField
                   label="Title"
                   variant="outlined"
@@ -148,9 +194,11 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
                 >
                   <MenuItem value={FormType.TextFieldShort}>文本输入框</MenuItem>
                   <MenuItem value={FormType.TextFieldLong}>文本输入区域</MenuItem>
-                  <MenuItem value={FormType.Select}>单项选择</MenuItem>
-                  <MenuItem value={FormType.Select}>多项选择</MenuItem>
-                  <MenuItem value={FormType.Checkbox}>是或否</MenuItem>
+                  <MenuItem value={FormType.RadioGroupH}>单项选择（横向）</MenuItem>
+                  <MenuItem value={FormType.RadioGroupV}>单项选择（纵向）</MenuItem>
+                  <MenuItem value={FormType.Select}>多项选择（下拉选择）</MenuItem>
+                  <MenuItem value={FormType.Checkbox}>多项选择（checkbox）</MenuItem>
+                  {/* <MenuItem value={FormType.RadioGroupH}>是或否</MenuItem> */}
                   <MenuItem value={FormType.DatePicker}>日期选择</MenuItem>
                   <MenuItem value={FormType.TimePicker}>时间选择</MenuItem>
                   <MenuItem value={FormType.DateTimePicker}>日期时间选择</MenuItem>
@@ -162,6 +210,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
                   label="Placeholder"
                   variant="outlined"
                   name={'placeholder'}
+                  placeholder='提示文字'
                   size='small'
                   fullWidth
                   value={formik.values.placeholder}
@@ -169,7 +218,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FieldLabel name='问题描述' />
+                <FieldLabel name='问题描述' description='鼠标悬浮在问题后的“？”上时显示问题描述'/>
                 <TextField
                   label="Description"
                   variant="outlined"
@@ -186,12 +235,14 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen }) => {
                 xs={12}
                 sx={{
                   display: formik.values.formType === FormType.Select ||
-                  formik.values.formType === FormType.Checkbox ?
+                  formik.values.formType === FormType.Checkbox ||
+                  formik.values.formType === FormType.RadioGroupH ||
+                  formik.values.formType === FormType.RadioGroupV ?
                     'block' : 'none'
                 }}
               >
                 <Divider sx={{ mb: 1 }}/>
-                <FieldLabel name='选项配置' />
+                <FieldLabel name='选项配置' isRequired/>
                 {
                   options.map((option, index) => (
                     <Box
