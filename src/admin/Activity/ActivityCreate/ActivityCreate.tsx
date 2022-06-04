@@ -2,7 +2,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-05-31 10:20:04
- * @LastEditTime: 2022-06-03 18:20:12
+ * @LastEditTime: 2022-06-04 11:14:45
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/ActivityCreate.tsx
  */
@@ -90,7 +90,7 @@ const ActivityCreate: React.FC = () => {
           </Stepper>
         }
       >
-        <Box paddingX={'5%'} pb={4}>
+        <Box paddingX={'2%'} pb={4}>
           <Card
             sx={{
               paddingX: 4,

@@ -1,8 +1,8 @@
 /*
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 22:46:15
+ * @LastEditors: 李佳修
+ * @LastEditTime: 2022-06-04 11:11:12
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -291,6 +291,11 @@ const formSlice = createSlice({
     addQuestion(state, action) {
       state.createData.selectedQuestions.push(action.payload);
     },
+
+    removeQuestion(state, action) {
+      state.createData.selectedQuestions = state.createData.selectedQuestions.filter(item => 
+        item.id !== action.payload.id);
+    }
   },
   extraReducers(builder) {
     builder
@@ -415,7 +420,7 @@ const formSlice = createSlice({
   },
 });
 
-export const { setBasicInfo, addQuestion } = formSlice.actions;
+export const { setBasicInfo, addQuestion, removeQuestion } = formSlice.actions;
 
 export const {
   selectAll: selectAllForms,
