@@ -407,6 +407,8 @@ export const getComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       count {
         id
@@ -916,6 +918,13 @@ export const getEvent = /* GraphQL */ `
         updatedAt
         owner
       }
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+        formEventId
+      }
       comments {
         nextToken
       }
@@ -942,6 +951,8 @@ export const getEvent = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      eventEventLocationId
+      eventFormId
     }
   }
 `;
@@ -969,6 +980,8 @@ export const listEvents = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       nextToken
     }
@@ -1008,6 +1021,8 @@ export const eventSortByCreatedAt = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       nextToken
     }
@@ -1081,6 +1096,26 @@ export const getForm = /* GraphQL */ `
       formItems {
         nextToken
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+      }
       createdAt
       updatedAt
       owner
@@ -1100,6 +1135,7 @@ export const getForm = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      formEventId
     }
   }
 `;
@@ -1115,6 +1151,7 @@ export const listForms = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        formEventId
       }
       nextToken
     }
@@ -1145,24 +1182,9 @@ export const getFormItem = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        formEventId
       }
       owner
-      user {
-        id
-        name
-        email
-        fullName
-        contactEmail
-        title
-        about
-        website
-        emailSubscription
-        active
-        createdAt
-        updatedAt
-        owner
-        userProfileAvatarURLId
-      }
       formFormItemsId
     }
   }
@@ -1801,6 +1823,8 @@ export const getEventTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       createdAt
       updatedAt

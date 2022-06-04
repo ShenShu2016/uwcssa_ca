@@ -510,6 +510,8 @@ export const createComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       count {
         id
@@ -586,6 +588,8 @@ export const updateComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       count {
         id
@@ -662,6 +666,8 @@ export const deleteComment = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       count {
         id
@@ -1427,6 +1433,13 @@ export const createEvent = /* GraphQL */ `
         updatedAt
         owner
       }
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+        formEventId
+      }
       comments {
         nextToken
       }
@@ -1453,6 +1466,8 @@ export const createEvent = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      eventEventLocationId
+      eventFormId
     }
   }
 `;
@@ -1492,6 +1507,13 @@ export const updateEvent = /* GraphQL */ `
         updatedAt
         owner
       }
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+        formEventId
+      }
       comments {
         nextToken
       }
@@ -1518,6 +1540,8 @@ export const updateEvent = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      eventEventLocationId
+      eventFormId
     }
   }
 `;
@@ -1557,6 +1581,13 @@ export const deleteEvent = /* GraphQL */ `
         updatedAt
         owner
       }
+      form {
+        id
+        createdAt
+        updatedAt
+        owner
+        formEventId
+      }
       comments {
         nextToken
       }
@@ -1583,6 +1614,8 @@ export const deleteEvent = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      eventEventLocationId
+      eventFormId
     }
   }
 `;
@@ -1710,6 +1743,26 @@ export const createForm = /* GraphQL */ `
       formItems {
         nextToken
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+      }
       createdAt
       updatedAt
       owner
@@ -1729,6 +1782,7 @@ export const createForm = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      formEventId
     }
   }
 `;
@@ -1742,6 +1796,26 @@ export const updateForm = /* GraphQL */ `
       formItems {
         nextToken
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+      }
       createdAt
       updatedAt
       owner
@@ -1761,6 +1835,7 @@ export const updateForm = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      formEventId
     }
   }
 `;
@@ -1774,6 +1849,26 @@ export const deleteForm = /* GraphQL */ `
       formItems {
         nextToken
       }
+      event {
+        id
+        title
+        coverPageImgURL
+        coverPageDescription
+        content
+        imgURLs
+        sponsor
+        online
+        group
+        startDate
+        endDate
+        eventStatus
+        active
+        createdAt
+        updatedAt
+        owner
+        eventEventLocationId
+        eventFormId
+      }
       createdAt
       updatedAt
       owner
@@ -1793,6 +1888,7 @@ export const deleteForm = /* GraphQL */ `
         owner
         userProfileAvatarURLId
       }
+      formEventId
     }
   }
 `;
@@ -1824,24 +1920,9 @@ export const createFormItem = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        formEventId
       }
       owner
-      user {
-        id
-        name
-        email
-        fullName
-        contactEmail
-        title
-        about
-        website
-        emailSubscription
-        active
-        createdAt
-        updatedAt
-        owner
-        userProfileAvatarURLId
-      }
       formFormItemsId
     }
   }
@@ -1874,24 +1955,9 @@ export const updateFormItem = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        formEventId
       }
       owner
-      user {
-        id
-        name
-        email
-        fullName
-        contactEmail
-        title
-        about
-        website
-        emailSubscription
-        active
-        createdAt
-        updatedAt
-        owner
-        userProfileAvatarURLId
-      }
       formFormItemsId
     }
   }
@@ -1924,24 +1990,9 @@ export const deleteFormItem = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        formEventId
       }
       owner
-      user {
-        id
-        name
-        email
-        fullName
-        contactEmail
-        title
-        about
-        website
-        emailSubscription
-        active
-        createdAt
-        updatedAt
-        owner
-        userProfileAvatarURLId
-      }
       formFormItemsId
     }
   }
@@ -3478,6 +3529,8 @@ export const createEventTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       createdAt
       updatedAt
@@ -3516,6 +3569,8 @@ export const updateEventTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       createdAt
       updatedAt
@@ -3554,6 +3609,8 @@ export const deleteEventTags = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+        eventEventLocationId
+        eventFormId
       }
       createdAt
       updatedAt

@@ -336,7 +336,8 @@ type Event
   startDate: AWSDateTime!
   endDate: AWSDateTime!
   eventStatus: EventStatus!
-  eventLocation: Address
+  eventLocation: Address @hasOne
+  form: Form @hasOne
   comments: [Comment] @hasMany
   eventParticipants: [EventParticipant] @hasMany
   active: ActiveType!
@@ -399,6 +400,7 @@ type Form
   ) {
   id: ID!
   formItems: [FormItem] @hasMany # 可以有很多 FormItem form questions 不可以重复利用
+  event: Event @belongsTo
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: ID!
@@ -434,7 +436,6 @@ type FormItem
   updatedAt: AWSDateTime! # 更新时间
   form: Form @belongsTo
   owner: ID! # 创建者
-  user: UserProfile @hasOne(fields: ["owner"])
 }
 
 enum FormType {
@@ -442,6 +443,7 @@ enum FormType {
   TextFieldLong
   Checkbox
   Select
+  MultipleSelect
   FileUpload
   RadioGroupH
   RadioGroupV

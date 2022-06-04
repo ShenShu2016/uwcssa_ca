@@ -3,7918 +3,8032 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreateUserInput = {
-  id?: string | null;
-  email: string;
-  userName: string;
-  name: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  email: string,
+  userName: string,
+  name: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
 };
 
 export type ModelUserConditionInput = {
-  email?: ModelStringInput | null;
-  userName?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUserConditionInput | null> | null;
-  or?: Array<ModelUserConditionInput | null> | null;
-  not?: ModelUserConditionInput | null;
+  email?: ModelStringInput | null,
+  userName?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
 };
 
 export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export enum ModelAttributeTypes {
-  binary = 'binary',
-  binarySet = 'binarySet',
-  bool = 'bool',
-  list = 'list',
-  map = 'map',
-  number = 'number',
-  numberSet = 'numberSet',
-  string = 'string',
-  stringSet = 'stringSet',
-  _null = '_null',
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
 }
 
+
 export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
 };
 
 export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type User = {
-  __typename: 'User';
-  id: string;
-  email: string;
-  userName: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
+  __typename: "User",
+  id: string,
+  email: string,
+  userName: string,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
 };
 
 export type UpdateUserInput = {
-  id: string;
-  email?: string | null;
-  userName?: string | null;
-  name?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  email?: string | null,
+  userName?: string | null,
+  name?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteUserInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateUserProfileInput = {
-  id?: string | null;
-  name: string;
-  email?: string | null;
-  fullName?: string | null;
-  contactEmail?: string | null;
-  title?: string | null;
-  about?: string | null;
-  website?: string | null;
-  emailSubscription: boolean;
-  active: ActiveType;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  userProfileAvatarURLId?: string | null;
+  id?: string | null,
+  name: string,
+  email?: string | null,
+  fullName?: string | null,
+  contactEmail?: string | null,
+  title?: string | null,
+  about?: string | null,
+  website?: string | null,
+  emailSubscription: boolean,
+  active: ActiveType,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  userProfileAvatarURLId?: string | null,
 };
 
 export enum ActiveType {
-  T = 'T',
-  F = 'F',
+  T = "T",
+  F = "F",
 }
 
+
 export type ModelUserProfileConditionInput = {
-  name?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  fullName?: ModelStringInput | null;
-  contactEmail?: ModelStringInput | null;
-  title?: ModelStringInput | null;
-  about?: ModelStringInput | null;
-  website?: ModelStringInput | null;
-  emailSubscription?: ModelBooleanInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUserProfileConditionInput | null> | null;
-  or?: Array<ModelUserProfileConditionInput | null> | null;
-  not?: ModelUserProfileConditionInput | null;
-  userProfileAvatarURLId?: ModelIDInput | null;
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  fullName?: ModelStringInput | null,
+  contactEmail?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  about?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  emailSubscription?: ModelBooleanInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserProfileConditionInput | null > | null,
+  or?: Array< ModelUserProfileConditionInput | null > | null,
+  not?: ModelUserProfileConditionInput | null,
+  userProfileAvatarURLId?: ModelIDInput | null,
 };
 
 export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type ModelActiveTypeInput = {
-  eq?: ActiveType | null;
-  ne?: ActiveType | null;
+  eq?: ActiveType | null,
+  ne?: ActiveType | null,
 };
 
 export type UserProfile = {
-  __typename: 'UserProfile';
-  id: string;
-  name: string;
-  email?: string | null;
-  fullName?: string | null;
-  contactEmail?: string | null;
-  title?: string | null;
-  about?: string | null;
-  avatarURL?: UserImage | null;
-  website?: string | null;
-  emailSubscription: boolean;
-  active: ActiveType;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  userProfileAvatarURLId?: string | null;
+  __typename: "UserProfile",
+  id: string,
+  name: string,
+  email?: string | null,
+  fullName?: string | null,
+  contactEmail?: string | null,
+  title?: string | null,
+  about?: string | null,
+  avatarURL?: UserImage | null,
+  website?: string | null,
+  emailSubscription: boolean,
+  active: ActiveType,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  userProfileAvatarURLId?: string | null,
 };
 
 export type UserImage = {
-  __typename: 'UserImage';
-  id: string;
-  objectURL: string;
-  key: string;
-  name: string;
-  size: number;
-  type: string;
-  lastModified?: string | null;
-  lastModifiedDate?: string | null;
-  compressedWidth?: number | null;
-  objectCompressedURL?: string | null;
-  thumbnailWidth?: number | null;
-  objectThumbnailURL?: string | null;
-  targetTable: string;
-  active: ActiveType;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
+  __typename: "UserImage",
+  id: string,
+  objectURL: string,
+  key: string,
+  name: string,
+  size: number,
+  type: string,
+  lastModified?: string | null,
+  lastModifiedDate?: string | null,
+  compressedWidth?: number | null,
+  objectCompressedURL?: string | null,
+  thumbnailWidth?: number | null,
+  objectThumbnailURL?: string | null,
+  targetTable: string,
+  active: ActiveType,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
 };
 
 export type UpdateUserProfileInput = {
-  id: string;
-  name?: string | null;
-  email?: string | null;
-  fullName?: string | null;
-  contactEmail?: string | null;
-  title?: string | null;
-  about?: string | null;
-  website?: string | null;
-  emailSubscription?: boolean | null;
-  active?: ActiveType | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  userProfileAvatarURLId?: string | null;
+  id: string,
+  name?: string | null,
+  email?: string | null,
+  fullName?: string | null,
+  contactEmail?: string | null,
+  title?: string | null,
+  about?: string | null,
+  website?: string | null,
+  emailSubscription?: boolean | null,
+  active?: ActiveType | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  userProfileAvatarURLId?: string | null,
 };
 
 export type DeleteUserProfileInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateUserImageInput = {
-  id?: string | null;
-  objectURL: string;
-  key: string;
-  name: string;
-  size: number;
-  type: string;
-  lastModified?: string | null;
-  lastModifiedDate?: string | null;
-  compressedWidth?: number | null;
-  objectCompressedURL?: string | null;
-  thumbnailWidth?: number | null;
-  objectThumbnailURL?: string | null;
-  targetTable: string;
-  active: ActiveType;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  objectURL: string,
+  key: string,
+  name: string,
+  size: number,
+  type: string,
+  lastModified?: string | null,
+  lastModifiedDate?: string | null,
+  compressedWidth?: number | null,
+  objectCompressedURL?: string | null,
+  thumbnailWidth?: number | null,
+  objectThumbnailURL?: string | null,
+  targetTable: string,
+  active: ActiveType,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
 };
 
 export type ModelUserImageConditionInput = {
-  objectURL?: ModelStringInput | null;
-  key?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  size?: ModelIntInput | null;
-  type?: ModelStringInput | null;
-  lastModified?: ModelStringInput | null;
-  lastModifiedDate?: ModelStringInput | null;
-  compressedWidth?: ModelIntInput | null;
-  objectCompressedURL?: ModelStringInput | null;
-  thumbnailWidth?: ModelIntInput | null;
-  objectThumbnailURL?: ModelStringInput | null;
-  targetTable?: ModelStringInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUserImageConditionInput | null> | null;
-  or?: Array<ModelUserImageConditionInput | null> | null;
-  not?: ModelUserImageConditionInput | null;
+  objectURL?: ModelStringInput | null,
+  key?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  size?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  lastModified?: ModelStringInput | null,
+  lastModifiedDate?: ModelStringInput | null,
+  compressedWidth?: ModelIntInput | null,
+  objectCompressedURL?: ModelStringInput | null,
+  thumbnailWidth?: ModelIntInput | null,
+  objectThumbnailURL?: ModelStringInput | null,
+  targetTable?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserImageConditionInput | null > | null,
+  or?: Array< ModelUserImageConditionInput | null > | null,
+  not?: ModelUserImageConditionInput | null,
 };
 
 export type ModelIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UpdateUserImageInput = {
-  id: string;
-  objectURL?: string | null;
-  key?: string | null;
-  name?: string | null;
-  size?: number | null;
-  type?: string | null;
-  lastModified?: string | null;
-  lastModifiedDate?: string | null;
-  compressedWidth?: number | null;
-  objectCompressedURL?: string | null;
-  thumbnailWidth?: number | null;
-  objectThumbnailURL?: string | null;
-  targetTable?: string | null;
-  active?: ActiveType | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  objectURL?: string | null,
+  key?: string | null,
+  name?: string | null,
+  size?: number | null,
+  type?: string | null,
+  lastModified?: string | null,
+  lastModifiedDate?: string | null,
+  compressedWidth?: number | null,
+  objectCompressedURL?: string | null,
+  thumbnailWidth?: number | null,
+  objectThumbnailURL?: string | null,
+  targetTable?: string | null,
+  active?: ActiveType | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteUserImageInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateTagInput = {
-  id?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
 };
 
 export type ModelTagConditionInput = {
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelTagConditionInput | null> | null;
-  or?: Array<ModelTagConditionInput | null> | null;
-  not?: ModelTagConditionInput | null;
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelTagConditionInput | null > | null,
+  or?: Array< ModelTagConditionInput | null > | null,
+  not?: ModelTagConditionInput | null,
 };
 
 export type Tag = {
-  __typename: 'Tag';
-  id: string;
-  articles?: ModelArticleTagsConnection | null;
-  events?: ModelEventTagsConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
+  __typename: "Tag",
+  id: string,
+  articles?: ModelArticleTagsConnection | null,
+  events?: ModelEventTagsConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
 };
 
 export type ModelArticleTagsConnection = {
-  __typename: 'ModelArticleTagsConnection';
-  items: Array<ArticleTags | null>;
-  nextToken?: string | null;
+  __typename: "ModelArticleTagsConnection",
+  items:  Array<ArticleTags | null >,
+  nextToken?: string | null,
 };
 
 export type ArticleTags = {
-  __typename: 'ArticleTags';
-  id: string;
-  tagID: string;
-  articleID: string;
-  tag: Tag;
-  article: Article;
-  createdAt: string;
-  updatedAt: string;
+  __typename: "ArticleTags",
+  id: string,
+  tagID: string,
+  articleID: string,
+  tag: Tag,
+  article: Article,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type Article = {
-  __typename: 'Article';
-  id: string;
-  title: string;
-  content: string;
-  coverPageImgURL?: string | null;
-  coverPageDescription?: string | null;
-  tags?: ModelArticleTagsConnection | null;
-  comments?: ModelCommentConnection | null;
-  likes?: ModelLikeConnection | null;
-  count?: Count | null;
-  active: ActiveType;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user: UserProfile;
-  articleCountId?: string | null;
+  __typename: "Article",
+  id: string,
+  title: string,
+  content: string,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  tags?: ModelArticleTagsConnection | null,
+  comments?: ModelCommentConnection | null,
+  likes?: ModelLikeConnection | null,
+  count?: Count | null,
+  active: ActiveType,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user: UserProfile,
+  articleCountId?: string | null,
 };
 
 export type ModelCommentConnection = {
-  __typename: 'ModelCommentConnection';
-  items: Array<Comment | null>;
-  nextToken?: string | null;
+  __typename: "ModelCommentConnection",
+  items:  Array<Comment | null >,
+  nextToken?: string | null,
 };
 
 export type Comment = {
-  __typename: 'Comment';
-  id: string;
-  content: string;
-  isDeleted: boolean;
-  articleCommentsId?: string | null;
-  article?: Article | null;
-  eventCommentsId?: string | null;
-  event?: Event | null;
-  count?: Count | null;
-  likes?: ModelLikeConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user: UserProfile;
-  commentCountId?: string | null;
+  __typename: "Comment",
+  id: string,
+  content: string,
+  isDeleted: boolean,
+  articleCommentsId?: string | null,
+  article?: Article | null,
+  eventCommentsId?: string | null,
+  event?: Event | null,
+  count?: Count | null,
+  likes?: ModelLikeConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user: UserProfile,
+  commentCountId?: string | null,
 };
 
 export type Event = {
-  __typename: 'Event';
-  id: string;
-  title?: string | null;
-  coverPageImgURL?: string | null;
-  coverPageDescription?: string | null;
-  content?: string | null;
-  imgURLs?: Array<string | null> | null;
-  sponsor?: Array<string | null> | null;
-  online: boolean;
-  group: boolean;
-  tags?: ModelEventTagsConnection | null;
-  startDate: string;
-  endDate: string;
-  eventStatus: EventStatus;
-  eventLocation?: Address | null;
-  comments?: ModelCommentConnection | null;
-  eventParticipants?: ModelEventParticipantConnection | null;
-  active: ActiveType;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user?: UserProfile | null;
+  __typename: "Event",
+  id: string,
+  title?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  content?: string | null,
+  imgURLs?: Array< string | null > | null,
+  sponsor?: Array< string | null > | null,
+  online: boolean,
+  group: boolean,
+  tags?: ModelEventTagsConnection | null,
+  startDate: string,
+  endDate: string,
+  eventStatus: EventStatus,
+  eventLocation?: Address | null,
+  form?: Form | null,
+  comments?: ModelCommentConnection | null,
+  eventParticipants?: ModelEventParticipantConnection | null,
+  active: ActiveType,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  eventEventLocationId?: string | null,
+  eventFormId?: string | null,
 };
 
 export type ModelEventTagsConnection = {
-  __typename: 'ModelEventTagsConnection';
-  items: Array<EventTags | null>;
-  nextToken?: string | null;
+  __typename: "ModelEventTagsConnection",
+  items:  Array<EventTags | null >,
+  nextToken?: string | null,
 };
 
 export type EventTags = {
-  __typename: 'EventTags';
-  id: string;
-  tagID: string;
-  eventID: string;
-  tag: Tag;
-  event: Event;
-  createdAt: string;
-  updatedAt: string;
+  __typename: "EventTags",
+  id: string,
+  tagID: string,
+  eventID: string,
+  tag: Tag,
+  event: Event,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export enum EventStatus {
-  ComingSoon = 'ComingSoon',
-  InProgress = 'InProgress',
-  SignUpClosed = 'SignUpClosed',
-  Finished = 'Finished',
-  Canceled = 'Canceled',
+  ComingSoon = "ComingSoon",
+  InProgress = "InProgress",
+  SignUpClosed = "SignUpClosed",
+  Finished = "Finished",
+  Canceled = "Canceled",
 }
+
 
 export type Address = {
-  __typename: 'Address';
-  id: string;
-  description?: string | null;
-  place_id?: string | null;
-  reference?: string | null;
-  terms?: Array<string | null> | null;
-  types?: Array<string | null> | null;
-  apartmentNumbers?: string | null;
-  geocodingResult?: string | null;
-  lat?: number | null;
-  lng?: number | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user?: UserProfile | null;
+  __typename: "Address",
+  id: string,
+  description?: string | null,
+  place_id?: string | null,
+  reference?: string | null,
+  terms?: Array< string | null > | null,
+  types?: Array< string | null > | null,
+  apartmentNumbers?: string | null,
+  geocodingResult?: string | null,
+  lat?: number | null,
+  lng?: number | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
 };
-
-export type ModelEventParticipantConnection = {
-  __typename: 'ModelEventParticipantConnection';
-  items: Array<EventParticipant | null>;
-  nextToken?: string | null;
-};
-
-export type EventParticipant = {
-  __typename: 'EventParticipant';
-  id: string;
-  content1?: string | null;
-  formItem1?: FormItem | null;
-  content2?: string | null;
-  formItem2?: FormItem | null;
-  content3?: string | null;
-  formItem3?: FormItem | null;
-  content4?: string | null;
-  formItem4?: FormItem | null;
-  content5?: string | null;
-  formItem5?: FormItem | null;
-  content6?: string | null;
-  formItem6?: FormItem | null;
-  content7?: string | null;
-  formItem7?: FormItem | null;
-  content8?: string | null;
-  formItem8?: FormItem | null;
-  content9?: string | null;
-  formItem9?: FormItem | null;
-  content10?: string | null;
-  formItem10?: FormItem | null;
-  content11?: string | null;
-  formItem11?: FormItem | null;
-  content12?: string | null;
-  formItem12?: FormItem | null;
-  content13?: string | null;
-  formItem13?: FormItem | null;
-  content14?: string | null;
-  formItem14?: FormItem | null;
-  content15?: string | null;
-  formItem15?: FormItem | null;
-  content16?: string | null;
-  formItem16?: FormItem | null;
-  content17?: string | null;
-  formItem17?: FormItem | null;
-  content18?: string | null;
-  formItem18?: FormItem | null;
-  content19?: string | null;
-  formItem19?: FormItem | null;
-  eventParticipantStatus: EventParticipantStatus;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user?: UserProfile | null;
-  eventEventParticipantsId?: string | null;
-  eventParticipantFormItem1Id?: string | null;
-  eventParticipantFormItem2Id?: string | null;
-  eventParticipantFormItem3Id?: string | null;
-  eventParticipantFormItem4Id?: string | null;
-  eventParticipantFormItem5Id?: string | null;
-  eventParticipantFormItem6Id?: string | null;
-  eventParticipantFormItem7Id?: string | null;
-  eventParticipantFormItem8Id?: string | null;
-  eventParticipantFormItem9Id?: string | null;
-  eventParticipantFormItem10Id?: string | null;
-  eventParticipantFormItem11Id?: string | null;
-  eventParticipantFormItem12Id?: string | null;
-  eventParticipantFormItem13Id?: string | null;
-  eventParticipantFormItem14Id?: string | null;
-  eventParticipantFormItem15Id?: string | null;
-  eventParticipantFormItem16Id?: string | null;
-  eventParticipantFormItem17Id?: string | null;
-  eventParticipantFormItem18Id?: string | null;
-  eventParticipantFormItem19Id?: string | null;
-};
-
-export type FormItem = {
-  __typename: 'FormItem';
-  id: string;
-  name: string;
-  order: number;
-  isRequired: boolean;
-  isString: boolean;
-  isEmail: boolean;
-  isNumber: boolean;
-  description?: string | null;
-  formType: FormType;
-  helperText?: string | null;
-  minLength?: number | null;
-  maxLength?: number | null;
-  placeholder?: string | null;
-  label?: string | null;
-  formSelectChoices?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  form?: Form | null;
-  owner: string;
-  user?: UserProfile | null;
-  formFormItemsId?: string | null;
-};
-
-export enum FormType {
-  TextFieldShort = 'TextFieldShort',
-  TextFieldLong = 'TextFieldLong',
-  Checkbox = 'Checkbox',
-  Select = 'Select',
-  FileUpload = 'FileUpload',
-  RadioGroupH = 'RadioGroupH',
-  RadioGroupV = 'RadioGroupV',
-  DatePicker = 'DatePicker',
-  DateTimePicker = 'DateTimePicker',
-  TimePicker = 'TimePicker',
-}
 
 export type Form = {
-  __typename: 'Form';
-  id: string;
-  formItems?: ModelFormItemConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user?: UserProfile | null;
+  __typename: "Form",
+  id: string,
+  formItems?: ModelFormItemConnection | null,
+  event?: Event | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  formEventId?: string | null,
 };
 
 export type ModelFormItemConnection = {
-  __typename: 'ModelFormItemConnection';
-  items: Array<FormItem | null>;
-  nextToken?: string | null;
+  __typename: "ModelFormItemConnection",
+  items:  Array<FormItem | null >,
+  nextToken?: string | null,
+};
+
+export type FormItem = {
+  __typename: "FormItem",
+  id: string,
+  name: string,
+  order: number,
+  isRequired: boolean,
+  isString: boolean,
+  isEmail: boolean,
+  isNumber: boolean,
+  description?: string | null,
+  formType: FormType,
+  helperText?: string | null,
+  minLength?: number | null,
+  maxLength?: number | null,
+  placeholder?: string | null,
+  label?: string | null,
+  formSelectChoices?: Array< string | null > | null,
+  createdAt: string,
+  updatedAt: string,
+  form?: Form | null,
+  owner: string,
+  formFormItemsId?: string | null,
+};
+
+export enum FormType {
+  TextFieldShort = "TextFieldShort",
+  TextFieldLong = "TextFieldLong",
+  Checkbox = "Checkbox",
+  Select = "Select",
+  MultipleSelect = "MultipleSelect",
+  FileUpload = "FileUpload",
+  RadioGroupH = "RadioGroupH",
+  RadioGroupV = "RadioGroupV",
+  DatePicker = "DatePicker",
+  DateTimePicker = "DateTimePicker",
+  TimePicker = "TimePicker",
+}
+
+
+export type ModelEventParticipantConnection = {
+  __typename: "ModelEventParticipantConnection",
+  items:  Array<EventParticipant | null >,
+  nextToken?: string | null,
+};
+
+export type EventParticipant = {
+  __typename: "EventParticipant",
+  id: string,
+  content1?: string | null,
+  formItem1?: FormItem | null,
+  content2?: string | null,
+  formItem2?: FormItem | null,
+  content3?: string | null,
+  formItem3?: FormItem | null,
+  content4?: string | null,
+  formItem4?: FormItem | null,
+  content5?: string | null,
+  formItem5?: FormItem | null,
+  content6?: string | null,
+  formItem6?: FormItem | null,
+  content7?: string | null,
+  formItem7?: FormItem | null,
+  content8?: string | null,
+  formItem8?: FormItem | null,
+  content9?: string | null,
+  formItem9?: FormItem | null,
+  content10?: string | null,
+  formItem10?: FormItem | null,
+  content11?: string | null,
+  formItem11?: FormItem | null,
+  content12?: string | null,
+  formItem12?: FormItem | null,
+  content13?: string | null,
+  formItem13?: FormItem | null,
+  content14?: string | null,
+  formItem14?: FormItem | null,
+  content15?: string | null,
+  formItem15?: FormItem | null,
+  content16?: string | null,
+  formItem16?: FormItem | null,
+  content17?: string | null,
+  formItem17?: FormItem | null,
+  content18?: string | null,
+  formItem18?: FormItem | null,
+  content19?: string | null,
+  formItem19?: FormItem | null,
+  eventParticipantStatus: EventParticipantStatus,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  eventEventParticipantsId?: string | null,
+  eventParticipantFormItem1Id?: string | null,
+  eventParticipantFormItem2Id?: string | null,
+  eventParticipantFormItem3Id?: string | null,
+  eventParticipantFormItem4Id?: string | null,
+  eventParticipantFormItem5Id?: string | null,
+  eventParticipantFormItem6Id?: string | null,
+  eventParticipantFormItem7Id?: string | null,
+  eventParticipantFormItem8Id?: string | null,
+  eventParticipantFormItem9Id?: string | null,
+  eventParticipantFormItem10Id?: string | null,
+  eventParticipantFormItem11Id?: string | null,
+  eventParticipantFormItem12Id?: string | null,
+  eventParticipantFormItem13Id?: string | null,
+  eventParticipantFormItem14Id?: string | null,
+  eventParticipantFormItem15Id?: string | null,
+  eventParticipantFormItem16Id?: string | null,
+  eventParticipantFormItem17Id?: string | null,
+  eventParticipantFormItem18Id?: string | null,
+  eventParticipantFormItem19Id?: string | null,
 };
 
 export enum EventParticipantStatus {
-  ArriveOnTime = 'ArriveOnTime',
-  CanNotArrive = 'CanNotArrive',
-  Undecided = 'Undecided',
+  ArriveOnTime = "ArriveOnTime",
+  CanNotArrive = "CanNotArrive",
+  Undecided = "Undecided",
 }
 
+
 export type Count = {
-  __typename: 'Count';
-  id: string;
-  count: number;
-  article?: Article | null;
-  comment?: Comment | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  countArticleId?: string | null;
-  countCommentId?: string | null;
+  __typename: "Count",
+  id: string,
+  count: number,
+  article?: Article | null,
+  comment?: Comment | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  countArticleId?: string | null,
+  countCommentId?: string | null,
 };
 
 export type ModelLikeConnection = {
-  __typename: 'ModelLikeConnection';
-  items: Array<Like | null>;
-  nextToken?: string | null;
+  __typename: "ModelLikeConnection",
+  items:  Array<Like | null >,
+  nextToken?: string | null,
 };
 
 export type Like = {
-  __typename: 'Like';
-  id: string;
-  article?: Article | null;
-  comment?: Comment | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  articleLikesId?: string | null;
-  commentLikesId?: string | null;
+  __typename: "Like",
+  id: string,
+  article?: Article | null,
+  comment?: Comment | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  articleLikesId?: string | null,
+  commentLikesId?: string | null,
 };
 
 export type UpdateTagInput = {
-  id: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteTagInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateArticleInput = {
-  id?: string | null;
-  title: string;
-  content: string;
-  coverPageImgURL?: string | null;
-  coverPageDescription?: string | null;
-  active: ActiveType;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  articleCountId?: string | null;
+  id?: string | null,
+  title: string,
+  content: string,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  active: ActiveType,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  articleCountId?: string | null,
 };
 
 export type ModelArticleConditionInput = {
-  title?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  coverPageImgURL?: ModelStringInput | null;
-  coverPageDescription?: ModelStringInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelArticleConditionInput | null> | null;
-  or?: Array<ModelArticleConditionInput | null> | null;
-  not?: ModelArticleConditionInput | null;
-  articleCountId?: ModelIDInput | null;
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelArticleConditionInput | null > | null,
+  or?: Array< ModelArticleConditionInput | null > | null,
+  not?: ModelArticleConditionInput | null,
+  articleCountId?: ModelIDInput | null,
 };
 
 export type UpdateArticleInput = {
-  id: string;
-  title?: string | null;
-  content?: string | null;
-  coverPageImgURL?: string | null;
-  coverPageDescription?: string | null;
-  active?: ActiveType | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  articleCountId?: string | null;
+  id: string,
+  title?: string | null,
+  content?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  active?: ActiveType | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  articleCountId?: string | null,
 };
 
 export type DeleteArticleInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateCommentInput = {
-  id?: string | null;
-  content: string;
-  isDeleted: boolean;
-  articleCommentsId?: string | null;
-  eventCommentsId?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  commentCountId?: string | null;
+  id?: string | null,
+  content: string,
+  isDeleted: boolean,
+  articleCommentsId?: string | null,
+  eventCommentsId?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  commentCountId?: string | null,
 };
 
 export type ModelCommentConditionInput = {
-  content?: ModelStringInput | null;
-  isDeleted?: ModelBooleanInput | null;
-  articleCommentsId?: ModelIDInput | null;
-  eventCommentsId?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelCommentConditionInput | null> | null;
-  or?: Array<ModelCommentConditionInput | null> | null;
-  not?: ModelCommentConditionInput | null;
-  commentCountId?: ModelIDInput | null;
+  content?: ModelStringInput | null,
+  isDeleted?: ModelBooleanInput | null,
+  articleCommentsId?: ModelIDInput | null,
+  eventCommentsId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelCommentConditionInput | null > | null,
+  or?: Array< ModelCommentConditionInput | null > | null,
+  not?: ModelCommentConditionInput | null,
+  commentCountId?: ModelIDInput | null,
 };
 
 export type UpdateCommentInput = {
-  id: string;
-  content?: string | null;
-  isDeleted?: boolean | null;
-  articleCommentsId?: string | null;
-  eventCommentsId?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  commentCountId?: string | null;
+  id: string,
+  content?: string | null,
+  isDeleted?: boolean | null,
+  articleCommentsId?: string | null,
+  eventCommentsId?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  commentCountId?: string | null,
 };
 
 export type DeleteCommentInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateContactUsInput = {
-  id?: string | null;
-  fullName?: string | null;
-  email?: string | null;
-  message?: string | null;
-  phone?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id?: string | null,
+  fullName?: string | null,
+  email?: string | null,
+  message?: string | null,
+  phone?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type ModelContactUsConditionInput = {
-  fullName?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  message?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelContactUsConditionInput | null> | null;
-  or?: Array<ModelContactUsConditionInput | null> | null;
-  not?: ModelContactUsConditionInput | null;
+  fullName?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelContactUsConditionInput | null > | null,
+  or?: Array< ModelContactUsConditionInput | null > | null,
+  not?: ModelContactUsConditionInput | null,
 };
 
 export type ContactUs = {
-  __typename: 'ContactUs';
-  id: string;
-  fullName?: string | null;
-  email?: string | null;
-  message?: string | null;
-  phone?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  owner?: string | null;
-  user?: UserProfile | null;
+  __typename: "ContactUs",
+  id: string,
+  fullName?: string | null,
+  email?: string | null,
+  message?: string | null,
+  phone?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+  user?: UserProfile | null,
 };
 
 export type UpdateContactUsInput = {
-  id: string;
-  fullName?: string | null;
-  email?: string | null;
-  message?: string | null;
-  phone?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  fullName?: string | null,
+  email?: string | null,
+  message?: string | null,
+  phone?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteContactUsInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateCountInput = {
-  id?: string | null;
-  count: number;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  countArticleId?: string | null;
-  countCommentId?: string | null;
+  id?: string | null,
+  count: number,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  countArticleId?: string | null,
+  countCommentId?: string | null,
 };
 
 export type ModelCountConditionInput = {
-  count?: ModelIntInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelCountConditionInput | null> | null;
-  or?: Array<ModelCountConditionInput | null> | null;
-  not?: ModelCountConditionInput | null;
-  countArticleId?: ModelIDInput | null;
-  countCommentId?: ModelIDInput | null;
+  count?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelCountConditionInput | null > | null,
+  or?: Array< ModelCountConditionInput | null > | null,
+  not?: ModelCountConditionInput | null,
+  countArticleId?: ModelIDInput | null,
+  countCommentId?: ModelIDInput | null,
 };
 
 export type UpdateCountInput = {
-  id: string;
-  count?: number | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  countArticleId?: string | null;
-  countCommentId?: string | null;
+  id: string,
+  count?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  countArticleId?: string | null,
+  countCommentId?: string | null,
 };
 
 export type DeleteCountInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateLikeInput = {
-  id?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  articleLikesId?: string | null;
-  commentLikesId?: string | null;
+  id?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  articleLikesId?: string | null,
+  commentLikesId?: string | null,
 };
 
 export type ModelLikeConditionInput = {
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelLikeConditionInput | null> | null;
-  or?: Array<ModelLikeConditionInput | null> | null;
-  not?: ModelLikeConditionInput | null;
-  articleLikesId?: ModelIDInput | null;
-  commentLikesId?: ModelIDInput | null;
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelLikeConditionInput | null > | null,
+  or?: Array< ModelLikeConditionInput | null > | null,
+  not?: ModelLikeConditionInput | null,
+  articleLikesId?: ModelIDInput | null,
+  commentLikesId?: ModelIDInput | null,
 };
 
 export type UpdateLikeInput = {
-  id: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  articleLikesId?: string | null;
-  commentLikesId?: string | null;
+  id: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  articleLikesId?: string | null,
+  commentLikesId?: string | null,
 };
 
 export type DeleteLikeInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateResearchDevelopmentTeamInput = {
-  id?: string | null;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  linkedIn?: string | null;
-  github?: string | null;
-  website?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  github?: string | null,
+  website?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
 };
 
 export type ModelResearchDevelopmentTeamConditionInput = {
-  name?: ModelStringInput | null;
-  title?: ModelStringInput | null;
-  subTitle?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  imgURL?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  linkedIn?: ModelStringInput | null;
-  github?: ModelStringInput | null;
-  website?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelResearchDevelopmentTeamConditionInput | null> | null;
-  or?: Array<ModelResearchDevelopmentTeamConditionInput | null> | null;
-  not?: ModelResearchDevelopmentTeamConditionInput | null;
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelResearchDevelopmentTeamConditionInput | null > | null,
+  or?: Array< ModelResearchDevelopmentTeamConditionInput | null > | null,
+  not?: ModelResearchDevelopmentTeamConditionInput | null,
 };
 
 export type ResearchDevelopmentTeam = {
-  __typename: 'ResearchDevelopmentTeam';
-  id: string;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  linkedIn?: string | null;
-  github?: string | null;
-  website?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user?: UserProfile | null;
+  __typename: "ResearchDevelopmentTeam",
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  github?: string | null,
+  website?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
 };
 
 export type UpdateResearchDevelopmentTeamInput = {
-  id: string;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  linkedIn?: string | null;
-  github?: string | null;
-  website?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  github?: string | null,
+  website?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteResearchDevelopmentTeamInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateUwcssaDepartmentInput = {
-  id?: string | null;
-  introduction?: string | null;
-  email?: string | null;
-  leader?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  introduction?: string | null,
+  email?: string | null,
+  leader?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
 };
 
 export type ModelUwcssaDepartmentConditionInput = {
-  introduction?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  leader?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUwcssaDepartmentConditionInput | null> | null;
-  or?: Array<ModelUwcssaDepartmentConditionInput | null> | null;
-  not?: ModelUwcssaDepartmentConditionInput | null;
+  introduction?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  leader?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaDepartmentConditionInput | null > | null,
+  or?: Array< ModelUwcssaDepartmentConditionInput | null > | null,
+  not?: ModelUwcssaDepartmentConditionInput | null,
 };
 
 export type UwcssaDepartment = {
-  __typename: 'UwcssaDepartment';
-  id: string;
-  introduction?: string | null;
-  email?: string | null;
-  leader?: string | null;
-  currentLeader?: UserProfile | null;
-  uwcssaMembers?: ModelUwcssaMemberConnection | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
+  __typename: "UwcssaDepartment",
+  id: string,
+  introduction?: string | null,
+  email?: string | null,
+  leader?: string | null,
+  currentLeader?: UserProfile | null,
+  uwcssaMembers?: ModelUwcssaMemberConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
 };
 
 export type ModelUwcssaMemberConnection = {
-  __typename: 'ModelUwcssaMemberConnection';
-  items: Array<UwcssaMember | null>;
-  nextToken?: string | null;
+  __typename: "ModelUwcssaMemberConnection",
+  items:  Array<UwcssaMember | null >,
+  nextToken?: string | null,
 };
 
 export type UwcssaMember = {
-  __typename: 'UwcssaMember';
-  id: string;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  department?: UwcssaDepartment | null;
-  linkedIn?: string | null;
-  website?: string | null;
-  github?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  owner: string;
-  user?: UserProfile | null;
-  uwcssaDepartmentUwcssaMembersId?: string | null;
+  __typename: "UwcssaMember",
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  department?: UwcssaDepartment | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner: string,
+  user?: UserProfile | null,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
 };
 
 export type UpdateUwcssaDepartmentInput = {
-  id: string;
-  introduction?: string | null;
-  email?: string | null;
-  leader?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  introduction?: string | null,
+  email?: string | null,
+  leader?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteUwcssaDepartmentInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateUwcssaMemberInput = {
-  id?: string | null;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  linkedIn?: string | null;
-  website?: string | null;
-  github?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  uwcssaDepartmentUwcssaMembersId?: string | null;
+  id?: string | null,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
 };
 
 export type ModelUwcssaMemberConditionInput = {
-  name?: ModelStringInput | null;
-  title?: ModelStringInput | null;
-  subTitle?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  imgURL?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  linkedIn?: ModelStringInput | null;
-  website?: ModelStringInput | null;
-  github?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUwcssaMemberConditionInput | null> | null;
-  or?: Array<ModelUwcssaMemberConditionInput | null> | null;
-  not?: ModelUwcssaMemberConditionInput | null;
-  uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null;
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaMemberConditionInput | null > | null,
+  or?: Array< ModelUwcssaMemberConditionInput | null > | null,
+  not?: ModelUwcssaMemberConditionInput | null,
+  uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null,
 };
 
 export type UpdateUwcssaMemberInput = {
-  id: string;
-  name?: string | null;
-  title?: string | null;
-  subTitle?: string | null;
-  content?: string | null;
-  imgURL?: string | null;
-  email?: string | null;
-  linkedIn?: string | null;
-  website?: string | null;
-  github?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  uwcssaDepartmentUwcssaMembersId?: string | null;
+  id: string,
+  name?: string | null,
+  title?: string | null,
+  subTitle?: string | null,
+  content?: string | null,
+  imgURL?: string | null,
+  email?: string | null,
+  linkedIn?: string | null,
+  website?: string | null,
+  github?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  uwcssaDepartmentUwcssaMembersId?: string | null,
 };
 
 export type DeleteUwcssaMemberInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateEventInput = {
-  id?: string | null;
-  title?: string | null;
-  coverPageImgURL?: string | null;
-  coverPageDescription?: string | null;
-  content?: string | null;
-  imgURLs?: Array<string | null> | null;
-  sponsor?: Array<string | null> | null;
-  online: boolean;
-  group: boolean;
-  startDate: string;
-  endDate: string;
-  eventStatus: EventStatus;
-  active: ActiveType;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  title?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  content?: string | null,
+  imgURLs?: Array< string | null > | null,
+  sponsor?: Array< string | null > | null,
+  online: boolean,
+  group: boolean,
+  startDate: string,
+  endDate: string,
+  eventStatus: EventStatus,
+  active: ActiveType,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  eventEventLocationId?: string | null,
+  eventFormId?: string | null,
 };
 
 export type ModelEventConditionInput = {
-  title?: ModelStringInput | null;
-  coverPageImgURL?: ModelStringInput | null;
-  coverPageDescription?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  imgURLs?: ModelStringInput | null;
-  sponsor?: ModelStringInput | null;
-  online?: ModelBooleanInput | null;
-  group?: ModelBooleanInput | null;
-  startDate?: ModelStringInput | null;
-  endDate?: ModelStringInput | null;
-  eventStatus?: ModelEventStatusInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelEventConditionInput | null> | null;
-  or?: Array<ModelEventConditionInput | null> | null;
-  not?: ModelEventConditionInput | null;
+  title?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURLs?: ModelStringInput | null,
+  sponsor?: ModelStringInput | null,
+  online?: ModelBooleanInput | null,
+  group?: ModelBooleanInput | null,
+  startDate?: ModelStringInput | null,
+  endDate?: ModelStringInput | null,
+  eventStatus?: ModelEventStatusInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelEventConditionInput | null > | null,
+  or?: Array< ModelEventConditionInput | null > | null,
+  not?: ModelEventConditionInput | null,
+  eventEventLocationId?: ModelIDInput | null,
+  eventFormId?: ModelIDInput | null,
 };
 
 export type ModelEventStatusInput = {
-  eq?: EventStatus | null;
-  ne?: EventStatus | null;
+  eq?: EventStatus | null,
+  ne?: EventStatus | null,
 };
 
 export type UpdateEventInput = {
-  id: string;
-  title?: string | null;
-  coverPageImgURL?: string | null;
-  coverPageDescription?: string | null;
-  content?: string | null;
-  imgURLs?: Array<string | null> | null;
-  sponsor?: Array<string | null> | null;
-  online?: boolean | null;
-  group?: boolean | null;
-  startDate?: string | null;
-  endDate?: string | null;
-  eventStatus?: EventStatus | null;
-  active?: ActiveType | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  title?: string | null,
+  coverPageImgURL?: string | null,
+  coverPageDescription?: string | null,
+  content?: string | null,
+  imgURLs?: Array< string | null > | null,
+  sponsor?: Array< string | null > | null,
+  online?: boolean | null,
+  group?: boolean | null,
+  startDate?: string | null,
+  endDate?: string | null,
+  eventStatus?: EventStatus | null,
+  active?: ActiveType | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  eventEventLocationId?: string | null,
+  eventFormId?: string | null,
 };
 
 export type DeleteEventInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateAddressInput = {
-  id?: string | null;
-  description?: string | null;
-  place_id?: string | null;
-  reference?: string | null;
-  terms?: Array<string | null> | null;
-  types?: Array<string | null> | null;
-  apartmentNumbers?: string | null;
-  geocodingResult?: string | null;
-  lat?: number | null;
-  lng?: number | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  description?: string | null,
+  place_id?: string | null,
+  reference?: string | null,
+  terms?: Array< string | null > | null,
+  types?: Array< string | null > | null,
+  apartmentNumbers?: string | null,
+  geocodingResult?: string | null,
+  lat?: number | null,
+  lng?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
 };
 
 export type ModelAddressConditionInput = {
-  description?: ModelStringInput | null;
-  place_id?: ModelStringInput | null;
-  reference?: ModelStringInput | null;
-  terms?: ModelStringInput | null;
-  types?: ModelStringInput | null;
-  apartmentNumbers?: ModelStringInput | null;
-  geocodingResult?: ModelStringInput | null;
-  lat?: ModelFloatInput | null;
-  lng?: ModelFloatInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelAddressConditionInput | null> | null;
-  or?: Array<ModelAddressConditionInput | null> | null;
-  not?: ModelAddressConditionInput | null;
+  description?: ModelStringInput | null,
+  place_id?: ModelStringInput | null,
+  reference?: ModelStringInput | null,
+  terms?: ModelStringInput | null,
+  types?: ModelStringInput | null,
+  apartmentNumbers?: ModelStringInput | null,
+  geocodingResult?: ModelStringInput | null,
+  lat?: ModelFloatInput | null,
+  lng?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelAddressConditionInput | null > | null,
+  or?: Array< ModelAddressConditionInput | null > | null,
+  not?: ModelAddressConditionInput | null,
 };
 
 export type ModelFloatInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UpdateAddressInput = {
-  id: string;
-  description?: string | null;
-  place_id?: string | null;
-  reference?: string | null;
-  terms?: Array<string | null> | null;
-  types?: Array<string | null> | null;
-  apartmentNumbers?: string | null;
-  geocodingResult?: string | null;
-  lat?: number | null;
-  lng?: number | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  description?: string | null,
+  place_id?: string | null,
+  reference?: string | null,
+  terms?: Array< string | null > | null,
+  types?: Array< string | null > | null,
+  apartmentNumbers?: string | null,
+  geocodingResult?: string | null,
+  lat?: number | null,
+  lng?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
 };
 
 export type DeleteAddressInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateFormInput = {
-  id?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
+  id?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  formEventId?: string | null,
 };
 
 export type ModelFormConditionInput = {
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelFormConditionInput | null> | null;
-  or?: Array<ModelFormConditionInput | null> | null;
-  not?: ModelFormConditionInput | null;
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormConditionInput | null > | null,
+  or?: Array< ModelFormConditionInput | null > | null,
+  not?: ModelFormConditionInput | null,
+  formEventId?: ModelIDInput | null,
 };
 
 export type UpdateFormInput = {
-  id: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
+  id: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  formEventId?: string | null,
 };
 
 export type DeleteFormInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateFormItemInput = {
-  id?: string | null;
-  name: string;
-  order: number;
-  isRequired: boolean;
-  isString: boolean;
-  isEmail: boolean;
-  isNumber: boolean;
-  description?: string | null;
-  formType: FormType;
-  helperText?: string | null;
-  minLength?: number | null;
-  maxLength?: number | null;
-  placeholder?: string | null;
-  label?: string | null;
-  formSelectChoices?: Array<string | null> | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  formFormItemsId?: string | null;
+  id?: string | null,
+  name: string,
+  order: number,
+  isRequired: boolean,
+  isString: boolean,
+  isEmail: boolean,
+  isNumber: boolean,
+  description?: string | null,
+  formType: FormType,
+  helperText?: string | null,
+  minLength?: number | null,
+  maxLength?: number | null,
+  placeholder?: string | null,
+  label?: string | null,
+  formSelectChoices?: Array< string | null > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  formFormItemsId?: string | null,
 };
 
 export type ModelFormItemConditionInput = {
-  name?: ModelStringInput | null;
-  order?: ModelIntInput | null;
-  isRequired?: ModelBooleanInput | null;
-  isString?: ModelBooleanInput | null;
-  isEmail?: ModelBooleanInput | null;
-  isNumber?: ModelBooleanInput | null;
-  description?: ModelStringInput | null;
-  formType?: ModelFormTypeInput | null;
-  helperText?: ModelStringInput | null;
-  minLength?: ModelIntInput | null;
-  maxLength?: ModelIntInput | null;
-  placeholder?: ModelStringInput | null;
-  label?: ModelStringInput | null;
-  formSelectChoices?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelFormItemConditionInput | null> | null;
-  or?: Array<ModelFormItemConditionInput | null> | null;
-  not?: ModelFormItemConditionInput | null;
-  formFormItemsId?: ModelIDInput | null;
+  name?: ModelStringInput | null,
+  order?: ModelIntInput | null,
+  isRequired?: ModelBooleanInput | null,
+  isString?: ModelBooleanInput | null,
+  isEmail?: ModelBooleanInput | null,
+  isNumber?: ModelBooleanInput | null,
+  description?: ModelStringInput | null,
+  formType?: ModelFormTypeInput | null,
+  helperText?: ModelStringInput | null,
+  minLength?: ModelIntInput | null,
+  maxLength?: ModelIntInput | null,
+  placeholder?: ModelStringInput | null,
+  label?: ModelStringInput | null,
+  formSelectChoices?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormItemConditionInput | null > | null,
+  or?: Array< ModelFormItemConditionInput | null > | null,
+  not?: ModelFormItemConditionInput | null,
+  formFormItemsId?: ModelIDInput | null,
 };
 
 export type ModelFormTypeInput = {
-  eq?: FormType | null;
-  ne?: FormType | null;
+  eq?: FormType | null,
+  ne?: FormType | null,
 };
 
 export type UpdateFormItemInput = {
-  id: string;
-  name?: string | null;
-  order?: number | null;
-  isRequired?: boolean | null;
-  isString?: boolean | null;
-  isEmail?: boolean | null;
-  isNumber?: boolean | null;
-  description?: string | null;
-  formType?: FormType | null;
-  helperText?: string | null;
-  minLength?: number | null;
-  maxLength?: number | null;
-  placeholder?: string | null;
-  label?: string | null;
-  formSelectChoices?: Array<string | null> | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  formFormItemsId?: string | null;
+  id: string,
+  name?: string | null,
+  order?: number | null,
+  isRequired?: boolean | null,
+  isString?: boolean | null,
+  isEmail?: boolean | null,
+  isNumber?: boolean | null,
+  description?: string | null,
+  formType?: FormType | null,
+  helperText?: string | null,
+  minLength?: number | null,
+  maxLength?: number | null,
+  placeholder?: string | null,
+  label?: string | null,
+  formSelectChoices?: Array< string | null > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  formFormItemsId?: string | null,
 };
 
 export type DeleteFormItemInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateEventParticipantInput = {
-  id?: string | null;
-  content1?: string | null;
-  content2?: string | null;
-  content3?: string | null;
-  content4?: string | null;
-  content5?: string | null;
-  content6?: string | null;
-  content7?: string | null;
-  content8?: string | null;
-  content9?: string | null;
-  content10?: string | null;
-  content11?: string | null;
-  content12?: string | null;
-  content13?: string | null;
-  content14?: string | null;
-  content15?: string | null;
-  content16?: string | null;
-  content17?: string | null;
-  content18?: string | null;
-  content19?: string | null;
-  eventParticipantStatus: EventParticipantStatus;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner: string;
-  eventEventParticipantsId?: string | null;
-  eventParticipantFormItem1Id?: string | null;
-  eventParticipantFormItem2Id?: string | null;
-  eventParticipantFormItem3Id?: string | null;
-  eventParticipantFormItem4Id?: string | null;
-  eventParticipantFormItem5Id?: string | null;
-  eventParticipantFormItem6Id?: string | null;
-  eventParticipantFormItem7Id?: string | null;
-  eventParticipantFormItem8Id?: string | null;
-  eventParticipantFormItem9Id?: string | null;
-  eventParticipantFormItem10Id?: string | null;
-  eventParticipantFormItem11Id?: string | null;
-  eventParticipantFormItem12Id?: string | null;
-  eventParticipantFormItem13Id?: string | null;
-  eventParticipantFormItem14Id?: string | null;
-  eventParticipantFormItem15Id?: string | null;
-  eventParticipantFormItem16Id?: string | null;
-  eventParticipantFormItem17Id?: string | null;
-  eventParticipantFormItem18Id?: string | null;
-  eventParticipantFormItem19Id?: string | null;
+  id?: string | null,
+  content1?: string | null,
+  content2?: string | null,
+  content3?: string | null,
+  content4?: string | null,
+  content5?: string | null,
+  content6?: string | null,
+  content7?: string | null,
+  content8?: string | null,
+  content9?: string | null,
+  content10?: string | null,
+  content11?: string | null,
+  content12?: string | null,
+  content13?: string | null,
+  content14?: string | null,
+  content15?: string | null,
+  content16?: string | null,
+  content17?: string | null,
+  content18?: string | null,
+  content19?: string | null,
+  eventParticipantStatus: EventParticipantStatus,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner: string,
+  eventEventParticipantsId?: string | null,
+  eventParticipantFormItem1Id?: string | null,
+  eventParticipantFormItem2Id?: string | null,
+  eventParticipantFormItem3Id?: string | null,
+  eventParticipantFormItem4Id?: string | null,
+  eventParticipantFormItem5Id?: string | null,
+  eventParticipantFormItem6Id?: string | null,
+  eventParticipantFormItem7Id?: string | null,
+  eventParticipantFormItem8Id?: string | null,
+  eventParticipantFormItem9Id?: string | null,
+  eventParticipantFormItem10Id?: string | null,
+  eventParticipantFormItem11Id?: string | null,
+  eventParticipantFormItem12Id?: string | null,
+  eventParticipantFormItem13Id?: string | null,
+  eventParticipantFormItem14Id?: string | null,
+  eventParticipantFormItem15Id?: string | null,
+  eventParticipantFormItem16Id?: string | null,
+  eventParticipantFormItem17Id?: string | null,
+  eventParticipantFormItem18Id?: string | null,
+  eventParticipantFormItem19Id?: string | null,
 };
 
 export type ModelEventParticipantConditionInput = {
-  content1?: ModelStringInput | null;
-  content2?: ModelStringInput | null;
-  content3?: ModelStringInput | null;
-  content4?: ModelStringInput | null;
-  content5?: ModelStringInput | null;
-  content6?: ModelStringInput | null;
-  content7?: ModelStringInput | null;
-  content8?: ModelStringInput | null;
-  content9?: ModelStringInput | null;
-  content10?: ModelStringInput | null;
-  content11?: ModelStringInput | null;
-  content12?: ModelStringInput | null;
-  content13?: ModelStringInput | null;
-  content14?: ModelStringInput | null;
-  content15?: ModelStringInput | null;
-  content16?: ModelStringInput | null;
-  content17?: ModelStringInput | null;
-  content18?: ModelStringInput | null;
-  content19?: ModelStringInput | null;
-  eventParticipantStatus?: ModelEventParticipantStatusInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelEventParticipantConditionInput | null> | null;
-  or?: Array<ModelEventParticipantConditionInput | null> | null;
-  not?: ModelEventParticipantConditionInput | null;
-  eventEventParticipantsId?: ModelIDInput | null;
-  eventParticipantFormItem1Id?: ModelIDInput | null;
-  eventParticipantFormItem2Id?: ModelIDInput | null;
-  eventParticipantFormItem3Id?: ModelIDInput | null;
-  eventParticipantFormItem4Id?: ModelIDInput | null;
-  eventParticipantFormItem5Id?: ModelIDInput | null;
-  eventParticipantFormItem6Id?: ModelIDInput | null;
-  eventParticipantFormItem7Id?: ModelIDInput | null;
-  eventParticipantFormItem8Id?: ModelIDInput | null;
-  eventParticipantFormItem9Id?: ModelIDInput | null;
-  eventParticipantFormItem10Id?: ModelIDInput | null;
-  eventParticipantFormItem11Id?: ModelIDInput | null;
-  eventParticipantFormItem12Id?: ModelIDInput | null;
-  eventParticipantFormItem13Id?: ModelIDInput | null;
-  eventParticipantFormItem14Id?: ModelIDInput | null;
-  eventParticipantFormItem15Id?: ModelIDInput | null;
-  eventParticipantFormItem16Id?: ModelIDInput | null;
-  eventParticipantFormItem17Id?: ModelIDInput | null;
-  eventParticipantFormItem18Id?: ModelIDInput | null;
-  eventParticipantFormItem19Id?: ModelIDInput | null;
+  content1?: ModelStringInput | null,
+  content2?: ModelStringInput | null,
+  content3?: ModelStringInput | null,
+  content4?: ModelStringInput | null,
+  content5?: ModelStringInput | null,
+  content6?: ModelStringInput | null,
+  content7?: ModelStringInput | null,
+  content8?: ModelStringInput | null,
+  content9?: ModelStringInput | null,
+  content10?: ModelStringInput | null,
+  content11?: ModelStringInput | null,
+  content12?: ModelStringInput | null,
+  content13?: ModelStringInput | null,
+  content14?: ModelStringInput | null,
+  content15?: ModelStringInput | null,
+  content16?: ModelStringInput | null,
+  content17?: ModelStringInput | null,
+  content18?: ModelStringInput | null,
+  content19?: ModelStringInput | null,
+  eventParticipantStatus?: ModelEventParticipantStatusInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelEventParticipantConditionInput | null > | null,
+  or?: Array< ModelEventParticipantConditionInput | null > | null,
+  not?: ModelEventParticipantConditionInput | null,
+  eventEventParticipantsId?: ModelIDInput | null,
+  eventParticipantFormItem1Id?: ModelIDInput | null,
+  eventParticipantFormItem2Id?: ModelIDInput | null,
+  eventParticipantFormItem3Id?: ModelIDInput | null,
+  eventParticipantFormItem4Id?: ModelIDInput | null,
+  eventParticipantFormItem5Id?: ModelIDInput | null,
+  eventParticipantFormItem6Id?: ModelIDInput | null,
+  eventParticipantFormItem7Id?: ModelIDInput | null,
+  eventParticipantFormItem8Id?: ModelIDInput | null,
+  eventParticipantFormItem9Id?: ModelIDInput | null,
+  eventParticipantFormItem10Id?: ModelIDInput | null,
+  eventParticipantFormItem11Id?: ModelIDInput | null,
+  eventParticipantFormItem12Id?: ModelIDInput | null,
+  eventParticipantFormItem13Id?: ModelIDInput | null,
+  eventParticipantFormItem14Id?: ModelIDInput | null,
+  eventParticipantFormItem15Id?: ModelIDInput | null,
+  eventParticipantFormItem16Id?: ModelIDInput | null,
+  eventParticipantFormItem17Id?: ModelIDInput | null,
+  eventParticipantFormItem18Id?: ModelIDInput | null,
+  eventParticipantFormItem19Id?: ModelIDInput | null,
 };
 
 export type ModelEventParticipantStatusInput = {
-  eq?: EventParticipantStatus | null;
-  ne?: EventParticipantStatus | null;
+  eq?: EventParticipantStatus | null,
+  ne?: EventParticipantStatus | null,
 };
 
 export type UpdateEventParticipantInput = {
-  id: string;
-  content1?: string | null;
-  content2?: string | null;
-  content3?: string | null;
-  content4?: string | null;
-  content5?: string | null;
-  content6?: string | null;
-  content7?: string | null;
-  content8?: string | null;
-  content9?: string | null;
-  content10?: string | null;
-  content11?: string | null;
-  content12?: string | null;
-  content13?: string | null;
-  content14?: string | null;
-  content15?: string | null;
-  content16?: string | null;
-  content17?: string | null;
-  content18?: string | null;
-  content19?: string | null;
-  eventParticipantStatus?: EventParticipantStatus | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  owner?: string | null;
-  eventEventParticipantsId?: string | null;
-  eventParticipantFormItem1Id?: string | null;
-  eventParticipantFormItem2Id?: string | null;
-  eventParticipantFormItem3Id?: string | null;
-  eventParticipantFormItem4Id?: string | null;
-  eventParticipantFormItem5Id?: string | null;
-  eventParticipantFormItem6Id?: string | null;
-  eventParticipantFormItem7Id?: string | null;
-  eventParticipantFormItem8Id?: string | null;
-  eventParticipantFormItem9Id?: string | null;
-  eventParticipantFormItem10Id?: string | null;
-  eventParticipantFormItem11Id?: string | null;
-  eventParticipantFormItem12Id?: string | null;
-  eventParticipantFormItem13Id?: string | null;
-  eventParticipantFormItem14Id?: string | null;
-  eventParticipantFormItem15Id?: string | null;
-  eventParticipantFormItem16Id?: string | null;
-  eventParticipantFormItem17Id?: string | null;
-  eventParticipantFormItem18Id?: string | null;
-  eventParticipantFormItem19Id?: string | null;
+  id: string,
+  content1?: string | null,
+  content2?: string | null,
+  content3?: string | null,
+  content4?: string | null,
+  content5?: string | null,
+  content6?: string | null,
+  content7?: string | null,
+  content8?: string | null,
+  content9?: string | null,
+  content10?: string | null,
+  content11?: string | null,
+  content12?: string | null,
+  content13?: string | null,
+  content14?: string | null,
+  content15?: string | null,
+  content16?: string | null,
+  content17?: string | null,
+  content18?: string | null,
+  content19?: string | null,
+  eventParticipantStatus?: EventParticipantStatus | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  owner?: string | null,
+  eventEventParticipantsId?: string | null,
+  eventParticipantFormItem1Id?: string | null,
+  eventParticipantFormItem2Id?: string | null,
+  eventParticipantFormItem3Id?: string | null,
+  eventParticipantFormItem4Id?: string | null,
+  eventParticipantFormItem5Id?: string | null,
+  eventParticipantFormItem6Id?: string | null,
+  eventParticipantFormItem7Id?: string | null,
+  eventParticipantFormItem8Id?: string | null,
+  eventParticipantFormItem9Id?: string | null,
+  eventParticipantFormItem10Id?: string | null,
+  eventParticipantFormItem11Id?: string | null,
+  eventParticipantFormItem12Id?: string | null,
+  eventParticipantFormItem13Id?: string | null,
+  eventParticipantFormItem14Id?: string | null,
+  eventParticipantFormItem15Id?: string | null,
+  eventParticipantFormItem16Id?: string | null,
+  eventParticipantFormItem17Id?: string | null,
+  eventParticipantFormItem18Id?: string | null,
+  eventParticipantFormItem19Id?: string | null,
 };
 
 export type DeleteEventParticipantInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateArticleTagsInput = {
-  id?: string | null;
-  tagID: string;
-  articleID: string;
+  id?: string | null,
+  tagID: string,
+  articleID: string,
 };
 
 export type ModelArticleTagsConditionInput = {
-  tagID?: ModelIDInput | null;
-  articleID?: ModelIDInput | null;
-  and?: Array<ModelArticleTagsConditionInput | null> | null;
-  or?: Array<ModelArticleTagsConditionInput | null> | null;
-  not?: ModelArticleTagsConditionInput | null;
+  tagID?: ModelIDInput | null,
+  articleID?: ModelIDInput | null,
+  and?: Array< ModelArticleTagsConditionInput | null > | null,
+  or?: Array< ModelArticleTagsConditionInput | null > | null,
+  not?: ModelArticleTagsConditionInput | null,
 };
 
 export type UpdateArticleTagsInput = {
-  id: string;
-  tagID?: string | null;
-  articleID?: string | null;
+  id: string,
+  tagID?: string | null,
+  articleID?: string | null,
 };
 
 export type DeleteArticleTagsInput = {
-  id: string;
+  id: string,
 };
 
 export type CreateEventTagsInput = {
-  id?: string | null;
-  tagID: string;
-  eventID: string;
+  id?: string | null,
+  tagID: string,
+  eventID: string,
 };
 
 export type ModelEventTagsConditionInput = {
-  tagID?: ModelIDInput | null;
-  eventID?: ModelIDInput | null;
-  and?: Array<ModelEventTagsConditionInput | null> | null;
-  or?: Array<ModelEventTagsConditionInput | null> | null;
-  not?: ModelEventTagsConditionInput | null;
+  tagID?: ModelIDInput | null,
+  eventID?: ModelIDInput | null,
+  and?: Array< ModelEventTagsConditionInput | null > | null,
+  or?: Array< ModelEventTagsConditionInput | null > | null,
+  not?: ModelEventTagsConditionInput | null,
 };
 
 export type UpdateEventTagsInput = {
-  id: string;
-  tagID?: string | null;
-  eventID?: string | null;
+  id: string,
+  tagID?: string | null,
+  eventID?: string | null,
 };
 
 export type DeleteEventTagsInput = {
-  id: string;
+  id: string,
 };
 
 export type ModelUserFilterInput = {
-  id?: ModelIDInput | null;
-  email?: ModelStringInput | null;
-  userName?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUserFilterInput | null> | null;
-  or?: Array<ModelUserFilterInput | null> | null;
-  not?: ModelUserFilterInput | null;
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  userName?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
 };
 
 export type ModelUserConnection = {
-  __typename: 'ModelUserConnection';
-  items: Array<User | null>;
-  nextToken?: string | null;
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
+  nextToken?: string | null,
 };
 
 export type ModelUserProfileFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  fullName?: ModelStringInput | null;
-  contactEmail?: ModelStringInput | null;
-  title?: ModelStringInput | null;
-  about?: ModelStringInput | null;
-  website?: ModelStringInput | null;
-  emailSubscription?: ModelBooleanInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUserProfileFilterInput | null> | null;
-  or?: Array<ModelUserProfileFilterInput | null> | null;
-  not?: ModelUserProfileFilterInput | null;
-  userProfileAvatarURLId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  fullName?: ModelStringInput | null,
+  contactEmail?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  about?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  emailSubscription?: ModelBooleanInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserProfileFilterInput | null > | null,
+  or?: Array< ModelUserProfileFilterInput | null > | null,
+  not?: ModelUserProfileFilterInput | null,
+  userProfileAvatarURLId?: ModelIDInput | null,
 };
 
 export type ModelUserProfileConnection = {
-  __typename: 'ModelUserProfileConnection';
-  items: Array<UserProfile | null>;
-  nextToken?: string | null;
+  __typename: "ModelUserProfileConnection",
+  items:  Array<UserProfile | null >,
+  nextToken?: string | null,
 };
 
 export type ModelStringKeyConditionInput = {
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
 export enum ModelSortDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
+  ASC = "ASC",
+  DESC = "DESC",
 }
 
+
 export type ModelUserImageFilterInput = {
-  id?: ModelIDInput | null;
-  objectURL?: ModelStringInput | null;
-  key?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  size?: ModelIntInput | null;
-  type?: ModelStringInput | null;
-  lastModified?: ModelStringInput | null;
-  lastModifiedDate?: ModelStringInput | null;
-  compressedWidth?: ModelIntInput | null;
-  objectCompressedURL?: ModelStringInput | null;
-  thumbnailWidth?: ModelIntInput | null;
-  objectThumbnailURL?: ModelStringInput | null;
-  targetTable?: ModelStringInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUserImageFilterInput | null> | null;
-  or?: Array<ModelUserImageFilterInput | null> | null;
-  not?: ModelUserImageFilterInput | null;
+  id?: ModelIDInput | null,
+  objectURL?: ModelStringInput | null,
+  key?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  size?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  lastModified?: ModelStringInput | null,
+  lastModifiedDate?: ModelStringInput | null,
+  compressedWidth?: ModelIntInput | null,
+  objectCompressedURL?: ModelStringInput | null,
+  thumbnailWidth?: ModelIntInput | null,
+  objectThumbnailURL?: ModelStringInput | null,
+  targetTable?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUserImageFilterInput | null > | null,
+  or?: Array< ModelUserImageFilterInput | null > | null,
+  not?: ModelUserImageFilterInput | null,
 };
 
 export type ModelUserImageConnection = {
-  __typename: 'ModelUserImageConnection';
-  items: Array<UserImage | null>;
-  nextToken?: string | null;
+  __typename: "ModelUserImageConnection",
+  items:  Array<UserImage | null >,
+  nextToken?: string | null,
 };
 
 export type ModelTagFilterInput = {
-  id?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelTagFilterInput | null> | null;
-  or?: Array<ModelTagFilterInput | null> | null;
-  not?: ModelTagFilterInput | null;
+  id?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelTagFilterInput | null > | null,
+  or?: Array< ModelTagFilterInput | null > | null,
+  not?: ModelTagFilterInput | null,
 };
 
 export type ModelTagConnection = {
-  __typename: 'ModelTagConnection';
-  items: Array<Tag | null>;
-  nextToken?: string | null;
+  __typename: "ModelTagConnection",
+  items:  Array<Tag | null >,
+  nextToken?: string | null,
 };
 
 export type ModelArticleFilterInput = {
-  id?: ModelIDInput | null;
-  title?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  coverPageImgURL?: ModelStringInput | null;
-  coverPageDescription?: ModelStringInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelArticleFilterInput | null> | null;
-  or?: Array<ModelArticleFilterInput | null> | null;
-  not?: ModelArticleFilterInput | null;
-  articleCountId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelArticleFilterInput | null > | null,
+  or?: Array< ModelArticleFilterInput | null > | null,
+  not?: ModelArticleFilterInput | null,
+  articleCountId?: ModelIDInput | null,
 };
 
 export type ModelArticleConnection = {
-  __typename: 'ModelArticleConnection';
-  items: Array<Article | null>;
-  nextToken?: string | null;
+  __typename: "ModelArticleConnection",
+  items:  Array<Article | null >,
+  nextToken?: string | null,
 };
 
 export type ModelCommentFilterInput = {
-  id?: ModelIDInput | null;
-  content?: ModelStringInput | null;
-  isDeleted?: ModelBooleanInput | null;
-  articleCommentsId?: ModelIDInput | null;
-  eventCommentsId?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelCommentFilterInput | null> | null;
-  or?: Array<ModelCommentFilterInput | null> | null;
-  not?: ModelCommentFilterInput | null;
-  commentCountId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  content?: ModelStringInput | null,
+  isDeleted?: ModelBooleanInput | null,
+  articleCommentsId?: ModelIDInput | null,
+  eventCommentsId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelCommentFilterInput | null > | null,
+  or?: Array< ModelCommentFilterInput | null > | null,
+  not?: ModelCommentFilterInput | null,
+  commentCountId?: ModelIDInput | null,
 };
 
 export type ModelContactUsFilterInput = {
-  id?: ModelIDInput | null;
-  fullName?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  message?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelContactUsFilterInput | null> | null;
-  or?: Array<ModelContactUsFilterInput | null> | null;
-  not?: ModelContactUsFilterInput | null;
+  id?: ModelIDInput | null,
+  fullName?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  phone?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelContactUsFilterInput | null > | null,
+  or?: Array< ModelContactUsFilterInput | null > | null,
+  not?: ModelContactUsFilterInput | null,
 };
 
 export type ModelContactUsConnection = {
-  __typename: 'ModelContactUsConnection';
-  items: Array<ContactUs | null>;
-  nextToken?: string | null;
+  __typename: "ModelContactUsConnection",
+  items:  Array<ContactUs | null >,
+  nextToken?: string | null,
 };
 
 export type ModelCountFilterInput = {
-  id?: ModelIDInput | null;
-  count?: ModelIntInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelCountFilterInput | null> | null;
-  or?: Array<ModelCountFilterInput | null> | null;
-  not?: ModelCountFilterInput | null;
-  countArticleId?: ModelIDInput | null;
-  countCommentId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelCountFilterInput | null > | null,
+  or?: Array< ModelCountFilterInput | null > | null,
+  not?: ModelCountFilterInput | null,
+  countArticleId?: ModelIDInput | null,
+  countCommentId?: ModelIDInput | null,
 };
 
 export type ModelCountConnection = {
-  __typename: 'ModelCountConnection';
-  items: Array<Count | null>;
-  nextToken?: string | null;
+  __typename: "ModelCountConnection",
+  items:  Array<Count | null >,
+  nextToken?: string | null,
 };
 
 export type ModelLikeFilterInput = {
-  id?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelLikeFilterInput | null> | null;
-  or?: Array<ModelLikeFilterInput | null> | null;
-  not?: ModelLikeFilterInput | null;
-  articleLikesId?: ModelIDInput | null;
-  commentLikesId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelLikeFilterInput | null > | null,
+  or?: Array< ModelLikeFilterInput | null > | null,
+  not?: ModelLikeFilterInput | null,
+  articleLikesId?: ModelIDInput | null,
+  commentLikesId?: ModelIDInput | null,
 };
 
 export type ModelResearchDevelopmentTeamFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  title?: ModelStringInput | null;
-  subTitle?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  imgURL?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  linkedIn?: ModelStringInput | null;
-  github?: ModelStringInput | null;
-  website?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelResearchDevelopmentTeamFilterInput | null> | null;
-  or?: Array<ModelResearchDevelopmentTeamFilterInput | null> | null;
-  not?: ModelResearchDevelopmentTeamFilterInput | null;
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelResearchDevelopmentTeamFilterInput | null > | null,
+  or?: Array< ModelResearchDevelopmentTeamFilterInput | null > | null,
+  not?: ModelResearchDevelopmentTeamFilterInput | null,
 };
 
 export type ModelResearchDevelopmentTeamConnection = {
-  __typename: 'ModelResearchDevelopmentTeamConnection';
-  items: Array<ResearchDevelopmentTeam | null>;
-  nextToken?: string | null;
+  __typename: "ModelResearchDevelopmentTeamConnection",
+  items:  Array<ResearchDevelopmentTeam | null >,
+  nextToken?: string | null,
 };
 
 export type ModelUwcssaDepartmentFilterInput = {
-  id?: ModelIDInput | null;
-  introduction?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  leader?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUwcssaDepartmentFilterInput | null> | null;
-  or?: Array<ModelUwcssaDepartmentFilterInput | null> | null;
-  not?: ModelUwcssaDepartmentFilterInput | null;
+  id?: ModelIDInput | null,
+  introduction?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  leader?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaDepartmentFilterInput | null > | null,
+  or?: Array< ModelUwcssaDepartmentFilterInput | null > | null,
+  not?: ModelUwcssaDepartmentFilterInput | null,
 };
 
 export type ModelUwcssaDepartmentConnection = {
-  __typename: 'ModelUwcssaDepartmentConnection';
-  items: Array<UwcssaDepartment | null>;
-  nextToken?: string | null;
+  __typename: "ModelUwcssaDepartmentConnection",
+  items:  Array<UwcssaDepartment | null >,
+  nextToken?: string | null,
 };
 
 export type ModelUwcssaMemberFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  title?: ModelStringInput | null;
-  subTitle?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  imgURL?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  linkedIn?: ModelStringInput | null;
-  website?: ModelStringInput | null;
-  github?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelUwcssaMemberFilterInput | null> | null;
-  or?: Array<ModelUwcssaMemberFilterInput | null> | null;
-  not?: ModelUwcssaMemberFilterInput | null;
-  uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  subTitle?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURL?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  linkedIn?: ModelStringInput | null,
+  website?: ModelStringInput | null,
+  github?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelUwcssaMemberFilterInput | null > | null,
+  or?: Array< ModelUwcssaMemberFilterInput | null > | null,
+  not?: ModelUwcssaMemberFilterInput | null,
+  uwcssaDepartmentUwcssaMembersId?: ModelIDInput | null,
 };
 
 export type ModelEventFilterInput = {
-  id?: ModelIDInput | null;
-  title?: ModelStringInput | null;
-  coverPageImgURL?: ModelStringInput | null;
-  coverPageDescription?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  imgURLs?: ModelStringInput | null;
-  sponsor?: ModelStringInput | null;
-  online?: ModelBooleanInput | null;
-  group?: ModelBooleanInput | null;
-  startDate?: ModelStringInput | null;
-  endDate?: ModelStringInput | null;
-  eventStatus?: ModelEventStatusInput | null;
-  active?: ModelActiveTypeInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelEventFilterInput | null> | null;
-  or?: Array<ModelEventFilterInput | null> | null;
-  not?: ModelEventFilterInput | null;
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  coverPageImgURL?: ModelStringInput | null,
+  coverPageDescription?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  imgURLs?: ModelStringInput | null,
+  sponsor?: ModelStringInput | null,
+  online?: ModelBooleanInput | null,
+  group?: ModelBooleanInput | null,
+  startDate?: ModelStringInput | null,
+  endDate?: ModelStringInput | null,
+  eventStatus?: ModelEventStatusInput | null,
+  active?: ModelActiveTypeInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelEventFilterInput | null > | null,
+  or?: Array< ModelEventFilterInput | null > | null,
+  not?: ModelEventFilterInput | null,
+  eventEventLocationId?: ModelIDInput | null,
+  eventFormId?: ModelIDInput | null,
 };
 
 export type ModelEventConnection = {
-  __typename: 'ModelEventConnection';
-  items: Array<Event | null>;
-  nextToken?: string | null;
+  __typename: "ModelEventConnection",
+  items:  Array<Event | null >,
+  nextToken?: string | null,
 };
 
 export type ModelAddressFilterInput = {
-  id?: ModelIDInput | null;
-  description?: ModelStringInput | null;
-  place_id?: ModelStringInput | null;
-  reference?: ModelStringInput | null;
-  terms?: ModelStringInput | null;
-  types?: ModelStringInput | null;
-  apartmentNumbers?: ModelStringInput | null;
-  geocodingResult?: ModelStringInput | null;
-  lat?: ModelFloatInput | null;
-  lng?: ModelFloatInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelAddressFilterInput | null> | null;
-  or?: Array<ModelAddressFilterInput | null> | null;
-  not?: ModelAddressFilterInput | null;
+  id?: ModelIDInput | null,
+  description?: ModelStringInput | null,
+  place_id?: ModelStringInput | null,
+  reference?: ModelStringInput | null,
+  terms?: ModelStringInput | null,
+  types?: ModelStringInput | null,
+  apartmentNumbers?: ModelStringInput | null,
+  geocodingResult?: ModelStringInput | null,
+  lat?: ModelFloatInput | null,
+  lng?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelAddressFilterInput | null > | null,
+  or?: Array< ModelAddressFilterInput | null > | null,
+  not?: ModelAddressFilterInput | null,
 };
 
 export type ModelAddressConnection = {
-  __typename: 'ModelAddressConnection';
-  items: Array<Address | null>;
-  nextToken?: string | null;
+  __typename: "ModelAddressConnection",
+  items:  Array<Address | null >,
+  nextToken?: string | null,
 };
 
 export type ModelFormFilterInput = {
-  id?: ModelIDInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelFormFilterInput | null> | null;
-  or?: Array<ModelFormFilterInput | null> | null;
-  not?: ModelFormFilterInput | null;
+  id?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormFilterInput | null > | null,
+  or?: Array< ModelFormFilterInput | null > | null,
+  not?: ModelFormFilterInput | null,
+  formEventId?: ModelIDInput | null,
 };
 
 export type ModelFormConnection = {
-  __typename: 'ModelFormConnection';
-  items: Array<Form | null>;
-  nextToken?: string | null;
+  __typename: "ModelFormConnection",
+  items:  Array<Form | null >,
+  nextToken?: string | null,
 };
 
 export type ModelFormItemFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  order?: ModelIntInput | null;
-  isRequired?: ModelBooleanInput | null;
-  isString?: ModelBooleanInput | null;
-  isEmail?: ModelBooleanInput | null;
-  isNumber?: ModelBooleanInput | null;
-  description?: ModelStringInput | null;
-  formType?: ModelFormTypeInput | null;
-  helperText?: ModelStringInput | null;
-  minLength?: ModelIntInput | null;
-  maxLength?: ModelIntInput | null;
-  placeholder?: ModelStringInput | null;
-  label?: ModelStringInput | null;
-  formSelectChoices?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelFormItemFilterInput | null> | null;
-  or?: Array<ModelFormItemFilterInput | null> | null;
-  not?: ModelFormItemFilterInput | null;
-  formFormItemsId?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  order?: ModelIntInput | null,
+  isRequired?: ModelBooleanInput | null,
+  isString?: ModelBooleanInput | null,
+  isEmail?: ModelBooleanInput | null,
+  isNumber?: ModelBooleanInput | null,
+  description?: ModelStringInput | null,
+  formType?: ModelFormTypeInput | null,
+  helperText?: ModelStringInput | null,
+  minLength?: ModelIntInput | null,
+  maxLength?: ModelIntInput | null,
+  placeholder?: ModelStringInput | null,
+  label?: ModelStringInput | null,
+  formSelectChoices?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelFormItemFilterInput | null > | null,
+  or?: Array< ModelFormItemFilterInput | null > | null,
+  not?: ModelFormItemFilterInput | null,
+  formFormItemsId?: ModelIDInput | null,
 };
 
 export type ModelEventParticipantFilterInput = {
-  id?: ModelIDInput | null;
-  content1?: ModelStringInput | null;
-  content2?: ModelStringInput | null;
-  content3?: ModelStringInput | null;
-  content4?: ModelStringInput | null;
-  content5?: ModelStringInput | null;
-  content6?: ModelStringInput | null;
-  content7?: ModelStringInput | null;
-  content8?: ModelStringInput | null;
-  content9?: ModelStringInput | null;
-  content10?: ModelStringInput | null;
-  content11?: ModelStringInput | null;
-  content12?: ModelStringInput | null;
-  content13?: ModelStringInput | null;
-  content14?: ModelStringInput | null;
-  content15?: ModelStringInput | null;
-  content16?: ModelStringInput | null;
-  content17?: ModelStringInput | null;
-  content18?: ModelStringInput | null;
-  content19?: ModelStringInput | null;
-  eventParticipantStatus?: ModelEventParticipantStatusInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  owner?: ModelIDInput | null;
-  and?: Array<ModelEventParticipantFilterInput | null> | null;
-  or?: Array<ModelEventParticipantFilterInput | null> | null;
-  not?: ModelEventParticipantFilterInput | null;
-  eventEventParticipantsId?: ModelIDInput | null;
-  eventParticipantFormItem1Id?: ModelIDInput | null;
-  eventParticipantFormItem2Id?: ModelIDInput | null;
-  eventParticipantFormItem3Id?: ModelIDInput | null;
-  eventParticipantFormItem4Id?: ModelIDInput | null;
-  eventParticipantFormItem5Id?: ModelIDInput | null;
-  eventParticipantFormItem6Id?: ModelIDInput | null;
-  eventParticipantFormItem7Id?: ModelIDInput | null;
-  eventParticipantFormItem8Id?: ModelIDInput | null;
-  eventParticipantFormItem9Id?: ModelIDInput | null;
-  eventParticipantFormItem10Id?: ModelIDInput | null;
-  eventParticipantFormItem11Id?: ModelIDInput | null;
-  eventParticipantFormItem12Id?: ModelIDInput | null;
-  eventParticipantFormItem13Id?: ModelIDInput | null;
-  eventParticipantFormItem14Id?: ModelIDInput | null;
-  eventParticipantFormItem15Id?: ModelIDInput | null;
-  eventParticipantFormItem16Id?: ModelIDInput | null;
-  eventParticipantFormItem17Id?: ModelIDInput | null;
-  eventParticipantFormItem18Id?: ModelIDInput | null;
-  eventParticipantFormItem19Id?: ModelIDInput | null;
+  id?: ModelIDInput | null,
+  content1?: ModelStringInput | null,
+  content2?: ModelStringInput | null,
+  content3?: ModelStringInput | null,
+  content4?: ModelStringInput | null,
+  content5?: ModelStringInput | null,
+  content6?: ModelStringInput | null,
+  content7?: ModelStringInput | null,
+  content8?: ModelStringInput | null,
+  content9?: ModelStringInput | null,
+  content10?: ModelStringInput | null,
+  content11?: ModelStringInput | null,
+  content12?: ModelStringInput | null,
+  content13?: ModelStringInput | null,
+  content14?: ModelStringInput | null,
+  content15?: ModelStringInput | null,
+  content16?: ModelStringInput | null,
+  content17?: ModelStringInput | null,
+  content18?: ModelStringInput | null,
+  content19?: ModelStringInput | null,
+  eventParticipantStatus?: ModelEventParticipantStatusInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelIDInput | null,
+  and?: Array< ModelEventParticipantFilterInput | null > | null,
+  or?: Array< ModelEventParticipantFilterInput | null > | null,
+  not?: ModelEventParticipantFilterInput | null,
+  eventEventParticipantsId?: ModelIDInput | null,
+  eventParticipantFormItem1Id?: ModelIDInput | null,
+  eventParticipantFormItem2Id?: ModelIDInput | null,
+  eventParticipantFormItem3Id?: ModelIDInput | null,
+  eventParticipantFormItem4Id?: ModelIDInput | null,
+  eventParticipantFormItem5Id?: ModelIDInput | null,
+  eventParticipantFormItem6Id?: ModelIDInput | null,
+  eventParticipantFormItem7Id?: ModelIDInput | null,
+  eventParticipantFormItem8Id?: ModelIDInput | null,
+  eventParticipantFormItem9Id?: ModelIDInput | null,
+  eventParticipantFormItem10Id?: ModelIDInput | null,
+  eventParticipantFormItem11Id?: ModelIDInput | null,
+  eventParticipantFormItem12Id?: ModelIDInput | null,
+  eventParticipantFormItem13Id?: ModelIDInput | null,
+  eventParticipantFormItem14Id?: ModelIDInput | null,
+  eventParticipantFormItem15Id?: ModelIDInput | null,
+  eventParticipantFormItem16Id?: ModelIDInput | null,
+  eventParticipantFormItem17Id?: ModelIDInput | null,
+  eventParticipantFormItem18Id?: ModelIDInput | null,
+  eventParticipantFormItem19Id?: ModelIDInput | null,
 };
 
 export type ModelArticleTagsFilterInput = {
-  id?: ModelIDInput | null;
-  tagID?: ModelIDInput | null;
-  articleID?: ModelIDInput | null;
-  and?: Array<ModelArticleTagsFilterInput | null> | null;
-  or?: Array<ModelArticleTagsFilterInput | null> | null;
-  not?: ModelArticleTagsFilterInput | null;
+  id?: ModelIDInput | null,
+  tagID?: ModelIDInput | null,
+  articleID?: ModelIDInput | null,
+  and?: Array< ModelArticleTagsFilterInput | null > | null,
+  or?: Array< ModelArticleTagsFilterInput | null > | null,
+  not?: ModelArticleTagsFilterInput | null,
 };
 
 export type ModelEventTagsFilterInput = {
-  id?: ModelIDInput | null;
-  tagID?: ModelIDInput | null;
-  eventID?: ModelIDInput | null;
-  and?: Array<ModelEventTagsFilterInput | null> | null;
-  or?: Array<ModelEventTagsFilterInput | null> | null;
-  not?: ModelEventTagsFilterInput | null;
+  id?: ModelIDInput | null,
+  tagID?: ModelIDInput | null,
+  eventID?: ModelIDInput | null,
+  and?: Array< ModelEventTagsFilterInput | null > | null,
+  or?: Array< ModelEventTagsFilterInput | null > | null,
+  not?: ModelEventTagsFilterInput | null,
 };
 
 export type CreateUserMutationVariables = {
-  input: CreateUserInput;
-  condition?: ModelUserConditionInput | null;
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
 export type CreateUserMutation = {
-  createUser?: {
-    __typename: 'User';
-    id: string;
-    email: string;
-    userName: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    userName: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type UpdateUserMutationVariables = {
-  input: UpdateUserInput;
-  condition?: ModelUserConditionInput | null;
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
 export type UpdateUserMutation = {
-  updateUser?: {
-    __typename: 'User';
-    id: string;
-    email: string;
-    userName: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    userName: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type DeleteUserMutationVariables = {
-  input: DeleteUserInput;
-  condition?: ModelUserConditionInput | null;
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
 export type DeleteUserMutation = {
-  deleteUser?: {
-    __typename: 'User';
-    id: string;
-    email: string;
-    userName: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    userName: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type CreateUserProfileMutationVariables = {
-  input: CreateUserProfileInput;
-  condition?: ModelUserProfileConditionInput | null;
+  input: CreateUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
 export type CreateUserProfileMutation = {
-  createUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    name: string;
-    email?: string | null;
-    fullName?: string | null;
-    contactEmail?: string | null;
-    title?: string | null;
-    about?: string | null;
-    avatarURL?: {
-      __typename: 'UserImage';
-      id: string;
-      objectURL: string;
-      key: string;
-      name: string;
-      size: number;
-      type: string;
-      lastModified?: string | null;
-      lastModifiedDate?: string | null;
-      compressedWidth?: number | null;
-      objectCompressedURL?: string | null;
-      thumbnailWidth?: number | null;
-      objectThumbnailURL?: string | null;
-      targetTable: string;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    website?: string | null;
-    emailSubscription: boolean;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    userProfileAvatarURLId?: string | null;
-  } | null;
+  createUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    name: string,
+    email?: string | null,
+    fullName?: string | null,
+    contactEmail?: string | null,
+    title?: string | null,
+    about?: string | null,
+    avatarURL?:  {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      name: string,
+      size: number,
+      type: string,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      compressedWidth?: number | null,
+      objectCompressedURL?: string | null,
+      thumbnailWidth?: number | null,
+      objectThumbnailURL?: string | null,
+      targetTable: string,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    website?: string | null,
+    emailSubscription: boolean,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    userProfileAvatarURLId?: string | null,
+  } | null,
 };
 
 export type UpdateUserProfileMutationVariables = {
-  input: UpdateUserProfileInput;
-  condition?: ModelUserProfileConditionInput | null;
+  input: UpdateUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
 export type UpdateUserProfileMutation = {
-  updateUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    name: string;
-    email?: string | null;
-    fullName?: string | null;
-    contactEmail?: string | null;
-    title?: string | null;
-    about?: string | null;
-    avatarURL?: {
-      __typename: 'UserImage';
-      id: string;
-      objectURL: string;
-      key: string;
-      name: string;
-      size: number;
-      type: string;
-      lastModified?: string | null;
-      lastModifiedDate?: string | null;
-      compressedWidth?: number | null;
-      objectCompressedURL?: string | null;
-      thumbnailWidth?: number | null;
-      objectThumbnailURL?: string | null;
-      targetTable: string;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    website?: string | null;
-    emailSubscription: boolean;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    userProfileAvatarURLId?: string | null;
-  } | null;
+  updateUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    name: string,
+    email?: string | null,
+    fullName?: string | null,
+    contactEmail?: string | null,
+    title?: string | null,
+    about?: string | null,
+    avatarURL?:  {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      name: string,
+      size: number,
+      type: string,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      compressedWidth?: number | null,
+      objectCompressedURL?: string | null,
+      thumbnailWidth?: number | null,
+      objectThumbnailURL?: string | null,
+      targetTable: string,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    website?: string | null,
+    emailSubscription: boolean,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    userProfileAvatarURLId?: string | null,
+  } | null,
 };
 
 export type DeleteUserProfileMutationVariables = {
-  input: DeleteUserProfileInput;
-  condition?: ModelUserProfileConditionInput | null;
+  input: DeleteUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
 export type DeleteUserProfileMutation = {
-  deleteUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    name: string;
-    email?: string | null;
-    fullName?: string | null;
-    contactEmail?: string | null;
-    title?: string | null;
-    about?: string | null;
-    avatarURL?: {
-      __typename: 'UserImage';
-      id: string;
-      objectURL: string;
-      key: string;
-      name: string;
-      size: number;
-      type: string;
-      lastModified?: string | null;
-      lastModifiedDate?: string | null;
-      compressedWidth?: number | null;
-      objectCompressedURL?: string | null;
-      thumbnailWidth?: number | null;
-      objectThumbnailURL?: string | null;
-      targetTable: string;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    website?: string | null;
-    emailSubscription: boolean;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    userProfileAvatarURLId?: string | null;
-  } | null;
+  deleteUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    name: string,
+    email?: string | null,
+    fullName?: string | null,
+    contactEmail?: string | null,
+    title?: string | null,
+    about?: string | null,
+    avatarURL?:  {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      name: string,
+      size: number,
+      type: string,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      compressedWidth?: number | null,
+      objectCompressedURL?: string | null,
+      thumbnailWidth?: number | null,
+      objectThumbnailURL?: string | null,
+      targetTable: string,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    website?: string | null,
+    emailSubscription: boolean,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    userProfileAvatarURLId?: string | null,
+  } | null,
 };
 
 export type CreateUserImageMutationVariables = {
-  input: CreateUserImageInput;
-  condition?: ModelUserImageConditionInput | null;
+  input: CreateUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
 };
 
 export type CreateUserImageMutation = {
-  createUserImage?: {
-    __typename: 'UserImage';
-    id: string;
-    objectURL: string;
-    key: string;
-    name: string;
-    size: number;
-    type: string;
-    lastModified?: string | null;
-    lastModifiedDate?: string | null;
-    compressedWidth?: number | null;
-    objectCompressedURL?: string | null;
-    thumbnailWidth?: number | null;
-    objectThumbnailURL?: string | null;
-    targetTable: string;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  createUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    name: string,
+    size: number,
+    type: string,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    compressedWidth?: number | null,
+    objectCompressedURL?: string | null,
+    thumbnailWidth?: number | null,
+    objectThumbnailURL?: string | null,
+    targetTable: string,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type UpdateUserImageMutationVariables = {
-  input: UpdateUserImageInput;
-  condition?: ModelUserImageConditionInput | null;
+  input: UpdateUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
 };
 
 export type UpdateUserImageMutation = {
-  updateUserImage?: {
-    __typename: 'UserImage';
-    id: string;
-    objectURL: string;
-    key: string;
-    name: string;
-    size: number;
-    type: string;
-    lastModified?: string | null;
-    lastModifiedDate?: string | null;
-    compressedWidth?: number | null;
-    objectCompressedURL?: string | null;
-    thumbnailWidth?: number | null;
-    objectThumbnailURL?: string | null;
-    targetTable: string;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  updateUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    name: string,
+    size: number,
+    type: string,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    compressedWidth?: number | null,
+    objectCompressedURL?: string | null,
+    thumbnailWidth?: number | null,
+    objectThumbnailURL?: string | null,
+    targetTable: string,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type DeleteUserImageMutationVariables = {
-  input: DeleteUserImageInput;
-  condition?: ModelUserImageConditionInput | null;
+  input: DeleteUserImageInput,
+  condition?: ModelUserImageConditionInput | null,
 };
 
 export type DeleteUserImageMutation = {
-  deleteUserImage?: {
-    __typename: 'UserImage';
-    id: string;
-    objectURL: string;
-    key: string;
-    name: string;
-    size: number;
-    type: string;
-    lastModified?: string | null;
-    lastModifiedDate?: string | null;
-    compressedWidth?: number | null;
-    objectCompressedURL?: string | null;
-    thumbnailWidth?: number | null;
-    objectThumbnailURL?: string | null;
-    targetTable: string;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  deleteUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    name: string,
+    size: number,
+    type: string,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    compressedWidth?: number | null,
+    objectCompressedURL?: string | null,
+    thumbnailWidth?: number | null,
+    objectThumbnailURL?: string | null,
+    targetTable: string,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type CreateTagMutationVariables = {
-  input: CreateTagInput;
-  condition?: ModelTagConditionInput | null;
+  input: CreateTagInput,
+  condition?: ModelTagConditionInput | null,
 };
 
 export type CreateTagMutation = {
-  createTag?: {
-    __typename: 'Tag';
-    id: string;
-    articles?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    events?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  createTag?:  {
+    __typename: "Tag",
+    id: string,
+    articles?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type UpdateTagMutationVariables = {
-  input: UpdateTagInput;
-  condition?: ModelTagConditionInput | null;
+  input: UpdateTagInput,
+  condition?: ModelTagConditionInput | null,
 };
 
 export type UpdateTagMutation = {
-  updateTag?: {
-    __typename: 'Tag';
-    id: string;
-    articles?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    events?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  updateTag?:  {
+    __typename: "Tag",
+    id: string,
+    articles?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type DeleteTagMutationVariables = {
-  input: DeleteTagInput;
-  condition?: ModelTagConditionInput | null;
+  input: DeleteTagInput,
+  condition?: ModelTagConditionInput | null,
 };
 
 export type DeleteTagMutation = {
-  deleteTag?: {
-    __typename: 'Tag';
-    id: string;
-    articles?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    events?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  deleteTag?:  {
+    __typename: "Tag",
+    id: string,
+    articles?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type CreateArticleMutationVariables = {
-  input: CreateArticleInput;
-  condition?: ModelArticleConditionInput | null;
+  input: CreateArticleInput,
+  condition?: ModelArticleConditionInput | null,
 };
 
 export type CreateArticleMutation = {
-  createArticle?: {
-    __typename: 'Article';
-    id: string;
-    title: string;
-    content: string;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    tags?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    articleCountId?: string | null;
-  } | null;
+  createArticle?:  {
+    __typename: "Article",
+    id: string,
+    title: string,
+    content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    tags?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    articleCountId?: string | null,
+  } | null,
 };
 
 export type UpdateArticleMutationVariables = {
-  input: UpdateArticleInput;
-  condition?: ModelArticleConditionInput | null;
+  input: UpdateArticleInput,
+  condition?: ModelArticleConditionInput | null,
 };
 
 export type UpdateArticleMutation = {
-  updateArticle?: {
-    __typename: 'Article';
-    id: string;
-    title: string;
-    content: string;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    tags?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    articleCountId?: string | null;
-  } | null;
+  updateArticle?:  {
+    __typename: "Article",
+    id: string,
+    title: string,
+    content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    tags?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    articleCountId?: string | null,
+  } | null,
 };
 
 export type DeleteArticleMutationVariables = {
-  input: DeleteArticleInput;
-  condition?: ModelArticleConditionInput | null;
+  input: DeleteArticleInput,
+  condition?: ModelArticleConditionInput | null,
 };
 
 export type DeleteArticleMutation = {
-  deleteArticle?: {
-    __typename: 'Article';
-    id: string;
-    title: string;
-    content: string;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    tags?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    articleCountId?: string | null;
-  } | null;
+  deleteArticle?:  {
+    __typename: "Article",
+    id: string,
+    title: string,
+    content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    tags?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    articleCountId?: string | null,
+  } | null,
 };
 
 export type CreateCommentMutationVariables = {
-  input: CreateCommentInput;
-  condition?: ModelCommentConditionInput | null;
+  input: CreateCommentInput,
+  condition?: ModelCommentConditionInput | null,
 };
 
 export type CreateCommentMutation = {
-  createComment?: {
-    __typename: 'Comment';
-    id: string;
-    content: string;
-    isDeleted: boolean;
-    articleCommentsId?: string | null;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    eventCommentsId?: string | null;
-    event?: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    commentCountId?: string | null;
-  } | null;
+  createComment?:  {
+    __typename: "Comment",
+    id: string,
+    content: string,
+    isDeleted: boolean,
+    articleCommentsId?: string | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    commentCountId?: string | null,
+  } | null,
 };
 
 export type UpdateCommentMutationVariables = {
-  input: UpdateCommentInput;
-  condition?: ModelCommentConditionInput | null;
+  input: UpdateCommentInput,
+  condition?: ModelCommentConditionInput | null,
 };
 
 export type UpdateCommentMutation = {
-  updateComment?: {
-    __typename: 'Comment';
-    id: string;
-    content: string;
-    isDeleted: boolean;
-    articleCommentsId?: string | null;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    eventCommentsId?: string | null;
-    event?: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    commentCountId?: string | null;
-  } | null;
+  updateComment?:  {
+    __typename: "Comment",
+    id: string,
+    content: string,
+    isDeleted: boolean,
+    articleCommentsId?: string | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    commentCountId?: string | null,
+  } | null,
 };
 
 export type DeleteCommentMutationVariables = {
-  input: DeleteCommentInput;
-  condition?: ModelCommentConditionInput | null;
+  input: DeleteCommentInput,
+  condition?: ModelCommentConditionInput | null,
 };
 
 export type DeleteCommentMutation = {
-  deleteComment?: {
-    __typename: 'Comment';
-    id: string;
-    content: string;
-    isDeleted: boolean;
-    articleCommentsId?: string | null;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    eventCommentsId?: string | null;
-    event?: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    commentCountId?: string | null;
-  } | null;
+  deleteComment?:  {
+    __typename: "Comment",
+    id: string,
+    content: string,
+    isDeleted: boolean,
+    articleCommentsId?: string | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    commentCountId?: string | null,
+  } | null,
 };
 
 export type CreateContactUsMutationVariables = {
-  input: CreateContactUsInput;
-  condition?: ModelContactUsConditionInput | null;
+  input: CreateContactUsInput,
+  condition?: ModelContactUsConditionInput | null,
 };
 
 export type CreateContactUsMutation = {
-  createContactUs?: {
-    __typename: 'ContactUs';
-    id: string;
-    fullName?: string | null;
-    email?: string | null;
-    message?: string | null;
-    phone?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  createContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    message?: string | null,
+    phone?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type UpdateContactUsMutationVariables = {
-  input: UpdateContactUsInput;
-  condition?: ModelContactUsConditionInput | null;
+  input: UpdateContactUsInput,
+  condition?: ModelContactUsConditionInput | null,
 };
 
 export type UpdateContactUsMutation = {
-  updateContactUs?: {
-    __typename: 'ContactUs';
-    id: string;
-    fullName?: string | null;
-    email?: string | null;
-    message?: string | null;
-    phone?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  updateContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    message?: string | null,
+    phone?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type DeleteContactUsMutationVariables = {
-  input: DeleteContactUsInput;
-  condition?: ModelContactUsConditionInput | null;
+  input: DeleteContactUsInput,
+  condition?: ModelContactUsConditionInput | null,
 };
 
 export type DeleteContactUsMutation = {
-  deleteContactUs?: {
-    __typename: 'ContactUs';
-    id: string;
-    fullName?: string | null;
-    email?: string | null;
-    message?: string | null;
-    phone?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  deleteContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    message?: string | null,
+    phone?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type CreateCountMutationVariables = {
-  input: CreateCountInput;
-  condition?: ModelCountConditionInput | null;
+  input: CreateCountInput,
+  condition?: ModelCountConditionInput | null,
 };
 
 export type CreateCountMutation = {
-  createCount?: {
-    __typename: 'Count';
-    id: string;
-    count: number;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    countArticleId?: string | null;
-    countCommentId?: string | null;
-  } | null;
+  createCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
 };
 
 export type UpdateCountMutationVariables = {
-  input: UpdateCountInput;
-  condition?: ModelCountConditionInput | null;
+  input: UpdateCountInput,
+  condition?: ModelCountConditionInput | null,
 };
 
 export type UpdateCountMutation = {
-  updateCount?: {
-    __typename: 'Count';
-    id: string;
-    count: number;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    countArticleId?: string | null;
-    countCommentId?: string | null;
-  } | null;
+  updateCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
 };
 
 export type DeleteCountMutationVariables = {
-  input: DeleteCountInput;
-  condition?: ModelCountConditionInput | null;
+  input: DeleteCountInput,
+  condition?: ModelCountConditionInput | null,
 };
 
 export type DeleteCountMutation = {
-  deleteCount?: {
-    __typename: 'Count';
-    id: string;
-    count: number;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    countArticleId?: string | null;
-    countCommentId?: string | null;
-  } | null;
+  deleteCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
 };
 
 export type CreateLikeMutationVariables = {
-  input: CreateLikeInput;
-  condition?: ModelLikeConditionInput | null;
+  input: CreateLikeInput,
+  condition?: ModelLikeConditionInput | null,
 };
 
 export type CreateLikeMutation = {
-  createLike?: {
-    __typename: 'Like';
-    id: string;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    articleLikesId?: string | null;
-    commentLikesId?: string | null;
-  } | null;
+  createLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
 };
 
 export type UpdateLikeMutationVariables = {
-  input: UpdateLikeInput;
-  condition?: ModelLikeConditionInput | null;
+  input: UpdateLikeInput,
+  condition?: ModelLikeConditionInput | null,
 };
 
 export type UpdateLikeMutation = {
-  updateLike?: {
-    __typename: 'Like';
-    id: string;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    articleLikesId?: string | null;
-    commentLikesId?: string | null;
-  } | null;
+  updateLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
 };
 
 export type DeleteLikeMutationVariables = {
-  input: DeleteLikeInput;
-  condition?: ModelLikeConditionInput | null;
+  input: DeleteLikeInput,
+  condition?: ModelLikeConditionInput | null,
 };
 
 export type DeleteLikeMutation = {
-  deleteLike?: {
-    __typename: 'Like';
-    id: string;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    articleLikesId?: string | null;
-    commentLikesId?: string | null;
-  } | null;
+  deleteLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
 };
 
 export type CreateResearchDevelopmentTeamMutationVariables = {
-  input: CreateResearchDevelopmentTeamInput;
-  condition?: ModelResearchDevelopmentTeamConditionInput | null;
+  input: CreateResearchDevelopmentTeamInput,
+  condition?: ModelResearchDevelopmentTeamConditionInput | null,
 };
 
 export type CreateResearchDevelopmentTeamMutation = {
-  createResearchDevelopmentTeam?: {
-    __typename: 'ResearchDevelopmentTeam';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    linkedIn?: string | null;
-    github?: string | null;
-    website?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  createResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type UpdateResearchDevelopmentTeamMutationVariables = {
-  input: UpdateResearchDevelopmentTeamInput;
-  condition?: ModelResearchDevelopmentTeamConditionInput | null;
+  input: UpdateResearchDevelopmentTeamInput,
+  condition?: ModelResearchDevelopmentTeamConditionInput | null,
 };
 
 export type UpdateResearchDevelopmentTeamMutation = {
-  updateResearchDevelopmentTeam?: {
-    __typename: 'ResearchDevelopmentTeam';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    linkedIn?: string | null;
-    github?: string | null;
-    website?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  updateResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type DeleteResearchDevelopmentTeamMutationVariables = {
-  input: DeleteResearchDevelopmentTeamInput;
-  condition?: ModelResearchDevelopmentTeamConditionInput | null;
+  input: DeleteResearchDevelopmentTeamInput,
+  condition?: ModelResearchDevelopmentTeamConditionInput | null,
 };
 
 export type DeleteResearchDevelopmentTeamMutation = {
-  deleteResearchDevelopmentTeam?: {
-    __typename: 'ResearchDevelopmentTeam';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    linkedIn?: string | null;
-    github?: string | null;
-    website?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  deleteResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type CreateUwcssaDepartmentMutationVariables = {
-  input: CreateUwcssaDepartmentInput;
-  condition?: ModelUwcssaDepartmentConditionInput | null;
+  input: CreateUwcssaDepartmentInput,
+  condition?: ModelUwcssaDepartmentConditionInput | null,
 };
 
 export type CreateUwcssaDepartmentMutation = {
-  createUwcssaDepartment?: {
-    __typename: 'UwcssaDepartment';
-    id: string;
-    introduction?: string | null;
-    email?: string | null;
-    leader?: string | null;
-    currentLeader?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaMembers?: {
-      __typename: 'ModelUwcssaMemberConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  createUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type UpdateUwcssaDepartmentMutationVariables = {
-  input: UpdateUwcssaDepartmentInput;
-  condition?: ModelUwcssaDepartmentConditionInput | null;
+  input: UpdateUwcssaDepartmentInput,
+  condition?: ModelUwcssaDepartmentConditionInput | null,
 };
 
 export type UpdateUwcssaDepartmentMutation = {
-  updateUwcssaDepartment?: {
-    __typename: 'UwcssaDepartment';
-    id: string;
-    introduction?: string | null;
-    email?: string | null;
-    leader?: string | null;
-    currentLeader?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaMembers?: {
-      __typename: 'ModelUwcssaMemberConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  updateUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type DeleteUwcssaDepartmentMutationVariables = {
-  input: DeleteUwcssaDepartmentInput;
-  condition?: ModelUwcssaDepartmentConditionInput | null;
+  input: DeleteUwcssaDepartmentInput,
+  condition?: ModelUwcssaDepartmentConditionInput | null,
 };
 
 export type DeleteUwcssaDepartmentMutation = {
-  deleteUwcssaDepartment?: {
-    __typename: 'UwcssaDepartment';
-    id: string;
-    introduction?: string | null;
-    email?: string | null;
-    leader?: string | null;
-    currentLeader?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaMembers?: {
-      __typename: 'ModelUwcssaMemberConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  deleteUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type CreateUwcssaMemberMutationVariables = {
-  input: CreateUwcssaMemberInput;
-  condition?: ModelUwcssaMemberConditionInput | null;
+  input: CreateUwcssaMemberInput,
+  condition?: ModelUwcssaMemberConditionInput | null,
 };
 
 export type CreateUwcssaMemberMutation = {
-  createUwcssaMember?: {
-    __typename: 'UwcssaMember';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    department?: {
-      __typename: 'UwcssaDepartment';
-      id: string;
-      introduction?: string | null;
-      email?: string | null;
-      leader?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    linkedIn?: string | null;
-    website?: string | null;
-    github?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaDepartmentUwcssaMembersId?: string | null;
-  } | null;
+  createUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
 };
 
 export type UpdateUwcssaMemberMutationVariables = {
-  input: UpdateUwcssaMemberInput;
-  condition?: ModelUwcssaMemberConditionInput | null;
+  input: UpdateUwcssaMemberInput,
+  condition?: ModelUwcssaMemberConditionInput | null,
 };
 
 export type UpdateUwcssaMemberMutation = {
-  updateUwcssaMember?: {
-    __typename: 'UwcssaMember';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    department?: {
-      __typename: 'UwcssaDepartment';
-      id: string;
-      introduction?: string | null;
-      email?: string | null;
-      leader?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    linkedIn?: string | null;
-    website?: string | null;
-    github?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaDepartmentUwcssaMembersId?: string | null;
-  } | null;
+  updateUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
 };
 
 export type DeleteUwcssaMemberMutationVariables = {
-  input: DeleteUwcssaMemberInput;
-  condition?: ModelUwcssaMemberConditionInput | null;
+  input: DeleteUwcssaMemberInput,
+  condition?: ModelUwcssaMemberConditionInput | null,
 };
 
 export type DeleteUwcssaMemberMutation = {
-  deleteUwcssaMember?: {
-    __typename: 'UwcssaMember';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    department?: {
-      __typename: 'UwcssaDepartment';
-      id: string;
-      introduction?: string | null;
-      email?: string | null;
-      leader?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    linkedIn?: string | null;
-    website?: string | null;
-    github?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaDepartmentUwcssaMembersId?: string | null;
-  } | null;
+  deleteUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
 };
 
 export type CreateEventMutationVariables = {
-  input: CreateEventInput;
-  condition?: ModelEventConditionInput | null;
+  input: CreateEventInput,
+  condition?: ModelEventConditionInput | null,
 };
 
 export type CreateEventMutation = {
-  createEvent?: {
-    __typename: 'Event';
-    id: string;
-    title?: string | null;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    content?: string | null;
-    imgURLs?: Array<string | null> | null;
-    sponsor?: Array<string | null> | null;
-    online: boolean;
-    group: boolean;
-    tags?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    startDate: string;
-    endDate: string;
-    eventStatus: EventStatus;
-    eventLocation?: {
-      __typename: 'Address';
-      id: string;
-      description?: string | null;
-      place_id?: string | null;
-      reference?: string | null;
-      terms?: Array<string | null> | null;
-      types?: Array<string | null> | null;
-      apartmentNumbers?: string | null;
-      geocodingResult?: string | null;
-      lat?: number | null;
-      lng?: number | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    eventParticipants?: {
-      __typename: 'ModelEventParticipantConnection';
-      nextToken?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  createEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online: boolean,
+    group: boolean,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    eventParticipants?:  {
+      __typename: "ModelEventParticipantConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventLocationId?: string | null,
+    eventFormId?: string | null,
+  } | null,
 };
 
 export type UpdateEventMutationVariables = {
-  input: UpdateEventInput;
-  condition?: ModelEventConditionInput | null;
+  input: UpdateEventInput,
+  condition?: ModelEventConditionInput | null,
 };
 
 export type UpdateEventMutation = {
-  updateEvent?: {
-    __typename: 'Event';
-    id: string;
-    title?: string | null;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    content?: string | null;
-    imgURLs?: Array<string | null> | null;
-    sponsor?: Array<string | null> | null;
-    online: boolean;
-    group: boolean;
-    tags?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    startDate: string;
-    endDate: string;
-    eventStatus: EventStatus;
-    eventLocation?: {
-      __typename: 'Address';
-      id: string;
-      description?: string | null;
-      place_id?: string | null;
-      reference?: string | null;
-      terms?: Array<string | null> | null;
-      types?: Array<string | null> | null;
-      apartmentNumbers?: string | null;
-      geocodingResult?: string | null;
-      lat?: number | null;
-      lng?: number | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    eventParticipants?: {
-      __typename: 'ModelEventParticipantConnection';
-      nextToken?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  updateEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online: boolean,
+    group: boolean,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    eventParticipants?:  {
+      __typename: "ModelEventParticipantConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventLocationId?: string | null,
+    eventFormId?: string | null,
+  } | null,
 };
 
 export type DeleteEventMutationVariables = {
-  input: DeleteEventInput;
-  condition?: ModelEventConditionInput | null;
+  input: DeleteEventInput,
+  condition?: ModelEventConditionInput | null,
 };
 
 export type DeleteEventMutation = {
-  deleteEvent?: {
-    __typename: 'Event';
-    id: string;
-    title?: string | null;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    content?: string | null;
-    imgURLs?: Array<string | null> | null;
-    sponsor?: Array<string | null> | null;
-    online: boolean;
-    group: boolean;
-    tags?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    startDate: string;
-    endDate: string;
-    eventStatus: EventStatus;
-    eventLocation?: {
-      __typename: 'Address';
-      id: string;
-      description?: string | null;
-      place_id?: string | null;
-      reference?: string | null;
-      terms?: Array<string | null> | null;
-      types?: Array<string | null> | null;
-      apartmentNumbers?: string | null;
-      geocodingResult?: string | null;
-      lat?: number | null;
-      lng?: number | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    eventParticipants?: {
-      __typename: 'ModelEventParticipantConnection';
-      nextToken?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  deleteEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online: boolean,
+    group: boolean,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    eventParticipants?:  {
+      __typename: "ModelEventParticipantConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventLocationId?: string | null,
+    eventFormId?: string | null,
+  } | null,
 };
 
 export type CreateAddressMutationVariables = {
-  input: CreateAddressInput;
-  condition?: ModelAddressConditionInput | null;
+  input: CreateAddressInput,
+  condition?: ModelAddressConditionInput | null,
 };
 
 export type CreateAddressMutation = {
-  createAddress?: {
-    __typename: 'Address';
-    id: string;
-    description?: string | null;
-    place_id?: string | null;
-    reference?: string | null;
-    terms?: Array<string | null> | null;
-    types?: Array<string | null> | null;
-    apartmentNumbers?: string | null;
-    geocodingResult?: string | null;
-    lat?: number | null;
-    lng?: number | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  createAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type UpdateAddressMutationVariables = {
-  input: UpdateAddressInput;
-  condition?: ModelAddressConditionInput | null;
+  input: UpdateAddressInput,
+  condition?: ModelAddressConditionInput | null,
 };
 
 export type UpdateAddressMutation = {
-  updateAddress?: {
-    __typename: 'Address';
-    id: string;
-    description?: string | null;
-    place_id?: string | null;
-    reference?: string | null;
-    terms?: Array<string | null> | null;
-    types?: Array<string | null> | null;
-    apartmentNumbers?: string | null;
-    geocodingResult?: string | null;
-    lat?: number | null;
-    lng?: number | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  updateAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type DeleteAddressMutationVariables = {
-  input: DeleteAddressInput;
-  condition?: ModelAddressConditionInput | null;
+  input: DeleteAddressInput,
+  condition?: ModelAddressConditionInput | null,
 };
 
 export type DeleteAddressMutation = {
-  deleteAddress?: {
-    __typename: 'Address';
-    id: string;
-    description?: string | null;
-    place_id?: string | null;
-    reference?: string | null;
-    terms?: Array<string | null> | null;
-    types?: Array<string | null> | null;
-    apartmentNumbers?: string | null;
-    geocodingResult?: string | null;
-    lat?: number | null;
-    lng?: number | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  deleteAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type CreateFormMutationVariables = {
-  input: CreateFormInput;
-  condition?: ModelFormConditionInput | null;
+  input: CreateFormInput,
+  condition?: ModelFormConditionInput | null,
 };
 
 export type CreateFormMutation = {
-  createForm?: {
-    __typename: 'Form';
-    id: string;
-    formItems?: {
-      __typename: 'ModelFormItemConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  createForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formEventId?: string | null,
+  } | null,
 };
 
 export type UpdateFormMutationVariables = {
-  input: UpdateFormInput;
-  condition?: ModelFormConditionInput | null;
+  input: UpdateFormInput,
+  condition?: ModelFormConditionInput | null,
 };
 
 export type UpdateFormMutation = {
-  updateForm?: {
-    __typename: 'Form';
-    id: string;
-    formItems?: {
-      __typename: 'ModelFormItemConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  updateForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formEventId?: string | null,
+  } | null,
 };
 
 export type DeleteFormMutationVariables = {
-  input: DeleteFormInput;
-  condition?: ModelFormConditionInput | null;
+  input: DeleteFormInput,
+  condition?: ModelFormConditionInput | null,
 };
 
 export type DeleteFormMutation = {
-  deleteForm?: {
-    __typename: 'Form';
-    id: string;
-    formItems?: {
-      __typename: 'ModelFormItemConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  deleteForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formEventId?: string | null,
+  } | null,
 };
 
 export type CreateFormItemMutationVariables = {
-  input: CreateFormItemInput;
-  condition?: ModelFormItemConditionInput | null;
+  input: CreateFormItemInput,
+  condition?: ModelFormItemConditionInput | null,
 };
 
 export type CreateFormItemMutation = {
-  createFormItem?: {
-    __typename: 'FormItem';
-    id: string;
-    name: string;
-    order: number;
-    isRequired: boolean;
-    isString: boolean;
-    isEmail: boolean;
-    isNumber: boolean;
-    description?: string | null;
-    formType: FormType;
-    helperText?: string | null;
-    minLength?: number | null;
-    maxLength?: number | null;
-    placeholder?: string | null;
-    label?: string | null;
-    formSelectChoices?: Array<string | null> | null;
-    createdAt: string;
-    updatedAt: string;
-    form?: {
-      __typename: 'Form';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    formFormItemsId?: string | null;
-  } | null;
+  createFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    order: number,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    owner: string,
+    formFormItemsId?: string | null,
+  } | null,
 };
 
 export type UpdateFormItemMutationVariables = {
-  input: UpdateFormItemInput;
-  condition?: ModelFormItemConditionInput | null;
+  input: UpdateFormItemInput,
+  condition?: ModelFormItemConditionInput | null,
 };
 
 export type UpdateFormItemMutation = {
-  updateFormItem?: {
-    __typename: 'FormItem';
-    id: string;
-    name: string;
-    order: number;
-    isRequired: boolean;
-    isString: boolean;
-    isEmail: boolean;
-    isNumber: boolean;
-    description?: string | null;
-    formType: FormType;
-    helperText?: string | null;
-    minLength?: number | null;
-    maxLength?: number | null;
-    placeholder?: string | null;
-    label?: string | null;
-    formSelectChoices?: Array<string | null> | null;
-    createdAt: string;
-    updatedAt: string;
-    form?: {
-      __typename: 'Form';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    formFormItemsId?: string | null;
-  } | null;
+  updateFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    order: number,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    owner: string,
+    formFormItemsId?: string | null,
+  } | null,
 };
 
 export type DeleteFormItemMutationVariables = {
-  input: DeleteFormItemInput;
-  condition?: ModelFormItemConditionInput | null;
+  input: DeleteFormItemInput,
+  condition?: ModelFormItemConditionInput | null,
 };
 
 export type DeleteFormItemMutation = {
-  deleteFormItem?: {
-    __typename: 'FormItem';
-    id: string;
-    name: string;
-    order: number;
-    isRequired: boolean;
-    isString: boolean;
-    isEmail: boolean;
-    isNumber: boolean;
-    description?: string | null;
-    formType: FormType;
-    helperText?: string | null;
-    minLength?: number | null;
-    maxLength?: number | null;
-    placeholder?: string | null;
-    label?: string | null;
-    formSelectChoices?: Array<string | null> | null;
-    createdAt: string;
-    updatedAt: string;
-    form?: {
-      __typename: 'Form';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    formFormItemsId?: string | null;
-  } | null;
+  deleteFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    order: number,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    owner: string,
+    formFormItemsId?: string | null,
+  } | null,
 };
 
 export type CreateEventParticipantMutationVariables = {
-  input: CreateEventParticipantInput;
-  condition?: ModelEventParticipantConditionInput | null;
+  input: CreateEventParticipantInput,
+  condition?: ModelEventParticipantConditionInput | null,
 };
 
 export type CreateEventParticipantMutation = {
-  createEventParticipant?: {
-    __typename: 'EventParticipant';
-    id: string;
-    content1?: string | null;
-    formItem1?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content2?: string | null;
-    formItem2?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content3?: string | null;
-    formItem3?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content4?: string | null;
-    formItem4?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content5?: string | null;
-    formItem5?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content6?: string | null;
-    formItem6?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content7?: string | null;
-    formItem7?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content8?: string | null;
-    formItem8?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content9?: string | null;
-    formItem9?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content10?: string | null;
-    formItem10?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content11?: string | null;
-    formItem11?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content12?: string | null;
-    formItem12?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content13?: string | null;
-    formItem13?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content14?: string | null;
-    formItem14?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content15?: string | null;
-    formItem15?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content16?: string | null;
-    formItem16?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content17?: string | null;
-    formItem17?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content18?: string | null;
-    formItem18?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content19?: string | null;
-    formItem19?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    eventParticipantStatus: EventParticipantStatus;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    eventEventParticipantsId?: string | null;
-    eventParticipantFormItem1Id?: string | null;
-    eventParticipantFormItem2Id?: string | null;
-    eventParticipantFormItem3Id?: string | null;
-    eventParticipantFormItem4Id?: string | null;
-    eventParticipantFormItem5Id?: string | null;
-    eventParticipantFormItem6Id?: string | null;
-    eventParticipantFormItem7Id?: string | null;
-    eventParticipantFormItem8Id?: string | null;
-    eventParticipantFormItem9Id?: string | null;
-    eventParticipantFormItem10Id?: string | null;
-    eventParticipantFormItem11Id?: string | null;
-    eventParticipantFormItem12Id?: string | null;
-    eventParticipantFormItem13Id?: string | null;
-    eventParticipantFormItem14Id?: string | null;
-    eventParticipantFormItem15Id?: string | null;
-    eventParticipantFormItem16Id?: string | null;
-    eventParticipantFormItem17Id?: string | null;
-    eventParticipantFormItem18Id?: string | null;
-    eventParticipantFormItem19Id?: string | null;
-  } | null;
+  createEventParticipant?:  {
+    __typename: "EventParticipant",
+    id: string,
+    content1?: string | null,
+    formItem1?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content2?: string | null,
+    formItem2?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content3?: string | null,
+    formItem3?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content4?: string | null,
+    formItem4?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content5?: string | null,
+    formItem5?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content6?: string | null,
+    formItem6?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content7?: string | null,
+    formItem7?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content8?: string | null,
+    formItem8?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content9?: string | null,
+    formItem9?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content10?: string | null,
+    formItem10?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content11?: string | null,
+    formItem11?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content12?: string | null,
+    formItem12?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content13?: string | null,
+    formItem13?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content14?: string | null,
+    formItem14?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content15?: string | null,
+    formItem15?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content16?: string | null,
+    formItem16?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content17?: string | null,
+    formItem17?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content18?: string | null,
+    formItem18?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content19?: string | null,
+    formItem19?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    eventParticipantStatus: EventParticipantStatus,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventParticipantsId?: string | null,
+    eventParticipantFormItem1Id?: string | null,
+    eventParticipantFormItem2Id?: string | null,
+    eventParticipantFormItem3Id?: string | null,
+    eventParticipantFormItem4Id?: string | null,
+    eventParticipantFormItem5Id?: string | null,
+    eventParticipantFormItem6Id?: string | null,
+    eventParticipantFormItem7Id?: string | null,
+    eventParticipantFormItem8Id?: string | null,
+    eventParticipantFormItem9Id?: string | null,
+    eventParticipantFormItem10Id?: string | null,
+    eventParticipantFormItem11Id?: string | null,
+    eventParticipantFormItem12Id?: string | null,
+    eventParticipantFormItem13Id?: string | null,
+    eventParticipantFormItem14Id?: string | null,
+    eventParticipantFormItem15Id?: string | null,
+    eventParticipantFormItem16Id?: string | null,
+    eventParticipantFormItem17Id?: string | null,
+    eventParticipantFormItem18Id?: string | null,
+    eventParticipantFormItem19Id?: string | null,
+  } | null,
 };
 
 export type UpdateEventParticipantMutationVariables = {
-  input: UpdateEventParticipantInput;
-  condition?: ModelEventParticipantConditionInput | null;
+  input: UpdateEventParticipantInput,
+  condition?: ModelEventParticipantConditionInput | null,
 };
 
 export type UpdateEventParticipantMutation = {
-  updateEventParticipant?: {
-    __typename: 'EventParticipant';
-    id: string;
-    content1?: string | null;
-    formItem1?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content2?: string | null;
-    formItem2?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content3?: string | null;
-    formItem3?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content4?: string | null;
-    formItem4?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content5?: string | null;
-    formItem5?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content6?: string | null;
-    formItem6?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content7?: string | null;
-    formItem7?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content8?: string | null;
-    formItem8?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content9?: string | null;
-    formItem9?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content10?: string | null;
-    formItem10?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content11?: string | null;
-    formItem11?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content12?: string | null;
-    formItem12?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content13?: string | null;
-    formItem13?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content14?: string | null;
-    formItem14?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content15?: string | null;
-    formItem15?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content16?: string | null;
-    formItem16?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content17?: string | null;
-    formItem17?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content18?: string | null;
-    formItem18?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content19?: string | null;
-    formItem19?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    eventParticipantStatus: EventParticipantStatus;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    eventEventParticipantsId?: string | null;
-    eventParticipantFormItem1Id?: string | null;
-    eventParticipantFormItem2Id?: string | null;
-    eventParticipantFormItem3Id?: string | null;
-    eventParticipantFormItem4Id?: string | null;
-    eventParticipantFormItem5Id?: string | null;
-    eventParticipantFormItem6Id?: string | null;
-    eventParticipantFormItem7Id?: string | null;
-    eventParticipantFormItem8Id?: string | null;
-    eventParticipantFormItem9Id?: string | null;
-    eventParticipantFormItem10Id?: string | null;
-    eventParticipantFormItem11Id?: string | null;
-    eventParticipantFormItem12Id?: string | null;
-    eventParticipantFormItem13Id?: string | null;
-    eventParticipantFormItem14Id?: string | null;
-    eventParticipantFormItem15Id?: string | null;
-    eventParticipantFormItem16Id?: string | null;
-    eventParticipantFormItem17Id?: string | null;
-    eventParticipantFormItem18Id?: string | null;
-    eventParticipantFormItem19Id?: string | null;
-  } | null;
+  updateEventParticipant?:  {
+    __typename: "EventParticipant",
+    id: string,
+    content1?: string | null,
+    formItem1?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content2?: string | null,
+    formItem2?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content3?: string | null,
+    formItem3?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content4?: string | null,
+    formItem4?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content5?: string | null,
+    formItem5?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content6?: string | null,
+    formItem6?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content7?: string | null,
+    formItem7?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content8?: string | null,
+    formItem8?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content9?: string | null,
+    formItem9?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content10?: string | null,
+    formItem10?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content11?: string | null,
+    formItem11?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content12?: string | null,
+    formItem12?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content13?: string | null,
+    formItem13?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content14?: string | null,
+    formItem14?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content15?: string | null,
+    formItem15?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content16?: string | null,
+    formItem16?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content17?: string | null,
+    formItem17?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content18?: string | null,
+    formItem18?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content19?: string | null,
+    formItem19?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    eventParticipantStatus: EventParticipantStatus,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventParticipantsId?: string | null,
+    eventParticipantFormItem1Id?: string | null,
+    eventParticipantFormItem2Id?: string | null,
+    eventParticipantFormItem3Id?: string | null,
+    eventParticipantFormItem4Id?: string | null,
+    eventParticipantFormItem5Id?: string | null,
+    eventParticipantFormItem6Id?: string | null,
+    eventParticipantFormItem7Id?: string | null,
+    eventParticipantFormItem8Id?: string | null,
+    eventParticipantFormItem9Id?: string | null,
+    eventParticipantFormItem10Id?: string | null,
+    eventParticipantFormItem11Id?: string | null,
+    eventParticipantFormItem12Id?: string | null,
+    eventParticipantFormItem13Id?: string | null,
+    eventParticipantFormItem14Id?: string | null,
+    eventParticipantFormItem15Id?: string | null,
+    eventParticipantFormItem16Id?: string | null,
+    eventParticipantFormItem17Id?: string | null,
+    eventParticipantFormItem18Id?: string | null,
+    eventParticipantFormItem19Id?: string | null,
+  } | null,
 };
 
 export type DeleteEventParticipantMutationVariables = {
-  input: DeleteEventParticipantInput;
-  condition?: ModelEventParticipantConditionInput | null;
+  input: DeleteEventParticipantInput,
+  condition?: ModelEventParticipantConditionInput | null,
 };
 
 export type DeleteEventParticipantMutation = {
-  deleteEventParticipant?: {
-    __typename: 'EventParticipant';
-    id: string;
-    content1?: string | null;
-    formItem1?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content2?: string | null;
-    formItem2?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content3?: string | null;
-    formItem3?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content4?: string | null;
-    formItem4?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content5?: string | null;
-    formItem5?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content6?: string | null;
-    formItem6?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content7?: string | null;
-    formItem7?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content8?: string | null;
-    formItem8?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content9?: string | null;
-    formItem9?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content10?: string | null;
-    formItem10?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content11?: string | null;
-    formItem11?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content12?: string | null;
-    formItem12?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content13?: string | null;
-    formItem13?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content14?: string | null;
-    formItem14?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content15?: string | null;
-    formItem15?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content16?: string | null;
-    formItem16?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content17?: string | null;
-    formItem17?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content18?: string | null;
-    formItem18?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content19?: string | null;
-    formItem19?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    eventParticipantStatus: EventParticipantStatus;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    eventEventParticipantsId?: string | null;
-    eventParticipantFormItem1Id?: string | null;
-    eventParticipantFormItem2Id?: string | null;
-    eventParticipantFormItem3Id?: string | null;
-    eventParticipantFormItem4Id?: string | null;
-    eventParticipantFormItem5Id?: string | null;
-    eventParticipantFormItem6Id?: string | null;
-    eventParticipantFormItem7Id?: string | null;
-    eventParticipantFormItem8Id?: string | null;
-    eventParticipantFormItem9Id?: string | null;
-    eventParticipantFormItem10Id?: string | null;
-    eventParticipantFormItem11Id?: string | null;
-    eventParticipantFormItem12Id?: string | null;
-    eventParticipantFormItem13Id?: string | null;
-    eventParticipantFormItem14Id?: string | null;
-    eventParticipantFormItem15Id?: string | null;
-    eventParticipantFormItem16Id?: string | null;
-    eventParticipantFormItem17Id?: string | null;
-    eventParticipantFormItem18Id?: string | null;
-    eventParticipantFormItem19Id?: string | null;
-  } | null;
+  deleteEventParticipant?:  {
+    __typename: "EventParticipant",
+    id: string,
+    content1?: string | null,
+    formItem1?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content2?: string | null,
+    formItem2?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content3?: string | null,
+    formItem3?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content4?: string | null,
+    formItem4?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content5?: string | null,
+    formItem5?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content6?: string | null,
+    formItem6?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content7?: string | null,
+    formItem7?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content8?: string | null,
+    formItem8?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content9?: string | null,
+    formItem9?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content10?: string | null,
+    formItem10?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content11?: string | null,
+    formItem11?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content12?: string | null,
+    formItem12?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content13?: string | null,
+    formItem13?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content14?: string | null,
+    formItem14?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content15?: string | null,
+    formItem15?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content16?: string | null,
+    formItem16?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content17?: string | null,
+    formItem17?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content18?: string | null,
+    formItem18?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content19?: string | null,
+    formItem19?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    eventParticipantStatus: EventParticipantStatus,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventParticipantsId?: string | null,
+    eventParticipantFormItem1Id?: string | null,
+    eventParticipantFormItem2Id?: string | null,
+    eventParticipantFormItem3Id?: string | null,
+    eventParticipantFormItem4Id?: string | null,
+    eventParticipantFormItem5Id?: string | null,
+    eventParticipantFormItem6Id?: string | null,
+    eventParticipantFormItem7Id?: string | null,
+    eventParticipantFormItem8Id?: string | null,
+    eventParticipantFormItem9Id?: string | null,
+    eventParticipantFormItem10Id?: string | null,
+    eventParticipantFormItem11Id?: string | null,
+    eventParticipantFormItem12Id?: string | null,
+    eventParticipantFormItem13Id?: string | null,
+    eventParticipantFormItem14Id?: string | null,
+    eventParticipantFormItem15Id?: string | null,
+    eventParticipantFormItem16Id?: string | null,
+    eventParticipantFormItem17Id?: string | null,
+    eventParticipantFormItem18Id?: string | null,
+    eventParticipantFormItem19Id?: string | null,
+  } | null,
 };
 
 export type CreateArticleTagsMutationVariables = {
-  input: CreateArticleTagsInput;
-  condition?: ModelArticleTagsConditionInput | null;
+  input: CreateArticleTagsInput,
+  condition?: ModelArticleTagsConditionInput | null,
 };
 
 export type CreateArticleTagsMutation = {
-  createArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  createArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type UpdateArticleTagsMutationVariables = {
-  input: UpdateArticleTagsInput;
-  condition?: ModelArticleTagsConditionInput | null;
+  input: UpdateArticleTagsInput,
+  condition?: ModelArticleTagsConditionInput | null,
 };
 
 export type UpdateArticleTagsMutation = {
-  updateArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  updateArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type DeleteArticleTagsMutationVariables = {
-  input: DeleteArticleTagsInput;
-  condition?: ModelArticleTagsConditionInput | null;
+  input: DeleteArticleTagsInput,
+  condition?: ModelArticleTagsConditionInput | null,
 };
 
 export type DeleteArticleTagsMutation = {
-  deleteArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  deleteArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateEventTagsMutationVariables = {
-  input: CreateEventTagsInput;
-  condition?: ModelEventTagsConditionInput | null;
+  input: CreateEventTagsInput,
+  condition?: ModelEventTagsConditionInput | null,
 };
 
 export type CreateEventTagsMutation = {
-  createEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  createEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type UpdateEventTagsMutationVariables = {
-  input: UpdateEventTagsInput;
-  condition?: ModelEventTagsConditionInput | null;
+  input: UpdateEventTagsInput,
+  condition?: ModelEventTagsConditionInput | null,
 };
 
 export type UpdateEventTagsMutation = {
-  updateEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  updateEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type DeleteEventTagsMutationVariables = {
-  input: DeleteEventTagsInput;
-  condition?: ModelEventTagsConditionInput | null;
+  input: DeleteEventTagsInput,
+  condition?: ModelEventTagsConditionInput | null,
 };
 
 export type DeleteEventTagsMutation = {
-  deleteEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  deleteEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type GetUserQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetUserQuery = {
-  getUser?: {
-    __typename: 'User';
-    id: string;
-    email: string;
-    userName: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    userName: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListUsersQuery = {
-  listUsers?: {
-    __typename: 'ModelUserConnection';
-    items: Array<{
-      __typename: 'User';
-      id: string;
-      email: string;
-      userName: string;
-      name: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      email: string,
+      userName: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetUserProfileQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetUserProfileQuery = {
-  getUserProfile?: {
-    __typename: 'UserProfile';
-    id: string;
-    name: string;
-    email?: string | null;
-    fullName?: string | null;
-    contactEmail?: string | null;
-    title?: string | null;
-    about?: string | null;
-    avatarURL?: {
-      __typename: 'UserImage';
-      id: string;
-      objectURL: string;
-      key: string;
-      name: string;
-      size: number;
-      type: string;
-      lastModified?: string | null;
-      lastModifiedDate?: string | null;
-      compressedWidth?: number | null;
-      objectCompressedURL?: string | null;
-      thumbnailWidth?: number | null;
-      objectThumbnailURL?: string | null;
-      targetTable: string;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    website?: string | null;
-    emailSubscription: boolean;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    userProfileAvatarURLId?: string | null;
-  } | null;
+  getUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    name: string,
+    email?: string | null,
+    fullName?: string | null,
+    contactEmail?: string | null,
+    title?: string | null,
+    about?: string | null,
+    avatarURL?:  {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      name: string,
+      size: number,
+      type: string,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      compressedWidth?: number | null,
+      objectCompressedURL?: string | null,
+      thumbnailWidth?: number | null,
+      objectThumbnailURL?: string | null,
+      targetTable: string,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    website?: string | null,
+    emailSubscription: boolean,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    userProfileAvatarURLId?: string | null,
+  } | null,
 };
 
 export type ListUserProfilesQueryVariables = {
-  filter?: ModelUserProfileFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelUserProfileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListUserProfilesQuery = {
-  listUserProfiles?: {
-    __typename: 'ModelUserProfileConnection';
-    items: Array<{
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUserProfiles?:  {
+    __typename: "ModelUserProfileConnection",
+    items:  Array< {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type UserProfileSortByCreatedAtQueryVariables = {
-  active: ActiveType;
-  createdAt?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelUserProfileFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserProfileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type UserProfileSortByCreatedAtQuery = {
-  userProfileSortByCreatedAt?: {
-    __typename: 'ModelUserProfileConnection';
-    items: Array<{
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  userProfileSortByCreatedAt?:  {
+    __typename: "ModelUserProfileConnection",
+    items:  Array< {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetUserImageQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetUserImageQuery = {
-  getUserImage?: {
-    __typename: 'UserImage';
-    id: string;
-    objectURL: string;
-    key: string;
-    name: string;
-    size: number;
-    type: string;
-    lastModified?: string | null;
-    lastModifiedDate?: string | null;
-    compressedWidth?: number | null;
-    objectCompressedURL?: string | null;
-    thumbnailWidth?: number | null;
-    objectThumbnailURL?: string | null;
-    targetTable: string;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  getUserImage?:  {
+    __typename: "UserImage",
+    id: string,
+    objectURL: string,
+    key: string,
+    name: string,
+    size: number,
+    type: string,
+    lastModified?: string | null,
+    lastModifiedDate?: string | null,
+    compressedWidth?: number | null,
+    objectCompressedURL?: string | null,
+    thumbnailWidth?: number | null,
+    objectThumbnailURL?: string | null,
+    targetTable: string,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type ListUserImagesQueryVariables = {
-  filter?: ModelUserImageFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelUserImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListUserImagesQuery = {
-  listUserImages?: {
-    __typename: 'ModelUserImageConnection';
-    items: Array<{
-      __typename: 'UserImage';
-      id: string;
-      objectURL: string;
-      key: string;
-      name: string;
-      size: number;
-      type: string;
-      lastModified?: string | null;
-      lastModifiedDate?: string | null;
-      compressedWidth?: number | null;
-      objectCompressedURL?: string | null;
-      thumbnailWidth?: number | null;
-      objectThumbnailURL?: string | null;
-      targetTable: string;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUserImages?:  {
+    __typename: "ModelUserImageConnection",
+    items:  Array< {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      name: string,
+      size: number,
+      type: string,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      compressedWidth?: number | null,
+      objectCompressedURL?: string | null,
+      thumbnailWidth?: number | null,
+      objectThumbnailURL?: string | null,
+      targetTable: string,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type UserImageSortByCreatedAtQueryVariables = {
-  active: ActiveType;
-  createdAt?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelUserImageFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserImageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type UserImageSortByCreatedAtQuery = {
-  userImageSortByCreatedAt?: {
-    __typename: 'ModelUserImageConnection';
-    items: Array<{
-      __typename: 'UserImage';
-      id: string;
-      objectURL: string;
-      key: string;
-      name: string;
-      size: number;
-      type: string;
-      lastModified?: string | null;
-      lastModifiedDate?: string | null;
-      compressedWidth?: number | null;
-      objectCompressedURL?: string | null;
-      thumbnailWidth?: number | null;
-      objectThumbnailURL?: string | null;
-      targetTable: string;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  userImageSortByCreatedAt?:  {
+    __typename: "ModelUserImageConnection",
+    items:  Array< {
+      __typename: "UserImage",
+      id: string,
+      objectURL: string,
+      key: string,
+      name: string,
+      size: number,
+      type: string,
+      lastModified?: string | null,
+      lastModifiedDate?: string | null,
+      compressedWidth?: number | null,
+      objectCompressedURL?: string | null,
+      thumbnailWidth?: number | null,
+      objectThumbnailURL?: string | null,
+      targetTable: string,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetTagQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetTagQuery = {
-  getTag?: {
-    __typename: 'Tag';
-    id: string;
-    articles?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    events?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  getTag?:  {
+    __typename: "Tag",
+    id: string,
+    articles?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    events?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type ListTagsQueryVariables = {
-  filter?: ModelTagFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelTagFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListTagsQuery = {
-  listTags?: {
-    __typename: 'ModelTagConnection';
-    items: Array<{
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listTags?:  {
+    __typename: "ModelTagConnection",
+    items:  Array< {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetArticleQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetArticleQuery = {
-  getArticle?: {
-    __typename: 'Article';
-    id: string;
-    title: string;
-    content: string;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    tags?: {
-      __typename: 'ModelArticleTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    articleCountId?: string | null;
-  } | null;
+  getArticle?:  {
+    __typename: "Article",
+    id: string,
+    title: string,
+    content: string,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    tags?:  {
+      __typename: "ModelArticleTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    articleCountId?: string | null,
+  } | null,
 };
 
 export type ListArticlesQueryVariables = {
-  filter?: ModelArticleFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelArticleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListArticlesQuery = {
-  listArticles?: {
-    __typename: 'ModelArticleConnection';
-    items: Array<{
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listArticles?:  {
+    __typename: "ModelArticleConnection",
+    items:  Array< {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ArticleSortByCreatedAtQueryVariables = {
-  active: ActiveType;
-  createdAt?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelArticleFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelArticleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ArticleSortByCreatedAtQuery = {
-  articleSortByCreatedAt?: {
-    __typename: 'ModelArticleConnection';
-    items: Array<{
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  articleSortByCreatedAt?:  {
+    __typename: "ModelArticleConnection",
+    items:  Array< {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetCommentQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetCommentQuery = {
-  getComment?: {
-    __typename: 'Comment';
-    id: string;
-    content: string;
-    isDeleted: boolean;
-    articleCommentsId?: string | null;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    eventCommentsId?: string | null;
-    event?: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    count?: {
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null;
-    likes?: {
-      __typename: 'ModelLikeConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    };
-    commentCountId?: string | null;
-  } | null;
+  getComment?:  {
+    __typename: "Comment",
+    id: string,
+    content: string,
+    isDeleted: boolean,
+    articleCommentsId?: string | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    eventCommentsId?: string | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    count?:  {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    },
+    commentCountId?: string | null,
+  } | null,
 };
 
 export type ListCommentsQueryVariables = {
-  filter?: ModelCommentFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListCommentsQuery = {
-  listComments?: {
-    __typename: 'ModelCommentConnection';
-    items: Array<{
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listComments?:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type CommentSortByArticleCommentsIdCreatedAtQueryVariables = {
-  articleCommentsId: string;
-  createdAt?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelCommentFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  articleCommentsId: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type CommentSortByArticleCommentsIdCreatedAtQuery = {
-  commentSortByArticleCommentsIdCreatedAt?: {
-    __typename: 'ModelCommentConnection';
-    items: Array<{
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  commentSortByArticleCommentsIdCreatedAt?:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type CommentSortByEventCommentsIdCreatedAtQueryVariables = {
-  eventCommentsId: string;
-  createdAt?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelCommentFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  eventCommentsId: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type CommentSortByEventCommentsIdCreatedAtQuery = {
-  commentSortByEventCommentsIdCreatedAt?: {
-    __typename: 'ModelCommentConnection';
-    items: Array<{
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  commentSortByEventCommentsIdCreatedAt?:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetContactUsQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetContactUsQuery = {
-  getContactUs?: {
-    __typename: 'ContactUs';
-    id: string;
-    fullName?: string | null;
-    email?: string | null;
-    message?: string | null;
-    phone?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner?: string | null;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  getContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    fullName?: string | null,
+    email?: string | null,
+    message?: string | null,
+    phone?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type ListContactusesQueryVariables = {
-  filter?: ModelContactUsFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelContactUsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListContactusesQuery = {
-  listContactuses?: {
-    __typename: 'ModelContactUsConnection';
-    items: Array<{
-      __typename: 'ContactUs';
-      id: string;
-      fullName?: string | null;
-      email?: string | null;
-      message?: string | null;
-      phone?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listContactuses?:  {
+    __typename: "ModelContactUsConnection",
+    items:  Array< {
+      __typename: "ContactUs",
+      id: string,
+      fullName?: string | null,
+      email?: string | null,
+      message?: string | null,
+      phone?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetCountQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetCountQuery = {
-  getCount?: {
-    __typename: 'Count';
-    id: string;
-    count: number;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    countArticleId?: string | null;
-    countCommentId?: string | null;
-  } | null;
+  getCount?:  {
+    __typename: "Count",
+    id: string,
+    count: number,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    countArticleId?: string | null,
+    countCommentId?: string | null,
+  } | null,
 };
 
 export type ListCountsQueryVariables = {
-  filter?: ModelCountFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelCountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListCountsQuery = {
-  listCounts?: {
-    __typename: 'ModelCountConnection';
-    items: Array<{
-      __typename: 'Count';
-      id: string;
-      count: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      countArticleId?: string | null;
-      countCommentId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listCounts?:  {
+    __typename: "ModelCountConnection",
+    items:  Array< {
+      __typename: "Count",
+      id: string,
+      count: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      countArticleId?: string | null,
+      countCommentId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetLikeQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetLikeQuery = {
-  getLike?: {
-    __typename: 'Like';
-    id: string;
-    article?: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    } | null;
-    comment?: {
-      __typename: 'Comment';
-      id: string;
-      content: string;
-      isDeleted: boolean;
-      articleCommentsId?: string | null;
-      eventCommentsId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      commentCountId?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    articleLikesId?: string | null;
-    commentLikesId?: string | null;
-  } | null;
+  getLike?:  {
+    __typename: "Like",
+    id: string,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    } | null,
+    comment?:  {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      isDeleted: boolean,
+      articleCommentsId?: string | null,
+      eventCommentsId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      commentCountId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    articleLikesId?: string | null,
+    commentLikesId?: string | null,
+  } | null,
 };
 
 export type ListLikesQueryVariables = {
-  filter?: ModelLikeFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelLikeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListLikesQuery = {
-  listLikes?: {
-    __typename: 'ModelLikeConnection';
-    items: Array<{
-      __typename: 'Like';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleLikesId?: string | null;
-      commentLikesId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listLikes?:  {
+    __typename: "ModelLikeConnection",
+    items:  Array< {
+      __typename: "Like",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleLikesId?: string | null,
+      commentLikesId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetResearchDevelopmentTeamQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetResearchDevelopmentTeamQuery = {
-  getResearchDevelopmentTeam?: {
-    __typename: 'ResearchDevelopmentTeam';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    linkedIn?: string | null;
-    github?: string | null;
-    website?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  getResearchDevelopmentTeam?:  {
+    __typename: "ResearchDevelopmentTeam",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    linkedIn?: string | null,
+    github?: string | null,
+    website?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type ListResearchDevelopmentTeamsQueryVariables = {
-  filter?: ModelResearchDevelopmentTeamFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelResearchDevelopmentTeamFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListResearchDevelopmentTeamsQuery = {
-  listResearchDevelopmentTeams?: {
-    __typename: 'ModelResearchDevelopmentTeamConnection';
-    items: Array<{
-      __typename: 'ResearchDevelopmentTeam';
-      id: string;
-      name?: string | null;
-      title?: string | null;
-      subTitle?: string | null;
-      content?: string | null;
-      imgURL?: string | null;
-      email?: string | null;
-      linkedIn?: string | null;
-      github?: string | null;
-      website?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listResearchDevelopmentTeams?:  {
+    __typename: "ModelResearchDevelopmentTeamConnection",
+    items:  Array< {
+      __typename: "ResearchDevelopmentTeam",
+      id: string,
+      name?: string | null,
+      title?: string | null,
+      subTitle?: string | null,
+      content?: string | null,
+      imgURL?: string | null,
+      email?: string | null,
+      linkedIn?: string | null,
+      github?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetUwcssaDepartmentQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetUwcssaDepartmentQuery = {
-  getUwcssaDepartment?: {
-    __typename: 'UwcssaDepartment';
-    id: string;
-    introduction?: string | null;
-    email?: string | null;
-    leader?: string | null;
-    currentLeader?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaMembers?: {
-      __typename: 'ModelUwcssaMemberConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-  } | null;
+  getUwcssaDepartment?:  {
+    __typename: "UwcssaDepartment",
+    id: string,
+    introduction?: string | null,
+    email?: string | null,
+    leader?: string | null,
+    currentLeader?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaMembers?:  {
+      __typename: "ModelUwcssaMemberConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+  } | null,
 };
 
 export type ListUwcssaDepartmentsQueryVariables = {
-  filter?: ModelUwcssaDepartmentFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelUwcssaDepartmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListUwcssaDepartmentsQuery = {
-  listUwcssaDepartments?: {
-    __typename: 'ModelUwcssaDepartmentConnection';
-    items: Array<{
-      __typename: 'UwcssaDepartment';
-      id: string;
-      introduction?: string | null;
-      email?: string | null;
-      leader?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUwcssaDepartments?:  {
+    __typename: "ModelUwcssaDepartmentConnection",
+    items:  Array< {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetUwcssaMemberQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetUwcssaMemberQuery = {
-  getUwcssaMember?: {
-    __typename: 'UwcssaMember';
-    id: string;
-    name?: string | null;
-    title?: string | null;
-    subTitle?: string | null;
-    content?: string | null;
-    imgURL?: string | null;
-    email?: string | null;
-    department?: {
-      __typename: 'UwcssaDepartment';
-      id: string;
-      introduction?: string | null;
-      email?: string | null;
-      leader?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    linkedIn?: string | null;
-    website?: string | null;
-    github?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    uwcssaDepartmentUwcssaMembersId?: string | null;
-  } | null;
+  getUwcssaMember?:  {
+    __typename: "UwcssaMember",
+    id: string,
+    name?: string | null,
+    title?: string | null,
+    subTitle?: string | null,
+    content?: string | null,
+    imgURL?: string | null,
+    email?: string | null,
+    department?:  {
+      __typename: "UwcssaDepartment",
+      id: string,
+      introduction?: string | null,
+      email?: string | null,
+      leader?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    linkedIn?: string | null,
+    website?: string | null,
+    github?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    uwcssaDepartmentUwcssaMembersId?: string | null,
+  } | null,
 };
 
 export type ListUwcssaMembersQueryVariables = {
-  filter?: ModelUwcssaMemberFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelUwcssaMemberFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListUwcssaMembersQuery = {
-  listUwcssaMembers?: {
-    __typename: 'ModelUwcssaMemberConnection';
-    items: Array<{
-      __typename: 'UwcssaMember';
-      id: string;
-      name?: string | null;
-      title?: string | null;
-      subTitle?: string | null;
-      content?: string | null;
-      imgURL?: string | null;
-      email?: string | null;
-      linkedIn?: string | null;
-      website?: string | null;
-      github?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      uwcssaDepartmentUwcssaMembersId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUwcssaMembers?:  {
+    __typename: "ModelUwcssaMemberConnection",
+    items:  Array< {
+      __typename: "UwcssaMember",
+      id: string,
+      name?: string | null,
+      title?: string | null,
+      subTitle?: string | null,
+      content?: string | null,
+      imgURL?: string | null,
+      email?: string | null,
+      linkedIn?: string | null,
+      website?: string | null,
+      github?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      uwcssaDepartmentUwcssaMembersId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetEventQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetEventQuery = {
-  getEvent?: {
-    __typename: 'Event';
-    id: string;
-    title?: string | null;
-    coverPageImgURL?: string | null;
-    coverPageDescription?: string | null;
-    content?: string | null;
-    imgURLs?: Array<string | null> | null;
-    sponsor?: Array<string | null> | null;
-    online: boolean;
-    group: boolean;
-    tags?: {
-      __typename: 'ModelEventTagsConnection';
-      nextToken?: string | null;
-    } | null;
-    startDate: string;
-    endDate: string;
-    eventStatus: EventStatus;
-    eventLocation?: {
-      __typename: 'Address';
-      id: string;
-      description?: string | null;
-      place_id?: string | null;
-      reference?: string | null;
-      terms?: Array<string | null> | null;
-      types?: Array<string | null> | null;
-      apartmentNumbers?: string | null;
-      geocodingResult?: string | null;
-      lat?: number | null;
-      lng?: number | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    comments?: {
-      __typename: 'ModelCommentConnection';
-      nextToken?: string | null;
-    } | null;
-    eventParticipants?: {
-      __typename: 'ModelEventParticipantConnection';
-      nextToken?: string | null;
-    } | null;
-    active: ActiveType;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  getEvent?:  {
+    __typename: "Event",
+    id: string,
+    title?: string | null,
+    coverPageImgURL?: string | null,
+    coverPageDescription?: string | null,
+    content?: string | null,
+    imgURLs?: Array< string | null > | null,
+    sponsor?: Array< string | null > | null,
+    online: boolean,
+    group: boolean,
+    tags?:  {
+      __typename: "ModelEventTagsConnection",
+      nextToken?: string | null,
+    } | null,
+    startDate: string,
+    endDate: string,
+    eventStatus: EventStatus,
+    eventLocation?:  {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    eventParticipants?:  {
+      __typename: "ModelEventParticipantConnection",
+      nextToken?: string | null,
+    } | null,
+    active: ActiveType,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventLocationId?: string | null,
+    eventFormId?: string | null,
+  } | null,
 };
 
 export type ListEventsQueryVariables = {
-  filter?: ModelEventFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListEventsQuery = {
-  listEvents?: {
-    __typename: 'ModelEventConnection';
-    items: Array<{
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listEvents?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type EventSortByCreatedAtQueryVariables = {
-  active: ActiveType;
-  createdAt?: ModelStringKeyConditionInput | null;
-  sortDirection?: ModelSortDirection | null;
-  filter?: ModelEventFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  active: ActiveType,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type EventSortByCreatedAtQuery = {
-  eventSortByCreatedAt?: {
-    __typename: 'ModelEventConnection';
-    items: Array<{
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  eventSortByCreatedAt?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetAddressQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetAddressQuery = {
-  getAddress?: {
-    __typename: 'Address';
-    id: string;
-    description?: string | null;
-    place_id?: string | null;
-    reference?: string | null;
-    terms?: Array<string | null> | null;
-    types?: Array<string | null> | null;
-    apartmentNumbers?: string | null;
-    geocodingResult?: string | null;
-    lat?: number | null;
-    lng?: number | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  getAddress?:  {
+    __typename: "Address",
+    id: string,
+    description?: string | null,
+    place_id?: string | null,
+    reference?: string | null,
+    terms?: Array< string | null > | null,
+    types?: Array< string | null > | null,
+    apartmentNumbers?: string | null,
+    geocodingResult?: string | null,
+    lat?: number | null,
+    lng?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+  } | null,
 };
 
 export type ListAddressesQueryVariables = {
-  filter?: ModelAddressFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelAddressFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListAddressesQuery = {
-  listAddresses?: {
-    __typename: 'ModelAddressConnection';
-    items: Array<{
-      __typename: 'Address';
-      id: string;
-      description?: string | null;
-      place_id?: string | null;
-      reference?: string | null;
-      terms?: Array<string | null> | null;
-      types?: Array<string | null> | null;
-      apartmentNumbers?: string | null;
-      geocodingResult?: string | null;
-      lat?: number | null;
-      lng?: number | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listAddresses?:  {
+    __typename: "ModelAddressConnection",
+    items:  Array< {
+      __typename: "Address",
+      id: string,
+      description?: string | null,
+      place_id?: string | null,
+      reference?: string | null,
+      terms?: Array< string | null > | null,
+      types?: Array< string | null > | null,
+      apartmentNumbers?: string | null,
+      geocodingResult?: string | null,
+      lat?: number | null,
+      lng?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetFormQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetFormQuery = {
-  getForm?: {
-    __typename: 'Form';
-    id: string;
-    formItems?: {
-      __typename: 'ModelFormItemConnection';
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-  } | null;
+  getForm?:  {
+    __typename: "Form",
+    id: string,
+    formItems?:  {
+      __typename: "ModelFormItemConnection",
+      nextToken?: string | null,
+    } | null,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    formEventId?: string | null,
+  } | null,
 };
 
 export type ListFormsQueryVariables = {
-  filter?: ModelFormFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelFormFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListFormsQuery = {
-  listForms?: {
-    __typename: 'ModelFormConnection';
-    items: Array<{
-      __typename: 'Form';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listForms?:  {
+    __typename: "ModelFormConnection",
+    items:  Array< {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetFormItemQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetFormItemQuery = {
-  getFormItem?: {
-    __typename: 'FormItem';
-    id: string;
-    name: string;
-    order: number;
-    isRequired: boolean;
-    isString: boolean;
-    isEmail: boolean;
-    isNumber: boolean;
-    description?: string | null;
-    formType: FormType;
-    helperText?: string | null;
-    minLength?: number | null;
-    maxLength?: number | null;
-    placeholder?: string | null;
-    label?: string | null;
-    formSelectChoices?: Array<string | null> | null;
-    createdAt: string;
-    updatedAt: string;
-    form?: {
-      __typename: 'Form';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    } | null;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    formFormItemsId?: string | null;
-  } | null;
+  getFormItem?:  {
+    __typename: "FormItem",
+    id: string,
+    name: string,
+    order: number,
+    isRequired: boolean,
+    isString: boolean,
+    isEmail: boolean,
+    isNumber: boolean,
+    description?: string | null,
+    formType: FormType,
+    helperText?: string | null,
+    minLength?: number | null,
+    maxLength?: number | null,
+    placeholder?: string | null,
+    label?: string | null,
+    formSelectChoices?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    form?:  {
+      __typename: "Form",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formEventId?: string | null,
+    } | null,
+    owner: string,
+    formFormItemsId?: string | null,
+  } | null,
 };
 
 export type ListFormItemsQueryVariables = {
-  filter?: ModelFormItemFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelFormItemFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListFormItemsQuery = {
-  listFormItems?: {
-    __typename: 'ModelFormItemConnection';
-    items: Array<{
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listFormItems?:  {
+    __typename: "ModelFormItemConnection",
+    items:  Array< {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetEventParticipantQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetEventParticipantQuery = {
-  getEventParticipant?: {
-    __typename: 'EventParticipant';
-    id: string;
-    content1?: string | null;
-    formItem1?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content2?: string | null;
-    formItem2?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content3?: string | null;
-    formItem3?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content4?: string | null;
-    formItem4?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content5?: string | null;
-    formItem5?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content6?: string | null;
-    formItem6?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content7?: string | null;
-    formItem7?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content8?: string | null;
-    formItem8?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content9?: string | null;
-    formItem9?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content10?: string | null;
-    formItem10?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content11?: string | null;
-    formItem11?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content12?: string | null;
-    formItem12?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content13?: string | null;
-    formItem13?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content14?: string | null;
-    formItem14?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content15?: string | null;
-    formItem15?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content16?: string | null;
-    formItem16?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content17?: string | null;
-    formItem17?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content18?: string | null;
-    formItem18?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    content19?: string | null;
-    formItem19?: {
-      __typename: 'FormItem';
-      id: string;
-      name: string;
-      order: number;
-      isRequired: boolean;
-      isString: boolean;
-      isEmail: boolean;
-      isNumber: boolean;
-      description?: string | null;
-      formType: FormType;
-      helperText?: string | null;
-      minLength?: number | null;
-      maxLength?: number | null;
-      placeholder?: string | null;
-      label?: string | null;
-      formSelectChoices?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      formFormItemsId?: string | null;
-    } | null;
-    eventParticipantStatus: EventParticipantStatus;
-    createdAt: string;
-    updatedAt: string;
-    owner: string;
-    user?: {
-      __typename: 'UserProfile';
-      id: string;
-      name: string;
-      email?: string | null;
-      fullName?: string | null;
-      contactEmail?: string | null;
-      title?: string | null;
-      about?: string | null;
-      website?: string | null;
-      emailSubscription: boolean;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      userProfileAvatarURLId?: string | null;
-    } | null;
-    eventEventParticipantsId?: string | null;
-    eventParticipantFormItem1Id?: string | null;
-    eventParticipantFormItem2Id?: string | null;
-    eventParticipantFormItem3Id?: string | null;
-    eventParticipantFormItem4Id?: string | null;
-    eventParticipantFormItem5Id?: string | null;
-    eventParticipantFormItem6Id?: string | null;
-    eventParticipantFormItem7Id?: string | null;
-    eventParticipantFormItem8Id?: string | null;
-    eventParticipantFormItem9Id?: string | null;
-    eventParticipantFormItem10Id?: string | null;
-    eventParticipantFormItem11Id?: string | null;
-    eventParticipantFormItem12Id?: string | null;
-    eventParticipantFormItem13Id?: string | null;
-    eventParticipantFormItem14Id?: string | null;
-    eventParticipantFormItem15Id?: string | null;
-    eventParticipantFormItem16Id?: string | null;
-    eventParticipantFormItem17Id?: string | null;
-    eventParticipantFormItem18Id?: string | null;
-    eventParticipantFormItem19Id?: string | null;
-  } | null;
+  getEventParticipant?:  {
+    __typename: "EventParticipant",
+    id: string,
+    content1?: string | null,
+    formItem1?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content2?: string | null,
+    formItem2?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content3?: string | null,
+    formItem3?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content4?: string | null,
+    formItem4?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content5?: string | null,
+    formItem5?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content6?: string | null,
+    formItem6?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content7?: string | null,
+    formItem7?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content8?: string | null,
+    formItem8?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content9?: string | null,
+    formItem9?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content10?: string | null,
+    formItem10?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content11?: string | null,
+    formItem11?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content12?: string | null,
+    formItem12?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content13?: string | null,
+    formItem13?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content14?: string | null,
+    formItem14?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content15?: string | null,
+    formItem15?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content16?: string | null,
+    formItem16?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content17?: string | null,
+    formItem17?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content18?: string | null,
+    formItem18?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    content19?: string | null,
+    formItem19?:  {
+      __typename: "FormItem",
+      id: string,
+      name: string,
+      order: number,
+      isRequired: boolean,
+      isString: boolean,
+      isEmail: boolean,
+      isNumber: boolean,
+      description?: string | null,
+      formType: FormType,
+      helperText?: string | null,
+      minLength?: number | null,
+      maxLength?: number | null,
+      placeholder?: string | null,
+      label?: string | null,
+      formSelectChoices?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      formFormItemsId?: string | null,
+    } | null,
+    eventParticipantStatus: EventParticipantStatus,
+    createdAt: string,
+    updatedAt: string,
+    owner: string,
+    user?:  {
+      __typename: "UserProfile",
+      id: string,
+      name: string,
+      email?: string | null,
+      fullName?: string | null,
+      contactEmail?: string | null,
+      title?: string | null,
+      about?: string | null,
+      website?: string | null,
+      emailSubscription: boolean,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      userProfileAvatarURLId?: string | null,
+    } | null,
+    eventEventParticipantsId?: string | null,
+    eventParticipantFormItem1Id?: string | null,
+    eventParticipantFormItem2Id?: string | null,
+    eventParticipantFormItem3Id?: string | null,
+    eventParticipantFormItem4Id?: string | null,
+    eventParticipantFormItem5Id?: string | null,
+    eventParticipantFormItem6Id?: string | null,
+    eventParticipantFormItem7Id?: string | null,
+    eventParticipantFormItem8Id?: string | null,
+    eventParticipantFormItem9Id?: string | null,
+    eventParticipantFormItem10Id?: string | null,
+    eventParticipantFormItem11Id?: string | null,
+    eventParticipantFormItem12Id?: string | null,
+    eventParticipantFormItem13Id?: string | null,
+    eventParticipantFormItem14Id?: string | null,
+    eventParticipantFormItem15Id?: string | null,
+    eventParticipantFormItem16Id?: string | null,
+    eventParticipantFormItem17Id?: string | null,
+    eventParticipantFormItem18Id?: string | null,
+    eventParticipantFormItem19Id?: string | null,
+  } | null,
 };
 
 export type ListEventParticipantsQueryVariables = {
-  filter?: ModelEventParticipantFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelEventParticipantFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListEventParticipantsQuery = {
-  listEventParticipants?: {
-    __typename: 'ModelEventParticipantConnection';
-    items: Array<{
-      __typename: 'EventParticipant';
-      id: string;
-      content1?: string | null;
-      content2?: string | null;
-      content3?: string | null;
-      content4?: string | null;
-      content5?: string | null;
-      content6?: string | null;
-      content7?: string | null;
-      content8?: string | null;
-      content9?: string | null;
-      content10?: string | null;
-      content11?: string | null;
-      content12?: string | null;
-      content13?: string | null;
-      content14?: string | null;
-      content15?: string | null;
-      content16?: string | null;
-      content17?: string | null;
-      content18?: string | null;
-      content19?: string | null;
-      eventParticipantStatus: EventParticipantStatus;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      eventEventParticipantsId?: string | null;
-      eventParticipantFormItem1Id?: string | null;
-      eventParticipantFormItem2Id?: string | null;
-      eventParticipantFormItem3Id?: string | null;
-      eventParticipantFormItem4Id?: string | null;
-      eventParticipantFormItem5Id?: string | null;
-      eventParticipantFormItem6Id?: string | null;
-      eventParticipantFormItem7Id?: string | null;
-      eventParticipantFormItem8Id?: string | null;
-      eventParticipantFormItem9Id?: string | null;
-      eventParticipantFormItem10Id?: string | null;
-      eventParticipantFormItem11Id?: string | null;
-      eventParticipantFormItem12Id?: string | null;
-      eventParticipantFormItem13Id?: string | null;
-      eventParticipantFormItem14Id?: string | null;
-      eventParticipantFormItem15Id?: string | null;
-      eventParticipantFormItem16Id?: string | null;
-      eventParticipantFormItem17Id?: string | null;
-      eventParticipantFormItem18Id?: string | null;
-      eventParticipantFormItem19Id?: string | null;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listEventParticipants?:  {
+    __typename: "ModelEventParticipantConnection",
+    items:  Array< {
+      __typename: "EventParticipant",
+      id: string,
+      content1?: string | null,
+      content2?: string | null,
+      content3?: string | null,
+      content4?: string | null,
+      content5?: string | null,
+      content6?: string | null,
+      content7?: string | null,
+      content8?: string | null,
+      content9?: string | null,
+      content10?: string | null,
+      content11?: string | null,
+      content12?: string | null,
+      content13?: string | null,
+      content14?: string | null,
+      content15?: string | null,
+      content16?: string | null,
+      content17?: string | null,
+      content18?: string | null,
+      content19?: string | null,
+      eventParticipantStatus: EventParticipantStatus,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventParticipantsId?: string | null,
+      eventParticipantFormItem1Id?: string | null,
+      eventParticipantFormItem2Id?: string | null,
+      eventParticipantFormItem3Id?: string | null,
+      eventParticipantFormItem4Id?: string | null,
+      eventParticipantFormItem5Id?: string | null,
+      eventParticipantFormItem6Id?: string | null,
+      eventParticipantFormItem7Id?: string | null,
+      eventParticipantFormItem8Id?: string | null,
+      eventParticipantFormItem9Id?: string | null,
+      eventParticipantFormItem10Id?: string | null,
+      eventParticipantFormItem11Id?: string | null,
+      eventParticipantFormItem12Id?: string | null,
+      eventParticipantFormItem13Id?: string | null,
+      eventParticipantFormItem14Id?: string | null,
+      eventParticipantFormItem15Id?: string | null,
+      eventParticipantFormItem16Id?: string | null,
+      eventParticipantFormItem17Id?: string | null,
+      eventParticipantFormItem18Id?: string | null,
+      eventParticipantFormItem19Id?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetArticleTagsQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetArticleTagsQuery = {
-  getArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  getArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type ListArticleTagsQueryVariables = {
-  filter?: ModelArticleTagsFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelArticleTagsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListArticleTagsQuery = {
-  listArticleTags?: {
-    __typename: 'ModelArticleTagsConnection';
-    items: Array<{
-      __typename: 'ArticleTags';
-      id: string;
-      tagID: string;
-      articleID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listArticleTags?:  {
+    __typename: "ModelArticleTagsConnection",
+    items:  Array< {
+      __typename: "ArticleTags",
+      id: string,
+      tagID: string,
+      articleID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type GetEventTagsQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetEventTagsQuery = {
-  getEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  getEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type ListEventTagsQueryVariables = {
-  filter?: ModelEventTagsFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
+  filter?: ModelEventTagsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type ListEventTagsQuery = {
-  listEventTags?: {
-    __typename: 'ModelEventTagsConnection';
-    items: Array<{
-      __typename: 'EventTags';
-      id: string;
-      tagID: string;
-      eventID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listEventTags?:  {
+    __typename: "ModelEventTagsConnection",
+    items:  Array< {
+      __typename: "EventTags",
+      id: string,
+      tagID: string,
+      eventID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type OnCreateArticleTagsSubscription = {
-  onCreateArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onCreateArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnUpdateArticleTagsSubscription = {
-  onUpdateArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onUpdateArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnDeleteArticleTagsSubscription = {
-  onDeleteArticleTags?: {
-    __typename: 'ArticleTags';
-    id: string;
-    tagID: string;
-    articleID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    article: {
-      __typename: 'Article';
-      id: string;
-      title: string;
-      content: string;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-      articleCountId?: string | null;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onDeleteArticleTags?:  {
+    __typename: "ArticleTags",
+    id: string,
+    tagID: string,
+    articleID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    article:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      articleCountId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnCreateEventTagsSubscription = {
-  onCreateEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onCreateEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnUpdateEventTagsSubscription = {
-  onUpdateEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onUpdateEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnDeleteEventTagsSubscription = {
-  onDeleteEventTags?: {
-    __typename: 'EventTags';
-    id: string;
-    tagID: string;
-    eventID: string;
-    tag: {
-      __typename: 'Tag';
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    event: {
-      __typename: 'Event';
-      id: string;
-      title?: string | null;
-      coverPageImgURL?: string | null;
-      coverPageDescription?: string | null;
-      content?: string | null;
-      imgURLs?: Array<string | null> | null;
-      sponsor?: Array<string | null> | null;
-      online: boolean;
-      group: boolean;
-      startDate: string;
-      endDate: string;
-      eventStatus: EventStatus;
-      active: ActiveType;
-      createdAt: string;
-      updatedAt: string;
-      owner: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null;
+  onDeleteEventTags?:  {
+    __typename: "EventTags",
+    id: string,
+    tagID: string,
+    eventID: string,
+    tag:  {
+      __typename: "Tag",
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+    },
+    event:  {
+      __typename: "Event",
+      id: string,
+      title?: string | null,
+      coverPageImgURL?: string | null,
+      coverPageDescription?: string | null,
+      content?: string | null,
+      imgURLs?: Array< string | null > | null,
+      sponsor?: Array< string | null > | null,
+      online: boolean,
+      group: boolean,
+      startDate: string,
+      endDate: string,
+      eventStatus: EventStatus,
+      active: ActiveType,
+      createdAt: string,
+      updatedAt: string,
+      owner: string,
+      eventEventLocationId?: string | null,
+      eventFormId?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
