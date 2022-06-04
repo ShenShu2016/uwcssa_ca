@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-26 13:57:44
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 20:48:51
+ * @LastEditTime: 2022-06-04 18:53:25
  * @FilePath: /uwcssa_ca/src/layouts/navigation--main.ts
  * @Description:
  *
@@ -189,7 +189,7 @@ const pages = {
       href: '/partners',
     },
     {
-      title: 'Developers',
+      title: 'Engineering at UWCSSA',
       href: '/developers',
     },
   ],
