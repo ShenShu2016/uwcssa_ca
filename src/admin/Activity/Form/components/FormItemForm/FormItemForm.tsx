@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-03 16:39:34
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 19:04:59
+ * @LastEditTime: 2022-06-05 15:26:34
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/components/FormItemForm/FormItemForm.tsx
  * @Description:
  *
@@ -20,6 +20,9 @@ import { useFormik } from 'formik';
 
 function getYupValidation(formItem: FormItem) {
   let validation: any = yup;
+  if (formItem.formType === 'MultipleSelect') {
+    return validation.array().of(yup.string()); //github ai帮忙写的。。牛逼
+  }
   if (formItem.formType === 'Checkbox') {
     return validation.boolean();
   }
@@ -91,7 +94,6 @@ function FormItemForm({ formItemList }: { formItemList: Array<FormItem> }) {
     content19:
       sortedFormItemList[18] && getYupValidation(sortedFormItemList[18]),
   });
-  //console.log('validationSchema', validationSchema);
 
   const initialValues = {
     content1: '',

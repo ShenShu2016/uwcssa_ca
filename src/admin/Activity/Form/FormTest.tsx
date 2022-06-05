@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 18:10:36
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-06-03 17:58:17
+ * @LastEditTime: 2022-06-05 13:47:25
  * @FilePath: /uwcssa_ca/src/admin/Activity/Form/FormTest.tsx
  * @Description:
  *
@@ -25,6 +25,9 @@ function FormTest() {
     (state) => state.form.formItem,
   );
   const formItemList = useAppSelector(selectAllFormItems);
+  const formItemListSortByOrder = formItemList.sort(
+    (a, b) => a.order - b.order,
+  );
 
   useEffect(() => {
     if (isAuth !== null && fetchFormItemListStatus === 'idle') {
@@ -37,12 +40,16 @@ function FormTest() {
   }, [isAuth, fetchFormItemListStatus]);
 
   return (
-    <Container>
+    <Box sx={{ p: '1rem' }}>
       FormTest
-      <Box sx={{ display: 'flex' }}>
-        {formItemList.map((item) => {
+      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+        {formItemListSortByOrder.map((item) => {
           return (
-            <Container key={item.id} component={Paper}>
+            <Container
+              key={item.id}
+              component={Paper}
+              sx={{ maxWidth: '350px', m: '1rem' }}
+            >
               <Typography variant="body2">name: {item.name}</Typography>
               <Typography>order: {item.order}</Typography>
               <Typography>isRequired: {item.isRequired.toString()}</Typography>
@@ -71,7 +78,7 @@ function FormTest() {
       </Box>
       <Divider />
       <FormItemForm formItemList={formItemList} />
-    </Container>
+    </Box>
   );
 }
 
