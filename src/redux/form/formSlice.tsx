@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-06-02 17:10:21
  * @LastEditors: 李佳修
- * @LastEditTime: 2022-06-04 11:11:12
+ * @LastEditTime: 2022-06-05 11:12:18
  * @FilePath: /uwcssa_ca/src/redux/form/formSlice.tsx
  * @Description:
  *
@@ -73,6 +73,7 @@ export enum FormType {
   TextFieldLong = 'TextFieldLong',
   Checkbox = 'Checkbox',
   Select = 'Select',
+  Boolean = 'Boolean',
   MultipleSelect = 'MultipleSelect',
   FileUpload = 'FileUpload',
   RadioGroupH = 'RadioGroupH',

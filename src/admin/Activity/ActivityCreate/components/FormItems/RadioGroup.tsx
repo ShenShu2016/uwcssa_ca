@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-04 10:43:44
+ * @LastEditTime: 2022-06-05 14:34:58
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/RadioGroup.tsx
  */
@@ -33,12 +33,12 @@ const RadioGroupItem: React.FC<RadioGroupProp> = ({ item }) => {
     <>
       <FieldLabel name={item.name} isRequired={item.isRequired} description={item.description}/>
       <RadioGroup
-        row={item.formType === FormType.RadioGroupH}
+        row={item.formType !== FormType.RadioGroupV }
         value={value}
         onChange={(e) => setValue(e.target.value)}
       >
         {
-          item.formSelectChoices?.map(choice => (
+          !item.isBoolean && item.formSelectChoices?.map(choice => (
             <FormControlLabel
               key={choice}
               value={choice}
@@ -46,6 +46,21 @@ const RadioGroupItem: React.FC<RadioGroupProp> = ({ item }) => {
               label={choice}
             />
           ))
+        }
+        {
+          item.isBoolean ?
+            <>
+              <FormControlLabel
+                value={true}
+                control={<Radio size='small'/>}
+                label={'是'}
+              />
+              <FormControlLabel
+                value={false}
+                control={<Radio size='small'/>}
+                label={'否'}
+              />
+            </> : null
         }
       </RadioGroup>
     </>

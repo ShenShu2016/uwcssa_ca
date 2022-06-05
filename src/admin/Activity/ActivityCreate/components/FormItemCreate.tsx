@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 09:32:30
- * @LastEditTime: 2022-06-04 12:13:54
+ * @LastEditTime: 2022-06-05 14:32:22
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemCreate.tsx
  */
@@ -93,8 +93,13 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
     title: '',
     placeholder: '',
     description: '',
+    label: '',
     formType: '',
-    isRequired: false
+    helperText: '',
+    minLength: 0,
+    maxLength: 0,
+    inputType: 'string',
+    isRequired: 0
   };
 
   const onSubmit = async (values) => {
@@ -117,11 +122,18 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
       createFormItemInput: {
         name: values.title,
         order: 1,
-        isString: true,
-        isEmail: false,
-        isNumber: false,
-        isRequired: values.isRequired,
+        isDate: false,
+        isTrim: true,
+        isBoolean: values.formType === FormType.Boolean,
+        isString: values.inputType === 'string',
+        isEmail: values.inputType === 'email',
+        isNumber: values.inputType === 'number',
+        minLength: values.minLength,
+        maxLength: values.maxLength,
+        isRequired: !!values.isRequired,
         description: values.description,
+        label: values.label,
+        helperText: values.helperText,
         formType: values.formType,
         placeholder: values.placeholder,
         formSelectChoices: options.map((item) => item.label),
@@ -164,21 +176,7 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
         <DialogContent dividers>
           <Box width={'50vw'}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <FieldLabel name='问题标题' isRequired />
-                <TextField
-                  label="Title"
-                  variant="outlined"
-                  name={'title'}
-                  fullWidth
-                  size='small'
-                  value={formik.values.title}
-                  onChange={(e) => handleFieldValueChange(e)}
-                  error={formik.touched.title && Boolean(formik.errors.title)}
-                  helperText={formik.touched.title && formik.errors.title}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <FieldLabel name='问题类型' isRequired />
                 <TextField
                   label="Type"
@@ -196,16 +194,45 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
                   <MenuItem value={FormType.TextFieldLong}>文本输入区域</MenuItem>
                   <MenuItem value={FormType.RadioGroupH}>单项选择（横向）</MenuItem>
                   <MenuItem value={FormType.RadioGroupV}>单项选择（纵向）</MenuItem>
-                  <MenuItem value={FormType.Select}>多项选择（下拉选择）</MenuItem>
+                  <MenuItem value={FormType.Select}>单项选择（下拉选择）</MenuItem>
+                  <MenuItem value={FormType.MultipleSelect}>多项选择（下拉选择）</MenuItem>
                   <MenuItem value={FormType.Checkbox}>多项选择（checkbox）</MenuItem>
-                  {/* <MenuItem value={FormType.RadioGroupH}>是或否</MenuItem> */}
+                  <MenuItem value={FormType.Boolean}>是或否</MenuItem>
                   <MenuItem value={FormType.DatePicker}>日期选择</MenuItem>
                   <MenuItem value={FormType.TimePicker}>时间选择</MenuItem>
                   <MenuItem value={FormType.DateTimePicker}>日期时间选择</MenuItem>
+                  <MenuItem value={FormType.FileUpload}>文件上传</MenuItem>
                 </TextField>
               </Grid>
+
+            </Grid>
+
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: formik.values.formType ? 'flex' : 'none'
+              }}
+            >
+              <Grid item xs={12}>
+                <Divider sx={{ mt: 2 }}/>
+              </Grid>
               <Grid item xs={12} sm={6}>
-                <FieldLabel name='提示文字' />
+                <FieldLabel name='问题标题' isRequired description='必填，显示在输入框上方'/>
+                <TextField
+                  label="Title"
+                  variant="outlined"
+                  name={'title'}
+                  fullWidth
+                  size='small'
+                  value={formik.values.title}
+                  onChange={(e) => handleFieldValueChange(e)}
+                  error={formik.touched.title && Boolean(formik.errors.title)}
+                  helperText={formik.touched.title && formik.errors.title}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FieldLabel name='提示文字' description='输入框聚焦且未输入的情况下显示提示文字'/>
                 <TextField
                   label="Placeholder"
                   variant="outlined"
@@ -214,6 +241,19 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
                   size='small'
                   fullWidth
                   value={formik.values.placeholder}
+                  onChange={(e) => handleFieldValueChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FieldLabel name='问题标签' description='输入框未聚焦时显示的文字'/>
+                <TextField
+                  label="问题标签"
+                  variant="outlined"
+                  name={'label'}
+                  placeholder='提示文字'
+                  size='small'
+                  fullWidth
+                  value={formik.values.label}
                   onChange={(e) => handleFieldValueChange(e)}
                 />
               </Grid>
@@ -229,19 +269,50 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
                   onChange={(e) => handleFieldValueChange(e)}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <FieldLabel name='校验提示'/>
+                <TextField
+                  label="Helper text"
+                  variant="outlined"
+                  name={'helperText'}
+                  size='small'
+                  fullWidth
+                  value={formik.values.helperText}
+                  helperText={'校验提示会出现在输入框的下方'}
+                  onChange={(e) => handleFieldValueChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FieldLabel name='是否必填' />
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name={'isRequired'}
+                  value={formik.values.isRequired}
+                  onChange={(e) => handleFieldValueChange(e)}
+                >
+                  <FormControlLabel value={1} control={<Radio />} label="必填" />
+                  <FormControlLabel value={0} control={<Radio />} label="非必填" />
+                </RadioGroup>
+              </Grid>
+            </Grid>
+
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: 
+                    formik.values.formType === FormType.Select ||
+                    formik.values.formType === FormType.MultipleSelect ||
+                    formik.values.formType === FormType.Checkbox ||
+                    formik.values.formType === FormType.RadioGroupH ||
+                    formik.values.formType === FormType.RadioGroupV ?
+                      'block' : 'none'
+              }}
+            >
               {/* 选项配置 当选择select或checkbox的时候显示 */}
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: formik.values.formType === FormType.Select ||
-                  formik.values.formType === FormType.Checkbox ||
-                  formik.values.formType === FormType.RadioGroupH ||
-                  formik.values.formType === FormType.RadioGroupV ?
-                    'block' : 'none'
-                }}
-              >
-                <Divider sx={{ mb: 1 }}/>
+              <Grid item xs={12}>
+                <Divider sx={{ mb: 1, mt: 1 }}/>
                 <FieldLabel name='选项配置' isRequired/>
                 {
                   options.map((option, index) => (
@@ -286,17 +357,60 @@ const FormItemCreate: React.FC<FormItemCreateProp> = ({ open, setOpen, completeC
               <Grid item xs={12}>
                 <Divider />
               </Grid>
+            </Grid>
+
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: formik.values.formType === FormType.TextFieldLong ||
+                formik.values.formType === FormType.TextFieldShort ?
+                  'flex' : 'none'
+              }}
+            >
+              <Grid item xs={12}>
+                <Divider sx={{ mt: 1 }}/>
+              </Grid>
               <Grid item xs={12} sm={6}>
-                <FieldLabel name='是否必填' />
+                <FieldLabel name='最少输入字数限制' description='0或不填表示不限制'/>
+                <TextField
+                  label="Min length"
+                  type='number'
+                  variant="outlined"
+                  name={'minLength'}
+                  size='small'
+                  fullWidth
+                  helperText='仅允许输入数字'
+                  value={formik.values.minLength}
+                  onChange={(e) => handleFieldValueChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FieldLabel name='最多输入字数限制' description='0或不填表示不限制'/>
+                <TextField
+                  label="Max length"
+                  variant="outlined"
+                  name={'maxLength'}
+                  size='small'
+                  type='number'
+                  fullWidth
+                  helperText='仅允许输入数字'
+                  value={formik.values.maxLength}
+                  onChange={(e) => handleFieldValueChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FieldLabel name='输入框内容限制'/>
                 <RadioGroup
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
-                  name={'isRequired'}
-                  value={formik.values.isRequired}
+                  name={'inputType'}
+                  value={formik.values.inputType}
                   onChange={(e) => handleFieldValueChange(e)}
                 >
-                  <FormControlLabel value={true} control={<Radio />} label="必填" />
-                  <FormControlLabel value={false} control={<Radio />} label="非必填" />
+                  <FormControlLabel value={'string'} control={<Radio />} label="无限制" />
+                  <FormControlLabel value={'number'} control={<Radio />} label="仅数字" />
+                  <FormControlLabel value={'email'} control={<Radio />} label="Email" />
                 </RadioGroup>
               </Grid>
             </Grid>

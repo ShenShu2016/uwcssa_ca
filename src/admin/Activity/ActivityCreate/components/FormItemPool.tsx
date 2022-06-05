@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-06-04 10:52:08
+ * @LastEditTime: 2022-06-05 14:33:20
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemPool.tsx
  */
@@ -65,7 +65,7 @@ const FormItemPool: React.FC = () => {
                 }
              
                 {
-                  item.formType === FormType.Select ?
+                  item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
                     <Select item={item}/> : null
                 }
 
@@ -86,7 +86,8 @@ const FormItemPool: React.FC = () => {
 
                 {
                   item.formType === FormType.RadioGroupH ||
-                item.formType === FormType.RadioGroupV ?
+                  item.formType === FormType.RadioGroupV ||
+                  item.formType === FormType.Boolean ?
                     <RadioGroup item={item}/> : null
                 }
 

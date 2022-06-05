@@ -1,7 +1,7 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 17:10:14
- * @LastEditTime: 2022-06-04 09:50:34
+ * @LastEditTime: 2022-06-05 11:17:29
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItems/Select.tsx
  */
@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import FieldLabel from '../FieldLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { FormType } from 'redux/form/formSlice';
 
 interface SelectInfo {
     formSelectChoices?: string[];
@@ -25,7 +26,7 @@ interface SelectProp {
 }
 
 const Select: React.FC<SelectProp> = ({ item }) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string | string[]>(item.formType === FormType.MultipleSelect ? [] : '');
 
   return (
     <>
@@ -36,6 +37,9 @@ const Select: React.FC<SelectProp> = ({ item }) => {
         placeholder={item.placeholder}
         variant="outlined"
         fullWidth
+        SelectProps={{
+          multiple: item.formType === FormType.MultipleSelect
+        }}
         size='small'
         value={value}
         onChange={(e) => setValue(e.target.value)}
