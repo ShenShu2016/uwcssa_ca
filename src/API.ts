@@ -505,6 +505,7 @@ export enum FormType {
   TextFieldShort = "TextFieldShort",
   TextFieldLong = "TextFieldLong",
   Checkbox = "Checkbox",
+  Boolean = "Boolean",
   Select = "Select",
   MultipleSelect = "MultipleSelect",
   FileUpload = "FileUpload",

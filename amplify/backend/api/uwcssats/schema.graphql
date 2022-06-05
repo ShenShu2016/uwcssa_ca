@@ -445,6 +445,7 @@ enum FormType {
   TextFieldShort
   TextFieldLong
   Checkbox
+  Boolean
   Select
   MultipleSelect
   FileUpload
