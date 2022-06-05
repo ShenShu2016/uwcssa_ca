@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-01 09:18:34
- * @LastEditTime: 2022-06-04 12:08:13
+ * @LastEditTime: 2022-06-05 16:24:21
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/ActivityConfig.tsx
  */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -24,9 +24,10 @@ import RadioGroup from './FormItems/RadioGroup';
 import CheckBoxGroup from './FormItems/CheckBoxGroup';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { useSwiper } from 'swiper/react';
-import { removeQuestion } from 'redux/form/formSlice';
+import { removeQuestion, reorderQuestion } from 'redux/form/formSlice';
 import Tooltip from '@mui/material/Tooltip';
 import { fetchFormItemList } from 'redux/form/formSlice';
+import TextField from '@mui/material/TextField';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 const ActivityConfig: React.FC = () => {
@@ -34,13 +35,26 @@ const ActivityConfig: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const selectedQuestions = useAppSelector(state => state.form.createData.selectedQuestions);
-
+  const rederList = [...selectedQuestions];
+  rederList.sort((prev, next) => prev.order - next.order);
+  console.log(rederList);
+  
   const handleRemoveQuestion = (item) => {
     dispatch(removeQuestion(item));
   };
 
   const handleCompleteCreateFormItem = () => {
     dispatch(fetchFormItemList({ isAuth: true }));
+  };
+
+  const handleOrderChange = (e, item) => {
+    if (e.target.value !== '') {
+      dispatch(reorderQuestion({
+        order: e.target.value,
+        item
+      }));
+    }
+    console.log(e.target.value, item);
   };
 
   return (
@@ -81,9 +95,9 @@ const ActivityConfig: React.FC = () => {
           <Typography variant="h6" gutterBottom component="div">
               活动报名表单
           </Typography>
-          <Box width={'100%'} paddingLeft={4} boxSizing='border-box'>
+          <Box width={'100%'}  boxSizing='border-box'>
             {
-              selectedQuestions.map(item => (
+              rederList.map(item => (
                 <Box
                   key={item.id}
                   mt={1}
@@ -99,7 +113,28 @@ const ActivityConfig: React.FC = () => {
                     }
                   }}
                 >
-                  <Box width={'calc(100% - 50px)'}>
+                  <Box
+                    width='100px'
+                    display={'flex'}
+                    p={2}
+                    alignItems={'center'}
+                  >
+                    <TextField
+                      id="outlined-multiline-flexible"
+                      type='number'
+                      label="排序"
+                      size='small'
+                      inputProps={{ min: 1, max: rederList.length }}
+                      value={item.order}
+                      onChange={(e) => handleOrderChange(e, item)}
+                      InputLabelProps={{
+                        sx: {
+                          fontSize: '12px'
+                        }
+                      }}
+                    />
+                  </Box>
+                  <Box width={'calc(100% - 150px)'}>
                     {
                       item.formType === FormType.TextFieldShort ?
                         <TextFieldShort item={item}/> : null
@@ -111,7 +146,7 @@ const ActivityConfig: React.FC = () => {
                     }
              
                     {
-                      item.formType === FormType.Select ?
+                      item.formType === FormType.Select || item.formType === FormType.MultipleSelect ?
                         <Select item={item}/> : null
                     }
 
@@ -132,7 +167,8 @@ const ActivityConfig: React.FC = () => {
 
                     {
                       item.formType === FormType.RadioGroupH ||
-                item.formType === FormType.RadioGroupV ?
+                  item.formType === FormType.RadioGroupV ||
+                  item.formType === FormType.Boolean ?
                         <RadioGroup item={item}/> : null
                     }
 
@@ -140,7 +176,6 @@ const ActivityConfig: React.FC = () => {
                       item.formType === FormType.Checkbox ?
                         <CheckBoxGroup item={item}/> : null
                     }
-
                   </Box>
                   <Box
                     className='remove_icon'

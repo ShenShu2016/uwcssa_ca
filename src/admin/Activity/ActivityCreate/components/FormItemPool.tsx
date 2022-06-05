@@ -1,11 +1,11 @@
 /*
  * @Author: 李佳修
  * @Date: 2022-06-03 16:11:08
- * @LastEditTime: 2022-06-05 14:33:20
+ * @LastEditTime: 2022-06-05 15:54:02
  * @LastEditors: 李佳修
  * @FilePath: /uwcssa_ca/src/admin/Activity/ActivityCreate/components/FormItemPool.tsx
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchFormItemList } from 'redux/form/formSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import Card from '@mui/material/Card';
@@ -21,6 +21,8 @@ import RadioGroup from './FormItems/RadioGroup';
 import CheckBoxGroup from './FormItems/CheckBoxGroup';
 import Button from '@mui/material/Button';
 import { addQuestion } from 'redux/form/formSlice';
+import FormItemDetail from './FormItemDetail';
+import { FormItem } from 'redux/form/formSlice';
 // interface FormItemPoolProp {
 //     questions: []
 // }
@@ -28,8 +30,9 @@ import { addQuestion } from 'redux/form/formSlice';
 const FormItemPool: React.FC = () => {
   const formItemList = useAppSelector(state => state.form.formItem);
   const selectedList = useAppSelector(state => state.form.createData.selectedQuestions);
+  const [detailDialogOpen, setDetailDialogOpen] = useState<boolean>(false);
+  const [detailedItem, setDetailedItem] = useState<null | FormItem>(null);
   const dispatch = useAppDispatch();
-  console.log(formItemList);
 
   useEffect(() => {
     dispatch(fetchFormItemList({ isAuth: true }));
@@ -37,6 +40,11 @@ const FormItemPool: React.FC = () => {
 
   const handleAddQuestion = (data) => {
     dispatch(addQuestion(data));
+  };
+
+  const handleCheckDetail = (data) => {
+    setDetailedItem(data);
+    setDetailDialogOpen(true);
   };
 
   return (
@@ -95,15 +103,12 @@ const FormItemPool: React.FC = () => {
                   item.formType === FormType.Checkbox ?
                     <CheckBoxGroup item={item}/> : null
                 }
-
-
-
                 <Box
                   display={'flex'}
                   justifyContent={'space-between'}
                 >
                   <Button variant="text" size='small' onClick={() => handleAddQuestion(item)}>使用问题</Button>
-                  <Button variant="text" size='small'>查看详情</Button>
+                  <Button variant="text" size='small' onClick={() => handleCheckDetail(item)}>查看详情</Button>
                   <Button variant="text" size='small'>编辑问题</Button>
                 </Box>
               </Card>)
@@ -111,6 +116,7 @@ const FormItemPool: React.FC = () => {
           );
         })
       }
+      <FormItemDetail open={detailDialogOpen} setOpen={setDetailDialogOpen} item={detailedItem}/>
     </>
   );
 };
