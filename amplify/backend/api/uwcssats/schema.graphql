@@ -302,7 +302,7 @@ type UwcssaMember
   title: String
   subTitle: String
   content: String
-  imgURL: AWSURL
+  imgURL: UserImage @hasOne
   email: AWSEmail
   department: UwcssaDepartment @belongsTo
   linkedIn: AWSURL
@@ -424,6 +424,9 @@ type FormItem
   isString: Boolean! # 是否是字符串
   isEmail: Boolean! # 是否是邮箱
   isNumber: Boolean! # 是否是数字
+  isDate: Boolean! # 是否是日期
+  isBoolean: Boolean! # 是否是布尔值
+  isTrim: Boolean! # 是否是去除空格
   description: String # 描述
   formType: FormType!
   helperText: String # 帮助文字

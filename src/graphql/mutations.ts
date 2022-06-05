@@ -1264,7 +1264,25 @@ export const createUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
+      imgURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       email
       department {
         id
@@ -1298,6 +1316,7 @@ export const createUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
+      uwcssaMemberImgURLId
     }
   }
 `;
@@ -1312,7 +1331,25 @@ export const updateUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
+      imgURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       email
       department {
         id
@@ -1346,6 +1383,7 @@ export const updateUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
+      uwcssaMemberImgURLId
     }
   }
 `;
@@ -1360,7 +1398,25 @@ export const deleteUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
+      imgURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       email
       department {
         id
@@ -1394,6 +1450,7 @@ export const deleteUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
+      uwcssaMemberImgURLId
     }
   }
 `;
@@ -1905,6 +1962,9 @@ export const createFormItem = /* GraphQL */ `
       isString
       isEmail
       isNumber
+      isDate
+      isBoolean
+      isTrim
       description
       formType
       helperText
@@ -1940,6 +2000,9 @@ export const updateFormItem = /* GraphQL */ `
       isString
       isEmail
       isNumber
+      isDate
+      isBoolean
+      isTrim
       description
       formType
       helperText
@@ -1975,6 +2038,9 @@ export const deleteFormItem = /* GraphQL */ `
       isString
       isEmail
       isNumber
+      isDate
+      isBoolean
+      isTrim
       description
       formType
       helperText
@@ -2013,6 +2079,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2035,6 +2104,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2057,6 +2129,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2079,6 +2154,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2101,6 +2179,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2123,6 +2204,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2145,6 +2229,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2167,6 +2254,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2189,6 +2279,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2211,6 +2304,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2233,6 +2329,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2255,6 +2354,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2277,6 +2379,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2299,6 +2404,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2321,6 +2429,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2343,6 +2454,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2365,6 +2479,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2387,6 +2504,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2409,6 +2529,9 @@ export const createEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2481,6 +2604,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2503,6 +2629,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2525,6 +2654,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2547,6 +2679,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2569,6 +2704,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2591,6 +2729,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2613,6 +2754,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2635,6 +2779,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2657,6 +2804,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2679,6 +2829,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2701,6 +2854,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2723,6 +2879,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2745,6 +2904,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2767,6 +2929,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2789,6 +2954,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2811,6 +2979,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2833,6 +3004,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2855,6 +3029,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2877,6 +3054,9 @@ export const updateEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2949,6 +3129,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2971,6 +3154,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -2993,6 +3179,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3015,6 +3204,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3037,6 +3229,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3059,6 +3254,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3081,6 +3279,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3103,6 +3304,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3125,6 +3329,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3147,6 +3354,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3169,6 +3379,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3191,6 +3404,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3213,6 +3429,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3235,6 +3454,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3257,6 +3479,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3279,6 +3504,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3301,6 +3529,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3323,6 +3554,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -3345,6 +3579,9 @@ export const deleteEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText

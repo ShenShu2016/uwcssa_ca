@@ -821,7 +821,25 @@ export const getUwcssaMember = /* GraphQL */ `
       title
       subTitle
       content
-      imgURL
+      imgURL {
+        id
+        objectURL
+        key
+        name
+        size
+        type
+        lastModified
+        lastModifiedDate
+        compressedWidth
+        objectCompressedURL
+        thumbnailWidth
+        objectThumbnailURL
+        targetTable
+        active
+        createdAt
+        updatedAt
+        owner
+      }
       email
       department {
         id
@@ -855,6 +873,7 @@ export const getUwcssaMember = /* GraphQL */ `
         userProfileAvatarURLId
       }
       uwcssaDepartmentUwcssaMembersId
+      uwcssaMemberImgURLId
     }
   }
 `;
@@ -871,7 +890,6 @@ export const listUwcssaMembers = /* GraphQL */ `
         title
         subTitle
         content
-        imgURL
         email
         linkedIn
         website
@@ -880,6 +898,7 @@ export const listUwcssaMembers = /* GraphQL */ `
         updatedAt
         owner
         uwcssaDepartmentUwcssaMembersId
+        uwcssaMemberImgURLId
       }
       nextToken
     }
@@ -1167,6 +1186,9 @@ export const getFormItem = /* GraphQL */ `
       isString
       isEmail
       isNumber
+      isDate
+      isBoolean
+      isTrim
       description
       formType
       helperText
@@ -1204,6 +1226,9 @@ export const listFormItems = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1234,6 +1259,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1256,6 +1284,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1278,6 +1309,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1300,6 +1334,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1322,6 +1359,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1344,6 +1384,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1366,6 +1409,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1388,6 +1434,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1410,6 +1459,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1432,6 +1484,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1454,6 +1509,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1476,6 +1534,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1498,6 +1559,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1520,6 +1584,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1542,6 +1609,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1564,6 +1634,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1586,6 +1659,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1608,6 +1684,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
@@ -1630,6 +1709,9 @@ export const getEventParticipant = /* GraphQL */ `
         isString
         isEmail
         isNumber
+        isDate
+        isBoolean
+        isTrim
         description
         formType
         helperText
