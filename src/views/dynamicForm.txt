@@ -1,0 +1,212 @@
+    TextFieldShort
+    email:情况
+    name: 比如： 学校邮箱 (中英文都可以，可以是一段话)
+    isRequired: true|false
+    isString: true
+    isEmail: true
+    isNumber: false
+    isDate: false
+    isBoolean:false
+    isTrim: true
+    description: 可以填写也可以不填
+    helperText： 貌似没啥用
+    minLength: undefined
+    maxLength:undefined
+    placeholder: xxx@uwindosr.ca
+    label: Email （是textfield上面那个词，可以设置字数限制，不能太长）
+    formSelectChoices： undefined
+
+    数字:情况
+    name： 比如： 你每天上厕所的次数?
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: true
+    isDate: false
+    isBoolean:false
+    isTrim: false
+    description: 可以填写也可以不填
+    helperText： 貌似没啥用
+    minLength: undefined
+    maxLength:undefined
+    placeholder: 没啥用可以不填
+    label: 上厕所的次数
+    formSelectChoices： undefined
+
+    普通:情况
+    name： 比如： 你的中文姓名?
+    isRequired: true|false
+    isString: true
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:false
+    isTrim: true
+    description: 可以填写也可以不填
+    minLength: 让他们自己设置，比如名字不能低于2个字
+    maxLength:不能超过25个字？ 谁的名字会超过25？
+    helperText： 比如说是required： 我们必须要知道您的名字才能联系您
+    placeholder: 张三
+    label: 名字
+    formSelectChoices： undefined
+
+
+  TextFieldLong
+    name：个人介绍
+    isRequired: true|false
+    isString: true
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:false
+    isTrim: true
+    description: ？ | null
+    minLength: 让他们自己设置，比如名字不能低于2个字
+    maxLength:不能超过300个字 自己看把
+    helperText： 
+    placeholder: 我来字中国上海，我的职业是前端开发工程师
+    label: 自我介绍
+    formSelectChoices： undefined
+
+
+    Checkbox
+    name：同意以上协议
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:true
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 同意协议请打勾
+    formSelectChoices： undefined
+
+
+    Boolean
+    name：同意以上协议
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:true
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 同意协议请打勾
+    formSelectChoices： undefined
+
+
+    Select （这地方不能放true or false）
+    name：你的性别?
+    isRequired: true|false
+    isString: true
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:false
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 请选择性别
+    formSelectChoices： ['男', '女','保密', '其他', '不知道', '不愿意说', '不想说']
+
+    MultipleSelect
+    name：请您选择以下一个火多个符合的描述?
+    isRequired: true|false
+    isString: true
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:false
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 请选择符合的描述
+    formSelectChoices： ['男', '女','保密', '其他', '不知道', '不愿意说', '不想说']
+ 
+
+    FileUpload
+    还没想好
+
+    RadioGroupH && RadioGroupV
+    name：请选择你最喜欢的颜色
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: false
+    isDate: false
+    isBoolean:false
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: name：请选择你最喜欢的颜色
+    formSelectChoices： ['绿色', '红色','蓝色', '紫色', '黄色', '白色', '黑色']
+ 
+    DatePicker
+    name：你的生日
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: false
+    isDate: true
+    isBoolean:false
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 生日日期
+    formSelectChoices： undefined
+ 
+    DateTimePicker
+    name：你上次吃popeye的时间
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: false
+    isDate: true
+    isBoolean:false
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 日期
+    formSelectChoices： undefined
+
+    TimePicker
+    name：每天睡觉时间
+    isRequired: true|false
+    isString: false
+    isEmail: false
+    isNumber: false
+    isDate: true
+    isBoolean:false
+    isTrim: false
+    description: ？ | null
+    minLength: undefined
+    maxLength: undefined
+    helperText： 这里应该没啥用
+    placeholder: undefined
+    label: 每天几点睡觉呀
+    formSelectChoices： undefined
