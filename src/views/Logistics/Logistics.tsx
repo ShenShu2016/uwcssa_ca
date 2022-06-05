@@ -1,8 +1,8 @@
 /*
  * @Author: Shikai Jin
  * @Date: 2022-05-27 17:53:27
- * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-29 23:55:27
+ * @LastEditors: Shikai Jin
+ * @LastEditTime: 2022-06-04 21:49:59
  * @FilePath: /uwcssa_ca/src/views/Logistics/Logistics.tsx
  * @Description:
  *
@@ -94,16 +94,6 @@ const Logistics = (): JSX.Element => {
       <Box bgcolor={'primary.main'}>
         <Container>
           <Reviews />
-        </Container>
-      </Box>
-      <Container>
-        <FQA />
-      </Container>
-      <Divider />
-      <Sponsor />
-      <Box bgcolor={'primary.main'}>
-        <Container paddingX={'0 !important'} maxWidth={1}>
-          <Partner />
         </Container>
       </Box>
     </>
