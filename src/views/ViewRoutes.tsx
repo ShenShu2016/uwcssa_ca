@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-17 14:08:10
  * @LastEditors: Shikai Jin
- * @LastEditTime: 2022-06-02 20:54:49
+ * @LastEditTime: 2022-06-04 18:11:56
  * @FilePath: /uwcssa_ca/src/views/ViewRoutes.tsx
  * @Description:
  *
@@ -20,6 +20,7 @@ import {
   CareerOpening as CareerOpeningView,
   CompanyTerms as CompanyTermsView,
   ContactPage as ContactPageView,
+  Developers as DevelopersView,
   EmailConfirmationCover as EmailConfirmationCoverView,
   ForgotPassWordSubmit as ForgotPassWordSubmitView,
   Home,
@@ -214,6 +215,12 @@ function ViewRoutes(): Array<{
     {
       path: '/about',
       renderer: (params = {}): JSX.Element => <AboutView {...params} />,
+      isAllowed: true,
+      redirectPath: undefined,
+    },
+    {
+      path: '/developers',
+      renderer: (params = {}): JSX.Element => <DevelopersView {...params} />,
       isAllowed: true,
       redirectPath: undefined,
     },
